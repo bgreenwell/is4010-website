@@ -1,0 +1,48 @@
+---
+title: "Setup guide"
+subtitle: "Step-by-step instructions for setting up your development environment"
+---
+
+Welcome to IS 4010! This guide provides step-by-step instructions for setting up your computer with all the necessary tools for this course.
+
+### 1. Visual Studio Code (VS Code)
+We use VS Code as our primary IDE.
+
+*   **Download**: [code.visualstudio.com](https://code.visualstudio.com/download)
+*   **Install**: Run the installer for your OS.
+    *   **Windows**: Check "Add to PATH".
+    *   **macOS**: Open VS Code, press `Cmd+Shift+P`, type "Shell Command", and select **Install 'code' command in PATH**.
+
+### 2. Git & GitHub
+*   **Git**: [Download and install](https://git-scm.com/downloads).
+    *   **Windows Users**: We strongly recommend installing **Git Bash** (via the Git for Windows installer) and using it as your default terminal profile in [Windows Terminal](https://apps.microsoft.com/detail/9n0dx20hk701).
+*   **GitHub**: 
+    1.  Create an account at [github.com](https://github.com).
+    2.  Sign up for the [Student Developer Pack](https://education.github.com/pack) (free Copilot!).
+    3.  **Configure Git**:
+        ```bash
+        git config --global user.name "Your Name"
+        git config --global user.email "your.email@example.com"
+        ```
+
+### 3. Python setup
+*   **Install**: Python 3.10+ from [python.org](https://www.python.org/downloads/).
+    *   **Windows**: Check "Add python.exe to PATH" during installation.
+*   **Verify**: `python --version` (or `python3 --version`).
+
+### 4. Rust setup
+*   **Install**: Run the following command (macOS/Linux/WSL):
+    ```bash
+    curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+    ```
+    *   **Windows**: Download `rustup-init.exe` from [rust-lang.org](https://www.rust-lang.org/tools/install).
+*   **Verify**: `cargo --version`.
+
+### 5. Gemini CLI
+*   **Prerequisite**: Node.js v20+.
+*   **Install**: `npm install -g @google/gemini-cli`.
+*   **Authenticate**: Run `gemini` and log in with your Google account.
+
+### 6. GitHub Copilot
+*   Install the **GitHub Copilot** extension in VS Code.
+*   Sign in with your GitHub account (ensure you have the Student Developer Pack activated).

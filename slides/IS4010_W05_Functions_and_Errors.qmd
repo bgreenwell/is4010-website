@@ -1,0 +1,922 @@
+---
+title: "IS4010: AI-Enhanced Application Development"
+subtitle: "Week 5: Functions & Error Handling"
+author: "Brandon M. Greenwell"
+format:
+  revealjs:
+    self-contained: false
+    theme: dracula
+    transition: fade
+    scrollable: true
+    css: custom.css
+---
+
+# Welcome to Functions & Error Handling 🔧
+
+## Building robust, reusable code 🏗️
+
+::: {.incremental}
+- **Functions** are the building blocks of maintainable software
+- **Error handling** makes your applications bulletproof
+- **Career relevance**: Essential skills for any software development role
+- **Code quality**: Write once, use everywhere - the foundation of professional development
+- **User experience**: Graceful error handling prevents crashes and frustrated users
+:::
+
+::: {.notes}
+**TEACHING NOTES:**
+
+- **Career connection**: Functions and error handling are fundamental interview topics
+- **Industry practices**: Professional code always includes comprehensive error handling
+- **Code maintainability**: Functions reduce bugs by eliminating code duplication
+- **User experience**: Well-handled errors vs. crashes make the difference between professional and amateur software
+- **Course progression**: These concepts build foundation for larger projects and team development
+:::
+
+---
+
+# Session 1: Writing clean functions
+
+---
+
+## Why use functions? 🤔
+
+::: {.incremental}
+- The most important reason is the **DRY** principle: **d**on't **r**epeat **y**ourself
+- [Functions](https://docs.python.org/3/tutorial/controlflow.html#defining-functions) allow us to break down large, complex problems into smaller, logical, and more manageable pieces
+- This makes our code easier to read, test, and debug
+- It also promotes reusability. You can write a function once and use it many times throughout your application
+- **Performance**: Well-designed functions can be optimized and cached
+:::
+
+::: {.notes}
+**TEACHING NOTES:**
+
+- **DRY principle**: Show examples of repeated code vs. function calls
+- **Debugging advantage**: Easier to isolate problems in small functions
+- **Testing strategy**: Functions make unit testing straightforward
+- **Team development**: Functions create clear contracts between developers
+- **Code review**: Smaller functions are easier to review and understand
+:::
+
+---
+
+## The anatomy of a Python function 🔍
+
+::: {.incremental}
+- Let's break down the core components of a modern [Python function](https://docs.python.org/3/tutorial/controlflow.html#defining-functions)
+- We use the `def` keyword, a descriptive name, parameters with [type hints](https://docs.python.org/3/library/typing.html), a return type, and a docstring (here we're using a [numpy-style docstring](https://numpydoc.readthedocs.io/en/latest/format.html))
+- **Professional standard**: Type hints help catch bugs and make code self-documenting
+- **Documentation**: Good docstrings explain the 'why', not just the 'what'
+:::
+
+```python
+def calculate_area(length: float, width: float) -> float:
+    """Calculate the area of a rectangle.
+
+    Parameters
+    ----------
+    length : float
+        The length of the rectangle.
+    width : float
+        The width of the rectangle.
+
+    Returns
+    -------
+    float
+        The calculated area of the rectangle.
+    """
+    return length * width
+```
+
+::: {.notes}
+**TEACHING NOTES:**
+
+- **Type hints**: Explain how these help IDEs provide better autocomplete and catch errors
+- **Return types**: Show how `-> float` documents what the function returns
+- **Docstring format**: Emphasize consistency in documentation across team projects
+- **Professional development**: Industry standard to include type hints in new Python code
+- **Tool integration**: Type hints work with tools like mypy for static analysis
+:::
+
+---
+
+## Understanding variable scope 🎯
+
+::: {.incremental}
+- **[Scope](https://docs.python.org/3/tutorial/classes.html#python-scopes-and-namespaces)** refers to the region of code where a variable is accessible
+- Variables created inside a function have **local scope**. They only exist within that function
+- Variables created outside of any function have **global scope**
+- This is a good thing! It prevents functions from accidentally modifying variables they shouldn't have access to
+- **LEGB Rule**: Local → Enclosing → Global → Built-in (scope resolution order)
+:::
+
+```python
+def my_function():
+    # secret_number has local scope
+    secret_number = 42
+    print("Inside the function, the number is", secret_number)
+
+my_function()
+# This next line would cause a NameError!
+# print("Outside the function, the number is", secret_number)
+```
+
+::: {.notes}
+**TEACHING NOTES:**
+
+- **LEGB explanation**: Show how Python looks for variables in order
+- **Scope benefits**: Prevents accidental variable modification across functions
+- **Global keyword**: Mention but discourage - prefer passing parameters
+- **Debugging tip**: Scope errors are common for beginners, show how to trace them
+- **Best practice**: Keep functions self-contained with clear inputs and outputs
+:::
+
+---
+
+## Function parameters: the basics 📝
+
+::: {.incremental}
+- **[Parameters](https://docs.python.org/3/tutorial/controlflow.html#more-on-defining-functions)** are variables that receive values when a function is called
+- **Arguments** are the actual values passed to the function
+- **Positional arguments**: Order matters - first argument goes to first parameter
+- **Keyword arguments**: Use parameter names - order doesn't matter
+- **Best practice**: Use keyword arguments for clarity in function calls
+:::
+
+```python
+def create_user_profile(name: str, age: int, city: str) -> dict:
+    """Create a user profile dictionary."""
+    return {
+        "name": name,
+        "age": age,
+        "city": city,
+        "account_created": "today"
+    }
+
+# Positional arguments (order matters)
+profile1 = create_user_profile("Alice", 30, "Cincinnati")
+
+# Keyword arguments (order doesn't matter)
+profile2 = create_user_profile(city="Columbus", name="Bob", age=25)
+```
+
+::: {.notes}
+**TEACHING NOTES:**
+
+- **Terminology clarity**: Parameters vs arguments confusion is common
+- **Keyword argument benefits**: Self-documenting code, prevents mistakes
+- **Industry practice**: Many teams require keyword arguments for functions with 3+ parameters
+- **Error prevention**: Show how positional arguments can cause subtle bugs
+- **Code readability**: Keyword arguments make function calls more readable
+:::
+
+---
+
+## Default parameters: making functions flexible 🔧
+
+::: {.incremental}
+- **[Default parameters](https://docs.python.org/3/tutorial/controlflow.html#default-argument-values)** provide fallback values when arguments aren't provided
+- Make your functions more user-friendly and reduce duplicate code
+- **Rule**: Default parameters must come after non-default parameters
+- **Common pattern**: Use `None` as default, then check and assign actual default in function body
+- **Gotcha**: Never use mutable objects (lists, dicts) as default values
+:::
+
+```python
+def send_notification(message: str, urgency: str = "normal",
+                     channels: list = None) -> dict:
+    """Send a notification through specified channels."""
+    if channels is None:
+        channels = ["email"]  # Safe default assignment
+
+    return {
+        "message": message,
+        "urgency": urgency,
+        "channels": channels,
+        "timestamp": "2024-03-15T10:30:00"
+    }
+
+# Uses defaults
+result1 = send_notification("Server backup complete")
+
+# Overrides defaults
+result2 = send_notification("Critical error!", "high", ["email", "slack", "phone"])
+```
+
+::: {.notes}
+**TEACHING NOTES:**
+
+- **Mutable default gotcha**: Explain why `def func(items=[]):` is dangerous
+- **None pattern**: Industry standard for handling mutable defaults
+- **API design**: Default parameters make functions easier to use
+- **Backward compatibility**: Adding default parameters doesn't break existing code
+- **Common defaults**: Show typical patterns like empty lists, current time, etc.
+:::
+
+---
+
+## Variable-length arguments: *args and **kwargs 🌟
+
+::: {.incremental}
+- **[*args](https://docs.python.org/3/tutorial/controlflow.html#arbitrary-argument-lists)**: Accepts any number of positional arguments as a tuple
+- **[**kwargs](https://docs.python.org/3/tutorial/controlflow.html#keyword-arguments)**: Accepts any number of keyword arguments as a dictionary
+- **Use cases**: Building flexible APIs, wrapper functions, decorator patterns
+- **Convention**: Names `args` and `kwargs` are standard (but you can use other names)
+- **Order matters**: `def func(required, *args, **kwargs):`
+:::
+
+```python
+def analyze_user_data(user_id: int, *metrics: str, **options) -> dict:
+    """Analyze user data with flexible metrics and options."""
+    print(f"Analyzing user {user_id}")
+    print(f"Metrics to analyze: {metrics}")  # Tuple of strings
+    print(f"Analysis options: {options}")     # Dictionary
+
+    results = {"user_id": user_id, "metrics_count": len(metrics)}
+
+    # Process each metric
+    for metric in metrics:
+        results[f"{metric}_score"] = 85  # Simulated analysis
+
+    # Apply options
+    if options.get("detailed", False):
+        results["detailed_breakdown"] = "Available"
+
+    return results
+
+# Flexible function calls
+result1 = analyze_user_data(123, "engagement", "retention")
+result2 = analyze_user_data(456, "clicks", "views", "shares",
+                           detailed=True, format="json")
+```
+
+::: {.notes}
+**TEACHING NOTES:**
+
+- **Real-world usage**: Show how popular libraries like requests use **kwargs
+- **API design**: Demonstrate how this enables flexible, extensible functions
+- **Wrapper functions**: Perfect for creating decorators or middleware
+- **Performance note**: Tuple/dict creation has minimal overhead for reasonable argument counts
+- **Debugging tip**: Print args and kwargs to understand what's being passed
+:::
+
+---
+
+## Working with dictionaries and lists 📊
+
+::: {.incremental}
+- **Passing dictionaries**: Functions can accept and return complex data structures
+- **Dictionary unpacking**: Use `**dict` to pass dictionary as keyword arguments
+- **List unpacking**: Use `*list` to pass list items as positional arguments
+- **Modifying vs. returning**: Be clear about whether you modify in-place or return new data
+- **Performance consideration**: Large dictionaries are passed by reference, not copied
+:::
+
+```python
+def update_user_settings(user_data: dict, **new_settings) -> dict:
+    """Update user settings, returning a new dictionary."""
+    # Create a copy to avoid modifying original
+    updated_data = user_data.copy()
+    updated_data.update(new_settings)
+    return updated_data
+
+def calculate_statistics(numbers: list[float]) -> dict:
+    """Calculate basic statistics from a list of numbers."""
+    if not numbers:
+        return {"error": "Empty list provided"}
+
+    return {
+        "count": len(numbers),
+        "sum": sum(numbers),
+        "average": sum(numbers) / len(numbers),
+        "min": min(numbers),
+        "max": max(numbers)
+    }
+
+# Example usage
+user = {"name": "Alice", "theme": "dark", "notifications": True}
+preferences = {"theme": "light", "language": "es"}
+
+# Update settings using dictionary unpacking
+updated_user = update_user_settings(user, **preferences)
+
+# Work with lists
+scores = [85.5, 92.0, 78.5, 96.0, 89.5]
+stats = calculate_statistics(scores)
+```
+
+::: {.notes}
+**TEACHING NOTES:**
+
+- **Dictionary copying**: Explain shallow vs deep copy considerations
+- **Reference vs value**: Emphasize that large objects are passed by reference
+- **Immutability pattern**: Show how returning new objects prevents side effects
+- **Error handling preview**: Empty list example prepares for error handling section
+- **Type hints**: List[float] syntax helps with IDE support and documentation
+:::
+
+---
+
+## Function design principles 🎨
+
+::: {.incremental}
+- **Single Responsibility**: Each function should do one thing well
+- **Pure functions**: Same input → same output, no side effects (when possible)
+- **Clear naming**: Function names should describe what they do, not how
+- **Reasonable length**: If a function is over 20-30 lines, consider splitting it
+- **Return consistency**: Always return the same type, or use Union types with type hints
+:::
+
+```python
+# GOOD: Single responsibility, clear purpose
+def calculate_order_total(items: list[dict]) -> float:
+    """Calculate the total cost of items in an order."""
+    return sum(item["price"] * item["quantity"] for item in items)
+
+def apply_discount(total: float, discount_percent: float) -> float:
+    """Apply a percentage discount to a total."""
+    return total * (1 - discount_percent / 100)
+
+def format_currency(amount: float) -> str:
+    """Format a number as currency."""
+    return f"${amount:.2f}"
+
+# BAD: Multiple responsibilities in one function
+def process_order_badly(items, discount, tax_rate):
+    total = 0
+    for item in items:
+        total += item["price"] * item["quantity"]
+
+    discounted = total * (1 - discount / 100)
+    with_tax = discounted * (1 + tax_rate / 100)
+    formatted = f"${with_tax:.2f}"
+
+    print(f"Order processed: {formatted}")  # Side effect!
+    return with_tax  # Returns number, but also prints
+```
+
+::: {.notes}
+**TEACHING NOTES:**
+
+- **Testability**: Small functions are easier to test and debug
+- **Reusability**: Single-purpose functions can be reused in different contexts
+- **Code review**: Smaller functions are easier for teams to review
+- **Side effects**: Explain why printing in a calculation function is problematic
+- **Composition**: Show how small functions can be combined for complex operations
+:::
+
+---
+
+## AI-assisted refactoring 🤖
+
+::: {.incremental}
+- One of the most powerful uses for an AI partner is **[refactoring](https://refactoring.com/)** code
+- You can give it a messy, procedural script and ask it to break it down into clean, reusable functions
+- **Career skill**: Refactoring is a daily activity for professional developers
+- **Collaborative process**: Use AI suggestions as starting points, then apply your judgment
+- **Quality improvement**: Focus on readability, testability, and maintainability
+:::
+
+**Effective refactoring prompts:**
+```
+"Act as a senior Python developer. Review this script and refactor it into
+clean, reusable functions. Each function should:
+- Have a single, clear responsibility
+- Include type hints and numpy-style docstrings
+- Handle edge cases appropriately
+- Follow PEP 8 naming conventions"
+```
+
+**What to ask for:**
+- Specific function separation suggestions
+- Error handling improvements
+- Performance optimization opportunities
+- Code organization and module structure
+
+::: {.notes}
+**TEACHING NOTES:**
+
+- **Professional practice**: Refactoring is constant in industry - code evolves continuously
+- **AI as assistant**: Emphasize human judgment in evaluating AI suggestions
+- **Code review skills**: Teach students to critique and improve AI-generated code
+- **Lab connection**: This directly connects to Lab 05's refactoring challenge
+- **Career preparation**: Refactoring skills are essential for technical interviews
+:::
+
+---
+
+# Session 2: Building robust code
+
+---
+
+## Why error handling matters 💪
+
+::: {.incremental}
+- **User experience**: Crashes vs. graceful error messages make the difference
+- **Production systems**: Unhandled errors can take down entire applications
+- **Data integrity**: Proper error handling prevents corrupt data
+- **Debugging**: Good error handling provides clear information about what went wrong
+- **Professional development**: Error handling separates amateur from professional code
+:::
+
+::: {.notes}
+**TEACHING NOTES:**
+
+- **Real consequences**: Share examples of production outages caused by unhandled exceptions
+- **User trust**: Crashes make users lose confidence in applications
+- **Cost of downtime**: Enterprise applications losing money per minute of downtime
+- **Career impact**: Error handling skills are crucial for senior developer roles
+- **Industry standards**: Most companies have strict error handling requirements
+:::
+
+---
+
+## When things go wrong: exceptions 🚨
+
+::: {.incremental}
+- A **[syntax error](https://docs.python.org/3/tutorial/errors.html#syntax-errors)** is like bad grammar; Python doesn't even understand the code, so it won't run
+- A **[runtime error](https://docs.python.org/3/tutorial/errors.html#exceptions)**, or **exception**, happens while the program is running
+- The code is syntactically correct, but something unexpected occurred
+- **Common examples**: Dividing by zero, opening nonexistent files, accessing invalid list indices
+- **Unhandled exceptions** will crash your program and frustrate users
+:::
+
+```python
+# Syntax error - won't even run
+# print("Hello world"  # Missing closing parenthesis
+
+# Runtime errors - code runs until exception occurs
+numbers = [1, 2, 3]
+print(numbers[10])  # IndexError: list index out of range
+
+result = 10 / 0     # ZeroDivisionError: division by zero
+
+age = int("not a number")  # ValueError: invalid literal for int()
+```
+
+::: {.notes}
+**TEACHING NOTES:**
+
+- **Syntax vs runtime**: Help students understand the difference clearly
+- **IDE help**: Modern IDEs catch syntax errors before running
+- **Common beginner mistakes**: Index errors and type conversion errors are frequent
+- **Error messages**: Teach students to read and understand error messages
+- **Stack traces**: Show how to follow the traceback to find the problem
+:::
+
+---
+
+## Handling exceptions with try and except 🛡️
+
+::: {.incremental}
+- We can handle these errors gracefully using a **[try...except](https://docs.python.org/3/tutorial/errors.html#handling-exceptions)** block
+- The `try` block contains the code that might fail
+- The `except` block contains the code that runs *only if* an error occurs in the `try` block
+- **Best practice**: Catch specific exceptions so you can handle different errors appropriately
+- **Never use bare except**: Always specify which exceptions you're catching
+:::
+
+```python
+def safe_divide(a: float, b: float) -> float | None:
+    """Safely divide two numbers, returning None if division fails."""
+    try:
+        result = a / b
+        return result
+    except ZeroDivisionError:
+        print(f"Cannot divide {a} by zero")
+        return None
+    except TypeError:
+        print("Both arguments must be numbers")
+        return None
+
+# Usage examples
+print(safe_divide(10, 2))    # 5.0
+print(safe_divide(10, 0))    # Cannot divide 10 by zero, returns None
+print(safe_divide(10, "x"))  # Both arguments must be numbers, returns None
+```
+
+::: {.notes}
+**TEACHING NOTES:**
+
+- **Specific exceptions**: Emphasize why `except ValueError:` is better than `except:`
+- **Error communication**: Show how different exception types need different user messages
+- **Return value strategy**: Discuss when to return None vs. raise exceptions
+- **Union types**: New Python 3.10+ syntax for optional return types
+- **Production consideration**: In real apps, might log errors instead of printing
+:::
+
+---
+
+## Python's exception hierarchy 🌳
+
+::: {.incremental}
+- **[Exception hierarchy](https://docs.python.org/3/library/exceptions.html#exception-hierarchy)**: All exceptions inherit from `BaseException`
+- **Most exceptions** inherit from `Exception` (the ones you typically catch)
+- **Common built-in exceptions**: Each serves a specific purpose
+- **Inheritance matters**: Catching `Exception` catches all its subclasses
+- **Order matters**: More specific exceptions must come before general ones
+:::
+
+```python
+# Common exception types and when they occur
+def demonstrate_exceptions():
+    examples = {
+        "ValueError": "int('not_a_number')",
+        "TypeError": "'hello' + 5",
+        "KeyError": "{'a': 1}['missing_key']",
+        "IndexError": "[1, 2, 3][10]",
+        "FileNotFoundError": "open('nonexistent.txt')",
+        "ZeroDivisionError": "10 / 0",
+        "AttributeError": "'hello'.nonexistent_method()"
+    }
+
+    for exception_type, code in examples.items():
+        print(f"{exception_type}: {code}")
+
+# Multiple exception handling
+def robust_data_processing(data: dict, key: str) -> str:
+    try:
+        value = data[key]           # Could raise KeyError
+        number = int(value)         # Could raise ValueError
+        result = 100 / number       # Could raise ZeroDivisionError
+        return f"Result: {result}"
+    except KeyError:
+        return f"Key '{key}' not found in data"
+    except ValueError:
+        return f"Value '{data[key]}' is not a valid number"
+    except ZeroDivisionError:
+        return "Cannot divide by zero"
+    except Exception as e:  # Catch any other unexpected exceptions
+        return f"Unexpected error: {e}"
+```
+
+::: {.notes}
+**TEACHING NOTES:**
+
+- **Exception hierarchy**: Draw the tree structure on board if possible
+- **Catching order**: Show why `except Exception:` must come after specific exceptions
+- **Real-world scenarios**: Each exception type maps to common programming mistakes
+- **Debugging strategy**: Exception types give clues about what went wrong
+- **Exception objects**: The `as e` syntax captures the exception for inspection
+:::
+
+---
+
+## Creating custom exceptions 🎨
+
+::: {.incremental}
+- **[Custom exceptions](https://docs.python.org/3/tutorial/errors.html#user-defined-exceptions)**: Create your own exception types for specific scenarios
+- **Inherit from Exception**: Custom exceptions should inherit from `Exception` or its subclasses
+- **Clear naming**: Exception names should end with "Error" and describe the problem
+- **Add context**: Custom exceptions can carry additional information
+- **When to use**: Domain-specific errors that don't fit built-in exception types
+:::
+
+```python
+class InsufficientFundsError(Exception):
+    """Raised when account doesn't have enough money for transaction."""
+    def __init__(self, balance: float, amount: float):
+        self.balance = balance
+        self.amount = amount
+        self.shortfall = amount - balance
+        super().__init__(f"Insufficient funds: need ${amount}, have ${balance}")
+
+class InvalidUserAgeError(Exception):
+    """Raised when user age is outside valid range."""
+    pass
+
+def withdraw_money(balance: float, amount: float) -> float:
+    """Withdraw money from account, raising custom exception if insufficient funds."""
+    if amount > balance:
+        raise InsufficientFundsError(balance, amount)
+    return balance - amount
+
+def validate_user_age(age: int) -> bool:
+    """Validate user age, raising custom exception if invalid."""
+    if not (13 <= age <= 120):
+        raise InvalidUserAgeError(f"Age {age} is not valid (must be 13-120)")
+    return True
+
+# Usage with custom exception handling
+try:
+    new_balance = withdraw_money(50.0, 75.0)
+except InsufficientFundsError as e:
+    print(f"Transaction failed: {e}")
+    print(f"You need ${e.shortfall:.2f} more")
+```
+
+::: {.notes}
+**TEACHING NOTES:**
+
+- **Domain modeling**: Custom exceptions represent business rules and constraints
+- **Error context**: Show how custom exceptions can carry more information than built-ins
+- **API design**: Custom exceptions make your functions' contracts clearer
+- **Inheritance benefits**: Can catch custom exceptions individually or as a group
+- **Professional practice**: Large applications typically have many custom exception types
+:::
+
+---
+
+## The else and finally clauses 🎯
+
+::: {.incremental}
+- We can add two more optional clauses to our error handling
+- The **[else](https://docs.python.org/3/tutorial/errors.html#defining-clean-up-actions)** block runs only if the `try` block completes successfully (no exception was raised)
+- The **[finally](https://docs.python.org/3/tutorial/errors.html#defining-clean-up-actions)** block runs **no matter what** - perfect for cleanup code
+- **Best practice**: Use `finally` for resource cleanup (files, network connections, locks)
+- **Performance consideration**: `finally` ensures cleanup even if exceptions are re-raised
+:::
+
+```python
+def process_user_data(filename: str) -> dict:
+    """Process user data from file with proper cleanup."""
+    file_handle = None
+    try:
+        file_handle = open(filename, 'r')
+        data = file_handle.read()
+        parsed_data = eval(data)  # Dangerous! Just for demonstration
+        return {"status": "success", "data": parsed_data}
+    except FileNotFoundError:
+        return {"status": "error", "message": f"File {filename} not found"}
+    except SyntaxError:
+        return {"status": "error", "message": "Invalid data format in file"}
+    else:
+        print("File processed successfully - no exceptions occurred")
+        return {"status": "success", "message": "Data processed"}
+    finally:
+        # This ALWAYS runs - exception or not
+        if file_handle and not file_handle.closed:
+            file_handle.close()
+            print("File closed in finally block")
+
+# Demonstrate all clauses
+result = process_user_data("user_data.txt")
+print(f"Result: {result}")
+```
+
+::: {.notes}
+**TEACHING NOTES:**
+
+- **else vs finally**: else only runs on success, finally always runs
+- **Resource management**: Show why finally is crucial for preventing resource leaks
+- **Exception propagation**: finally runs even if exceptions are re-raised
+- **Production patterns**: In real code, use context managers instead of manual cleanup
+- **Debugging tool**: finally blocks are useful for logging and cleanup during debugging
+:::
+
+---
+
+## Context managers: the with statement 🔐
+
+::: {.incremental}
+- **[Context managers](https://docs.python.org/3/library/stdtypes.html#context-manager-types)**: Automatically handle setup and cleanup operations
+- **The `with` statement**: Guarantees cleanup even if exceptions occur
+- **Most common use**: File operations - automatically closes files
+- **Professional standard**: Always use `with` for file operations
+- **Under the hood**: Uses `__enter__` and `__exit__` methods
+:::
+
+```python
+# OLD WAY: Manual file handling (error-prone)
+def read_config_old(filename: str) -> dict:
+    try:
+        file = open(filename, 'r')
+        content = file.read()
+        return {"content": content}
+    except FileNotFoundError:
+        return {"error": "File not found"}
+    finally:
+        if 'file' in locals() and not file.closed:
+            file.close()
+
+# NEW WAY: Context manager (automatic cleanup)
+def read_config_new(filename: str) -> dict:
+    try:
+        with open(filename, 'r') as file:
+            content = file.read()
+            return {"content": content}
+    except FileNotFoundError:
+        return {"error": "File not found"}
+    # File automatically closed here, even if exception occurs!
+
+# Multiple files with context managers
+def compare_files(file1: str, file2: str) -> bool:
+    try:
+        with open(file1, 'r') as f1, open(file2, 'r') as f2:
+            return f1.read() == f2.read()
+    except FileNotFoundError:
+        return False
+    # Both files automatically closed
+```
+
+::: {.notes}
+**TEACHING NOTES:**
+
+- **Resource leaks**: Show how manual file handling can leave files open
+- **Exception safety**: Context managers guarantee cleanup even during exceptions
+- **Multiple resources**: with statement can handle multiple context managers
+- **Industry standard**: Professional Python code almost always uses context managers for files
+- **Other uses**: Database connections, network sockets, thread locks all use context managers
+:::
+
+---
+
+## Defensive programming: input validation 🛡️
+
+::: {.incremental}
+- **Defensive programming**: Write code that protects against invalid inputs
+- **Input validation**: Check arguments before processing them
+- **Early return pattern**: Validate first, process later
+- **Clear error messages**: Help users understand what went wrong
+- **Type checking**: Use type hints and runtime validation together
+:::
+
+```python
+def create_user_account(username: str, age: int, email: str) -> dict:
+    """Create user account with comprehensive input validation."""
+
+    # Input validation with clear error messages
+    if not isinstance(username, str):
+        raise TypeError("Username must be a string")
+
+    if not username or len(username.strip()) == 0:
+        raise ValueError("Username cannot be empty or only whitespace")
+
+    if len(username) < 3:
+        raise ValueError("Username must be at least 3 characters long")
+
+    if not isinstance(age, int):
+        raise TypeError("Age must be an integer")
+
+    if not (13 <= age <= 120):
+        raise ValueError("Age must be between 13 and 120")
+
+    if not isinstance(email, str) or '@' not in email:
+        raise ValueError("Email must be a valid email address")
+
+    # Only process if all validation passes
+    return {
+        "username": username.strip().lower(),
+        "age": age,
+        "email": email.lower(),
+        "account_id": f"user_{username}_{age}",
+        "status": "active"
+    }
+
+# Safe usage with validation
+try:
+    user = create_user_account("Alice123", 25, "alice@example.com")
+    print(f"Created user: {user}")
+except (TypeError, ValueError) as e:
+    print(f"Invalid input: {e}")
+```
+
+::: {.notes}
+**TEACHING NOTES:**
+
+- **Fail fast principle**: Catch problems as early as possible
+- **User experience**: Clear error messages help users fix their input
+- **Security consideration**: Input validation prevents many security vulnerabilities
+- **API design**: Well-validated functions are easier to use correctly
+- **Testing strategy**: Input validation makes functions more predictable and testable
+:::
+
+---
+
+## Error handling patterns: EAFP vs LBYL 🤔
+
+::: {.incremental}
+- **EAFP**: "Easier to Ask for Forgiveness than Permission" - try it and handle exceptions
+- **LBYL**: "Look Before You Leap" - check conditions before attempting operations
+- **Python philosophy**: Generally prefers EAFP approach
+- **Performance**: EAFP can be faster when exceptions are rare
+- **Choose wisely**: Some situations favor one approach over the other
+:::
+
+```python
+# LBYL Approach: Check first, then act
+def get_user_score_lbyl(users: dict, user_id: str) -> float:
+    """Get user score using Look Before You Leap pattern."""
+    if user_id not in users:
+        return 0.0
+
+    user = users[user_id]
+    if 'scores' not in user:
+        return 0.0
+
+    if len(user['scores']) == 0:
+        return 0.0
+
+    return sum(user['scores']) / len(user['scores'])
+
+# EAFP Approach: Try it and handle exceptions
+def get_user_score_eafp(users: dict, user_id: str) -> float:
+    """Get user score using Easier to Ask Forgiveness pattern."""
+    try:
+        scores = users[user_id]['scores']
+        return sum(scores) / len(scores)
+    except KeyError:
+        return 0.0  # User or scores key doesn't exist
+    except ZeroDivisionError:
+        return 0.0  # Empty scores list
+
+# When to use each approach
+def demonstrate_patterns():
+    users = {
+        "alice": {"scores": [85, 92, 78]},
+        "bob": {"scores": []},
+        "charlie": {}
+    }
+
+    # Both approaches handle the same edge cases
+    print("LBYL results:", [get_user_score_lbyl(users, uid)
+                          for uid in ["alice", "bob", "charlie", "diana"]])
+    print("EAFP results:", [get_user_score_eafp(users, uid)
+                          for uid in ["alice", "bob", "charlie", "diana"]])
+```
+
+::: {.notes}
+**TEACHING NOTES:**
+
+- **Python culture**: EAFP is more "Pythonic" in most cases
+- **Performance consideration**: EAFP avoids double lookups in dictionaries
+- **Readability**: EAFP often leads to cleaner, more readable code
+- **Exception cost**: Exceptions have overhead, so LBYL might be better if failures are common
+- **Real-world decision**: Choose based on your specific use case and team preferences
+:::
+
+---
+
+## Introducing Lab 05: Functions & Error Handling 🚀
+
+::: {.incremental}
+- This week's lab will have two parts, mirroring our two sessions
+- **Part 1: The refactor challenge** - Transform messy code into clean, professional functions
+- **Part 2: Bulletproof your code** - Add comprehensive error handling to make your code production-ready
+- **Skills practiced**: Function design, parameter handling, exception management, defensive programming
+- **AI assistance**: Use your AI partner strategically for both refactoring and error handling strategies
+:::
+
+**What you'll accomplish:**
+```python
+# From this (messy, fragile code)
+total = 0
+for user in users:
+    if user.get("age"):
+        total += user["age"]
+print("Average:", total/len(users))  # Will crash if no users!
+
+# To this (clean, robust functions)
+def calculate_average_age(users: list[dict]) -> float | None:
+    """Calculate average age with proper error handling."""
+    try:
+        valid_ages = [user["age"] for user in users
+                     if isinstance(user.get("age"), (int, float))]
+        return sum(valid_ages) / len(valid_ages) if valid_ages else None
+    except (KeyError, TypeError) as e:
+        logger.warning(f"Error calculating average age: {e}")
+        return None
+```
+
+**Lab objectives**: Clean code organization, defensive programming patterns, professional error handling
+
+::: {.notes}
+**TEACHING NOTES:**
+
+- **Before/after comparison**: Show transformation from amateur to professional code
+- **Real-world relevance**: These patterns are used daily in industry
+- **AI collaboration**: Emphasize using AI as a coding partner, not just code generator
+- **Quality focus**: Lab emphasizes code quality, not just functionality
+- **Career preparation**: These skills directly apply to internships and full-time roles
+:::
+
+---
+
+## Summary: Professional Python development 🎯
+
+::: {.incremental}
+- **Functions**: The foundation of maintainable, testable code
+- **Error handling**: The difference between amateur and professional software
+- **Career skills**: These concepts appear in every technical interview and code review
+- **AI partnership**: Use AI to learn patterns, then apply your judgment
+- **Next steps**: Practice these patterns until they become second nature
+:::
+
+**Key takeaways for your development journey:**
+- **Design functions** that do one thing well with clear interfaces
+- **Handle errors** proactively rather than reactively
+- **Validate inputs** to prevent problems before they occur
+- **Use context managers** for automatic resource management
+- **Choose EAFP vs LBYL** based on your specific use case
+- **Write code** that your future self (and teammates) will thank you for
+
+::: {.notes}
+**TEACHING NOTES:**
+
+- **Career connection**: Reinforce how these skills apply to professional development
+- **Confidence building**: Students should feel prepared to write production-quality code
+- **Next week preview**: These patterns will be essential for upcoming projects
+- **Portfolio development**: Encourage students to refactor their previous labs using new techniques
+- **Industry mindset**: Shift from "getting it to work" to "getting it to work reliably"
+:::

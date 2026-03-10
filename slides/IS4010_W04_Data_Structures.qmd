@@ -1,0 +1,1033 @@
+---
+title: "IS4010: AI-Enhanced Application Development"
+subtitle: "Week 4: Python Data Structures"
+author: "Brandon M. Greenwell"
+format:
+  revealjs:
+    self-contained: false
+    theme: dracula
+    transition: fade
+    scrollable: true
+    css: custom.css
+---
+
+# Welcome to Python Data Structures 📦
+
+## The foundation of organized programming 🏗️
+
+::: {.incremental}
+- **Data structures** are the backbone of efficient programming
+- They determine how we organize, store, and access information
+- **Python's philosophy**: "Batteries included" - powerful built-in data structures ready to use
+- **Career relevance**: Understanding data structures is essential for technical interviews
+- **Real-world impact**: Every app you use relies on sophisticated data organization
+:::
+
+::: {.notes}
+**TEACHING NOTES:**
+
+- **Career connection**: Data structure questions are common in coding interviews
+- **Real-world examples**: Instagram feeds (lists), user profiles (dictionaries), unique hashtags (sets)
+- **Python advantage**: Compare to languages like C where you build data structures from scratch
+- **Course progression**: This builds foundation for database design later in the course
+- **Historical context**: Data structures were formalized in the 1960s, fundamental to computer science
+:::
+
+---
+
+# Session 1: Sequences & collections
+
+---
+
+## What is a data structure? 🤔
+
+::: {.incremental}
+- A **data structure** is a way to organize and store multiple pieces of data in a single variable
+- Think of them as **specialized containers** for your data
+- **Python's built-in arsenal**: [Lists](https://docs.python.org/3/tutorial/introduction.html#lists), [tuples](https://docs.python.org/3/tutorial/datastructures.html#tuples-and-sequences), [dictionaries](https://docs.python.org/3/tutorial/datastructures.html#dictionaries), and [sets](https://docs.python.org/3/tutorial/datastructures.html#sets)
+- **Choosing wisely**: The right data structure makes your code faster, cleaner, and more maintainable
+- **Performance matters**: Different structures excel at different operations
+:::
+
+::: {.notes}
+**TEACHING NOTES:**
+
+- **Container metaphor**: Use physical examples - toolbox (organized), junk drawer (unorganized)
+- **Performance preview**: Mention that dictionaries are faster for lookups than lists
+- **Real applications**: Shopping cart (list), user settings (dictionary), unique visitors (set)
+- **Python advantage**: Many languages require manual memory management for data structures
+- **Learning strategy**: Start with understanding when to use each type, optimization comes later
+:::
+
+---
+
+## The list: a mutable sequence 📝
+
+::: {.incremental}
+- A **[list](https://docs.python.org/3/tutorial/introduction.html#lists)** is an ordered, changeable collection of items
+- **Most versatile**: Lists are the workhorses of Python programming
+- **Ordered**: Items maintain their position - first in, stays first (unless you change it)
+- **Mutable**: Add, remove, or modify items after creation
+- **Syntax**: Items enclosed in square brackets `[]`, separated by commas
+- **Dynamic size**: Grow or shrink as needed - no fixed size limit
+:::
+
+```python
+# A list of computer science pioneers
+pioneers = ["Grace Hopper", "Ada Lovelace", "Katherine Johnson"]
+
+# Add new pioneer (append adds to the end)
+pioneers.append("Dorothy Vaughan")
+
+# Update an item (zero-based indexing)
+pioneers[0] = "Rear Admiral Grace Hopper"
+
+# Insert at specific position
+pioneers.insert(1, "Hedy Lamarr")
+
+print(pioneers)
+# Output: ['Rear Admiral Grace Hopper', 'Hedy Lamarr', 'Ada Lovelace', 'Katherine Johnson', 'Dorothy Vaughan']
+
+# Useful list methods
+print(f"Number of pioneers: {len(pioneers)}")
+print(f"Last pioneer: {pioneers[-1]}")
+```
+
+::: {.notes}
+**TEACHING NOTES:**
+
+- **Historical figures**: Use real computer science pioneers to make examples meaningful
+- **Zero-based indexing**: Emphasize this is fundamental to most programming languages
+- **Common methods**: Preview append(), insert(), remove(), pop(), index(), count()
+- **Real applications**: Shopping carts, todo lists, user feeds, search results
+- **Performance note**: Lists are optimized for accessing by index, slower for searching
+- **Memory model**: Lists store references to objects, not the objects themselves
+:::
+
+---
+
+## The tuple: an immutable sequence 🔒
+
+::: {.incremental}
+- A **[tuple](https://docs.python.org/3/tutorial/datastructures.html#tuples-and-sequences)** is an ordered, unchangeable collection of items
+- **Ordered**: Like lists, items maintain their position
+- **Immutable**: Cannot add, remove, or change items after creation
+- **Syntax**: Items enclosed in parentheses `()`, though parentheses are often optional
+- **Use cases**: Coordinates, RGB colors, database records, function return values
+- **Performance advantage**: Slightly faster than lists for accessing elements
+- **Memory efficient**: Less overhead than lists due to immutability
+:::
+
+```python
+# Coordinate pairs for a map application
+start_location = (39.1031, -84.5120)  # Cincinnati coordinates
+end_location = (39.7391, -104.9847)   # Denver coordinates
+
+# RGB color values for UI design
+brand_colors = (
+    (0, 123, 191),    # UC Blue
+    (224, 18, 34),    # UC Red
+    (0, 0, 0)         # Black
+)
+
+# Tuple unpacking (very common pattern)
+lat, lon = start_location
+print(f"Starting at latitude {lat}, longitude {lon}")
+
+# Multiple return values from functions
+def get_name_and_grade():
+    return "Alice", 95.5  # Returns a tuple
+
+name, grade = get_name_and_grade()  # Tuple unpacking
+
+# Single item tuple (note the comma!)
+single_item = (42,)  # Without comma, it's just parentheses for grouping
+```
+
+::: {.notes}
+**TEACHING NOTES:**
+
+- **Immutability advantage**: Tuples can be used as dictionary keys (lists cannot)
+- **Real coordinates**: Use actual Cincinnati and UC campus coordinates for relevance
+- **Tuple unpacking**: This is extremely common in Python - emphasize the pattern
+- **Single item syntax**: The comma is crucial - `(42)` is just the number 42 with parentheses
+- **Performance**: Tuples are faster for access and iteration, but the difference is usually negligible
+- **Function returns**: Tuples are the standard way to return multiple values
+:::
+
+---
+
+## Accessing items: indexing & slicing 🎯
+
+::: {.incremental}
+- **Zero-based indexing**: Python counts from 0, not 1 (like most programming languages)
+- **Positive indices**: `my_list[0]` first item, `my_list[1]` second item, etc.
+- **Negative indices**: `my_list[-1]` last item, `my_list[-2]` second-to-last, etc.
+- **Slicing**: Extract ranges of items with `start:stop:step` syntax
+- **Slice behavior**: `[start:stop]` includes start, excludes stop
+- **Advanced slicing**: Control step size and direction
+:::
+
+```python
+# Working with sequence data
+languages = ["Python", "JavaScript", "Java", "C++", "Rust", "Go", "TypeScript"]
+
+# Basic indexing
+print(f"First language: {languages[0]}")           # Python
+print(f"Third language: {languages[2]}")           # Java
+print(f"Last language: {languages[-1]}")           # TypeScript
+print(f"Second to last: {languages[-2]}")          # Go
+
+# Slicing examples
+print(f"First three: {languages[0:3]}")            # ['Python', 'JavaScript', 'Java']
+print(f"From index 2 on: {languages[2:]}")         # ['Java', 'C++', 'Rust', 'Go', 'TypeScript']
+print(f"Last three: {languages[-3:]}")             # ['Rust', 'Go', 'TypeScript']
+print(f"Every other: {languages[::2]}")            # ['Python', 'Java', 'Rust', 'TypeScript']
+print(f"Reversed: {languages[::-1]}")              # Entire list in reverse order
+
+# Slicing with coordinates
+point = (10, 20, 30, 40)
+x, y = point[0:2]  # Get first two values
+print(f"2D coordinates: ({x}, {y})")
+```
+
+::: {.notes}
+**TEACHING NOTES:**
+
+- **Zero-based confusion**: This trips up beginners - relate to array indexing in other languages
+- **Negative indexing**: Unique Python feature that makes code more readable
+- **Slice notation**: [start:stop:step] - stop is exclusive (common source of off-by-one errors)
+- **Memory efficiency**: Slicing creates new objects, doesn't modify originals
+- **Real applications**: Processing data chunks, pagination, extracting subsets
+- **Common patterns**: `list[:]` copies entire list, `list[::-1]` reverses
+:::
+
+---
+
+## Common sequence operations 🛠️
+
+::: {.incremental}
+- **Length**: `len(sequence)` returns number of items
+- **Membership**: `item in sequence` checks if item exists
+- **Concatenation**: `list1 + list2` combines sequences
+- **Repetition**: `list * 3` repeats sequence multiple times
+- **Sorting**: `sorted()` returns new sorted sequence, `list.sort()` modifies in place
+- **Finding**: `sequence.index(item)` finds first occurrence
+:::
+
+```python
+# Working with programming languages data
+popular_languages = ["Python", "JavaScript", "TypeScript"]
+systems_languages = ["C++", "Rust", "Go"]
+
+# Length and membership
+print(f"We track {len(popular_languages)} popular languages")
+print(f"Is Python popular? {'Python' in popular_languages}")
+print(f"Is Assembly popular? {'Assembly' in popular_languages}")
+
+# Concatenation and repetition
+all_languages = popular_languages + systems_languages
+separator = ["-"] * 3  # Creates ["-", "-", "-"]
+
+# Sorting (doesn't modify original)
+sorted_languages = sorted(all_languages)
+print(f"Alphabetical: {sorted_languages}")
+
+# Finding items
+try:
+    rust_position = all_languages.index("Rust")
+    print(f"Rust is at position {rust_position}")
+except ValueError:
+    print("Rust not found in list")
+
+# List comprehensions (introduced earlier in this lecture!)
+short_names = [lang for lang in all_languages if len(lang) <= 4]
+print(f"Short language names: {short_names}")
+```
+
+::: {.notes}
+**TEACHING NOTES:**
+
+- **sorted() vs .sort()**: sorted() returns new list, .sort() modifies original
+- **in operator**: Very efficient for checking membership
+- **Exception handling**: Preview try/except for .index() method
+- **List comprehensions**: Apply the syntax we just learned for filtering
+- **Performance**: `in` is O(n) for lists, O(1) for sets - preview of why sets matter
+- **Real applications**: Data filtering, search functionality, user interface lists
+:::
+
+---
+
+## Quick Introduction: List Comprehensions 📝
+
+**Python has a concise way to create lists called [list comprehensions](https://docs.python.org/3/tutorial/datastructures.html#list-comprehensions):**
+
+```python
+# Traditional approach with loops
+numbers = []
+for i in range(5):
+    numbers.append(i * 2)
+print(numbers)  # [0, 2, 4, 6, 8]
+
+# List comprehension - more concise!
+numbers = [i * 2 for i in range(5)]
+print(numbers)  # [0, 2, 4, 6, 8]
+
+# Pattern: [expression for item in iterable]
+emails = [f"user_{i}@email.com" for i in range(3)]
+print(emails)  # ['user_0@email.com', 'user_1@email.com', 'user_2@email.com']
+```
+
+**Why learn this now?**
+- Perfect for generating test data (which we'll need for performance testing!)
+- More readable and Pythonic than traditional loops
+- We'll use this pattern extensively in data processing
+
+::: {.notes}
+**TEACHING NOTES:**
+
+- **Quick introduction**: Don't go too deep - just enough for immediate use
+- **Pattern recognition**: Emphasize the `[expression for item in iterable]` pattern
+- **Practical context**: "We need this for our performance exercise!"
+- **Future reference**: "We'll see more advanced list comprehensions in later weeks"
+- **Connection**: Link to the upcoming performance exercise where they'll see it in action
+- **Documentation**: Point out the official Python docs link for deeper study
+:::
+
+---
+
+## 🔬 Live Exercise: AI-Assisted Performance Detective
+
+**Challenge:** Help me optimize this slow code using GenAI tools!
+
+```python
+# SLOW CODE - Let's time this together!
+import time
+
+# Simulating a large customer database
+customers = [f"customer_{i}@email.com" for i in range(50000)]
+vip_customers = [f"customer_{i}@email.com" for i in range(0, 50000, 100)]  # Every 100th customer
+
+# Slow approach - checking VIP status
+def is_vip_slow(email, vip_list):
+    """Check if customer is VIP - using list membership"""
+    return email in vip_list
+
+# Let's time this approach
+start_time = time.time()
+vip_count = 0
+for customer in customers[:1000]:  # Check first 1000 customers
+    if is_vip_slow(customer, vip_customers):
+        vip_count += 1
+slow_time = time.time() - start_time
+
+print(f"Slow approach: {slow_time:.4f} seconds, found {vip_count} VIPs")
+```
+
+**Your Turn with GenAI:**
+
+1. 🤖 **Ask Claude/Gemini/ChatGPT**: "How can I optimize this customer VIP lookup code?"
+2. 📊 **Get timing comparison**: What data structure should we use instead?
+3. 💡 **Implement together**: Let's code the optimized version live!
+
+::: {.notes}
+**LIVE EXERCISE INSTRUCTIONS:**
+
+- **Setup (2 min)**: Have students open Claude/ChatGPT in browser
+- **Prompt suggestion**: "Analyze this Python code for performance bottlenecks and suggest optimizations using different data structures"
+- **Expected AI response**: Should recommend converting list to set for O(1) lookups
+- **Live coding**: Implement the set-based solution and show timing difference
+- **Discussion points**: Why sets are faster, when to use each approach
+- **Backup plan**: If timing demo fails, show pre-calculated results
+- **Extension**: Ask AI about other optimization strategies (caching, indexing, etc.)
+:::
+
+---
+
+## 🚀 Optimized Solution (with GenAI help!)
+
+```python
+# FAST CODE - After consulting with GenAI
+import time
+
+# Convert VIP list to set for O(1) lookups
+vip_customers_set = set(vip_customers)
+
+def is_vip_fast(email, vip_set):
+    """Check if customer is VIP - using set membership"""
+    return email in vip_set
+
+# Time the optimized approach
+start_time = time.time()
+vip_count = 0
+for customer in customers[:1000]:
+    if is_vip_fast(customer, vip_customers_set):
+        vip_count += 1
+fast_time = time.time() - start_time
+
+print(f"Fast approach: {fast_time:.4f} seconds, found {vip_count} VIPs")
+print(f"Speedup: {slow_time/fast_time:.1f}x faster!")
+
+# GenAI bonus: What other optimizations could we make?
+# - Pre-compute VIP status in a dictionary
+# - Use database indexing for larger datasets
+# - Cache frequently accessed results
+```
+
+**Results Discussion:**
+- 📈 **Performance gain**: Typically 10-100x faster for large datasets
+- 🧠 **AI insight**: GenAI tools excel at identifying these patterns
+- 💼 **Real impact**: This optimization matters in production systems
+- 🔄 **Learning loop**: AI suggestions → implementation → measurement → iteration
+
+::: {.notes}
+**DISCUSSION FACILITATION:**
+
+- **Performance reveal**: Students should see dramatic speed improvement
+- **AI reflection**: "What did the AI get right? What did it miss?"
+- **Real-world connection**: "Where would this optimization matter in real apps?"
+- **Critical thinking**: "When might a list still be better than a set?"
+- **Career relevance**: "This type of optimization thinking is valued in technical interviews"
+- **Next steps**: "What other performance bottlenecks might AI help us find?"
+:::
+
+---
+
+# Session 2: Mappings & collections
+
+---
+
+## The dictionary: key-value pairs 🗝️
+
+::: {.incremental}
+- A **[dictionary](https://docs.python.org/3/tutorial/datastructures.html#dictionaries)** is a collection of `key: value` pairs
+- **Lightning fast lookups**: Optimized for retrieving values when you know the key
+- **Real-world analogy**: Like a phone book or actual dictionary - look up by name/word, get number/definition
+- **Unique keys**: Each key can appear only once, but values can be duplicated
+- **Key types**: Strings, numbers, tuples (immutable types only)
+- **Syntax**: Pairs enclosed in curly braces `{key: value}`
+- **Python 3.7+**: Dictionaries maintain insertion order (ordered)
+:::
+
+```python
+# User profile for a social media application
+user_profile = {
+    "username": "ada_lovelace",
+    "first_name": "Ada",
+    "last_name": "Lovelace",
+    "birth_year": 1815,
+    "occupation": "Mathematician",
+    "famous_for": "First computer programmer",
+    "followers": 125000,
+    "verified": True,
+    "programming_languages": ["Analytical Engine", "Mathematics"]
+}
+
+# Accessing values (multiple ways)
+print(f"User: {user_profile['username']}")
+print(f"Born: {user_profile.get('birth_year', 'Unknown')}")  # Safe access
+print(f"Followers: {user_profile['followers']:,}")
+
+# Adding new information
+user_profile["location"] = "London, England"
+user_profile["last_active"] = "1852-11-27"
+
+# Updating existing values
+user_profile["followers"] += 1000  # New followers!
+
+print(f"Updated profile: {user_profile['username']} now has {user_profile['followers']:,} followers")
+```
+
+::: {.notes}
+**TEACHING NOTES:**
+
+- **Performance advantage**: O(1) average lookup time vs O(n) for lists
+- **Real applications**: User accounts, configuration settings, caching, databases
+- **Key restrictions**: Only immutable types (strings, numbers, tuples) can be keys
+- **get() method**: Safer than bracket notation - returns None or default instead of error
+- **Historical context**: Ada Lovelace wrote the first computer algorithm in 1843
+- **Modern relevance**: JSON data maps directly to Python dictionaries
+:::
+
+---
+
+## 🛠️ Live Exercise: AI-Powered Code Refactoring
+
+**Challenge:** This code works, but it's messy and slow. Let's fix it with GenAI!
+
+```python
+# MESSY CODE - Student registration system (needs help!)
+def process_student_data():
+    # Raw data from registration form
+    students = []
+    students.append(["Alice Johnson", "alice@uc.edu", "IS4010", 95])
+    students.append(["Bob Smith", "bob@uc.edu", "IS4010", 87])
+    students.append(["Alice Johnson", "alice@uc.edu", "CS2071", 92])  # Duplicate student!
+    students.append(["Carol Davis", "carol@uc.edu", "IS4010", 78])
+    students.append(["Bob Smith", "bob@uc.edu", "MATH2045", 85])    # Another duplicate!
+
+    # Find students in IS4010 (slow way)
+    is4010_students = []
+    for student in students:
+        if student[2] == "IS4010":  # Magic number - what does index 2 mean?
+            is4010_students.append(student)
+
+    # Calculate average grade (also slow)
+    total = 0
+    count = 0
+    for student in is4010_students:
+        total += student[3]  # Another magic number!
+        count += 1
+    average = total / count if count > 0 else 0
+
+    return is4010_students, average
+
+# Call the function
+students, avg = process_student_data()
+print(f"IS4010 students: {len(students)}, Average: {avg:.1f}")
+```
+
+**GenAI Prompt Challenge:**
+🤖 *"Analyze this Python code and suggest improvements for data structure choice, readability, and performance. Focus on eliminating magic numbers and handling duplicate data."*
+
+::: {.notes}
+**INTERACTIVE EXERCISE FLOW:**
+
+1. **Problem identification (3 min)**: Ask students what's wrong with this code
+2. **AI consultation (5 min)**: Students ask their GenAI tool for refactoring suggestions
+3. **Solution discussion (5 min)**: Collect AI recommendations from students
+4. **Live refactoring (7 min)**: Implement the best suggestions together
+
+**Expected AI suggestions:**
+- Use dictionaries instead of lists for structured data
+- Use sets to handle duplicate students
+- Replace magic numbers with named constants or dictionary keys
+- Separate concerns (data processing vs calculations)
+
+**Backup suggestions if AI doesn't deliver:**
+- Convert list of lists to list of dictionaries
+- Use defaultdict for grouping students by course
+- Create proper data validation
+:::
+
+---
+
+## 🎯 Refactored Solution (AI-Assisted)
+
+```python
+# CLEAN CODE - After GenAI consultation
+from collections import defaultdict
+
+def process_student_data_improved():
+    # Better data structure: list of dictionaries
+    raw_students = [
+        {"name": "Alice Johnson", "email": "alice@uc.edu", "course": "IS4010", "grade": 95},
+        {"name": "Bob Smith", "email": "bob@uc.edu", "course": "IS4010", "grade": 87},
+        {"name": "Alice Johnson", "email": "alice@uc.edu", "course": "CS2071", "grade": 92},
+        {"name": "Carol Davis", "email": "carol@uc.edu", "course": "IS4010", "grade": 78},
+        {"name": "Bob Smith", "email": "bob@uc.edu", "course": "MATH2045", "grade": 85},
+    ]
+
+    # Group students by course (using defaultdict - AI suggestion!)
+    students_by_course = defaultdict(list)
+    unique_enrollments = set()  # Handle duplicates with sets!
+
+    for student in raw_students:
+        # Create unique key for duplicate detection
+        key = (student["name"], student["email"], student["course"])
+        if key not in unique_enrollments:
+            unique_enrollments.add(key)
+            students_by_course[student["course"]].append(student)
+
+    # Calculate statistics for IS4010
+    is4010_students = students_by_course["IS4010"]
+    average_grade = sum(s["grade"] for s in is4010_students) / len(is4010_students)
+
+    return is4010_students, average_grade
+
+# Much cleaner!
+students, avg = process_student_data_improved()
+print(f"IS4010 students: {len(students)}, Average: {avg:.1f}")
+```
+
+**What GenAI helped us achieve:**
+- 🗂️ **Better structure**: Dictionaries instead of magic indices
+- 🚫 **Duplicate handling**: Sets for unique enrollment tracking
+- 📊 **Efficient grouping**: defaultdict for course organization
+- 📖 **Readable code**: Self-documenting variable names
+- ⚡ **Performance**: Faster lookups and processing
+
+::: {.notes}
+**DISCUSSION POINTS:**
+
+- **AI vs Human insight**: What did AI catch that humans might miss?
+- **Trade-offs**: When is the simpler version actually better?
+- **Real-world impact**: How much does this matter in production?
+- **Learning reinforcement**: Connect back to data structure choices
+- **Next level**: What would a database solution look like?
+:::
+
+---
+
+## The set: unique items only 🎯
+
+::: {.incremental}
+- A **[set](https://docs.python.org/3/tutorial/datastructures.html#sets)** is an unordered collection of **unique** items
+- **No duplicates allowed**: Automatically removes duplicate entries
+- **Lightning fast membership testing**: `item in set` is extremely efficient
+- **Mathematical operations**: Union, intersection, difference operations
+- **Syntax**: Items in curly braces `{}` or use `set()` constructor
+- **Mutable**: Add and remove items after creation
+- **Use cases**: Remove duplicates, track unique visitors, mathematical set operations
+:::
+
+```python
+# Website analytics: tracking unique visitors
+daily_visitors = ["alice", "bob", "charlie", "alice", "david", "alice", "eve"]
+monthly_visitors = ["alice", "frank", "george", "bob", "helen"]
+
+# Remove duplicates and get unique visitors
+unique_daily = set(daily_visitors)
+unique_monthly = set(monthly_visitors)
+
+print(f"Unique daily visitors: {len(unique_daily)}")  # 5 unique visitors
+print(f"Daily visitors: {unique_daily}")
+
+# Set operations (mathematical set theory)
+all_visitors = unique_daily | unique_monthly        # Union: all unique visitors
+returning_visitors = unique_daily & unique_monthly  # Intersection: visitors in both
+new_visitors = unique_monthly - unique_daily        # Difference: monthly-only visitors
+
+print(f"All unique visitors: {all_visitors}")
+print(f"Returning visitors: {returning_visitors}")
+print(f"New visitors this month: {new_visitors}")
+
+# Adding and removing items
+unique_daily.add("ivan")      # Add new visitor
+unique_daily.discard("bob")   # Remove visitor (safe - no error if not found)
+
+# Create set from list to remove duplicates
+languages = ["Python", "Java", "Python", "C++", "Java", "Rust"]
+unique_languages = set(languages)
+print(f"Unique programming languages: {unique_languages}")
+
+# Fast membership testing
+if "Python" in unique_languages:
+    print("Python is one of our tracked languages")
+```
+
+::: {.notes}
+**TEACHING NOTES:**
+
+- **Mathematical foundation**: Sets are based on mathematical set theory
+- **Performance**: `in` operator is O(1) for sets vs O(n) for lists
+- **Set operations**: Use | (union), & (intersection), - (difference), ^ (symmetric difference)
+- **Real applications**: User tracking, duplicate removal, permission systems
+- **Empty set**: Use `set()` not `{}` (empty braces create empty dictionary)
+- **Immutable version**: `frozenset()` creates immutable sets that can be dictionary keys
+:::
+
+---
+
+## 📡 Live Exercise: AI-Powered API Data Design
+
+**Scenario:** You're building a student dashboard that needs to process this GitHub API-style data efficiently. Let's design the optimal data structures with GenAI!
+
+```python
+# Realistic API response from student management system
+api_response = {
+    "students": [
+        {
+            "id": 12345,
+            "username": "alice_j",
+            "profile": {
+                "name": "Alice Johnson",
+                "email": "alice@uc.edu",
+                "year": "junior",
+                "major": "Information Systems"
+            },
+            "courses": [
+                {"code": "IS4010", "grade": 95, "credits": 3},
+                {"code": "CS2071", "grade": 88, "credits": 4},
+                {"code": "MATH2045", "grade": 92, "credits": 3}
+            ],
+            "activities": ["ACM", "IS Club", "Dean's List"],
+            "permissions": ["student", "tutor", "lab_assistant"]
+        },
+        {
+            "id": 67890,
+            "username": "bob_s",
+            "profile": {
+                "name": "Bob Smith",
+                "email": "bob@uc.edu",
+                "year": "senior",
+                "major": "Computer Science"
+            },
+            "courses": [
+                {"code": "IS4010", "grade": 87, "credits": 3},
+                {"code": "CS5168", "grade": 91, "credits": 3}
+            ],
+            "activities": ["IEEE", "Hackathon Club"],
+            "permissions": ["student", "teaching_assistant"]
+        }
+    ],
+    "metadata": {
+        "total_students": 2,
+        "timestamp": "2024-03-15T10:30:00Z",
+        "api_version": "v2.1"
+    }
+}
+```
+
+**GenAI Design Challenge:**
+🤖 *"I need to design data structures for a student dashboard with these requirements:*
+*1. Fast lookup of students by username*
+*2. Quick filtering by course enrollment*
+*3. Efficient permission checking*
+*4. Find students with specific activities*
+*What data structures should I use and why?"*
+
+::: {.notes}
+**EXERCISE STRUCTURE (15 minutes total):**
+
+1. **Problem analysis (3 min)**: Students identify the different query patterns needed
+2. **AI consultation (5 min)**: Students ask GenAI for data structure recommendations
+3. **Solution sharing (4 min)**: Compare different AI suggestions from the class
+4. **Live implementation (3 min)**: Code the best approach together
+
+**Expected AI recommendations:**
+- Dictionary for username→student mapping
+- Set for fast permission checking
+- Dictionary for course→students mapping
+- Set operations for activity filtering
+
+**Learning objectives:**
+- Real API data processing
+- Multiple access patterns requiring different structures
+- Performance considerations for production systems
+:::
+
+---
+
+## 🏗️ Optimized Data Structures (AI-Designed)
+
+```python
+# After consulting GenAI, let's build efficient access structures
+def process_student_api_data(api_response):
+    students_data = api_response["students"]
+
+    # 1. Fast username lookup - Dictionary
+    students_by_username = {}
+
+    # 2. Course enrollment tracking - Dictionary of sets
+    students_by_course = {}
+
+    # 3. Activity membership - Dictionary of sets
+    students_by_activity = {}
+
+    # 4. Permission checking - Dictionary of sets
+    students_by_permission = {}
+
+    # Process each student (GenAI suggested this structure)
+    for student in students_data:
+        username = student["username"]
+        students_by_username[username] = student
+
+        # Index by courses
+        for course in student["courses"]:
+            course_code = course["code"]
+            if course_code not in students_by_course:
+                students_by_course[course_code] = set()
+            students_by_course[course_code].add(username)
+
+        # Index by activities
+        for activity in student["activities"]:
+            if activity not in students_by_activity:
+                students_by_activity[activity] = set()
+            students_by_activity[activity].add(username)
+
+        # Index by permissions
+        for permission in student["permissions"]:
+            if permission not in students_by_permission:
+                students_by_permission[permission] = set()
+            students_by_permission[permission].add(username)
+
+    return {
+        "by_username": students_by_username,
+        "by_course": students_by_course,
+        "by_activity": students_by_activity,
+        "by_permission": students_by_permission
+    }
+
+# Build the optimized structures
+optimized_data = process_student_api_data(api_response)
+
+# Now queries are lightning fast!
+print(f"Students in IS4010: {optimized_data['by_course']['IS4010']}")
+print(f"ACM members: {optimized_data['by_activity']['ACM']}")
+print(f"Teaching assistants: {optimized_data['by_permission']['teaching_assistant']}")
+
+# Complex query: IS4010 students who are also ACM members
+is4010_students = optimized_data['by_course']['IS4010']
+acm_members = optimized_data['by_activity']['ACM']
+is4010_acm = is4010_students & acm_members  # Set intersection!
+print(f"IS4010 + ACM: {is4010_acm}")
+```
+
+**GenAI Success Metrics:**
+- 🚀 **O(1) lookups** instead of O(n) searches
+- 🔍 **Set operations** for complex filtering
+- 📊 **Multiple access patterns** supported efficiently
+- 💾 **Memory trade-off** for speed (typical AI recommendation)
+
+::: {.notes}
+**DISCUSSION FACILITATORS:**
+
+- **AI evaluation**: "Did the AI suggestions match your intuition?"
+- **Trade-offs**: "What's the memory cost of this optimization?"
+- **Real-world**: "Where would you see this pattern in actual applications?"
+- **Scaling**: "How would this perform with 10,000 students?"
+- **Extensions**: "What other queries might we need to optimize for?"
+- **Career connection**: "This type of system design thinking appears in technical interviews"
+:::
+
+---
+
+## Choosing the right data structure 🎯
+
+::: {.incremental}
+- **Use a `list`** when you need an ordered, changeable collection
+  - Shopping carts, todo items, search results, user feeds
+- **Use a `tuple`** when you need ordered, unchangeable data
+  - Coordinates, RGB colors, database records, configuration settings
+- **Use a `dict`** when you need fast key-based lookups
+  - User profiles, settings, caches, JSON data, databases
+- **Use a `set`** when you need unique items and fast membership testing
+  - Unique visitors, tags, permissions, removing duplicates
+:::
+
+```python
+# Real-world decision making examples
+
+# E-commerce shopping cart (order matters, items change)
+shopping_cart = ["laptop", "mouse", "keyboard", "monitor"]
+
+# Product coordinates (fixed position data)
+warehouse_location = (39.1031, -84.5120, 1)  # lat, lon, floor
+
+# User account information (key-value lookups)
+user_account = {
+    "user_id": 12345,
+    "email": "student@uc.edu",
+    "subscription": "premium",
+    "last_login": "2024-03-15"
+}
+
+# User permissions (unique items, fast checking)
+user_permissions = {"read", "write", "delete", "admin"}
+
+# Decision logic in action
+def can_user_edit(user_permissions, required_permission):
+    """Check if user has required permission - O(1) lookup!"""
+    return required_permission in user_permissions
+
+# Performance comparison
+import time
+
+# Checking membership in list vs set
+large_list = list(range(10000))
+large_set = set(range(10000))
+
+# This is slow for lists (O(n))
+# result = 9999 in large_list
+
+# This is fast for sets (O(1))
+# result = 9999 in large_set
+```
+
+::: {.notes}
+**TEACHING NOTES:**
+
+- **Performance matters**: Emphasize the practical impact of choosing the right structure
+- **Real applications**: Use concrete examples students can relate to
+- **Interview relevance**: Data structure choice is a common technical interview topic
+- **Scalability**: Wrong choice can make apps slow with large datasets
+- **Memory considerations**: Different structures have different memory overhead
+- **Future learning**: This foundation helps with database design and algorithms
+:::
+
+---
+
+## 🎮 Interactive Challenge: AI Pair Programming Session
+
+**Mini-Hackathon Time!** Work with GenAI to solve these real-world data structure problems in 15 minutes.
+
+### **Challenge 1: Social Media Analytics** 📱
+```python
+# Raw social media engagement data
+posts = [
+    {"id": 1, "user": "alice", "likes": ["bob", "carol", "dave"], "tags": ["python", "coding"]},
+    {"id": 2, "user": "bob", "likes": ["alice", "carol"], "tags": ["ai", "python"]},
+    {"id": 3, "user": "carol", "likes": ["alice"], "tags": ["datascience", "python"]},
+]
+
+# Goals: Find most popular user, most used tags, mutual connections
+# Ask your AI: "What data structures optimize social media analytics?"
+```
+
+### **Challenge 2: E-commerce Inventory** 🛒
+```python
+# Product inventory system
+inventory = [
+    {"sku": "LAP001", "name": "Laptop", "price": 999, "categories": ["electronics", "computers"], "stock": 5},
+    {"sku": "MOU002", "name": "Mouse", "price": 25, "categories": ["electronics", "accessories"], "stock": 50},
+    {"sku": "KEY003", "name": "Keyboard", "price": 75, "categories": ["electronics", "accessories"], "stock": 30},
+]
+
+# Goals: Fast product lookup, category filtering, inventory alerts
+# Ask your AI: "How do I optimize product search and filtering?"
+```
+
+### **Challenge 3: University Course Scheduler** 📚
+```python
+# Course scheduling conflicts
+courses = [
+    {"code": "IS4010", "time": "MWF 10:00", "room": "Lindner 100", "students": ["alice", "bob"]},
+    {"code": "CS2071", "time": "TTh 14:00", "room": "Lindner 200", "students": ["alice", "carol"]},
+    {"code": "MATH2045", "time": "MWF 10:00", "room": "Swift 300", "students": ["bob", "dave"]},
+]
+
+# Goals: Detect time conflicts, room utilization, student schedules
+# Ask your AI: "What's the best way to handle scheduling conflicts?"
+```
+
+**Your Mission:**
+1. 🤖 **Pick ONE challenge** that interests you most
+2. 💬 **Consult your GenAI tool** for data structure recommendations
+3. 🚀 **Be ready to share** your AI's best suggestion with the class
+4. 🏆 **Bonus**: Implement a quick prototype if you're feeling ambitious!
+
+::: {.notes}
+**FACILITATING THE MINI-HACKATHON:**
+
+**Setup (2 minutes):**
+- Students choose their challenge
+- Form small groups or work individually
+- Open GenAI tools (Claude, ChatGPT, etc.)
+
+**Work time (10 minutes):**
+- Circulate and observe AI interactions
+- Help with prompt refinement if needed
+- Look for interesting AI recommendations to highlight
+
+**Share-out (8 minutes):**
+- Each challenge gets 2-3 minutes for solutions
+- Focus on AI recommendations and reasoning
+- Highlight creative or unexpected suggestions
+- Connect back to core data structure principles
+
+**Wrap-up questions:**
+- "Which AI suggestion surprised you most?"
+- "What did AI miss that a human developer might catch?"
+- "How would you validate these recommendations in production?"
+:::
+
+---
+
+## 🎯 Challenge Solutions Showcase
+
+**Let's see what GenAI recommended for each challenge!**
+
+### **Social Media Analytics - Expected AI Solutions:**
+- **User popularity**: Dictionary counting mentions across all likes lists
+- **Tag frequency**: Counter or defaultdict for tag occurrence tracking
+- **Mutual connections**: Set intersections for finding common connections
+- **Performance**: Sets for fast membership checking in large user bases
+
+### **E-commerce Inventory - Expected AI Solutions:**
+- **Product lookup**: Dictionary with SKU as key for O(1) access
+- **Category filtering**: Dictionary mapping categories to product sets
+- **Inventory alerts**: Separate low-stock tracking with threshold checking
+- **Price queries**: Sorted structures or separate indexing for range queries
+
+### **Course Scheduling - Expected AI Solutions:**
+- **Time conflict detection**: Dictionary grouping courses by time slots
+- **Room utilization**: Dictionary tracking room→courses mapping
+- **Student schedules**: Dictionary with student→courses for individual schedules
+- **Conflict resolution**: Set operations for finding overlapping students/times
+
+**Key AI Insights:**
+- 🧠 **Pattern recognition**: AI excels at identifying common optimization patterns
+- 🔄 **Trade-off analysis**: AI often suggests multiple approaches with pros/cons
+- 📈 **Scalability thinking**: AI frequently considers performance at scale
+- 🚨 **Edge case awareness**: Good AI prompts reveal boundary conditions
+
+::: {.notes}
+**DEBRIEF DISCUSSION:**
+
+- **AI effectiveness**: "How accurate were the AI recommendations?"
+- **Human insight**: "What did you add that AI didn't suggest?"
+- **Real applications**: "Where do you see these patterns in actual software?"
+- **Next steps**: "How would you test these solutions with real data?"
+- **Course connection**: "How does this connect to your Lab 04 work?"
+:::
+
+---
+
+## Putting It All Together: Lab 04 🚀
+
+**You've experienced the power of AI-assisted data structure optimization. Now apply those skills!**
+
+**Lab 04 Challenge:**
+
+::: {.incremental}
+- **AI-guided design**: Use GenAI to recommend optimal data structures for three real scenarios
+- **Performance validation**: Test your AI's recommendations with actual code
+- **Professional documentation**: Record your AI interactions and reasoning
+- **Automated verification**: GitHub Actions will test your implementations
+- **Real-world application**: Problems mirror the challenges we solved today
+:::
+
+**From Today's Exercises to Your Lab:**
+- 🔬 **Performance Detective** → Lab's efficiency requirements
+- 🛠️ **Code Refactoring** → Lab's clean implementation standards
+- 📡 **API Data Design** → Lab's complex data structure challenges
+- 🎮 **Problem Solving** → Lab's critical thinking with AI assistance
+
+**Your AI Pair Programming Toolkit:**
+- 💬 **Effective prompts**: "Analyze this code for performance bottlenecks..."
+- 📊 **Trade-off analysis**: "Compare list vs set for this use case..."
+- 🚀 **Optimization requests**: "Suggest the fastest data structure for..."
+- 🔍 **Code review**: "What improvements can you suggest for..."
+
+**Navigate to**: [`week04/lab04.md`](https://github.com/bgreenwell/is4010-course/blob/main/week04/lab04.md)
+
+**Success Strategy:**
+1. 🤖 **Collaborate with AI** for data structure recommendations
+2. 💡 **Test and validate** AI suggestions with real code
+3. 📝 **Document your reasoning** for future reference
+4. ✅ **Verify with automation** using GitHub Actions
+
+::: {.notes}
+**FINAL CLASS WRAP-UP:**
+
+**Connection reinforcement (3 minutes):**
+- "How will today's exercises help with your lab?"
+- "Which AI prompting techniques will you use?"
+- "What performance insights will guide your choices?"
+
+**Lab preview (2 minutes):**
+- Emphasize the AI collaboration requirement
+- Mention that AI recommendations must be documented
+- Preview that automated tests will validate their choices
+
+**Next week setup:**
+- "Keep experimenting with AI for code optimization"
+- "Consider performance implications in all your coding"
+- "Practice explaining AI recommendations to others"
+
+**Career connection:**
+- "These AI collaboration skills are increasingly valuable in industry"
+- "Data structure optimization thinking appears in technical interviews"
+- "Portfolio demonstration: show both AI usage and critical evaluation"
+:::

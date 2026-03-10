@@ -1,0 +1,19 @@
+---
+title: "Week 08: Professional Python"
+---
+
+## Introduction
+
+Coming soon!
+
+## Recommended readings
+
+- [Python tutorial](https://docs.python.org/3/tutorial/) - Official Python documentation
+
+## Lectures
+
+- [**Slides: Professional Python**](../slides/IS4010_W08_Professional_Python.qmd)
+
+## Lab assignment
+
+- [Lab 08: Professional Python](https://github.com/bgreenwell/is4010-course)

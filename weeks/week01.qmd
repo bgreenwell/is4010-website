@@ -1,0 +1,19 @@
+---
+title: "Week 01: Toolkit setup"
+---
+
+## Introduction
+
+Coming soon!
+
+## Recommended readings
+
+- [Python tutorial](https://docs.python.org/3/tutorial/) - Official Python documentation
+
+## Lectures
+
+- [**Slides: Introduction & development toolkit**](../slides/IS4010_W01_Introduction.qmd)
+
+## Lab assignment
+
+- [Lab 01: Toolkit setup](https://github.com/bgreenwell/is4010-course)

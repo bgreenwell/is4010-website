@@ -1,0 +1,36 @@
+---
+title: "IS 4010: Application Development with Artificial Intelligence"
+---
+
+Welcome to the official course website for **IS 4010**.
+
+## Course overview
+This course explores the intersection of modern software development and generative AI. Students will learn to build robust applications in **Python** and **Rust** while mastering the art of using AI as a collaborative partner ("Co-Pilot").
+
+A central theme is the practical application of AI code assistants (like **GitHub Copilot** and **Gemini**) to enhance problem-solving, accelerate development, and prepare students for the future of software engineering.
+
+## Course books
+This course uses two primary, free, and open-source resources:
+
+*   **[The Python Tutorial](https://docs.python.org/3/tutorial/)**: The official guide to Python, covering everything from basic syntax to the standard library.
+*   **[The Rust Programming Language](https://doc.rust-lang.org/book/)**: Affectionately known as "The Book," this is the official, community-maintained guide to Rust.
+
+We will reference specific chapters from these books each week to support our hands-on labs.
+
+## Quick links
+* [**Syllabus**](syllabus.qmd)
+* [Weekly schedule](weeks/week01.qmd)
+* [Lab repository template](https://github.com/bgreenwell/is4010-course)
+* [Canvas (LMS)](https://uc.instructure.com/)
+
+## Instructor
+**Brandon M. Greenwell, PhD**  
+Director, Data Science @ [84.51°](https://www.8451.com/)  
+Annual Adjunct Instructor
+Department of OBAIS, University of Cincinnati
+
+Brandon is a data scientist and educator with a passion for building reliable, interpretable AI systems. In his role as Director of Data Science at 84.51°, he leads initiatives in retail analytics and statistical modeling. His research and open-source contributions focus on **Explainable AI (XAI)**, machine learning, and statistical computing.
+
+He is the author of several widely-used R packages (including [`pdp`](https://github.com/bgreenwell/pdp), [`vip`](https://github.com/koalaverse/vip), and [`fastshap`](https://github.com/bgreenwell/fastshap)) and books, including *[Tree-Based Methods for Statistical Learning in R](https://www.routledge.com/Tree-Based-Methods-for-Statistical-Learning-in-R/Greenwell/p/book/9780367532468)* and the co-authored *[Hands-On Machine Learning with R](https://www.routledge.com/Hands-On-Machine-Learning-with-R/Boehmke-Greenwell/p/book/9781138495685)*. More recently, he has been contributing to the **Rust** ecosystem with popular packages like [`doxx`](https://github.com/bgreenwell/doxx), [`xleak`](https://github.com/bgreenwell/xleak), and [`lstr`](https://github.com/bgreenwell/lstr). In this course, he brings a professional perspective on using these modern tools to build the next generation of AI-enhanced applications.
+
+{{< iconify bi github >}} [Follow on GitHub](https://github.com/bgreenwell)

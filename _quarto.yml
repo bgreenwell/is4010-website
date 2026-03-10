@@ -1,0 +1,69 @@
+project:
+  type: website
+
+website:
+  title: "IS 4010 - App Dev with AI"
+  description: "Course materials for IS 4010: Application Development with Artificial Intelligence at the University of Cincinnati."
+  page-navigation: true
+
+  sidebar:
+    style: docked
+    pinned: true
+    search: true
+    collapse-level: 1
+    tools:
+      - icon: github
+        href: https://github.com/bgreenwell/is4010-course
+        text: "GitHub"
+      - icon: journal-text
+        href: https://uc.instructure.com/
+        text: "Canvas"
+    contents:
+      - text: "Home"
+        href: index.qmd
+      - text: "Syllabus"
+        href: syllabus.qmd
+      - section: "Resources"
+        contents:
+          - text: "Setup guide"
+            href: resources/setup.qmd
+          - text: "Troubleshooting"
+            href: resources/troubleshooting.qmd
+          - text: "Python packages"
+            href: resources/packages.qmd
+      - section: "Weekly schedule"
+        contents:
+          - text: "Week 01: Toolkit setup"
+            href: weeks/week01.qmd
+          - text: "Week 02: AI-assisted dev"
+            href: weeks/week02.qmd
+          - text: "Week 03: Python basics"
+            href: weeks/week03.qmd
+          - text: "Week 04: Data structures"
+            href: weeks/week04.qmd
+          - text: "Week 05: Functions & errors"
+            href: weeks/week05.qmd
+          - text: "Week 06: OOP"
+            href: weeks/week06.qmd
+          - text: "Week 07: External data"
+            href: weeks/week07.qmd
+          - text: "Week 08: Professional Python"
+            href: weeks/week08.qmd
+          - text: "Week 09: Welcome to Rust"
+            href: weeks/week09.qmd
+          - text: "Week 10: Soul of Rust"
+            href: weeks/week10.qmd
+          - text: "Week 11: Structuring code"
+            href: weeks/week11.qmd
+          - text: "Week 12: Generics & traits"
+            href: weeks/week12.qmd
+          - text: "Week 13: Idiomatic Rust"
+            href: weeks/week13.qmd
+          - text: "Week 14: Multithreading"
+            href: weeks/week14.qmd
+
+format:
+  html:
+    theme: cosmo
+    toc: true
+    css: styles.css

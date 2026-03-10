@@ -1,0 +1,19 @@
+---
+title: "Week 12: Generics & traits"
+---
+
+## Introduction
+
+This week you'll learn how Rust achieves polymorphism without inheritance through traits and generics. Rust uses traits to define shared behavior and generics to write code that works with any type. You'll build a generic Stack<T> that works with integers, strings, or any other type—demonstrating Rust's "write once, use everywhere" philosophy with zero runtime cost.
+
+## Recommended readings
+
+- [Chapter 10: Generic types, traits, and lifetimes](https://doc.rust-lang.org/book/ch10-00-generics.html)
+
+## Lectures
+
+- [**Slides: Generics and traits**](../slides/IS4010_W12_Generics_and_Traits.qmd)
+
+## Lab assignment
+
+- [Lab 12: Generics & traits](https://github.com/bgreenwell/is4010-rust/blob/main/week12/lab12.md)

@@ -1,0 +1,954 @@
+---
+title: "IS4010: AI-Enhanced Application Development"
+subtitle: "Week 11: Structuring Code and Data in Rust"
+author: "Brandon M. Greenwell"
+format:
+  revealjs:
+    self-contained: false
+    theme: dracula
+    transition: fade
+    scrollable: true
+    css: custom.css
+---
+
+## Session 1: Organizing Code and Custom Types
+
+::: {.notes}
+This week builds directly on ownership fundamentals from Week 10. Students now know how memory works in Rust - today they learn how to structure programs and data. Start with motivation: "You can write Rust code - now let's organize it like professionals do."
+:::
+
+---
+
+## From small scripts to real programs
+
+::: {.incremental}
+- So far, we've written small [Rust](https://www.rust-lang.org/) programs in a single `main.rs` file
+- Real applications need **organization**: separate files, logical grouping, reusable components
+- [Rust](https://www.rust-lang.org/)'s [module system](https://doc.rust-lang.org/book/ch07-00-managing-growing-projects-with-packages-crates-and-modules.html) provides powerful tools for structuring code
+- Today we learn how professionals organize [Rust](https://www.rust-lang.org/) projects
+:::
+
+::: {.notes}
+Transition from "can you write Rust?" to "can you organize Rust?" Students have the fundamentals - now we scale up to real programs. The module system is Rust's answer to organization.
+:::
+
+---
+
+## The Rust module system hierarchy
+
+::: {.incremental}
+**Three levels of organization:**
+
+1. **[Packages](https://doc.rust-lang.org/book/ch07-01-packages-and-crates.html)** - A [Cargo](https://doc.rust-lang.org/cargo/) feature that builds, tests, and shares crates
+2. **[Crates](https://doc.rust-lang.org/book/ch07-01-packages-and-crates.html)** - A tree of modules that produces a library or executable
+3. **[Modules](https://doc.rust-lang.org/book/ch07-02-defining-modules-to-control-scope-and-privacy.html)** - Let you control organization, scope, and privacy
+
+**Think of it like:** Package = project, Crate = building, Modules = rooms
+:::
+
+::: {.notes}
+The hierarchy confuses newcomers. Use the building analogy: package is the whole project, crate is a library or binary, modules are logical divisions. We'll focus on modules today since that's what students will use most.
+:::
+
+---
+
+## Creating modules with [`mod`](https://doc.rust-lang.org/book/ch07-02-defining-modules-to-control-scope-and-privacy.html)
+
+```rust
+// src/main.rs
+
+mod math {  // Define a module named 'math'
+
+    pub fn add(a: i32, b: i32) -> i32 {  // 'pub' makes this visible outside the module
+        a + b  // Return the sum
+    }
+
+    fn subtract(a: i32, b: i32) -> i32 {  // No 'pub' = private to this module only
+        a - b  // Return the difference
+    }
+}
+
+fn main() {
+    println!("2 + 3 = {}", math::add(2, 3));  // ✅ Works! add() is public
+    // println!("5 - 2 = {}", math::subtract(5, 2));  // ❌ ERROR: subtract() is private!
+}
+```
+
+[Try it in Rust Playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=mod+math+%7B++%2F%2F+Define+a+module+named+%27math%27%0A++++pub+fn+add%28a%3A+i32%2C+b%3A+i32%29+-%3E+i32+%7B++%2F%2F+%27pub%27+makes+this+visible+outside+the+module%0A++++++++a+%2B+b++%2F%2F+Return+the+sum%0A++++%7D%0A++++%0A++++fn+subtract%28a%3A+i32%2C+b%3A+i32%29+-%3E+i32+%7B++%2F%2F+No+%27pub%27+%3D+private+to+this+module+only%0A++++++++a+-+b++%2F%2F+Return+the+difference%0A++++%7D%0A%7D%0A%0Afn+main%28%29+%7B%0A++++println%21%28%222+%2B+3+%3D+%7B%7D%22%2C+math%3A%3Aadd%282%2C+3%29%29%3B++%2F%2F+%E2%9C%85+Works%21+add%28%29+is+public%0A++++%2F%2F+println%21%28%225+-+2+%3D+%7B%7D%22%2C+math%3A%3Asubtract%285%2C+2%29%29%3B++%2F%2F+%E2%9D%8C+ERROR%3A+subtract%28%29+is+private%21%0A%7D)
+
+::: {.notes}
+Show module definition with mod. Explain pub keyword - everything is private by default. Show the path syntax with ::. Have students try calling math::subtract() in the Playground to see the error. Then have them change subtract to pub and see it work. This simple example teaches the core concept clearly.
+:::
+
+---
+
+## Privacy in Rust: default private
+
+::: {.incremental}
+- **Everything is private by default** in [Rust](https://www.rust-lang.org/) modules
+- Use [`pub`](https://doc.rust-lang.org/book/ch07-03-paths-for-referring-to-an-item-in-the-module-tree.html#exposing-paths-with-the-pub-keyword) keyword to make items public
+- Privacy rules:
+  - Parent modules can't see into child private items
+  - Child modules can see everything in parent modules
+  - Sibling modules can see each other's public items
+- This is **defensive design** - explicit about your public API
+:::
+
+::: {.notes}
+Contrast with Python where everything is public by convention. Rust enforces privacy at compile time. This prevents accidental dependencies on internal implementation details. It's about intentional design.
+:::
+
+---
+
+## Quick rule of thumb: when do you need `pub`? 🤔
+
+:::: {.columns}
+::: {.column width="50%"}
+**✅ Use `pub` when accessed from:**
+
+- A **parent module**
+- A **sibling's child module**
+- **Outside the crate**
+
+*Example: Public API functions, structs used by other modules*
+:::
+
+::: {.column width="50%"}
+**❌ No `pub` needed when accessed from:**
+
+- The **same module**
+- Its **child modules**
+
+*Example: Helper functions, internal implementation details*
+:::
+::::
+
+::: {.notes}
+This is the practical guidance students need. Most confusion comes from not understanding the scope. Key insight: child modules have access to parent's private items (unusual compared to other languages), but parents don't have access to children's private items (this is normal). When in doubt, try compiling without pub first - the compiler will tell you if you need it!
+:::
+
+---
+
+## Example: `pub` visibility in action
+
+```rust
+mod calculator {  // Parent module
+
+    fn validate_inputs(a: i32, b: i32) -> bool {  // ❌ No pub - internal helper only
+        b != 0  // Make sure we're not dividing by zero
+    }
+
+    pub mod operations {  // ✅ pub - main() needs to access this module
+
+        pub fn divide(a: i32, b: i32) -> i32 {  // ✅ pub - public API function
+            if super::validate_inputs(a, b) {  // ✅ Child can access parent's private!
+                a / b  // Do the division
+            } else {
+                0  // Return 0 for invalid inputs (simplified error handling)
+            }
+        }
+
+        fn log_operation(msg: &str) {  // ❌ Private - internal to operations only
+            println!("LOG: {}", msg);  // Internal logging
+        }
+    }
+}
+
+fn main() {
+    println!("10 / 2 = {}", calculator::operations::divide(10, 2));  // ✅ Works! Both pub
+    // calculator::validate_inputs(10, 2);  // ❌ Error! validate_inputs is private
+    // calculator::operations::log_operation("test");  // ❌ Error! log_operation is private
+}
+```
+
+[Try it in Rust Playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=mod+calculator+%7B++%2F%2F+Parent+module%0A++++fn+validate_inputs%28a%3A+i32%2C+b%3A+i32%29+-%3E+bool+%7B++%2F%2F+%E2%9D%8C+No+pub+-+internal+helper+only%0A++++++++b+%21%3D+0++%2F%2F+Make+sure+we%27re+not+dividing+by+zero%0A++++%7D%0A++++%0A++++pub+mod+operations+%7B++%2F%2F+%E2%9C%85+pub+-+main%28%29+needs+to+access+this+module%0A++++++++pub+fn+divide%28a%3A+i32%2C+b%3A+i32%29+-%3E+i32+%7B++%2F%2F+%E2%9C%85+pub+-+public+API+function%0A++++++++++++if+super%3A%3Avalidate_inputs%28a%2C+b%29+%7B++%2F%2F+%E2%9C%85+Child+can+access+parent%27s+private%21%0A++++++++++++++++a+%2F+b++%2F%2F+Do+the+division%0A++++++++++++%7D+else+%7B%0A++++++++++++++++0++%2F%2F+Return+0+for+invalid+inputs%0A++++++++++++%7D%0A++++++++%7D%0A++++++++%0A++++++++fn+log_operation%28msg%3A+%26str%29+%7B++%2F%2F+%E2%9D%8C+Private+-+internal+to+operations+only%0A++++++++++++println%21%28%22LOG%3A+%7B%7D%22%2C+msg%29%3B++%2F%2F+Internal+logging%0A++++++++%7D%0A++++%7D%0A%7D%0A%0Afn+main%28%29+%7B%0A++++println%21%28%2210+%2F+2+%3D+%7B%7D%22%2C+calculator%3A%3Aoperations%3A%3Adivide%2810%2C+2%29%29%3B++%2F%2F+%E2%9C%85+Works%21+Both+pub%0A++++%2F%2F+calculator%3A%3Avalidate_inputs%2810%2C+2%29%3B++%2F%2F+%E2%9D%8C+Error%21+validate_inputs+is+private%0A++++%2F%2F+calculator%3A%3Aoperations%3A%3Alog_operation%28%22test%22%29%3B++%2F%2F+%E2%9D%8C+Error%21+log_operation+is+private%0A%7D)
+
+::: {.notes}
+Show this code working in the Playground. Then have students uncomment the error lines one at a time to see the errors. Key point: divide() is in a CHILD module (operations) but can call parent's validate_inputs() with super::. This asymmetry confuses students - child can see parent's private, but parent can't see child's private. Spend time on this concept. The example is deliberately simple (returning 0 for errors) to focus on the visibility rules, not error handling.
+:::
+
+---
+
+## The [`use`](https://doc.rust-lang.org/book/ch07-04-bringing-paths-into-scope-with-the-use-keyword.html) keyword: bringing paths into scope
+
+```rust
+mod math {  // Parent module
+
+    pub mod operations {  // Public submodule
+        pub fn add(a: i32, b: i32) -> i32 {  // Public function
+            a + b  // Return the sum
+        }
+
+        pub fn multiply(a: i32, b: i32) -> i32 {  // Public function
+            a * b  // Return the product
+        }
+    }
+}
+
+// Bring the operations module into scope with 'use'
+use math::operations;
+
+fn main() {
+    println!("2 + 3 = {}", operations::add(2, 3));  // ✅ Shorter! Just operations::add
+    println!("2 * 3 = {}", operations::multiply(2, 3));  // Instead of math::operations::multiply
+    // Without 'use', we'd need: math::operations::add(2, 3)
+}
+```
+
+[Try it in Rust Playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=mod+math+%7B++%2F%2F+Parent+module%0A++++pub+mod+operations+%7B++%2F%2F+Public+submodule%0A++++++++pub+fn+add%28a%3A+i32%2C+b%3A+i32%29+-%3E+i32+%7B++%2F%2F+Public+function%0A++++++++++++a+%2B+b++%2F%2F+Return+the+sum%0A++++++++%7D%0A++++++++%0A++++++++pub+fn+multiply%28a%3A+i32%2C+b%3A+i32%29+-%3E+i32+%7B++%2F%2F+Public+function%0A++++++++++++a+%2A+b++%2F%2F+Return+the+product%0A++++++++%7D%0A++++%7D%0A%7D%0A%0A%2F%2F+Bring+the+operations+module+into+scope+with+%27use%27%0Ause+math%3A%3Aoperations%3B%0A%0Afn+main%28%29+%7B%0A++++println%21%28%222+%2B+3+%3D+%7B%7D%22%2C+operations%3A%3Aadd%282%2C+3%29%29%3B++%2F%2F+%E2%9C%85+Shorter%21+Just+operations%3A%3Aadd%0A++++println%21%28%222+%2A+3+%3D+%7B%7D%22%2C+operations%3A%3Amultiply%282%2C+3%29%29%3B++%2F%2F+Instead+of+math%3A%3Aoperations%3A%3Amultiply%0A++++%2F%2F+Without+%27use%27%2C+we%27d+need%3A+math%3A%3Aoperations%3A%3Aadd%282%2C+3%29%0A%7D)
+
+::: {.notes}
+'use' is like Python's import or Java's import. It creates shortcuts. Note the idiomatic pattern: bring the parent module into scope (operations), not the function itself. This makes it clear where functions come from. Have students try 'use math::operations::add;' to see the difference - it's less clear and goes against Rust conventions.
+:::
+
+---
+
+## Separating modules into files
+
+**Project structure:**
+```
+src/
+├── main.rs
+├── math.rs
+└── math/
+    ├── operations.rs
+    └── constants.rs
+```
+
+**In `main.rs`:**
+```rust
+mod math;  // Tells Rust to look for math.rs (no braces = load from file)
+
+use math::operations;  // Import the operations submodule
+
+fn main() {
+    println!("{}", operations::add(2, 3));  // Use the add function
+}
+```
+
+**In `math.rs`:**
+```rust
+// src/math.rs
+// This file declares what submodules exist under 'math'
+pub mod operations;  // Makes operations public and tells Rust to load math/operations.rs
+pub mod constants;   // Makes constants public and tells Rust to load math/constants.rs
+```
+
+**In `math/operations.rs`:**
+```rust
+// src/math/operations.rs
+// This file contains the actual implementation of math operations
+pub fn add(a: i32, b: i32) -> i32 {  // Public function
+    a + b  // Return sum
+}
+
+pub fn multiply(a: i32, b: i32) -> i32 {  // Public function
+    a * b  // Return product
+}
+```
+
+**In `math/constants.rs`:**
+```rust
+// src/math/constants.rs
+// This file defines mathematical constants
+pub const PI: f64 = 3.14159;  // Approximation of pi
+pub const E: f64 = 2.71828;   // Approximation of Euler's number
+```
+
+::: {.notes}
+Real projects split modules into separate files. The 'mod' declaration without braces tells Rust to load from a file. This is how professional Rust code is organized. The file system mirrors the module tree. The `math.rs` file declares the submodules (operations and constants). Students can try this in VS Code - create these files and run cargo build to see it work.
+:::
+
+---
+
+## 🤖 AI co-pilot technique: module organization
+
+When organizing code into modules, ask your [AI assistant](https://claude.ai/):
+
+**Effective prompts:**
+- *"How should I organize this Rust project into modules? [describe project]"*
+- *"What should be public vs private in this module? [paste code]"*
+- *"Explain the difference between 'use' and 'mod' in Rust"*
+- *"Help me split this large main.rs into separate modules"*
+
+**Pro tip:** Ask AI to explain the module tree structure - visualizations help!
+
+::: {.notes}
+Module organization is a design skill. AI can suggest logical groupings and explain privacy trade-offs. Students should use AI to learn patterns, not just copy structure. Understanding module design makes code maintainable.
+:::
+
+---
+
+## Defining custom data with [`struct`](https://doc.rust-lang.org/book/ch05-00-structs.html)
+
+::: {.incremental}
+- A [`struct`](https://doc.rust-lang.org/book/ch05-01-defining-structs.html) (structure) groups related data into a single, meaningful type
+- Like Python classes but **data only** (methods come separately)
+- Three kinds:
+  1. **Named-field structs** - most common
+  2. **Tuple structs** - fields accessed by position
+  3. **Unit structs** - no fields (rare)
+:::
+
+```rust
+struct User {
+    username: String,
+    email: String,
+    active: bool,
+    sign_in_count: u64,
+}
+```
+
+::: {.notes}
+Structs are how you model domain concepts in Rust. Coming from Python, think of them as the data part of a class. The separation of data and behavior is intentional - Rust favors composition.
+:::
+
+---
+
+## Creating struct instances
+
+```rust
+struct User {
+    username: String,
+    email: String,
+    active: bool,
+}
+
+fn main() {
+    let user1 = User {
+        email: String::from("ada@example.com"),
+        username: String::from("ada_lovelace"),
+        active: true,
+    };
+
+    println!("Username: {}", user1.username);
+
+    // Make mutable to change fields
+    let mut user2 = User {
+        email: String::from("grace@example.com"),
+        username: String::from("grace_hopper"),
+        active: true,
+    };
+    user2.email = String::from("new_email@example.com");
+}
+```
+
+[Try it in Rust Playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=struct+User+%7B%0A++++username%3A+String%2C%0A++++email%3A+String%2C%0A++++active%3A+bool%2C%0A%7D%0Afn+main%28%29+%7B%0A++++let+user1+%3D+User+%7B%0A++++++++email%3A+String%3A%3Afrom%28%22ada%40example.com%22%29%2C%0A++++++++username%3A+String%3A%3Afrom%28%22ada_lovelace%22%29%2C%0A++++++++active%3A+true%2C%0A++++%7D%3B%0A++++println%21%28%22Username%3A+%7B%7D%22%2C+user1.username%29%3B%0A%7D)
+
+::: {.notes}
+**LIVE DEMO**: Create a struct instance. Show that the entire struct must be mutable to change any field - Rust doesn't have per-field mutability. This is consistent with Rust's ownership model.
+:::
+
+---
+
+## Adding behavior with [`impl`](https://doc.rust-lang.org/book/ch05-03-method-syntax.html) blocks
+
+```rust
+struct Rectangle {
+    width: u32,
+    height: u32,
+}
+
+impl Rectangle {
+    // Method (takes &self)
+    fn area(&self) -> u32 {
+        self.width * self.height
+    }
+
+    // Associated function (no self) - like a static method
+    fn square(size: u32) -> Rectangle {
+        Rectangle {
+            width: size,
+            height: size,
+        }
+    }
+}
+
+fn main() {
+    let rect = Rectangle { width: 30, height: 50 };
+    println!("Area: {}", rect.area());
+
+    let sq = Rectangle::square(10);
+}
+```
+
+[Try it in Rust Playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=struct+Rectangle+%7B%0A++++width%3A+u32%2C%0A++++height%3A+u32%2C%0A%7D%0Aimpl+Rectangle+%7B%0A++++fn+area%28%26self%29+-%3E+u32+%7B%0A++++++++self.width+*+self.height%0A++++%7D%0A++++fn+square%28size%3A+u32%29+-%3E+Rectangle+%7B%0A++++++++Rectangle+%7B+width%3A+size%2C+height%3A+size+%7D%0A++++%7D%0A%7D%0Afn+main%28%29+%7B%0A++++let+rect+%3D+Rectangle+%7B+width%3A+30%2C+height%3A+50+%7D%3B%0A++++println%21%28%22Area%3A+%7B%7D%22%2C+rect.area%28%29%29%3B%0A++++let+sq+%3D+Rectangle%3A%3Asquare%28%2810%29%3B%0A%7D)
+
+::: {.notes}
+impl blocks add methods to structs. Methods take self (or &self or &mut self). Associated functions don't take self - they're like constructors or static methods. You can have multiple impl blocks for organization.
+:::
+
+---
+
+## Modeling choices with [`enum`](https://doc.rust-lang.org/book/ch06-00-enums.html)
+
+::: {.incremental}
+- An [`enum`](https://doc.rust-lang.org/book/ch06-01-defining-an-enum.html) (enumeration) represents a value that can be one of several variants
+- **Much more powerful** than enums in [C](https://en.cppreference.com/w/c), [Java](https://www.java.com/), or [Python](https://www.python.org/)
+- Each variant can hold different types of data
+- Perfect for modeling "this OR that OR that" situations
+:::
+
+```rust
+enum Shape {  // Define an enum to represent different geometric shapes
+    Circle(f64),              // Circle variant holds radius
+    Rectangle(f64, f64),      // Rectangle holds width and height
+    Triangle(f64, f64),       // Triangle holds base and height
+}
+
+// Create instances of different shapes
+let circle = Shape::Circle(5.0);                    // Circle with radius 5.0
+let rectangle = Shape::Rectangle(4.0, 6.0);         // Rectangle 4.0 × 6.0
+let triangle = Shape::Triangle(3.0, 8.0);           // Triangle with base 3.0, height 8.0
+```
+
+[Try it in Rust Playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=enum+Shape+%7B%0A++++Circle%28f64%29%2C%0A++++Rectangle%28f64%2C+f64%29%2C%0A++++Triangle%28f64%2C+f64%29%2C%0A%7D%0A%0Afn+main%28%29+%7B%0A++++let+circle+%3D+Shape%3A%3ACircle%285.0%29%3B%0A++++let+rectangle+%3D+Shape%3A%3ARectangle%284.0%2C+6.0%29%3B%0A++++let+triangle+%3D+Shape%3A%3ATriangle%283.0%2C+8.0%29%3B%0A++++%0A++++println%21%28%22Created+three+shapes%21%22%29%3B%0A%7D)
+
+::: {.notes}
+Rust enums are algebraic data types - incredibly powerful! Each variant can hold different amounts and types of data. Circle needs one dimension (radius), Rectangle needs two (width, height), Triangle needs two (base, height). This is the perfect use case for enums - same concept (shape) but different data structure. This is much more powerful than C-style enums which are just named integers.
+
+**Computer science terminology**: Rust enums are "sum types" or "tagged unions" from functional programming. They encode different states and their associated data within a single type, which the compiler checks exhaustively. The Shape example clearly shows this - each variant is mutually exclusive (a shape is a circle OR rectangle OR triangle, never multiple at once).
+:::
+
+---
+
+## Pattern matching with [`match`](https://doc.rust-lang.org/book/ch06-02-match.html)
+
+```rust
+enum Shape {  // Define different geometric shapes
+    Circle(f64),              // Circle holds radius
+    Rectangle(f64, f64),      // Rectangle holds width and height
+    Triangle(f64, f64),       // Triangle holds base and height
+}
+
+fn area(shape: Shape) -> f64 {  // Calculate area for any shape
+    match shape {  // Pattern match on the shape variant
+        Shape::Circle(r) => {  // Extract radius from Circle
+            println!("Calculating area of circle with radius {}", r);
+            3.14159 * r * r  // Formula: πr²
+        }
+        Shape::Rectangle(w, h) => {  // Extract width and height
+            w * h  // Formula: width × height
+        }
+        Shape::Triangle(b, h) => {  // Extract base and height
+            0.5 * b * h  // Formula: ½ × base × height
+        }
+    }  // ✅ Compiler ensures we handle ALL variants!
+}
+
+fn main() {
+    let circle = Shape::Circle(5.0);  // Create a circle with radius 5.0
+    println!("Area: {:.2} square units", area(circle));  // Output: 78.54
+
+    let rect = Shape::Rectangle(4.0, 6.0);  // Create a 4×6 rectangle
+    println!("Area: {:.2} square units", area(rect));  // Output: 24.00
+}
+```
+
+[Try it in Rust Playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=enum+Shape+%7B%0A++++Circle%28f64%29%2C%0A++++Rectangle%28f64%2C+f64%29%2C%0A++++Triangle%28f64%2C+f64%29%2C%0A%7D%0A%0Afn+area%28shape%3A+Shape%29+-%3E+f64+%7B%0A++++match+shape+%7B%0A++++++++Shape%3A%3ACircle%28r%29+%3D%3E+%7B%0A++++++++++++println%21%28%22Calculating+area+of+circle+with+radius+%7B%7D%22%2C+r%29%3B%0A++++++++++++3.14159+*+r+*+r%0A++++++++%7D%0A++++++++Shape%3A%3ARectangle%28w%2C+h%29+%3D%3E+w+*+h%2C%0A++++++++Shape%3A%3ATriangle%28b%2C+h%29+%3D%3E+0.5+*+b+*+h%2C%0A++++%7D%0A%7D%0A%0Afn+main%28%29+%7B%0A++++let+circle+%3D+Shape%3A%3ACircle%285.0%29%3B%0A++++println%21%28%22Area%3A+%7B%3A.2%7D+square+units%22%2C+area%28circle%29%29%3B%0A++++%0A++++let+rect+%3D+Shape%3A%3ARectangle%284.0%2C+6.0%29%3B%0A++++println%21%28%22Area%3A+%7B%3A.2%7D+square+units%22%2C+area%28rect%29%29%3B%0A%7D)
+
+::: {.notes}
+**LIVE DEMO**: This perfectly shows why match with enums is powerful! Each shape needs a different formula - pattern matching makes this natural and safe. The compiler ensures exhaustiveness - you MUST handle every variant. If you add a new shape later, the compiler will force you to update every match statement. Pattern matching extracts the data (radius, width/height, base/height) so you can use it in calculations. This prevents forgotten cases that cause bugs in other languages. Try removing one match arm to see the compiler error!
+:::
+
+---
+
+## 🤖 AI co-pilot technique: designing with structs and enums
+
+When modeling data, ask your [AI assistant](https://claude.ai/):
+
+**Effective prompts:**
+- *"Should I use a struct or enum for this? [describe data]"*
+- *"Help me model a [domain concept] in Rust with structs and enums"*
+- *"What fields should this struct have? [describe requirements]"*
+- *"Show me how to use match to handle all cases of this enum"*
+
+**Example:** *"I need to model a blog post that can be Draft, Published, or Archived. Each state has different data. How should I structure this in Rust?"*
+
+::: {.notes}
+Data modeling is a design skill. AI can suggest struct vs enum trade-offs and show idiomatic patterns. Ask AI to explain the reasoning, not just provide code. Understanding design choices makes better Rust developers.
+:::
+
+---
+
+## Session 2: Error Handling and Collections
+
+::: {.notes}
+Second session builds on structs/enums. Now we use two special enums (Option and Result) and work with dynamic collections. Emphasize that these aren't "advanced" - they're everyday Rust. Tie to ownership from last week.
+:::
+
+---
+
+## The problem with `null`
+
+::: {.incremental}
+- In [Python](https://www.python.org/), [Java](https://www.java.com/), [C++](https://en.cppreference.com/w/), variables can be `None`/`null`
+- This causes **billions of dollars in bugs**: [Tony Hoare calls it his "billion-dollar mistake"](https://www.infoq.com/presentations/Null-References-The-Billion-Dollar-Mistake-Tony-Hoare/)
+- The problem: you can forget to check for null, causing crashes
+- [Rust](https://www.rust-lang.org/)'s solution: no `null` - instead, use [`Option<T>`](https://doc.rust-lang.org/std/option/enum.Option.html)
+:::
+
+::: {.notes}
+Null reference errors are among the most common bugs. Tony Hoare invented null and regrets it. Rust eliminates this entire category of bugs by making "might not exist" explicit in the type system.
+:::
+
+---
+
+## [`Option<T>`](https://doc.rust-lang.org/std/option/enum.Option.html): handling optional values
+
+```rust
+enum Option<T> {
+    Some(T),
+    None,
+}
+
+fn find_user(id: u32) -> Option<String> {
+    if id == 1 {
+        Some(String::from("Alice"))
+    } else {
+        None
+    }
+}
+
+fn main() {
+    match find_user(1) {
+        Some(name) => println!("Found: {}", name),
+        None => println!("User not found"),
+    }
+
+    // Shorthand with if let
+    if let Some(name) = find_user(2) {
+        println!("Found: {}", name);
+    } else {
+        println!("User not found");
+    }
+}
+```
+
+[Try it in Rust Playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=fn+find_user%28id%3A+u32%29+-%3E+Option%3CString%3E+%7B%0A++++if+id+%3D%3D+1+%7B%0A++++++++Some%28String%3A%3Afrom%28%22Alice%22%29%29%0A++++%7D+else+%7B%0A++++++++None%0A++++%7D%0A%7D%0Afn+main%28%29+%7B%0A++++match+find_user%281%29+%7B%0A++++++++Some%28name%29+%3D%3E+println%21%28%22Found%3A+%7B%7D%22%2C+name%29%2C%0A++++++++None+%3D%3E+println%21%28%22User+not+found%22%29%2C%0A++++%7D%0A%7D)
+
+::: {.notes}
+**LIVE DEMO**: Show Option in action. The type system forces you to handle the None case - you can't forget. Show both match and if let patterns. if let is syntactic sugar for matching one pattern and ignoring others.
+:::
+
+---
+
+## [`Result<T, E>`](https://doc.rust-lang.org/std/result/enum.Result.html): recoverable errors
+
+```rust
+enum Result<T, E> {
+    Ok(T),
+    Err(E),
+}
+
+use std::fs::File;
+use std::io::ErrorKind;
+
+fn open_config() -> Result<File, std::io::Error> {
+    File::open("config.txt")
+}
+
+fn main() {
+    match open_config() {
+        Ok(file) => println!("Opened file successfully"),
+        Err(error) => match error.kind() {
+            ErrorKind::NotFound => println!("File not found!"),
+            other => println!("Error opening file: {:?}", other),
+        },
+    }
+}
+```
+
+[Try it in Rust Playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=use+std%3A%3Afs%3A%3AFile%3B%0Ause+std%3A%3Aio%3A%3AErrorKind%3B%0Afn+open_config%28%29+-%3E+Result%3CFile%2C+std%3A%3Aio%3A%3AError%3E+%7B%0A++++File%3A%3Aopen%28%22config.txt%22%29%0A%7D%0Afn+main%28%29+%7B%0A++++match+open_config%28%29+%7B%0A++++++++Ok%28file%29+%3D%3E+println%21%28%22Opened+successfully%22%29%2C%0A++++++++Err%28error%29+%3D%3E+println%21%28%22Error%3A+%7B%3A%3F%7D%22%2C+error%29%2C%0A++++%7D%0A%7D)
+
+::: {.notes}
+Result is for operations that can fail. Like Option, the type system forces you to handle errors. No more forgotten try/catch! You can nest matches to handle specific error types. This is much safer than exceptions.
+:::
+
+---
+
+## The [`?` operator](https://doc.rust-lang.org/book/ch09-02-recoverable-errors-with-result.html#a-shortcut-for-propagating-errors-the--operator): error propagation
+
+```rust
+use std::fs::File;
+use std::io::{self, Read};
+
+fn read_username_from_file() -> Result<String, io::Error> {
+    let mut file = File::open("username.txt")?; // ❓ propagates error if Err
+    let mut username = String::new();
+    file.read_to_string(&mut username)?;        // ❓ propagates error if Err
+    Ok(username)                                  // ✅ returns Ok if success
+}
+
+// Without ? operator, this would be:
+// match File::open("username.txt") {
+//     Ok(mut file) => match file.read_to_string(&mut username) {
+//         Ok(_) => Ok(username),
+//         Err(e) => Err(e),
+//     },
+//     Err(e) => Err(e),
+// }
+```
+
+::: {.notes}
+The ? operator is syntactic sugar for error propagation. If Result is Err, it returns early with that error. If Ok, it unwraps the value and continues. This makes error handling code much cleaner. It's like try/catch but explicit in types.
+
+**Important constraint**: Remind students that the `?` operator can only be used inside a function that returns a `Result` or an `Option`. The compiler will give an error if you try to use it in a function like `main` that doesn't return one of these types (unless you change main's return type to `Result<(), E>`).
+:::
+
+---
+
+## 🤖 AI co-pilot technique: error handling patterns
+
+When handling errors, ask your [AI assistant](https://claude.ai/):
+
+**Effective prompts:**
+- *"When should I use Option vs Result in Rust?"*
+- *"Help me handle this error idiomatically: [paste code]"*
+- *"Explain the ? operator and when I can use it"*
+- *"Convert this match error handling to use ? operator"*
+
+**Pro tip:** Ask AI to show both verbose (match) and concise (? operator) versions to understand what's happening under the hood.
+
+::: {.notes}
+Error handling patterns take practice. AI can show idiomatic approaches and explain trade-offs. Students should understand both match and ? operator - ? is sugar for match patterns. Ask AI to explain, not just provide code.
+:::
+
+---
+
+## Common collections: [`Vec<T>`](https://doc.rust-lang.org/std/vec/struct.Vec.html)
+
+::: {.incremental}
+- [`Vec<T>`](https://doc.rust-lang.org/std/vec/struct.Vec.html) (vector) is a **growable array** - like Python's list
+- Stores values of the same type
+- Allocated on the heap (flexible size)
+- Most common collection in [Rust](https://www.rust-lang.org/)
+:::
+
+```rust
+fn main() {
+    // Creating vectors
+    let mut v: Vec<i32> = Vec::new();
+    let mut v2 = vec![1, 2, 3]; // vec! macro for initial values
+
+    // Adding elements
+    v.push(5);
+    v.push(6);
+
+    // Accessing elements
+    let third = &v2[2];         // Panics if out of bounds
+    let maybe_third = v2.get(2); // Returns Option<&T>
+
+    // Iterating
+    for i in &v2 {
+        println!("{}", i);
+    }
+}
+```
+
+[Try it in Rust Playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=fn+main%28%29+%7B%0A++++let+mut+v+%3D+vec%21%5B1%2C+2%2C+3%5D%3B%0A++++v.push%284%29%3B%0A++++for+i+in+%26v+%7B%0A++++++++println%21%28%22%7B%7D%22%2C+i%29%3B%0A++++%7D%0A++++let+third+%3D+%26v%5B2%5D%3B%0A++++println%21%28%22Third%3A+%7B%7D%22%2C+third%29%3B%0A%7D)
+
+::: {.notes}
+**LIVE DEMO**: Show Vec creation, push, indexing, and iteration. Explain the two ways to access: [] panics if out of bounds, .get() returns Option. This ties back to Option from earlier. Vectors follow ownership rules - you can't modify while iterating immutably.
+
+**Performance insight**: Mention that when a `Vec`'s capacity is exceeded, it must perform a new allocation on the heap and copy all existing elements over. For performance-critical code, pre-allocating with `Vec::with_capacity` can be a useful optimization.
+:::
+
+---
+
+## Strings in Rust: [`String`](https://doc.rust-lang.org/std/string/struct.String.html) vs [`&str`](https://doc.rust-lang.org/std/primitive.str.html)
+
+::: {.incremental}
+- [Rust](https://www.rust-lang.org/) has two main string types (not one!):
+- **[`String`](https://doc.rust-lang.org/std/string/struct.String.html)** - Owned, growable, heap-allocated (like `Vec<u8>`)
+- **[`&str`](https://doc.rust-lang.org/std/primitive.str.html)** - String slice, borrowed, immutable view
+- All strings are [UTF-8](https://en.wikipedia.org/wiki/UTF-8) encoded
+:::
+
+```rust
+fn main() {
+    // String - owned
+    let mut s = String::from("hello");
+    s.push_str(" world"); // Can modify
+
+    // &str - borrowed string slice
+    let slice: &str = &s[0..5]; // "hello"
+
+    // String literals are &str
+    let literal = "I'm a &str";
+
+    // Converting
+    let s2: String = literal.to_string();
+    let slice2: &str = &s2;
+}
+```
+
+[Try it in Rust Playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=fn+main%28%29+%7B%0A++++let+mut+s+%3D+String%3A%3Afrom%28%22hello%22%29%3B%0A++++s.push_str%28%22+world%22%29%3B%0A++++println%21%28%22%7B%7D%22%2C+s%29%3B%0A++++let+slice%3A+%26str+%3D+%26s%5B0..5%5D%3B%0A++++println%21%28%22Slice%3A+%7B%7D%22%2C+slice%29%3B%0A%7D)
+
+::: {.notes}
+String vs &str confuses everyone. String is owned data, &str is a view into string data. Think: String is like Vec<u8>, &str is like &[u8]. String literals in code are &str with 'static lifetime. This follows ownership from Week 10.
+
+**Best practice**: Emphasize that functions should almost always accept `&str` as a parameter instead of `String`. This is more flexible as you can pass either a `String` (as `&my_string`) or a string literal, and it avoids unnecessary memory allocations.
+:::
+
+---
+
+## [`HashMap<K, V>`](https://doc.rust-lang.org/std/collections/struct.HashMap.html): key-value storage
+
+```rust
+use std::collections::HashMap;
+
+fn main() {
+    // Creating
+    let mut scores = HashMap::new();
+
+    // Inserting
+    scores.insert(String::from("Blue"), 10);
+    scores.insert(String::from("Yellow"), 50);
+
+    // Accessing
+    let team_name = String::from("Blue");
+    let score = scores.get(&team_name);  // Returns Option<&V>
+
+    match score {
+        Some(&s) => println!("Score: {}", s),
+        None => println!("Team not found"),
+    }
+
+    // Iterating
+    for (key, value) in &scores {
+        println!("{}: {}", key, value);
+    }
+}
+```
+
+[Try it in Rust Playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=use+std%3A%3Acollections%3A%3AHashMap%3B%0Afn+main%28%29+%7B%0A++++let+mut+scores+%3D+HashMap%3A%3Anew%28%29%3B%0A++++scores.insert%28String%3A%3Afrom%28%22Blue%22%29%2C+10%29%3B%0A++++scores.insert%28String%3A%3Afrom%28%22Yellow%22%29%2C+50%29%3B%0A++++for+%28key%2C+value%29+in+%26scores+%7B%0A++++++++println%21%28%22%7B%7D%3A+%7B%7D%22%2C+key%2C+value%29%3B%0A++++%7D%0A%7D)
+
+::: {.notes}
+**LIVE DEMO**: Show HashMap creation, insertion, and lookup. Note that .get() returns Option - the key might not exist! HashMap owns its keys and values. When you insert, ownership moves into the HashMap. This is consistent with ownership rules.
+
+**Performance insight**: Clarify that `HashMap` provides *amortized O(1)* (average constant time) performance for insertions and lookups, which is why it's so fast. This is a key data structures concept.
+:::
+
+---
+
+## Choosing the right collection
+
+::: {.incremental}
+**[`Vec<T>`](https://doc.rust-lang.org/std/vec/struct.Vec.html)** - Use when:
+- You need an ordered list
+- You want to access by index
+- You'll add/remove from the end
+
+**[`String`](https://doc.rust-lang.org/std/string/struct.String.html)** - Use when:
+- You need owned, growable text
+- Building strings dynamically
+
+**[`HashMap<K, V>`](https://doc.rust-lang.org/std/collections/struct.HashMap.html)** - Use when:
+- You need key-value lookups
+- Order doesn't matter
+- Fast access by key is important
+:::
+
+::: {.notes}
+Choosing collections is a design decision. Vec for lists, HashMap for lookups, String for text. These cover 95% of use cases. There are other collections (BTreeMap, HashSet, etc.) but start with these three. Ask yourself: How will I access this data?
+:::
+
+---
+
+## Real-world example: building a phone book
+
+```rust
+use std::collections::HashMap;
+
+struct Contact {
+    name: String,
+    phone: String,
+    email: Option<String>, // Email is optional
+}
+
+fn main() {
+    let mut phone_book: HashMap<String, Contact> = HashMap::new();
+
+    phone_book.insert(
+        String::from("Alice"),
+        Contact {
+            name: String::from("Alice Smith"),
+            phone: String::from("555-1234"),
+            email: Some(String::from("alice@example.com")),
+        }
+    );
+
+    // Look up by name
+    if let Some(contact) = phone_book.get("Alice") {
+        println!("Phone: {}", contact.phone);
+        if let Some(email) = &contact.email {
+            println!("Email: {}", email);
+        }
+    }
+}
+```
+
+[Try it in Rust Playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=use+std%3A%3Acollections%3A%3AHashMap%3B%0Astruct+Contact+%7B%0A++++name%3A+String%2C%0A++++phone%3A+String%2C%0A++++email%3A+Option%3CString%3E%2C%0A%7D%0Afn+main%28%29+%7B%0A++++let+mut+phone_book%3A+HashMap%3CString%2C+Contact%3E+%3D+HashMap%3A%3Anew%28%29%3B%0A++++phone_book.insert%28%0A++++++++String%3A%3Afrom%28%22Alice%22%29%2C%0A++++++++Contact+%7B%0A++++++++++++name%3A+String%3A%3Afrom%28%22Alice+Smith%22%29%2C%0A++++++++++++phone%3A+String%3A%3Afrom%28%22555-1234%22%29%2C%0A++++++++++++email%3A+Some%28String%3A%3Afrom%28%22alice%40example.com%22%29%29%2C%0A++++++++%7D%0A++++%29%3B%0A++++if+let+Some%28contact%29+%3D+phone_book.get%28%22Alice%22%29+%7B%0A++++++++println%21%28%22Phone%3A+%7B%7D%22%2C+contact.phone%29%3B%0A++++%7D%0A%7D)
+
+::: {.notes}
+This example ties everything together: struct for Contact, Option for optional email, HashMap for storage, if let for handling Options. This is how real Rust programs are structured. Show students this is production-quality code.
+:::
+
+---
+
+## 🤖 AI co-pilot technique: working with collections
+
+When using collections, ask your [AI assistant](https://claude.ai/):
+
+**Effective prompts:**
+- *"Which Rust collection should I use for [describe use case]?"*
+- *"Help me convert this Python list comprehension to Rust: [paste code]"*
+- *"Show me how to iterate over a HashMap in Rust"*
+- *"How do I handle the Option returned by HashMap.get()?"*
+- *"What's the difference between Vec::push and Vec::append?"*
+
+**Example:** *"I have a list of user IDs and need fast lookup. Should I use Vec or HashMap?"*
+
+::: {.notes}
+Collections have many methods. AI can help find the right one and show idiomatic patterns. Students should ask AI to explain trade-offs (Vec vs HashMap performance), not just provide syntax. Understanding when to use each collection is key.
+:::
+
+---
+
+## Introducing Lab 11: data modeling challenge
+
+::: {.incremental}
+**This week's lab has three parts:**
+
+1. **Structs and Enums**
+   - Model a library system with custom types
+   - Use structs for Book/DVD data
+   - Use enums for ItemStatus (Available/CheckedOut)
+
+2. **Error Handling**
+   - Return `Result` from functions that can fail
+   - Use `Option` for optional data
+   - Practice the `?` operator
+
+3. **Collections in Action**
+   - Store items in `Vec<T>`
+   - Build `HashMap<K, V>` for fast lookups
+   - Iterate and search
+
+**Full instructions:** `week11/lab11.md`
+:::
+
+::: {.notes}
+Lab 11 applies everything from today. Students will design data structures, handle errors properly, and use collections. This is practical Rust - the kind they'll write in real projects. Emphasize that this builds on ownership from last week.
+:::
+
+---
+
+## Career relevance: production Rust patterns
+
+::: {.incremental}
+**What you learned today is used daily in industry:**
+
+- **[Discord](https://discord.com/blog/why-discord-is-switching-from-go-to-rust)** - Structs for message data, enums for event types
+- **[Dropbox](https://dropbox.tech/infrastructure/rewriting-the-heart-of-our-sync-engine)** - Result for error handling, HashMap for file tracking
+- **[Cloudflare](https://blog.cloudflare.com/how-we-built-pingora-the-proxy-that-connects-cloudflare-to-the-internet/)** - Vec for request queues, modules for organization
+
+**Interview topics:**
+- "How does Rust handle errors differently than exceptions?"
+- "When would you use an enum instead of inheritance?"
+- "Explain Option vs Result"
+:::
+
+::: {.notes}
+These patterns aren't academic - they're production Rust. Companies choose Rust partly because of these features (Result vs exceptions, enums vs inheritance). Students learning these concepts now are learning industry standards.
+:::
+
+---
+
+## Preview: You've Been Using Generics! {.inverse}
+
+**Notice the angle brackets?**
+
+```rust
+let mut numbers: Vec<i32> = Vec::new();
+let result: Result<String, io::Error> = read_file();
+let maybe_value: Option<&str> = map.get("key");
+let mut scores: HashMap<String, i32> = HashMap::new();
+```
+
+**What `<T>` means:**
+- `Vec<i32>` = "a vector of i32 values"
+- `Result<String, io::Error>` = "success gives String, error gives io::Error"
+- `Option<&str>` = "maybe a &str, maybe nothing"
+- `HashMap<String, i32>` = "map from String keys to i32 values"
+
+**You've been using [generic types](https://doc.rust-lang.org/book/ch10-00-generics.html) all along!**
+
+::: {.notes}
+This is a key realization moment. Students have been using Vec<T>, Option<T>, Result<T, E> without necessarily understanding the generic nature. Point out that the angle brackets always mean "generic over some type". This primes them for next week where they'll write their own generic types.
+:::
+
+---
+
+## Next Week: Writing Your Own Generics {.smaller}
+
+**Week 12 preview - Generics and Traits:**
+
+You'll learn to:
+- Write generic functions that work with any type
+- Create generic structs like `Stack<T>` or `Cache<K, V>`
+- Define [traits](https://doc.rust-lang.org/book/ch10-02-traits.html) (Rust's version of interfaces)
+- Implement traits like `Display`, `Iterator`, `Clone`
+- Use trait bounds to constrain generic types
+
+**Why it matters:**
+- Write reusable code without duplication
+- Zero runtime cost (Rust generates specialized code)
+- Type-safe abstractions
+- Professional Rust development pattern
+
+**Teaser:** Lab 12 will have you build a generic `Stack<T>` that works with any type!
+
+::: {.notes}
+Build excitement for next week. Emphasize that they already understand how to USE generics (Vec, Option, Result) - now they'll learn to CREATE them. This is the jump from consumer to creator. The Stack<T> lab is a classic data structures exercise that demonstrates the power of generics.
+:::
+
+---
+
+## Resources for going deeper
+
+**Official [Rust](https://www.rust-lang.org/) documentation:**
+- [The Rust Book - Chapter 7: Modules](https://doc.rust-lang.org/book/ch07-00-managing-growing-projects-with-packages-crates-and-modules.html)
+- [The Rust Book - Chapter 5: Structs](https://doc.rust-lang.org/book/ch05-00-structs.html)
+- [The Rust Book - Chapter 6: Enums and Pattern Matching](https://doc.rust-lang.org/book/ch06-00-enums.html)
+- [The Rust Book - Chapter 9: Error Handling](https://doc.rust-lang.org/book/ch09-00-error-handling.html)
+- [The Rust Book - Chapter 8: Collections](https://doc.rust-lang.org/book/ch08-00-common-collections.html)
+
+**Interactive practice:**
+- [Rust by Example - Modules](https://doc.rust-lang.org/rust-by-example/mod.html)
+- [Rust by Example - Error Handling](https://doc.rust-lang.org/rust-by-example/error.html)
+- [Rustlings - Structs Exercises](https://github.com/rust-lang/rustlings)
+
+::: {.notes}
+All these links are essential reading. Chapter 8 (Collections) and Chapter 9 (Error Handling) are particularly important. Rustlings has great exercises for structs and enums. Encourage students to work through these after the lab.
+:::
+
+---
+
+## Questions?
+
+**Remember:**
+- Modules organize code, structs/enums organize data
+- `Option<T>` eliminates null pointer errors
+- `Result<T, E>` makes error handling explicit
+- Collections (`Vec`, `String`, `HashMap`) follow ownership rules
+- Use [AI](https://claude.ai/) to explore design patterns and learn idioms
+
+**Lab 11 due:** Sunday, November 16 at 11:59 PM
+
+**Office hours:** Available on [Microsoft Teams](https://www.microsoft.com/en-us/microsoft-teams/group-chat-software) - reach out anytime!
+
+::: {.notes}
+End on an encouraging note. Today's content is dense but practical. Every concept (modules, structs, enums, Result, collections) is used daily in production Rust. The lab lets them apply it all. Remind them that understanding ownership makes this week easier.
+:::

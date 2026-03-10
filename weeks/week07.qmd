@@ -1,0 +1,19 @@
+---
+title: "Week 07: External data"
+---
+
+## Introduction
+
+Coming soon!
+
+## Recommended readings
+
+- [Python tutorial](https://docs.python.org/3/tutorial/) - Official Python documentation
+
+## Lectures
+
+- [**Slides: Working with data**](../slides/IS4010_W07_Working_with_Data.qmd)
+
+## Lab assignment
+
+- [Lab 07: External data](https://github.com/bgreenwell/is4010-course)

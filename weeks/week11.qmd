@@ -1,0 +1,23 @@
+---
+title: "Week 11: Structuring code"
+---
+
+## Introduction
+
+This week you'll synthesize everything you've learned about Rust by building a complete student management system. You'll create a modular application that demonstrates structs for data modeling, enums for representing alternatives, error handling with Option and Result, and the Rust module system for code organization. This is where Rust's type system shines—making invalid states unrepresentable.
+
+## Recommended readings
+
+- [Chapter 5: Using structs to structure related data](https://doc.rust-lang.org/book/ch05-00-structs.html)
+- [Chapter 6: Enums and pattern matching](https://doc.rust-lang.org/book/ch06-00-enums.html)
+- [Chapter 7: Managing growing projects](https://doc.rust-lang.org/book/ch07-00-managing-growing-projects-with-packages-crates-and-modules.html) - Packages, crates, and modules
+- [Chapter 8: Common collections](https://doc.rust-lang.org/book/ch08-00-common-collections.html) - Vectors, strings, and hash maps
+- [Chapter 9: Error handling](https://doc.rust-lang.org/book/ch09-00-error-handling.html) - Panic! and Result
+
+## Lectures
+
+- [**Slides: Structuring code and data**](../slides/IS4010_W11_Structuring_Code_and_Data.qmd)
+
+## Lab assignment
+
+- [Lab 11: Structuring code](https://github.com/bgreenwell/is4010-rust/blob/main/week11/lab11.md)

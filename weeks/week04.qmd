@@ -1,0 +1,19 @@
+---
+title: "Week 04: Data structures"
+---
+
+## Introduction
+
+Coming soon!
+
+## Recommended readings
+
+- [Python tutorial](https://docs.python.org/3/tutorial/) - Official Python documentation
+
+## Lectures
+
+- [**Slides: Data structures**](../slides/IS4010_W04_Data_Structures.qmd)
+
+## Lab assignment
+
+- [Lab 04: Data structures](https://github.com/bgreenwell/is4010-course)

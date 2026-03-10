@@ -1,0 +1,1335 @@
+---
+title: "IS4010: AI-Enhanced Application Development"
+subtitle: "Week 15: Advanced AI Workflows & Prompt Engineering"
+author: "Brandon M. Greenwell"
+format:
+  revealjs:
+    theme: dracula
+    transition: fade
+    slide-number: true
+    chalkboard: true
+    preview-links: auto
+    footer: "IS4010: App Development with AI"
+    scrollable: true
+    css: custom.css
+---
+
+## Week 15 Overview {.inverse}
+
+**Session 1: Advanced Prompt Engineering**
+
+- Strategic prompting techniques
+- Context management and iteration
+- AI-assisted code review
+- Debugging with AI
+
+**Session 2: Professional AI Workflows**
+
+- Documentation generation
+- Refactoring strategies
+- Custom AI workflows
+- Evaluating AI outputs
+- Limitations and best practices
+
+::: {.notes}
+This is the final technical week before project completion. Focus on making students more effective with AI tools they're already using. Emphasize strategic thinking over simple code generation.
+:::
+
+---
+
+## Why Advanced AI Skills Matter {.inverse}
+
+**The AI-enhanced developer:**
+
+- **10x productivity**: Studies show 55% faster task completion with AI tools
+- **Competitive advantage**: AI proficiency is becoming a required skill
+- **Better code quality**: AI assists with reviews, testing, documentation
+- **Continuous learning**: AI helps you understand unfamiliar codebases faster
+
+**Industry reality:**
+
+- [GitHub Copilot](https://github.com/features/copilot): 46% of code now AI-assisted
+- Companies expect AI tool proficiency in 2025
+- Knowing *how* to use AI is as important as *what* you code
+
+::: {.notes}
+This isn't about replacing programming skills - it's about augmenting them. The best developers use AI strategically, not as a crutch.
+:::
+
+---
+
+# Session 1: Advanced Prompt Engineering
+
+## The Anatomy of Good Prompts {.smaller}
+
+**Poor prompt:**
+```
+write a function to sort a list
+```
+
+**Better prompt:**
+```
+Write a Python function that sorts a list of dictionaries by a
+specified key. Include type hints, docstring, and handle edge
+cases like missing keys.
+```
+
+**Best prompt:**
+```
+I'm building a data processing pipeline in Python. I need a
+function that:
+- Takes a list of dictionaries and a key name
+- Sorts the list by that key's value
+- Handles missing keys gracefully (should those items go first or last?)
+- Returns a new sorted list (don't modify original)
+- Include NumPy-style docstring and type hints
+- Should this be case-sensitive for string values?
+
+Example input: [{"name": "Alice", "age": 30}, {"name": "Bob"}]
+```
+
+[📖 OpenAI Prompt Engineering Guide](https://platform.openai.com/docs/guides/prompt-engineering)
+
+::: {.notes}
+The best prompts provide context, constraints, and examples. They ask questions when requirements are ambiguous.
+:::
+
+---
+
+## The Five C's of Effective Prompting {.smaller}
+
+**1. Context** - Provide background information
+```
+I'm working on a Rust CLI tool for processing log files...
+```
+
+**2. Constraints** - Specify requirements and limitations
+```
+Must use only standard library, no external dependencies
+```
+
+**3. Clarity** - Be specific and unambiguous
+```
+Parse Apache Common Log Format, not generic logs
+```
+
+**4. Completeness** - Include all necessary details
+```
+Input: access.log with 10M+ lines
+Output: JSON summary of status codes
+Performance requirement: <5 seconds
+```
+
+**5. Conversation** - Iterate and refine
+```
+That's good, but can you make it handle malformed lines
+without crashing?
+```
+
+::: {.notes}
+This framework helps structure prompts systematically. Most prompt failures come from missing one of these elements.
+:::
+
+---
+
+## Prompt Pattern: Persona Assignment {.smaller}
+
+**Technique**: Ask AI to adopt a specific role or perspective
+
+**Generic approach:**
+```
+How do I optimize this Python code?
+```
+
+**Persona approach:**
+```
+You are a senior Python performance engineer reviewing code
+for a high-traffic web service. Analyze this function for
+performance bottlenecks and suggest optimizations with
+benchmarking strategies.
+```
+
+**Examples:**
+
+- "You are a security auditor reviewing this code..."
+- "As a Rust compiler, explain why this ownership pattern fails..."
+- "Act as a code reviewer focusing on maintainability..."
+- "You are teaching this concept to a beginner..."
+
+[📖 Prompt Engineering Patterns](https://github.com/prompt-engineering/prompt-patterns)
+
+::: {.notes}
+Personas shape the AI's response style and focus. Use different personas for different aspects: security, performance, readability, etc.
+:::
+
+---
+
+## Prompt Pattern: Chain-of-Thought {.smaller}
+
+**Technique**: Ask AI to explain its reasoning step-by-step
+
+**Standard prompt:**
+```
+Why doesn't this Rust code compile?
+[code snippet]
+```
+
+**Chain-of-thought prompt:**
+```
+This Rust code doesn't compile. Walk me through the
+compilation process step-by-step:
+1. What does the borrow checker analyze first?
+2. Where does it detect the problem?
+3. Why is this specific pattern invalid?
+4. What are two different ways to fix it?
+
+[code snippet]
+```
+
+**Benefits:**
+- Deeper understanding, not just fixes
+- Reveals AI's reasoning process
+- Helps you learn patterns, not just solutions
+- Better for debugging complex issues
+
+[📖 Chain-of-Thought Prompting](https://arxiv.org/abs/2201.11903)
+
+::: {.notes}
+Chain-of-thought is especially powerful for debugging and learning. It forces the AI to show its work, which helps you verify correctness.
+:::
+
+---
+
+## Prompt Pattern: Few-Shot Learning {.smaller}
+
+**Technique**: Provide examples of desired input/output
+
+**Without examples (zero-shot):**
+```
+Convert this function to use type hints
+```
+
+**With examples (few-shot):**
+```
+Convert this function to use type hints. Follow this style:
+
+Example 1:
+Input:  def add(a, b): return a + b
+Output: def add(a: int, b: int) -> int: return a + b
+
+Example 2:
+Input:  def greet(name): return f"Hello, {name}"
+Output: def greet(name: str) -> str: return f"Hello, {name}"
+
+Now convert this function:
+def process_data(items, threshold):
+    return [x for x in items if x > threshold]
+```
+
+**When to use:**
+- Specific output formatting
+- Consistent code style
+- Complex transformations
+- Domain-specific patterns
+
+::: {.notes}
+Few-shot learning is powerful when you need consistency. Provide 2-3 examples for best results. More examples don't always help.
+:::
+
+---
+
+## Context Management Strategies {.smaller}
+
+**Problem**: AI tools have limited context windows
+
+**Strategy 1: Chunking**
+```
+First, let's focus on the data structures (send relevant code)
+[AI responds]
+Now let's look at the processing logic (send next chunk)
+```
+
+**Strategy 2: Explicit references**
+```
+In the validate_input() function we just discussed, add
+error handling for the case where...
+```
+
+**Strategy 3: Summary anchors**
+```
+To summarize what we've built so far:
+- User input validation with regex patterns
+- SQLite database connection with connection pooling
+- Error handling using Result types
+
+Now let's add the query builder...
+```
+
+**Strategy 4: Start fresh when needed**
+```
+Let's start a new conversation. Here's the complete current
+state of the module... [provide full context]
+```
+
+::: {.notes}
+Context management is crucial for long coding sessions. Don't fight context limits - work with them strategically.
+:::
+
+---
+
+## AI-Assisted Code Review {.smaller}
+
+**Effective review prompt:**
+
+```
+Review this Rust function for:
+
+1. **Correctness**: Logic errors, edge cases, type safety
+2. **Performance**: Unnecessary allocations, algorithmic complexity
+3. **Idiomatic Rust**: Better patterns, standard library usage
+4. **Security**: Input validation, potential vulnerabilities
+5. **Maintainability**: Naming, documentation, structure
+
+For each issue found:
+- Explain WHY it's a problem
+- Show HOW to fix it
+- Rate severity (critical/moderate/minor)
+
+[paste code]
+```
+
+**Better than:**
+```
+Is this code good?
+```
+
+[📖 Google Code Review Guidelines](https://google.github.io/eng-practices/review/)
+
+::: {.notes}
+Specific review criteria get specific feedback. General questions get general answers. Guide the AI to focus on what matters most.
+:::
+
+---
+
+## Code Review Examples {.smaller}
+
+**Reviewing for performance:**
+```python
+# Original code
+def find_duplicates(items):
+    duplicates = []
+    for i in range(len(items)):
+        for j in range(i + 1, len(items)):
+            if items[i] == items[j]:
+                duplicates.append(items[i])
+    return duplicates
+```
+
+**Prompt:**
+```
+Review this Python function for performance issues. What's
+the time complexity? How could we improve it? Show a more
+efficient implementation using appropriate data structures.
+```
+
+**Expected AI feedback:**
+- Identifies O(n²) complexity
+- Suggests using sets for O(n) solution
+- Provides improved implementation
+- Explains trade-offs (memory vs. speed)
+
+::: {.notes}
+Good code review with AI requires you to know what to ask. You still need to understand the fundamentals to ask the right questions.
+:::
+
+---
+
+## Debugging with AI {.smaller}
+
+**Strategic debugging prompt:**
+
+```
+I'm getting this error in my Rust program:
+
+[paste error message]
+
+Here's the relevant code:
+[paste minimal reproducing code]
+
+Context:
+- Using Rust 1.75
+- This worked before I added the new caching feature
+- Error only happens with concurrent requests
+
+Please:
+1. Explain what's causing this error
+2. Why did it start happening now?
+3. Provide 2-3 different fix approaches
+4. Which fix is most idiomatic for Rust?
+```
+
+**Don't just:**
+```
+fix this error [paste entire file]
+```
+
+[📖 Rust Error Index](https://doc.rust-lang.org/error-index.html)
+
+::: {.notes}
+Debugging prompts should isolate the problem. Provide context about when it started happening - this helps AI identify the root cause.
+:::
+
+---
+
+## Debugging Pattern: Rubber Duck + AI {.smaller}
+
+**Technique**: Explain the problem as if teaching someone
+
+**Effective debugging conversation:**
+
+```
+I'm confused about this borrow checker error. Let me walk
+through what I'm trying to do:
+
+1. I have a Vector of items
+2. I iterate over it and process each one
+3. During processing, I need to modify the vector
+4. The compiler says I can't borrow mutably while iterating
+
+I understand why this is unsafe (iterator invalidation), but
+I'm not sure of the best pattern to solve it. Should I:
+- Collect items to process first, then modify?
+- Use indices instead of iterators?
+- Restructure to avoid modification?
+
+What's the most idiomatic Rust approach?
+```
+
+**Why this works:**
+- Demonstrates you understand the problem
+- Shows what you've tried
+- Asks for trade-offs, not just solutions
+
+::: {.notes}
+When you explain the problem clearly, you often solve it yourself. When you don't, the AI has all the context to help effectively.
+:::
+
+---
+
+## Iterative Refinement {.smaller}
+
+**Conversation pattern:**
+
+**Turn 1:** Get initial implementation
+```
+Create a Python function to parse CSV files with error handling
+```
+
+**Turn 2:** Add requirements
+```
+Great start. Now add:
+- Support for custom delimiters
+- Type validation for numeric columns
+- Progress reporting for large files
+```
+
+**Turn 3:** Optimize
+```
+This works but it's slow on my 50MB file. Can you optimize it
+to process in chunks and use a streaming approach?
+```
+
+**Turn 4:** Polish
+```
+Add comprehensive docstring and type hints following NumPy style
+```
+
+**Turn 5:** Test
+```
+Generate pytest tests covering edge cases: empty files,
+malformed rows, encoding issues
+```
+
+::: {.notes}
+Don't expect perfection in one prompt. Build iteratively, like you would with a junior developer. Each iteration adds detail.
+:::
+
+---
+
+## Multi-Tool Strategies {.smaller}
+
+**Different tools for different tasks:**
+
+**GitHub Copilot** (in-editor):
+- Autocompleting functions
+- Generating boilerplate
+- Quick inline suggestions
+- Pattern completion
+
+**ChatGPT/Claude** (conversational):
+- Complex explanations
+- Architecture decisions
+- Debugging multi-file issues
+- Learning new concepts
+
+**Gemini CLI** (terminal):
+- Explaining error messages
+- Generating shell scripts
+- Quick command lookups
+- Repository analysis
+
+**Perplexity** (research):
+- Finding documentation
+- Comparing approaches
+- Staying current with ecosystem changes
+
+::: {.notes}
+Master developers use the right tool for the job. Each AI tool has strengths - learn them and combine strategically.
+:::
+
+---
+
+## 🎯 Try It Yourself: Code Review {.smaller}
+
+**Exercise**: Use AI to review this code
+
+```python
+def calculate_total(items):
+    total = 0
+    for i in items:
+        total = total + i['price'] * i['quantity']
+    tax = total * 0.08
+    return total + tax
+```
+
+**Prompt to try:**
+```
+Review this Python function for:
+1. Edge cases and error handling
+2. Code clarity and maintainability
+3. Potential bugs
+4. More Pythonic approaches
+
+Provide specific improvements with explanations.
+```
+
+**[Try in Claude](https://claude.ai)** | **[Try in ChatGPT](https://chat.openai.com)**
+
+::: {.notes}
+Have students actually do this exercise. Compare results from different AI tools. Discuss what each AI caught and missed.
+:::
+
+---
+
+# Session 2: Professional AI Workflows
+
+## AI-Generated Documentation {.smaller}
+
+**Strategic documentation prompt:**
+
+```
+Generate comprehensive documentation for this Python module:
+
+[paste code]
+
+Please create:
+1. Module-level docstring explaining purpose and usage
+2. Function docstrings in NumPy style
+3. README section with installation and examples
+4. API reference table
+5. Common usage patterns section
+
+Focus on:
+- WHY to use each function, not just what it does
+- Practical examples with real-world context
+- Edge cases and limitations
+- Performance characteristics
+```
+
+**Why this works:**
+- Specifies format (NumPy style)
+- Asks for context, not just signatures
+- Requests examples and edge cases
+- Structures output clearly
+
+::: {.notes}
+AI excels at documentation when given structure. But always review - AI can document what code does, but may miss why it exists.
+:::
+
+---
+
+## Documentation Quality Checklist {.smaller}
+
+**After AI generates documentation, verify:**
+
+**Accuracy:**
+- [ ] Parameter types match actual code
+- [ ] Return values correctly described
+- [ ] Examples actually work
+- [ ] No hallucinated features
+
+**Completeness:**
+- [ ] All public functions documented
+- [ ] Edge cases mentioned
+- [ ] Error conditions explained
+- [ ] Performance characteristics noted
+
+**Clarity:**
+- [ ] Written for target audience
+- [ ] Examples are practical
+- [ ] Jargon explained
+- [ ] Links to related functions
+
+**Maintenance:**
+- [ ] Matches current code version
+- [ ] Breaking changes highlighted
+- [ ] Deprecation warnings included
+
+::: {.notes}
+AI documentation is a starting point, not the finish line. Always review and refine, especially for public APIs.
+:::
+
+---
+
+## Documentation Example {.smaller}
+
+**Code to document:**
+```rust
+pub fn parse_log_entry(line: &str) -> Result<LogEntry, ParseError> {
+    // Implementation
+}
+```
+
+**AI-generated documentation:**
+```rust
+/// Parses a single log entry from Apache Common Log Format.
+///
+/// This function takes a raw log line and converts it into a
+/// structured `LogEntry`. It handles standard Apache CLF format
+/// and gracefully handles malformed entries.
+///
+/// # Arguments
+///
+/// * `line` - A string slice containing a single log line
+///
+/// # Returns
+///
+/// * `Ok(LogEntry)` - Successfully parsed log entry
+/// * `Err(ParseError)` - Line doesn't match expected format
+///
+/// # Examples
+///
+/// ```
+/// let line = r#"127.0.0.1 - frank [10/Oct/2000:13:55:36 -0700] "GET /index.html HTTP/1.0" 200 2326"#;
+/// let entry = parse_log_entry(line)?;
+/// assert_eq!(entry.status_code, 200);
+/// ```
+///
+/// # Performance
+///
+/// O(n) where n is the line length. Uses zero-copy parsing.
+```
+
+::: {.notes}
+This is good AI-generated documentation. Notice it includes why, examples, and performance notes. This is what to aim for.
+:::
+
+---
+
+## Refactoring with AI {.smaller}
+
+**Effective refactoring prompt:**
+
+```
+I need to refactor this code for better maintainability.
+
+Current issues:
+- 300-line function doing too much
+- Duplicated error handling logic
+- Hard to test individual components
+- Poor separation of concerns
+
+Goals:
+- Break into smaller, focused functions
+- Extract common error handling
+- Make testable with dependency injection
+- Maintain backward compatibility
+
+Please:
+1. Propose a refactoring strategy
+2. Show the refactored structure
+3. Explain the benefits of each change
+4. Identify any risks or trade-offs
+
+[paste code]
+```
+
+[📖 Martin Fowler - Refactoring](https://refactoring.com/)
+
+::: {.notes}
+Good refactoring prompts explain the problems and goals clearly. AI can suggest patterns, but you must validate the approach makes sense.
+:::
+
+---
+
+## Refactoring Patterns {.smaller}
+
+**Common refactoring requests:**
+
+**Extract function:**
+```
+This function does validation, processing, and logging.
+Extract each into separate, testable functions.
+```
+
+**Replace magic numbers:**
+```
+Replace all magic numbers with named constants at the
+module level. Explain what each represents.
+```
+
+**Introduce error types:**
+```
+Convert these string error messages into a proper error enum.
+Show how to use them with the ? operator.
+```
+
+**Dependency injection:**
+```
+This function directly creates a database connection. Refactor
+to accept a connection as a parameter for better testing.
+```
+
+**Simplify conditionals:**
+```
+This nested if-else chain is hard to read. Refactor using
+early returns or match expressions.
+```
+
+::: {.notes}
+Name the refactoring pattern you want. AI knows common patterns from literature - use the standard terminology.
+:::
+
+---
+
+## Test Generation with AI {.smaller}
+
+**Comprehensive test prompt:**
+
+```
+Generate pytest tests for this Python function:
+
+[paste function]
+
+Please create tests for:
+1. **Happy path**: Normal expected inputs
+2. **Edge cases**: Empty inputs, None, extremes
+3. **Error cases**: Invalid types, out-of-range values
+4. **Boundary conditions**: Min/max values
+5. **Integration**: How it works with related functions
+
+For each test:
+- Use descriptive test names
+- Add docstrings explaining what's being tested
+- Use pytest fixtures for common setup
+- Include assertions with helpful failure messages
+```
+
+**Result**: Comprehensive test suite covering scenarios you might have missed
+
+[📖 pytest Documentation](https://docs.pytest.org/)
+
+::: {.notes}
+AI is excellent at generating test cases. It often thinks of edge cases humans miss. But review for business logic coverage.
+:::
+
+---
+
+## Test Quality Review {.smaller}
+
+**After AI generates tests, check:**
+
+**Coverage:**
+- [ ] All code paths tested
+- [ ] Edge cases included
+- [ ] Error conditions verified
+- [ ] Integration scenarios covered
+
+**Quality:**
+- [ ] Tests are independent (no shared state)
+- [ ] Meaningful test names
+- [ ] Clear assertions
+- [ ] Good failure messages
+
+**Practicality:**
+- [ ] Tests actually run and pass
+- [ ] No flaky tests
+- [ ] Reasonable execution time
+- [ ] Mock external dependencies
+
+**Maintenance:**
+- [ ] Tests will remain stable as code evolves
+- [ ] Not too brittle (over-specified)
+- [ ] Well-organized
+
+::: {.notes}
+AI-generated tests need review just like AI-generated code. They might be technically correct but impractical or brittle.
+:::
+
+---
+
+## Building Custom Workflows {.smaller}
+
+**Example: Git commit message generation**
+
+**Workflow:**
+```bash
+# 1. Stage changes
+git add .
+
+# 2. Get diff
+git diff --staged
+
+# 3. Prompt AI
+"Generate a conventional commit message for these changes.
+Format: <type>(<scope>): <description>
+Types: feat, fix, docs, refactor, test, chore
+Keep description under 50 chars.
+
+Changes:
+[paste diff]"
+
+# 4. Review and use
+git commit -m "[AI-generated message]"
+```
+
+**Automate further:**
+```bash
+# Create a git alias or script
+git config --global alias.ai-commit '!git diff --staged | gemini "Generate commit message..."'
+```
+
+[📖 Conventional Commits](https://www.conventionalcommits.org/)
+
+::: {.notes}
+Custom workflows save time on repetitive tasks. Identify your common patterns and create prompts for them.
+:::
+
+---
+
+## Workflow: PR Description Generation {.smaller}
+
+**Custom GitHub PR workflow:**
+
+```
+Generate a pull request description for these changes:
+
+Branch: feature/user-authentication
+Base: main
+
+Changes made:
+[paste git log]
+
+File changes:
+[paste git diff --stat]
+
+Please create:
+## Summary
+- What this PR does (2-3 sentences)
+
+## Changes
+- Bullet list of main changes
+
+## Testing
+- How this was tested
+
+## Screenshots (if applicable)
+
+## Checklist
+- [ ] Tests added/updated
+- [ ] Documentation updated
+- [ ] No breaking changes
+```
+
+**Save as a template or shell script for reuse**
+
+::: {.notes}
+Good PR descriptions improve code review efficiency. AI can draft them, but you should personalize and add context.
+:::
+
+---
+
+## Workflow: Code Explanation for Teams {.smaller}
+
+**When explaining complex code to teammates:**
+
+```
+Help me explain this code to my team in our documentation:
+
+[paste complex function]
+
+Create an explanation that:
+1. **High-level overview**: What does this do and why?
+2. **Step-by-step breakdown**: Walk through the logic
+3. **Key concepts**: Any patterns or techniques used?
+4. **Visual diagram**: ASCII diagram if helpful
+5. **Example**: Concrete input → output walkthrough
+6. **Common questions**: What might teammates ask?
+
+Audience: Junior developers familiar with Rust basics
+```
+
+**Result**: Clear documentation that helps team onboarding
+
+::: {.notes}
+Use AI to translate complex code into understandable explanations. Great for documentation and knowledge sharing.
+:::
+
+---
+
+## Evaluating AI Output Quality {.smaller}
+
+**Red flags in AI-generated code:**
+
+🚩 **Hallucinated APIs**
+```python
+# This doesn't exist in standard library!
+from requests import super_fast_download
+```
+
+🚩 **Outdated patterns**
+```rust
+// Old Rust 2015 style
+extern crate serde;  // Not needed in 2021 edition
+```
+
+🚩 **Over-complicated**
+```python
+# AI wrote 50 lines when 5 would work
+```
+
+🚩 **Missing error handling**
+```rust
+let file = File::open("data.txt").unwrap();  // Never unwrap in production!
+```
+
+🚩 **Security issues**
+```python
+eval(user_input)  # Never do this!
+```
+
+::: {.notes}
+Always verify AI code. Test it, review it, understand it. AI is a tool, not a replacement for your judgment.
+:::
+
+---
+
+## Quality Verification Checklist {.smaller}
+
+**Before using AI-generated code:**
+
+**Correctness:**
+- [ ] Code actually compiles/runs
+- [ ] Logic is sound
+- [ ] Edge cases handled
+- [ ] No hallucinated functions/APIs
+
+**Security:**
+- [ ] Input validation present
+- [ ] No SQL injection risks
+- [ ] No command injection
+- [ ] Secrets not hardcoded
+
+**Performance:**
+- [ ] Algorithms are efficient
+- [ ] No unnecessary allocations
+- [ ] Appropriate data structures
+- [ ] Scalability considered
+
+**Maintainability:**
+- [ ] Code is readable
+- [ ] Well-structured
+- [ ] Properly documented
+- [ ] Follows project conventions
+
+::: {.notes}
+Make this checklist a habit. Quick review catches most AI mistakes before they become problems.
+:::
+
+---
+
+## Understanding AI Limitations {.smaller}
+
+**What AI does well:**
+- ✅ Generating boilerplate code
+- ✅ Explaining existing code
+- ✅ Suggesting common patterns
+- ✅ Writing tests for known behaviors
+- ✅ Documentation drafting
+- ✅ Syntax translation between languages
+
+**What AI struggles with:**
+- ❌ Novel algorithms or architectures
+- ❌ Complex business logic
+- ❌ Performance optimization (without profiling)
+- ❌ Security vulnerabilities (incomplete detection)
+- ❌ Maintaining consistency across large codebases
+- ❌ Understanding project-specific context
+
+**The solution:** Use AI for what it's good at, rely on your expertise for the rest
+
+::: {.notes}
+Understanding limitations prevents frustration and misuse. AI is a powerful assistant, not a senior architect.
+:::
+
+---
+
+## When NOT to Use AI {.smaller}
+
+**Situations where AI may hurt more than help:**
+
+**Learning fundamentals:**
+```
+Bad: "Write a binary search tree implementation for me"
+Good: "Explain how BST insertion works, then I'll implement it"
+```
+
+**Critical security code:**
+```
+Don't trust AI blindly for:
+- Authentication systems
+- Encryption implementation
+- Permission checks
+- Input sanitization
+```
+
+**Novel problem solving:**
+```
+AI excels at known patterns, not creative solutions to
+unique business problems
+```
+
+**Production hotfixes:**
+```
+Under pressure, AI mistakes are more likely. Understand
+the fix before deploying.
+```
+
+::: {.notes}
+Know when to put the AI tool down and think deeply yourself. Some problems require human creativity and judgment.
+:::
+
+---
+
+## Academic Integrity with AI {.smaller}
+
+**In this course, acceptable AI use:**
+
+✅ **Allowed:**
+- Explaining concepts and documentation
+- Debugging help (but understand the fix)
+- Code review and suggestions
+- Test case generation
+- Refactoring assistance
+
+❌ **Not allowed (unless specified):**
+- Having AI complete entire assignments
+- Copying AI code without understanding
+- Using AI without disclosure
+- Submitting AI output without verification
+
+**The standard:**
+> You must be able to explain every line of code you submit,
+> whether you wrote it, AI wrote it, or you found it online.
+
+[📖 UC Academic Integrity Policy](https://www.uc.edu/conduct/academic-integrity.html)
+
+::: {.notes}
+AI is a tool for learning, not a shortcut to avoid learning. Using AI ethically means using it to enhance your understanding.
+:::
+
+---
+
+## Prompt Engineering for Learning {.smaller}
+
+**Instead of:** "Write this entire program for me"
+
+**Try:** "I'm learning error handling in Rust. Help me understand..."
+
+**Learning-focused prompts:**
+
+```
+I'm trying to implement [specific feature]. I've written
+this code but it's not working:
+
+[paste your attempt]
+
+Please:
+1. Don't give me the complete solution yet
+2. Point out what I'm misunderstanding
+3. Ask me questions to guide my thinking
+4. Give me hints about which concept to study
+5. Only show a solution after I've learned the concepts
+```
+
+**Goal:** Use AI as a tutor, not a solution generator
+
+[📖 Socratic Method](https://en.wikipedia.org/wiki/Socratic_method)
+
+::: {.notes}
+The best learning happens when you struggle a bit. Use AI to guide that struggle productively, not to skip it.
+:::
+
+---
+
+## Career Relevance {.smaller}
+
+**Why these skills matter professionally:**
+
+**AI proficiency is expected:**
+- Job postings increasingly mention AI tool experience
+- Companies assume developers use AI assistants
+- Interviews may ask about AI workflow
+
+**Strategic AI use demonstrates:**
+- **Efficiency**: Get more done in less time
+- **Code quality**: Consistent reviews and testing
+- **Communication**: Clear documentation
+- **Adaptability**: Learning new tools/languages faster
+- **Judgment**: Knowing when to use AI vs. manual work
+
+**Interview examples:**
+- "How do you use AI in your development workflow?"
+- "Describe a time AI helped you solve a complex problem"
+- "What are the limitations of AI coding assistants?"
+- "How do you verify AI-generated code quality?"
+
+::: {.notes}
+AI skills are now professional skills. Employers want developers who use AI effectively and responsibly.
+:::
+
+---
+
+## Real-World AI Workflows {.smaller}
+
+**How professionals use AI:**
+
+**At Microsoft:**
+- 60% of developers use GitHub Copilot daily
+- Primary use: Boilerplate, tests, documentation
+- Still require code review for all AI output
+
+**At Stripe:**
+- AI-assisted code reviews
+- Documentation generation from code
+- Migration scripts between API versions
+
+**At startups:**
+- Rapid prototyping with AI
+- Learning unfamiliar codebases
+- Generating integration tests
+
+**Common patterns:**
+- AI for first draft, human for refinement
+- AI for explanations, human for decisions
+- AI for tedious work, human for creative work
+
+::: {.notes}
+These are real patterns from industry. AI augments human developers, not replaces them.
+:::
+
+---
+
+## Building Your AI Toolkit {.smaller}
+
+**Recommended workflow setup:**
+
+**In-editor (GitHub Copilot):**
+- Tab completion for code
+- Function generation
+- Quick documentation
+
+**Terminal (Gemini CLI):**
+```bash
+gem "explain this error: [error message]"
+gem "write git commit message for: $(git diff --staged)"
+```
+
+**Browser (Claude/ChatGPT):**
+- Architecture discussions
+- Complex debugging
+- Learning new concepts
+
+**Documentation (Cursor, Continue.dev):**
+- Codebase-aware AI
+- Multi-file refactoring
+- Project-specific context
+
+**Create a personal prompt library:**
+- Save effective prompts you use often
+- Customize for your projects
+- Share with teammates
+
+::: {.notes}
+Build your toolkit gradually. Master one tool before adding another. Quality over quantity.
+:::
+
+---
+
+## 🤖 AI Prompting: Meta Level {.smaller}
+
+**Prompts about prompting:**
+
+**Improve your prompts:**
+```
+I want to ask an AI to help me optimize this Rust code.
+What information should I include in my prompt to get the
+best advice?
+```
+
+**Generate custom prompts:**
+```
+Create a prompt template I can reuse for generating
+comprehensive pytest tests for Python functions. Include
+placeholders for [function_code] and [special_requirements].
+```
+
+**Learn from AI:**
+```
+What are the most effective techniques for prompting AI to
+help with code review? Give me 3 example prompts showing
+different approaches.
+```
+
+**Evaluate your workflow:**
+```
+I'm using AI to help with [task]. Here's my current process:
+[describe workflow]
+
+How could I improve this workflow for better results?
+```
+
+::: {.notes}
+Meta-prompting - using AI to improve how you use AI. This accelerates your learning curve with AI tools.
+:::
+
+---
+
+## Key Takeaways {.inverse}
+
+**Advanced prompting:**
+- Use the Five C's: Context, Constraints, Clarity, Completeness, Conversation
+- Apply patterns: Persona, Chain-of-Thought, Few-Shot
+- Manage context strategically
+
+**Professional workflows:**
+- AI for documentation, testing, refactoring
+- Build custom workflows for repetitive tasks
+- Always verify and validate output
+
+**Quality and ethics:**
+- Understand AI limitations
+- Verify before using generated code
+- Use AI to enhance learning, not replace it
+- Maintain academic and professional integrity
+
+**Strategic thinking:**
+- Choose the right tool for each task
+- Iterate and refine
+- Focus on understanding, not just solutions
+
+::: {.notes}
+These skills compound over time. The better you get at prompting, the more productive you become.
+:::
+
+---
+
+## Additional Resources {.smaller}
+
+**Prompt engineering:**
+- [OpenAI Prompt Engineering Guide](https://platform.openai.com/docs/guides/prompt-engineering)
+- [Anthropic Prompt Library](https://docs.anthropic.com/claude/prompt-library)
+- [Learn Prompting](https://learnprompting.org/)
+- [Prompt Engineering Patterns](https://github.com/prompt-engineering/prompt-patterns)
+
+**AI tools:**
+- [GitHub Copilot Documentation](https://docs.github.com/copilot)
+- [Claude AI](https://claude.ai)
+- [ChatGPT](https://chat.openai.com)
+- [Gemini CLI](https://github.com/google/generative-ai-python)
+
+**Best practices:**
+- [Google Code Review Guidelines](https://google.github.io/eng-practices/review/)
+- [Refactoring Catalog](https://refactoring.com/catalog/)
+- [Academic Integrity Resources](https://www.uc.edu/conduct/academic-integrity.html)
+
+::: {.notes}
+Encourage students to explore these resources. Prompt engineering is an evolving field - stay current.
+:::
+
+---
+
+## Final Project Application {.inverse}
+
+**Apply these skills to your final project:**
+
+**Documentation:**
+- [ ] Generate comprehensive README
+- [ ] Add docstrings to all functions
+- [ ] Create usage examples
+- [ ] Document installation steps
+
+**Code quality:**
+- [ ] AI-assisted code review
+- [ ] Refactor complex functions
+- [ ] Add comprehensive tests
+- [ ] Check for security issues
+
+**Professional polish:**
+- [ ] Write clear commit messages
+- [ ] Create detailed PR descriptions (if applicable)
+- [ ] Add inline code comments
+- [ ] Include performance notes
+
+**Use AI strategically to make your project portfolio-worthy!**
+
+::: {.notes}
+This is the last chance to apply these techniques before project submission. Emphasize that AI can help make their projects more professional.
+:::
+
+---
+
+## Questions? {.inverse}
+
+**Get help:**
+
+- Office hours: [Schedule on Teams](https://teams.microsoft.com)
+- Course discussion: Microsoft Teams channel
+- AI tools: Claude, ChatGPT, GitHub Copilot, Gemini CLI
+- Prompt engineering communities
+
+**Final project deadline approaching - make it exceptional!**
+
+Remember: AI is your assistant, not your replacement. Use it to amplify your skills, not replace your thinking.
+
+---
+
+## Thank You! {.inverse}
+
+**You've completed IS4010!**
+
+**Throughout this course, you've learned:**
+- Python and Rust programming
+- Professional development practices
+- Testing, CI/CD, and distribution
+- **Strategic AI-enhanced development workflows**
+
+**What's next:**
+- Complete your final project with professional polish
+- Build your portfolio with published work
+- Continue practicing AI-enhanced development
+- Apply these skills in your career
+
+**You're ready to be an AI-enhanced developer in the modern software industry!** 🚀
+
+**Good luck with your final projects!** 🦀

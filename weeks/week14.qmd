@@ -1,0 +1,19 @@
+---
+title: "Week 14: Multithreading"
+---
+
+## Introduction
+
+This week you'll build a complete command-line application that synthesizes everything you've learned about Rust. You'll create a professional CLI password generator and validator that demonstrates ownership, modules, traits, generics, iterators, error handling, and the clap argument parsing library. This is the capstone project that brings together 14 weeks of learning into a production-ready tool.
+
+## Recommended readings
+
+- [Chapter 16: Fearless concurrency](https://doc.rust-lang.org/book/ch16-00-concurrency.html) - Threads and message passing
+
+## Lectures
+
+- [**Slides: Multithreaded applications**](../slides/IS4010_W14_Multithreaded_Applications.qmd)
+
+## Lab assignment
+
+- [Lab 14: Multithreading](https://github.com/bgreenwell/is4010-rust/blob/main/week14/lab14.md)

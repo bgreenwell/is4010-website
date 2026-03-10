@@ -1,0 +1,747 @@
+---
+title: "IS4010: AI-Enhanced Application Development"
+subtitle: "Week 02"
+author: "Brandon M. Greenwell"
+format: 
+  revealjs:
+    self-contained: false
+    theme: dracula
+    transition: fade
+---
+
+# AI tools for programming
+
+## Welcome to the AI revolution
+
+::: {.incremental}
+- Today we'll explore the landscape of AI programming tools
+- You'll learn to work with AI as your **pair programming partner**
+- We'll compare the major players and find the right tool for each job
+- By the end, you'll understand how to "talk" to AI about code
+:::
+
+::: notes
+Start with enthusiasm - this is genuinely exciting technology that will transform how students approach programming. Emphasize that we're not replacing programming skills, but augmenting them.
+
+Demo hook: Have three browser tabs open (Gemini, ChatGPT, Claude) and be ready to show the same prompt to all three for the live comparison.
+:::
+
+---
+
+## Course motto: 
+
+> Augment, don't automate!
+
+::: {.incremental}
+- **AI is your co-pilot, not your autopilot**
+- Think of AI as a brilliant but sometimes eccentric junior developer
+- AI provides suggestions → You review, approve, and own the code
+- **Your job**: Direct, verify, and integrate AI assistance
+- **Remember**: The pilot is always responsible for the flight
+:::
+
+::: notes
+This is the foundational philosophy for the entire course. Spend time here - students need to understand that they remain in control and responsible for all code they submit.
+
+Use the pilot/co-pilot analogy throughout the course. It's memorable and accurate.
+:::
+
+---
+
+## What are AI programming tools?
+
+::: {.incremental}
+- **Code generation**: Turn comments and prompts into working code
+- **Code explanation**: Break down complex functions into plain English  
+- **Debugging assistance**: Help identify and fix errors
+- **Refactoring support**: Improve code structure and style
+- **Learning accelerator**: Get instant feedback and alternative approaches
+:::
+
+---
+
+## Under the hood: LLMs 🧠
+
+::: {.incremental}
+- **Large Language Models (LLMs)**: AI systems trained on massive amounts of text from the internet
+- **Pattern recognition experts**: They've learned patterns in human language *and code*
+- **Sophisticated autocomplete**: Like your phone's predictive text, but incredibly advanced
+- **Not databases**: They don't "know" facts—they predict what text should come next
+- **Surprisingly good at code**: Programming languages follow patterns, just like natural language
+:::
+
+::: notes
+This is crucial foundational knowledge. Students often think AI "knows" things, when really it's predicting based on patterns.
+
+Key analogies to use:
+- **Autocomplete on steroids**: Everyone understands phone predictive text
+- **Pattern matching**: Like learning to recognize handwriting, but for language/code patterns
+- **Very sophisticated parrot**: Can produce remarkably coherent text without true "understanding"
+
+Important points:
+- LLMs were trained on billions of lines of code from GitHub and other sources
+- They learned that certain patterns appear together (if you write a function definition, a return statement usually follows)
+- This is why they're good at code completion but can make subtle logical errors
+- They work the same way for Python, Rust, English, or any other language—it's all just patterns in text
+
+Set expectations: These tools are incredibly useful but require human judgment and verification.
+:::
+
+---
+
+## Four main categories:
+::: {.incremental}
+- **Conversational AI models**: General-purpose models (Gemini, ChatGPT, Claude)
+- **Specialized code assistants**: Purpose-built for coding ([GitHub Copilot](https://github.com/features/copilot), [Claude Code](https://claude.ai/code))
+- **Command-line tools**: Terminal-based AI access ([Gemini CLI](https://github.com/google-gemini/gemini-cli), [Copilot CLI](https://github.com/features/copilot/cli))
+- **Code analysis tools**: Project-wide review and feedback ([Google Jules](https://jules.google/))
+:::
+
+::: notes
+Frame these as the five core use cases students will encounter most frequently. Every AI interaction should fit into one of these categories.
+
+Ask students: "Which of these sounds most useful to you right now?" Get a sense of where they are in their programming journey.
+:::
+
+---
+
+## Conversational AI models 🤖
+
+**The big three:** [Gemini](https://gemini.google.com/), [ChatGPT](https://chat.openai.com/), and [Claude](https://claude.ai/) (These are general-purpose AI models that can help with programming.)
+
+::: {.incremental}
+- **All offer free tiers** - Cost shouldn't be a barrier!
+- **Strong programming support** - Excellent for [Python](https://www.python.org/), explanations, and debugging
+- **Different personalities** - Each has unique strengths
+- **Web-based interfaces** - Easy to access
+- **Great for learning** - Perfect for explanations, brainstorming, and code review
+:::
+
+::: notes
+Emphasize that these are general-purpose AI models, not specialized coding tools. They're excellent for learning, explanations, and brainstorming, but they're different from purpose-built code assistants.
+
+All three have free tiers - cost shouldn't be a barrier for students. Each has different strengths, and we'll see this in the live demo.
+
+Point out that we're focusing on the web interfaces first - this is the easiest entry point for beginners.
+:::
+
+---
+
+## Conversational coding 💬
+
+**The CPTF framework for great prompts:**
+
+::: {.incremental}
+1. **Context**: "Here is my [Python](https://www.python.org/) function..."
+2. **Persona**: "Act as a senior software developer reviewing my code."  
+3. **Task**: "Find any potential bugs and suggest improvements."
+4. **Format**: "Provide your answer as a numbered list."
+:::
+
+::: notes
+This is crucial - the quality of AI responses depends entirely on prompt quality. Students often start with vague prompts like "fix my code" and get frustrated with the results.
+
+Have a few examples ready:
+- Bad: "Make this better"
+- Good: "Act as a [Python](https://www.python.org/) expert. Here's my function that calculates fibonacci numbers. Explain how it works and suggest any performance improvements. Format your response with explanations and code examples."
+:::
+
+---
+
+## Five essential prompt patterns
+
+### 1. **Explain this code**
+```
+"Explain this Python dictionary comprehension step by step:
+
+{word: len(word) for word in text.split() if len(word) > 3}"
+```
+
+### 2. **Generate boilerplate**
+```
+"Write a Numpy-style docstring for this function that calculates the area of a circle given its radius."
+```
+
+### 3. **Refactor for clarity**
+```  
+"Convert this for loop into a more Pythonic equivalent using list comprehension or built-in functions."
+```
+
+::: notes
+Walk through each pattern with a concrete example. These are the patterns students will use 80% of the time.
+
+Emphasize that good prompts are specific and provide context. The AI needs to understand what you're trying to accomplish.
+:::
+
+---
+
+## More essential patterns
+
+### 4. **Debug assistance**
+```
+"I'm getting a 'TypeError: unsupported operand type(s)' on line 15. Here's my code... What's the likely cause and how do I fix it?"
+```
+
+### 5. **Architecture advice**
+```
+"I need to store student information (name, ID, grades). Should I use a list of dictionaries or create a Student class? Explain the pros and cons of each approach."
+```
+
+::: notes
+Pattern 4 is incredibly valuable - students often get cryptic error messages and spend hours debugging what an AI can spot in seconds.
+
+Pattern 5 shows how AI can help with design decisions, not just code generation. This is where the "senior developer" persona really shines.
+:::
+
+---
+
+## Live demo: Head-to-head comparison 🥊
+
+**Our challenge**: Create a [Python](https://www.python.org/) function that takes a filename and returns the number of lines in the file, handling potential `FileNotFoundError` exceptions.
+
+Let's give the **exact same prompt** to all three AIs:
+
+> "Write a [Python](https://www.python.org/) function called `count_lines` that takes a filename as a parameter and returns the number of lines in the file. Handle the case where the file doesn't exist by returning 0. Include a [NumPy](https://numpy.org/)-style docstring."
+
+::: notes
+This is the highlight of the session! Have three browser tabs ready:
+1. Gemini (gemini.google.com)
+2. ChatGPT (chat.openai.com) 
+3. Claude (claude.ai)
+
+Paste the exact same prompt into each and show the results side-by-side. Point out:
+- Different coding styles
+- Quality of docstrings  
+- Error handling approaches
+- Explanation quality
+- Any unique insights each model provides
+
+This demonstrates that models have different "personalities" and there's no single "best" tool.
+:::
+
+---
+
+## What did we learn? 🧠
+
+::: {.incremental}
+- **Different models, different strengths**: Each AI has its own "personality"
+- **Quality varies**: Same prompt can yield different code quality
+- **No single winner**: The "best" AI depends on your specific task
+- **Explanation matters**: Some models explain their reasoning better
+- **Style differences**: Notice variations in variable naming, comments, structure
+:::
+
+::: notes
+After the live demo, take a few minutes to discuss what students observed. Ask:
+- Which response did you prefer and why?
+- Did any approach surprise you?
+- What differences in coding style did you notice?
+
+This reinforces that AI tools are aids to human judgment, not replacements for it.
+:::
+
+---
+
+## Ethics and limitations ⚠️
+
+::: {.incremental}
+- **AI can hallucinate**: Models sometimes generate plausible-looking but incorrect code
+- **You own the code**: Never submit code you don't understand
+- **Privacy matters**: Be cautious about sharing sensitive info
+- **Academic integrity**: Document your AI usage in assignments
+- **Keep learning**: AI should accelerate your learning, not replace it
+:::
+
+::: notes
+This is critical. Students need to understand that AI is a powerful tool but requires human oversight.
+
+Share examples of AI hallucinations if you have them - perhaps a function that looks correct but has subtle bugs, or advice that sounds authoritative but is outdated.
+
+Emphasize the course AI policy: use AI freely, but understand everything you submit.
+:::
+
+---
+
+## A quick note on docstrings 📝
+
+::: {.incremental}
+- Before our lab, we need to introduce a key concept: the **docstring**
+- A docstring is a string literal, enclosed in triple quotes (`"""`), that occurs as the first statement in a module, function, class, or method definition
+- Its purpose is to explain what the code does
+- We are learning about them now because they are the primary way you will communicate your intent to AI assistants
+- **A good docstring leads to good AI-generated code**
+:::
+
+::: notes
+This bridges from the AI discussion to the practical lab work. Students need to understand docstrings before Lab 02 Part 1.
+
+Emphasize the connection: clear human communication (docstrings) leads to better AI assistance. This reinforces that AI tools respond to human intent and clarity.
+:::
+
+---
+
+## Our docstring style: [NumPy](https://numpydoc.readthedocs.io/en/latest/format.html)
+
+::: {.incremental}
+- There are several popular styles for writing docstrings. In this course, we will use the **[NumPy style](https://numpydoc.readthedocs.io/en/latest/format.html)**
+- It is clean, readable, and works very well with automated documentation tools
+- See next slide for an example
+:::
+
+---
+
+An example of Numpy-style docstrings:
+
+```python
+def add(num1, num2):
+    """
+    Add two numbers together.
+
+    Parameters
+    ----------
+    num1 : int
+        The first number.
+    num2 : int
+        The second number.
+
+    Returns
+    -------
+    int
+        The sum of the two numbers.
+    """
+    return num1 + num2
+```
+
+::: notes
+Show the [NumPy](https://numpy.org/) docstring format that will be used throughout the course. This is important for Lab 02 where students will be working with docstrings extensively.
+
+Point out:
+- The brief description first
+- Parameters section with types and descriptions  
+- Returns section with type and description
+- Clear, consistent formatting
+
+This style works particularly well with AI tools because it provides structured, detailed context about function intent.
+:::
+
+---
+
+## Introducing Lab 02 (Part 1) 🧪
+
+- Your next lab assignment will give you hands-on practice with both AI tool types
+- **Part 1**: "Copilot driving school" - Use **[GitHub Copilot](https://github.com/features/copilot) specifically**
+- **Objective**: You will be given [Python](https://www.python.org/) function stubs with [NumPy](https://numpy.org/)-style docstrings. Let Copilot generate the implementations based on your clear documentation
+
+---
+
+# AI in your editor & beyond
+
+## From browser to IDE
+
+Why integration matters 🔗
+
+::: {.incremental}
+- **Stay in your flow state**: No context switching!
+- **Keep your hands on the keyboard**: Faster than copy-paste workflows
+- **Context awareness**: AI can see your entire project
+- **Real-time assistance**: Get help as you type
+- **Professional workflow**: This is how AI is used in the industry
+:::
+
+::: notes
+Open with the value proposition - students should understand why we're moving from the browser-based tools from last session to integrated development tools.
+
+Emphasize "flow state" - the psychological concept of being fully immersed in coding. Context switching breaks flow and reduces productivity.
+
+Make sure students have [VS Code](https://code.visualstudio.com/) open and ready for the [GitHub Copilot](https://github.com/features/copilot) demonstration.
+:::
+
+---
+
+## What's [GitHub Copilot](https://github.com/features/copilot)?
+
+::: {.incremental}
+- Purpose-built for coding and integrates directly into [VS Code](https://code.visualstudio.com/)!
+- Trained specifically on code repositories from GitHub
+- Provides **two main modes** of assistance:
+  - **Inline suggestions**: "Ghost text" appears as you type
+  - **Copilot Chat**: Conversational interface within your editor
+- **Context-aware**: Sees your current file, open files, and project structure
+:::
+
+::: notes
+This is the primary specialized code assistant for the course. Make sure students understand that Copilot is fundamentally different from the conversational AI models - it's purpose-built for code generation and editing.
+
+Key point: Context awareness and integration. Copilot can see variable names, function signatures, imports, and other files in your project. This makes its suggestions much more relevant than general-purpose AI models working with isolated code snippets.
+:::
+
+---
+
+## The magic of inline suggestions ✨
+
+**How it works:**
+
+::: {.incremental}
+- Write a **descriptive comment** about what you want to accomplish
+- Start coding...
+- Copilot appears as **gray "ghost text"**
+- Press **Tab** to accept, **Esc** to reject
+- Use **Alt + ]** (Windows) or **Option + ]** (Mac) to cycle through alternatives
+:::
+
+---
+
+## The magic of inline suggestions ✨
+
+**Best practices:**
+
+::: {.incremental}
+- **Clear comments are key**: 
+
+  `# Calculate the factorial of a positive integer`
+
+- **Descriptive function names**: 
+
+  `calculate_factorial` not `calc_fact`
+
+- **Type hints help**: 
+
+  `def factorial(n: int) -> int:`
+:::
+
+::: notes
+This is the "classic" Copilot experience that most people think of. Prepare a live demo:
+
+1. Open a new [Python](https://www.python.org/) file
+2. Write a comment: "# A function that calculates the factorial of a number"
+3. Start typing: "def factorial(n: int) -> int:"
+4. Let Copilot complete the function
+5. Show how to cycle through alternatives
+
+Emphasize that the quality of suggestions depends heavily on the quality of your comments and function names.
+:::
+
+---
+
+## Copilot Chat
+
+**Your conversational partner** 💬
+
+Three powerful modes:
+
+::: {.incremental}
+- **Planning mode**: Architectural decisions and project structure
+- **Ask mode**: Questions, explanations, and debugging help
+- **Agent mode**: Autonomous task completion and complex operations
+:::
+
+---
+
+## Copilot Chat
+
+**Your conversational partner** 💬
+
+When to use each mode:
+
+::: {.incremental}
+- **Planning**: "How should I structure a student gradebook application?"
+- **Ask**: "Explain this regex pattern" or "Why am I getting this error?"
+- **Agent**: "Refactor this class to use data classes" or "Add error handling to all functions"
+:::
+
+::: notes
+This is new content that distinguishes between different interaction patterns. Students need to understand when to use each mode:
+
+**Planning mode**: High-level architectural decisions. Use when you're not sure how to approach a problem.
+
+**Ask mode**: Specific questions about existing code. Use when you need explanations or help debugging.
+
+**Agent mode**: When you want the AI to perform specific, well-defined tasks autonomously. Use when you know what needs to be done but want AI to do the implementation.
+
+Prepare examples for each mode to show during the demo.
+:::
+
+---
+
+## Live demo 🎬
+
+**Building a [Python](https://www.python.org/) utility with AI assistance:**
+
+::: {.incremental}
+1. **Start with a comment**: `# A function that calculates compound interest`
+2. **Let Copilot generate the function**: Accept or refine the suggestion
+3. **Use Chat to enhance**:
+   - `/explain` the generated code
+   - "Add a [NumPy](https://numpy.org/)-style docstring and type hints"
+   - `/tests` to generate [pytest](https://pytest.org/) unit tests
+4. **Refactor and debug**: "Make this function more robust" or "Find the bug in this code"
+:::
+
+::: notes
+This is the centerpiece demonstration. Have a live coding session where you build a small utility from scratch using only AI assistance. Suggested function: compound interest calculator.
+
+Key moments to highlight:
+1. How inline suggestions save typing
+2. How chat can explain unfamiliar code
+3. The "wow" moment when `/tests` generates complete unit tests
+4. How to iteratively improve code with AI feedback
+
+If something goes wrong (AI gives bad suggestions), use it as a teaching moment about verification and human oversight.
+:::
+
+---
+
+## Command-line AI assistants 💻
+
+**Why use terminal-based AI?**
+
+::: {.incremental}
+- **Stay in your workflow**: No need to switch between terminal and browser
+- **Quick queries**: Fast answers without leaving the command line
+- **Scriptable**: Can be integrated into automated workflows
+- **Code context**: Easy to pipe file contents directly to AI
+- **Privacy options**: Some tools offer better data handling
+:::
+
+::: notes
+Set up the value proposition for command-line tools. These are for "power users" who want to integrate AI into their terminal workflow.
+
+Students may ask: "Why not just use the browser?" Answer: When you're deep in terminal work (git operations, file manipulation, debugging), switching to a browser breaks your flow.
+:::
+
+---
+
+## [Gemini CLI](https://github.com/google-gemini/gemini-cli)
+
+### (Free) AI in your terminal 🖥️
+
+**Common usage patterns:**
+
+```bash
+# Start an interactive gemini session
+gemini
+
+# Quick code questions
+gemini "How do I install [pytest](https://pytest.org/) in [Python](https://www.python.org/)?"
+
+# Code generation
+gemini "Write a [Rust](https://www.rust-lang.org/) function to read a CSV file"
+
+# Debugging help
+gemini "Explain this error: ImportError: No module named 'requests'"
+```
+
+::: notes
+Prepare a live demo of Gemini CLI. Have it installed and configured beforehand.
+
+Show practical examples:
+1. Quick package installation help
+2. Language translation ([Python](https://www.python.org/) to [Rust](https://www.rust-lang.org/))
+3. Error message explanation
+4. Code review of a file: `cat script.py | gemini "Review this code for bugs"`
+
+Mention that students can get a free API key from [Google AI Studio](https://aistudio.google.com/).
+:::
+
+---
+
+## [GitHub Copilot CLI](https://github.com/features/copilot/cli)
+
+### (Free tier) Natural language terminal ⌨️
+
+**Common usage patterns:**
+
+```bash
+# Ask how to do something in the terminal
+gh copilot suggest "list all python files larger than 1MB"
+
+# Explain a complex command
+gh copilot explain "find . -name '*.py' -size +1M"
+
+# Execute suggestions directly
+# (Follow the prompts to execute or copy)
+```
+
+::: notes
+GitHub Copilot CLI is part of the `gh` (GitHub CLI) tool. It's excellent for when you know *what* you want to do in the terminal but forget the exact flags or syntax.
+
+Key feature: It doesn't just give you code; it gives you terminal commands and explains what they do before you run them.
+
+Students with the GitHub Student Developer Pack get this as part of their Copilot access.
+:::
+
+---
+
+## [Claude Code](https://claude.ai/code)
+
+### (Not free) AI in your terminal 🖥️
+
+**What is it?**
+
+::: {.incremental}
+- **Anthropic's premium CLI tool** for professional development
+- **Advanced features**: Project context, file editing, test generation, and much, much more!
+- **Industry adoption**: Popular in professional development
+- **Subscription required**: Currently better than free alternatives
+:::
+
+---
+
+## [Claude Code](https://claude.ai/code)
+
+### (Not free) AI in your terminal 🖥️
+
+**Why mention it?**
+
+::: {.incremental}
+- **Career awareness**: You'll likely encounter it in industry
+- **Feature preview**: Shows where AI coding tools are heading
+- **Upgrade path**: When you outgrow free tools, this is an option
+:::
+
+::: notes
+We're not doing a live demo since it's a paid tool, but students should be aware it exists.
+
+Position this as "what you might use in your first job" - many companies are adopting premium AI tools for their development teams.
+
+Key message: Start with free tools (Gemini, Copilot free tier), but be aware of the premium tools available for career purposes.
+:::
+
+---
+
+## [Google Jules](https://jules.google/)
+
+**AI-powered code review** 🔍
+
+Revolutionary approach:
+
+::: {.incremental}
+- **Understands entire codebases**, not just individual files
+- **Comprehensive analysis**: Security, performance, maintainability
+- **Context-aware suggestions**: Considers your project's architecture
+- **Educational feedback**: Explains *why* changes are recommended
+:::
+
+---
+
+## [Google Jules](https://jules.google/)
+
+**AI-powered code review** 🔍
+
+Good for:
+
+::: {.incremental}
+- **Code review**: Before submitting assignments or pull requests
+- **Learning**: Understanding best practices in real projects
+- **Debugging**: Finding subtle issues across multiple files
+- **Refactoring**: Identifying improvement opportunities
+- **Addressing [PRs](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/about-pull-requests)**: [Example](https://github.com/bgreenwell/statlingua/pull/7)
+:::
+
+::: notes
+Jules represents a new category of AI tools - those that can understand and analyze entire projects, not just individual functions.
+
+Prepare a demo with a small [Python](https://www.python.org/) project (maybe 3-4 files). Upload it to [Jules](https://jules.google/) and show:
+1. How it analyzes code structure
+2. Security and performance recommendations
+3. Suggestions for code organization
+4. Educational explanations of why changes are recommended
+
+Emphasize that this is perfect for their lab submissions - they can get AI feedback before turning in their work.
+:::
+
+---
+
+## Choosing your AI toolkit 🧰
+
+**Required for this course (free):**
+
+- [GitHub Copilot](https://github.com/features/copilot) 
+- [Gemini CLI](https://github.com/google-gemini/gemini-cli) 
+
+**Recommended for this course (also free):**
+
+- [GitHub Copilot CLI](https://github.com/features/copilot/cli)
+- [Gemini web interface](https://gemini.google.com/) 
+- [Google Jules](https://jules.google/)
+
+::: notes
+Give clear guidance on what students need vs. what's nice to have.
+
+[GitHub Copilot](https://github.com/features/copilot) is required because it integrates directly with [VS Code](https://code.visualstudio.com/) and provides the best learning experience for the course.
+
+Everything else is optional but recommended for exploration. Encourage students to try different tools and find their preferences.
+
+Remind them that many tools offer free tiers or student discounts.
+:::
+
+---
+
+## Your professional AI workflow 🔄
+
+**Daily development:**
+
+1. **Start with comments**: Describe your intent clearly
+2. **Use Copilot inline**: Accept, modify, or reject suggestions
+3. **Chat for complex problems**: Switch to conversational help when stuck
+4. **Command-line for quick help**: Terminal-based queries for efficiency
+
+---
+
+## Your professional AI workflow 🔄
+
+**Code review and submission:**
+
+1. **Jules analysis**: Upload complete projects for comprehensive review
+2. **AI-assisted debugging**: Use chat to identify and fix issues
+3. **Documentation**: Generate docstrings and comments with AI help
+4. **Testing**: Auto-generate test cases with `/tests` command
+
+::: notes
+This gives students a complete workflow they can start using immediately.
+
+Emphasize the progression: start with simple inline suggestions, graduate to conversational help for complex problems, and use specialized tools for specific tasks like code review.
+
+The key insight: different tools for different phases of development. You wouldn't use the same tool for initial brainstorming as you would for final code review.
+:::
+
+---
+
+## Remember: You are the pilot ✈️
+
+::: {.incremental}
+- **AI provides suggestions** → You make decisions
+- **AI explains possibilities** → You choose the best approach
+- **AI generates code** → You understand and verify it
+- **AI finds patterns** → You apply domain knowledge
+- **Always maintain responsibility** for the final product
+:::
+
+**The golden rule**: Never submit code you don't understand!
+
+::: notes
+End with the core philosophy. Students should leave feeling empowered, not dependent.
+
+The goal is to make students better programmers faster, not to replace their thinking. AI should accelerate learning and remove tedious barriers, but students must remain intellectually engaged.
+
+Ask: "What questions do you have about integrating AI into your development workflow?"
+:::
+
+---
+
+## Introducing Lab 02 (Part 2) 🚀
+
+- **Part 2**: "Prompt engineering challenge" - Use **any conversational AI model**
+- **Your choice**: [Gemini](https://gemini.google.com/), [ChatGPT](https://chat.openai.com/), [Claude](https://claude.ai/), or others
+- **Objective**: Debug, refactor, and document buggy [Python](https://www.python.org/) code snippets by crafting high-quality, effective prompts using the CPTF method
+- All instructions will be in `week02/lab02.md`
+
+---
+
+## Time for Lab 02! 🧪
+
+- Your next hands-on lab: AI-assisted [Python](https://www.python.org/) development
+- **Part 1**: "Copilot driving school" - hands-on practice with inline suggestions
+- **Part 2**: "Prompt engineering challenge" - master conversational AI debugging
+- Please navigate to [`week02/lab02.md`](https://github.com/bgreenwell/is4010-course/blob/main/week02/lab02.md) in the course repository for step-by-step instructions
+

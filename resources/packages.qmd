@@ -1,0 +1,73 @@
+---
+title: "Python packages & environments"
+subtitle: "Managing dependencies and virtual environments"
+---
+
+This course uses a small set of Python libraries for testing and data processing. To keep your system clean and avoid version conflicts, we recommend using a virtual environment.
+
+## 📦 Installing core packages
+
+Once your environment is active (see below), you can install the required libraries directly using `pip` or `uv`.
+
+### The essentials
+
+We primarily use three packages throughout the Python portion of the course:
+
+```bash
+# Using standard pip
+pip install pytest pytest-cov requests
+
+# Using uv (recommended)
+uv pip install pytest pytest-cov requests
+```
+
+*   **pytest**: The industry-standard testing framework.
+*   **pytest-cov**: Tools for measuring how much of your code is covered by tests.
+*   **requests**: The "HTTP for Humans" library used for interacting with web APIs.
+
+---
+
+## 🛠️ Virtual environments
+
+A virtual environment is an isolated space where you can install packages without affecting other projects or your global Python installation. **Always create one for your lab repository.**
+
+### Option 1: Using `uv` (recommended)
+
+[`uv`](https://github.com/astral-sh/uv) is an extremely fast Python package manager written in Rust. It is significantly faster than standard tools and handles environment creation automatically.
+
+```bash
+# 1. Install uv (one-time setup)
+# macOS/Linux: curl -LsSf https://astral-sh.github.io/uv/install.sh | sh
+# Windows: powershell -c "irm https://astral-sh.github.io/uv/install.ps1 | iex"
+
+# 2. Create and activate a venv
+uv venv
+source .venv/bin/activate  # macOS/Linux
+source .venv/Scripts/activate # Windows (Git Bash)
+```
+
+### Option 2: Using `venv` (built-in)
+
+If you prefer not to install extra tools, you can use Python's built-in module:
+
+```bash
+# 1. Create the environment
+python -m venv venv
+
+# 2. Activate it
+source venv/bin/activate  # macOS/Linux
+source venv/Scripts/activate # Windows (Git Bash)
+```
+
+---
+
+## 💡 Tips for success
+
+*   **Activation is key**: Remember to activate your environment every time you open a new terminal window. You'll know it's active if you see `(venv)` or `(.venv)` in your command prompt.
+*   **VS Code integration**: When you open your repository, VS Code will usually detect your virtual environment. Always click **Yes** when it asks to set it as the workspace interpreter.
+*   **Don't commit your venv**: Your environment folder contains thousands of files. It should **never** be pushed to GitHub. Our lab templates include this in the `.gitignore` by default.
+
+::: {.callout-tip}
+### Pro tip: Why use a requirements file?
+While direct installation is fine for this course, professional projects use a `requirements.txt` file to ensure every developer on a team is using the exact same versions of every library. It's the "recipe" for your project's environment!
+:::

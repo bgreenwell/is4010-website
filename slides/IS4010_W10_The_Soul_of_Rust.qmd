@@ -1,0 +1,783 @@
+---
+title: "IS4010: AI-Enhanced Application Development"
+subtitle: "Week 10: The Soul of Rust - Ownership & Borrowing"
+author: "Brandon M. Greenwell"
+format:
+  revealjs:
+    self-contained: false
+    theme: dracula
+    transition: fade
+    scrollable: true
+    css: custom.css
+---
+
+## Session 1: The Ownership Model
+
+::: {.notes}
+This is THE defining feature of Rust. Take time here - students coming from Python will find this challenging but transformative. Use analogies and build slowly. Show enthusiasm about how elegant this system is.
+:::
+
+---
+
+## Housekeeping: midterm project
+
+- **Reminder**: Your midterm project was due last week. If you haven't submitted it yet, please reach out on [Microsoft Teams](https://www.microsoft.com/en-us/microsoft-teams/group-chat-software)
+- This week we're diving into what makes [Rust](https://www.rust-lang.org/) truly unique: its [ownership system](https://doc.rust-lang.org/book/ch04-00-understanding-ownership.html)
+- This is the most important concept you'll learn in Rust programming
+
+::: {.notes}
+Check in about midterm submissions. Remind students that ownership is challenging but worth the effort. This week builds the foundation for everything else in Rust.
+:::
+
+---
+
+## Why ownership matters: a real-world crisis
+
+::: {.incremental}
+- In 2014, the [Heartbleed bug](https://heartbleed.com/) exposed millions of users' private data due to a memory management error in [OpenSSL](https://www.openssl.org/)
+- [70% of security vulnerabilities](https://msrc.microsoft.com/blog/2019/07/a-proactive-approach-to-more-secure-code/) in [Microsoft](https://www.microsoft.com/) and [Google](https://www.google.com/) products are memory safety issues
+- These bugs happen in [C](https://en.cppreference.com/w/c)/[C++](https://en.cppreference.com/w/) because programmers must manually manage memory
+- [Rust](https://www.rust-lang.org/) eliminates these entire categories of bugs at **compile time** with its [ownership system](https://doc.rust-lang.org/book/ch04-00-understanding-ownership.html)
+:::
+
+::: {.notes}
+Real-world impact: Heartbleed was a buffer over-read vulnerability. Microsoft and Google data shows 70% of CVEs are memory issues. Rust's ownership system makes these bugs impossible. This isn't academic - this is career-relevant and industry-critical.
+:::
+
+---
+
+## The memory management trilemma
+
+::: {.incremental}
+**Historically, you had to pick two out of three:**
+
+1. **Performance** (fast execution, low overhead)
+2. **Safety** (no crashes, no security vulnerabilities)
+3. **Ease of use** (simple mental model)
+
+**Traditional choices:**
+- [Python](https://www.python.org/), [Java](https://www.java.com/): Safety + Ease → [Garbage collector](https://en.wikipedia.org/wiki/Garbage_collection_(computer_science)) costs performance
+- [C](https://en.cppreference.com/w/c), [C++](https://en.cppreference.com/w/): Performance + Ease → Manual memory management sacrifices safety
+
+**[Rust](https://www.rust-lang.org/)'s innovation:** Achieves all three through [ownership](https://doc.rust-lang.org/book/ch04-00-understanding-ownership.html)!
+:::
+
+::: {.notes}
+This is the key insight. Rust breaks the traditional trade-off. Draw a triangle diagram on the board. Emphasize that this was thought to be impossible until Rust proved otherwise. This is why Rust is revolutionary.
+:::
+
+---
+
+## How Python handles memory (garbage collection)
+
+::: {.incremental}
+- [Python](https://www.python.org/) uses a [garbage collector (GC)](https://docs.python.org/3/library/gc.html) that runs in the background
+- The GC periodically scans memory to find objects that are no longer referenced
+- When it finds "garbage," it automatically frees that memory
+- **Pros**: You never think about memory management
+- **Cons**: GC pauses slow down your program, uses extra memory, unpredictable timing
+:::
+
+::: {.notes}
+Python's approach: convenient but costly. GC pauses can be milliseconds to seconds depending on heap size. Fine for web apps, terrible for real-time systems (games, embedded, high-frequency trading). Show enthusiasm for how Rust solves this.
+:::
+
+---
+
+## How C/C++ handles memory (manual management)
+
+::: {.incremental}
+- In [C](https://en.cppreference.com/w/c)/[C++](https://en.cppreference.com/w/), **you** are responsible for allocating and freeing memory
+- Use [`malloc()`](https://en.cppreference.com/w/c/memory/malloc)/[`new`](https://en.cppreference.com/w/cpp/language/new) to allocate, [`free()`](https://en.cppreference.com/w/c/memory/free)/[`delete`](https://en.cppreference.com/w/cpp/language/delete) to deallocate
+- **Pros**: Maximum performance and control
+- **Cons**: Easy to make mistakes:
+  - **Use-after-free**: Using memory after it's been freed (security vulnerability)
+  - **Double-free**: Freeing the same memory twice (crashes)
+  - **Memory leaks**: Forgetting to free memory (resource exhaustion)
+:::
+
+::: {.notes}
+Manual memory management is incredibly error-prone. Even experienced C++ developers make these mistakes. These aren't hypothetical - these cause real CVEs and production outages. Rust makes these bugs impossible.
+:::
+
+---
+
+## Rust's approach: ownership
+
+::: {.incremental}
+- [Rust](https://www.rust-lang.org/) introduces a third approach: the [ownership system](https://doc.rust-lang.org/book/ch04-00-understanding-ownership.html)
+- The compiler enforces **ownership rules** at compile time
+- If your code violates these rules, it **won't compile**
+- No runtime overhead (zero-cost abstraction)
+- No garbage collector needed
+- Memory safety **guaranteed** by the type system
+:::
+
+::: {.notes}
+This is the big reveal. Rust's ownership is checked entirely at compile time. Zero runtime cost. If it compiles, memory safety is guaranteed. This is why Rust is called "fearless concurrency" - you can't accidentally create data races.
+:::
+
+---
+
+## The three ownership rules
+
+::: {.incremental}
+These three rules are **always** enforced by the [Rust compiler](https://doc.rust-lang.org/rustc/what-is-rustc.html):
+
+1. **Each value has a variable that's called its owner**
+   - Every piece of data in memory has exactly one variable that owns it
+
+2. **There can only be one owner at a time**
+   - When you assign a value to a new variable, ownership transfers (it "moves")
+
+3. **When the owner goes out of scope, the value is dropped**
+   - [Rust automatically calls `drop()`](https://doc.rust-lang.org/std/ops/trait.Drop.html) to free the memory
+:::
+
+::: {.notes}
+Write these three rules on the board. Students will need to internalize these. Rule 2 is the most surprising to newcomers. Rule 3 is why Rust doesn't need garbage collection. Emphasize that these are compiler-enforced - not guidelines.
+:::
+
+---
+
+## Ownership in action: the stack and the heap
+
+::: {.incremental}
+- Simple values like integers are stored on the **[stack](https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html#the-stack-and-the-heap)** (fast, fixed size, automatically managed)
+- Complex values like [`String`](https://doc.rust-lang.org/std/string/struct.String.html) are stored on the **[heap](https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html#the-stack-and-the-heap)** (flexible size, slower, needs management)
+- The [stack](https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html#the-stack-and-the-heap) holds the pointer, capacity, and length
+- The [heap](https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html#the-stack-and-the-heap) holds the actual string data
+- When ownership moves, the stack data moves, but heap data stays put (just the pointer changes)
+:::
+
+::: {.notes}
+Draw a memory diagram on the board. Stack on the left, heap on the right. Show how a String has three stack values (ptr, len, cap) pointing to heap data. This visual is crucial for understanding moves vs copies.
+:::
+
+---
+
+## Example: ownership transfer (move)
+
+```rust
+fn main() {
+    let s1 = String::from("hello");
+    let s2 = s1; // Ownership moves from s1 to s2
+
+    // println!("{}", s1); // ❌ ERROR: value borrowed after move
+    println!("{}", s2); // ✅ OK: s2 owns the string now
+}
+```
+
+[Try it in Rust Playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=fn+main%28%29+%7B%0A++++let+s1+%3D+String%3A%3Afrom%28%22hello%22%29%3B%0A++++let+s2+%3D+s1%3B+%2F%2F+Ownership+moves%0A++++println%21%28%22%7B%7D%22%2C+s2%29%3B%0A%7D)
+
+::: {.notes}
+**LIVE DEMO**: Uncomment the s1 line to show the error. Read the compiler error message aloud - it's excellent! Explain that this prevents double-free bugs. In C++, this code would crash or cause undefined behavior.
+:::
+
+---
+
+## Why moves matter: preventing double-free
+
+::: {.incremental}
+- If [Rust](https://www.rust-lang.org/) allowed both `s1` and `s2` to be valid, both would try to free the same memory when they go out of scope
+- This is a **[double-free error](https://owasp.org/www-community/vulnerabilities/Doubly_freeing_memory)** - a serious security vulnerability
+- Rust prevents this by invalidating `s1` after the move to `s2`
+- The [borrow checker](https://doc.rust-lang.org/book/ch04-02-references-and-borrowing.html#the-rules-of-references) enforces this at compile time
+:::
+
+::: {.notes}
+Double-free errors are CVE-worthy bugs in C/C++. They can be exploited to execute arbitrary code. Rust makes them impossible by design. This is the "fearless" in fearless concurrency.
+:::
+
+---
+
+## The [`Copy` trait](https://doc.rust-lang.org/std/marker/trait.Copy.html): the exception to moves
+
+::: {.incremental}
+- Simple types like [`i32`](https://doc.rust-lang.org/std/primitive.i32.html), [`f64`](https://doc.rust-lang.org/std/primitive.f64.html), [`bool`](https://doc.rust-lang.org/std/primitive.bool.html), and [`char`](https://doc.rust-lang.org/std/primitive.char.html) implement the [`Copy` trait](https://doc.rust-lang.org/std/marker/trait.Copy.html)
+- Types with [`Copy`](https://doc.rust-lang.org/std/marker/trait.Copy.html) are **copied** instead of **moved**
+- This is efficient because they live entirely on the [stack](https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html#the-stack-and-the-heap) (no heap allocation)
+- After copying, both variables remain valid
+:::
+
+```rust
+let x = 5;
+let y = x; // Copy happens (not a move)
+println!("x = {}, y = {}", x, y); // ✅ Both valid!
+```
+
+::: {.notes}
+Copy vs Move is a key distinction. Copy types are stack-only, so copying is cheap (just copy the bytes). String is NOT Copy because it has heap data. You can't accidentally expensive operations.
+:::
+
+---
+
+## 🤖 AI co-pilot technique: understanding moves
+
+When you encounter move errors, ask your [AI assistant](https://claude.ai/) for help:
+
+**Effective prompts:**
+- *"Explain this Rust move error in simple terms: [paste error message]"*
+- *"Why does Rust move String but copy i32?"*
+- *"How do I use a value after it's been moved?"*
+- *"What's the difference between Copy and Clone in Rust?"*
+
+**Pro tip:** The [Rust compiler error messages](https://doc.rust-lang.org/error_codes/error-index.html) are incredibly helpful on their own - read them carefully before asking AI!
+
+::: {.notes}
+Teach students to read compiler errors first. Rust's error messages are some of the best in any language. Then use AI to deepen understanding, not as a first resort.
+:::
+
+---
+
+## Scope and automatic cleanup
+
+::: {.incremental}
+- Every variable has a **[scope](https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html#variable-scope)**: the region of code where it's valid
+- When a variable goes out of scope, [Rust automatically calls `drop()`](https://doc.rust-lang.org/std/ops/trait.Drop.html)
+- [`drop()`](https://doc.rust-lang.org/std/ops/trait.Drop.html) is a special function that cleans up resources (like freeing heap memory)
+- This is called [RAII (Resource Acquisition Is Initialization)](https://en.wikipedia.org/wiki/Resource_acquisition_is_initialization) - borrowed from C++, but enforced by the compiler in Rust
+:::
+
+```rust
+{
+    let s = String::from("hello"); // s is valid here
+    // use s
+} // s goes out of scope, drop() is called automatically
+```
+
+[Try it in Rust Playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=fn+main%28%29+%7B%0A++++%7B%0A++++++++let+s+%3D+String%3A%3Afrom%28%22hello%22%29%3B%0A++++++++println%21%28%22%7B%7D%22%2C+s%29%3B%0A++++%7D+%2F%2F+s+dropped+here%0A++++%2F%2F+println%21%28%22%7B%7D%22%2C+s%29%3B+%2F%2F+Would+error%0A%7D)
+
+::: {.notes}
+RAII is a C++ concept but Rust enforces it. This is why you rarely see explicit cleanup code in Rust. The scope determines lifetime automatically.
+:::
+
+---
+
+## Session 2: Borrowing, References & Lifetimes
+
+::: {.notes}
+This builds directly on ownership. Borrowing is how we work with data without taking ownership. Students will struggle with the borrow checker at first - normalize that struggle and emphasize the error messages are your friend.
+:::
+
+---
+
+## The problem: functions that take ownership
+
+```rust
+fn calculate_length(s: String) -> usize {
+    s.len()
+} // s is dropped here
+
+fn main() {
+    let my_string = String::from("hello");
+    let len = calculate_length(my_string); // Ownership moved!
+    // println!("{}", my_string); // ❌ ERROR: value borrowed after move
+}
+```
+
+::: {.incremental}
+- When we pass `my_string` to the function, ownership moves to `s`
+- After the function returns, we can't use `my_string` anymore
+- This is annoying - we just wanted to read the length!
+:::
+
+::: {.notes}
+This is the motivating problem for borrowing. Show this code and let students feel the frustration. Then introduce references as the elegant solution.
+:::
+
+---
+
+## The solution: references and borrowing
+
+::: {.incremental}
+- A **[reference](https://doc.rust-lang.org/book/ch04-02-references-and-borrowing.html)** lets you refer to a value without taking ownership
+- References are created with the `&` operator
+- Using references is called **[borrowing](https://doc.rust-lang.org/book/ch04-02-references-and-borrowing.html)**
+- The original owner retains ownership, so the value won't be dropped
+:::
+
+```rust
+fn calculate_length(s: &String) -> usize {
+    s.len()
+} // s goes out of scope, but it doesn't own the String, so nothing is dropped
+
+fn main() {
+    let my_string = String::from("hello");
+    let len = calculate_length(&my_string); // Borrow, don't move
+    println!("{} has length {}", my_string, len); // ✅ Still valid!
+}
+```
+
+[Try it in Rust Playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=fn+calculate_length%28s%3A+%26String%29+-%3E+usize+%7B%0A++++s.len%28%29%0A%7D%0A%0Afn+main%28%29+%7B%0A++++let+my_string+%3D+String%3A%3Afrom%28%22hello%22%29%3B%0A++++let+len+%3D+calculate_length%28%26my_string%29%3B%0A++++println%21%28%22%7B%7D+has+length+%7B%7D%22%2C+my_string%2C+len%29%3B%0A%7D)
+
+::: {.notes}
+This is the elegant solution. The ampersand syntax is borrowed from C/C++. Emphasize that references are pointers under the hood, but safe pointers checked by the compiler.
+:::
+
+---
+
+## Immutable vs. mutable references
+
+::: {.incremental}
+- By default, [references](https://doc.rust-lang.org/book/ch04-02-references-and-borrowing.html) are **immutable** (`&T`)
+- You can create a **[mutable reference](https://doc.rust-lang.org/book/ch04-02-references-and-borrowing.html#mutable-references)** with `&mut T`
+- Mutable references let you modify the borrowed value
+- **But there's a catch...** (next slide)
+:::
+
+```rust
+fn add_world(s: &mut String) {
+    s.push_str(", world");
+}
+
+fn main() {
+    let mut my_string = String::from("hello");
+    add_world(&mut my_string);
+    println!("{}", my_string); // Prints: hello, world
+}
+```
+
+[Try it in Rust Playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=fn+add_world%28s%3A+%26mut+String%29+%7B%0A++++s.push_str%28%22%2C+world%22%29%3B%0A%7D%0A%0Afn+main%28%29+%7B%0A++++let+mut+my_string+%3D+String%3A%3Afrom%28%22hello%22%29%3B%0A++++add_world%28%26mut+my_string%29%3B%0A++++println%21%28%22%7B%7D%22%2C+my_string%29%3B%0A%7D)
+
+::: {.notes}
+Note that the variable must also be declared `mut`. Rust's mutability is opt-in at every level. This is defensive by default - prevents accidental modification.
+:::
+
+---
+
+## The borrowing rules (enforced by the borrow checker)
+
+::: {.incremental}
+The [borrow checker](https://doc.rust-lang.org/book/ch04-02-references-and-borrowing.html#the-rules-of-references) enforces these rules at compile time:
+
+1. **At any given time, you can have EITHER:**
+   - One [mutable reference](https://doc.rust-lang.org/book/ch04-02-references-and-borrowing.html#mutable-references) (`&mut T`)
+   - OR any number of [immutable references](https://doc.rust-lang.org/book/ch04-02-references-and-borrowing.html) (`&T`)
+
+2. **References must always be valid**
+   - No [dangling references](https://doc.rust-lang.org/book/ch04-02-references-and-borrowing.html#dangling-references) (pointing to freed memory)
+
+**Why?** These rules prevent [data races](https://doc.rust-lang.org/nomicon/races.html) at compile time!
+:::
+
+::: {.notes}
+Write these two rules on the board. Rule 1 is the "XOR" rule - mutable XOR immutable. This prevents iterator invalidation bugs (common in C++). Rule 2 prevents use-after-free bugs (also common in C++).
+:::
+
+---
+
+## Borrow checker error: multiple mutable references
+
+```rust
+let mut s = String::from("hello");
+
+let r1 = &mut s;
+let r2 = &mut s; // ❌ ERROR: cannot borrow as mutable more than once
+
+println!("{}, {}", r1, r2);
+```
+
+**The error:**
+```
+error[E0499]: cannot borrow `s` as mutable more than once at a time
+```
+
+::: {.incremental}
+- [Rust](https://www.rust-lang.org/) prevents multiple mutable references to avoid [data races](https://doc.rust-lang.org/nomicon/races.html)
+- A data race occurs when two threads access the same memory and at least one is writing
+- Rust's rule is stricter: **only one mutable borrow** even in single-threaded code
+:::
+
+[Try it in Rust Playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=fn+main%28%29+%7B%0A++++let+mut+s+%3D+String%3A%3Afrom%28%22hello%22%29%3B%0A++++let+r1+%3D+%26mut+s%3B%0A++++let+r2+%3D+%26mut+s%3B%0A++++println%21%28%22%7B%7D%2C+%7B%7D%22%2C+r1%2C+r2%29%3B%0A%7D)
+
+::: {.notes}
+**LIVE DEMO**: Show this error. Read the compiler message - it's incredibly clear! Explain that iterator invalidation (a common C++ bug) is impossible in Rust because of this rule.
+:::
+
+---
+
+## Borrow checker error: mixing mutable and immutable
+
+```rust
+let mut s = String::from("hello");
+
+let r1 = &s;     // Immutable borrow
+let r2 = &s;     // Another immutable borrow (OK)
+let r3 = &mut s; // ❌ ERROR: cannot borrow as mutable
+
+println!("{}, {}, {}", r1, r2, r3);
+```
+
+**The error:**
+```
+error[E0502]: cannot borrow `s` as mutable because it is also borrowed as immutable
+```
+
+::: {.incremental}
+- You can't modify data while others are reading it
+- This prevents "reading while writing" bugs
+:::
+
+[Try it in Rust Playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=fn+main%28%29+%7B%0A++++let+mut+s+%3D+String%3A%3Afrom%28%22hello%22%29%3B%0A++++let+r1+%3D+%26s%3B%0A++++let+r2+%3D+%26s%3B%0A++++let+r3+%3D+%26mut+s%3B%0A++++println%21%28%22%7B%7D%2C+%7B%7D%2C+%7B%7D%22%2C+r1%2C+r2%2C+r3%29%3B%0A%7D)
+
+::: {.notes}
+This prevents the "reading while writing" pattern that causes bugs in other languages. Example: in C++, you might iterate over a vector while modifying it, causing a crash. Impossible in Rust.
+:::
+
+---
+
+## The fix: reference scope ends at last use
+
+::: {.incremental}
+- [Non-Lexical Lifetimes (NLL)](https://doc.rust-lang.org/edition-guide/rust-2018/ownership-and-lifetimes/non-lexical-lifetimes.html) - a Rust 2018 improvement
+- A reference's scope ends at its **last use**, not at the closing brace
+- This makes many common patterns "just work"
+:::
+
+```rust
+let mut s = String::from("hello");
+
+let r1 = &s;     // Immutable borrow
+let r2 = &s;     // Another immutable borrow
+println!("{}, {}", r1, r2); // r1 and r2 last used here - scope ends
+
+let r3 = &mut s; // ✅ OK: no immutable borrows are active
+println!("{}", r3);
+```
+
+[Try it in Rust Playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=fn+main%28%29+%7B%0A++++let+mut+s+%3D+String%3A%3Afrom%28%22hello%22%29%3B%0A++++let+r1+%3D+%26s%3B%0A++++let+r2+%3D+%26s%3B%0A++++println%21%28%22%7B%7D%2C+%7B%7D%22%2C+r1%2C+r2%29%3B%0A++++let+r3+%3D+%26mut+s%3B%0A++++println%21%28%22%7B%7D%22%2C+r3%29%3B%0A%7D)
+
+::: {.notes}
+NLL was a major usability improvement in Rust 2018. Before NLL, this code wouldn't compile. Now the compiler is smart enough to see that r1 and r2 aren't used after their last println. Celebrate this - the language is getting better!
+:::
+
+---
+
+## 🤖 AI co-pilot technique: debugging borrow checker errors
+
+The [borrow checker](https://doc.rust-lang.org/book/ch04-02-references-and-borrowing.html#the-rules-of-references) is your friend, but it takes practice. Use [AI](https://claude.ai/) to accelerate your learning:
+
+**Effective prompts:**
+- *"Explain this borrow checker error: [paste full error message]"*
+- *"Why can't I borrow this variable as mutable? [paste code]"*
+- *"How do I fix 'cannot borrow as mutable more than once'?"*
+- *"What's a [dangling reference](https://doc.rust-lang.org/book/ch04-02-references-and-borrowing.html#dangling-references) and how does Rust prevent them?"*
+
+**Best practice:** Read the [error message](https://doc.rust-lang.org/error_codes/error-index.html) first, understand the rule being violated, then ask AI for deeper insight or alternative solutions.
+
+::: {.notes}
+Teach the workflow: 1) Read compiler error carefully, 2) Try to understand the rule, 3) Use AI to explain WHY that rule exists, 4) Ask AI for the idiomatic fix. This builds understanding, not just copy-pasting.
+:::
+
+---
+
+## Preventing dangling references
+
+::: {.incremental}
+- A **[dangling reference](https://doc.rust-lang.org/book/ch04-02-references-and-borrowing.html#dangling-references)** is a pointer to memory that has been freed
+- This is a critical security vulnerability in [C](https://en.cppreference.com/w/c)/[C++](https://en.cppreference.com/w/) (use-after-free)
+- [Rust](https://www.rust-lang.org/) makes dangling references **impossible** at compile time
+:::
+
+```rust
+fn dangle() -> &String {  // ❌ Won't compile!
+    let s = String::from("hello");
+    &s  // ERROR: s will be dropped, but we're returning a reference to it
+} // s goes out of scope and is dropped, but the reference would point to freed memory
+```
+
+**The fix:** Return the owned value, not a reference:
+```rust
+fn no_dangle() -> String {  // ✅ Ownership transfers to caller
+    let s = String::from("hello");
+    s  // Move ownership out
+}
+```
+
+::: {.notes}
+Dangling pointers are CVE-level bugs in C/C++. They can be exploited for arbitrary code execution. Rust makes them impossible. This is a major security advantage.
+:::
+
+---
+
+## Introduction to lifetimes
+
+::: {.incremental}
+- **[Lifetimes](https://doc.rust-lang.org/book/ch10-03-lifetime-syntax.html)** are [Rust](https://www.rust-lang.org/)'s way of ensuring references are always valid
+- Every reference has a lifetime - the scope for which it's valid
+- Usually, the compiler can **infer** lifetimes automatically
+- Sometimes you need to annotate them explicitly with `'a`, `'b`, etc.
+- Lifetimes prevent [dangling references](https://doc.rust-lang.org/book/ch04-02-references-and-borrowing.html#dangling-references) at compile time
+:::
+
+::: {.notes}
+Lifetimes are often the hardest concept for new Rustaceans. Emphasize that the compiler usually handles this automatically. When you do need to annotate, it's because you have multiple references and the compiler needs clarity.
+:::
+
+---
+
+## Why lifetimes exist: a problematic example
+
+```rust
+fn longest(x: &str, y: &str) -> &str {  // ❌ Won't compile!
+    if x.len() > y.len() {
+        x
+    } else {
+        y
+    }
+}
+```
+
+**The error:**
+```
+error[E0106]: missing lifetime specifier
+  --> src/main.rs:1:33
+   |
+1  | fn longest(x: &str, y: &str) -> &str {
+   |               ----     ----     ^ expected named lifetime parameter
+```
+
+::: {.incremental}
+- The compiler doesn't know if the returned reference comes from `x` or `y`
+- It can't verify the returned reference will be valid
+- We need to tell the compiler about the relationship between input and output lifetimes
+:::
+
+::: {.notes}
+This is THE classic lifetime example. Don't skip this. The error message is excellent - read it aloud. Explain that the compiler is asking "how long is this returned reference valid?"
+:::
+
+---
+
+## Lifetime annotations: the solution
+
+```rust
+fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
+    if x.len() > y.len() {
+        x
+    } else {
+        y
+    }
+}
+```
+
+::: {.incremental}
+- `'a` is a **[lifetime parameter](https://doc.rust-lang.org/book/ch10-03-lifetime-syntax.html)**
+- It says: "the returned reference will live as long as the shortest-lived input"
+- If `x` lives longer than `y`, the return value's lifetime is tied to `y` (the shorter one)
+- The [borrow checker](https://doc.rust-lang.org/book/ch04-02-references-and-borrowing.html#the-rules-of-references) uses this to ensure safety
+:::
+
+[Try it in Rust Playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=fn+longest%3C%27a%3E%28x%3A+%26%27a+str%2C+y%3A+%26%27a+str%29+-%3E+%26%27a+str+%7B%0A++++if+x.len%28%29+%3E+y.len%28%29+%7B%0A++++++++x%0A++++%7D+else+%7B%0A++++++++y%0A++++%7D%0A%7D%0A%0Afn+main%28%29+%7B%0A++++let+s1+%3D+String%3A%3Afrom%28%22long+string%22%29%3B%0A++++let+s2+%3D+String%3A%3Afrom%28%22short%22%29%3B%0A++++let+result+%3D+longest%28%26s1%2C+%26s2%29%3B%0A++++println%21%28%22Longest%3A+%7B%7D%22%2C+result%29%3B%0A%7D)
+
+::: {.notes}
+Lifetimes are descriptive, not prescriptive. We're not changing how long things live - we're describing the relationships so the compiler can verify safety. The `'a` syntax is intimidating but it's just a label.
+:::
+
+---
+
+## When you need lifetime annotations
+
+::: {.incremental}
+You typically need [lifetime annotations](https://doc.rust-lang.org/book/ch10-03-lifetime-syntax.html) when:
+
+1. **Function returns a reference** that came from one of multiple input references
+2. **Structs contain references** (struct must not outlive the referenced data)
+3. **Multiple references with complex relationships** where the compiler can't infer
+
+**Good news:** In most code, lifetimes are inferred automatically thanks to [lifetime elision rules](https://doc.rust-lang.org/book/ch10-03-lifetime-syntax.html#lifetime-elision)
+:::
+
+::: {.notes}
+Emphasize that most Rust code doesn't need explicit lifetime annotations. The compiler is very smart. When you do need them, the error messages will guide you. Don't let lifetimes intimidate students - they're rarer than they think.
+:::
+
+---
+
+## 🤖 AI co-pilot technique: understanding lifetimes
+
+[Lifetimes](https://doc.rust-lang.org/book/ch10-03-lifetime-syntax.html) can be confusing. Use [AI](https://claude.ai/) to build intuition:
+
+**Effective prompts:**
+- *"Explain Rust lifetimes like I'm coming from Python"*
+- *"Why does this code need a lifetime annotation? [paste code]"*
+- *"What does 'a mean in this function signature? [paste signature]"*
+- *"How do I fix 'lifetime may not live long enough'?"*
+- *"When can I omit lifetime annotations in Rust?"*
+
+**Pro tip:** Use [Rust Playground](https://play.rust-lang.org/) to experiment. Change code, see errors, ask AI to explain the errors.
+
+::: {.notes}
+Lifetimes are abstract. AI can provide multiple explanations and analogies until one clicks. Encourage iterative learning: try → error → AI explanation → try again. Playground is perfect for this.
+:::
+
+---
+
+## Lifetimes in structs
+
+```rust
+struct Excerpt<'a> {
+    text: &'a str,  // This reference must be valid as long as the Excerpt exists
+}
+
+fn main() {
+    let novel = String::from("Call me Ishmael. Some years ago...");
+    let first_sentence = novel.split('.').next().unwrap();
+    let excerpt = Excerpt { text: first_sentence };
+    println!("{}", excerpt.text);
+} // excerpt and novel both go out of scope here (OK: excerpt doesn't outlive novel)
+```
+
+::: {.incremental}
+- When a [struct](https://doc.rust-lang.org/book/ch05-00-structs.html) contains a reference, we must annotate the [lifetime](https://doc.rust-lang.org/book/ch10-03-lifetime-syntax.html)
+- `'a` says: "this struct can't live longer than the data it references"
+- The [borrow checker](https://doc.rust-lang.org/book/ch04-02-references-and-borrowing.html#the-rules-of-references) enforces that `novel` outlives `excerpt`
+:::
+
+[Try it in Rust Playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=struct+Excerpt%3C%27a%3E+%7B%0A++++text%3A+%26%27a+str%2C%0A%7D%0A%0Afn+main%28%29+%7B%0A++++let+novel+%3D+String%3A%3Afrom%28%22Call+me+Ishmael.+Some+years+ago...%22%29%3B%0A++++let+first_sentence+%3D+novel.split%28%27.%27%29.next%28%29.unwrap%28%29%3B%0A++++let+excerpt+%3D+Excerpt+%7B+text%3A+first_sentence+%7D%3B%0A++++println%21%28%22%7B%7D%22%2C+excerpt.text%29%3B%0A%7D)
+
+::: {.notes}
+Structs with references are less common than owned data. But when you need them, lifetimes are essential. This prevents the struct from outliving the data it points to.
+:::
+
+---
+
+## The big picture: why ownership matters
+
+::: {.incremental}
+**What ownership gives you:**
+- **Memory safety** without garbage collection
+- **No data races** (guaranteed at compile time)
+- **Predictable performance** (no GC pauses)
+- **Zero-cost abstractions** (compile-time checks, zero runtime overhead)
+
+**The trade-off:**
+- **Steeper learning curve** (you're learning now!)
+- **Fight the borrow checker** (initially - then you'll think differently)
+- **More upfront thinking** about data ownership
+
+**Career insight:** Once you understand ownership, you'll write better code in *every* language. You'll think about memory and references more carefully even in [Python](https://www.python.org/) or [JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript).
+:::
+
+::: {.notes}
+This is the payoff slide. Emphasize that fighting the borrow checker is temporary. Once you internalize these concepts, you'll write better code everywhere. This is transferable knowledge.
+:::
+
+---
+
+## Real-world performance wins
+
+::: {.incremental}
+**Examples of [Rust](https://www.rust-lang.org/)'s ownership system delivering real results:**
+
+- **[Discord](https://discord.com/blog/why-discord-is-switching-from-go-to-rust)**: Switched from [Go](https://go.dev/) to Rust, reduced latency spikes from seconds to milliseconds (10x improvement)
+- **[Dropbox](https://dropbox.tech/infrastructure/rewriting-the-heart-of-our-sync-engine)**: Rewrote sync engine in Rust, reduced memory usage by 2x, improved performance
+- **[npm](https://www.rust-lang.org/static/pdfs/Rust-npm-Whitepaper.pdf)**: Rewrote CPU-heavy services in Rust, 10x performance improvement
+- **[Microsoft](https://msrc.microsoft.com/blog/2019/07/a-proactive-approach-to-more-secure-code/)**: Using Rust in Windows to prevent 70% of security vulnerabilities
+
+**The common thread:** No garbage collector + memory safety = high performance + security
+:::
+
+::: {.notes}
+These are real stories, not marketing. Discord's blog post is excellent - show it to students. npm's case study shows 10x improvements. Microsoft's 70% figure is from their security team. This is industry validation.
+:::
+
+---
+
+## Try it yourself: borrow checker challenges
+
+**Challenge 1:** Fix the ownership error
+[Rust Playground Link](https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=fn+main%28%29+%7B%0A++++let+s1+%3D+String%3A%3Afrom%28%22hello%22%29%3B%0A++++let+s2+%3D+s1%3B%0A++++println%21%28%22%7B%7D%22%2C+s1%29%3B+%2F%2F+Fix+this+error%0A%7D)
+
+**Challenge 2:** Fix the borrowing error
+[Rust Playground Link](https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=fn+main%28%29+%7B%0A++++let+mut+s+%3D+String%3A%3Afrom%28%22hello%22%29%3B%0A++++let+r1+%3D+%26s%3B%0A++++let+r2+%3D+%26mut+s%3B%0A++++println%21%28%22%7B%7D%2C+%7B%7D%22%2C+r1%2C+r2%29%3B%0A%7D)
+
+**Challenge 3:** Fix the dangling reference
+[Rust Playground Link](https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=fn+dangle%28%29+-%3E+%26String+%7B%0A++++let+s+%3D+String%3A%3Afrom%28%22hello%22%29%3B%0A++++%26s%0A%7D%0A%0Afn+main%28%29+%7B%0A++++let+r+%3D+dangle%28%29%3B%0A%7D)
+
+::: {.notes}
+Give students 5-10 minutes to work through these. Walk around and help. Encourage them to read the error messages carefully. These are the three most common borrow checker errors.
+:::
+
+---
+
+## Introducing Lab 10: ownership and borrowing mastery
+
+::: {.incremental}
+**This week's lab has two parts:**
+
+1. **The Borrow Checker Game**
+   - Fix 5-7 progressively challenging ownership and borrowing errors
+   - Learn to interpret [compiler error messages](https://doc.rust-lang.org/error_codes/error-index.html)
+   - Practice the fix-compile-test cycle
+
+2. **Hands-on Ownership Exercises**
+   - Implement functions demonstrating ownership concepts
+   - Work with references and borrowing patterns
+   - Test your understanding with [`cargo test`](https://doc.rust-lang.org/cargo/commands/cargo-test.html)
+
+**Full instructions:** `week10/lab10.md`
+:::
+
+::: {.notes}
+Lab 10 is all about practice with the borrow checker. Part 1 is diagnostic - can you read errors and fix them? Part 2 is constructive - can you write correct code from scratch? Both essential skills.
+:::
+
+---
+
+## Resources for going deeper
+
+::: {.incremental}
+**Official [Rust](https://www.rust-lang.org/) resources:**
+- [The Rust Programming Language book - Chapter 4 (Ownership)](https://doc.rust-lang.org/book/ch04-00-understanding-ownership.html)
+- [The Rust Programming Language book - Chapter 10 (Lifetimes)](https://doc.rust-lang.org/book/ch10-03-lifetime-syntax.html)
+- [Rust by Example - Ownership](https://doc.rust-lang.org/rust-by-example/scope.html)
+- [The Rustonomicon - Advanced ownership](https://doc.rust-lang.org/nomicon/)
+
+**Interactive learning:**
+- [Rust Playground](https://play.rust-lang.org/) - experiment in your browser
+- [Rustlings](https://github.com/rust-lang/rustlings) - small exercises to get you used to reading and writing Rust code
+
+**Community:**
+- [r/rust](https://www.reddit.com/r/rust/) - Rust subreddit
+- [The Rust Programming Language Discord](https://discord.gg/rust-lang)
+:::
+
+::: {.notes}
+The Rust book Chapter 4 is essential reading. Rustlings is excellent for practice. The community is friendly and helpful - encourage students to engage. The Rustonomicon is advanced - mention it but don't overwhelm students yet.
+:::
+
+---
+
+## Looking ahead: next week
+
+::: {.incremental}
+**Week 11 preview: structs, enums, and pattern matching**
+- Creating custom data types with [`struct`](https://doc.rust-lang.org/book/ch05-00-structs.html)
+- Rust's powerful [`enum`](https://doc.rust-lang.org/book/ch06-00-enums.html) type
+- Pattern matching with [`match`](https://doc.rust-lang.org/book/ch06-02-match.html)
+- [AI-assisted](https://claude.ai/) data modeling strategies
+
+**For now:** Focus on mastering [ownership](https://doc.rust-lang.org/book/ch04-00-understanding-ownership.html) and [borrowing](https://doc.rust-lang.org/book/ch04-02-references-and-borrowing.html). These concepts underpin everything else in Rust!
+:::
+
+::: {.notes}
+Next week builds on this foundation. Everything in Rust flows from ownership. Structs and enums are easier once ownership is clear. Encourage students to struggle with the borrow checker this week - it's normal and valuable.
+:::
+
+---
+
+## Questions?
+
+**Remember:**
+- The [borrow checker](https://doc.rust-lang.org/book/ch04-02-references-and-borrowing.html#the-rules-of-references) is your friend (even when it feels like your enemy)
+- [Compiler error messages](https://doc.rust-lang.org/error_codes/error-index.html) are incredibly helpful - read them carefully
+- Use [AI assistants](https://claude.ai/) to deepen understanding, not to skip learning
+- Fighting with Rust now makes you a better programmer forever
+
+**Office hours:** Available on [Microsoft Teams](https://www.microsoft.com/en-us/microsoft-teams/group-chat-software) - reach out anytime!
+
+::: {.notes}
+End on an encouraging note. Ownership is hard but worth it. Normalize the struggle. Remind them you're available for help. This is the most important concept in the entire Rust portion of the course.
+:::

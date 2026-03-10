@@ -1,0 +1,19 @@
+---
+title: "Week 10: Soul of Rust"
+---
+
+## Introduction
+
+This week you'll master Rust's revolutionary memory safety system that makes it unique among programming languages. Ownership and borrowing are what make Rust special—they eliminate entire categories of bugs (use-after-free, double-free, data races) at compile time, with zero runtime cost. You'll develop the muscle memory to work with the borrow checker instead of fighting it, understanding how to manage memory safely without a garbage collector.
+
+## Recommended readings
+
+- [Chapter 4: Understanding ownership](https://doc.rust-lang.org/book/ch04-00-understanding-ownership.html) - Ownership, references, and borrowing
+
+## Lectures
+
+- [**Slides: The soul of Rust**](../slides/IS4010_W10_The_Soul_of_Rust.qmd)
+
+## Lab assignment
+
+- [Lab 10: Soul of Rust](https://github.com/bgreenwell/is4010-rust/blob/main/week10/lab10.md)

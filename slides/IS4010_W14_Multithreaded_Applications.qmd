@@ -1,0 +1,1170 @@
+---
+title: "IS4010: AI-Enhanced Application Development"
+subtitle: "Week 14: Multithreaded Applications"
+author: "Brandon M. Greenwell"
+format:
+  revealjs:
+    theme: dracula
+    transition: fade
+    slide-number: true
+    chalkboard: true
+    preview-links: auto
+    footer: "IS4010: App Development with AI"
+    scrollable: true
+    css: custom.css
+---
+
+## Week 14 Overview {.inverse}
+
+**Session 1: Threading Fundamentals**
+
+- Why concurrency matters
+- Spawning and joining threads
+- Thread safety in Rust
+- Data races and the borrow checker
+- Move semantics with threads
+- Measuring performance gains
+
+**Session 2: Thread Communication and Coordination**
+
+- Message passing with channels
+- Shared state with `Arc<Mutex<T>>`
+- Comparing message passing vs shared state
+- Building a thread pool
+- Graceful shutdown patterns
+- Testing concurrent code
+
+::: {.notes}
+This is your final Rust project week. You'll build a multithreaded file processor that demonstrates fearless concurrency.
+:::
+
+---
+
+## Why Concurrency Matters {.inverse}
+
+**Modern hardware reality:**
+
+- Most computers have multiple CPU cores (4, 8, 16+)
+- Single-threaded programs use only one core
+- Concurrent programs utilize all available cores
+
+**Real-world performance impact:**
+
+```
+Single-threaded: 10 seconds to process 1000 files
+Multi-threaded (8 cores): 1.5 seconds (6.7x faster!)
+```
+
+**Where concurrency is essential:**
+
+- Web servers handling multiple requests
+- Data processing pipelines
+- Real-time systems
+- Game engines
+- Database systems
+
+::: {.notes}
+Without concurrency, you're leaving performance on the table. Rust makes it safe!
+:::
+
+---
+
+## The Concurrency Challenge {.smaller}
+
+**Most languages make concurrency scary:**
+
+```rust
+// In many languages, this causes race conditions:
+let mut counter = 0;
+
+// Thread 1
+counter = counter + 1;  // Read, increment, write
+
+// Thread 2 (at same time!)
+counter = counter + 1;  // Read, increment, write
+
+// Expected: counter = 2
+// Actual: Could be 1! (race condition)
+```
+
+**Why data races are terrible:**
+
+- Hard to reproduce (timing-dependent)
+- Hard to debug (non-deterministic)
+- Can cause crashes, data corruption, security bugs
+- Often only appear in production under load
+
+**Rust's solution**: Make data races impossible at compile time!
+
+::: {.notes}
+This is Rust's killer feature - fearless concurrency. The borrow checker prevents data races.
+:::
+
+---
+
+## Rust's Fearless Concurrency {.inverse}
+
+**The ownership system prevents data races:**
+
+```rust
+let mut data = vec![1, 2, 3];
+
+// ❌ This won't compile!
+thread::spawn(|| {
+    data.push(4);  // ERROR: can't borrow `data` as mutable
+});
+
+println!("{:?}", data);  // data still borrowed here
+```
+
+**Compiler error saves you:**
+
+```
+error[E0373]: closure may outlive the current function
+```
+
+**Key insight**: If code compiles, it's thread-safe!
+
+**No need for:**
+
+- Mutexes everywhere (only when actually needed)
+- Defensive coding against races
+- Debugging race conditions at runtime
+
+::: {.notes}
+This compile-time guarantee is why Rust is used for critical systems like Firefox and Cloudflare.
+:::
+
+---
+
+# Session 1: Threading Fundamentals
+
+## Spawning Threads {.smaller}
+
+**Create a new thread with `thread::spawn`:**
+
+```rust
+use std::thread;
+use std::time::Duration;
+
+fn main() {
+    // Spawn a new thread
+    let handle = thread::spawn(|| {
+        for i in 1..10 {
+            println!("Thread: count {}", i);
+            thread::sleep(Duration::from_millis(100));
+        }
+    });
+
+    // Main thread continues
+    for i in 1..5 {
+        println!("Main: count {}", i);
+        thread::sleep(Duration::from_millis(100));
+    }
+
+    // Wait for spawned thread to finish
+    handle.join().unwrap();
+}
+```
+
+**Output** (interleaved):
+
+```
+Main: count 1
+Thread: count 1
+Main: count 2
+Thread: count 2
+...
+```
+
+[📖 std::thread documentation](https://doc.rust-lang.org/std/thread/)
+
+::: {.notes}
+Threads execute concurrently - their outputs interleave based on OS scheduling.
+:::
+
+---
+
+## Join Handles: Waiting for Completion {.smaller}
+
+**`join()` blocks until thread completes:**
+
+```rust
+use std::thread;
+
+fn main() {
+    let handle = thread::spawn(|| {
+        // Do expensive work
+        let mut sum = 0;
+        for i in 1..=1000000 {
+            sum += i;
+        }
+        sum  // Return value from thread
+    });
+
+    println!("Thread spawned, doing other work...");
+
+    // Wait for result
+    let result = handle.join().unwrap();
+    println!("Thread result: {}", result);
+}
+```
+
+**Return type**: `thread::spawn` returns `JoinHandle<T>` where `T` is the closure's return type.
+
+**Important**: If you don't call `join()`, the thread may be killed when `main()` exits!
+
+::: {.notes}
+Always join threads you care about. Dropped handles may not complete execution.
+:::
+
+---
+
+## Move Semantics with Threads {.smaller}
+
+**Threads need ownership of captured variables:**
+
+```rust
+use std::thread;
+
+fn main() {
+    let data = vec![1, 2, 3];
+
+    // ❌ ERROR: closure may outlive `data`
+    let handle = thread::spawn(|| {
+        println!("{:?}", data);
+    });
+
+    // ✅ CORRECT: use `move` to transfer ownership
+    let handle = thread::spawn(move || {
+        println!("{:?}", data);  // Thread now owns `data`
+    });
+
+    // data is no longer available here (moved into thread)
+    handle.join().unwrap();
+}
+```
+
+**Why `move` is required:**
+
+- Thread might outlive current scope
+- Compiler ensures no dangling references
+- Thread gets its own copy of the data
+
+::: {.notes}
+The `move` keyword is crucial - it's how you tell Rust "this thread owns this data now."
+:::
+
+---
+
+## Parallel Computation Example {.smaller}
+
+**Compute sum using multiple threads:**
+
+```rust
+use std::thread;
+
+fn main() {
+    let data = vec![1, 2, 3, 4, 5, 6, 7, 8];
+    let chunk_size = data.len() / 4;
+
+    // Split data into chunks for each thread
+    let mut handles = vec![];
+
+    for chunk_idx in 0..4 {
+        let start = chunk_idx * chunk_size;
+        let end = start + chunk_size;
+        let chunk: Vec<i32> = data[start..end].to_vec();
+
+        let handle = thread::spawn(move || {
+            chunk.iter().sum::<i32>()  // Sum this chunk
+        });
+        handles.push(handle);
+    }
+
+    // Collect results from all threads
+    let total: i32 = handles
+        .into_iter()
+        .map(|h| h.join().unwrap())
+        .sum();
+
+    println!("Total: {}", total);  // 36
+}
+```
+
+::: {.notes}
+This pattern - divide work, process in parallel, combine results - is fundamental to concurrent programming.
+:::
+
+---
+
+## Try It Yourself: Parallel Search {.inverse .smaller}
+
+**Challenge**: Search for a value in parallel
+
+```rust
+use std::thread;
+
+fn parallel_search(data: Vec<i32>, target: i32, num_threads: usize) -> bool {
+    // TODO:
+    // 1. Split data into chunks
+    // 2. Spawn threads to search each chunk
+    // 3. Return true if any thread finds target
+
+    // Hint: Use handles and check results with .any()
+}
+
+// Test:
+let data = (1..=100).collect();
+assert!(parallel_search(data, 42, 4));
+assert!(!parallel_search(vec![1, 2, 3], 10, 2));
+```
+
+**Try on [Rust Playground](https://play.rust-lang.org/)**
+
+::: {.notes}
+Give students 5-7 minutes. This reinforces thread spawning, joining, and returning values.
+:::
+
+---
+
+## Thread Performance Considerations {.smaller}
+
+**Threading isn't always faster:**
+
+```rust
+// Small task - overhead dominates
+let sum: i32 = (1..=100)
+    .sum();  // Single-threaded is faster!
+
+// Large task - parallelism wins
+let sum: i32 = (1..=10_000_000)
+    .chunks(1000)
+    .map(|chunk| chunk.sum())
+    .sum();  // Multi-threaded is faster!
+```
+
+**Costs of threading:**
+
+- **Thread creation**: Allocating stack, OS resources (~100μs)
+- **Context switching**: OS switching between threads (overhead)
+- **Cache effects**: Threads may evict each other's data from CPU cache
+
+**When to use threads:**
+
+✅ Long-running tasks (> 1ms)
+✅ I/O-bound operations (network, disk)
+✅ Independent computations
+❌ Tiny tasks (< 100μs)
+❌ Highly interdependent work
+
+::: {.notes}
+Measure! Use `std::time::Instant` to benchmark single vs multi-threaded versions.
+:::
+
+---
+
+## Measuring Concurrency Gains {.smaller}
+
+**Benchmark single vs multi-threaded:**
+
+```rust
+use std::time::Instant;
+
+fn process_single_threaded(data: &[i32]) -> i32 {
+    data.iter().map(|&x| expensive_computation(x)).sum()
+}
+
+fn process_multi_threaded(data: &[i32], num_threads: usize) -> i32 {
+    // Split and process in parallel (previous example pattern)
+}
+
+fn main() {
+    let data: Vec<i32> = (0..100_000).collect();
+
+    // Single-threaded
+    let start = Instant::now();
+    let result1 = process_single_threaded(&data);
+    let duration1 = start.elapsed();
+
+    // Multi-threaded
+    let start = Instant::now();
+    let result2 = process_multi_threaded(&data, 8);
+    let duration2 = start.elapsed();
+
+    println!("Single: {:?}, Multi: {:?}", duration1, duration2);
+    println!("Speedup: {:.2}x", duration1.as_secs_f64() / duration2.as_secs_f64());
+}
+```
+
+::: {.notes}
+Always measure! Theoretical speedup vs actual speedup can differ due to overhead.
+:::
+
+---
+
+## Session 1 Ends Here {.inverse}
+
+**What we covered:**
+
+✅ Why concurrency matters (utilizing all cores)
+✅ Spawning threads with `thread::spawn`
+✅ Joining threads with `JoinHandle`
+✅ Move semantics for thread ownership
+✅ Parallel computation patterns
+✅ Performance considerations and measurement
+
+**Next session:** Thread communication with channels and shared state!
+
+::: {.notes}
+Take a break. Next session covers how threads coordinate and share data safely.
+:::
+
+---
+
+# Session 2: Thread Communication
+
+## Two Approaches to Coordination {.inverse}
+
+**Message Passing (Channels):**
+
+- Threads send data through channels
+- No shared memory
+- Ownership transferred with messages
+- Easier to reason about
+
+**Shared State (Arc + Mutex):**
+
+- Multiple threads access same data
+- Protected by mutual exclusion lock
+- More familiar from other languages
+- Sometimes necessary for performance
+
+**Rust supports both!** Use whichever fits your problem.
+
+::: {.notes}
+Message passing is Rust's preferred approach, but shared state is available when needed.
+:::
+
+---
+
+## Message Passing with Channels {.smaller}
+
+**Channels enable thread communication:**
+
+```rust
+use std::sync::mpsc;  // Multi-Producer, Single-Consumer
+use std::thread;
+
+fn main() {
+    // Create channel
+    let (tx, rx) = mpsc::channel();
+
+    // Spawn thread that sends messages
+    thread::spawn(move || {
+        tx.send("Hello from thread!").unwrap();
+        tx.send("Another message").unwrap();
+    });
+
+    // Receive messages in main thread
+    let msg1 = rx.recv().unwrap();
+    let msg2 = rx.recv().unwrap();
+
+    println!("{}", msg1);
+    println!("{}", msg2);
+}
+```
+
+**Key concepts:**
+
+- `tx` (transmitter) sends messages
+- `rx` (receiver) receives messages
+- Ownership of message transfers through channel
+
+[📖 mpsc channel documentation](https://doc.rust-lang.org/std/sync/mpsc/index.html)
+
+::: {.notes}
+mpsc = Multi-Producer, Single-Consumer. Multiple threads can send, one receives.
+:::
+
+---
+
+## Channel Semantics {.smaller}
+
+**Blocking receive:**
+
+```rust
+let msg = rx.recv().unwrap();  // Blocks until message available
+```
+
+**Non-blocking receive:**
+
+```rust
+match rx.try_recv() {
+    Ok(msg) => println!("Got: {}", msg),
+    Err(_) => println!("No message yet"),
+}
+```
+
+**Iterating over messages:**
+
+```rust
+for msg in rx {
+    println!("Received: {}", msg);
+    // Loop ends when all senders drop
+}
+```
+
+**Multiple senders:**
+
+```rust
+let (tx, rx) = mpsc::channel();
+let tx2 = tx.clone();  // Clone transmitter
+
+thread::spawn(move || tx.send(1).unwrap());
+thread::spawn(move || tx2.send(2).unwrap());
+```
+
+::: {.notes}
+Channels close automatically when all senders are dropped. The receiver loop terminates.
+:::
+
+---
+
+## Practical Example: Task Queue {.smaller}
+
+**Worker threads processing tasks from queue:**
+
+```rust
+use std::sync::mpsc;
+use std::thread;
+
+enum Task {
+    Process(i32),
+    Shutdown,
+}
+
+fn main() {
+    let (tx, rx) = mpsc::channel();
+
+    // Spawn worker thread
+    let worker = thread::spawn(move || {
+        for task in rx {
+            match task {
+                Task::Process(n) => {
+                    println!("Processing: {}", n);
+                    thread::sleep(std::time::Duration::from_millis(100));
+                }
+                Task::Shutdown => {
+                    println!("Shutting down");
+                    break;
+                }
+            }
+        }
+    });
+
+    // Send tasks
+    for i in 1..=5 {
+        tx.send(Task::Process(i)).unwrap();
+    }
+    tx.send(Task::Shutdown).unwrap();
+
+    worker.join().unwrap();
+}
+```
+
+::: {.notes}
+This pattern - task queue + worker threads - is the foundation of thread pools.
+:::
+
+---
+
+## Shared State with Arc and Mutex {.smaller}
+
+**`Arc<Mutex<T>>` enables shared mutable state:**
+
+```rust
+use std::sync::{Arc, Mutex};
+use std::thread;
+
+fn main() {
+    // Arc = Atomic Reference Counting (thread-safe Rc)
+    // Mutex = Mutual Exclusion lock
+    let counter = Arc::new(Mutex::new(0));
+    let mut handles = vec![];
+
+    for _ in 0..10 {
+        let counter_clone = Arc::clone(&counter);
+        let handle = thread::spawn(move || {
+            let mut num = counter_clone.lock().unwrap();
+            *num += 1;
+        });
+        handles.push(handle);
+    }
+
+    for handle in handles {
+        handle.join().unwrap();
+    }
+
+    println!("Result: {}", *counter.lock().unwrap());  // 10
+}
+```
+
+**Key concepts:**
+
+- `Arc`: Multiple owners (thread-safe reference counting)
+- `Mutex`: One thread at a time can access data
+- `.lock()`: Acquire lock (blocks if held by another thread)
+
+[📖 Arc documentation](https://doc.rust-lang.org/std/sync/struct.Arc.html) | [📖 Mutex documentation](https://doc.rust-lang.org/std/sync/struct.Mutex.html)
+
+::: {.notes}
+Arc + Mutex is the thread-safe version of Rc<RefCell<T>> from last week.
+:::
+
+---
+
+## Arc vs Rc, Mutex vs RefCell {.smaller}
+
+**Single-threaded (last week):**
+
+```rust
+use std::rc::Rc;
+use std::cell::RefCell;
+
+let data = Rc::new(RefCell::new(5));
+```
+
+**Multi-threaded (this week):**
+
+```rust
+use std::sync::{Arc, Mutex};
+
+let data = Arc::new(Mutex::new(5));
+```
+
+**Comparison:**
+
+| Type | Thread-Safe? | Purpose |
+|------|--------------|---------|
+| `Rc<T>` | ❌ No | Reference counting (single-thread) |
+| `Arc<T>` | ✅ Yes | **Atomic** reference counting |
+| `RefCell<T>` | ❌ No | Runtime borrow checking |
+| `Mutex<T>` | ✅ Yes | **Mutual exclusion** lock |
+
+**Performance cost:**
+
+- `Arc`: Slightly slower than `Rc` (atomic operations)
+- `Mutex`: Lock acquisition overhead
+
+::: {.notes}
+Arc and Mutex are heavier but necessary for thread safety. Use Rc/RefCell when single-threaded.
+:::
+
+---
+
+## Mutex Best Practices {.smaller}
+
+**Lock scope management:**
+
+```rust
+// ❌ BAD: Lock held too long
+let data = Arc::new(Mutex::new(vec![1, 2, 3]));
+let mut guard = data.lock().unwrap();
+guard.push(4);
+expensive_computation();  // Lock still held!
+guard.push(5);
+
+// ✅ GOOD: Minimize lock scope
+{
+    let mut guard = data.lock().unwrap();
+    guard.push(4);
+}  // Lock released here
+expensive_computation();  // No lock held
+{
+    let mut guard = data.lock().unwrap();
+    guard.push(5);
+}
+```
+
+**Avoiding deadlocks:**
+
+```rust
+// ❌ DEADLOCK: Circular dependency
+let lock1 = Arc::new(Mutex::new(1));
+let lock2 = Arc::new(Mutex::new(2));
+
+// Thread 1: lock1 then lock2
+// Thread 2: lock2 then lock1
+// → DEADLOCK!
+
+// ✅ SOLUTION: Always acquire locks in same order
+```
+
+::: {.notes}
+Keep critical sections (locked code) as short as possible. Deadlocks are subtle!
+:::
+
+---
+
+## Message Passing vs Shared State {.smaller}
+
+**When to use channels (message passing):**
+
+✅ Producer-consumer patterns
+✅ Task distribution (work queue)
+✅ Pipeline architectures
+✅ When ownership transfer makes sense
+✅ Simpler reasoning about data flow
+
+**When to use Arc<Mutex<T>> (shared state):**
+
+✅ Multiple threads reading/writing same data
+✅ Performance-critical (no message copy overhead)
+✅ When channels feel awkward
+✅ Familiar from other languages
+
+**Hybrid approach:**
+
+Use both! Channels for coordination, shared state for critical data.
+
+**Rust philosophy**: Prefer message passing when possible.
+
+> "Do not communicate by sharing memory; instead, share memory by communicating."
+> — Go proverb (applies to Rust too!)
+
+::: {.notes}
+Channels are often easier to reason about. Shared state is powerful but requires care.
+:::
+
+---
+
+## Try It Yourself: Parallel Counter {.inverse .smaller}
+
+**Challenge**: Implement a thread-safe counter
+
+```rust
+use std::sync::{Arc, Mutex};
+use std::thread;
+
+fn parallel_increment(num_threads: usize, increments_per_thread: usize) -> i32 {
+    // TODO:
+    // 1. Create Arc<Mutex<i32>> counter starting at 0
+    // 2. Spawn num_threads threads
+    // 3. Each thread increments counter increments_per_thread times
+    // 4. Return final value
+
+    // Expected: num_threads * increments_per_thread
+}
+
+// Test:
+assert_eq!(parallel_increment(10, 1000), 10_000);
+```
+
+**Try on [Rust Playground](https://play.rust-lang.org/)**
+
+::: {.notes}
+This combines Arc cloning, Mutex locking, and thread spawning. Give 5-7 minutes.
+:::
+
+---
+
+## Building a Thread Pool {.smaller}
+
+**Reusing threads is more efficient than spawning for every task:**
+
+```rust
+use std::sync::{mpsc, Arc, Mutex};
+use std::thread;
+
+struct ThreadPool {
+    workers: Vec<Worker>,
+    sender: mpsc::Sender<Job>,
+}
+
+type Job = Box<dyn FnOnce() + Send + 'static>;
+
+struct Worker {
+    id: usize,
+    thread: thread::JoinHandle<()>,
+}
+
+impl ThreadPool {
+    fn new(size: usize) -> ThreadPool {
+        let (sender, receiver) = mpsc::channel();
+        let receiver = Arc::new(Mutex::new(receiver));
+
+        let mut workers = Vec::with_capacity(size);
+        for id in 0..size {
+            workers.push(Worker::new(id, Arc::clone(&receiver)));
+        }
+
+        ThreadPool { workers, sender }
+    }
+
+    fn execute<F>(&self, f: F)
+    where
+        F: FnOnce() + Send + 'static,
+    {
+        self.sender.send(Box::new(f)).unwrap();
+    }
+}
+```
+
+::: {.notes}
+This is the pattern used by web servers, databases, and task queues. Workers pull from shared queue.
+:::
+
+---
+
+## Graceful Shutdown {.smaller}
+
+**Signaling threads to stop:**
+
+**Approach 1: Shutdown message:**
+
+```rust
+enum Message {
+    NewJob(Job),
+    Terminate,
+}
+
+// Send terminate to all workers
+for _ in &workers {
+    sender.send(Message::Terminate).unwrap();
+}
+
+// Wait for workers to finish
+for worker in workers {
+    worker.thread.join().unwrap();
+}
+```
+
+**Approach 2: Drop channel:**
+
+```rust
+// When sender is dropped, channel closes
+drop(sender);
+
+// Workers' recv() returns Err, they exit loop
+for worker in workers {
+    worker.thread.join().unwrap();
+}
+```
+
+::: {.notes}
+Graceful shutdown ensures all in-flight work completes before termination.
+:::
+
+---
+
+## Real-World Pattern: Parallel File Search {.smaller}
+
+**Combining threads, channels, and shared state:**
+
+```rust
+use std::sync::{mpsc, Arc, Mutex};
+use std::thread;
+use std::fs;
+
+struct SearchResult {
+    file: String,
+    line_num: usize,
+    content: String,
+}
+
+fn parallel_grep(pattern: &str, files: Vec<String>, num_workers: usize) -> Vec<SearchResult> {
+    let (task_tx, task_rx) = mpsc::channel();
+    let (result_tx, result_rx) = mpsc::channel();
+    let task_rx = Arc::new(Mutex::new(task_rx));
+
+    // Spawn workers
+    for _ in 0..num_workers {
+        let task_rx = Arc::clone(&task_rx);
+        let result_tx = result_tx.clone();
+        let pattern = pattern.to_string();
+
+        thread::spawn(move || {
+            while let Ok(file) = task_rx.lock().unwrap().recv() {
+                if let Ok(contents) = fs::read_to_string(&file) {
+                    for (i, line) in contents.lines().enumerate() {
+                        if line.contains(&pattern) {
+                            result_tx.send(SearchResult {
+                                file: file.clone(),
+                                line_num: i + 1,
+                                content: line.to_string(),
+                            }).unwrap();
+                        }
+                    }
+                }
+            }
+        });
+    }
+
+    // Send tasks
+    for file in files {
+        task_tx.send(file).unwrap();
+    }
+    drop(task_tx);  // Close channel
+    drop(result_tx);  // Close results channel after workers
+
+    // Collect results
+    result_rx.iter().collect()
+}
+```
+
+::: {.notes}
+This is Lab 14's core pattern! Task channel feeds workers, result channel collects findings.
+:::
+
+---
+
+## Testing Concurrent Code {.smaller}
+
+**Challenge**: Concurrency bugs are non-deterministic!
+
+**Strategies:**
+
+**1. Test for correctness:**
+
+```rust
+#[test]
+fn test_concurrent_increment() {
+    let result = parallel_increment(10, 100);
+    assert_eq!(result, 1000);  // Must always be correct
+}
+```
+
+**2. Stress testing:**
+
+```rust
+#[test]
+fn test_many_threads() {
+    for _ in 0..100 {  // Run many times
+        let result = parallel_increment(100, 100);
+        assert_eq!(result, 10_000);
+    }
+}
+```
+
+**3. Test synchronization primitives:**
+
+```rust
+#[test]
+fn test_channel_send_receive() {
+    let (tx, rx) = mpsc::channel();
+    thread::spawn(move || tx.send(42).unwrap());
+    assert_eq!(rx.recv().unwrap(), 42);
+}
+```
+
+::: {.notes}
+Can't test timing, only correctness. Run tests many times to catch races.
+:::
+
+---
+
+## Common Concurrency Pitfalls {.smaller}
+
+**Rust prevents at compile-time:**
+
+✅ Data races (prevented by borrow checker)
+✅ Use-after-free (prevented by ownership)
+✅ Double-free (prevented by Drop semantics)
+
+**Rust doesn't prevent:**
+
+❌ **Deadlocks** (circular lock dependencies)
+❌ **Livelocks** (threads spinning without progress)
+❌ **Starvation** (threads never getting locks)
+❌ **Logic errors** (incorrect synchronization)
+
+**Best practices:**
+
+- Always acquire locks in consistent order
+- Keep critical sections short
+- Use channels when possible
+- Test with many threads
+- Use tools like `cargo-tsan` (ThreadSanitizer)
+
+::: {.notes}
+Rust eliminates memory safety issues but can't prevent all concurrency bugs. Design carefully!
+:::
+
+---
+
+## Performance Optimization Tips {.inverse .smaller}
+
+**Reduce lock contention:**
+
+```rust
+// ❌ BAD: Single lock for everything
+let data = Arc::new(Mutex::new(HashMap::new()));
+
+// ✅ BETTER: Fine-grained locking
+let shard1 = Arc::new(Mutex::new(HashMap::new()));
+let shard2 = Arc::new(Mutex::new(HashMap::new()));
+```
+
+**Batch operations:**
+
+```rust
+// ❌ BAD: Lock/unlock per operation
+for item in items {
+    data.lock().unwrap().push(item);
+}
+
+// ✅ BETTER: Lock once for batch
+{
+    let mut guard = data.lock().unwrap();
+    for item in items {
+        guard.push(item);
+    }
+}
+```
+
+**Use atomic types for counters:**
+
+```rust
+use std::sync::atomic::{AtomicUsize, Ordering};
+
+let counter = Arc::new(AtomicUsize::new(0));
+counter.fetch_add(1, Ordering::SeqCst);  // Lock-free!
+```
+
+::: {.notes}
+Lock-free atomics are much faster than Mutex for simple counters.
+:::
+
+---
+
+## Lab 14 Preview {.inverse}
+
+**Build a parallel file processor (parallel grep):**
+
+**Features you'll implement:**
+
+1. **Thread spawning**: Create worker pool
+2. **Task queue**: Distribute files to workers via channel
+3. **Result aggregation**: Collect matches from all threads
+4. **Progress reporting**: Show real-time processing status
+5. **Error handling**: Handle missing files, permissions gracefully
+6. **Performance**: Measure speedup vs single-threaded
+
+**Key skills applied:**
+
+- All Rust concepts from Labs 9-13
+- Thread coordination patterns
+- CLI with `clap`
+- Professional project structure
+
+::: {.notes}
+This is your capstone Rust project. It demonstrates everything you've learned!
+:::
+
+---
+
+## Career Applications {.inverse .smaller}
+
+**Industries using concurrent Rust:**
+
+**Systems Programming:**
+
+- **Mozilla**: Firefox browser engine (Servo)
+- **Cloudflare**: Edge computing platform
+- **Discord**: Real-time messaging backend
+
+**Cloud Infrastructure:**
+
+- **AWS**: Firecracker VM manager
+- **Dropbox**: File synchronization engine
+- **Microsoft**: Azure IoT Edge runtime
+
+**Embedded/IoT:**
+
+- **Espressif**: ESP32 firmware
+- **Automotive**: Safety-critical systems
+- **Aerospace**: Flight control software
+
+**Interview topics:**
+
+- Explaining data races and how Rust prevents them
+- When to use message passing vs shared state
+- Deadlock prevention strategies
+- Performance profiling of concurrent code
+
+::: {.notes}
+Concurrent programming is a high-value skill. Rust expertise is in high demand!
+:::
+
+---
+
+## Week 14 Summary {.inverse}
+
+**Threading fundamentals:**
+
+✅ Spawning threads and join handles
+✅ Move semantics for thread ownership
+✅ Measuring performance gains
+
+**Thread communication:**
+
+✅ Message passing with channels
+✅ Shared state with `Arc<Mutex<T>>`
+✅ Thread pools and graceful shutdown
+✅ Real-world patterns and testing
+
+**Key takeaways:**
+
+- Rust makes concurrency safe and fast
+- Borrow checker prevents data races at compile time
+- Choose channels or shared state based on problem
+- Always measure - threading has overhead
+
+**Congratulations on completing the Rust portion of the course!**
+
+::: {.notes}
+This is the final Rust lecture. You've mastered ownership, traits, generics, and now concurrency!
+:::
+
+---
+
+## Resources and Further Reading {.smaller}
+
+**Official Documentation:**
+
+- [The Rust Book Ch 16 - Fearless Concurrency](https://doc.rust-lang.org/book/ch16-00-concurrency.html)
+- [std::thread module](https://doc.rust-lang.org/std/thread/)
+- [std::sync::mpsc](https://doc.rust-lang.org/std/sync/mpsc/)
+- [Arc documentation](https://doc.rust-lang.org/std/sync/struct.Arc.html)
+- [Mutex documentation](https://doc.rust-lang.org/std/sync/struct.Mutex.html)
+
+**Advanced Topics:**
+
+- [Tokio](https://tokio.rs/) - Async runtime (next level concurrency)
+- [Rayon](https://docs.rs/rayon/) - Data parallelism library
+- [Crossbeam](https://docs.rs/crossbeam/) - Advanced concurrency tools
+
+**Practice:**
+
+- [Rustlings](https://github.com/rust-lang/rustlings/) - Threads section
+- [Exercism Rust Track](https://exercism.org/tracks/rust) - Concurrency exercises
+
+---
+
+## Questions? {.inverse}
+
+**Office hours**: See syllabus
+
+**AI assistance**: GitHub Copilot, ChatGPT, Claude, Gemini CLI
+
+**Lab 14**: Build your parallel file processor - due Sunday at 11:59 PM
+
+**Final thoughts:**
+
+- You've learned one of the hardest parts of programming
+- Rust's safety guarantees are game-changing
+- This skill is valuable across many domains
+- Keep practicing and building projects!
+
+**Great work this semester! 🦀**

@@ -1,0 +1,763 @@
+---
+title: "IS4010: AI-Enhanced Application Development"
+subtitle: "Week 12: Generics and Traits"
+author: "Brandon M. Greenwell"
+format:
+  revealjs:
+    theme: dracula
+    transition: fade
+    slide-number: true
+    chalkboard: true
+    preview-links: auto
+    footer: "IS4010: App Development with AI"
+    scrollable: true
+    css: custom.css
+---
+
+## Week 12 Overview {.inverse}
+
+**Session 1: Generic Types**
+
+- Understanding the problem: code duplication
+- Generic functions and structs
+- Generic enums (Option, Result)
+- Generic methods and implementations
+- Introduction to trait bounds
+
+**Session 2: Traits Deep Dive**
+
+- Trait definitions and implementations
+- Default implementations and trait parameters
+- Trait bounds and where clauses
+- Common traits: Debug, Clone, Display, Iterator
+- Implementing traits for custom types
+
+::: {.notes}
+This week focuses on Rust's powerful abstraction mechanisms. Generics enable code reuse without runtime cost. Traits define shared behavior and enable polymorphism without inheritance.
+:::
+
+---
+
+## Why Generics and Traits Matter {.inverse}
+
+**Real-world impact:**
+
+- **Rust standard library**: Built on generics (`Vec<T>`, `Option<T>`, `Result<T, E>`)
+- **Code reuse**: Write once, use with any type
+- **Type safety**: Compile-time guarantees without runtime cost
+- **Zero-cost abstractions**: No performance penalty
+
+**Industry examples:**
+
+- [Servo](https://servo.org/): Mozilla's parallel browser engine
+- [Tokio](https://tokio.rs/): Async runtime using generic futures
+- [Serde](https://serde.rs/): Generic serialization framework
+
+::: {.notes}
+Generics are foundational to Rust's design philosophy. They enable the standard library's power while maintaining performance.
+:::
+
+---
+
+# Session 1: Generics and Traits
+
+## Understanding the Problem {.smaller}
+
+**Without generics, you need duplicate code:**
+
+```rust
+fn largest_i32(list: &[i32]) -> &i32 {
+    let mut largest = &list[0];
+    for item in list {
+        if item > largest {
+            largest = item;
+        }
+    }
+    largest
+}
+
+fn largest_f64(list: &[f64]) -> &f64 {
+    let mut largest = &list[0];
+    for item in list {
+        if item > largest {
+            largest = item;
+        }
+    }
+    largest
+}
+```
+
+**Problem**: Same logic, different types → code duplication!
+
+::: {.notes}
+This motivates generics. Ask students: "What happens when you need largest_u32, largest_char, etc.?"
+:::
+
+---
+
+## Introducing Generics {.smaller}
+
+**Generic functions work with multiple types:**
+
+```rust
+fn largest<T: PartialOrd>(list: &[T]) -> &T {
+    let mut largest = &list[0];
+    for item in list {
+        if item > largest {
+            largest = item;
+        }
+    }
+    largest
+}
+
+// Works with any type that can be compared!
+let numbers = vec![34, 50, 25, 100, 65];
+let result = largest(&numbers);
+
+let chars = vec!['y', 'm', 'a', 'q'];
+let result = largest(&chars);
+```
+
+**Key concept**: `T: PartialOrd` is a [trait bound](https://doc.rust-lang.org/book/ch10-02-traits.html#trait-bounds) - T must implement PartialOrd.
+
+[📖 Rust Book: Generic Data Types](https://doc.rust-lang.org/book/ch10-01-syntax.html)
+
+::: {.notes}
+Emphasize that generics are checked at compile time. No runtime cost!
+:::
+
+---
+
+## Generic Structs {.smaller}
+
+**Define structs that work with any type:**
+
+```rust
+struct Point<T> {
+    x: T,
+    y: T,
+}
+
+fn main() {
+    let integer_point = Point { x: 5, y: 10 };
+    let float_point = Point { x: 1.0, y: 4.0 };
+}
+```
+
+**Multiple type parameters:**
+
+```rust
+struct Point<T, U> {
+    x: T,
+    y: U,
+}
+
+fn main() {
+    let mixed = Point { x: 5, y: 4.0 };  // T=i32, U=f64
+}
+```
+
+[📖 Rust Book: Generic Structs](https://doc.rust-lang.org/book/ch10-01-syntax.html#in-struct-definitions)
+
+::: {.notes}
+Show that each type parameter can be different. This is more flexible than requiring all fields to be the same type.
+:::
+
+---
+
+## Generic Enums {.smaller}
+
+**You've been using generic enums all along:**
+
+```rust
+// Option<T> from standard library
+enum Option<T> {
+    Some(T),
+    None,
+}
+
+// Result<T, E> for error handling
+enum Result<T, E> {
+    Ok(T),
+    Err(E),
+}
+```
+
+**Usage:**
+
+```rust
+fn divide(a: f64, b: f64) -> Result<f64, String> {
+    if b == 0.0 {
+        Err(String::from("Division by zero"))
+    } else {
+        Ok(a / b)
+    }
+}
+```
+
+[📖 Rust Book: Generic Enums](https://doc.rust-lang.org/book/ch10-01-syntax.html#in-enum-definitions)
+
+::: {.notes}
+Connect to previous week - they've already used generic enums without realizing it!
+:::
+
+---
+
+## Generic Methods {.smaller}
+
+**Methods on generic structs:**
+
+```rust
+struct Point<T> {
+    x: T,
+    y: T,
+}
+
+impl<T> Point<T> {
+    fn x(&self) -> &T {
+        &self.x
+    }
+}
+
+// Method only for specific type
+impl Point<f32> {
+    fn distance_from_origin(&self) -> f32 {
+        (self.x.powi(2) + self.y.powi(2)).sqrt()
+    }
+}
+```
+
+**Notice**: `impl<T>` declares the generic, then `Point<T>` uses it.
+
+[📖 Rust Book: Generic Methods](https://doc.rust-lang.org/book/ch10-01-syntax.html#in-method-definitions)
+
+::: {.notes}
+Show that you can implement methods for all T, or only for specific types.
+:::
+
+---
+
+## What Are Traits? {.smaller}
+
+**Traits define shared behavior:**
+
+```rust
+pub trait Summary {
+    fn summarize(&self) -> String;
+}
+
+struct NewsArticle {
+    headline: String,
+    content: String,
+}
+
+impl Summary for NewsArticle {
+    fn summarize(&self) -> String {
+        format!("{}: {}", self.headline, self.content)
+    }
+}
+```
+
+**Think of traits as:**
+- Interfaces (Java/C#)
+- Protocols (Swift)
+- Type classes (Haskell)
+
+[📖 Rust Book: Traits](https://doc.rust-lang.org/book/ch10-02-traits.html)
+
+::: {.notes}
+Traits are Rust's way of defining shared behavior without inheritance.
+:::
+
+---
+
+## Default Trait Implementations {.smaller}
+
+**Traits can provide default behavior:**
+
+```rust
+pub trait Summary {
+    fn summarize_author(&self) -> String;
+
+    fn summarize(&self) -> String {
+        format!("(Read more from {}...)", self.summarize_author())
+    }
+}
+
+struct Tweet {
+    username: String,
+    content: String,
+}
+
+impl Summary for Tweet {
+    fn summarize_author(&self) -> String {
+        format!("@{}", self.username)
+    }
+    // summarize() uses the default implementation
+}
+```
+
+[📖 Rust Book: Default Implementations](https://doc.rust-lang.org/book/ch10-02-traits.html#default-implementations)
+
+::: {.notes}
+Default implementations reduce boilerplate. Types can override or use the default.
+:::
+
+---
+
+## Traits as Parameters {.smaller}
+
+**Accept any type implementing a trait:**
+
+```rust
+pub fn notify(item: &impl Summary) {
+    println!("Breaking news! {}", item.summarize());
+}
+
+// Longer syntax (trait bound):
+pub fn notify<T: Summary>(item: &T) {
+    println!("Breaking news! {}", item.summarize());
+}
+
+// Multiple trait bounds:
+pub fn notify<T: Summary + Display>(item: &T) {
+    // Can call summarize() and also use {} formatting
+}
+```
+
+[📖 Rust Book: Traits as Parameters](https://doc.rust-lang.org/book/ch10-02-traits.html#traits-as-parameters)
+
+::: {.notes}
+`impl Trait` is syntactic sugar for trait bounds. Use whichever is clearer.
+:::
+
+---
+
+## The `where` Clause {.smaller}
+
+**Make complex trait bounds readable:**
+
+```rust
+// Hard to read:
+fn some_function<T: Display + Clone, U: Clone + Debug>(t: &T, u: &U) -> i32 {
+    // ...
+}
+
+// Much clearer with where clause:
+fn some_function<T, U>(t: &T, u: &U) -> i32
+where
+    T: Display + Clone,
+    U: Clone + Debug,
+{
+    // ...
+}
+```
+
+**Use `where` when:**
+- Multiple trait bounds
+- Complex generic relationships
+- Improves readability
+
+[📖 Rust Book: where Clauses](https://doc.rust-lang.org/book/ch10-02-traits.html#clearer-trait-bounds-with-where-clauses)
+
+::: {.notes}
+Where clauses are especially helpful with associated types and lifetime bounds.
+:::
+
+---
+
+## Returning Trait Types {.smaller}
+
+**Return types that implement traits:**
+
+```rust
+fn returns_summarizable() -> impl Summary {
+    Tweet {
+        username: String::from("rustacean"),
+        content: String::from("Rust is awesome!"),
+    }
+}
+```
+
+**Limitation**: Can only return ONE concrete type:
+
+```rust
+// ❌ ERROR: Can't return different types
+fn returns_summarizable(switch: bool) -> impl Summary {
+    if switch {
+        NewsArticle { /* ... */ }
+    } else {
+        Tweet { /* ... */ }  // Error!
+    }
+}
+```
+
+[📖 Rust Book: Returning Traits](https://doc.rust-lang.org/book/ch10-02-traits.html#returning-types-that-implement-traits)
+
+::: {.notes}
+For returning different types, you need trait objects (Box<dyn Trait>) - advanced topic.
+:::
+
+---
+
+## Common Standard Library Traits {.smaller}
+
+**Frequently used traits you should know:**
+
+- **[`Debug`](https://doc.rust-lang.org/std/fmt/trait.Debug.html)**: Format with `{:?}` (derive with `#[derive(Debug)]`)
+- **[`Clone`](https://doc.rust-lang.org/std/clone/trait.Clone.html)**: Create deep copies with `.clone()`
+- **[`Copy`](https://doc.rust-lang.org/std/marker/trait.Copy.html)**: Types that can be copied by just copying bits
+- **[`Display`](https://doc.rust-lang.org/std/fmt/trait.Display.html)**: Format with `{}` (implement manually)
+- **[`PartialEq`](https://doc.rust-lang.org/std/cmp/trait.PartialEq.html)**: Compare with `==` and `!=`
+- **[`Eq`](https://doc.rust-lang.org/std/cmp/trait.Eq.html)**: Full equivalence relation
+- **[`PartialOrd`](https://doc.rust-lang.org/std/cmp/trait.PartialOrd.html)**: Compare with `<`, `>`, `<=`, `>=`
+- **[`Ord`](https://doc.rust-lang.org/std/cmp/trait.Ord.html)**: Total ordering
+- **[`Iterator`](https://doc.rust-lang.org/std/iter/trait.Iterator.html)**: Types that can be iterated over
+
+[📖 Rust Standard Library Traits](https://doc.rust-lang.org/std/#traits)
+
+::: {.notes}
+These traits are fundamental. Most can be automatically derived with #[derive(...)].
+:::
+
+---
+
+## Deriving Traits {.smaller}
+
+**Automatically implement common traits:**
+
+```rust
+#[derive(Debug, Clone, PartialEq, Eq)]
+struct Point {
+    x: i32,
+    y: i32,
+}
+
+fn main() {
+    let p1 = Point { x: 1, y: 2 };
+    let p2 = p1.clone();
+
+    println!("{:?}", p1);  // Debug
+    assert_eq!(p1, p2);    // PartialEq
+}
+```
+
+**Can derive:**
+- `Debug`, `Clone`, `Copy`
+- `PartialEq`, `Eq`, `PartialOrd`, `Ord`
+- `Hash`, `Default`
+
+**Cannot derive**: `Display`, `Iterator` (must implement manually)
+
+[📖 Rust Book: Derivable Traits](https://doc.rust-lang.org/book/appendix-03-derivable-traits.html)
+
+::: {.notes}
+Derive whenever possible - it's less error-prone than manual implementation.
+:::
+
+---
+
+## Implementing Display Trait {.smaller}
+
+**Custom formatting for user-facing output:**
+
+```rust
+use std::fmt;
+
+struct Point {
+    x: i32,
+    y: i32,
+}
+
+impl fmt::Display for Point {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        write!(f, "({}, {})", self.x, self.y)
+    }
+}
+
+fn main() {
+    let p = Point { x: 1, y: 2 };
+    println!("Point: {}", p);  // Point: (1, 2)
+}
+```
+
+[📖 Rust Book: Display Trait](https://doc.rust-lang.org/std/fmt/trait.Display.html)
+
+::: {.notes}
+Display is for user-facing output. Debug is for programmer-facing output.
+:::
+
+---
+
+## Implementing Iterator Trait {.smaller}
+
+**Make your types iterable:**
+
+```rust
+struct Counter {
+    count: u32,
+}
+
+impl Counter {
+    fn new() -> Counter {
+        Counter { count: 0 }
+    }
+}
+
+impl Iterator for Counter {
+    type Item = u32;  // Associated type
+
+    fn next(&mut self) -> Option<Self::Item> {
+        if self.count < 5 {
+            self.count += 1;
+            Some(self.count)
+        } else {
+            None
+        }
+    }
+}
+```
+
+[📖 Rust Book: Iterator Trait](https://doc.rust-lang.org/book/ch13-02-iterators.html)
+
+::: {.notes}
+Iterator is powerful - once implemented, you get all iterator methods for free!
+:::
+
+---
+
+## Generic Stack Example {.smaller}
+
+**Building a generic data structure:**
+
+```rust
+struct Stack<T> {
+    items: Vec<T>,
+}
+
+impl<T> Stack<T> {
+    fn new() -> Stack<T> {
+        Stack { items: Vec::new() }
+    }
+
+    fn push(&mut self, item: T) {
+        self.items.push(item);
+    }
+
+    fn pop(&mut self) -> Option<T> {
+        self.items.pop()
+    }
+
+    fn is_empty(&self) -> bool {
+        self.items.is_empty()
+    }
+}
+```
+
+[🎮 Try it in Playground](https://play.rust-lang.org/)
+
+::: {.notes}
+This will be the basis for Lab 12. Students will implement and test this.
+:::
+
+---
+
+## 🤖 AI Prompting: Generics and Traits {.smaller}
+
+**Design assistance:**
+- "Help me design a generic cache data structure in Rust"
+- "What traits should my custom type implement for common operations?"
+- "Explain when to use trait bounds vs where clauses"
+
+**Implementation help:**
+- "How do I implement the Iterator trait for my custom struct?"
+- "Why can't I return different types from a function returning impl Trait?"
+- "Help me fix this trait bound error: [paste error]"
+
+**Code review:**
+- "Is this the idiomatic way to use generics in Rust?"
+- "Should this be a generic function or use dynamic dispatch?"
+- "How can I make these trait bounds more readable?"
+
+::: {.notes}
+AI is excellent for explaining trait system complexities and suggesting appropriate trait bounds.
+:::
+
+---
+
+# Session 2: Traits Deep Dive
+
+## Traits: Defining Shared Behavior {.inverse}
+
+**What we'll cover:**
+
+- Trait definitions and custom traits
+- Implementing traits for your types
+- Default implementations for code reuse
+- Traits as function parameters
+- Advanced trait bounds with where clauses
+- Common standard library traits
+
+**Goal**: Master Rust's powerful trait system for polymorphism and code reuse
+
+::: {.notes}
+Traits are one of Rust's most powerful features. They enable abstraction without inheritance.
+:::
+
+---
+
+## Lab 12 Preview: Generic Stack {.inverse}
+
+**What you'll build:**
+
+- Generic `Stack<T>` data structure
+- Implement core methods: `push`, `pop`, `peek`, `is_empty`, `len`
+- Implement `Display` trait for custom formatting
+- Implement `Iterator` trait to make your stack iterable
+- Comprehensive test suite with 15+ tests
+
+**Learning goals:**
+
+- Apply generics to create reusable data structures
+- Implement standard library traits
+- Understand trait bounds in practice
+- Write tests for generic types
+
+**Deliverable**: A fully functional, well-tested generic stack!
+
+::: {.notes}
+This lab applies all the concepts from this week. Students will see how generics and traits work together in practice.
+:::
+
+---
+
+## Career Relevance {.smaller}
+
+**Why these skills matter:**
+
+**Generics:**
+- Foundation of modern language features (Java, C#, TypeScript, Swift, Go)
+- Essential for library and framework development
+- Interview questions: "Design a generic data structure"
+- Understanding constraints and bounds
+
+**Traits/Interfaces:**
+- Interface design skills transfer to all languages
+- Composition over inheritance (modern best practice)
+- Critical for extensible systems and plugin architectures
+- Type system understanding for advanced roles
+
+**Real interview questions:**
+- "Explain the difference between generics and dynamic dispatch"
+- "Design an interface for [problem] - what methods would it have?"
+- "How would you make this code reusable across different types?"
+- "What are the tradeoffs between compile-time and runtime polymorphism?"
+
+::: {.notes}
+These skills are transferable across all modern programming languages. Employers value developers who understand abstraction mechanisms.
+:::
+
+---
+
+## Key Takeaways {.inverse}
+
+**Generics:**
+- Enable code reuse without sacrificing type safety
+- Zero-cost abstractions - no runtime overhead
+- Work with structs, enums, functions, and methods
+- Use trait bounds to constrain type parameters
+
+**Traits:**
+- Define shared behavior across types
+- Enable polymorphism without inheritance
+- Foundation of Rust's standard library
+- Can have default implementations for convenience
+
+**Together:**
+- Generics + Traits = Powerful, reusable abstractions
+- Type safety at compile time
+- Expressive code that's still performant
+- Industry-standard design patterns
+
+::: {.notes}
+These concepts work together to enable Rust's unique combination of performance and abstraction.
+:::
+
+---
+
+## Additional Resources {.smaller}
+
+**Official documentation:**
+- [The Rust Book - Chapter 10: Generic Types, Traits, and Lifetimes](https://doc.rust-lang.org/book/ch10-00-generics.html)
+- [Rust by Example: Generics](https://doc.rust-lang.org/rust-by-example/generics.html)
+- [Rust by Example: Traits](https://doc.rust-lang.org/rust-by-example/trait.html)
+- [Rust Standard Library Traits](https://doc.rust-lang.org/std/#traits)
+
+**Articles and guides:**
+- [Rust Traits: A Deep Dive](https://oswalt.dev/2021/09/rust-traits-a-deep-dive/)
+- [Generic Associated Types](https://blog.rust-lang.org/2022/10/28/gats-stabilization.html)
+- [Tour of Rust's Standard Library Traits](https://github.com/pretzelhammer/rust-blog/blob/master/posts/tour-of-rusts-standard-library-traits.md)
+
+**Tools:**
+- [Rust Playground](https://play.rust-lang.org/) - Test code online
+- [docs.rs](https://docs.rs/) - Browse crate documentation
+
+::: {.notes}
+Encourage students to explore these resources, especially the Tour of Rust's Standard Library Traits.
+:::
+
+---
+
+## Next Week: Testing and Packaging {.inverse}
+
+**Week 13 topics:**
+
+- Test-driven development (TDD) workflow
+- Unit testing vs integration testing
+- Error handling with Result and Option
+- Packaging Rust applications
+- Building command-line tools
+
+**Why it matters**: Learn to build complete, tested, distributable applications
+
+**Focus**: Final project work begins - no new lab assignments
+
+::: {.notes}
+Week 13 covers testing and packaging so students can build complete applications for their final projects.
+:::
+
+---
+
+## Questions? {.inverse}
+
+**Get help:**
+
+- Office hours: [Schedule on Teams](https://teams.microsoft.com)
+- Course discussion: Microsoft Teams channel
+- AI tools: Claude, ChatGPT, GitHub Copilot
+- Rust community: [users.rust-lang.org](https://users.rust-lang.org)
+
+**This week's materials:**
+
+- [Week 12 Lecture Notes](../../resources/lecture-notes/W12_Generics_and_Traits_notes.md)
+- [Week 12 Interactive Exercises](../../resources/lecture-notes/W12_Generics_and_Traits_exercises.md)
+- [Lab 12: Generic Stack](../../week12/lab12.md)
+
+---
+
+## Start Lab 12! {.inverse}
+
+**Lab due: Sunday, November 23, 2025, at 11:59 PM**
+
+**What to do:**
+
+1. Review lecture materials and examples
+2. Work through interactive exercises
+3. Begin Lab 12: Generic Stack implementation
+4. Apply generics and traits from this week
+5. Write comprehensive tests for your implementation
+6. Ask questions early and often
+
+**Remember**: You're not just learning Rust - you're learning universal programming concepts that apply everywhere!
+
+**Good luck!** 🦀

@@ -1,0 +1,410 @@
+---
+title: "IS4010: AI-Enhanced Application Development"
+subtitle: "Week 09: Welcome to Rust"
+author: "Brandon M. Greenwell"
+format:
+  revealjs:
+    self-contained: false
+    theme: dracula
+    transition: fade
+    scrollable: true
+    css: custom.css
+---
+
+## Session 1: Why Rust?
+
+::: {.notes}
+Open with energy - students are transitioning from Python to a systems language. Emphasize that Rust is challenging but incredibly rewarding. Show brief demo of Rust Playground.
+:::
+
+## Housekeeping: midterm project
+
+-   **Reminder**: Your midterm project is due this Sunday at 11:59 PM!
+-   Make sure you've tested your code locally and pushed all changes to GitHub
+-   The automated grading system will run on Monday morning
+-   If you have questions, reach out on Teams before Sunday
+
+::: {.notes}
+Check in with students about midterm progress. Offer to answer quick questions after class.
+:::
+
+## Welcome to a new frontier
+
+::: {.incremental}
+-   For the next few weeks, we are shifting from [Python](https://www.python.org/) to our second language, [Rust](https://www.rust-lang.org/)
+-   [Rust](https://doc.rust-lang.org/book/) is a modern, compiled language focused on three primary goals: **performance**, **reliability**, and **safety**
+-   It has a steeper learning curve than Python, but it gives us the power to write incredibly fast and memory-efficient code, which is essential for systems programming, game development, and high-performance computing
+-   Created by [Graydon Hoare at Mozilla Research](https://www.technologyreview.com/2023/02/14/1067869/rust-worlds-fastest-growing-programming-language/) in 2006, first stable release in 2015
+:::
+
+::: {.notes}
+Historical context: Rust started as a personal project and became one of the most loved languages (Stack Overflow surveys). Emphasize the "performance + safety" combination that makes it unique.
+:::
+
+## Why Rust matters in 2025
+
+::: {.incremental}
+-   **Industry adoption**: Used by [Microsoft](https://www.microsoft.com/en-us/security/blog/2019/07/16/rustc-brings-rust-to-windows/), [Amazon Web Services](https://aws.amazon.com/blogs/opensource/why-aws-loves-rust-and-how-wed-like-to-help/), [Google](https://security.googleblog.com/2021/04/rust-in-linux-kernel.html), [Meta](https://engineering.fb.com/2021/04/29/developer-tools/rust/), and [Discord](https://discord.com/blog/why-discord-is-switching-from-go-to-rust)
+-   **Firefox browser**: Large portions rewritten in Rust for performance and security
+-   **Linux kernel**: [Rust support added in 2022](https://www.zdnet.com/article/linus-torvalds-rust-will-go-into-linux-6-1/) for driver development
+-   **WebAssembly**: Rust is the #1 language for [WebAssembly](https://webassembly.org/) development
+-   **Job market**: Consistently highest-paid programming language in [Stack Overflow surveys](https://survey.stackoverflow.co/2024/technology#top-paying-technologies)
+:::
+
+::: {.notes}
+Real-world relevance: Discord saw 10x performance improvements switching from Go to Rust. Dropbox uses Rust for their file synchronization engine. This isn't academic - this is what industry needs.
+:::
+
+## Compiled vs. interpreted languages
+
+::: {.incremental}
+-   [Python](https://www.python.org/) is an **interpreted** language. An interpreter reads and executes your code line by line. This makes it flexible and easy to use, but it can be slower
+-   [Rust](https://www.rust-lang.org/) is a **compiled** language. A [compiler](https://doc.rust-lang.org/rustc/what-is-rustc.html) translates your entire program into machine code—the raw instructions the computer's CPU understands—before you run it
+-   This ahead-of-time compilation is a major reason for Rust's high performance. It catches errors early and optimizes the code for speed
+-   Bonus: Compiled Rust programs don't need a runtime or interpreter installed to run
+:::
+
+::: {.notes}
+Analogy: Interpreted = simultaneous translation (slower, more flexible). Compiled = translating an entire book before reading (upfront work, but faster execution). Rust can be 10-100x faster than Python for CPU-intensive tasks.
+:::
+
+## Meet [`cargo`](https://doc.rust-lang.org/cargo/), your Rust build tool
+
+::: {.incremental}
+-   [`cargo`](https://doc.rust-lang.org/cargo/guide/) is Rust's official build system and package manager, and it's one of the language's best features
+-   It handles creating new projects, compiling your code, running your application, and managing external libraries (called "[crates](https://crates.io/)" in Rust)
+-   Think of it as Python's pip + pytest + black + mypy all rolled into one amazing tool!
+-   Cargo is why Rust development feels so smooth and professional
+:::
+
+::: {.notes}
+Cargo is like pip + pytest + setuptools all in one tool. It's incredibly well-designed. Show live demo: cargo new demo && cd demo && cargo run. Point out the automatic git init and .gitignore creation.
+:::
+
+---
+
+## Essential Cargo commands
+
+::: {.incremental}
+**Project management:**
+-   [`cargo new project_name`](https://doc.rust-lang.org/cargo/commands/cargo-new.html): creates a new "Hello, world!" project
+-   [`cargo init`](https://doc.rust-lang.org/cargo/commands/cargo-init.html): initialize Cargo in an existing directory
+
+**Building and running:**
+-   [`cargo build`](https://doc.rust-lang.org/cargo/commands/cargo-build.html): compiles your code (debug mode)
+-   [`cargo run`](https://doc.rust-lang.org/cargo/commands/cargo-run.html): compiles and runs in one command
+-   [`cargo build --release`](https://doc.rust-lang.org/cargo/commands/cargo-build.html): optimized production build
+
+**Development workflow:**
+-   [`cargo check`](https://doc.rust-lang.org/cargo/commands/cargo-check.html): fast compile check (no executable)
+-   [`cargo test`](https://doc.rust-lang.org/cargo/commands/cargo-test.html): run all tests
+-   [`cargo clean`](https://doc.rust-lang.org/cargo/commands/cargo-clean.html): delete build artifacts
+:::
+
+::: {.notes}
+Emphasize cargo check - it's MUCH faster than cargo build because it doesn't generate an executable. Use it constantly while coding! cargo build --release is 10-100x faster than debug builds but takes longer to compile.
+:::
+
+---
+
+## Cargo's secret weapons: [clippy](https://doc.rust-lang.org/clippy/) and [rustfmt](https://github.com/rust-lang/rustfmt)
+
+::: {.incremental}
+**[`cargo clippy`](https://doc.rust-lang.org/clippy/)** - your personal Rust mentor:
+-   Catches common mistakes and suggests better approaches
+-   Over 500 lints for code quality, performance, and style
+-   Like having a senior Rust developer review your code
+-   Example: "you can simplify this code" or "this might panic"
+
+**[`cargo fmt`](https://github.com/rust-lang/rustfmt)** - automatic code formatting:
+-   Formats your code to match Rust community style
+-   No more debates about spacing, indentation, or style
+-   Run before every commit - keeps code consistent
+-   Like Python's [black](https://github.com/psf/black) formatter
+:::
+
+::: {.notes}
+**LIVE DEMO**: Show clippy catching a mistake. Show fmt before/after messy code. Explain that these come with rustup, no separate install needed. Emphasize that using these tools is NOT cheating - it's professional Rust development. All Rust developers use them.
+:::
+
+---
+
+## Your Rust development workflow
+
+::: {.incremental}
+This is what professional Rust developers do:
+
+1.  **Write code** in your editor
+2.  **`cargo check`** - fast compilation check while coding
+3.  **`cargo clippy`** - catch issues and learn better patterns
+4.  **`cargo test`** - verify your code works correctly
+5.  **`cargo fmt`** - format code before committing
+6.  **`cargo run`** - try out your program
+
+**Pro tip:** Run `cargo check` constantly. It's 10x faster than `cargo build`!
+:::
+
+::: {.notes}
+This is the actual workflow. cargo check gives you immediate feedback. clippy teaches you better Rust. fmt keeps code clean. Get students in this habit NOW. Mention that VS Code with rust-analyzer runs cargo check automatically in the background.
+:::
+
+## [Rust Playground](https://play.rust-lang.org/): try before you install
+
+::: {.incremental}
+-   Before installing anything, you can experiment with Rust in your browser at [play.rust-lang.org](https://play.rust-lang.org/)
+-   The [Rust Playground](https://play.rust-lang.org/) lets you write, compile, and run Rust code instantly
+-   Perfect for testing small examples, sharing code snippets, and learning syntax
+-   **Every code example in these slides has a clickable Playground link** - try them all!
+-   You'll use the Playground extensively in this week's practice exercises
+:::
+
+::: {.notes}
+**LIVE DEMO**: Open Playground now and run a Hello World example. Show how to:
+1. Edit code and click Run
+2. See compile errors in red
+3. Use the Share button to save/share
+4. Change to different Rust editions
+Mention that professional Rust developers use Playground daily for quick experiments and collaboration. Encourage students to open Playground in another tab RIGHT NOW and follow along.
+:::
+
+---
+
+## 🎮 **Live Demo: Your first Rust code!**
+
+**👉 Everyone open this link NOW:** [play.rust-lang.org](https://play.rust-lang.org/)
+
+**Follow along:**
+
+1. **Click "Run"** - see "Hello, world!" in the output
+2. **Edit the message** - change it to your name
+3. **Click "Run" again** - see your personalized greeting!
+4. **Click "Share"** - get a permanent link to save your work
+
+**🎯 Challenge:** Can you make it print TWO lines with different messages?
+
+::: {.notes}
+**Pause here for 2-3 minutes** - let students actually do this. Walk around (or check screen shares in virtual class) to ensure everyone successfully ran their first Rust code. This builds confidence before diving into syntax.
+:::
+
+## Hello, Rust!
+
+::: {.incremental}
+-   When you run `cargo new hello_rust`, it creates a simple project structure for you
+-   The main source code lives in `src/main.rs`
+-   The `fn main()` block is the entry point for every Rust executable
+-   [`println!`](https://doc.rust-lang.org/std/macro.println.html) is a **macro** (not a function, note the `!`) that prints text to the console
+:::
+
+```rust
+// Inside src/main.rs
+fn main() {
+    println!("Hello, Rust!");
+}
+```
+
+**🎮 Try it yourself:** [▶ Run in Rust Playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=fn+main%28%29+%7B%0A++++println%21%28%22Hello%2C+Rust%21%22%29%3B%0A%7D)
+
+**Your turn:** Modify the message and add a second `println!` line!
+
+::: {.notes}
+Point out the exclamation mark - macros are a powerful Rust feature. They're code that writes code. We'll use them without creating our own for now. Give students 30 seconds to try it in Playground.
+:::
+
+## Session 2: Rust basics
+
+::: {.notes}
+Second half focuses on syntax fundamentals. Students coming from Python will find the type annotations verbose but precise. Emphasize compile-time safety benefits.
+:::
+
+## Variables and mutability
+
+::: {.incremental}
+-   We declare variables using the [`let`](https://doc.rust-lang.org/book/ch03-01-variables-and-mutability.html) keyword
+-   A core concept in Rust is that variables are **immutable** by default. Once a value is bound to a name, you can't change it. This helps us write safer code
+-   To make a variable mutable, you must explicitly use the [`let mut`](https://doc.rust-lang.org/book/ch03-01-variables-and-mutability.html#mutability) keyword
+-   This is the opposite of Python, where everything is mutable by default!
+:::
+
+```rust
+let x = 5;        // immutable
+let mut y = 10;   // mutable
+y = 15;           // this is allowed
+// x = 6;         // this would cause a compiler error!
+```
+
+**🎮 Try it yourself:** [▶ Experiment in Playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=fn+main%28%29+%7B%0A++++let+x+%3D+5%3B%0A++++let+mut+y+%3D+10%3B%0A++++y+%3D+15%3B%0A++++println%21%28%22x%3A+%7B%7D%2C+y%3A+%7B%7D%22%2C+x%2C+y%29%3B%0A%7D)
+
+**🎯 Challenge:** Uncomment the `x = 6;` line. What error do you get? Read it carefully!
+
+::: {.notes}
+Why immutable by default? Prevents entire categories of bugs (race conditions, unexpected mutations). If you need to change a value, you declare that intent upfront. **HAVE STUDENTS uncomment the x = 6 line in Playground** to see the compiler error. The error message is incredibly helpful - point this out!
+:::
+
+## Scalar data types
+
+::: {.incremental}
+-   Rust is a **statically typed language**, meaning the type of every variable must be known at [compile time](https://doc.rust-lang.org/book/ch03-02-data-types.html)
+-   It has four primary **scalar** (single value) types:
+    -   **[Integers](https://doc.rust-lang.org/book/ch03-02-data-types.html#integer-types)**: signed (`i32`, `i64`) or unsigned (`u8`, `u32`). The number is the bits of space it takes up. `i32` is the default
+    -   **[Floating-point numbers](https://doc.rust-lang.org/book/ch03-02-data-types.html#floating-point-types)**: `f32` (single-precision) and `f64` (double-precision). `f64` is the default
+    -   **[Booleans](https://doc.rust-lang.org/book/ch03-02-data-types.html#the-boolean-type)**: `bool` with values `true` or `false`
+    -   **[Characters](https://doc.rust-lang.org/book/ch03-02-data-types.html#the-character-type)**: `char`, for a single Unicode character, denoted with single quotes
+:::
+
+::: {.notes}
+Type inference works most of the time - Rust can figure out types. But when it can't, you'll get a compile error. Integer types: signed can be negative (i), unsigned cannot (u). Memory conscious choices matter in systems programming.
+:::
+
+## Compound data types
+
+::: {.incremental}
+-   Rust has two primary built-in [compound types](https://doc.rust-lang.org/book/ch03-02-data-types.html#compound-types) for grouping multiple values
+-   The **[tuple](https://doc.rust-lang.org/book/ch03-02-data-types.html#the-tuple-type)** is a fixed-size collection of values of *different* types. Once declared, a tuple's size cannot change
+-   The **[array](https://doc.rust-lang.org/book/ch03-02-data-types.html#the-array-type)** is a fixed-size collection where every element must have the *same* type
+-   For dynamic sizing, we'll learn about [Vectors](https://doc.rust-lang.org/book/ch08-01-vectors.html) and [HashMaps](https://doc.rust-lang.org/book/ch08-03-hash-maps.html) later
+:::
+
+```rust
+// A tuple with different types
+let my_tuple: (i32, f64, u8) = (500, 6.4, 1);
+
+// An array with five elements of the same type
+let my_array: [i32; 5] = [1, 2, 3, 4, 5];
+```
+
+**🎮 Try it yourself:** [▶ Run in Playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=fn+main%28%29+%7B%0A++++let+my_tuple%3A+%28i32%2C+f64%2C+u8%29+%3D+%28500%2C+6.4%2C+1%29%3B%0A++++let+my_array%3A+%5Bi32%3B+5%5D+%3D+%5B1%2C+2%2C+3%2C+4%2C+5%5D%3B%0A++++println%21%28%22Tuple%3A+%7B%3A%3F%7D%22%2C+my_tuple%29%3B%0A++++println%21%28%22Array%3A+%7B%3A%3F%7D%22%2C+my_array%29%3B%0A%7D)
+
+**🎯 Challenge:** Try accessing `my_tuple.0` and `my_array[0]`. What do you get?
+
+::: {.notes}
+Arrays are stack-allocated and fast but inflexible. Unlike Python lists, Rust arrays have fixed size. The {:?} is debug formatting - we'll cover formatting more later. Have students try accessing individual elements by index.
+:::
+
+## [Functions](https://doc.rust-lang.org/book/ch03-03-how-functions-work.html) in Rust
+
+::: {.incremental}
+-   We define functions using the `fn` keyword
+-   You **must** declare the type of each function parameter
+-   If the function returns a value, you must declare its type after an arrow `->`
+-   The final expression in a function is automatically returned; you don't need the `return` keyword if it's at the end
+-   This is called an **expression-based language** - expressions return values, statements don't
+:::
+
+```rust
+fn add(num1: i32, num2: i32) -> i32 {
+    // No semicolon means this is an expression, and it's returned
+    num1 + num2
+}
+```
+
+**🎮 Try it yourself:** [▶ Run in Playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=fn+add%28num1%3A+i32%2C+num2%3A+i32%29+-%3E+i32+%7B%0A++++num1+%2B+num2%0A%7D%0A%0Afn+main%28%29+%7B%0A++++let+result+%3D+add%285%2C+7%29%3B%0A++++println%21%28%22Result%3A+%7B%7D%22%2C+result%29%3B%0A%7D)
+
+**🎯 Challenge:** Add a semicolon after `num1 + num2`. What error appears? Why?
+
+::: {.notes}
+Key difference from Python: type annotations aren't optional, they're required. The semicolon vs no semicolon matters! **CRITICAL DEMO**: With semicolon = statement (no value). Without = expression (returns value). Have students add the semicolon and read the error message together. This is the #1 beginner mistake!
+:::
+
+## How do we know our code works?
+
+::: {.incremental}
+-   In the Python section, we used the `pytest` library to run our tests
+-   Rust has a powerful [testing framework](https://doc.rust-lang.org/book/ch11-00-testing.html) built directly into the language and its tooling
+-   We can write tests for our code and run them from the command line using a simple, built-in command: [`cargo test`](https://doc.rust-lang.org/cargo/commands/cargo-test.html)
+-   No need to install separate testing libraries - testing is first-class in Rust!
+:::
+
+::: {.notes}
+Testing culture in Rust is strong. Most crates (libraries) have excellent test coverage. Cargo makes it effortless - tests live alongside code.
+:::
+
+## The anatomy of a [Rust test](https://doc.rust-lang.org/book/ch11-01-writing-tests.html)
+
+::: {.incremental}
+-   Tests are just functions marked with a `#[test]` [attribute](https://doc.rust-lang.org/reference/attributes.html)
+-   By convention, they are placed in a special module named `tests` inside the same file as the code they are testing
+-   The `#[cfg(test)]` attribute tells Rust to only compile and run this code when we execute `cargo test`
+:::
+
+```rust
+fn add_two(a: i32) -> i32 {
+    a + 2
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*; // Brings `add_two` into scope
+
+    #[test]
+    fn it_adds_two() {
+        assert_eq!(add_two(2), 4);
+    }
+}
+```
+
+::: {.notes}
+The #[test] attribute is Rust's way of marking test functions. The #[cfg(test)] conditional compilation ensures test code isn't included in release builds. The use super::* imports everything from the parent module.
+:::
+
+## [Assertion macros](https://doc.rust-lang.org/book/ch11-01-writing-tests.html#checking-results-with-the-assert-macro)
+
+::: {.incremental}
+-   How do we actually check if our code is correct inside a test? We use **assertion macros**
+-   A test passes if the function completes without the macro "panicking" (crashing)
+-   The most common macros are:
+    -   [`assert!(expression)`](https://doc.rust-lang.org/std/macro.assert.html): Panics if the expression evaluates to `false`. Useful for boolean checks
+    -   [`assert_eq!(left, right)`](https://doc.rust-lang.org/std/macro.assert_eq.html): Panics if the left and right arguments are not equal. This is the one you'll use most often
+    -   [`assert_ne!(left, right)`](https://doc.rust-lang.org/std/macro.assert_ne.html): The opposite of `assert_eq!`. Panics if the arguments *are* equal
+:::
+
+::: {.notes}
+Panicking = Rust's way of saying "critical error, can't continue". In tests, a panic means the test failed. In production code, we handle errors more gracefully with Result types (next week).
+:::
+
+## Our workflow for Rust labs
+
+::: {.incremental}
+-   For the Rust labs, we will provide the test suite for you
+-   Your workflow should be:
+    1.  Write your solution code in `src/main.rs`
+    2.  Append our provided test module to the bottom of that file
+    3.  Run `cargo test` in your terminal to check your work locally
+    4.  Once all tests pass, commit and push your code to [GitHub](https://github.com/)
+-   This gives you instant feedback without having to wait for the CI/CD pipeline
+-   Green tests = you're ready to submit! 🎉
+:::
+
+::: {.notes}
+Emphasize the instant feedback loop. Students should be running cargo test constantly as they work. It's much faster than waiting for GitHub Actions.
+:::
+
+## Introducing Lab 09
+
+::: {.incremental}
+-   This week's lab is your first hands-on introduction to Rust
+-   You'll install the [Rust toolchain](https://www.rust-lang.org/tools/install) using [rustup](https://rustup.rs/)
+-   Create your first [Cargo project](https://doc.rust-lang.org/cargo/guide/creating-a-new-project.html)
+-   Practice with variables, data types, and functions
+-   Write and run tests with `cargo test`
+-   Full instructions are in `week09/lab09.md`
+-   Don't forget the [Rust Playground exercises](https://play.rust-lang.org/) for extra practice!
+:::
+
+::: {.notes}
+Remind students: Rust has a steeper learning curve, but the compiler is incredibly helpful. Read the error messages - they often tell you exactly how to fix the problem. Use AI assistants, but make sure you understand the code.
+:::
+
+## Resources for learning Rust
+
+::: {.incremental}
+-   📖 [The Rust Programming Language Book](https://doc.rust-lang.org/book/) - the official, free, comprehensive guide
+-   🎮 [Rust by Example](https://doc.rust-lang.org/rust-by-example/) - learn through annotated examples
+-   🏃 [Rustlings](https://github.com/rust-lang/rustlings/) - small exercises to get you used to reading and writing Rust code
+-   💬 [Rust Users Forum](https://users.rust-lang.org/) - friendly community for questions
+-   📺 [Microsoft Rust course on YouTube](https://www.youtube.com/playlist?list=PLlrxD0HtieHjbTjrchBwOVks_sr8EVW1x) - free video series
+-   🤖 Use [GitHub Copilot](https://github.com/features/copilot) and [Claude](https://claude.ai/) - but always understand the code!
+:::
+
+::: {.notes}
+The Rust community is exceptionally welcoming. The book (often called "the Rust book") is the gold standard - well-written and free. Rustlings is great for building muscle memory with Rust syntax.
+:::

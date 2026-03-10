@@ -1,0 +1,1240 @@
+---
+title: "IS4010: AI-Enhanced Application Development"
+subtitle: "Week 8: Building Professional Python Applications"
+author: "Brandon M. Greenwell"
+format:
+  revealjs:
+    self-contained: false
+    theme: dracula
+    transition: fade
+    scrollable: true
+    css: custom.css
+---
+
+# Building Professional Python Applications 🏗️
+
+## From scripts to production-ready tools 🎯
+
+::: {.incremental}
+- **Professional Python development** goes beyond simple scripts to create robust, maintainable applications
+- **Command-line interfaces (CLIs)**: The backbone of automation, scripting, and developer tools
+- **Package structure**: Organizing code for reusability, testing, and distribution
+- **Career relevance**: Every Python job expects these skills - from data science to web development
+- **Midterm connection**: These patterns will elevate your projects from "works on my machine" to professional quality
+:::
+
+::: {.notes}
+**TEACHING NOTES:**
+
+- **Timing context**: Students are working on midterm projects - this is just-in-time instruction
+- **Professional transition**: Moving from learning Python syntax to building real applications
+- **Industry standards**: These practices are universal across tech companies
+- **Career preparation**: CLI tools and proper package structure appear in every Python interview
+- **Framework foundation**: Understanding packages prepares students for Django, Flask, FastAPI
+- **Course arc**: This completes Python education before transitioning to Rust next week
+:::
+
+---
+
+# Part 1: Command-Line Interfaces
+
+---
+
+## 🤔 Why CLIs matter: The power of automation
+
+### **The Problem**: Manual, repetitive tasks
+
+::: {.incremental}
+- **Scenario**: You need to fetch data from an API multiple times per day
+- **Manual approach**: Open browser, navigate to site, copy data, paste into file
+- **Time waste**: 5 minutes per fetch × 10 times per day = 50 minutes daily
+- **Error-prone**: Manual copy-paste leads to mistakes and inconsistencies
+- **Solution**: A CLI tool that automates the entire workflow in seconds
+:::
+
+::: {.notes}
+**TEACHING NOTES:**
+
+- **Real-world motivation**: Show how professionals use CLI tools constantly
+- **Career examples**: Data scientists use CLI tools for dataset downloads, web developers for deployment
+- **Unix philosophy**: Small, composable tools that do one thing well
+- **Student connection**: They've used `git`, `pip`, `python` - all CLI tools
+- **Midterm application**: Their projects should have CLI interfaces for easy testing and demonstration
+- **Time savings**: Automation is a force multiplier for productivity
+:::
+
+---
+
+## 🛠️ CLI tools in the wild: Examples everywhere
+
+::: {.incremental}
+- **Version control**: [`git`](https://git-scm.com/docs) - `git add`, `git commit`, `git push`
+- **Package management**: [`pip`](https://pip.pypa.io/en/stable/cli/pip/) - `pip install`, `pip list`, `pip freeze`
+- **Web frameworks**: [`django-admin`](https://docs.djangoproject.com/en/stable/ref/django-admin/) - `startproject`, `migrate`, `runserver`
+- **AWS CLI**: [`aws`](https://aws.amazon.com/cli/) - Manage cloud infrastructure from the terminal
+- **Data science**: [`jupyter`](https://jupyter.readthedocs.io/en/latest/running.html) - `jupyter notebook`, `jupyter lab`
+- **Your midterm**: Create professional CLIs for your API projects
+:::
+
+::: {.notes}
+**TEACHING NOTES:**
+
+- **Ubiquity**: Students have been using CLIs without realizing it
+- **Design patterns**: Notice common patterns - commands, subcommands, flags
+- **Professional standard**: Every major framework provides CLI tools
+- **Career skills**: Building CLIs is a resume-worthy skill
+- **Interview topics**: CLI design often appears in system design discussions
+- **Ecosystem**: Python has excellent CLI libraries - argparse, click, typer
+:::
+
+---
+
+## 📦 Introducing argparse: Python's built-in CLI library
+
+::: {.incremental}
+- **[`argparse`](https://docs.python.org/3/library/argparse.html)** is Python's standard library for creating command-line interfaces
+- **Built-in**: No installation required, part of Python's standard library
+- **Powerful**: Handles arguments, flags, subcommands, help text, validation
+- **Automatic help**: Generates `--help` documentation for free
+- **Industry standard**: Used in production at Google, Netflix, and countless startups
+- **Learning path**: Start with argparse, graduate to [Click](https://click.palletsprojects.com/) or [Typer](https://typer.tiangolo.com/) for advanced projects
+:::
+
+::: {.notes}
+**TEACHING NOTES:**
+
+- **Standard library advantage**: No dependency management needed for basic CLIs
+- **Learning foundation**: Concepts transfer to all CLI libraries
+- **Progression**: argparse → Click (Flask-style) → Typer (modern, type-hint based)
+- **Production usage**: Many major tools still use argparse despite newer alternatives
+- **Type hints**: argparse predates type hints but integrates well with them
+- **Documentation**: Emphasize the excellent official documentation
+:::
+
+---
+
+## 🎯 CLI design patterns: Arguments vs flags
+
+### **Three types of CLI inputs:**
+
+::: {.incremental}
+- **Positional arguments**: Required, order matters - `git commit message.txt`
+- **Optional arguments (flags)**: Named, order flexible - `git commit --amend -m "Fix bug"`
+- **Subcommands**: Different actions in one tool - `git add` vs `git commit`
+:::
+
+### **Design principles:**
+
+::: {.incremental}
+- **Intuitive**: Users should guess the correct syntax
+- **Consistent**: Follow conventions from popular tools
+- **Helpful**: Provide clear error messages and help text
+- **Forgiving**: Accept common variations and abbreviations
+:::
+
+::: {.notes}
+**TEACHING NOTES:**
+
+- **User experience**: CLI design is UI/UX design for developers
+- **Conventions**: `-h` for help, `-v` for verbose, `-o` for output
+- **Error messages**: Show examples of good vs bad error messages
+- **Unix philosophy**: Do one thing well, compose with pipes
+- **Accessibility**: Clear help text serves as documentation
+- **Testing**: Well-designed CLIs are easier to test programmatically
+:::
+
+---
+
+## 💻 Basic argparse: Your first CLI
+
+```python
+"""simple_greeter.py - A friendly CLI greeter."""
+import argparse
+
+def main():
+    # Create the parser
+    parser = argparse.ArgumentParser(
+        description="A simple greeting tool",
+        epilog="Thanks for using the greeter!"
+    )
+
+    # Add positional argument (required)
+    parser.add_argument(
+        "name",
+        help="The name of the person to greet"
+    )
+
+    # Add optional flag
+    parser.add_argument(
+        "--loud",
+        action="store_true",
+        help="Greet in ALL CAPS"
+    )
+
+    # Parse the arguments
+    args = parser.parse_args()
+
+    # Use the arguments
+    greeting = f"Hello, {args.name}!"
+    if args.loud:
+        greeting = greeting.upper()
+
+    print(greeting)
+
+if __name__ == "__main__":
+    main()
+```
+
+::: {.notes}
+**TEACHING NOTES:**
+
+- **Structure**: Show the standard pattern - create parser, add arguments, parse, use
+- **help parameter**: Appears in `--help` output automatically
+- **action="store_true"**: Boolean flags don't need values
+- **args namespace**: Clean attribute access with dot notation
+- **Entry point**: `if __name__ == "__main__"` - will explain more in Part 2
+- **Live demo**: Run this to show `--help`, error messages, successful execution
+:::
+
+---
+
+## 🚀 Running the CLI: Usage examples
+
+### **Getting help:**
+```bash
+$ python simple_greeter.py --help
+usage: simple_greeter.py [-h] [--loud] name
+
+A simple greeting tool
+
+positional arguments:
+  name        The name of the person to greet
+
+options:
+  -h, --help  show this help message and exit
+  --loud      Greet in ALL CAPS
+
+Thanks for using the greeter!
+```
+
+### **Using the tool:**
+```bash
+$ python simple_greeter.py Alice
+Hello, Alice!
+
+$ python simple_greeter.py Bob --loud
+HELLO, BOB!
+
+$ python simple_greeter.py
+usage: simple_greeter.py [-h] [--loud] name
+simple_greeter.py: error: the following arguments are required: name
+```
+
+::: {.notes}
+**TEACHING NOTES:**
+
+- **Auto-generated help**: argparse creates this from our code
+- **Error handling**: Automatic validation and helpful error messages
+- **User experience**: Notice how intuitive the interface is
+- **Professional quality**: This rivals commercial CLI tools
+- **No extra code**: We didn't write any error handling or help text rendering
+- **Best practices**: This is the gold standard for Python CLI design
+:::
+
+---
+
+## 🎨 Advanced argparse: Multiple arguments and types
+
+```python
+"""api_fetcher.py - Fetch data from APIs with configurable options."""
+import argparse
+
+def fetch_data(api_name: str, resource: str, limit: int, output_file: str = None):
+    """Fetch data from an API (implementation details omitted)."""
+    print(f"Fetching {limit} {resource} from {api_name}...")
+    if output_file:
+        print(f"Saving to {output_file}")
+    # Actual API call would go here
+    return {"status": "success", "count": limit}
+
+def main():
+    parser = argparse.ArgumentParser(
+        description="Fetch data from various APIs"
+    )
+
+    # Positional arguments
+    parser.add_argument("api", help="API name (e.g., 'pokemon', 'jokes', 'weather')")
+    parser.add_argument("resource", help="Resource to fetch (e.g., 'pikachu', 'random')")
+
+    # Optional arguments with types
+    parser.add_argument(
+        "-l", "--limit",
+        type=int,
+        default=10,
+        help="Number of items to fetch (default: 10)"
+    )
+
+    parser.add_argument(
+        "-o", "--output",
+        help="Output file path (if not specified, prints to console)"
+    )
+
+    parser.add_argument(
+        "--format",
+        choices=["json", "csv", "txt"],
+        default="json",
+        help="Output format (default: json)"
+    )
+
+    args = parser.parse_args()
+
+    # Call the function with parsed arguments
+    result = fetch_data(args.api, args.resource, args.limit, args.output)
+    print(f"Result: {result}")
+
+if __name__ == "__main__":
+    main()
+```
+
+::: {.notes}
+**TEACHING NOTES:**
+
+- **Type conversion**: `type=int` automatically converts and validates
+- **Defaults**: Professional CLIs have sensible defaults
+- **Short and long forms**: `-l` and `--limit` both work (convention)
+- **Choices**: Restricts to valid options, auto-validates
+- **Integration**: CLI arguments map cleanly to function parameters
+- **Midterm application**: This pattern works perfectly for their API projects
+- **Real-world**: Show how this mirrors tools like `curl`, `wget`, `httpie`
+:::
+
+---
+
+## 🌟 Subcommands: Building multi-function tools
+
+```python
+"""project_manager.py - Manage your project with subcommands."""
+import argparse
+
+def cmd_init(args):
+    """Initialize a new project."""
+    print(f"Initializing project: {args.name}")
+    print(f"Template: {args.template}")
+
+def cmd_build(args):
+    """Build the project."""
+    print(f"Building project...")
+    if args.verbose:
+        print("Verbose output enabled")
+
+def cmd_deploy(args):
+    """Deploy the project."""
+    print(f"Deploying to {args.environment}")
+
+def main():
+    parser = argparse.ArgumentParser(description="Project management tool")
+    subparsers = parser.add_subparsers(dest="command", help="Available commands")
+
+    # 'init' subcommand
+    init_parser = subparsers.add_parser("init", help="Initialize a new project")
+    init_parser.add_argument("name", help="Project name")
+    init_parser.add_argument("--template", default="basic", help="Project template")
+    init_parser.set_defaults(func=cmd_init)
+
+    # 'build' subcommand
+    build_parser = subparsers.add_parser("build", help="Build the project")
+    build_parser.add_argument("-v", "--verbose", action="store_true")
+    build_parser.set_defaults(func=cmd_build)
+
+    # 'deploy' subcommand
+    deploy_parser = subparsers.add_parser("deploy", help="Deploy the project")
+    deploy_parser.add_argument("environment", choices=["dev", "staging", "prod"])
+    deploy_parser.set_defaults(func=cmd_deploy)
+
+    args = parser.parse_args()
+
+    # Call the appropriate function
+    if hasattr(args, "func"):
+        args.func(args)
+    else:
+        parser.print_help()
+
+if __name__ == "__main__":
+    main()
+```
+
+::: {.notes}
+**TEACHING NOTES:**
+
+- **Git-style**: This pattern mirrors `git add`, `git commit`, etc.
+- **Scalability**: Easy to add new subcommands without refactoring
+- **Organization**: Each subcommand has its own function and arguments
+- **Function dispatch**: `set_defaults(func=...)` enables clean routing
+- **Professional pattern**: Used in Django, Flask, AWS CLI, and more
+- **Midterm application**: Students could add subcommands for different API operations
+- **Help per subcommand**: `python project_manager.py init --help` works
+:::
+
+---
+
+## 🎯 CLI UX best practices: Professional polish
+
+::: {.incremental}
+- **Clear error messages**: "Error: API key not found. Set POKEAPI_KEY environment variable."
+- **Progress indicators**: Show activity for long-running operations
+- **Colorized output**: Use libraries like [`rich`](https://rich.readthedocs.io/) or [`colorama`](https://pypi.org/project/colorama/) for visual hierarchy
+- **Input validation**: Fail fast with helpful messages, not cryptic stack traces
+- **Exit codes**: Return 0 for success, non-zero for failures (enables shell scripting)
+- **Confirmation prompts**: Ask before destructive operations
+- **Verbose mode**: `--verbose` or `-v` flag for debugging
+- **Version flag**: `--version` shows tool version
+:::
+
+::: {.notes}
+**TEACHING NOTES:**
+
+- **User experience**: CLI UX is as important as GUI UX
+- **Error messages**: Compare good vs bad examples from real tools
+- **Exit codes**: Essential for CI/CD pipelines and shell scripts
+- **Professional touch**: These details separate hobby projects from professional tools
+- **Libraries**: Show rich library for amazing terminal output
+- **Accessibility**: Clear messages help all users, not just experts
+- **Career impact**: Attention to UX details impresses employers
+:::
+
+---
+
+## 💡 Practical example: API CLI for midterm projects
+
+```python
+"""my_api_tool.py - Professional CLI for your midterm API project."""
+import argparse
+import sys
+from typing import Optional
+
+def fetch_resource(resource_type: str, resource_id: Optional[str], limit: int):
+    """Fetch data from your API."""
+    # Your API integration code here
+    print(f"Fetching {resource_type}...")
+    if resource_id:
+        print(f"ID: {resource_id}")
+    print(f"Limit: {limit}")
+    # Return the data
+
+def main():
+    parser = argparse.ArgumentParser(
+        prog="my_api_tool",
+        description="Interact with [Your API Name] from the command line",
+        epilog="Example: python my_api_tool.py pokemon pikachu --format json"
+    )
+
+    parser.add_argument("resource", help="Resource type to fetch")
+    parser.add_argument("id", nargs="?", help="Optional resource ID")
+    parser.add_argument("-l", "--limit", type=int, default=10, help="Number of items")
+    parser.add_argument("--format", choices=["json", "pretty"], default="pretty")
+    parser.add_argument("-o", "--output", help="Save to file instead of printing")
+
+    try:
+        args = parser.parse_args()
+        result = fetch_resource(args.resource, args.id, args.limit)
+        print("Success!")
+        return 0  # Success exit code
+    except Exception as e:
+        print(f"Error: {e}", file=sys.stderr)
+        return 1  # Error exit code
+
+if __name__ == "__main__":
+    sys.exit(main())
+```
+
+::: {.notes}
+**TEACHING NOTES:**
+
+- **Midterm application**: This is directly applicable to their projects
+- **Error handling**: Try/except at top level catches all errors
+- **Exit codes**: `sys.exit(main())` returns proper codes
+- **Optional arguments**: `nargs="?"` makes positional arg optional
+- **stderr**: Errors go to stderr, not stdout (Unix convention)
+- **Prog name**: Customize how the tool appears in help text
+- **Epilog**: Provide usage examples in help output
+- **Career skill**: This pattern is interview-worthy
+:::
+
+---
+
+## 🚀 AI-assisted CLI development
+
+### **Prompt strategies for building CLIs:**
+
+::: {.incremental}
+- **Starter prompt**: "Create a Python argparse CLI for fetching data from the [API Name] API with options for resource type, limit, and output format"
+- **Enhancement prompt**: "Add subcommands for 'fetch', 'list', and 'search' operations"
+- **Refinement prompt**: "Improve error handling and add input validation for API parameters"
+- **Testing prompt**: "Generate test cases for this CLI including error scenarios"
+:::
+
+### **AI tools excel at:**
+
+::: {.incremental}
+- Generating boilerplate argparse setup
+- Creating comprehensive help text
+- Adding input validation logic
+- Designing argument structures
+:::
+
+::: {.notes}
+**TEACHING NOTES:**
+
+- **AI partnership**: Perfect use case for AI assistance
+- **Iterative refinement**: Start simple, enhance progressively
+- **Learning approach**: Understand the generated code, don't just copy
+- **Customization**: AI provides the structure, student adds domain logic
+- **Copilot advantage**: Real-time suggestions as students type
+- **Testing**: AI can generate test cases for different CLI scenarios
+- **Documentation**: AI can help write comprehensive help text
+:::
+
+---
+
+# Part 2: Python Packages & Project Structure
+
+---
+
+## 🏗️ From scripts to packages: The evolution
+
+### **The journey every Python developer takes:**
+
+::: {.incremental}
+- **Stage 1**: Single `.py` file - `my_script.py` does everything
+- **Stage 2**: Multiple files - `utils.py`, `api.py`, `cli.py` in one folder
+- **Stage 3**: Package structure - Organized directories with `__init__.py` files
+- **Stage 4**: Installable package - Can `pip install` your own code
+- **Career reality**: Professional projects are always Stage 3 or 4
+:::
+
+::: {.notes}
+**TEACHING NOTES:**
+
+- **Natural progression**: Students are transitioning from Stage 1 to Stage 2
+- **Midterm timing**: Perfect moment to introduce Stage 3
+- **Industry expectation**: All professional Python is packaged
+- **Framework requirement**: Django, Flask, FastAPI all expect package structure
+- **Interview relevance**: System design questions assume understanding of packages
+- **Career preparation**: Portfolio projects should demonstrate proper structure
+:::
+
+---
+
+## 🤔 Why package structure matters
+
+::: {.incremental}
+- **Code organization**: Logical grouping of related functionality
+- **Reusability**: Import code across multiple projects
+- **Collaboration**: Team members work on different modules without conflicts
+- **Testing**: Easier to test individual components in isolation
+- **Distribution**: Share your code with others via PyPI
+- **Professionalism**: Signals you understand production Python development
+:::
+
+### **Real-world examples:**
+
+::: {.incremental}
+- **[Django](https://github.com/django/django)**: Models, views, templates organized in packages
+- **[Requests](https://github.com/psf/requests)**: `requests/`, `requests/auth/`, `requests/models/`
+- **Your midterm**: Transform a script into a proper package structure
+:::
+
+::: {.notes}
+**TEACHING NOTES:**
+
+- **GitHub examples**: Show popular projects on GitHub
+- **Module boundaries**: Clear separation of concerns
+- **Import advantages**: Clean import statements
+- **Testing structure**: Tests mirror package structure
+- **Documentation**: Package structure serves as architecture documentation
+- **Career impact**: Employers review GitHub repos - structure matters
+:::
+
+---
+
+## 📦 What is a Python package?
+
+::: {.incremental}
+- A **[package](https://docs.python.org/3/tutorial/modules.html#packages)** is a directory containing an `__init__.py` file
+- **Module**: A single `.py` file
+- **Package**: A directory of modules with `__init__.py`
+- **Subpackage**: A package inside another package
+- **`__init__.py`**: Marks directory as package, can contain initialization code
+- **Modern Python (3.3+)**: `__init__.py` optional but still recommended
+:::
+
+::: {.notes}
+**TEACHING NOTES:**
+
+- **Historical context**: PEP 420 made `__init__.py` optional
+- **Best practice**: Still include it for clarity and initialization
+- **Empty file**: Often `__init__.py` is empty - that's fine
+- **Import control**: Can control what's exposed from package
+- **Package discovery**: Helps tools find and index your code
+- **Backward compatibility**: Ensures code works on older Python versions
+:::
+
+---
+
+## 🗂️ Basic package structure: A practical example
+
+```
+my_api_project/
+│
+├── my_api/                  # Main package directory
+│   ├── __init__.py         # Marks this as a package
+│   ├── api.py              # API client code
+│   ├── cli.py              # CLI interface
+│   └── utils.py            # Utility functions
+│
+├── tests/                   # Test directory
+│   ├── __init__.py
+│   ├── test_api.py
+│   └── test_cli.py
+│
+├── main.py                  # Entry point script
+├── requirements.txt         # Dependencies
+└── README.md               # Documentation
+```
+
+### **Using this structure:**
+
+```python
+# In main.py
+from my_api.cli import main
+from my_api.api import fetch_data
+from my_api.utils import format_output
+
+if __name__ == "__main__":
+    main()
+```
+
+::: {.notes}
+**TEACHING NOTES:**
+
+- **Naming convention**: Package name should be lowercase, underscores OK
+- **Test structure**: Tests mirror the package structure
+- **Entry point**: `main.py` is the script users run
+- **Imports**: Clean, explicit import statements
+- **Discoverability**: Structure makes it easy to find code
+- **Scalability**: Easy to add new modules without refactoring
+- **IDE support**: Better autocomplete and navigation
+:::
+
+---
+
+## 🎯 The `__init__.py` file: Package initialization
+
+### **Empty `__init__.py` (most common):**
+
+```python
+# my_api/__init__.py
+# Empty file - marks directory as package
+```
+
+### **With initialization code:**
+
+```python
+# my_api/__init__.py
+"""My API Client Package - A professional API wrapper."""
+
+# Import key functions for convenient access
+from my_api.api import fetch_data, APIClient
+from my_api.utils import format_output
+
+# Package metadata
+__version__ = "1.0.0"
+__author__ = "Your Name"
+
+# Define public API - controls "from my_api import *"
+__all__ = ["fetch_data", "APIClient", "format_output"]
+```
+
+### **Usage becomes cleaner:**
+
+```python
+# Instead of: from my_api.api import fetch_data
+# You can do: from my_api import fetch_data
+
+import my_api
+print(my_api.__version__)  # 1.0.0
+```
+
+::: {.notes}
+**TEACHING NOTES:**
+
+- **Empty is fine**: Most `__init__.py` files are empty
+- **Convenience imports**: Re-export commonly used items
+- **Version management**: Single source of truth for version
+- **Public API**: `__all__` defines the official interface
+- **Documentation**: Good place for package-level docstring
+- **Initialization**: Can set up logging, config, etc.
+- **Best practice**: Keep it minimal - complex init code slows imports
+:::
+
+---
+
+## 🔀 Import systems: Absolute vs relative
+
+### **Absolute imports (preferred):**
+
+```python
+# my_api/cli.py
+from my_api.api import fetch_data
+from my_api.utils import format_output
+import my_api
+```
+
+### **Relative imports (within a package):**
+
+```python
+# my_api/cli.py
+from .api import fetch_data        # Same directory
+from .utils import format_output   # Same directory
+from ..other_package import helper # Parent directory
+```
+
+### **When to use each:**
+
+::: {.incremental}
+- **Absolute imports**: Default choice, always clear where code comes from
+- **Relative imports**: Useful for large packages, makes refactoring easier
+- **[PEP 8](https://peps.python.org/pep-0008/#imports) recommendation**: Prefer absolute imports unless path becomes excessively long
+:::
+
+::: {.notes}
+**TEACHING NOTES:**
+
+- **Clarity**: Absolute imports are more explicit
+- **Refactoring**: Relative imports survive package renaming
+- **Main script issue**: Relative imports don't work in `__main__` scripts
+- **Team preference**: Some teams prefer one style consistently
+- **IDE support**: Absolute imports have better IDE autocomplete
+- **Best practice**: Be consistent within a project
+- **Learning curve**: Start with absolute, learn relative later
+:::
+
+---
+
+## 🎭 The `__name__ == "__main__"` pattern
+
+### **Understanding Python execution:**
+
+::: {.incremental}
+- When Python runs a file directly: `__name__` is set to `"__main__"`
+- When Python imports a file: `__name__` is the module name
+- This allows code to be both a **script** (runnable) and a **module** (importable)
+:::
+
+### **The pattern:**
+
+```python
+# my_api/api.py
+
+def fetch_data(api_name: str):
+    """Fetch data from an API."""
+    print(f"Fetching from {api_name}")
+    return {"data": "example"}
+
+def main():
+    """Entry point for running as a script."""
+    result = fetch_data("pokemon")
+    print(result)
+
+# Script mode: runs when file is executed directly
+if __name__ == "__main__":
+    main()
+```
+
+### **Usage:**
+
+```bash
+# Run as script
+$ python my_api/api.py
+Fetching from pokemon
+{'data': 'example'}
+```
+
+```python
+# Import as module (main() doesn't run)
+from my_api.api import fetch_data
+```
+
+::: {.notes}
+**TEACHING NOTES:**
+
+- **Dual purpose**: Same file can be script or library
+- **Testing**: Allows easy manual testing of modules
+- **Convention**: Every Python developer knows this pattern
+- **Protection**: Prevents code from running on import
+- **Entry points**: Often combined with CLI parsing
+- **Interview topic**: Frequently asked in Python interviews
+- **Best practice**: All modules should be importable without side effects
+:::
+
+---
+
+## 📐 Modern project layout: The `src/` structure
+
+### **Recommended professional structure:**
+
+```
+my_api_project/
+│
+├── src/                     # Source code (modern best practice)
+│   └── my_api/
+│       ├── __init__.py
+│       ├── api.py
+│       ├── cli.py
+│       └── utils.py
+│
+├── tests/                   # Tests outside source tree
+│   ├── __init__.py
+│   ├── test_api.py
+│   └── test_cli.py
+│
+├── docs/                    # Documentation
+│   └── index.md
+│
+├── pyproject.toml           # Modern Python project metadata
+├── README.md
+└── .gitignore
+```
+
+### **Why `src/` layout?**
+
+::: {.incremental}
+- **Import discipline**: Ensures you test installed version, not local files
+- **Namespace clarity**: Prevents accidental relative imports
+- **Professional standard**: Adopted by Python Packaging Authority ([PyPA](https://packaging.python.org/en/latest/discussions/src-layout-vs-flat-layout/))
+- **Build isolation**: Cleaner separation of source and build artifacts
+:::
+
+::: {.notes}
+**TEACHING NOTES:**
+
+- **Modern trend**: `src/` layout gaining popularity
+- **Testing benefit**: Forces proper package installation
+- **Flat vs src**: Flat layout is simpler for beginners
+- **Migration**: Easy to adopt later if needed
+- **Tool support**: Modern tools (Poetry, PDM, Hatch) prefer `src/`
+- **Career preparation**: New projects should use `src/`
+- **Legacy code**: Many projects still use flat layout - both are valid
+:::
+
+---
+
+## 🔧 Making code installable: `pyproject.toml`
+
+### **Modern Python packaging with [`pyproject.toml`](https://packaging.python.org/en/latest/guides/writing-pyproject-toml/):**
+
+```toml
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "my-api-tool"
+version = "0.1.0"
+description = "A professional API client for [Your API]"
+authors = [{name = "Your Name", email = "you@example.com"}]
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "requests>=2.31.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0.0",
+    "black>=23.0.0",
+    "ruff>=0.1.0",
+]
+
+[project.scripts]
+my-api = "my_api.cli:main"  # Creates a 'my-api' command
+```
+
+### **Installing in editable mode:**
+
+```bash
+# Install your package locally for development
+pip install -e .
+
+# Now you can import it anywhere
+python -c "from my_api import fetch_data"
+
+# And use the CLI command
+my-api pokemon pikachu
+```
+
+::: {.notes}
+**TEACHING NOTES:**
+
+- **Modern standard**: `pyproject.toml` replaces `setup.py`
+- **PEP 621**: Standardized project metadata format
+- **Editable install**: `-e` flag links to source code
+- **Scripts**: Automatically creates CLI commands
+- **Dependencies**: Central place for all requirements
+- **Tool config**: Can include black, pytest, ruff config
+- **Career relevance**: All new Python projects use this format
+:::
+
+---
+
+## ⚡ Modern Python tooling: Enter `uv`
+
+::: {.incremental}
+- **[`uv`](https://github.com/astral-sh/uv)** is a blazingly fast Python package installer and resolver (written in Rust!)
+- **10-100× faster** than pip for most operations
+- **Drop-in replacement**: `uv pip install` works like `pip install`
+- **Created by Astral**: Same team behind [Ruff](https://github.com/astral-sh/ruff) (the fast Python linter)
+- **Growing adoption**: Becoming the standard for new Python projects
+- **Learning curve**: Minimal - works like pip but faster
+:::
+
+### **Basic usage:**
+
+```bash
+# Install uv
+curl -LsSf https://astral.sh/uv/install.sh | sh
+
+# Use it like pip
+uv pip install requests
+uv pip install -e .           # Editable install
+
+# Create virtual environments
+uv venv
+source .venv/bin/activate
+```
+
+::: {.notes}
+**TEACHING NOTES:**
+
+- **Performance**: Show speed comparison demos if possible
+- **Rust connection**: Perfect bridge to next week's Rust introduction
+- **Modern tooling**: Python ecosystem is modernizing rapidly
+- **Optional**: Students can stick with pip if they prefer
+- **Industry trend**: Major projects adopting uv
+- **Simplicity**: Don't overcomplicate - it's just a faster pip
+- **Future-proofing**: Learning modern tools prepares for career
+:::
+
+---
+
+## 🤖 AI-assisted package scaffolding
+
+### **Prompt strategies for project structure:**
+
+::: {.incremental}
+- **Initial scaffold**: "Create a Python package structure for an API client project with CLI, tests, and proper imports"
+- **Best practices**: "Show me a modern Python project layout with src/ structure and pyproject.toml"
+- **Migration**: "Convert my single-file script into a proper Python package with separate modules"
+- **Documentation**: "Generate a README with installation and usage instructions for my package"
+:::
+
+### **AI tools excel at:**
+
+::: {.incremental}
+- Generating boilerplate directory structures
+- Creating `__init__.py` files with proper imports
+- Writing `pyproject.toml` configurations
+- Setting up testing frameworks
+- Generating comprehensive README files
+:::
+
+::: {.notes}
+**TEACHING NOTES:**
+
+- **Scaffolding**: AI is perfect for generating project skeletons
+- **Learning opportunity**: Study the generated structure to understand patterns
+- **Customization**: AI provides template, student adds domain logic
+- **Iteration**: Refine structure through conversation with AI
+- **Best practices**: AI incorporates current Python packaging standards
+- **Time savings**: Reduces tedious setup work
+- **Career skill**: Knowing how to use AI for project setup is valuable
+:::
+
+---
+
+## 💡 Practical example: Midterm project structure
+
+### **Recommended structure for your midterm:**
+
+```
+my_midterm_project/
+│
+├── src/
+│   └── my_api_tool/
+│       ├── __init__.py          # Package initialization
+│       ├── api_client.py        # API interaction logic
+│       ├── cli.py               # argparse CLI interface
+│       ├── models.py            # Data models/classes
+│       └── utils.py             # Helper functions
+│
+├── tests/
+│   ├── __init__.py
+│   ├── test_api_client.py      # API tests
+│   ├── test_cli.py              # CLI tests
+│   └── test_models.py           # Model tests
+│
+├── .github/
+│   └── workflows/
+│       └── tests.yml            # GitHub Actions CI/CD
+│
+├── pyproject.toml               # Project configuration
+├── README.md                    # Your documentation
+├── .gitignore                   # Git exclusions
+└── requirements.txt             # Or use pyproject.toml dependencies
+```
+
+::: {.notes}
+**TEACHING NOTES:**
+
+- **Midterm application**: This is the target structure for their projects
+- **Gradual adoption**: Can start simpler and refactor
+- **Testing**: Structure makes testing easier
+- **CI/CD**: GitHub Actions can run tests automatically
+- **Portfolio quality**: This structure impresses employers
+- **Flexibility**: Can adapt structure to project needs
+- **Documentation**: README is essential for grading and sharing
+:::
+
+---
+
+## 🔗 Putting it all together: CLI + Package structure
+
+### **Entry point (`main.py` or `src/my_api_tool/__main__.py`):**
+
+```python
+"""Entry point for the my_api_tool CLI."""
+from my_api_tool.cli import main
+
+if __name__ == "__main__":
+    main()
+```
+
+### **CLI module (`src/my_api_tool/cli.py`):**
+
+```python
+"""Command-line interface for API tool."""
+import argparse
+import sys
+from my_api_tool.api_client import APIClient
+from my_api_tool.utils import format_output
+
+def main():
+    parser = argparse.ArgumentParser(description="API client tool")
+    parser.add_argument("resource", help="Resource to fetch")
+    parser.add_argument("--format", choices=["json", "pretty"], default="pretty")
+
+    args = parser.parse_args()
+
+    try:
+        client = APIClient()
+        data = client.fetch(args.resource)
+        print(format_output(data, args.format))
+        return 0
+    except Exception as e:
+        print(f"Error: {e}", file=sys.stderr)
+        return 1
+
+if __name__ == "__main__":
+    sys.exit(main())
+```
+
+### **Usage after install:**
+
+```bash
+pip install -e .
+my-api-tool pokemon --format json
+```
+
+::: {.notes}
+**TEACHING NOTES:**
+
+- **Integration**: Shows how CLI and package structure work together
+- **Clean imports**: Package structure enables clear module organization
+- **Professional pattern**: This is production-quality code structure
+- **Testability**: Each component can be tested independently
+- **Maintainability**: Easy to find and modify code
+- **Scalability**: Can grow from simple to complex without refactoring
+- **Career preparation**: This is exactly how professional tools are structured
+:::
+
+---
+
+## 🌉 Bridge to Rust: A preview of next week
+
+### **Python packaging challenges we've seen:**
+
+::: {.incremental}
+- **Manual structure**: Create directories, `__init__.py` files by hand
+- **Import complexity**: Absolute vs relative, `__name__ == "__main__"` patterns
+- **Dependency management**: Multiple tools (`pip`, `venv`, `pyproject.toml`)
+- **Build system**: Choose from many options (setuptools, hatch, poetry, PDM)
+:::
+
+### **Next week in Rust:**
+
+::: {.incremental}
+- **[Cargo](https://doc.rust-lang.org/cargo/)** handles **everything** automatically
+- **One command**: `cargo new my_project` creates perfect structure
+- **Built-in**: Package management, building, testing, documentation
+- **No decisions**: One standard way to structure projects
+- **Comparison point**: "Remember Python packages? Rust's Cargo solves all those pain points"
+:::
+
+::: {.notes}
+**TEACHING NOTES:**
+
+- **Transition preview**: Prepare students for next week's Rust intro
+- **Fresh perspective**: Python midterm experience will highlight Rust's advantages
+- **Comparison learning**: Understanding Python packages makes Cargo appreciation deeper
+- **Motivation**: "You've learned the hard way, now see the automatic way"
+- **Career context**: Understanding both approaches makes better engineers
+- **Ecosystem differences**: Python's flexibility vs Rust's opinionation
+- **Learning sequence**: Intentional - Python first shows why Cargo matters
+:::
+
+---
+
+## 📚 Resources and further learning
+
+### **Official documentation:**
+
+::: {.incremental}
+- **[argparse](https://docs.python.org/3/library/argparse.html)** - Python standard library CLI tool
+- **[Python Packages](https://docs.python.org/3/tutorial/modules.html#packages)** - Official modules and packages guide
+- **[Packaging Projects](https://packaging.python.org/en/latest/tutorials/packaging-projects/)** - Python Packaging Authority tutorial
+- **[Click](https://click.palletsprojects.com/)** - Alternative CLI framework (more advanced)
+- **[Typer](https://typer.tiangolo.com/)** - Modern CLI with type hints
+- **[Rich](https://rich.readthedocs.io/)** - Beautiful terminal output
+- **[uv documentation](https://github.com/astral-sh/uv)** - Fast Python package installer
+:::
+
+### **Advanced topics:**
+
+::: {.incremental}
+- **[PEP 8](https://peps.python.org/pep-0008/)** - Python style guide
+- **[PEP 621](https://peps.python.org/pep-0621/)** - Project metadata in `pyproject.toml`
+- **Entry points** - Creating console scripts
+- **Namespace packages** - Splitting packages across distributions
+:::
+
+::: {.notes}
+**TEACHING NOTES:**
+
+- **Progressive depth**: Start with basics, explore advanced topics as needed
+- **Career resources**: Bookmark these for future reference
+- **Community**: Python packaging is well-documented
+- **Modern practices**: Links focus on current best practices
+- **Tool ecosystem**: Many options - all are valid choices
+- **AI assistance**: Can help understand these docs
+:::
+
+---
+
+## 🎯 Applying to your midterm project
+
+### **This week's work session:**
+
+::: {.incremental}
+- **Restructure your code** into a proper package with `src/` layout
+- **Add a CLI interface** with argparse for easy testing and demonstration
+- **Create clean imports** between your modules
+- **Add entry point** in `pyproject.toml` for your CLI command
+- **Document usage** in your README with examples
+- **Test your CLI** with different arguments and edge cases
+:::
+
+### **Success criteria:**
+
+::: {.incremental}
+- Can run `pip install -e .` to install your project
+- CLI works with intuitive arguments and helpful error messages
+- Code is organized in logical modules with clean imports
+- `--help` flag provides clear usage instructions
+- README explains installation and usage
+:::
+
+::: {.notes}
+**TEACHING NOTES:**
+
+- **Actionable**: Students should leave with clear next steps
+- **Midterm focus**: Everything ties back to their projects
+- **Quality bar**: Set expectations for professional-level work
+- **Support**: Encourage office hours for structure questions
+- **AI assistance**: Perfect use case for AI pair programming
+- **Timeline**: Due next week - emphasize time management
+- **Grading**: Structure and CLI quality are assessment criteria
+:::
+
+---
+
+## 📋 Summary: Key takeaways
+
+::: {.incremental}
+- **CLI with argparse**: Create professional command-line tools with automatic help and validation
+- **Package structure**: Organize code with `__init__.py`, proper imports, and logical modules
+- **`__name__ == "__main__"`**: Make code both runnable and importable
+- **Modern tooling**: `pyproject.toml` and `uv` represent the future of Python development
+- **Integration**: CLI + packages = professional, maintainable applications
+- **Midterm application**: Apply these patterns immediately to elevate your projects
+- **Next week**: See how Rust's Cargo handles all this automatically
+:::
+
+::: {.notes}
+**TEACHING NOTES:**
+
+- **Concept reinforcement**: Review the most important patterns
+- **Practical focus**: Everything learned today applies to midterm
+- **Confidence building**: Students have the tools to build professional software
+- **Career preparation**: These are fundamental professional Python skills
+- **Course progression**: Sets up perfect contrast with Rust next week
+- **Support**: Office hours available for implementation questions
+- **Celebration**: Students have now learned comprehensive Python development
+:::
+
+---
+
+## 🚀 Work session: Build your professional Python application
+
+### **Today's goals:**
+
+::: {.incremental}
+- Restructure your midterm project with proper package layout
+- Implement a CLI interface with argparse
+- Create clean module organization
+- Test your CLI and fix any issues
+- Update your README with installation and usage instructions
+:::
+
+### **Need help?**
+
+::: {.incremental}
+- Review the slide examples
+- Use AI assistants for structure scaffolding
+- Ask questions as you work
+- Reference the official documentation
+- Test frequently as you refactor
+:::
+
+**Let's build something professional!** 🎉
+
+::: {.notes}
+**TEACHING NOTES:**
+
+- **Hands-on time**: Students work on their projects during class
+- **Availability**: Circulate to help with questions
+- **Common issues**: Be ready to debug import errors, argparse confusion
+- **Encouragement**: Refactoring is professional skill - embrace it
+- **Time management**: Midterm due next week - use this time wisely
+- **Collaboration**: Students can help each other with structure questions
+- **Quality focus**: Better structure now = easier maintenance later
+:::

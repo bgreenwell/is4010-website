@@ -1,0 +1,35 @@
+---
+title: "Troubleshooting"
+subtitle: "Common issues and their solutions"
+---
+
+Welcome to IS 4010! Here are some common issues and their solutions.
+
+### Python issues
+
+**`ModuleNotFoundError: No module named 'labXX'`**
+*   **Fix**: Ensure you are running `pytest` from the **repository root**, not inside the `weekXX` folder.
+*   Command: `pytest weekXX/tests/`
+
+**`python: command not found`**
+*   **Fix**: Try using `python3` instead. If on Windows, ensure you checked "Add to PATH" during installation.
+
+### Git & GitHub issues
+
+**`Permission denied (publickey)`**
+*   **Fix**: You are likely trying to push without setting up authentication.
+*   **Solution**: Use a **Personal Access Token (PAT)** as your password when prompted, or set up SSH keys.
+
+**Changes not showing on GitHub**
+*   **Fix**: Did you `git push`? Committing only saves changes locally.
+
+### Rust issues
+
+**`cargo: command not found`**
+*   **Fix**: You may need to restart your terminal after installing Rust to refresh your PATH.
+
+### GitHub Actions
+
+**Workflow not triggering**
+*   **Fix**: For your first lab, go to the **Actions** tab on GitHub and click "I understand my workflows, enable them".
+*   **Fix**: Ensure you pushed your code!

@@ -1,0 +1,7 @@
+/.quarto/
+/docs/
+/.ipynb_checkpoints/
+.DS_Store
+*.docx
+*.pdf
+/downloads/

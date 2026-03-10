@@ -1,0 +1,1053 @@
+---
+title: "IS4010: AI-Enhanced Application Development"
+subtitle: "Week 3: Python Basics & Control Flow"
+author: "Brandon M. Greenwell"
+format: 
+  revealjs:
+    self-contained: false
+    theme: dracula
+    transition: fade
+    scrollable: true
+    css: custom.css
+---
+
+# Welcome to Python 🐍
+
+## A brief history of Python 📚
+
+::: {.incremental}
+- **Born on Christmas 1989**: [Guido van Rossum](https://en.wikipedia.org/wiki/Guido_van_Rossum) started Python as a hobby project during the Christmas holidays
+- **Named after Monty Python**: Not the snake! Guido was reading Monty Python's Flying Circus scripts and thought it was a fun, short name
+- **First release (1991)**: Python 0.9.0 featured classes, functions, and exception handling
+- **Philosophy**: "There should be one obvious way to do it" - emphasis on readability and simplicity
+- **Modern dominance**: Now one of the world's most popular programming languages
+:::
+
+::: {.notes}
+**TEACHING NOTES:**
+
+- **Personal story angle**: Emphasize that Python started as one person's Christmas project - shows how individual creativity can change the world
+- **Monty Python connection**: Students often remember this fun fact, and it shows the Python community's sense of humor
+- **1991 context**: This was before the World Wide Web! Python predates most of the internet as we know it
+- **Philosophy matters**: This emphasis on readability is why Python is so beginner-friendly
+- **Connect to today**: Python powers Instagram, YouTube, Netflix, and most AI/machine learning applications
+:::
+
+---
+
+## Why Python matters today 🌟
+
+::: {.incremental}
+- **Readability first**: "Code is read more often than it's written" - Python prioritizes human understanding
+- **Versatility**: Web development, data science, AI/ML, automation, scientific computing
+- **Huge ecosystem**: Over 400,000 packages available on [PyPI](https://pypi.org/)
+- **Industry adoption**: Powers Instagram, Spotify, Netflix, and most AI research
+- **Perfect learning language**: Gentle learning curve, powerful capabilities
+- **Career relevance**: Consistently ranks as one of the most in-demand programming languages
+:::
+
+::: {.notes}
+**TEACHING NOTES:**
+
+- **Readability example**: Show the same algorithm in C++ vs Python - the difference is striking
+- **Ecosystem power**: Compare to other languages - few have Python's breadth of libraries
+- **Industry examples**: These aren't toy applications - these are billion-dollar companies running on Python
+- **Learning progression**: Students can start simple and grow into complex applications
+- **Job market data**: Reference recent surveys showing Python's popularity with employers
+- **Connect to course**: This versatility is why we're teaching Python first, then Rust
+:::
+
+---
+
+## The Zen of Python 🧘
+
+```python
+import this  # Try this in Python!
+```
+
+*([PEP 20 - The Zen of Python](https://peps.python.org/pep-0020/))*
+
+::: {.incremental}
+- **"Beautiful is better than ugly"**
+- **"Simple is better than complex"**  
+- **"Readability counts"**
+- **"There should be one obvious way to do it"**
+- These principles guide everything we'll learn
+:::
+
+::: {.notes}
+**LIVE DEMO NOTE:**
+Open Python interpreter and type `import this` to show the full Zen of Python. Students always enjoy this Easter egg.
+
+**Key principles to emphasize:**
+- These aren't just nice sayings - they influence language design decisions
+- When you have multiple ways to solve a problem, choose the most readable
+- Python values developer time over computer time (within reason)
+- The community takes these principles seriously - you'll see them referenced in discussions
+:::
+
+---
+
+## How to run Python code 💻
+
+There are three main ways to execute Python code, each with different use cases:
+
+::: {.incremental}
+1. **Command line execution**: Run complete programs from files
+   - `python script.py` - Execute a Python file
+   - `python -c "print('Hello World')"` - Run a single command
+   
+2. **Interactive REPL**: Test code snippets and explore
+   - `python` - Start interactive Python shell
+   - Great for testing, learning, and debugging
+   
+3. **Integrated Development Environment (IDE)**: Professional development
+   - [VS Code](https://code.visualstudio.com/) with Python extension
+   - [PyCharm](https://www.jetbrains.com/pycharm/), [Sublime Text](https://www.sublimetext.com/), [Vim](https://www.vim.org/)
+   - Built-in terminals, debugging, and code completion
+:::
+
+::: {.notes}
+**TEACHING NOTES:**
+
+- **Demo all three**: Show live examples of each execution method
+- **REPL demonstration**: Show how to use `python` command to get interactive shell
+- **VS Code focus**: Since this is what students should be using in the course
+- **File execution**: Show how their lab scripts will be run
+- **Debugging**: Mention that IDEs make debugging much easier
+:::
+
+---
+
+## Modern Python toolchain 🛠️
+
+Python development has evolved with modern tools that make coding faster and more reliable:
+
+::: {.incremental}
+- **[uv](https://docs.astral.sh/uv/)**: Ultra-fast Python package manager and project manager
+  - 10-100x faster than `pip` for installing packages
+  - Handles virtual environments automatically
+  - `uv run script.py` - Run scripts with automatic dependency management
+
+- **[ruff](https://docs.astral.sh/ruff/)**: Lightning-fast Python linter and formatter  
+  - 10-100x faster than traditional tools (flake8, black, isort)
+  - Catches common errors and enforces style consistency
+  - Integrates seamlessly with VS Code
+
+- **Why these matter**: Industry is rapidly adopting these tools for speed and reliability
+- **Course usage**: We'll primarily use traditional tools (pip, pytest) but be aware these exist
+:::
+
+::: {.notes}
+**TEACHING NOTES:**
+
+- **Modern landscape**: The Python tooling ecosystem is evolving rapidly
+- **Speed emphasis**: These tools solve real performance problems developers face
+- **Industry adoption**: Major companies are switching to these tools
+- **Course balance**: We teach fundamentals first, modern tools second
+- **Career relevance**: Students will encounter these in internships/jobs
+- **Optional exploration**: Encourage students to try these tools for personal projects
+:::
+
+---
+
+# Session 1: Python fundamentals & data types
+
+---
+
+## Understanding variables 📦
+
+::: {.incremental}
+- Think of a variable as a **labeled box** where you can store a piece of information
+- **Assignment**: We use the equals sign (`=`) to put data into variables
+- **Naming matters**: Choose descriptive names that explain what the data represents
+- **Python convention**: Use `snake_case` for variable names ([PEP 8 Style Guide](https://peps.python.org/pep-0008/))
+- **Memory insight**: Variables are actually references to objects in memory
+:::
+
+```python
+# Good variable names (descriptive and clear)
+student_name = "Grace Hopper"
+birth_year = 1906
+is_computer_pioneer = True
+course_grade = 95.7
+
+# Poor variable names (avoid these)
+n = "Grace Hopper"    # What is 'n'?
+x = 1906             # What does 'x' represent?
+```
+
+::: {.notes}
+**TEACHING NOTES:**
+
+- **Box metaphor**: Use physical props if possible - show a labeled box with items inside
+- **Memory concept**: Don't go too deep, but plant the seed that variables point to objects
+- **Naming importance**: Bad variable names are the #1 cause of unreadable code
+- **snake_case rationale**: Explain this is Python convention, different languages have different conventions
+- **Good examples**: Use real historical figures students might recognize (Grace Hopper invented the first compiler!)
+:::
+
+---
+
+## Python naming conventions 🏷️
+
+::: {.incremental}
+- **Variables and functions**: `snake_case` (words separated by underscores)
+  - `user_name`, `calculate_total`, `is_valid`
+- **Constants**: `SCREAMING_SNAKE_CASE` (all caps)
+  - `MAX_ATTEMPTS = 3`, `PI = 3.14159`
+- **Classes**: `PascalCase` (capitalize each word)
+  - `StudentRecord`, `BankAccount`, `WeatherData`
+- **Modules**: `lowercase` or `snake_case`
+  - `math`, `user_authentication`
+:::
+
+```python
+# Following Python conventions
+MAX_LOGIN_ATTEMPTS = 3
+user_email = "grace@navy.mil"
+account_balance = 1250.75
+
+def calculate_interest(principal, rate):
+    return principal * rate
+
+class BankAccount:
+    pass
+```
+
+::: {.notes}
+**TEACHING NOTES:**
+
+- **Consistency matters**: Following conventions makes your code readable to other Python developers
+- **PEP 8**: Mention this is codified in PEP 8, Python's style guide
+- **Industry relevance**: Professional codebases follow these conventions religiously
+- **Tool support**: IDEs and linters will flag violations of these conventions
+- **Examples**: Use realistic business examples students might encounter in internships
+:::
+
+---
+
+## Variable assignment patterns 🔄
+
+::: {.incremental}
+- **Multiple assignment**: Assign several variables at once
+- **Tuple unpacking**: Extract values from collections
+- **Chained assignment**: Give the same value to multiple variables
+- **Augmented assignment**: Modify variables in place
+:::
+
+```python
+# Multiple assignment
+name, age, grade = "Alice", 20, "A"
+
+# Tuple unpacking from a function return
+def get_student_info():
+    return "Bob", 21, 3.8
+
+student_name, student_age, gpa = get_student_info()
+
+# Chained assignment
+x = y = z = 0
+
+# Augmented assignment operators
+score = 85
+score += 10    # Same as: score = score + 10
+score *= 2     # Same as: score = score * 2
+```
+
+::: {.notes}
+**TEACHING NOTES:**
+
+- **Multiple assignment**: Demonstrate how this reads left to right, very intuitive
+- **Tuple unpacking**: This is a preview of functions returning multiple values
+- **Common use cases**: Show real scenarios where each pattern is useful
+- **Augmented operators**: Cover +=, -=, *=, /=, //=, %=, **=
+- **Warning**: Chained assignment can be confusing with mutable objects (save for later)
+:::
+
+## Core data types 🧩
+
+::: {.incremental}
+- **`str` (string)**: Text data, enclosed in quotes (`'` or `"`)
+- **`int` (integer)**: Whole numbers, positive or negative
+- **`float` (floating-point)**: Numbers with decimal points
+- **`bool` (boolean)**: Truth values (`True` or `False`)
+- **Dynamic typing**: Python figures out the type automatically
+- **`type()` function**: Use this to check what type a variable is
+:::
+
+```python
+# Python automatically determines types
+student_name = "Ada Lovelace"        # str
+student_id = 12345                   # int
+gpa = 3.95                          # float
+is_honors_student = True            # bool
+graduation_year = None              # NoneType
+
+# Check types
+print(type(student_name))    # <class 'str'>
+print(type(gpa))            # <class 'float'>
+print(type(is_honors_student))  # <class 'bool'>
+```
+
+::: {.notes}
+**TEACHING NOTES:**
+
+- **Dynamic typing advantage**: No need to declare types like in Java/C++
+- **Type checking**: Show live `type()` examples in Python interpreter
+- **None type**: Briefly introduce `None` as Python's null value
+- **Historical reference**: Ada Lovelace wrote the first computer program in 1843
+- **Common beginner confusion**: `"123"` is a string, `123` is an integer
+:::
+
+---
+
+## Strings: Working with text 📝
+
+::: {.incremental}
+- **Single vs double quotes**: Both work the same, choose one style and be consistent
+- **Triple quotes**: For multi-line strings (also used for docstrings)
+- **Escape sequences**: Special characters like `\n` (newline), `\t` (tab)
+- **String immutability**: Strings cannot be changed after creation
+- **Common methods**: `.upper()`, `.lower()`, `.strip()`, `.replace()`
+:::
+
+```python
+# Different ways to create strings
+name = 'Alan Turing'
+name = "Alan Turing"          # Equivalent
+quote = """Computing machinery and intelligence
+was published in 1950 by Alan Turing."""
+
+# Escape sequences
+message = "Hello\nWorld\t!"   # Hello(newline)World(tab)!
+file_path = "C:\\Users\\Documents\\file.txt"  # Windows path
+
+# String methods
+name = "  alan turing  "
+print(name.strip().title())   # "Alan Turing"
+print(name.upper())          # "  ALAN TURING  "
+print(name.replace("alan", "Alan"))  # "  Alan turing  "
+```
+
+::: {.notes}
+**TEACHING NOTES:**
+
+- **Quote choice**: Many prefer double quotes for consistency with other languages
+- **Triple quotes**: Show how these are used for docstrings (connects to lab)
+- **Immutability demo**: Show that `name[0] = 'B'` raises an error
+- **Method chaining**: Explain how `.strip().title()` works step by step
+- **Real-world examples**: File paths, user input processing
+:::
+
+---
+
+## Numbers: Integers and floats 🔢
+
+::: {.incremental}
+- **Integers**: Whole numbers, unlimited precision in Python
+- **Floats**: Decimal numbers, IEEE 754 standard (limited precision)
+- **Scientific notation**: `1.5e3` means `1.5 × 10³ = 1500`
+- **Arithmetic operators**: `+`, `-`, `*`, `/`, `//` (floor division), `%` (modulo), `**` (exponent)
+- **Type conversion**: `int()`, `float()`, `str()`
+:::
+
+```python
+# Integer examples
+students_enrolled = 150
+temperature_celsius = -5
+big_number = 123456789012345678901234567890  # No limits!
+
+# Float examples
+pi = 3.14159
+temperature_fahrenheit = 23.0
+scientific = 1.5e6  # 1,500,000
+
+# Arithmetic operations
+result = 17 / 3      # 5.666666666666667 (regular division)
+result = 17 // 3     # 5 (floor division)
+result = 17 % 3      # 2 (remainder)
+result = 2 ** 10     # 1024 (exponentiation)
+
+# Type conversions
+age_str = "21"
+age_int = int(age_str)    # Convert string to integer
+pi_str = str(3.14159)     # Convert float to string
+```
+
+::: {.notes}
+**TEACHING NOTES:**
+
+- **Unlimited integers**: This is unique to Python - show very large number example
+- **Float precision**: Mention this can cause rounding errors (preview for later)
+- **Division differences**: Emphasize `/` vs `//` - common source of bugs
+- **Type conversion errors**: Show what happens with `int("hello")` - ValueError
+- **Real applications**: GPA calculations, financial computations, scientific data
+:::
+
+## Getting user input 💬
+
+::: {.incremental}
+- **`input()` function**: Gets text from user via keyboard
+- **Always returns strings**: Even if user types numbers, you get a string
+- **Type conversion needed**: Use `int()` or `float()` for numeric input
+- **Prompts**: Include helpful messages to guide users
+- **Error handling**: Be prepared for invalid input (we'll cover this later)
+:::
+
+```python
+# Simple string input
+name = input("What is your name? ")
+print(f"Hello, {name}!")
+
+# Numeric input with conversion
+age_str = input("What is your age? ")
+age = int(age_str)  # Convert to integer
+
+# One-liner for numeric input
+grade = float(input("Enter your grade (0-100): "))
+
+# Multiple inputs
+print("Tell me about yourself:")
+name = input("Name: ")
+age = int(input("Age: "))
+favorite_color = input("Favorite color: ")
+
+print(f"Hi {name}! You're {age} and love {favorite_color}.")
+```
+
+::: {.notes}
+**TEACHING NOTES:**
+
+- **Common mistake**: Students forget to convert input to numbers
+- **User experience**: Emphasize clear, helpful prompts
+- **Error preview**: Mention `int("hello")` crashes the program - we'll fix this later with exception handling
+- **f-strings**: This previews string formatting (next slide)
+- **Real applications**: User registration, settings, interactive programs
+:::
+
+---
+
+## String formatting: Making output beautiful ✨
+
+::: {.incremental}
+- **f-strings (modern)**: `f"Hello {name}!"` - preferred method
+- **`.format()` method**: `"Hello {}!".format(name)` - older but still common
+- **% formatting**: `"Hello %s!" % name` - legacy, avoid in new code
+- **Formatting numbers**: Control decimal places, padding, alignment
+:::
+
+```python
+name = "Katherine Johnson"
+salary = 75000.50
+accuracy = 0.99999
+
+# f-string examples (Python 3.6+)
+print(f"Employee: {name}")
+print(f"Salary: ${salary:,.2f}")           # $75,000.50
+print(f"Accuracy: {accuracy:.2%}")         # 99.99%
+print(f"Name width: {name:>20}")          # Right-aligned
+
+# .format() method examples
+print("Hello {}! You earned ${:,.2f}".format(name, salary))
+print("Accuracy: {:.1%}".format(accuracy))
+
+# Complex f-string expressions
+items = ["apple", "banana", "cherry"]
+print(f"We have {len(items)} fruits: {', '.join(items)}")
+
+# Multi-line f-strings
+report = f"""
+Employee Report:
+Name: {name}
+Salary: ${salary:,.2f}
+Performance: {accuracy:.1%}
+"""
+```
+
+::: {.notes}
+**TEACHING NOTES:**
+
+- **f-string preference**: Emphasize f-strings are modern Python standard
+- **Format specifiers**: Show common patterns: `:.2f` (2 decimals), `:,` (thousands separator), `:>10` (right-align in 10 chars)
+- **Historical context**: Katherine Johnson calculated trajectories for NASA space missions
+- **Live demo**: Show format playground - have students suggest numbers and formats
+- **Common uses**: Reports, user interfaces, file output
+:::
+
+## Python debugging tips 🐛
+
+::: {.incremental}
+- **Read error messages carefully**: Python gives helpful error descriptions
+- **Check variable types**: Use `type()` and `print()` to inspect values
+- **Common mistakes**: Forgetting quotes, mismatched parentheses, indentation errors
+- **Use meaningful variable names**: Makes debugging much easier
+- **Test frequently**: Don't write 100 lines before testing
+:::
+
+```python
+# Common debugging techniques
+name = input("Enter name: ")
+print(f"Debug: name = '{name}', type = {type(name)}")
+
+# Check if conversion worked
+age_str = input("Enter age: ")
+try:
+    age = int(age_str)
+    print(f"Successfully converted '{age_str}' to {age}")
+except ValueError:
+    print(f"Couldn't convert '{age_str}' to a number")
+```
+
+::: {.notes}
+**TEACHING NOTES:**
+
+- **Error message reading**: Show how Python errors point to specific lines
+- **Debug prints**: Emphasize temporary print statements are professional debugging tools
+- **Try/except preview**: Don't go deep, just show the pattern exists
+- **IDE features**: Mention VS Code's debugger for advanced debugging
+- **Psychology**: Debugging is detective work - embrace the puzzle-solving aspect
+:::
+
+---
+
+## Let's build something (Part 1) 🎭
+
+**Mad Libs Generator Preview:**
+
+::: {.incremental}
+- **Concepts applied**: Variables, input, string formatting, type conversion
+- **User interaction**: Collect words from user input
+- **String manipulation**: Use f-strings to build a story
+- **Function design**: Write testable, reusable code
+- **Professional structure**: Follow naming conventions and documentation standards
+:::
+
+```python
+def generate_mad_lib(adjective, noun, verb):
+    """
+    Generates a short story using the provided words.
+    This function is testable and reusable!
+    """
+    # Your task: Create a story using f-string formatting
+    # Must include all three parameters in the returned string
+    # Example structure: f"Once upon a time, a {adjective} {noun}..."
+    pass
+
+# How it will be used (conceptual - you'll implement the function)
+# word1 = input("Give me an adjective: ")
+# word2 = input("Give me a noun: ")  
+# word3 = input("Give me a past-tense verb: ")
+# result = generate_mad_lib(word1, word2, word3)
+# print(result)  # Should print your creative story!
+```
+
+::: {.notes}
+**TEACHING NOTES:**
+
+- **Function preview**: Students haven't learned functions yet, but show the lab structure
+- **Testability**: Emphasize why functions are better than input() inside the logic
+- **Lab connection**: This directly connects to what they'll build in lab
+- **Professional habits**: Even simple programs benefit from good structure
+- **Creativity**: Encourage students to write creative, funny stories
+:::
+
+---
+
+## Preparing for Session 2: Professional Development Workflows 📚
+
+**Suggested reading before our next class:**
+
+::: {.incremental}
+- **[Understanding GitHub Actions](https://docs.github.com/en/actions/get-started/understand-github-actions)** - Learn the fundamentals of automated workflows
+- **[Continuous Integration with GitHub Actions](https://docs.github.com/en/actions/get-started/continuous-integration)** - How automated testing works in professional development  
+- **[Continuous Deployment with GitHub Actions](https://docs.github.com/en/actions/get-started/continuous-deployment)** - From testing to production deployment
+
+**Why this matters:**
+- These are the same tools used by professional development teams
+- Understanding CI/CD workflows is increasingly expected by employers
+- You'll set up your first automated workflow in Lab 03
+:::
+
+::: {.notes}
+**TEACHING NOTES:**
+
+- **Optional but valuable**: Frame as "recommended" not "required" reading
+- **Career relevance**: Emphasize that understanding CI/CD is a marketable skill
+- **Lab connection**: This reading will make Lab 03's automated testing setup more meaningful
+- **Progressive disclosure**: Students will implement what they read about
+- **Professional context**: Many internship interviews ask about CI/CD knowledge
+:::
+
+---
+
+# Session 2: Control flow & professional testing
+
+## Conditional logic: Making decisions 🤔
+
+::: {.incremental}
+- **Decision making**: Programs need to choose different actions based on conditions
+- **Boolean expressions**: Conditions that evaluate to `True` or `False`
+- **Code blocks**: Groups of statements that execute together
+- **Indentation matters**: Python uses whitespace to group code (not braces like other languages)
+- **Comparison operators**: `==`, `!=`, `<`, `>`, `<=`, `>=`
+:::
+
+```python
+# Simple condition
+temperature = 75
+if temperature > 70:
+    print("It's warm outside!")
+    print("Perfect for a walk.")
+
+# Multiple conditions
+age = 20
+has_id = True
+
+if age >= 21 and has_id:
+    print("Welcome to the club!")
+elif age >= 18:
+    print("You can vote, but can't enter the club.")
+else:
+    print("Too young for either.")
+```
+
+::: {.notes}
+**TEACHING NOTES:**
+
+- **Indentation**: This is unique to Python - show examples of how other languages use braces
+- **Boolean logic**: Preview `and`, `or`, `not` operators
+- **Common mistake**: Using `=` instead of `==` for comparison
+- **Real applications**: User authentication, game logic, data validation
+- **Style**: Consistent indentation (4 spaces is Python standard)
+:::
+
+---
+
+## Boolean operators and logic 🧮
+
+::: {.incremental}
+- **Comparison operators**: `==` (equal), `!=` (not equal), `<`, `>`, `<=`, `>=`
+- **Logical operators**: `and`, `or`, `not`
+- **Identity operators**: `is`, `is not` (check if same object)
+- **Membership operators**: `in`, `not in` (check if item in collection)
+- **Precedence**: `not` → comparisons → `and` → `or`
+:::
+
+```python
+# Comparison examples
+score = 85
+grade = "B"
+is_passing = score >= 60          # True
+is_excellent = score >= 90        # False
+is_b_grade = grade == "B"         # True
+
+# Logical operators
+has_homework = True
+studied_hard = False
+can_pass = has_homework and studied_hard    # False
+should_study = not studied_hard             # True
+might_pass = has_homework or studied_hard   # True
+
+# Membership testing
+fruits = ["apple", "banana", "cherry"]
+has_apple = "apple" in fruits              # True
+has_orange = "orange" not in fruits        # True
+
+# Complex conditions
+username = "alice"
+password = "secret123"
+is_admin = False
+
+if username == "alice" and password == "secret123" and not is_admin:
+    print("Regular user login successful")
+```
+
+::: {.notes}
+**TEACHING NOTES:**
+
+- **Common confusion**: `=` vs `==` - assignment vs comparison
+- **Short-circuiting**: `and` stops at first False, `or` stops at first True
+- **Truthiness**: Empty strings, 0, None, empty lists are "falsy"
+- **is vs ==**: `is` checks identity, `==` checks value
+- **Practical examples**: User authentication, input validation, game conditions
+:::
+
+---
+
+## Loops: Repeating actions efficiently 🔄
+
+::: {.incremental}
+- **Why loops?** Avoid repetitive code, process collections, create interactive programs
+- **`for` loops**: When you know what you want to iterate over
+- **`while` loops**: When you want to repeat until a condition changes
+- **Loop control**: `break` (exit loop), `continue` (skip to next iteration)
+- **Nested loops**: Loops inside other loops
+:::
+
+```python
+# For loop with range()
+print("Countdown:")
+for i in range(5, 0, -1):
+    print(f"{i}...")
+print("Blast off!")
+
+# For loop with collections
+students = ["Alice", "Bob", "Charlie"]
+for student in students:
+    print(f"Hello, {student}!")
+
+# While loop for user input
+total = 0
+while total < 100:
+    number = int(input("Enter a number (goal: reach 100): "))
+    total += number
+    print(f"Current total: {total}")
+print("Goal reached!")
+
+# Loop with break and continue
+for i in range(10):
+    if i == 3:
+        continue  # Skip 3
+    if i == 7:
+        break     # Stop at 7
+    print(i)      # Prints: 0, 1, 2, 4, 5, 6
+```
+
+::: {.notes}
+**TEACHING NOTES:**
+
+- **range() function**: Explain start, stop, step parameters
+- **Collection iteration**: Show lists, strings, dictionaries (briefly)
+- **while loop danger**: Infinite loops - always ensure condition can become False
+- **break/continue**: Show when these are useful vs making conditions more complex
+- **Real applications**: Menu systems, data processing, game loops
+:::
+
+---
+
+## The `range()` function: Your loop companion 📏
+
+::: {.incremental}
+- **`range(stop)`**: Numbers from 0 to stop-1
+- **`range(start, stop)`**: Numbers from start to stop-1  
+- **`range(start, stop, step)`**: Numbers from start to stop-1, incrementing by step
+- **Memory efficient**: Generates numbers on-demand, not all at once
+- **Convert to list**: `list(range(5))` to see all values
+:::
+
+```python
+# Basic range patterns
+print(list(range(5)))           # [0, 1, 2, 3, 4]
+print(list(range(1, 6)))        # [1, 2, 3, 4, 5]
+print(list(range(0, 10, 2)))    # [0, 2, 4, 6, 8]
+print(list(range(10, 0, -1)))   # [10, 9, 8, 7, 6, 5, 4, 3, 2, 1]
+
+# Practical examples
+# Print multiplication table
+number = 7
+for i in range(1, 11):
+    print(f"{number} x {i} = {number * i}")
+
+# Process items with indices
+fruits = ["apple", "banana", "cherry"]
+for i in range(len(fruits)):
+    print(f"Item {i}: {fruits[i]}")
+
+# Better way: enumerate()
+for i, fruit in enumerate(fruits):
+    print(f"Item {i}: {fruit}")
+```
+
+::: {.notes}
+**TEACHING NOTES:**
+
+- **Common mistakes**: Forgetting range() stops before the end value
+- **Negative step**: Show countdown examples, reverse processing
+- **enumerate()**: Introduce as a more Pythonic way to get indices
+- **Memory efficiency**: Explain why range() doesn't create a huge list in memory
+- **Practical uses**: Counting, indexing, mathematical sequences
+:::
+
+## Let's build something (Part 2) 🎯
+
+**Number Guessing Game Preview:**
+
+::: {.incremental}
+- **Concepts applied**: while loops, conditionals, user input, random numbers
+- **Game logic**: Generate secret number, get user guesses, provide feedback
+- **Loop design**: Continue until correct guess is made
+- **User experience**: Clear prompts and helpful feedback
+- **Random module**: Introduction to Python's standard library
+:::
+
+```python
+import random
+
+def guessing_game():
+    """
+    Plays a number guessing game with the user.
+    Demonstrates while loops, conditionals, and user interaction.
+    """
+    secret = random.randint(1, 100)
+    attempts = 0
+    
+    print("I'm thinking of a number between 1 and 100!")
+    
+    while True:  # Continue until user guesses correctly
+        guess = int(input("Enter your guess: "))
+        attempts += 1
+        
+        if guess < secret:
+            print("Too low! Try again.")
+        elif guess > secret:
+            print("Too high! Try again.")
+        else:
+            print(f"Correct! You guessed it in {attempts} attempts!")
+            break  # Exit the loop when correct
+
+# This allows the game to run when script is executed directly
+if __name__ == '__main__':
+    guessing_game()
+```
+
+::: {.notes}
+**TEACHING NOTES:**
+
+- **Random module**: First introduction to importing modules
+- **Infinite loop pattern**: `while True:` with `break` is common in games
+- **Input validation**: Preview that we should handle invalid input (next week)
+- **if __name__ == '__main__'**: Explain this Python idiom briefly
+- **Game mechanics**: This pattern applies to many interactive programs
+:::
+
+---
+
+## Python ecosystem preview 🌍
+
+::: {.incremental}
+- **Standard library**: Batteries included - modules like [`random`](https://docs.python.org/3/library/random.html), [`math`](https://docs.python.org/3/library/math.html), [`datetime`](https://docs.python.org/3/library/datetime.html)
+- **Third-party packages**: Over 400,000 packages on [PyPI](https://pypi.org/)
+- **Package manager**: [`pip install package_name`](https://pip.pypa.io/en/stable/) to add functionality
+- **Virtual environments**: Isolate project dependencies
+- **Popular packages**: `requests` (web), `pandas` (data), `flask` (web apps)
+:::
+
+```python
+# Standard library examples
+import random
+import math
+import datetime
+
+# Random numbers for games, simulations
+lucky_number = random.randint(1, 10)
+coin_flip = random.choice(["heads", "tails"])
+
+# Mathematical functions
+area = math.pi * (radius ** 2)
+square_root = math.sqrt(16)
+
+# Date and time operations
+today = datetime.date.today()
+formatted = today.strftime("%B %d, %Y")
+
+# Coming later: third-party packages
+# pip install requests
+# import requests
+# response = requests.get("https://api.github.com/users/bgreenwell")
+```
+
+::: {.notes}
+**TEACHING NOTES:**
+
+- **Batteries included**: Python's standard library is extensive
+- **Import statement**: Show different ways to import (import, from...import)
+- **pip**: Don't go too deep, just preview package management
+- **Virtual environments**: Mention concept, cover properly in later weeks
+- **Real applications**: Show how these modules enable complex applications
+- **Preview next weeks**: We'll use requests for API calls, pandas for data analysis
+:::
+
+---
+
+## Professional development practices 🏗️
+
+::: {.incremental}
+- **Testing mindset**: Write code that proves your functions work correctly
+- **Continuous Integration (CI)**: Automatically test code every time changes are made
+- **Quality assurance**: Catch bugs early, before they reach users
+- **Documentation**: Code should explain itself and be well-documented
+- **Version control integration**: Tests run automatically when you push to GitHub
+:::
+
+::: {.notes}
+**TEACHING NOTES:**
+
+- **Professional relevance**: This is how real software companies work
+- **Bug prevention**: Testing catches mistakes before they become problems
+- **Confidence**: Tests give you confidence to make changes and refactor
+- **Portfolio value**: Automated testing shows professionalism to employers
+- **Industry standard**: All major tech companies use CI/CD workflows
+:::
+
+## Testing with `pytest` 🧪
+
+::: {.incremental}
+- **Industry standard**: Most Python projects use [pytest](https://pytest.org/) for testing
+- **Simple conventions**: Files start with `test_`, functions start with `test_`
+- **Automatic discovery**: pytest finds and runs all your tests
+- **Clear feedback**: Detailed output when tests pass or fail
+- **Easy assertions**: Use simple `assert` statements to check results
+:::
+
+```python
+# In your lab03.py file
+def add_numbers(a, b):
+    """Add two numbers and return the result."""
+    return a + b
+
+# In test_lab03.py file
+def test_add_numbers():
+    """Test that add_numbers works correctly."""
+    result = add_numbers(2, 3)
+    assert result == 5
+    
+    result = add_numbers(-1, 1)
+    assert result == 0
+    
+    result = add_numbers(0, 0)
+    assert result == 0
+```
+
+::: {.notes}
+**TEACHING NOTES:**
+
+- **Discovery pattern**: pytest automatically finds test_*.py files
+- **Assert statements**: If condition is True, test passes; if False, test fails
+- **Multiple assertions**: Each test can have multiple checks
+- **Test naming**: Test names should describe what they're testing
+- **Red-Green cycle**: Write test (red), write code (green), refactor
+:::
+
+---
+
+## GitHub Actions: Automation in the cloud ☁️
+
+::: {.incremental}
+- **Built into GitHub**: No additional setup required
+- **Event-driven**: Runs automatically when you push code
+- **Virtual machines**: Spins up fresh Linux containers for testing
+- **Free for public repos**: GitHub provides free compute time for open source
+- **Professional workflow**: Same tools used by major tech companies
+:::
+
+```yaml
+# .github/workflows/main.yml
+name: run-pytest
+
+on: [push]  # Run when code is pushed
+
+jobs:
+  build:
+    runs-on: ubuntu-latest  # Fresh Linux machine
+    steps:
+      - uses: actions/checkout@v3      # Get your code
+      - uses: actions/setup-python@v4  # Install Python
+      - name: Install dependencies
+        run: pip install pytest        # Install testing tools
+      - name: Test with pytest
+        run: pytest                   # Run all tests
+```
+
+::: {.notes}
+**TEACHING NOTES:**
+
+- **YAML format**: Configuration files use YAML (Yet Another Markup Language)
+- **Steps sequence**: Each step runs in order, failure stops the process
+- **Fresh environment**: Each run starts with a clean machine
+- **Public repos**: Free tier includes 2000 minutes/month for private repos
+- **Industry standard**: This is how real companies deploy software
+:::
+
+## Your instant feedback system 🔄
+
+::: {.incremental}
+- **Green checkmark ✅**: All tests passed - your code is working!
+- **Red X ❌**: Some tests failed - time to debug and fix
+- **Actions tab**: Click to see detailed test results and error messages
+- **Iterative process**: Fix issues, commit, push, and test again
+- **Professional habit**: Never merge code that fails tests
+:::
+
+```bash
+# Your development workflow
+git add lab03.py test_lab03.py .github/workflows/main.yml
+git commit -m "Implement mad libs and guessing game"
+git push origin main
+
+# Then check GitHub Actions tab for results
+# Green = success, Red = needs fixing
+```
+
+::: {.notes}
+**TEACHING NOTES:**
+
+- **Instant gratification**: Students love seeing immediate results
+- **Learning opportunity**: Failed tests teach debugging skills
+- **Portfolio value**: Green checkmarks show working code to employers
+- **Habit formation**: This creates good software development practices
+- **Real-world workflow**: This mirrors professional development practices
+:::
+
+---
+
+## Introducing Lab 03: Python fundamentals + CI/CD 🚀
+
+**What you'll build:**
+
+::: {.incremental}
+- **Part 1**: Mad Libs generator (variables, input, string formatting)
+- **Part 2**: Number guessing game (loops, conditionals, random numbers)
+- **Part 3**: Professional testing setup (pytest + GitHub Actions)
+- **One-time setup**: This testing framework will work for all future labs
+- **Real-world skills**: The same tools used by professional developers
+:::
+
+**Key learning outcomes:**
+- Master Python fundamentals through practical application
+- Set up automated testing and continuous integration
+- Create interactive, user-friendly programs
+- Follow professional development practices
+
+::: {.notes}
+**TEACHING NOTES:**
+
+- **Progressive complexity**: Each part builds on previous knowledge
+- **Practical application**: Real programs students can show friends/family
+- **Professional relevance**: Emphasize career-relevant skills
+- **Portfolio building**: These projects demonstrate competency
+- **Foundation setting**: This testing setup serves the entire course
+:::
+
+---
+
+## Time for Lab 03! 🧪
+
+Your comprehensive Python fundamentals lab awaits:
+
+- **Navigate to**: [`week03/lab03.md`](https://github.com/bgreenwell/is4010-course/blob/main/week03/lab03.md)
+- **Build**: Mad Libs generator and number guessing game
+- **Setup**: Professional automated testing workflow
+- **Master**: Variables, I/O, control flow, and testing
+
+**Remember**: This is your first step into professional Python development!
+
+::: {.notes}
+**FINAL TEACHING NOTES:**
+
+- **Encouragement**: Emphasize that this lab builds foundational skills
+- **Support available**: Remind students about office hours, Teams channel, AI tools
+- **Professional context**: These aren't just exercises - they're building career skills
+- **Next week preview**: We'll build on these fundamentals with data structures
+- **Success metrics**: Green checkmarks in GitHub Actions = mastery demonstrated
+:::

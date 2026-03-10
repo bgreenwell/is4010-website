@@ -1,0 +1,19 @@
+---
+title: "Week 05: Functions & errors"
+---
+
+## Introduction
+
+Coming soon!
+
+## Recommended readings
+
+- [Python tutorial](https://docs.python.org/3/tutorial/) - Official Python documentation
+
+## Lectures
+
+- [**Slides: Functions and errors**](../slides/IS4010_W05_Functions_and_Errors.qmd)
+
+## Lab assignment
+
+- [Lab 05: Functions & errors](https://github.com/bgreenwell/is4010-course)

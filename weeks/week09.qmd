@@ -1,0 +1,20 @@
+---
+title: "Week 09: Welcome to Rust"
+---
+
+## Introduction
+
+Welcome to the second half of the course—it's time to learn Rust! After mastering Python fundamentals, you're ready to explore a completely different programming paradigm. Rust is a compiled systems programming language that prioritizes performance, reliability, and memory safety. You'll discover why companies like Microsoft, Amazon, Google, Meta, and Discord are adopting Rust for performance-critical systems.
+
+## Recommended readings
+
+- [Chapter 1: Getting started](https://doc.rust-lang.org/book/ch01-00-getting-started.html) - Installation and Cargo basics
+- [Chapter 3: Common programming concepts](https://doc.rust-lang.org/book/ch03-00-common-programming-concepts.html) - Variables, types, and functions
+
+## Lectures
+
+- [**Slides: Welcome to Rust**](../slides/IS4010_W09_Welcome_to_Rust.qmd)
+
+## Lab assignment
+
+- [Lab 09: Welcome to Rust](https://github.com/bgreenwell/is4010-rust/blob/main/week09/lab09.md)

@@ -1,0 +1,19 @@
+---
+title: "Week 02: AI-assisted dev"
+---
+
+## Introduction
+
+Coming soon!
+
+## Recommended readings
+
+- [Python tutorial](https://docs.python.org/3/tutorial/) - Official Python documentation
+
+## Lectures
+
+- [**Slides: AI-assisted development**](../slides/IS4010_W02_AI_Copilots.qmd)
+
+## Lab assignment
+
+- [Lab 02: AI-assisted dev](https://github.com/bgreenwell/is4010-course)

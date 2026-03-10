@@ -1,0 +1,649 @@
+---
+title: "IS4010: AI-Enhanced Application Development"
+subtitle: "Week 6: Object-Oriented Programming"
+author: "Brandon M. Greenwell"
+format:
+  revealjs:
+    self-contained: false
+    theme: dracula
+    transition: fade
+    scrollable: true
+    css: custom.css
+---
+
+# Welcome to Object-Oriented Programming 🏗️
+
+## The foundation of scalable software architecture 🎯
+
+::: {.incremental}
+- **Object-Oriented Programming (OOP)** revolutionizes how we design and structure applications
+- **Real-world modeling**: Create digital representations of real-world entities and their interactions
+- **Career relevance**: Essential for modern software development, system design interviews, and team collaboration
+- **Scalability**: Build applications that can grow from prototypes to enterprise-level systems
+- **Code organization**: Transform chaotic procedural code into elegant, maintainable architectures
+:::
+
+::: {.notes}
+**TEACHING NOTES:**
+
+- **Historical significance**: OOP emerged in the 1960s with Simula, popularized by Smalltalk in the 1970s
+- **Industry adoption**: Nearly every major software system uses OOP principles - from operating systems to web frameworks
+- **Career impact**: OOP concepts appear in 90% of technical interviews for software engineering roles
+- **Course progression**: This builds foundation for design patterns, software architecture, and advanced Python features
+- **Real-world examples**: Instagram (User, Post, Comment classes), banking systems (Account, Transaction classes), games (Player, Inventory classes)
+- **Python advantage**: Python's OOP is clean and intuitive compared to languages like C++ or Java
+:::
+
+---
+
+# Session 1: From functions to objects
+
+---
+
+## 🤔 When functions aren't enough: A shopping cart story
+
+### **The Problem**: Managing complex state with functions
+
+::: {.incremental}
+- **Scenario**: Building an e-commerce shopping cart system
+- **Challenge**: Multiple pieces of related data (items, totals, discounts, tax rates)
+- **Function approach**: Becomes unwieldy as complexity grows
+- **Real pain points**: Parameter passing chaos, state management nightmares, code duplication
+:::
+
+::: {.notes}
+**TEACHING NOTES:**
+
+- **Relate to students**: Everyone has used shopping carts online - Amazon, Target, etc.
+- **Complexity evolution**: Start simple, show how requirements naturally grow
+- **Industry reality**: Real shopping carts have dozens of features - promotions, shipping, inventory checks
+- **Common mistake**: Students often try to solve everything with functions first
+- **Learning approach**: Let them feel the pain of the function approach before showing the OOP solution
+:::
+
+---
+
+## ❌ The function approach: Shopping cart chaos
+
+```python
+# Creating and managing cart state with functions - gets messy fast!
+def create_cart():
+    return {"items": [], "subtotal": 0, "tax_rate": 0.08, "discount": 0}
+
+def add_item(cart, name, price, quantity=1):
+    cart["items"].append({"name": name, "price": price, "qty": quantity})
+    cart["subtotal"] += price * quantity
+    return cart
+
+def apply_discount(cart, discount_percent):
+    cart["discount"] = discount_percent
+    return cart
+
+def calculate_total(cart):
+    discounted = cart["subtotal"] * (1 - cart["discount"]/100)
+    return discounted * (1 + cart["tax_rate"])
+
+# Usage becomes cumbersome and error-prone
+cart = create_cart()
+cart = add_item(cart, "Laptop", 999.99)
+cart = add_item(cart, "Mouse", 29.99)
+cart = apply_discount(cart, 10)
+total = calculate_total(cart)
+print(f"Total: ${total:.2f}")
+```
+
+::: {.notes}
+**TEACHING NOTES:**
+
+- **Pain points**: Parameter passing every function call, easy to forget return values
+- **State management**: Dictionary approach is fragile - typos in keys cause runtime errors
+- **Scalability issues**: Adding features requires modifying multiple functions
+- **Testing difficulties**: Hard to test individual components in isolation
+- **Team development**: Multiple developers would step on each other's code
+:::
+
+---
+
+## ✅ The class approach: Elegant and scalable
+
+```python
+class ShoppingCart:
+    """Represents a shopping cart with items, discounts, and tax calculation."""
+
+    def __init__(self, tax_rate=0.08):
+        self.items = []
+        self.tax_rate = tax_rate
+        self.discount_percent = 0
+
+    def add_item(self, name, price, quantity=1):
+        """Add an item to the cart."""
+        self.items.append({"name": name, "price": price, "qty": quantity})
+
+    def apply_discount(self, discount_percent):
+        """Apply a discount to the entire cart."""
+        self.discount_percent = discount_percent
+
+    @property
+    def subtotal(self):
+        """Calculate subtotal before discount and tax."""
+        return sum(item["price"] * item["qty"] for item in self.items)
+
+    @property
+    def total(self):
+        """Calculate final total after discount and tax."""
+        discounted = self.subtotal * (1 - self.discount_percent/100)
+        return discounted * (1 + self.tax_rate)
+
+# Usage is clean, intuitive, and maintainable
+cart = ShoppingCart()
+cart.add_item("Laptop", 999.99)
+cart.add_item("Mouse", 29.99)
+cart.apply_discount(10)
+print(f"Total: ${cart.total:.2f}")
+```
+
+::: {.notes}
+**TEACHING NOTES:**
+
+- **Clean API**: No more parameter passing, state is encapsulated
+- **Properties**: `@property` decorator makes calculated values look like attributes
+- **Extensibility**: Easy to add features like `remove_item()`, `clear_cart()`, etc.
+- **Error prevention**: IDE can provide autocomplete, type checking catches errors earlier
+- **Testing**: Each method can be tested independently
+- **Real-world parallel**: This mirrors how actual e-commerce systems are designed
+:::
+
+---
+
+## 🚀 Why object-oriented programming matters
+
+::: {.incremental}
+- **[Encapsulation](https://docs.python.org/3/tutorial/classes.html#private-variables)**: Bundle data and methods together, hide implementation details
+- **Code reusability**: Write once, use everywhere - create multiple cart instances
+- **Maintainability**: Changes to internal implementation don't break external code
+- **Collaboration**: Team members can work on different classes independently
+- **Industry standard**: Every major framework ([Django](https://docs.djangoproject.com/en/stable/topics/class-based-views/), [Flask](https://flask.palletsprojects.com/en/2.3.x/views/), [FastAPI](https://fastapi.tiangolo.com/tutorial/dependencies/classes-as-dependencies/)) uses OOP principles
+:::
+
+::: {.notes}
+**TEACHING NOTES:**
+
+- **Historical context**: Alan Kay coined "object-oriented" in the 1960s, inspired by biological cells
+- **Industry adoption**: Google, Facebook, Netflix - all built on OOP principles
+- **Career preparation**: System design interviews often focus on class relationships
+- **Python's advantage**: Clean syntax makes OOP concepts easier to learn than C++ or Java
+- **Framework examples**: Show how popular web frameworks use classes for views, models, etc.
+:::
+
+---
+
+## 🏛️ What is a class?
+
+::: {.incremental}
+- A **[class](https://docs.python.org/3/tutorial/classes.html)** is a blueprint or template for creating objects
+- An **object** (or **instance**) is a specific item created from that class blueprint
+- **Attributes**: The data that belongs to an object (like variables)
+- **Methods**: The functions that operate on an object's data
+- **Analogy**: A `Car` class is the blueprint; your specific Honda Civic is an object instance
+:::
+
+::: {.notes}
+**TEACHING NOTES:**
+
+- **Architecture parallel**: Like architectural blueprints - one design, many houses
+- **DNA analogy**: DNA is the "class," each organism is an "instance"
+- **Cookie cutter**: Class is the cutter, cookies are the instances
+- **Programming languages**: Show how this concept exists in Java, C#, JavaScript, etc.
+- **Memory model**: Classes define structure, instances occupy memory
+:::
+
+---
+
+## 🔧 The `__init__` method: Object construction
+
+::: {.incremental}
+- The **[`__init__` method](https://docs.python.org/3/reference/datamodel.html#object.__init__)** is a special constructor function
+- **Automatic execution**: Runs immediately when a new object is created
+- **Purpose**: Initialize the object's attributes with starting values
+- **The `self` parameter**: References the specific instance being created
+- **Convention**: Always the first parameter in instance methods
+:::
+
+```python
+class BankAccount:
+    """Represents a bank account with balance tracking."""
+
+    def __init__(self, account_holder: str, initial_balance: float = 0.0):
+        # Instance attributes - unique to each account
+        self.account_holder = account_holder
+        self.balance = initial_balance
+        self.transaction_history = []
+
+    def deposit(self, amount: float):
+        """Add money to the account."""
+        self.balance += amount
+        self.transaction_history.append(f"Deposited ${amount:.2f}")
+
+# Create specific account instances
+alice_account = BankAccount("Alice Johnson", 1000.0)
+bob_account = BankAccount("Bob Smith")  # Uses default balance of 0.0
+```
+
+::: {.notes}
+**TEACHING NOTES:**
+
+- **Type hints**: Emphasize modern Python practices with type annotations
+- **Default parameters**: Show flexibility in constructor design
+- **Instance vs class**: Each account has its own balance, independent of others
+- **Real-world modeling**: Bank accounts are perfect OOP examples students understand
+- **Memory visualization**: Draw how each instance has its own memory space
+- **Common errors**: Forgetting `self`, incorrect parameter order
+:::
+
+---
+
+## 📝 The `__str__` method: Human-readable representation
+
+::: {.incremental}
+- The **[`__str__` method](https://docs.python.org/3/reference/datamodel.html#object.__str__)** defines how objects appear when printed
+- **Automatic invocation**: Called by `print()`, `str()`, and string formatting
+- **User-friendly**: Should return meaningful information for end users
+- **AI assistant friendly**: Perfect boilerplate code to generate with AI tools
+- **Debugging essential**: Makes testing and troubleshooting much easier
+:::
+
+```python
+class User:
+    """Represents a user in a social media application."""
+
+    def __init__(self, username: str, email: str, join_date: str):
+        self.username = username
+        self.email = email
+        self.join_date = join_date
+        self.followers = 0
+        self.is_verified = False
+
+    def __str__(self) -> str:
+        """Return a user-friendly string representation."""
+        verification = "✓" if self.is_verified else ""
+        return f"@{self.username}{verification} ({self.followers} followers) - Joined {self.join_date}"
+
+# Create and display user instances
+user1 = User("grace_hopper", "grace@example.com", "2023-01-15")
+user2 = User("ada_lovelace", "ada@example.com", "2023-02-20")
+user2.is_verified = True
+user2.followers = 50000
+
+print(user1)  # @grace_hopper (0 followers) - Joined 2023-01-15
+print(user2)  # @ada_lovelace✓ (50000 followers) - Joined 2023-02-20
+```
+
+::: {.notes}
+**TEACHING NOTES:**
+
+- **Social media context**: Students relate to Instagram/Twitter user profiles
+- **String formatting**: Show f-strings, `.format()`, and other approaches
+- **Unicode symbols**: Verification checkmarks make output more engaging
+- **Debugging value**: Good `__str__` methods save hours of debugging time
+- **Professional practice**: All production classes should have meaningful `__str__` methods
+- **AI integration**: Show how to prompt AI assistants for good `__str__` implementations
+:::
+
+---
+
+## 💡 Introducing Lab 06 (Part 1)
+
+::: {.incremental}
+- **Your mission**: Create a `Book` class to model real-world books
+- **AI partnership**: Use AI assistants to help generate class structure and methods
+- **Core concepts**: Practice `__init__` constructors and `__str__` representations
+- **Real-world modeling**: Transform abstract concepts into concrete code
+- **Foundation building**: Prepares you for more complex OOP concepts
+:::
+
+::: {.notes}
+**TEACHING NOTES:**
+
+- **Lab connection**: Direct tie-in to what students will implement
+- **AI guidance**: Encourage using AI tools as coding partners, not crutches
+- **Scaffolding**: Start simple, build complexity gradually
+- **Assessment preparation**: These fundamentals appear in every OOP assessment
+- **Portfolio building**: Good class design is essential for project portfolios
+:::
+
+---
+
+# Session 2: Methods & inheritance
+
+---
+
+## ⚡ Giving objects behavior with methods
+
+::: {.incremental}
+- **[Methods](https://docs.python.org/3/tutorial/classes.html#method-objects)** are functions defined inside a class that operate on object data
+- **Instance methods**: Most common type, always take `self` as first parameter
+- **Behavior modeling**: Define what objects can *do*, not just what they *are*
+- **Encapsulation**: Methods can access and modify private object state safely
+- **State management**: Methods ensure object data stays consistent and valid
+:::
+
+```python
+class GameCharacter:
+    """Represents a character in a role-playing game."""
+
+    def __init__(self, name: str, health: int = 100):
+        self.name = name
+        self.health = health
+        self.max_health = health
+        self.experience = 0
+        self.level = 1
+
+    def take_damage(self, damage: int):
+        """Reduce character health, ensuring it doesn't go below 0."""
+        self.health = max(0, self.health - damage)
+        print(f"{self.name} takes {damage} damage! Health: {self.health}/{self.max_health}")
+
+    def heal(self, amount: int):
+        """Restore character health, capped at maximum."""
+        old_health = self.health
+        self.health = min(self.max_health, self.health + amount)
+        healed = self.health - old_health
+        print(f"{self.name} heals for {healed} points! Health: {self.health}/{self.max_health}")
+
+    def gain_experience(self, exp: int):
+        """Add experience and level up if threshold is reached."""
+        self.experience += exp
+        if self.experience >= self.level * 100:  # Simple leveling formula
+            self.level += 1
+            self.max_health += 20
+            self.health = self.max_health  # Full heal on level up
+            print(f"🎉 {self.name} reached level {self.level}!")
+
+# Create and interact with a character
+hero = GameCharacter("Aria the Brave")
+hero.take_damage(30)
+hero.heal(15)
+hero.gain_experience(150)
+```
+
+::: {.notes}
+**TEACHING NOTES:**
+
+- **Gaming context**: Students connect with RPG mechanics from popular games
+- **State validation**: Show how methods ensure data integrity (health can't go negative)
+- **Method chaining**: Mention how some methods could return `self` for fluent APIs
+- **Error handling**: Could add validation for negative damage/healing amounts
+- **Complex interactions**: Show how multiple methods work together to create behavior
+- **Real-world parallel**: Similar to user profile management in social media apps
+:::
+
+---
+
+## 🔗 Understanding inheritance: Code reuse at scale
+
+::: {.incremental}
+- **[Inheritance](https://docs.python.org/3/tutorial/classes.html#inheritance)** allows classes to inherit attributes and methods from parent classes
+- **Code reuse**: Write common functionality once, share across multiple related classes
+- **"Is-a" relationships**: Child classes are specialized versions of parent classes
+- **Hierarchical design**: Models real-world relationships naturally
+- **Professional development**: Essential for frameworks, libraries, and large codebases
+:::
+
+::: {.notes}
+**TEACHING NOTES:**
+
+- **Real-world examples**: Vehicle → Car/Truck/Motorcycle, Animal → Dog/Cat/Bird
+- **Framework usage**: Django models, Flask views - all use inheritance extensively
+- **Design principle**: Favor composition over inheritance, but understand both
+- **Interview topic**: Inheritance vs composition is a common technical interview question
+- **Code organization**: Helps create logical, maintainable class hierarchies
+:::
+
+---
+
+## 🏗️ Implementing inheritance: The `super()` function
+
+::: {.incremental}
+- **Syntax**: `class ChildClass(ParentClass):` establishes inheritance relationship
+- **[`super()` function](https://docs.python.org/3/library/functions.html#super)**: Calls methods from the parent class
+- **Constructor chaining**: Child `__init__` must call parent `__init__` using `super()`
+- **Method override**: Child classes can replace parent methods with specialized versions
+- **Method extension**: Or extend parent methods with additional functionality
+:::
+
+```python
+class Vehicle:
+    """Base class for all vehicles."""
+
+    def __init__(self, make: str, model: str, year: int):
+        self.make = make
+        self.model = model
+        self.year = year
+        self.mileage = 0
+
+    def start_engine(self):
+        """Start the vehicle's engine."""
+        print(f"The {self.year} {self.make} {self.model} engine starts.")
+
+    def drive(self, miles: float):
+        """Drive the vehicle and update mileage."""
+        self.mileage += miles
+        print(f"Drove {miles} miles. Total mileage: {self.mileage}")
+
+class ElectricCar(Vehicle):
+    """Electric vehicle with battery management."""
+
+    def __init__(self, make: str, model: str, year: int, battery_capacity: float):
+        super().__init__(make, model, year)  # Call parent constructor
+        self.battery_capacity = battery_capacity
+        self.battery_level = 100.0  # Start fully charged
+
+    def start_engine(self):
+        """Override: Electric cars don't have traditional engines."""
+        print(f"The {self.year} {self.make} {self.model} powers on silently.")
+
+    def charge(self, hours: float):
+        """Charge the battery (unique to electric cars)."""
+        charge_added = min(hours * 10, 100 - self.battery_level)
+        self.battery_level += charge_added
+        print(f"Charged for {hours} hours. Battery: {self.battery_level:.1f}%")
+
+# Inheritance in action
+tesla = ElectricCar("Tesla", "Model S", 2023, 100.0)
+tesla.start_engine()  # Uses overridden method
+tesla.drive(50)       # Uses inherited method
+tesla.charge(2)       # Uses unique method
+```
+
+::: {.notes}
+**TEACHING NOTES:**
+
+- **Method resolution**: Python searches child class first, then parent
+- **super() benefits**: Maintainable, handles multiple inheritance correctly
+- **Override vs extend**: Show both patterns - complete replacement vs enhancement
+- **Real-world modeling**: Vehicle hierarchy is intuitive for students
+- **Code reuse demonstration**: Show how much code is shared vs specialized
+- **Common mistakes**: Forgetting super() call, incorrect parameter passing
+:::
+
+---
+
+## 🎯 Advanced OOP concepts preview
+
+::: {.incremental}
+- **[Class variables](https://docs.python.org/3/tutorial/classes.html#class-and-instance-variables)**: Shared data across all instances of a class
+- **[Properties](https://docs.python.org/3/library/functions.html#property)**: Computed attributes using `@property` decorator
+- **[Class methods](https://docs.python.org/3/library/functions.html#classmethod)**: Methods that operate on the class itself, not instances
+- **[Static methods](https://docs.python.org/3/library/functions.html#staticmethod)**: Utility functions that belong logically to the class
+- **Multiple inheritance**: Inheriting from multiple parent classes (advanced topic)
+:::
+
+```python
+class Product:
+    """Represents a product in an inventory system."""
+
+    # Class variable - shared across all instances
+    total_products_created = 0
+
+    def __init__(self, name: str, price: float):
+        self.name = name
+        self._price = price  # Private attribute (convention)
+        Product.total_products_created += 1
+
+    @property
+    def price(self) -> float:
+        """Get the product price."""
+        return self._price
+
+    @price.setter
+    def price(self, value: float):
+        """Set the product price with validation."""
+        if value < 0:
+            raise ValueError("Price cannot be negative")
+        self._price = value
+
+    @classmethod
+    def get_total_products(cls) -> int:
+        """Return total number of products created."""
+        return cls.total_products_created
+
+    @staticmethod
+    def calculate_tax(price: float, tax_rate: float = 0.08) -> float:
+        """Calculate tax amount for a given price."""
+        return price * tax_rate
+
+# Advanced features in action
+laptop = Product("Gaming Laptop", 1299.99)
+mouse = Product("Wireless Mouse", 79.99)
+
+print(f"Total products: {Product.get_total_products()}")  # Class method
+print(f"Tax on laptop: ${Product.calculate_tax(laptop.price):.2f}")  # Static method
+
+# Property with validation
+# laptop.price = -100  # Would raise ValueError
+laptop.price = 1199.99  # Valid price change
+```
+
+::: {.notes}
+**TEACHING NOTES:**
+
+- **Class variables**: Useful for counters, configuration, shared resources
+- **Properties**: Essential for data validation and computed attributes
+- **Method types**: Explain when to use each type of method
+- **Naming conventions**: Leading underscore indicates "private" (by convention)
+- **Advanced topics**: These concepts appear in professional Python codebases
+- **Framework examples**: Django models use all these concepts extensively
+:::
+
+---
+
+## 🎨 Real-world applications: Where OOP shines
+
+::: {.incremental}
+- **Web development**: [Django models](https://docs.djangoproject.com/en/stable/topics/db/models/), [FastAPI dependencies](https://fastapi.tiangolo.com/tutorial/dependencies/classes-as-dependencies/)
+- **Game development**: Characters, items, game states, collision systems
+- **Financial systems**: Accounts, transactions, portfolios, risk calculations
+- **Data science**: Custom data structures, machine learning pipelines
+- **Desktop applications**: UI components, event handling, application state
+:::
+
+::: {.notes}
+**TEACHING NOTES:**
+
+- **Career paths**: Show how OOP applies to different programming specializations
+- **Industry examples**: GitHub (repositories as objects), Netflix (user profiles, content)
+- **Design patterns**: Mention that design patterns are built on OOP principles
+- **Framework architecture**: Most modern frameworks are object-oriented at their core
+- **Portfolio projects**: Encourage students to think in objects for their projects
+:::
+
+---
+
+## 📚 Computer science pioneers: OOP visionaries
+
+::: {.incremental}
+- **[Alan Kay](https://en.wikipedia.org/wiki/Alan_Kay)** (1940-): Coined "object-oriented programming," created Smalltalk
+- **[Kristen Nygaard](https://en.wikipedia.org/wiki/Kristen_Nygaard)** (1926-2002): Co-invented Simula, the first OOP language
+- **[Ole-Johan Dahl](https://en.wikipedia.org/wiki/Ole-Johan_Dahl)** (1931-2002): Co-creator of Simula, Turing Award winner
+- **Legacy**: Their ideas revolutionized software development and enabled modern applications
+- **Philosophy**: "Objects are not just data structures, they are living entities that communicate"
+:::
+
+::: {.notes}
+**TEACHING NOTES:**
+
+- **Historical context**: OOP emerged from simulation needs (Simula = simulation language)
+- **Alan Kay's vision**: Inspired by biological cells communicating via messages
+- **Smalltalk influence**: Influenced Java, C#, Python, and modern language design
+- **Turing Awards**: Both Nygaard and Dahl received computing's highest honor
+- **Modern relevance**: Their 1960s insights still guide today's software architecture
+- **Diversity note**: Highlight contributions of international computer scientists
+:::
+
+---
+
+## 🎯 Introducing Lab 06 (Part 2)
+
+::: {.incremental}
+- **Build on Part 1**: Extend your `Book` class with meaningful methods
+- **Inheritance practice**: Create an `EBook` class that inherits from `Book`
+- **Method override**: Customize `__str__` method in the child class
+- **Real-world skills**: These patterns appear in every professional codebase
+- **AI collaboration**: Use AI assistants to explore different implementation approaches
+:::
+
+::: {.notes}
+**TEACHING NOTES:**
+
+- **Scaffolding**: Part 2 builds naturally on Part 1 concepts
+- **Practical application**: Book/EBook relationship is intuitive for students
+- **Assessment alignment**: Lab directly prepares for upcoming assessments
+- **AI guidance**: Encourage experimentation with different AI prompts
+- **Code quality**: Emphasize clean, readable, well-documented code
+- **Testing mindset**: Suggest testing each method as they implement it
+:::
+
+---
+
+## 🚀 Looking ahead: OOP in practice
+
+::: {.incremental}
+- **Next week**: Working with data - APIs, JSON, and object serialization
+- **Project applications**: Your midterm projects will benefit from OOP design
+- **Industry preparation**: System design interviews focus on class relationships
+- **Continuous learning**: Explore design patterns, SOLID principles, architectural patterns
+- **AI enhancement**: Use AI tools to refine your OOP designs and implementations
+:::
+
+::: {.notes}
+**TEACHING NOTES:**
+
+- **Course integration**: Connect to upcoming topics and projects
+- **Career preparation**: Mention system design interviews at tech companies
+- **Advanced concepts**: SOLID principles, design patterns for motivated students
+- **AI integration**: Show how AI can help with architectural decisions
+- **Portfolio development**: Good OOP skills are essential for impressive projects
+- **Industry trends**: Mention modern patterns like composition over inheritance
+:::
+
+---
+
+## 📋 Summary: Key takeaways
+
+::: {.incremental}
+- **OOP motivation**: Solves complex state management problems that functions can't handle elegantly
+- **Core concepts**: Classes (blueprints), objects (instances), attributes (data), methods (behavior)
+- **Essential methods**: `__init__` for construction, `__str__` for representation
+- **Inheritance**: Enables code reuse and hierarchical relationships
+- **Real-world relevance**: Every major application and framework uses OOP principles
+:::
+
+::: {.notes}
+**TEACHING NOTES:**
+
+- **Concept reinforcement**: Emphasize the most important takeaways
+- **Practical application**: Remind students how this applies to their lab work
+- **Confidence building**: Students should feel ready to tackle Lab 06
+- **Next session prep**: Brief mention of what's coming in Session 2
+- **Office hours**: Encourage questions about OOP concepts or lab implementation
+:::
