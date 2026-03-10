@@ -9,7 +9,7 @@ This course explores the intersection of modern software development and generat
 
 A central theme is the practical application of AI code assistants (like **GitHub Copilot** and **Gemini**) to enhance problem-solving, accelerate development, and prepare students for the future of software engineering.
 
-## Course books
+## Course "books"
 This course uses two primary, free, and open-source resources:
 
 *   **[The Python Tutorial](https://docs.python.org/3/tutorial/)**: The official guide to Python, covering everything from basic syntax to the standard library.

@@ -4035,8 +4035,8 @@
     "objectID": "index.html#course-books",
     "href": "index.html#course-books",
     "title": "IS 4010: Application Development with Artificial Intelligence",
-    "section": "Course books",
-    "text": "Course books\nThis course uses two primary, free, and open-source resources:\n\nThe Python Tutorial: The official guide to Python, covering everything from basic syntax to the standard library.\nThe Rust Programming Language: Affectionately known as “The Book,” this is the official, community-maintained guide to Rust.\n\nWe will reference specific chapters from these books each week to support our hands-on labs.",
+    "section": "Course “books”",
+    "text": "Course “books”\nThis course uses two primary, free, and open-source resources:\n\nThe Python Tutorial: The official guide to Python, covering everything from basic syntax to the standard library.\nThe Rust Programming Language: Affectionately known as “The Book,” this is the official, community-maintained guide to Rust.\n\nWe will reference specific chapters from these books each week to support our hands-on labs.",
     "crumbs": [
       "Home"
     ]
