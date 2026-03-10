@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>IS 4010: Application Development with Artificial Intelligence – IS 4010 - App Dev with AI</title>
+<title>agents – IS 4010 - App Dev with AI</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,6 +20,41 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -29,7 +64,6 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./syllabus.html" rel="next">
 <link href="./images/uc-logo-2.png" rel="icon" type="image/png">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
@@ -42,7 +76,6 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="site_libs/bootstrap/bootstrap-251449ada0ddbdd49c494e2ec9d5d6a9.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
-<script src="site_libs/quarto-contrib/iconify-3.0.0/iconify-icon.min.js"></script>
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -84,7 +117,9 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">Home</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">
+      IS 4010 - App Dev with AI
+      </li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -115,7 +150,7 @@ ul.task-list li input[type="checkbox"] {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link active">
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Home</span></a>
   </div>
 </li>
@@ -265,69 +300,85 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#course-overview" id="toc-course-overview" class="nav-link active" data-scroll-target="#course-overview">Course overview</a></li>
-  <li><a href="#course-books" id="toc-course-books" class="nav-link" data-scroll-target="#course-books">Course “books”</a></li>
-  <li><a href="#quick-links" id="toc-quick-links" class="nav-link" data-scroll-target="#quick-links">Quick links</a></li>
-  <li><a href="#instructor" id="toc-instructor" class="nav-link" data-scroll-target="#instructor">Instructor</a></li>
+  <li><a href="#is-4010-application-development-with-artificial-intelligence---website-repository" id="toc-is-4010-application-development-with-artificial-intelligence---website-repository" class="nav-link active" data-scroll-target="#is-4010-application-development-with-artificial-intelligence---website-repository">IS 4010: Application Development with Artificial Intelligence - Website Repository</a>
+  <ul class="collapse">
+  <li><a href="#directory-overview" id="toc-directory-overview" class="nav-link" data-scroll-target="#directory-overview">Directory Overview</a></li>
+  <li><a href="#key-files" id="toc-key-files" class="nav-link" data-scroll-target="#key-files">Key Files</a></li>
+  <li><a href="#usage-development" id="toc-usage-development" class="nav-link" data-scroll-target="#usage-development">Usage &amp; Development</a>
+  <ul class="collapse">
+  <li><a href="#local-development" id="toc-local-development" class="nav-link" data-scroll-target="#local-development">Local Development</a></li>
+  <li><a href="#rendering" id="toc-rendering" class="nav-link" data-scroll-target="#rendering">Rendering</a></li>
+  <li><a href="#deployment" id="toc-deployment" class="nav-link" data-scroll-target="#deployment">Deployment</a></li>
+  </ul></li>
+  <li><a href="#development-conventions" id="toc-development-conventions" class="nav-link" data-scroll-target="#development-conventions">Development Conventions</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
-
-<header id="title-block-header" class="quarto-title-block default">
-<div class="quarto-title">
-<h1 class="title">IS 4010: Application Development with Artificial Intelligence</h1>
-</div>
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
 
 
 
-<div class="quarto-title-meta">
 
-    
-  
-    
-  </div>
-  
-
-
-</header>
-
-
-<p>Welcome to the official course website for <strong>IS 4010</strong>.</p>
-<section id="course-overview" class="level2">
-<h2 class="anchored" data-anchor-id="course-overview">Course overview</h2>
-<p>This course explores the intersection of modern software development and generative AI. Students will learn to build robust applications in <strong>Python</strong> and <strong>Rust</strong> while mastering the art of using AI as a collaborative partner (“Co-Pilot”).</p>
-<p>A central theme is the practical application of AI code assistants (like <strong>GitHub Copilot</strong> and <strong>Gemini</strong>) to enhance problem-solving, accelerate development, and prepare students for the future of software engineering.</p>
-</section>
-<section id="course-books" class="level2">
-<h2 class="anchored" data-anchor-id="course-books">Course “books”</h2>
-<p>This course uses two primary, free, and open-source resources:</p>
+<section id="is-4010-application-development-with-artificial-intelligence---website-repository" class="level1">
+<h1>IS 4010: Application Development with Artificial Intelligence - Website Repository</h1>
+<p>This repository contains the source code for the official course website for <strong>IS 4010: Application Development with Artificial Intelligence</strong>, taught by Brandon M. Greenwell, PhD, at the University of Cincinnati.</p>
+<section id="directory-overview" class="level2">
+<h2 class="anchored" data-anchor-id="directory-overview">Directory Overview</h2>
+<p>This is a <strong>Quarto-based website project</strong>. It uses Quarto Markdown (<code>.qmd</code>) files to generate a static website and Reveal.js presentation slides.</p>
 <ul>
-<li><strong><a href="https://docs.python.org/3/tutorial/">The Python Tutorial</a></strong>: The official guide to Python, covering everything from basic syntax to the standard library.</li>
-<li><strong><a href="https://doc.rust-lang.org/book/">The Rust Programming Language</a></strong>: Affectionately known as “The Book,” this is the official, community-maintained guide to Rust.</li>
-</ul>
-<p>We will reference specific chapters from these books each week to support our hands-on labs.</p>
-</section>
-<section id="quick-links" class="level2">
-<h2 class="anchored" data-anchor-id="quick-links">Quick links</h2>
-<ul>
-<li><a href="./syllabus.html"><strong>Syllabus</strong></a></li>
-<li><a href="./weeks/week01.html">Weekly schedule</a></li>
-<li><a href="https://github.com/bgreenwell/is4010-course">Lab repository template</a></li>
-<li><a href="https://uc.instructure.com/">Canvas (LMS)</a></li>
+<li><strong><code>index.qmd</code></strong>: The landing page of the course website.</li>
+<li><strong><code>syllabus.qmd</code></strong>: The comprehensive course syllabus, including policies, grading, and schedule.</li>
+<li><strong><code>project.qmd</code></strong>: Details regarding the final solo capstone project.</li>
+<li><strong><code>weeks/</code></strong>: Contains weekly module pages (<code>week01.qmd</code> through <code>week14.qmd</code>) that outline the curriculum.</li>
+<li><strong><code>slides/</code></strong>: Contains Quarto source files for Reveal.js lecture slides.</li>
+<li><strong><code>resources/</code></strong>: Supplemental guides for students (setup, troubleshooting, packages).</li>
+<li><strong><code>_quarto.yml</code></strong>: The main configuration file for the website’s structure, navigation, and theme.</li>
+<li><strong><code>styles.css</code></strong>: Custom CSS for the website.</li>
+<li><strong><code>.github/workflows/publish.yml</code></strong>: GitHub Actions workflow for automated rendering and deployment to GitHub Pages.</li>
 </ul>
 </section>
-<section id="instructor" class="level2">
-<h2 class="anchored" data-anchor-id="instructor">Instructor</h2>
-<p><strong>Brandon M. Greenwell, PhD</strong><br>
-Director, Data Science @ <a href="https://www.8451.com/">84.51°</a><br>
-Annual Adjunct Instructor Department of OBAIS, University of Cincinnati</p>
-<p>Brandon is a data scientist and educator with a passion for building reliable, interpretable AI systems. In his role as Director of Data Science at 84.51°, he leads initiatives in retail analytics and statistical modeling. His research and open-source contributions focus on <strong>Explainable AI (XAI)</strong>, machine learning, and statistical computing.</p>
-<p>He is the author of several widely-used R packages (including <a href="https://github.com/bgreenwell/pdp"><code>pdp</code></a>, <a href="https://github.com/koalaverse/vip"><code>vip</code></a>, and <a href="https://github.com/bgreenwell/fastshap"><code>fastshap</code></a>) and books, including <em><a href="https://www.routledge.com/Tree-Based-Methods-for-Statistical-Learning-in-R/Greenwell/p/book/9780367532468">Tree-Based Methods for Statistical Learning in R</a></em> and the co-authored <em><a href="https://www.routledge.com/Hands-On-Machine-Learning-with-R/Boehmke-Greenwell/p/book/9781138495685">Hands-On Machine Learning with R</a></em>. More recently, he has been contributing to the <strong>Rust</strong> ecosystem with popular packages like <a href="https://github.com/bgreenwell/doxx"><code>doxx</code></a>, <a href="https://github.com/bgreenwell/xleak"><code>xleak</code></a>, and <a href="https://github.com/bgreenwell/lstr"><code>lstr</code></a>. In this course, he brings a professional perspective on using these modern tools to build the next generation of AI-enhanced applications.</p>
-<p><iconify-icon role="img" inline="" icon="bi:github" aria-label="Icon github from bi Iconify.design set." title="Icon github from bi Iconify.design set."></iconify-icon> <a href="https://github.com/bgreenwell">Follow on GitHub</a></p>
+<section id="key-files" class="level2">
+<h2 class="anchored" data-anchor-id="key-files">Key Files</h2>
+<ul>
+<li><strong><code>_quarto.yml</code></strong>: Define the sidebar, navbar, and global site metadata here.</li>
+<li><strong><code>syllabus.qmd</code></strong>: The “source of truth” for course dates and policies.</li>
+<li><strong><code>slides/*.qmd</code></strong>: Individual slide decks rendered as Reveal.js presentations.</li>
+<li><strong><code>AGENTS.md</code></strong> (in parent or root): Contains specific instructions for AI agents regarding tone (AI Co-Pilot), casing (Sentence Case), and security.</li>
+</ul>
+</section>
+<section id="usage-development" class="level2">
+<h2 class="anchored" data-anchor-id="usage-development">Usage &amp; Development</h2>
+<section id="local-development" class="level3">
+<h3 class="anchored" data-anchor-id="local-development">Local Development</h3>
+<p>To preview the website locally as you make changes:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto</span> preview</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="rendering" class="level3">
+<h3 class="anchored" data-anchor-id="rendering">Rendering</h3>
+<p>To render the entire site to the <code>_site/</code> (or <code>docs/</code>) directory:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto</span> render</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>To render only the slides to a specific directory (e.g., for Canvas upload):</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> slides</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto</span> render . <span class="at">--output-dir</span> html</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="deployment" class="level3">
+<h3 class="anchored" data-anchor-id="deployment">Deployment</h3>
+<p>Deployment is automated. Any push to the <code>main</code> branch triggers a GitHub Action that renders the site and publishes it to the <code>gh-pages</code> branch.</p>
+</section>
+</section>
+<section id="development-conventions" class="level2">
+<h2 class="anchored" data-anchor-id="development-conventions">Development Conventions</h2>
+<ul>
+<li><strong>Tone</strong>: Maintain an encouraging, professional, and practical “AI Co-Pilot” tone.</li>
+<li><strong>Formatting</strong>: Use <strong>Sentence case</strong> for all titles, headings, and subheadings (e.g., “Course overview” instead of “Course Overview”).</li>
+<li><strong>Consistency</strong>: Ensure code examples and terminology (Python vs.&nbsp;Rust) align with the weekly modules.</li>
+<li><strong>Security</strong>: Never commit sensitive instructor materials or API keys to this repository.</li>
+</ul>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
@@ -731,15 +782,6 @@ Annual Adjunct Instructor Department of OBAIS, University of Cincinnati</p>
     }
   });
   </script>
-<nav class="page-navigation">
-  <div class="nav-page nav-page-previous">
-  </div>
-  <div class="nav-page nav-page-next">
-      <a href="./syllabus.html" class="pagination-link" aria-label="Syllabus">
-        <span class="nav-page-text">Syllabus</span> <i class="bi bi-arrow-right-short"></i>
-      </a>
-  </div>
-</nav>
 </div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">

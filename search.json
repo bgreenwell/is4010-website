@@ -1815,56 +1815,6 @@
     ]
   },
   {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "IS 4010: Application Development with Artificial Intelligence",
-    "section": "",
-    "text": "Welcome to the official course website for IS 4010.",
-    "crumbs": [
-      "Home"
-    ]
-  },
-  {
-    "objectID": "index.html#course-overview",
-    "href": "index.html#course-overview",
-    "title": "IS 4010: Application Development with Artificial Intelligence",
-    "section": "Course overview",
-    "text": "Course overview\nThis course explores the intersection of modern software development and generative AI. Students will learn to build robust applications in Python and Rust while mastering the art of using AI as a collaborative partner (“Co-Pilot”).\nA central theme is the practical application of AI code assistants (like GitHub Copilot and Gemini) to enhance problem-solving, accelerate development, and prepare students for the future of software engineering.",
-    "crumbs": [
-      "Home"
-    ]
-  },
-  {
-    "objectID": "index.html#course-books",
-    "href": "index.html#course-books",
-    "title": "IS 4010: Application Development with Artificial Intelligence",
-    "section": "Course books",
-    "text": "Course books\nThis course uses two primary, free, and open-source resources:\n\nThe Python Tutorial: The official guide to Python, covering everything from basic syntax to the standard library.\nThe Rust Programming Language: Affectionately known as “The Book,” this is the official, community-maintained guide to Rust.\n\nWe will reference specific chapters from these books each week to support our hands-on labs.",
-    "crumbs": [
-      "Home"
-    ]
-  },
-  {
-    "objectID": "index.html#quick-links",
-    "href": "index.html#quick-links",
-    "title": "IS 4010: Application Development with Artificial Intelligence",
-    "section": "Quick links",
-    "text": "Quick links\n\nSyllabus\nWeekly schedule\nLab repository template\nCanvas (LMS)",
-    "crumbs": [
-      "Home"
-    ]
-  },
-  {
-    "objectID": "index.html#instructor",
-    "href": "index.html#instructor",
-    "title": "IS 4010: Application Development with Artificial Intelligence",
-    "section": "Instructor",
-    "text": "Instructor\nBrandon M. Greenwell, PhD\nDirector, Data Science @ 84.51°\nAnnual Adjunct Instructor Department of OBAIS, University of Cincinnati\nBrandon is a data scientist and educator with a passion for building reliable, interpretable AI systems. In his role as Director of Data Science at 84.51°, he leads initiatives in retail analytics and statistical modeling. His research and open-source contributions focus on Explainable AI (XAI), machine learning, and statistical computing.\nHe is the author of several widely-used R packages (including pdp, vip, and fastshap) and books, including Tree-Based Methods for Statistical Learning in R and the co-authored Hands-On Machine Learning with R. More recently, he has been contributing to the Rust ecosystem with popular packages like doxx, xleak, and lstr. In this course, he brings a professional perspective on using these modern tools to build the next generation of AI-enhanced applications.\n Follow on GitHub",
-    "crumbs": [
-      "Home"
-    ]
-  },
-  {
     "objectID": "syllabus.html",
     "href": "syllabus.html",
     "title": "Syllabus",
@@ -2043,6 +1993,91 @@
     "crumbs": [
       "Syllabus"
     ]
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "IS 4010: Application Development with Artificial Intelligence",
+    "section": "",
+    "text": "Welcome to the official course website for IS 4010.",
+    "crumbs": [
+      "Home"
+    ]
+  },
+  {
+    "objectID": "index.html#course-overview",
+    "href": "index.html#course-overview",
+    "title": "IS 4010: Application Development with Artificial Intelligence",
+    "section": "Course overview",
+    "text": "Course overview\nThis course explores the intersection of modern software development and generative AI. Students will learn to build robust applications in Python and Rust while mastering the art of using AI as a collaborative partner (“Co-Pilot”).\nA central theme is the practical application of AI code assistants (like GitHub Copilot and Gemini) to enhance problem-solving, accelerate development, and prepare students for the future of software engineering.",
+    "crumbs": [
+      "Home"
+    ]
+  },
+  {
+    "objectID": "index.html#course-books",
+    "href": "index.html#course-books",
+    "title": "IS 4010: Application Development with Artificial Intelligence",
+    "section": "Course “books”",
+    "text": "Course “books”\nThis course uses two primary, free, and open-source resources:\n\nThe Python Tutorial: The official guide to Python, covering everything from basic syntax to the standard library.\nThe Rust Programming Language: Affectionately known as “The Book,” this is the official, community-maintained guide to Rust.\n\nWe will reference specific chapters from these books each week to support our hands-on labs.",
+    "crumbs": [
+      "Home"
+    ]
+  },
+  {
+    "objectID": "index.html#quick-links",
+    "href": "index.html#quick-links",
+    "title": "IS 4010: Application Development with Artificial Intelligence",
+    "section": "Quick links",
+    "text": "Quick links\n\nSyllabus\nWeekly schedule\nLab repository template\nCanvas (LMS)",
+    "crumbs": [
+      "Home"
+    ]
+  },
+  {
+    "objectID": "index.html#instructor",
+    "href": "index.html#instructor",
+    "title": "IS 4010: Application Development with Artificial Intelligence",
+    "section": "Instructor",
+    "text": "Instructor\nBrandon M. Greenwell, PhD\nDirector, Data Science @ 84.51°\nAnnual Adjunct Instructor Department of OBAIS, University of Cincinnati\nBrandon is a data scientist and educator with a passion for building reliable, interpretable AI systems. In his role as Director of Data Science at 84.51°, he leads initiatives in retail analytics and statistical modeling. His research and open-source contributions focus on Explainable AI (XAI), machine learning, and statistical computing.\nHe is the author of several widely-used R packages (including pdp, vip, and fastshap) and books, including Tree-Based Methods for Statistical Learning in R and the co-authored Hands-On Machine Learning with R. More recently, he has been contributing to the Rust ecosystem with popular packages like doxx, xleak, and lstr. In this course, he brings a professional perspective on using these modern tools to build the next generation of AI-enhanced applications.\n Follow on GitHub",
+    "crumbs": [
+      "Home"
+    ]
+  },
+  {
+    "objectID": "AGENTS.html",
+    "href": "AGENTS.html",
+    "title": "IS 4010: Application Development with Artificial Intelligence - Website Repository",
+    "section": "",
+    "text": "This repository contains the source code for the official course website for IS 4010: Application Development with Artificial Intelligence, taught by Brandon M. Greenwell, PhD, at the University of Cincinnati.\n\n\nThis is a Quarto-based website project. It uses Quarto Markdown (.qmd) files to generate a static website and Reveal.js presentation slides.\n\nindex.qmd: The landing page of the course website.\nsyllabus.qmd: The comprehensive course syllabus, including policies, grading, and schedule.\nproject.qmd: Details regarding the final solo capstone project.\nweeks/: Contains weekly module pages (week01.qmd through week14.qmd) that outline the curriculum.\nslides/: Contains Quarto source files for Reveal.js lecture slides.\nresources/: Supplemental guides for students (setup, troubleshooting, packages).\n_quarto.yml: The main configuration file for the website’s structure, navigation, and theme.\nstyles.css: Custom CSS for the website.\n.github/workflows/publish.yml: GitHub Actions workflow for automated rendering and deployment to GitHub Pages.\n\n\n\n\n\n_quarto.yml: Define the sidebar, navbar, and global site metadata here.\nsyllabus.qmd: The “source of truth” for course dates and policies.\nslides/*.qmd: Individual slide decks rendered as Reveal.js presentations.\nAGENTS.md (in parent or root): Contains specific instructions for AI agents regarding tone (AI Co-Pilot), casing (Sentence Case), and security.\n\n\n\n\n\n\nTo preview the website locally as you make changes:\nquarto preview\n\n\n\nTo render the entire site to the _site/ (or docs/) directory:\nquarto render\nTo render only the slides to a specific directory (e.g., for Canvas upload):\ncd slides\nquarto render . --output-dir html\n\n\n\nDeployment is automated. Any push to the main branch triggers a GitHub Action that renders the site and publishes it to the gh-pages branch.\n\n\n\n\n\nTone: Maintain an encouraging, professional, and practical “AI Co-Pilot” tone.\nFormatting: Use Sentence case for all titles, headings, and subheadings (e.g., “Course overview” instead of “Course Overview”).\nConsistency: Ensure code examples and terminology (Python vs. Rust) align with the weekly modules.\nSecurity: Never commit sensitive instructor materials or API keys to this repository."
+  },
+  {
+    "objectID": "AGENTS.html#directory-overview",
+    "href": "AGENTS.html#directory-overview",
+    "title": "IS 4010: Application Development with Artificial Intelligence - Website Repository",
+    "section": "",
+    "text": "This is a Quarto-based website project. It uses Quarto Markdown (.qmd) files to generate a static website and Reveal.js presentation slides.\n\nindex.qmd: The landing page of the course website.\nsyllabus.qmd: The comprehensive course syllabus, including policies, grading, and schedule.\nproject.qmd: Details regarding the final solo capstone project.\nweeks/: Contains weekly module pages (week01.qmd through week14.qmd) that outline the curriculum.\nslides/: Contains Quarto source files for Reveal.js lecture slides.\nresources/: Supplemental guides for students (setup, troubleshooting, packages).\n_quarto.yml: The main configuration file for the website’s structure, navigation, and theme.\nstyles.css: Custom CSS for the website.\n.github/workflows/publish.yml: GitHub Actions workflow for automated rendering and deployment to GitHub Pages."
+  },
+  {
+    "objectID": "AGENTS.html#key-files",
+    "href": "AGENTS.html#key-files",
+    "title": "IS 4010: Application Development with Artificial Intelligence - Website Repository",
+    "section": "",
+    "text": "_quarto.yml: Define the sidebar, navbar, and global site metadata here.\nsyllabus.qmd: The “source of truth” for course dates and policies.\nslides/*.qmd: Individual slide decks rendered as Reveal.js presentations.\nAGENTS.md (in parent or root): Contains specific instructions for AI agents regarding tone (AI Co-Pilot), casing (Sentence Case), and security."
+  },
+  {
+    "objectID": "AGENTS.html#usage-development",
+    "href": "AGENTS.html#usage-development",
+    "title": "IS 4010: Application Development with Artificial Intelligence - Website Repository",
+    "section": "",
+    "text": "To preview the website locally as you make changes:\nquarto preview\n\n\n\nTo render the entire site to the _site/ (or docs/) directory:\nquarto render\nTo render only the slides to a specific directory (e.g., for Canvas upload):\ncd slides\nquarto render . --output-dir html\n\n\n\nDeployment is automated. Any push to the main branch triggers a GitHub Action that renders the site and publishes it to the gh-pages branch."
+  },
+  {
+    "objectID": "AGENTS.html#development-conventions",
+    "href": "AGENTS.html#development-conventions",
+    "title": "IS 4010: Application Development with Artificial Intelligence - Website Repository",
+    "section": "",
+    "text": "Tone: Maintain an encouraging, professional, and practical “AI Co-Pilot” tone.\nFormatting: Use Sentence case for all titles, headings, and subheadings (e.g., “Course overview” instead of “Course Overview”).\nConsistency: Ensure code examples and terminology (Python vs. Rust) align with the weekly modules.\nSecurity: Never commit sensitive instructor materials or API keys to this repository."
   },
   {
     "objectID": "slides/IS4010_W06_OOP.html#the-foundation-of-scalable-software-architecture",
