@@ -6,6 +6,7 @@ website:
   description: "Course materials for IS 4010: Application Development with Artificial Intelligence at the University of Cincinnati."
   favicon: images/uc-logo-2.png
   page-navigation: true
+  page-footer: "IS 4010"
 
   sidebar:
     style: docked
@@ -70,4 +71,3 @@ format:
     theme: cosmo
     toc: true
     css: styles.css
-    page-footer: "IS 4010"
