@@ -1,0 +1,1236 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-html/tabby.min.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-707d8167ce6003fca903bfe2be84ab7f.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.8.25">
+
+  <meta name="author" content="Brandon M. Greenwell">
+  <title>IS 4010 - App Dev with AI – IS4010: AI-Enhanced Application Development</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="../site_libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="../site_libs/revealjs/dist/reveal.css">
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+      vertical-align: middle;
+    }
+    /* CSS for syntax highlighting */
+    html { -webkit-text-size-adjust: 100%; }
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+      }
+    pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+    div.sourceCode
+      { color: #f8f8f2;  }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #f8f8f2; } /* Normal */
+    code span.al { color: #f07178; } /* Alert */
+    code span.an { color: #d4d0ab; } /* Annotation */
+    code span.at { color: #00e0e0; } /* Attribute */
+    code span.bn { color: #d4d0ab; } /* BaseN */
+    code span.bu { color: #abe338; } /* BuiltIn */
+    code span.cf { color: #ffa07a; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #abe338; } /* Char */
+    code span.cn { color: #ffd700; } /* Constant */
+    code span.co { color: #f8f8f2; font-style: italic; } /* Comment */
+    code span.cv { color: #ffd700; } /* CommentVar */
+    code span.do { color: #f8f8f2; } /* Documentation */
+    code span.dt { color: #ffa07a; } /* DataType */
+    code span.dv { color: #d4d0ab; } /* DecVal */
+    code span.er { color: #f07178; text-decoration: underline; } /* Error */
+    code span.ex { color: #00e0e0; font-weight: bold; } /* Extension */
+    code span.fl { color: #d4d0ab; } /* Float */
+    code span.fu { color: #ffa07a; } /* Function */
+    code span.im { color: #abe338; } /* Import */
+    code span.in { color: #d4d0ab; } /* Information */
+    code span.kw { color: #ffa07a; font-weight: bold; } /* Keyword */
+    code span.op { color: #ffa07a; } /* Operator */
+    code span.ot { color: #00e0e0; } /* Other */
+    code span.pp { color: #dcc6e0; } /* Preprocessor */
+    code span.re { color: #00e0e0; background-color: #f8f8f2; } /* RegionMarker */
+    code span.sc { color: #abe338; } /* SpecialChar */
+    code span.ss { color: #abe338; } /* SpecialString */
+    code span.st { color: #abe338; } /* String */
+    code span.va { color: #00e0e0; } /* Variable */
+    code span.vs { color: #abe338; } /* VerbatimString */
+    code span.wa { color: #dcc6e0; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto-a1d3734469117662d4af4794742e8c15.css">
+  <link rel="stylesheet" href="custom.css">
+  <link href="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="../site_libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <style type="text/css">
+    .reveal div.sourceCode {
+      margin: 0;
+      overflow: auto;
+    }
+    .reveal div.hanging-indent {
+      margin-left: 1em;
+      text-indent: -1em;
+    }
+    .reveal .slide:not(.center) {
+      height: 100%;
+      overflow-y: auto;
+    }
+    .reveal .slide.scrollable {
+      overflow-y: auto;
+    }
+    .reveal .footnotes {
+      height: 100%;
+      overflow-y: auto;
+    }
+    .reveal .slide .absolute {
+      position: absolute;
+      display: block;
+    }
+    .reveal .footnotes ol {
+      counter-reset: ol;
+      list-style-type: none; 
+      margin-left: 0;
+    }
+    .reveal .footnotes ol li:before {
+      counter-increment: ol;
+      content: counter(ol) ". "; 
+    }
+    .reveal .footnotes ol li > p:first-child {
+      display: inline-block;
+    }
+    .reveal .slide ul,
+    .reveal .slide ol {
+      margin-bottom: 0.5em;
+    }
+    .reveal .slide ul li,
+    .reveal .slide ol li {
+      margin-top: 0.4em;
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide ul[role="tablist"] li {
+      margin-bottom: 0;
+    }
+    .reveal .slide ul li > *:first-child,
+    .reveal .slide ol li > *:first-child {
+      margin-block-start: 0;
+    }
+    .reveal .slide ul li > *:last-child,
+    .reveal .slide ol li > *:last-child {
+      margin-block-end: 0;
+    }
+    .reveal .slide .columns:nth-child(3) {
+      margin-block-start: 0.8em;
+    }
+    .reveal blockquote {
+      box-shadow: none;
+    }
+    .reveal .tippy-content>* {
+      margin-top: 0.2em;
+      margin-bottom: 0.7em;
+    }
+    .reveal .tippy-content>*:last-child {
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide > img.stretch.quarto-figure-center,
+    .reveal .slide > img.r-stretch.quarto-figure-center {
+      display: block;
+      margin-left: auto;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-left,
+    .reveal .slide > img.r-stretch.quarto-figure-left  {
+      display: block;
+      margin-left: 0;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-right,
+    .reveal .slide > img.r-stretch.quarto-figure-right  {
+      display: block;
+      margin-left: auto;
+      margin-right: 0; 
+    }
+  </style>
+</head>
+<body class="quarto-dark">
+  <div class="reveal">
+    <div class="slides">
+
+<section id="title-slide" class="quarto-title-block center">
+  <h1 class="title">IS4010: AI-Enhanced Application Development</h1>
+  <p class="subtitle">Week 7: Working with External Data</p>
+
+<div class="quarto-title-authors">
+<div class="quarto-title-author">
+<div class="quarto-title-author-name">
+Brandon M. Greenwell 
+</div>
+</div>
+</div>
+
+</section>
+<section>
+<section id="working-with-external-data" class="title-slide slide level1 center">
+<h1>Working with External Data 🌐</h1>
+
+</section>
+<section id="from-local-files-to-the-entire-web" class="slide level2">
+<h2>From local files to the entire web</h2>
+<ul>
+<li class="fragment"><strong>The progression</strong>: Your app → Files → JSON → APIs → The world</li>
+<li class="fragment"><strong>Why this matters</strong>: No app exists in isolation - data flows between systems constantly</li>
+<li class="fragment"><strong>Real-world reality</strong>: Twitter, Stripe, GitHub, OpenAI - all expose APIs you can use</li>
+<li class="fragment"><strong>Career skill</strong>: API integration is one of the most in-demand programming capabilities</li>
+<li class="fragment"><strong>This week</strong>: Build apps that persist data locally AND fetch live data from the internet</li>
+</ul>
+<aside class="notes">
+<p><strong>Session Overview:</strong> - Part 1: File I/O and JSON - The foundation of data persistence - Part 2: HTTP APIs - Connecting your apps to external services - Unified theme: JSON is the universal language that makes data portable across files and networks - Lab 07 will combine both: save/load local data AND fetch live API data</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level2">
+
+</section></section>
+<section>
+<section id="part-1-files-json" class="title-slide slide level1 center">
+<h1>Part 1: Files &amp; JSON 📁</h1>
+
+</section>
+<section id="the-problem-programs-have-amnesia" class="slide level2">
+<h2>🤔 The problem: Programs have amnesia</h2>
+<h3 id="when-the-script-ends-everything-disappears"><strong>When the script ends, everything disappears</strong></h3>
+<ul>
+<li class="fragment"><strong>Every program so far</strong>: Variables, lists, dictionaries - all gone when the program exits</li>
+<li class="fragment"><strong>Real apps need memory</strong>: Contact lists, game progress, user preferences, shopping carts</li>
+<li class="fragment"><strong>The solution</strong>: <strong>Persistence</strong> - saving data to permanent storage (files, databases)</li>
+<li class="fragment"><strong>This enables</strong>: Apps that remember state between runs, data analysis on large datasets, sharing data between programs</li>
+</ul>
+<aside class="notes">
+<p><strong>Examples to mention:</strong> - Your phone’s contact list persists even when apps close - Video game save files let you resume progress - VS Code remembers your recent files and settings - Web browsers remember your bookmarks and history</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="reading-and-writing-files-in-python" class="slide level2">
+<h2>Reading and writing files in Python</h2>
+<h3 id="the-standard-pattern-with-open-context-manager"><strong>The standard pattern: <code>with open()</code> context manager</strong></h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a></a><span class="co"># Write to a file (overwrites existing content)</span></span>
+<span id="cb1-2"><a></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">"my_note.txt"</span>, <span class="st">"w"</span>) <span class="im">as</span> f:</span>
+<span id="cb1-3"><a></a>    f.write(<span class="st">"Hello from our application!"</span>)</span>
+<span id="cb1-4"><a></a></span>
+<span id="cb1-5"><a></a><span class="co"># Read the content back</span></span>
+<span id="cb1-6"><a></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">"my_note.txt"</span>, <span class="st">"r"</span>) <span class="im">as</span> f:</span>
+<span id="cb1-7"><a></a>    content <span class="op">=</span> f.read()</span>
+<span id="cb1-8"><a></a>    <span class="bu">print</span>(content)  <span class="co"># Output: Hello from our application!</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<ul>
+<li class="fragment"><strong>Why <code>with</code>?</strong>: Automatically closes the file even if errors occur</li>
+<li class="fragment"><strong>File modes</strong>: <code>"r"</code> (read), <code>"w"</code> (write/overwrite), <code>"a"</code> (append)</li>
+<li class="fragment"><strong>Best practice</strong>: Always use <code>with</code> - prevents file corruption and resource leaks</li>
+<li class="fragment">📚 <a href="https://docs.python.org/3/tutorial/inputoutput.html#reading-and-writing-files">Python file I/O documentation</a></li>
+</ul>
+<aside class="notes">
+<p><strong>Common mistakes:</strong> - Forgetting to close files → resource leaks - Using wrong mode → accidentally overwriting data - Not handling file not found errors</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="the-problem-with-plain-text-files" class="slide level2">
+<h2>🚧 The problem with plain text files</h2>
+<h3 id="text-is-unstructured-and-hard-to-parse"><strong>Text is unstructured and hard to parse</strong></h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a></a><span class="co"># Saving a contact list to a text file - messy!</span></span>
+<span id="cb2-2"><a></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">"contacts.txt"</span>, <span class="st">"w"</span>) <span class="im">as</span> f:</span>
+<span id="cb2-3"><a></a>    f.write(<span class="st">"Alice|alice@example.com|555-1234</span><span class="ch">\n</span><span class="st">"</span>)</span>
+<span id="cb2-4"><a></a>    f.write(<span class="st">"Bob|bob@example.com|555-5678</span><span class="ch">\n</span><span class="st">"</span>)</span>
+<span id="cb2-5"><a></a></span>
+<span id="cb2-6"><a></a><span class="co"># Reading it back - lots of manual parsing</span></span>
+<span id="cb2-7"><a></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">"contacts.txt"</span>, <span class="st">"r"</span>) <span class="im">as</span> f:</span>
+<span id="cb2-8"><a></a>    <span class="cf">for</span> line <span class="kw">in</span> f:</span>
+<span id="cb2-9"><a></a>        parts <span class="op">=</span> line.strip().split(<span class="st">"|"</span>)</span>
+<span id="cb2-10"><a></a>        name, email, phone <span class="op">=</span> parts</span>
+<span id="cb2-11"><a></a>        <span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span>name<span class="sc">}</span><span class="ss">: </span><span class="sc">{</span>email<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<ul>
+<li class="fragment"><strong>Problems</strong>: Custom delimiters (<code>|</code>), fragile parsing, no nested data, no type info</li>
+<li class="fragment"><strong>What if</strong>: Email contains <code>|</code>? What about optional fields? Nested addresses?</li>
+<li class="fragment"><strong>The real solution</strong>: We need a <strong>standard data format</strong> everyone agrees on</li>
+</ul>
+</section>
+<section id="enter-json-the-universal-data-format" class="slide level2">
+<h2>Enter JSON: The universal data format 🌍</h2>
+<h3 id="javascript-object-notation---the-language-of-the-web"><strong>JavaScript Object Notation - The language of the web</strong></h3>
+<ul>
+<li class="fragment"><strong>JSON</strong> is a simple, human-readable text format for representing structured data</li>
+<li class="fragment"><strong>Created</strong>: Early 2000s by Douglas Crockford - became the web’s standard (<a href="https://www.json.org/">JSON.org</a>)</li>
+<li class="fragment"><strong>Why it won</strong>: Simple, language-agnostic, maps perfectly to most programming languages</li>
+<li class="fragment"><strong>Ubiquity</strong>: APIs, config files, databases, logs - JSON is everywhere</li>
+<li class="fragment"><strong>Python advantage</strong>: JSON maps directly to Python’s built-in types</li>
+</ul>
+</section>
+<section id="json-structure-maps-to-python" class="slide level2">
+<h2>JSON structure maps to Python</h2>
+<h3 id="almost-identical-syntax"><strong>Almost identical syntax</strong></h3>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th>JSON Type</th>
+<th>Python Type</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Object <code>{}</code></td>
+<td>Dictionary</td>
+<td><code>{"name": "Alice", "age": 30}</code></td>
+</tr>
+<tr class="even">
+<td>Array <code>[]</code></td>
+<td>List</td>
+<td><code>[1, 2, 3, 4, 5]</code></td>
+</tr>
+<tr class="odd">
+<td>String</td>
+<td>String</td>
+<td><code>"hello"</code></td>
+</tr>
+<tr class="even">
+<td>Number</td>
+<td>int/float</td>
+<td><code>42</code>, <code>3.14</code></td>
+</tr>
+<tr class="odd">
+<td>Boolean</td>
+<td>Boolean</td>
+<td><code>true</code> → <code>True</code>, <code>false</code> → <code>False</code></td>
+</tr>
+<tr class="even">
+<td>Null</td>
+<td>None</td>
+<td><code>null</code> → <code>None</code></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li class="fragment"><strong>Key insight</strong>: If you know Python dicts/lists, you already know JSON</li>
+<li class="fragment"><strong>This makes</strong>: Reading/writing JSON in Python incredibly easy</li>
+</ul>
+</section>
+<section id="using-pythons-json-library" class="slide level2">
+<h2>Using Python’s <code>json</code> library</h2>
+<h3 id="two-key-functions-dump-and-load"><strong>Two key functions: <code>dump()</code> and <code>load()</code></strong></h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a></a><span class="im">import</span> json</span>
+<span id="cb3-2"><a></a></span>
+<span id="cb3-3"><a></a><span class="co"># Python dictionary (complex, nested structure)</span></span>
+<span id="cb3-4"><a></a>contacts <span class="op">=</span> {</span>
+<span id="cb3-5"><a></a>    <span class="st">"people"</span>: [</span>
+<span id="cb3-6"><a></a>        {<span class="st">"name"</span>: <span class="st">"Alice"</span>, <span class="st">"email"</span>: <span class="st">"alice@example.com"</span>, <span class="st">"age"</span>: <span class="dv">30</span>},</span>
+<span id="cb3-7"><a></a>        {<span class="st">"name"</span>: <span class="st">"Bob"</span>, <span class="st">"email"</span>: <span class="st">"bob@example.com"</span>, <span class="st">"age"</span>: <span class="dv">25</span>}</span>
+<span id="cb3-8"><a></a>    ],</span>
+<span id="cb3-9"><a></a>    <span class="st">"count"</span>: <span class="dv">2</span></span>
+<span id="cb3-10"><a></a>}</span>
+<span id="cb3-11"><a></a></span>
+<span id="cb3-12"><a></a><span class="co"># Write Python object to JSON file</span></span>
+<span id="cb3-13"><a></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">"contacts.json"</span>, <span class="st">"w"</span>) <span class="im">as</span> f:</span>
+<span id="cb3-14"><a></a>    json.dump(contacts, f, indent<span class="op">=</span><span class="dv">4</span>)  <span class="co"># indent=4 makes it readable</span></span>
+<span id="cb3-15"><a></a></span>
+<span id="cb3-16"><a></a><span class="co"># Read JSON file back into Python object</span></span>
+<span id="cb3-17"><a></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">"contacts.json"</span>, <span class="st">"r"</span>) <span class="im">as</span> f:</span>
+<span id="cb3-18"><a></a>    data <span class="op">=</span> json.load(f)</span>
+<span id="cb3-19"><a></a>    <span class="bu">print</span>(data[<span class="st">"people"</span>][<span class="dv">0</span>][<span class="st">"name"</span>])  <span class="co"># Output: Alice</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<ul>
+<li class="fragment"><strong><code>json.dump(obj, file)</code></strong>: Python object → JSON file</li>
+<li class="fragment"><strong><code>json.load(file)</code></strong>: JSON file → Python object</li>
+<li class="fragment"><strong><code>indent=4</code></strong>: Makes JSON human-readable (use in development, skip in production)</li>
+<li class="fragment">📚 <a href="https://docs.python.org/3/library/json.html">Python json module docs</a></li>
+</ul>
+</section>
+<section id="what-the-generated-json-looks-like" class="slide level2">
+<h2>🎯 What the generated JSON looks like</h2>
+<h3 id="contacts.json"><strong>contacts.json</strong></h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode numberSource json number-lines code-with-copy"><code class="sourceCode json"><span id="cb4-1"><a></a><span class="fu">{</span></span>
+<span id="cb4-2"><a></a>    <span class="dt">"people"</span><span class="fu">:</span> <span class="ot">[</span></span>
+<span id="cb4-3"><a></a>        <span class="fu">{</span></span>
+<span id="cb4-4"><a></a>            <span class="dt">"name"</span><span class="fu">:</span> <span class="st">"Alice"</span><span class="fu">,</span></span>
+<span id="cb4-5"><a></a>            <span class="dt">"email"</span><span class="fu">:</span> <span class="st">"alice@example.com"</span><span class="fu">,</span></span>
+<span id="cb4-6"><a></a>            <span class="dt">"age"</span><span class="fu">:</span> <span class="dv">30</span></span>
+<span id="cb4-7"><a></a>        <span class="fu">}</span><span class="ot">,</span></span>
+<span id="cb4-8"><a></a>        <span class="fu">{</span></span>
+<span id="cb4-9"><a></a>            <span class="dt">"name"</span><span class="fu">:</span> <span class="st">"Bob"</span><span class="fu">,</span></span>
+<span id="cb4-10"><a></a>            <span class="dt">"email"</span><span class="fu">:</span> <span class="st">"bob@example.com"</span><span class="fu">,</span></span>
+<span id="cb4-11"><a></a>            <span class="dt">"age"</span><span class="fu">:</span> <span class="dv">25</span></span>
+<span id="cb4-12"><a></a>        <span class="fu">}</span></span>
+<span id="cb4-13"><a></a>    <span class="ot">]</span><span class="fu">,</span></span>
+<span id="cb4-14"><a></a>    <span class="dt">"count"</span><span class="fu">:</span> <span class="dv">2</span></span>
+<span id="cb4-15"><a></a><span class="fu">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<ul>
+<li class="fragment"><strong>Human-readable</strong>: You can open it in any text editor</li>
+<li class="fragment"><strong>Standard format</strong>: Any language can read this (JavaScript, Java, C#, etc.)</li>
+<li class="fragment"><strong>Portable</strong>: Email this file to a teammate, they can load it instantly</li>
+</ul>
+</section>
+<section id="why-json-matters-for-apis-preview" class="slide level2">
+<h2>💡 Why JSON matters for APIs (preview)</h2>
+<h3 id="the-connection-to-part-2"><strong>The connection to Part 2</strong></h3>
+<ul>
+<li class="fragment"><strong>Files are local</strong>: Your computer reads/writes JSON files</li>
+<li class="fragment"><strong>APIs are remote</strong>: Other computers send/receive JSON over the internet</li>
+<li class="fragment"><strong>Same format</strong>: The JSON you just learned works for BOTH</li>
+<li class="fragment"><strong>This means</strong>: Once you can work with JSON files, you can work with web APIs</li>
+<li class="fragment"><strong>Coming up</strong>: How to fetch JSON from remote servers using HTTP requests</li>
+</ul>
+<aside class="notes">
+<p><strong>Bridge to Part 2:</strong> - JSON is the universal translator between systems - Your app speaks JSON, APIs speak JSON, databases speak JSON - Learning JSON once unlocks both file persistence AND web integration</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level2">
+
+</section></section>
+<section>
+<section id="part-2-working-with-apis" class="title-slide slide level1 center">
+<h1>Part 2: Working with APIs 🔌</h1>
+
+</section>
+<section id="what-is-an-api" class="slide level2">
+<h2>What is an API?</h2>
+<h3 id="application-programming-interface"><strong>Application Programming Interface</strong></h3>
+<ul>
+<li class="fragment"><strong>An API</strong> is a set of rules that allows different software applications to communicate</li>
+<li class="fragment"><strong>Simple analogy</strong>: A restaurant menu
+<ul>
+<li class="fragment">Menu (API) tells you what you can order (available operations)</li>
+<li class="fragment">You don’t need to know how the kitchen works (implementation details)</li>
+<li class="fragment">You just make a request, and get food back (data)</li>
+</ul></li>
+<li class="fragment"><strong>APIs define</strong>: What operations are available, what data to send, what you get back</li>
+<li class="fragment">📚 <a href="https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Client-side_web_APIs/Introduction">What is an API? (MDN)</a></li>
+</ul>
+<aside class="notes">
+<p><strong>Examples of APIs students use daily:</strong> - Instagram API: Apps like Buffer post to Instagram programmatically - Google Maps API: Uber/Lyft use it for navigation - Stripe API: E-commerce sites process payments - OpenAI API: ChatGPT-powered applications</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="web-apis-apps-talking-over-the-internet" class="slide level2 scrollable">
+<h2>🌐 Web APIs: Apps talking over the internet</h2>
+<h3 id="http-as-the-communication-protocol"><strong>HTTP as the communication protocol</strong></h3>
+<ul>
+<li class="fragment"><strong>Web APIs</strong> use <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Overview">HTTP</a> (HyperText Transfer Protocol) to communicate over the internet</li>
+<li class="fragment"><strong>Same protocol</strong>: Your web browser uses HTTP to load websites</li>
+<li class="fragment"><strong>The exchange</strong>:
+<ol type="1">
+<li class="fragment">Your app sends an <strong>HTTP request</strong> to a URL</li>
+<li class="fragment">Remote server processes the request</li>
+<li class="fragment">Server sends back an <strong>HTTP response</strong> with data (usually JSON!)</li>
+</ol></li>
+<li class="fragment"><strong>Key insight</strong>: Reading API data is just like reading a JSON file, but from a remote server</li>
+</ul>
+</section>
+<section id="anatomy-of-a-web-api-request" class="slide level2">
+<h2>🔍 Anatomy of a web API request</h2>
+<h3 id="url-structure-and-http-methods"><strong>URL structure and HTTP methods</strong></h3>
+<pre><code>https://api.github.com/users/octocat/repos
+└─┬─┘ └────────┬─────────┘ └─────┬────────┘
+  │          base URL         endpoint path
+protocol</code></pre>
+<ul>
+<li class="fragment"><strong>Base URL</strong>: <code>https://api.github.com</code> - the server you’re talking to</li>
+<li class="fragment"><strong>Endpoint</strong>: <code>/users/octocat/repos</code> - the specific resource you want</li>
+<li class="fragment"><strong>HTTP method</strong>: <code>GET</code> (retrieve data), <code>POST</code> (send data), <code>PUT</code> (update), <code>DELETE</code> (remove)</li>
+<li class="fragment"><strong>For now</strong>: We’ll focus on <code>GET</code> requests to retrieve data</li>
+<li class="fragment">📚 <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods">HTTP methods explained</a></li>
+</ul>
+</section>
+<section id="installing-the-requests-library" class="slide level2">
+<h2>Installing the <code>requests</code> library</h2>
+<h3 id="pythons-most-popular-http-library"><strong>Python’s most popular HTTP library</strong></h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a></a><span class="ex">pip</span> install requests</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<ul>
+<li class="fragment"><strong>Not built-in</strong>: Unlike <code>json</code>, we need to install <a href="https://requests.readthedocs.io/en/latest/">requests</a></li>
+<li class="fragment"><strong>Why requests?</strong>: Clean, simple API - much easier than Python’s built-in <code>urllib</code></li>
+<li class="fragment"><strong>Industry standard</strong>: Used by millions of Python developers</li>
+<li class="fragment"><strong>Alternative</strong>: Python 3.11+ has <code>urllib3</code>, but <code>requests</code> is still preferred for simplicity</li>
+</ul>
+<aside class="notes">
+<p><strong>Installation tips:</strong> - Make sure students activate virtual environment first - Show how to verify installation: <code>python -c "import requests; print(requests.__version__)"</code></p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="making-your-first-api-request" class="slide level2">
+<h2>Making your first API request</h2>
+<h3 id="get-request-to-a-public-api"><strong>GET request to a public API</strong></h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a></a><span class="im">import</span> requests</span>
+<span id="cb7-2"><a></a></span>
+<span id="cb7-3"><a></a><span class="co"># Make a GET request to the PokeAPI</span></span>
+<span id="cb7-4"><a></a>url <span class="op">=</span> <span class="st">"https://pokeapi.co/api/v2/pokemon/pikachu"</span></span>
+<span id="cb7-5"><a></a>response <span class="op">=</span> requests.get(url)</span>
+<span id="cb7-6"><a></a></span>
+<span id="cb7-7"><a></a><span class="co"># Check if the request was successful</span></span>
+<span id="cb7-8"><a></a><span class="cf">if</span> response.status_code <span class="op">==</span> <span class="dv">200</span>:</span>
+<span id="cb7-9"><a></a>    <span class="co"># Parse the JSON response into a Python dictionary</span></span>
+<span id="cb7-10"><a></a>    data <span class="op">=</span> response.json()</span>
+<span id="cb7-11"><a></a>    <span class="bu">print</span>(<span class="ss">f"Name: </span><span class="sc">{</span>data[<span class="st">'name'</span>]<span class="sc">.</span>title()<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb7-12"><a></a>    <span class="bu">print</span>(<span class="ss">f"Height: </span><span class="sc">{</span>data[<span class="st">'height'</span>]<span class="sc">}</span><span class="ss"> decimetres"</span>)</span>
+<span id="cb7-13"><a></a>    <span class="bu">print</span>(<span class="ss">f"Weight: </span><span class="sc">{</span>data[<span class="st">'weight'</span>]<span class="sc">}</span><span class="ss"> hectograms"</span>)</span>
+<span id="cb7-14"><a></a><span class="cf">else</span>:</span>
+<span id="cb7-15"><a></a>    <span class="bu">print</span>(<span class="ss">f"Error: Received status code </span><span class="sc">{</span>response<span class="sc">.</span>status_code<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<ul>
+<li class="fragment"><strong><code>requests.get(url)</code></strong>: Makes HTTP GET request, returns response object</li>
+<li class="fragment"><strong><code>response.status_code</code></strong>: HTTP status code (200 = success)</li>
+<li class="fragment"><strong><code>response.json()</code></strong>: Parses JSON response → Python dict (same as <code>json.load()</code>!)</li>
+<li class="fragment">📚 <a href="https://pokeapi.co/docs/v2">PokeAPI documentation</a></li>
+</ul>
+</section>
+<section id="http-status-codes" class="slide level2">
+<h2>📊 HTTP status codes</h2>
+<h3 id="the-servers-way-of-telling-you-what-happened"><strong>The server’s way of telling you what happened</strong></h3>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th>Code</th>
+<th>Meaning</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>200</td>
+<td>OK - Success</td>
+<td>Data retrieved successfully</td>
+</tr>
+<tr class="even">
+<td>201</td>
+<td>Created</td>
+<td>New resource created</td>
+</tr>
+<tr class="odd">
+<td>400</td>
+<td>Bad Request</td>
+<td>Invalid data sent</td>
+</tr>
+<tr class="even">
+<td>401</td>
+<td>Unauthorized</td>
+<td>Need authentication</td>
+</tr>
+<tr class="odd">
+<td>404</td>
+<td>Not Found</td>
+<td>Resource doesn’t exist</td>
+</tr>
+<tr class="even">
+<td>500</td>
+<td>Server Error</td>
+<td>Something broke on server</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li class="fragment"><strong>Always check</strong>: <code>response.status_code</code> before processing data</li>
+<li class="fragment"><strong>Error handling</strong>: Different codes need different responses</li>
+<li class="fragment">📚 <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Status">HTTP status codes reference</a></li>
+</ul>
+</section>
+<section id="the-json-connection-same-format-different-source" class="slide level2">
+<h2>🔗 The JSON connection: Same format, different source</h2>
+<h3 id="comparison-files-vs-apis"><strong>Comparison: Files vs APIs</strong></h3>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><strong>Reading JSON from a file:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a></a><span class="im">import</span> json</span>
+<span id="cb8-2"><a></a></span>
+<span id="cb8-3"><a></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">"data.json"</span>, <span class="st">"r"</span>) <span class="im">as</span> f:</span>
+<span id="cb8-4"><a></a>    data <span class="op">=</span> json.load(f)</span>
+<span id="cb8-5"><a></a>    <span class="bu">print</span>(data[<span class="st">"name"</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div><div class="column" style="width:50%;">
+<p><strong>Reading JSON from an API:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a></a><span class="im">import</span> requests</span>
+<span id="cb9-2"><a></a></span>
+<span id="cb9-3"><a></a>response <span class="op">=</span> requests.get(url)</span>
+<span id="cb9-4"><a></a>data <span class="op">=</span> response.json()</span>
+<span id="cb9-5"><a></a><span class="bu">print</span>(data[<span class="st">"name"</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div></div>
+<ul>
+<li class="fragment"><strong>Same result</strong>: Both give you a Python dictionary</li>
+<li class="fragment"><strong>Same skills</strong>: Working with dicts, lists, accessing nested data</li>
+<li class="fragment"><strong>Different source</strong>: One is local, one is remote</li>
+<li class="fragment"><strong>Key takeaway</strong>: JSON knowledge transfers directly between files and APIs</li>
+</ul>
+</section>
+<section id="real-world-api-examples" class="slide level2">
+<h2>🚀 Real-world API examples</h2>
+<h3 id="apis-you-can-use-right-now-no-api-key-needed"><strong>APIs you can use right now (no API key needed)</strong></h3>
+<ul>
+<li class="fragment"><strong><a href="https://pokeapi.co/">PokeAPI</a></strong>: Pokemon data (what we just used)</li>
+<li class="fragment"><strong><a href="https://openweathermap.org/api">OpenWeatherMap</a></strong>: Current weather and forecasts (free tier)</li>
+<li class="fragment"><strong><a href="https://restcountries.com/">REST Countries</a></strong>: Country data (population, flags, currencies)</li>
+<li class="fragment"><strong><a href="https://thedogapi.com/">The Dog API</a></strong>: Random dog pictures and breed info</li>
+<li class="fragment"><strong><a href="https://api.nasa.gov/">NASA API</a></strong>: Astronomy picture of the day, Mars rover photos</li>
+<li class="fragment"><strong><a href="https://jokeapi.dev/">JokeAPI</a></strong>: Random jokes and puns</li>
+<li class="fragment"><strong>Thousands more</strong>: <a href="https://github.com/public-apis/public-apis">Public APIs directory</a></li>
+</ul>
+<aside class="notes">
+<p><strong>For Lab 07:</strong> - Students will choose one of these APIs - Some require free API keys (OpenWeatherMap, NASA) - simple signup - Emphasize exploring documentation before coding</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="error-handling-with-apis" class="slide level2">
+<h2>🛡️ Error handling with APIs</h2>
+<h3 id="networks-are-unreliable---plan-for-failure"><strong>Networks are unreliable - plan for failure</strong></h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a></a><span class="im">import</span> requests</span>
+<span id="cb10-2"><a></a></span>
+<span id="cb10-3"><a></a>url <span class="op">=</span> <span class="st">"https://api.example.com/data"</span></span>
+<span id="cb10-4"><a></a></span>
+<span id="cb10-5"><a></a><span class="cf">try</span>:</span>
+<span id="cb10-6"><a></a>    response <span class="op">=</span> requests.get(url, timeout<span class="op">=</span><span class="dv">5</span>)  <span class="co"># 5 second timeout</span></span>
+<span id="cb10-7"><a></a>    response.raise_for_status()  <span class="co"># Raises exception for 4xx/5xx codes</span></span>
+<span id="cb10-8"><a></a></span>
+<span id="cb10-9"><a></a>    data <span class="op">=</span> response.json()</span>
+<span id="cb10-10"><a></a>    <span class="bu">print</span>(<span class="ss">f"Success: </span><span class="sc">{</span>data<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb10-11"><a></a></span>
+<span id="cb10-12"><a></a><span class="cf">except</span> requests.exceptions.Timeout:</span>
+<span id="cb10-13"><a></a>    <span class="bu">print</span>(<span class="st">"Error: Request timed out"</span>)</span>
+<span id="cb10-14"><a></a><span class="cf">except</span> requests.exceptions.<span class="pp">ConnectionError</span>:</span>
+<span id="cb10-15"><a></a>    <span class="bu">print</span>(<span class="st">"Error: Could not connect to server"</span>)</span>
+<span id="cb10-16"><a></a><span class="cf">except</span> requests.exceptions.HTTPError <span class="im">as</span> e:</span>
+<span id="cb10-17"><a></a>    <span class="bu">print</span>(<span class="ss">f"Error: HTTP </span><span class="sc">{</span>e<span class="sc">.</span>response<span class="sc">.</span>status_code<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb10-18"><a></a><span class="cf">except</span> requests.exceptions.JSONDecodeError:</span>
+<span id="cb10-19"><a></a>    <span class="bu">print</span>(<span class="st">"Error: Response was not valid JSON"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<ul>
+<li class="fragment"><strong>Timeouts</strong>: Set with <code>timeout=</code> parameter (seconds)</li>
+<li class="fragment"><strong><code>raise_for_status()</code></strong>: Converts error codes into exceptions</li>
+<li class="fragment"><strong>Why this matters</strong>: APIs can be down, slow, or change without notice</li>
+</ul>
+</section>
+<section id="api-best-practices" class="slide level2">
+<h2>⚡ API best practices</h2>
+<h3 id="being-a-good-api-citizen"><strong>Being a good API citizen</strong></h3>
+<ul>
+<li class="fragment"><strong>Read the docs first</strong>: Every API has different rules and endpoints</li>
+<li class="fragment"><strong>Respect rate limits</strong>: Most free APIs limit requests (e.g., 1000/day)</li>
+<li class="fragment"><strong>Cache responses</strong>: Don’t request the same data repeatedly</li>
+<li class="fragment"><strong>Use timeouts</strong>: Don’t let your app hang forever waiting for response</li>
+<li class="fragment"><strong>Check status codes</strong>: Handle errors gracefully</li>
+<li class="fragment"><strong>API keys</strong>: Keep them secret (use <code>.env</code> files, never commit to git)</li>
+<li class="fragment">📚 <a href="https://swagger.io/resources/articles/best-practices-in-api-design/">API development best practices</a></li>
+</ul>
+<aside class="notes">
+<p><strong>Rate limiting example:</strong> - GitHub API: 60 requests/hour (unauthenticated), 5000/hour (authenticated) - OpenWeatherMap: 1000 requests/day (free tier) - Exceeding limits → 429 Too Many Requests error</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="putting-it-all-together-files-apis" class="slide level2">
+<h2>🎯 Putting it all together: Files + APIs</h2>
+<h3 id="a-complete-data-workflow"><strong>A complete data workflow</strong></h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a></a><span class="im">import</span> json</span>
+<span id="cb11-2"><a></a><span class="im">import</span> requests</span>
+<span id="cb11-3"><a></a></span>
+<span id="cb11-4"><a></a><span class="co"># 1. Fetch live data from API</span></span>
+<span id="cb11-5"><a></a>response <span class="op">=</span> requests.get(<span class="st">"https://pokeapi.co/api/v2/pokemon/ditto"</span>)</span>
+<span id="cb11-6"><a></a>pokemon_data <span class="op">=</span> response.json()</span>
+<span id="cb11-7"><a></a></span>
+<span id="cb11-8"><a></a><span class="co"># 2. Process the data (extract what we need)</span></span>
+<span id="cb11-9"><a></a>simplified <span class="op">=</span> {</span>
+<span id="cb11-10"><a></a>    <span class="st">"name"</span>: pokemon_data[<span class="st">"name"</span>],</span>
+<span id="cb11-11"><a></a>    <span class="st">"height"</span>: pokemon_data[<span class="st">"height"</span>],</span>
+<span id="cb11-12"><a></a>    <span class="st">"weight"</span>: pokemon_data[<span class="st">"weight"</span>],</span>
+<span id="cb11-13"><a></a>    <span class="st">"types"</span>: [t[<span class="st">"type"</span>][<span class="st">"name"</span>] <span class="cf">for</span> t <span class="kw">in</span> pokemon_data[<span class="st">"types"</span>]]</span>
+<span id="cb11-14"><a></a>}</span>
+<span id="cb11-15"><a></a></span>
+<span id="cb11-16"><a></a><span class="co"># 3. Save to local JSON file for offline use</span></span>
+<span id="cb11-17"><a></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">"pokemon_cache.json"</span>, <span class="st">"w"</span>) <span class="im">as</span> f:</span>
+<span id="cb11-18"><a></a>    json.dump(simplified, f, indent<span class="op">=</span><span class="dv">4</span>)</span>
+<span id="cb11-19"><a></a></span>
+<span id="cb11-20"><a></a><span class="bu">print</span>(<span class="st">"Data fetched from API and saved locally!"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<ul>
+<li class="fragment"><strong>The pattern</strong>: Fetch → Process → Store</li>
+<li class="fragment"><strong>Why cache?</strong>: Faster loading, works offline, reduces API calls</li>
+<li class="fragment"><strong>Real apps do this</strong>: Weather apps, news readers, social media feeds</li>
+</ul>
+</section>
+<section id="lab-07-overview" class="slide level2">
+<h2>🧪 Lab 07 overview</h2>
+<h3 id="two-part-lab-local-persistence-live-api-integration"><strong>Two-part lab: Local persistence + Live API integration</strong></h3>
+<ul>
+<li class="fragment"><strong>Part 1</strong>: Build a contact book application
+<ul>
+<li class="fragment">Store contacts as JSON file</li>
+<li class="fragment">Load contacts when app starts</li>
+<li class="fragment">Add, view, and search contacts</li>
+<li class="fragment">Data persists between runs</li>
+</ul></li>
+<li class="fragment"><strong>Part 2</strong>: Choose a public API and build a data viewer
+<ul>
+<li class="fragment">Pick an API that interests you</li>
+<li class="fragment">Fetch live data with <code>requests</code></li>
+<li class="fragment">Parse JSON response</li>
+<li class="fragment">Display formatted output to user</li>
+</ul></li>
+<li class="fragment"><strong>Bonus challenge</strong>: Combine both - cache API responses to JSON files!</li>
+</ul>
+<aside class="notes">
+<p><strong>Lab guidance:</strong> - Part 1 builds on Week 6 OOP concepts (optional: make Contact class) - Part 2 is open-ended - encourage creativity - Grading focuses on: proper error handling, clean JSON structure, user-friendly output - Common issues: forgetting to handle file not found, not checking API status codes</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="career-relevance-why-this-matters" class="slide level2">
+<h2>🚀 Career relevance: Why this matters</h2>
+<h3 id="api-integration-is-a-core-professional-skill"><strong>API integration is a core professional skill</strong></h3>
+<ul>
+<li class="fragment"><strong>Every modern app</strong>: Integrates with external services (payments, auth, maps, notifications)</li>
+<li class="fragment"><strong>Job requirements</strong>: “Experience with RESTful APIs” appears in 80%+ of backend/full-stack job postings</li>
+<li class="fragment"><strong>Interview questions</strong>: “How would you integrate Stripe payment processing?” “Design a weather dashboard”</li>
+<li class="fragment"><strong>Real companies using APIs</strong>:
+<ul>
+<li class="fragment">Stripe: Payment processing API ($95B valuation)</li>
+<li class="fragment">Twilio: SMS/Voice API ($12B valuation)</li>
+<li class="fragment">Mapbox: Maps API (powers Snapchat, Instacart)</li>
+</ul></li>
+<li class="fragment"><strong>Your portfolio</strong>: API projects demonstrate practical, real-world skills</li>
+</ul>
+</section>
+<section id="key-takeaways" class="slide level2">
+<h2>📚 Key takeaways</h2>
+<ul>
+<li class="fragment"><strong>Persistence</strong>: Files let your programs remember state between runs</li>
+<li class="fragment"><strong>JSON</strong>: Universal data format - works for files AND APIs</li>
+<li class="fragment"><strong>APIs</strong>: Let your apps communicate with other systems over the internet</li>
+<li class="fragment"><strong>HTTP</strong>: The protocol that powers the web and most APIs</li>
+<li class="fragment"><strong>Requests library</strong>: Makes HTTP requests simple in Python</li>
+<li class="fragment"><strong>Error handling</strong>: Always check status codes and handle failures gracefully</li>
+<li class="fragment"><strong>The connection</strong>: <code>json.load()</code> (files) and <code>response.json()</code> (APIs) both give you Python dicts</li>
+</ul>
+</section>
+<section id="essential-resources" class="slide level2">
+<h2>🔗 Essential resources</h2>
+<h3 id="documentation-and-learning-materials"><strong>Documentation and learning materials</strong></h3>
+<ul>
+<li class="fragment">📘 <a href="https://docs.python.org/3/tutorial/inputoutput.html#reading-and-writing-files">Python file I/O tutorial</a></li>
+<li class="fragment">📗 <a href="https://docs.python.org/3/library/json.html">JSON module documentation</a></li>
+<li class="fragment">📕 <a href="https://requests.readthedocs.io/en/latest/">Requests library docs</a></li>
+<li class="fragment">📙 <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods">HTTP methods reference</a></li>
+<li class="fragment">📓 <a href="https://github.com/public-apis/public-apis">Public APIs directory</a></li>
+<li class="fragment">🎓 <a href="https://realpython.com/python-api/">Real Python: Working with APIs</a></li>
+</ul>
+</section>
+<section id="questions" class="slide level2">
+<h2>💬 Questions?</h2>
+<p><strong>Next steps:</strong> - Review Lab 07 instructions in <code>week07/lab07.md</code> - Choose an API that interests you - Start with simple examples, then build complexity</p>
+<p><strong>Office hours:</strong> Available for API selection guidance and debugging!</p>
+<aside class="notes">
+<p><strong>Wrap-up reminders:</strong> - Encourage students to start early - API integration can be tricky first time - Suggest pairing up to explore different APIs together - Remind about error handling - it’s part of the grading rubric</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+
+
+</section></section>
+    </div>
+  <div class="quarto-auto-generated-content" style="display: none;">
+<div class="footer footer-default">
+
+</div>
+</div></div>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script>
+  <script src="../site_libs/revealjs/dist/reveal.js"></script>
+  <!-- reveal.js plugins -->
+  <script src="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="../site_libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="../site_libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="../site_libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="../site_libs/revealjs/plugin/quarto-support/support.js"></script>
+  
+
+  <script src="../site_libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="../site_libs/revealjs/plugin/search/search.js"></script>
+  <script src="../site_libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="../site_libs/revealjs/plugin/math/math.js"></script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://revealjs.com/config/
+      Reveal.initialize({
+'controlsAuto': true,
+'previewLinksAuto': false,
+'pdfSeparateFragments': false,
+'autoAnimateEasing': "ease",
+'autoAnimateDuration': 1,
+'autoAnimateUnmatched': true,
+'jumpToSlide': true,
+'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\"><kbd>r</kbd> Scroll View Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
+'smaller': false,
+ 
+        // Display controls in the bottom right corner
+        controls: false,
+
+        // Help the user learn the controls by providing hints, for example by
+        // bouncing the down arrow when they first encounter a vertical slide
+        controlsTutorial: false,
+
+        // Determines where controls appear, "edges" or "bottom-right"
+        controlsLayout: 'edges',
+
+        // Visibility rule for backwards navigation arrows; "faded", "hidden"
+        // or "visible"
+        controlsBackArrows: 'faded',
+
+        // Display a presentation progress bar
+        progress: true,
+
+        // Display the page number of the current slide
+        slideNumber: false,
+
+        // 'all', 'print', or 'speaker'
+        showSlideNumber: 'all',
+
+        // Add the current slide number to the URL hash so that reloading the
+        // page/copying the URL will return you to the same slide
+        hash: true,
+
+        // Start with 1 for the hash rather than 0
+        hashOneBasedIndex: false,
+
+        // Flags if we should monitor the hash and change slides accordingly
+        respondToHashChanges: true,
+
+        // Push each slide change to the browser history
+        history: true,
+
+        // Enable keyboard shortcuts for navigation
+        keyboard: true,
+
+        // Enable the slide overview mode
+        overview: true,
+
+        // Disables the default reveal.js slide layout (scaling and centering)
+        // so that you can use custom CSS layout
+        disableLayout: false,
+
+        // Vertical centering of slides
+        center: false,
+
+        // Enables touch navigation on devices with touch input
+        touch: true,
+
+        // Loop the presentation
+        loop: false,
+
+        // Change the presentation direction to be RTL
+        rtl: false,
+
+        // see https://revealjs.com/vertical-slides/#navigation-mode
+        navigationMode: 'linear',
+
+        // Randomizes the order of slides each time the presentation loads
+        shuffle: false,
+
+        // Turns fragments on and off globally
+        fragments: true,
+
+        // Flags whether to include the current fragment in the URL,
+        // so that reloading brings you to the same fragment position
+        fragmentInURL: false,
+
+        // Flags if the presentation is running in an embedded mode,
+        // i.e. contained within a limited portion of the screen
+        embedded: false,
+
+        // Flags if we should show a help overlay when the questionmark
+        // key is pressed
+        help: true,
+
+        // Flags if it should be possible to pause the presentation (blackout)
+        pause: true,
+
+        // Flags if speaker notes should be visible to all viewers
+        showNotes: false,
+
+        // Global override for autoplaying embedded media (null/true/false)
+        autoPlayMedia: null,
+
+        // Global override for preloading lazy-loaded iframes (null/true/false)
+        preloadIframes: null,
+
+        // Number of milliseconds between automatically proceeding to the
+        // next slide, disabled when set to 0, this value can be overwritten
+        // by using a data-autoslide attribute on your slides
+        autoSlide: 0,
+
+        // Stop auto-sliding after user input
+        autoSlideStoppable: true,
+
+        // Use this method for navigation when auto-sliding
+        autoSlideMethod: null,
+
+        // Specify the average time in seconds that you think you will spend
+        // presenting each slide. This is used to show a pacing timer in the
+        // speaker view
+        defaultTiming: null,
+
+        // Enable slide navigation via mouse wheel
+        mouseWheel: false,
+
+        // The display mode that will be used to show slides
+        display: 'block',
+
+        // Hide cursor if inactive
+        hideInactiveCursor: true,
+
+        // Time before the cursor is hidden (in ms)
+        hideCursorTime: 5000,
+
+        // Opens links in an iframe preview overlay
+        previewLinks: false,
+
+        // Transition style (none/fade/slide/convex/concave/zoom)
+        transition: 'fade',
+
+        // Transition speed (default/fast/slow)
+        transitionSpeed: 'default',
+
+        // Transition style for full page slide backgrounds
+        // (none/fade/slide/convex/concave/zoom)
+        backgroundTransition: 'none',
+
+        // Number of slides away from the current that are visible
+        viewDistance: 3,
+
+        // Number of slides away from the current that are visible on mobile
+        // devices. It is advisable to set this to a lower number than
+        // viewDistance in order to save resources.
+        mobileViewDistance: 2,
+
+        // The "normal" size of the presentation, aspect ratio will be preserved
+        // when the presentation is scaled to fit different resolutions. Can be
+        // specified using percentage units.
+        width: 1050,
+
+        height: 700,
+
+        // Factor of the display size that should remain empty around the content
+        margin: 0.1,
+
+        math: {
+          mathjax: 'https://cdn.jsdelivr.net/npm/mathjax@2.7.9/MathJax.js',
+          config: 'TeX-AMS_HTML-full',
+          tex2jax: {
+            inlineMath: [['\\(','\\)']],
+            displayMath: [['\\[','\\]']],
+            balanceBraces: true,
+            processEscapes: false,
+            processRefs: true,
+            processEnvironments: true,
+            preview: 'TeX',
+            skipTags: ['script','noscript','style','textarea','pre','code'],
+            ignoreClass: 'tex2jax_ignore',
+            processClass: 'tex2jax_process'
+          },
+        },
+
+        // reveal.js plugins
+        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, QuartoSupport,
+
+          RevealMath,
+          RevealNotes,
+          RevealSearch,
+          RevealZoom
+        ]
+      });
+    </script>
+    <script id="quarto-html-after-body" type="application/javascript">
+      window.document.addEventListener("DOMContentLoaded", function (event) {
+        const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
+        tabsets.forEach(function(tabset) {
+          const tabby = new Tabby('#' + tabset.id);
+        });
+        const isCodeAnnotation = (el) => {
+          for (const clz of el.classList) {
+            if (clz.startsWith('code-annotation-')) {                     
+              return true;
+            }
+          }
+          return false;
+        }
+        const onCopySuccess = function(e) {
+          // button target
+          const button = e.trigger;
+          // don't keep focus
+          button.blur();
+          // flash "checked"
+          button.classList.add('code-copy-button-checked');
+          var currentTitle = button.getAttribute("title");
+          button.setAttribute("title", "Copied!");
+          let tooltip;
+          if (window.bootstrap) {
+            button.setAttribute("data-bs-toggle", "tooltip");
+            button.setAttribute("data-bs-placement", "left");
+            button.setAttribute("data-bs-title", "Copied!");
+            tooltip = new bootstrap.Tooltip(button, 
+              { trigger: "manual", 
+                customClass: "code-copy-button-tooltip",
+                offset: [0, -8]});
+            tooltip.show();    
+          }
+          setTimeout(function() {
+            if (tooltip) {
+              tooltip.hide();
+              button.removeAttribute("data-bs-title");
+              button.removeAttribute("data-bs-toggle");
+              button.removeAttribute("data-bs-placement");
+            }
+            button.setAttribute("title", currentTitle);
+            button.classList.remove('code-copy-button-checked');
+          }, 1000);
+          // clear code selection
+          e.clearSelection();
+        }
+        const getTextToCopy = function(trigger) {
+          const outerScaffold = trigger.parentElement.cloneNode(true);
+          const codeEl = outerScaffold.querySelector('code');
+          for (const childEl of codeEl.children) {
+            if (isCodeAnnotation(childEl)) {
+              childEl.remove();
+            }
+          }
+          return codeEl.innerText;
+        }
+        const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+          text: getTextToCopy
+        });
+        clipboard.on('success', onCopySuccess);
+        if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+          const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+            text: getTextToCopy,
+            container: window.document.getElementById('quarto-embedded-source-code-modal')
+          });
+          clipboardModal.on('success', onCopySuccess);
+        }
+          var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+          var mailtoRegex = new RegExp(/^mailto:/);
+            var filterRegex = new RegExp('/' + window.location.host + '/');
+          var isInternal = (href) => {
+              return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+          }
+          // Inspect non-navigation links and adorn them if external
+         var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+          for (var i=0; i<links.length; i++) {
+            const link = links[i];
+            if (!isInternal(link.href)) {
+              // undo the damage that might have been done by quarto-nav.js in the case of
+              // links that we want to consider external
+              if (link.dataset.originalHref !== undefined) {
+                link.href = link.dataset.originalHref;
+              }
+            }
+          }
+        function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+          const config = {
+            allowHTML: true,
+            maxWidth: 500,
+            delay: 100,
+            arrow: false,
+            appendTo: function(el) {
+                return el.closest('section.slide') || el.parentElement;
+            },
+            interactive: true,
+            interactiveBorder: 10,
+            theme: 'light-border',
+            placement: 'bottom-start',
+          };
+          if (contentFn) {
+            config.content = contentFn;
+          }
+          if (onTriggerFn) {
+            config.onTrigger = onTriggerFn;
+          }
+          if (onUntriggerFn) {
+            config.onUntrigger = onUntriggerFn;
+          }
+            config['offset'] = [0,0];
+            config['maxWidth'] = 700;
+          window.tippy(el, config); 
+        }
+        const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+        for (var i=0; i<noterefs.length; i++) {
+          const ref = noterefs[i];
+          tippyHover(ref, function() {
+            // use id or data attribute instead here
+            let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+            try { href = new URL(href).hash; } catch {}
+            const id = href.replace(/^#\/?/, "");
+            const note = window.document.getElementById(id);
+            if (note) {
+              return note.innerHTML;
+            } else {
+              return "";
+            }
+          });
+        }
+        const findCites = (el) => {
+          const parentEl = el.parentElement;
+          if (parentEl) {
+            const cites = parentEl.dataset.cites;
+            if (cites) {
+              return {
+                el,
+                cites: cites.split(' ')
+              };
+            } else {
+              return findCites(el.parentElement)
+            }
+          } else {
+            return undefined;
+          }
+        };
+        var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+        for (var i=0; i<bibliorefs.length; i++) {
+          const ref = bibliorefs[i];
+          const citeInfo = findCites(ref);
+          if (citeInfo) {
+            tippyHover(citeInfo.el, function() {
+              var popup = window.document.createElement('div');
+              citeInfo.cites.forEach(function(cite) {
+                var citeDiv = window.document.createElement('div');
+                citeDiv.classList.add('hanging-indent');
+                citeDiv.classList.add('csl-entry');
+                var biblioDiv = window.document.getElementById('ref-' + cite);
+                if (biblioDiv) {
+                  citeDiv.innerHTML = biblioDiv.innerHTML;
+                }
+                popup.appendChild(citeDiv);
+              });
+              return popup.innerHTML;
+            });
+          }
+        }
+      });
+      </script>
+    
+
+</body></html>

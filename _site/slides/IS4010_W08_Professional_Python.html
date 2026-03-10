@@ -1,0 +1,1971 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-html/tabby.min.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-707d8167ce6003fca903bfe2be84ab7f.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.8.25">
+
+  <meta name="author" content="Brandon M. Greenwell">
+  <title>IS 4010 - App Dev with AI – IS4010: AI-Enhanced Application Development</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="../site_libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="../site_libs/revealjs/dist/reveal.css">
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+      vertical-align: middle;
+    }
+    /* CSS for syntax highlighting */
+    html { -webkit-text-size-adjust: 100%; }
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+      }
+    pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+    div.sourceCode
+      { color: #f8f8f2;  }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #f8f8f2; } /* Normal */
+    code span.al { color: #f07178; } /* Alert */
+    code span.an { color: #d4d0ab; } /* Annotation */
+    code span.at { color: #00e0e0; } /* Attribute */
+    code span.bn { color: #d4d0ab; } /* BaseN */
+    code span.bu { color: #abe338; } /* BuiltIn */
+    code span.cf { color: #ffa07a; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #abe338; } /* Char */
+    code span.cn { color: #ffd700; } /* Constant */
+    code span.co { color: #f8f8f2; font-style: italic; } /* Comment */
+    code span.cv { color: #ffd700; } /* CommentVar */
+    code span.do { color: #f8f8f2; } /* Documentation */
+    code span.dt { color: #ffa07a; } /* DataType */
+    code span.dv { color: #d4d0ab; } /* DecVal */
+    code span.er { color: #f07178; text-decoration: underline; } /* Error */
+    code span.ex { color: #00e0e0; font-weight: bold; } /* Extension */
+    code span.fl { color: #d4d0ab; } /* Float */
+    code span.fu { color: #ffa07a; } /* Function */
+    code span.im { color: #abe338; } /* Import */
+    code span.in { color: #d4d0ab; } /* Information */
+    code span.kw { color: #ffa07a; font-weight: bold; } /* Keyword */
+    code span.op { color: #ffa07a; } /* Operator */
+    code span.ot { color: #00e0e0; } /* Other */
+    code span.pp { color: #dcc6e0; } /* Preprocessor */
+    code span.re { color: #00e0e0; background-color: #f8f8f2; } /* RegionMarker */
+    code span.sc { color: #abe338; } /* SpecialChar */
+    code span.ss { color: #abe338; } /* SpecialString */
+    code span.st { color: #abe338; } /* String */
+    code span.va { color: #00e0e0; } /* Variable */
+    code span.vs { color: #abe338; } /* VerbatimString */
+    code span.wa { color: #dcc6e0; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto-a1d3734469117662d4af4794742e8c15.css">
+  <link rel="stylesheet" href="custom.css">
+  <link href="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="../site_libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <style type="text/css">
+    .reveal div.sourceCode {
+      margin: 0;
+      overflow: auto;
+    }
+    .reveal div.hanging-indent {
+      margin-left: 1em;
+      text-indent: -1em;
+    }
+    .reveal .slide:not(.center) {
+      height: 100%;
+      overflow-y: auto;
+    }
+    .reveal .slide.scrollable {
+      overflow-y: auto;
+    }
+    .reveal .footnotes {
+      height: 100%;
+      overflow-y: auto;
+    }
+    .reveal .slide .absolute {
+      position: absolute;
+      display: block;
+    }
+    .reveal .footnotes ol {
+      counter-reset: ol;
+      list-style-type: none; 
+      margin-left: 0;
+    }
+    .reveal .footnotes ol li:before {
+      counter-increment: ol;
+      content: counter(ol) ". "; 
+    }
+    .reveal .footnotes ol li > p:first-child {
+      display: inline-block;
+    }
+    .reveal .slide ul,
+    .reveal .slide ol {
+      margin-bottom: 0.5em;
+    }
+    .reveal .slide ul li,
+    .reveal .slide ol li {
+      margin-top: 0.4em;
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide ul[role="tablist"] li {
+      margin-bottom: 0;
+    }
+    .reveal .slide ul li > *:first-child,
+    .reveal .slide ol li > *:first-child {
+      margin-block-start: 0;
+    }
+    .reveal .slide ul li > *:last-child,
+    .reveal .slide ol li > *:last-child {
+      margin-block-end: 0;
+    }
+    .reveal .slide .columns:nth-child(3) {
+      margin-block-start: 0.8em;
+    }
+    .reveal blockquote {
+      box-shadow: none;
+    }
+    .reveal .tippy-content>* {
+      margin-top: 0.2em;
+      margin-bottom: 0.7em;
+    }
+    .reveal .tippy-content>*:last-child {
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide > img.stretch.quarto-figure-center,
+    .reveal .slide > img.r-stretch.quarto-figure-center {
+      display: block;
+      margin-left: auto;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-left,
+    .reveal .slide > img.r-stretch.quarto-figure-left  {
+      display: block;
+      margin-left: 0;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-right,
+    .reveal .slide > img.r-stretch.quarto-figure-right  {
+      display: block;
+      margin-left: auto;
+      margin-right: 0; 
+    }
+  </style>
+</head>
+<body class="quarto-dark">
+  <div class="reveal">
+    <div class="slides">
+
+<section id="title-slide" class="quarto-title-block center">
+  <h1 class="title">IS4010: AI-Enhanced Application Development</h1>
+  <p class="subtitle">Week 8: Building Professional Python Applications</p>
+
+<div class="quarto-title-authors">
+<div class="quarto-title-author">
+<div class="quarto-title-author-name">
+Brandon M. Greenwell 
+</div>
+</div>
+</div>
+
+</section>
+<section>
+<section id="building-professional-python-applications" class="title-slide slide level1 center">
+<h1>Building Professional Python Applications 🏗️</h1>
+
+</section>
+<section id="from-scripts-to-production-ready-tools" class="slide level2">
+<h2>From scripts to production-ready tools 🎯</h2>
+<ul>
+<li class="fragment"><strong>Professional Python development</strong> goes beyond simple scripts to create robust, maintainable applications</li>
+<li class="fragment"><strong>Command-line interfaces (CLIs)</strong>: The backbone of automation, scripting, and developer tools</li>
+<li class="fragment"><strong>Package structure</strong>: Organizing code for reusability, testing, and distribution</li>
+<li class="fragment"><strong>Career relevance</strong>: Every Python job expects these skills - from data science to web development</li>
+<li class="fragment"><strong>Midterm connection</strong>: These patterns will elevate your projects from “works on my machine” to professional quality</li>
+</ul>
+<aside class="notes">
+<p><strong>TEACHING NOTES:</strong></p>
+<ul>
+<li><strong>Timing context</strong>: Students are working on midterm projects - this is just-in-time instruction</li>
+<li><strong>Professional transition</strong>: Moving from learning Python syntax to building real applications</li>
+<li><strong>Industry standards</strong>: These practices are universal across tech companies</li>
+<li><strong>Career preparation</strong>: CLI tools and proper package structure appear in every Python interview</li>
+<li><strong>Framework foundation</strong>: Understanding packages prepares students for Django, Flask, FastAPI</li>
+<li><strong>Course arc</strong>: This completes Python education before transitioning to Rust next week</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level2">
+
+</section></section>
+<section>
+<section id="part-1-command-line-interfaces" class="title-slide slide level1 center">
+<h1>Part 1: Command-Line Interfaces</h1>
+
+</section>
+<section id="why-clis-matter-the-power-of-automation" class="slide level2">
+<h2>🤔 Why CLIs matter: The power of automation</h2>
+<h3 id="the-problem-manual-repetitive-tasks"><strong>The Problem</strong>: Manual, repetitive tasks</h3>
+<ul>
+<li class="fragment"><strong>Scenario</strong>: You need to fetch data from an API multiple times per day</li>
+<li class="fragment"><strong>Manual approach</strong>: Open browser, navigate to site, copy data, paste into file</li>
+<li class="fragment"><strong>Time waste</strong>: 5 minutes per fetch × 10 times per day = 50 minutes daily</li>
+<li class="fragment"><strong>Error-prone</strong>: Manual copy-paste leads to mistakes and inconsistencies</li>
+<li class="fragment"><strong>Solution</strong>: A CLI tool that automates the entire workflow in seconds</li>
+</ul>
+<aside class="notes">
+<p><strong>TEACHING NOTES:</strong></p>
+<ul>
+<li><strong>Real-world motivation</strong>: Show how professionals use CLI tools constantly</li>
+<li><strong>Career examples</strong>: Data scientists use CLI tools for dataset downloads, web developers for deployment</li>
+<li><strong>Unix philosophy</strong>: Small, composable tools that do one thing well</li>
+<li><strong>Student connection</strong>: They’ve used <code>git</code>, <code>pip</code>, <code>python</code> - all CLI tools</li>
+<li><strong>Midterm application</strong>: Their projects should have CLI interfaces for easy testing and demonstration</li>
+<li><strong>Time savings</strong>: Automation is a force multiplier for productivity</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="cli-tools-in-the-wild-examples-everywhere" class="slide level2">
+<h2>🛠️ CLI tools in the wild: Examples everywhere</h2>
+<ul>
+<li class="fragment"><strong>Version control</strong>: <a href="https://git-scm.com/docs"><code>git</code></a> - <code>git add</code>, <code>git commit</code>, <code>git push</code></li>
+<li class="fragment"><strong>Package management</strong>: <a href="https://pip.pypa.io/en/stable/cli/pip/"><code>pip</code></a> - <code>pip install</code>, <code>pip list</code>, <code>pip freeze</code></li>
+<li class="fragment"><strong>Web frameworks</strong>: <a href="https://docs.djangoproject.com/en/stable/ref/django-admin/"><code>django-admin</code></a> - <code>startproject</code>, <code>migrate</code>, <code>runserver</code></li>
+<li class="fragment"><strong>AWS CLI</strong>: <a href="https://aws.amazon.com/cli/"><code>aws</code></a> - Manage cloud infrastructure from the terminal</li>
+<li class="fragment"><strong>Data science</strong>: <a href="https://jupyter.readthedocs.io/en/latest/running.html"><code>jupyter</code></a> - <code>jupyter notebook</code>, <code>jupyter lab</code></li>
+<li class="fragment"><strong>Your midterm</strong>: Create professional CLIs for your API projects</li>
+</ul>
+<aside class="notes">
+<p><strong>TEACHING NOTES:</strong></p>
+<ul>
+<li><strong>Ubiquity</strong>: Students have been using CLIs without realizing it</li>
+<li><strong>Design patterns</strong>: Notice common patterns - commands, subcommands, flags</li>
+<li><strong>Professional standard</strong>: Every major framework provides CLI tools</li>
+<li><strong>Career skills</strong>: Building CLIs is a resume-worthy skill</li>
+<li><strong>Interview topics</strong>: CLI design often appears in system design discussions</li>
+<li><strong>Ecosystem</strong>: Python has excellent CLI libraries - argparse, click, typer</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="introducing-argparse-pythons-built-in-cli-library" class="slide level2">
+<h2>📦 Introducing argparse: Python’s built-in CLI library</h2>
+<ul>
+<li class="fragment"><strong><a href="https://docs.python.org/3/library/argparse.html"><code>argparse</code></a></strong> is Python’s standard library for creating command-line interfaces</li>
+<li class="fragment"><strong>Built-in</strong>: No installation required, part of Python’s standard library</li>
+<li class="fragment"><strong>Powerful</strong>: Handles arguments, flags, subcommands, help text, validation</li>
+<li class="fragment"><strong>Automatic help</strong>: Generates <code>--help</code> documentation for free</li>
+<li class="fragment"><strong>Industry standard</strong>: Used in production at Google, Netflix, and countless startups</li>
+<li class="fragment"><strong>Learning path</strong>: Start with argparse, graduate to <a href="https://click.palletsprojects.com/">Click</a> or <a href="https://typer.tiangolo.com/">Typer</a> for advanced projects</li>
+</ul>
+<aside class="notes">
+<p><strong>TEACHING NOTES:</strong></p>
+<ul>
+<li><strong>Standard library advantage</strong>: No dependency management needed for basic CLIs</li>
+<li><strong>Learning foundation</strong>: Concepts transfer to all CLI libraries</li>
+<li><strong>Progression</strong>: argparse → Click (Flask-style) → Typer (modern, type-hint based)</li>
+<li><strong>Production usage</strong>: Many major tools still use argparse despite newer alternatives</li>
+<li><strong>Type hints</strong>: argparse predates type hints but integrates well with them</li>
+<li><strong>Documentation</strong>: Emphasize the excellent official documentation</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="cli-design-patterns-arguments-vs-flags" class="slide level2">
+<h2>🎯 CLI design patterns: Arguments vs flags</h2>
+<h3 id="three-types-of-cli-inputs"><strong>Three types of CLI inputs:</strong></h3>
+<ul>
+<li class="fragment"><strong>Positional arguments</strong>: Required, order matters - <code>git commit message.txt</code></li>
+<li class="fragment"><strong>Optional arguments (flags)</strong>: Named, order flexible - <code>git commit --amend -m "Fix bug"</code></li>
+<li class="fragment"><strong>Subcommands</strong>: Different actions in one tool - <code>git add</code> vs <code>git commit</code></li>
+</ul>
+<h3 id="design-principles"><strong>Design principles:</strong></h3>
+<ul>
+<li class="fragment"><strong>Intuitive</strong>: Users should guess the correct syntax</li>
+<li class="fragment"><strong>Consistent</strong>: Follow conventions from popular tools</li>
+<li class="fragment"><strong>Helpful</strong>: Provide clear error messages and help text</li>
+<li class="fragment"><strong>Forgiving</strong>: Accept common variations and abbreviations</li>
+</ul>
+<aside class="notes">
+<p><strong>TEACHING NOTES:</strong></p>
+<ul>
+<li><strong>User experience</strong>: CLI design is UI/UX design for developers</li>
+<li><strong>Conventions</strong>: <code>-h</code> for help, <code>-v</code> for verbose, <code>-o</code> for output</li>
+<li><strong>Error messages</strong>: Show examples of good vs bad error messages</li>
+<li><strong>Unix philosophy</strong>: Do one thing well, compose with pipes</li>
+<li><strong>Accessibility</strong>: Clear help text serves as documentation</li>
+<li><strong>Testing</strong>: Well-designed CLIs are easier to test programmatically</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="basic-argparse-your-first-cli" class="slide level2">
+<h2>💻 Basic argparse: Your first CLI</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a></a><span class="co">"""simple_greeter.py - A friendly CLI greeter."""</span></span>
+<span id="cb1-2"><a></a><span class="im">import</span> argparse</span>
+<span id="cb1-3"><a></a></span>
+<span id="cb1-4"><a></a><span class="kw">def</span> main():</span>
+<span id="cb1-5"><a></a>    <span class="co"># Create the parser</span></span>
+<span id="cb1-6"><a></a>    parser <span class="op">=</span> argparse.ArgumentParser(</span>
+<span id="cb1-7"><a></a>        description<span class="op">=</span><span class="st">"A simple greeting tool"</span>,</span>
+<span id="cb1-8"><a></a>        epilog<span class="op">=</span><span class="st">"Thanks for using the greeter!"</span></span>
+<span id="cb1-9"><a></a>    )</span>
+<span id="cb1-10"><a></a></span>
+<span id="cb1-11"><a></a>    <span class="co"># Add positional argument (required)</span></span>
+<span id="cb1-12"><a></a>    parser.add_argument(</span>
+<span id="cb1-13"><a></a>        <span class="st">"name"</span>,</span>
+<span id="cb1-14"><a></a>        <span class="bu">help</span><span class="op">=</span><span class="st">"The name of the person to greet"</span></span>
+<span id="cb1-15"><a></a>    )</span>
+<span id="cb1-16"><a></a></span>
+<span id="cb1-17"><a></a>    <span class="co"># Add optional flag</span></span>
+<span id="cb1-18"><a></a>    parser.add_argument(</span>
+<span id="cb1-19"><a></a>        <span class="st">"--loud"</span>,</span>
+<span id="cb1-20"><a></a>        action<span class="op">=</span><span class="st">"store_true"</span>,</span>
+<span id="cb1-21"><a></a>        <span class="bu">help</span><span class="op">=</span><span class="st">"Greet in ALL CAPS"</span></span>
+<span id="cb1-22"><a></a>    )</span>
+<span id="cb1-23"><a></a></span>
+<span id="cb1-24"><a></a>    <span class="co"># Parse the arguments</span></span>
+<span id="cb1-25"><a></a>    args <span class="op">=</span> parser.parse_args()</span>
+<span id="cb1-26"><a></a></span>
+<span id="cb1-27"><a></a>    <span class="co"># Use the arguments</span></span>
+<span id="cb1-28"><a></a>    greeting <span class="op">=</span> <span class="ss">f"Hello, </span><span class="sc">{</span>args<span class="sc">.</span>name<span class="sc">}</span><span class="ss">!"</span></span>
+<span id="cb1-29"><a></a>    <span class="cf">if</span> args.loud:</span>
+<span id="cb1-30"><a></a>        greeting <span class="op">=</span> greeting.upper()</span>
+<span id="cb1-31"><a></a></span>
+<span id="cb1-32"><a></a>    <span class="bu">print</span>(greeting)</span>
+<span id="cb1-33"><a></a></span>
+<span id="cb1-34"><a></a><span class="cf">if</span> <span class="va">__name__</span> <span class="op">==</span> <span class="st">"__main__"</span>:</span>
+<span id="cb1-35"><a></a>    main()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<aside class="notes">
+<p><strong>TEACHING NOTES:</strong></p>
+<ul>
+<li><strong>Structure</strong>: Show the standard pattern - create parser, add arguments, parse, use</li>
+<li><strong>help parameter</strong>: Appears in <code>--help</code> output automatically</li>
+<li><strong>action=“store_true”</strong>: Boolean flags don’t need values</li>
+<li><strong>args namespace</strong>: Clean attribute access with dot notation</li>
+<li><strong>Entry point</strong>: <code>if __name__ == "__main__"</code> - will explain more in Part 2</li>
+<li><strong>Live demo</strong>: Run this to show <code>--help</code>, error messages, successful execution</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="running-the-cli-usage-examples" class="slide level2">
+<h2>🚀 Running the CLI: Usage examples</h2>
+<h3 id="getting-help"><strong>Getting help:</strong></h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a></a><span class="ex">$</span> python simple_greeter.py <span class="at">--help</span></span>
+<span id="cb2-2"><a></a><span class="ex">usage:</span> simple_greeter.py <span class="pp">[-</span><span class="ss">h</span><span class="pp">]</span> <span class="pp">[--</span><span class="ss">loud</span><span class="pp">]</span> name</span>
+<span id="cb2-3"><a></a></span>
+<span id="cb2-4"><a></a><span class="ex">A</span> simple greeting tool</span>
+<span id="cb2-5"><a></a></span>
+<span id="cb2-6"><a></a><span class="ex">positional</span> arguments:</span>
+<span id="cb2-7"><a></a>  <span class="ex">name</span>        The name of the person to greet</span>
+<span id="cb2-8"><a></a></span>
+<span id="cb2-9"><a></a><span class="ex">options:</span></span>
+<span id="cb2-10"><a></a>  <span class="ex">-h,</span> <span class="at">--help</span>  show this help message and exit</span>
+<span id="cb2-11"><a></a>  <span class="ex">--loud</span>      Greet in ALL CAPS</span>
+<span id="cb2-12"><a></a></span>
+<span id="cb2-13"><a></a><span class="ex">Thanks</span> for using the greeter!</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<h3 id="using-the-tool"><strong>Using the tool:</strong></h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a></a><span class="ex">$</span> python simple_greeter.py Alice</span>
+<span id="cb3-2"><a></a><span class="ex">Hello,</span> Alice!</span>
+<span id="cb3-3"><a></a></span>
+<span id="cb3-4"><a></a><span class="ex">$</span> python simple_greeter.py Bob <span class="at">--loud</span></span>
+<span id="cb3-5"><a></a><span class="ex">HELLO,</span> BOB!</span>
+<span id="cb3-6"><a></a></span>
+<span id="cb3-7"><a></a><span class="ex">$</span> python simple_greeter.py</span>
+<span id="cb3-8"><a></a><span class="ex">usage:</span> simple_greeter.py <span class="pp">[-</span><span class="ss">h</span><span class="pp">]</span> <span class="pp">[--</span><span class="ss">loud</span><span class="pp">]</span> name</span>
+<span id="cb3-9"><a></a><span class="ex">simple_greeter.py:</span> error: the following arguments are required: name</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<aside class="notes">
+<p><strong>TEACHING NOTES:</strong></p>
+<ul>
+<li><strong>Auto-generated help</strong>: argparse creates this from our code</li>
+<li><strong>Error handling</strong>: Automatic validation and helpful error messages</li>
+<li><strong>User experience</strong>: Notice how intuitive the interface is</li>
+<li><strong>Professional quality</strong>: This rivals commercial CLI tools</li>
+<li><strong>No extra code</strong>: We didn’t write any error handling or help text rendering</li>
+<li><strong>Best practices</strong>: This is the gold standard for Python CLI design</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="advanced-argparse-multiple-arguments-and-types" class="slide level2">
+<h2>🎨 Advanced argparse: Multiple arguments and types</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a></a><span class="co">"""api_fetcher.py - Fetch data from APIs with configurable options."""</span></span>
+<span id="cb4-2"><a></a><span class="im">import</span> argparse</span>
+<span id="cb4-3"><a></a></span>
+<span id="cb4-4"><a></a><span class="kw">def</span> fetch_data(api_name: <span class="bu">str</span>, resource: <span class="bu">str</span>, limit: <span class="bu">int</span>, output_file: <span class="bu">str</span> <span class="op">=</span> <span class="va">None</span>):</span>
+<span id="cb4-5"><a></a>    <span class="co">"""Fetch data from an API (implementation details omitted)."""</span></span>
+<span id="cb4-6"><a></a>    <span class="bu">print</span>(<span class="ss">f"Fetching </span><span class="sc">{</span>limit<span class="sc">}</span><span class="ss"> </span><span class="sc">{</span>resource<span class="sc">}</span><span class="ss"> from </span><span class="sc">{</span>api_name<span class="sc">}</span><span class="ss">..."</span>)</span>
+<span id="cb4-7"><a></a>    <span class="cf">if</span> output_file:</span>
+<span id="cb4-8"><a></a>        <span class="bu">print</span>(<span class="ss">f"Saving to </span><span class="sc">{</span>output_file<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb4-9"><a></a>    <span class="co"># Actual API call would go here</span></span>
+<span id="cb4-10"><a></a>    <span class="cf">return</span> {<span class="st">"status"</span>: <span class="st">"success"</span>, <span class="st">"count"</span>: limit}</span>
+<span id="cb4-11"><a></a></span>
+<span id="cb4-12"><a></a><span class="kw">def</span> main():</span>
+<span id="cb4-13"><a></a>    parser <span class="op">=</span> argparse.ArgumentParser(</span>
+<span id="cb4-14"><a></a>        description<span class="op">=</span><span class="st">"Fetch data from various APIs"</span></span>
+<span id="cb4-15"><a></a>    )</span>
+<span id="cb4-16"><a></a></span>
+<span id="cb4-17"><a></a>    <span class="co"># Positional arguments</span></span>
+<span id="cb4-18"><a></a>    parser.add_argument(<span class="st">"api"</span>, <span class="bu">help</span><span class="op">=</span><span class="st">"API name (e.g., 'pokemon', 'jokes', 'weather')"</span>)</span>
+<span id="cb4-19"><a></a>    parser.add_argument(<span class="st">"resource"</span>, <span class="bu">help</span><span class="op">=</span><span class="st">"Resource to fetch (e.g., 'pikachu', 'random')"</span>)</span>
+<span id="cb4-20"><a></a></span>
+<span id="cb4-21"><a></a>    <span class="co"># Optional arguments with types</span></span>
+<span id="cb4-22"><a></a>    parser.add_argument(</span>
+<span id="cb4-23"><a></a>        <span class="st">"-l"</span>, <span class="st">"--limit"</span>,</span>
+<span id="cb4-24"><a></a>        <span class="bu">type</span><span class="op">=</span><span class="bu">int</span>,</span>
+<span id="cb4-25"><a></a>        default<span class="op">=</span><span class="dv">10</span>,</span>
+<span id="cb4-26"><a></a>        <span class="bu">help</span><span class="op">=</span><span class="st">"Number of items to fetch (default: 10)"</span></span>
+<span id="cb4-27"><a></a>    )</span>
+<span id="cb4-28"><a></a></span>
+<span id="cb4-29"><a></a>    parser.add_argument(</span>
+<span id="cb4-30"><a></a>        <span class="st">"-o"</span>, <span class="st">"--output"</span>,</span>
+<span id="cb4-31"><a></a>        <span class="bu">help</span><span class="op">=</span><span class="st">"Output file path (if not specified, prints to console)"</span></span>
+<span id="cb4-32"><a></a>    )</span>
+<span id="cb4-33"><a></a></span>
+<span id="cb4-34"><a></a>    parser.add_argument(</span>
+<span id="cb4-35"><a></a>        <span class="st">"--format"</span>,</span>
+<span id="cb4-36"><a></a>        choices<span class="op">=</span>[<span class="st">"json"</span>, <span class="st">"csv"</span>, <span class="st">"txt"</span>],</span>
+<span id="cb4-37"><a></a>        default<span class="op">=</span><span class="st">"json"</span>,</span>
+<span id="cb4-38"><a></a>        <span class="bu">help</span><span class="op">=</span><span class="st">"Output format (default: json)"</span></span>
+<span id="cb4-39"><a></a>    )</span>
+<span id="cb4-40"><a></a></span>
+<span id="cb4-41"><a></a>    args <span class="op">=</span> parser.parse_args()</span>
+<span id="cb4-42"><a></a></span>
+<span id="cb4-43"><a></a>    <span class="co"># Call the function with parsed arguments</span></span>
+<span id="cb4-44"><a></a>    result <span class="op">=</span> fetch_data(args.api, args.resource, args.limit, args.output)</span>
+<span id="cb4-45"><a></a>    <span class="bu">print</span>(<span class="ss">f"Result: </span><span class="sc">{</span>result<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb4-46"><a></a></span>
+<span id="cb4-47"><a></a><span class="cf">if</span> <span class="va">__name__</span> <span class="op">==</span> <span class="st">"__main__"</span>:</span>
+<span id="cb4-48"><a></a>    main()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<aside class="notes">
+<p><strong>TEACHING NOTES:</strong></p>
+<ul>
+<li><strong>Type conversion</strong>: <code>type=int</code> automatically converts and validates</li>
+<li><strong>Defaults</strong>: Professional CLIs have sensible defaults</li>
+<li><strong>Short and long forms</strong>: <code>-l</code> and <code>--limit</code> both work (convention)</li>
+<li><strong>Choices</strong>: Restricts to valid options, auto-validates</li>
+<li><strong>Integration</strong>: CLI arguments map cleanly to function parameters</li>
+<li><strong>Midterm application</strong>: This pattern works perfectly for their API projects</li>
+<li><strong>Real-world</strong>: Show how this mirrors tools like <code>curl</code>, <code>wget</code>, <code>httpie</code></li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="subcommands-building-multi-function-tools" class="slide level2">
+<h2>🌟 Subcommands: Building multi-function tools</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a></a><span class="co">"""project_manager.py - Manage your project with subcommands."""</span></span>
+<span id="cb5-2"><a></a><span class="im">import</span> argparse</span>
+<span id="cb5-3"><a></a></span>
+<span id="cb5-4"><a></a><span class="kw">def</span> cmd_init(args):</span>
+<span id="cb5-5"><a></a>    <span class="co">"""Initialize a new project."""</span></span>
+<span id="cb5-6"><a></a>    <span class="bu">print</span>(<span class="ss">f"Initializing project: </span><span class="sc">{</span>args<span class="sc">.</span>name<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb5-7"><a></a>    <span class="bu">print</span>(<span class="ss">f"Template: </span><span class="sc">{</span>args<span class="sc">.</span>template<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb5-8"><a></a></span>
+<span id="cb5-9"><a></a><span class="kw">def</span> cmd_build(args):</span>
+<span id="cb5-10"><a></a>    <span class="co">"""Build the project."""</span></span>
+<span id="cb5-11"><a></a>    <span class="bu">print</span>(<span class="ss">f"Building project..."</span>)</span>
+<span id="cb5-12"><a></a>    <span class="cf">if</span> args.verbose:</span>
+<span id="cb5-13"><a></a>        <span class="bu">print</span>(<span class="st">"Verbose output enabled"</span>)</span>
+<span id="cb5-14"><a></a></span>
+<span id="cb5-15"><a></a><span class="kw">def</span> cmd_deploy(args):</span>
+<span id="cb5-16"><a></a>    <span class="co">"""Deploy the project."""</span></span>
+<span id="cb5-17"><a></a>    <span class="bu">print</span>(<span class="ss">f"Deploying to </span><span class="sc">{</span>args<span class="sc">.</span>environment<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb5-18"><a></a></span>
+<span id="cb5-19"><a></a><span class="kw">def</span> main():</span>
+<span id="cb5-20"><a></a>    parser <span class="op">=</span> argparse.ArgumentParser(description<span class="op">=</span><span class="st">"Project management tool"</span>)</span>
+<span id="cb5-21"><a></a>    subparsers <span class="op">=</span> parser.add_subparsers(dest<span class="op">=</span><span class="st">"command"</span>, <span class="bu">help</span><span class="op">=</span><span class="st">"Available commands"</span>)</span>
+<span id="cb5-22"><a></a></span>
+<span id="cb5-23"><a></a>    <span class="co"># 'init' subcommand</span></span>
+<span id="cb5-24"><a></a>    init_parser <span class="op">=</span> subparsers.add_parser(<span class="st">"init"</span>, <span class="bu">help</span><span class="op">=</span><span class="st">"Initialize a new project"</span>)</span>
+<span id="cb5-25"><a></a>    init_parser.add_argument(<span class="st">"name"</span>, <span class="bu">help</span><span class="op">=</span><span class="st">"Project name"</span>)</span>
+<span id="cb5-26"><a></a>    init_parser.add_argument(<span class="st">"--template"</span>, default<span class="op">=</span><span class="st">"basic"</span>, <span class="bu">help</span><span class="op">=</span><span class="st">"Project template"</span>)</span>
+<span id="cb5-27"><a></a>    init_parser.set_defaults(func<span class="op">=</span>cmd_init)</span>
+<span id="cb5-28"><a></a></span>
+<span id="cb5-29"><a></a>    <span class="co"># 'build' subcommand</span></span>
+<span id="cb5-30"><a></a>    build_parser <span class="op">=</span> subparsers.add_parser(<span class="st">"build"</span>, <span class="bu">help</span><span class="op">=</span><span class="st">"Build the project"</span>)</span>
+<span id="cb5-31"><a></a>    build_parser.add_argument(<span class="st">"-v"</span>, <span class="st">"--verbose"</span>, action<span class="op">=</span><span class="st">"store_true"</span>)</span>
+<span id="cb5-32"><a></a>    build_parser.set_defaults(func<span class="op">=</span>cmd_build)</span>
+<span id="cb5-33"><a></a></span>
+<span id="cb5-34"><a></a>    <span class="co"># 'deploy' subcommand</span></span>
+<span id="cb5-35"><a></a>    deploy_parser <span class="op">=</span> subparsers.add_parser(<span class="st">"deploy"</span>, <span class="bu">help</span><span class="op">=</span><span class="st">"Deploy the project"</span>)</span>
+<span id="cb5-36"><a></a>    deploy_parser.add_argument(<span class="st">"environment"</span>, choices<span class="op">=</span>[<span class="st">"dev"</span>, <span class="st">"staging"</span>, <span class="st">"prod"</span>])</span>
+<span id="cb5-37"><a></a>    deploy_parser.set_defaults(func<span class="op">=</span>cmd_deploy)</span>
+<span id="cb5-38"><a></a></span>
+<span id="cb5-39"><a></a>    args <span class="op">=</span> parser.parse_args()</span>
+<span id="cb5-40"><a></a></span>
+<span id="cb5-41"><a></a>    <span class="co"># Call the appropriate function</span></span>
+<span id="cb5-42"><a></a>    <span class="cf">if</span> <span class="bu">hasattr</span>(args, <span class="st">"func"</span>):</span>
+<span id="cb5-43"><a></a>        args.func(args)</span>
+<span id="cb5-44"><a></a>    <span class="cf">else</span>:</span>
+<span id="cb5-45"><a></a>        parser.print_help()</span>
+<span id="cb5-46"><a></a></span>
+<span id="cb5-47"><a></a><span class="cf">if</span> <span class="va">__name__</span> <span class="op">==</span> <span class="st">"__main__"</span>:</span>
+<span id="cb5-48"><a></a>    main()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<aside class="notes">
+<p><strong>TEACHING NOTES:</strong></p>
+<ul>
+<li><strong>Git-style</strong>: This pattern mirrors <code>git add</code>, <code>git commit</code>, etc.</li>
+<li><strong>Scalability</strong>: Easy to add new subcommands without refactoring</li>
+<li><strong>Organization</strong>: Each subcommand has its own function and arguments</li>
+<li><strong>Function dispatch</strong>: <code>set_defaults(func=...)</code> enables clean routing</li>
+<li><strong>Professional pattern</strong>: Used in Django, Flask, AWS CLI, and more</li>
+<li><strong>Midterm application</strong>: Students could add subcommands for different API operations</li>
+<li><strong>Help per subcommand</strong>: <code>python project_manager.py init --help</code> works</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="cli-ux-best-practices-professional-polish" class="slide level2">
+<h2>🎯 CLI UX best practices: Professional polish</h2>
+<ul>
+<li class="fragment"><strong>Clear error messages</strong>: “Error: API key not found. Set POKEAPI_KEY environment variable.”</li>
+<li class="fragment"><strong>Progress indicators</strong>: Show activity for long-running operations</li>
+<li class="fragment"><strong>Colorized output</strong>: Use libraries like <a href="https://rich.readthedocs.io/"><code>rich</code></a> or <a href="https://pypi.org/project/colorama/"><code>colorama</code></a> for visual hierarchy</li>
+<li class="fragment"><strong>Input validation</strong>: Fail fast with helpful messages, not cryptic stack traces</li>
+<li class="fragment"><strong>Exit codes</strong>: Return 0 for success, non-zero for failures (enables shell scripting)</li>
+<li class="fragment"><strong>Confirmation prompts</strong>: Ask before destructive operations</li>
+<li class="fragment"><strong>Verbose mode</strong>: <code>--verbose</code> or <code>-v</code> flag for debugging</li>
+<li class="fragment"><strong>Version flag</strong>: <code>--version</code> shows tool version</li>
+</ul>
+<aside class="notes">
+<p><strong>TEACHING NOTES:</strong></p>
+<ul>
+<li><strong>User experience</strong>: CLI UX is as important as GUI UX</li>
+<li><strong>Error messages</strong>: Compare good vs bad examples from real tools</li>
+<li><strong>Exit codes</strong>: Essential for CI/CD pipelines and shell scripts</li>
+<li><strong>Professional touch</strong>: These details separate hobby projects from professional tools</li>
+<li><strong>Libraries</strong>: Show rich library for amazing terminal output</li>
+<li><strong>Accessibility</strong>: Clear messages help all users, not just experts</li>
+<li><strong>Career impact</strong>: Attention to UX details impresses employers</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="practical-example-api-cli-for-midterm-projects" class="slide level2">
+<h2>💡 Practical example: API CLI for midterm projects</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a></a><span class="co">"""my_api_tool.py - Professional CLI for your midterm API project."""</span></span>
+<span id="cb6-2"><a></a><span class="im">import</span> argparse</span>
+<span id="cb6-3"><a></a><span class="im">import</span> sys</span>
+<span id="cb6-4"><a></a><span class="im">from</span> typing <span class="im">import</span> Optional</span>
+<span id="cb6-5"><a></a></span>
+<span id="cb6-6"><a></a><span class="kw">def</span> fetch_resource(resource_type: <span class="bu">str</span>, resource_id: Optional[<span class="bu">str</span>], limit: <span class="bu">int</span>):</span>
+<span id="cb6-7"><a></a>    <span class="co">"""Fetch data from your API."""</span></span>
+<span id="cb6-8"><a></a>    <span class="co"># Your API integration code here</span></span>
+<span id="cb6-9"><a></a>    <span class="bu">print</span>(<span class="ss">f"Fetching </span><span class="sc">{</span>resource_type<span class="sc">}</span><span class="ss">..."</span>)</span>
+<span id="cb6-10"><a></a>    <span class="cf">if</span> resource_id:</span>
+<span id="cb6-11"><a></a>        <span class="bu">print</span>(<span class="ss">f"ID: </span><span class="sc">{</span>resource_id<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb6-12"><a></a>    <span class="bu">print</span>(<span class="ss">f"Limit: </span><span class="sc">{</span>limit<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb6-13"><a></a>    <span class="co"># Return the data</span></span>
+<span id="cb6-14"><a></a></span>
+<span id="cb6-15"><a></a><span class="kw">def</span> main():</span>
+<span id="cb6-16"><a></a>    parser <span class="op">=</span> argparse.ArgumentParser(</span>
+<span id="cb6-17"><a></a>        prog<span class="op">=</span><span class="st">"my_api_tool"</span>,</span>
+<span id="cb6-18"><a></a>        description<span class="op">=</span><span class="st">"Interact with [Your API Name] from the command line"</span>,</span>
+<span id="cb6-19"><a></a>        epilog<span class="op">=</span><span class="st">"Example: python my_api_tool.py pokemon pikachu --format json"</span></span>
+<span id="cb6-20"><a></a>    )</span>
+<span id="cb6-21"><a></a></span>
+<span id="cb6-22"><a></a>    parser.add_argument(<span class="st">"resource"</span>, <span class="bu">help</span><span class="op">=</span><span class="st">"Resource type to fetch"</span>)</span>
+<span id="cb6-23"><a></a>    parser.add_argument(<span class="st">"id"</span>, nargs<span class="op">=</span><span class="st">"?"</span>, <span class="bu">help</span><span class="op">=</span><span class="st">"Optional resource ID"</span>)</span>
+<span id="cb6-24"><a></a>    parser.add_argument(<span class="st">"-l"</span>, <span class="st">"--limit"</span>, <span class="bu">type</span><span class="op">=</span><span class="bu">int</span>, default<span class="op">=</span><span class="dv">10</span>, <span class="bu">help</span><span class="op">=</span><span class="st">"Number of items"</span>)</span>
+<span id="cb6-25"><a></a>    parser.add_argument(<span class="st">"--format"</span>, choices<span class="op">=</span>[<span class="st">"json"</span>, <span class="st">"pretty"</span>], default<span class="op">=</span><span class="st">"pretty"</span>)</span>
+<span id="cb6-26"><a></a>    parser.add_argument(<span class="st">"-o"</span>, <span class="st">"--output"</span>, <span class="bu">help</span><span class="op">=</span><span class="st">"Save to file instead of printing"</span>)</span>
+<span id="cb6-27"><a></a></span>
+<span id="cb6-28"><a></a>    <span class="cf">try</span>:</span>
+<span id="cb6-29"><a></a>        args <span class="op">=</span> parser.parse_args()</span>
+<span id="cb6-30"><a></a>        result <span class="op">=</span> fetch_resource(args.resource, args.<span class="bu">id</span>, args.limit)</span>
+<span id="cb6-31"><a></a>        <span class="bu">print</span>(<span class="st">"Success!"</span>)</span>
+<span id="cb6-32"><a></a>        <span class="cf">return</span> <span class="dv">0</span>  <span class="co"># Success exit code</span></span>
+<span id="cb6-33"><a></a>    <span class="cf">except</span> <span class="pp">Exception</span> <span class="im">as</span> e:</span>
+<span id="cb6-34"><a></a>        <span class="bu">print</span>(<span class="ss">f"Error: </span><span class="sc">{</span>e<span class="sc">}</span><span class="ss">"</span>, <span class="bu">file</span><span class="op">=</span>sys.stderr)</span>
+<span id="cb6-35"><a></a>        <span class="cf">return</span> <span class="dv">1</span>  <span class="co"># Error exit code</span></span>
+<span id="cb6-36"><a></a></span>
+<span id="cb6-37"><a></a><span class="cf">if</span> <span class="va">__name__</span> <span class="op">==</span> <span class="st">"__main__"</span>:</span>
+<span id="cb6-38"><a></a>    sys.exit(main())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<aside class="notes">
+<p><strong>TEACHING NOTES:</strong></p>
+<ul>
+<li><strong>Midterm application</strong>: This is directly applicable to their projects</li>
+<li><strong>Error handling</strong>: Try/except at top level catches all errors</li>
+<li><strong>Exit codes</strong>: <code>sys.exit(main())</code> returns proper codes</li>
+<li><strong>Optional arguments</strong>: <code>nargs="?"</code> makes positional arg optional</li>
+<li><strong>stderr</strong>: Errors go to stderr, not stdout (Unix convention)</li>
+<li><strong>Prog name</strong>: Customize how the tool appears in help text</li>
+<li><strong>Epilog</strong>: Provide usage examples in help output</li>
+<li><strong>Career skill</strong>: This pattern is interview-worthy</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="ai-assisted-cli-development" class="slide level2">
+<h2>🚀 AI-assisted CLI development</h2>
+<h3 id="prompt-strategies-for-building-clis"><strong>Prompt strategies for building CLIs:</strong></h3>
+<ul>
+<li class="fragment"><strong>Starter prompt</strong>: “Create a Python argparse CLI for fetching data from the [API Name] API with options for resource type, limit, and output format”</li>
+<li class="fragment"><strong>Enhancement prompt</strong>: “Add subcommands for ‘fetch’, ‘list’, and ‘search’ operations”</li>
+<li class="fragment"><strong>Refinement prompt</strong>: “Improve error handling and add input validation for API parameters”</li>
+<li class="fragment"><strong>Testing prompt</strong>: “Generate test cases for this CLI including error scenarios”</li>
+</ul>
+<h3 id="ai-tools-excel-at"><strong>AI tools excel at:</strong></h3>
+<ul>
+<li class="fragment">Generating boilerplate argparse setup</li>
+<li class="fragment">Creating comprehensive help text</li>
+<li class="fragment">Adding input validation logic</li>
+<li class="fragment">Designing argument structures</li>
+</ul>
+<aside class="notes">
+<p><strong>TEACHING NOTES:</strong></p>
+<ul>
+<li><strong>AI partnership</strong>: Perfect use case for AI assistance</li>
+<li><strong>Iterative refinement</strong>: Start simple, enhance progressively</li>
+<li><strong>Learning approach</strong>: Understand the generated code, don’t just copy</li>
+<li><strong>Customization</strong>: AI provides the structure, student adds domain logic</li>
+<li><strong>Copilot advantage</strong>: Real-time suggestions as students type</li>
+<li><strong>Testing</strong>: AI can generate test cases for different CLI scenarios</li>
+<li><strong>Documentation</strong>: AI can help write comprehensive help text</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level2">
+
+</section></section>
+<section>
+<section id="part-2-python-packages-project-structure" class="title-slide slide level1 center">
+<h1>Part 2: Python Packages &amp; Project Structure</h1>
+
+</section>
+<section id="from-scripts-to-packages-the-evolution" class="slide level2">
+<h2>🏗️ From scripts to packages: The evolution</h2>
+<h3 id="the-journey-every-python-developer-takes"><strong>The journey every Python developer takes:</strong></h3>
+<ul>
+<li class="fragment"><strong>Stage 1</strong>: Single <code>.py</code> file - <code>my_script.py</code> does everything</li>
+<li class="fragment"><strong>Stage 2</strong>: Multiple files - <code>utils.py</code>, <code>api.py</code>, <code>cli.py</code> in one folder</li>
+<li class="fragment"><strong>Stage 3</strong>: Package structure - Organized directories with <code>__init__.py</code> files</li>
+<li class="fragment"><strong>Stage 4</strong>: Installable package - Can <code>pip install</code> your own code</li>
+<li class="fragment"><strong>Career reality</strong>: Professional projects are always Stage 3 or 4</li>
+</ul>
+<aside class="notes">
+<p><strong>TEACHING NOTES:</strong></p>
+<ul>
+<li><strong>Natural progression</strong>: Students are transitioning from Stage 1 to Stage 2</li>
+<li><strong>Midterm timing</strong>: Perfect moment to introduce Stage 3</li>
+<li><strong>Industry expectation</strong>: All professional Python is packaged</li>
+<li><strong>Framework requirement</strong>: Django, Flask, FastAPI all expect package structure</li>
+<li><strong>Interview relevance</strong>: System design questions assume understanding of packages</li>
+<li><strong>Career preparation</strong>: Portfolio projects should demonstrate proper structure</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="why-package-structure-matters" class="slide level2">
+<h2>🤔 Why package structure matters</h2>
+<ul>
+<li class="fragment"><strong>Code organization</strong>: Logical grouping of related functionality</li>
+<li class="fragment"><strong>Reusability</strong>: Import code across multiple projects</li>
+<li class="fragment"><strong>Collaboration</strong>: Team members work on different modules without conflicts</li>
+<li class="fragment"><strong>Testing</strong>: Easier to test individual components in isolation</li>
+<li class="fragment"><strong>Distribution</strong>: Share your code with others via PyPI</li>
+<li class="fragment"><strong>Professionalism</strong>: Signals you understand production Python development</li>
+</ul>
+<h3 id="real-world-examples"><strong>Real-world examples:</strong></h3>
+<ul>
+<li class="fragment"><strong><a href="https://github.com/django/django">Django</a></strong>: Models, views, templates organized in packages</li>
+<li class="fragment"><strong><a href="https://github.com/psf/requests">Requests</a></strong>: <code>requests/</code>, <code>requests/auth/</code>, <code>requests/models/</code></li>
+<li class="fragment"><strong>Your midterm</strong>: Transform a script into a proper package structure</li>
+</ul>
+<aside class="notes">
+<p><strong>TEACHING NOTES:</strong></p>
+<ul>
+<li><strong>GitHub examples</strong>: Show popular projects on GitHub</li>
+<li><strong>Module boundaries</strong>: Clear separation of concerns</li>
+<li><strong>Import advantages</strong>: Clean import statements</li>
+<li><strong>Testing structure</strong>: Tests mirror package structure</li>
+<li><strong>Documentation</strong>: Package structure serves as architecture documentation</li>
+<li><strong>Career impact</strong>: Employers review GitHub repos - structure matters</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="what-is-a-python-package" class="slide level2">
+<h2>📦 What is a Python package?</h2>
+<ul>
+<li class="fragment">A <strong><a href="https://docs.python.org/3/tutorial/modules.html#packages">package</a></strong> is a directory containing an <code>__init__.py</code> file</li>
+<li class="fragment"><strong>Module</strong>: A single <code>.py</code> file</li>
+<li class="fragment"><strong>Package</strong>: A directory of modules with <code>__init__.py</code></li>
+<li class="fragment"><strong>Subpackage</strong>: A package inside another package</li>
+<li class="fragment"><strong><code>__init__.py</code></strong>: Marks directory as package, can contain initialization code</li>
+<li class="fragment"><strong>Modern Python (3.3+)</strong>: <code>__init__.py</code> optional but still recommended</li>
+</ul>
+<aside class="notes">
+<p><strong>TEACHING NOTES:</strong></p>
+<ul>
+<li><strong>Historical context</strong>: PEP 420 made <code>__init__.py</code> optional</li>
+<li><strong>Best practice</strong>: Still include it for clarity and initialization</li>
+<li><strong>Empty file</strong>: Often <code>__init__.py</code> is empty - that’s fine</li>
+<li><strong>Import control</strong>: Can control what’s exposed from package</li>
+<li><strong>Package discovery</strong>: Helps tools find and index your code</li>
+<li><strong>Backward compatibility</strong>: Ensures code works on older Python versions</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="basic-package-structure-a-practical-example" class="slide level2">
+<h2>🗂️ Basic package structure: A practical example</h2>
+<pre><code>my_api_project/
+│
+├── my_api/                  # Main package directory
+│   ├── __init__.py         # Marks this as a package
+│   ├── api.py              # API client code
+│   ├── cli.py              # CLI interface
+│   └── utils.py            # Utility functions
+│
+├── tests/                   # Test directory
+│   ├── __init__.py
+│   ├── test_api.py
+│   └── test_cli.py
+│
+├── main.py                  # Entry point script
+├── requirements.txt         # Dependencies
+└── README.md               # Documentation</code></pre>
+<h3 id="using-this-structure"><strong>Using this structure:</strong></h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a></a><span class="co"># In main.py</span></span>
+<span id="cb8-2"><a></a><span class="im">from</span> my_api.cli <span class="im">import</span> main</span>
+<span id="cb8-3"><a></a><span class="im">from</span> my_api.api <span class="im">import</span> fetch_data</span>
+<span id="cb8-4"><a></a><span class="im">from</span> my_api.utils <span class="im">import</span> format_output</span>
+<span id="cb8-5"><a></a></span>
+<span id="cb8-6"><a></a><span class="cf">if</span> <span class="va">__name__</span> <span class="op">==</span> <span class="st">"__main__"</span>:</span>
+<span id="cb8-7"><a></a>    main()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<aside class="notes">
+<p><strong>TEACHING NOTES:</strong></p>
+<ul>
+<li><strong>Naming convention</strong>: Package name should be lowercase, underscores OK</li>
+<li><strong>Test structure</strong>: Tests mirror the package structure</li>
+<li><strong>Entry point</strong>: <code>main.py</code> is the script users run</li>
+<li><strong>Imports</strong>: Clean, explicit import statements</li>
+<li><strong>Discoverability</strong>: Structure makes it easy to find code</li>
+<li><strong>Scalability</strong>: Easy to add new modules without refactoring</li>
+<li><strong>IDE support</strong>: Better autocomplete and navigation</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="the-__init__.py-file-package-initialization" class="slide level2">
+<h2>🎯 The <code>__init__.py</code> file: Package initialization</h2>
+<h3 id="empty-__init__.py-most-common"><strong>Empty <code>__init__.py</code> (most common):</strong></h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a></a><span class="co"># my_api/__init__.py</span></span>
+<span id="cb9-2"><a></a><span class="co"># Empty file - marks directory as package</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<h3 id="with-initialization-code"><strong>With initialization code:</strong></h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a></a><span class="co"># my_api/__init__.py</span></span>
+<span id="cb10-2"><a></a><span class="co">"""My API Client Package - A professional API wrapper."""</span></span>
+<span id="cb10-3"><a></a></span>
+<span id="cb10-4"><a></a><span class="co"># Import key functions for convenient access</span></span>
+<span id="cb10-5"><a></a><span class="im">from</span> my_api.api <span class="im">import</span> fetch_data, APIClient</span>
+<span id="cb10-6"><a></a><span class="im">from</span> my_api.utils <span class="im">import</span> format_output</span>
+<span id="cb10-7"><a></a></span>
+<span id="cb10-8"><a></a><span class="co"># Package metadata</span></span>
+<span id="cb10-9"><a></a>__version__ <span class="op">=</span> <span class="st">"1.0.0"</span></span>
+<span id="cb10-10"><a></a>__author__ <span class="op">=</span> <span class="st">"Your Name"</span></span>
+<span id="cb10-11"><a></a></span>
+<span id="cb10-12"><a></a><span class="co"># Define public API - controls "from my_api import *"</span></span>
+<span id="cb10-13"><a></a><span class="va">__all__</span> <span class="op">=</span> [<span class="st">"fetch_data"</span>, <span class="st">"APIClient"</span>, <span class="st">"format_output"</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<h3 id="usage-becomes-cleaner"><strong>Usage becomes cleaner:</strong></h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a></a><span class="co"># Instead of: from my_api.api import fetch_data</span></span>
+<span id="cb11-2"><a></a><span class="co"># You can do: from my_api import fetch_data</span></span>
+<span id="cb11-3"><a></a></span>
+<span id="cb11-4"><a></a><span class="im">import</span> my_api</span>
+<span id="cb11-5"><a></a><span class="bu">print</span>(my_api.__version__)  <span class="co"># 1.0.0</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<aside class="notes">
+<p><strong>TEACHING NOTES:</strong></p>
+<ul>
+<li><strong>Empty is fine</strong>: Most <code>__init__.py</code> files are empty</li>
+<li><strong>Convenience imports</strong>: Re-export commonly used items</li>
+<li><strong>Version management</strong>: Single source of truth for version</li>
+<li><strong>Public API</strong>: <code>__all__</code> defines the official interface</li>
+<li><strong>Documentation</strong>: Good place for package-level docstring</li>
+<li><strong>Initialization</strong>: Can set up logging, config, etc.</li>
+<li><strong>Best practice</strong>: Keep it minimal - complex init code slows imports</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="import-systems-absolute-vs-relative" class="slide level2">
+<h2>🔀 Import systems: Absolute vs relative</h2>
+<h3 id="absolute-imports-preferred"><strong>Absolute imports (preferred):</strong></h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a></a><span class="co"># my_api/cli.py</span></span>
+<span id="cb12-2"><a></a><span class="im">from</span> my_api.api <span class="im">import</span> fetch_data</span>
+<span id="cb12-3"><a></a><span class="im">from</span> my_api.utils <span class="im">import</span> format_output</span>
+<span id="cb12-4"><a></a><span class="im">import</span> my_api</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<h3 id="relative-imports-within-a-package"><strong>Relative imports (within a package):</strong></h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a></a><span class="co"># my_api/cli.py</span></span>
+<span id="cb13-2"><a></a><span class="im">from</span> .api <span class="im">import</span> fetch_data        <span class="co"># Same directory</span></span>
+<span id="cb13-3"><a></a><span class="im">from</span> .utils <span class="im">import</span> format_output   <span class="co"># Same directory</span></span>
+<span id="cb13-4"><a></a><span class="im">from</span> ..other_package <span class="im">import</span> helper <span class="co"># Parent directory</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<h3 id="when-to-use-each"><strong>When to use each:</strong></h3>
+<ul>
+<li class="fragment"><strong>Absolute imports</strong>: Default choice, always clear where code comes from</li>
+<li class="fragment"><strong>Relative imports</strong>: Useful for large packages, makes refactoring easier</li>
+<li class="fragment"><strong><a href="https://peps.python.org/pep-0008/#imports">PEP 8</a> recommendation</strong>: Prefer absolute imports unless path becomes excessively long</li>
+</ul>
+<aside class="notes">
+<p><strong>TEACHING NOTES:</strong></p>
+<ul>
+<li><strong>Clarity</strong>: Absolute imports are more explicit</li>
+<li><strong>Refactoring</strong>: Relative imports survive package renaming</li>
+<li><strong>Main script issue</strong>: Relative imports don’t work in <code>__main__</code> scripts</li>
+<li><strong>Team preference</strong>: Some teams prefer one style consistently</li>
+<li><strong>IDE support</strong>: Absolute imports have better IDE autocomplete</li>
+<li><strong>Best practice</strong>: Be consistent within a project</li>
+<li><strong>Learning curve</strong>: Start with absolute, learn relative later</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="the-__name__-__main__-pattern" class="slide level2">
+<h2>🎭 The <code>__name__ == "__main__"</code> pattern</h2>
+<h3 id="understanding-python-execution"><strong>Understanding Python execution:</strong></h3>
+<ul>
+<li class="fragment">When Python runs a file directly: <code>__name__</code> is set to <code>"__main__"</code></li>
+<li class="fragment">When Python imports a file: <code>__name__</code> is the module name</li>
+<li class="fragment">This allows code to be both a <strong>script</strong> (runnable) and a <strong>module</strong> (importable)</li>
+</ul>
+<h3 id="the-pattern"><strong>The pattern:</strong></h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a></a><span class="co"># my_api/api.py</span></span>
+<span id="cb14-2"><a></a></span>
+<span id="cb14-3"><a></a><span class="kw">def</span> fetch_data(api_name: <span class="bu">str</span>):</span>
+<span id="cb14-4"><a></a>    <span class="co">"""Fetch data from an API."""</span></span>
+<span id="cb14-5"><a></a>    <span class="bu">print</span>(<span class="ss">f"Fetching from </span><span class="sc">{</span>api_name<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb14-6"><a></a>    <span class="cf">return</span> {<span class="st">"data"</span>: <span class="st">"example"</span>}</span>
+<span id="cb14-7"><a></a></span>
+<span id="cb14-8"><a></a><span class="kw">def</span> main():</span>
+<span id="cb14-9"><a></a>    <span class="co">"""Entry point for running as a script."""</span></span>
+<span id="cb14-10"><a></a>    result <span class="op">=</span> fetch_data(<span class="st">"pokemon"</span>)</span>
+<span id="cb14-11"><a></a>    <span class="bu">print</span>(result)</span>
+<span id="cb14-12"><a></a></span>
+<span id="cb14-13"><a></a><span class="co"># Script mode: runs when file is executed directly</span></span>
+<span id="cb14-14"><a></a><span class="cf">if</span> <span class="va">__name__</span> <span class="op">==</span> <span class="st">"__main__"</span>:</span>
+<span id="cb14-15"><a></a>    main()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<h3 id="usage"><strong>Usage:</strong></h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb15-1"><a></a><span class="co"># Run as script</span></span>
+<span id="cb15-2"><a></a><span class="ex">$</span> python my_api/api.py</span>
+<span id="cb15-3"><a></a><span class="ex">Fetching</span> from pokemon</span>
+<span id="cb15-4"><a></a><span class="ex">{</span><span class="st">'data'</span><span class="ex">:</span> <span class="st">'example'</span>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a></a><span class="co"># Import as module (main() doesn't run)</span></span>
+<span id="cb16-2"><a></a><span class="im">from</span> my_api.api <span class="im">import</span> fetch_data</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<aside class="notes">
+<p><strong>TEACHING NOTES:</strong></p>
+<ul>
+<li><strong>Dual purpose</strong>: Same file can be script or library</li>
+<li><strong>Testing</strong>: Allows easy manual testing of modules</li>
+<li><strong>Convention</strong>: Every Python developer knows this pattern</li>
+<li><strong>Protection</strong>: Prevents code from running on import</li>
+<li><strong>Entry points</strong>: Often combined with CLI parsing</li>
+<li><strong>Interview topic</strong>: Frequently asked in Python interviews</li>
+<li><strong>Best practice</strong>: All modules should be importable without side effects</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="modern-project-layout-the-src-structure" class="slide level2">
+<h2>📐 Modern project layout: The <code>src/</code> structure</h2>
+<h3 id="recommended-professional-structure"><strong>Recommended professional structure:</strong></h3>
+<pre><code>my_api_project/
+│
+├── src/                     # Source code (modern best practice)
+│   └── my_api/
+│       ├── __init__.py
+│       ├── api.py
+│       ├── cli.py
+│       └── utils.py
+│
+├── tests/                   # Tests outside source tree
+│   ├── __init__.py
+│   ├── test_api.py
+│   └── test_cli.py
+│
+├── docs/                    # Documentation
+│   └── index.md
+│
+├── pyproject.toml           # Modern Python project metadata
+├── README.md
+└── .gitignore</code></pre>
+<h3 id="why-src-layout"><strong>Why <code>src/</code> layout?</strong></h3>
+<ul>
+<li class="fragment"><strong>Import discipline</strong>: Ensures you test installed version, not local files</li>
+<li class="fragment"><strong>Namespace clarity</strong>: Prevents accidental relative imports</li>
+<li class="fragment"><strong>Professional standard</strong>: Adopted by Python Packaging Authority (<a href="https://packaging.python.org/en/latest/discussions/src-layout-vs-flat-layout/">PyPA</a>)</li>
+<li class="fragment"><strong>Build isolation</strong>: Cleaner separation of source and build artifacts</li>
+</ul>
+<aside class="notes">
+<p><strong>TEACHING NOTES:</strong></p>
+<ul>
+<li><strong>Modern trend</strong>: <code>src/</code> layout gaining popularity</li>
+<li><strong>Testing benefit</strong>: Forces proper package installation</li>
+<li><strong>Flat vs src</strong>: Flat layout is simpler for beginners</li>
+<li><strong>Migration</strong>: Easy to adopt later if needed</li>
+<li><strong>Tool support</strong>: Modern tools (Poetry, PDM, Hatch) prefer <code>src/</code></li>
+<li><strong>Career preparation</strong>: New projects should use <code>src/</code></li>
+<li><strong>Legacy code</strong>: Many projects still use flat layout - both are valid</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="making-code-installable-pyproject.toml" class="slide level2">
+<h2>🔧 Making code installable: <code>pyproject.toml</code></h2>
+<h3 id="modern-python-packaging-with-pyproject.toml"><strong>Modern Python packaging with <a href="https://packaging.python.org/en/latest/guides/writing-pyproject-toml/"><code>pyproject.toml</code></a>:</strong></h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb18"><pre class="sourceCode numberSource toml number-lines code-with-copy"><code class="sourceCode toml"><span id="cb18-1"><a></a><span class="kw">[build-system]</span></span>
+<span id="cb18-2"><a></a><span class="dt">requires</span> <span class="op">=</span> <span class="op">[</span><span class="st">"hatchling"</span><span class="op">]</span></span>
+<span id="cb18-3"><a></a><span class="dt">build-backend</span> <span class="op">=</span> <span class="st">"hatchling.build"</span></span>
+<span id="cb18-4"><a></a></span>
+<span id="cb18-5"><a></a><span class="kw">[project]</span></span>
+<span id="cb18-6"><a></a><span class="dt">name</span> <span class="op">=</span> <span class="st">"my-api-tool"</span></span>
+<span id="cb18-7"><a></a><span class="dt">version</span> <span class="op">=</span> <span class="st">"0.1.0"</span></span>
+<span id="cb18-8"><a></a><span class="dt">description</span> <span class="op">=</span> <span class="st">"A professional API client for [Your API]"</span></span>
+<span id="cb18-9"><a></a><span class="dt">authors</span> <span class="op">=</span> <span class="op">[{</span><span class="dt">name</span><span class="op"> =</span> <span class="st">"Your Name"</span><span class="op">, </span><span class="dt">email</span><span class="op"> =</span> <span class="st">"you@example.com"</span><span class="op">}]</span></span>
+<span id="cb18-10"><a></a><span class="dt">readme</span> <span class="op">=</span> <span class="st">"README.md"</span></span>
+<span id="cb18-11"><a></a><span class="dt">requires-python</span> <span class="op">=</span> <span class="st">"&gt;=3.10"</span></span>
+<span id="cb18-12"><a></a><span class="dt">dependencies</span> <span class="op">=</span> <span class="op">[</span></span>
+<span id="cb18-13"><a></a>    <span class="st">"requests&gt;=2.31.0"</span><span class="op">,</span></span>
+<span id="cb18-14"><a></a><span class="op">]</span></span>
+<span id="cb18-15"><a></a></span>
+<span id="cb18-16"><a></a><span class="kw">[project.optional-dependencies]</span></span>
+<span id="cb18-17"><a></a><span class="dt">dev</span> <span class="op">=</span> <span class="op">[</span></span>
+<span id="cb18-18"><a></a>    <span class="st">"pytest&gt;=7.0.0"</span><span class="op">,</span></span>
+<span id="cb18-19"><a></a>    <span class="st">"black&gt;=23.0.0"</span><span class="op">,</span></span>
+<span id="cb18-20"><a></a>    <span class="st">"ruff&gt;=0.1.0"</span><span class="op">,</span></span>
+<span id="cb18-21"><a></a><span class="op">]</span></span>
+<span id="cb18-22"><a></a></span>
+<span id="cb18-23"><a></a><span class="kw">[project.scripts]</span></span>
+<span id="cb18-24"><a></a><span class="dt">my-api</span> <span class="op">=</span> <span class="st">"my_api.cli:main"</span>  <span class="co"># Creates a 'my-api' command</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<h3 id="installing-in-editable-mode"><strong>Installing in editable mode:</strong></h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb19"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb19-1"><a></a><span class="co"># Install your package locally for development</span></span>
+<span id="cb19-2"><a></a><span class="ex">pip</span> install <span class="at">-e</span> .</span>
+<span id="cb19-3"><a></a></span>
+<span id="cb19-4"><a></a><span class="co"># Now you can import it anywhere</span></span>
+<span id="cb19-5"><a></a><span class="ex">python</span> <span class="at">-c</span> <span class="st">"from my_api import fetch_data"</span></span>
+<span id="cb19-6"><a></a></span>
+<span id="cb19-7"><a></a><span class="co"># And use the CLI command</span></span>
+<span id="cb19-8"><a></a><span class="ex">my-api</span> pokemon pikachu</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<aside class="notes">
+<p><strong>TEACHING NOTES:</strong></p>
+<ul>
+<li><strong>Modern standard</strong>: <code>pyproject.toml</code> replaces <code>setup.py</code></li>
+<li><strong>PEP 621</strong>: Standardized project metadata format</li>
+<li><strong>Editable install</strong>: <code>-e</code> flag links to source code</li>
+<li><strong>Scripts</strong>: Automatically creates CLI commands</li>
+<li><strong>Dependencies</strong>: Central place for all requirements</li>
+<li><strong>Tool config</strong>: Can include black, pytest, ruff config</li>
+<li><strong>Career relevance</strong>: All new Python projects use this format</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="modern-python-tooling-enter-uv" class="slide level2">
+<h2>⚡ Modern Python tooling: Enter <code>uv</code></h2>
+<ul>
+<li class="fragment"><strong><a href="https://github.com/astral-sh/uv"><code>uv</code></a></strong> is a blazingly fast Python package installer and resolver (written in Rust!)</li>
+<li class="fragment"><strong>10-100× faster</strong> than pip for most operations</li>
+<li class="fragment"><strong>Drop-in replacement</strong>: <code>uv pip install</code> works like <code>pip install</code></li>
+<li class="fragment"><strong>Created by Astral</strong>: Same team behind <a href="https://github.com/astral-sh/ruff">Ruff</a> (the fast Python linter)</li>
+<li class="fragment"><strong>Growing adoption</strong>: Becoming the standard for new Python projects</li>
+<li class="fragment"><strong>Learning curve</strong>: Minimal - works like pip but faster</li>
+</ul>
+<h3 id="basic-usage"><strong>Basic usage:</strong></h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb20"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb20-1"><a></a><span class="co"># Install uv</span></span>
+<span id="cb20-2"><a></a><span class="ex">curl</span> <span class="at">-LsSf</span> https://astral.sh/uv/install.sh <span class="kw">|</span> <span class="fu">sh</span></span>
+<span id="cb20-3"><a></a></span>
+<span id="cb20-4"><a></a><span class="co"># Use it like pip</span></span>
+<span id="cb20-5"><a></a><span class="ex">uv</span> pip install requests</span>
+<span id="cb20-6"><a></a><span class="ex">uv</span> pip install <span class="at">-e</span> .           <span class="co"># Editable install</span></span>
+<span id="cb20-7"><a></a></span>
+<span id="cb20-8"><a></a><span class="co"># Create virtual environments</span></span>
+<span id="cb20-9"><a></a><span class="ex">uv</span> venv</span>
+<span id="cb20-10"><a></a><span class="bu">source</span> .venv/bin/activate</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<aside class="notes">
+<p><strong>TEACHING NOTES:</strong></p>
+<ul>
+<li><strong>Performance</strong>: Show speed comparison demos if possible</li>
+<li><strong>Rust connection</strong>: Perfect bridge to next week’s Rust introduction</li>
+<li><strong>Modern tooling</strong>: Python ecosystem is modernizing rapidly</li>
+<li><strong>Optional</strong>: Students can stick with pip if they prefer</li>
+<li><strong>Industry trend</strong>: Major projects adopting uv</li>
+<li><strong>Simplicity</strong>: Don’t overcomplicate - it’s just a faster pip</li>
+<li><strong>Future-proofing</strong>: Learning modern tools prepares for career</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="ai-assisted-package-scaffolding" class="slide level2">
+<h2>🤖 AI-assisted package scaffolding</h2>
+<h3 id="prompt-strategies-for-project-structure"><strong>Prompt strategies for project structure:</strong></h3>
+<ul>
+<li class="fragment"><strong>Initial scaffold</strong>: “Create a Python package structure for an API client project with CLI, tests, and proper imports”</li>
+<li class="fragment"><strong>Best practices</strong>: “Show me a modern Python project layout with src/ structure and pyproject.toml”</li>
+<li class="fragment"><strong>Migration</strong>: “Convert my single-file script into a proper Python package with separate modules”</li>
+<li class="fragment"><strong>Documentation</strong>: “Generate a README with installation and usage instructions for my package”</li>
+</ul>
+<h3 id="ai-tools-excel-at-1"><strong>AI tools excel at:</strong></h3>
+<ul>
+<li class="fragment">Generating boilerplate directory structures</li>
+<li class="fragment">Creating <code>__init__.py</code> files with proper imports</li>
+<li class="fragment">Writing <code>pyproject.toml</code> configurations</li>
+<li class="fragment">Setting up testing frameworks</li>
+<li class="fragment">Generating comprehensive README files</li>
+</ul>
+<aside class="notes">
+<p><strong>TEACHING NOTES:</strong></p>
+<ul>
+<li><strong>Scaffolding</strong>: AI is perfect for generating project skeletons</li>
+<li><strong>Learning opportunity</strong>: Study the generated structure to understand patterns</li>
+<li><strong>Customization</strong>: AI provides template, student adds domain logic</li>
+<li><strong>Iteration</strong>: Refine structure through conversation with AI</li>
+<li><strong>Best practices</strong>: AI incorporates current Python packaging standards</li>
+<li><strong>Time savings</strong>: Reduces tedious setup work</li>
+<li><strong>Career skill</strong>: Knowing how to use AI for project setup is valuable</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="practical-example-midterm-project-structure" class="slide level2">
+<h2>💡 Practical example: Midterm project structure</h2>
+<h3 id="recommended-structure-for-your-midterm"><strong>Recommended structure for your midterm:</strong></h3>
+<pre><code>my_midterm_project/
+│
+├── src/
+│   └── my_api_tool/
+│       ├── __init__.py          # Package initialization
+│       ├── api_client.py        # API interaction logic
+│       ├── cli.py               # argparse CLI interface
+│       ├── models.py            # Data models/classes
+│       └── utils.py             # Helper functions
+│
+├── tests/
+│   ├── __init__.py
+│   ├── test_api_client.py      # API tests
+│   ├── test_cli.py              # CLI tests
+│   └── test_models.py           # Model tests
+│
+├── .github/
+│   └── workflows/
+│       └── tests.yml            # GitHub Actions CI/CD
+│
+├── pyproject.toml               # Project configuration
+├── README.md                    # Your documentation
+├── .gitignore                   # Git exclusions
+└── requirements.txt             # Or use pyproject.toml dependencies</code></pre>
+<aside class="notes">
+<p><strong>TEACHING NOTES:</strong></p>
+<ul>
+<li><strong>Midterm application</strong>: This is the target structure for their projects</li>
+<li><strong>Gradual adoption</strong>: Can start simpler and refactor</li>
+<li><strong>Testing</strong>: Structure makes testing easier</li>
+<li><strong>CI/CD</strong>: GitHub Actions can run tests automatically</li>
+<li><strong>Portfolio quality</strong>: This structure impresses employers</li>
+<li><strong>Flexibility</strong>: Can adapt structure to project needs</li>
+<li><strong>Documentation</strong>: README is essential for grading and sharing</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="putting-it-all-together-cli-package-structure" class="slide level2">
+<h2>🔗 Putting it all together: CLI + Package structure</h2>
+<h3 id="entry-point-main.py-or-srcmy_api_tool__main__.py"><strong>Entry point (<code>main.py</code> or <code>src/my_api_tool/__main__.py</code>):</strong></h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb22"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a></a><span class="co">"""Entry point for the my_api_tool CLI."""</span></span>
+<span id="cb22-2"><a></a><span class="im">from</span> my_api_tool.cli <span class="im">import</span> main</span>
+<span id="cb22-3"><a></a></span>
+<span id="cb22-4"><a></a><span class="cf">if</span> <span class="va">__name__</span> <span class="op">==</span> <span class="st">"__main__"</span>:</span>
+<span id="cb22-5"><a></a>    main()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<h3 id="cli-module-srcmy_api_toolcli.py"><strong>CLI module (<code>src/my_api_tool/cli.py</code>):</strong></h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb23"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a></a><span class="co">"""Command-line interface for API tool."""</span></span>
+<span id="cb23-2"><a></a><span class="im">import</span> argparse</span>
+<span id="cb23-3"><a></a><span class="im">import</span> sys</span>
+<span id="cb23-4"><a></a><span class="im">from</span> my_api_tool.api_client <span class="im">import</span> APIClient</span>
+<span id="cb23-5"><a></a><span class="im">from</span> my_api_tool.utils <span class="im">import</span> format_output</span>
+<span id="cb23-6"><a></a></span>
+<span id="cb23-7"><a></a><span class="kw">def</span> main():</span>
+<span id="cb23-8"><a></a>    parser <span class="op">=</span> argparse.ArgumentParser(description<span class="op">=</span><span class="st">"API client tool"</span>)</span>
+<span id="cb23-9"><a></a>    parser.add_argument(<span class="st">"resource"</span>, <span class="bu">help</span><span class="op">=</span><span class="st">"Resource to fetch"</span>)</span>
+<span id="cb23-10"><a></a>    parser.add_argument(<span class="st">"--format"</span>, choices<span class="op">=</span>[<span class="st">"json"</span>, <span class="st">"pretty"</span>], default<span class="op">=</span><span class="st">"pretty"</span>)</span>
+<span id="cb23-11"><a></a></span>
+<span id="cb23-12"><a></a>    args <span class="op">=</span> parser.parse_args()</span>
+<span id="cb23-13"><a></a></span>
+<span id="cb23-14"><a></a>    <span class="cf">try</span>:</span>
+<span id="cb23-15"><a></a>        client <span class="op">=</span> APIClient()</span>
+<span id="cb23-16"><a></a>        data <span class="op">=</span> client.fetch(args.resource)</span>
+<span id="cb23-17"><a></a>        <span class="bu">print</span>(format_output(data, args.<span class="bu">format</span>))</span>
+<span id="cb23-18"><a></a>        <span class="cf">return</span> <span class="dv">0</span></span>
+<span id="cb23-19"><a></a>    <span class="cf">except</span> <span class="pp">Exception</span> <span class="im">as</span> e:</span>
+<span id="cb23-20"><a></a>        <span class="bu">print</span>(<span class="ss">f"Error: </span><span class="sc">{</span>e<span class="sc">}</span><span class="ss">"</span>, <span class="bu">file</span><span class="op">=</span>sys.stderr)</span>
+<span id="cb23-21"><a></a>        <span class="cf">return</span> <span class="dv">1</span></span>
+<span id="cb23-22"><a></a></span>
+<span id="cb23-23"><a></a><span class="cf">if</span> <span class="va">__name__</span> <span class="op">==</span> <span class="st">"__main__"</span>:</span>
+<span id="cb23-24"><a></a>    sys.exit(main())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<h3 id="usage-after-install"><strong>Usage after install:</strong></h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb24"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb24-1"><a></a><span class="ex">pip</span> install <span class="at">-e</span> .</span>
+<span id="cb24-2"><a></a><span class="ex">my-api-tool</span> pokemon <span class="at">--format</span> json</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<aside class="notes">
+<p><strong>TEACHING NOTES:</strong></p>
+<ul>
+<li><strong>Integration</strong>: Shows how CLI and package structure work together</li>
+<li><strong>Clean imports</strong>: Package structure enables clear module organization</li>
+<li><strong>Professional pattern</strong>: This is production-quality code structure</li>
+<li><strong>Testability</strong>: Each component can be tested independently</li>
+<li><strong>Maintainability</strong>: Easy to find and modify code</li>
+<li><strong>Scalability</strong>: Can grow from simple to complex without refactoring</li>
+<li><strong>Career preparation</strong>: This is exactly how professional tools are structured</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="bridge-to-rust-a-preview-of-next-week" class="slide level2">
+<h2>🌉 Bridge to Rust: A preview of next week</h2>
+<h3 id="python-packaging-challenges-weve-seen"><strong>Python packaging challenges we’ve seen:</strong></h3>
+<ul>
+<li class="fragment"><strong>Manual structure</strong>: Create directories, <code>__init__.py</code> files by hand</li>
+<li class="fragment"><strong>Import complexity</strong>: Absolute vs relative, <code>__name__ == "__main__"</code> patterns</li>
+<li class="fragment"><strong>Dependency management</strong>: Multiple tools (<code>pip</code>, <code>venv</code>, <code>pyproject.toml</code>)</li>
+<li class="fragment"><strong>Build system</strong>: Choose from many options (setuptools, hatch, poetry, PDM)</li>
+</ul>
+<h3 id="next-week-in-rust"><strong>Next week in Rust:</strong></h3>
+<ul>
+<li class="fragment"><strong><a href="https://doc.rust-lang.org/cargo/">Cargo</a></strong> handles <strong>everything</strong> automatically</li>
+<li class="fragment"><strong>One command</strong>: <code>cargo new my_project</code> creates perfect structure</li>
+<li class="fragment"><strong>Built-in</strong>: Package management, building, testing, documentation</li>
+<li class="fragment"><strong>No decisions</strong>: One standard way to structure projects</li>
+<li class="fragment"><strong>Comparison point</strong>: “Remember Python packages? Rust’s Cargo solves all those pain points”</li>
+</ul>
+<aside class="notes">
+<p><strong>TEACHING NOTES:</strong></p>
+<ul>
+<li><strong>Transition preview</strong>: Prepare students for next week’s Rust intro</li>
+<li><strong>Fresh perspective</strong>: Python midterm experience will highlight Rust’s advantages</li>
+<li><strong>Comparison learning</strong>: Understanding Python packages makes Cargo appreciation deeper</li>
+<li><strong>Motivation</strong>: “You’ve learned the hard way, now see the automatic way”</li>
+<li><strong>Career context</strong>: Understanding both approaches makes better engineers</li>
+<li><strong>Ecosystem differences</strong>: Python’s flexibility vs Rust’s opinionation</li>
+<li><strong>Learning sequence</strong>: Intentional - Python first shows why Cargo matters</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="resources-and-further-learning" class="slide level2">
+<h2>📚 Resources and further learning</h2>
+<h3 id="official-documentation"><strong>Official documentation:</strong></h3>
+<ul>
+<li class="fragment"><strong><a href="https://docs.python.org/3/library/argparse.html">argparse</a></strong> - Python standard library CLI tool</li>
+<li class="fragment"><strong><a href="https://docs.python.org/3/tutorial/modules.html#packages">Python Packages</a></strong> - Official modules and packages guide</li>
+<li class="fragment"><strong><a href="https://packaging.python.org/en/latest/tutorials/packaging-projects/">Packaging Projects</a></strong> - Python Packaging Authority tutorial</li>
+<li class="fragment"><strong><a href="https://click.palletsprojects.com/">Click</a></strong> - Alternative CLI framework (more advanced)</li>
+<li class="fragment"><strong><a href="https://typer.tiangolo.com/">Typer</a></strong> - Modern CLI with type hints</li>
+<li class="fragment"><strong><a href="https://rich.readthedocs.io/">Rich</a></strong> - Beautiful terminal output</li>
+<li class="fragment"><strong><a href="https://github.com/astral-sh/uv">uv documentation</a></strong> - Fast Python package installer</li>
+</ul>
+<h3 id="advanced-topics"><strong>Advanced topics:</strong></h3>
+<ul>
+<li class="fragment"><strong><a href="https://peps.python.org/pep-0008/">PEP 8</a></strong> - Python style guide</li>
+<li class="fragment"><strong><a href="https://peps.python.org/pep-0621/">PEP 621</a></strong> - Project metadata in <code>pyproject.toml</code></li>
+<li class="fragment"><strong>Entry points</strong> - Creating console scripts</li>
+<li class="fragment"><strong>Namespace packages</strong> - Splitting packages across distributions</li>
+</ul>
+<aside class="notes">
+<p><strong>TEACHING NOTES:</strong></p>
+<ul>
+<li><strong>Progressive depth</strong>: Start with basics, explore advanced topics as needed</li>
+<li><strong>Career resources</strong>: Bookmark these for future reference</li>
+<li><strong>Community</strong>: Python packaging is well-documented</li>
+<li><strong>Modern practices</strong>: Links focus on current best practices</li>
+<li><strong>Tool ecosystem</strong>: Many options - all are valid choices</li>
+<li><strong>AI assistance</strong>: Can help understand these docs</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="applying-to-your-midterm-project" class="slide level2">
+<h2>🎯 Applying to your midterm project</h2>
+<h3 id="this-weeks-work-session"><strong>This week’s work session:</strong></h3>
+<ul>
+<li class="fragment"><strong>Restructure your code</strong> into a proper package with <code>src/</code> layout</li>
+<li class="fragment"><strong>Add a CLI interface</strong> with argparse for easy testing and demonstration</li>
+<li class="fragment"><strong>Create clean imports</strong> between your modules</li>
+<li class="fragment"><strong>Add entry point</strong> in <code>pyproject.toml</code> for your CLI command</li>
+<li class="fragment"><strong>Document usage</strong> in your README with examples</li>
+<li class="fragment"><strong>Test your CLI</strong> with different arguments and edge cases</li>
+</ul>
+<h3 id="success-criteria"><strong>Success criteria:</strong></h3>
+<ul>
+<li class="fragment">Can run <code>pip install -e .</code> to install your project</li>
+<li class="fragment">CLI works with intuitive arguments and helpful error messages</li>
+<li class="fragment">Code is organized in logical modules with clean imports</li>
+<li class="fragment"><code>--help</code> flag provides clear usage instructions</li>
+<li class="fragment">README explains installation and usage</li>
+</ul>
+<aside class="notes">
+<p><strong>TEACHING NOTES:</strong></p>
+<ul>
+<li><strong>Actionable</strong>: Students should leave with clear next steps</li>
+<li><strong>Midterm focus</strong>: Everything ties back to their projects</li>
+<li><strong>Quality bar</strong>: Set expectations for professional-level work</li>
+<li><strong>Support</strong>: Encourage office hours for structure questions</li>
+<li><strong>AI assistance</strong>: Perfect use case for AI pair programming</li>
+<li><strong>Timeline</strong>: Due next week - emphasize time management</li>
+<li><strong>Grading</strong>: Structure and CLI quality are assessment criteria</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="summary-key-takeaways" class="slide level2">
+<h2>📋 Summary: Key takeaways</h2>
+<ul>
+<li class="fragment"><strong>CLI with argparse</strong>: Create professional command-line tools with automatic help and validation</li>
+<li class="fragment"><strong>Package structure</strong>: Organize code with <code>__init__.py</code>, proper imports, and logical modules</li>
+<li class="fragment"><strong><code>__name__ == "__main__"</code></strong>: Make code both runnable and importable</li>
+<li class="fragment"><strong>Modern tooling</strong>: <code>pyproject.toml</code> and <code>uv</code> represent the future of Python development</li>
+<li class="fragment"><strong>Integration</strong>: CLI + packages = professional, maintainable applications</li>
+<li class="fragment"><strong>Midterm application</strong>: Apply these patterns immediately to elevate your projects</li>
+<li class="fragment"><strong>Next week</strong>: See how Rust’s Cargo handles all this automatically</li>
+</ul>
+<aside class="notes">
+<p><strong>TEACHING NOTES:</strong></p>
+<ul>
+<li><strong>Concept reinforcement</strong>: Review the most important patterns</li>
+<li><strong>Practical focus</strong>: Everything learned today applies to midterm</li>
+<li><strong>Confidence building</strong>: Students have the tools to build professional software</li>
+<li><strong>Career preparation</strong>: These are fundamental professional Python skills</li>
+<li><strong>Course progression</strong>: Sets up perfect contrast with Rust next week</li>
+<li><strong>Support</strong>: Office hours available for implementation questions</li>
+<li><strong>Celebration</strong>: Students have now learned comprehensive Python development</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="work-session-build-your-professional-python-application" class="slide level2">
+<h2>🚀 Work session: Build your professional Python application</h2>
+<h3 id="todays-goals"><strong>Today’s goals:</strong></h3>
+<ul>
+<li class="fragment">Restructure your midterm project with proper package layout</li>
+<li class="fragment">Implement a CLI interface with argparse</li>
+<li class="fragment">Create clean module organization</li>
+<li class="fragment">Test your CLI and fix any issues</li>
+<li class="fragment">Update your README with installation and usage instructions</li>
+</ul>
+<h3 id="need-help"><strong>Need help?</strong></h3>
+<ul>
+<li class="fragment">Review the slide examples</li>
+<li class="fragment">Use AI assistants for structure scaffolding</li>
+<li class="fragment">Ask questions as you work</li>
+<li class="fragment">Reference the official documentation</li>
+<li class="fragment">Test frequently as you refactor</li>
+</ul>
+<p><strong>Let’s build something professional!</strong> 🎉</p>
+<aside class="notes">
+<p><strong>TEACHING NOTES:</strong></p>
+<ul>
+<li><strong>Hands-on time</strong>: Students work on their projects during class</li>
+<li><strong>Availability</strong>: Circulate to help with questions</li>
+<li><strong>Common issues</strong>: Be ready to debug import errors, argparse confusion</li>
+<li><strong>Encouragement</strong>: Refactoring is professional skill - embrace it</li>
+<li><strong>Time management</strong>: Midterm due next week - use this time wisely</li>
+<li><strong>Collaboration</strong>: Students can help each other with structure questions</li>
+<li><strong>Quality focus</strong>: Better structure now = easier maintenance later</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+
+
+</section></section>
+    </div>
+  <div class="quarto-auto-generated-content" style="display: none;">
+<div class="footer footer-default">
+
+</div>
+</div></div>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script>
+  <script src="../site_libs/revealjs/dist/reveal.js"></script>
+  <!-- reveal.js plugins -->
+  <script src="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="../site_libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="../site_libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="../site_libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="../site_libs/revealjs/plugin/quarto-support/support.js"></script>
+  
+
+  <script src="../site_libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="../site_libs/revealjs/plugin/search/search.js"></script>
+  <script src="../site_libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="../site_libs/revealjs/plugin/math/math.js"></script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://revealjs.com/config/
+      Reveal.initialize({
+'controlsAuto': true,
+'previewLinksAuto': false,
+'pdfSeparateFragments': false,
+'autoAnimateEasing': "ease",
+'autoAnimateDuration': 1,
+'autoAnimateUnmatched': true,
+'jumpToSlide': true,
+'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\"><kbd>r</kbd> Scroll View Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
+'smaller': false,
+ 
+        // Display controls in the bottom right corner
+        controls: false,
+
+        // Help the user learn the controls by providing hints, for example by
+        // bouncing the down arrow when they first encounter a vertical slide
+        controlsTutorial: false,
+
+        // Determines where controls appear, "edges" or "bottom-right"
+        controlsLayout: 'edges',
+
+        // Visibility rule for backwards navigation arrows; "faded", "hidden"
+        // or "visible"
+        controlsBackArrows: 'faded',
+
+        // Display a presentation progress bar
+        progress: true,
+
+        // Display the page number of the current slide
+        slideNumber: false,
+
+        // 'all', 'print', or 'speaker'
+        showSlideNumber: 'all',
+
+        // Add the current slide number to the URL hash so that reloading the
+        // page/copying the URL will return you to the same slide
+        hash: true,
+
+        // Start with 1 for the hash rather than 0
+        hashOneBasedIndex: false,
+
+        // Flags if we should monitor the hash and change slides accordingly
+        respondToHashChanges: true,
+
+        // Push each slide change to the browser history
+        history: true,
+
+        // Enable keyboard shortcuts for navigation
+        keyboard: true,
+
+        // Enable the slide overview mode
+        overview: true,
+
+        // Disables the default reveal.js slide layout (scaling and centering)
+        // so that you can use custom CSS layout
+        disableLayout: false,
+
+        // Vertical centering of slides
+        center: false,
+
+        // Enables touch navigation on devices with touch input
+        touch: true,
+
+        // Loop the presentation
+        loop: false,
+
+        // Change the presentation direction to be RTL
+        rtl: false,
+
+        // see https://revealjs.com/vertical-slides/#navigation-mode
+        navigationMode: 'linear',
+
+        // Randomizes the order of slides each time the presentation loads
+        shuffle: false,
+
+        // Turns fragments on and off globally
+        fragments: true,
+
+        // Flags whether to include the current fragment in the URL,
+        // so that reloading brings you to the same fragment position
+        fragmentInURL: false,
+
+        // Flags if the presentation is running in an embedded mode,
+        // i.e. contained within a limited portion of the screen
+        embedded: false,
+
+        // Flags if we should show a help overlay when the questionmark
+        // key is pressed
+        help: true,
+
+        // Flags if it should be possible to pause the presentation (blackout)
+        pause: true,
+
+        // Flags if speaker notes should be visible to all viewers
+        showNotes: false,
+
+        // Global override for autoplaying embedded media (null/true/false)
+        autoPlayMedia: null,
+
+        // Global override for preloading lazy-loaded iframes (null/true/false)
+        preloadIframes: null,
+
+        // Number of milliseconds between automatically proceeding to the
+        // next slide, disabled when set to 0, this value can be overwritten
+        // by using a data-autoslide attribute on your slides
+        autoSlide: 0,
+
+        // Stop auto-sliding after user input
+        autoSlideStoppable: true,
+
+        // Use this method for navigation when auto-sliding
+        autoSlideMethod: null,
+
+        // Specify the average time in seconds that you think you will spend
+        // presenting each slide. This is used to show a pacing timer in the
+        // speaker view
+        defaultTiming: null,
+
+        // Enable slide navigation via mouse wheel
+        mouseWheel: false,
+
+        // The display mode that will be used to show slides
+        display: 'block',
+
+        // Hide cursor if inactive
+        hideInactiveCursor: true,
+
+        // Time before the cursor is hidden (in ms)
+        hideCursorTime: 5000,
+
+        // Opens links in an iframe preview overlay
+        previewLinks: false,
+
+        // Transition style (none/fade/slide/convex/concave/zoom)
+        transition: 'fade',
+
+        // Transition speed (default/fast/slow)
+        transitionSpeed: 'default',
+
+        // Transition style for full page slide backgrounds
+        // (none/fade/slide/convex/concave/zoom)
+        backgroundTransition: 'none',
+
+        // Number of slides away from the current that are visible
+        viewDistance: 3,
+
+        // Number of slides away from the current that are visible on mobile
+        // devices. It is advisable to set this to a lower number than
+        // viewDistance in order to save resources.
+        mobileViewDistance: 2,
+
+        // The "normal" size of the presentation, aspect ratio will be preserved
+        // when the presentation is scaled to fit different resolutions. Can be
+        // specified using percentage units.
+        width: 1050,
+
+        height: 700,
+
+        // Factor of the display size that should remain empty around the content
+        margin: 0.1,
+
+        math: {
+          mathjax: 'https://cdn.jsdelivr.net/npm/mathjax@2.7.9/MathJax.js',
+          config: 'TeX-AMS_HTML-full',
+          tex2jax: {
+            inlineMath: [['\\(','\\)']],
+            displayMath: [['\\[','\\]']],
+            balanceBraces: true,
+            processEscapes: false,
+            processRefs: true,
+            processEnvironments: true,
+            preview: 'TeX',
+            skipTags: ['script','noscript','style','textarea','pre','code'],
+            ignoreClass: 'tex2jax_ignore',
+            processClass: 'tex2jax_process'
+          },
+        },
+
+        // reveal.js plugins
+        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, QuartoSupport,
+
+          RevealMath,
+          RevealNotes,
+          RevealSearch,
+          RevealZoom
+        ]
+      });
+    </script>
+    <script id="quarto-html-after-body" type="application/javascript">
+      window.document.addEventListener("DOMContentLoaded", function (event) {
+        const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
+        tabsets.forEach(function(tabset) {
+          const tabby = new Tabby('#' + tabset.id);
+        });
+        const isCodeAnnotation = (el) => {
+          for (const clz of el.classList) {
+            if (clz.startsWith('code-annotation-')) {                     
+              return true;
+            }
+          }
+          return false;
+        }
+        const onCopySuccess = function(e) {
+          // button target
+          const button = e.trigger;
+          // don't keep focus
+          button.blur();
+          // flash "checked"
+          button.classList.add('code-copy-button-checked');
+          var currentTitle = button.getAttribute("title");
+          button.setAttribute("title", "Copied!");
+          let tooltip;
+          if (window.bootstrap) {
+            button.setAttribute("data-bs-toggle", "tooltip");
+            button.setAttribute("data-bs-placement", "left");
+            button.setAttribute("data-bs-title", "Copied!");
+            tooltip = new bootstrap.Tooltip(button, 
+              { trigger: "manual", 
+                customClass: "code-copy-button-tooltip",
+                offset: [0, -8]});
+            tooltip.show();    
+          }
+          setTimeout(function() {
+            if (tooltip) {
+              tooltip.hide();
+              button.removeAttribute("data-bs-title");
+              button.removeAttribute("data-bs-toggle");
+              button.removeAttribute("data-bs-placement");
+            }
+            button.setAttribute("title", currentTitle);
+            button.classList.remove('code-copy-button-checked');
+          }, 1000);
+          // clear code selection
+          e.clearSelection();
+        }
+        const getTextToCopy = function(trigger) {
+          const outerScaffold = trigger.parentElement.cloneNode(true);
+          const codeEl = outerScaffold.querySelector('code');
+          for (const childEl of codeEl.children) {
+            if (isCodeAnnotation(childEl)) {
+              childEl.remove();
+            }
+          }
+          return codeEl.innerText;
+        }
+        const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+          text: getTextToCopy
+        });
+        clipboard.on('success', onCopySuccess);
+        if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+          const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+            text: getTextToCopy,
+            container: window.document.getElementById('quarto-embedded-source-code-modal')
+          });
+          clipboardModal.on('success', onCopySuccess);
+        }
+          var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+          var mailtoRegex = new RegExp(/^mailto:/);
+            var filterRegex = new RegExp('/' + window.location.host + '/');
+          var isInternal = (href) => {
+              return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+          }
+          // Inspect non-navigation links and adorn them if external
+         var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+          for (var i=0; i<links.length; i++) {
+            const link = links[i];
+            if (!isInternal(link.href)) {
+              // undo the damage that might have been done by quarto-nav.js in the case of
+              // links that we want to consider external
+              if (link.dataset.originalHref !== undefined) {
+                link.href = link.dataset.originalHref;
+              }
+            }
+          }
+        function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+          const config = {
+            allowHTML: true,
+            maxWidth: 500,
+            delay: 100,
+            arrow: false,
+            appendTo: function(el) {
+                return el.closest('section.slide') || el.parentElement;
+            },
+            interactive: true,
+            interactiveBorder: 10,
+            theme: 'light-border',
+            placement: 'bottom-start',
+          };
+          if (contentFn) {
+            config.content = contentFn;
+          }
+          if (onTriggerFn) {
+            config.onTrigger = onTriggerFn;
+          }
+          if (onUntriggerFn) {
+            config.onUntrigger = onUntriggerFn;
+          }
+            config['offset'] = [0,0];
+            config['maxWidth'] = 700;
+          window.tippy(el, config); 
+        }
+        const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+        for (var i=0; i<noterefs.length; i++) {
+          const ref = noterefs[i];
+          tippyHover(ref, function() {
+            // use id or data attribute instead here
+            let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+            try { href = new URL(href).hash; } catch {}
+            const id = href.replace(/^#\/?/, "");
+            const note = window.document.getElementById(id);
+            if (note) {
+              return note.innerHTML;
+            } else {
+              return "";
+            }
+          });
+        }
+        const findCites = (el) => {
+          const parentEl = el.parentElement;
+          if (parentEl) {
+            const cites = parentEl.dataset.cites;
+            if (cites) {
+              return {
+                el,
+                cites: cites.split(' ')
+              };
+            } else {
+              return findCites(el.parentElement)
+            }
+          } else {
+            return undefined;
+          }
+        };
+        var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+        for (var i=0; i<bibliorefs.length; i++) {
+          const ref = bibliorefs[i];
+          const citeInfo = findCites(ref);
+          if (citeInfo) {
+            tippyHover(citeInfo.el, function() {
+              var popup = window.document.createElement('div');
+              citeInfo.cites.forEach(function(cite) {
+                var citeDiv = window.document.createElement('div');
+                citeDiv.classList.add('hanging-indent');
+                citeDiv.classList.add('csl-entry');
+                var biblioDiv = window.document.getElementById('ref-' + cite);
+                if (biblioDiv) {
+                  citeDiv.innerHTML = biblioDiv.innerHTML;
+                }
+                popup.appendChild(citeDiv);
+              });
+              return popup.innerHTML;
+            });
+          }
+        }
+      });
+      </script>
+    
+
+</body></html>

@@ -5,3 +5,5 @@
 *.docx
 *.pdf
 /downloads/
+
+**/*.quarto_ipynb

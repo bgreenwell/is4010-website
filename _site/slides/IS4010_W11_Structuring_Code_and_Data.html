@@ -1,0 +1,1637 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-html/tabby.min.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-707d8167ce6003fca903bfe2be84ab7f.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.8.25">
+
+  <meta name="author" content="Brandon M. Greenwell">
+  <title>IS 4010 - App Dev with AI – IS4010: AI-Enhanced Application Development</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="../site_libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="../site_libs/revealjs/dist/reveal.css">
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+      vertical-align: middle;
+    }
+    /* CSS for syntax highlighting */
+    html { -webkit-text-size-adjust: 100%; }
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+      }
+    pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+    div.sourceCode
+      { color: #f8f8f2;  }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #f8f8f2; } /* Normal */
+    code span.al { color: #f07178; } /* Alert */
+    code span.an { color: #d4d0ab; } /* Annotation */
+    code span.at { color: #00e0e0; } /* Attribute */
+    code span.bn { color: #d4d0ab; } /* BaseN */
+    code span.bu { color: #abe338; } /* BuiltIn */
+    code span.cf { color: #ffa07a; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #abe338; } /* Char */
+    code span.cn { color: #ffd700; } /* Constant */
+    code span.co { color: #f8f8f2; font-style: italic; } /* Comment */
+    code span.cv { color: #ffd700; } /* CommentVar */
+    code span.do { color: #f8f8f2; } /* Documentation */
+    code span.dt { color: #ffa07a; } /* DataType */
+    code span.dv { color: #d4d0ab; } /* DecVal */
+    code span.er { color: #f07178; text-decoration: underline; } /* Error */
+    code span.ex { color: #00e0e0; font-weight: bold; } /* Extension */
+    code span.fl { color: #d4d0ab; } /* Float */
+    code span.fu { color: #ffa07a; } /* Function */
+    code span.im { color: #abe338; } /* Import */
+    code span.in { color: #d4d0ab; } /* Information */
+    code span.kw { color: #ffa07a; font-weight: bold; } /* Keyword */
+    code span.op { color: #ffa07a; } /* Operator */
+    code span.ot { color: #00e0e0; } /* Other */
+    code span.pp { color: #dcc6e0; } /* Preprocessor */
+    code span.re { color: #00e0e0; background-color: #f8f8f2; } /* RegionMarker */
+    code span.sc { color: #abe338; } /* SpecialChar */
+    code span.ss { color: #abe338; } /* SpecialString */
+    code span.st { color: #abe338; } /* String */
+    code span.va { color: #00e0e0; } /* Variable */
+    code span.vs { color: #abe338; } /* VerbatimString */
+    code span.wa { color: #dcc6e0; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto-a1d3734469117662d4af4794742e8c15.css">
+  <link rel="stylesheet" href="custom.css">
+  <link href="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="../site_libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <style type="text/css">
+    .reveal div.sourceCode {
+      margin: 0;
+      overflow: auto;
+    }
+    .reveal div.hanging-indent {
+      margin-left: 1em;
+      text-indent: -1em;
+    }
+    .reveal .slide:not(.center) {
+      height: 100%;
+      overflow-y: auto;
+    }
+    .reveal .slide.scrollable {
+      overflow-y: auto;
+    }
+    .reveal .footnotes {
+      height: 100%;
+      overflow-y: auto;
+    }
+    .reveal .slide .absolute {
+      position: absolute;
+      display: block;
+    }
+    .reveal .footnotes ol {
+      counter-reset: ol;
+      list-style-type: none; 
+      margin-left: 0;
+    }
+    .reveal .footnotes ol li:before {
+      counter-increment: ol;
+      content: counter(ol) ". "; 
+    }
+    .reveal .footnotes ol li > p:first-child {
+      display: inline-block;
+    }
+    .reveal .slide ul,
+    .reveal .slide ol {
+      margin-bottom: 0.5em;
+    }
+    .reveal .slide ul li,
+    .reveal .slide ol li {
+      margin-top: 0.4em;
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide ul[role="tablist"] li {
+      margin-bottom: 0;
+    }
+    .reveal .slide ul li > *:first-child,
+    .reveal .slide ol li > *:first-child {
+      margin-block-start: 0;
+    }
+    .reveal .slide ul li > *:last-child,
+    .reveal .slide ol li > *:last-child {
+      margin-block-end: 0;
+    }
+    .reveal .slide .columns:nth-child(3) {
+      margin-block-start: 0.8em;
+    }
+    .reveal blockquote {
+      box-shadow: none;
+    }
+    .reveal .tippy-content>* {
+      margin-top: 0.2em;
+      margin-bottom: 0.7em;
+    }
+    .reveal .tippy-content>*:last-child {
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide > img.stretch.quarto-figure-center,
+    .reveal .slide > img.r-stretch.quarto-figure-center {
+      display: block;
+      margin-left: auto;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-left,
+    .reveal .slide > img.r-stretch.quarto-figure-left  {
+      display: block;
+      margin-left: 0;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-right,
+    .reveal .slide > img.r-stretch.quarto-figure-right  {
+      display: block;
+      margin-left: auto;
+      margin-right: 0; 
+    }
+  </style>
+</head>
+<body class="quarto-dark">
+  <div class="reveal">
+    <div class="slides">
+
+<section id="title-slide" class="quarto-title-block center">
+  <h1 class="title">IS4010: AI-Enhanced Application Development</h1>
+  <p class="subtitle">Week 11: Structuring Code and Data in Rust</p>
+
+<div class="quarto-title-authors">
+<div class="quarto-title-author">
+<div class="quarto-title-author-name">
+Brandon M. Greenwell 
+</div>
+</div>
+</div>
+
+</section>
+<section id="session-1-organizing-code-and-custom-types" class="slide level2">
+<h2>Session 1: Organizing Code and Custom Types</h2>
+<aside class="notes">
+<p>This week builds directly on ownership fundamentals from Week 10. Students now know how memory works in Rust - today they learn how to structure programs and data. Start with motivation: “You can write Rust code - now let’s organize it like professionals do.”</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="from-small-scripts-to-real-programs" class="slide level2">
+<h2>From small scripts to real programs</h2>
+<ul>
+<li class="fragment">So far, we’ve written small <a href="https://www.rust-lang.org/">Rust</a> programs in a single <code>main.rs</code> file</li>
+<li class="fragment">Real applications need <strong>organization</strong>: separate files, logical grouping, reusable components</li>
+<li class="fragment"><a href="https://www.rust-lang.org/">Rust</a>’s <a href="https://doc.rust-lang.org/book/ch07-00-managing-growing-projects-with-packages-crates-and-modules.html">module system</a> provides powerful tools for structuring code</li>
+<li class="fragment">Today we learn how professionals organize <a href="https://www.rust-lang.org/">Rust</a> projects</li>
+</ul>
+<aside class="notes">
+<p>Transition from “can you write Rust?” to “can you organize Rust?” Students have the fundamentals - now we scale up to real programs. The module system is Rust’s answer to organization.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="the-rust-module-system-hierarchy" class="slide level2 scrollable">
+<h2>The Rust module system hierarchy</h2>
+<p><strong>Three levels of organization:</strong></p>
+<ol type="1">
+<li class="fragment"><strong><a href="https://doc.rust-lang.org/book/ch07-01-packages-and-crates.html">Packages</a></strong> - A <a href="https://doc.rust-lang.org/cargo/">Cargo</a> feature that builds, tests, and shares crates</li>
+<li class="fragment"><strong><a href="https://doc.rust-lang.org/book/ch07-01-packages-and-crates.html">Crates</a></strong> - A tree of modules that produces a library or executable</li>
+<li class="fragment"><strong><a href="https://doc.rust-lang.org/book/ch07-02-defining-modules-to-control-scope-and-privacy.html">Modules</a></strong> - Let you control organization, scope, and privacy</li>
+</ol>
+<p><strong>Think of it like:</strong> Package = project, Crate = building, Modules = rooms</p>
+<aside class="notes">
+<p>The hierarchy confuses newcomers. Use the building analogy: package is the whole project, crate is a library or binary, modules are logical divisions. We’ll focus on modules today since that’s what students will use most.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="creating-modules-with-mod" class="slide level2">
+<h2>Creating modules with <a href="https://doc.rust-lang.org/book/ch07-02-defining-modules-to-control-scope-and-privacy.html"><code>mod</code></a></h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb1-1"><a></a><span class="co">// src/main.rs</span></span>
+<span id="cb1-2"><a></a></span>
+<span id="cb1-3"><a></a><span class="kw">mod</span> math <span class="op">{</span>  <span class="co">// Define a module named 'math'</span></span>
+<span id="cb1-4"><a></a></span>
+<span id="cb1-5"><a></a>    <span class="kw">pub</span> <span class="kw">fn</span> add(a<span class="op">:</span> <span class="dt">i32</span><span class="op">,</span> b<span class="op">:</span> <span class="dt">i32</span>) <span class="op">-&gt;</span> <span class="dt">i32</span> <span class="op">{</span>  <span class="co">// 'pub' makes this visible outside the module</span></span>
+<span id="cb1-6"><a></a>        a <span class="op">+</span> b  <span class="co">// Return the sum</span></span>
+<span id="cb1-7"><a></a>    <span class="op">}</span></span>
+<span id="cb1-8"><a></a></span>
+<span id="cb1-9"><a></a>    <span class="kw">fn</span> subtract(a<span class="op">:</span> <span class="dt">i32</span><span class="op">,</span> b<span class="op">:</span> <span class="dt">i32</span>) <span class="op">-&gt;</span> <span class="dt">i32</span> <span class="op">{</span>  <span class="co">// No 'pub' = private to this module only</span></span>
+<span id="cb1-10"><a></a>        a <span class="op">-</span> b  <span class="co">// Return the difference</span></span>
+<span id="cb1-11"><a></a>    <span class="op">}</span></span>
+<span id="cb1-12"><a></a><span class="op">}</span></span>
+<span id="cb1-13"><a></a></span>
+<span id="cb1-14"><a></a><span class="kw">fn</span> main() <span class="op">{</span></span>
+<span id="cb1-15"><a></a>    <span class="pp">println!</span>(<span class="st">"2 + 3 = {}"</span><span class="op">,</span> <span class="pp">math::</span>add(<span class="dv">2</span><span class="op">,</span> <span class="dv">3</span>))<span class="op">;</span>  <span class="co">// ✅ Works! add() is public</span></span>
+<span id="cb1-16"><a></a>    <span class="co">// println!("5 - 2 = {}", math::subtract(5, 2));  // ❌ ERROR: subtract() is private!</span></span>
+<span id="cb1-17"><a></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><a href="https://play.rust-lang.org/?version=stable&amp;mode=debug&amp;edition=2021&amp;code=mod+math+%7B++%2F%2F+Define+a+module+named+%27math%27%0A++++pub+fn+add%28a%3A+i32%2C+b%3A+i32%29+-%3E+i32+%7B++%2F%2F+%27pub%27+makes+this+visible+outside+the+module%0A++++++++a+%2B+b++%2F%2F+Return+the+sum%0A++++%7D%0A++++%0A++++fn+subtract%28a%3A+i32%2C+b%3A+i32%29+-%3E+i32+%7B++%2F%2F+No+%27pub%27+%3D+private+to+this+module+only%0A++++++++a+-+b++%2F%2F+Return+the+difference%0A++++%7D%0A%7D%0A%0Afn+main%28%29+%7B%0A++++println%21%28%222+%2B+3+%3D+%7B%7D%22%2C+math%3A%3Aadd%282%2C+3%29%29%3B++%2F%2F+%E2%9C%85+Works%21+add%28%29+is+public%0A++++%2F%2F+println%21%28%225+-+2+%3D+%7B%7D%22%2C+math%3A%3Asubtract%285%2C+2%29%29%3B++%2F%2F+%E2%9D%8C+ERROR%3A+subtract%28%29+is+private%21%0A%7D">Try it in Rust Playground</a></p>
+<aside class="notes">
+<p>Show module definition with mod. Explain pub keyword - everything is private by default. Show the path syntax with ::. Have students try calling math::subtract() in the Playground to see the error. Then have them change subtract to pub and see it work. This simple example teaches the core concept clearly.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="privacy-in-rust-default-private" class="slide level2">
+<h2>Privacy in Rust: default private</h2>
+<ul>
+<li class="fragment"><strong>Everything is private by default</strong> in <a href="https://www.rust-lang.org/">Rust</a> modules</li>
+<li class="fragment">Use <a href="https://doc.rust-lang.org/book/ch07-03-paths-for-referring-to-an-item-in-the-module-tree.html#exposing-paths-with-the-pub-keyword"><code>pub</code></a> keyword to make items public</li>
+<li class="fragment">Privacy rules:
+<ul>
+<li class="fragment">Parent modules can’t see into child private items</li>
+<li class="fragment">Child modules can see everything in parent modules</li>
+<li class="fragment">Sibling modules can see each other’s public items</li>
+</ul></li>
+<li class="fragment">This is <strong>defensive design</strong> - explicit about your public API</li>
+</ul>
+<aside class="notes">
+<p>Contrast with Python where everything is public by convention. Rust enforces privacy at compile time. This prevents accidental dependencies on internal implementation details. It’s about intentional design.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="quick-rule-of-thumb-when-do-you-need-pub" class="slide level2">
+<h2>Quick rule of thumb: when do you need <code>pub</code>? 🤔</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><strong>✅ Use <code>pub</code> when accessed from:</strong></p>
+<ul>
+<li>A <strong>parent module</strong></li>
+<li>A <strong>sibling’s child module</strong></li>
+<li><strong>Outside the crate</strong></li>
+</ul>
+<p><em>Example: Public API functions, structs used by other modules</em></p>
+</div><div class="column" style="width:50%;">
+<p><strong>❌ No <code>pub</code> needed when accessed from:</strong></p>
+<ul>
+<li>The <strong>same module</strong></li>
+<li>Its <strong>child modules</strong></li>
+</ul>
+<p><em>Example: Helper functions, internal implementation details</em></p>
+</div></div>
+<aside class="notes">
+<p>This is the practical guidance students need. Most confusion comes from not understanding the scope. Key insight: child modules have access to parent’s private items (unusual compared to other languages), but parents don’t have access to children’s private items (this is normal). When in doubt, try compiling without pub first - the compiler will tell you if you need it!</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="example-pub-visibility-in-action" class="slide level2">
+<h2>Example: <code>pub</code> visibility in action</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb2-1"><a></a><span class="kw">mod</span> calculator <span class="op">{</span>  <span class="co">// Parent module</span></span>
+<span id="cb2-2"><a></a></span>
+<span id="cb2-3"><a></a>    <span class="kw">fn</span> validate_inputs(a<span class="op">:</span> <span class="dt">i32</span><span class="op">,</span> b<span class="op">:</span> <span class="dt">i32</span>) <span class="op">-&gt;</span> <span class="dt">bool</span> <span class="op">{</span>  <span class="co">// ❌ No pub - internal helper only</span></span>
+<span id="cb2-4"><a></a>        b <span class="op">!=</span> <span class="dv">0</span>  <span class="co">// Make sure we're not dividing by zero</span></span>
+<span id="cb2-5"><a></a>    <span class="op">}</span></span>
+<span id="cb2-6"><a></a></span>
+<span id="cb2-7"><a></a>    <span class="kw">pub</span> <span class="kw">mod</span> operations <span class="op">{</span>  <span class="co">// ✅ pub - main() needs to access this module</span></span>
+<span id="cb2-8"><a></a></span>
+<span id="cb2-9"><a></a>        <span class="kw">pub</span> <span class="kw">fn</span> divide(a<span class="op">:</span> <span class="dt">i32</span><span class="op">,</span> b<span class="op">:</span> <span class="dt">i32</span>) <span class="op">-&gt;</span> <span class="dt">i32</span> <span class="op">{</span>  <span class="co">// ✅ pub - public API function</span></span>
+<span id="cb2-10"><a></a>            <span class="cf">if</span> <span class="kw">super</span><span class="pp">::</span>validate_inputs(a<span class="op">,</span> b) <span class="op">{</span>  <span class="co">// ✅ Child can access parent's private!</span></span>
+<span id="cb2-11"><a></a>                a <span class="op">/</span> b  <span class="co">// Do the division</span></span>
+<span id="cb2-12"><a></a>            <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></span>
+<span id="cb2-13"><a></a>                <span class="dv">0</span>  <span class="co">// Return 0 for invalid inputs (simplified error handling)</span></span>
+<span id="cb2-14"><a></a>            <span class="op">}</span></span>
+<span id="cb2-15"><a></a>        <span class="op">}</span></span>
+<span id="cb2-16"><a></a></span>
+<span id="cb2-17"><a></a>        <span class="kw">fn</span> log_operation(msg<span class="op">:</span> <span class="op">&amp;</span><span class="dt">str</span>) <span class="op">{</span>  <span class="co">// ❌ Private - internal to operations only</span></span>
+<span id="cb2-18"><a></a>            <span class="pp">println!</span>(<span class="st">"LOG: {}"</span><span class="op">,</span> msg)<span class="op">;</span>  <span class="co">// Internal logging</span></span>
+<span id="cb2-19"><a></a>        <span class="op">}</span></span>
+<span id="cb2-20"><a></a>    <span class="op">}</span></span>
+<span id="cb2-21"><a></a><span class="op">}</span></span>
+<span id="cb2-22"><a></a></span>
+<span id="cb2-23"><a></a><span class="kw">fn</span> main() <span class="op">{</span></span>
+<span id="cb2-24"><a></a>    <span class="pp">println!</span>(<span class="st">"10 / 2 = {}"</span><span class="op">,</span> <span class="pp">calculator::operations::</span>divide(<span class="dv">10</span><span class="op">,</span> <span class="dv">2</span>))<span class="op">;</span>  <span class="co">// ✅ Works! Both pub</span></span>
+<span id="cb2-25"><a></a>    <span class="co">// calculator::validate_inputs(10, 2);  // ❌ Error! validate_inputs is private</span></span>
+<span id="cb2-26"><a></a>    <span class="co">// calculator::operations::log_operation("test");  // ❌ Error! log_operation is private</span></span>
+<span id="cb2-27"><a></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><a href="https://play.rust-lang.org/?version=stable&amp;mode=debug&amp;edition=2021&amp;code=mod+calculator+%7B++%2F%2F+Parent+module%0A++++fn+validate_inputs%28a%3A+i32%2C+b%3A+i32%29+-%3E+bool+%7B++%2F%2F+%E2%9D%8C+No+pub+-+internal+helper+only%0A++++++++b+%21%3D+0++%2F%2F+Make+sure+we%27re+not+dividing+by+zero%0A++++%7D%0A++++%0A++++pub+mod+operations+%7B++%2F%2F+%E2%9C%85+pub+-+main%28%29+needs+to+access+this+module%0A++++++++pub+fn+divide%28a%3A+i32%2C+b%3A+i32%29+-%3E+i32+%7B++%2F%2F+%E2%9C%85+pub+-+public+API+function%0A++++++++++++if+super%3A%3Avalidate_inputs%28a%2C+b%29+%7B++%2F%2F+%E2%9C%85+Child+can+access+parent%27s+private%21%0A++++++++++++++++a+%2F+b++%2F%2F+Do+the+division%0A++++++++++++%7D+else+%7B%0A++++++++++++++++0++%2F%2F+Return+0+for+invalid+inputs%0A++++++++++++%7D%0A++++++++%7D%0A++++++++%0A++++++++fn+log_operation%28msg%3A+%26str%29+%7B++%2F%2F+%E2%9D%8C+Private+-+internal+to+operations+only%0A++++++++++++println%21%28%22LOG%3A+%7B%7D%22%2C+msg%29%3B++%2F%2F+Internal+logging%0A++++++++%7D%0A++++%7D%0A%7D%0A%0Afn+main%28%29+%7B%0A++++println%21%28%2210+%2F+2+%3D+%7B%7D%22%2C+calculator%3A%3Aoperations%3A%3Adivide%2810%2C+2%29%29%3B++%2F%2F+%E2%9C%85+Works%21+Both+pub%0A++++%2F%2F+calculator%3A%3Avalidate_inputs%2810%2C+2%29%3B++%2F%2F+%E2%9D%8C+Error%21+validate_inputs+is+private%0A++++%2F%2F+calculator%3A%3Aoperations%3A%3Alog_operation%28%22test%22%29%3B++%2F%2F+%E2%9D%8C+Error%21+log_operation+is+private%0A%7D">Try it in Rust Playground</a></p>
+<aside class="notes">
+<p>Show this code working in the Playground. Then have students uncomment the error lines one at a time to see the errors. Key point: divide() is in a CHILD module (operations) but can call parent’s validate_inputs() with super::. This asymmetry confuses students - child can see parent’s private, but parent can’t see child’s private. Spend time on this concept. The example is deliberately simple (returning 0 for errors) to focus on the visibility rules, not error handling.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="the-use-keyword-bringing-paths-into-scope" class="slide level2">
+<h2>The <a href="https://doc.rust-lang.org/book/ch07-04-bringing-paths-into-scope-with-the-use-keyword.html"><code>use</code></a> keyword: bringing paths into scope</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb3-1"><a></a><span class="kw">mod</span> math <span class="op">{</span>  <span class="co">// Parent module</span></span>
+<span id="cb3-2"><a></a></span>
+<span id="cb3-3"><a></a>    <span class="kw">pub</span> <span class="kw">mod</span> operations <span class="op">{</span>  <span class="co">// Public submodule</span></span>
+<span id="cb3-4"><a></a>        <span class="kw">pub</span> <span class="kw">fn</span> add(a<span class="op">:</span> <span class="dt">i32</span><span class="op">,</span> b<span class="op">:</span> <span class="dt">i32</span>) <span class="op">-&gt;</span> <span class="dt">i32</span> <span class="op">{</span>  <span class="co">// Public function</span></span>
+<span id="cb3-5"><a></a>            a <span class="op">+</span> b  <span class="co">// Return the sum</span></span>
+<span id="cb3-6"><a></a>        <span class="op">}</span></span>
+<span id="cb3-7"><a></a></span>
+<span id="cb3-8"><a></a>        <span class="kw">pub</span> <span class="kw">fn</span> multiply(a<span class="op">:</span> <span class="dt">i32</span><span class="op">,</span> b<span class="op">:</span> <span class="dt">i32</span>) <span class="op">-&gt;</span> <span class="dt">i32</span> <span class="op">{</span>  <span class="co">// Public function</span></span>
+<span id="cb3-9"><a></a>            a <span class="op">*</span> b  <span class="co">// Return the product</span></span>
+<span id="cb3-10"><a></a>        <span class="op">}</span></span>
+<span id="cb3-11"><a></a>    <span class="op">}</span></span>
+<span id="cb3-12"><a></a><span class="op">}</span></span>
+<span id="cb3-13"><a></a></span>
+<span id="cb3-14"><a></a><span class="co">// Bring the operations module into scope with 'use'</span></span>
+<span id="cb3-15"><a></a><span class="kw">use</span> <span class="pp">math::</span>operations<span class="op">;</span></span>
+<span id="cb3-16"><a></a></span>
+<span id="cb3-17"><a></a><span class="kw">fn</span> main() <span class="op">{</span></span>
+<span id="cb3-18"><a></a>    <span class="pp">println!</span>(<span class="st">"2 + 3 = {}"</span><span class="op">,</span> <span class="pp">operations::</span>add(<span class="dv">2</span><span class="op">,</span> <span class="dv">3</span>))<span class="op">;</span>  <span class="co">// ✅ Shorter! Just operations::add</span></span>
+<span id="cb3-19"><a></a>    <span class="pp">println!</span>(<span class="st">"2 * 3 = {}"</span><span class="op">,</span> <span class="pp">operations::</span>multiply(<span class="dv">2</span><span class="op">,</span> <span class="dv">3</span>))<span class="op">;</span>  <span class="co">// Instead of math::operations::multiply</span></span>
+<span id="cb3-20"><a></a>    <span class="co">// Without 'use', we'd need: math::operations::add(2, 3)</span></span>
+<span id="cb3-21"><a></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><a href="https://play.rust-lang.org/?version=stable&amp;mode=debug&amp;edition=2021&amp;code=mod+math+%7B++%2F%2F+Parent+module%0A++++pub+mod+operations+%7B++%2F%2F+Public+submodule%0A++++++++pub+fn+add%28a%3A+i32%2C+b%3A+i32%29+-%3E+i32+%7B++%2F%2F+Public+function%0A++++++++++++a+%2B+b++%2F%2F+Return+the+sum%0A++++++++%7D%0A++++++++%0A++++++++pub+fn+multiply%28a%3A+i32%2C+b%3A+i32%29+-%3E+i32+%7B++%2F%2F+Public+function%0A++++++++++++a+%2A+b++%2F%2F+Return+the+product%0A++++++++%7D%0A++++%7D%0A%7D%0A%0A%2F%2F+Bring+the+operations+module+into+scope+with+%27use%27%0Ause+math%3A%3Aoperations%3B%0A%0Afn+main%28%29+%7B%0A++++println%21%28%222+%2B+3+%3D+%7B%7D%22%2C+operations%3A%3Aadd%282%2C+3%29%29%3B++%2F%2F+%E2%9C%85+Shorter%21+Just+operations%3A%3Aadd%0A++++println%21%28%222+%2A+3+%3D+%7B%7D%22%2C+operations%3A%3Amultiply%282%2C+3%29%29%3B++%2F%2F+Instead+of+math%3A%3Aoperations%3A%3Amultiply%0A++++%2F%2F+Without+%27use%27%2C+we%27d+need%3A+math%3A%3Aoperations%3A%3Aadd%282%2C+3%29%0A%7D">Try it in Rust Playground</a></p>
+<aside class="notes">
+<p>‘use’ is like Python’s import or Java’s import. It creates shortcuts. Note the idiomatic pattern: bring the parent module into scope (operations), not the function itself. This makes it clear where functions come from. Have students try ‘use math::operations::add;’ to see the difference - it’s less clear and goes against Rust conventions.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="separating-modules-into-files" class="slide level2">
+<h2>Separating modules into files</h2>
+<p><strong>Project structure:</strong></p>
+<pre><code>src/
+├── main.rs
+├── math.rs
+└── math/
+    ├── operations.rs
+    └── constants.rs</code></pre>
+<p><strong>In <code>main.rs</code>:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb5-1"><a></a><span class="kw">mod</span> math<span class="op">;</span>  <span class="co">// Tells Rust to look for math.rs (no braces = load from file)</span></span>
+<span id="cb5-2"><a></a></span>
+<span id="cb5-3"><a></a><span class="kw">use</span> <span class="pp">math::</span>operations<span class="op">;</span>  <span class="co">// Import the operations submodule</span></span>
+<span id="cb5-4"><a></a></span>
+<span id="cb5-5"><a></a><span class="kw">fn</span> main() <span class="op">{</span></span>
+<span id="cb5-6"><a></a>    <span class="pp">println!</span>(<span class="st">"{}"</span><span class="op">,</span> <span class="pp">operations::</span>add(<span class="dv">2</span><span class="op">,</span> <span class="dv">3</span>))<span class="op">;</span>  <span class="co">// Use the add function</span></span>
+<span id="cb5-7"><a></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>In <code>math.rs</code>:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb6-1"><a></a><span class="co">// src/math.rs</span></span>
+<span id="cb6-2"><a></a><span class="co">// This file declares what submodules exist under 'math'</span></span>
+<span id="cb6-3"><a></a><span class="kw">pub</span> <span class="kw">mod</span> operations<span class="op">;</span>  <span class="co">// Makes operations public and tells Rust to load math/operations.rs</span></span>
+<span id="cb6-4"><a></a><span class="kw">pub</span> <span class="kw">mod</span> constants<span class="op">;</span>   <span class="co">// Makes constants public and tells Rust to load math/constants.rs</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>In <code>math/operations.rs</code>:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb7-1"><a></a><span class="co">// src/math/operations.rs</span></span>
+<span id="cb7-2"><a></a><span class="co">// This file contains the actual implementation of math operations</span></span>
+<span id="cb7-3"><a></a><span class="kw">pub</span> <span class="kw">fn</span> add(a<span class="op">:</span> <span class="dt">i32</span><span class="op">,</span> b<span class="op">:</span> <span class="dt">i32</span>) <span class="op">-&gt;</span> <span class="dt">i32</span> <span class="op">{</span>  <span class="co">// Public function</span></span>
+<span id="cb7-4"><a></a>    a <span class="op">+</span> b  <span class="co">// Return sum</span></span>
+<span id="cb7-5"><a></a><span class="op">}</span></span>
+<span id="cb7-6"><a></a></span>
+<span id="cb7-7"><a></a><span class="kw">pub</span> <span class="kw">fn</span> multiply(a<span class="op">:</span> <span class="dt">i32</span><span class="op">,</span> b<span class="op">:</span> <span class="dt">i32</span>) <span class="op">-&gt;</span> <span class="dt">i32</span> <span class="op">{</span>  <span class="co">// Public function</span></span>
+<span id="cb7-8"><a></a>    a <span class="op">*</span> b  <span class="co">// Return product</span></span>
+<span id="cb7-9"><a></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>In <code>math/constants.rs</code>:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb8-1"><a></a><span class="co">// src/math/constants.rs</span></span>
+<span id="cb8-2"><a></a><span class="co">// This file defines mathematical constants</span></span>
+<span id="cb8-3"><a></a><span class="kw">pub</span> <span class="kw">const</span> PI<span class="op">:</span> <span class="dt">f64</span> <span class="op">=</span> <span class="dv">3.14159</span><span class="op">;</span>  <span class="co">// Approximation of pi</span></span>
+<span id="cb8-4"><a></a><span class="kw">pub</span> <span class="kw">const</span> E<span class="op">:</span> <span class="dt">f64</span> <span class="op">=</span> <span class="dv">2.71828</span><span class="op">;</span>   <span class="co">// Approximation of Euler's number</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<aside class="notes">
+<p>Real projects split modules into separate files. The ‘mod’ declaration without braces tells Rust to load from a file. This is how professional Rust code is organized. The file system mirrors the module tree. The <code>math.rs</code> file declares the submodules (operations and constants). Students can try this in VS Code - create these files and run cargo build to see it work.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="ai-co-pilot-technique-module-organization" class="slide level2">
+<h2>🤖 AI co-pilot technique: module organization</h2>
+<p>When organizing code into modules, ask your <a href="https://claude.ai/">AI assistant</a>:</p>
+<p><strong>Effective prompts:</strong> - <em>“How should I organize this Rust project into modules? [describe project]”</em> - <em>“What should be public vs private in this module? [paste code]”</em> - <em>“Explain the difference between ‘use’ and ‘mod’ in Rust”</em> - <em>“Help me split this large main.rs into separate modules”</em></p>
+<p><strong>Pro tip:</strong> Ask AI to explain the module tree structure - visualizations help!</p>
+<aside class="notes">
+<p>Module organization is a design skill. AI can suggest logical groupings and explain privacy trade-offs. Students should use AI to learn patterns, not just copy structure. Understanding module design makes code maintainable.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="defining-custom-data-with-struct" class="slide level2 scrollable">
+<h2>Defining custom data with <a href="https://doc.rust-lang.org/book/ch05-00-structs.html"><code>struct</code></a></h2>
+<ul>
+<li class="fragment">A <a href="https://doc.rust-lang.org/book/ch05-01-defining-structs.html"><code>struct</code></a> (structure) groups related data into a single, meaningful type</li>
+<li class="fragment">Like Python classes but <strong>data only</strong> (methods come separately)</li>
+<li class="fragment">Three kinds:
+<ol type="1">
+<li class="fragment"><strong>Named-field structs</strong> - most common</li>
+<li class="fragment"><strong>Tuple structs</strong> - fields accessed by position</li>
+<li class="fragment"><strong>Unit structs</strong> - no fields (rare)</li>
+</ol></li>
+</ul>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb9-1"><a></a><span class="kw">struct</span> User <span class="op">{</span></span>
+<span id="cb9-2"><a></a>    username<span class="op">:</span> <span class="dt">String</span><span class="op">,</span></span>
+<span id="cb9-3"><a></a>    email<span class="op">:</span> <span class="dt">String</span><span class="op">,</span></span>
+<span id="cb9-4"><a></a>    active<span class="op">:</span> <span class="dt">bool</span><span class="op">,</span></span>
+<span id="cb9-5"><a></a>    sign_in_count<span class="op">:</span> <span class="dt">u64</span><span class="op">,</span></span>
+<span id="cb9-6"><a></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<aside class="notes">
+<p>Structs are how you model domain concepts in Rust. Coming from Python, think of them as the data part of a class. The separation of data and behavior is intentional - Rust favors composition.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="creating-struct-instances" class="slide level2">
+<h2>Creating struct instances</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb10-1"><a></a><span class="kw">struct</span> User <span class="op">{</span></span>
+<span id="cb10-2"><a></a>    username<span class="op">:</span> <span class="dt">String</span><span class="op">,</span></span>
+<span id="cb10-3"><a></a>    email<span class="op">:</span> <span class="dt">String</span><span class="op">,</span></span>
+<span id="cb10-4"><a></a>    active<span class="op">:</span> <span class="dt">bool</span><span class="op">,</span></span>
+<span id="cb10-5"><a></a><span class="op">}</span></span>
+<span id="cb10-6"><a></a></span>
+<span id="cb10-7"><a></a><span class="kw">fn</span> main() <span class="op">{</span></span>
+<span id="cb10-8"><a></a>    <span class="kw">let</span> user1 <span class="op">=</span> User <span class="op">{</span></span>
+<span id="cb10-9"><a></a>        email<span class="op">:</span> <span class="dt">String</span><span class="pp">::</span>from(<span class="st">"ada@example.com"</span>)<span class="op">,</span></span>
+<span id="cb10-10"><a></a>        username<span class="op">:</span> <span class="dt">String</span><span class="pp">::</span>from(<span class="st">"ada_lovelace"</span>)<span class="op">,</span></span>
+<span id="cb10-11"><a></a>        active<span class="op">:</span> <span class="cn">true</span><span class="op">,</span></span>
+<span id="cb10-12"><a></a>    <span class="op">};</span></span>
+<span id="cb10-13"><a></a></span>
+<span id="cb10-14"><a></a>    <span class="pp">println!</span>(<span class="st">"Username: {}"</span><span class="op">,</span> user1<span class="op">.</span>username)<span class="op">;</span></span>
+<span id="cb10-15"><a></a></span>
+<span id="cb10-16"><a></a>    <span class="co">// Make mutable to change fields</span></span>
+<span id="cb10-17"><a></a>    <span class="kw">let</span> <span class="kw">mut</span> user2 <span class="op">=</span> User <span class="op">{</span></span>
+<span id="cb10-18"><a></a>        email<span class="op">:</span> <span class="dt">String</span><span class="pp">::</span>from(<span class="st">"grace@example.com"</span>)<span class="op">,</span></span>
+<span id="cb10-19"><a></a>        username<span class="op">:</span> <span class="dt">String</span><span class="pp">::</span>from(<span class="st">"grace_hopper"</span>)<span class="op">,</span></span>
+<span id="cb10-20"><a></a>        active<span class="op">:</span> <span class="cn">true</span><span class="op">,</span></span>
+<span id="cb10-21"><a></a>    <span class="op">};</span></span>
+<span id="cb10-22"><a></a>    user2<span class="op">.</span>email <span class="op">=</span> <span class="dt">String</span><span class="pp">::</span>from(<span class="st">"new_email@example.com"</span>)<span class="op">;</span></span>
+<span id="cb10-23"><a></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><a href="https://play.rust-lang.org/?version=stable&amp;mode=debug&amp;edition=2021&amp;code=struct+User+%7B%0A++++username%3A+String%2C%0A++++email%3A+String%2C%0A++++active%3A+bool%2C%0A%7D%0Afn+main%28%29+%7B%0A++++let+user1+%3D+User+%7B%0A++++++++email%3A+String%3A%3Afrom%28%22ada%40example.com%22%29%2C%0A++++++++username%3A+String%3A%3Afrom%28%22ada_lovelace%22%29%2C%0A++++++++active%3A+true%2C%0A++++%7D%3B%0A++++println%21%28%22Username%3A+%7B%7D%22%2C+user1.username%29%3B%0A%7D">Try it in Rust Playground</a></p>
+<aside class="notes">
+<p><strong>LIVE DEMO</strong>: Create a struct instance. Show that the entire struct must be mutable to change any field - Rust doesn’t have per-field mutability. This is consistent with Rust’s ownership model.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="adding-behavior-with-impl-blocks" class="slide level2">
+<h2>Adding behavior with <a href="https://doc.rust-lang.org/book/ch05-03-method-syntax.html"><code>impl</code></a> blocks</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb11-1"><a></a><span class="kw">struct</span> Rectangle <span class="op">{</span></span>
+<span id="cb11-2"><a></a>    width<span class="op">:</span> <span class="dt">u32</span><span class="op">,</span></span>
+<span id="cb11-3"><a></a>    height<span class="op">:</span> <span class="dt">u32</span><span class="op">,</span></span>
+<span id="cb11-4"><a></a><span class="op">}</span></span>
+<span id="cb11-5"><a></a></span>
+<span id="cb11-6"><a></a><span class="kw">impl</span> Rectangle <span class="op">{</span></span>
+<span id="cb11-7"><a></a>    <span class="co">// Method (takes &amp;self)</span></span>
+<span id="cb11-8"><a></a>    <span class="kw">fn</span> area(<span class="op">&amp;</span><span class="kw">self</span>) <span class="op">-&gt;</span> <span class="dt">u32</span> <span class="op">{</span></span>
+<span id="cb11-9"><a></a>        <span class="kw">self</span><span class="op">.</span>width <span class="op">*</span> <span class="kw">self</span><span class="op">.</span>height</span>
+<span id="cb11-10"><a></a>    <span class="op">}</span></span>
+<span id="cb11-11"><a></a></span>
+<span id="cb11-12"><a></a>    <span class="co">// Associated function (no self) - like a static method</span></span>
+<span id="cb11-13"><a></a>    <span class="kw">fn</span> square(size<span class="op">:</span> <span class="dt">u32</span>) <span class="op">-&gt;</span> Rectangle <span class="op">{</span></span>
+<span id="cb11-14"><a></a>        Rectangle <span class="op">{</span></span>
+<span id="cb11-15"><a></a>            width<span class="op">:</span> size<span class="op">,</span></span>
+<span id="cb11-16"><a></a>            height<span class="op">:</span> size<span class="op">,</span></span>
+<span id="cb11-17"><a></a>        <span class="op">}</span></span>
+<span id="cb11-18"><a></a>    <span class="op">}</span></span>
+<span id="cb11-19"><a></a><span class="op">}</span></span>
+<span id="cb11-20"><a></a></span>
+<span id="cb11-21"><a></a><span class="kw">fn</span> main() <span class="op">{</span></span>
+<span id="cb11-22"><a></a>    <span class="kw">let</span> rect <span class="op">=</span> Rectangle <span class="op">{</span> width<span class="op">:</span> <span class="dv">30</span><span class="op">,</span> height<span class="op">:</span> <span class="dv">50</span> <span class="op">};</span></span>
+<span id="cb11-23"><a></a>    <span class="pp">println!</span>(<span class="st">"Area: {}"</span><span class="op">,</span> rect<span class="op">.</span>area())<span class="op">;</span></span>
+<span id="cb11-24"><a></a></span>
+<span id="cb11-25"><a></a>    <span class="kw">let</span> sq <span class="op">=</span> <span class="pp">Rectangle::</span>square(<span class="dv">10</span>)<span class="op">;</span></span>
+<span id="cb11-26"><a></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><a href="https://play.rust-lang.org/?version=stable&amp;mode=debug&amp;edition=2021&amp;code=struct+Rectangle+%7B%0A++++width%3A+u32%2C%0A++++height%3A+u32%2C%0A%7D%0Aimpl+Rectangle+%7B%0A++++fn+area%28%26self%29+-%3E+u32+%7B%0A++++++++self.width+*+self.height%0A++++%7D%0A++++fn+square%28size%3A+u32%29+-%3E+Rectangle+%7B%0A++++++++Rectangle+%7B+width%3A+size%2C+height%3A+size+%7D%0A++++%7D%0A%7D%0Afn+main%28%29+%7B%0A++++let+rect+%3D+Rectangle+%7B+width%3A+30%2C+height%3A+50+%7D%3B%0A++++println%21%28%22Area%3A+%7B%7D%22%2C+rect.area%28%29%29%3B%0A++++let+sq+%3D+Rectangle%3A%3Asquare%28%2810%29%3B%0A%7D">Try it in Rust Playground</a></p>
+<aside class="notes">
+<p>impl blocks add methods to structs. Methods take self (or &amp;self or &amp;mut self). Associated functions don’t take self - they’re like constructors or static methods. You can have multiple impl blocks for organization.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="modeling-choices-with-enum" class="slide level2">
+<h2>Modeling choices with <a href="https://doc.rust-lang.org/book/ch06-00-enums.html"><code>enum</code></a></h2>
+<ul>
+<li class="fragment">An <a href="https://doc.rust-lang.org/book/ch06-01-defining-an-enum.html"><code>enum</code></a> (enumeration) represents a value that can be one of several variants</li>
+<li class="fragment"><strong>Much more powerful</strong> than enums in <a href="https://en.cppreference.com/w/c">C</a>, <a href="https://www.java.com/">Java</a>, or <a href="https://www.python.org/">Python</a></li>
+<li class="fragment">Each variant can hold different types of data</li>
+<li class="fragment">Perfect for modeling “this OR that OR that” situations</li>
+</ul>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb12-1"><a></a><span class="kw">enum</span> Shape <span class="op">{</span>  <span class="co">// Define an enum to represent different geometric shapes</span></span>
+<span id="cb12-2"><a></a>    Circle(<span class="dt">f64</span>)<span class="op">,</span>              <span class="co">// Circle variant holds radius</span></span>
+<span id="cb12-3"><a></a>    Rectangle(<span class="dt">f64</span><span class="op">,</span> <span class="dt">f64</span>)<span class="op">,</span>      <span class="co">// Rectangle holds width and height</span></span>
+<span id="cb12-4"><a></a>    Triangle(<span class="dt">f64</span><span class="op">,</span> <span class="dt">f64</span>)<span class="op">,</span>       <span class="co">// Triangle holds base and height</span></span>
+<span id="cb12-5"><a></a><span class="op">}</span></span>
+<span id="cb12-6"><a></a></span>
+<span id="cb12-7"><a></a><span class="co">// Create instances of different shapes</span></span>
+<span id="cb12-8"><a></a><span class="kw">let</span> circle <span class="op">=</span> <span class="pp">Shape::</span>Circle(<span class="dv">5.0</span>)<span class="op">;</span>                    <span class="co">// Circle with radius 5.0</span></span>
+<span id="cb12-9"><a></a><span class="kw">let</span> rectangle <span class="op">=</span> <span class="pp">Shape::</span>Rectangle(<span class="dv">4.0</span><span class="op">,</span> <span class="dv">6.0</span>)<span class="op">;</span>         <span class="co">// Rectangle 4.0 × 6.0</span></span>
+<span id="cb12-10"><a></a><span class="kw">let</span> triangle <span class="op">=</span> <span class="pp">Shape::</span>Triangle(<span class="dv">3.0</span><span class="op">,</span> <span class="dv">8.0</span>)<span class="op">;</span>           <span class="co">// Triangle with base 3.0, height 8.0</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><a href="https://play.rust-lang.org/?version=stable&amp;mode=debug&amp;edition=2021&amp;code=enum+Shape+%7B%0A++++Circle%28f64%29%2C%0A++++Rectangle%28f64%2C+f64%29%2C%0A++++Triangle%28f64%2C+f64%29%2C%0A%7D%0A%0Afn+main%28%29+%7B%0A++++let+circle+%3D+Shape%3A%3ACircle%285.0%29%3B%0A++++let+rectangle+%3D+Shape%3A%3ARectangle%284.0%2C+6.0%29%3B%0A++++let+triangle+%3D+Shape%3A%3ATriangle%283.0%2C+8.0%29%3B%0A++++%0A++++println%21%28%22Created+three+shapes%21%22%29%3B%0A%7D">Try it in Rust Playground</a></p>
+<aside class="notes">
+<p>Rust enums are algebraic data types - incredibly powerful! Each variant can hold different amounts and types of data. Circle needs one dimension (radius), Rectangle needs two (width, height), Triangle needs two (base, height). This is the perfect use case for enums - same concept (shape) but different data structure. This is much more powerful than C-style enums which are just named integers.</p>
+<p><strong>Computer science terminology</strong>: Rust enums are “sum types” or “tagged unions” from functional programming. They encode different states and their associated data within a single type, which the compiler checks exhaustively. The Shape example clearly shows this - each variant is mutually exclusive (a shape is a circle OR rectangle OR triangle, never multiple at once).</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="pattern-matching-with-match" class="slide level2">
+<h2>Pattern matching with <a href="https://doc.rust-lang.org/book/ch06-02-match.html"><code>match</code></a></h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb13-1"><a></a><span class="kw">enum</span> Shape <span class="op">{</span>  <span class="co">// Define different geometric shapes</span></span>
+<span id="cb13-2"><a></a>    Circle(<span class="dt">f64</span>)<span class="op">,</span>              <span class="co">// Circle holds radius</span></span>
+<span id="cb13-3"><a></a>    Rectangle(<span class="dt">f64</span><span class="op">,</span> <span class="dt">f64</span>)<span class="op">,</span>      <span class="co">// Rectangle holds width and height</span></span>
+<span id="cb13-4"><a></a>    Triangle(<span class="dt">f64</span><span class="op">,</span> <span class="dt">f64</span>)<span class="op">,</span>       <span class="co">// Triangle holds base and height</span></span>
+<span id="cb13-5"><a></a><span class="op">}</span></span>
+<span id="cb13-6"><a></a></span>
+<span id="cb13-7"><a></a><span class="kw">fn</span> area(shape<span class="op">:</span> Shape) <span class="op">-&gt;</span> <span class="dt">f64</span> <span class="op">{</span>  <span class="co">// Calculate area for any shape</span></span>
+<span id="cb13-8"><a></a>    <span class="cf">match</span> shape <span class="op">{</span>  <span class="co">// Pattern match on the shape variant</span></span>
+<span id="cb13-9"><a></a>        <span class="pp">Shape::</span>Circle(r) <span class="op">=&gt;</span> <span class="op">{</span>  <span class="co">// Extract radius from Circle</span></span>
+<span id="cb13-10"><a></a>            <span class="pp">println!</span>(<span class="st">"Calculating area of circle with radius {}"</span><span class="op">,</span> r)<span class="op">;</span></span>
+<span id="cb13-11"><a></a>            <span class="dv">3.14159</span> <span class="op">*</span> r <span class="op">*</span> r  <span class="co">// Formula: πr²</span></span>
+<span id="cb13-12"><a></a>        <span class="op">}</span></span>
+<span id="cb13-13"><a></a>        <span class="pp">Shape::</span>Rectangle(w<span class="op">,</span> h) <span class="op">=&gt;</span> <span class="op">{</span>  <span class="co">// Extract width and height</span></span>
+<span id="cb13-14"><a></a>            w <span class="op">*</span> h  <span class="co">// Formula: width × height</span></span>
+<span id="cb13-15"><a></a>        <span class="op">}</span></span>
+<span id="cb13-16"><a></a>        <span class="pp">Shape::</span>Triangle(b<span class="op">,</span> h) <span class="op">=&gt;</span> <span class="op">{</span>  <span class="co">// Extract base and height</span></span>
+<span id="cb13-17"><a></a>            <span class="dv">0.5</span> <span class="op">*</span> b <span class="op">*</span> h  <span class="co">// Formula: ½ × base × height</span></span>
+<span id="cb13-18"><a></a>        <span class="op">}</span></span>
+<span id="cb13-19"><a></a>    <span class="op">}</span>  <span class="co">// ✅ Compiler ensures we handle ALL variants!</span></span>
+<span id="cb13-20"><a></a><span class="op">}</span></span>
+<span id="cb13-21"><a></a></span>
+<span id="cb13-22"><a></a><span class="kw">fn</span> main() <span class="op">{</span></span>
+<span id="cb13-23"><a></a>    <span class="kw">let</span> circle <span class="op">=</span> <span class="pp">Shape::</span>Circle(<span class="dv">5.0</span>)<span class="op">;</span>  <span class="co">// Create a circle with radius 5.0</span></span>
+<span id="cb13-24"><a></a>    <span class="pp">println!</span>(<span class="st">"Area: {:.2} square units"</span><span class="op">,</span> area(circle))<span class="op">;</span>  <span class="co">// Output: 78.54</span></span>
+<span id="cb13-25"><a></a></span>
+<span id="cb13-26"><a></a>    <span class="kw">let</span> rect <span class="op">=</span> <span class="pp">Shape::</span>Rectangle(<span class="dv">4.0</span><span class="op">,</span> <span class="dv">6.0</span>)<span class="op">;</span>  <span class="co">// Create a 4×6 rectangle</span></span>
+<span id="cb13-27"><a></a>    <span class="pp">println!</span>(<span class="st">"Area: {:.2} square units"</span><span class="op">,</span> area(rect))<span class="op">;</span>  <span class="co">// Output: 24.00</span></span>
+<span id="cb13-28"><a></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><a href="https://play.rust-lang.org/?version=stable&amp;mode=debug&amp;edition=2021&amp;code=enum+Shape+%7B%0A++++Circle%28f64%29%2C%0A++++Rectangle%28f64%2C+f64%29%2C%0A++++Triangle%28f64%2C+f64%29%2C%0A%7D%0A%0Afn+area%28shape%3A+Shape%29+-%3E+f64+%7B%0A++++match+shape+%7B%0A++++++++Shape%3A%3ACircle%28r%29+%3D%3E+%7B%0A++++++++++++println%21%28%22Calculating+area+of+circle+with+radius+%7B%7D%22%2C+r%29%3B%0A++++++++++++3.14159+*+r+*+r%0A++++++++%7D%0A++++++++Shape%3A%3ARectangle%28w%2C+h%29+%3D%3E+w+*+h%2C%0A++++++++Shape%3A%3ATriangle%28b%2C+h%29+%3D%3E+0.5+*+b+*+h%2C%0A++++%7D%0A%7D%0A%0Afn+main%28%29+%7B%0A++++let+circle+%3D+Shape%3A%3ACircle%285.0%29%3B%0A++++println%21%28%22Area%3A+%7B%3A.2%7D+square+units%22%2C+area%28circle%29%29%3B%0A++++%0A++++let+rect+%3D+Shape%3A%3ARectangle%284.0%2C+6.0%29%3B%0A++++println%21%28%22Area%3A+%7B%3A.2%7D+square+units%22%2C+area%28rect%29%29%3B%0A%7D">Try it in Rust Playground</a></p>
+<aside class="notes">
+<p><strong>LIVE DEMO</strong>: This perfectly shows why match with enums is powerful! Each shape needs a different formula - pattern matching makes this natural and safe. The compiler ensures exhaustiveness - you MUST handle every variant. If you add a new shape later, the compiler will force you to update every match statement. Pattern matching extracts the data (radius, width/height, base/height) so you can use it in calculations. This prevents forgotten cases that cause bugs in other languages. Try removing one match arm to see the compiler error!</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="ai-co-pilot-technique-designing-with-structs-and-enums" class="slide level2">
+<h2>🤖 AI co-pilot technique: designing with structs and enums</h2>
+<p>When modeling data, ask your <a href="https://claude.ai/">AI assistant</a>:</p>
+<p><strong>Effective prompts:</strong> - <em>“Should I use a struct or enum for this? [describe data]”</em> - <em>“Help me model a [domain concept] in Rust with structs and enums”</em> - <em>“What fields should this struct have? [describe requirements]”</em> - <em>“Show me how to use match to handle all cases of this enum”</em></p>
+<p><strong>Example:</strong> <em>“I need to model a blog post that can be Draft, Published, or Archived. Each state has different data. How should I structure this in Rust?”</em></p>
+<aside class="notes">
+<p>Data modeling is a design skill. AI can suggest struct vs enum trade-offs and show idiomatic patterns. Ask AI to explain the reasoning, not just provide code. Understanding design choices makes better Rust developers.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="session-2-error-handling-and-collections" class="slide level2">
+<h2>Session 2: Error Handling and Collections</h2>
+<aside class="notes">
+<p>Second session builds on structs/enums. Now we use two special enums (Option and Result) and work with dynamic collections. Emphasize that these aren’t “advanced” - they’re everyday Rust. Tie to ownership from last week.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="the-problem-with-null" class="slide level2">
+<h2>The problem with <code>null</code></h2>
+<ul>
+<li class="fragment">In <a href="https://www.python.org/">Python</a>, <a href="https://www.java.com/">Java</a>, <a href="https://en.cppreference.com/w/">C++</a>, variables can be <code>None</code>/<code>null</code></li>
+<li class="fragment">This causes <strong>billions of dollars in bugs</strong>: <a href="https://www.infoq.com/presentations/Null-References-The-Billion-Dollar-Mistake-Tony-Hoare/">Tony Hoare calls it his “billion-dollar mistake”</a></li>
+<li class="fragment">The problem: you can forget to check for null, causing crashes</li>
+<li class="fragment"><a href="https://www.rust-lang.org/">Rust</a>’s solution: no <code>null</code> - instead, use <a href="https://doc.rust-lang.org/std/option/enum.Option.html"><code>Option&lt;T&gt;</code></a></li>
+</ul>
+<aside class="notes">
+<p>Null reference errors are among the most common bugs. Tony Hoare invented null and regrets it. Rust eliminates this entire category of bugs by making “might not exist” explicit in the type system.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="optiont-handling-optional-values" class="slide level2">
+<h2><a href="https://doc.rust-lang.org/std/option/enum.Option.html"><code>Option&lt;T&gt;</code></a>: handling optional values</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb14-1"><a></a><span class="kw">enum</span> <span class="dt">Option</span><span class="op">&lt;</span>T<span class="op">&gt;</span> <span class="op">{</span></span>
+<span id="cb14-2"><a></a>    <span class="cn">Some</span>(T)<span class="op">,</span></span>
+<span id="cb14-3"><a></a>    <span class="cn">None</span><span class="op">,</span></span>
+<span id="cb14-4"><a></a><span class="op">}</span></span>
+<span id="cb14-5"><a></a></span>
+<span id="cb14-6"><a></a><span class="kw">fn</span> find_user(id<span class="op">:</span> <span class="dt">u32</span>) <span class="op">-&gt;</span> <span class="dt">Option</span><span class="op">&lt;</span><span class="dt">String</span><span class="op">&gt;</span> <span class="op">{</span></span>
+<span id="cb14-7"><a></a>    <span class="cf">if</span> id <span class="op">==</span> <span class="dv">1</span> <span class="op">{</span></span>
+<span id="cb14-8"><a></a>        <span class="cn">Some</span>(<span class="dt">String</span><span class="pp">::</span>from(<span class="st">"Alice"</span>))</span>
+<span id="cb14-9"><a></a>    <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></span>
+<span id="cb14-10"><a></a>        <span class="cn">None</span></span>
+<span id="cb14-11"><a></a>    <span class="op">}</span></span>
+<span id="cb14-12"><a></a><span class="op">}</span></span>
+<span id="cb14-13"><a></a></span>
+<span id="cb14-14"><a></a><span class="kw">fn</span> main() <span class="op">{</span></span>
+<span id="cb14-15"><a></a>    <span class="cf">match</span> find_user(<span class="dv">1</span>) <span class="op">{</span></span>
+<span id="cb14-16"><a></a>        <span class="cn">Some</span>(name) <span class="op">=&gt;</span> <span class="pp">println!</span>(<span class="st">"Found: {}"</span><span class="op">,</span> name)<span class="op">,</span></span>
+<span id="cb14-17"><a></a>        <span class="cn">None</span> <span class="op">=&gt;</span> <span class="pp">println!</span>(<span class="st">"User not found"</span>)<span class="op">,</span></span>
+<span id="cb14-18"><a></a>    <span class="op">}</span></span>
+<span id="cb14-19"><a></a></span>
+<span id="cb14-20"><a></a>    <span class="co">// Shorthand with if let</span></span>
+<span id="cb14-21"><a></a>    <span class="cf">if</span> <span class="kw">let</span> <span class="cn">Some</span>(name) <span class="op">=</span> find_user(<span class="dv">2</span>) <span class="op">{</span></span>
+<span id="cb14-22"><a></a>        <span class="pp">println!</span>(<span class="st">"Found: {}"</span><span class="op">,</span> name)<span class="op">;</span></span>
+<span id="cb14-23"><a></a>    <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></span>
+<span id="cb14-24"><a></a>        <span class="pp">println!</span>(<span class="st">"User not found"</span>)<span class="op">;</span></span>
+<span id="cb14-25"><a></a>    <span class="op">}</span></span>
+<span id="cb14-26"><a></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><a href="https://play.rust-lang.org/?version=stable&amp;mode=debug&amp;edition=2021&amp;code=fn+find_user%28id%3A+u32%29+-%3E+Option%3CString%3E+%7B%0A++++if+id+%3D%3D+1+%7B%0A++++++++Some%28String%3A%3Afrom%28%22Alice%22%29%29%0A++++%7D+else+%7B%0A++++++++None%0A++++%7D%0A%7D%0Afn+main%28%29+%7B%0A++++match+find_user%281%29+%7B%0A++++++++Some%28name%29+%3D%3E+println%21%28%22Found%3A+%7B%7D%22%2C+name%29%2C%0A++++++++None+%3D%3E+println%21%28%22User+not+found%22%29%2C%0A++++%7D%0A%7D">Try it in Rust Playground</a></p>
+<aside class="notes">
+<p><strong>LIVE DEMO</strong>: Show Option in action. The type system forces you to handle the None case - you can’t forget. Show both match and if let patterns. if let is syntactic sugar for matching one pattern and ignoring others.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="resultt-e-recoverable-errors" class="slide level2">
+<h2><a href="https://doc.rust-lang.org/std/result/enum.Result.html"><code>Result&lt;T, E&gt;</code></a>: recoverable errors</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb15-1"><a></a><span class="kw">enum</span> <span class="dt">Result</span><span class="op">&lt;</span>T<span class="op">,</span> E<span class="op">&gt;</span> <span class="op">{</span></span>
+<span id="cb15-2"><a></a>    <span class="cn">Ok</span>(T)<span class="op">,</span></span>
+<span id="cb15-3"><a></a>    <span class="cn">Err</span>(E)<span class="op">,</span></span>
+<span id="cb15-4"><a></a><span class="op">}</span></span>
+<span id="cb15-5"><a></a></span>
+<span id="cb15-6"><a></a><span class="kw">use</span> <span class="pp">std::fs::</span>File<span class="op">;</span></span>
+<span id="cb15-7"><a></a><span class="kw">use</span> <span class="pp">std::io::</span>ErrorKind<span class="op">;</span></span>
+<span id="cb15-8"><a></a></span>
+<span id="cb15-9"><a></a><span class="kw">fn</span> open_config() <span class="op">-&gt;</span> <span class="dt">Result</span><span class="op">&lt;</span>File<span class="op">,</span> <span class="pp">std::io::</span><span class="bu">Error</span><span class="op">&gt;</span> <span class="op">{</span></span>
+<span id="cb15-10"><a></a>    <span class="pp">File::</span>open(<span class="st">"config.txt"</span>)</span>
+<span id="cb15-11"><a></a><span class="op">}</span></span>
+<span id="cb15-12"><a></a></span>
+<span id="cb15-13"><a></a><span class="kw">fn</span> main() <span class="op">{</span></span>
+<span id="cb15-14"><a></a>    <span class="cf">match</span> open_config() <span class="op">{</span></span>
+<span id="cb15-15"><a></a>        <span class="cn">Ok</span>(file) <span class="op">=&gt;</span> <span class="pp">println!</span>(<span class="st">"Opened file successfully"</span>)<span class="op">,</span></span>
+<span id="cb15-16"><a></a>        <span class="cn">Err</span>(error) <span class="op">=&gt;</span> <span class="cf">match</span> error<span class="op">.</span>kind() <span class="op">{</span></span>
+<span id="cb15-17"><a></a>            <span class="pp">ErrorKind::</span>NotFound <span class="op">=&gt;</span> <span class="pp">println!</span>(<span class="st">"File not found!"</span>)<span class="op">,</span></span>
+<span id="cb15-18"><a></a>            other <span class="op">=&gt;</span> <span class="pp">println!</span>(<span class="st">"Error opening file: {:?}"</span><span class="op">,</span> other)<span class="op">,</span></span>
+<span id="cb15-19"><a></a>        <span class="op">},</span></span>
+<span id="cb15-20"><a></a>    <span class="op">}</span></span>
+<span id="cb15-21"><a></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><a href="https://play.rust-lang.org/?version=stable&amp;mode=debug&amp;edition=2021&amp;code=use+std%3A%3Afs%3A%3AFile%3B%0Ause+std%3A%3Aio%3A%3AErrorKind%3B%0Afn+open_config%28%29+-%3E+Result%3CFile%2C+std%3A%3Aio%3A%3AError%3E+%7B%0A++++File%3A%3Aopen%28%22config.txt%22%29%0A%7D%0Afn+main%28%29+%7B%0A++++match+open_config%28%29+%7B%0A++++++++Ok%28file%29+%3D%3E+println%21%28%22Opened+successfully%22%29%2C%0A++++++++Err%28error%29+%3D%3E+println%21%28%22Error%3A+%7B%3A%3F%7D%22%2C+error%29%2C%0A++++%7D%0A%7D">Try it in Rust Playground</a></p>
+<aside class="notes">
+<p>Result is for operations that can fail. Like Option, the type system forces you to handle errors. No more forgotten try/catch! You can nest matches to handle specific error types. This is much safer than exceptions.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="the-operator-error-propagation" class="slide level2">
+<h2>The <a href="https://doc.rust-lang.org/book/ch09-02-recoverable-errors-with-result.html#a-shortcut-for-propagating-errors-the--operator"><code>?</code> operator</a>: error propagation</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb16-1"><a></a><span class="kw">use</span> <span class="pp">std::fs::</span>File<span class="op">;</span></span>
+<span id="cb16-2"><a></a><span class="kw">use</span> <span class="pp">std::io::</span><span class="op">{</span><span class="kw">self</span><span class="op">,</span> <span class="bu">Read</span><span class="op">};</span></span>
+<span id="cb16-3"><a></a></span>
+<span id="cb16-4"><a></a><span class="kw">fn</span> read_username_from_file() <span class="op">-&gt;</span> <span class="dt">Result</span><span class="op">&lt;</span><span class="dt">String</span><span class="op">,</span> <span class="pp">io::</span><span class="bu">Error</span><span class="op">&gt;</span> <span class="op">{</span></span>
+<span id="cb16-5"><a></a>    <span class="kw">let</span> <span class="kw">mut</span> file <span class="op">=</span> <span class="pp">File::</span>open(<span class="st">"username.txt"</span>)<span class="op">?;</span> <span class="co">// ❓ propagates error if Err</span></span>
+<span id="cb16-6"><a></a>    <span class="kw">let</span> <span class="kw">mut</span> username <span class="op">=</span> <span class="dt">String</span><span class="pp">::</span>new()<span class="op">;</span></span>
+<span id="cb16-7"><a></a>    file<span class="op">.</span>read_to_string(<span class="op">&amp;</span><span class="kw">mut</span> username)<span class="op">?;</span>        <span class="co">// ❓ propagates error if Err</span></span>
+<span id="cb16-8"><a></a>    <span class="cn">Ok</span>(username)                                  <span class="co">// ✅ returns Ok if success</span></span>
+<span id="cb16-9"><a></a><span class="op">}</span></span>
+<span id="cb16-10"><a></a></span>
+<span id="cb16-11"><a></a><span class="co">// Without ? operator, this would be:</span></span>
+<span id="cb16-12"><a></a><span class="co">// match File::open("username.txt") {</span></span>
+<span id="cb16-13"><a></a><span class="co">//     Ok(mut file) =&gt; match file.read_to_string(&amp;mut username) {</span></span>
+<span id="cb16-14"><a></a><span class="co">//         Ok(_) =&gt; Ok(username),</span></span>
+<span id="cb16-15"><a></a><span class="co">//         Err(e) =&gt; Err(e),</span></span>
+<span id="cb16-16"><a></a><span class="co">//     },</span></span>
+<span id="cb16-17"><a></a><span class="co">//     Err(e) =&gt; Err(e),</span></span>
+<span id="cb16-18"><a></a><span class="co">// }</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<aside class="notes">
+<p>The ? operator is syntactic sugar for error propagation. If Result is Err, it returns early with that error. If Ok, it unwraps the value and continues. This makes error handling code much cleaner. It’s like try/catch but explicit in types.</p>
+<p><strong>Important constraint</strong>: Remind students that the <code>?</code> operator can only be used inside a function that returns a <code>Result</code> or an <code>Option</code>. The compiler will give an error if you try to use it in a function like <code>main</code> that doesn’t return one of these types (unless you change main’s return type to <code>Result&lt;(), E&gt;</code>).</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="ai-co-pilot-technique-error-handling-patterns" class="slide level2">
+<h2>🤖 AI co-pilot technique: error handling patterns</h2>
+<p>When handling errors, ask your <a href="https://claude.ai/">AI assistant</a>:</p>
+<p><strong>Effective prompts:</strong> - <em>“When should I use Option vs Result in Rust?”</em> - <em>“Help me handle this error idiomatically: [paste code]”</em> - <em>“Explain the ? operator and when I can use it”</em> - <em>“Convert this match error handling to use ? operator”</em></p>
+<p><strong>Pro tip:</strong> Ask AI to show both verbose (match) and concise (? operator) versions to understand what’s happening under the hood.</p>
+<aside class="notes">
+<p>Error handling patterns take practice. AI can show idiomatic approaches and explain trade-offs. Students should understand both match and ? operator - ? is sugar for match patterns. Ask AI to explain, not just provide code.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="common-collections-vect" class="slide level2">
+<h2>Common collections: <a href="https://doc.rust-lang.org/std/vec/struct.Vec.html"><code>Vec&lt;T&gt;</code></a></h2>
+<ul>
+<li class="fragment"><a href="https://doc.rust-lang.org/std/vec/struct.Vec.html"><code>Vec&lt;T&gt;</code></a> (vector) is a <strong>growable array</strong> - like Python’s list</li>
+<li class="fragment">Stores values of the same type</li>
+<li class="fragment">Allocated on the heap (flexible size)</li>
+<li class="fragment">Most common collection in <a href="https://www.rust-lang.org/">Rust</a></li>
+</ul>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb17-1"><a></a><span class="kw">fn</span> main() <span class="op">{</span></span>
+<span id="cb17-2"><a></a>    <span class="co">// Creating vectors</span></span>
+<span id="cb17-3"><a></a>    <span class="kw">let</span> <span class="kw">mut</span> v<span class="op">:</span> <span class="dt">Vec</span><span class="op">&lt;</span><span class="dt">i32</span><span class="op">&gt;</span> <span class="op">=</span> <span class="dt">Vec</span><span class="pp">::</span>new()<span class="op">;</span></span>
+<span id="cb17-4"><a></a>    <span class="kw">let</span> <span class="kw">mut</span> v2 <span class="op">=</span> <span class="pp">vec!</span>[<span class="dv">1</span><span class="op">,</span> <span class="dv">2</span><span class="op">,</span> <span class="dv">3</span>]<span class="op">;</span> <span class="co">// vec! macro for initial values</span></span>
+<span id="cb17-5"><a></a></span>
+<span id="cb17-6"><a></a>    <span class="co">// Adding elements</span></span>
+<span id="cb17-7"><a></a>    v<span class="op">.</span>push(<span class="dv">5</span>)<span class="op">;</span></span>
+<span id="cb17-8"><a></a>    v<span class="op">.</span>push(<span class="dv">6</span>)<span class="op">;</span></span>
+<span id="cb17-9"><a></a></span>
+<span id="cb17-10"><a></a>    <span class="co">// Accessing elements</span></span>
+<span id="cb17-11"><a></a>    <span class="kw">let</span> third <span class="op">=</span> <span class="op">&amp;</span>v2[<span class="dv">2</span>]<span class="op">;</span>         <span class="co">// Panics if out of bounds</span></span>
+<span id="cb17-12"><a></a>    <span class="kw">let</span> maybe_third <span class="op">=</span> v2<span class="op">.</span>get(<span class="dv">2</span>)<span class="op">;</span> <span class="co">// Returns Option&lt;&amp;T&gt;</span></span>
+<span id="cb17-13"><a></a></span>
+<span id="cb17-14"><a></a>    <span class="co">// Iterating</span></span>
+<span id="cb17-15"><a></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="op">&amp;</span>v2 <span class="op">{</span></span>
+<span id="cb17-16"><a></a>        <span class="pp">println!</span>(<span class="st">"{}"</span><span class="op">,</span> i)<span class="op">;</span></span>
+<span id="cb17-17"><a></a>    <span class="op">}</span></span>
+<span id="cb17-18"><a></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><a href="https://play.rust-lang.org/?version=stable&amp;mode=debug&amp;edition=2021&amp;code=fn+main%28%29+%7B%0A++++let+mut+v+%3D+vec%21%5B1%2C+2%2C+3%5D%3B%0A++++v.push%284%29%3B%0A++++for+i+in+%26v+%7B%0A++++++++println%21%28%22%7B%7D%22%2C+i%29%3B%0A++++%7D%0A++++let+third+%3D+%26v%5B2%5D%3B%0A++++println%21%28%22Third%3A+%7B%7D%22%2C+third%29%3B%0A%7D">Try it in Rust Playground</a></p>
+<aside class="notes">
+<p><strong>LIVE DEMO</strong>: Show Vec creation, push, indexing, and iteration. Explain the two ways to access: [] panics if out of bounds, .get() returns Option. This ties back to Option from earlier. Vectors follow ownership rules - you can’t modify while iterating immutably.</p>
+<p><strong>Performance insight</strong>: Mention that when a <code>Vec</code>’s capacity is exceeded, it must perform a new allocation on the heap and copy all existing elements over. For performance-critical code, pre-allocating with <code>Vec::with_capacity</code> can be a useful optimization.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="strings-in-rust-string-vs-str" class="slide level2">
+<h2>Strings in Rust: <a href="https://doc.rust-lang.org/std/string/struct.String.html"><code>String</code></a> vs <a href="https://doc.rust-lang.org/std/primitive.str.html"><code>&amp;str</code></a></h2>
+<ul>
+<li class="fragment"><a href="https://www.rust-lang.org/">Rust</a> has two main string types (not one!):</li>
+<li class="fragment"><strong><a href="https://doc.rust-lang.org/std/string/struct.String.html"><code>String</code></a></strong> - Owned, growable, heap-allocated (like <code>Vec&lt;u8&gt;</code>)</li>
+<li class="fragment"><strong><a href="https://doc.rust-lang.org/std/primitive.str.html"><code>&amp;str</code></a></strong> - String slice, borrowed, immutable view</li>
+<li class="fragment">All strings are <a href="https://en.wikipedia.org/wiki/UTF-8">UTF-8</a> encoded</li>
+</ul>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb18"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb18-1"><a></a><span class="kw">fn</span> main() <span class="op">{</span></span>
+<span id="cb18-2"><a></a>    <span class="co">// String - owned</span></span>
+<span id="cb18-3"><a></a>    <span class="kw">let</span> <span class="kw">mut</span> s <span class="op">=</span> <span class="dt">String</span><span class="pp">::</span>from(<span class="st">"hello"</span>)<span class="op">;</span></span>
+<span id="cb18-4"><a></a>    s<span class="op">.</span>push_str(<span class="st">" world"</span>)<span class="op">;</span> <span class="co">// Can modify</span></span>
+<span id="cb18-5"><a></a></span>
+<span id="cb18-6"><a></a>    <span class="co">// &amp;str - borrowed string slice</span></span>
+<span id="cb18-7"><a></a>    <span class="kw">let</span> slice<span class="op">:</span> <span class="op">&amp;</span><span class="dt">str</span> <span class="op">=</span> <span class="op">&amp;</span>s[<span class="dv">0</span><span class="op">..</span><span class="dv">5</span>]<span class="op">;</span> <span class="co">// "hello"</span></span>
+<span id="cb18-8"><a></a></span>
+<span id="cb18-9"><a></a>    <span class="co">// String literals are &amp;str</span></span>
+<span id="cb18-10"><a></a>    <span class="kw">let</span> literal <span class="op">=</span> <span class="st">"I'm a &amp;str"</span><span class="op">;</span></span>
+<span id="cb18-11"><a></a></span>
+<span id="cb18-12"><a></a>    <span class="co">// Converting</span></span>
+<span id="cb18-13"><a></a>    <span class="kw">let</span> s2<span class="op">:</span> <span class="dt">String</span> <span class="op">=</span> literal<span class="op">.</span>to_string()<span class="op">;</span></span>
+<span id="cb18-14"><a></a>    <span class="kw">let</span> slice2<span class="op">:</span> <span class="op">&amp;</span><span class="dt">str</span> <span class="op">=</span> <span class="op">&amp;</span>s2<span class="op">;</span></span>
+<span id="cb18-15"><a></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><a href="https://play.rust-lang.org/?version=stable&amp;mode=debug&amp;edition=2021&amp;code=fn+main%28%29+%7B%0A++++let+mut+s+%3D+String%3A%3Afrom%28%22hello%22%29%3B%0A++++s.push_str%28%22+world%22%29%3B%0A++++println%21%28%22%7B%7D%22%2C+s%29%3B%0A++++let+slice%3A+%26str+%3D+%26s%5B0..5%5D%3B%0A++++println%21%28%22Slice%3A+%7B%7D%22%2C+slice%29%3B%0A%7D">Try it in Rust Playground</a></p>
+<aside class="notes">
+<p>String vs &amp;str confuses everyone. String is owned data, &amp;str is a view into string data. Think: String is like Vec<u8>, &amp;str is like &amp;[u8]. String literals in code are &amp;str with ’static lifetime. This follows ownership from Week 10.</u8></p>
+<p><strong>Best practice</strong>: Emphasize that functions should almost always accept <code>&amp;str</code> as a parameter instead of <code>String</code>. This is more flexible as you can pass either a <code>String</code> (as <code>&amp;my_string</code>) or a string literal, and it avoids unnecessary memory allocations.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="hashmapk-v-key-value-storage" class="slide level2">
+<h2><a href="https://doc.rust-lang.org/std/collections/struct.HashMap.html"><code>HashMap&lt;K, V&gt;</code></a>: key-value storage</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb19"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb19-1"><a></a><span class="kw">use</span> <span class="pp">std::collections::</span>HashMap<span class="op">;</span></span>
+<span id="cb19-2"><a></a></span>
+<span id="cb19-3"><a></a><span class="kw">fn</span> main() <span class="op">{</span></span>
+<span id="cb19-4"><a></a>    <span class="co">// Creating</span></span>
+<span id="cb19-5"><a></a>    <span class="kw">let</span> <span class="kw">mut</span> scores <span class="op">=</span> <span class="pp">HashMap::</span>new()<span class="op">;</span></span>
+<span id="cb19-6"><a></a></span>
+<span id="cb19-7"><a></a>    <span class="co">// Inserting</span></span>
+<span id="cb19-8"><a></a>    scores<span class="op">.</span>insert(<span class="dt">String</span><span class="pp">::</span>from(<span class="st">"Blue"</span>)<span class="op">,</span> <span class="dv">10</span>)<span class="op">;</span></span>
+<span id="cb19-9"><a></a>    scores<span class="op">.</span>insert(<span class="dt">String</span><span class="pp">::</span>from(<span class="st">"Yellow"</span>)<span class="op">,</span> <span class="dv">50</span>)<span class="op">;</span></span>
+<span id="cb19-10"><a></a></span>
+<span id="cb19-11"><a></a>    <span class="co">// Accessing</span></span>
+<span id="cb19-12"><a></a>    <span class="kw">let</span> team_name <span class="op">=</span> <span class="dt">String</span><span class="pp">::</span>from(<span class="st">"Blue"</span>)<span class="op">;</span></span>
+<span id="cb19-13"><a></a>    <span class="kw">let</span> score <span class="op">=</span> scores<span class="op">.</span>get(<span class="op">&amp;</span>team_name)<span class="op">;</span>  <span class="co">// Returns Option&lt;&amp;V&gt;</span></span>
+<span id="cb19-14"><a></a></span>
+<span id="cb19-15"><a></a>    <span class="cf">match</span> score <span class="op">{</span></span>
+<span id="cb19-16"><a></a>        <span class="cn">Some</span>(<span class="op">&amp;</span>s) <span class="op">=&gt;</span> <span class="pp">println!</span>(<span class="st">"Score: {}"</span><span class="op">,</span> s)<span class="op">,</span></span>
+<span id="cb19-17"><a></a>        <span class="cn">None</span> <span class="op">=&gt;</span> <span class="pp">println!</span>(<span class="st">"Team not found"</span>)<span class="op">,</span></span>
+<span id="cb19-18"><a></a>    <span class="op">}</span></span>
+<span id="cb19-19"><a></a></span>
+<span id="cb19-20"><a></a>    <span class="co">// Iterating</span></span>
+<span id="cb19-21"><a></a>    <span class="cf">for</span> (key<span class="op">,</span> value) <span class="kw">in</span> <span class="op">&amp;</span>scores <span class="op">{</span></span>
+<span id="cb19-22"><a></a>        <span class="pp">println!</span>(<span class="st">"{}: {}"</span><span class="op">,</span> key<span class="op">,</span> value)<span class="op">;</span></span>
+<span id="cb19-23"><a></a>    <span class="op">}</span></span>
+<span id="cb19-24"><a></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><a href="https://play.rust-lang.org/?version=stable&amp;mode=debug&amp;edition=2021&amp;code=use+std%3A%3Acollections%3A%3AHashMap%3B%0Afn+main%28%29+%7B%0A++++let+mut+scores+%3D+HashMap%3A%3Anew%28%29%3B%0A++++scores.insert%28String%3A%3Afrom%28%22Blue%22%29%2C+10%29%3B%0A++++scores.insert%28String%3A%3Afrom%28%22Yellow%22%29%2C+50%29%3B%0A++++for+%28key%2C+value%29+in+%26scores+%7B%0A++++++++println%21%28%22%7B%7D%3A+%7B%7D%22%2C+key%2C+value%29%3B%0A++++%7D%0A%7D">Try it in Rust Playground</a></p>
+<aside class="notes">
+<p><strong>LIVE DEMO</strong>: Show HashMap creation, insertion, and lookup. Note that .get() returns Option - the key might not exist! HashMap owns its keys and values. When you insert, ownership moves into the HashMap. This is consistent with ownership rules.</p>
+<p><strong>Performance insight</strong>: Clarify that <code>HashMap</code> provides <em>amortized O(1)</em> (average constant time) performance for insertions and lookups, which is why it’s so fast. This is a key data structures concept.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="choosing-the-right-collection" class="slide level2">
+<h2>Choosing the right collection</h2>
+<p><strong><a href="https://doc.rust-lang.org/std/vec/struct.Vec.html"><code>Vec&lt;T&gt;</code></a></strong> - Use when: - You need an ordered list - You want to access by index - You’ll add/remove from the end</p>
+<p><strong><a href="https://doc.rust-lang.org/std/string/struct.String.html"><code>String</code></a></strong> - Use when: - You need owned, growable text - Building strings dynamically</p>
+<p><strong><a href="https://doc.rust-lang.org/std/collections/struct.HashMap.html"><code>HashMap&lt;K, V&gt;</code></a></strong> - Use when: - You need key-value lookups - Order doesn’t matter - Fast access by key is important</p>
+<aside class="notes">
+<p>Choosing collections is a design decision. Vec for lists, HashMap for lookups, String for text. These cover 95% of use cases. There are other collections (BTreeMap, HashSet, etc.) but start with these three. Ask yourself: How will I access this data?</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="real-world-example-building-a-phone-book" class="slide level2">
+<h2>Real-world example: building a phone book</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb20"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb20-1"><a></a><span class="kw">use</span> <span class="pp">std::collections::</span>HashMap<span class="op">;</span></span>
+<span id="cb20-2"><a></a></span>
+<span id="cb20-3"><a></a><span class="kw">struct</span> Contact <span class="op">{</span></span>
+<span id="cb20-4"><a></a>    name<span class="op">:</span> <span class="dt">String</span><span class="op">,</span></span>
+<span id="cb20-5"><a></a>    phone<span class="op">:</span> <span class="dt">String</span><span class="op">,</span></span>
+<span id="cb20-6"><a></a>    email<span class="op">:</span> <span class="dt">Option</span><span class="op">&lt;</span><span class="dt">String</span><span class="op">&gt;,</span> <span class="co">// Email is optional</span></span>
+<span id="cb20-7"><a></a><span class="op">}</span></span>
+<span id="cb20-8"><a></a></span>
+<span id="cb20-9"><a></a><span class="kw">fn</span> main() <span class="op">{</span></span>
+<span id="cb20-10"><a></a>    <span class="kw">let</span> <span class="kw">mut</span> phone_book<span class="op">:</span> HashMap<span class="op">&lt;</span><span class="dt">String</span><span class="op">,</span> Contact<span class="op">&gt;</span> <span class="op">=</span> <span class="pp">HashMap::</span>new()<span class="op">;</span></span>
+<span id="cb20-11"><a></a></span>
+<span id="cb20-12"><a></a>    phone_book<span class="op">.</span>insert(</span>
+<span id="cb20-13"><a></a>        <span class="dt">String</span><span class="pp">::</span>from(<span class="st">"Alice"</span>)<span class="op">,</span></span>
+<span id="cb20-14"><a></a>        Contact <span class="op">{</span></span>
+<span id="cb20-15"><a></a>            name<span class="op">:</span> <span class="dt">String</span><span class="pp">::</span>from(<span class="st">"Alice Smith"</span>)<span class="op">,</span></span>
+<span id="cb20-16"><a></a>            phone<span class="op">:</span> <span class="dt">String</span><span class="pp">::</span>from(<span class="st">"555-1234"</span>)<span class="op">,</span></span>
+<span id="cb20-17"><a></a>            email<span class="op">:</span> <span class="cn">Some</span>(<span class="dt">String</span><span class="pp">::</span>from(<span class="st">"alice@example.com"</span>))<span class="op">,</span></span>
+<span id="cb20-18"><a></a>        <span class="op">}</span></span>
+<span id="cb20-19"><a></a>    )<span class="op">;</span></span>
+<span id="cb20-20"><a></a></span>
+<span id="cb20-21"><a></a>    <span class="co">// Look up by name</span></span>
+<span id="cb20-22"><a></a>    <span class="cf">if</span> <span class="kw">let</span> <span class="cn">Some</span>(contact) <span class="op">=</span> phone_book<span class="op">.</span>get(<span class="st">"Alice"</span>) <span class="op">{</span></span>
+<span id="cb20-23"><a></a>        <span class="pp">println!</span>(<span class="st">"Phone: {}"</span><span class="op">,</span> contact<span class="op">.</span>phone)<span class="op">;</span></span>
+<span id="cb20-24"><a></a>        <span class="cf">if</span> <span class="kw">let</span> <span class="cn">Some</span>(email) <span class="op">=</span> <span class="op">&amp;</span>contact<span class="op">.</span>email <span class="op">{</span></span>
+<span id="cb20-25"><a></a>            <span class="pp">println!</span>(<span class="st">"Email: {}"</span><span class="op">,</span> email)<span class="op">;</span></span>
+<span id="cb20-26"><a></a>        <span class="op">}</span></span>
+<span id="cb20-27"><a></a>    <span class="op">}</span></span>
+<span id="cb20-28"><a></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><a href="https://play.rust-lang.org/?version=stable&amp;mode=debug&amp;edition=2021&amp;code=use+std%3A%3Acollections%3A%3AHashMap%3B%0Astruct+Contact+%7B%0A++++name%3A+String%2C%0A++++phone%3A+String%2C%0A++++email%3A+Option%3CString%3E%2C%0A%7D%0Afn+main%28%29+%7B%0A++++let+mut+phone_book%3A+HashMap%3CString%2C+Contact%3E+%3D+HashMap%3A%3Anew%28%29%3B%0A++++phone_book.insert%28%0A++++++++String%3A%3Afrom%28%22Alice%22%29%2C%0A++++++++Contact+%7B%0A++++++++++++name%3A+String%3A%3Afrom%28%22Alice+Smith%22%29%2C%0A++++++++++++phone%3A+String%3A%3Afrom%28%22555-1234%22%29%2C%0A++++++++++++email%3A+Some%28String%3A%3Afrom%28%22alice%40example.com%22%29%29%2C%0A++++++++%7D%0A++++%29%3B%0A++++if+let+Some%28contact%29+%3D+phone_book.get%28%22Alice%22%29+%7B%0A++++++++println%21%28%22Phone%3A+%7B%7D%22%2C+contact.phone%29%3B%0A++++%7D%0A%7D">Try it in Rust Playground</a></p>
+<aside class="notes">
+<p>This example ties everything together: struct for Contact, Option for optional email, HashMap for storage, if let for handling Options. This is how real Rust programs are structured. Show students this is production-quality code.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="ai-co-pilot-technique-working-with-collections" class="slide level2">
+<h2>🤖 AI co-pilot technique: working with collections</h2>
+<p>When using collections, ask your <a href="https://claude.ai/">AI assistant</a>:</p>
+<p><strong>Effective prompts:</strong> - <em>“Which Rust collection should I use for [describe use case]?”</em> - <em>“Help me convert this Python list comprehension to Rust: [paste code]”</em> - <em>“Show me how to iterate over a HashMap in Rust”</em> - <em>“How do I handle the Option returned by HashMap.get()?”</em> - <em>“What’s the difference between Vec::push and Vec::append?”</em></p>
+<p><strong>Example:</strong> <em>“I have a list of user IDs and need fast lookup. Should I use Vec or HashMap?”</em></p>
+<aside class="notes">
+<p>Collections have many methods. AI can help find the right one and show idiomatic patterns. Students should ask AI to explain trade-offs (Vec vs HashMap performance), not just provide syntax. Understanding when to use each collection is key.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="introducing-lab-11-data-modeling-challenge" class="slide level2 scrollable">
+<h2>Introducing Lab 11: data modeling challenge</h2>
+<p><strong>This week’s lab has three parts:</strong></p>
+<ol type="1">
+<li class="fragment"><strong>Structs and Enums</strong>
+<ul>
+<li class="fragment">Model a library system with custom types</li>
+<li class="fragment">Use structs for Book/DVD data</li>
+<li class="fragment">Use enums for ItemStatus (Available/CheckedOut)</li>
+</ul></li>
+<li class="fragment"><strong>Error Handling</strong>
+<ul>
+<li class="fragment">Return <code>Result</code> from functions that can fail</li>
+<li class="fragment">Use <code>Option</code> for optional data</li>
+<li class="fragment">Practice the <code>?</code> operator</li>
+</ul></li>
+<li class="fragment"><strong>Collections in Action</strong>
+<ul>
+<li class="fragment">Store items in <code>Vec&lt;T&gt;</code></li>
+<li class="fragment">Build <code>HashMap&lt;K, V&gt;</code> for fast lookups</li>
+<li class="fragment">Iterate and search</li>
+</ul></li>
+</ol>
+<p><strong>Full instructions:</strong> <code>week11/lab11.md</code></p>
+<aside class="notes">
+<p>Lab 11 applies everything from today. Students will design data structures, handle errors properly, and use collections. This is practical Rust - the kind they’ll write in real projects. Emphasize that this builds on ownership from last week.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="career-relevance-production-rust-patterns" class="slide level2">
+<h2>Career relevance: production Rust patterns</h2>
+<p><strong>What you learned today is used daily in industry:</strong></p>
+<ul>
+<li class="fragment"><strong><a href="https://discord.com/blog/why-discord-is-switching-from-go-to-rust">Discord</a></strong> - Structs for message data, enums for event types</li>
+<li class="fragment"><strong><a href="https://dropbox.tech/infrastructure/rewriting-the-heart-of-our-sync-engine">Dropbox</a></strong> - Result for error handling, HashMap for file tracking</li>
+<li class="fragment"><strong><a href="https://blog.cloudflare.com/how-we-built-pingora-the-proxy-that-connects-cloudflare-to-the-internet/">Cloudflare</a></strong> - Vec for request queues, modules for organization</li>
+</ul>
+<p><strong>Interview topics:</strong> - “How does Rust handle errors differently than exceptions?” - “When would you use an enum instead of inheritance?” - “Explain Option vs Result”</p>
+<aside class="notes">
+<p>These patterns aren’t academic - they’re production Rust. Companies choose Rust partly because of these features (Result vs exceptions, enums vs inheritance). Students learning these concepts now are learning industry standards.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="preview-youve-been-using-generics" class="slide level2 inverse">
+<h2>Preview: You’ve Been Using Generics!</h2>
+<p><strong>Notice the angle brackets?</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb21"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb21-1"><a></a><span class="kw">let</span> <span class="kw">mut</span> numbers<span class="op">:</span> <span class="dt">Vec</span><span class="op">&lt;</span><span class="dt">i32</span><span class="op">&gt;</span> <span class="op">=</span> <span class="dt">Vec</span><span class="pp">::</span>new()<span class="op">;</span></span>
+<span id="cb21-2"><a></a><span class="kw">let</span> result<span class="op">:</span> <span class="dt">Result</span><span class="op">&lt;</span><span class="dt">String</span><span class="op">,</span> <span class="pp">io::</span><span class="bu">Error</span><span class="op">&gt;</span> <span class="op">=</span> read_file()<span class="op">;</span></span>
+<span id="cb21-3"><a></a><span class="kw">let</span> maybe_value<span class="op">:</span> <span class="dt">Option</span><span class="op">&lt;&amp;</span><span class="dt">str</span><span class="op">&gt;</span> <span class="op">=</span> map<span class="op">.</span>get(<span class="st">"key"</span>)<span class="op">;</span></span>
+<span id="cb21-4"><a></a><span class="kw">let</span> <span class="kw">mut</span> scores<span class="op">:</span> HashMap<span class="op">&lt;</span><span class="dt">String</span><span class="op">,</span> <span class="dt">i32</span><span class="op">&gt;</span> <span class="op">=</span> <span class="pp">HashMap::</span>new()<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>What <code>&lt;T&gt;</code> means:</strong> - <code>Vec&lt;i32&gt;</code> = “a vector of i32 values” - <code>Result&lt;String, io::Error&gt;</code> = “success gives String, error gives io::Error” - <code>Option&lt;&amp;str&gt;</code> = “maybe a &amp;str, maybe nothing” - <code>HashMap&lt;String, i32&gt;</code> = “map from String keys to i32 values”</p>
+<p><strong>You’ve been using <a href="https://doc.rust-lang.org/book/ch10-00-generics.html">generic types</a> all along!</strong></p>
+<aside class="notes">
+<p>This is a key realization moment. Students have been using Vec<t>, Option<t>, Result&lt;T, E&gt; without necessarily understanding the generic nature. Point out that the angle brackets always mean “generic over some type”. This primes them for next week where they’ll write their own generic types.</t></t></p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="next-week-writing-your-own-generics" class="slide level2 smaller">
+<h2>Next Week: Writing Your Own Generics</h2>
+<p><strong>Week 12 preview - Generics and Traits:</strong></p>
+<p>You’ll learn to: - Write generic functions that work with any type - Create generic structs like <code>Stack&lt;T&gt;</code> or <code>Cache&lt;K, V&gt;</code> - Define <a href="https://doc.rust-lang.org/book/ch10-02-traits.html">traits</a> (Rust’s version of interfaces) - Implement traits like <code>Display</code>, <code>Iterator</code>, <code>Clone</code> - Use trait bounds to constrain generic types</p>
+<p><strong>Why it matters:</strong> - Write reusable code without duplication - Zero runtime cost (Rust generates specialized code) - Type-safe abstractions - Professional Rust development pattern</p>
+<p><strong>Teaser:</strong> Lab 12 will have you build a generic <code>Stack&lt;T&gt;</code> that works with any type!</p>
+<aside class="notes">
+<p>Build excitement for next week. Emphasize that they already understand how to USE generics (Vec, Option, Result) - now they’ll learn to CREATE them. This is the jump from consumer to creator. The Stack<t> lab is a classic data structures exercise that demonstrates the power of generics.</t></p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="resources-for-going-deeper" class="slide level2">
+<h2>Resources for going deeper</h2>
+<p><strong>Official <a href="https://www.rust-lang.org/">Rust</a> documentation:</strong> - <a href="https://doc.rust-lang.org/book/ch07-00-managing-growing-projects-with-packages-crates-and-modules.html">The Rust Book - Chapter 7: Modules</a> - <a href="https://doc.rust-lang.org/book/ch05-00-structs.html">The Rust Book - Chapter 5: Structs</a> - <a href="https://doc.rust-lang.org/book/ch06-00-enums.html">The Rust Book - Chapter 6: Enums and Pattern Matching</a> - <a href="https://doc.rust-lang.org/book/ch09-00-error-handling.html">The Rust Book - Chapter 9: Error Handling</a> - <a href="https://doc.rust-lang.org/book/ch08-00-common-collections.html">The Rust Book - Chapter 8: Collections</a></p>
+<p><strong>Interactive practice:</strong> - <a href="https://doc.rust-lang.org/rust-by-example/mod.html">Rust by Example - Modules</a> - <a href="https://doc.rust-lang.org/rust-by-example/error.html">Rust by Example - Error Handling</a> - <a href="https://github.com/rust-lang/rustlings">Rustlings - Structs Exercises</a></p>
+<aside class="notes">
+<p>All these links are essential reading. Chapter 8 (Collections) and Chapter 9 (Error Handling) are particularly important. Rustlings has great exercises for structs and enums. Encourage students to work through these after the lab.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="questions" class="slide level2">
+<h2>Questions?</h2>
+<p><strong>Remember:</strong> - Modules organize code, structs/enums organize data - <code>Option&lt;T&gt;</code> eliminates null pointer errors - <code>Result&lt;T, E&gt;</code> makes error handling explicit - Collections (<code>Vec</code>, <code>String</code>, <code>HashMap</code>) follow ownership rules - Use <a href="https://claude.ai/">AI</a> to explore design patterns and learn idioms</p>
+<p><strong>Lab 11 due:</strong> Sunday, November 16 at 11:59 PM</p>
+<p><strong>Office hours:</strong> Available on <a href="https://www.microsoft.com/en-us/microsoft-teams/group-chat-software">Microsoft Teams</a> - reach out anytime!</p>
+<aside class="notes">
+<p>End on an encouraging note. Today’s content is dense but practical. Every concept (modules, structs, enums, Result, collections) is used daily in production Rust. The lab lets them apply it all. Remind them that understanding ownership makes this week easier.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+
+
+</section>
+    </div>
+  <div class="quarto-auto-generated-content" style="display: none;">
+<div class="footer footer-default">
+
+</div>
+</div></div>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script>
+  <script src="../site_libs/revealjs/dist/reveal.js"></script>
+  <!-- reveal.js plugins -->
+  <script src="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="../site_libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="../site_libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="../site_libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="../site_libs/revealjs/plugin/quarto-support/support.js"></script>
+  
+
+  <script src="../site_libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="../site_libs/revealjs/plugin/search/search.js"></script>
+  <script src="../site_libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="../site_libs/revealjs/plugin/math/math.js"></script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://revealjs.com/config/
+      Reveal.initialize({
+'controlsAuto': true,
+'previewLinksAuto': false,
+'pdfSeparateFragments': false,
+'autoAnimateEasing': "ease",
+'autoAnimateDuration': 1,
+'autoAnimateUnmatched': true,
+'jumpToSlide': true,
+'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\"><kbd>r</kbd> Scroll View Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
+'smaller': false,
+ 
+        // Display controls in the bottom right corner
+        controls: false,
+
+        // Help the user learn the controls by providing hints, for example by
+        // bouncing the down arrow when they first encounter a vertical slide
+        controlsTutorial: false,
+
+        // Determines where controls appear, "edges" or "bottom-right"
+        controlsLayout: 'edges',
+
+        // Visibility rule for backwards navigation arrows; "faded", "hidden"
+        // or "visible"
+        controlsBackArrows: 'faded',
+
+        // Display a presentation progress bar
+        progress: true,
+
+        // Display the page number of the current slide
+        slideNumber: false,
+
+        // 'all', 'print', or 'speaker'
+        showSlideNumber: 'all',
+
+        // Add the current slide number to the URL hash so that reloading the
+        // page/copying the URL will return you to the same slide
+        hash: true,
+
+        // Start with 1 for the hash rather than 0
+        hashOneBasedIndex: false,
+
+        // Flags if we should monitor the hash and change slides accordingly
+        respondToHashChanges: true,
+
+        // Push each slide change to the browser history
+        history: true,
+
+        // Enable keyboard shortcuts for navigation
+        keyboard: true,
+
+        // Enable the slide overview mode
+        overview: true,
+
+        // Disables the default reveal.js slide layout (scaling and centering)
+        // so that you can use custom CSS layout
+        disableLayout: false,
+
+        // Vertical centering of slides
+        center: false,
+
+        // Enables touch navigation on devices with touch input
+        touch: true,
+
+        // Loop the presentation
+        loop: false,
+
+        // Change the presentation direction to be RTL
+        rtl: false,
+
+        // see https://revealjs.com/vertical-slides/#navigation-mode
+        navigationMode: 'linear',
+
+        // Randomizes the order of slides each time the presentation loads
+        shuffle: false,
+
+        // Turns fragments on and off globally
+        fragments: true,
+
+        // Flags whether to include the current fragment in the URL,
+        // so that reloading brings you to the same fragment position
+        fragmentInURL: false,
+
+        // Flags if the presentation is running in an embedded mode,
+        // i.e. contained within a limited portion of the screen
+        embedded: false,
+
+        // Flags if we should show a help overlay when the questionmark
+        // key is pressed
+        help: true,
+
+        // Flags if it should be possible to pause the presentation (blackout)
+        pause: true,
+
+        // Flags if speaker notes should be visible to all viewers
+        showNotes: false,
+
+        // Global override for autoplaying embedded media (null/true/false)
+        autoPlayMedia: null,
+
+        // Global override for preloading lazy-loaded iframes (null/true/false)
+        preloadIframes: null,
+
+        // Number of milliseconds between automatically proceeding to the
+        // next slide, disabled when set to 0, this value can be overwritten
+        // by using a data-autoslide attribute on your slides
+        autoSlide: 0,
+
+        // Stop auto-sliding after user input
+        autoSlideStoppable: true,
+
+        // Use this method for navigation when auto-sliding
+        autoSlideMethod: null,
+
+        // Specify the average time in seconds that you think you will spend
+        // presenting each slide. This is used to show a pacing timer in the
+        // speaker view
+        defaultTiming: null,
+
+        // Enable slide navigation via mouse wheel
+        mouseWheel: false,
+
+        // The display mode that will be used to show slides
+        display: 'block',
+
+        // Hide cursor if inactive
+        hideInactiveCursor: true,
+
+        // Time before the cursor is hidden (in ms)
+        hideCursorTime: 5000,
+
+        // Opens links in an iframe preview overlay
+        previewLinks: false,
+
+        // Transition style (none/fade/slide/convex/concave/zoom)
+        transition: 'fade',
+
+        // Transition speed (default/fast/slow)
+        transitionSpeed: 'default',
+
+        // Transition style for full page slide backgrounds
+        // (none/fade/slide/convex/concave/zoom)
+        backgroundTransition: 'none',
+
+        // Number of slides away from the current that are visible
+        viewDistance: 3,
+
+        // Number of slides away from the current that are visible on mobile
+        // devices. It is advisable to set this to a lower number than
+        // viewDistance in order to save resources.
+        mobileViewDistance: 2,
+
+        // The "normal" size of the presentation, aspect ratio will be preserved
+        // when the presentation is scaled to fit different resolutions. Can be
+        // specified using percentage units.
+        width: 1050,
+
+        height: 700,
+
+        // Factor of the display size that should remain empty around the content
+        margin: 0.1,
+
+        math: {
+          mathjax: 'https://cdn.jsdelivr.net/npm/mathjax@2.7.9/MathJax.js',
+          config: 'TeX-AMS_HTML-full',
+          tex2jax: {
+            inlineMath: [['\\(','\\)']],
+            displayMath: [['\\[','\\]']],
+            balanceBraces: true,
+            processEscapes: false,
+            processRefs: true,
+            processEnvironments: true,
+            preview: 'TeX',
+            skipTags: ['script','noscript','style','textarea','pre','code'],
+            ignoreClass: 'tex2jax_ignore',
+            processClass: 'tex2jax_process'
+          },
+        },
+
+        // reveal.js plugins
+        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, QuartoSupport,
+
+          RevealMath,
+          RevealNotes,
+          RevealSearch,
+          RevealZoom
+        ]
+      });
+    </script>
+    <script id="quarto-html-after-body" type="application/javascript">
+      window.document.addEventListener("DOMContentLoaded", function (event) {
+        const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
+        tabsets.forEach(function(tabset) {
+          const tabby = new Tabby('#' + tabset.id);
+        });
+        const isCodeAnnotation = (el) => {
+          for (const clz of el.classList) {
+            if (clz.startsWith('code-annotation-')) {                     
+              return true;
+            }
+          }
+          return false;
+        }
+        const onCopySuccess = function(e) {
+          // button target
+          const button = e.trigger;
+          // don't keep focus
+          button.blur();
+          // flash "checked"
+          button.classList.add('code-copy-button-checked');
+          var currentTitle = button.getAttribute("title");
+          button.setAttribute("title", "Copied!");
+          let tooltip;
+          if (window.bootstrap) {
+            button.setAttribute("data-bs-toggle", "tooltip");
+            button.setAttribute("data-bs-placement", "left");
+            button.setAttribute("data-bs-title", "Copied!");
+            tooltip = new bootstrap.Tooltip(button, 
+              { trigger: "manual", 
+                customClass: "code-copy-button-tooltip",
+                offset: [0, -8]});
+            tooltip.show();    
+          }
+          setTimeout(function() {
+            if (tooltip) {
+              tooltip.hide();
+              button.removeAttribute("data-bs-title");
+              button.removeAttribute("data-bs-toggle");
+              button.removeAttribute("data-bs-placement");
+            }
+            button.setAttribute("title", currentTitle);
+            button.classList.remove('code-copy-button-checked');
+          }, 1000);
+          // clear code selection
+          e.clearSelection();
+        }
+        const getTextToCopy = function(trigger) {
+          const outerScaffold = trigger.parentElement.cloneNode(true);
+          const codeEl = outerScaffold.querySelector('code');
+          for (const childEl of codeEl.children) {
+            if (isCodeAnnotation(childEl)) {
+              childEl.remove();
+            }
+          }
+          return codeEl.innerText;
+        }
+        const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+          text: getTextToCopy
+        });
+        clipboard.on('success', onCopySuccess);
+        if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+          const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+            text: getTextToCopy,
+            container: window.document.getElementById('quarto-embedded-source-code-modal')
+          });
+          clipboardModal.on('success', onCopySuccess);
+        }
+          var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+          var mailtoRegex = new RegExp(/^mailto:/);
+            var filterRegex = new RegExp('/' + window.location.host + '/');
+          var isInternal = (href) => {
+              return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+          }
+          // Inspect non-navigation links and adorn them if external
+         var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+          for (var i=0; i<links.length; i++) {
+            const link = links[i];
+            if (!isInternal(link.href)) {
+              // undo the damage that might have been done by quarto-nav.js in the case of
+              // links that we want to consider external
+              if (link.dataset.originalHref !== undefined) {
+                link.href = link.dataset.originalHref;
+              }
+            }
+          }
+        function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+          const config = {
+            allowHTML: true,
+            maxWidth: 500,
+            delay: 100,
+            arrow: false,
+            appendTo: function(el) {
+                return el.closest('section.slide') || el.parentElement;
+            },
+            interactive: true,
+            interactiveBorder: 10,
+            theme: 'light-border',
+            placement: 'bottom-start',
+          };
+          if (contentFn) {
+            config.content = contentFn;
+          }
+          if (onTriggerFn) {
+            config.onTrigger = onTriggerFn;
+          }
+          if (onUntriggerFn) {
+            config.onUntrigger = onUntriggerFn;
+          }
+            config['offset'] = [0,0];
+            config['maxWidth'] = 700;
+          window.tippy(el, config); 
+        }
+        const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+        for (var i=0; i<noterefs.length; i++) {
+          const ref = noterefs[i];
+          tippyHover(ref, function() {
+            // use id or data attribute instead here
+            let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+            try { href = new URL(href).hash; } catch {}
+            const id = href.replace(/^#\/?/, "");
+            const note = window.document.getElementById(id);
+            if (note) {
+              return note.innerHTML;
+            } else {
+              return "";
+            }
+          });
+        }
+        const findCites = (el) => {
+          const parentEl = el.parentElement;
+          if (parentEl) {
+            const cites = parentEl.dataset.cites;
+            if (cites) {
+              return {
+                el,
+                cites: cites.split(' ')
+              };
+            } else {
+              return findCites(el.parentElement)
+            }
+          } else {
+            return undefined;
+          }
+        };
+        var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+        for (var i=0; i<bibliorefs.length; i++) {
+          const ref = bibliorefs[i];
+          const citeInfo = findCites(ref);
+          if (citeInfo) {
+            tippyHover(citeInfo.el, function() {
+              var popup = window.document.createElement('div');
+              citeInfo.cites.forEach(function(cite) {
+                var citeDiv = window.document.createElement('div');
+                citeDiv.classList.add('hanging-indent');
+                citeDiv.classList.add('csl-entry');
+                var biblioDiv = window.document.getElementById('ref-' + cite);
+                if (biblioDiv) {
+                  citeDiv.innerHTML = biblioDiv.innerHTML;
+                }
+                popup.appendChild(citeDiv);
+              });
+              return popup.innerHTML;
+            });
+          }
+        }
+      });
+      </script>
+    
+
+</body></html>

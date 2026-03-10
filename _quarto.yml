@@ -4,6 +4,7 @@ project:
 website:
   title: "IS 4010 - App Dev with AI"
   description: "Course materials for IS 4010: Application Development with Artificial Intelligence at the University of Cincinnati."
+  favicon: images/uc-logo-2.png
   page-navigation: true
 
   sidebar:
@@ -23,6 +24,8 @@ website:
         href: index.qmd
       - text: "Syllabus"
         href: syllabus.qmd
+      - text: "Final project"
+        href: project.qmd
       - section: "Resources"
         contents:
           - text: "Setup guide"
@@ -67,3 +70,4 @@ format:
     theme: cosmo
     toc: true
     css: styles.css
+    page-footer: "IS 4010"
