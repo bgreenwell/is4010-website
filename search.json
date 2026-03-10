@@ -1765,6 +1765,106 @@
     "text": "Questions?\nOffice hours: See syllabus\nAI assistance: GitHub Copilot, ChatGPT, Claude, Gemini CLI\nLab 13: Due Sunday at 11:59 PM\nGood luck and have fun with idiomatic Rust! 🦀"
   },
   {
+    "objectID": "project.html",
+    "href": "project.html",
+    "title": "Final project",
+    "section": "",
+    "text": "The final assessment allows you to demonstrate your comprehensive understanding of course concepts through a solo capstone project. You will build a professional command-line application in either Python or Rust.",
+    "crumbs": [
+      "Final project"
+    ]
+  },
+  {
+    "objectID": "project.html#overview",
+    "href": "project.html#overview",
+    "title": "Final project",
+    "section": "",
+    "text": "The final assessment allows you to demonstrate your comprehensive understanding of course concepts through a solo capstone project. You will build a professional command-line application in either Python or Rust.",
+    "crumbs": [
+      "Final project"
+    ]
+  },
+  {
+    "objectID": "project.html#project-requirements",
+    "href": "project.html#project-requirements",
+    "title": "Final project",
+    "section": "Project requirements",
+    "text": "Project requirements\nWhile the full specification is coming soon, your project will be evaluated on the following core components:\n\nFunctionality: Does the application solve a real-world problem or provide useful utility?\nCode Quality: Is the code idiomatic, well-structured, and easy to read?\nTesting: Does the project include a comprehensive test suite with high coverage?\nDocumentation: Is there a clear README.md and an AGENTS.md file documenting your AI tool usage?\nProfessionalism: Does the repository use CI/CD (GitHub Actions) and proper version control?",
+    "crumbs": [
+      "Final project"
+    ]
+  },
+  {
+    "objectID": "project.html#key-dates",
+    "href": "project.html#key-dates",
+    "title": "Final project",
+    "section": "Key dates",
+    "text": "Key dates\n\nProject proposal: [Coming soon]\nFinal submission: Sunday, May 3, 2026 at 11:59 PM\n\n\n\n\n\n\n\nImportantAcademic integrity\n\n\n\nAs with all assignments in this course, you are encouraged to use AI as your “co-pilot,” but you must be the “pilot.” You must be able to explain every line of code in your final submission.",
+    "crumbs": [
+      "Final project"
+    ]
+  },
+  {
+    "objectID": "project.html#resources-examples",
+    "href": "project.html#resources-examples",
+    "title": "Final project",
+    "section": "Resources & examples",
+    "text": "Resources & examples\n\nAGENTS.md template\n[Example Python project] (Coming soon)\n[Example Rust project] (Coming soon)",
+    "crumbs": [
+      "Final project"
+    ]
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "IS 4010: Application Development with Artificial Intelligence",
+    "section": "",
+    "text": "Welcome to the official course website for IS 4010.",
+    "crumbs": [
+      "Home"
+    ]
+  },
+  {
+    "objectID": "index.html#course-overview",
+    "href": "index.html#course-overview",
+    "title": "IS 4010: Application Development with Artificial Intelligence",
+    "section": "Course overview",
+    "text": "Course overview\nThis course explores the intersection of modern software development and generative AI. Students will learn to build robust applications in Python and Rust while mastering the art of using AI as a collaborative partner (“Co-Pilot”).\nA central theme is the practical application of AI code assistants (like GitHub Copilot and Gemini) to enhance problem-solving, accelerate development, and prepare students for the future of software engineering.",
+    "crumbs": [
+      "Home"
+    ]
+  },
+  {
+    "objectID": "index.html#course-books",
+    "href": "index.html#course-books",
+    "title": "IS 4010: Application Development with Artificial Intelligence",
+    "section": "Course books",
+    "text": "Course books\nThis course uses two primary, free, and open-source resources:\n\nThe Python Tutorial: The official guide to Python, covering everything from basic syntax to the standard library.\nThe Rust Programming Language: Affectionately known as “The Book,” this is the official, community-maintained guide to Rust.\n\nWe will reference specific chapters from these books each week to support our hands-on labs.",
+    "crumbs": [
+      "Home"
+    ]
+  },
+  {
+    "objectID": "index.html#quick-links",
+    "href": "index.html#quick-links",
+    "title": "IS 4010: Application Development with Artificial Intelligence",
+    "section": "Quick links",
+    "text": "Quick links\n\nSyllabus\nWeekly schedule\nLab repository template\nCanvas (LMS)",
+    "crumbs": [
+      "Home"
+    ]
+  },
+  {
+    "objectID": "index.html#instructor",
+    "href": "index.html#instructor",
+    "title": "IS 4010: Application Development with Artificial Intelligence",
+    "section": "Instructor",
+    "text": "Instructor\nBrandon M. Greenwell, PhD\nDirector, Data Science @ 84.51°\nAnnual Adjunct Instructor Department of OBAIS, University of Cincinnati\nBrandon is a data scientist and educator with a passion for building reliable, interpretable AI systems. In his role as Director of Data Science at 84.51°, he leads initiatives in retail analytics and statistical modeling. His research and open-source contributions focus on Explainable AI (XAI), machine learning, and statistical computing.\nHe is the author of several widely-used R packages (including pdp, vip, and fastshap) and books, including Tree-Based Methods for Statistical Learning in R and the co-authored Hands-On Machine Learning with R. More recently, he has been contributing to the Rust ecosystem with popular packages like doxx, xleak, and lstr. In this course, he brings a professional perspective on using these modern tools to build the next generation of AI-enhanced applications.\n Follow on GitHub",
+    "crumbs": [
+      "Home"
+    ]
+  },
+  {
     "objectID": "syllabus.html",
     "href": "syllabus.html",
     "title": "Syllabus",
@@ -1942,56 +2042,6 @@
     "text": "LCB weather related and emergency protocol\nWhen inclement weather threatens the safety of the University of Cincinnati community, the Senior Vice President for Administration and Finance may invoke University Rule 3361: 10-55-01 and declare an emergency closing. There will be an announcement posted on Canvas and if possible, on the local news channels (TV and radio). Communications related to University closures will also be sent to the student’s cell phone number on record through the automatic University emergency text messaging system. Students should notify the University if they change their cell phone number to ensure they will receive these important emergency communications.\nThe Lindner College of Business will observe the university emergency closing protocol for all on-campus classes. During a university emergency closing, all college offices will be closed.\nStudents should clarify with their course instructors how the closure will affect assignments and deadlines, and whether class information from the missed session(s) will be posted on Canvas, and/or if the class will meet virtually during the closure.\nIn the event of inclement weather and the university is closed, the closure will not affect online courses. All course assignments and activities will remain as scheduled in the course syllabus.\nCriteria for letter grades:\nYour course grades will be based on your performance on the following:\n\nPoint allocation:\n\n\n\nAssignment\nPoints\nWeight\n\n\n\n\nLabs (14 labs × 10 pts each)\n140\n80%\n\n\nFinal exam/project\n35\n20%\n\n\nTotal\n175\n100%\n\n\n\n\n\nGrading scale\n94% and above = A\n90% = A- 87% = B+ 84% = B\n80% = B- 77% = C+ 74% = C\n70% = C- 60% = D Below 60% = F\n\n\nDescription of major assignments\n\nLabs (80%)\nStudents will complete 14 hands-on lab assignments (10 points each) that progress from basic Python programming through advanced Rust development. Labs emphasize practical application of programming concepts with AI assistance. Each assignment includes automated testing where applicable and must be submitted via GitHub.\nAutomated grading & feedback system: Labs are evaluated using sophisticated automated grading scripts that provide immediate, detailed feedback. Students receive personalized feedback through GitHub Issues in their repositories, typically within 24-48 hours of submission. This feedback includes specific point breakdowns, test results, and actionable improvement guidance. Students earning perfect scores may not receive feedback issues, as the system optimizes for providing help where it’s most needed.\n\n\nFinal exam/project (20%)\nThe final assessment allows students to demonstrate comprehensive understanding of course concepts through a solo capstone project. Students will build a command-line application in either Python or Rust, with automated testing, CI/CD integration, and professional documentation. All projects must include documentation of AI tool usage in an AGENTS.md file.",
     "crumbs": [
       "Syllabus"
-    ]
-  },
-  {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "IS 4010: Application Development with Artificial Intelligence",
-    "section": "",
-    "text": "Welcome to the official course website for IS 4010.",
-    "crumbs": [
-      "Home"
-    ]
-  },
-  {
-    "objectID": "index.html#course-overview",
-    "href": "index.html#course-overview",
-    "title": "IS 4010: Application Development with Artificial Intelligence",
-    "section": "Course overview",
-    "text": "Course overview\nThis course explores the intersection of modern software development and generative AI. Students will learn to build robust applications in Python and Rust while mastering the art of using AI as a collaborative partner (“Co-Pilot”).\nA central theme is the practical application of AI code assistants (like GitHub Copilot and Gemini) to enhance problem-solving, accelerate development, and prepare students for the future of software engineering.",
-    "crumbs": [
-      "Home"
-    ]
-  },
-  {
-    "objectID": "index.html#course-books",
-    "href": "index.html#course-books",
-    "title": "IS 4010: Application Development with Artificial Intelligence",
-    "section": "Course books",
-    "text": "Course books\nThis course uses two primary, free, and open-source resources:\n\nThe Python Tutorial: The official guide to Python, covering everything from basic syntax to the standard library.\nThe Rust Programming Language: Affectionately known as “The Book,” this is the official, community-maintained guide to Rust.\n\nWe will reference specific chapters from these books each week to support our hands-on labs.",
-    "crumbs": [
-      "Home"
-    ]
-  },
-  {
-    "objectID": "index.html#quick-links",
-    "href": "index.html#quick-links",
-    "title": "IS 4010: Application Development with Artificial Intelligence",
-    "section": "Quick links",
-    "text": "Quick links\n\nSyllabus\nWeekly schedule\nLab repository template\nCanvas (LMS)",
-    "crumbs": [
-      "Home"
-    ]
-  },
-  {
-    "objectID": "index.html#instructor",
-    "href": "index.html#instructor",
-    "title": "IS 4010: Application Development with Artificial Intelligence",
-    "section": "Instructor",
-    "text": "Instructor\nBrandon M. Greenwell, PhD\nDirector, Data Science @ 84.51°\nAnnual Adjunct Instructor Department of OBAIS, University of Cincinnati\nBrandon is a data scientist and educator with a passion for building reliable, interpretable AI systems. In his role as Director of Data Science at 84.51°, he leads initiatives in retail analytics and statistical modeling. His research and open-source contributions focus on Explainable AI (XAI), machine learning, and statistical computing.\nHe is the author of several widely-used R packages (including pdp, vip, and fastshap) and books, including Tree-Based Methods for Statistical Learning in R and the co-authored Hands-On Machine Learning with R. More recently, he has been contributing to the Rust ecosystem with popular packages like doxx, xleak, and lstr. In this course, he brings a professional perspective on using these modern tools to build the next generation of AI-enhanced applications.\n Follow on GitHub",
-    "crumbs": [
-      "Home"
     ]
   },
   {

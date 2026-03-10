@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Week 04: Data structures – IS 4010 - App Dev with AI</title>
+<title>Final project – IS 4010 - App Dev with AI</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -23,26 +23,26 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="../site_libs/clipboard/clipboard.min.js"></script>
-<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="../site_libs/quarto-search/fuse.min.js"></script>
-<script src="../site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="../">
-<link href="../weeks/week05.html" rel="next">
-<link href="../weeks/week03.html" rel="prev">
-<link href="../images/uc-logo-2.png" rel="icon" type="image/png">
-<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
-<script src="../site_libs/quarto-html/popper.min.js"></script>
-<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="../site_libs/quarto-html/anchor.min.js"></script>
-<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-ed96de9b727972fe78a7b5d16c58bf87.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-251449ada0ddbdd49c494e2ec9d5d6a9.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./resources/setup.html" rel="next">
+<link href="./syllabus.html" rel="prev">
+<link href="./images/uc-logo-2.png" rel="icon" type="image/png">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-ed96de9b727972fe78a7b5d16c58bf87.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-251449ada0ddbdd49c494e2ec9d5d6a9.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -72,7 +72,7 @@ ul.task-list li input[type="checkbox"] {
 }</script>
 
 
-<link rel="stylesheet" href="../styles.css">
+<link rel="stylesheet" href="styles.css">
 </head>
 
 <body class="nav-sidebar docked quarto-light">
@@ -84,7 +84,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../weeks/week01.html">Weekly schedule</a></li><li class="breadcrumb-item"><a href="../weeks/week04.html">Week 04: Data structures</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./project.html">Final project</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -99,7 +99,7 @@ ul.task-list li input[type="checkbox"] {
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
-      <a href="../">IS 4010 - App Dev with AI</a> 
+      <a href="./">IS 4010 - App Dev with AI</a> 
         <div class="sidebar-tools-main">
     <a href="https://github.com/bgreenwell/is4010-course" title="GitHub" class="quarto-navigation-tool px-1" aria-label="GitHub"><i class="bi bi-github"></i></a>
     <a href="https://uc.instructure.com/" title="Canvas" class="quarto-navigation-tool px-1" aria-label="Canvas"><i class="bi bi-journal-text"></i></a>
@@ -115,19 +115,19 @@ ul.task-list li input[type="checkbox"] {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../index.html" class="sidebar-item-text sidebar-link">
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Home</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../syllabus.html" class="sidebar-item-text sidebar-link">
+  <a href="./syllabus.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Syllabus</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../project.html" class="sidebar-item-text sidebar-link">
+  <a href="./project.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Final project</span></a>
   </div>
 </li>
@@ -142,19 +142,19 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../resources/setup.html" class="sidebar-item-text sidebar-link">
+  <a href="./resources/setup.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Setup guide</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../resources/troubleshooting.html" class="sidebar-item-text sidebar-link">
+  <a href="./resources/troubleshooting.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Troubleshooting</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../resources/packages.html" class="sidebar-item-text sidebar-link">
+  <a href="./resources/packages.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Python packages</span></a>
   </div>
 </li>
@@ -162,94 +162,94 @@ ul.task-list li input[type="checkbox"] {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false">
  <span class="menu-text">Weekly schedule</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../weeks/week01.html" class="sidebar-item-text sidebar-link">
+  <a href="./weeks/week01.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Week 01: Toolkit setup</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../weeks/week02.html" class="sidebar-item-text sidebar-link">
+  <a href="./weeks/week02.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Week 02: AI-assisted dev</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../weeks/week03.html" class="sidebar-item-text sidebar-link">
+  <a href="./weeks/week03.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Week 03: Python basics</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../weeks/week04.html" class="sidebar-item-text sidebar-link active">
+  <a href="./weeks/week04.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Week 04: Data structures</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../weeks/week05.html" class="sidebar-item-text sidebar-link">
+  <a href="./weeks/week05.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Week 05: Functions &amp; errors</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../weeks/week06.html" class="sidebar-item-text sidebar-link">
+  <a href="./weeks/week06.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Week 06: OOP</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../weeks/week07.html" class="sidebar-item-text sidebar-link">
+  <a href="./weeks/week07.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Week 07: External data</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../weeks/week08.html" class="sidebar-item-text sidebar-link">
+  <a href="./weeks/week08.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Week 08: Professional Python</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../weeks/week09.html" class="sidebar-item-text sidebar-link">
+  <a href="./weeks/week09.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Week 09: Welcome to Rust</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../weeks/week10.html" class="sidebar-item-text sidebar-link">
+  <a href="./weeks/week10.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Week 10: Soul of Rust</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../weeks/week11.html" class="sidebar-item-text sidebar-link">
+  <a href="./weeks/week11.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Week 11: Structuring code</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../weeks/week12.html" class="sidebar-item-text sidebar-link">
+  <a href="./weeks/week12.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Week 12: Generics &amp; traits</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../weeks/week13.html" class="sidebar-item-text sidebar-link">
+  <a href="./weeks/week13.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Week 13: Idiomatic Rust</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../weeks/week14.html" class="sidebar-item-text sidebar-link">
+  <a href="./weeks/week14.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Week 14: Multithreading</span></a>
   </div>
 </li>
@@ -265,19 +265,20 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
-  <li><a href="#recommended-readings" id="toc-recommended-readings" class="nav-link" data-scroll-target="#recommended-readings">Recommended readings</a></li>
-  <li><a href="#lectures" id="toc-lectures" class="nav-link" data-scroll-target="#lectures">Lectures</a></li>
-  <li><a href="#lab-assignment" id="toc-lab-assignment" class="nav-link" data-scroll-target="#lab-assignment">Lab assignment</a></li>
+  <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview">Overview</a></li>
+  <li><a href="#project-requirements" id="toc-project-requirements" class="nav-link" data-scroll-target="#project-requirements">Project requirements</a></li>
+  <li><a href="#key-dates" id="toc-key-dates" class="nav-link" data-scroll-target="#key-dates">Key dates</a></li>
+  <li><a href="#resources-examples" id="toc-resources-examples" class="nav-link" data-scroll-target="#resources-examples">Resources &amp; examples</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../weeks/week01.html">Weekly schedule</a></li><li class="breadcrumb-item"><a href="../weeks/week04.html">Week 04: Data structures</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Week 04: Data structures</h1>
+<h1 class="title">Final project</h1>
+<p class="subtitle lead">The solo capstone project for IS 4010</p>
 </div>
 
 
@@ -294,26 +295,47 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="introduction" class="level2">
-<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
-<p>Coming soon!</p>
+<section id="overview" class="level2">
+<h2 class="anchored" data-anchor-id="overview">Overview</h2>
+<p>The final assessment allows you to demonstrate your comprehensive understanding of course concepts through a solo capstone project. You will build a professional command-line application in either <strong>Python</strong> or <strong>Rust</strong>.</p>
 </section>
-<section id="recommended-readings" class="level2">
-<h2 class="anchored" data-anchor-id="recommended-readings">Recommended readings</h2>
+<section id="project-requirements" class="level2">
+<h2 class="anchored" data-anchor-id="project-requirements">Project requirements</h2>
+<p>While the full specification is coming soon, your project will be evaluated on the following core components:</p>
 <ul>
-<li><a href="https://docs.python.org/3/tutorial/">Python tutorial</a> - Official Python documentation</li>
+<li><strong>Functionality</strong>: Does the application solve a real-world problem or provide useful utility?</li>
+<li><strong>Code Quality</strong>: Is the code idiomatic, well-structured, and easy to read?</li>
+<li><strong>Testing</strong>: Does the project include a comprehensive test suite with high coverage?</li>
+<li><strong>Documentation</strong>: Is there a clear <code>README.md</code> and an <code>AGENTS.md</code> file documenting your AI tool usage?</li>
+<li><strong>Professionalism</strong>: Does the repository use CI/CD (GitHub Actions) and proper version control?</li>
 </ul>
 </section>
-<section id="lectures" class="level2">
-<h2 class="anchored" data-anchor-id="lectures">Lectures</h2>
+<section id="key-dates" class="level2">
+<h2 class="anchored" data-anchor-id="key-dates">Key dates</h2>
 <ul>
-<li><a href="../slides/IS4010_W04_Data_Structures.html"><strong>Slides: Data structures</strong></a></li>
+<li><strong>Project proposal</strong>: [Coming soon]</li>
+<li><strong>Final submission</strong>: Sunday, May 3, 2026 at 11:59 PM</li>
 </ul>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Academic integrity
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>As with all assignments in this course, you are encouraged to use AI as your “co-pilot,” but you must be the “pilot.” You must be able to explain every line of code in your final submission.</p>
+</div>
+</div>
 </section>
-<section id="lab-assignment" class="level2">
-<h2 class="anchored" data-anchor-id="lab-assignment">Lab assignment</h2>
+<section id="resources-examples" class="level2">
+<h2 class="anchored" data-anchor-id="resources-examples">Resources &amp; examples</h2>
 <ul>
-<li><a href="https://github.com/bgreenwell/is4010-course">Lab 04: Data structures</a></li>
+<li><a href="https://github.com/bgreenwell/is4010-course/blob/main/AGENTS.md">AGENTS.md template</a></li>
+<li>[Example Python project] (Coming soon)</li>
+<li>[Example Rust project] (Coming soon)</li>
 </ul>
 
 
@@ -722,13 +744,13 @@ ul.task-list li input[type="checkbox"] {
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../weeks/week03.html" class="pagination-link" aria-label="Week 03: Python basics">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Week 03: Python basics</span>
+      <a href="./syllabus.html" class="pagination-link" aria-label="Syllabus">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Syllabus</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../weeks/week05.html" class="pagination-link" aria-label="Week 05: Functions &amp; errors">
-        <span class="nav-page-text">Week 05: Functions &amp; errors</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./resources/setup.html" class="pagination-link" aria-label="Setup guide">
+        <span class="nav-page-text">Setup guide</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
