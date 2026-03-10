@@ -1,0 +1,1371 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-html/tabby.min.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-4d9afe2b8d18ee9fa5d0d57b5ed4214d.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.8.27">
+
+  <meta name="author" content="Brandon M. Greenwell">
+  <title>IS 4010 - App Dev with AI – IS4010: AI-Enhanced Application Development</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="../site_libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="../site_libs/revealjs/dist/reveal.css">
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+      vertical-align: middle;
+    }
+    /* CSS for syntax highlighting */
+    html { -webkit-text-size-adjust: 100%; }
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+      }
+    pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+    div.sourceCode
+      { color: #f8f8f2;  }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #f8f8f2; } /* Normal */
+    code span.al { color: #f07178; } /* Alert */
+    code span.an { color: #d4d0ab; } /* Annotation */
+    code span.at { color: #00e0e0; } /* Attribute */
+    code span.bn { color: #d4d0ab; } /* BaseN */
+    code span.bu { color: #abe338; } /* BuiltIn */
+    code span.cf { color: #ffa07a; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #abe338; } /* Char */
+    code span.cn { color: #ffd700; } /* Constant */
+    code span.co { color: #f8f8f2; font-style: italic; } /* Comment */
+    code span.cv { color: #ffd700; } /* CommentVar */
+    code span.do { color: #f8f8f2; } /* Documentation */
+    code span.dt { color: #ffa07a; } /* DataType */
+    code span.dv { color: #d4d0ab; } /* DecVal */
+    code span.er { color: #f07178; text-decoration: underline; } /* Error */
+    code span.ex { color: #00e0e0; font-weight: bold; } /* Extension */
+    code span.fl { color: #d4d0ab; } /* Float */
+    code span.fu { color: #ffa07a; } /* Function */
+    code span.im { color: #abe338; } /* Import */
+    code span.in { color: #d4d0ab; } /* Information */
+    code span.kw { color: #ffa07a; font-weight: bold; } /* Keyword */
+    code span.op { color: #ffa07a; } /* Operator */
+    code span.ot { color: #00e0e0; } /* Other */
+    code span.pp { color: #dcc6e0; } /* Preprocessor */
+    code span.re { color: #00e0e0; background-color: #f8f8f2; } /* RegionMarker */
+    code span.sc { color: #abe338; } /* SpecialChar */
+    code span.ss { color: #abe338; } /* SpecialString */
+    code span.st { color: #abe338; } /* String */
+    code span.va { color: #00e0e0; } /* Variable */
+    code span.vs { color: #abe338; } /* VerbatimString */
+    code span.wa { color: #dcc6e0; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto-a1d3734469117662d4af4794742e8c15.css">
+  <link rel="stylesheet" href="custom.css">
+  <link href="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="../site_libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <style type="text/css">
+    .reveal div.sourceCode {
+      margin: 0;
+      overflow: auto;
+    }
+    .reveal div.hanging-indent {
+      margin-left: 1em;
+      text-indent: -1em;
+    }
+    .reveal .slide:not(.center) {
+      height: 100%;
+      overflow-y: auto;
+    }
+    .reveal .slide.scrollable {
+      overflow-y: auto;
+    }
+    .reveal .footnotes {
+      height: 100%;
+      overflow-y: auto;
+    }
+    .reveal .slide .absolute {
+      position: absolute;
+      display: block;
+    }
+    .reveal .footnotes ol {
+      counter-reset: ol;
+      list-style-type: none; 
+      margin-left: 0;
+    }
+    .reveal .footnotes ol li:before {
+      counter-increment: ol;
+      content: counter(ol) ". "; 
+    }
+    .reveal .footnotes ol li > p:first-child {
+      display: inline-block;
+    }
+    .reveal .slide ul,
+    .reveal .slide ol {
+      margin-bottom: 0.5em;
+    }
+    .reveal .slide ul li,
+    .reveal .slide ol li {
+      margin-top: 0.4em;
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide ul[role="tablist"] li {
+      margin-bottom: 0;
+    }
+    .reveal .slide ul li > *:first-child,
+    .reveal .slide ol li > *:first-child {
+      margin-block-start: 0;
+    }
+    .reveal .slide ul li > *:last-child,
+    .reveal .slide ol li > *:last-child {
+      margin-block-end: 0;
+    }
+    .reveal .slide .columns:nth-child(3) {
+      margin-block-start: 0.8em;
+    }
+    .reveal blockquote {
+      box-shadow: none;
+    }
+    .reveal .tippy-content>* {
+      margin-top: 0.2em;
+      margin-bottom: 0.7em;
+    }
+    .reveal .tippy-content>*:last-child {
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide > img.stretch.quarto-figure-center,
+    .reveal .slide > img.r-stretch.quarto-figure-center {
+      display: block;
+      margin-left: auto;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-left,
+    .reveal .slide > img.r-stretch.quarto-figure-left  {
+      display: block;
+      margin-left: 0;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-right,
+    .reveal .slide > img.r-stretch.quarto-figure-right  {
+      display: block;
+      margin-left: auto;
+      margin-right: 0; 
+    }
+  </style>
+</head>
+<body class="quarto-dark">
+  <div class="reveal">
+    <div class="slides">
+
+<section id="title-slide" class="quarto-title-block center">
+  <h1 class="title">IS4010: AI-Enhanced Application Development</h1>
+  <p class="subtitle">Week 6: Object-Oriented Programming</p>
+
+<div class="quarto-title-authors">
+<div class="quarto-title-author">
+<div class="quarto-title-author-name">
+Brandon M. Greenwell 
+</div>
+</div>
+</div>
+
+</section>
+<section>
+<section id="welcome-to-object-oriented-programming" class="title-slide slide level1 center">
+<h1>Welcome to Object-Oriented Programming 🏗️</h1>
+
+</section>
+<section id="the-foundation-of-scalable-software-architecture" class="slide level2">
+<h2>The foundation of scalable software architecture 🎯</h2>
+<ul>
+<li class="fragment"><strong>Object-Oriented Programming (OOP)</strong> revolutionizes how we design and structure applications</li>
+<li class="fragment"><strong>Real-world modeling</strong>: Create digital representations of real-world entities and their interactions</li>
+<li class="fragment"><strong>Career relevance</strong>: Essential for modern software development, system design interviews, and team collaboration</li>
+<li class="fragment"><strong>Scalability</strong>: Build applications that can grow from prototypes to enterprise-level systems</li>
+<li class="fragment"><strong>Code organization</strong>: Transform chaotic procedural code into elegant, maintainable architectures</li>
+</ul>
+<aside class="notes">
+<p><strong>TEACHING NOTES:</strong></p>
+<ul>
+<li><strong>Historical significance</strong>: OOP emerged in the 1960s with Simula, popularized by Smalltalk in the 1970s</li>
+<li><strong>Industry adoption</strong>: Nearly every major software system uses OOP principles - from operating systems to web frameworks</li>
+<li><strong>Career impact</strong>: OOP concepts appear in 90% of technical interviews for software engineering roles</li>
+<li><strong>Course progression</strong>: This builds foundation for design patterns, software architecture, and advanced Python features</li>
+<li><strong>Real-world examples</strong>: Instagram (User, Post, Comment classes), banking systems (Account, Transaction classes), games (Player, Inventory classes)</li>
+<li><strong>Python advantage</strong>: Python’s OOP is clean and intuitive compared to languages like C++ or Java</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level2">
+
+</section></section>
+<section>
+<section id="session-1-from-functions-to-objects" class="title-slide slide level1 center">
+<h1>Session 1: From functions to objects</h1>
+
+</section>
+<section id="when-functions-arent-enough-a-shopping-cart-story" class="slide level2">
+<h2>🤔 When functions aren’t enough: A shopping cart story</h2>
+<h3 id="the-problem-managing-complex-state-with-functions"><strong>The Problem</strong>: Managing complex state with functions</h3>
+<ul>
+<li class="fragment"><strong>Scenario</strong>: Building an e-commerce shopping cart system</li>
+<li class="fragment"><strong>Challenge</strong>: Multiple pieces of related data (items, totals, discounts, tax rates)</li>
+<li class="fragment"><strong>Function approach</strong>: Becomes unwieldy as complexity grows</li>
+<li class="fragment"><strong>Real pain points</strong>: Parameter passing chaos, state management nightmares, code duplication</li>
+</ul>
+<aside class="notes">
+<p><strong>TEACHING NOTES:</strong></p>
+<ul>
+<li><strong>Relate to students</strong>: Everyone has used shopping carts online - Amazon, Target, etc.</li>
+<li><strong>Complexity evolution</strong>: Start simple, show how requirements naturally grow</li>
+<li><strong>Industry reality</strong>: Real shopping carts have dozens of features - promotions, shipping, inventory checks</li>
+<li><strong>Common mistake</strong>: Students often try to solve everything with functions first</li>
+<li><strong>Learning approach</strong>: Let them feel the pain of the function approach before showing the OOP solution</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="the-function-approach-shopping-cart-chaos" class="slide level2">
+<h2>❌ The function approach: Shopping cart chaos</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a></a><span class="co"># Creating and managing cart state with functions - gets messy fast!</span></span>
+<span id="cb1-2"><a></a><span class="kw">def</span> create_cart():</span>
+<span id="cb1-3"><a></a>    <span class="cf">return</span> {<span class="st">"items"</span>: [], <span class="st">"subtotal"</span>: <span class="dv">0</span>, <span class="st">"tax_rate"</span>: <span class="fl">0.08</span>, <span class="st">"discount"</span>: <span class="dv">0</span>}</span>
+<span id="cb1-4"><a></a></span>
+<span id="cb1-5"><a></a><span class="kw">def</span> add_item(cart, name, price, quantity<span class="op">=</span><span class="dv">1</span>):</span>
+<span id="cb1-6"><a></a>    cart[<span class="st">"items"</span>].append({<span class="st">"name"</span>: name, <span class="st">"price"</span>: price, <span class="st">"qty"</span>: quantity})</span>
+<span id="cb1-7"><a></a>    cart[<span class="st">"subtotal"</span>] <span class="op">+=</span> price <span class="op">*</span> quantity</span>
+<span id="cb1-8"><a></a>    <span class="cf">return</span> cart</span>
+<span id="cb1-9"><a></a></span>
+<span id="cb1-10"><a></a><span class="kw">def</span> apply_discount(cart, discount_percent):</span>
+<span id="cb1-11"><a></a>    cart[<span class="st">"discount"</span>] <span class="op">=</span> discount_percent</span>
+<span id="cb1-12"><a></a>    <span class="cf">return</span> cart</span>
+<span id="cb1-13"><a></a></span>
+<span id="cb1-14"><a></a><span class="kw">def</span> calculate_total(cart):</span>
+<span id="cb1-15"><a></a>    discounted <span class="op">=</span> cart[<span class="st">"subtotal"</span>] <span class="op">*</span> (<span class="dv">1</span> <span class="op">-</span> cart[<span class="st">"discount"</span>]<span class="op">/</span><span class="dv">100</span>)</span>
+<span id="cb1-16"><a></a>    <span class="cf">return</span> discounted <span class="op">*</span> (<span class="dv">1</span> <span class="op">+</span> cart[<span class="st">"tax_rate"</span>])</span>
+<span id="cb1-17"><a></a></span>
+<span id="cb1-18"><a></a><span class="co"># Usage becomes cumbersome and error-prone</span></span>
+<span id="cb1-19"><a></a>cart <span class="op">=</span> create_cart()</span>
+<span id="cb1-20"><a></a>cart <span class="op">=</span> add_item(cart, <span class="st">"Laptop"</span>, <span class="fl">999.99</span>)</span>
+<span id="cb1-21"><a></a>cart <span class="op">=</span> add_item(cart, <span class="st">"Mouse"</span>, <span class="fl">29.99</span>)</span>
+<span id="cb1-22"><a></a>cart <span class="op">=</span> apply_discount(cart, <span class="dv">10</span>)</span>
+<span id="cb1-23"><a></a>total <span class="op">=</span> calculate_total(cart)</span>
+<span id="cb1-24"><a></a><span class="bu">print</span>(<span class="ss">f"Total: $</span><span class="sc">{</span>total<span class="sc">:.2f}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<aside class="notes">
+<p><strong>TEACHING NOTES:</strong></p>
+<ul>
+<li><strong>Pain points</strong>: Parameter passing every function call, easy to forget return values</li>
+<li><strong>State management</strong>: Dictionary approach is fragile - typos in keys cause runtime errors</li>
+<li><strong>Scalability issues</strong>: Adding features requires modifying multiple functions</li>
+<li><strong>Testing difficulties</strong>: Hard to test individual components in isolation</li>
+<li><strong>Team development</strong>: Multiple developers would step on each other’s code</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="the-class-approach-elegant-and-scalable" class="slide level2">
+<h2>✅ The class approach: Elegant and scalable</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a></a><span class="kw">class</span> ShoppingCart:</span>
+<span id="cb2-2"><a></a>    <span class="co">"""Represents a shopping cart with items, discounts, and tax calculation."""</span></span>
+<span id="cb2-3"><a></a></span>
+<span id="cb2-4"><a></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, tax_rate<span class="op">=</span><span class="fl">0.08</span>):</span>
+<span id="cb2-5"><a></a>        <span class="va">self</span>.items <span class="op">=</span> []</span>
+<span id="cb2-6"><a></a>        <span class="va">self</span>.tax_rate <span class="op">=</span> tax_rate</span>
+<span id="cb2-7"><a></a>        <span class="va">self</span>.discount_percent <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb2-8"><a></a></span>
+<span id="cb2-9"><a></a>    <span class="kw">def</span> add_item(<span class="va">self</span>, name, price, quantity<span class="op">=</span><span class="dv">1</span>):</span>
+<span id="cb2-10"><a></a>        <span class="co">"""Add an item to the cart."""</span></span>
+<span id="cb2-11"><a></a>        <span class="va">self</span>.items.append({<span class="st">"name"</span>: name, <span class="st">"price"</span>: price, <span class="st">"qty"</span>: quantity})</span>
+<span id="cb2-12"><a></a></span>
+<span id="cb2-13"><a></a>    <span class="kw">def</span> apply_discount(<span class="va">self</span>, discount_percent):</span>
+<span id="cb2-14"><a></a>        <span class="co">"""Apply a discount to the entire cart."""</span></span>
+<span id="cb2-15"><a></a>        <span class="va">self</span>.discount_percent <span class="op">=</span> discount_percent</span>
+<span id="cb2-16"><a></a></span>
+<span id="cb2-17"><a></a>    <span class="at">@property</span></span>
+<span id="cb2-18"><a></a>    <span class="kw">def</span> subtotal(<span class="va">self</span>):</span>
+<span id="cb2-19"><a></a>        <span class="co">"""Calculate subtotal before discount and tax."""</span></span>
+<span id="cb2-20"><a></a>        <span class="cf">return</span> <span class="bu">sum</span>(item[<span class="st">"price"</span>] <span class="op">*</span> item[<span class="st">"qty"</span>] <span class="cf">for</span> item <span class="kw">in</span> <span class="va">self</span>.items)</span>
+<span id="cb2-21"><a></a></span>
+<span id="cb2-22"><a></a>    <span class="at">@property</span></span>
+<span id="cb2-23"><a></a>    <span class="kw">def</span> total(<span class="va">self</span>):</span>
+<span id="cb2-24"><a></a>        <span class="co">"""Calculate final total after discount and tax."""</span></span>
+<span id="cb2-25"><a></a>        discounted <span class="op">=</span> <span class="va">self</span>.subtotal <span class="op">*</span> (<span class="dv">1</span> <span class="op">-</span> <span class="va">self</span>.discount_percent<span class="op">/</span><span class="dv">100</span>)</span>
+<span id="cb2-26"><a></a>        <span class="cf">return</span> discounted <span class="op">*</span> (<span class="dv">1</span> <span class="op">+</span> <span class="va">self</span>.tax_rate)</span>
+<span id="cb2-27"><a></a></span>
+<span id="cb2-28"><a></a><span class="co"># Usage is clean, intuitive, and maintainable</span></span>
+<span id="cb2-29"><a></a>cart <span class="op">=</span> ShoppingCart()</span>
+<span id="cb2-30"><a></a>cart.add_item(<span class="st">"Laptop"</span>, <span class="fl">999.99</span>)</span>
+<span id="cb2-31"><a></a>cart.add_item(<span class="st">"Mouse"</span>, <span class="fl">29.99</span>)</span>
+<span id="cb2-32"><a></a>cart.apply_discount(<span class="dv">10</span>)</span>
+<span id="cb2-33"><a></a><span class="bu">print</span>(<span class="ss">f"Total: $</span><span class="sc">{</span>cart<span class="sc">.</span>total<span class="sc">:.2f}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<aside class="notes">
+<p><strong>TEACHING NOTES:</strong></p>
+<ul>
+<li><strong>Clean API</strong>: No more parameter passing, state is encapsulated</li>
+<li><strong>Properties</strong>: <code>@property</code> decorator makes calculated values look like attributes</li>
+<li><strong>Extensibility</strong>: Easy to add features like <code>remove_item()</code>, <code>clear_cart()</code>, etc.</li>
+<li><strong>Error prevention</strong>: IDE can provide autocomplete, type checking catches errors earlier</li>
+<li><strong>Testing</strong>: Each method can be tested independently</li>
+<li><strong>Real-world parallel</strong>: This mirrors how actual e-commerce systems are designed</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="why-object-oriented-programming-matters" class="slide level2">
+<h2>🚀 Why object-oriented programming matters</h2>
+<ul>
+<li class="fragment"><strong><a href="https://docs.python.org/3/tutorial/classes.html#private-variables">Encapsulation</a></strong>: Bundle data and methods together, hide implementation details</li>
+<li class="fragment"><strong>Code reusability</strong>: Write once, use everywhere - create multiple cart instances</li>
+<li class="fragment"><strong>Maintainability</strong>: Changes to internal implementation don’t break external code</li>
+<li class="fragment"><strong>Collaboration</strong>: Team members can work on different classes independently</li>
+<li class="fragment"><strong>Industry standard</strong>: Every major framework (<a href="https://docs.djangoproject.com/en/stable/topics/class-based-views/">Django</a>, <a href="https://flask.palletsprojects.com/en/2.3.x/views/">Flask</a>, <a href="https://fastapi.tiangolo.com/tutorial/dependencies/classes-as-dependencies/">FastAPI</a>) uses OOP principles</li>
+</ul>
+<aside class="notes">
+<p><strong>TEACHING NOTES:</strong></p>
+<ul>
+<li><strong>Historical context</strong>: Alan Kay coined “object-oriented” in the 1960s, inspired by biological cells</li>
+<li><strong>Industry adoption</strong>: Google, Facebook, Netflix - all built on OOP principles</li>
+<li><strong>Career preparation</strong>: System design interviews often focus on class relationships</li>
+<li><strong>Python’s advantage</strong>: Clean syntax makes OOP concepts easier to learn than C++ or Java</li>
+<li><strong>Framework examples</strong>: Show how popular web frameworks use classes for views, models, etc.</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="what-is-a-class" class="slide level2">
+<h2>🏛️ What is a class?</h2>
+<ul>
+<li class="fragment">A <strong><a href="https://docs.python.org/3/tutorial/classes.html">class</a></strong> is a blueprint or template for creating objects</li>
+<li class="fragment">An <strong>object</strong> (or <strong>instance</strong>) is a specific item created from that class blueprint</li>
+<li class="fragment"><strong>Attributes</strong>: The data that belongs to an object (like variables)</li>
+<li class="fragment"><strong>Methods</strong>: The functions that operate on an object’s data</li>
+<li class="fragment"><strong>Analogy</strong>: A <code>Car</code> class is the blueprint; your specific Honda Civic is an object instance</li>
+</ul>
+<aside class="notes">
+<p><strong>TEACHING NOTES:</strong></p>
+<ul>
+<li><strong>Architecture parallel</strong>: Like architectural blueprints - one design, many houses</li>
+<li><strong>DNA analogy</strong>: DNA is the “class,” each organism is an “instance”</li>
+<li><strong>Cookie cutter</strong>: Class is the cutter, cookies are the instances</li>
+<li><strong>Programming languages</strong>: Show how this concept exists in Java, C#, JavaScript, etc.</li>
+<li><strong>Memory model</strong>: Classes define structure, instances occupy memory</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="the-__init__-method-object-construction" class="slide level2">
+<h2>🔧 The <code>__init__</code> method: Object construction</h2>
+<ul>
+<li class="fragment">The <strong><a href="https://docs.python.org/3/reference/datamodel.html#object.__init__"><code>__init__</code> method</a></strong> is a special constructor function</li>
+<li class="fragment"><strong>Automatic execution</strong>: Runs immediately when a new object is created</li>
+<li class="fragment"><strong>Purpose</strong>: Initialize the object’s attributes with starting values</li>
+<li class="fragment"><strong>The <code>self</code> parameter</strong>: References the specific instance being created</li>
+<li class="fragment"><strong>Convention</strong>: Always the first parameter in instance methods</li>
+</ul>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a></a><span class="kw">class</span> BankAccount:</span>
+<span id="cb3-2"><a></a>    <span class="co">"""Represents a bank account with balance tracking."""</span></span>
+<span id="cb3-3"><a></a></span>
+<span id="cb3-4"><a></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, account_holder: <span class="bu">str</span>, initial_balance: <span class="bu">float</span> <span class="op">=</span> <span class="fl">0.0</span>):</span>
+<span id="cb3-5"><a></a>        <span class="co"># Instance attributes - unique to each account</span></span>
+<span id="cb3-6"><a></a>        <span class="va">self</span>.account_holder <span class="op">=</span> account_holder</span>
+<span id="cb3-7"><a></a>        <span class="va">self</span>.balance <span class="op">=</span> initial_balance</span>
+<span id="cb3-8"><a></a>        <span class="va">self</span>.transaction_history <span class="op">=</span> []</span>
+<span id="cb3-9"><a></a></span>
+<span id="cb3-10"><a></a>    <span class="kw">def</span> deposit(<span class="va">self</span>, amount: <span class="bu">float</span>):</span>
+<span id="cb3-11"><a></a>        <span class="co">"""Add money to the account."""</span></span>
+<span id="cb3-12"><a></a>        <span class="va">self</span>.balance <span class="op">+=</span> amount</span>
+<span id="cb3-13"><a></a>        <span class="va">self</span>.transaction_history.append(<span class="ss">f"Deposited $</span><span class="sc">{</span>amount<span class="sc">:.2f}</span><span class="ss">"</span>)</span>
+<span id="cb3-14"><a></a></span>
+<span id="cb3-15"><a></a><span class="co"># Create specific account instances</span></span>
+<span id="cb3-16"><a></a>alice_account <span class="op">=</span> BankAccount(<span class="st">"Alice Johnson"</span>, <span class="fl">1000.0</span>)</span>
+<span id="cb3-17"><a></a>bob_account <span class="op">=</span> BankAccount(<span class="st">"Bob Smith"</span>)  <span class="co"># Uses default balance of 0.0</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<aside class="notes">
+<p><strong>TEACHING NOTES:</strong></p>
+<ul>
+<li><strong>Type hints</strong>: Emphasize modern Python practices with type annotations</li>
+<li><strong>Default parameters</strong>: Show flexibility in constructor design</li>
+<li><strong>Instance vs class</strong>: Each account has its own balance, independent of others</li>
+<li><strong>Real-world modeling</strong>: Bank accounts are perfect OOP examples students understand</li>
+<li><strong>Memory visualization</strong>: Draw how each instance has its own memory space</li>
+<li><strong>Common errors</strong>: Forgetting <code>self</code>, incorrect parameter order</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="the-__str__-method-human-readable-representation" class="slide level2">
+<h2>📝 The <code>__str__</code> method: Human-readable representation</h2>
+<ul>
+<li class="fragment">The <strong><a href="https://docs.python.org/3/reference/datamodel.html#object.__str__"><code>__str__</code> method</a></strong> defines how objects appear when printed</li>
+<li class="fragment"><strong>Automatic invocation</strong>: Called by <code>print()</code>, <code>str()</code>, and string formatting</li>
+<li class="fragment"><strong>User-friendly</strong>: Should return meaningful information for end users</li>
+<li class="fragment"><strong>AI assistant friendly</strong>: Perfect boilerplate code to generate with AI tools</li>
+<li class="fragment"><strong>Debugging essential</strong>: Makes testing and troubleshooting much easier</li>
+</ul>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a></a><span class="kw">class</span> User:</span>
+<span id="cb4-2"><a></a>    <span class="co">"""Represents a user in a social media application."""</span></span>
+<span id="cb4-3"><a></a></span>
+<span id="cb4-4"><a></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, username: <span class="bu">str</span>, email: <span class="bu">str</span>, join_date: <span class="bu">str</span>):</span>
+<span id="cb4-5"><a></a>        <span class="va">self</span>.username <span class="op">=</span> username</span>
+<span id="cb4-6"><a></a>        <span class="va">self</span>.email <span class="op">=</span> email</span>
+<span id="cb4-7"><a></a>        <span class="va">self</span>.join_date <span class="op">=</span> join_date</span>
+<span id="cb4-8"><a></a>        <span class="va">self</span>.followers <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb4-9"><a></a>        <span class="va">self</span>.is_verified <span class="op">=</span> <span class="va">False</span></span>
+<span id="cb4-10"><a></a></span>
+<span id="cb4-11"><a></a>    <span class="kw">def</span> <span class="fu">__str__</span>(<span class="va">self</span>) <span class="op">-&gt;</span> <span class="bu">str</span>:</span>
+<span id="cb4-12"><a></a>        <span class="co">"""Return a user-friendly string representation."""</span></span>
+<span id="cb4-13"><a></a>        verification <span class="op">=</span> <span class="st">"✓"</span> <span class="cf">if</span> <span class="va">self</span>.is_verified <span class="cf">else</span> <span class="st">""</span></span>
+<span id="cb4-14"><a></a>        <span class="cf">return</span> <span class="ss">f"@</span><span class="sc">{</span><span class="va">self</span><span class="sc">.</span>username<span class="sc">}{</span>verification<span class="sc">}</span><span class="ss"> (</span><span class="sc">{</span><span class="va">self</span><span class="sc">.</span>followers<span class="sc">}</span><span class="ss"> followers) - Joined </span><span class="sc">{</span><span class="va">self</span><span class="sc">.</span>join_date<span class="sc">}</span><span class="ss">"</span></span>
+<span id="cb4-15"><a></a></span>
+<span id="cb4-16"><a></a><span class="co"># Create and display user instances</span></span>
+<span id="cb4-17"><a></a>user1 <span class="op">=</span> User(<span class="st">"grace_hopper"</span>, <span class="st">"grace@example.com"</span>, <span class="st">"2023-01-15"</span>)</span>
+<span id="cb4-18"><a></a>user2 <span class="op">=</span> User(<span class="st">"ada_lovelace"</span>, <span class="st">"ada@example.com"</span>, <span class="st">"2023-02-20"</span>)</span>
+<span id="cb4-19"><a></a>user2.is_verified <span class="op">=</span> <span class="va">True</span></span>
+<span id="cb4-20"><a></a>user2.followers <span class="op">=</span> <span class="dv">50000</span></span>
+<span id="cb4-21"><a></a></span>
+<span id="cb4-22"><a></a><span class="bu">print</span>(user1)  <span class="co"># @grace_hopper (0 followers) - Joined 2023-01-15</span></span>
+<span id="cb4-23"><a></a><span class="bu">print</span>(user2)  <span class="co"># @ada_lovelace✓ (50000 followers) - Joined 2023-02-20</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<aside class="notes">
+<p><strong>TEACHING NOTES:</strong></p>
+<ul>
+<li><strong>Social media context</strong>: Students relate to Instagram/Twitter user profiles</li>
+<li><strong>String formatting</strong>: Show f-strings, <code>.format()</code>, and other approaches</li>
+<li><strong>Unicode symbols</strong>: Verification checkmarks make output more engaging</li>
+<li><strong>Debugging value</strong>: Good <code>__str__</code> methods save hours of debugging time</li>
+<li><strong>Professional practice</strong>: All production classes should have meaningful <code>__str__</code> methods</li>
+<li><strong>AI integration</strong>: Show how to prompt AI assistants for good <code>__str__</code> implementations</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="introducing-lab-06-part-1" class="slide level2">
+<h2>💡 Introducing Lab 06 (Part 1)</h2>
+<ul>
+<li class="fragment"><strong>Your mission</strong>: Create a <code>Book</code> class to model real-world books</li>
+<li class="fragment"><strong>AI partnership</strong>: Use AI assistants to help generate class structure and methods</li>
+<li class="fragment"><strong>Core concepts</strong>: Practice <code>__init__</code> constructors and <code>__str__</code> representations</li>
+<li class="fragment"><strong>Real-world modeling</strong>: Transform abstract concepts into concrete code</li>
+<li class="fragment"><strong>Foundation building</strong>: Prepares you for more complex OOP concepts</li>
+</ul>
+<aside class="notes">
+<p><strong>TEACHING NOTES:</strong></p>
+<ul>
+<li><strong>Lab connection</strong>: Direct tie-in to what students will implement</li>
+<li><strong>AI guidance</strong>: Encourage using AI tools as coding partners, not crutches</li>
+<li><strong>Scaffolding</strong>: Start simple, build complexity gradually</li>
+<li><strong>Assessment preparation</strong>: These fundamentals appear in every OOP assessment</li>
+<li><strong>Portfolio building</strong>: Good class design is essential for project portfolios</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level2">
+
+</section></section>
+<section>
+<section id="session-2-methods-inheritance" class="title-slide slide level1 center">
+<h1>Session 2: Methods &amp; inheritance</h1>
+
+</section>
+<section id="giving-objects-behavior-with-methods" class="slide level2">
+<h2>⚡ Giving objects behavior with methods</h2>
+<ul>
+<li class="fragment"><strong><a href="https://docs.python.org/3/tutorial/classes.html#method-objects">Methods</a></strong> are functions defined inside a class that operate on object data</li>
+<li class="fragment"><strong>Instance methods</strong>: Most common type, always take <code>self</code> as first parameter</li>
+<li class="fragment"><strong>Behavior modeling</strong>: Define what objects can <em>do</em>, not just what they <em>are</em></li>
+<li class="fragment"><strong>Encapsulation</strong>: Methods can access and modify private object state safely</li>
+<li class="fragment"><strong>State management</strong>: Methods ensure object data stays consistent and valid</li>
+</ul>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a></a><span class="kw">class</span> GameCharacter:</span>
+<span id="cb5-2"><a></a>    <span class="co">"""Represents a character in a role-playing game."""</span></span>
+<span id="cb5-3"><a></a></span>
+<span id="cb5-4"><a></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, name: <span class="bu">str</span>, health: <span class="bu">int</span> <span class="op">=</span> <span class="dv">100</span>):</span>
+<span id="cb5-5"><a></a>        <span class="va">self</span>.name <span class="op">=</span> name</span>
+<span id="cb5-6"><a></a>        <span class="va">self</span>.health <span class="op">=</span> health</span>
+<span id="cb5-7"><a></a>        <span class="va">self</span>.max_health <span class="op">=</span> health</span>
+<span id="cb5-8"><a></a>        <span class="va">self</span>.experience <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb5-9"><a></a>        <span class="va">self</span>.level <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb5-10"><a></a></span>
+<span id="cb5-11"><a></a>    <span class="kw">def</span> take_damage(<span class="va">self</span>, damage: <span class="bu">int</span>):</span>
+<span id="cb5-12"><a></a>        <span class="co">"""Reduce character health, ensuring it doesn't go below 0."""</span></span>
+<span id="cb5-13"><a></a>        <span class="va">self</span>.health <span class="op">=</span> <span class="bu">max</span>(<span class="dv">0</span>, <span class="va">self</span>.health <span class="op">-</span> damage)</span>
+<span id="cb5-14"><a></a>        <span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span><span class="va">self</span><span class="sc">.</span>name<span class="sc">}</span><span class="ss"> takes </span><span class="sc">{</span>damage<span class="sc">}</span><span class="ss"> damage! Health: </span><span class="sc">{</span><span class="va">self</span><span class="sc">.</span>health<span class="sc">}</span><span class="ss">/</span><span class="sc">{</span><span class="va">self</span><span class="sc">.</span>max_health<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb5-15"><a></a></span>
+<span id="cb5-16"><a></a>    <span class="kw">def</span> heal(<span class="va">self</span>, amount: <span class="bu">int</span>):</span>
+<span id="cb5-17"><a></a>        <span class="co">"""Restore character health, capped at maximum."""</span></span>
+<span id="cb5-18"><a></a>        old_health <span class="op">=</span> <span class="va">self</span>.health</span>
+<span id="cb5-19"><a></a>        <span class="va">self</span>.health <span class="op">=</span> <span class="bu">min</span>(<span class="va">self</span>.max_health, <span class="va">self</span>.health <span class="op">+</span> amount)</span>
+<span id="cb5-20"><a></a>        healed <span class="op">=</span> <span class="va">self</span>.health <span class="op">-</span> old_health</span>
+<span id="cb5-21"><a></a>        <span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span><span class="va">self</span><span class="sc">.</span>name<span class="sc">}</span><span class="ss"> heals for </span><span class="sc">{</span>healed<span class="sc">}</span><span class="ss"> points! Health: </span><span class="sc">{</span><span class="va">self</span><span class="sc">.</span>health<span class="sc">}</span><span class="ss">/</span><span class="sc">{</span><span class="va">self</span><span class="sc">.</span>max_health<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb5-22"><a></a></span>
+<span id="cb5-23"><a></a>    <span class="kw">def</span> gain_experience(<span class="va">self</span>, exp: <span class="bu">int</span>):</span>
+<span id="cb5-24"><a></a>        <span class="co">"""Add experience and level up if threshold is reached."""</span></span>
+<span id="cb5-25"><a></a>        <span class="va">self</span>.experience <span class="op">+=</span> exp</span>
+<span id="cb5-26"><a></a>        <span class="cf">if</span> <span class="va">self</span>.experience <span class="op">&gt;=</span> <span class="va">self</span>.level <span class="op">*</span> <span class="dv">100</span>:  <span class="co"># Simple leveling formula</span></span>
+<span id="cb5-27"><a></a>            <span class="va">self</span>.level <span class="op">+=</span> <span class="dv">1</span></span>
+<span id="cb5-28"><a></a>            <span class="va">self</span>.max_health <span class="op">+=</span> <span class="dv">20</span></span>
+<span id="cb5-29"><a></a>            <span class="va">self</span>.health <span class="op">=</span> <span class="va">self</span>.max_health  <span class="co"># Full heal on level up</span></span>
+<span id="cb5-30"><a></a>            <span class="bu">print</span>(<span class="ss">f"🎉 </span><span class="sc">{</span><span class="va">self</span><span class="sc">.</span>name<span class="sc">}</span><span class="ss"> reached level </span><span class="sc">{</span><span class="va">self</span><span class="sc">.</span>level<span class="sc">}</span><span class="ss">!"</span>)</span>
+<span id="cb5-31"><a></a></span>
+<span id="cb5-32"><a></a><span class="co"># Create and interact with a character</span></span>
+<span id="cb5-33"><a></a>hero <span class="op">=</span> GameCharacter(<span class="st">"Aria the Brave"</span>)</span>
+<span id="cb5-34"><a></a>hero.take_damage(<span class="dv">30</span>)</span>
+<span id="cb5-35"><a></a>hero.heal(<span class="dv">15</span>)</span>
+<span id="cb5-36"><a></a>hero.gain_experience(<span class="dv">150</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<aside class="notes">
+<p><strong>TEACHING NOTES:</strong></p>
+<ul>
+<li><strong>Gaming context</strong>: Students connect with RPG mechanics from popular games</li>
+<li><strong>State validation</strong>: Show how methods ensure data integrity (health can’t go negative)</li>
+<li><strong>Method chaining</strong>: Mention how some methods could return <code>self</code> for fluent APIs</li>
+<li><strong>Error handling</strong>: Could add validation for negative damage/healing amounts</li>
+<li><strong>Complex interactions</strong>: Show how multiple methods work together to create behavior</li>
+<li><strong>Real-world parallel</strong>: Similar to user profile management in social media apps</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="understanding-inheritance-code-reuse-at-scale" class="slide level2">
+<h2>🔗 Understanding inheritance: Code reuse at scale</h2>
+<ul>
+<li class="fragment"><strong><a href="https://docs.python.org/3/tutorial/classes.html#inheritance">Inheritance</a></strong> allows classes to inherit attributes and methods from parent classes</li>
+<li class="fragment"><strong>Code reuse</strong>: Write common functionality once, share across multiple related classes</li>
+<li class="fragment"><strong>“Is-a” relationships</strong>: Child classes are specialized versions of parent classes</li>
+<li class="fragment"><strong>Hierarchical design</strong>: Models real-world relationships naturally</li>
+<li class="fragment"><strong>Professional development</strong>: Essential for frameworks, libraries, and large codebases</li>
+</ul>
+<aside class="notes">
+<p><strong>TEACHING NOTES:</strong></p>
+<ul>
+<li><strong>Real-world examples</strong>: Vehicle → Car/Truck/Motorcycle, Animal → Dog/Cat/Bird</li>
+<li><strong>Framework usage</strong>: Django models, Flask views - all use inheritance extensively</li>
+<li><strong>Design principle</strong>: Favor composition over inheritance, but understand both</li>
+<li><strong>Interview topic</strong>: Inheritance vs composition is a common technical interview question</li>
+<li><strong>Code organization</strong>: Helps create logical, maintainable class hierarchies</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="implementing-inheritance-the-super-function" class="slide level2">
+<h2>🏗️ Implementing inheritance: The <code>super()</code> function</h2>
+<ul>
+<li class="fragment"><strong>Syntax</strong>: <code>class ChildClass(ParentClass):</code> establishes inheritance relationship</li>
+<li class="fragment"><strong><a href="https://docs.python.org/3/library/functions.html#super"><code>super()</code> function</a></strong>: Calls methods from the parent class</li>
+<li class="fragment"><strong>Constructor chaining</strong>: Child <code>__init__</code> must call parent <code>__init__</code> using <code>super()</code></li>
+<li class="fragment"><strong>Method override</strong>: Child classes can replace parent methods with specialized versions</li>
+<li class="fragment"><strong>Method extension</strong>: Or extend parent methods with additional functionality</li>
+</ul>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a></a><span class="kw">class</span> Vehicle:</span>
+<span id="cb6-2"><a></a>    <span class="co">"""Base class for all vehicles."""</span></span>
+<span id="cb6-3"><a></a></span>
+<span id="cb6-4"><a></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, make: <span class="bu">str</span>, model: <span class="bu">str</span>, year: <span class="bu">int</span>):</span>
+<span id="cb6-5"><a></a>        <span class="va">self</span>.make <span class="op">=</span> make</span>
+<span id="cb6-6"><a></a>        <span class="va">self</span>.model <span class="op">=</span> model</span>
+<span id="cb6-7"><a></a>        <span class="va">self</span>.year <span class="op">=</span> year</span>
+<span id="cb6-8"><a></a>        <span class="va">self</span>.mileage <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb6-9"><a></a></span>
+<span id="cb6-10"><a></a>    <span class="kw">def</span> start_engine(<span class="va">self</span>):</span>
+<span id="cb6-11"><a></a>        <span class="co">"""Start the vehicle's engine."""</span></span>
+<span id="cb6-12"><a></a>        <span class="bu">print</span>(<span class="ss">f"The </span><span class="sc">{</span><span class="va">self</span><span class="sc">.</span>year<span class="sc">}</span><span class="ss"> </span><span class="sc">{</span><span class="va">self</span><span class="sc">.</span>make<span class="sc">}</span><span class="ss"> </span><span class="sc">{</span><span class="va">self</span><span class="sc">.</span>model<span class="sc">}</span><span class="ss"> engine starts."</span>)</span>
+<span id="cb6-13"><a></a></span>
+<span id="cb6-14"><a></a>    <span class="kw">def</span> drive(<span class="va">self</span>, miles: <span class="bu">float</span>):</span>
+<span id="cb6-15"><a></a>        <span class="co">"""Drive the vehicle and update mileage."""</span></span>
+<span id="cb6-16"><a></a>        <span class="va">self</span>.mileage <span class="op">+=</span> miles</span>
+<span id="cb6-17"><a></a>        <span class="bu">print</span>(<span class="ss">f"Drove </span><span class="sc">{</span>miles<span class="sc">}</span><span class="ss"> miles. Total mileage: </span><span class="sc">{</span><span class="va">self</span><span class="sc">.</span>mileage<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb6-18"><a></a></span>
+<span id="cb6-19"><a></a><span class="kw">class</span> ElectricCar(Vehicle):</span>
+<span id="cb6-20"><a></a>    <span class="co">"""Electric vehicle with battery management."""</span></span>
+<span id="cb6-21"><a></a></span>
+<span id="cb6-22"><a></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, make: <span class="bu">str</span>, model: <span class="bu">str</span>, year: <span class="bu">int</span>, battery_capacity: <span class="bu">float</span>):</span>
+<span id="cb6-23"><a></a>        <span class="bu">super</span>().<span class="fu">__init__</span>(make, model, year)  <span class="co"># Call parent constructor</span></span>
+<span id="cb6-24"><a></a>        <span class="va">self</span>.battery_capacity <span class="op">=</span> battery_capacity</span>
+<span id="cb6-25"><a></a>        <span class="va">self</span>.battery_level <span class="op">=</span> <span class="fl">100.0</span>  <span class="co"># Start fully charged</span></span>
+<span id="cb6-26"><a></a></span>
+<span id="cb6-27"><a></a>    <span class="kw">def</span> start_engine(<span class="va">self</span>):</span>
+<span id="cb6-28"><a></a>        <span class="co">"""Override: Electric cars don't have traditional engines."""</span></span>
+<span id="cb6-29"><a></a>        <span class="bu">print</span>(<span class="ss">f"The </span><span class="sc">{</span><span class="va">self</span><span class="sc">.</span>year<span class="sc">}</span><span class="ss"> </span><span class="sc">{</span><span class="va">self</span><span class="sc">.</span>make<span class="sc">}</span><span class="ss"> </span><span class="sc">{</span><span class="va">self</span><span class="sc">.</span>model<span class="sc">}</span><span class="ss"> powers on silently."</span>)</span>
+<span id="cb6-30"><a></a></span>
+<span id="cb6-31"><a></a>    <span class="kw">def</span> charge(<span class="va">self</span>, hours: <span class="bu">float</span>):</span>
+<span id="cb6-32"><a></a>        <span class="co">"""Charge the battery (unique to electric cars)."""</span></span>
+<span id="cb6-33"><a></a>        charge_added <span class="op">=</span> <span class="bu">min</span>(hours <span class="op">*</span> <span class="dv">10</span>, <span class="dv">100</span> <span class="op">-</span> <span class="va">self</span>.battery_level)</span>
+<span id="cb6-34"><a></a>        <span class="va">self</span>.battery_level <span class="op">+=</span> charge_added</span>
+<span id="cb6-35"><a></a>        <span class="bu">print</span>(<span class="ss">f"Charged for </span><span class="sc">{</span>hours<span class="sc">}</span><span class="ss"> hours. Battery: </span><span class="sc">{</span><span class="va">self</span><span class="sc">.</span>battery_level<span class="sc">:.1f}</span><span class="ss">%"</span>)</span>
+<span id="cb6-36"><a></a></span>
+<span id="cb6-37"><a></a><span class="co"># Inheritance in action</span></span>
+<span id="cb6-38"><a></a>tesla <span class="op">=</span> ElectricCar(<span class="st">"Tesla"</span>, <span class="st">"Model S"</span>, <span class="dv">2023</span>, <span class="fl">100.0</span>)</span>
+<span id="cb6-39"><a></a>tesla.start_engine()  <span class="co"># Uses overridden method</span></span>
+<span id="cb6-40"><a></a>tesla.drive(<span class="dv">50</span>)       <span class="co"># Uses inherited method</span></span>
+<span id="cb6-41"><a></a>tesla.charge(<span class="dv">2</span>)       <span class="co"># Uses unique method</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<aside class="notes">
+<p><strong>TEACHING NOTES:</strong></p>
+<ul>
+<li><strong>Method resolution</strong>: Python searches child class first, then parent</li>
+<li><strong>super() benefits</strong>: Maintainable, handles multiple inheritance correctly</li>
+<li><strong>Override vs extend</strong>: Show both patterns - complete replacement vs enhancement</li>
+<li><strong>Real-world modeling</strong>: Vehicle hierarchy is intuitive for students</li>
+<li><strong>Code reuse demonstration</strong>: Show how much code is shared vs specialized</li>
+<li><strong>Common mistakes</strong>: Forgetting super() call, incorrect parameter passing</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="advanced-oop-concepts-preview" class="slide level2">
+<h2>🎯 Advanced OOP concepts preview</h2>
+<ul>
+<li class="fragment"><strong><a href="https://docs.python.org/3/tutorial/classes.html#class-and-instance-variables">Class variables</a></strong>: Shared data across all instances of a class</li>
+<li class="fragment"><strong><a href="https://docs.python.org/3/library/functions.html#property">Properties</a></strong>: Computed attributes using <code>@property</code> decorator</li>
+<li class="fragment"><strong><a href="https://docs.python.org/3/library/functions.html#classmethod">Class methods</a></strong>: Methods that operate on the class itself, not instances</li>
+<li class="fragment"><strong><a href="https://docs.python.org/3/library/functions.html#staticmethod">Static methods</a></strong>: Utility functions that belong logically to the class</li>
+<li class="fragment"><strong>Multiple inheritance</strong>: Inheriting from multiple parent classes (advanced topic)</li>
+</ul>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a></a><span class="kw">class</span> Product:</span>
+<span id="cb7-2"><a></a>    <span class="co">"""Represents a product in an inventory system."""</span></span>
+<span id="cb7-3"><a></a></span>
+<span id="cb7-4"><a></a>    <span class="co"># Class variable - shared across all instances</span></span>
+<span id="cb7-5"><a></a>    total_products_created <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb7-6"><a></a></span>
+<span id="cb7-7"><a></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, name: <span class="bu">str</span>, price: <span class="bu">float</span>):</span>
+<span id="cb7-8"><a></a>        <span class="va">self</span>.name <span class="op">=</span> name</span>
+<span id="cb7-9"><a></a>        <span class="va">self</span>._price <span class="op">=</span> price  <span class="co"># Private attribute (convention)</span></span>
+<span id="cb7-10"><a></a>        Product.total_products_created <span class="op">+=</span> <span class="dv">1</span></span>
+<span id="cb7-11"><a></a></span>
+<span id="cb7-12"><a></a>    <span class="at">@property</span></span>
+<span id="cb7-13"><a></a>    <span class="kw">def</span> price(<span class="va">self</span>) <span class="op">-&gt;</span> <span class="bu">float</span>:</span>
+<span id="cb7-14"><a></a>        <span class="co">"""Get the product price."""</span></span>
+<span id="cb7-15"><a></a>        <span class="cf">return</span> <span class="va">self</span>._price</span>
+<span id="cb7-16"><a></a></span>
+<span id="cb7-17"><a></a>    <span class="at">@price.setter</span></span>
+<span id="cb7-18"><a></a>    <span class="kw">def</span> price(<span class="va">self</span>, value: <span class="bu">float</span>):</span>
+<span id="cb7-19"><a></a>        <span class="co">"""Set the product price with validation."""</span></span>
+<span id="cb7-20"><a></a>        <span class="cf">if</span> value <span class="op">&lt;</span> <span class="dv">0</span>:</span>
+<span id="cb7-21"><a></a>            <span class="cf">raise</span> <span class="pp">ValueError</span>(<span class="st">"Price cannot be negative"</span>)</span>
+<span id="cb7-22"><a></a>        <span class="va">self</span>._price <span class="op">=</span> value</span>
+<span id="cb7-23"><a></a></span>
+<span id="cb7-24"><a></a>    <span class="at">@classmethod</span></span>
+<span id="cb7-25"><a></a>    <span class="kw">def</span> get_total_products(cls) <span class="op">-&gt;</span> <span class="bu">int</span>:</span>
+<span id="cb7-26"><a></a>        <span class="co">"""Return total number of products created."""</span></span>
+<span id="cb7-27"><a></a>        <span class="cf">return</span> cls.total_products_created</span>
+<span id="cb7-28"><a></a></span>
+<span id="cb7-29"><a></a>    <span class="at">@staticmethod</span></span>
+<span id="cb7-30"><a></a>    <span class="kw">def</span> calculate_tax(price: <span class="bu">float</span>, tax_rate: <span class="bu">float</span> <span class="op">=</span> <span class="fl">0.08</span>) <span class="op">-&gt;</span> <span class="bu">float</span>:</span>
+<span id="cb7-31"><a></a>        <span class="co">"""Calculate tax amount for a given price."""</span></span>
+<span id="cb7-32"><a></a>        <span class="cf">return</span> price <span class="op">*</span> tax_rate</span>
+<span id="cb7-33"><a></a></span>
+<span id="cb7-34"><a></a><span class="co"># Advanced features in action</span></span>
+<span id="cb7-35"><a></a>laptop <span class="op">=</span> Product(<span class="st">"Gaming Laptop"</span>, <span class="fl">1299.99</span>)</span>
+<span id="cb7-36"><a></a>mouse <span class="op">=</span> Product(<span class="st">"Wireless Mouse"</span>, <span class="fl">79.99</span>)</span>
+<span id="cb7-37"><a></a></span>
+<span id="cb7-38"><a></a><span class="bu">print</span>(<span class="ss">f"Total products: </span><span class="sc">{</span>Product<span class="sc">.</span>get_total_products()<span class="sc">}</span><span class="ss">"</span>)  <span class="co"># Class method</span></span>
+<span id="cb7-39"><a></a><span class="bu">print</span>(<span class="ss">f"Tax on laptop: $</span><span class="sc">{</span>Product<span class="sc">.</span>calculate_tax(laptop.price)<span class="sc">:.2f}</span><span class="ss">"</span>)  <span class="co"># Static method</span></span>
+<span id="cb7-40"><a></a></span>
+<span id="cb7-41"><a></a><span class="co"># Property with validation</span></span>
+<span id="cb7-42"><a></a><span class="co"># laptop.price = -100  # Would raise ValueError</span></span>
+<span id="cb7-43"><a></a>laptop.price <span class="op">=</span> <span class="fl">1199.99</span>  <span class="co"># Valid price change</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<aside class="notes">
+<p><strong>TEACHING NOTES:</strong></p>
+<ul>
+<li><strong>Class variables</strong>: Useful for counters, configuration, shared resources</li>
+<li><strong>Properties</strong>: Essential for data validation and computed attributes</li>
+<li><strong>Method types</strong>: Explain when to use each type of method</li>
+<li><strong>Naming conventions</strong>: Leading underscore indicates “private” (by convention)</li>
+<li><strong>Advanced topics</strong>: These concepts appear in professional Python codebases</li>
+<li><strong>Framework examples</strong>: Django models use all these concepts extensively</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="real-world-applications-where-oop-shines" class="slide level2">
+<h2>🎨 Real-world applications: Where OOP shines</h2>
+<ul>
+<li class="fragment"><strong>Web development</strong>: <a href="https://docs.djangoproject.com/en/stable/topics/db/models/">Django models</a>, <a href="https://fastapi.tiangolo.com/tutorial/dependencies/classes-as-dependencies/">FastAPI dependencies</a></li>
+<li class="fragment"><strong>Game development</strong>: Characters, items, game states, collision systems</li>
+<li class="fragment"><strong>Financial systems</strong>: Accounts, transactions, portfolios, risk calculations</li>
+<li class="fragment"><strong>Data science</strong>: Custom data structures, machine learning pipelines</li>
+<li class="fragment"><strong>Desktop applications</strong>: UI components, event handling, application state</li>
+</ul>
+<aside class="notes">
+<p><strong>TEACHING NOTES:</strong></p>
+<ul>
+<li><strong>Career paths</strong>: Show how OOP applies to different programming specializations</li>
+<li><strong>Industry examples</strong>: GitHub (repositories as objects), Netflix (user profiles, content)</li>
+<li><strong>Design patterns</strong>: Mention that design patterns are built on OOP principles</li>
+<li><strong>Framework architecture</strong>: Most modern frameworks are object-oriented at their core</li>
+<li><strong>Portfolio projects</strong>: Encourage students to think in objects for their projects</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="computer-science-pioneers-oop-visionaries" class="slide level2">
+<h2>📚 Computer science pioneers: OOP visionaries</h2>
+<ul>
+<li class="fragment"><strong><a href="https://en.wikipedia.org/wiki/Alan_Kay">Alan Kay</a></strong> (1940-): Coined “object-oriented programming,” created Smalltalk</li>
+<li class="fragment"><strong><a href="https://en.wikipedia.org/wiki/Kristen_Nygaard">Kristen Nygaard</a></strong> (1926-2002): Co-invented Simula, the first OOP language</li>
+<li class="fragment"><strong><a href="https://en.wikipedia.org/wiki/Ole-Johan_Dahl">Ole-Johan Dahl</a></strong> (1931-2002): Co-creator of Simula, Turing Award winner</li>
+<li class="fragment"><strong>Legacy</strong>: Their ideas revolutionized software development and enabled modern applications</li>
+<li class="fragment"><strong>Philosophy</strong>: “Objects are not just data structures, they are living entities that communicate”</li>
+</ul>
+<aside class="notes">
+<p><strong>TEACHING NOTES:</strong></p>
+<ul>
+<li><strong>Historical context</strong>: OOP emerged from simulation needs (Simula = simulation language)</li>
+<li><strong>Alan Kay’s vision</strong>: Inspired by biological cells communicating via messages</li>
+<li><strong>Smalltalk influence</strong>: Influenced Java, C#, Python, and modern language design</li>
+<li><strong>Turing Awards</strong>: Both Nygaard and Dahl received computing’s highest honor</li>
+<li><strong>Modern relevance</strong>: Their 1960s insights still guide today’s software architecture</li>
+<li><strong>Diversity note</strong>: Highlight contributions of international computer scientists</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="introducing-lab-06-part-2" class="slide level2">
+<h2>🎯 Introducing Lab 06 (Part 2)</h2>
+<ul>
+<li class="fragment"><strong>Build on Part 1</strong>: Extend your <code>Book</code> class with meaningful methods</li>
+<li class="fragment"><strong>Inheritance practice</strong>: Create an <code>EBook</code> class that inherits from <code>Book</code></li>
+<li class="fragment"><strong>Method override</strong>: Customize <code>__str__</code> method in the child class</li>
+<li class="fragment"><strong>Real-world skills</strong>: These patterns appear in every professional codebase</li>
+<li class="fragment"><strong>AI collaboration</strong>: Use AI assistants to explore different implementation approaches</li>
+</ul>
+<aside class="notes">
+<p><strong>TEACHING NOTES:</strong></p>
+<ul>
+<li><strong>Scaffolding</strong>: Part 2 builds naturally on Part 1 concepts</li>
+<li><strong>Practical application</strong>: Book/EBook relationship is intuitive for students</li>
+<li><strong>Assessment alignment</strong>: Lab directly prepares for upcoming assessments</li>
+<li><strong>AI guidance</strong>: Encourage experimentation with different AI prompts</li>
+<li><strong>Code quality</strong>: Emphasize clean, readable, well-documented code</li>
+<li><strong>Testing mindset</strong>: Suggest testing each method as they implement it</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="looking-ahead-oop-in-practice" class="slide level2">
+<h2>🚀 Looking ahead: OOP in practice</h2>
+<ul>
+<li class="fragment"><strong>Next week</strong>: Working with data - APIs, JSON, and object serialization</li>
+<li class="fragment"><strong>Project applications</strong>: Your midterm projects will benefit from OOP design</li>
+<li class="fragment"><strong>Industry preparation</strong>: System design interviews focus on class relationships</li>
+<li class="fragment"><strong>Continuous learning</strong>: Explore design patterns, SOLID principles, architectural patterns</li>
+<li class="fragment"><strong>AI enhancement</strong>: Use AI tools to refine your OOP designs and implementations</li>
+</ul>
+<aside class="notes">
+<p><strong>TEACHING NOTES:</strong></p>
+<ul>
+<li><strong>Course integration</strong>: Connect to upcoming topics and projects</li>
+<li><strong>Career preparation</strong>: Mention system design interviews at tech companies</li>
+<li><strong>Advanced concepts</strong>: SOLID principles, design patterns for motivated students</li>
+<li><strong>AI integration</strong>: Show how AI can help with architectural decisions</li>
+<li><strong>Portfolio development</strong>: Good OOP skills are essential for impressive projects</li>
+<li><strong>Industry trends</strong>: Mention modern patterns like composition over inheritance</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="summary-key-takeaways" class="slide level2">
+<h2>📋 Summary: Key takeaways</h2>
+<ul>
+<li class="fragment"><strong>OOP motivation</strong>: Solves complex state management problems that functions can’t handle elegantly</li>
+<li class="fragment"><strong>Core concepts</strong>: Classes (blueprints), objects (instances), attributes (data), methods (behavior)</li>
+<li class="fragment"><strong>Essential methods</strong>: <code>__init__</code> for construction, <code>__str__</code> for representation</li>
+<li class="fragment"><strong>Inheritance</strong>: Enables code reuse and hierarchical relationships</li>
+<li class="fragment"><strong>Real-world relevance</strong>: Every major application and framework uses OOP principles</li>
+</ul>
+<aside class="notes">
+<p><strong>TEACHING NOTES:</strong></p>
+<ul>
+<li><strong>Concept reinforcement</strong>: Emphasize the most important takeaways</li>
+<li><strong>Practical application</strong>: Remind students how this applies to their lab work</li>
+<li><strong>Confidence building</strong>: Students should feel ready to tackle Lab 06</li>
+<li><strong>Next session prep</strong>: Brief mention of what’s coming in Session 2</li>
+<li><strong>Office hours</strong>: Encourage questions about OOP concepts or lab implementation</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+
+
+</section></section>
+    </div>
+  <div class="quarto-auto-generated-content" style="display: none;">
+<div class="footer footer-default">
+
+</div>
+</div></div>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script>
+  <script src="../site_libs/revealjs/dist/reveal.js"></script>
+  <!-- reveal.js plugins -->
+  <script src="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="../site_libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="../site_libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="../site_libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="../site_libs/revealjs/plugin/quarto-support/support.js"></script>
+  
+
+  <script src="../site_libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="../site_libs/revealjs/plugin/search/search.js"></script>
+  <script src="../site_libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="../site_libs/revealjs/plugin/math/math.js"></script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://revealjs.com/config/
+      Reveal.initialize({
+'controlsAuto': true,
+'previewLinksAuto': false,
+'pdfSeparateFragments': false,
+'autoAnimateEasing': "ease",
+'autoAnimateDuration': 1,
+'autoAnimateUnmatched': true,
+'jumpToSlide': true,
+'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\"><kbd>r</kbd> Scroll View Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
+'smaller': false,
+ 
+        // Display controls in the bottom right corner
+        controls: false,
+
+        // Help the user learn the controls by providing hints, for example by
+        // bouncing the down arrow when they first encounter a vertical slide
+        controlsTutorial: false,
+
+        // Determines where controls appear, "edges" or "bottom-right"
+        controlsLayout: 'edges',
+
+        // Visibility rule for backwards navigation arrows; "faded", "hidden"
+        // or "visible"
+        controlsBackArrows: 'faded',
+
+        // Display a presentation progress bar
+        progress: true,
+
+        // Display the page number of the current slide
+        slideNumber: false,
+
+        // 'all', 'print', or 'speaker'
+        showSlideNumber: 'all',
+
+        // Add the current slide number to the URL hash so that reloading the
+        // page/copying the URL will return you to the same slide
+        hash: true,
+
+        // Start with 1 for the hash rather than 0
+        hashOneBasedIndex: false,
+
+        // Flags if we should monitor the hash and change slides accordingly
+        respondToHashChanges: true,
+
+        // Push each slide change to the browser history
+        history: true,
+
+        // Enable keyboard shortcuts for navigation
+        keyboard: true,
+
+        // Enable the slide overview mode
+        overview: true,
+
+        // Disables the default reveal.js slide layout (scaling and centering)
+        // so that you can use custom CSS layout
+        disableLayout: false,
+
+        // Vertical centering of slides
+        center: false,
+
+        // Enables touch navigation on devices with touch input
+        touch: true,
+
+        // Loop the presentation
+        loop: false,
+
+        // Change the presentation direction to be RTL
+        rtl: false,
+
+        // see https://revealjs.com/vertical-slides/#navigation-mode
+        navigationMode: 'linear',
+
+        // Randomizes the order of slides each time the presentation loads
+        shuffle: false,
+
+        // Turns fragments on and off globally
+        fragments: true,
+
+        // Flags whether to include the current fragment in the URL,
+        // so that reloading brings you to the same fragment position
+        fragmentInURL: false,
+
+        // Flags if the presentation is running in an embedded mode,
+        // i.e. contained within a limited portion of the screen
+        embedded: false,
+
+        // Flags if we should show a help overlay when the questionmark
+        // key is pressed
+        help: true,
+
+        // Flags if it should be possible to pause the presentation (blackout)
+        pause: true,
+
+        // Flags if speaker notes should be visible to all viewers
+        showNotes: false,
+
+        // Global override for autoplaying embedded media (null/true/false)
+        autoPlayMedia: null,
+
+        // Global override for preloading lazy-loaded iframes (null/true/false)
+        preloadIframes: null,
+
+        // Number of milliseconds between automatically proceeding to the
+        // next slide, disabled when set to 0, this value can be overwritten
+        // by using a data-autoslide attribute on your slides
+        autoSlide: 0,
+
+        // Stop auto-sliding after user input
+        autoSlideStoppable: true,
+
+        // Use this method for navigation when auto-sliding
+        autoSlideMethod: null,
+
+        // Specify the average time in seconds that you think you will spend
+        // presenting each slide. This is used to show a pacing timer in the
+        // speaker view
+        defaultTiming: null,
+
+        // Enable slide navigation via mouse wheel
+        mouseWheel: false,
+
+        // The display mode that will be used to show slides
+        display: 'block',
+
+        // Hide cursor if inactive
+        hideInactiveCursor: true,
+
+        // Time before the cursor is hidden (in ms)
+        hideCursorTime: 5000,
+
+        // Opens links in an iframe preview overlay
+        previewLinks: false,
+
+        // Transition style (none/fade/slide/convex/concave/zoom)
+        transition: 'fade',
+
+        // Transition speed (default/fast/slow)
+        transitionSpeed: 'default',
+
+        // Transition style for full page slide backgrounds
+        // (none/fade/slide/convex/concave/zoom)
+        backgroundTransition: 'none',
+
+        // Number of slides away from the current that are visible
+        viewDistance: 3,
+
+        // Number of slides away from the current that are visible on mobile
+        // devices. It is advisable to set this to a lower number than
+        // viewDistance in order to save resources.
+        mobileViewDistance: 2,
+
+        // The "normal" size of the presentation, aspect ratio will be preserved
+        // when the presentation is scaled to fit different resolutions. Can be
+        // specified using percentage units.
+        width: 1050,
+
+        height: 700,
+
+        // Factor of the display size that should remain empty around the content
+        margin: 0.1,
+
+        math: {
+          mathjax: 'https://cdn.jsdelivr.net/npm/mathjax@2.7.9/MathJax.js',
+          config: 'TeX-AMS_HTML-full',
+          tex2jax: {
+            inlineMath: [['\\(','\\)']],
+            displayMath: [['\\[','\\]']],
+            balanceBraces: true,
+            processEscapes: false,
+            processRefs: true,
+            processEnvironments: true,
+            preview: 'TeX',
+            skipTags: ['script','noscript','style','textarea','pre','code'],
+            ignoreClass: 'tex2jax_ignore',
+            processClass: 'tex2jax_process'
+          },
+        },
+
+        // reveal.js plugins
+        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, QuartoSupport,
+
+          RevealMath,
+          RevealNotes,
+          RevealSearch,
+          RevealZoom
+        ]
+      });
+    </script>
+    <script id="quarto-html-after-body" type="application/javascript">
+      window.document.addEventListener("DOMContentLoaded", function (event) {
+        const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
+        tabsets.forEach(function(tabset) {
+          const tabby = new Tabby('#' + tabset.id);
+        });
+        const isCodeAnnotation = (el) => {
+          for (const clz of el.classList) {
+            if (clz.startsWith('code-annotation-')) {                     
+              return true;
+            }
+          }
+          return false;
+        }
+        const onCopySuccess = function(e) {
+          // button target
+          const button = e.trigger;
+          // don't keep focus
+          button.blur();
+          // flash "checked"
+          button.classList.add('code-copy-button-checked');
+          var currentTitle = button.getAttribute("title");
+          button.setAttribute("title", "Copied!");
+          let tooltip;
+          if (window.bootstrap) {
+            button.setAttribute("data-bs-toggle", "tooltip");
+            button.setAttribute("data-bs-placement", "left");
+            button.setAttribute("data-bs-title", "Copied!");
+            tooltip = new bootstrap.Tooltip(button, 
+              { trigger: "manual", 
+                customClass: "code-copy-button-tooltip",
+                offset: [0, -8]});
+            tooltip.show();    
+          }
+          setTimeout(function() {
+            if (tooltip) {
+              tooltip.hide();
+              button.removeAttribute("data-bs-title");
+              button.removeAttribute("data-bs-toggle");
+              button.removeAttribute("data-bs-placement");
+            }
+            button.setAttribute("title", currentTitle);
+            button.classList.remove('code-copy-button-checked');
+          }, 1000);
+          // clear code selection
+          e.clearSelection();
+        }
+        const getTextToCopy = function(trigger) {
+          const outerScaffold = trigger.parentElement.cloneNode(true);
+          const codeEl = outerScaffold.querySelector('code');
+          for (const childEl of codeEl.children) {
+            if (isCodeAnnotation(childEl)) {
+              childEl.remove();
+            }
+          }
+          return codeEl.innerText;
+        }
+        const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+          text: getTextToCopy
+        });
+        clipboard.on('success', onCopySuccess);
+        if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+          const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+            text: getTextToCopy,
+            container: window.document.getElementById('quarto-embedded-source-code-modal')
+          });
+          clipboardModal.on('success', onCopySuccess);
+        }
+          var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+          var mailtoRegex = new RegExp(/^mailto:/);
+            var filterRegex = new RegExp("https:\/\/bgreenwell\.github\.io\/is4010-website\/");
+          var isInternal = (href) => {
+              return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+          }
+          // Inspect non-navigation links and adorn them if external
+         var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+          for (var i=0; i<links.length; i++) {
+            const link = links[i];
+            if (!isInternal(link.href)) {
+              // undo the damage that might have been done by quarto-nav.js in the case of
+              // links that we want to consider external
+              if (link.dataset.originalHref !== undefined) {
+                link.href = link.dataset.originalHref;
+              }
+            }
+          }
+        function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+          const config = {
+            allowHTML: true,
+            maxWidth: 500,
+            delay: 100,
+            arrow: false,
+            appendTo: function(el) {
+                return el.closest('section.slide') || el.parentElement;
+            },
+            interactive: true,
+            interactiveBorder: 10,
+            theme: 'light-border',
+            placement: 'bottom-start',
+          };
+          if (contentFn) {
+            config.content = contentFn;
+          }
+          if (onTriggerFn) {
+            config.onTrigger = onTriggerFn;
+          }
+          if (onUntriggerFn) {
+            config.onUntrigger = onUntriggerFn;
+          }
+            config['offset'] = [0,0];
+            config['maxWidth'] = 700;
+          window.tippy(el, config); 
+        }
+        const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+        for (var i=0; i<noterefs.length; i++) {
+          const ref = noterefs[i];
+          tippyHover(ref, function() {
+            // use id or data attribute instead here
+            let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+            try { href = new URL(href).hash; } catch {}
+            const id = href.replace(/^#\/?/, "");
+            const note = window.document.getElementById(id);
+            if (note) {
+              return note.innerHTML;
+            } else {
+              return "";
+            }
+          });
+        }
+        const findCites = (el) => {
+          const parentEl = el.parentElement;
+          if (parentEl) {
+            const cites = parentEl.dataset.cites;
+            if (cites) {
+              return {
+                el,
+                cites: cites.split(' ')
+              };
+            } else {
+              return findCites(el.parentElement)
+            }
+          } else {
+            return undefined;
+          }
+        };
+        var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+        for (var i=0; i<bibliorefs.length; i++) {
+          const ref = bibliorefs[i];
+          const citeInfo = findCites(ref);
+          if (citeInfo) {
+            tippyHover(citeInfo.el, function() {
+              var popup = window.document.createElement('div');
+              citeInfo.cites.forEach(function(cite) {
+                var citeDiv = window.document.createElement('div');
+                citeDiv.classList.add('hanging-indent');
+                citeDiv.classList.add('csl-entry');
+                var biblioDiv = window.document.getElementById('ref-' + cite);
+                if (biblioDiv) {
+                  citeDiv.innerHTML = biblioDiv.innerHTML;
+                }
+                popup.appendChild(citeDiv);
+              });
+              return popup.innerHTML;
+            });
+          }
+        }
+      });
+      </script>
+    
+
+</body></html>

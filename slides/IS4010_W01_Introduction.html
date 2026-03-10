@@ -1,0 +1,1028 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-html/tabby.min.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-4d9afe2b8d18ee9fa5d0d57b5ed4214d.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.8.27">
+
+  <meta name="author" content="Brandon M. Greenwell">
+  <title>IS 4010 - App Dev with AI – IS4010: AI-Enhanced Application Development</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="../site_libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="../site_libs/revealjs/dist/reveal.css">
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+      vertical-align: middle;
+    }
+    /* CSS for syntax highlighting */
+    html { -webkit-text-size-adjust: 100%; }
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+      }
+    pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+    div.sourceCode
+      { color: #f8f8f2;  }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #f8f8f2; } /* Normal */
+    code span.al { color: #f07178; } /* Alert */
+    code span.an { color: #d4d0ab; } /* Annotation */
+    code span.at { color: #00e0e0; } /* Attribute */
+    code span.bn { color: #d4d0ab; } /* BaseN */
+    code span.bu { color: #abe338; } /* BuiltIn */
+    code span.cf { color: #ffa07a; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #abe338; } /* Char */
+    code span.cn { color: #ffd700; } /* Constant */
+    code span.co { color: #f8f8f2; font-style: italic; } /* Comment */
+    code span.cv { color: #ffd700; } /* CommentVar */
+    code span.do { color: #f8f8f2; } /* Documentation */
+    code span.dt { color: #ffa07a; } /* DataType */
+    code span.dv { color: #d4d0ab; } /* DecVal */
+    code span.er { color: #f07178; text-decoration: underline; } /* Error */
+    code span.ex { color: #00e0e0; font-weight: bold; } /* Extension */
+    code span.fl { color: #d4d0ab; } /* Float */
+    code span.fu { color: #ffa07a; } /* Function */
+    code span.im { color: #abe338; } /* Import */
+    code span.in { color: #d4d0ab; } /* Information */
+    code span.kw { color: #ffa07a; font-weight: bold; } /* Keyword */
+    code span.op { color: #ffa07a; } /* Operator */
+    code span.ot { color: #00e0e0; } /* Other */
+    code span.pp { color: #dcc6e0; } /* Preprocessor */
+    code span.re { color: #00e0e0; background-color: #f8f8f2; } /* RegionMarker */
+    code span.sc { color: #abe338; } /* SpecialChar */
+    code span.ss { color: #abe338; } /* SpecialString */
+    code span.st { color: #abe338; } /* String */
+    code span.va { color: #00e0e0; } /* Variable */
+    code span.vs { color: #abe338; } /* VerbatimString */
+    code span.wa { color: #dcc6e0; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto-a1d3734469117662d4af4794742e8c15.css">
+  <link href="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="../site_libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <style type="text/css">
+    .reveal div.sourceCode {
+      margin: 0;
+      overflow: auto;
+    }
+    .reveal div.hanging-indent {
+      margin-left: 1em;
+      text-indent: -1em;
+    }
+    .reveal .slide:not(.center) {
+      height: 100%;
+    }
+    .reveal .slide.scrollable {
+      overflow-y: auto;
+    }
+    .reveal .footnotes {
+      height: 100%;
+      overflow-y: auto;
+    }
+    .reveal .slide .absolute {
+      position: absolute;
+      display: block;
+    }
+    .reveal .footnotes ol {
+      counter-reset: ol;
+      list-style-type: none; 
+      margin-left: 0;
+    }
+    .reveal .footnotes ol li:before {
+      counter-increment: ol;
+      content: counter(ol) ". "; 
+    }
+    .reveal .footnotes ol li > p:first-child {
+      display: inline-block;
+    }
+    .reveal .slide ul,
+    .reveal .slide ol {
+      margin-bottom: 0.5em;
+    }
+    .reveal .slide ul li,
+    .reveal .slide ol li {
+      margin-top: 0.4em;
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide ul[role="tablist"] li {
+      margin-bottom: 0;
+    }
+    .reveal .slide ul li > *:first-child,
+    .reveal .slide ol li > *:first-child {
+      margin-block-start: 0;
+    }
+    .reveal .slide ul li > *:last-child,
+    .reveal .slide ol li > *:last-child {
+      margin-block-end: 0;
+    }
+    .reveal .slide .columns:nth-child(3) {
+      margin-block-start: 0.8em;
+    }
+    .reveal blockquote {
+      box-shadow: none;
+    }
+    .reveal .tippy-content>* {
+      margin-top: 0.2em;
+      margin-bottom: 0.7em;
+    }
+    .reveal .tippy-content>*:last-child {
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide > img.stretch.quarto-figure-center,
+    .reveal .slide > img.r-stretch.quarto-figure-center {
+      display: block;
+      margin-left: auto;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-left,
+    .reveal .slide > img.r-stretch.quarto-figure-left  {
+      display: block;
+      margin-left: 0;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-right,
+    .reveal .slide > img.r-stretch.quarto-figure-right  {
+      display: block;
+      margin-left: auto;
+      margin-right: 0; 
+    }
+  </style>
+  <script src="../site_libs/quarto-diagram/mermaid.min.js"></script>
+  <script src="../site_libs/quarto-diagram/mermaid-init.js"></script>
+  <link href="../site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
+</head>
+<body class="quarto-dark">
+  <div class="reveal">
+    <div class="slides">
+
+<section id="title-slide" class="quarto-title-block center">
+  <h1 class="title">IS4010: AI-Enhanced Application Development</h1>
+  <p class="subtitle">Week 01</p>
+
+<div class="quarto-title-authors">
+<div class="quarto-title-author">
+<div class="quarto-title-author-name">
+Brandon M. Greenwell 
+</div>
+</div>
+</div>
+
+</section>
+<section>
+<section id="course-introduction" class="title-slide slide level1 center">
+<h1>Course introduction</h1>
+
+</section>
+<section id="about-me" class="slide level2">
+<h2>About me</h2>
+
+<img data-src="images/ollie_and_zoey.jpeg" class="r-stretch"><p>My <a href="https://github.com/bgreenwell">personal “website”</a></p>
+</section>
+<section id="the-software-world-has-changed" class="slide level2">
+<h2>The software world has changed 🌍</h2>
+<ul>
+<li class="fragment">AI code assistants (like <a href="https://github.com/features/copilot">GitHub Copilot</a>, <a href="https://claude.ai/code">Claude Code</a>, and <a href="https://ai.google.dev/gemini-api/docs/get-started/tutorial?lang=rest#start-command-line">Gemini CLI</a>) are no longer a novelty; they’re rapidly becoming a standard part of the professional developer’s toolkit.</li>
+<li class="fragment">Knowing how to use these tools effectively is becoming a required skill for new graduates.</li>
+<li class="fragment">Our goal is to make you proficient not just in a language, but in this new AI-augmented workflow.</li>
+</ul>
+</section>
+<section id="our-course-philosophy" class="slide level2">
+<h2>Our course philosophy 💭</h2>
+<ul>
+<li class="fragment">This course directly addresses the valid concerns of using AI in education.</li>
+<li class="fragment">We’ll use AI to handle boilerplate and accelerate development, not to do our thinking for us.</li>
+<li class="fragment"><strong>You’re the pilot! ✈️</strong> You’re responsible for every line of code, and you must understand, test, and be able to explain the code you submit.</li>
+<li class="fragment">We’ll critically examine where AI excels and where it fails, addressing issues like short-term memory, hallucinations, and repeatability.</li>
+</ul>
+</section>
+<section id="what-well-learn" class="slide level2">
+<h2>What we’ll learn 🎯</h2>
+<ul>
+<li class="fragment">Write clean, professional <a href="https://www.python.org/">Python</a> and <a href="https://www.rust-lang.org/">Rust</a> code.</li>
+<li class="fragment">Use <a href="https://git-scm.com/">Git</a> and <a href="https://github.com/">GitHub</a> for version control and collaboration.</li>
+<li class="fragment">Leverage AI code assistants to write, debug, and refactor code.</li>
+<li class="fragment">Build data-driven applications that interact with real-world APIs. 🌐</li>
+<li class="fragment">Create a unique portfolio project that showcases your skills to future employers. 💼</li>
+</ul>
+</section>
+<section id="our-roadmap" class="slide level2">
+<h2>Our roadmap 🗺️</h2>
+<ul>
+<li class="fragment"><strong>Foundations &amp; modern tooling</strong> (<a href="https://git-scm.com/">Git</a>, <a href="https://github.com/">GitHub</a>, AI assistants) (weeks 1-2)</li>
+<li class="fragment"><strong><a href="https://www.python.org/">Python</a> fundamentals with an AI partner</strong> (from basics to OOP) (weeks 3-6)</li>
+<li class="fragment"><strong>Building a Python application</strong> (APIs and the midterm project) (weeks 7-9)</li>
+<li class="fragment"><strong>New frontiers: <a href="https://www.rust-lang.org/">Rust</a></strong> (performance, safety, and a new ecosystem) (weeks 10-12)</li>
+<li class="fragment"><strong>Synthesis &amp; the final project</strong> (your portfolio piece) (weeks 13-14)</li>
+</ul>
+</section>
+<section id="key-course-components" class="slide level2">
+<h2>Key course components 📊</h2>
+<ul>
+<li class="fragment">Our grading is designed to reflect hands-on, applied skill.</li>
+<li class="fragment">Labs: 70%</li>
+<li class="fragment">Midterm (group) project: 15%</li>
+<li class="fragment">Final (group) project: 15%</li>
+<li class="fragment">Our primary communication channel will be our associated class channel in <a href="https://teams.microsoft.com/">Microsoft Teams</a>.</li>
+</ul>
+</section>
+<section id="important-course-links" class="slide level2">
+<h2>Important course links 🔗</h2>
+<ul>
+<li class="fragment"><strong>Course Canvas:</strong> <a href="https://uc.instructure.com/courses/1812798">uc.instructure.com</a> (grades, slides, labs, due dates, etc.)</li>
+<li class="fragment"><strong>Course repository:</strong> <a href="https://github.com/bgreenwell/is4010-course">GitHub template</a> (labs and projects)</li>
+<li class="fragment"><strong>Course syllabus:</strong> <a href="https://bgreenwell.github.io/is4010-instructor-materials/syllabus.html">Online syllabus</a> (always up-to-date)</li>
+<li class="fragment"><strong>Communication:</strong> <a href="https://teams.microsoft.com/l/team/19%3ASjdonOkpgQOXFJf6qmHIWfJIwzgKl-xvmnkNVUkg8k81%40thread.tacv2/conversations?groupId=5c3ca09e-ec41-473c-8395-ab28de92a041&amp;tenantId=f5222e6c-5fc6-48eb-8f03-73db18203b63">Microsoft Teams</a> (primary discussion, questions about the material, questions about the labs, etc.)</li>
+</ul>
+</section>
+<section id="the-final-project-your-portfolio-piece" class="slide level2">
+<h2>The final project: Your portfolio piece 🎨</h2>
+<ul>
+<li class="fragment">The culmination of this course is a student-choice final project.</li>
+<li class="fragment">You get to propose and build an application you’re passionate about.</li>
+<li class="fragment">The only major requirement is that it must meaningfully use Python, Rust, and our AI-driven workflow.</li>
+<li class="fragment">This is your chance to create something unique that you can proudly showcase.</li>
+</ul>
+</section>
+<section id="setup-fest" class="slide level2">
+<h2>Setup fest 🛠️</h2>
+<ul>
+<li>Time to get our hands dirty.</li>
+<li>We’ll now spend the rest of the session setting up our development environment.</li>
+<li><strong>Checklist:</strong> (follow the detailed <a href="https://github.com/bgreenwell/is4010-course/blob/main/resources/SETUP_GUIDE.md">Setup Guide</a>!!)
+<ul>
+<li>Install <a href="https://code.visualstudio.com/">Visual Studio Code</a></li>
+<li>Install <a href="https://www.python.org/downloads/">Python 3.10+</a></li>
+<li>Install <a href="https://git-scm.com/downloads">Git</a></li>
+<li>Install the <a href="https://rustup.rs/">Rust toolchain</a></li>
+<li><h2 id="install-gemini-cli-optional">Install <a href="https://github.com/google-gemini/gemini-cli?tab=readme-ov-file#quick-install">Gemini CLI</a> (optional)</h2></li>
+</ul></li>
+</ul>
+</section>
+<section id="how-to-know-its-working" class="slide level2">
+<h2>How to know it’s working ✅</h2>
+<ul>
+<li>Open your terminal or command prompt and run the following commands:
+<ul>
+<li><a href="https://git-scm.com/"><code>git --version</code></a></li>
+<li><a href="https://www.python.org/"><code>python --version</code></a> (or <code>python3 --version</code>)</li>
+<li><a href="https://rustup.rs/"><code>cargo --version</code></a></li>
+<li><a href="https://rustup.rs/"><code>gemini --version</code></a></li>
+</ul></li>
+<li>In VS Code, check for the GitHub Copilot icon in the bottom status bar.</li>
+<li>We’ll walk through this together.</li>
+</ul>
+</section>
+<section id="for-next-time" class="slide level2">
+<h2>For next time 📅</h2>
+<ul>
+<li class="fragment">Please ensure you’ve finished the complete setup before our next class.</li>
+<li class="fragment">Create your <a href="https://github.com/join">GitHub account</a> if you haven’t already.</li>
+<li class="fragment"><strong>Next session:</strong> we’ll dive deep into Git and GitHub, the foundation of collaborative software development.</li>
+</ul>
+</section>
+<section class="slide level2">
+
+</section></section>
+<section>
+<section id="version-control-with-git-github" class="title-slide slide level1 center">
+<h1>Version control with Git &amp; GitHub 📝</h1>
+
+</section>
+<section id="what-is-version-control" class="slide level2">
+<h2>What is version control? ⏰</h2>
+<ul>
+<li class="fragment">Think of it as a <a href="https://github.com/bgreenwell/timewarp/tree/main">time machine for your code</a>.</li>
+<li class="fragment">It tracks every single change you make to a project over time.</li>
+<li class="fragment">It lets you rewind to a previous version if you make a mistake or need to see an older state of the code.</li>
+<li class="fragment">It’s the absolute foundation for collaborating with other developers on a shared project.</li>
+</ul>
+</section>
+<section id="a-brief-history-of-version-control" class="slide level2">
+<h2>A brief history of version control 📚</h2>
+<ul>
+<li class="fragment"><strong>Early days (1970s-90s):</strong> <a href="https://www.gnu.org/software/rcs/">RCS</a>, <a href="https://en.wikipedia.org/wiki/Source_Code_Control_System">SCCS</a> - single files, no networking</li>
+<li class="fragment"><strong>Centralized era (2000s):</strong> <a href="https://subversion.apache.org/">Subversion (SVN)</a>, <a href="https://www.nongnu.org/cvs/">CVS</a> - single server, everyone syncs to it</li>
+<li class="fragment"><strong>Distributed revolution (2005):</strong> Git was created by <a href="https://www.reddit.com/r/linux/comments/vbvxiv/10_years_ago_today_linus_torvalds_to_nvidia_fu_you/?utm_source=share&amp;utm_medium=web3x&amp;utm_name=web3xcss&amp;utm_term=1&amp;utm_content=share_button">Linus Torvalds</a> for Linux kernel development
+<ul>
+<li class="fragment">Born out of frustration with existing tools for Linux development</li>
+<li class="fragment">Designed for speed, data integrity, and distributed workflows</li>
+</ul></li>
+<li class="fragment"><strong>Modern landscape:</strong> Git dominates (~90% market share), with hosting platforms competing on features</li>
+</ul>
+<aside class="notes">
+<p><strong>TEACHING NOTES:</strong></p>
+<ul>
+<li><strong>RCS/SCCS context:</strong> These were for individual developers - imagine saving “essay_v1.docx”, “essay_v2.docx” but automated</li>
+<li><strong>Centralized problems:</strong> If the SVN server went down, nobody could save their work! All collaboration stopped</li>
+<li><strong>Enter Linus Torvalds:</strong> Built Git in just 2 weeks after <a href="https://en.wikipedia.org/wiki/BitKeeper">BitKeeper</a> (previous tool) revoked free access. The link shows his famous “F you NVIDIA” moment - he’s known for strong opinions!</li>
+<li><strong>Why it matters:</strong> Understanding this history explains why Git feels complex - it was built by kernel developers for kernel developers</li>
+<li><strong>Modern dominance:</strong> Even Microsoft moved from their own TFS to Git - that’s when you know a technology won</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="version-control-systems" class="slide level2 smaller">
+<h2>Version control systems 📊</h2>
+<p><strong>Centralized vs.&nbsp;Distributed:</strong></p>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th><strong>Centralized (<a href="https://subversion.apache.org/">SVN</a>, <a href="https://www.nongnu.org/cvs/">CVS</a>)</strong></th>
+<th><strong>Distributed (<a href="https://git-scm.com/">Git</a>, <a href="https://www.mercurial-scm.org/">Mercurial</a>)</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Single source of truth</td>
+<td>Every copy is complete</td>
+</tr>
+<tr class="even">
+<td>Must be online to commit</td>
+<td>Work offline, sync later</td>
+</tr>
+<tr class="odd">
+<td>Simpler mental model</td>
+<td>More flexible workflows</td>
+</tr>
+<tr class="even">
+<td>Single point of failure</td>
+<td>Redundant by design</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li class="fragment"><strong>Why Git won:</strong> Speed, branching, offline capability, and Linux adoption</li>
+</ul>
+</section>
+<section id="git-hosting-platforms" class="slide level2 smaller">
+<h2>Git hosting platforms 🏠</h2>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th>Platform</th>
+<th>Strengths</th>
+<th>Best For</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong><a href="https://github.com/">GitHub</a></strong></td>
+<td>Largest community, excellent discoverability</td>
+<td>Open source, portfolio projects</td>
+</tr>
+<tr class="even">
+<td><strong><a href="https://gitlab.com/">GitLab</a></strong></td>
+<td>Integrated CI/CD, self-hosting</td>
+<td>Enterprise, DevOps workflows</td>
+</tr>
+<tr class="odd">
+<td><strong><a href="https://bitbucket.org/">Bitbucket</a></strong></td>
+<td>Atlassian integration (<a href="https://www.atlassian.com/software/jira">Jira</a>, <a href="https://www.atlassian.com/software/confluence">Confluence</a>)</td>
+<td>Teams using Atlassian tools</td>
+</tr>
+<tr class="even">
+<td><strong><a href="https://azure.microsoft.com/en-us/products/devops">Azure DevOps</a></strong></td>
+<td>Microsoft ecosystem integration</td>
+<td>.NET development, enterprise</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li class="fragment">All use Git under the hood - the collaboration features differ</li>
+<li class="fragment"><strong>For this course:</strong> We’ll use GitHub for its student-friendly features and industry relevance</li>
+</ul>
+</section>
+<section id="git-github" class="slide level2">
+<h2>Git 🆚 GitHub</h2>
+<ul>
+<li class="fragment">This is a common point of confusion.</li>
+<li class="fragment"><strong><a href="https://git-scm.com/">Git</a>:</strong> is the software tool that runs on your computer. It does the actual work of tracking changes. (Think of it like Microsoft Word.)</li>
+<li class="fragment"><strong><a href="https://github.com/">GitHub</a>:</strong> is a website that stores your Git projects in the cloud. It’s where you share your code and collaborate. (Think of it like OneDrive or Google Docs.)</li>
+</ul>
+</section>
+<section id="the-core-workflow" class="slide level2">
+<h2>The core workflow 🔄</h2>
+<ul>
+<li class="fragment"><strong>Remote (GitHub):</strong> a project lives on GitHub.</li>
+<li class="fragment"><strong><code>git clone</code>:</strong> you download a perfect copy to your local machine.</li>
+<li class="fragment"><strong>Local (your computer):</strong> you edit files, write code, and fix bugs.</li>
+<li class="fragment"><strong><code>git add</code> &amp; <code>git commit</code>:</strong> you save a snapshot (a commit) of your changes to your local history.</li>
+<li class="fragment"><strong><code>git push</code>:</strong> you upload your new commits from your computer back to GitHub.</li>
+</ul>
+</section>
+<section id="key-terminology" class="slide level2">
+<h2>Key terminology 📖</h2>
+<ul>
+<li class="fragment"><strong>Repository (repo):</strong> a folder that contains your project and its entire history.</li>
+<li class="fragment"><strong>Commit:</strong> a snapshot of your files at a specific point in time; a saved checkpoint.</li>
+<li class="fragment"><strong>Staging area:</strong> a temporary holding place where you gather the changes you want to include in your next commit.</li>
+<li class="fragment"><strong>Push:</strong> the command to send your committed changes from your local computer to GitHub.</li>
+</ul>
+</section>
+<section id="essential-git-commands" class="slide level2">
+<h2>Essential Git commands 🛠️</h2>
+<ul>
+<li class="fragment"><strong><code>git clone &lt;url&gt;</code></strong> - Download a repository from GitHub to your computer</li>
+<li class="fragment"><strong><code>git status</code></strong> - See what files have changed and what’s ready to commit</li>
+<li class="fragment"><strong><code>git add &lt;file&gt;</code></strong> - Stage specific files for your next commit</li>
+<li class="fragment"><strong><code>git add .</code></strong> - Stage ALL changed files for your next commit</li>
+<li class="fragment"><strong><code>git commit -m "message"</code></strong> - Save your staged changes with a descriptive message</li>
+<li class="fragment"><strong><code>git push</code></strong> - Send your commits from local to remote</li>
+</ul>
+</section>
+<section id="the-git-workflow-in-action" class="slide level2">
+<h2>The Git workflow in action 💻</h2>
+<p>Here’s what the commands actually look like:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a></a><span class="co"># Check what's changed</span></span>
+<span id="cb1-2"><a></a><span class="ex">$</span> git status</span>
+<span id="cb1-3"><a></a><span class="ex">On</span> branch main</span>
+<span id="cb1-4"><a></a><span class="ex">Changes</span> not staged for commit:</span>
+<span id="cb1-5"><a></a>  <span class="ex">modified:</span>   hello.py</span>
+<span id="cb1-6"><a></a></span>
+<span id="cb1-7"><a></a><span class="co"># Stage your changes</span></span>
+<span id="cb1-8"><a></a><span class="ex">$</span> git add hello.py</span>
+<span id="cb1-9"><a></a></span>
+<span id="cb1-10"><a></a><span class="co"># Commit with a message</span></span>
+<span id="cb1-11"><a></a><span class="ex">$</span> git commit <span class="at">-m</span> <span class="st">"Fix greeting message"</span></span>
+<span id="cb1-12"><a></a><span class="ex">[main</span> 1a2b3c4] Fix greeting message</span>
+<span id="cb1-13"><a></a> <span class="ex">1</span> file changed, 1 insertion<span class="er">(</span><span class="ex">+</span><span class="kw">)</span><span class="ex">,</span> 1 deletion<span class="er">(</span><span class="ex">-</span><span class="kw">)</span></span>
+<span id="cb1-14"><a></a></span>
+<span id="cb1-15"><a></a><span class="co"># Push to GitHub</span></span>
+<span id="cb1-16"><a></a><span class="ex">$</span> git push origin main</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<aside class="notes">
+<p><strong>LIVE DEMO NOTES:</strong> - Open terminal and navigate to a demo repository - Modify a file (edit hello.py to change the message) - Run each command and explain the output - Show how <code>git status</code> changes after each step - Demonstrate the GitHub page updating after push - If time permits, show <code>git log</code> to see the commit history</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="live-demo-time" class="slide level2">
+<h2>Live demo time! 🎬</h2>
+<p>We’ll create repositories two ways, then walk through the basic Git workflow:</p>
+<ol type="1">
+<li class="fragment"><strong>Method 1: GitHub first</strong> - Create repo on GitHub → <code>git clone</code></li>
+<li class="fragment"><strong>Method 2: Local first</strong> - Create local repo → connect to GitHub</li>
+<li class="fragment"><strong>Add &amp; push code</strong> - Create Python file, commit, and push</li>
+<li class="fragment"><strong>Demonstrate <code>git pull</code></strong> - Edit on GitHub, then pull changes locally</li>
+</ol>
+<aside class="notes">
+<p><strong>DEMO STEPS:</strong></p>
+<p><strong>Method 1 (GitHub first):</strong> - Create new repo on GitHub: “demo-github-first” - Clone: <code>git clone https://github.com/bgreenwell/demo-github-first.git</code></p>
+<p><strong>Method 2 (Local first):</strong> - Create folder: <code>mkdir demo-local-first &amp;&amp; cd demo-local-first</code> - Initialize: <code>git init</code> - Create GitHub repo, add remote: <code>git remote add origin https://github.com/bgreenwell/demo-local-first.git</code> - Push: <code>git push -u origin main</code></p>
+<p><strong>Add code to GitHub-first repo only:</strong> - Add hello.py: <code>print("Hello from GitHub first!")</code> - Show workflow: <code>git status</code> → <code>git add .</code> → <code>git commit -m "Add hello script"</code> → <code>git push</code></p>
+<p><strong>Demonstrate git pull:</strong> - Edit hello.py directly on GitHub (add a comment or change message) - Back in terminal: <code>git pull</code> to fetch the changes - Show how local file now matches GitHub version</p>
+<p><strong>Key points to emphasize:</strong> - Both creation methods achieve same result - GitHub-first is easier for beginners - <code>git pull</code> keeps you synced with remote changes - This is the complete collaboration cycle</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="more-useful-git-commands" class="slide level2">
+<h2>More useful Git commands 📚</h2>
+<ul>
+<li class="fragment"><strong><code>git log</code></strong> - See the history of your commits</li>
+<li class="fragment"><strong><code>git log --oneline</code></strong> - Compact view of commit history</li>
+<li class="fragment"><strong><code>git diff</code></strong> - See exactly what changed in your files</li>
+<li class="fragment"><strong><code>git pull</code></strong> - Download the latest changes from GitHub</li>
+<li class="fragment"><strong><a href="https://git-scm.com/docs/git-init"><code>git init</code></a></strong> - Turn any folder into a Git repository</li>
+</ul>
+</section>
+<section id="understanding-gits-three-stages" class="slide level2">
+<h2>Understanding Git’s three stages 🔄</h2>
+<div class="cell" data-reveal="true" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class=""><p></p>
+<div>
+<pre class="mermaid mermaid-js">graph LR
+    A[Working Directory&lt;br/&gt;Your files] --&gt; B[Staging Area&lt;br/&gt;git add]
+    B --&gt; C[Repository&lt;br/&gt;git commit]
+    C --&gt; D[Remote GitHub&lt;br/&gt;git push]
+    
+    style A fill:#ffcccb
+    style B fill:#ffffcc  
+    style C fill:#ccffcc
+    style D fill:#ccccff
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<ul>
+<li class="fragment"><strong>Working Directory:</strong> where you edit files</li>
+<li class="fragment"><strong>Staging Area:</strong> where you prepare what to commit</li>
+<li class="fragment"><strong>Repository:</strong> your local Git history</li>
+<li class="fragment"><strong>Remote:</strong> your project on GitHub</li>
+</ul>
+</section>
+<section id="common-git-scenarios-fixes" class="slide level2">
+<h2>Common Git scenarios &amp; fixes 🚑</h2>
+<ul>
+<li class="fragment"><strong>“I made a typo in my commit message”</strong>
+<ul>
+<li class="fragment"><code>git commit --amend -m "New message"</code></li>
+</ul></li>
+<li class="fragment"><strong>“I want to see what I changed”</strong>
+<ul>
+<li class="fragment"><code>git diff</code> (before staging) or <code>git diff --staged</code> (after staging)</li>
+</ul></li>
+<li class="fragment"><strong>“I staged the wrong file”</strong>
+<ul>
+<li class="fragment"><code>git reset HEAD &lt;file&gt;</code> to unstage</li>
+</ul></li>
+<li class="fragment"><strong>“Authentication failed”</strong>
+<ul>
+<li class="fragment">Make sure you’re using your <a href="https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens">PAT</a>, not your GitHub password</li>
+</ul></li>
+</ul>
+</section>
+<section id="want-to-learn-more" class="slide level2">
+<h2>Want to learn more? 📚</h2>
+<p>Essential resources for mastering Git and GitHub:</p>
+<ul>
+<li class="fragment"><strong><a href="https://git-scm.com/book/en/v2">Pro Git Book</a></strong> - The definitive free guide (chapters 1-3 are perfect for beginners)</li>
+<li class="fragment"><strong><a href="https://skills.github.com/">GitHub Skills</a></strong> - Interactive tutorials directly on GitHub</li>
+<li class="fragment"><strong><a href="https://learngitbranching.js.org/">Learn Git Branching</a></strong> - Visual, interactive Git concepts</li>
+<li class="fragment"><strong><a href="https://desktop.github.com/">GitHub Desktop</a></strong> - GUI alternative for those who prefer visual tools</li>
+<li class="fragment"><strong><a href="https://www.atlassian.com/git/tutorials">Atlassian Git Tutorials</a></strong> - Comprehensive beginner to advanced guides</li>
+</ul>
+</section>
+<section id="quick-reference-cheat-sheet" class="slide level2">
+<h2>Quick reference cheat sheet 📋</h2>
+<p>Commands you’ll use constantly:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a></a><span class="co"># Getting started</span></span>
+<span id="cb2-2"><a></a><span class="fu">git</span> clone <span class="op">&lt;</span>url<span class="op">&gt;</span>         <span class="co"># Download a repository</span></span>
+<span id="cb2-3"><a></a><span class="fu">git</span> status              <span class="co"># See what's changed</span></span>
+<span id="cb2-4"><a></a><span class="fu">git</span> log <span class="at">--oneline</span>       <span class="co"># View commit history</span></span>
+<span id="cb2-5"><a></a></span>
+<span id="cb2-6"><a></a><span class="co"># Making changes  </span></span>
+<span id="cb2-7"><a></a><span class="fu">git</span> add <span class="op">&lt;</span>file<span class="op">&gt;</span>          <span class="co"># Stage specific file</span></span>
+<span id="cb2-8"><a></a><span class="fu">git</span> add .               <span class="co"># Stage all changes</span></span>
+<span id="cb2-9"><a></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"message"</span> <span class="co"># Save your changes</span></span>
+<span id="cb2-10"><a></a><span class="fu">git</span> push                <span class="co"># Send to GitHub</span></span>
+<span id="cb2-11"><a></a></span>
+<span id="cb2-12"><a></a><span class="co"># Fixing mistakes</span></span>
+<span id="cb2-13"><a></a><span class="fu">git</span> diff                <span class="co"># See what changed</span></span>
+<span id="cb2-14"><a></a><span class="fu">git</span> reset HEAD <span class="op">&lt;</span>file<span class="op">&gt;</span>   <span class="co"># Unstage a file</span></span>
+<span id="cb2-15"><a></a><span class="fu">git</span> commit <span class="at">--amend</span>      <span class="co"># Fix last commit message</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="time-for-lab-01" class="slide level2">
+<h2>Time for Lab 01 🧪</h2>
+<ul>
+<li>Your first hands-on lab: Git and GitHub fundamentals.</li>
+<li><strong>Objective:</strong> complete your first full development cycle from <code>clone</code> to <code>push</code>.</li>
+<li>Please navigate to <a href="https://github.com/bgreenwell/is4010-course/blob/main/week01/lab01.md"><code>week01/lab01.md</code></a> in the course repository for step-by-step instructions.</li>
+</ul>
+
+
+</section></section>
+    </div>
+  <div class="quarto-auto-generated-content" style="display: none;">
+<div class="footer footer-default">
+
+</div>
+</div></div>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script>
+  <script src="../site_libs/revealjs/dist/reveal.js"></script>
+  <!-- reveal.js plugins -->
+  <script src="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="../site_libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="../site_libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="../site_libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="../site_libs/revealjs/plugin/quarto-support/support.js"></script>
+  
+
+  <script src="../site_libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="../site_libs/revealjs/plugin/search/search.js"></script>
+  <script src="../site_libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="../site_libs/revealjs/plugin/math/math.js"></script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://revealjs.com/config/
+      Reveal.initialize({
+'controlsAuto': true,
+'previewLinksAuto': false,
+'pdfSeparateFragments': false,
+'autoAnimateEasing': "ease",
+'autoAnimateDuration': 1,
+'autoAnimateUnmatched': true,
+'jumpToSlide': true,
+'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\"><kbd>r</kbd> Scroll View Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
+'smaller': false,
+ 
+        // Display controls in the bottom right corner
+        controls: false,
+
+        // Help the user learn the controls by providing hints, for example by
+        // bouncing the down arrow when they first encounter a vertical slide
+        controlsTutorial: false,
+
+        // Determines where controls appear, "edges" or "bottom-right"
+        controlsLayout: 'edges',
+
+        // Visibility rule for backwards navigation arrows; "faded", "hidden"
+        // or "visible"
+        controlsBackArrows: 'faded',
+
+        // Display a presentation progress bar
+        progress: true,
+
+        // Display the page number of the current slide
+        slideNumber: false,
+
+        // 'all', 'print', or 'speaker'
+        showSlideNumber: 'all',
+
+        // Add the current slide number to the URL hash so that reloading the
+        // page/copying the URL will return you to the same slide
+        hash: true,
+
+        // Start with 1 for the hash rather than 0
+        hashOneBasedIndex: false,
+
+        // Flags if we should monitor the hash and change slides accordingly
+        respondToHashChanges: true,
+
+        // Push each slide change to the browser history
+        history: true,
+
+        // Enable keyboard shortcuts for navigation
+        keyboard: true,
+
+        // Enable the slide overview mode
+        overview: true,
+
+        // Disables the default reveal.js slide layout (scaling and centering)
+        // so that you can use custom CSS layout
+        disableLayout: false,
+
+        // Vertical centering of slides
+        center: false,
+
+        // Enables touch navigation on devices with touch input
+        touch: true,
+
+        // Loop the presentation
+        loop: false,
+
+        // Change the presentation direction to be RTL
+        rtl: false,
+
+        // see https://revealjs.com/vertical-slides/#navigation-mode
+        navigationMode: 'linear',
+
+        // Randomizes the order of slides each time the presentation loads
+        shuffle: false,
+
+        // Turns fragments on and off globally
+        fragments: true,
+
+        // Flags whether to include the current fragment in the URL,
+        // so that reloading brings you to the same fragment position
+        fragmentInURL: false,
+
+        // Flags if the presentation is running in an embedded mode,
+        // i.e. contained within a limited portion of the screen
+        embedded: false,
+
+        // Flags if we should show a help overlay when the questionmark
+        // key is pressed
+        help: true,
+
+        // Flags if it should be possible to pause the presentation (blackout)
+        pause: true,
+
+        // Flags if speaker notes should be visible to all viewers
+        showNotes: false,
+
+        // Global override for autoplaying embedded media (null/true/false)
+        autoPlayMedia: null,
+
+        // Global override for preloading lazy-loaded iframes (null/true/false)
+        preloadIframes: null,
+
+        // Number of milliseconds between automatically proceeding to the
+        // next slide, disabled when set to 0, this value can be overwritten
+        // by using a data-autoslide attribute on your slides
+        autoSlide: 0,
+
+        // Stop auto-sliding after user input
+        autoSlideStoppable: true,
+
+        // Use this method for navigation when auto-sliding
+        autoSlideMethod: null,
+
+        // Specify the average time in seconds that you think you will spend
+        // presenting each slide. This is used to show a pacing timer in the
+        // speaker view
+        defaultTiming: null,
+
+        // Enable slide navigation via mouse wheel
+        mouseWheel: false,
+
+        // The display mode that will be used to show slides
+        display: 'block',
+
+        // Hide cursor if inactive
+        hideInactiveCursor: true,
+
+        // Time before the cursor is hidden (in ms)
+        hideCursorTime: 5000,
+
+        // Opens links in an iframe preview overlay
+        previewLinks: false,
+
+        // Transition style (none/fade/slide/convex/concave/zoom)
+        transition: 'fade',
+
+        // Transition speed (default/fast/slow)
+        transitionSpeed: 'default',
+
+        // Transition style for full page slide backgrounds
+        // (none/fade/slide/convex/concave/zoom)
+        backgroundTransition: 'none',
+
+        // Number of slides away from the current that are visible
+        viewDistance: 3,
+
+        // Number of slides away from the current that are visible on mobile
+        // devices. It is advisable to set this to a lower number than
+        // viewDistance in order to save resources.
+        mobileViewDistance: 2,
+
+        // The "normal" size of the presentation, aspect ratio will be preserved
+        // when the presentation is scaled to fit different resolutions. Can be
+        // specified using percentage units.
+        width: 1050,
+
+        height: 700,
+
+        // Factor of the display size that should remain empty around the content
+        margin: 0.1,
+
+        math: {
+          mathjax: 'https://cdn.jsdelivr.net/npm/mathjax@2.7.9/MathJax.js',
+          config: 'TeX-AMS_HTML-full',
+          tex2jax: {
+            inlineMath: [['\\(','\\)']],
+            displayMath: [['\\[','\\]']],
+            balanceBraces: true,
+            processEscapes: false,
+            processRefs: true,
+            processEnvironments: true,
+            preview: 'TeX',
+            skipTags: ['script','noscript','style','textarea','pre','code'],
+            ignoreClass: 'tex2jax_ignore',
+            processClass: 'tex2jax_process'
+          },
+        },
+
+        // reveal.js plugins
+        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, QuartoSupport,
+
+          RevealMath,
+          RevealNotes,
+          RevealSearch,
+          RevealZoom
+        ]
+      });
+    </script>
+    <script id="quarto-html-after-body" type="application/javascript">
+      window.document.addEventListener("DOMContentLoaded", function (event) {
+        const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
+        tabsets.forEach(function(tabset) {
+          const tabby = new Tabby('#' + tabset.id);
+        });
+        const isCodeAnnotation = (el) => {
+          for (const clz of el.classList) {
+            if (clz.startsWith('code-annotation-')) {                     
+              return true;
+            }
+          }
+          return false;
+        }
+        const onCopySuccess = function(e) {
+          // button target
+          const button = e.trigger;
+          // don't keep focus
+          button.blur();
+          // flash "checked"
+          button.classList.add('code-copy-button-checked');
+          var currentTitle = button.getAttribute("title");
+          button.setAttribute("title", "Copied!");
+          let tooltip;
+          if (window.bootstrap) {
+            button.setAttribute("data-bs-toggle", "tooltip");
+            button.setAttribute("data-bs-placement", "left");
+            button.setAttribute("data-bs-title", "Copied!");
+            tooltip = new bootstrap.Tooltip(button, 
+              { trigger: "manual", 
+                customClass: "code-copy-button-tooltip",
+                offset: [0, -8]});
+            tooltip.show();    
+          }
+          setTimeout(function() {
+            if (tooltip) {
+              tooltip.hide();
+              button.removeAttribute("data-bs-title");
+              button.removeAttribute("data-bs-toggle");
+              button.removeAttribute("data-bs-placement");
+            }
+            button.setAttribute("title", currentTitle);
+            button.classList.remove('code-copy-button-checked');
+          }, 1000);
+          // clear code selection
+          e.clearSelection();
+        }
+        const getTextToCopy = function(trigger) {
+          const outerScaffold = trigger.parentElement.cloneNode(true);
+          const codeEl = outerScaffold.querySelector('code');
+          for (const childEl of codeEl.children) {
+            if (isCodeAnnotation(childEl)) {
+              childEl.remove();
+            }
+          }
+          return codeEl.innerText;
+        }
+        const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+          text: getTextToCopy
+        });
+        clipboard.on('success', onCopySuccess);
+        if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+          const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+            text: getTextToCopy,
+            container: window.document.getElementById('quarto-embedded-source-code-modal')
+          });
+          clipboardModal.on('success', onCopySuccess);
+        }
+          var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+          var mailtoRegex = new RegExp(/^mailto:/);
+            var filterRegex = new RegExp("https:\/\/bgreenwell\.github\.io\/is4010-website\/");
+          var isInternal = (href) => {
+              return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+          }
+          // Inspect non-navigation links and adorn them if external
+         var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+          for (var i=0; i<links.length; i++) {
+            const link = links[i];
+            if (!isInternal(link.href)) {
+              // undo the damage that might have been done by quarto-nav.js in the case of
+              // links that we want to consider external
+              if (link.dataset.originalHref !== undefined) {
+                link.href = link.dataset.originalHref;
+              }
+            }
+          }
+        function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+          const config = {
+            allowHTML: true,
+            maxWidth: 500,
+            delay: 100,
+            arrow: false,
+            appendTo: function(el) {
+                return el.closest('section.slide') || el.parentElement;
+            },
+            interactive: true,
+            interactiveBorder: 10,
+            theme: 'light-border',
+            placement: 'bottom-start',
+          };
+          if (contentFn) {
+            config.content = contentFn;
+          }
+          if (onTriggerFn) {
+            config.onTrigger = onTriggerFn;
+          }
+          if (onUntriggerFn) {
+            config.onUntrigger = onUntriggerFn;
+          }
+            config['offset'] = [0,0];
+            config['maxWidth'] = 700;
+          window.tippy(el, config); 
+        }
+        const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+        for (var i=0; i<noterefs.length; i++) {
+          const ref = noterefs[i];
+          tippyHover(ref, function() {
+            // use id or data attribute instead here
+            let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+            try { href = new URL(href).hash; } catch {}
+            const id = href.replace(/^#\/?/, "");
+            const note = window.document.getElementById(id);
+            if (note) {
+              return note.innerHTML;
+            } else {
+              return "";
+            }
+          });
+        }
+        const findCites = (el) => {
+          const parentEl = el.parentElement;
+          if (parentEl) {
+            const cites = parentEl.dataset.cites;
+            if (cites) {
+              return {
+                el,
+                cites: cites.split(' ')
+              };
+            } else {
+              return findCites(el.parentElement)
+            }
+          } else {
+            return undefined;
+          }
+        };
+        var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+        for (var i=0; i<bibliorefs.length; i++) {
+          const ref = bibliorefs[i];
+          const citeInfo = findCites(ref);
+          if (citeInfo) {
+            tippyHover(citeInfo.el, function() {
+              var popup = window.document.createElement('div');
+              citeInfo.cites.forEach(function(cite) {
+                var citeDiv = window.document.createElement('div');
+                citeDiv.classList.add('hanging-indent');
+                citeDiv.classList.add('csl-entry');
+                var biblioDiv = window.document.getElementById('ref-' + cite);
+                if (biblioDiv) {
+                  citeDiv.innerHTML = biblioDiv.innerHTML;
+                }
+                popup.appendChild(citeDiv);
+              });
+              return popup.innerHTML;
+            });
+          }
+        }
+      });
+      </script>
+    
+
+</body></html>
