@@ -26,7 +26,7 @@
     "href": "weeks/week01.html",
     "title": "Week 01: Toolkit setup",
     "section": "",
-    "text": "Coming soon!",
+    "text": "Welcome to the first week of IS 4010! This week is all about building your foundation. We’ll introduce the course philosophy of “AI-enhanced development,” set up your professional developer toolkit, and dive into the world of version control with Git and GitHub. By the end of this module, you’ll have a fully configured environment and your first repository ready to go.",
     "crumbs": [
       "Weekly schedule",
       "Week 01: Toolkit setup"
@@ -37,7 +37,7 @@
     "href": "weeks/week01.html#introduction",
     "title": "Week 01: Toolkit setup",
     "section": "",
-    "text": "Coming soon!",
+    "text": "Welcome to the first week of IS 4010! This week is all about building your foundation. We’ll introduce the course philosophy of “AI-enhanced development,” set up your professional developer toolkit, and dive into the world of version control with Git and GitHub. By the end of this module, you’ll have a fully configured environment and your first repository ready to go.",
     "crumbs": [
       "Weekly schedule",
       "Week 01: Toolkit setup"
@@ -48,7 +48,7 @@
     "href": "weeks/week01.html#recommended-readings",
     "title": "Week 01: Toolkit setup",
     "section": "Recommended readings",
-    "text": "Recommended readings\n\nPython tutorial - Official Python documentation",
+    "text": "Recommended readings\n\nPro Git Book (Ch 1-3) - The definitive guide to Git\nGitHub Guides - Essential tutorials for working with GitHub",
     "crumbs": [
       "Weekly schedule",
       "Week 01: Toolkit setup"
@@ -59,7 +59,18 @@
     "href": "weeks/week01.html#lectures",
     "title": "Week 01: Toolkit setup",
     "section": "Lectures",
-    "text": "Lectures\n\nSlides: Introduction & development toolkit",
+    "text": "Lectures\n\nSlides: Course introduction & version control",
+    "crumbs": [
+      "Weekly schedule",
+      "Week 01: Toolkit setup"
+    ]
+  },
+  {
+    "objectID": "weeks/week01.html#interactive-notebooks",
+    "href": "weeks/week01.html#interactive-notebooks",
+    "title": "Week 01: Toolkit setup",
+    "section": "Interactive notebooks",
+    "text": "Interactive notebooks\n\n Open in GitHub\n Open in Colab",
     "crumbs": [
       "Weekly schedule",
       "Week 01: Toolkit setup"
@@ -70,7 +81,7 @@
     "href": "weeks/week01.html#lab-assignment",
     "title": "Week 01: Toolkit setup",
     "section": "Lab assignment",
-    "text": "Lab assignment\n\nLab 01: Toolkit setup",
+    "text": "Lab assignment\n\nLab 01: Git & GitHub fundamentals",
     "crumbs": [
       "Weekly schedule",
       "Week 01: Toolkit setup"
@@ -81,7 +92,7 @@
     "href": "weeks/week04.html",
     "title": "Week 04: Data structures",
     "section": "",
-    "text": "Coming soon!",
+    "text": "In programming, how we organize data is just as important as the data itself. This week, we’ll dive into Python’s powerful built-in data structures—lists, tuples, dictionaries, and sets. You’ll learn how to choose the right container for your data and how to use AI to optimize your code for both performance and readability.",
     "crumbs": [
       "Weekly schedule",
       "Week 04: Data structures"
@@ -92,7 +103,7 @@
     "href": "weeks/week04.html#introduction",
     "title": "Week 04: Data structures",
     "section": "",
-    "text": "Coming soon!",
+    "text": "In programming, how we organize data is just as important as the data itself. This week, we’ll dive into Python’s powerful built-in data structures—lists, tuples, dictionaries, and sets. You’ll learn how to choose the right container for your data and how to use AI to optimize your code for both performance and readability.",
     "crumbs": [
       "Weekly schedule",
       "Week 04: Data structures"
@@ -103,7 +114,7 @@
     "href": "weeks/week04.html#recommended-readings",
     "title": "Week 04: Data structures",
     "section": "Recommended readings",
-    "text": "Recommended readings\n\nPython tutorial - Official Python documentation",
+    "text": "Recommended readings\n\nPython tutorial (Ch 5: Data structures) - Official Python documentation",
     "crumbs": [
       "Weekly schedule",
       "Week 04: Data structures"
@@ -115,6 +126,17 @@
     "title": "Week 04: Data structures",
     "section": "Lectures",
     "text": "Lectures\n\nSlides: Data structures",
+    "crumbs": [
+      "Weekly schedule",
+      "Week 04: Data structures"
+    ]
+  },
+  {
+    "objectID": "weeks/week04.html#interactive-notebooks",
+    "href": "weeks/week04.html#interactive-notebooks",
+    "title": "Week 04: Data structures",
+    "section": "Interactive notebooks",
+    "text": "Interactive notebooks\n\n Open in GitHub\n Open in Colab",
     "crumbs": [
       "Weekly schedule",
       "Week 04: Data structures"
@@ -246,7 +268,7 @@
     "href": "weeks/week05.html",
     "title": "Week 05: Functions & errors",
     "section": "",
-    "text": "Coming soon!",
+    "text": "Professional development means writing code that is both reusable and robust. This week, we’ll master the art of the function—the essential building block of clean, “DRY” code. We’ll also learn how to make our applications “bulletproof” by gracefully handling unexpected errors and exceptions, ensuring our users stay happy even when things go wrong.",
     "crumbs": [
       "Weekly schedule",
       "Week 05: Functions & errors"
@@ -257,7 +279,7 @@
     "href": "weeks/week05.html#introduction",
     "title": "Week 05: Functions & errors",
     "section": "",
-    "text": "Coming soon!",
+    "text": "Professional development means writing code that is both reusable and robust. This week, we’ll master the art of the function—the essential building block of clean, “DRY” code. We’ll also learn how to make our applications “bulletproof” by gracefully handling unexpected errors and exceptions, ensuring our users stay happy even when things go wrong.",
     "crumbs": [
       "Weekly schedule",
       "Week 05: Functions & errors"
@@ -268,7 +290,7 @@
     "href": "weeks/week05.html#recommended-readings",
     "title": "Week 05: Functions & errors",
     "section": "Recommended readings",
-    "text": "Recommended readings\n\nPython tutorial - Official Python documentation",
+    "text": "Recommended readings\n\nPython tutorial (Ch 4.7-4.8) - More on defining functions\nPython tutorial (Ch 8: Errors & exceptions) - Handling errors in Python",
     "crumbs": [
       "Weekly schedule",
       "Week 05: Functions & errors"
@@ -280,6 +302,17 @@
     "title": "Week 05: Functions & errors",
     "section": "Lectures",
     "text": "Lectures\n\nSlides: Functions and errors",
+    "crumbs": [
+      "Weekly schedule",
+      "Week 05: Functions & errors"
+    ]
+  },
+  {
+    "objectID": "weeks/week05.html#interactive-notebooks",
+    "href": "weeks/week05.html#interactive-notebooks",
+    "title": "Week 05: Functions & errors",
+    "section": "Interactive notebooks",
+    "text": "Interactive notebooks\n\n Open in GitHub\n Open in Colab",
     "crumbs": [
       "Weekly schedule",
       "Week 05: Functions & errors"
@@ -301,7 +334,7 @@
     "href": "weeks/week02.html",
     "title": "Week 02: AI-assisted dev",
     "section": "",
-    "text": "Coming soon!",
+    "text": "This week, we’ll explore the rapidly evolving landscape of AI-assisted software development. We’ll compare the “big three” conversational models—Gemini, ChatGPT, and Claude—and dive deep into GitHub Copilot, our primary “Co-Pilot” for the semester. You’ll learn the art of prompt engineering using the CPTF framework and discover how to leverage AI to explain, debug, and refactor your code effectively.",
     "crumbs": [
       "Weekly schedule",
       "Week 02: AI-assisted dev"
@@ -312,7 +345,7 @@
     "href": "weeks/week02.html#introduction",
     "title": "Week 02: AI-assisted dev",
     "section": "",
-    "text": "Coming soon!",
+    "text": "This week, we’ll explore the rapidly evolving landscape of AI-assisted software development. We’ll compare the “big three” conversational models—Gemini, ChatGPT, and Claude—and dive deep into GitHub Copilot, our primary “Co-Pilot” for the semester. You’ll learn the art of prompt engineering using the CPTF framework and discover how to leverage AI to explain, debug, and refactor your code effectively.",
     "crumbs": [
       "Weekly schedule",
       "Week 02: AI-assisted dev"
@@ -323,7 +356,7 @@
     "href": "weeks/week02.html#recommended-readings",
     "title": "Week 02: AI-assisted dev",
     "section": "Recommended readings",
-    "text": "Recommended readings\n\nPython tutorial - Official Python documentation",
+    "text": "Recommended readings\n\nGitHub Copilot documentation - Official guide to GitHub Copilot\nThe art of prompt engineering - Best practices for prompting AI code assistants",
     "crumbs": [
       "Weekly schedule",
       "Week 02: AI-assisted dev"
@@ -341,11 +374,22 @@
     ]
   },
   {
+    "objectID": "weeks/week02.html#interactive-notebooks",
+    "href": "weeks/week02.html#interactive-notebooks",
+    "title": "Week 02: AI-assisted dev",
+    "section": "Interactive notebooks",
+    "text": "Interactive notebooks\n\n Open in GitHub\n Open in Colab",
+    "crumbs": [
+      "Weekly schedule",
+      "Week 02: AI-assisted dev"
+    ]
+  },
+  {
     "objectID": "weeks/week02.html#lab-assignment",
     "href": "weeks/week02.html#lab-assignment",
     "title": "Week 02: AI-assisted dev",
     "section": "Lab assignment",
-    "text": "Lab assignment\n\nLab 02: AI-assisted dev",
+    "text": "Lab assignment\n\nLab 02: AI tools for programming",
     "crumbs": [
       "Weekly schedule",
       "Week 02: AI-assisted dev"
@@ -356,7 +400,7 @@
     "href": "weeks/week07.html",
     "title": "Week 07: External data",
     "section": "",
-    "text": "Coming soon!",
+    "text": "No application exists in isolation. This week, we’ll learn how to connect our Python programs to the outside world. We’ll start by mastering local data persistence with JSON files, and then we’ll dive into the world of REST APIs using the requests library to fetch and process live data from the internet.",
     "crumbs": [
       "Weekly schedule",
       "Week 07: External data"
@@ -367,7 +411,7 @@
     "href": "weeks/week07.html#introduction",
     "title": "Week 07: External data",
     "section": "",
-    "text": "Coming soon!",
+    "text": "No application exists in isolation. This week, we’ll learn how to connect our Python programs to the outside world. We’ll start by mastering local data persistence with JSON files, and then we’ll dive into the world of REST APIs using the requests library to fetch and process live data from the internet.",
     "crumbs": [
       "Weekly schedule",
       "Week 07: External data"
@@ -378,7 +422,7 @@
     "href": "weeks/week07.html#recommended-readings",
     "title": "Week 07: External data",
     "section": "Recommended readings",
-    "text": "Recommended readings\n\nPython tutorial - Official Python documentation",
+    "text": "Recommended readings\n\nPython tutorial (Ch 7.2) - Reading and writing files\nRequests documentation - The official library for HTTP requests",
     "crumbs": [
       "Weekly schedule",
       "Week 07: External data"
@@ -390,6 +434,17 @@
     "title": "Week 07: External data",
     "section": "Lectures",
     "text": "Lectures\n\nSlides: Working with data",
+    "crumbs": [
+      "Weekly schedule",
+      "Week 07: External data"
+    ]
+  },
+  {
+    "objectID": "weeks/week07.html#interactive-notebooks",
+    "href": "weeks/week07.html#interactive-notebooks",
+    "title": "Week 07: External data",
+    "section": "Interactive notebooks",
+    "text": "Interactive notebooks\n\n Open in GitHub\n Open in Colab",
     "crumbs": [
       "Weekly schedule",
       "Week 07: External data"
@@ -2029,7 +2084,7 @@
     "href": "index.html#quick-links",
     "title": "IS 4010: Application Development with Artificial Intelligence",
     "section": "Quick links",
-    "text": "Quick links\n\nSyllabus\nWeekly schedule\nLab repository template\nCanvas (LMS)",
+    "text": "Quick links\n\nSyllabus\nWeekly schedule\nPython lab repository\nRust lab repository\nCanvas (LMS)",
     "crumbs": [
       "Home"
     ]
@@ -3777,7 +3832,7 @@
     "href": "weeks/week08.html",
     "title": "Week 08: Professional Python",
     "section": "",
-    "text": "Coming soon!",
+    "text": "This week, we bridge the gap between simple scripts and professional-grade applications. We’ll learn how to build robust command-line interfaces (CLIs) with argparse and how to organize our code into professional package structures. We’ll also explore modern tools like uv to manage dependencies with speed and precision.",
     "crumbs": [
       "Weekly schedule",
       "Week 08: Professional Python"
@@ -3788,7 +3843,7 @@
     "href": "weeks/week08.html#introduction",
     "title": "Week 08: Professional Python",
     "section": "",
-    "text": "Coming soon!",
+    "text": "This week, we bridge the gap between simple scripts and professional-grade applications. We’ll learn how to build robust command-line interfaces (CLIs) with argparse and how to organize our code into professional package structures. We’ll also explore modern tools like uv to manage dependencies with speed and precision.",
     "crumbs": [
       "Weekly schedule",
       "Week 08: Professional Python"
@@ -3799,7 +3854,7 @@
     "href": "weeks/week08.html#recommended-readings",
     "title": "Week 08: Professional Python",
     "section": "Recommended readings",
-    "text": "Recommended readings\n\nPython tutorial - Official Python documentation",
+    "text": "Recommended readings\n\nargparse documentation - Python standard library for CLI tools\nPython Packaging User Guide - Official guide to packaging Python code",
     "crumbs": [
       "Weekly schedule",
       "Week 08: Professional Python"
@@ -3811,6 +3866,17 @@
     "title": "Week 08: Professional Python",
     "section": "Lectures",
     "text": "Lectures\n\nSlides: Professional Python",
+    "crumbs": [
+      "Weekly schedule",
+      "Week 08: Professional Python"
+    ]
+  },
+  {
+    "objectID": "weeks/week08.html#interactive-notebooks",
+    "href": "weeks/week08.html#interactive-notebooks",
+    "title": "Week 08: Professional Python",
+    "section": "Interactive notebooks",
+    "text": "Interactive notebooks\n\n Open in GitHub\n Open in Colab",
     "crumbs": [
       "Weekly schedule",
       "Week 08: Professional Python"
@@ -3832,7 +3898,7 @@
     "href": "weeks/week03.html",
     "title": "Week 03: Python basics",
     "section": "",
-    "text": "Coming soon!",
+    "text": "This week marks the beginning of our Python journey. We’ll start by exploring the foundational building blocks of the language: variables, core data types, and the logic that controls program flow. We’ll also dive into the art of “prompt engineering” with AI assistants to help us write, debug, and explain code as we build our first interactive programs.",
     "crumbs": [
       "Weekly schedule",
       "Week 03: Python basics"
@@ -3843,7 +3909,7 @@
     "href": "weeks/week03.html#introduction",
     "title": "Week 03: Python basics",
     "section": "",
-    "text": "Coming soon!",
+    "text": "This week marks the beginning of our Python journey. We’ll start by exploring the foundational building blocks of the language: variables, core data types, and the logic that controls program flow. We’ll also dive into the art of “prompt engineering” with AI assistants to help us write, debug, and explain code as we build our first interactive programs.",
     "crumbs": [
       "Weekly schedule",
       "Week 03: Python basics"
@@ -3854,7 +3920,7 @@
     "href": "weeks/week03.html#recommended-readings",
     "title": "Week 03: Python basics",
     "section": "Recommended readings",
-    "text": "Recommended readings\n\nPython tutorial - Official Python documentation",
+    "text": "Recommended readings\n\nPython tutorial (Ch 3-4) - Official Python documentation\nPEP 8: Style guide for Python code - The official Python style guide",
     "crumbs": [
       "Weekly schedule",
       "Week 03: Python basics"
@@ -3865,7 +3931,18 @@
     "href": "weeks/week03.html#lectures",
     "title": "Week 03: Python basics",
     "section": "Lectures",
-    "text": "Lectures\n\nSlides: Python basics",
+    "text": "Lectures\n\nSlides: Python basics & control flow",
+    "crumbs": [
+      "Weekly schedule",
+      "Week 03: Python basics"
+    ]
+  },
+  {
+    "objectID": "weeks/week03.html#interactive-notebooks",
+    "href": "weeks/week03.html#interactive-notebooks",
+    "title": "Week 03: Python basics",
+    "section": "Interactive notebooks",
+    "text": "Interactive notebooks\n\n Open in GitHub\n Open in Colab",
     "crumbs": [
       "Weekly schedule",
       "Week 03: Python basics"
@@ -3887,7 +3964,7 @@
     "href": "weeks/week06.html",
     "title": "Week 06: OOP",
     "section": "",
-    "text": "Coming soon!",
+    "text": "Object-oriented programming (OOP) is the architecture behind most modern software systems. This week, we’ll learn how to model real-world entities as objects in our code. We’ll explore classes, inheritance, and encapsulation, and see how AI can help us design elegant and scalable application structures.",
     "crumbs": [
       "Weekly schedule",
       "Week 06: OOP"
@@ -3898,7 +3975,7 @@
     "href": "weeks/week06.html#introduction",
     "title": "Week 06: OOP",
     "section": "",
-    "text": "Coming soon!",
+    "text": "Object-oriented programming (OOP) is the architecture behind most modern software systems. This week, we’ll learn how to model real-world entities as objects in our code. We’ll explore classes, inheritance, and encapsulation, and see how AI can help us design elegant and scalable application structures.",
     "crumbs": [
       "Weekly schedule",
       "Week 06: OOP"
@@ -3909,7 +3986,7 @@
     "href": "weeks/week06.html#recommended-readings",
     "title": "Week 06: OOP",
     "section": "Recommended readings",
-    "text": "Recommended readings\n\nPython tutorial - Official Python documentation",
+    "text": "Recommended readings\n\nPython tutorial (Ch 9: Classes) - Object-oriented programming in Python",
     "crumbs": [
       "Weekly schedule",
       "Week 06: OOP"
@@ -3921,6 +3998,17 @@
     "title": "Week 06: OOP",
     "section": "Lectures",
     "text": "Lectures\n\nSlides: OOP",
+    "crumbs": [
+      "Weekly schedule",
+      "Week 06: OOP"
+    ]
+  },
+  {
+    "objectID": "weeks/week06.html#interactive-notebooks",
+    "href": "weeks/week06.html#interactive-notebooks",
+    "title": "Week 06: OOP",
+    "section": "Interactive notebooks",
+    "text": "Interactive notebooks\n\n Open in GitHub\n Open in Colab",
     "crumbs": [
       "Weekly schedule",
       "Week 06: OOP"
