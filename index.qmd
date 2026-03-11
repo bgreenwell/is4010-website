@@ -20,7 +20,8 @@ We will reference specific chapters from these books each week to support our ha
 ## Quick links
 * [**Syllabus**](syllabus.qmd)
 * [Weekly schedule](weeks/week01.qmd)
-* [Lab repository template](https://github.com/bgreenwell/is4010-course)
+* [Python lab repository](https://github.com/bgreenwell/is4010-python)
+* [Rust lab repository](https://github.com/bgreenwell/is4010-rust)
 * [Canvas (LMS)](https://uc.instructure.com/)
 
 ## Instructor

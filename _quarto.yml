@@ -15,8 +15,11 @@ website:
     collapse-level: 1
     tools:
       - icon: github
-        href: https://github.com/bgreenwell/is4010-course
-        text: "GitHub"
+        href: https://github.com/bgreenwell/is4010-python
+        text: "Python Labs"
+      - icon: github
+        href: https://github.com/bgreenwell/is4010-rust
+        text: "Rust Labs"
       - icon: journal-text
         href: https://uc.instructure.com/
         text: "Canvas"

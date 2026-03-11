@@ -4,16 +4,22 @@ title: "Week 05: Functions & errors"
 
 ## Introduction
 
-Coming soon!
+Professional development means writing code that is both reusable and robust. This week, we'll master the art of the function—the essential building block of clean, "DRY" code. We'll also learn how to make our applications "bulletproof" by gracefully handling unexpected errors and exceptions, ensuring our users stay happy even when things go wrong.
 
 ## Recommended readings
 
-- [Python tutorial](https://docs.python.org/3/tutorial/) - Official Python documentation
+- [Python tutorial (Ch 4.7-4.8)](https://docs.python.org/3/tutorial/controlflow.html#more-on-defining-functions) - More on defining functions
+- [Python tutorial (Ch 8: Errors & exceptions)](https://docs.python.org/3/tutorial/errors.html) - Handling errors in Python
 
 ## Lectures
 
 - [**Slides: Functions and errors**](../slides/IS4010_W05_Functions_and_Errors.qmd)
 
+## Interactive notebooks
+
+- {{< iconify bi github >}} [Open in GitHub](https://github.com/bgreenwell/is4010-course/blob/main/week05/week05.ipynb)
+- {{< iconify bi google >}} [Open in Colab](https://colab.research.google.com/github/bgreenwell/is4010-course/blob/main/week05/week05.ipynb)
+
 ## Lab assignment
 
-- [Lab 05: Functions & errors](https://github.com/bgreenwell/is4010-course)
+- [Lab 05: Functions & errors](https://github.com/bgreenwell/is4010-python/blob/main/week05/lab05.md)

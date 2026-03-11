@@ -4,16 +4,22 @@ title: "Week 08: Professional Python"
 
 ## Introduction
 
-Coming soon!
+This week, we bridge the gap between simple scripts and professional-grade applications. We'll learn how to build robust command-line interfaces (CLIs) with `argparse` and how to organize our code into professional package structures. We'll also explore modern tools like `uv` to manage dependencies with speed and precision.
 
 ## Recommended readings
 
-- [Python tutorial](https://docs.python.org/3/tutorial/) - Official Python documentation
+- [argparse documentation](https://docs.python.org/3/library/argparse.html) - Python standard library for CLI tools
+- [Python Packaging User Guide](https://packaging.python.org/en/latest/tutorials/packaging-projects/) - Official guide to packaging Python code
 
 ## Lectures
 
 - [**Slides: Professional Python**](../slides/IS4010_W08_Professional_Python.qmd)
 
+## Interactive notebooks
+
+- {{< iconify bi github >}} [Open in GitHub](https://github.com/bgreenwell/is4010-course/blob/main/week08/week08.ipynb)
+- {{< iconify bi google >}} [Open in Colab](https://colab.research.google.com/github/bgreenwell/is4010-course/blob/main/week08/week08.ipynb)
+
 ## Lab assignment
 
-- [Lab 08: Professional Python](https://github.com/bgreenwell/is4010-course)
+- [Lab 08: Professional Python](https://github.com/bgreenwell/is4010-python/blob/main/week08/lab08.md)

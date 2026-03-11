@@ -4,16 +4,22 @@ title: "Week 02: AI-assisted dev"
 
 ## Introduction
 
-Coming soon!
+This week, we'll explore the rapidly evolving landscape of AI-assisted software development. We'll compare the "big three" conversational models—Gemini, ChatGPT, and Claude—and dive deep into GitHub Copilot, our primary "Co-Pilot" for the semester. You'll learn the art of prompt engineering using the CPTF framework and discover how to leverage AI to explain, debug, and refactor your code effectively.
 
 ## Recommended readings
 
-- [Python tutorial](https://docs.python.org/3/tutorial/) - Official Python documentation
+- [GitHub Copilot documentation](https://docs.github.com/en/copilot) - Official guide to GitHub Copilot
+- [The art of prompt engineering](https://github.com/features/copilot/prompt-engineering) - Best practices for prompting AI code assistants
 
 ## Lectures
 
 - [**Slides: AI-assisted development**](../slides/IS4010_W02_AI_Copilots.qmd)
 
+## Interactive notebooks
+
+- {{< iconify bi github >}} [Open in GitHub](https://github.com/bgreenwell/is4010-course/blob/main/week02/week02.ipynb)
+- {{< iconify bi google >}} [Open in Colab](https://colab.research.google.com/github/bgreenwell/is4010-course/blob/main/week02/week02.ipynb)
+
 ## Lab assignment
 
-- [Lab 02: AI-assisted dev](https://github.com/bgreenwell/is4010-course)
+- [Lab 02: AI tools for programming](https://github.com/bgreenwell/is4010-python/blob/main/week02/lab02.md)

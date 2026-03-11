@@ -4,16 +4,22 @@ title: "Week 03: Python basics"
 
 ## Introduction
 
-Coming soon!
+This week marks the beginning of our Python journey. We'll start by exploring the foundational building blocks of the language: variables, core data types, and the logic that controls program flow. We'll also dive into the art of "prompt engineering" with AI assistants to help us write, debug, and explain code as we build our first interactive programs.
 
 ## Recommended readings
 
-- [Python tutorial](https://docs.python.org/3/tutorial/) - Official Python documentation
+- [Python tutorial (Ch 3-4)](https://docs.python.org/3/tutorial/introduction.html) - Official Python documentation
+- [PEP 8: Style guide for Python code](https://peps.python.org/pep-0008/) - The official Python style guide
 
 ## Lectures
 
-- [**Slides: Python basics**](../slides/IS4010_W03_Python_Basics.qmd)
+- [**Slides: Python basics & control flow**](../slides/IS4010_W03_Python_Basics.qmd)
+
+## Interactive notebooks
+
+- {{< iconify bi github >}} [Open in GitHub](https://github.com/bgreenwell/is4010-course/blob/main/week03/week03.ipynb)
+- {{< iconify bi google >}} [Open in Colab](https://colab.research.google.com/github/bgreenwell/is4010-course/blob/main/week03/week03.ipynb)
 
 ## Lab assignment
 
-- [Lab 03: Python basics](https://github.com/bgreenwell/is4010-course)
+- [Lab 03: Python basics](https://github.com/bgreenwell/is4010-python/blob/main/week03/lab03.md)

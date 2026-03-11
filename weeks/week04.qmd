@@ -4,16 +4,21 @@ title: "Week 04: Data structures"
 
 ## Introduction
 
-Coming soon!
+In programming, how we organize data is just as important as the data itself. This week, we'll dive into Python's powerful built-in data structures—lists, tuples, dictionaries, and sets. You'll learn how to choose the right container for your data and how to use AI to optimize your code for both performance and readability.
 
 ## Recommended readings
 
-- [Python tutorial](https://docs.python.org/3/tutorial/) - Official Python documentation
+- [Python tutorial (Ch 5: Data structures)](https://docs.python.org/3/tutorial/datastructures.html) - Official Python documentation
 
 ## Lectures
 
 - [**Slides: Data structures**](../slides/IS4010_W04_Data_Structures.qmd)
 
+## Interactive notebooks
+
+- {{< iconify bi github >}} [Open in GitHub](https://github.com/bgreenwell/is4010-course/blob/main/week04/week04.ipynb)
+- {{< iconify bi google >}} [Open in Colab](https://colab.research.google.com/github/bgreenwell/is4010-course/blob/main/week04/week04.ipynb)
+
 ## Lab assignment
 
-- [Lab 04: Data structures](https://github.com/bgreenwell/is4010-course)
+- [Lab 04: Data structures](https://github.com/bgreenwell/is4010-python/blob/main/week04/lab04.md)

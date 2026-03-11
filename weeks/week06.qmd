@@ -4,16 +4,21 @@ title: "Week 06: OOP"
 
 ## Introduction
 
-Coming soon!
+Object-oriented programming (OOP) is the architecture behind most modern software systems. This week, we'll learn how to model real-world entities as objects in our code. We'll explore classes, inheritance, and encapsulation, and see how AI can help us design elegant and scalable application structures.
 
 ## Recommended readings
 
-- [Python tutorial](https://docs.python.org/3/tutorial/) - Official Python documentation
+- [Python tutorial (Ch 9: Classes)](https://docs.python.org/3/tutorial/classes.html) - Object-oriented programming in Python
 
 ## Lectures
 
 - [**Slides: OOP**](../slides/IS4010_W06_OOP.qmd)
 
+## Interactive notebooks
+
+- {{< iconify bi github >}} [Open in GitHub](https://github.com/bgreenwell/is4010-course/blob/main/week06/week06.ipynb)
+- {{< iconify bi google >}} [Open in Colab](https://colab.research.google.com/github/bgreenwell/is4010-course/blob/main/week06/week06.ipynb)
+
 ## Lab assignment
 
-- [Lab 06: OOP](https://github.com/bgreenwell/is4010-course)
+- [Lab 06: OOP](https://github.com/bgreenwell/is4010-python/blob/main/week06/lab06.md)

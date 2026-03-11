@@ -4,16 +4,22 @@ title: "Week 07: External data"
 
 ## Introduction
 
-Coming soon!
+No application exists in isolation. This week, we'll learn how to connect our Python programs to the outside world. We'll start by mastering local data persistence with JSON files, and then we'll dive into the world of REST APIs using the `requests` library to fetch and process live data from the internet.
 
 ## Recommended readings
 
-- [Python tutorial](https://docs.python.org/3/tutorial/) - Official Python documentation
+- [Python tutorial (Ch 7.2)](https://docs.python.org/3/tutorial/inputoutput.html#reading-and-writing-files) - Reading and writing files
+- [Requests documentation](https://requests.readthedocs.io/en/latest/) - The official library for HTTP requests
 
 ## Lectures
 
 - [**Slides: Working with data**](../slides/IS4010_W07_Working_with_Data.qmd)
 
+## Interactive notebooks
+
+- {{< iconify bi github >}} [Open in GitHub](https://github.com/bgreenwell/is4010-course/blob/main/week07/week07.ipynb)
+- {{< iconify bi google >}} [Open in Colab](https://colab.research.google.com/github/bgreenwell/is4010-course/blob/main/week07/week07.ipynb)
+
 ## Lab assignment
 
-- [Lab 07: External data](https://github.com/bgreenwell/is4010-course)
+- [Lab 07: External data](https://github.com/bgreenwell/is4010-python/blob/main/week07/lab07.md)
