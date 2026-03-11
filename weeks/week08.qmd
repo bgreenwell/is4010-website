@@ -17,8 +17,9 @@ This week, we bridge the gap between simple scripts and professional-grade appli
 
 ## Interactive notebooks
 
-- {{< iconify bi github >}} [Open in GitHub](https://github.com/bgreenwell/is4010-course/blob/main/week08/week08.ipynb)
-- {{< iconify bi google >}} [Open in Colab](https://colab.research.google.com/github/bgreenwell/is4010-course/blob/main/week08/week08.ipynb)
+- {{< iconify bi file-earmark-code >}} [Interactive notebook (rendered)](week08-notebook.ipynb)
+- {{< iconify bi github >}} [Open in GitHub](https://github.com/bgreenwell/is4010-website/blob/main/weeks/week08-notebook.ipynb)
+- {{< iconify bi google >}} [Open in Colab](https://colab.research.google.com/github/bgreenwell/is4010-website/blob/main/weeks/week08-notebook.ipynb)
 
 ## Lab assignment
 

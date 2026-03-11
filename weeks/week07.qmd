@@ -17,8 +17,9 @@ No application exists in isolation. This week, we'll learn how to connect our Py
 
 ## Interactive notebooks
 
-- {{< iconify bi github >}} [Open in GitHub](https://github.com/bgreenwell/is4010-course/blob/main/week07/week07.ipynb)
-- {{< iconify bi google >}} [Open in Colab](https://colab.research.google.com/github/bgreenwell/is4010-course/blob/main/week07/week07.ipynb)
+- {{< iconify bi file-earmark-code >}} [Interactive notebook (rendered)](week07-notebook.ipynb)
+- {{< iconify bi github >}} [Open in GitHub](https://github.com/bgreenwell/is4010-website/blob/main/weeks/week07-notebook.ipynb)
+- {{< iconify bi google >}} [Open in Colab](https://colab.research.google.com/github/bgreenwell/is4010-website/blob/main/weeks/week07-notebook.ipynb)
 
 ## Lab assignment
 

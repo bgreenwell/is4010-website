@@ -16,8 +16,9 @@ Object-oriented programming (OOP) is the architecture behind most modern softwar
 
 ## Interactive notebooks
 
-- {{< iconify bi github >}} [Open in GitHub](https://github.com/bgreenwell/is4010-course/blob/main/week06/week06.ipynb)
-- {{< iconify bi google >}} [Open in Colab](https://colab.research.google.com/github/bgreenwell/is4010-course/blob/main/week06/week06.ipynb)
+- {{< iconify bi file-earmark-code >}} [Interactive notebook (rendered)](week06-notebook.ipynb)
+- {{< iconify bi github >}} [Open in GitHub](https://github.com/bgreenwell/is4010-website/blob/main/weeks/week06-notebook.ipynb)
+- {{< iconify bi google >}} [Open in Colab](https://colab.research.google.com/github/bgreenwell/is4010-website/blob/main/weeks/week06-notebook.ipynb)
 
 ## Lab assignment
 

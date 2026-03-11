@@ -17,8 +17,9 @@ This week marks the beginning of our Python journey. We'll start by exploring th
 
 ## Interactive notebooks
 
-- {{< iconify bi github >}} [Open in GitHub](https://github.com/bgreenwell/is4010-course/blob/main/week03/week03.ipynb)
-- {{< iconify bi google >}} [Open in Colab](https://colab.research.google.com/github/bgreenwell/is4010-course/blob/main/week03/week03.ipynb)
+- {{< iconify bi file-earmark-code >}} [Interactive notebook (rendered)](week03-notebook.ipynb)
+- {{< iconify bi github >}} [Open in GitHub](https://github.com/bgreenwell/is4010-website/blob/main/weeks/week03-notebook.ipynb)
+- {{< iconify bi google >}} [Open in Colab](https://colab.research.google.com/github/bgreenwell/is4010-website/blob/main/weeks/week03-notebook.ipynb)
 
 ## Lab assignment
 

@@ -16,8 +16,9 @@ In programming, how we organize data is just as important as the data itself. Th
 
 ## Interactive notebooks
 
-- {{< iconify bi github >}} [Open in GitHub](https://github.com/bgreenwell/is4010-course/blob/main/week04/week04.ipynb)
-- {{< iconify bi google >}} [Open in Colab](https://colab.research.google.com/github/bgreenwell/is4010-course/blob/main/week04/week04.ipynb)
+- {{< iconify bi file-earmark-code >}} [Interactive notebook (rendered)](week04-notebook.ipynb)
+- {{< iconify bi github >}} [Open in GitHub](https://github.com/bgreenwell/is4010-website/blob/main/weeks/week04-notebook.ipynb)
+- {{< iconify bi google >}} [Open in Colab](https://colab.research.google.com/github/bgreenwell/is4010-website/blob/main/weeks/week04-notebook.ipynb)
 
 ## Lab assignment
 

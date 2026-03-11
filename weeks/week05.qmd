@@ -17,8 +17,9 @@ Professional development means writing code that is both reusable and robust. Th
 
 ## Interactive notebooks
 
-- {{< iconify bi github >}} [Open in GitHub](https://github.com/bgreenwell/is4010-course/blob/main/week05/week05.ipynb)
-- {{< iconify bi google >}} [Open in Colab](https://colab.research.google.com/github/bgreenwell/is4010-course/blob/main/week05/week05.ipynb)
+- {{< iconify bi file-earmark-code >}} [Interactive notebook (rendered)](week05-notebook.ipynb)
+- {{< iconify bi github >}} [Open in GitHub](https://github.com/bgreenwell/is4010-website/blob/main/weeks/week05-notebook.ipynb)
+- {{< iconify bi google >}} [Open in Colab](https://colab.research.google.com/github/bgreenwell/is4010-website/blob/main/weeks/week05-notebook.ipynb)
 
 ## Lab assignment
 

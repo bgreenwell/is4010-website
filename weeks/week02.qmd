@@ -17,8 +17,9 @@ This week, we'll explore the rapidly evolving landscape of AI-assisted software 
 
 ## Interactive notebooks
 
-- {{< iconify bi github >}} [Open in GitHub](https://github.com/bgreenwell/is4010-course/blob/main/week02/week02.ipynb)
-- {{< iconify bi google >}} [Open in Colab](https://colab.research.google.com/github/bgreenwell/is4010-course/blob/main/week02/week02.ipynb)
+- {{< iconify bi file-earmark-code >}} [Interactive notebook (rendered)](week02-notebook.ipynb)
+- {{< iconify bi github >}} [Open in GitHub](https://github.com/bgreenwell/is4010-website/blob/main/weeks/week02-notebook.ipynb)
+- {{< iconify bi google >}} [Open in Colab](https://colab.research.google.com/github/bgreenwell/is4010-website/blob/main/weeks/week02-notebook.ipynb)
 
 ## Lab assignment
 
