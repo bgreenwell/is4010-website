@@ -1,0 +1,1501 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.27">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>IS4010: AI-Enhanced Application Development – IS 4010 - App Dev with AI</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../images/uc-logo-2.png" rel="icon" type="image/png">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-ed96de9b727972fe78a7b5d16c58bf87.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-251449ada0ddbdd49c494e2ec9d5d6a9.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="nav-sidebar docked quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">
+      IS 4010 - App Dev with AI
+      </li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">IS 4010 - App Dev with AI</a> 
+        <div class="sidebar-tools-main tools-wide">
+    <a href="https://github.com/bgreenwell/is4010-python" title="Python Labs" class="quarto-navigation-tool px-1" aria-label="Python Labs"><i class="bi bi-github"></i></a>
+    <a href="https://github.com/bgreenwell/is4010-rust" title="Rust Labs" class="quarto-navigation-tool px-1" aria-label="Rust Labs"><i class="bi bi-github"></i></a>
+    <a href="https://uc.instructure.com/" title="Canvas" class="quarto-navigation-tool px-1" aria-label="Canvas"><i class="bi bi-journal-text"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Home</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../syllabus.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Syllabus</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../project.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Final project</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false">
+ <span class="menu-text">Resources</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../resources/setup.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Setup guide</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../resources/troubleshooting.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Troubleshooting</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../resources/packages.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Python packages</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false">
+ <span class="menu-text">Weekly schedule</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../weeks/week01.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 01: Toolkit setup</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../weeks/week02.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 02: AI-assisted dev</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../weeks/week03.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 03: Python basics</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../weeks/week04.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 04: Data structures</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../weeks/week05.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 05: Functions &amp; errors</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../weeks/week06.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 06: OOP</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../weeks/week07.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 07: External data</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../weeks/week08.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 08: Professional Python</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../weeks/week09.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 09: Welcome to Rust</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../weeks/week10.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 10: Soul of Rust</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../weeks/week11.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 11: Structuring code</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../weeks/week12.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 12: Generics &amp; traits</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../weeks/week13.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 13: Idiomatic Rust</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../weeks/week14.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 14: Multithreading</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#week-2-ai-tools-for-programming---interactive-companion-notebook" id="toc-week-2-ai-tools-for-programming---interactive-companion-notebook" class="nav-link active" data-scroll-target="#week-2-ai-tools-for-programming---interactive-companion-notebook">Week 2: AI Tools for Programming - Interactive Companion Notebook</a>
+  <ul class="collapse">
+  <li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link" data-scroll-target="#learning-objectives">🎯 Learning Objectives</a></li>
+  <li><a href="#prerequisites" id="toc-prerequisites" class="nav-link" data-scroll-target="#prerequisites">🛠️ Prerequisites</a></li>
+  <li><a href="#resources" id="toc-resources" class="nav-link" data-scroll-target="#resources">🔗 Resources</a></li>
+  </ul></li>
+  <li><a href="#session-1-introduction-to-ai-assisted-development" id="toc-session-1-introduction-to-ai-assisted-development" class="nav-link" data-scroll-target="#session-1-introduction-to-ai-assisted-development">Session 1: Introduction to AI-Assisted Development</a>
+  <ul class="collapse">
+  <li><a href="#the-ai-revolution-in-programming" id="toc-the-ai-revolution-in-programming" class="nav-link" data-scroll-target="#the-ai-revolution-in-programming">The AI Revolution in Programming 🚀</a>
+  <ul class="collapse">
+  <li><a href="#the-course-motto-augment-dont-automate" id="toc-the-course-motto-augment-dont-automate" class="nav-link" data-scroll-target="#the-course-motto-augment-dont-automate">The Course Motto: Augment, Don’t Automate!</a></li>
+  </ul></li>
+  <li><a href="#understanding-large-language-models-llms" id="toc-understanding-large-language-models-llms" class="nav-link" data-scroll-target="#understanding-large-language-models-llms">Understanding Large Language Models (LLMs) 🧠</a>
+  <ul class="collapse">
+  <li><a href="#key-insight" id="toc-key-insight" class="nav-link" data-scroll-target="#key-insight">Key Insight</a></li>
+  </ul></li>
+  <li><a href="#four-main-categories-of-ai-tools" id="toc-four-main-categories-of-ai-tools" class="nav-link" data-scroll-target="#four-main-categories-of-ai-tools">Four Main Categories of AI Tools 🛠️</a></li>
+  </ul></li>
+  <li><a href="#session-2-conversational-ai-models" id="toc-session-2-conversational-ai-models" class="nav-link" data-scroll-target="#session-2-conversational-ai-models">Session 2: Conversational AI Models</a>
+  <ul class="collapse">
+  <li><a href="#the-big-three-gemini-chatgpt-and-claude" id="toc-the-big-three-gemini-chatgpt-and-claude" class="nav-link" data-scroll-target="#the-big-three-gemini-chatgpt-and-claude">The Big Three: Gemini, ChatGPT, and Claude 🤖</a>
+  <ul class="collapse">
+  <li><a href="#when-to-use-conversational-ai" id="toc-when-to-use-conversational-ai" class="nav-link" data-scroll-target="#when-to-use-conversational-ai">When to Use Conversational AI</a></li>
+  </ul></li>
+  <li><a href="#the-cptf-prompt-engineering-framework" id="toc-the-cptf-prompt-engineering-framework" class="nav-link" data-scroll-target="#the-cptf-prompt-engineering-framework">The CPTF Prompt Engineering Framework 📝</a>
+  <ul class="collapse">
+  <li><a href="#context" id="toc-context" class="nav-link" data-scroll-target="#context"><strong>C</strong>ontext</a></li>
+  <li><a href="#persona" id="toc-persona" class="nav-link" data-scroll-target="#persona"><strong>P</strong>ersona</a></li>
+  <li><a href="#task" id="toc-task" class="nav-link" data-scroll-target="#task"><strong>T</strong>ask</a></li>
+  <li><a href="#format" id="toc-format" class="nav-link" data-scroll-target="#format"><strong>F</strong>ormat</a></li>
+  <li><a href="#example-bad-prompt-vs-good-prompt" id="toc-example-bad-prompt-vs-good-prompt" class="nav-link" data-scroll-target="#example-bad-prompt-vs-good-prompt">Example: Bad Prompt vs Good Prompt</a></li>
+  </ul></li>
+  <li><a href="#your-turn-craft-a-cptf-prompt" id="toc-your-turn-craft-a-cptf-prompt" class="nav-link" data-scroll-target="#your-turn-craft-a-cptf-prompt">🎯 Your Turn: Craft a CPTF Prompt</a>
+  <ul class="collapse">
+  <li><a href="#exercise-your-cptf-prompt" id="toc-exercise-your-cptf-prompt" class="nav-link" data-scroll-target="#exercise-your-cptf-prompt">✍️ Exercise: Your CPTF Prompt</a></li>
+  </ul></li>
+  <li><a href="#five-essential-prompt-patterns" id="toc-five-essential-prompt-patterns" class="nav-link" data-scroll-target="#five-essential-prompt-patterns">Five Essential Prompt Patterns 📋</a>
+  <ul class="collapse">
+  <li><a href="#explain-this-code" id="toc-explain-this-code" class="nav-link" data-scroll-target="#explain-this-code">1. Explain This Code</a></li>
+  <li><a href="#generate-boilerplate" id="toc-generate-boilerplate" class="nav-link" data-scroll-target="#generate-boilerplate">2. Generate Boilerplate</a></li>
+  <li><a href="#refactor-for-clarity" id="toc-refactor-for-clarity" class="nav-link" data-scroll-target="#refactor-for-clarity">3. Refactor for Clarity</a></li>
+  <li><a href="#debug-assistance" id="toc-debug-assistance" class="nav-link" data-scroll-target="#debug-assistance">4. Debug Assistance</a></li>
+  <li><a href="#architecture-advice" id="toc-architecture-advice" class="nav-link" data-scroll-target="#architecture-advice">5. Architecture Advice</a></li>
+  </ul></li>
+  <li><a href="#your-turn-practice-prompt-patterns" id="toc-your-turn-practice-prompt-patterns" class="nav-link" data-scroll-target="#your-turn-practice-prompt-patterns">🎯 Your Turn: Practice Prompt Patterns</a></li>
+  <li><a href="#numpy-style-docstrings-communicating-with-ai" id="toc-numpy-style-docstrings-communicating-with-ai" class="nav-link" data-scroll-target="#numpy-style-docstrings-communicating-with-ai">NumPy-Style Docstrings: Communicating with AI 📝</a>
+  <ul class="collapse">
+  <li><a href="#why-docstrings-matter-for-ai" id="toc-why-docstrings-matter-for-ai" class="nav-link" data-scroll-target="#why-docstrings-matter-for-ai">Why Docstrings Matter for AI</a></li>
+  <li><a href="#numpy-docstring-format" id="toc-numpy-docstring-format" class="nav-link" data-scroll-target="#numpy-docstring-format">NumPy Docstring Format</a></li>
+  <li><a href="#docstring-structure-breakdown" id="toc-docstring-structure-breakdown" class="nav-link" data-scroll-target="#docstring-structure-breakdown">Docstring Structure Breakdown</a></li>
+  <li><a href="#why-this-style-works-well-with-ai" id="toc-why-this-style-works-well-with-ai" class="nav-link" data-scroll-target="#why-this-style-works-well-with-ai">Why This Style Works Well with AI</a></li>
+  </ul></li>
+  <li><a href="#your-turn-write-a-numpy-style-docstring" id="toc-your-turn-write-a-numpy-style-docstring" class="nav-link" data-scroll-target="#your-turn-write-a-numpy-style-docstring">🎯 Your Turn: Write a NumPy-Style Docstring</a></li>
+  </ul></li>
+  <li><a href="#session-3-github-copilot---your-ai-pair-programmer" id="toc-session-3-github-copilot---your-ai-pair-programmer" class="nav-link" data-scroll-target="#session-3-github-copilot---your-ai-pair-programmer">Session 3: GitHub Copilot - Your AI Pair Programmer</a>
+  <ul class="collapse">
+  <li><a href="#what-is-github-copilot" id="toc-what-is-github-copilot" class="nav-link" data-scroll-target="#what-is-github-copilot">What is GitHub Copilot? 💻</a>
+  <ul class="collapse">
+  <li><a href="#two-ways-to-use-copilot" id="toc-two-ways-to-use-copilot" class="nav-link" data-scroll-target="#two-ways-to-use-copilot">Two Ways to Use Copilot</a></li>
+  </ul></li>
+  <li><a href="#inline-suggestions-the-magic-of-ghost-text" id="toc-inline-suggestions-the-magic-of-ghost-text" class="nav-link" data-scroll-target="#inline-suggestions-the-magic-of-ghost-text">Inline Suggestions: The Magic of Ghost Text ✨</a>
+  <ul class="collapse">
+  <li><a href="#best-practices-for-inline-suggestions" id="toc-best-practices-for-inline-suggestions" class="nav-link" data-scroll-target="#best-practices-for-inline-suggestions">Best Practices for Inline Suggestions</a></li>
+  </ul></li>
+  <li><a href="#example-github-copilot-workflow" id="toc-example-github-copilot-workflow" class="nav-link" data-scroll-target="#example-github-copilot-workflow">Example: GitHub Copilot Workflow</a>
+  <ul class="collapse">
+  <li><a href="#example-function-stub-for-lab-02" id="toc-example-function-stub-for-lab-02" class="nav-link" data-scroll-target="#example-function-stub-for-lab-02">Example Function Stub (For Lab 02)</a></li>
+  </ul></li>
+  <li><a href="#copilot-chat-conversational-help-in-your-editor" id="toc-copilot-chat-conversational-help-in-your-editor" class="nav-link" data-scroll-target="#copilot-chat-conversational-help-in-your-editor">Copilot Chat: Conversational Help in Your Editor 💬</a>
+  <ul class="collapse">
+  <li><a href="#planning-mode" id="toc-planning-mode" class="nav-link" data-scroll-target="#planning-mode">1. Planning Mode</a></li>
+  <li><a href="#ask-mode" id="toc-ask-mode" class="nav-link" data-scroll-target="#ask-mode">2. Ask Mode</a></li>
+  <li><a href="#agent-mode" id="toc-agent-mode" class="nav-link" data-scroll-target="#agent-mode">3. Agent Mode</a></li>
+  <li><a href="#special-copilot-chat-commands" id="toc-special-copilot-chat-commands" class="nav-link" data-scroll-target="#special-copilot-chat-commands">Special Copilot Chat Commands</a></li>
+  </ul></li>
+  <li><a href="#your-turn-plan-your-lab-02-approach" id="toc-your-turn-plan-your-lab-02-approach" class="nav-link" data-scroll-target="#your-turn-plan-your-lab-02-approach">🎯 Your Turn: Plan Your Lab 02 Approach</a>
+  <ul class="collapse">
+  <li><a href="#planning-exercise" id="toc-planning-exercise" class="nav-link" data-scroll-target="#planning-exercise">Planning Exercise</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#session-4-command-line-tools-and-code-analysis" id="toc-session-4-command-line-tools-and-code-analysis" class="nav-link" data-scroll-target="#session-4-command-line-tools-and-code-analysis">Session 4: Command-Line Tools and Code Analysis</a>
+  <ul class="collapse">
+  <li><a href="#gemini-cli-ai-in-your-terminal" id="toc-gemini-cli-ai-in-your-terminal" class="nav-link" data-scroll-target="#gemini-cli-ai-in-your-terminal">Gemini CLI: AI in Your Terminal 🖥️</a>
+  <ul class="collapse">
+  <li><a href="#why-use-terminal-based-ai" id="toc-why-use-terminal-based-ai" class="nav-link" data-scroll-target="#why-use-terminal-based-ai">Why Use Terminal-Based AI?</a></li>
+  <li><a href="#common-usage-patterns" id="toc-common-usage-patterns" class="nav-link" data-scroll-target="#common-usage-patterns">Common Usage Patterns</a></li>
+  <li><a href="#when-to-use-gemini-cli" id="toc-when-to-use-gemini-cli" class="nav-link" data-scroll-target="#when-to-use-gemini-cli">When to Use Gemini CLI</a></li>
+  </ul></li>
+  <li><a href="#google-jules-ai-powered-code-review" id="toc-google-jules-ai-powered-code-review" class="nav-link" data-scroll-target="#google-jules-ai-powered-code-review">Google Jules: AI-Powered Code Review 🔍</a>
+  <ul class="collapse">
+  <li><a href="#revolutionary-capabilities" id="toc-revolutionary-capabilities" class="nav-link" data-scroll-target="#revolutionary-capabilities">Revolutionary Capabilities</a></li>
+  <li><a href="#when-to-use-jules" id="toc-when-to-use-jules" class="nav-link" data-scroll-target="#when-to-use-jules">When to Use Jules</a></li>
+  <li><a href="#example-use-case" id="toc-example-use-case" class="nav-link" data-scroll-target="#example-use-case">Example Use Case</a></li>
+  </ul></li>
+  <li><a href="#your-professional-ai-toolkit" id="toc-your-professional-ai-toolkit" class="nav-link" data-scroll-target="#your-professional-ai-toolkit">Your Professional AI Toolkit 🧰</a>
+  <ul class="collapse">
+  <li><a href="#required-for-this-course-free" id="toc-required-for-this-course-free" class="nav-link" data-scroll-target="#required-for-this-course-free">Required for This Course (Free)</a></li>
+  <li><a href="#recommended-for-this-course-also-free" id="toc-recommended-for-this-course-also-free" class="nav-link" data-scroll-target="#recommended-for-this-course-also-free">Recommended for This Course (Also Free)</a></li>
+  <li><a href="#optional-but-worth-exploring" id="toc-optional-but-worth-exploring" class="nav-link" data-scroll-target="#optional-but-worth-exploring">Optional (But Worth Exploring)</a></li>
+  </ul></li>
+  <li><a href="#your-professional-ai-workflow" id="toc-your-professional-ai-workflow" class="nav-link" data-scroll-target="#your-professional-ai-workflow">Your Professional AI Workflow 🔄</a>
+  <ul class="collapse">
+  <li><a href="#daily-development" id="toc-daily-development" class="nav-link" data-scroll-target="#daily-development">Daily Development</a></li>
+  <li><a href="#code-review-and-submission" id="toc-code-review-and-submission" class="nav-link" data-scroll-target="#code-review-and-submission">Code Review and Submission</a></li>
+  <li><a href="#the-golden-rule" id="toc-the-golden-rule" class="nav-link" data-scroll-target="#the-golden-rule">The Golden Rule</a></li>
+  </ul></li>
+  <li><a href="#ethics-and-limitations" id="toc-ethics-and-limitations" class="nav-link" data-scroll-target="#ethics-and-limitations">Ethics and Limitations ⚠️</a>
+  <ul class="collapse">
+  <li><a href="#ai-can-hallucinate" id="toc-ai-can-hallucinate" class="nav-link" data-scroll-target="#ai-can-hallucinate">AI Can Hallucinate</a></li>
+  <li><a href="#you-own-the-code" id="toc-you-own-the-code" class="nav-link" data-scroll-target="#you-own-the-code">You Own the Code</a></li>
+  <li><a href="#privacy-matters" id="toc-privacy-matters" class="nav-link" data-scroll-target="#privacy-matters">Privacy Matters</a></li>
+  <li><a href="#academic-integrity" id="toc-academic-integrity" class="nav-link" data-scroll-target="#academic-integrity">Academic Integrity</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#putting-it-all-together-lab-02-integration" id="toc-putting-it-all-together-lab-02-integration" class="nav-link" data-scroll-target="#putting-it-all-together-lab-02-integration">🎯 Putting It All Together: Lab 02 Integration</a>
+  <ul class="collapse">
+  <li><a href="#lab-02-success-strategy" id="toc-lab-02-success-strategy" class="nav-link" data-scroll-target="#lab-02-success-strategy">Lab 02 Success Strategy</a>
+  <ul class="collapse">
+  <li><a href="#part-1-copilot-driving-school" id="toc-part-1-copilot-driving-school" class="nav-link" data-scroll-target="#part-1-copilot-driving-school">Part 1: Copilot Driving School</a></li>
+  <li><a href="#part-2-prompt-engineering-challenge" id="toc-part-2-prompt-engineering-challenge" class="nav-link" data-scroll-target="#part-2-prompt-engineering-challenge">Part 2: Prompt Engineering Challenge</a></li>
+  </ul></li>
+  <li><a href="#your-ai-assistant-checklist" id="toc-your-ai-assistant-checklist" class="nav-link" data-scroll-target="#your-ai-assistant-checklist">Your AI Assistant Checklist</a></li>
+  <li><a href="#remember-you-are-the-pilot" id="toc-remember-you-are-the-pilot" class="nav-link" data-scroll-target="#remember-you-are-the-pilot">Remember: You Are the Pilot ✈️</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">IS4010: AI-Enhanced Application Development</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="week-2-ai-tools-for-programming---interactive-companion-notebook" class="level2">
+<h2 class="anchored" data-anchor-id="week-2-ai-tools-for-programming---interactive-companion-notebook">Week 2: AI Tools for Programming - Interactive Companion Notebook</h2>
+<p><strong>Instructor:</strong> Brandon M. Greenwell<br>
+<strong>Course:</strong> IS4010: AI-Enhanced Application Development<br>
+<strong>Week:</strong> 2 - AI Tools for Programming</p>
+<hr>
+<section id="learning-objectives" class="level3">
+<h3 class="anchored" data-anchor-id="learning-objectives">🎯 Learning Objectives</h3>
+<p>By the end of this interactive session, you will be able to:</p>
+<ul>
+<li><strong>Understand the landscape</strong> of AI programming tools and their different use cases</li>
+<li><strong>Work with AI as a pair programming partner</strong> using the augment-not-automate philosophy</li>
+<li><strong>Craft effective prompts</strong> using the Context-Persona-Task-Format (CPTF) framework</li>
+<li><strong>Compare conversational AI models</strong> (Gemini, ChatGPT, Claude) for programming tasks</li>
+<li><strong>Use GitHub Copilot</strong> for inline code suggestions and conversational assistance</li>
+<li><strong>Apply prompt engineering techniques</strong> to debug, refactor, and document code</li>
+<li><strong>Write NumPy-style docstrings</strong> to communicate intent to AI assistants</li>
+</ul>
+</section>
+<section id="prerequisites" class="level3">
+<h3 class="anchored" data-anchor-id="prerequisites">🛠️ Prerequisites</h3>
+<ul>
+<li>Python 3.10+ installed</li>
+<li>Access to a conversational AI tool (Gemini, ChatGPT, or Claude)</li>
+<li>GitHub Copilot extension for VS Code (free for students)</li>
+<li>Basic understanding of Python variables and functions</li>
+</ul>
+</section>
+<section id="resources" class="level3">
+<h3 class="anchored" data-anchor-id="resources">🔗 Resources</h3>
+<ul>
+<li><a href="https://github.com/features/copilot">GitHub Copilot</a></li>
+<li><a href="https://github.com/google-gemini/gemini-cli">Gemini CLI</a></li>
+<li><a href="https://numpydoc.readthedocs.io/en/latest/format.html">NumPy Docstring Style Guide</a></li>
+<li><a href="https://github.com/bgreenwell/is4010-course-template/blob/main/labs/lab02/README.md">Lab 02 Instructions</a></li>
+</ul>
+<hr>
+</section>
+</section>
+<section id="session-1-introduction-to-ai-assisted-development" class="level1">
+<h1>Session 1: Introduction to AI-Assisted Development</h1>
+<section id="the-ai-revolution-in-programming" class="level2">
+<h2 class="anchored" data-anchor-id="the-ai-revolution-in-programming">The AI Revolution in Programming 🚀</h2>
+<p>AI tools are transforming how we write code, but the key is understanding how to use them effectively. In this session, you’ll learn to work with AI as your <strong>pair programming partner</strong>, not your autopilot.</p>
+<section id="the-course-motto-augment-dont-automate" class="level3">
+<h3 class="anchored" data-anchor-id="the-course-motto-augment-dont-automate">The Course Motto: Augment, Don’t Automate!</h3>
+<p>Think of AI as your <strong>co-pilot</strong>, not your <strong>autopilot</strong>: - AI provides suggestions → You review and approve - AI explains possibilities → You make decisions - AI generates code → You understand and own it - You remain responsible for all code you submit</p>
+<p><strong>Remember:</strong> The pilot is always responsible for the flight!</p>
+</section>
+</section>
+<section id="understanding-large-language-models-llms" class="level2">
+<h2 class="anchored" data-anchor-id="understanding-large-language-models-llms">Understanding Large Language Models (LLMs) 🧠</h2>
+<p>Before we dive into using AI tools, let’s understand what they are:</p>
+<ul>
+<li><strong>Large Language Models (LLMs)</strong>: AI systems trained on massive amounts of text from the internet</li>
+<li><strong>Pattern recognition experts</strong>: They’ve learned patterns in human language and code</li>
+<li><strong>Sophisticated autocomplete</strong>: Like your phone’s predictive text, but incredibly advanced</li>
+<li><strong>Not databases</strong>: They predict what text should come next based on patterns</li>
+<li><strong>Good at code</strong>: Programming languages follow patterns, just like natural language</li>
+</ul>
+<section id="key-insight" class="level3">
+<h3 class="anchored" data-anchor-id="key-insight">Key Insight</h3>
+<p>LLMs were trained on billions of lines of code from GitHub and other sources. They learned that certain patterns appear together (like function definitions followed by return statements). This makes them surprisingly good at code completion, but they still require human judgment and verification.</p>
+</section>
+</section>
+<section id="four-main-categories-of-ai-tools" class="level2">
+<h2 class="anchored" data-anchor-id="four-main-categories-of-ai-tools">Four Main Categories of AI Tools 🛠️</h2>
+<p>AI programming tools fall into four main categories:</p>
+<ol type="1">
+<li><strong>Conversational AI models</strong>: General-purpose models (Gemini, ChatGPT, Claude)</li>
+<li><strong>Specialized code assistants</strong>: Purpose-built for coding (GitHub Copilot, Claude Code)</li>
+<li><strong>Command-line tools</strong>: Terminal-based AI access (Gemini CLI)</li>
+<li><strong>Code analysis tools</strong>: Project-wide review and feedback (Google Jules)</li>
+</ol>
+<p>Each has unique strengths. Let’s explore when and how to use each one.</p>
+</section>
+</section>
+<section id="session-2-conversational-ai-models" class="level1">
+<h1>Session 2: Conversational AI Models</h1>
+<section id="the-big-three-gemini-chatgpt-and-claude" class="level2">
+<h2 class="anchored" data-anchor-id="the-big-three-gemini-chatgpt-and-claude">The Big Three: Gemini, ChatGPT, and Claude 🤖</h2>
+<p>These general-purpose AI models can help with programming tasks:</p>
+<ul>
+<li><strong>All offer free tiers</strong> - No cost barrier to entry</li>
+<li><strong>Strong programming support</strong> - Excellent for Python, explanations, and debugging</li>
+<li><strong>Different personalities</strong> - Each has unique strengths</li>
+<li><strong>Web-based interfaces</strong> - Easy to access from any browser</li>
+<li><strong>Great for learning</strong> - Perfect for explanations and code review</li>
+</ul>
+<section id="when-to-use-conversational-ai" class="level3">
+<h3 class="anchored" data-anchor-id="when-to-use-conversational-ai">When to Use Conversational AI</h3>
+<ul>
+<li><strong>Explaining code</strong>: “What does this function do?”</li>
+<li><strong>Debugging help</strong>: “Why am I getting this error?”</li>
+<li><strong>Architecture advice</strong>: “Should I use a list or dictionary here?”</li>
+<li><strong>Learning</strong>: “Explain list comprehensions in simple terms”</li>
+<li><strong>Code review</strong>: “What improvements could be made to this function?”</li>
+</ul>
+</section>
+</section>
+<section id="the-cptf-prompt-engineering-framework" class="level2">
+<h2 class="anchored" data-anchor-id="the-cptf-prompt-engineering-framework">The CPTF Prompt Engineering Framework 📝</h2>
+<p>The quality of AI responses depends on the quality of your prompts. Use the <strong>CPTF</strong> framework:</p>
+<section id="context" class="level3">
+<h3 class="anchored" data-anchor-id="context"><strong>C</strong>ontext</h3>
+<p>Provide the situation and relevant information</p>
+</section>
+<section id="persona" class="level3">
+<h3 class="anchored" data-anchor-id="persona"><strong>P</strong>ersona</h3>
+<p>Tell the AI who to act as (e.g., “Act as a senior Python developer”)</p>
+</section>
+<section id="task" class="level3">
+<h3 class="anchored" data-anchor-id="task"><strong>T</strong>ask</h3>
+<p>Be specific about what you want the AI to do</p>
+</section>
+<section id="format" class="level3">
+<h3 class="anchored" data-anchor-id="format"><strong>F</strong>ormat</h3>
+<p>Specify how you want the response structured</p>
+</section>
+<section id="example-bad-prompt-vs-good-prompt" class="level3">
+<h3 class="anchored" data-anchor-id="example-bad-prompt-vs-good-prompt">Example: Bad Prompt vs Good Prompt</h3>
+<p><strong>Bad:</strong> “Fix my code”</p>
+<p><strong>Good:</strong></p>
+<pre><code>Context: I'm writing a Python function to calculate student grades.
+Persona: Act as a senior Python developer reviewing my code.
+Task: Here's my function [paste code]. Find any potential bugs and suggest improvements.
+Format: Provide your answer as a numbered list with explanations and corrected code.</code></pre>
+</section>
+</section>
+<section id="your-turn-craft-a-cptf-prompt" class="level2">
+<h2 class="anchored" data-anchor-id="your-turn-craft-a-cptf-prompt">🎯 Your Turn: Craft a CPTF Prompt</h2>
+<p>Let’s practice crafting a prompt using the CPTF framework. You’ll use this for Lab 02 Part 2.</p>
+<p><strong>Scenario:</strong> You have a buggy function that’s supposed to calculate the sum of even numbers in a list.</p>
+<p><strong>Your Task:</strong> 1. Read the buggy code below 2. Craft a prompt using the CPTF framework 3. Test your prompt with a conversational AI model 4. Document the results</p>
+<div id="cell-8" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Buggy code - can you spot the error?</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> sum_of_evens(numbers):</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Calculates the sum of all even numbers in a list."""</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    total <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> num <span class="kw">in</span> numbers:</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> num <span class="op">%</span> <span class="dv">2</span> <span class="op">==</span> <span class="dv">1</span>:  <span class="co"># This line has a bug!</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>            total <span class="op">+=</span> num</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> total</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Test the buggy function</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>test_numbers <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>]</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>result <span class="op">=</span> sum_of_evens(test_numbers)</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Sum of evens in </span><span class="sc">{</span>test_numbers<span class="sc">}</span><span class="ss">: </span><span class="sc">{</span>result<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Expected: </span><span class="sc">{</span><span class="dv">2</span> <span class="op">+</span> <span class="dv">4</span> <span class="op">+</span> <span class="dv">6</span><span class="sc">}</span><span class="ss"> = 12"</span>)</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Actual: </span><span class="sc">{</span>result<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<section id="exercise-your-cptf-prompt" class="level3">
+<h3 class="anchored" data-anchor-id="exercise-your-cptf-prompt">✍️ Exercise: Your CPTF Prompt</h3>
+<p>Double-click this cell to edit and write your prompt:</p>
+<p><strong>Context:</strong> <em>[Describe what the code is supposed to do and what problem you’re facing]</em></p>
+<p><strong>Persona:</strong> <em>[Who should the AI act as?]</em></p>
+<p><strong>Task:</strong> <em>[What specific help do you need?]</em></p>
+<p><strong>Format:</strong> <em>[How should the response be structured?]</em></p>
+<hr>
+<p><strong>AI Response Summary:</strong> <em>[After testing your prompt, summarize what the AI said and whether it was helpful]</em></p>
+</section>
+</section>
+<section id="five-essential-prompt-patterns" class="level2">
+<h2 class="anchored" data-anchor-id="five-essential-prompt-patterns">Five Essential Prompt Patterns 📋</h2>
+<p>Here are five prompt patterns you’ll use frequently:</p>
+<section id="explain-this-code" class="level3">
+<h3 class="anchored" data-anchor-id="explain-this-code">1. Explain This Code</h3>
+<p>“Explain this Python dictionary comprehension step by step: <code>{word: len(word) for word in text.split() if len(word) &gt; 3}</code>”</p>
+</section>
+<section id="generate-boilerplate" class="level3">
+<h3 class="anchored" data-anchor-id="generate-boilerplate">2. Generate Boilerplate</h3>
+<p>“Write a NumPy-style docstring for a function that calculates the area of a circle given its radius.”</p>
+</section>
+<section id="refactor-for-clarity" class="level3">
+<h3 class="anchored" data-anchor-id="refactor-for-clarity">3. Refactor for Clarity</h3>
+<p>“Convert this for loop into a more Pythonic equivalent using list comprehension or built-in functions.”</p>
+</section>
+<section id="debug-assistance" class="level3">
+<h3 class="anchored" data-anchor-id="debug-assistance">4. Debug Assistance</h3>
+<p>“I’m getting a ‘TypeError: unsupported operand type(s)’ on line 15. Here’s my code… What’s the likely cause and how do I fix it?”</p>
+</section>
+<section id="architecture-advice" class="level3">
+<h3 class="anchored" data-anchor-id="architecture-advice">5. Architecture Advice</h3>
+<p>“I need to store student information (name, ID, grades). Should I use a list of dictionaries or create a Student class? Explain the pros and cons of each approach.”</p>
+</section>
+</section>
+<section id="your-turn-practice-prompt-patterns" class="level2">
+<h2 class="anchored" data-anchor-id="your-turn-practice-prompt-patterns">🎯 Your Turn: Practice Prompt Patterns</h2>
+<p>Try each of the five prompt patterns with a conversational AI model:</p>
+<ol type="1">
+<li>Pick ONE pattern from above</li>
+<li>Use it with your preferred AI (Gemini, ChatGPT, or Claude)</li>
+<li>Document the result in the cell below</li>
+</ol>
+<p><strong>Which pattern did you try?</strong> <em>[Write your answer here]</em></p>
+<p><strong>What was the AI’s response?</strong> <em>[Summarize the response here]</em></p>
+<p><strong>How helpful was it on a scale of 1-5?</strong> <em>[Your rating and why]</em></p>
+</section>
+<section id="numpy-style-docstrings-communicating-with-ai" class="level2">
+<h2 class="anchored" data-anchor-id="numpy-style-docstrings-communicating-with-ai">NumPy-Style Docstrings: Communicating with AI 📝</h2>
+<p>A <strong>docstring</strong> is a string literal (enclosed in triple quotes <code>"""</code>) that occurs as the first statement in a module, function, class, or method. Its purpose is to explain what the code does.</p>
+<section id="why-docstrings-matter-for-ai" class="level3">
+<h3 class="anchored" data-anchor-id="why-docstrings-matter-for-ai">Why Docstrings Matter for AI</h3>
+<ul>
+<li><strong>Clear communication</strong>: Good docstrings lead to good AI-generated code</li>
+<li><strong>Intent specification</strong>: Tell the AI what you want the function to do</li>
+<li><strong>Type information</strong>: Specify parameter and return types</li>
+<li><strong>Examples</strong>: Show the AI what correct usage looks like</li>
+</ul>
+</section>
+<section id="numpy-docstring-format" class="level3">
+<h3 class="anchored" data-anchor-id="numpy-docstring-format">NumPy Docstring Format</h3>
+<p>We use the <a href="https://numpydoc.readthedocs.io/en/latest/format.html">NumPy style</a> for its clarity and readability:</p>
+<div id="cell-13" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> calculate_area(length, width):</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co">    Calculate the area of a rectangle.</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="co">    Parameters</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="co">    ----------</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="co">    length : float</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="co">        The length of the rectangle in meters.</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="co">    width : float</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="co">        The width of the rectangle in meters.</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="co">    Returns</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="co">    -------</span></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a><span class="co">    float</span></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a><span class="co">        The area of the rectangle in square meters.</span></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a><span class="co">    Examples</span></span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a><span class="co">    --------</span></span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a><span class="co">    &gt;&gt;&gt; calculate_area(5, 3)</span></span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a><span class="co">    15.0</span></span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a><span class="co">    </span></span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a><span class="co">    &gt;&gt;&gt; calculate_area(10, 2.5)</span></span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a><span class="co">    25.0</span></span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> length <span class="op">*</span> width</span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a><span class="co"># Test the function</span></span>
+<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(calculate_area(<span class="dv">5</span>, <span class="dv">3</span>))</span>
+<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(calculate_area(<span class="dv">10</span>, <span class="fl">2.5</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="docstring-structure-breakdown" class="level3">
+<h3 class="anchored" data-anchor-id="docstring-structure-breakdown">Docstring Structure Breakdown</h3>
+<ol type="1">
+<li><strong>Brief description</strong>: One-line summary of what the function does</li>
+<li><strong>Parameters section</strong>: Lists all parameters with types and descriptions</li>
+<li><strong>Returns section</strong>: Describes the return value type and meaning</li>
+<li><strong>Examples section</strong> (optional but recommended): Shows usage examples</li>
+</ol>
+</section>
+<section id="why-this-style-works-well-with-ai" class="level3">
+<h3 class="anchored" data-anchor-id="why-this-style-works-well-with-ai">Why This Style Works Well with AI</h3>
+<ul>
+<li><strong>Structured format</strong>: AI tools recognize and understand this pattern</li>
+<li><strong>Type hints</strong>: Helps AI generate type-appropriate code</li>
+<li><strong>Clear intent</strong>: Detailed descriptions guide code generation</li>
+<li><strong>Examples</strong>: Show AI exactly what correct behavior looks like</li>
+</ul>
+</section>
+</section>
+<section id="your-turn-write-a-numpy-style-docstring" class="level2">
+<h2 class="anchored" data-anchor-id="your-turn-write-a-numpy-style-docstring">🎯 Your Turn: Write a NumPy-Style Docstring</h2>
+<p>Practice writing a professional docstring for this function:</p>
+<div id="cell-16" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> calculate_grade(score, total_points):</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    <span class="co"># </span><span class="al">TODO</span><span class="co">: Add a complete NumPy-style docstring above this comment</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Include: description, parameters, returns, and at least one example</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    percentage <span class="op">=</span> (score <span class="op">/</span> total_points) <span class="op">*</span> <span class="dv">100</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> percentage <span class="op">&gt;=</span> <span class="dv">90</span>:</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="st">'A'</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">elif</span> percentage <span class="op">&gt;=</span> <span class="dv">80</span>:</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="st">'B'</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">elif</span> percentage <span class="op">&gt;=</span> <span class="dv">70</span>:</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="st">'C'</span></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">elif</span> percentage <span class="op">&gt;=</span> <span class="dv">60</span>:</span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="st">'D'</span></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="st">'F'</span></span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Test your documentation</span></span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(calculate_grade(<span class="dv">85</span>, <span class="dv">100</span>))</span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(calculate_grade(<span class="dv">72</span>, <span class="dv">80</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+</section>
+<section id="session-3-github-copilot---your-ai-pair-programmer" class="level1">
+<h1>Session 3: GitHub Copilot - Your AI Pair Programmer</h1>
+<section id="what-is-github-copilot" class="level2">
+<h2 class="anchored" data-anchor-id="what-is-github-copilot">What is GitHub Copilot? 💻</h2>
+<p>GitHub Copilot is a purpose-built AI code assistant that integrates directly into VS Code:</p>
+<ul>
+<li><strong>Trained specifically on code</strong>: Billions of lines from GitHub repositories</li>
+<li><strong>Two main modes</strong>: Inline suggestions and Copilot Chat</li>
+<li><strong>Context-aware</strong>: Sees your current file, open files, and project structure</li>
+<li><strong>Real-time assistance</strong>: Get help as you type</li>
+<li><strong>Professional workflow</strong>: Stay in your editor, maintain flow state</li>
+</ul>
+<section id="two-ways-to-use-copilot" class="level3">
+<h3 class="anchored" data-anchor-id="two-ways-to-use-copilot">Two Ways to Use Copilot</h3>
+<ol type="1">
+<li><strong>Inline Suggestions</strong>: Ghost text appears as you type (press Tab to accept)</li>
+<li><strong>Copilot Chat</strong>: Conversational interface within VS Code</li>
+</ol>
+</section>
+</section>
+<section id="inline-suggestions-the-magic-of-ghost-text" class="level2">
+<h2 class="anchored" data-anchor-id="inline-suggestions-the-magic-of-ghost-text">Inline Suggestions: The Magic of Ghost Text ✨</h2>
+<p>How it works: 1. Write a <strong>descriptive comment</strong> or <strong>docstring</strong> 2. Start typing your function definition 3. Copilot suggests code in <strong>gray “ghost text”</strong> 4. Press <strong>Tab</strong> to accept, <strong>Esc</strong> to reject 5. Use <strong>Alt + ]</strong> (Windows) or <strong>Option + ]</strong> (Mac) to see alternative suggestions</p>
+<section id="best-practices-for-inline-suggestions" class="level3">
+<h3 class="anchored" data-anchor-id="best-practices-for-inline-suggestions">Best Practices for Inline Suggestions</h3>
+<ul>
+<li><strong>Clear comments</strong>: <code># Calculate the factorial of a positive integer</code></li>
+<li><strong>Descriptive names</strong>: <code>calculate_factorial</code> not <code>calc_fact</code></li>
+<li><strong>Type hints</strong>: <code>def factorial(n: int) -&gt; int:</code></li>
+<li><strong>Good docstrings</strong>: Detailed NumPy-style documentation</li>
+</ul>
+</section>
+</section>
+<section id="example-github-copilot-workflow" class="level2">
+<h2 class="anchored" data-anchor-id="example-github-copilot-workflow">Example: GitHub Copilot Workflow</h2>
+<p>Here’s what a typical Copilot workflow looks like. In VS Code, you would:</p>
+<ol type="1">
+<li>Write the docstring (communicates intent to Copilot)</li>
+<li>Start the function definition</li>
+<li>Copilot suggests the implementation</li>
+<li>Review and accept (or modify) the suggestion</li>
+</ol>
+<section id="example-function-stub-for-lab-02" class="level3">
+<h3 class="anchored" data-anchor-id="example-function-stub-for-lab-02">Example Function Stub (For Lab 02)</h3>
+<div id="cell-19" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> factorial(n):</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Calculate the factorial of a non-negative integer.</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co">    Parameters</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="co">    ----------</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="co">    n : int</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="co">        The non-negative integer to calculate the factorial of.</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="co">    Returns</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="co">    -------</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="co">    int</span></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a><span class="co">        The factorial of n. Returns 1 for n = 0.</span></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a><span class="co">        </span></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a><span class="co">    Examples</span></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a><span class="co">    --------</span></span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a><span class="co">    &gt;&gt;&gt; factorial(5)</span></span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a><span class="co">    120</span></span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a><span class="co">    </span></span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a><span class="co">    &gt;&gt;&gt; factorial(0)</span></span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a><span class="co">    1</span></span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a>    <span class="co"># When you place your cursor here in VS Code and wait,</span></span>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Copilot will suggest an implementation based on the docstring!</span></span>
+<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a>    <span class="co"># For this notebook, here's a manual implementation:</span></span>
+<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> n <span class="op">==</span> <span class="dv">0</span>:</span>
+<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="dv">1</span></span>
+<span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a>    result <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb5-29"><a href="#cb5-29" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, n <span class="op">+</span> <span class="dv">1</span>):</span>
+<span id="cb5-30"><a href="#cb5-30" aria-hidden="true" tabindex="-1"></a>        result <span class="op">*=</span> i</span>
+<span id="cb5-31"><a href="#cb5-31" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> result</span>
+<span id="cb5-32"><a href="#cb5-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-33"><a href="#cb5-33" aria-hidden="true" tabindex="-1"></a><span class="co"># Test the function</span></span>
+<span id="cb5-34"><a href="#cb5-34" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"factorial(5) = </span><span class="sc">{</span>factorial(<span class="dv">5</span>)<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb5-35"><a href="#cb5-35" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"factorial(0) = </span><span class="sc">{</span>factorial(<span class="dv">0</span>)<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb5-36"><a href="#cb5-36" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"factorial(7) = </span><span class="sc">{</span>factorial(<span class="dv">7</span>)<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+</section>
+<section id="copilot-chat-conversational-help-in-your-editor" class="level2">
+<h2 class="anchored" data-anchor-id="copilot-chat-conversational-help-in-your-editor">Copilot Chat: Conversational Help in Your Editor 💬</h2>
+<p>Copilot Chat provides three powerful modes:</p>
+<section id="planning-mode" class="level3">
+<h3 class="anchored" data-anchor-id="planning-mode">1. Planning Mode</h3>
+<p>For architectural decisions and project structure: - “How should I structure a student gradebook application?” - “What’s the best way to organize this code into functions?”</p>
+</section>
+<section id="ask-mode" class="level3">
+<h3 class="anchored" data-anchor-id="ask-mode">2. Ask Mode</h3>
+<p>For questions, explanations, and debugging: - “Explain this regex pattern” - “Why am I getting this error?” - “What does this function do?”</p>
+</section>
+<section id="agent-mode" class="level3">
+<h3 class="anchored" data-anchor-id="agent-mode">3. Agent Mode</h3>
+<p>For autonomous task completion: - “Refactor this class to use data classes” - “Add error handling to all functions” - “Generate tests for this module”</p>
+</section>
+<section id="special-copilot-chat-commands" class="level3">
+<h3 class="anchored" data-anchor-id="special-copilot-chat-commands">Special Copilot Chat Commands</h3>
+<ul>
+<li><code>/explain</code> - Explain selected code</li>
+<li><code>/fix</code> - Suggest fixes for problems</li>
+<li><code>/tests</code> - Generate unit tests</li>
+<li><code>/doc</code> - Add documentation</li>
+</ul>
+</section>
+</section>
+<section id="your-turn-plan-your-lab-02-approach" class="level2">
+<h2 class="anchored" data-anchor-id="your-turn-plan-your-lab-02-approach">🎯 Your Turn: Plan Your Lab 02 Approach</h2>
+<p>Think about how you’ll use AI tools for Lab 02:</p>
+<p><strong>Part 1 (Copilot Driving School):</strong> - Write detailed docstrings for each function stub - Let Copilot suggest implementations - Review and test each suggestion - Accept, modify, or reject based on your understanding</p>
+<p><strong>Part 2 (Prompt Engineering Challenge):</strong> - Use CPTF framework for each problem - Test prompts with conversational AI (Gemini, ChatGPT, or Claude) - Document your prompts and AI responses in <code>lab02_prompts.md</code> - Understand the AI’s solutions before using them</p>
+<section id="planning-exercise" class="level3">
+<h3 class="anchored" data-anchor-id="planning-exercise">Planning Exercise</h3>
+<p>Write down your strategy:</p>
+<p><strong>Which AI tool will you use for Part 2?</strong> <em>[Your answer here]</em></p>
+<p><strong>How will you ensure you understand the AI-generated code?</strong> <em>[Your approach here]</em></p>
+<p><strong>What will you do if Copilot’s suggestion doesn’t work?</strong> <em>[Your strategy here]</em></p>
+</section>
+</section>
+</section>
+<section id="session-4-command-line-tools-and-code-analysis" class="level1">
+<h1>Session 4: Command-Line Tools and Code Analysis</h1>
+<section id="gemini-cli-ai-in-your-terminal" class="level2">
+<h2 class="anchored" data-anchor-id="gemini-cli-ai-in-your-terminal">Gemini CLI: AI in Your Terminal 🖥️</h2>
+<p>The Gemini CLI brings AI assistance directly to your command line:</p>
+<section id="why-use-terminal-based-ai" class="level3">
+<h3 class="anchored" data-anchor-id="why-use-terminal-based-ai">Why Use Terminal-Based AI?</h3>
+<ul>
+<li><strong>Stay in your workflow</strong>: No switching between terminal and browser</li>
+<li><strong>Quick queries</strong>: Fast answers without leaving the command line</li>
+<li><strong>Scriptable</strong>: Can be integrated into automated workflows</li>
+<li><strong>Code context</strong>: Easy to pipe file contents directly to AI</li>
+</ul>
+</section>
+<section id="common-usage-patterns" class="level3">
+<h3 class="anchored" data-anchor-id="common-usage-patterns">Common Usage Patterns</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Start interactive session</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="ex">gemini</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Quick question</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="ex">gemini</span> <span class="st">"How do I install pytest in Python?"</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Code generation</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="ex">gemini</span> <span class="st">"Write a Python function to read a CSV file"</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Debugging help</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="ex">gemini</span> <span class="st">"Explain this error: ImportError: No module named 'requests'"</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Code review</span></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> script.py <span class="kw">|</span> <span class="ex">gemini</span> <span class="st">"Review this code for bugs"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="when-to-use-gemini-cli" class="level3">
+<h3 class="anchored" data-anchor-id="when-to-use-gemini-cli">When to Use Gemini CLI</h3>
+<ul>
+<li><strong>Quick package help</strong>: “How do I install X?”</li>
+<li><strong>Error explanations</strong>: “What does this error mean?”</li>
+<li><strong>Command examples</strong>: “Show me how to use git stash”</li>
+<li><strong>Code snippets</strong>: “Generate a function to do X”</li>
+</ul>
+</section>
+</section>
+<section id="google-jules-ai-powered-code-review" class="level2">
+<h2 class="anchored" data-anchor-id="google-jules-ai-powered-code-review">Google Jules: AI-Powered Code Review 🔍</h2>
+<p>Google Jules represents a new category of AI tools that understand entire codebases:</p>
+<section id="revolutionary-capabilities" class="level3">
+<h3 class="anchored" data-anchor-id="revolutionary-capabilities">Revolutionary Capabilities</h3>
+<ul>
+<li><strong>Understands entire codebases</strong>, not just individual files</li>
+<li><strong>Comprehensive analysis</strong>: Security, performance, maintainability</li>
+<li><strong>Context-aware suggestions</strong>: Considers your project’s architecture</li>
+<li><strong>Educational feedback</strong>: Explains why changes are recommended</li>
+</ul>
+</section>
+<section id="when-to-use-jules" class="level3">
+<h3 class="anchored" data-anchor-id="when-to-use-jules">When to Use Jules</h3>
+<ul>
+<li><strong>Before submitting labs</strong>: Get AI feedback on your complete solution</li>
+<li><strong>Code review</strong>: Identify issues across multiple files</li>
+<li><strong>Learning</strong>: Understand best practices in real projects</li>
+<li><strong>Refactoring</strong>: Find improvement opportunities</li>
+<li><strong>Addressing pull requests</strong>: Get help with PR feedback</li>
+</ul>
+</section>
+<section id="example-use-case" class="level3">
+<h3 class="anchored" data-anchor-id="example-use-case">Example Use Case</h3>
+<p>Before submitting Lab 02: 1. Upload your <code>lab02/</code> folder to Jules 2. Get comprehensive feedback on all three functions 3. Review suggestions for improvements 4. Make informed decisions about changes 5. Submit with confidence</p>
+</section>
+</section>
+<section id="your-professional-ai-toolkit" class="level2">
+<h2 class="anchored" data-anchor-id="your-professional-ai-toolkit">Your Professional AI Toolkit 🧰</h2>
+<section id="required-for-this-course-free" class="level3">
+<h3 class="anchored" data-anchor-id="required-for-this-course-free">Required for This Course (Free)</h3>
+<ul>
+<li><strong>GitHub Copilot</strong> - Integrated code assistance in VS Code</li>
+<li><strong>Gemini CLI</strong> - Terminal-based AI for quick queries</li>
+</ul>
+</section>
+<section id="recommended-for-this-course-also-free" class="level3">
+<h3 class="anchored" data-anchor-id="recommended-for-this-course-also-free">Recommended for This Course (Also Free)</h3>
+<ul>
+<li><strong>Gemini web interface</strong> - Conversational AI for problem-solving</li>
+<li><strong>Google Jules</strong> - Comprehensive code review and analysis</li>
+</ul>
+</section>
+<section id="optional-but-worth-exploring" class="level3">
+<h3 class="anchored" data-anchor-id="optional-but-worth-exploring">Optional (But Worth Exploring)</h3>
+<ul>
+<li><strong>ChatGPT</strong> - Alternative conversational AI</li>
+<li><strong>Claude</strong> - Another excellent conversational AI</li>
+<li><strong>Claude Code</strong> - Premium CLI tool (paid subscription)</li>
+</ul>
+</section>
+</section>
+<section id="your-professional-ai-workflow" class="level2">
+<h2 class="anchored" data-anchor-id="your-professional-ai-workflow">Your Professional AI Workflow 🔄</h2>
+<p>Here’s a recommended workflow for AI-assisted development:</p>
+<section id="daily-development" class="level3">
+<h3 class="anchored" data-anchor-id="daily-development">Daily Development</h3>
+<ol type="1">
+<li><strong>Start with comments</strong>: Describe your intent clearly</li>
+<li><strong>Use Copilot inline</strong>: Accept, modify, or reject suggestions</li>
+<li><strong>Chat for complex problems</strong>: Switch to conversational help when stuck</li>
+<li><strong>Command-line for quick help</strong>: Terminal queries for efficiency</li>
+</ol>
+</section>
+<section id="code-review-and-submission" class="level3">
+<h3 class="anchored" data-anchor-id="code-review-and-submission">Code Review and Submission</h3>
+<ol type="1">
+<li><strong>Jules analysis</strong>: Upload complete projects for review</li>
+<li><strong>AI-assisted debugging</strong>: Use chat to identify and fix issues</li>
+<li><strong>Documentation</strong>: Generate docstrings with AI help</li>
+<li><strong>Testing</strong>: Auto-generate test cases with <code>/tests</code> command</li>
+</ol>
+</section>
+<section id="the-golden-rule" class="level3">
+<h3 class="anchored" data-anchor-id="the-golden-rule">The Golden Rule</h3>
+<p><strong>Never submit code you don’t understand!</strong></p>
+<ul>
+<li>AI provides suggestions → You make decisions</li>
+<li>AI explains possibilities → You choose the best approach</li>
+<li>AI generates code → You understand and verify it</li>
+<li>AI finds patterns → You apply domain knowledge</li>
+<li>You remain responsible for the final product</li>
+</ul>
+</section>
+</section>
+<section id="ethics-and-limitations" class="level2">
+<h2 class="anchored" data-anchor-id="ethics-and-limitations">Ethics and Limitations ⚠️</h2>
+<p>AI tools are powerful but require human oversight:</p>
+<section id="ai-can-hallucinate" class="level3">
+<h3 class="anchored" data-anchor-id="ai-can-hallucinate">AI Can Hallucinate</h3>
+<ul>
+<li>Models sometimes generate plausible-looking but <strong>incorrect code</strong></li>
+<li>Advice may sound authoritative but be <strong>outdated or wrong</strong></li>
+<li>Subtle logical errors may not be immediately obvious</li>
+</ul>
+</section>
+<section id="you-own-the-code" class="level3">
+<h3 class="anchored" data-anchor-id="you-own-the-code">You Own the Code</h3>
+<ul>
+<li>Never submit code you don’t understand</li>
+<li>Test all AI-generated code thoroughly</li>
+<li>Take responsibility for all submissions</li>
+</ul>
+</section>
+<section id="privacy-matters" class="level3">
+<h3 class="anchored" data-anchor-id="privacy-matters">Privacy Matters</h3>
+<ul>
+<li>Be cautious about sharing sensitive information</li>
+<li>Don’t paste real passwords, API keys, or personal data</li>
+<li>Use example data for prompts when possible</li>
+</ul>
+</section>
+<section id="academic-integrity" class="level3">
+<h3 class="anchored" data-anchor-id="academic-integrity">Academic Integrity</h3>
+<ul>
+<li>Document your AI usage in assignments</li>
+<li>Understand the code you submit</li>
+<li>AI should accelerate learning, not replace it</li>
+<li>Follow course policies on AI assistance</li>
+</ul>
+</section>
+</section>
+</section>
+<section id="putting-it-all-together-lab-02-integration" class="level1">
+<h1>🎯 Putting It All Together: Lab 02 Integration</h1>
+<p>You’ve learned the essential AI tools and techniques. Now apply them in <a href="https://github.com/bgreenwell/is4010-course-template/blob/main/labs/lab02/README.md">Lab 02</a>!</p>
+<section id="lab-02-success-strategy" class="level2">
+<h2 class="anchored" data-anchor-id="lab-02-success-strategy">Lab 02 Success Strategy</h2>
+<section id="part-1-copilot-driving-school" class="level3">
+<h3 class="anchored" data-anchor-id="part-1-copilot-driving-school">Part 1: Copilot Driving School</h3>
+<ol type="1">
+<li><strong>Write clear docstrings</strong> - Use NumPy format with detailed descriptions</li>
+<li><strong>Let Copilot suggest</strong> - Place cursor in function body and wait</li>
+<li><strong>Review carefully</strong> - Understand what Copilot suggests</li>
+<li><strong>Test thoroughly</strong> - Verify functions work correctly</li>
+<li><strong>Modify if needed</strong> - Don’t blindly accept suggestions</li>
+</ol>
+</section>
+<section id="part-2-prompt-engineering-challenge" class="level3">
+<h3 class="anchored" data-anchor-id="part-2-prompt-engineering-challenge">Part 2: Prompt Engineering Challenge</h3>
+<ol type="1">
+<li><strong>Use CPTF framework</strong> - Context, Persona, Task, Format</li>
+<li><strong>Be specific</strong> - Clear prompts get better responses</li>
+<li><strong>Document everything</strong> - Save prompts and responses in <code>lab02_prompts.md</code></li>
+<li><strong>Understand solutions</strong> - Don’t copy-paste without understanding</li>
+<li><strong>Iterate if needed</strong> - Refine prompts for better results</li>
+</ol>
+</section>
+</section>
+<section id="your-ai-assistant-checklist" class="level2">
+<h2 class="anchored" data-anchor-id="your-ai-assistant-checklist">Your AI Assistant Checklist</h2>
+<p>Before starting Lab 02, make sure you have:</p>
+<ul class="task-list">
+<li><label><input type="checkbox">GitHub Copilot installed and activated in VS Code</label></li>
+<li><label><input type="checkbox">Access to a conversational AI (Gemini, ChatGPT, or Claude)</label></li>
+<li><label><input type="checkbox">Understanding of NumPy-style docstrings</label></li>
+<li><label><input type="checkbox">CPTF framework memorized or bookmarked</label></li>
+<li><label><input type="checkbox">Commitment to understanding all AI-generated code</label></li>
+</ul>
+</section>
+<section id="remember-you-are-the-pilot" class="level2">
+<h2 class="anchored" data-anchor-id="remember-you-are-the-pilot">Remember: You Are the Pilot ✈️</h2>
+<ul>
+<li>AI provides suggestions → You make decisions</li>
+<li>AI explains possibilities → You choose the best approach</li>
+<li>AI generates code → You understand and verify it</li>
+<li>Always maintain responsibility for your work</li>
+</ul>
+<p><strong>Good luck with Lab 02! Use AI wisely, learn actively, and code confidently!</strong></p>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/bgreenwell\.github\.io\/is4010-website\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+<p>IS 4010 - App Dev with AI</p>
+</div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>
