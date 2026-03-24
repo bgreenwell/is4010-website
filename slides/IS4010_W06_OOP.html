@@ -1,23 +1,25 @@
 <!DOCTYPE html>
 <html lang="en"><head>
-<link href="../images/uc-logo-2.png" rel="icon" type="image/png">
-<script src="../site_libs/clipboard/clipboard.min.js"></script>
-<script src="../site_libs/quarto-html/tabby.min.js"></script>
-<script src="../site_libs/quarto-html/popper.min.js"></script>
-<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
-<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-4d9afe2b8d18ee9fa5d0d57b5ed4214d.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.8.27">
+<script src="IS4010_W06_OOP_files/libs/clipboard/clipboard.min.js"></script>
+<script src="IS4010_W06_OOP_files/libs/quarto-html/tabby.min.js"></script>
+<script src="IS4010_W06_OOP_files/libs/quarto-html/popper.min.js"></script>
+<script src="IS4010_W06_OOP_files/libs/quarto-html/tippy.umd.min.js"></script>
+<link href="IS4010_W06_OOP_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="IS4010_W06_OOP_files/libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="IS4010_W06_OOP_files/libs/quarto-html/quarto-syntax-highlighting-dark-f418161beb48e0141c760e455f12af2c.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.9.36">
 
   <meta name="author" content="Brandon M. Greenwell">
-  <title>IS 4010 - App Dev with AI – IS4010: AI-Enhanced Application Development</title>
+  <title>IS4010: AI-Enhanced Application Development</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
-  <link rel="stylesheet" href="../site_libs/revealjs/dist/reset.css">
-  <link rel="stylesheet" href="../site_libs/revealjs/dist/reveal.css">
+  <link rel="stylesheet" href="IS4010_W06_OOP_files/libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="IS4010_W06_OOP_files/libs/revealjs/dist/reveal.css">
   <style>
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
     div.columns{display: flex; gap: min(4vw, 1.5em);}
@@ -96,12 +98,14 @@
     code span.vs { color: #abe338; } /* VerbatimString */
     code span.wa { color: #dcc6e0; } /* Warning */
   </style>
-  <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto-a1d3734469117662d4af4794742e8c15.css">
+  <link rel="stylesheet" href="IS4010_W06_OOP_files/libs/revealjs/dist/theme/quarto-fdc93494f2580a7e050003a96af38920.css">
   <link rel="stylesheet" href="custom.css">
-  <link href="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
-  <link href="../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
-  <link href="../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
-  <link href="../site_libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <link href="IS4010_W06_OOP_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="IS4010_W06_OOP_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="IS4010_W06_OOP_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="IS4010_W06_OOP_files/libs/revealjs/plugin/reveal-chalkboard/font-awesome/css/all.css" rel="stylesheet">
+  <link href="IS4010_W06_OOP_files/libs/revealjs/plugin/reveal-chalkboard/style.css" rel="stylesheet">
+  <link href="IS4010_W06_OOP_files/libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
   <style type="text/css">
     .reveal div.sourceCode {
       margin: 0;
@@ -284,30 +288,30 @@ Brandon M. Greenwell
 </section>
 <section id="the-function-approach-shopping-cart-chaos" class="slide level2">
 <h2>❌ The function approach: Shopping cart chaos</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a></a><span class="co"># Creating and managing cart state with functions - gets messy fast!</span></span>
-<span id="cb1-2"><a></a><span class="kw">def</span> create_cart():</span>
-<span id="cb1-3"><a></a>    <span class="cf">return</span> {<span class="st">"items"</span>: [], <span class="st">"subtotal"</span>: <span class="dv">0</span>, <span class="st">"tax_rate"</span>: <span class="fl">0.08</span>, <span class="st">"discount"</span>: <span class="dv">0</span>}</span>
-<span id="cb1-4"><a></a></span>
-<span id="cb1-5"><a></a><span class="kw">def</span> add_item(cart, name, price, quantity<span class="op">=</span><span class="dv">1</span>):</span>
-<span id="cb1-6"><a></a>    cart[<span class="st">"items"</span>].append({<span class="st">"name"</span>: name, <span class="st">"price"</span>: price, <span class="st">"qty"</span>: quantity})</span>
-<span id="cb1-7"><a></a>    cart[<span class="st">"subtotal"</span>] <span class="op">+=</span> price <span class="op">*</span> quantity</span>
-<span id="cb1-8"><a></a>    <span class="cf">return</span> cart</span>
-<span id="cb1-9"><a></a></span>
-<span id="cb1-10"><a></a><span class="kw">def</span> apply_discount(cart, discount_percent):</span>
-<span id="cb1-11"><a></a>    cart[<span class="st">"discount"</span>] <span class="op">=</span> discount_percent</span>
-<span id="cb1-12"><a></a>    <span class="cf">return</span> cart</span>
-<span id="cb1-13"><a></a></span>
-<span id="cb1-14"><a></a><span class="kw">def</span> calculate_total(cart):</span>
-<span id="cb1-15"><a></a>    discounted <span class="op">=</span> cart[<span class="st">"subtotal"</span>] <span class="op">*</span> (<span class="dv">1</span> <span class="op">-</span> cart[<span class="st">"discount"</span>]<span class="op">/</span><span class="dv">100</span>)</span>
-<span id="cb1-16"><a></a>    <span class="cf">return</span> discounted <span class="op">*</span> (<span class="dv">1</span> <span class="op">+</span> cart[<span class="st">"tax_rate"</span>])</span>
-<span id="cb1-17"><a></a></span>
-<span id="cb1-18"><a></a><span class="co"># Usage becomes cumbersome and error-prone</span></span>
-<span id="cb1-19"><a></a>cart <span class="op">=</span> create_cart()</span>
-<span id="cb1-20"><a></a>cart <span class="op">=</span> add_item(cart, <span class="st">"Laptop"</span>, <span class="fl">999.99</span>)</span>
-<span id="cb1-21"><a></a>cart <span class="op">=</span> add_item(cart, <span class="st">"Mouse"</span>, <span class="fl">29.99</span>)</span>
-<span id="cb1-22"><a></a>cart <span class="op">=</span> apply_discount(cart, <span class="dv">10</span>)</span>
-<span id="cb1-23"><a></a>total <span class="op">=</span> calculate_total(cart)</span>
-<span id="cb1-24"><a></a><span class="bu">print</span>(<span class="ss">f"Total: $</span><span class="sc">{</span>total<span class="sc">:.2f}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href=""></a><span class="co"># Creating and managing cart state with functions - gets messy fast!</span></span>
+<span id="cb1-2"><a href=""></a><span class="kw">def</span> create_cart():</span>
+<span id="cb1-3"><a href=""></a>    <span class="cf">return</span> {<span class="st">"items"</span>: [], <span class="st">"subtotal"</span>: <span class="dv">0</span>, <span class="st">"tax_rate"</span>: <span class="fl">0.08</span>, <span class="st">"discount"</span>: <span class="dv">0</span>}</span>
+<span id="cb1-4"><a href=""></a></span>
+<span id="cb1-5"><a href=""></a><span class="kw">def</span> add_item(cart, name, price, quantity<span class="op">=</span><span class="dv">1</span>):</span>
+<span id="cb1-6"><a href=""></a>    cart[<span class="st">"items"</span>].append({<span class="st">"name"</span>: name, <span class="st">"price"</span>: price, <span class="st">"qty"</span>: quantity})</span>
+<span id="cb1-7"><a href=""></a>    cart[<span class="st">"subtotal"</span>] <span class="op">+=</span> price <span class="op">*</span> quantity</span>
+<span id="cb1-8"><a href=""></a>    <span class="cf">return</span> cart</span>
+<span id="cb1-9"><a href=""></a></span>
+<span id="cb1-10"><a href=""></a><span class="kw">def</span> apply_discount(cart, discount_percent):</span>
+<span id="cb1-11"><a href=""></a>    cart[<span class="st">"discount"</span>] <span class="op">=</span> discount_percent</span>
+<span id="cb1-12"><a href=""></a>    <span class="cf">return</span> cart</span>
+<span id="cb1-13"><a href=""></a></span>
+<span id="cb1-14"><a href=""></a><span class="kw">def</span> calculate_total(cart):</span>
+<span id="cb1-15"><a href=""></a>    discounted <span class="op">=</span> cart[<span class="st">"subtotal"</span>] <span class="op">*</span> (<span class="dv">1</span> <span class="op">-</span> cart[<span class="st">"discount"</span>]<span class="op">/</span><span class="dv">100</span>)</span>
+<span id="cb1-16"><a href=""></a>    <span class="cf">return</span> discounted <span class="op">*</span> (<span class="dv">1</span> <span class="op">+</span> cart[<span class="st">"tax_rate"</span>])</span>
+<span id="cb1-17"><a href=""></a></span>
+<span id="cb1-18"><a href=""></a><span class="co"># Usage becomes cumbersome and error-prone</span></span>
+<span id="cb1-19"><a href=""></a>cart <span class="op">=</span> create_cart()</span>
+<span id="cb1-20"><a href=""></a>cart <span class="op">=</span> add_item(cart, <span class="st">"Laptop"</span>, <span class="fl">999.99</span>)</span>
+<span id="cb1-21"><a href=""></a>cart <span class="op">=</span> add_item(cart, <span class="st">"Mouse"</span>, <span class="fl">29.99</span>)</span>
+<span id="cb1-22"><a href=""></a>cart <span class="op">=</span> apply_discount(cart, <span class="dv">10</span>)</span>
+<span id="cb1-23"><a href=""></a>total <span class="op">=</span> calculate_total(cart)</span>
+<span id="cb1-24"><a href=""></a><span class="bu">print</span>(<span class="ss">f"Total: $</span><span class="sc">{</span>total<span class="sc">:.2f}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <aside class="notes">
 <p><strong>TEACHING NOTES:</strong></p>
 <ul>
@@ -331,39 +335,39 @@ Brandon M. Greenwell
 </section>
 <section id="the-class-approach-elegant-and-scalable" class="slide level2">
 <h2>✅ The class approach: Elegant and scalable</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a></a><span class="kw">class</span> ShoppingCart:</span>
-<span id="cb2-2"><a></a>    <span class="co">"""Represents a shopping cart with items, discounts, and tax calculation."""</span></span>
-<span id="cb2-3"><a></a></span>
-<span id="cb2-4"><a></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, tax_rate<span class="op">=</span><span class="fl">0.08</span>):</span>
-<span id="cb2-5"><a></a>        <span class="va">self</span>.items <span class="op">=</span> []</span>
-<span id="cb2-6"><a></a>        <span class="va">self</span>.tax_rate <span class="op">=</span> tax_rate</span>
-<span id="cb2-7"><a></a>        <span class="va">self</span>.discount_percent <span class="op">=</span> <span class="dv">0</span></span>
-<span id="cb2-8"><a></a></span>
-<span id="cb2-9"><a></a>    <span class="kw">def</span> add_item(<span class="va">self</span>, name, price, quantity<span class="op">=</span><span class="dv">1</span>):</span>
-<span id="cb2-10"><a></a>        <span class="co">"""Add an item to the cart."""</span></span>
-<span id="cb2-11"><a></a>        <span class="va">self</span>.items.append({<span class="st">"name"</span>: name, <span class="st">"price"</span>: price, <span class="st">"qty"</span>: quantity})</span>
-<span id="cb2-12"><a></a></span>
-<span id="cb2-13"><a></a>    <span class="kw">def</span> apply_discount(<span class="va">self</span>, discount_percent):</span>
-<span id="cb2-14"><a></a>        <span class="co">"""Apply a discount to the entire cart."""</span></span>
-<span id="cb2-15"><a></a>        <span class="va">self</span>.discount_percent <span class="op">=</span> discount_percent</span>
-<span id="cb2-16"><a></a></span>
-<span id="cb2-17"><a></a>    <span class="at">@property</span></span>
-<span id="cb2-18"><a></a>    <span class="kw">def</span> subtotal(<span class="va">self</span>):</span>
-<span id="cb2-19"><a></a>        <span class="co">"""Calculate subtotal before discount and tax."""</span></span>
-<span id="cb2-20"><a></a>        <span class="cf">return</span> <span class="bu">sum</span>(item[<span class="st">"price"</span>] <span class="op">*</span> item[<span class="st">"qty"</span>] <span class="cf">for</span> item <span class="kw">in</span> <span class="va">self</span>.items)</span>
-<span id="cb2-21"><a></a></span>
-<span id="cb2-22"><a></a>    <span class="at">@property</span></span>
-<span id="cb2-23"><a></a>    <span class="kw">def</span> total(<span class="va">self</span>):</span>
-<span id="cb2-24"><a></a>        <span class="co">"""Calculate final total after discount and tax."""</span></span>
-<span id="cb2-25"><a></a>        discounted <span class="op">=</span> <span class="va">self</span>.subtotal <span class="op">*</span> (<span class="dv">1</span> <span class="op">-</span> <span class="va">self</span>.discount_percent<span class="op">/</span><span class="dv">100</span>)</span>
-<span id="cb2-26"><a></a>        <span class="cf">return</span> discounted <span class="op">*</span> (<span class="dv">1</span> <span class="op">+</span> <span class="va">self</span>.tax_rate)</span>
-<span id="cb2-27"><a></a></span>
-<span id="cb2-28"><a></a><span class="co"># Usage is clean, intuitive, and maintainable</span></span>
-<span id="cb2-29"><a></a>cart <span class="op">=</span> ShoppingCart()</span>
-<span id="cb2-30"><a></a>cart.add_item(<span class="st">"Laptop"</span>, <span class="fl">999.99</span>)</span>
-<span id="cb2-31"><a></a>cart.add_item(<span class="st">"Mouse"</span>, <span class="fl">29.99</span>)</span>
-<span id="cb2-32"><a></a>cart.apply_discount(<span class="dv">10</span>)</span>
-<span id="cb2-33"><a></a><span class="bu">print</span>(<span class="ss">f"Total: $</span><span class="sc">{</span>cart<span class="sc">.</span>total<span class="sc">:.2f}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href=""></a><span class="kw">class</span> ShoppingCart:</span>
+<span id="cb2-2"><a href=""></a>    <span class="co">"""Represents a shopping cart with items, discounts, and tax calculation."""</span></span>
+<span id="cb2-3"><a href=""></a></span>
+<span id="cb2-4"><a href=""></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, tax_rate<span class="op">=</span><span class="fl">0.08</span>):</span>
+<span id="cb2-5"><a href=""></a>        <span class="va">self</span>.items <span class="op">=</span> []</span>
+<span id="cb2-6"><a href=""></a>        <span class="va">self</span>.tax_rate <span class="op">=</span> tax_rate</span>
+<span id="cb2-7"><a href=""></a>        <span class="va">self</span>.discount_percent <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb2-8"><a href=""></a></span>
+<span id="cb2-9"><a href=""></a>    <span class="kw">def</span> add_item(<span class="va">self</span>, name, price, quantity<span class="op">=</span><span class="dv">1</span>):</span>
+<span id="cb2-10"><a href=""></a>        <span class="co">"""Add an item to the cart."""</span></span>
+<span id="cb2-11"><a href=""></a>        <span class="va">self</span>.items.append({<span class="st">"name"</span>: name, <span class="st">"price"</span>: price, <span class="st">"qty"</span>: quantity})</span>
+<span id="cb2-12"><a href=""></a></span>
+<span id="cb2-13"><a href=""></a>    <span class="kw">def</span> apply_discount(<span class="va">self</span>, discount_percent):</span>
+<span id="cb2-14"><a href=""></a>        <span class="co">"""Apply a discount to the entire cart."""</span></span>
+<span id="cb2-15"><a href=""></a>        <span class="va">self</span>.discount_percent <span class="op">=</span> discount_percent</span>
+<span id="cb2-16"><a href=""></a></span>
+<span id="cb2-17"><a href=""></a>    <span class="at">@property</span></span>
+<span id="cb2-18"><a href=""></a>    <span class="kw">def</span> subtotal(<span class="va">self</span>):</span>
+<span id="cb2-19"><a href=""></a>        <span class="co">"""Calculate subtotal before discount and tax."""</span></span>
+<span id="cb2-20"><a href=""></a>        <span class="cf">return</span> <span class="bu">sum</span>(item[<span class="st">"price"</span>] <span class="op">*</span> item[<span class="st">"qty"</span>] <span class="cf">for</span> item <span class="kw">in</span> <span class="va">self</span>.items)</span>
+<span id="cb2-21"><a href=""></a></span>
+<span id="cb2-22"><a href=""></a>    <span class="at">@property</span></span>
+<span id="cb2-23"><a href=""></a>    <span class="kw">def</span> total(<span class="va">self</span>):</span>
+<span id="cb2-24"><a href=""></a>        <span class="co">"""Calculate final total after discount and tax."""</span></span>
+<span id="cb2-25"><a href=""></a>        discounted <span class="op">=</span> <span class="va">self</span>.subtotal <span class="op">*</span> (<span class="dv">1</span> <span class="op">-</span> <span class="va">self</span>.discount_percent<span class="op">/</span><span class="dv">100</span>)</span>
+<span id="cb2-26"><a href=""></a>        <span class="cf">return</span> discounted <span class="op">*</span> (<span class="dv">1</span> <span class="op">+</span> <span class="va">self</span>.tax_rate)</span>
+<span id="cb2-27"><a href=""></a></span>
+<span id="cb2-28"><a href=""></a><span class="co"># Usage is clean, intuitive, and maintainable</span></span>
+<span id="cb2-29"><a href=""></a>cart <span class="op">=</span> ShoppingCart()</span>
+<span id="cb2-30"><a href=""></a>cart.add_item(<span class="st">"Laptop"</span>, <span class="fl">999.99</span>)</span>
+<span id="cb2-31"><a href=""></a>cart.add_item(<span class="st">"Mouse"</span>, <span class="fl">29.99</span>)</span>
+<span id="cb2-32"><a href=""></a>cart.apply_discount(<span class="dv">10</span>)</span>
+<span id="cb2-33"><a href=""></a><span class="bu">print</span>(<span class="ss">f"Total: $</span><span class="sc">{</span>cart<span class="sc">.</span>total<span class="sc">:.2f}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <aside class="notes">
 <p><strong>TEACHING NOTES:</strong></p>
 <ul>
@@ -455,23 +459,23 @@ Brandon M. Greenwell
 <li class="fragment"><strong>The <code>self</code> parameter</strong>: References the specific instance being created</li>
 <li class="fragment"><strong>Convention</strong>: Always the first parameter in instance methods</li>
 </ul>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a></a><span class="kw">class</span> BankAccount:</span>
-<span id="cb3-2"><a></a>    <span class="co">"""Represents a bank account with balance tracking."""</span></span>
-<span id="cb3-3"><a></a></span>
-<span id="cb3-4"><a></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, account_holder: <span class="bu">str</span>, initial_balance: <span class="bu">float</span> <span class="op">=</span> <span class="fl">0.0</span>):</span>
-<span id="cb3-5"><a></a>        <span class="co"># Instance attributes - unique to each account</span></span>
-<span id="cb3-6"><a></a>        <span class="va">self</span>.account_holder <span class="op">=</span> account_holder</span>
-<span id="cb3-7"><a></a>        <span class="va">self</span>.balance <span class="op">=</span> initial_balance</span>
-<span id="cb3-8"><a></a>        <span class="va">self</span>.transaction_history <span class="op">=</span> []</span>
-<span id="cb3-9"><a></a></span>
-<span id="cb3-10"><a></a>    <span class="kw">def</span> deposit(<span class="va">self</span>, amount: <span class="bu">float</span>):</span>
-<span id="cb3-11"><a></a>        <span class="co">"""Add money to the account."""</span></span>
-<span id="cb3-12"><a></a>        <span class="va">self</span>.balance <span class="op">+=</span> amount</span>
-<span id="cb3-13"><a></a>        <span class="va">self</span>.transaction_history.append(<span class="ss">f"Deposited $</span><span class="sc">{</span>amount<span class="sc">:.2f}</span><span class="ss">"</span>)</span>
-<span id="cb3-14"><a></a></span>
-<span id="cb3-15"><a></a><span class="co"># Create specific account instances</span></span>
-<span id="cb3-16"><a></a>alice_account <span class="op">=</span> BankAccount(<span class="st">"Alice Johnson"</span>, <span class="fl">1000.0</span>)</span>
-<span id="cb3-17"><a></a>bob_account <span class="op">=</span> BankAccount(<span class="st">"Bob Smith"</span>)  <span class="co"># Uses default balance of 0.0</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href=""></a><span class="kw">class</span> BankAccount:</span>
+<span id="cb3-2"><a href=""></a>    <span class="co">"""Represents a bank account with balance tracking."""</span></span>
+<span id="cb3-3"><a href=""></a></span>
+<span id="cb3-4"><a href=""></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, account_holder: <span class="bu">str</span>, initial_balance: <span class="bu">float</span> <span class="op">=</span> <span class="fl">0.0</span>):</span>
+<span id="cb3-5"><a href=""></a>        <span class="co"># Instance attributes - unique to each account</span></span>
+<span id="cb3-6"><a href=""></a>        <span class="va">self</span>.account_holder <span class="op">=</span> account_holder</span>
+<span id="cb3-7"><a href=""></a>        <span class="va">self</span>.balance <span class="op">=</span> initial_balance</span>
+<span id="cb3-8"><a href=""></a>        <span class="va">self</span>.transaction_history <span class="op">=</span> []</span>
+<span id="cb3-9"><a href=""></a></span>
+<span id="cb3-10"><a href=""></a>    <span class="kw">def</span> deposit(<span class="va">self</span>, amount: <span class="bu">float</span>):</span>
+<span id="cb3-11"><a href=""></a>        <span class="co">"""Add money to the account."""</span></span>
+<span id="cb3-12"><a href=""></a>        <span class="va">self</span>.balance <span class="op">+=</span> amount</span>
+<span id="cb3-13"><a href=""></a>        <span class="va">self</span>.transaction_history.append(<span class="ss">f"Deposited $</span><span class="sc">{</span>amount<span class="sc">:.2f}</span><span class="ss">"</span>)</span>
+<span id="cb3-14"><a href=""></a></span>
+<span id="cb3-15"><a href=""></a><span class="co"># Create specific account instances</span></span>
+<span id="cb3-16"><a href=""></a>alice_account <span class="op">=</span> BankAccount(<span class="st">"Alice Johnson"</span>, <span class="fl">1000.0</span>)</span>
+<span id="cb3-17"><a href=""></a>bob_account <span class="op">=</span> BankAccount(<span class="st">"Bob Smith"</span>)  <span class="co"># Uses default balance of 0.0</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <aside class="notes">
 <p><strong>TEACHING NOTES:</strong></p>
 <ul>
@@ -503,29 +507,29 @@ Brandon M. Greenwell
 <li class="fragment"><strong>AI assistant friendly</strong>: Perfect boilerplate code to generate with AI tools</li>
 <li class="fragment"><strong>Debugging essential</strong>: Makes testing and troubleshooting much easier</li>
 </ul>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a></a><span class="kw">class</span> User:</span>
-<span id="cb4-2"><a></a>    <span class="co">"""Represents a user in a social media application."""</span></span>
-<span id="cb4-3"><a></a></span>
-<span id="cb4-4"><a></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, username: <span class="bu">str</span>, email: <span class="bu">str</span>, join_date: <span class="bu">str</span>):</span>
-<span id="cb4-5"><a></a>        <span class="va">self</span>.username <span class="op">=</span> username</span>
-<span id="cb4-6"><a></a>        <span class="va">self</span>.email <span class="op">=</span> email</span>
-<span id="cb4-7"><a></a>        <span class="va">self</span>.join_date <span class="op">=</span> join_date</span>
-<span id="cb4-8"><a></a>        <span class="va">self</span>.followers <span class="op">=</span> <span class="dv">0</span></span>
-<span id="cb4-9"><a></a>        <span class="va">self</span>.is_verified <span class="op">=</span> <span class="va">False</span></span>
-<span id="cb4-10"><a></a></span>
-<span id="cb4-11"><a></a>    <span class="kw">def</span> <span class="fu">__str__</span>(<span class="va">self</span>) <span class="op">-&gt;</span> <span class="bu">str</span>:</span>
-<span id="cb4-12"><a></a>        <span class="co">"""Return a user-friendly string representation."""</span></span>
-<span id="cb4-13"><a></a>        verification <span class="op">=</span> <span class="st">"✓"</span> <span class="cf">if</span> <span class="va">self</span>.is_verified <span class="cf">else</span> <span class="st">""</span></span>
-<span id="cb4-14"><a></a>        <span class="cf">return</span> <span class="ss">f"@</span><span class="sc">{</span><span class="va">self</span><span class="sc">.</span>username<span class="sc">}{</span>verification<span class="sc">}</span><span class="ss"> (</span><span class="sc">{</span><span class="va">self</span><span class="sc">.</span>followers<span class="sc">}</span><span class="ss"> followers) - Joined </span><span class="sc">{</span><span class="va">self</span><span class="sc">.</span>join_date<span class="sc">}</span><span class="ss">"</span></span>
-<span id="cb4-15"><a></a></span>
-<span id="cb4-16"><a></a><span class="co"># Create and display user instances</span></span>
-<span id="cb4-17"><a></a>user1 <span class="op">=</span> User(<span class="st">"grace_hopper"</span>, <span class="st">"grace@example.com"</span>, <span class="st">"2023-01-15"</span>)</span>
-<span id="cb4-18"><a></a>user2 <span class="op">=</span> User(<span class="st">"ada_lovelace"</span>, <span class="st">"ada@example.com"</span>, <span class="st">"2023-02-20"</span>)</span>
-<span id="cb4-19"><a></a>user2.is_verified <span class="op">=</span> <span class="va">True</span></span>
-<span id="cb4-20"><a></a>user2.followers <span class="op">=</span> <span class="dv">50000</span></span>
-<span id="cb4-21"><a></a></span>
-<span id="cb4-22"><a></a><span class="bu">print</span>(user1)  <span class="co"># @grace_hopper (0 followers) - Joined 2023-01-15</span></span>
-<span id="cb4-23"><a></a><span class="bu">print</span>(user2)  <span class="co"># @ada_lovelace✓ (50000 followers) - Joined 2023-02-20</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href=""></a><span class="kw">class</span> User:</span>
+<span id="cb4-2"><a href=""></a>    <span class="co">"""Represents a user in a social media application."""</span></span>
+<span id="cb4-3"><a href=""></a></span>
+<span id="cb4-4"><a href=""></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, username: <span class="bu">str</span>, email: <span class="bu">str</span>, join_date: <span class="bu">str</span>):</span>
+<span id="cb4-5"><a href=""></a>        <span class="va">self</span>.username <span class="op">=</span> username</span>
+<span id="cb4-6"><a href=""></a>        <span class="va">self</span>.email <span class="op">=</span> email</span>
+<span id="cb4-7"><a href=""></a>        <span class="va">self</span>.join_date <span class="op">=</span> join_date</span>
+<span id="cb4-8"><a href=""></a>        <span class="va">self</span>.followers <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb4-9"><a href=""></a>        <span class="va">self</span>.is_verified <span class="op">=</span> <span class="va">False</span></span>
+<span id="cb4-10"><a href=""></a></span>
+<span id="cb4-11"><a href=""></a>    <span class="kw">def</span> <span class="fu">__str__</span>(<span class="va">self</span>) <span class="op">-&gt;</span> <span class="bu">str</span>:</span>
+<span id="cb4-12"><a href=""></a>        <span class="co">"""Return a user-friendly string representation."""</span></span>
+<span id="cb4-13"><a href=""></a>        verification <span class="op">=</span> <span class="st">"✓"</span> <span class="cf">if</span> <span class="va">self</span>.is_verified <span class="cf">else</span> <span class="st">""</span></span>
+<span id="cb4-14"><a href=""></a>        <span class="cf">return</span> <span class="ss">f"@</span><span class="sc">{</span><span class="va">self</span><span class="sc">.</span>username<span class="sc">}{</span>verification<span class="sc">}</span><span class="ss"> (</span><span class="sc">{</span><span class="va">self</span><span class="sc">.</span>followers<span class="sc">}</span><span class="ss"> followers) - Joined </span><span class="sc">{</span><span class="va">self</span><span class="sc">.</span>join_date<span class="sc">}</span><span class="ss">"</span></span>
+<span id="cb4-15"><a href=""></a></span>
+<span id="cb4-16"><a href=""></a><span class="co"># Create and display user instances</span></span>
+<span id="cb4-17"><a href=""></a>user1 <span class="op">=</span> User(<span class="st">"grace_hopper"</span>, <span class="st">"grace@example.com"</span>, <span class="st">"2023-01-15"</span>)</span>
+<span id="cb4-18"><a href=""></a>user2 <span class="op">=</span> User(<span class="st">"ada_lovelace"</span>, <span class="st">"ada@example.com"</span>, <span class="st">"2023-02-20"</span>)</span>
+<span id="cb4-19"><a href=""></a>user2.is_verified <span class="op">=</span> <span class="va">True</span></span>
+<span id="cb4-20"><a href=""></a>user2.followers <span class="op">=</span> <span class="dv">50000</span></span>
+<span id="cb4-21"><a href=""></a></span>
+<span id="cb4-22"><a href=""></a><span class="bu">print</span>(user1)  <span class="co"># @grace_hopper (0 followers) - Joined 2023-01-15</span></span>
+<span id="cb4-23"><a href=""></a><span class="bu">print</span>(user2)  <span class="co"># @ada_lovelace✓ (50000 followers) - Joined 2023-02-20</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <aside class="notes">
 <p><strong>TEACHING NOTES:</strong></p>
 <ul>
@@ -595,42 +599,42 @@ Brandon M. Greenwell
 <li class="fragment"><strong>Encapsulation</strong>: Methods can access and modify private object state safely</li>
 <li class="fragment"><strong>State management</strong>: Methods ensure object data stays consistent and valid</li>
 </ul>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a></a><span class="kw">class</span> GameCharacter:</span>
-<span id="cb5-2"><a></a>    <span class="co">"""Represents a character in a role-playing game."""</span></span>
-<span id="cb5-3"><a></a></span>
-<span id="cb5-4"><a></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, name: <span class="bu">str</span>, health: <span class="bu">int</span> <span class="op">=</span> <span class="dv">100</span>):</span>
-<span id="cb5-5"><a></a>        <span class="va">self</span>.name <span class="op">=</span> name</span>
-<span id="cb5-6"><a></a>        <span class="va">self</span>.health <span class="op">=</span> health</span>
-<span id="cb5-7"><a></a>        <span class="va">self</span>.max_health <span class="op">=</span> health</span>
-<span id="cb5-8"><a></a>        <span class="va">self</span>.experience <span class="op">=</span> <span class="dv">0</span></span>
-<span id="cb5-9"><a></a>        <span class="va">self</span>.level <span class="op">=</span> <span class="dv">1</span></span>
-<span id="cb5-10"><a></a></span>
-<span id="cb5-11"><a></a>    <span class="kw">def</span> take_damage(<span class="va">self</span>, damage: <span class="bu">int</span>):</span>
-<span id="cb5-12"><a></a>        <span class="co">"""Reduce character health, ensuring it doesn't go below 0."""</span></span>
-<span id="cb5-13"><a></a>        <span class="va">self</span>.health <span class="op">=</span> <span class="bu">max</span>(<span class="dv">0</span>, <span class="va">self</span>.health <span class="op">-</span> damage)</span>
-<span id="cb5-14"><a></a>        <span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span><span class="va">self</span><span class="sc">.</span>name<span class="sc">}</span><span class="ss"> takes </span><span class="sc">{</span>damage<span class="sc">}</span><span class="ss"> damage! Health: </span><span class="sc">{</span><span class="va">self</span><span class="sc">.</span>health<span class="sc">}</span><span class="ss">/</span><span class="sc">{</span><span class="va">self</span><span class="sc">.</span>max_health<span class="sc">}</span><span class="ss">"</span>)</span>
-<span id="cb5-15"><a></a></span>
-<span id="cb5-16"><a></a>    <span class="kw">def</span> heal(<span class="va">self</span>, amount: <span class="bu">int</span>):</span>
-<span id="cb5-17"><a></a>        <span class="co">"""Restore character health, capped at maximum."""</span></span>
-<span id="cb5-18"><a></a>        old_health <span class="op">=</span> <span class="va">self</span>.health</span>
-<span id="cb5-19"><a></a>        <span class="va">self</span>.health <span class="op">=</span> <span class="bu">min</span>(<span class="va">self</span>.max_health, <span class="va">self</span>.health <span class="op">+</span> amount)</span>
-<span id="cb5-20"><a></a>        healed <span class="op">=</span> <span class="va">self</span>.health <span class="op">-</span> old_health</span>
-<span id="cb5-21"><a></a>        <span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span><span class="va">self</span><span class="sc">.</span>name<span class="sc">}</span><span class="ss"> heals for </span><span class="sc">{</span>healed<span class="sc">}</span><span class="ss"> points! Health: </span><span class="sc">{</span><span class="va">self</span><span class="sc">.</span>health<span class="sc">}</span><span class="ss">/</span><span class="sc">{</span><span class="va">self</span><span class="sc">.</span>max_health<span class="sc">}</span><span class="ss">"</span>)</span>
-<span id="cb5-22"><a></a></span>
-<span id="cb5-23"><a></a>    <span class="kw">def</span> gain_experience(<span class="va">self</span>, exp: <span class="bu">int</span>):</span>
-<span id="cb5-24"><a></a>        <span class="co">"""Add experience and level up if threshold is reached."""</span></span>
-<span id="cb5-25"><a></a>        <span class="va">self</span>.experience <span class="op">+=</span> exp</span>
-<span id="cb5-26"><a></a>        <span class="cf">if</span> <span class="va">self</span>.experience <span class="op">&gt;=</span> <span class="va">self</span>.level <span class="op">*</span> <span class="dv">100</span>:  <span class="co"># Simple leveling formula</span></span>
-<span id="cb5-27"><a></a>            <span class="va">self</span>.level <span class="op">+=</span> <span class="dv">1</span></span>
-<span id="cb5-28"><a></a>            <span class="va">self</span>.max_health <span class="op">+=</span> <span class="dv">20</span></span>
-<span id="cb5-29"><a></a>            <span class="va">self</span>.health <span class="op">=</span> <span class="va">self</span>.max_health  <span class="co"># Full heal on level up</span></span>
-<span id="cb5-30"><a></a>            <span class="bu">print</span>(<span class="ss">f"🎉 </span><span class="sc">{</span><span class="va">self</span><span class="sc">.</span>name<span class="sc">}</span><span class="ss"> reached level </span><span class="sc">{</span><span class="va">self</span><span class="sc">.</span>level<span class="sc">}</span><span class="ss">!"</span>)</span>
-<span id="cb5-31"><a></a></span>
-<span id="cb5-32"><a></a><span class="co"># Create and interact with a character</span></span>
-<span id="cb5-33"><a></a>hero <span class="op">=</span> GameCharacter(<span class="st">"Aria the Brave"</span>)</span>
-<span id="cb5-34"><a></a>hero.take_damage(<span class="dv">30</span>)</span>
-<span id="cb5-35"><a></a>hero.heal(<span class="dv">15</span>)</span>
-<span id="cb5-36"><a></a>hero.gain_experience(<span class="dv">150</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href=""></a><span class="kw">class</span> GameCharacter:</span>
+<span id="cb5-2"><a href=""></a>    <span class="co">"""Represents a character in a role-playing game."""</span></span>
+<span id="cb5-3"><a href=""></a></span>
+<span id="cb5-4"><a href=""></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, name: <span class="bu">str</span>, health: <span class="bu">int</span> <span class="op">=</span> <span class="dv">100</span>):</span>
+<span id="cb5-5"><a href=""></a>        <span class="va">self</span>.name <span class="op">=</span> name</span>
+<span id="cb5-6"><a href=""></a>        <span class="va">self</span>.health <span class="op">=</span> health</span>
+<span id="cb5-7"><a href=""></a>        <span class="va">self</span>.max_health <span class="op">=</span> health</span>
+<span id="cb5-8"><a href=""></a>        <span class="va">self</span>.experience <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb5-9"><a href=""></a>        <span class="va">self</span>.level <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb5-10"><a href=""></a></span>
+<span id="cb5-11"><a href=""></a>    <span class="kw">def</span> take_damage(<span class="va">self</span>, damage: <span class="bu">int</span>):</span>
+<span id="cb5-12"><a href=""></a>        <span class="co">"""Reduce character health, ensuring it doesn't go below 0."""</span></span>
+<span id="cb5-13"><a href=""></a>        <span class="va">self</span>.health <span class="op">=</span> <span class="bu">max</span>(<span class="dv">0</span>, <span class="va">self</span>.health <span class="op">-</span> damage)</span>
+<span id="cb5-14"><a href=""></a>        <span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span><span class="va">self</span><span class="sc">.</span>name<span class="sc">}</span><span class="ss"> takes </span><span class="sc">{</span>damage<span class="sc">}</span><span class="ss"> damage! Health: </span><span class="sc">{</span><span class="va">self</span><span class="sc">.</span>health<span class="sc">}</span><span class="ss">/</span><span class="sc">{</span><span class="va">self</span><span class="sc">.</span>max_health<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb5-15"><a href=""></a></span>
+<span id="cb5-16"><a href=""></a>    <span class="kw">def</span> heal(<span class="va">self</span>, amount: <span class="bu">int</span>):</span>
+<span id="cb5-17"><a href=""></a>        <span class="co">"""Restore character health, capped at maximum."""</span></span>
+<span id="cb5-18"><a href=""></a>        old_health <span class="op">=</span> <span class="va">self</span>.health</span>
+<span id="cb5-19"><a href=""></a>        <span class="va">self</span>.health <span class="op">=</span> <span class="bu">min</span>(<span class="va">self</span>.max_health, <span class="va">self</span>.health <span class="op">+</span> amount)</span>
+<span id="cb5-20"><a href=""></a>        healed <span class="op">=</span> <span class="va">self</span>.health <span class="op">-</span> old_health</span>
+<span id="cb5-21"><a href=""></a>        <span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span><span class="va">self</span><span class="sc">.</span>name<span class="sc">}</span><span class="ss"> heals for </span><span class="sc">{</span>healed<span class="sc">}</span><span class="ss"> points! Health: </span><span class="sc">{</span><span class="va">self</span><span class="sc">.</span>health<span class="sc">}</span><span class="ss">/</span><span class="sc">{</span><span class="va">self</span><span class="sc">.</span>max_health<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb5-22"><a href=""></a></span>
+<span id="cb5-23"><a href=""></a>    <span class="kw">def</span> gain_experience(<span class="va">self</span>, exp: <span class="bu">int</span>):</span>
+<span id="cb5-24"><a href=""></a>        <span class="co">"""Add experience and level up if threshold is reached."""</span></span>
+<span id="cb5-25"><a href=""></a>        <span class="va">self</span>.experience <span class="op">+=</span> exp</span>
+<span id="cb5-26"><a href=""></a>        <span class="cf">if</span> <span class="va">self</span>.experience <span class="op">&gt;=</span> <span class="va">self</span>.level <span class="op">*</span> <span class="dv">100</span>:  <span class="co"># Simple leveling formula</span></span>
+<span id="cb5-27"><a href=""></a>            <span class="va">self</span>.level <span class="op">+=</span> <span class="dv">1</span></span>
+<span id="cb5-28"><a href=""></a>            <span class="va">self</span>.max_health <span class="op">+=</span> <span class="dv">20</span></span>
+<span id="cb5-29"><a href=""></a>            <span class="va">self</span>.health <span class="op">=</span> <span class="va">self</span>.max_health  <span class="co"># Full heal on level up</span></span>
+<span id="cb5-30"><a href=""></a>            <span class="bu">print</span>(<span class="ss">f"🎉 </span><span class="sc">{</span><span class="va">self</span><span class="sc">.</span>name<span class="sc">}</span><span class="ss"> reached level </span><span class="sc">{</span><span class="va">self</span><span class="sc">.</span>level<span class="sc">}</span><span class="ss">!"</span>)</span>
+<span id="cb5-31"><a href=""></a></span>
+<span id="cb5-32"><a href=""></a><span class="co"># Create and interact with a character</span></span>
+<span id="cb5-33"><a href=""></a>hero <span class="op">=</span> GameCharacter(<span class="st">"Aria the Brave"</span>)</span>
+<span id="cb5-34"><a href=""></a>hero.take_damage(<span class="dv">30</span>)</span>
+<span id="cb5-35"><a href=""></a>hero.heal(<span class="dv">15</span>)</span>
+<span id="cb5-36"><a href=""></a>hero.gain_experience(<span class="dv">150</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <aside class="notes">
 <p><strong>TEACHING NOTES:</strong></p>
 <ul>
@@ -692,47 +696,47 @@ Brandon M. Greenwell
 <li class="fragment"><strong>Method override</strong>: Child classes can replace parent methods with specialized versions</li>
 <li class="fragment"><strong>Method extension</strong>: Or extend parent methods with additional functionality</li>
 </ul>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a></a><span class="kw">class</span> Vehicle:</span>
-<span id="cb6-2"><a></a>    <span class="co">"""Base class for all vehicles."""</span></span>
-<span id="cb6-3"><a></a></span>
-<span id="cb6-4"><a></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, make: <span class="bu">str</span>, model: <span class="bu">str</span>, year: <span class="bu">int</span>):</span>
-<span id="cb6-5"><a></a>        <span class="va">self</span>.make <span class="op">=</span> make</span>
-<span id="cb6-6"><a></a>        <span class="va">self</span>.model <span class="op">=</span> model</span>
-<span id="cb6-7"><a></a>        <span class="va">self</span>.year <span class="op">=</span> year</span>
-<span id="cb6-8"><a></a>        <span class="va">self</span>.mileage <span class="op">=</span> <span class="dv">0</span></span>
-<span id="cb6-9"><a></a></span>
-<span id="cb6-10"><a></a>    <span class="kw">def</span> start_engine(<span class="va">self</span>):</span>
-<span id="cb6-11"><a></a>        <span class="co">"""Start the vehicle's engine."""</span></span>
-<span id="cb6-12"><a></a>        <span class="bu">print</span>(<span class="ss">f"The </span><span class="sc">{</span><span class="va">self</span><span class="sc">.</span>year<span class="sc">}</span><span class="ss"> </span><span class="sc">{</span><span class="va">self</span><span class="sc">.</span>make<span class="sc">}</span><span class="ss"> </span><span class="sc">{</span><span class="va">self</span><span class="sc">.</span>model<span class="sc">}</span><span class="ss"> engine starts."</span>)</span>
-<span id="cb6-13"><a></a></span>
-<span id="cb6-14"><a></a>    <span class="kw">def</span> drive(<span class="va">self</span>, miles: <span class="bu">float</span>):</span>
-<span id="cb6-15"><a></a>        <span class="co">"""Drive the vehicle and update mileage."""</span></span>
-<span id="cb6-16"><a></a>        <span class="va">self</span>.mileage <span class="op">+=</span> miles</span>
-<span id="cb6-17"><a></a>        <span class="bu">print</span>(<span class="ss">f"Drove </span><span class="sc">{</span>miles<span class="sc">}</span><span class="ss"> miles. Total mileage: </span><span class="sc">{</span><span class="va">self</span><span class="sc">.</span>mileage<span class="sc">}</span><span class="ss">"</span>)</span>
-<span id="cb6-18"><a></a></span>
-<span id="cb6-19"><a></a><span class="kw">class</span> ElectricCar(Vehicle):</span>
-<span id="cb6-20"><a></a>    <span class="co">"""Electric vehicle with battery management."""</span></span>
-<span id="cb6-21"><a></a></span>
-<span id="cb6-22"><a></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, make: <span class="bu">str</span>, model: <span class="bu">str</span>, year: <span class="bu">int</span>, battery_capacity: <span class="bu">float</span>):</span>
-<span id="cb6-23"><a></a>        <span class="bu">super</span>().<span class="fu">__init__</span>(make, model, year)  <span class="co"># Call parent constructor</span></span>
-<span id="cb6-24"><a></a>        <span class="va">self</span>.battery_capacity <span class="op">=</span> battery_capacity</span>
-<span id="cb6-25"><a></a>        <span class="va">self</span>.battery_level <span class="op">=</span> <span class="fl">100.0</span>  <span class="co"># Start fully charged</span></span>
-<span id="cb6-26"><a></a></span>
-<span id="cb6-27"><a></a>    <span class="kw">def</span> start_engine(<span class="va">self</span>):</span>
-<span id="cb6-28"><a></a>        <span class="co">"""Override: Electric cars don't have traditional engines."""</span></span>
-<span id="cb6-29"><a></a>        <span class="bu">print</span>(<span class="ss">f"The </span><span class="sc">{</span><span class="va">self</span><span class="sc">.</span>year<span class="sc">}</span><span class="ss"> </span><span class="sc">{</span><span class="va">self</span><span class="sc">.</span>make<span class="sc">}</span><span class="ss"> </span><span class="sc">{</span><span class="va">self</span><span class="sc">.</span>model<span class="sc">}</span><span class="ss"> powers on silently."</span>)</span>
-<span id="cb6-30"><a></a></span>
-<span id="cb6-31"><a></a>    <span class="kw">def</span> charge(<span class="va">self</span>, hours: <span class="bu">float</span>):</span>
-<span id="cb6-32"><a></a>        <span class="co">"""Charge the battery (unique to electric cars)."""</span></span>
-<span id="cb6-33"><a></a>        charge_added <span class="op">=</span> <span class="bu">min</span>(hours <span class="op">*</span> <span class="dv">10</span>, <span class="dv">100</span> <span class="op">-</span> <span class="va">self</span>.battery_level)</span>
-<span id="cb6-34"><a></a>        <span class="va">self</span>.battery_level <span class="op">+=</span> charge_added</span>
-<span id="cb6-35"><a></a>        <span class="bu">print</span>(<span class="ss">f"Charged for </span><span class="sc">{</span>hours<span class="sc">}</span><span class="ss"> hours. Battery: </span><span class="sc">{</span><span class="va">self</span><span class="sc">.</span>battery_level<span class="sc">:.1f}</span><span class="ss">%"</span>)</span>
-<span id="cb6-36"><a></a></span>
-<span id="cb6-37"><a></a><span class="co"># Inheritance in action</span></span>
-<span id="cb6-38"><a></a>tesla <span class="op">=</span> ElectricCar(<span class="st">"Tesla"</span>, <span class="st">"Model S"</span>, <span class="dv">2023</span>, <span class="fl">100.0</span>)</span>
-<span id="cb6-39"><a></a>tesla.start_engine()  <span class="co"># Uses overridden method</span></span>
-<span id="cb6-40"><a></a>tesla.drive(<span class="dv">50</span>)       <span class="co"># Uses inherited method</span></span>
-<span id="cb6-41"><a></a>tesla.charge(<span class="dv">2</span>)       <span class="co"># Uses unique method</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href=""></a><span class="kw">class</span> Vehicle:</span>
+<span id="cb6-2"><a href=""></a>    <span class="co">"""Base class for all vehicles."""</span></span>
+<span id="cb6-3"><a href=""></a></span>
+<span id="cb6-4"><a href=""></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, make: <span class="bu">str</span>, model: <span class="bu">str</span>, year: <span class="bu">int</span>):</span>
+<span id="cb6-5"><a href=""></a>        <span class="va">self</span>.make <span class="op">=</span> make</span>
+<span id="cb6-6"><a href=""></a>        <span class="va">self</span>.model <span class="op">=</span> model</span>
+<span id="cb6-7"><a href=""></a>        <span class="va">self</span>.year <span class="op">=</span> year</span>
+<span id="cb6-8"><a href=""></a>        <span class="va">self</span>.mileage <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb6-9"><a href=""></a></span>
+<span id="cb6-10"><a href=""></a>    <span class="kw">def</span> start_engine(<span class="va">self</span>):</span>
+<span id="cb6-11"><a href=""></a>        <span class="co">"""Start the vehicle's engine."""</span></span>
+<span id="cb6-12"><a href=""></a>        <span class="bu">print</span>(<span class="ss">f"The </span><span class="sc">{</span><span class="va">self</span><span class="sc">.</span>year<span class="sc">}</span><span class="ss"> </span><span class="sc">{</span><span class="va">self</span><span class="sc">.</span>make<span class="sc">}</span><span class="ss"> </span><span class="sc">{</span><span class="va">self</span><span class="sc">.</span>model<span class="sc">}</span><span class="ss"> engine starts."</span>)</span>
+<span id="cb6-13"><a href=""></a></span>
+<span id="cb6-14"><a href=""></a>    <span class="kw">def</span> drive(<span class="va">self</span>, miles: <span class="bu">float</span>):</span>
+<span id="cb6-15"><a href=""></a>        <span class="co">"""Drive the vehicle and update mileage."""</span></span>
+<span id="cb6-16"><a href=""></a>        <span class="va">self</span>.mileage <span class="op">+=</span> miles</span>
+<span id="cb6-17"><a href=""></a>        <span class="bu">print</span>(<span class="ss">f"Drove </span><span class="sc">{</span>miles<span class="sc">}</span><span class="ss"> miles. Total mileage: </span><span class="sc">{</span><span class="va">self</span><span class="sc">.</span>mileage<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb6-18"><a href=""></a></span>
+<span id="cb6-19"><a href=""></a><span class="kw">class</span> ElectricCar(Vehicle):</span>
+<span id="cb6-20"><a href=""></a>    <span class="co">"""Electric vehicle with battery management."""</span></span>
+<span id="cb6-21"><a href=""></a></span>
+<span id="cb6-22"><a href=""></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, make: <span class="bu">str</span>, model: <span class="bu">str</span>, year: <span class="bu">int</span>, battery_capacity: <span class="bu">float</span>):</span>
+<span id="cb6-23"><a href=""></a>        <span class="bu">super</span>().<span class="fu">__init__</span>(make, model, year)  <span class="co"># Call parent constructor</span></span>
+<span id="cb6-24"><a href=""></a>        <span class="va">self</span>.battery_capacity <span class="op">=</span> battery_capacity</span>
+<span id="cb6-25"><a href=""></a>        <span class="va">self</span>.battery_level <span class="op">=</span> <span class="fl">100.0</span>  <span class="co"># Start fully charged</span></span>
+<span id="cb6-26"><a href=""></a></span>
+<span id="cb6-27"><a href=""></a>    <span class="kw">def</span> start_engine(<span class="va">self</span>):</span>
+<span id="cb6-28"><a href=""></a>        <span class="co">"""Override: Electric cars don't have traditional engines."""</span></span>
+<span id="cb6-29"><a href=""></a>        <span class="bu">print</span>(<span class="ss">f"The </span><span class="sc">{</span><span class="va">self</span><span class="sc">.</span>year<span class="sc">}</span><span class="ss"> </span><span class="sc">{</span><span class="va">self</span><span class="sc">.</span>make<span class="sc">}</span><span class="ss"> </span><span class="sc">{</span><span class="va">self</span><span class="sc">.</span>model<span class="sc">}</span><span class="ss"> powers on silently."</span>)</span>
+<span id="cb6-30"><a href=""></a></span>
+<span id="cb6-31"><a href=""></a>    <span class="kw">def</span> charge(<span class="va">self</span>, hours: <span class="bu">float</span>):</span>
+<span id="cb6-32"><a href=""></a>        <span class="co">"""Charge the battery (unique to electric cars)."""</span></span>
+<span id="cb6-33"><a href=""></a>        charge_added <span class="op">=</span> <span class="bu">min</span>(hours <span class="op">*</span> <span class="dv">10</span>, <span class="dv">100</span> <span class="op">-</span> <span class="va">self</span>.battery_level)</span>
+<span id="cb6-34"><a href=""></a>        <span class="va">self</span>.battery_level <span class="op">+=</span> charge_added</span>
+<span id="cb6-35"><a href=""></a>        <span class="bu">print</span>(<span class="ss">f"Charged for </span><span class="sc">{</span>hours<span class="sc">}</span><span class="ss"> hours. Battery: </span><span class="sc">{</span><span class="va">self</span><span class="sc">.</span>battery_level<span class="sc">:.1f}</span><span class="ss">%"</span>)</span>
+<span id="cb6-36"><a href=""></a></span>
+<span id="cb6-37"><a href=""></a><span class="co"># Inheritance in action</span></span>
+<span id="cb6-38"><a href=""></a>tesla <span class="op">=</span> ElectricCar(<span class="st">"Tesla"</span>, <span class="st">"Model S"</span>, <span class="dv">2023</span>, <span class="fl">100.0</span>)</span>
+<span id="cb6-39"><a href=""></a>tesla.start_engine()  <span class="co"># Uses overridden method</span></span>
+<span id="cb6-40"><a href=""></a>tesla.drive(<span class="dv">50</span>)       <span class="co"># Uses inherited method</span></span>
+<span id="cb6-41"><a href=""></a>tesla.charge(<span class="dv">2</span>)       <span class="co"># Uses unique method</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <aside class="notes">
 <p><strong>TEACHING NOTES:</strong></p>
 <ul>
@@ -764,49 +768,49 @@ Brandon M. Greenwell
 <li class="fragment"><strong><a href="https://docs.python.org/3/library/functions.html#staticmethod">Static methods</a></strong>: Utility functions that belong logically to the class</li>
 <li class="fragment"><strong>Multiple inheritance</strong>: Inheriting from multiple parent classes (advanced topic)</li>
 </ul>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a></a><span class="kw">class</span> Product:</span>
-<span id="cb7-2"><a></a>    <span class="co">"""Represents a product in an inventory system."""</span></span>
-<span id="cb7-3"><a></a></span>
-<span id="cb7-4"><a></a>    <span class="co"># Class variable - shared across all instances</span></span>
-<span id="cb7-5"><a></a>    total_products_created <span class="op">=</span> <span class="dv">0</span></span>
-<span id="cb7-6"><a></a></span>
-<span id="cb7-7"><a></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, name: <span class="bu">str</span>, price: <span class="bu">float</span>):</span>
-<span id="cb7-8"><a></a>        <span class="va">self</span>.name <span class="op">=</span> name</span>
-<span id="cb7-9"><a></a>        <span class="va">self</span>._price <span class="op">=</span> price  <span class="co"># Private attribute (convention)</span></span>
-<span id="cb7-10"><a></a>        Product.total_products_created <span class="op">+=</span> <span class="dv">1</span></span>
-<span id="cb7-11"><a></a></span>
-<span id="cb7-12"><a></a>    <span class="at">@property</span></span>
-<span id="cb7-13"><a></a>    <span class="kw">def</span> price(<span class="va">self</span>) <span class="op">-&gt;</span> <span class="bu">float</span>:</span>
-<span id="cb7-14"><a></a>        <span class="co">"""Get the product price."""</span></span>
-<span id="cb7-15"><a></a>        <span class="cf">return</span> <span class="va">self</span>._price</span>
-<span id="cb7-16"><a></a></span>
-<span id="cb7-17"><a></a>    <span class="at">@price.setter</span></span>
-<span id="cb7-18"><a></a>    <span class="kw">def</span> price(<span class="va">self</span>, value: <span class="bu">float</span>):</span>
-<span id="cb7-19"><a></a>        <span class="co">"""Set the product price with validation."""</span></span>
-<span id="cb7-20"><a></a>        <span class="cf">if</span> value <span class="op">&lt;</span> <span class="dv">0</span>:</span>
-<span id="cb7-21"><a></a>            <span class="cf">raise</span> <span class="pp">ValueError</span>(<span class="st">"Price cannot be negative"</span>)</span>
-<span id="cb7-22"><a></a>        <span class="va">self</span>._price <span class="op">=</span> value</span>
-<span id="cb7-23"><a></a></span>
-<span id="cb7-24"><a></a>    <span class="at">@classmethod</span></span>
-<span id="cb7-25"><a></a>    <span class="kw">def</span> get_total_products(cls) <span class="op">-&gt;</span> <span class="bu">int</span>:</span>
-<span id="cb7-26"><a></a>        <span class="co">"""Return total number of products created."""</span></span>
-<span id="cb7-27"><a></a>        <span class="cf">return</span> cls.total_products_created</span>
-<span id="cb7-28"><a></a></span>
-<span id="cb7-29"><a></a>    <span class="at">@staticmethod</span></span>
-<span id="cb7-30"><a></a>    <span class="kw">def</span> calculate_tax(price: <span class="bu">float</span>, tax_rate: <span class="bu">float</span> <span class="op">=</span> <span class="fl">0.08</span>) <span class="op">-&gt;</span> <span class="bu">float</span>:</span>
-<span id="cb7-31"><a></a>        <span class="co">"""Calculate tax amount for a given price."""</span></span>
-<span id="cb7-32"><a></a>        <span class="cf">return</span> price <span class="op">*</span> tax_rate</span>
-<span id="cb7-33"><a></a></span>
-<span id="cb7-34"><a></a><span class="co"># Advanced features in action</span></span>
-<span id="cb7-35"><a></a>laptop <span class="op">=</span> Product(<span class="st">"Gaming Laptop"</span>, <span class="fl">1299.99</span>)</span>
-<span id="cb7-36"><a></a>mouse <span class="op">=</span> Product(<span class="st">"Wireless Mouse"</span>, <span class="fl">79.99</span>)</span>
-<span id="cb7-37"><a></a></span>
-<span id="cb7-38"><a></a><span class="bu">print</span>(<span class="ss">f"Total products: </span><span class="sc">{</span>Product<span class="sc">.</span>get_total_products()<span class="sc">}</span><span class="ss">"</span>)  <span class="co"># Class method</span></span>
-<span id="cb7-39"><a></a><span class="bu">print</span>(<span class="ss">f"Tax on laptop: $</span><span class="sc">{</span>Product<span class="sc">.</span>calculate_tax(laptop.price)<span class="sc">:.2f}</span><span class="ss">"</span>)  <span class="co"># Static method</span></span>
-<span id="cb7-40"><a></a></span>
-<span id="cb7-41"><a></a><span class="co"># Property with validation</span></span>
-<span id="cb7-42"><a></a><span class="co"># laptop.price = -100  # Would raise ValueError</span></span>
-<span id="cb7-43"><a></a>laptop.price <span class="op">=</span> <span class="fl">1199.99</span>  <span class="co"># Valid price change</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href=""></a><span class="kw">class</span> Product:</span>
+<span id="cb7-2"><a href=""></a>    <span class="co">"""Represents a product in an inventory system."""</span></span>
+<span id="cb7-3"><a href=""></a></span>
+<span id="cb7-4"><a href=""></a>    <span class="co"># Class variable - shared across all instances</span></span>
+<span id="cb7-5"><a href=""></a>    total_products_created <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb7-6"><a href=""></a></span>
+<span id="cb7-7"><a href=""></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, name: <span class="bu">str</span>, price: <span class="bu">float</span>):</span>
+<span id="cb7-8"><a href=""></a>        <span class="va">self</span>.name <span class="op">=</span> name</span>
+<span id="cb7-9"><a href=""></a>        <span class="va">self</span>._price <span class="op">=</span> price  <span class="co"># Private attribute (convention)</span></span>
+<span id="cb7-10"><a href=""></a>        Product.total_products_created <span class="op">+=</span> <span class="dv">1</span></span>
+<span id="cb7-11"><a href=""></a></span>
+<span id="cb7-12"><a href=""></a>    <span class="at">@property</span></span>
+<span id="cb7-13"><a href=""></a>    <span class="kw">def</span> price(<span class="va">self</span>) <span class="op">-&gt;</span> <span class="bu">float</span>:</span>
+<span id="cb7-14"><a href=""></a>        <span class="co">"""Get the product price."""</span></span>
+<span id="cb7-15"><a href=""></a>        <span class="cf">return</span> <span class="va">self</span>._price</span>
+<span id="cb7-16"><a href=""></a></span>
+<span id="cb7-17"><a href=""></a>    <span class="at">@price.setter</span></span>
+<span id="cb7-18"><a href=""></a>    <span class="kw">def</span> price(<span class="va">self</span>, value: <span class="bu">float</span>):</span>
+<span id="cb7-19"><a href=""></a>        <span class="co">"""Set the product price with validation."""</span></span>
+<span id="cb7-20"><a href=""></a>        <span class="cf">if</span> value <span class="op">&lt;</span> <span class="dv">0</span>:</span>
+<span id="cb7-21"><a href=""></a>            <span class="cf">raise</span> <span class="pp">ValueError</span>(<span class="st">"Price cannot be negative"</span>)</span>
+<span id="cb7-22"><a href=""></a>        <span class="va">self</span>._price <span class="op">=</span> value</span>
+<span id="cb7-23"><a href=""></a></span>
+<span id="cb7-24"><a href=""></a>    <span class="at">@classmethod</span></span>
+<span id="cb7-25"><a href=""></a>    <span class="kw">def</span> get_total_products(cls) <span class="op">-&gt;</span> <span class="bu">int</span>:</span>
+<span id="cb7-26"><a href=""></a>        <span class="co">"""Return total number of products created."""</span></span>
+<span id="cb7-27"><a href=""></a>        <span class="cf">return</span> cls.total_products_created</span>
+<span id="cb7-28"><a href=""></a></span>
+<span id="cb7-29"><a href=""></a>    <span class="at">@staticmethod</span></span>
+<span id="cb7-30"><a href=""></a>    <span class="kw">def</span> calculate_tax(price: <span class="bu">float</span>, tax_rate: <span class="bu">float</span> <span class="op">=</span> <span class="fl">0.08</span>) <span class="op">-&gt;</span> <span class="bu">float</span>:</span>
+<span id="cb7-31"><a href=""></a>        <span class="co">"""Calculate tax amount for a given price."""</span></span>
+<span id="cb7-32"><a href=""></a>        <span class="cf">return</span> price <span class="op">*</span> tax_rate</span>
+<span id="cb7-33"><a href=""></a></span>
+<span id="cb7-34"><a href=""></a><span class="co"># Advanced features in action</span></span>
+<span id="cb7-35"><a href=""></a>laptop <span class="op">=</span> Product(<span class="st">"Gaming Laptop"</span>, <span class="fl">1299.99</span>)</span>
+<span id="cb7-36"><a href=""></a>mouse <span class="op">=</span> Product(<span class="st">"Wireless Mouse"</span>, <span class="fl">79.99</span>)</span>
+<span id="cb7-37"><a href=""></a></span>
+<span id="cb7-38"><a href=""></a><span class="bu">print</span>(<span class="ss">f"Total products: </span><span class="sc">{</span>Product<span class="sc">.</span>get_total_products()<span class="sc">}</span><span class="ss">"</span>)  <span class="co"># Class method</span></span>
+<span id="cb7-39"><a href=""></a><span class="bu">print</span>(<span class="ss">f"Tax on laptop: $</span><span class="sc">{</span>Product<span class="sc">.</span>calculate_tax(laptop.price)<span class="sc">:.2f}</span><span class="ss">"</span>)  <span class="co"># Static method</span></span>
+<span id="cb7-40"><a href=""></a></span>
+<span id="cb7-41"><a href=""></a><span class="co"># Property with validation</span></span>
+<span id="cb7-42"><a href=""></a><span class="co"># laptop.price = -100  # Would raise ValueError</span></span>
+<span id="cb7-43"><a href=""></a>laptop.price <span class="op">=</span> <span class="fl">1199.99</span>  <span class="co"># Valid price change</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <aside class="notes">
 <p><strong>TEACHING NOTES:</strong></p>
 <ul>
@@ -982,29 +986,29 @@ Brandon M. Greenwell
           display:block!important;
       }</style></aside>
 
-
 </section></section>
     </div>
   <div class="quarto-auto-generated-content" style="display: none;">
 <div class="footer footer-default">
-
+<p>IS4010: App Development with AI</p>
 </div>
 </div></div>
 
   <script>window.backupDefine = window.define; window.define = undefined;</script>
-  <script src="../site_libs/revealjs/dist/reveal.js"></script>
+  <script src="IS4010_W06_OOP_files/libs/revealjs/dist/reveal.js"></script>
   <!-- reveal.js plugins -->
-  <script src="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
-  <script src="../site_libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
-  <script src="../site_libs/revealjs/plugin/reveal-menu/menu.js"></script>
-  <script src="../site_libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
-  <script src="../site_libs/revealjs/plugin/quarto-support/support.js"></script>
+  <script src="IS4010_W06_OOP_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="IS4010_W06_OOP_files/libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="IS4010_W06_OOP_files/libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="IS4010_W06_OOP_files/libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="IS4010_W06_OOP_files/libs/revealjs/plugin/reveal-chalkboard/plugin.js"></script>
+  <script src="IS4010_W06_OOP_files/libs/revealjs/plugin/quarto-support/support.js"></script>
   
 
-  <script src="../site_libs/revealjs/plugin/notes/notes.js"></script>
-  <script src="../site_libs/revealjs/plugin/search/search.js"></script>
-  <script src="../site_libs/revealjs/plugin/zoom/zoom.js"></script>
-  <script src="../site_libs/revealjs/plugin/math/math.js"></script>
+  <script src="IS4010_W06_OOP_files/libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="IS4010_W06_OOP_files/libs/revealjs/plugin/search/search.js"></script>
+  <script src="IS4010_W06_OOP_files/libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="IS4010_W06_OOP_files/libs/revealjs/plugin/math/math.js"></script>
   <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
 
   <script>
@@ -1013,13 +1017,14 @@ Brandon M. Greenwell
       // https://revealjs.com/config/
       Reveal.initialize({
 'controlsAuto': true,
-'previewLinksAuto': false,
+'previewLinksAuto': true,
 'pdfSeparateFragments': false,
 'autoAnimateEasing': "ease",
 'autoAnimateDuration': 1,
 'autoAnimateUnmatched': true,
 'jumpToSlide': true,
-'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\"><kbd>r</kbd> Scroll View Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
+'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\"><kbd>r</kbd> Scroll View Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleChalkboard(event)\"><kbd>b</kbd> Toggle Chalkboard</a></li>\n<li class=\"slide-tool-item\" data-item=\"6\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleNotesCanvas(event)\"><kbd>c</kbd> Toggle Notes Canvas</a></li>\n<li class=\"slide-tool-item\" data-item=\"7\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.downloadDrawings(event)\"><kbd>d</kbd> Download Drawings</a></li>\n<li class=\"slide-tool-item\" data-item=\"8\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
+'chalkboard': {"buttons":true},
 'smaller': false,
  
         // Display controls in the bottom right corner
@@ -1040,7 +1045,7 @@ Brandon M. Greenwell
         progress: true,
 
         // Display the page number of the current slide
-        slideNumber: false,
+        slideNumber: 'c/t',
 
         // 'all', 'print', or 'speaker'
         showSlideNumber: 'all',
@@ -1190,7 +1195,7 @@ Brandon M. Greenwell
         },
 
         // reveal.js plugins
-        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, QuartoSupport,
+        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, RevealChalkboard, QuartoSupport,
 
           RevealMath,
           RevealNotes,
@@ -1269,7 +1274,7 @@ Brandon M. Greenwell
         }
           var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
           var mailtoRegex = new RegExp(/^mailto:/);
-            var filterRegex = new RegExp("https:\/\/bgreenwell\.github\.io\/is4010-website\/");
+            var filterRegex = new RegExp('/' + window.location.host + '/');
           var isInternal = (href) => {
               return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
           }

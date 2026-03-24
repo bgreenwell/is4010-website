@@ -1,23 +1,25 @@
 <!DOCTYPE html>
 <html lang="en"><head>
-<link href="../images/uc-logo-2.png" rel="icon" type="image/png">
-<script src="../site_libs/clipboard/clipboard.min.js"></script>
-<script src="../site_libs/quarto-html/tabby.min.js"></script>
-<script src="../site_libs/quarto-html/popper.min.js"></script>
-<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
-<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-4d9afe2b8d18ee9fa5d0d57b5ed4214d.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.8.27">
+<script src="IS4010_W10_The_Soul_of_Rust_files/libs/clipboard/clipboard.min.js"></script>
+<script src="IS4010_W10_The_Soul_of_Rust_files/libs/quarto-html/tabby.min.js"></script>
+<script src="IS4010_W10_The_Soul_of_Rust_files/libs/quarto-html/popper.min.js"></script>
+<script src="IS4010_W10_The_Soul_of_Rust_files/libs/quarto-html/tippy.umd.min.js"></script>
+<link href="IS4010_W10_The_Soul_of_Rust_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="IS4010_W10_The_Soul_of_Rust_files/libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="IS4010_W10_The_Soul_of_Rust_files/libs/quarto-html/quarto-syntax-highlighting-dark-f418161beb48e0141c760e455f12af2c.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.9.36">
 
   <meta name="author" content="Brandon M. Greenwell">
-  <title>IS 4010 - App Dev with AI – IS4010: AI-Enhanced Application Development</title>
+  <title>IS4010: AI-Enhanced Application Development</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
-  <link rel="stylesheet" href="../site_libs/revealjs/dist/reset.css">
-  <link rel="stylesheet" href="../site_libs/revealjs/dist/reveal.css">
+  <link rel="stylesheet" href="IS4010_W10_The_Soul_of_Rust_files/libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="IS4010_W10_The_Soul_of_Rust_files/libs/revealjs/dist/reveal.css">
   <style>
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
     div.columns{display: flex; gap: min(4vw, 1.5em);}
@@ -96,12 +98,14 @@
     code span.vs { color: #abe338; } /* VerbatimString */
     code span.wa { color: #dcc6e0; } /* Warning */
   </style>
-  <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto-a1d3734469117662d4af4794742e8c15.css">
+  <link rel="stylesheet" href="IS4010_W10_The_Soul_of_Rust_files/libs/revealjs/dist/theme/quarto-fdc93494f2580a7e050003a96af38920.css">
   <link rel="stylesheet" href="custom.css">
-  <link href="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
-  <link href="../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
-  <link href="../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
-  <link href="../site_libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <link href="IS4010_W10_The_Soul_of_Rust_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="IS4010_W10_The_Soul_of_Rust_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="IS4010_W10_The_Soul_of_Rust_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="IS4010_W10_The_Soul_of_Rust_files/libs/revealjs/plugin/reveal-chalkboard/font-awesome/css/all.css" rel="stylesheet">
+  <link href="IS4010_W10_The_Soul_of_Rust_files/libs/revealjs/plugin/reveal-chalkboard/style.css" rel="stylesheet">
+  <link href="IS4010_W10_The_Soul_of_Rust_files/libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
   <style type="text/css">
     .reveal div.sourceCode {
       margin: 0;
@@ -419,15 +423,69 @@ Brandon M. Greenwell
           display:block!important;
       }</style></aside>
 </section>
+<section id="the-stack-and-heap-a-cooking-analogy" class="slide level2">
+<h2>The stack and heap: a cooking analogy</h2>
+<p>Think of a chef setting up their station before service (<strong>mise en place</strong>):</p>
+<ul>
+<li class="fragment"><strong>The stack</strong> → your <strong>mise en place bowls</strong>: ingredients pre-measured into small glass bowls on the counter
+<ul>
+<li class="fragment">Fixed, known sizes — measured precisely before cooking begins</li>
+<li class="fragment">Right at hand — instant access, no searching required</li>
+<li class="fragment">Automatically cleared when the dish is finished</li>
+</ul></li>
+<li class="fragment"><strong>The heap</strong> → <strong>the walk-in pantry</strong>: large, flexible storage for bigger and variable quantities
+<ul>
+<li class="fragment">Items vary in size — a whole bag of flour vs.&nbsp;a pinch of salt</li>
+<li class="fragment">Farther away — more effort to access and manage</li>
+<li class="fragment">Must be tracked carefully — leave things unlabeled and they get “forgotten” (memory leak!)</li>
+</ul></li>
+</ul>
+<aside class="notes">
+<p>Mise en place is French for “everything in its place” — a foundational concept in professional cooking. The analogy: stack data is small, fixed-size, and automatically managed; heap data is flexible, larger, and needs explicit tracking. Consider showing an image of a chef’s mise en place station if you have one handy. The key properties to emphasize: <em>size known at compile time</em> (stack) vs.&nbsp;<em>size determined at runtime</em> (heap).</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="from-the-kitchen-to-rust" class="slide level2">
+<h2>From the kitchen to Rust</h2>
+<p>The analogy maps directly to <a href="https://www.rust-lang.org/">Rust</a> types:</p>
+<ul>
+<li class="fragment"><strong>Mise en place bowl</strong> (fixed size, cheap to duplicate) → <code>i32</code>, <code>f64</code>, <code>bool</code> on the <strong>stack</strong> — implement <a href="https://doc.rust-lang.org/std/marker/trait.Copy.html"><code>Copy</code></a></li>
+<li class="fragment"><strong>Pantry item</strong> (variable size, one of a kind) → <a href="https://doc.rust-lang.org/std/string/struct.String.html"><code>String</code></a>, <a href="https://doc.rust-lang.org/std/vec/struct.Vec.html"><code>Vec&lt;T&gt;</code></a> on the <strong>heap</strong> — subject to <strong>ownership rules</strong></li>
+<li class="fragment"><strong>Handing a bowl across the counter</strong> → cheap <code>Copy</code> (both keep their data)</li>
+<li class="fragment"><strong>Handing off the pantry item</strong> → <strong>move</strong> — you no longer have it; they do</li>
+</ul>
+<aside class="notes">
+<p>This bridge slide connects the analogy directly to the code examples that follow. The key insight: Copy types are like mise en place — cheap and fast to duplicate. Heap types (String, Vec) are like the big pantry item — there is one of them, handing it off is a move, and the original is gone. This sets up the move example on the next slide.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
 <section id="example-ownership-transfer-move" class="slide level2">
 <h2>Example: ownership transfer (move)</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb1-1"><a></a><span class="kw">fn</span> main() <span class="op">{</span></span>
-<span id="cb1-2"><a></a>    <span class="kw">let</span> s1 <span class="op">=</span> <span class="dt">String</span><span class="pp">::</span>from(<span class="st">"hello"</span>)<span class="op">;</span></span>
-<span id="cb1-3"><a></a>    <span class="kw">let</span> s2 <span class="op">=</span> s1<span class="op">;</span> <span class="co">// Ownership moves from s1 to s2</span></span>
-<span id="cb1-4"><a></a></span>
-<span id="cb1-5"><a></a>    <span class="co">// println!("{}", s1); // ❌ ERROR: value borrowed after move</span></span>
-<span id="cb1-6"><a></a>    <span class="pp">println!</span>(<span class="st">"{}"</span><span class="op">,</span> s2)<span class="op">;</span> <span class="co">// ✅ OK: s2 owns the string now</span></span>
-<span id="cb1-7"><a></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb1-1"><a href=""></a><span class="kw">fn</span> main() <span class="op">{</span></span>
+<span id="cb1-2"><a href=""></a>    <span class="kw">let</span> s1 <span class="op">=</span> <span class="dt">String</span><span class="pp">::</span>from(<span class="st">"hello"</span>)<span class="op">;</span></span>
+<span id="cb1-3"><a href=""></a>    <span class="kw">let</span> s2 <span class="op">=</span> s1<span class="op">;</span> <span class="co">// Ownership moves from s1 to s2</span></span>
+<span id="cb1-4"><a href=""></a></span>
+<span id="cb1-5"><a href=""></a>    <span class="co">// println!("{}", s1); // ❌ ERROR: value borrowed after move</span></span>
+<span id="cb1-6"><a href=""></a>    <span class="pp">println!</span>(<span class="st">"{}"</span><span class="op">,</span> s2)<span class="op">;</span> <span class="co">// ✅ OK: s2 owns the string now</span></span>
+<span id="cb1-7"><a href=""></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p><a href="https://play.rust-lang.org/?version=stable&amp;mode=debug&amp;edition=2021&amp;code=fn+main%28%29+%7B%0A++++let+s1+%3D+String%3A%3Afrom%28%22hello%22%29%3B%0A++++let+s2+%3D+s1%3B+%2F%2F+Ownership+moves%0A++++println%21%28%22%7B%7D%22%2C+s2%29%3B%0A%7D">Try it in Rust Playground</a></p>
 <aside class="notes">
 <p><strong>LIVE DEMO</strong>: Uncomment the s1 line to show the error. Read the compiler error message aloud - it’s excellent! Explain that this prevents double-free bugs. In C++, this code would crash or cause undefined behavior.</p>
@@ -473,9 +531,9 @@ Brandon M. Greenwell
 <li class="fragment">This is efficient because they live entirely on the <a href="https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html#the-stack-and-the-heap">stack</a> (no heap allocation)</li>
 <li class="fragment">After copying, both variables remain valid</li>
 </ul>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb2-1"><a></a><span class="kw">let</span> x <span class="op">=</span> <span class="dv">5</span><span class="op">;</span></span>
-<span id="cb2-2"><a></a><span class="kw">let</span> y <span class="op">=</span> x<span class="op">;</span> <span class="co">// Copy happens (not a move)</span></span>
-<span id="cb2-3"><a></a><span class="pp">println!</span>(<span class="st">"x = {}, y = {}"</span><span class="op">,</span> x<span class="op">,</span> y)<span class="op">;</span> <span class="co">// ✅ Both valid!</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb2-1"><a href=""></a><span class="kw">let</span> x <span class="op">=</span> <span class="dv">5</span><span class="op">;</span></span>
+<span id="cb2-2"><a href=""></a><span class="kw">let</span> y <span class="op">=</span> x<span class="op">;</span> <span class="co">// Copy happens (not a move)</span></span>
+<span id="cb2-3"><a href=""></a><span class="pp">println!</span>(<span class="st">"x = {}, y = {}"</span><span class="op">,</span> x<span class="op">,</span> y)<span class="op">;</span> <span class="co">// ✅ Both valid!</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <aside class="notes">
 <p>Copy vs Move is a key distinction. Copy types are stack-only, so copying is cheap (just copy the bytes). String is NOT Copy because it has heap data. You can’t accidentally expensive operations.</p>
 <style type="text/css">
@@ -517,13 +575,169 @@ Brandon M. Greenwell
 <li class="fragment"><a href="https://doc.rust-lang.org/std/ops/trait.Drop.html"><code>drop()</code></a> is a special function that cleans up resources (like freeing heap memory)</li>
 <li class="fragment">This is called <a href="https://en.wikipedia.org/wiki/Resource_acquisition_is_initialization">RAII (Resource Acquisition Is Initialization)</a> - borrowed from C++, but enforced by the compiler in Rust</li>
 </ul>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb3-1"><a></a><span class="op">{</span></span>
-<span id="cb3-2"><a></a>    <span class="kw">let</span> s <span class="op">=</span> <span class="dt">String</span><span class="pp">::</span>from(<span class="st">"hello"</span>)<span class="op">;</span> <span class="co">// s is valid here</span></span>
-<span id="cb3-3"><a></a>    <span class="co">// use s</span></span>
-<span id="cb3-4"><a></a><span class="op">}</span> <span class="co">// s goes out of scope, drop() is called automatically</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb3-1"><a href=""></a><span class="op">{</span></span>
+<span id="cb3-2"><a href=""></a>    <span class="kw">let</span> s <span class="op">=</span> <span class="dt">String</span><span class="pp">::</span>from(<span class="st">"hello"</span>)<span class="op">;</span> <span class="co">// s is valid here</span></span>
+<span id="cb3-3"><a href=""></a>    <span class="co">// use s</span></span>
+<span id="cb3-4"><a href=""></a><span class="op">}</span> <span class="co">// s goes out of scope, drop() is called automatically</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p><a href="https://play.rust-lang.org/?version=stable&amp;mode=debug&amp;edition=2021&amp;code=fn+main%28%29+%7B%0A++++%7B%0A++++++++let+s+%3D+String%3A%3Afrom%28%22hello%22%29%3B%0A++++++++println%21%28%22%7B%7D%22%2C+s%29%3B%0A++++%7D+%2F%2F+s+dropped+here%0A++++%2F%2F+println%21%28%22%7B%7D%22%2C+s%29%3B+%2F%2F+Would+error%0A%7D">Try it in Rust Playground</a></p>
 <aside class="notes">
 <p>RAII is a C++ concept but Rust enforces it. This is why you rarely see explicit cleanup code in Rust. The scope determines lifetime automatically.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="python-silently-accepts-a-dangerous-pattern" class="slide level2">
+<h2>Python silently accepts a dangerous pattern</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href=""></a><span class="co"># Goal: remove all even numbers from a list</span></span>
+<span id="cb4-2"><a href=""></a>items <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">6</span>, <span class="dv">7</span>, <span class="dv">8</span>]</span>
+<span id="cb4-3"><a href=""></a></span>
+<span id="cb4-4"><a href=""></a><span class="cf">for</span> item <span class="kw">in</span> items:</span>
+<span id="cb4-5"><a href=""></a>    <span class="cf">if</span> item <span class="op">%</span> <span class="dv">2</span> <span class="op">==</span> <span class="dv">0</span>:</span>
+<span id="cb4-6"><a href=""></a>        items.remove(item)  <span class="co"># Modifying the list while iterating!</span></span>
+<span id="cb4-7"><a href=""></a></span>
+<span id="cb4-8"><a href=""></a><span class="bu">print</span>(items)  <span class="co"># Expected: [1, 3, 7]</span></span>
+<span id="cb4-9"><a href=""></a>              <span class="co"># Actual:   [1, 3, 6, 7]  ← 6 is never checked!</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<ul>
+<li class="fragment">Python runs to completion — no error, no warning, exit code 0</li>
+<li class="fragment">When <code>4</code> is removed at index 2, the list shifts left; the iterator advances to <code>7</code>, skipping <code>6</code> entirely</li>
+<li class="fragment">This is a <strong>silent bug</strong>: your program lies to you with no indication anything went wrong</li>
+</ul>
+<aside class="notes">
+<p>LIVE DEMO opportunity: Run this in the Python REPL and ask students to predict the output BEFORE running it. The mechanism: removing 2 (index 1) shifts the list; the iterator advances to index 2 which is now 4. Removing 4 (index 2) shifts again; the iterator advances to index 3 which is now 7 — skipping 6, which has shifted into index 2. 6 is even and should have been removed but never gets checked. The bug appears whenever two consecutive removal candidates are adjacent in the list.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="why-python-gets-it-wrong" class="slide level2">
+<h2>Why Python gets it wrong</h2>
+<p><code>for item in items</code> tracks a hidden <strong>index counter</strong> — it increments by 1 each step, unaware of any list changes:</p>
+<ul>
+<li class="fragment">Index 0 → <code>1</code> (odd, skip). List: <code>[1, 2, 3, 4, 6, 7, 8]</code></li>
+<li class="fragment">Index 1 → <code>2</code> (even, remove). List: <code>[1, 3, 4, 6, 7, 8]</code></li>
+<li class="fragment">Index 2 → <code>4</code> (even, remove). List: <code>[1, 3, 6, 7, 8]</code></li>
+<li class="fragment">Index 3 → <code>7</code> (odd, skip) — <strong><code>6</code> shifted into index 2 and was never visited!</strong></li>
+<li class="fragment">Index 4 → <code>8</code> (even, remove). List: <code>[1, 3, 6, 7]</code></li>
+<li class="fragment">Index 5 → past end, loop stops</li>
+</ul>
+<p>The counter keeps incrementing; the list keeps shifting. They fall out of sync.</p>
+<aside class="notes">
+<p>This is iterator invalidation. The for loop’s index counter has no awareness that the list is changing under its feet. Every removal shifts subsequent elements left, which pushes one element into the “already visited” zone. Python never raises an error because from its perspective, the loop ran to completion normally.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="rust-catches-this-at-compile-time" class="slide level2">
+<h2>Rust catches this at compile time</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb5-1"><a href=""></a><span class="kw">fn</span> main() <span class="op">{</span></span>
+<span id="cb5-2"><a href=""></a>    <span class="kw">let</span> <span class="kw">mut</span> items <span class="op">=</span> <span class="pp">vec!</span>[<span class="dv">1</span><span class="op">,</span> <span class="dv">2</span><span class="op">,</span> <span class="dv">3</span><span class="op">,</span> <span class="dv">4</span><span class="op">,</span> <span class="dv">6</span><span class="op">,</span> <span class="dv">7</span><span class="op">,</span> <span class="dv">8</span>]<span class="op">;</span></span>
+<span id="cb5-3"><a href=""></a></span>
+<span id="cb5-4"><a href=""></a>    <span class="cf">for</span> item <span class="kw">in</span> <span class="op">&amp;</span>items <span class="op">{</span>                    <span class="co">// immutable borrow of `items`</span></span>
+<span id="cb5-5"><a href=""></a>        <span class="cf">if</span> item <span class="op">%</span> <span class="dv">2</span> <span class="op">==</span> <span class="dv">0</span> <span class="op">{</span></span>
+<span id="cb5-6"><a href=""></a>            items<span class="op">.</span>retain(<span class="op">|</span>x<span class="op">|</span> x <span class="op">!=</span> item)<span class="op">;</span>   <span class="co">// ❌ ERROR: mutable borrow!</span></span>
+<span id="cb5-7"><a href=""></a>        <span class="op">}</span></span>
+<span id="cb5-8"><a href=""></a>    <span class="op">}</span></span>
+<span id="cb5-9"><a href=""></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>error[E0502]: cannot borrow `items` as mutable because it is also borrowed as immutable
+ --&gt; src/main.rs:6:13
+  |
+4 |     for item in &amp;items {
+  |                 ------  immutable borrow occurs here
+...
+6 |             items.retain(|x| x != item);
+  |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^ mutable borrow occurs here</code></pre>
+<ul>
+<li class="fragment"><code>for item in &amp;items</code> takes an <strong>immutable borrow</strong> of the whole vector</li>
+<li class="fragment"><code>.retain()</code> needs a <strong>mutable borrow</strong> of the same vector — at the same time</li>
+<li class="fragment">Rust’s rule: you cannot hold both simultaneously — so this <strong>does not compile</strong></li>
+<li class="fragment">The bug Python hid at runtime, Rust surfaces at <strong>compile time</strong> before a single line runs</li>
+</ul>
+<p><a href="https://play.rust-lang.org/?version=stable&amp;mode=debug&amp;edition=2021&amp;code=fn+main%28%29+%7B%0A++++let+mut+items+%3D+vec%21%5B1%2C+2%2C+3%2C+4%2C+6%2C+7%2C+8%5D%3B%0A%0A++++for+item+in+%26items+%7B%0A++++++++if+item+%25+2+%3D%3D+0+%7B%0A++++++++++++items.retain%28%7Cx%7C+x+%21%3D+item%29%3B%0A++++++++%7D%0A++++%7D%0A%7D">Try it in Rust Playground</a></p>
+<aside class="notes">
+<p>This is the borrow checker rule from earlier in the session — one mutable OR many immutable, never both — catching a real, recognizable bug. Emphasize the contrast: Python ran to completion with wrong output and exit code 0; Rust refused to compile. Read the compiler error message aloud. It names the exact lines involved and explains precisely why the code is rejected. This is what “the compiler is your friend” means in practice.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="why-rust-catches-it" class="slide level2">
+<h2>Why Rust catches it</h2>
+<p><code>for item in &amp;items</code> takes an <strong>immutable borrow</strong> of the entire vector — a compile-time contract:</p>
+<blockquote>
+<p><em>“This data will not change while I hold this reference.”</em></p>
+</blockquote>
+<ul>
+<li class="fragment">Any method that mutates the vector (<code>.retain()</code>, <code>.remove()</code>, <code>.push()</code>) requires a <strong>mutable borrow</strong></li>
+<li class="fragment">You cannot hold an immutable borrow and a mutable borrow at the same time — ever</li>
+<li class="fragment">The compiler checks this <strong>before your program runs</strong> — zero runtime overhead</li>
+<li class="fragment">This isn’t just about iteration: the ownership system makes <em>any</em> aliased mutation impossible</li>
+</ul>
+<aside class="notes">
+<p>The deeper principle: an immutable reference guarantees stability for its entire lifetime. Python’s iterator has no such guarantee — the list can change under its feet. Rust makes the contract explicit and enforced at compile time. Iterator invalidation is just one of many bugs this invariant rules out — data races in multithreaded code are another.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="the-rust-way-transform-instead-of-mutate" class="slide level2">
+<h2>The Rust way: transform instead of mutate</h2>
+<p>When <a href="https://www.rust-lang.org/">Rust</a> says no to mutating in place, it is steering you toward a cleaner pattern:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb7-1"><a href=""></a><span class="kw">fn</span> main() <span class="op">{</span></span>
+<span id="cb7-2"><a href=""></a>    <span class="kw">let</span> items <span class="op">=</span> <span class="pp">vec!</span>[<span class="dv">1</span><span class="op">,</span> <span class="dv">2</span><span class="op">,</span> <span class="dv">3</span><span class="op">,</span> <span class="dv">4</span><span class="op">,</span> <span class="dv">6</span><span class="op">,</span> <span class="dv">7</span><span class="op">,</span> <span class="dv">8</span>]<span class="op">;</span></span>
+<span id="cb7-3"><a href=""></a></span>
+<span id="cb7-4"><a href=""></a>    <span class="kw">let</span> odds<span class="op">:</span> <span class="dt">Vec</span><span class="op">&lt;</span><span class="dt">i32</span><span class="op">&gt;</span> <span class="op">=</span> items</span>
+<span id="cb7-5"><a href=""></a>        <span class="op">.</span>into_iter()</span>
+<span id="cb7-6"><a href=""></a>        <span class="op">.</span>filter(<span class="op">|</span>x<span class="op">|</span> x <span class="op">%</span> <span class="dv">2</span> <span class="op">!=</span> <span class="dv">0</span>)</span>
+<span id="cb7-7"><a href=""></a>        <span class="op">.</span>collect()<span class="op">;</span></span>
+<span id="cb7-8"><a href=""></a></span>
+<span id="cb7-9"><a href=""></a>    <span class="pp">println!</span>(<span class="st">"{:?}"</span><span class="op">,</span> odds)<span class="op">;</span>  <span class="co">// ✅ [1, 3, 7] — correct, every time</span></span>
+<span id="cb7-10"><a href=""></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<ul>
+<li class="fragment"><code>into_iter()</code> consumes <code>items</code>, giving the iterator full ownership — no borrow conflict</li>
+<li class="fragment"><code>.filter()</code> selects elements without touching the original collection</li>
+<li class="fragment"><code>.collect()</code> builds a fresh <code>Vec&lt;i32&gt;</code></li>
+<li class="fragment">Python equivalent: <code>odds = [x for x in items if x % 2 != 0]</code> — same idea, now enforced by the type system</li>
+</ul>
+<p><a href="https://play.rust-lang.org/?version=stable&amp;mode=debug&amp;edition=2021&amp;code=fn+main%28%29+%7B%0A++++let+items+%3D+vec%21%5B1%2C+2%2C+3%2C+4%2C+6%2C+7%2C+8%5D%3B%0A%0A++++let+odds%3A+Vec%3Ci32%3E+%3D+items%0A++++++++.into_iter%28%29%0A++++++++.filter%28%7Cx%7C+x+%25+2+%21%3D+0%29%0A++++++++.collect%28%29%3B%0A%0A++++println%21%28%22%7B%3A%3F%7D%22%2C+odds%29%3B%0A%7D">Try it in Rust Playground</a></p>
+<aside class="notes">
+<p>The payoff: the borrow checker does not just prevent bugs — it steers students toward a better pattern. Iterator adapters (into_iter / filter / map / collect) are idiomatic Rust and appear constantly in real code. Connecting to the Python list comprehension from Week 4 reinforces that the concept is familiar; only the safety enforcement is new. The borrow checker is a teacher, not an obstacle.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -554,15 +768,15 @@ Brandon M. Greenwell
 </section>
 <section id="the-problem-functions-that-take-ownership" class="slide level2">
 <h2>The problem: functions that take ownership</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb4-1"><a></a><span class="kw">fn</span> calculate_length(s<span class="op">:</span> <span class="dt">String</span>) <span class="op">-&gt;</span> <span class="dt">usize</span> <span class="op">{</span></span>
-<span id="cb4-2"><a></a>    s<span class="op">.</span>len()</span>
-<span id="cb4-3"><a></a><span class="op">}</span> <span class="co">// s is dropped here</span></span>
-<span id="cb4-4"><a></a></span>
-<span id="cb4-5"><a></a><span class="kw">fn</span> main() <span class="op">{</span></span>
-<span id="cb4-6"><a></a>    <span class="kw">let</span> my_string <span class="op">=</span> <span class="dt">String</span><span class="pp">::</span>from(<span class="st">"hello"</span>)<span class="op">;</span></span>
-<span id="cb4-7"><a></a>    <span class="kw">let</span> len <span class="op">=</span> calculate_length(my_string)<span class="op">;</span> <span class="co">// Ownership moved!</span></span>
-<span id="cb4-8"><a></a>    <span class="co">// println!("{}", my_string); // ❌ ERROR: value borrowed after move</span></span>
-<span id="cb4-9"><a></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb8-1"><a href=""></a><span class="kw">fn</span> calculate_length(s<span class="op">:</span> <span class="dt">String</span>) <span class="op">-&gt;</span> <span class="dt">usize</span> <span class="op">{</span></span>
+<span id="cb8-2"><a href=""></a>    s<span class="op">.</span>len()</span>
+<span id="cb8-3"><a href=""></a><span class="op">}</span> <span class="co">// s is dropped here</span></span>
+<span id="cb8-4"><a href=""></a></span>
+<span id="cb8-5"><a href=""></a><span class="kw">fn</span> main() <span class="op">{</span></span>
+<span id="cb8-6"><a href=""></a>    <span class="kw">let</span> my_string <span class="op">=</span> <span class="dt">String</span><span class="pp">::</span>from(<span class="st">"hello"</span>)<span class="op">;</span></span>
+<span id="cb8-7"><a href=""></a>    <span class="kw">let</span> len <span class="op">=</span> calculate_length(my_string)<span class="op">;</span> <span class="co">// Ownership moved!</span></span>
+<span id="cb8-8"><a href=""></a>    <span class="co">// println!("{}", my_string); // ❌ ERROR: value borrowed after move</span></span>
+<span id="cb8-9"><a href=""></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <ul>
 <li class="fragment">When we pass <code>my_string</code> to the function, ownership moves to <code>s</code></li>
 <li class="fragment">After the function returns, we can’t use <code>my_string</code> anymore</li>
@@ -590,15 +804,15 @@ Brandon M. Greenwell
 <li class="fragment">Using references is called <strong><a href="https://doc.rust-lang.org/book/ch04-02-references-and-borrowing.html">borrowing</a></strong></li>
 <li class="fragment">The original owner retains ownership, so the value won’t be dropped</li>
 </ul>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb5-1"><a></a><span class="kw">fn</span> calculate_length(s<span class="op">:</span> <span class="op">&amp;</span><span class="dt">String</span>) <span class="op">-&gt;</span> <span class="dt">usize</span> <span class="op">{</span></span>
-<span id="cb5-2"><a></a>    s<span class="op">.</span>len()</span>
-<span id="cb5-3"><a></a><span class="op">}</span> <span class="co">// s goes out of scope, but it doesn't own the String, so nothing is dropped</span></span>
-<span id="cb5-4"><a></a></span>
-<span id="cb5-5"><a></a><span class="kw">fn</span> main() <span class="op">{</span></span>
-<span id="cb5-6"><a></a>    <span class="kw">let</span> my_string <span class="op">=</span> <span class="dt">String</span><span class="pp">::</span>from(<span class="st">"hello"</span>)<span class="op">;</span></span>
-<span id="cb5-7"><a></a>    <span class="kw">let</span> len <span class="op">=</span> calculate_length(<span class="op">&amp;</span>my_string)<span class="op">;</span> <span class="co">// Borrow, don't move</span></span>
-<span id="cb5-8"><a></a>    <span class="pp">println!</span>(<span class="st">"{} has length {}"</span><span class="op">,</span> my_string<span class="op">,</span> len)<span class="op">;</span> <span class="co">// ✅ Still valid!</span></span>
-<span id="cb5-9"><a></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb9-1"><a href=""></a><span class="kw">fn</span> calculate_length(s<span class="op">:</span> <span class="op">&amp;</span><span class="dt">String</span>) <span class="op">-&gt;</span> <span class="dt">usize</span> <span class="op">{</span></span>
+<span id="cb9-2"><a href=""></a>    s<span class="op">.</span>len()</span>
+<span id="cb9-3"><a href=""></a><span class="op">}</span> <span class="co">// s goes out of scope, but it doesn't own the String, so nothing is dropped</span></span>
+<span id="cb9-4"><a href=""></a></span>
+<span id="cb9-5"><a href=""></a><span class="kw">fn</span> main() <span class="op">{</span></span>
+<span id="cb9-6"><a href=""></a>    <span class="kw">let</span> my_string <span class="op">=</span> <span class="dt">String</span><span class="pp">::</span>from(<span class="st">"hello"</span>)<span class="op">;</span></span>
+<span id="cb9-7"><a href=""></a>    <span class="kw">let</span> len <span class="op">=</span> calculate_length(<span class="op">&amp;</span>my_string)<span class="op">;</span> <span class="co">// Borrow, don't move</span></span>
+<span id="cb9-8"><a href=""></a>    <span class="pp">println!</span>(<span class="st">"{} has length {}"</span><span class="op">,</span> my_string<span class="op">,</span> len)<span class="op">;</span> <span class="co">// ✅ Still valid!</span></span>
+<span id="cb9-9"><a href=""></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p><a href="https://play.rust-lang.org/?version=stable&amp;mode=debug&amp;edition=2021&amp;code=fn+calculate_length%28s%3A+%26String%29+-%3E+usize+%7B%0A++++s.len%28%29%0A%7D%0A%0Afn+main%28%29+%7B%0A++++let+my_string+%3D+String%3A%3Afrom%28%22hello%22%29%3B%0A++++let+len+%3D+calculate_length%28%26my_string%29%3B%0A++++println%21%28%22%7B%7D+has+length+%7B%7D%22%2C+my_string%2C+len%29%3B%0A%7D">Try it in Rust Playground</a></p>
 <aside class="notes">
 <p>This is the elegant solution. The ampersand syntax is borrowed from C/C++. Emphasize that references are pointers under the hood, but safe pointers checked by the compiler.</p>
@@ -622,15 +836,15 @@ Brandon M. Greenwell
 <li class="fragment">Mutable references let you modify the borrowed value</li>
 <li class="fragment"><strong>But there’s a catch…</strong> (next slide)</li>
 </ul>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb6-1"><a></a><span class="kw">fn</span> add_world(s<span class="op">:</span> <span class="op">&amp;</span><span class="kw">mut</span> <span class="dt">String</span>) <span class="op">{</span></span>
-<span id="cb6-2"><a></a>    s<span class="op">.</span>push_str(<span class="st">", world"</span>)<span class="op">;</span></span>
-<span id="cb6-3"><a></a><span class="op">}</span></span>
-<span id="cb6-4"><a></a></span>
-<span id="cb6-5"><a></a><span class="kw">fn</span> main() <span class="op">{</span></span>
-<span id="cb6-6"><a></a>    <span class="kw">let</span> <span class="kw">mut</span> my_string <span class="op">=</span> <span class="dt">String</span><span class="pp">::</span>from(<span class="st">"hello"</span>)<span class="op">;</span></span>
-<span id="cb6-7"><a></a>    add_world(<span class="op">&amp;</span><span class="kw">mut</span> my_string)<span class="op">;</span></span>
-<span id="cb6-8"><a></a>    <span class="pp">println!</span>(<span class="st">"{}"</span><span class="op">,</span> my_string)<span class="op">;</span> <span class="co">// Prints: hello, world</span></span>
-<span id="cb6-9"><a></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb10-1"><a href=""></a><span class="kw">fn</span> add_world(s<span class="op">:</span> <span class="op">&amp;</span><span class="kw">mut</span> <span class="dt">String</span>) <span class="op">{</span></span>
+<span id="cb10-2"><a href=""></a>    s<span class="op">.</span>push_str(<span class="st">", world"</span>)<span class="op">;</span></span>
+<span id="cb10-3"><a href=""></a><span class="op">}</span></span>
+<span id="cb10-4"><a href=""></a></span>
+<span id="cb10-5"><a href=""></a><span class="kw">fn</span> main() <span class="op">{</span></span>
+<span id="cb10-6"><a href=""></a>    <span class="kw">let</span> <span class="kw">mut</span> my_string <span class="op">=</span> <span class="dt">String</span><span class="pp">::</span>from(<span class="st">"hello"</span>)<span class="op">;</span></span>
+<span id="cb10-7"><a href=""></a>    add_world(<span class="op">&amp;</span><span class="kw">mut</span> my_string)<span class="op">;</span></span>
+<span id="cb10-8"><a href=""></a>    <span class="pp">println!</span>(<span class="st">"{}"</span><span class="op">,</span> my_string)<span class="op">;</span> <span class="co">// Prints: hello, world</span></span>
+<span id="cb10-9"><a href=""></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p><a href="https://play.rust-lang.org/?version=stable&amp;mode=debug&amp;edition=2021&amp;code=fn+add_world%28s%3A+%26mut+String%29+%7B%0A++++s.push_str%28%22%2C+world%22%29%3B%0A%7D%0A%0Afn+main%28%29+%7B%0A++++let+mut+my_string+%3D+String%3A%3Afrom%28%22hello%22%29%3B%0A++++add_world%28%26mut+my_string%29%3B%0A++++println%21%28%22%7B%7D%22%2C+my_string%29%3B%0A%7D">Try it in Rust Playground</a></p>
 <aside class="notes">
 <p>Note that the variable must also be declared <code>mut</code>. Rust’s mutability is opt-in at every level. This is defensive by default - prevents accidental modification.</p>
@@ -677,12 +891,12 @@ Brandon M. Greenwell
 </section>
 <section id="borrow-checker-error-multiple-mutable-references" class="slide level2">
 <h2>Borrow checker error: multiple mutable references</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb7-1"><a></a><span class="kw">let</span> <span class="kw">mut</span> s <span class="op">=</span> <span class="dt">String</span><span class="pp">::</span>from(<span class="st">"hello"</span>)<span class="op">;</span></span>
-<span id="cb7-2"><a></a></span>
-<span id="cb7-3"><a></a><span class="kw">let</span> r1 <span class="op">=</span> <span class="op">&amp;</span><span class="kw">mut</span> s<span class="op">;</span></span>
-<span id="cb7-4"><a></a><span class="kw">let</span> r2 <span class="op">=</span> <span class="op">&amp;</span><span class="kw">mut</span> s<span class="op">;</span> <span class="co">// ❌ ERROR: cannot borrow as mutable more than once</span></span>
-<span id="cb7-5"><a></a></span>
-<span id="cb7-6"><a></a><span class="pp">println!</span>(<span class="st">"{}, {}"</span><span class="op">,</span> r1<span class="op">,</span> r2)<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb11-1"><a href=""></a><span class="kw">let</span> <span class="kw">mut</span> s <span class="op">=</span> <span class="dt">String</span><span class="pp">::</span>from(<span class="st">"hello"</span>)<span class="op">;</span></span>
+<span id="cb11-2"><a href=""></a></span>
+<span id="cb11-3"><a href=""></a><span class="kw">let</span> r1 <span class="op">=</span> <span class="op">&amp;</span><span class="kw">mut</span> s<span class="op">;</span></span>
+<span id="cb11-4"><a href=""></a><span class="kw">let</span> r2 <span class="op">=</span> <span class="op">&amp;</span><span class="kw">mut</span> s<span class="op">;</span> <span class="co">// ❌ ERROR: cannot borrow as mutable more than once</span></span>
+<span id="cb11-5"><a href=""></a></span>
+<span id="cb11-6"><a href=""></a><span class="pp">println!</span>(<span class="st">"{}, {}"</span><span class="op">,</span> r1<span class="op">,</span> r2)<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p><strong>The error:</strong></p>
 <pre><code>error[E0499]: cannot borrow `s` as mutable more than once at a time</code></pre>
 <ul>
@@ -707,13 +921,13 @@ Brandon M. Greenwell
 </section>
 <section id="borrow-checker-error-mixing-mutable-and-immutable" class="slide level2">
 <h2>Borrow checker error: mixing mutable and immutable</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb9-1"><a></a><span class="kw">let</span> <span class="kw">mut</span> s <span class="op">=</span> <span class="dt">String</span><span class="pp">::</span>from(<span class="st">"hello"</span>)<span class="op">;</span></span>
-<span id="cb9-2"><a></a></span>
-<span id="cb9-3"><a></a><span class="kw">let</span> r1 <span class="op">=</span> <span class="op">&amp;</span>s<span class="op">;</span>     <span class="co">// Immutable borrow</span></span>
-<span id="cb9-4"><a></a><span class="kw">let</span> r2 <span class="op">=</span> <span class="op">&amp;</span>s<span class="op">;</span>     <span class="co">// Another immutable borrow (OK)</span></span>
-<span id="cb9-5"><a></a><span class="kw">let</span> r3 <span class="op">=</span> <span class="op">&amp;</span><span class="kw">mut</span> s<span class="op">;</span> <span class="co">// ❌ ERROR: cannot borrow as mutable</span></span>
-<span id="cb9-6"><a></a></span>
-<span id="cb9-7"><a></a><span class="pp">println!</span>(<span class="st">"{}, {}, {}"</span><span class="op">,</span> r1<span class="op">,</span> r2<span class="op">,</span> r3)<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb13-1"><a href=""></a><span class="kw">let</span> <span class="kw">mut</span> s <span class="op">=</span> <span class="dt">String</span><span class="pp">::</span>from(<span class="st">"hello"</span>)<span class="op">;</span></span>
+<span id="cb13-2"><a href=""></a></span>
+<span id="cb13-3"><a href=""></a><span class="kw">let</span> r1 <span class="op">=</span> <span class="op">&amp;</span>s<span class="op">;</span>     <span class="co">// Immutable borrow</span></span>
+<span id="cb13-4"><a href=""></a><span class="kw">let</span> r2 <span class="op">=</span> <span class="op">&amp;</span>s<span class="op">;</span>     <span class="co">// Another immutable borrow (OK)</span></span>
+<span id="cb13-5"><a href=""></a><span class="kw">let</span> r3 <span class="op">=</span> <span class="op">&amp;</span><span class="kw">mut</span> s<span class="op">;</span> <span class="co">// ❌ ERROR: cannot borrow as mutable</span></span>
+<span id="cb13-6"><a href=""></a></span>
+<span id="cb13-7"><a href=""></a><span class="pp">println!</span>(<span class="st">"{}, {}, {}"</span><span class="op">,</span> r1<span class="op">,</span> r2<span class="op">,</span> r3)<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p><strong>The error:</strong></p>
 <pre><code>error[E0502]: cannot borrow `s` as mutable because it is also borrowed as immutable</code></pre>
 <ul>
@@ -742,14 +956,14 @@ Brandon M. Greenwell
 <li class="fragment">A reference’s scope ends at its <strong>last use</strong>, not at the closing brace</li>
 <li class="fragment">This makes many common patterns “just work”</li>
 </ul>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb11-1"><a></a><span class="kw">let</span> <span class="kw">mut</span> s <span class="op">=</span> <span class="dt">String</span><span class="pp">::</span>from(<span class="st">"hello"</span>)<span class="op">;</span></span>
-<span id="cb11-2"><a></a></span>
-<span id="cb11-3"><a></a><span class="kw">let</span> r1 <span class="op">=</span> <span class="op">&amp;</span>s<span class="op">;</span>     <span class="co">// Immutable borrow</span></span>
-<span id="cb11-4"><a></a><span class="kw">let</span> r2 <span class="op">=</span> <span class="op">&amp;</span>s<span class="op">;</span>     <span class="co">// Another immutable borrow</span></span>
-<span id="cb11-5"><a></a><span class="pp">println!</span>(<span class="st">"{}, {}"</span><span class="op">,</span> r1<span class="op">,</span> r2)<span class="op">;</span> <span class="co">// r1 and r2 last used here - scope ends</span></span>
-<span id="cb11-6"><a></a></span>
-<span id="cb11-7"><a></a><span class="kw">let</span> r3 <span class="op">=</span> <span class="op">&amp;</span><span class="kw">mut</span> s<span class="op">;</span> <span class="co">// ✅ OK: no immutable borrows are active</span></span>
-<span id="cb11-8"><a></a><span class="pp">println!</span>(<span class="st">"{}"</span><span class="op">,</span> r3)<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb15-1"><a href=""></a><span class="kw">let</span> <span class="kw">mut</span> s <span class="op">=</span> <span class="dt">String</span><span class="pp">::</span>from(<span class="st">"hello"</span>)<span class="op">;</span></span>
+<span id="cb15-2"><a href=""></a></span>
+<span id="cb15-3"><a href=""></a><span class="kw">let</span> r1 <span class="op">=</span> <span class="op">&amp;</span>s<span class="op">;</span>     <span class="co">// Immutable borrow</span></span>
+<span id="cb15-4"><a href=""></a><span class="kw">let</span> r2 <span class="op">=</span> <span class="op">&amp;</span>s<span class="op">;</span>     <span class="co">// Another immutable borrow</span></span>
+<span id="cb15-5"><a href=""></a><span class="pp">println!</span>(<span class="st">"{}, {}"</span><span class="op">,</span> r1<span class="op">,</span> r2)<span class="op">;</span> <span class="co">// r1 and r2 last used here - scope ends</span></span>
+<span id="cb15-6"><a href=""></a></span>
+<span id="cb15-7"><a href=""></a><span class="kw">let</span> r3 <span class="op">=</span> <span class="op">&amp;</span><span class="kw">mut</span> s<span class="op">;</span> <span class="co">// ✅ OK: no immutable borrows are active</span></span>
+<span id="cb15-8"><a href=""></a><span class="pp">println!</span>(<span class="st">"{}"</span><span class="op">,</span> r3)<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p><a href="https://play.rust-lang.org/?version=stable&amp;mode=debug&amp;edition=2021&amp;code=fn+main%28%29+%7B%0A++++let+mut+s+%3D+String%3A%3Afrom%28%22hello%22%29%3B%0A++++let+r1+%3D+%26s%3B%0A++++let+r2+%3D+%26s%3B%0A++++println%21%28%22%7B%7D%2C+%7B%7D%22%2C+r1%2C+r2%29%3B%0A++++let+r3+%3D+%26mut+s%3B%0A++++println%21%28%22%7B%7D%22%2C+r3%29%3B%0A%7D">Try it in Rust Playground</a></p>
 <aside class="notes">
 <p>NLL was a major usability improvement in Rust 2018. Before NLL, this code wouldn’t compile. Now the compiler is smart enough to see that r1 and r2 aren’t used after their last println. Celebrate this - the language is getting better!</p>
@@ -791,15 +1005,15 @@ Brandon M. Greenwell
 <li class="fragment">This is a critical security vulnerability in <a href="https://en.cppreference.com/w/c">C</a>/<a href="https://en.cppreference.com/w/">C++</a> (use-after-free)</li>
 <li class="fragment"><a href="https://www.rust-lang.org/">Rust</a> makes dangling references <strong>impossible</strong> at compile time</li>
 </ul>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb12-1"><a></a><span class="kw">fn</span> dangle() <span class="op">-&gt;</span> <span class="op">&amp;</span><span class="dt">String</span> <span class="op">{</span>  <span class="co">// ❌ Won't compile!</span></span>
-<span id="cb12-2"><a></a>    <span class="kw">let</span> s <span class="op">=</span> <span class="dt">String</span><span class="pp">::</span>from(<span class="st">"hello"</span>)<span class="op">;</span></span>
-<span id="cb12-3"><a></a>    <span class="op">&amp;</span>s  <span class="co">// ERROR: s will be dropped, but we're returning a reference to it</span></span>
-<span id="cb12-4"><a></a><span class="op">}</span> <span class="co">// s goes out of scope and is dropped, but the reference would point to freed memory</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb16-1"><a href=""></a><span class="kw">fn</span> dangle() <span class="op">-&gt;</span> <span class="op">&amp;</span><span class="dt">String</span> <span class="op">{</span>  <span class="co">// ❌ Won't compile!</span></span>
+<span id="cb16-2"><a href=""></a>    <span class="kw">let</span> s <span class="op">=</span> <span class="dt">String</span><span class="pp">::</span>from(<span class="st">"hello"</span>)<span class="op">;</span></span>
+<span id="cb16-3"><a href=""></a>    <span class="op">&amp;</span>s  <span class="co">// ERROR: s will be dropped, but we're returning a reference to it</span></span>
+<span id="cb16-4"><a href=""></a><span class="op">}</span> <span class="co">// s goes out of scope and is dropped, but the reference would point to freed memory</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p><strong>The fix:</strong> Return the owned value, not a reference:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb13-1"><a></a><span class="kw">fn</span> no_dangle() <span class="op">-&gt;</span> <span class="dt">String</span> <span class="op">{</span>  <span class="co">// ✅ Ownership transfers to caller</span></span>
-<span id="cb13-2"><a></a>    <span class="kw">let</span> s <span class="op">=</span> <span class="dt">String</span><span class="pp">::</span>from(<span class="st">"hello"</span>)<span class="op">;</span></span>
-<span id="cb13-3"><a></a>    s  <span class="co">// Move ownership out</span></span>
-<span id="cb13-4"><a></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb17-1"><a href=""></a><span class="kw">fn</span> no_dangle() <span class="op">-&gt;</span> <span class="dt">String</span> <span class="op">{</span>  <span class="co">// ✅ Ownership transfers to caller</span></span>
+<span id="cb17-2"><a href=""></a>    <span class="kw">let</span> s <span class="op">=</span> <span class="dt">String</span><span class="pp">::</span>from(<span class="st">"hello"</span>)<span class="op">;</span></span>
+<span id="cb17-3"><a href=""></a>    s  <span class="co">// Move ownership out</span></span>
+<span id="cb17-4"><a href=""></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <aside class="notes">
 <p>Dangling pointers are CVE-level bugs in C/C++. They can be exploited for arbitrary code execution. Rust makes them impossible. This is a major security advantage.</p>
 <style type="text/css">
@@ -839,13 +1053,13 @@ Brandon M. Greenwell
 </section>
 <section id="why-lifetimes-exist-a-problematic-example" class="slide level2">
 <h2>Why lifetimes exist: a problematic example</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb14-1"><a></a><span class="kw">fn</span> longest(x<span class="op">:</span> <span class="op">&amp;</span><span class="dt">str</span><span class="op">,</span> y<span class="op">:</span> <span class="op">&amp;</span><span class="dt">str</span>) <span class="op">-&gt;</span> <span class="op">&amp;</span><span class="dt">str</span> <span class="op">{</span>  <span class="co">// ❌ Won't compile!</span></span>
-<span id="cb14-2"><a></a>    <span class="cf">if</span> x<span class="op">.</span>len() <span class="op">&gt;</span> y<span class="op">.</span>len() <span class="op">{</span></span>
-<span id="cb14-3"><a></a>        x</span>
-<span id="cb14-4"><a></a>    <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></span>
-<span id="cb14-5"><a></a>        y</span>
-<span id="cb14-6"><a></a>    <span class="op">}</span></span>
-<span id="cb14-7"><a></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb18"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb18-1"><a href=""></a><span class="kw">fn</span> longest(x<span class="op">:</span> <span class="op">&amp;</span><span class="dt">str</span><span class="op">,</span> y<span class="op">:</span> <span class="op">&amp;</span><span class="dt">str</span>) <span class="op">-&gt;</span> <span class="op">&amp;</span><span class="dt">str</span> <span class="op">{</span>  <span class="co">// ❌ Won't compile!</span></span>
+<span id="cb18-2"><a href=""></a>    <span class="cf">if</span> x<span class="op">.</span>len() <span class="op">&gt;</span> y<span class="op">.</span>len() <span class="op">{</span></span>
+<span id="cb18-3"><a href=""></a>        x</span>
+<span id="cb18-4"><a href=""></a>    <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></span>
+<span id="cb18-5"><a href=""></a>        y</span>
+<span id="cb18-6"><a href=""></a>    <span class="op">}</span></span>
+<span id="cb18-7"><a href=""></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p><strong>The error:</strong></p>
 <pre><code>error[E0106]: missing lifetime specifier
   --&gt; src/main.rs:1:33
@@ -873,13 +1087,13 @@ Brandon M. Greenwell
 </section>
 <section id="lifetime-annotations-the-solution" class="slide level2">
 <h2>Lifetime annotations: the solution</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb16-1"><a></a><span class="kw">fn</span> longest<span class="op">&lt;</span><span class="ot">'a</span><span class="op">&gt;</span>(x<span class="op">:</span> <span class="op">&amp;</span><span class="ot">'a</span> <span class="dt">str</span><span class="op">,</span> y<span class="op">:</span> <span class="op">&amp;</span><span class="ot">'a</span> <span class="dt">str</span>) <span class="op">-&gt;</span> <span class="op">&amp;</span><span class="ot">'a</span> <span class="dt">str</span> <span class="op">{</span></span>
-<span id="cb16-2"><a></a>    <span class="cf">if</span> x<span class="op">.</span>len() <span class="op">&gt;</span> y<span class="op">.</span>len() <span class="op">{</span></span>
-<span id="cb16-3"><a></a>        x</span>
-<span id="cb16-4"><a></a>    <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></span>
-<span id="cb16-5"><a></a>        y</span>
-<span id="cb16-6"><a></a>    <span class="op">}</span></span>
-<span id="cb16-7"><a></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb20"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb20-1"><a href=""></a><span class="kw">fn</span> longest<span class="op">&lt;</span><span class="ot">'a</span><span class="op">&gt;</span>(x<span class="op">:</span> <span class="op">&amp;</span><span class="ot">'a</span> <span class="dt">str</span><span class="op">,</span> y<span class="op">:</span> <span class="op">&amp;</span><span class="ot">'a</span> <span class="dt">str</span>) <span class="op">-&gt;</span> <span class="op">&amp;</span><span class="ot">'a</span> <span class="dt">str</span> <span class="op">{</span></span>
+<span id="cb20-2"><a href=""></a>    <span class="cf">if</span> x<span class="op">.</span>len() <span class="op">&gt;</span> y<span class="op">.</span>len() <span class="op">{</span></span>
+<span id="cb20-3"><a href=""></a>        x</span>
+<span id="cb20-4"><a href=""></a>    <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></span>
+<span id="cb20-5"><a href=""></a>        y</span>
+<span id="cb20-6"><a href=""></a>    <span class="op">}</span></span>
+<span id="cb20-7"><a href=""></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <ul>
 <li class="fragment"><code>'a</code> is a <strong><a href="https://doc.rust-lang.org/book/ch10-03-lifetime-syntax.html">lifetime parameter</a></strong></li>
 <li class="fragment">It says: “the returned reference will live as long as the shortest-lived input”</li>
@@ -945,16 +1159,16 @@ Brandon M. Greenwell
 </section>
 <section id="lifetimes-in-structs" class="slide level2">
 <h2>Lifetimes in structs</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb17-1"><a></a><span class="kw">struct</span> Excerpt<span class="op">&lt;</span><span class="ot">'a</span><span class="op">&gt;</span> <span class="op">{</span></span>
-<span id="cb17-2"><a></a>    text<span class="op">:</span> <span class="op">&amp;</span><span class="ot">'a</span> <span class="dt">str</span><span class="op">,</span>  <span class="co">// This reference must be valid as long as the Excerpt exists</span></span>
-<span id="cb17-3"><a></a><span class="op">}</span></span>
-<span id="cb17-4"><a></a></span>
-<span id="cb17-5"><a></a><span class="kw">fn</span> main() <span class="op">{</span></span>
-<span id="cb17-6"><a></a>    <span class="kw">let</span> novel <span class="op">=</span> <span class="dt">String</span><span class="pp">::</span>from(<span class="st">"Call me Ishmael. Some years ago..."</span>)<span class="op">;</span></span>
-<span id="cb17-7"><a></a>    <span class="kw">let</span> first_sentence <span class="op">=</span> novel<span class="op">.</span>split(<span class="ch">'.'</span>)<span class="op">.</span>next()<span class="op">.</span>unwrap()<span class="op">;</span></span>
-<span id="cb17-8"><a></a>    <span class="kw">let</span> excerpt <span class="op">=</span> Excerpt <span class="op">{</span> text<span class="op">:</span> first_sentence <span class="op">};</span></span>
-<span id="cb17-9"><a></a>    <span class="pp">println!</span>(<span class="st">"{}"</span><span class="op">,</span> excerpt<span class="op">.</span>text)<span class="op">;</span></span>
-<span id="cb17-10"><a></a><span class="op">}</span> <span class="co">// excerpt and novel both go out of scope here (OK: excerpt doesn't outlive novel)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb21"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb21-1"><a href=""></a><span class="kw">struct</span> Excerpt<span class="op">&lt;</span><span class="ot">'a</span><span class="op">&gt;</span> <span class="op">{</span></span>
+<span id="cb21-2"><a href=""></a>    text<span class="op">:</span> <span class="op">&amp;</span><span class="ot">'a</span> <span class="dt">str</span><span class="op">,</span>  <span class="co">// This reference must be valid as long as the Excerpt exists</span></span>
+<span id="cb21-3"><a href=""></a><span class="op">}</span></span>
+<span id="cb21-4"><a href=""></a></span>
+<span id="cb21-5"><a href=""></a><span class="kw">fn</span> main() <span class="op">{</span></span>
+<span id="cb21-6"><a href=""></a>    <span class="kw">let</span> novel <span class="op">=</span> <span class="dt">String</span><span class="pp">::</span>from(<span class="st">"Call me Ishmael. Some years ago..."</span>)<span class="op">;</span></span>
+<span id="cb21-7"><a href=""></a>    <span class="kw">let</span> first_sentence <span class="op">=</span> novel<span class="op">.</span>split(<span class="ch">'.'</span>)<span class="op">.</span>next()<span class="op">.</span>unwrap()<span class="op">;</span></span>
+<span id="cb21-8"><a href=""></a>    <span class="kw">let</span> excerpt <span class="op">=</span> Excerpt <span class="op">{</span> text<span class="op">:</span> first_sentence <span class="op">};</span></span>
+<span id="cb21-9"><a href=""></a>    <span class="pp">println!</span>(<span class="st">"{}"</span><span class="op">,</span> excerpt<span class="op">.</span>text)<span class="op">;</span></span>
+<span id="cb21-10"><a href=""></a><span class="op">}</span> <span class="co">// excerpt and novel both go out of scope here (OK: excerpt doesn't outlive novel)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <ul>
 <li class="fragment">When a <a href="https://doc.rust-lang.org/book/ch05-00-structs.html">struct</a> contains a reference, we must annotate the <a href="https://doc.rust-lang.org/book/ch10-03-lifetime-syntax.html">lifetime</a></li>
 <li class="fragment"><code>'a</code> says: “this struct can’t live longer than the data it references”</li>
@@ -1124,29 +1338,29 @@ Brandon M. Greenwell
           display:block!important;
       }</style></aside>
 
-
 </section>
     </div>
   <div class="quarto-auto-generated-content" style="display: none;">
 <div class="footer footer-default">
-
+<p>IS4010: App Development with AI</p>
 </div>
 </div></div>
 
   <script>window.backupDefine = window.define; window.define = undefined;</script>
-  <script src="../site_libs/revealjs/dist/reveal.js"></script>
+  <script src="IS4010_W10_The_Soul_of_Rust_files/libs/revealjs/dist/reveal.js"></script>
   <!-- reveal.js plugins -->
-  <script src="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
-  <script src="../site_libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
-  <script src="../site_libs/revealjs/plugin/reveal-menu/menu.js"></script>
-  <script src="../site_libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
-  <script src="../site_libs/revealjs/plugin/quarto-support/support.js"></script>
+  <script src="IS4010_W10_The_Soul_of_Rust_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="IS4010_W10_The_Soul_of_Rust_files/libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="IS4010_W10_The_Soul_of_Rust_files/libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="IS4010_W10_The_Soul_of_Rust_files/libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="IS4010_W10_The_Soul_of_Rust_files/libs/revealjs/plugin/reveal-chalkboard/plugin.js"></script>
+  <script src="IS4010_W10_The_Soul_of_Rust_files/libs/revealjs/plugin/quarto-support/support.js"></script>
   
 
-  <script src="../site_libs/revealjs/plugin/notes/notes.js"></script>
-  <script src="../site_libs/revealjs/plugin/search/search.js"></script>
-  <script src="../site_libs/revealjs/plugin/zoom/zoom.js"></script>
-  <script src="../site_libs/revealjs/plugin/math/math.js"></script>
+  <script src="IS4010_W10_The_Soul_of_Rust_files/libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="IS4010_W10_The_Soul_of_Rust_files/libs/revealjs/plugin/search/search.js"></script>
+  <script src="IS4010_W10_The_Soul_of_Rust_files/libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="IS4010_W10_The_Soul_of_Rust_files/libs/revealjs/plugin/math/math.js"></script>
   <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
 
   <script>
@@ -1155,13 +1369,14 @@ Brandon M. Greenwell
       // https://revealjs.com/config/
       Reveal.initialize({
 'controlsAuto': true,
-'previewLinksAuto': false,
+'previewLinksAuto': true,
 'pdfSeparateFragments': false,
 'autoAnimateEasing': "ease",
 'autoAnimateDuration': 1,
 'autoAnimateUnmatched': true,
 'jumpToSlide': true,
-'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\"><kbd>r</kbd> Scroll View Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
+'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\"><kbd>r</kbd> Scroll View Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleChalkboard(event)\"><kbd>b</kbd> Toggle Chalkboard</a></li>\n<li class=\"slide-tool-item\" data-item=\"6\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleNotesCanvas(event)\"><kbd>c</kbd> Toggle Notes Canvas</a></li>\n<li class=\"slide-tool-item\" data-item=\"7\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.downloadDrawings(event)\"><kbd>d</kbd> Download Drawings</a></li>\n<li class=\"slide-tool-item\" data-item=\"8\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
+'chalkboard': {"buttons":true},
 'smaller': false,
  
         // Display controls in the bottom right corner
@@ -1182,7 +1397,7 @@ Brandon M. Greenwell
         progress: true,
 
         // Display the page number of the current slide
-        slideNumber: false,
+        slideNumber: 'c/t',
 
         // 'all', 'print', or 'speaker'
         showSlideNumber: 'all',
@@ -1332,7 +1547,7 @@ Brandon M. Greenwell
         },
 
         // reveal.js plugins
-        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, QuartoSupport,
+        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, RevealChalkboard, QuartoSupport,
 
           RevealMath,
           RevealNotes,
@@ -1411,7 +1626,7 @@ Brandon M. Greenwell
         }
           var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
           var mailtoRegex = new RegExp(/^mailto:/);
-            var filterRegex = new RegExp("https:\/\/bgreenwell\.github\.io\/is4010-website\/");
+            var filterRegex = new RegExp('/' + window.location.host + '/');
           var isInternal = (href) => {
               return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
           }

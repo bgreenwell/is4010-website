@@ -1,23 +1,25 @@
 <!DOCTYPE html>
 <html lang="en"><head>
-<link href="../images/uc-logo-2.png" rel="icon" type="image/png">
-<script src="../site_libs/clipboard/clipboard.min.js"></script>
-<script src="../site_libs/quarto-html/tabby.min.js"></script>
-<script src="../site_libs/quarto-html/popper.min.js"></script>
-<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
-<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-4d9afe2b8d18ee9fa5d0d57b5ed4214d.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.8.27">
+<script src="IS4010_W13_Idiomatic_Rust_files/libs/clipboard/clipboard.min.js"></script>
+<script src="IS4010_W13_Idiomatic_Rust_files/libs/quarto-html/tabby.min.js"></script>
+<script src="IS4010_W13_Idiomatic_Rust_files/libs/quarto-html/popper.min.js"></script>
+<script src="IS4010_W13_Idiomatic_Rust_files/libs/quarto-html/tippy.umd.min.js"></script>
+<link href="IS4010_W13_Idiomatic_Rust_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="IS4010_W13_Idiomatic_Rust_files/libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="IS4010_W13_Idiomatic_Rust_files/libs/quarto-html/quarto-syntax-highlighting-dark-f418161beb48e0141c760e455f12af2c.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.9.36">
 
   <meta name="author" content="Brandon M. Greenwell">
-  <title>IS 4010 - App Dev with AI – IS4010: AI-Enhanced Application Development</title>
+  <title>IS4010: AI-Enhanced Application Development</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
-  <link rel="stylesheet" href="../site_libs/revealjs/dist/reset.css">
-  <link rel="stylesheet" href="../site_libs/revealjs/dist/reveal.css">
+  <link rel="stylesheet" href="IS4010_W13_Idiomatic_Rust_files/libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="IS4010_W13_Idiomatic_Rust_files/libs/revealjs/dist/reveal.css">
   <style>
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
     div.columns{display: flex; gap: min(4vw, 1.5em);}
@@ -96,14 +98,14 @@
     code span.vs { color: #abe338; } /* VerbatimString */
     code span.wa { color: #dcc6e0; } /* Warning */
   </style>
-  <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto-a1d3734469117662d4af4794742e8c15.css">
+  <link rel="stylesheet" href="IS4010_W13_Idiomatic_Rust_files/libs/revealjs/dist/theme/quarto-fdc93494f2580a7e050003a96af38920.css">
   <link rel="stylesheet" href="custom.css">
-  <link href="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
-  <link href="../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
-  <link href="../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
-  <link href="../site_libs/revealjs/plugin/reveal-chalkboard/font-awesome/css/all.css" rel="stylesheet">
-  <link href="../site_libs/revealjs/plugin/reveal-chalkboard/style.css" rel="stylesheet">
-  <link href="../site_libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <link href="IS4010_W13_Idiomatic_Rust_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="IS4010_W13_Idiomatic_Rust_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="IS4010_W13_Idiomatic_Rust_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="IS4010_W13_Idiomatic_Rust_files/libs/revealjs/plugin/reveal-chalkboard/font-awesome/css/all.css" rel="stylesheet">
+  <link href="IS4010_W13_Idiomatic_Rust_files/libs/revealjs/plugin/reveal-chalkboard/style.css" rel="stylesheet">
+  <link href="IS4010_W13_Idiomatic_Rust_files/libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
   <style type="text/css">
     .reveal div.sourceCode {
       margin: 0;
@@ -282,16 +284,16 @@ Brandon M. Greenwell
 <section id="the-problem-manual-iteration" class="slide level2 smaller">
 <h2>The Problem: Manual Iteration</h2>
 <p><strong>Traditional loop-based approach:</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb1-1"><a></a><span class="kw">let</span> numbers <span class="op">=</span> <span class="pp">vec!</span>[<span class="dv">1</span><span class="op">,</span> <span class="dv">2</span><span class="op">,</span> <span class="dv">3</span><span class="op">,</span> <span class="dv">4</span><span class="op">,</span> <span class="dv">5</span><span class="op">,</span> <span class="dv">6</span>]<span class="op">;</span></span>
-<span id="cb1-2"><a></a><span class="kw">let</span> <span class="kw">mut</span> result <span class="op">=</span> <span class="dt">Vec</span><span class="pp">::</span>new()<span class="op">;</span></span>
-<span id="cb1-3"><a></a></span>
-<span id="cb1-4"><a></a><span class="cf">for</span> num <span class="kw">in</span> <span class="op">&amp;</span>numbers <span class="op">{</span></span>
-<span id="cb1-5"><a></a>    <span class="cf">if</span> num <span class="op">%</span> <span class="dv">2</span> <span class="op">==</span> <span class="dv">0</span> <span class="op">{</span>  <span class="co">// Keep evens</span></span>
-<span id="cb1-6"><a></a>        <span class="kw">let</span> squared <span class="op">=</span> num <span class="op">*</span> num<span class="op">;</span>  <span class="co">// Square them</span></span>
-<span id="cb1-7"><a></a>        result<span class="op">.</span>push(squared)<span class="op">;</span></span>
-<span id="cb1-8"><a></a>    <span class="op">}</span></span>
-<span id="cb1-9"><a></a><span class="op">}</span></span>
-<span id="cb1-10"><a></a><span class="co">// result = [4, 16, 36]</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb1-1"><a href=""></a><span class="kw">let</span> numbers <span class="op">=</span> <span class="pp">vec!</span>[<span class="dv">1</span><span class="op">,</span> <span class="dv">2</span><span class="op">,</span> <span class="dv">3</span><span class="op">,</span> <span class="dv">4</span><span class="op">,</span> <span class="dv">5</span><span class="op">,</span> <span class="dv">6</span>]<span class="op">;</span></span>
+<span id="cb1-2"><a href=""></a><span class="kw">let</span> <span class="kw">mut</span> result <span class="op">=</span> <span class="dt">Vec</span><span class="pp">::</span>new()<span class="op">;</span></span>
+<span id="cb1-3"><a href=""></a></span>
+<span id="cb1-4"><a href=""></a><span class="cf">for</span> num <span class="kw">in</span> <span class="op">&amp;</span>numbers <span class="op">{</span></span>
+<span id="cb1-5"><a href=""></a>    <span class="cf">if</span> num <span class="op">%</span> <span class="dv">2</span> <span class="op">==</span> <span class="dv">0</span> <span class="op">{</span>  <span class="co">// Keep evens</span></span>
+<span id="cb1-6"><a href=""></a>        <span class="kw">let</span> squared <span class="op">=</span> num <span class="op">*</span> num<span class="op">;</span>  <span class="co">// Square them</span></span>
+<span id="cb1-7"><a href=""></a>        result<span class="op">.</span>push(squared)<span class="op">;</span></span>
+<span id="cb1-8"><a href=""></a>    <span class="op">}</span></span>
+<span id="cb1-9"><a href=""></a><span class="op">}</span></span>
+<span id="cb1-10"><a href=""></a><span class="co">// result = [4, 16, 36]</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p><strong>Problems:</strong></p>
 <ul>
 <li>Mutable state (<code>result</code>)</li>
@@ -316,15 +318,15 @@ Brandon M. Greenwell
 <section id="introducing-iterators" class="slide level2 smaller">
 <h2>Introducing Iterators</h2>
 <p><strong>Functional approach with iterator chains:</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb2-1"><a></a><span class="kw">let</span> numbers <span class="op">=</span> <span class="pp">vec!</span>[<span class="dv">1</span><span class="op">,</span> <span class="dv">2</span><span class="op">,</span> <span class="dv">3</span><span class="op">,</span> <span class="dv">4</span><span class="op">,</span> <span class="dv">5</span><span class="op">,</span> <span class="dv">6</span>]<span class="op">;</span></span>
-<span id="cb2-2"><a></a></span>
-<span id="cb2-3"><a></a><span class="kw">let</span> result<span class="op">:</span> <span class="dt">Vec</span><span class="op">&lt;</span><span class="dt">i32</span><span class="op">&gt;</span> <span class="op">=</span> numbers</span>
-<span id="cb2-4"><a></a>    <span class="op">.</span>iter()</span>
-<span id="cb2-5"><a></a>    <span class="op">.</span>filter(<span class="op">|&amp;&amp;</span>n<span class="op">|</span> n <span class="op">%</span> <span class="dv">2</span> <span class="op">==</span> <span class="dv">0</span>)  <span class="co">// Keep evens</span></span>
-<span id="cb2-6"><a></a>    <span class="op">.</span>map(<span class="op">|&amp;</span>n<span class="op">|</span> n <span class="op">*</span> n)            <span class="co">// Square them</span></span>
-<span id="cb2-7"><a></a>    <span class="op">.</span>collect()<span class="op">;</span></span>
-<span id="cb2-8"><a></a></span>
-<span id="cb2-9"><a></a><span class="co">// result = [4, 16, 36]</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb2-1"><a href=""></a><span class="kw">let</span> numbers <span class="op">=</span> <span class="pp">vec!</span>[<span class="dv">1</span><span class="op">,</span> <span class="dv">2</span><span class="op">,</span> <span class="dv">3</span><span class="op">,</span> <span class="dv">4</span><span class="op">,</span> <span class="dv">5</span><span class="op">,</span> <span class="dv">6</span>]<span class="op">;</span></span>
+<span id="cb2-2"><a href=""></a></span>
+<span id="cb2-3"><a href=""></a><span class="kw">let</span> result<span class="op">:</span> <span class="dt">Vec</span><span class="op">&lt;</span><span class="dt">i32</span><span class="op">&gt;</span> <span class="op">=</span> numbers</span>
+<span id="cb2-4"><a href=""></a>    <span class="op">.</span>iter()</span>
+<span id="cb2-5"><a href=""></a>    <span class="op">.</span>filter(<span class="op">|&amp;&amp;</span>n<span class="op">|</span> n <span class="op">%</span> <span class="dv">2</span> <span class="op">==</span> <span class="dv">0</span>)  <span class="co">// Keep evens</span></span>
+<span id="cb2-6"><a href=""></a>    <span class="op">.</span>map(<span class="op">|&amp;</span>n<span class="op">|</span> n <span class="op">*</span> n)            <span class="co">// Square them</span></span>
+<span id="cb2-7"><a href=""></a>    <span class="op">.</span>collect()<span class="op">;</span></span>
+<span id="cb2-8"><a href=""></a></span>
+<span id="cb2-9"><a href=""></a><span class="co">// result = [4, 16, 36]</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p><strong>Benefits:</strong></p>
 <ul>
 <li>Declarative: says <em>what</em> to do, not <em>how</em></li>
@@ -350,25 +352,25 @@ Brandon M. Greenwell
 <section id="common-iterator-methods" class="slide level2 smaller">
 <h2>Common Iterator Methods</h2>
 <p><strong>Transformation:</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb3-1"><a></a><span class="co">// map: transform each element</span></span>
-<span id="cb3-2"><a></a><span class="pp">vec!</span>[<span class="dv">1</span><span class="op">,</span> <span class="dv">2</span><span class="op">,</span> <span class="dv">3</span>]<span class="op">.</span>iter()<span class="op">.</span>map(<span class="op">|</span>x<span class="op">|</span> x <span class="op">*</span> <span class="dv">2</span>)  <span class="co">// [2, 4, 6]</span></span>
-<span id="cb3-3"><a></a></span>
-<span id="cb3-4"><a></a><span class="co">// filter: keep elements matching condition</span></span>
-<span id="cb3-5"><a></a><span class="pp">vec!</span>[<span class="dv">1</span><span class="op">,</span> <span class="dv">2</span><span class="op">,</span> <span class="dv">3</span><span class="op">,</span> <span class="dv">4</span>]<span class="op">.</span>iter()<span class="op">.</span>filter(<span class="op">|&amp;&amp;</span>x<span class="op">|</span> x <span class="op">%</span> <span class="dv">2</span> <span class="op">==</span> <span class="dv">0</span>)  <span class="co">// [2, 4]</span></span>
-<span id="cb3-6"><a></a></span>
-<span id="cb3-7"><a></a><span class="co">// filter_map: transform and filter in one step</span></span>
-<span id="cb3-8"><a></a><span class="pp">vec!</span>[<span class="st">"1"</span><span class="op">,</span> <span class="st">"two"</span><span class="op">,</span> <span class="st">"3"</span>]</span>
-<span id="cb3-9"><a></a>    <span class="op">.</span>iter()</span>
-<span id="cb3-10"><a></a>    <span class="op">.</span>filter_map(<span class="op">|</span>s<span class="op">|</span> s<span class="op">.</span><span class="pp">parse::</span><span class="op">&lt;</span><span class="dt">i32</span><span class="op">&gt;</span>()<span class="op">.</span>ok())  <span class="co">// [1, 3]</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb3-1"><a href=""></a><span class="co">// map: transform each element</span></span>
+<span id="cb3-2"><a href=""></a><span class="pp">vec!</span>[<span class="dv">1</span><span class="op">,</span> <span class="dv">2</span><span class="op">,</span> <span class="dv">3</span>]<span class="op">.</span>iter()<span class="op">.</span>map(<span class="op">|</span>x<span class="op">|</span> x <span class="op">*</span> <span class="dv">2</span>)  <span class="co">// [2, 4, 6]</span></span>
+<span id="cb3-3"><a href=""></a></span>
+<span id="cb3-4"><a href=""></a><span class="co">// filter: keep elements matching condition</span></span>
+<span id="cb3-5"><a href=""></a><span class="pp">vec!</span>[<span class="dv">1</span><span class="op">,</span> <span class="dv">2</span><span class="op">,</span> <span class="dv">3</span><span class="op">,</span> <span class="dv">4</span>]<span class="op">.</span>iter()<span class="op">.</span>filter(<span class="op">|&amp;&amp;</span>x<span class="op">|</span> x <span class="op">%</span> <span class="dv">2</span> <span class="op">==</span> <span class="dv">0</span>)  <span class="co">// [2, 4]</span></span>
+<span id="cb3-6"><a href=""></a></span>
+<span id="cb3-7"><a href=""></a><span class="co">// filter_map: transform and filter in one step</span></span>
+<span id="cb3-8"><a href=""></a><span class="pp">vec!</span>[<span class="st">"1"</span><span class="op">,</span> <span class="st">"two"</span><span class="op">,</span> <span class="st">"3"</span>]</span>
+<span id="cb3-9"><a href=""></a>    <span class="op">.</span>iter()</span>
+<span id="cb3-10"><a href=""></a>    <span class="op">.</span>filter_map(<span class="op">|</span>s<span class="op">|</span> s<span class="op">.</span><span class="pp">parse::</span><span class="op">&lt;</span><span class="dt">i32</span><span class="op">&gt;</span>()<span class="op">.</span>ok())  <span class="co">// [1, 3]</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p><strong>Aggregation:</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb4-1"><a></a><span class="co">// sum: add all elements</span></span>
-<span id="cb4-2"><a></a><span class="pp">vec!</span>[<span class="dv">1</span><span class="op">,</span> <span class="dv">2</span><span class="op">,</span> <span class="dv">3</span>]<span class="op">.</span>iter()<span class="op">.</span><span class="pp">sum::</span><span class="op">&lt;</span><span class="dt">i32</span><span class="op">&gt;</span>()  <span class="co">// 6</span></span>
-<span id="cb4-3"><a></a></span>
-<span id="cb4-4"><a></a><span class="co">// fold: custom aggregation</span></span>
-<span id="cb4-5"><a></a><span class="pp">vec!</span>[<span class="dv">1</span><span class="op">,</span> <span class="dv">2</span><span class="op">,</span> <span class="dv">3</span>]<span class="op">.</span>iter()<span class="op">.</span>fold(<span class="dv">0</span><span class="op">,</span> <span class="op">|</span>acc<span class="op">,</span> x<span class="op">|</span> acc <span class="op">+</span> x)  <span class="co">// 6</span></span>
-<span id="cb4-6"><a></a></span>
-<span id="cb4-7"><a></a><span class="co">// collect: gather results into a collection</span></span>
-<span id="cb4-8"><a></a>(<span class="dv">1</span><span class="op">..=</span><span class="dv">5</span>)<span class="op">.</span><span class="pp">collect::</span><span class="op">&lt;</span><span class="dt">Vec</span><span class="op">&lt;</span><span class="dt">i32</span><span class="op">&gt;&gt;</span>()  <span class="co">// [1, 2, 3, 4, 5]</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb4-1"><a href=""></a><span class="co">// sum: add all elements</span></span>
+<span id="cb4-2"><a href=""></a><span class="pp">vec!</span>[<span class="dv">1</span><span class="op">,</span> <span class="dv">2</span><span class="op">,</span> <span class="dv">3</span>]<span class="op">.</span>iter()<span class="op">.</span><span class="pp">sum::</span><span class="op">&lt;</span><span class="dt">i32</span><span class="op">&gt;</span>()  <span class="co">// 6</span></span>
+<span id="cb4-3"><a href=""></a></span>
+<span id="cb4-4"><a href=""></a><span class="co">// fold: custom aggregation</span></span>
+<span id="cb4-5"><a href=""></a><span class="pp">vec!</span>[<span class="dv">1</span><span class="op">,</span> <span class="dv">2</span><span class="op">,</span> <span class="dv">3</span>]<span class="op">.</span>iter()<span class="op">.</span>fold(<span class="dv">0</span><span class="op">,</span> <span class="op">|</span>acc<span class="op">,</span> x<span class="op">|</span> acc <span class="op">+</span> x)  <span class="co">// 6</span></span>
+<span id="cb4-6"><a href=""></a></span>
+<span id="cb4-7"><a href=""></a><span class="co">// collect: gather results into a collection</span></span>
+<span id="cb4-8"><a href=""></a>(<span class="dv">1</span><span class="op">..=</span><span class="dv">5</span>)<span class="op">.</span><span class="pp">collect::</span><span class="op">&lt;</span><span class="dt">Vec</span><span class="op">&lt;</span><span class="dt">i32</span><span class="op">&gt;&gt;</span>()  <span class="co">// [1, 2, 3, 4, 5]</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p><a href="https://doc.rust-lang.org/std/iter/trait.Iterator.html#provided-methods">📖 Iterator methods</a></p>
 <aside class="notes">
 <p>Point out that these are zero-cost - compiler optimizes them to loops.</p>
@@ -387,33 +389,33 @@ Brandon M. Greenwell
 <section id="practical-example-text-analysis" class="slide level2 smaller">
 <h2>Practical Example: Text Analysis</h2>
 <p><strong>Count words, find average length, get longest word:</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb5-1"><a></a><span class="kw">fn</span> analyze_text(text<span class="op">:</span> <span class="op">&amp;</span><span class="dt">str</span>) <span class="op">-&gt;</span> (<span class="dt">usize</span><span class="op">,</span> <span class="dt">f64</span><span class="op">,</span> <span class="dt">String</span>) <span class="op">{</span></span>
-<span id="cb5-2"><a></a>    <span class="kw">let</span> words<span class="op">:</span> <span class="dt">Vec</span><span class="op">&lt;&amp;</span><span class="dt">str</span><span class="op">&gt;</span> <span class="op">=</span> text</span>
-<span id="cb5-3"><a></a>        <span class="op">.</span>split_whitespace()</span>
-<span id="cb5-4"><a></a>        <span class="op">.</span>collect()<span class="op">;</span></span>
-<span id="cb5-5"><a></a></span>
-<span id="cb5-6"><a></a>    <span class="cf">if</span> words<span class="op">.</span>is_empty() <span class="op">{</span></span>
-<span id="cb5-7"><a></a>        <span class="cf">return</span> (<span class="dv">0</span><span class="op">,</span> <span class="dv">0.0</span><span class="op">,</span> <span class="dt">String</span><span class="pp">::</span>new())<span class="op">;</span></span>
-<span id="cb5-8"><a></a>    <span class="op">}</span></span>
-<span id="cb5-9"><a></a></span>
-<span id="cb5-10"><a></a>    <span class="kw">let</span> word_count <span class="op">=</span> words<span class="op">.</span>len()<span class="op">;</span></span>
-<span id="cb5-11"><a></a></span>
-<span id="cb5-12"><a></a>    <span class="co">// Average word length using iterator methods</span></span>
-<span id="cb5-13"><a></a>    <span class="kw">let</span> total_length<span class="op">:</span> <span class="dt">usize</span> <span class="op">=</span> words</span>
-<span id="cb5-14"><a></a>        <span class="op">.</span>iter()</span>
-<span id="cb5-15"><a></a>        <span class="op">.</span>map(<span class="op">|</span>word<span class="op">|</span> word<span class="op">.</span>len())</span>
-<span id="cb5-16"><a></a>        <span class="op">.</span>sum()<span class="op">;</span></span>
-<span id="cb5-17"><a></a>    <span class="kw">let</span> average_length <span class="op">=</span> total_length <span class="kw">as</span> <span class="dt">f64</span> <span class="op">/</span> word_count <span class="kw">as</span> <span class="dt">f64</span><span class="op">;</span></span>
-<span id="cb5-18"><a></a></span>
-<span id="cb5-19"><a></a>    <span class="co">// Find longest word</span></span>
-<span id="cb5-20"><a></a>    <span class="kw">let</span> longest_word <span class="op">=</span> words</span>
-<span id="cb5-21"><a></a>        <span class="op">.</span>iter()</span>
-<span id="cb5-22"><a></a>        <span class="op">.</span>max_by_key(<span class="op">|</span>word<span class="op">|</span> word<span class="op">.</span>len())</span>
-<span id="cb5-23"><a></a>        <span class="op">.</span>unwrap_or(<span class="op">&amp;</span><span class="st">""</span>)</span>
-<span id="cb5-24"><a></a>        <span class="op">.</span>to_string()<span class="op">;</span></span>
-<span id="cb5-25"><a></a></span>
-<span id="cb5-26"><a></a>    (word_count<span class="op">,</span> average_length<span class="op">,</span> longest_word)</span>
-<span id="cb5-27"><a></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb5-1"><a href=""></a><span class="kw">fn</span> analyze_text(text<span class="op">:</span> <span class="op">&amp;</span><span class="dt">str</span>) <span class="op">-&gt;</span> (<span class="dt">usize</span><span class="op">,</span> <span class="dt">f64</span><span class="op">,</span> <span class="dt">String</span>) <span class="op">{</span></span>
+<span id="cb5-2"><a href=""></a>    <span class="kw">let</span> words<span class="op">:</span> <span class="dt">Vec</span><span class="op">&lt;&amp;</span><span class="dt">str</span><span class="op">&gt;</span> <span class="op">=</span> text</span>
+<span id="cb5-3"><a href=""></a>        <span class="op">.</span>split_whitespace()</span>
+<span id="cb5-4"><a href=""></a>        <span class="op">.</span>collect()<span class="op">;</span></span>
+<span id="cb5-5"><a href=""></a></span>
+<span id="cb5-6"><a href=""></a>    <span class="cf">if</span> words<span class="op">.</span>is_empty() <span class="op">{</span></span>
+<span id="cb5-7"><a href=""></a>        <span class="cf">return</span> (<span class="dv">0</span><span class="op">,</span> <span class="dv">0.0</span><span class="op">,</span> <span class="dt">String</span><span class="pp">::</span>new())<span class="op">;</span></span>
+<span id="cb5-8"><a href=""></a>    <span class="op">}</span></span>
+<span id="cb5-9"><a href=""></a></span>
+<span id="cb5-10"><a href=""></a>    <span class="kw">let</span> word_count <span class="op">=</span> words<span class="op">.</span>len()<span class="op">;</span></span>
+<span id="cb5-11"><a href=""></a></span>
+<span id="cb5-12"><a href=""></a>    <span class="co">// Average word length using iterator methods</span></span>
+<span id="cb5-13"><a href=""></a>    <span class="kw">let</span> total_length<span class="op">:</span> <span class="dt">usize</span> <span class="op">=</span> words</span>
+<span id="cb5-14"><a href=""></a>        <span class="op">.</span>iter()</span>
+<span id="cb5-15"><a href=""></a>        <span class="op">.</span>map(<span class="op">|</span>word<span class="op">|</span> word<span class="op">.</span>len())</span>
+<span id="cb5-16"><a href=""></a>        <span class="op">.</span>sum()<span class="op">;</span></span>
+<span id="cb5-17"><a href=""></a>    <span class="kw">let</span> average_length <span class="op">=</span> total_length <span class="kw">as</span> <span class="dt">f64</span> <span class="op">/</span> word_count <span class="kw">as</span> <span class="dt">f64</span><span class="op">;</span></span>
+<span id="cb5-18"><a href=""></a></span>
+<span id="cb5-19"><a href=""></a>    <span class="co">// Find longest word</span></span>
+<span id="cb5-20"><a href=""></a>    <span class="kw">let</span> longest_word <span class="op">=</span> words</span>
+<span id="cb5-21"><a href=""></a>        <span class="op">.</span>iter()</span>
+<span id="cb5-22"><a href=""></a>        <span class="op">.</span>max_by_key(<span class="op">|</span>word<span class="op">|</span> word<span class="op">.</span>len())</span>
+<span id="cb5-23"><a href=""></a>        <span class="op">.</span>unwrap_or(<span class="op">&amp;</span><span class="st">""</span>)</span>
+<span id="cb5-24"><a href=""></a>        <span class="op">.</span>to_string()<span class="op">;</span></span>
+<span id="cb5-25"><a href=""></a></span>
+<span id="cb5-26"><a href=""></a>    (word_count<span class="op">,</span> average_length<span class="op">,</span> longest_word)</span>
+<span id="cb5-27"><a href=""></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <aside class="notes">
 <p>This shows real-world iterator usage. Much clearer than nested loops!</p>
 <style type="text/css">
@@ -431,20 +433,20 @@ Brandon M. Greenwell
 <section id="try-it-yourself-iterator-chains" class="slide level2 inverse smaller">
 <h2>Try It Yourself: Iterator Chains</h2>
 <p><strong>Challenge</strong>: Filter and transform numbers</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb6-1"><a></a><span class="co">// Given this vector:</span></span>
-<span id="cb6-2"><a></a><span class="kw">let</span> numbers <span class="op">=</span> <span class="pp">vec!</span>[<span class="dv">1</span><span class="op">,</span> <span class="dv">2</span><span class="op">,</span> <span class="dv">3</span><span class="op">,</span> <span class="dv">4</span><span class="op">,</span> <span class="dv">5</span><span class="op">,</span> <span class="dv">6</span><span class="op">,</span> <span class="dv">7</span><span class="op">,</span> <span class="dv">8</span><span class="op">,</span> <span class="dv">9</span><span class="op">,</span> <span class="dv">10</span>]<span class="op">;</span></span>
-<span id="cb6-3"><a></a></span>
-<span id="cb6-4"><a></a><span class="co">// Use iterator methods to:</span></span>
-<span id="cb6-5"><a></a><span class="co">// 1. Keep only even numbers</span></span>
-<span id="cb6-6"><a></a><span class="co">// 2. Square each number</span></span>
-<span id="cb6-7"><a></a><span class="co">// 3. Sum the results</span></span>
-<span id="cb6-8"><a></a><span class="co">// Expected: 220 (2² + 4² + 6² + 8² + 10² = 4 + 16 + 36 + 64 + 100)</span></span>
-<span id="cb6-9"><a></a></span>
-<span id="cb6-10"><a></a><span class="kw">let</span> result<span class="op">:</span> <span class="dt">i32</span> <span class="op">=</span> numbers</span>
-<span id="cb6-11"><a></a>    <span class="op">.</span>iter()</span>
-<span id="cb6-12"><a></a>    <span class="op">.</span>filter(<span class="op">|&amp;&amp;</span>n<span class="op">|</span> n <span class="op">%</span> <span class="dv">2</span> <span class="op">==</span> <span class="dv">0</span>)</span>
-<span id="cb6-13"><a></a>    <span class="op">.</span>map(<span class="op">|&amp;</span>n<span class="op">|</span> n <span class="op">*</span> n)</span>
-<span id="cb6-14"><a></a>    <span class="op">.</span>sum()<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb6-1"><a href=""></a><span class="co">// Given this vector:</span></span>
+<span id="cb6-2"><a href=""></a><span class="kw">let</span> numbers <span class="op">=</span> <span class="pp">vec!</span>[<span class="dv">1</span><span class="op">,</span> <span class="dv">2</span><span class="op">,</span> <span class="dv">3</span><span class="op">,</span> <span class="dv">4</span><span class="op">,</span> <span class="dv">5</span><span class="op">,</span> <span class="dv">6</span><span class="op">,</span> <span class="dv">7</span><span class="op">,</span> <span class="dv">8</span><span class="op">,</span> <span class="dv">9</span><span class="op">,</span> <span class="dv">10</span>]<span class="op">;</span></span>
+<span id="cb6-3"><a href=""></a></span>
+<span id="cb6-4"><a href=""></a><span class="co">// Use iterator methods to:</span></span>
+<span id="cb6-5"><a href=""></a><span class="co">// 1. Keep only even numbers</span></span>
+<span id="cb6-6"><a href=""></a><span class="co">// 2. Square each number</span></span>
+<span id="cb6-7"><a href=""></a><span class="co">// 3. Sum the results</span></span>
+<span id="cb6-8"><a href=""></a><span class="co">// Expected: 220 (2² + 4² + 6² + 8² + 10² = 4 + 16 + 36 + 64 + 100)</span></span>
+<span id="cb6-9"><a href=""></a></span>
+<span id="cb6-10"><a href=""></a><span class="kw">let</span> result<span class="op">:</span> <span class="dt">i32</span> <span class="op">=</span> numbers</span>
+<span id="cb6-11"><a href=""></a>    <span class="op">.</span>iter()</span>
+<span id="cb6-12"><a href=""></a>    <span class="op">.</span>filter(<span class="op">|&amp;&amp;</span>n<span class="op">|</span> n <span class="op">%</span> <span class="dv">2</span> <span class="op">==</span> <span class="dv">0</span>)</span>
+<span id="cb6-13"><a href=""></a>    <span class="op">.</span>map(<span class="op">|&amp;</span>n<span class="op">|</span> n <span class="op">*</span> n)</span>
+<span id="cb6-14"><a href=""></a>    <span class="op">.</span>sum()<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p><strong>Try on <a href="https://play.rust-lang.org/">Rust Playground</a></strong></p>
 <aside class="notes">
 <p>Give students 3-4 minutes. Then show solution and discuss the pattern.</p>
@@ -463,27 +465,27 @@ Brandon M. Greenwell
 <section id="closures-anonymous-functions" class="slide level2 smaller">
 <h2>Closures: Anonymous Functions</h2>
 <p><strong>Closures are functions that can capture their environment:</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb7-1"><a></a><span class="co">// Regular function</span></span>
-<span id="cb7-2"><a></a><span class="kw">fn</span> add_one(x<span class="op">:</span> <span class="dt">i32</span>) <span class="op">-&gt;</span> <span class="dt">i32</span> <span class="op">{</span></span>
-<span id="cb7-3"><a></a>    x <span class="op">+</span> <span class="dv">1</span></span>
-<span id="cb7-4"><a></a><span class="op">}</span></span>
-<span id="cb7-5"><a></a></span>
-<span id="cb7-6"><a></a><span class="co">// Closure (short form)</span></span>
-<span id="cb7-7"><a></a><span class="kw">let</span> add_one <span class="op">=</span> <span class="op">|</span>x<span class="op">:</span> <span class="dt">i32</span><span class="op">|</span> x <span class="op">+</span> <span class="dv">1</span><span class="op">;</span></span>
-<span id="cb7-8"><a></a></span>
-<span id="cb7-9"><a></a><span class="co">// Closure with type inference (Rust figures it out!)</span></span>
-<span id="cb7-10"><a></a><span class="kw">let</span> add_one <span class="op">=</span> <span class="op">|</span>x<span class="op">|</span> x <span class="op">+</span> <span class="dv">1</span><span class="op">;</span></span>
-<span id="cb7-11"><a></a></span>
-<span id="cb7-12"><a></a><span class="co">// Use it:</span></span>
-<span id="cb7-13"><a></a><span class="kw">let</span> result <span class="op">=</span> add_one(<span class="dv">5</span>)<span class="op">;</span>  <span class="co">// 6</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb7-1"><a href=""></a><span class="co">// Regular function</span></span>
+<span id="cb7-2"><a href=""></a><span class="kw">fn</span> add_one(x<span class="op">:</span> <span class="dt">i32</span>) <span class="op">-&gt;</span> <span class="dt">i32</span> <span class="op">{</span></span>
+<span id="cb7-3"><a href=""></a>    x <span class="op">+</span> <span class="dv">1</span></span>
+<span id="cb7-4"><a href=""></a><span class="op">}</span></span>
+<span id="cb7-5"><a href=""></a></span>
+<span id="cb7-6"><a href=""></a><span class="co">// Closure (short form)</span></span>
+<span id="cb7-7"><a href=""></a><span class="kw">let</span> add_one <span class="op">=</span> <span class="op">|</span>x<span class="op">:</span> <span class="dt">i32</span><span class="op">|</span> x <span class="op">+</span> <span class="dv">1</span><span class="op">;</span></span>
+<span id="cb7-8"><a href=""></a></span>
+<span id="cb7-9"><a href=""></a><span class="co">// Closure with type inference (Rust figures it out!)</span></span>
+<span id="cb7-10"><a href=""></a><span class="kw">let</span> add_one <span class="op">=</span> <span class="op">|</span>x<span class="op">|</span> x <span class="op">+</span> <span class="dv">1</span><span class="op">;</span></span>
+<span id="cb7-11"><a href=""></a></span>
+<span id="cb7-12"><a href=""></a><span class="co">// Use it:</span></span>
+<span id="cb7-13"><a href=""></a><span class="kw">let</span> result <span class="op">=</span> add_one(<span class="dv">5</span>)<span class="op">;</span>  <span class="co">// 6</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p><strong>Closures can capture variables:</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb8-1"><a></a><span class="kw">let</span> threshold <span class="op">=</span> <span class="dv">10</span><span class="op">;</span></span>
-<span id="cb8-2"><a></a></span>
-<span id="cb8-3"><a></a><span class="co">// Closure captures 'threshold' from environment</span></span>
-<span id="cb8-4"><a></a><span class="kw">let</span> is_large <span class="op">=</span> <span class="op">|</span>x<span class="op">:</span> <span class="dt">i32</span><span class="op">|</span> x <span class="op">&gt;</span> threshold<span class="op">;</span></span>
-<span id="cb8-5"><a></a></span>
-<span id="cb8-6"><a></a><span class="pp">println!</span>(<span class="st">"{}"</span><span class="op">,</span> is_large(<span class="dv">5</span>))<span class="op">;</span>   <span class="co">// false</span></span>
-<span id="cb8-7"><a></a><span class="pp">println!</span>(<span class="st">"{}"</span><span class="op">,</span> is_large(<span class="dv">15</span>))<span class="op">;</span>  <span class="co">// true</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb8-1"><a href=""></a><span class="kw">let</span> threshold <span class="op">=</span> <span class="dv">10</span><span class="op">;</span></span>
+<span id="cb8-2"><a href=""></a></span>
+<span id="cb8-3"><a href=""></a><span class="co">// Closure captures 'threshold' from environment</span></span>
+<span id="cb8-4"><a href=""></a><span class="kw">let</span> is_large <span class="op">=</span> <span class="op">|</span>x<span class="op">:</span> <span class="dt">i32</span><span class="op">|</span> x <span class="op">&gt;</span> threshold<span class="op">;</span></span>
+<span id="cb8-5"><a href=""></a></span>
+<span id="cb8-6"><a href=""></a><span class="pp">println!</span>(<span class="st">"{}"</span><span class="op">,</span> is_large(<span class="dv">5</span>))<span class="op">;</span>   <span class="co">// false</span></span>
+<span id="cb8-7"><a href=""></a><span class="pp">println!</span>(<span class="st">"{}"</span><span class="op">,</span> is_large(<span class="dv">15</span>))<span class="op">;</span>  <span class="co">// true</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p><a href="https://doc.rust-lang.org/book/ch13-01-closures.html">📖 Closures in Rust Book</a></p>
 <aside class="notes">
 <p>This is where closures shine - they remember their environment!</p>
@@ -503,18 +505,18 @@ Brandon M. Greenwell
 <h2>Closure Traits: Fn, FnMut, FnOnce</h2>
 <p><strong>Rust has three closure traits based on how they capture variables:</strong></p>
 <p><strong><code>Fn</code></strong> - Borrows immutably:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb9-1"><a></a><span class="kw">let</span> x <span class="op">=</span> <span class="dv">10</span><span class="op">;</span></span>
-<span id="cb9-2"><a></a><span class="kw">let</span> print_x <span class="op">=</span> <span class="op">||</span> <span class="pp">println!</span>(<span class="st">"{}"</span><span class="op">,</span> x)<span class="op">;</span>  <span class="co">// Borrows x</span></span>
-<span id="cb9-3"><a></a>print_x()<span class="op">;</span>  <span class="co">// Can call multiple times</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb9-1"><a href=""></a><span class="kw">let</span> x <span class="op">=</span> <span class="dv">10</span><span class="op">;</span></span>
+<span id="cb9-2"><a href=""></a><span class="kw">let</span> print_x <span class="op">=</span> <span class="op">||</span> <span class="pp">println!</span>(<span class="st">"{}"</span><span class="op">,</span> x)<span class="op">;</span>  <span class="co">// Borrows x</span></span>
+<span id="cb9-3"><a href=""></a>print_x()<span class="op">;</span>  <span class="co">// Can call multiple times</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p><strong><code>FnMut</code></strong> - Borrows mutably:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb10-1"><a></a><span class="kw">let</span> <span class="kw">mut</span> count <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
-<span id="cb10-2"><a></a><span class="kw">let</span> <span class="kw">mut</span> increment <span class="op">=</span> <span class="op">||</span> <span class="op">{</span> count <span class="op">+=</span> <span class="dv">1</span><span class="op">;</span> <span class="op">};</span>  <span class="co">// Mutably borrows count</span></span>
-<span id="cb10-3"><a></a>increment()<span class="op">;</span>  <span class="co">// count = 1</span></span>
-<span id="cb10-4"><a></a>increment()<span class="op">;</span>  <span class="co">// count = 2</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb10-1"><a href=""></a><span class="kw">let</span> <span class="kw">mut</span> count <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb10-2"><a href=""></a><span class="kw">let</span> <span class="kw">mut</span> increment <span class="op">=</span> <span class="op">||</span> <span class="op">{</span> count <span class="op">+=</span> <span class="dv">1</span><span class="op">;</span> <span class="op">};</span>  <span class="co">// Mutably borrows count</span></span>
+<span id="cb10-3"><a href=""></a>increment()<span class="op">;</span>  <span class="co">// count = 1</span></span>
+<span id="cb10-4"><a href=""></a>increment()<span class="op">;</span>  <span class="co">// count = 2</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p><strong><code>FnOnce</code></strong> - Takes ownership:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb11-1"><a></a><span class="kw">let</span> data <span class="op">=</span> <span class="pp">vec!</span>[<span class="dv">1</span><span class="op">,</span> <span class="dv">2</span><span class="op">,</span> <span class="dv">3</span>]<span class="op">;</span></span>
-<span id="cb11-2"><a></a><span class="kw">let</span> consume <span class="op">=</span> <span class="op">||</span> drop(data)<span class="op">;</span>  <span class="co">// Takes ownership of data</span></span>
-<span id="cb11-3"><a></a>consume()<span class="op">;</span>  <span class="co">// data is moved, can't call again</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb11-1"><a href=""></a><span class="kw">let</span> data <span class="op">=</span> <span class="pp">vec!</span>[<span class="dv">1</span><span class="op">,</span> <span class="dv">2</span><span class="op">,</span> <span class="dv">3</span>]<span class="op">;</span></span>
+<span id="cb11-2"><a href=""></a><span class="kw">let</span> consume <span class="op">=</span> <span class="op">||</span> drop(data)<span class="op">;</span>  <span class="co">// Takes ownership of data</span></span>
+<span id="cb11-3"><a href=""></a>consume()<span class="op">;</span>  <span class="co">// data is moved, can't call again</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p><a href="https://doc.rust-lang.org/std/ops/index.html#traits">📖 Fn traits</a></p>
 <aside class="notes">
 <p>Most closures are Fn or FnMut. FnOnce is rare but important to understand.</p>
@@ -533,24 +535,24 @@ Brandon M. Greenwell
 <section id="practical-example-custom-counter" class="slide level2 smaller">
 <h2>Practical Example: Custom Counter</h2>
 <p><strong>Create a closure that tracks state:</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb12-1"><a></a><span class="kw">fn</span> make_counter() <span class="op">-&gt;</span> <span class="kw">impl</span> <span class="bu">FnMut</span>() <span class="op">-&gt;</span> <span class="dt">i32</span> <span class="op">{</span></span>
-<span id="cb12-2"><a></a>    <span class="kw">let</span> <span class="kw">mut</span> count <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
-<span id="cb12-3"><a></a></span>
-<span id="cb12-4"><a></a>    <span class="kw">move</span> <span class="op">||</span> <span class="op">{</span></span>
-<span id="cb12-5"><a></a>        count <span class="op">+=</span> <span class="dv">1</span><span class="op">;</span></span>
-<span id="cb12-6"><a></a>        count</span>
-<span id="cb12-7"><a></a>    <span class="op">}</span></span>
-<span id="cb12-8"><a></a><span class="op">}</span></span>
-<span id="cb12-9"><a></a></span>
-<span id="cb12-10"><a></a><span class="co">// Use it:</span></span>
-<span id="cb12-11"><a></a><span class="kw">let</span> <span class="kw">mut</span> counter <span class="op">=</span> make_counter()<span class="op">;</span></span>
-<span id="cb12-12"><a></a><span class="pp">println!</span>(<span class="st">"{}"</span><span class="op">,</span> counter())<span class="op">;</span>  <span class="co">// 1</span></span>
-<span id="cb12-13"><a></a><span class="pp">println!</span>(<span class="st">"{}"</span><span class="op">,</span> counter())<span class="op">;</span>  <span class="co">// 2</span></span>
-<span id="cb12-14"><a></a><span class="pp">println!</span>(<span class="st">"{}"</span><span class="op">,</span> counter())<span class="op">;</span>  <span class="co">// 3</span></span>
-<span id="cb12-15"><a></a></span>
-<span id="cb12-16"><a></a><span class="co">// Each counter is independent!</span></span>
-<span id="cb12-17"><a></a><span class="kw">let</span> <span class="kw">mut</span> counter2 <span class="op">=</span> make_counter()<span class="op">;</span></span>
-<span id="cb12-18"><a></a><span class="pp">println!</span>(<span class="st">"{}"</span><span class="op">,</span> counter2())<span class="op">;</span>  <span class="co">// 1</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb12-1"><a href=""></a><span class="kw">fn</span> make_counter() <span class="op">-&gt;</span> <span class="kw">impl</span> <span class="bu">FnMut</span>() <span class="op">-&gt;</span> <span class="dt">i32</span> <span class="op">{</span></span>
+<span id="cb12-2"><a href=""></a>    <span class="kw">let</span> <span class="kw">mut</span> count <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb12-3"><a href=""></a></span>
+<span id="cb12-4"><a href=""></a>    <span class="kw">move</span> <span class="op">||</span> <span class="op">{</span></span>
+<span id="cb12-5"><a href=""></a>        count <span class="op">+=</span> <span class="dv">1</span><span class="op">;</span></span>
+<span id="cb12-6"><a href=""></a>        count</span>
+<span id="cb12-7"><a href=""></a>    <span class="op">}</span></span>
+<span id="cb12-8"><a href=""></a><span class="op">}</span></span>
+<span id="cb12-9"><a href=""></a></span>
+<span id="cb12-10"><a href=""></a><span class="co">// Use it:</span></span>
+<span id="cb12-11"><a href=""></a><span class="kw">let</span> <span class="kw">mut</span> counter <span class="op">=</span> make_counter()<span class="op">;</span></span>
+<span id="cb12-12"><a href=""></a><span class="pp">println!</span>(<span class="st">"{}"</span><span class="op">,</span> counter())<span class="op">;</span>  <span class="co">// 1</span></span>
+<span id="cb12-13"><a href=""></a><span class="pp">println!</span>(<span class="st">"{}"</span><span class="op">,</span> counter())<span class="op">;</span>  <span class="co">// 2</span></span>
+<span id="cb12-14"><a href=""></a><span class="pp">println!</span>(<span class="st">"{}"</span><span class="op">,</span> counter())<span class="op">;</span>  <span class="co">// 3</span></span>
+<span id="cb12-15"><a href=""></a></span>
+<span id="cb12-16"><a href=""></a><span class="co">// Each counter is independent!</span></span>
+<span id="cb12-17"><a href=""></a><span class="kw">let</span> <span class="kw">mut</span> counter2 <span class="op">=</span> make_counter()<span class="op">;</span></span>
+<span id="cb12-18"><a href=""></a><span class="pp">println!</span>(<span class="st">"{}"</span><span class="op">,</span> counter2())<span class="op">;</span>  <span class="co">// 1</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p><strong>Key concepts:</strong></p>
 <ul>
 <li><code>move</code> keyword transfers ownership into closure</li>
@@ -574,26 +576,26 @@ Brandon M. Greenwell
 <section id="real-world-iterator-closure-pattern" class="slide level2 smaller">
 <h2>Real-World Iterator + Closure Pattern</h2>
 <p><strong>Processing collections with closures:</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb13-1"><a></a><span class="at">#[</span>derive<span class="at">(</span><span class="bu">Debug</span><span class="at">)]</span></span>
-<span id="cb13-2"><a></a><span class="kw">struct</span> Student <span class="op">{</span></span>
-<span id="cb13-3"><a></a>    name<span class="op">:</span> <span class="dt">String</span><span class="op">,</span></span>
-<span id="cb13-4"><a></a>    grade<span class="op">:</span> <span class="dt">f64</span><span class="op">,</span></span>
-<span id="cb13-5"><a></a><span class="op">}</span></span>
-<span id="cb13-6"><a></a></span>
-<span id="cb13-7"><a></a><span class="kw">let</span> students <span class="op">=</span> <span class="pp">vec!</span>[</span>
-<span id="cb13-8"><a></a>    Student <span class="op">{</span> name<span class="op">:</span> <span class="st">"Alice"</span><span class="op">.</span>to_string()<span class="op">,</span> grade<span class="op">:</span> <span class="dv">92.0</span> <span class="op">},</span></span>
-<span id="cb13-9"><a></a>    Student <span class="op">{</span> name<span class="op">:</span> <span class="st">"Bob"</span><span class="op">.</span>to_string()<span class="op">,</span> grade<span class="op">:</span> <span class="dv">78.0</span> <span class="op">},</span></span>
-<span id="cb13-10"><a></a>    Student <span class="op">{</span> name<span class="op">:</span> <span class="st">"Charlie"</span><span class="op">.</span>to_string()<span class="op">,</span> grade<span class="op">:</span> <span class="dv">85.0</span> <span class="op">},</span></span>
-<span id="cb13-11"><a></a>]<span class="op">;</span></span>
-<span id="cb13-12"><a></a></span>
-<span id="cb13-13"><a></a><span class="co">// Find honor roll students (grade &gt;= 80)</span></span>
-<span id="cb13-14"><a></a><span class="kw">let</span> honor_roll<span class="op">:</span> <span class="dt">Vec</span><span class="op">&lt;&amp;</span><span class="dt">str</span><span class="op">&gt;</span> <span class="op">=</span> students</span>
-<span id="cb13-15"><a></a>    <span class="op">.</span>iter()</span>
-<span id="cb13-16"><a></a>    <span class="op">.</span>filter(<span class="op">|</span>student<span class="op">|</span> student<span class="op">.</span>grade <span class="op">&gt;=</span> <span class="dv">80.0</span>)</span>
-<span id="cb13-17"><a></a>    <span class="op">.</span>map(<span class="op">|</span>student<span class="op">|</span> student<span class="op">.</span>name<span class="op">.</span>as_str())</span>
-<span id="cb13-18"><a></a>    <span class="op">.</span>collect()<span class="op">;</span></span>
-<span id="cb13-19"><a></a></span>
-<span id="cb13-20"><a></a><span class="co">// honor_roll = ["Alice", "Charlie"]</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb13-1"><a href=""></a><span class="at">#[</span>derive<span class="at">(</span><span class="bu">Debug</span><span class="at">)]</span></span>
+<span id="cb13-2"><a href=""></a><span class="kw">struct</span> Student <span class="op">{</span></span>
+<span id="cb13-3"><a href=""></a>    name<span class="op">:</span> <span class="dt">String</span><span class="op">,</span></span>
+<span id="cb13-4"><a href=""></a>    grade<span class="op">:</span> <span class="dt">f64</span><span class="op">,</span></span>
+<span id="cb13-5"><a href=""></a><span class="op">}</span></span>
+<span id="cb13-6"><a href=""></a></span>
+<span id="cb13-7"><a href=""></a><span class="kw">let</span> students <span class="op">=</span> <span class="pp">vec!</span>[</span>
+<span id="cb13-8"><a href=""></a>    Student <span class="op">{</span> name<span class="op">:</span> <span class="st">"Alice"</span><span class="op">.</span>to_string()<span class="op">,</span> grade<span class="op">:</span> <span class="dv">92.0</span> <span class="op">},</span></span>
+<span id="cb13-9"><a href=""></a>    Student <span class="op">{</span> name<span class="op">:</span> <span class="st">"Bob"</span><span class="op">.</span>to_string()<span class="op">,</span> grade<span class="op">:</span> <span class="dv">78.0</span> <span class="op">},</span></span>
+<span id="cb13-10"><a href=""></a>    Student <span class="op">{</span> name<span class="op">:</span> <span class="st">"Charlie"</span><span class="op">.</span>to_string()<span class="op">,</span> grade<span class="op">:</span> <span class="dv">85.0</span> <span class="op">},</span></span>
+<span id="cb13-11"><a href=""></a>]<span class="op">;</span></span>
+<span id="cb13-12"><a href=""></a></span>
+<span id="cb13-13"><a href=""></a><span class="co">// Find honor roll students (grade &gt;= 80)</span></span>
+<span id="cb13-14"><a href=""></a><span class="kw">let</span> honor_roll<span class="op">:</span> <span class="dt">Vec</span><span class="op">&lt;&amp;</span><span class="dt">str</span><span class="op">&gt;</span> <span class="op">=</span> students</span>
+<span id="cb13-15"><a href=""></a>    <span class="op">.</span>iter()</span>
+<span id="cb13-16"><a href=""></a>    <span class="op">.</span>filter(<span class="op">|</span>student<span class="op">|</span> student<span class="op">.</span>grade <span class="op">&gt;=</span> <span class="dv">80.0</span>)</span>
+<span id="cb13-17"><a href=""></a>    <span class="op">.</span>map(<span class="op">|</span>student<span class="op">|</span> student<span class="op">.</span>name<span class="op">.</span>as_str())</span>
+<span id="cb13-18"><a href=""></a>    <span class="op">.</span>collect()<span class="op">;</span></span>
+<span id="cb13-19"><a href=""></a></span>
+<span id="cb13-20"><a href=""></a><span class="co">// honor_roll = ["Alice", "Charlie"]</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p><strong>Career relevance</strong>: This pattern appears in every Rust codebase!</p>
 <aside class="notes">
 <p>Emphasize that this is the Rust way. Database queries, API filtering, data processing all use this.</p>
@@ -639,19 +641,19 @@ Brandon M. Greenwell
 <section id="the-problem-ownership-limitations" class="slide level2 smaller">
 <h2>The Problem: Ownership Limitations</h2>
 <p><strong>Rust’s ownership rules are strict:</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb14-1"><a></a><span class="co">// ❌ Can't do this - multiple ownership</span></span>
-<span id="cb14-2"><a></a><span class="kw">let</span> data <span class="op">=</span> <span class="pp">vec!</span>[<span class="dv">1</span><span class="op">,</span> <span class="dv">2</span><span class="op">,</span> <span class="dv">3</span>]<span class="op">;</span></span>
-<span id="cb14-3"><a></a><span class="kw">let</span> owner1 <span class="op">=</span> data<span class="op">;</span></span>
-<span id="cb14-4"><a></a><span class="kw">let</span> owner2 <span class="op">=</span> data<span class="op">;</span>  <span class="co">// ERROR: value moved!</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb15-1"><a></a><span class="co">// ❌ Can't do this - recursive types have unknown size</span></span>
-<span id="cb15-2"><a></a><span class="kw">struct</span> Node <span class="op">{</span></span>
-<span id="cb15-3"><a></a>    value<span class="op">:</span> <span class="dt">i32</span><span class="op">,</span></span>
-<span id="cb15-4"><a></a>    next<span class="op">:</span> Node<span class="op">,</span>  <span class="co">// ERROR: infinite size!</span></span>
-<span id="cb15-5"><a></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb16-1"><a></a><span class="co">// ❌ Can't do this - mutation through shared reference</span></span>
-<span id="cb16-2"><a></a><span class="kw">let</span> x <span class="op">=</span> <span class="dv">5</span><span class="op">;</span></span>
-<span id="cb16-3"><a></a><span class="kw">let</span> y <span class="op">=</span> <span class="op">&amp;</span>x<span class="op">;</span></span>
-<span id="cb16-4"><a></a><span class="op">*</span>y <span class="op">=</span> <span class="dv">10</span><span class="op">;</span>  <span class="co">// ERROR: cannot assign through &amp;T</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb14-1"><a href=""></a><span class="co">// ❌ Can't do this - multiple ownership</span></span>
+<span id="cb14-2"><a href=""></a><span class="kw">let</span> data <span class="op">=</span> <span class="pp">vec!</span>[<span class="dv">1</span><span class="op">,</span> <span class="dv">2</span><span class="op">,</span> <span class="dv">3</span>]<span class="op">;</span></span>
+<span id="cb14-3"><a href=""></a><span class="kw">let</span> owner1 <span class="op">=</span> data<span class="op">;</span></span>
+<span id="cb14-4"><a href=""></a><span class="kw">let</span> owner2 <span class="op">=</span> data<span class="op">;</span>  <span class="co">// ERROR: value moved!</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb15-1"><a href=""></a><span class="co">// ❌ Can't do this - recursive types have unknown size</span></span>
+<span id="cb15-2"><a href=""></a><span class="kw">struct</span> Node <span class="op">{</span></span>
+<span id="cb15-3"><a href=""></a>    value<span class="op">:</span> <span class="dt">i32</span><span class="op">,</span></span>
+<span id="cb15-4"><a href=""></a>    next<span class="op">:</span> Node<span class="op">,</span>  <span class="co">// ERROR: infinite size!</span></span>
+<span id="cb15-5"><a href=""></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb16-1"><a href=""></a><span class="co">// ❌ Can't do this - mutation through shared reference</span></span>
+<span id="cb16-2"><a href=""></a><span class="kw">let</span> x <span class="op">=</span> <span class="dv">5</span><span class="op">;</span></span>
+<span id="cb16-3"><a href=""></a><span class="kw">let</span> y <span class="op">=</span> <span class="op">&amp;</span>x<span class="op">;</span></span>
+<span id="cb16-4"><a href=""></a><span class="op">*</span>y <span class="op">=</span> <span class="dv">10</span><span class="op">;</span>  <span class="co">// ERROR: cannot assign through &amp;T</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p><strong>Solution</strong>: Smart pointers!</p>
 <aside class="notes">
 <p>These limitations are by design - they prevent memory bugs. Smart pointers provide safe flexibility.</p>
@@ -721,27 +723,27 @@ Brandon M. Greenwell
 <section id="box-heap-allocation" class="slide level2 smaller">
 <h2>Box<t>: Heap Allocation</t></h2>
 <p><strong><code>Box&lt;T&gt;</code> stores data on the heap with known size:</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb17-1"><a></a><span class="co">// Simple heap allocation</span></span>
-<span id="cb17-2"><a></a><span class="kw">let</span> boxed_int <span class="op">=</span> <span class="dt">Box</span><span class="pp">::</span>new(<span class="dv">5</span>)<span class="op">;</span></span>
-<span id="cb17-3"><a></a><span class="pp">println!</span>(<span class="st">"{}"</span><span class="op">,</span> <span class="op">*</span>boxed_int)<span class="op">;</span>  <span class="co">// 5 (dereference with *)</span></span>
-<span id="cb17-4"><a></a></span>
-<span id="cb17-5"><a></a><span class="co">// Main use case: recursive types</span></span>
-<span id="cb17-6"><a></a><span class="at">#[</span>derive<span class="at">(</span><span class="bu">Debug</span><span class="at">)]</span></span>
-<span id="cb17-7"><a></a><span class="kw">enum</span> BinaryTree<span class="op">&lt;</span>T<span class="op">&gt;</span> <span class="op">{</span></span>
-<span id="cb17-8"><a></a>    Empty<span class="op">,</span></span>
-<span id="cb17-9"><a></a>    Node <span class="op">{</span></span>
-<span id="cb17-10"><a></a>        value<span class="op">:</span> T<span class="op">,</span></span>
-<span id="cb17-11"><a></a>        left<span class="op">:</span> <span class="dt">Box</span><span class="op">&lt;</span>BinaryTree<span class="op">&lt;</span>T<span class="op">&gt;&gt;,</span>   <span class="co">// Box enables recursion!</span></span>
-<span id="cb17-12"><a></a>        right<span class="op">:</span> <span class="dt">Box</span><span class="op">&lt;</span>BinaryTree<span class="op">&lt;</span>T<span class="op">&gt;&gt;,</span></span>
-<span id="cb17-13"><a></a>    <span class="op">},</span></span>
-<span id="cb17-14"><a></a><span class="op">}</span></span>
-<span id="cb17-15"><a></a></span>
-<span id="cb17-16"><a></a><span class="co">// Create a tree</span></span>
-<span id="cb17-17"><a></a><span class="kw">let</span> tree <span class="op">=</span> <span class="pp">BinaryTree::</span>Node <span class="op">{</span></span>
-<span id="cb17-18"><a></a>    value<span class="op">:</span> <span class="dv">5</span><span class="op">,</span></span>
-<span id="cb17-19"><a></a>    left<span class="op">:</span> <span class="dt">Box</span><span class="pp">::</span>new(<span class="pp">BinaryTree::</span>Empty)<span class="op">,</span></span>
-<span id="cb17-20"><a></a>    right<span class="op">:</span> <span class="dt">Box</span><span class="pp">::</span>new(<span class="pp">BinaryTree::</span>Empty)<span class="op">,</span></span>
-<span id="cb17-21"><a></a><span class="op">};</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb17-1"><a href=""></a><span class="co">// Simple heap allocation</span></span>
+<span id="cb17-2"><a href=""></a><span class="kw">let</span> boxed_int <span class="op">=</span> <span class="dt">Box</span><span class="pp">::</span>new(<span class="dv">5</span>)<span class="op">;</span></span>
+<span id="cb17-3"><a href=""></a><span class="pp">println!</span>(<span class="st">"{}"</span><span class="op">,</span> <span class="op">*</span>boxed_int)<span class="op">;</span>  <span class="co">// 5 (dereference with *)</span></span>
+<span id="cb17-4"><a href=""></a></span>
+<span id="cb17-5"><a href=""></a><span class="co">// Main use case: recursive types</span></span>
+<span id="cb17-6"><a href=""></a><span class="at">#[</span>derive<span class="at">(</span><span class="bu">Debug</span><span class="at">)]</span></span>
+<span id="cb17-7"><a href=""></a><span class="kw">enum</span> BinaryTree<span class="op">&lt;</span>T<span class="op">&gt;</span> <span class="op">{</span></span>
+<span id="cb17-8"><a href=""></a>    Empty<span class="op">,</span></span>
+<span id="cb17-9"><a href=""></a>    Node <span class="op">{</span></span>
+<span id="cb17-10"><a href=""></a>        value<span class="op">:</span> T<span class="op">,</span></span>
+<span id="cb17-11"><a href=""></a>        left<span class="op">:</span> <span class="dt">Box</span><span class="op">&lt;</span>BinaryTree<span class="op">&lt;</span>T<span class="op">&gt;&gt;,</span>   <span class="co">// Box enables recursion!</span></span>
+<span id="cb17-12"><a href=""></a>        right<span class="op">:</span> <span class="dt">Box</span><span class="op">&lt;</span>BinaryTree<span class="op">&lt;</span>T<span class="op">&gt;&gt;,</span></span>
+<span id="cb17-13"><a href=""></a>    <span class="op">},</span></span>
+<span id="cb17-14"><a href=""></a><span class="op">}</span></span>
+<span id="cb17-15"><a href=""></a></span>
+<span id="cb17-16"><a href=""></a><span class="co">// Create a tree</span></span>
+<span id="cb17-17"><a href=""></a><span class="kw">let</span> tree <span class="op">=</span> <span class="pp">BinaryTree::</span>Node <span class="op">{</span></span>
+<span id="cb17-18"><a href=""></a>    value<span class="op">:</span> <span class="dv">5</span><span class="op">,</span></span>
+<span id="cb17-19"><a href=""></a>    left<span class="op">:</span> <span class="dt">Box</span><span class="pp">::</span>new(<span class="pp">BinaryTree::</span>Empty)<span class="op">,</span></span>
+<span id="cb17-20"><a href=""></a>    right<span class="op">:</span> <span class="dt">Box</span><span class="pp">::</span>new(<span class="pp">BinaryTree::</span>Empty)<span class="op">,</span></span>
+<span id="cb17-21"><a href=""></a><span class="op">};</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p><strong>Why it works</strong>: <code>Box&lt;T&gt;</code> has fixed size (just a pointer), even though <code>T</code> might be recursive.</p>
 <p><a href="https://doc.rust-lang.org/std/boxed/struct.Box.html">📖 Box documentation</a></p>
 <aside class="notes">
@@ -761,37 +763,37 @@ Brandon M. Greenwell
 <section id="practical-example-binary-tree" class="slide level2 smaller">
 <h2>Practical Example: Binary Tree</h2>
 <p><strong>Building a binary tree with Box:</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb18"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb18-1"><a></a><span class="kw">impl</span><span class="op">&lt;</span>T<span class="op">&gt;</span> BinaryTree<span class="op">&lt;</span>T<span class="op">&gt;</span> <span class="op">{</span></span>
-<span id="cb18-2"><a></a>    <span class="co">/// Creates a new empty tree</span></span>
-<span id="cb18-3"><a></a>    <span class="kw">fn</span> new() <span class="op">-&gt;</span> <span class="dt">Self</span> <span class="op">{</span></span>
-<span id="cb18-4"><a></a>        <span class="pp">BinaryTree::</span>Empty</span>
-<span id="cb18-5"><a></a>    <span class="op">}</span></span>
-<span id="cb18-6"><a></a></span>
-<span id="cb18-7"><a></a>    <span class="co">/// Creates a leaf node (no children)</span></span>
-<span id="cb18-8"><a></a>    <span class="kw">fn</span> leaf(value<span class="op">:</span> T) <span class="op">-&gt;</span> <span class="dt">Self</span> <span class="op">{</span></span>
-<span id="cb18-9"><a></a>        <span class="pp">BinaryTree::</span>Node <span class="op">{</span></span>
-<span id="cb18-10"><a></a>            value<span class="op">,</span></span>
-<span id="cb18-11"><a></a>            left<span class="op">:</span> <span class="dt">Box</span><span class="pp">::</span>new(<span class="pp">BinaryTree::</span>Empty)<span class="op">,</span></span>
-<span id="cb18-12"><a></a>            right<span class="op">:</span> <span class="dt">Box</span><span class="pp">::</span>new(<span class="pp">BinaryTree::</span>Empty)<span class="op">,</span></span>
-<span id="cb18-13"><a></a>        <span class="op">}</span></span>
-<span id="cb18-14"><a></a>    <span class="op">}</span></span>
-<span id="cb18-15"><a></a></span>
-<span id="cb18-16"><a></a>    <span class="co">/// Creates a node with children</span></span>
-<span id="cb18-17"><a></a>    <span class="kw">fn</span> node(value<span class="op">:</span> T<span class="op">,</span> left<span class="op">:</span> BinaryTree<span class="op">&lt;</span>T<span class="op">&gt;,</span> right<span class="op">:</span> BinaryTree<span class="op">&lt;</span>T<span class="op">&gt;</span>) <span class="op">-&gt;</span> <span class="dt">Self</span> <span class="op">{</span></span>
-<span id="cb18-18"><a></a>        <span class="pp">BinaryTree::</span>Node <span class="op">{</span></span>
-<span id="cb18-19"><a></a>            value<span class="op">,</span></span>
-<span id="cb18-20"><a></a>            left<span class="op">:</span> <span class="dt">Box</span><span class="pp">::</span>new(left)<span class="op">,</span></span>
-<span id="cb18-21"><a></a>            right<span class="op">:</span> <span class="dt">Box</span><span class="pp">::</span>new(right)<span class="op">,</span></span>
-<span id="cb18-22"><a></a>        <span class="op">}</span></span>
-<span id="cb18-23"><a></a>    <span class="op">}</span></span>
-<span id="cb18-24"><a></a><span class="op">}</span></span>
-<span id="cb18-25"><a></a></span>
-<span id="cb18-26"><a></a><span class="co">// Usage:</span></span>
-<span id="cb18-27"><a></a><span class="kw">let</span> tree <span class="op">=</span> <span class="pp">BinaryTree::</span>node(</span>
-<span id="cb18-28"><a></a>    <span class="dv">10</span><span class="op">,</span></span>
-<span id="cb18-29"><a></a>    <span class="pp">BinaryTree::</span>leaf(<span class="dv">5</span>)<span class="op">,</span></span>
-<span id="cb18-30"><a></a>    <span class="pp">BinaryTree::</span>leaf(<span class="dv">15</span>)<span class="op">,</span></span>
-<span id="cb18-31"><a></a>)<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb18"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb18-1"><a href=""></a><span class="kw">impl</span><span class="op">&lt;</span>T<span class="op">&gt;</span> BinaryTree<span class="op">&lt;</span>T<span class="op">&gt;</span> <span class="op">{</span></span>
+<span id="cb18-2"><a href=""></a>    <span class="co">/// Creates a new empty tree</span></span>
+<span id="cb18-3"><a href=""></a>    <span class="kw">fn</span> new() <span class="op">-&gt;</span> <span class="dt">Self</span> <span class="op">{</span></span>
+<span id="cb18-4"><a href=""></a>        <span class="pp">BinaryTree::</span>Empty</span>
+<span id="cb18-5"><a href=""></a>    <span class="op">}</span></span>
+<span id="cb18-6"><a href=""></a></span>
+<span id="cb18-7"><a href=""></a>    <span class="co">/// Creates a leaf node (no children)</span></span>
+<span id="cb18-8"><a href=""></a>    <span class="kw">fn</span> leaf(value<span class="op">:</span> T) <span class="op">-&gt;</span> <span class="dt">Self</span> <span class="op">{</span></span>
+<span id="cb18-9"><a href=""></a>        <span class="pp">BinaryTree::</span>Node <span class="op">{</span></span>
+<span id="cb18-10"><a href=""></a>            value<span class="op">,</span></span>
+<span id="cb18-11"><a href=""></a>            left<span class="op">:</span> <span class="dt">Box</span><span class="pp">::</span>new(<span class="pp">BinaryTree::</span>Empty)<span class="op">,</span></span>
+<span id="cb18-12"><a href=""></a>            right<span class="op">:</span> <span class="dt">Box</span><span class="pp">::</span>new(<span class="pp">BinaryTree::</span>Empty)<span class="op">,</span></span>
+<span id="cb18-13"><a href=""></a>        <span class="op">}</span></span>
+<span id="cb18-14"><a href=""></a>    <span class="op">}</span></span>
+<span id="cb18-15"><a href=""></a></span>
+<span id="cb18-16"><a href=""></a>    <span class="co">/// Creates a node with children</span></span>
+<span id="cb18-17"><a href=""></a>    <span class="kw">fn</span> node(value<span class="op">:</span> T<span class="op">,</span> left<span class="op">:</span> BinaryTree<span class="op">&lt;</span>T<span class="op">&gt;,</span> right<span class="op">:</span> BinaryTree<span class="op">&lt;</span>T<span class="op">&gt;</span>) <span class="op">-&gt;</span> <span class="dt">Self</span> <span class="op">{</span></span>
+<span id="cb18-18"><a href=""></a>        <span class="pp">BinaryTree::</span>Node <span class="op">{</span></span>
+<span id="cb18-19"><a href=""></a>            value<span class="op">,</span></span>
+<span id="cb18-20"><a href=""></a>            left<span class="op">:</span> <span class="dt">Box</span><span class="pp">::</span>new(left)<span class="op">,</span></span>
+<span id="cb18-21"><a href=""></a>            right<span class="op">:</span> <span class="dt">Box</span><span class="pp">::</span>new(right)<span class="op">,</span></span>
+<span id="cb18-22"><a href=""></a>        <span class="op">}</span></span>
+<span id="cb18-23"><a href=""></a>    <span class="op">}</span></span>
+<span id="cb18-24"><a href=""></a><span class="op">}</span></span>
+<span id="cb18-25"><a href=""></a></span>
+<span id="cb18-26"><a href=""></a><span class="co">// Usage:</span></span>
+<span id="cb18-27"><a href=""></a><span class="kw">let</span> tree <span class="op">=</span> <span class="pp">BinaryTree::</span>node(</span>
+<span id="cb18-28"><a href=""></a>    <span class="dv">10</span><span class="op">,</span></span>
+<span id="cb18-29"><a href=""></a>    <span class="pp">BinaryTree::</span>leaf(<span class="dv">5</span>)<span class="op">,</span></span>
+<span id="cb18-30"><a href=""></a>    <span class="pp">BinaryTree::</span>leaf(<span class="dv">15</span>)<span class="op">,</span></span>
+<span id="cb18-31"><a href=""></a>)<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <aside class="notes">
 <p>This pattern appears in compilers, game engines, databases - anywhere trees are needed.</p>
 <style type="text/css">
@@ -809,26 +811,26 @@ Brandon M. Greenwell
 <section id="rc-reference-counting" class="slide level2 smaller">
 <h2>Rc<t>: Reference Counting</t></h2>
 <p><strong><code>Rc&lt;T&gt;</code> enables multiple owners of the same data:</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb19"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb19-1"><a></a><span class="kw">use</span> <span class="pp">std::rc::</span>Rc<span class="op">;</span></span>
-<span id="cb19-2"><a></a></span>
-<span id="cb19-3"><a></a><span class="at">#[</span>derive<span class="at">(</span><span class="bu">Debug</span><span class="at">)]</span></span>
-<span id="cb19-4"><a></a><span class="kw">struct</span> SharedData <span class="op">{</span></span>
-<span id="cb19-5"><a></a>    value<span class="op">:</span> <span class="dt">i32</span><span class="op">,</span></span>
-<span id="cb19-6"><a></a><span class="op">}</span></span>
-<span id="cb19-7"><a></a></span>
-<span id="cb19-8"><a></a><span class="kw">let</span> data <span class="op">=</span> <span class="pp">Rc::</span>new(SharedData <span class="op">{</span> value<span class="op">:</span> <span class="dv">42</span> <span class="op">}</span>)<span class="op">;</span></span>
-<span id="cb19-9"><a></a><span class="pp">println!</span>(<span class="st">"Count: {}"</span><span class="op">,</span> <span class="pp">Rc::</span>strong_count(<span class="op">&amp;</span>data))<span class="op">;</span>  <span class="co">// 1</span></span>
-<span id="cb19-10"><a></a></span>
-<span id="cb19-11"><a></a><span class="co">// Create additional owners by cloning the Rc</span></span>
-<span id="cb19-12"><a></a><span class="kw">let</span> owner1 <span class="op">=</span> <span class="pp">Rc::</span>clone(<span class="op">&amp;</span>data)<span class="op">;</span>  <span class="co">// Increments count</span></span>
-<span id="cb19-13"><a></a><span class="kw">let</span> owner2 <span class="op">=</span> <span class="pp">Rc::</span>clone(<span class="op">&amp;</span>data)<span class="op">;</span>  <span class="co">// Increments count</span></span>
-<span id="cb19-14"><a></a></span>
-<span id="cb19-15"><a></a><span class="pp">println!</span>(<span class="st">"Count: {}"</span><span class="op">,</span> <span class="pp">Rc::</span>strong_count(<span class="op">&amp;</span>data))<span class="op">;</span>  <span class="co">// 3</span></span>
-<span id="cb19-16"><a></a><span class="pp">println!</span>(<span class="st">"Value: {}"</span><span class="op">,</span> owner1<span class="op">.</span>value)<span class="op">;</span>  <span class="co">// 42</span></span>
-<span id="cb19-17"><a></a></span>
-<span id="cb19-18"><a></a><span class="co">// When all Rc's drop, data is freed</span></span>
-<span id="cb19-19"><a></a>drop(owner1)<span class="op">;</span></span>
-<span id="cb19-20"><a></a><span class="pp">println!</span>(<span class="st">"Count: {}"</span><span class="op">,</span> <span class="pp">Rc::</span>strong_count(<span class="op">&amp;</span>data))<span class="op">;</span>  <span class="co">// 2</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb19"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb19-1"><a href=""></a><span class="kw">use</span> <span class="pp">std::rc::</span>Rc<span class="op">;</span></span>
+<span id="cb19-2"><a href=""></a></span>
+<span id="cb19-3"><a href=""></a><span class="at">#[</span>derive<span class="at">(</span><span class="bu">Debug</span><span class="at">)]</span></span>
+<span id="cb19-4"><a href=""></a><span class="kw">struct</span> SharedData <span class="op">{</span></span>
+<span id="cb19-5"><a href=""></a>    value<span class="op">:</span> <span class="dt">i32</span><span class="op">,</span></span>
+<span id="cb19-6"><a href=""></a><span class="op">}</span></span>
+<span id="cb19-7"><a href=""></a></span>
+<span id="cb19-8"><a href=""></a><span class="kw">let</span> data <span class="op">=</span> <span class="pp">Rc::</span>new(SharedData <span class="op">{</span> value<span class="op">:</span> <span class="dv">42</span> <span class="op">}</span>)<span class="op">;</span></span>
+<span id="cb19-9"><a href=""></a><span class="pp">println!</span>(<span class="st">"Count: {}"</span><span class="op">,</span> <span class="pp">Rc::</span>strong_count(<span class="op">&amp;</span>data))<span class="op">;</span>  <span class="co">// 1</span></span>
+<span id="cb19-10"><a href=""></a></span>
+<span id="cb19-11"><a href=""></a><span class="co">// Create additional owners by cloning the Rc</span></span>
+<span id="cb19-12"><a href=""></a><span class="kw">let</span> owner1 <span class="op">=</span> <span class="pp">Rc::</span>clone(<span class="op">&amp;</span>data)<span class="op">;</span>  <span class="co">// Increments count</span></span>
+<span id="cb19-13"><a href=""></a><span class="kw">let</span> owner2 <span class="op">=</span> <span class="pp">Rc::</span>clone(<span class="op">&amp;</span>data)<span class="op">;</span>  <span class="co">// Increments count</span></span>
+<span id="cb19-14"><a href=""></a></span>
+<span id="cb19-15"><a href=""></a><span class="pp">println!</span>(<span class="st">"Count: {}"</span><span class="op">,</span> <span class="pp">Rc::</span>strong_count(<span class="op">&amp;</span>data))<span class="op">;</span>  <span class="co">// 3</span></span>
+<span id="cb19-16"><a href=""></a><span class="pp">println!</span>(<span class="st">"Value: {}"</span><span class="op">,</span> owner1<span class="op">.</span>value)<span class="op">;</span>  <span class="co">// 42</span></span>
+<span id="cb19-17"><a href=""></a></span>
+<span id="cb19-18"><a href=""></a><span class="co">// When all Rc's drop, data is freed</span></span>
+<span id="cb19-19"><a href=""></a>drop(owner1)<span class="op">;</span></span>
+<span id="cb19-20"><a href=""></a><span class="pp">println!</span>(<span class="st">"Count: {}"</span><span class="op">,</span> <span class="pp">Rc::</span>strong_count(<span class="op">&amp;</span>data))<span class="op">;</span>  <span class="co">// 2</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p><strong>Important</strong>: <code>Rc::clone</code> is cheap - it only increments a counter, doesn’t copy data!</p>
 <p><a href="https://doc.rust-lang.org/std/rc/struct.Rc.html">📖 Rc documentation</a></p>
 <aside class="notes">
@@ -848,27 +850,27 @@ Brandon M. Greenwell
 <section id="refcell-interior-mutability" class="slide level2 smaller">
 <h2>RefCell<t>: Interior Mutability</t></h2>
 <p><strong><code>RefCell&lt;T&gt;</code> allows mutation through shared references (runtime borrow checking):</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb20"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb20-1"><a></a><span class="kw">use</span> <span class="pp">std::cell::</span>RefCell<span class="op">;</span></span>
-<span id="cb20-2"><a></a></span>
-<span id="cb20-3"><a></a><span class="kw">let</span> data <span class="op">=</span> <span class="pp">RefCell::</span>new(<span class="dv">5</span>)<span class="op">;</span></span>
-<span id="cb20-4"><a></a></span>
-<span id="cb20-5"><a></a><span class="co">// Borrow immutably</span></span>
-<span id="cb20-6"><a></a><span class="op">{</span></span>
-<span id="cb20-7"><a></a>    <span class="kw">let</span> value <span class="op">=</span> data<span class="op">.</span>borrow()<span class="op">;</span></span>
-<span id="cb20-8"><a></a>    <span class="pp">println!</span>(<span class="st">"{}"</span><span class="op">,</span> <span class="op">*</span>value)<span class="op">;</span>  <span class="co">// 5</span></span>
-<span id="cb20-9"><a></a><span class="op">}</span> <span class="co">// borrow ends here</span></span>
-<span id="cb20-10"><a></a></span>
-<span id="cb20-11"><a></a><span class="co">// Borrow mutably</span></span>
-<span id="cb20-12"><a></a><span class="op">{</span></span>
-<span id="cb20-13"><a></a>    <span class="kw">let</span> <span class="kw">mut</span> value <span class="op">=</span> data<span class="op">.</span>borrow_mut()<span class="op">;</span></span>
-<span id="cb20-14"><a></a>    <span class="op">*</span>value <span class="op">+=</span> <span class="dv">10</span><span class="op">;</span></span>
-<span id="cb20-15"><a></a><span class="op">}</span> <span class="co">// borrow ends here</span></span>
-<span id="cb20-16"><a></a></span>
-<span id="cb20-17"><a></a><span class="pp">println!</span>(<span class="st">"{}"</span><span class="op">,</span> <span class="op">*</span>data<span class="op">.</span>borrow())<span class="op">;</span>  <span class="co">// 15</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb20"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb20-1"><a href=""></a><span class="kw">use</span> <span class="pp">std::cell::</span>RefCell<span class="op">;</span></span>
+<span id="cb20-2"><a href=""></a></span>
+<span id="cb20-3"><a href=""></a><span class="kw">let</span> data <span class="op">=</span> <span class="pp">RefCell::</span>new(<span class="dv">5</span>)<span class="op">;</span></span>
+<span id="cb20-4"><a href=""></a></span>
+<span id="cb20-5"><a href=""></a><span class="co">// Borrow immutably</span></span>
+<span id="cb20-6"><a href=""></a><span class="op">{</span></span>
+<span id="cb20-7"><a href=""></a>    <span class="kw">let</span> value <span class="op">=</span> data<span class="op">.</span>borrow()<span class="op">;</span></span>
+<span id="cb20-8"><a href=""></a>    <span class="pp">println!</span>(<span class="st">"{}"</span><span class="op">,</span> <span class="op">*</span>value)<span class="op">;</span>  <span class="co">// 5</span></span>
+<span id="cb20-9"><a href=""></a><span class="op">}</span> <span class="co">// borrow ends here</span></span>
+<span id="cb20-10"><a href=""></a></span>
+<span id="cb20-11"><a href=""></a><span class="co">// Borrow mutably</span></span>
+<span id="cb20-12"><a href=""></a><span class="op">{</span></span>
+<span id="cb20-13"><a href=""></a>    <span class="kw">let</span> <span class="kw">mut</span> value <span class="op">=</span> data<span class="op">.</span>borrow_mut()<span class="op">;</span></span>
+<span id="cb20-14"><a href=""></a>    <span class="op">*</span>value <span class="op">+=</span> <span class="dv">10</span><span class="op">;</span></span>
+<span id="cb20-15"><a href=""></a><span class="op">}</span> <span class="co">// borrow ends here</span></span>
+<span id="cb20-16"><a href=""></a></span>
+<span id="cb20-17"><a href=""></a><span class="pp">println!</span>(<span class="st">"{}"</span><span class="op">,</span> <span class="op">*</span>data<span class="op">.</span>borrow())<span class="op">;</span>  <span class="co">// 15</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p><strong>Key difference</strong>: Borrows checked at <em>runtime</em> instead of compile-time.</p>
 <p><strong>Panic if rules violated</strong>:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb21"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb21-1"><a></a><span class="kw">let</span> value1 <span class="op">=</span> data<span class="op">.</span>borrow_mut()<span class="op">;</span></span>
-<span id="cb21-2"><a></a><span class="kw">let</span> value2 <span class="op">=</span> data<span class="op">.</span>borrow()<span class="op">;</span>  <span class="co">// ❌ PANIC: already borrowed mutably!</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb21"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb21-1"><a href=""></a><span class="kw">let</span> value1 <span class="op">=</span> data<span class="op">.</span>borrow_mut()<span class="op">;</span></span>
+<span id="cb21-2"><a href=""></a><span class="kw">let</span> value2 <span class="op">=</span> data<span class="op">.</span>borrow()<span class="op">;</span>  <span class="co">// ❌ PANIC: already borrowed mutably!</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p><a href="https://doc.rust-lang.org/std/cell/struct.RefCell.html">📖 RefCell documentation</a></p>
 <aside class="notes">
 <p>Use RefCell when you need flexibility that the borrow checker can’t statically verify.</p>
@@ -887,25 +889,25 @@ Brandon M. Greenwell
 <section id="combining-rc-and-refcell" class="slide level2 smaller">
 <h2>Combining Rc and RefCell</h2>
 <p><strong>Pattern: Shared mutable data (single-threaded)</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb22"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb22-1"><a></a><span class="kw">use</span> <span class="pp">std::rc::</span>Rc<span class="op">;</span></span>
-<span id="cb22-2"><a></a><span class="kw">use</span> <span class="pp">std::cell::</span>RefCell<span class="op">;</span></span>
-<span id="cb22-3"><a></a></span>
-<span id="cb22-4"><a></a><span class="at">#[</span>derive<span class="at">(</span><span class="bu">Debug</span><span class="at">)]</span></span>
-<span id="cb22-5"><a></a><span class="kw">struct</span> Counter <span class="op">{</span></span>
-<span id="cb22-6"><a></a>    value<span class="op">:</span> <span class="dt">i32</span><span class="op">,</span></span>
-<span id="cb22-7"><a></a><span class="op">}</span></span>
-<span id="cb22-8"><a></a></span>
-<span id="cb22-9"><a></a><span class="kw">let</span> counter <span class="op">=</span> <span class="pp">Rc::</span>new(<span class="pp">RefCell::</span>new(Counter <span class="op">{</span> value<span class="op">:</span> <span class="dv">0</span> <span class="op">}</span>))<span class="op">;</span></span>
-<span id="cb22-10"><a></a></span>
-<span id="cb22-11"><a></a><span class="co">// Create multiple owners</span></span>
-<span id="cb22-12"><a></a><span class="kw">let</span> counter_ref1 <span class="op">=</span> <span class="pp">Rc::</span>clone(<span class="op">&amp;</span>counter)<span class="op">;</span></span>
-<span id="cb22-13"><a></a><span class="kw">let</span> counter_ref2 <span class="op">=</span> <span class="pp">Rc::</span>clone(<span class="op">&amp;</span>counter)<span class="op">;</span></span>
-<span id="cb22-14"><a></a></span>
-<span id="cb22-15"><a></a><span class="co">// All can mutate through RefCell</span></span>
-<span id="cb22-16"><a></a>counter_ref1<span class="op">.</span>borrow_mut()<span class="op">.</span>value <span class="op">+=</span> <span class="dv">1</span><span class="op">;</span></span>
-<span id="cb22-17"><a></a>counter_ref2<span class="op">.</span>borrow_mut()<span class="op">.</span>value <span class="op">+=</span> <span class="dv">1</span><span class="op">;</span></span>
-<span id="cb22-18"><a></a></span>
-<span id="cb22-19"><a></a><span class="pp">println!</span>(<span class="st">"{}"</span><span class="op">,</span> counter<span class="op">.</span>borrow()<span class="op">.</span>value)<span class="op">;</span>  <span class="co">// 2</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb22"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb22-1"><a href=""></a><span class="kw">use</span> <span class="pp">std::rc::</span>Rc<span class="op">;</span></span>
+<span id="cb22-2"><a href=""></a><span class="kw">use</span> <span class="pp">std::cell::</span>RefCell<span class="op">;</span></span>
+<span id="cb22-3"><a href=""></a></span>
+<span id="cb22-4"><a href=""></a><span class="at">#[</span>derive<span class="at">(</span><span class="bu">Debug</span><span class="at">)]</span></span>
+<span id="cb22-5"><a href=""></a><span class="kw">struct</span> Counter <span class="op">{</span></span>
+<span id="cb22-6"><a href=""></a>    value<span class="op">:</span> <span class="dt">i32</span><span class="op">,</span></span>
+<span id="cb22-7"><a href=""></a><span class="op">}</span></span>
+<span id="cb22-8"><a href=""></a></span>
+<span id="cb22-9"><a href=""></a><span class="kw">let</span> counter <span class="op">=</span> <span class="pp">Rc::</span>new(<span class="pp">RefCell::</span>new(Counter <span class="op">{</span> value<span class="op">:</span> <span class="dv">0</span> <span class="op">}</span>))<span class="op">;</span></span>
+<span id="cb22-10"><a href=""></a></span>
+<span id="cb22-11"><a href=""></a><span class="co">// Create multiple owners</span></span>
+<span id="cb22-12"><a href=""></a><span class="kw">let</span> counter_ref1 <span class="op">=</span> <span class="pp">Rc::</span>clone(<span class="op">&amp;</span>counter)<span class="op">;</span></span>
+<span id="cb22-13"><a href=""></a><span class="kw">let</span> counter_ref2 <span class="op">=</span> <span class="pp">Rc::</span>clone(<span class="op">&amp;</span>counter)<span class="op">;</span></span>
+<span id="cb22-14"><a href=""></a></span>
+<span id="cb22-15"><a href=""></a><span class="co">// All can mutate through RefCell</span></span>
+<span id="cb22-16"><a href=""></a>counter_ref1<span class="op">.</span>borrow_mut()<span class="op">.</span>value <span class="op">+=</span> <span class="dv">1</span><span class="op">;</span></span>
+<span id="cb22-17"><a href=""></a>counter_ref2<span class="op">.</span>borrow_mut()<span class="op">.</span>value <span class="op">+=</span> <span class="dv">1</span><span class="op">;</span></span>
+<span id="cb22-18"><a href=""></a></span>
+<span id="cb22-19"><a href=""></a><span class="pp">println!</span>(<span class="st">"{}"</span><span class="op">,</span> counter<span class="op">.</span>borrow()<span class="op">.</span>value)<span class="op">;</span>  <span class="co">// 2</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p><strong>Pattern breakdown</strong>:</p>
 <ul>
 <li><code>Rc&lt;T&gt;</code>: Multiple owners</li>
@@ -991,30 +993,30 @@ Brandon M. Greenwell
 <section id="resultt-e-basics" class="slide level2 smaller">
 <h2>Result&lt;T, E&gt; Basics</h2>
 <p><strong><code>Result</code> is an enum with two variants:</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb24"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb24-1"><a></a><span class="kw">enum</span> <span class="dt">Result</span><span class="op">&lt;</span>T<span class="op">,</span> E<span class="op">&gt;</span> <span class="op">{</span></span>
-<span id="cb24-2"><a></a>    <span class="cn">Ok</span>(T)<span class="op">,</span>   <span class="co">// Success - contains value</span></span>
-<span id="cb24-3"><a></a>    <span class="cn">Err</span>(E)<span class="op">,</span>  <span class="co">// Failure - contains error</span></span>
-<span id="cb24-4"><a></a><span class="op">}</span></span>
-<span id="cb24-5"><a></a></span>
-<span id="cb24-6"><a></a><span class="co">// Example: division that can fail</span></span>
-<span id="cb24-7"><a></a><span class="kw">fn</span> divide(a<span class="op">:</span> <span class="dt">f64</span><span class="op">,</span> b<span class="op">:</span> <span class="dt">f64</span>) <span class="op">-&gt;</span> <span class="dt">Result</span><span class="op">&lt;</span><span class="dt">f64</span><span class="op">,</span> <span class="dt">String</span><span class="op">&gt;</span> <span class="op">{</span></span>
-<span id="cb24-8"><a></a>    <span class="cf">if</span> b <span class="op">==</span> <span class="dv">0.0</span> <span class="op">{</span></span>
-<span id="cb24-9"><a></a>        <span class="cn">Err</span>(<span class="dt">String</span><span class="pp">::</span>from(<span class="st">"Division by zero"</span>))</span>
-<span id="cb24-10"><a></a>    <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></span>
-<span id="cb24-11"><a></a>        <span class="cn">Ok</span>(a <span class="op">/</span> b)</span>
-<span id="cb24-12"><a></a>    <span class="op">}</span></span>
-<span id="cb24-13"><a></a><span class="op">}</span></span>
-<span id="cb24-14"><a></a></span>
-<span id="cb24-15"><a></a><span class="co">// Usage with match:</span></span>
-<span id="cb24-16"><a></a><span class="cf">match</span> divide(<span class="dv">10.0</span><span class="op">,</span> <span class="dv">2.0</span>) <span class="op">{</span></span>
-<span id="cb24-17"><a></a>    <span class="cn">Ok</span>(result) <span class="op">=&gt;</span> <span class="pp">println!</span>(<span class="st">"Result: {}"</span><span class="op">,</span> result)<span class="op">,</span></span>
-<span id="cb24-18"><a></a>    <span class="cn">Err</span>(e) <span class="op">=&gt;</span> <span class="pp">println!</span>(<span class="st">"Error: {}"</span><span class="op">,</span> e)<span class="op">,</span></span>
-<span id="cb24-19"><a></a><span class="op">}</span></span>
-<span id="cb24-20"><a></a></span>
-<span id="cb24-21"><a></a><span class="co">// Or with if let:</span></span>
-<span id="cb24-22"><a></a><span class="cf">if</span> <span class="kw">let</span> <span class="cn">Ok</span>(result) <span class="op">=</span> divide(<span class="dv">10.0</span><span class="op">,</span> <span class="dv">2.0</span>) <span class="op">{</span></span>
-<span id="cb24-23"><a></a>    <span class="pp">println!</span>(<span class="st">"Result: {}"</span><span class="op">,</span> result)<span class="op">;</span></span>
-<span id="cb24-24"><a></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb24"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb24-1"><a href=""></a><span class="kw">enum</span> <span class="dt">Result</span><span class="op">&lt;</span>T<span class="op">,</span> E<span class="op">&gt;</span> <span class="op">{</span></span>
+<span id="cb24-2"><a href=""></a>    <span class="cn">Ok</span>(T)<span class="op">,</span>   <span class="co">// Success - contains value</span></span>
+<span id="cb24-3"><a href=""></a>    <span class="cn">Err</span>(E)<span class="op">,</span>  <span class="co">// Failure - contains error</span></span>
+<span id="cb24-4"><a href=""></a><span class="op">}</span></span>
+<span id="cb24-5"><a href=""></a></span>
+<span id="cb24-6"><a href=""></a><span class="co">// Example: division that can fail</span></span>
+<span id="cb24-7"><a href=""></a><span class="kw">fn</span> divide(a<span class="op">:</span> <span class="dt">f64</span><span class="op">,</span> b<span class="op">:</span> <span class="dt">f64</span>) <span class="op">-&gt;</span> <span class="dt">Result</span><span class="op">&lt;</span><span class="dt">f64</span><span class="op">,</span> <span class="dt">String</span><span class="op">&gt;</span> <span class="op">{</span></span>
+<span id="cb24-8"><a href=""></a>    <span class="cf">if</span> b <span class="op">==</span> <span class="dv">0.0</span> <span class="op">{</span></span>
+<span id="cb24-9"><a href=""></a>        <span class="cn">Err</span>(<span class="dt">String</span><span class="pp">::</span>from(<span class="st">"Division by zero"</span>))</span>
+<span id="cb24-10"><a href=""></a>    <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></span>
+<span id="cb24-11"><a href=""></a>        <span class="cn">Ok</span>(a <span class="op">/</span> b)</span>
+<span id="cb24-12"><a href=""></a>    <span class="op">}</span></span>
+<span id="cb24-13"><a href=""></a><span class="op">}</span></span>
+<span id="cb24-14"><a href=""></a></span>
+<span id="cb24-15"><a href=""></a><span class="co">// Usage with match:</span></span>
+<span id="cb24-16"><a href=""></a><span class="cf">match</span> divide(<span class="dv">10.0</span><span class="op">,</span> <span class="dv">2.0</span>) <span class="op">{</span></span>
+<span id="cb24-17"><a href=""></a>    <span class="cn">Ok</span>(result) <span class="op">=&gt;</span> <span class="pp">println!</span>(<span class="st">"Result: {}"</span><span class="op">,</span> result)<span class="op">,</span></span>
+<span id="cb24-18"><a href=""></a>    <span class="cn">Err</span>(e) <span class="op">=&gt;</span> <span class="pp">println!</span>(<span class="st">"Error: {}"</span><span class="op">,</span> e)<span class="op">,</span></span>
+<span id="cb24-19"><a href=""></a><span class="op">}</span></span>
+<span id="cb24-20"><a href=""></a></span>
+<span id="cb24-21"><a href=""></a><span class="co">// Or with if let:</span></span>
+<span id="cb24-22"><a href=""></a><span class="cf">if</span> <span class="kw">let</span> <span class="cn">Ok</span>(result) <span class="op">=</span> divide(<span class="dv">10.0</span><span class="op">,</span> <span class="dv">2.0</span>) <span class="op">{</span></span>
+<span id="cb24-23"><a href=""></a>    <span class="pp">println!</span>(<span class="st">"Result: {}"</span><span class="op">,</span> result)<span class="op">;</span></span>
+<span id="cb24-24"><a href=""></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p><a href="https://doc.rust-lang.org/std/result/enum.Result.html">📖 Result documentation</a></p>
 <aside class="notes">
 <p>Result forces you to think about errors upfront, not as an afterthought.</p>
@@ -1033,31 +1035,31 @@ Brandon M. Greenwell
 <section id="the-operator-error-propagation" class="slide level2 smaller">
 <h2>The ? Operator: Error Propagation</h2>
 <p><strong>The <code>?</code> operator makes error handling ergonomic:</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb25"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb25-1"><a></a><span class="kw">use</span> <span class="pp">std::fs::</span>File<span class="op">;</span></span>
-<span id="cb25-2"><a></a><span class="kw">use</span> <span class="pp">std::io::</span><span class="op">{</span><span class="kw">self</span><span class="op">,</span> <span class="bu">Read</span><span class="op">};</span></span>
-<span id="cb25-3"><a></a></span>
-<span id="cb25-4"><a></a><span class="co">// Without ?</span></span>
-<span id="cb25-5"><a></a><span class="kw">fn</span> read_file_verbose(path<span class="op">:</span> <span class="op">&amp;</span><span class="dt">str</span>) <span class="op">-&gt;</span> <span class="pp">io::</span><span class="dt">Result</span><span class="op">&lt;</span><span class="dt">String</span><span class="op">&gt;</span> <span class="op">{</span></span>
-<span id="cb25-6"><a></a>    <span class="kw">let</span> file_result <span class="op">=</span> <span class="pp">File::</span>open(path)<span class="op">;</span></span>
-<span id="cb25-7"><a></a>    <span class="kw">let</span> <span class="kw">mut</span> file <span class="op">=</span> <span class="cf">match</span> file_result <span class="op">{</span></span>
-<span id="cb25-8"><a></a>        <span class="cn">Ok</span>(f) <span class="op">=&gt;</span> f<span class="op">,</span></span>
-<span id="cb25-9"><a></a>        <span class="cn">Err</span>(e) <span class="op">=&gt;</span> <span class="cf">return</span> <span class="cn">Err</span>(e)<span class="op">,</span>  <span class="co">// Early return on error</span></span>
-<span id="cb25-10"><a></a>    <span class="op">};</span></span>
-<span id="cb25-11"><a></a></span>
-<span id="cb25-12"><a></a>    <span class="kw">let</span> <span class="kw">mut</span> contents <span class="op">=</span> <span class="dt">String</span><span class="pp">::</span>new()<span class="op">;</span></span>
-<span id="cb25-13"><a></a>    <span class="cf">match</span> file<span class="op">.</span>read_to_string(<span class="op">&amp;</span><span class="kw">mut</span> contents) <span class="op">{</span></span>
-<span id="cb25-14"><a></a>        <span class="cn">Ok</span>(_) <span class="op">=&gt;</span> <span class="cn">Ok</span>(contents)<span class="op">,</span></span>
-<span id="cb25-15"><a></a>        <span class="cn">Err</span>(e) <span class="op">=&gt;</span> <span class="cn">Err</span>(e)<span class="op">,</span></span>
-<span id="cb25-16"><a></a>    <span class="op">}</span></span>
-<span id="cb25-17"><a></a><span class="op">}</span></span>
-<span id="cb25-18"><a></a></span>
-<span id="cb25-19"><a></a><span class="co">// With ? (much cleaner!)</span></span>
-<span id="cb25-20"><a></a><span class="kw">fn</span> read_file(path<span class="op">:</span> <span class="op">&amp;</span><span class="dt">str</span>) <span class="op">-&gt;</span> <span class="pp">io::</span><span class="dt">Result</span><span class="op">&lt;</span><span class="dt">String</span><span class="op">&gt;</span> <span class="op">{</span></span>
-<span id="cb25-21"><a></a>    <span class="kw">let</span> <span class="kw">mut</span> file <span class="op">=</span> <span class="pp">File::</span>open(path)<span class="op">?;</span>  <span class="co">// ? propagates error</span></span>
-<span id="cb25-22"><a></a>    <span class="kw">let</span> <span class="kw">mut</span> contents <span class="op">=</span> <span class="dt">String</span><span class="pp">::</span>new()<span class="op">;</span></span>
-<span id="cb25-23"><a></a>    file<span class="op">.</span>read_to_string(<span class="op">&amp;</span><span class="kw">mut</span> contents)<span class="op">?;</span>  <span class="co">// ? propagates error</span></span>
-<span id="cb25-24"><a></a>    <span class="cn">Ok</span>(contents)</span>
-<span id="cb25-25"><a></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb25"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb25-1"><a href=""></a><span class="kw">use</span> <span class="pp">std::fs::</span>File<span class="op">;</span></span>
+<span id="cb25-2"><a href=""></a><span class="kw">use</span> <span class="pp">std::io::</span><span class="op">{</span><span class="kw">self</span><span class="op">,</span> <span class="bu">Read</span><span class="op">};</span></span>
+<span id="cb25-3"><a href=""></a></span>
+<span id="cb25-4"><a href=""></a><span class="co">// Without ?</span></span>
+<span id="cb25-5"><a href=""></a><span class="kw">fn</span> read_file_verbose(path<span class="op">:</span> <span class="op">&amp;</span><span class="dt">str</span>) <span class="op">-&gt;</span> <span class="pp">io::</span><span class="dt">Result</span><span class="op">&lt;</span><span class="dt">String</span><span class="op">&gt;</span> <span class="op">{</span></span>
+<span id="cb25-6"><a href=""></a>    <span class="kw">let</span> file_result <span class="op">=</span> <span class="pp">File::</span>open(path)<span class="op">;</span></span>
+<span id="cb25-7"><a href=""></a>    <span class="kw">let</span> <span class="kw">mut</span> file <span class="op">=</span> <span class="cf">match</span> file_result <span class="op">{</span></span>
+<span id="cb25-8"><a href=""></a>        <span class="cn">Ok</span>(f) <span class="op">=&gt;</span> f<span class="op">,</span></span>
+<span id="cb25-9"><a href=""></a>        <span class="cn">Err</span>(e) <span class="op">=&gt;</span> <span class="cf">return</span> <span class="cn">Err</span>(e)<span class="op">,</span>  <span class="co">// Early return on error</span></span>
+<span id="cb25-10"><a href=""></a>    <span class="op">};</span></span>
+<span id="cb25-11"><a href=""></a></span>
+<span id="cb25-12"><a href=""></a>    <span class="kw">let</span> <span class="kw">mut</span> contents <span class="op">=</span> <span class="dt">String</span><span class="pp">::</span>new()<span class="op">;</span></span>
+<span id="cb25-13"><a href=""></a>    <span class="cf">match</span> file<span class="op">.</span>read_to_string(<span class="op">&amp;</span><span class="kw">mut</span> contents) <span class="op">{</span></span>
+<span id="cb25-14"><a href=""></a>        <span class="cn">Ok</span>(_) <span class="op">=&gt;</span> <span class="cn">Ok</span>(contents)<span class="op">,</span></span>
+<span id="cb25-15"><a href=""></a>        <span class="cn">Err</span>(e) <span class="op">=&gt;</span> <span class="cn">Err</span>(e)<span class="op">,</span></span>
+<span id="cb25-16"><a href=""></a>    <span class="op">}</span></span>
+<span id="cb25-17"><a href=""></a><span class="op">}</span></span>
+<span id="cb25-18"><a href=""></a></span>
+<span id="cb25-19"><a href=""></a><span class="co">// With ? (much cleaner!)</span></span>
+<span id="cb25-20"><a href=""></a><span class="kw">fn</span> read_file(path<span class="op">:</span> <span class="op">&amp;</span><span class="dt">str</span>) <span class="op">-&gt;</span> <span class="pp">io::</span><span class="dt">Result</span><span class="op">&lt;</span><span class="dt">String</span><span class="op">&gt;</span> <span class="op">{</span></span>
+<span id="cb25-21"><a href=""></a>    <span class="kw">let</span> <span class="kw">mut</span> file <span class="op">=</span> <span class="pp">File::</span>open(path)<span class="op">?;</span>  <span class="co">// ? propagates error</span></span>
+<span id="cb25-22"><a href=""></a>    <span class="kw">let</span> <span class="kw">mut</span> contents <span class="op">=</span> <span class="dt">String</span><span class="pp">::</span>new()<span class="op">;</span></span>
+<span id="cb25-23"><a href=""></a>    file<span class="op">.</span>read_to_string(<span class="op">&amp;</span><span class="kw">mut</span> contents)<span class="op">?;</span>  <span class="co">// ? propagates error</span></span>
+<span id="cb25-24"><a href=""></a>    <span class="cn">Ok</span>(contents)</span>
+<span id="cb25-25"><a href=""></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p><strong><code>?</code> means</strong>: “If Ok, unwrap the value. If Err, return the error immediately.”</p>
 <p><a href="https://doc.rust-lang.org/book/ch09-02-recoverable-errors-with-result.html#a-shortcut-for-propagating-errors-the--operator">📖 ? operator</a></p>
 <aside class="notes">
@@ -1077,41 +1079,41 @@ Brandon M. Greenwell
 <section id="custom-error-types" class="slide level2 smaller">
 <h2>Custom Error Types</h2>
 <p><strong>Create domain-specific errors:</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb26"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb26-1"><a></a><span class="kw">use</span> <span class="pp">std::</span>fmt<span class="op">;</span></span>
-<span id="cb26-2"><a></a></span>
-<span id="cb26-3"><a></a><span class="at">#[</span>derive<span class="at">(</span><span class="bu">Debug</span><span class="op">,</span> <span class="bu">Clone</span><span class="at">)]</span></span>
-<span id="cb26-4"><a></a><span class="kw">enum</span> ParseError <span class="op">{</span></span>
-<span id="cb26-5"><a></a>    EmptyInput<span class="op">,</span></span>
-<span id="cb26-6"><a></a>    InvalidNumber(<span class="dt">String</span>)<span class="op">,</span></span>
-<span id="cb26-7"><a></a>    OutOfRange(<span class="dt">i32</span>)<span class="op">,</span></span>
-<span id="cb26-8"><a></a><span class="op">}</span></span>
-<span id="cb26-9"><a></a></span>
-<span id="cb26-10"><a></a><span class="co">// Implement Display for pretty error messages</span></span>
-<span id="cb26-11"><a></a><span class="kw">impl</span> <span class="pp">fmt::</span><span class="bu">Display</span> <span class="cf">for</span> ParseError <span class="op">{</span></span>
-<span id="cb26-12"><a></a>    <span class="kw">fn</span> fmt(<span class="op">&amp;</span><span class="kw">self</span><span class="op">,</span> f<span class="op">:</span> <span class="op">&amp;</span><span class="kw">mut</span> <span class="pp">fmt::</span>Formatter) <span class="op">-&gt;</span> <span class="pp">fmt::</span><span class="dt">Result</span> <span class="op">{</span></span>
-<span id="cb26-13"><a></a>        <span class="cf">match</span> <span class="kw">self</span> <span class="op">{</span></span>
-<span id="cb26-14"><a></a>            <span class="pp">ParseError::</span>EmptyInput <span class="op">=&gt;</span> <span class="pp">write!</span>(f<span class="op">,</span> <span class="st">"Input string is empty"</span>)<span class="op">,</span></span>
-<span id="cb26-15"><a></a>            <span class="pp">ParseError::</span>InvalidNumber(s) <span class="op">=&gt;</span> <span class="pp">write!</span>(f<span class="op">,</span> <span class="st">"Invalid number: {}"</span><span class="op">,</span> s)<span class="op">,</span></span>
-<span id="cb26-16"><a></a>            <span class="pp">ParseError::</span>OutOfRange(n) <span class="op">=&gt;</span> <span class="pp">write!</span>(f<span class="op">,</span> <span class="st">"Number {} out of range (1-100)"</span><span class="op">,</span> n)<span class="op">,</span></span>
-<span id="cb26-17"><a></a>        <span class="op">}</span></span>
-<span id="cb26-18"><a></a>    <span class="op">}</span></span>
-<span id="cb26-19"><a></a><span class="op">}</span></span>
-<span id="cb26-20"><a></a></span>
-<span id="cb26-21"><a></a><span class="co">// Use custom error type</span></span>
-<span id="cb26-22"><a></a><span class="kw">fn</span> parse_positive_number(input<span class="op">:</span> <span class="op">&amp;</span><span class="dt">str</span>) <span class="op">-&gt;</span> <span class="dt">Result</span><span class="op">&lt;</span><span class="dt">i32</span><span class="op">,</span> ParseError<span class="op">&gt;</span> <span class="op">{</span></span>
-<span id="cb26-23"><a></a>    <span class="cf">if</span> input<span class="op">.</span>is_empty() <span class="op">{</span></span>
-<span id="cb26-24"><a></a>        <span class="cf">return</span> <span class="cn">Err</span>(<span class="pp">ParseError::</span>EmptyInput)<span class="op">;</span></span>
-<span id="cb26-25"><a></a>    <span class="op">}</span></span>
-<span id="cb26-26"><a></a></span>
-<span id="cb26-27"><a></a>    <span class="kw">let</span> num<span class="op">:</span> <span class="dt">i32</span> <span class="op">=</span> input<span class="op">.</span>trim()<span class="op">.</span>parse()</span>
-<span id="cb26-28"><a></a>        <span class="op">.</span>map_err(<span class="op">|</span>_<span class="op">|</span> <span class="pp">ParseError::</span>InvalidNumber(input<span class="op">.</span>to_string()))<span class="op">?;</span></span>
-<span id="cb26-29"><a></a></span>
-<span id="cb26-30"><a></a>    <span class="cf">if</span> num <span class="op">&lt;</span> <span class="dv">1</span> <span class="op">||</span> num <span class="op">&gt;</span> <span class="dv">100</span> <span class="op">{</span></span>
-<span id="cb26-31"><a></a>        <span class="cf">return</span> <span class="cn">Err</span>(<span class="pp">ParseError::</span>OutOfRange(num))<span class="op">;</span></span>
-<span id="cb26-32"><a></a>    <span class="op">}</span></span>
-<span id="cb26-33"><a></a></span>
-<span id="cb26-34"><a></a>    <span class="cn">Ok</span>(num)</span>
-<span id="cb26-35"><a></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb26"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb26-1"><a href=""></a><span class="kw">use</span> <span class="pp">std::</span>fmt<span class="op">;</span></span>
+<span id="cb26-2"><a href=""></a></span>
+<span id="cb26-3"><a href=""></a><span class="at">#[</span>derive<span class="at">(</span><span class="bu">Debug</span><span class="op">,</span> <span class="bu">Clone</span><span class="at">)]</span></span>
+<span id="cb26-4"><a href=""></a><span class="kw">enum</span> ParseError <span class="op">{</span></span>
+<span id="cb26-5"><a href=""></a>    EmptyInput<span class="op">,</span></span>
+<span id="cb26-6"><a href=""></a>    InvalidNumber(<span class="dt">String</span>)<span class="op">,</span></span>
+<span id="cb26-7"><a href=""></a>    OutOfRange(<span class="dt">i32</span>)<span class="op">,</span></span>
+<span id="cb26-8"><a href=""></a><span class="op">}</span></span>
+<span id="cb26-9"><a href=""></a></span>
+<span id="cb26-10"><a href=""></a><span class="co">// Implement Display for pretty error messages</span></span>
+<span id="cb26-11"><a href=""></a><span class="kw">impl</span> <span class="pp">fmt::</span><span class="bu">Display</span> <span class="cf">for</span> ParseError <span class="op">{</span></span>
+<span id="cb26-12"><a href=""></a>    <span class="kw">fn</span> fmt(<span class="op">&amp;</span><span class="kw">self</span><span class="op">,</span> f<span class="op">:</span> <span class="op">&amp;</span><span class="kw">mut</span> <span class="pp">fmt::</span>Formatter) <span class="op">-&gt;</span> <span class="pp">fmt::</span><span class="dt">Result</span> <span class="op">{</span></span>
+<span id="cb26-13"><a href=""></a>        <span class="cf">match</span> <span class="kw">self</span> <span class="op">{</span></span>
+<span id="cb26-14"><a href=""></a>            <span class="pp">ParseError::</span>EmptyInput <span class="op">=&gt;</span> <span class="pp">write!</span>(f<span class="op">,</span> <span class="st">"Input string is empty"</span>)<span class="op">,</span></span>
+<span id="cb26-15"><a href=""></a>            <span class="pp">ParseError::</span>InvalidNumber(s) <span class="op">=&gt;</span> <span class="pp">write!</span>(f<span class="op">,</span> <span class="st">"Invalid number: {}"</span><span class="op">,</span> s)<span class="op">,</span></span>
+<span id="cb26-16"><a href=""></a>            <span class="pp">ParseError::</span>OutOfRange(n) <span class="op">=&gt;</span> <span class="pp">write!</span>(f<span class="op">,</span> <span class="st">"Number {} out of range (1-100)"</span><span class="op">,</span> n)<span class="op">,</span></span>
+<span id="cb26-17"><a href=""></a>        <span class="op">}</span></span>
+<span id="cb26-18"><a href=""></a>    <span class="op">}</span></span>
+<span id="cb26-19"><a href=""></a><span class="op">}</span></span>
+<span id="cb26-20"><a href=""></a></span>
+<span id="cb26-21"><a href=""></a><span class="co">// Use custom error type</span></span>
+<span id="cb26-22"><a href=""></a><span class="kw">fn</span> parse_positive_number(input<span class="op">:</span> <span class="op">&amp;</span><span class="dt">str</span>) <span class="op">-&gt;</span> <span class="dt">Result</span><span class="op">&lt;</span><span class="dt">i32</span><span class="op">,</span> ParseError<span class="op">&gt;</span> <span class="op">{</span></span>
+<span id="cb26-23"><a href=""></a>    <span class="cf">if</span> input<span class="op">.</span>is_empty() <span class="op">{</span></span>
+<span id="cb26-24"><a href=""></a>        <span class="cf">return</span> <span class="cn">Err</span>(<span class="pp">ParseError::</span>EmptyInput)<span class="op">;</span></span>
+<span id="cb26-25"><a href=""></a>    <span class="op">}</span></span>
+<span id="cb26-26"><a href=""></a></span>
+<span id="cb26-27"><a href=""></a>    <span class="kw">let</span> num<span class="op">:</span> <span class="dt">i32</span> <span class="op">=</span> input<span class="op">.</span>trim()<span class="op">.</span>parse()</span>
+<span id="cb26-28"><a href=""></a>        <span class="op">.</span>map_err(<span class="op">|</span>_<span class="op">|</span> <span class="pp">ParseError::</span>InvalidNumber(input<span class="op">.</span>to_string()))<span class="op">?;</span></span>
+<span id="cb26-29"><a href=""></a></span>
+<span id="cb26-30"><a href=""></a>    <span class="cf">if</span> num <span class="op">&lt;</span> <span class="dv">1</span> <span class="op">||</span> num <span class="op">&gt;</span> <span class="dv">100</span> <span class="op">{</span></span>
+<span id="cb26-31"><a href=""></a>        <span class="cf">return</span> <span class="cn">Err</span>(<span class="pp">ParseError::</span>OutOfRange(num))<span class="op">;</span></span>
+<span id="cb26-32"><a href=""></a>    <span class="op">}</span></span>
+<span id="cb26-33"><a href=""></a></span>
+<span id="cb26-34"><a href=""></a>    <span class="cn">Ok</span>(num)</span>
+<span id="cb26-35"><a href=""></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <aside class="notes">
 <p>Custom errors make your API self-documenting. Users know exactly what can fail.</p>
 <style type="text/css">
@@ -1129,17 +1131,17 @@ Brandon M. Greenwell
 <section id="try-it-yourself-error-handling" class="slide level2 inverse smaller">
 <h2>Try It Yourself: Error Handling</h2>
 <p><strong>Challenge</strong>: Parse user input with good error messages</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb27"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb27-1"><a></a><span class="co">// Given this function signature:</span></span>
-<span id="cb27-2"><a></a><span class="kw">fn</span> parse_age(input<span class="op">:</span> <span class="op">&amp;</span><span class="dt">str</span>) <span class="op">-&gt;</span> <span class="dt">Result</span><span class="op">&lt;</span><span class="dt">u8</span><span class="op">,</span> <span class="dt">String</span><span class="op">&gt;</span> <span class="op">{</span></span>
-<span id="cb27-3"><a></a>    <span class="co">// </span><span class="al">TODO</span><span class="co">: Parse age (0-120), return helpful errors</span></span>
-<span id="cb27-4"><a></a><span class="op">}</span></span>
-<span id="cb27-5"><a></a></span>
-<span id="cb27-6"><a></a><span class="co">// Test cases:</span></span>
-<span id="cb27-7"><a></a><span class="pp">assert_eq!</span>(parse_age(<span class="st">"25"</span>)<span class="op">,</span> <span class="cn">Ok</span>(<span class="dv">25</span>))<span class="op">;</span></span>
-<span id="cb27-8"><a></a><span class="pp">assert!</span>(parse_age(<span class="st">""</span>)<span class="op">.</span>is_err())<span class="op">;</span>           <span class="co">// Empty</span></span>
-<span id="cb27-9"><a></a><span class="pp">assert!</span>(parse_age(<span class="st">"abc"</span>)<span class="op">.</span>is_err())<span class="op">;</span>        <span class="co">// Not a number</span></span>
-<span id="cb27-10"><a></a><span class="pp">assert!</span>(parse_age(<span class="st">"150"</span>)<span class="op">.</span>is_err())<span class="op">;</span>        <span class="co">// Out of range</span></span>
-<span id="cb27-11"><a></a><span class="pp">assert!</span>(parse_age(<span class="st">"-5"</span>)<span class="op">.</span>is_err())<span class="op">;</span>         <span class="co">// Negative</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb27"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb27-1"><a href=""></a><span class="co">// Given this function signature:</span></span>
+<span id="cb27-2"><a href=""></a><span class="kw">fn</span> parse_age(input<span class="op">:</span> <span class="op">&amp;</span><span class="dt">str</span>) <span class="op">-&gt;</span> <span class="dt">Result</span><span class="op">&lt;</span><span class="dt">u8</span><span class="op">,</span> <span class="dt">String</span><span class="op">&gt;</span> <span class="op">{</span></span>
+<span id="cb27-3"><a href=""></a>    <span class="co">// </span><span class="al">TODO</span><span class="co">: Parse age (0-120), return helpful errors</span></span>
+<span id="cb27-4"><a href=""></a><span class="op">}</span></span>
+<span id="cb27-5"><a href=""></a></span>
+<span id="cb27-6"><a href=""></a><span class="co">// Test cases:</span></span>
+<span id="cb27-7"><a href=""></a><span class="pp">assert_eq!</span>(parse_age(<span class="st">"25"</span>)<span class="op">,</span> <span class="cn">Ok</span>(<span class="dv">25</span>))<span class="op">;</span></span>
+<span id="cb27-8"><a href=""></a><span class="pp">assert!</span>(parse_age(<span class="st">""</span>)<span class="op">.</span>is_err())<span class="op">;</span>           <span class="co">// Empty</span></span>
+<span id="cb27-9"><a href=""></a><span class="pp">assert!</span>(parse_age(<span class="st">"abc"</span>)<span class="op">.</span>is_err())<span class="op">;</span>        <span class="co">// Not a number</span></span>
+<span id="cb27-10"><a href=""></a><span class="pp">assert!</span>(parse_age(<span class="st">"150"</span>)<span class="op">.</span>is_err())<span class="op">;</span>        <span class="co">// Out of range</span></span>
+<span id="cb27-11"><a href=""></a><span class="pp">assert!</span>(parse_age(<span class="st">"-5"</span>)<span class="op">.</span>is_err())<span class="op">;</span>         <span class="co">// Negative</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p><strong>Hint</strong>: Use <code>?</code> operator and <code>.map_err()</code> for error conversion.</p>
 <p><strong>Try on <a href="https://play.rust-lang.org/">Rust Playground</a></strong></p>
 <aside class="notes">
@@ -1159,51 +1161,51 @@ Brandon M. Greenwell
 <section id="integrative-pattern-all-three-concepts" class="slide level2 smaller">
 <h2>Integrative Pattern: All Three Concepts</h2>
 <p><strong>Combining iterators, smart pointers, and error handling:</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb28"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb28-1"><a></a><span class="kw">use</span> <span class="pp">std::rc::</span>Rc<span class="op">;</span></span>
-<span id="cb28-2"><a></a><span class="kw">use</span> <span class="pp">std::cell::</span>RefCell<span class="op">;</span></span>
-<span id="cb28-3"><a></a><span class="kw">use</span> <span class="pp">std::</span>fmt<span class="op">;</span></span>
-<span id="cb28-4"><a></a></span>
-<span id="cb28-5"><a></a><span class="at">#[</span>derive<span class="at">(</span><span class="bu">Debug</span><span class="op">,</span> <span class="bu">Clone</span><span class="at">)]</span></span>
-<span id="cb28-6"><a></a><span class="kw">struct</span> Config <span class="op">{</span></span>
-<span id="cb28-7"><a></a>    min_length<span class="op">:</span> <span class="dt">usize</span><span class="op">,</span></span>
-<span id="cb28-8"><a></a>    max_length<span class="op">:</span> <span class="dt">usize</span><span class="op">,</span></span>
-<span id="cb28-9"><a></a><span class="op">}</span></span>
-<span id="cb28-10"><a></a></span>
-<span id="cb28-11"><a></a><span class="at">#[</span>derive<span class="at">(</span><span class="bu">Debug</span><span class="at">)]</span></span>
-<span id="cb28-12"><a></a><span class="kw">enum</span> ProcessError <span class="op">{</span></span>
-<span id="cb28-13"><a></a>    LineTooShort(<span class="dt">String</span>)<span class="op">,</span></span>
-<span id="cb28-14"><a></a>    LineTooLong(<span class="dt">String</span>)<span class="op">,</span></span>
-<span id="cb28-15"><a></a><span class="op">}</span></span>
-<span id="cb28-16"><a></a></span>
-<span id="cb28-17"><a></a><span class="kw">impl</span> <span class="pp">fmt::</span><span class="bu">Display</span> <span class="cf">for</span> ProcessError <span class="op">{</span></span>
-<span id="cb28-18"><a></a>    <span class="kw">fn</span> fmt(<span class="op">&amp;</span><span class="kw">self</span><span class="op">,</span> f<span class="op">:</span> <span class="op">&amp;</span><span class="kw">mut</span> <span class="pp">fmt::</span>Formatter) <span class="op">-&gt;</span> <span class="pp">fmt::</span><span class="dt">Result</span> <span class="op">{</span></span>
-<span id="cb28-19"><a></a>        <span class="cf">match</span> <span class="kw">self</span> <span class="op">{</span></span>
-<span id="cb28-20"><a></a>            <span class="pp">ProcessError::</span>LineTooShort(line) <span class="op">=&gt;</span> <span class="pp">write!</span>(f<span class="op">,</span> <span class="st">"Line too short: {}"</span><span class="op">,</span> line)<span class="op">,</span></span>
-<span id="cb28-21"><a></a>            <span class="pp">ProcessError::</span>LineTooLong(line) <span class="op">=&gt;</span> <span class="pp">write!</span>(f<span class="op">,</span> <span class="st">"Line too long: {}"</span><span class="op">,</span> line)<span class="op">,</span></span>
-<span id="cb28-22"><a></a>        <span class="op">}</span></span>
-<span id="cb28-23"><a></a>    <span class="op">}</span></span>
-<span id="cb28-24"><a></a><span class="op">}</span></span>
-<span id="cb28-25"><a></a></span>
-<span id="cb28-26"><a></a><span class="kw">fn</span> process_lines(</span>
-<span id="cb28-27"><a></a>    lines<span class="op">:</span> <span class="op">&amp;</span>[<span class="dt">String</span>]<span class="op">,</span></span>
-<span id="cb28-28"><a></a>    config<span class="op">:</span> Rc<span class="op">&lt;</span>RefCell<span class="op">&lt;</span>Config<span class="op">&gt;&gt;,</span>  <span class="co">// Smart pointer for shared config</span></span>
-<span id="cb28-29"><a></a>) <span class="op">-&gt;</span> <span class="dt">Result</span><span class="op">&lt;</span><span class="dt">Vec</span><span class="op">&lt;</span><span class="dt">String</span><span class="op">&gt;,</span> ProcessError<span class="op">&gt;</span> <span class="op">{</span>  <span class="co">// Result for error handling</span></span>
-<span id="cb28-30"><a></a>    lines</span>
-<span id="cb28-31"><a></a>        <span class="op">.</span>iter()  <span class="co">// Iterator</span></span>
-<span id="cb28-32"><a></a>        <span class="op">.</span>map(<span class="op">|</span>line<span class="op">|</span> <span class="op">{</span></span>
-<span id="cb28-33"><a></a>            <span class="kw">let</span> cfg <span class="op">=</span> config<span class="op">.</span>borrow()<span class="op">;</span></span>
-<span id="cb28-34"><a></a>            <span class="kw">let</span> len <span class="op">=</span> line<span class="op">.</span>len()<span class="op">;</span></span>
-<span id="cb28-35"><a></a></span>
-<span id="cb28-36"><a></a>            <span class="cf">if</span> len <span class="op">&lt;</span> cfg<span class="op">.</span>min_length <span class="op">{</span></span>
-<span id="cb28-37"><a></a>                <span class="cn">Err</span>(<span class="pp">ProcessError::</span>LineTooShort(line<span class="op">.</span>clone()))</span>
-<span id="cb28-38"><a></a>            <span class="op">}</span> <span class="cf">else</span> <span class="cf">if</span> len <span class="op">&gt;</span> cfg<span class="op">.</span>max_length <span class="op">{</span></span>
-<span id="cb28-39"><a></a>                <span class="cn">Err</span>(<span class="pp">ProcessError::</span>LineTooLong(line<span class="op">.</span>clone()))</span>
-<span id="cb28-40"><a></a>            <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></span>
-<span id="cb28-41"><a></a>                <span class="cn">Ok</span>(line<span class="op">.</span>to_uppercase())  <span class="co">// Transform on success</span></span>
-<span id="cb28-42"><a></a>            <span class="op">}</span></span>
-<span id="cb28-43"><a></a>        <span class="op">}</span>)</span>
-<span id="cb28-44"><a></a>        <span class="op">.</span>collect()  <span class="co">// Collect into Result&lt;Vec&lt;_&gt;, _&gt;</span></span>
-<span id="cb28-45"><a></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb28"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb28-1"><a href=""></a><span class="kw">use</span> <span class="pp">std::rc::</span>Rc<span class="op">;</span></span>
+<span id="cb28-2"><a href=""></a><span class="kw">use</span> <span class="pp">std::cell::</span>RefCell<span class="op">;</span></span>
+<span id="cb28-3"><a href=""></a><span class="kw">use</span> <span class="pp">std::</span>fmt<span class="op">;</span></span>
+<span id="cb28-4"><a href=""></a></span>
+<span id="cb28-5"><a href=""></a><span class="at">#[</span>derive<span class="at">(</span><span class="bu">Debug</span><span class="op">,</span> <span class="bu">Clone</span><span class="at">)]</span></span>
+<span id="cb28-6"><a href=""></a><span class="kw">struct</span> Config <span class="op">{</span></span>
+<span id="cb28-7"><a href=""></a>    min_length<span class="op">:</span> <span class="dt">usize</span><span class="op">,</span></span>
+<span id="cb28-8"><a href=""></a>    max_length<span class="op">:</span> <span class="dt">usize</span><span class="op">,</span></span>
+<span id="cb28-9"><a href=""></a><span class="op">}</span></span>
+<span id="cb28-10"><a href=""></a></span>
+<span id="cb28-11"><a href=""></a><span class="at">#[</span>derive<span class="at">(</span><span class="bu">Debug</span><span class="at">)]</span></span>
+<span id="cb28-12"><a href=""></a><span class="kw">enum</span> ProcessError <span class="op">{</span></span>
+<span id="cb28-13"><a href=""></a>    LineTooShort(<span class="dt">String</span>)<span class="op">,</span></span>
+<span id="cb28-14"><a href=""></a>    LineTooLong(<span class="dt">String</span>)<span class="op">,</span></span>
+<span id="cb28-15"><a href=""></a><span class="op">}</span></span>
+<span id="cb28-16"><a href=""></a></span>
+<span id="cb28-17"><a href=""></a><span class="kw">impl</span> <span class="pp">fmt::</span><span class="bu">Display</span> <span class="cf">for</span> ProcessError <span class="op">{</span></span>
+<span id="cb28-18"><a href=""></a>    <span class="kw">fn</span> fmt(<span class="op">&amp;</span><span class="kw">self</span><span class="op">,</span> f<span class="op">:</span> <span class="op">&amp;</span><span class="kw">mut</span> <span class="pp">fmt::</span>Formatter) <span class="op">-&gt;</span> <span class="pp">fmt::</span><span class="dt">Result</span> <span class="op">{</span></span>
+<span id="cb28-19"><a href=""></a>        <span class="cf">match</span> <span class="kw">self</span> <span class="op">{</span></span>
+<span id="cb28-20"><a href=""></a>            <span class="pp">ProcessError::</span>LineTooShort(line) <span class="op">=&gt;</span> <span class="pp">write!</span>(f<span class="op">,</span> <span class="st">"Line too short: {}"</span><span class="op">,</span> line)<span class="op">,</span></span>
+<span id="cb28-21"><a href=""></a>            <span class="pp">ProcessError::</span>LineTooLong(line) <span class="op">=&gt;</span> <span class="pp">write!</span>(f<span class="op">,</span> <span class="st">"Line too long: {}"</span><span class="op">,</span> line)<span class="op">,</span></span>
+<span id="cb28-22"><a href=""></a>        <span class="op">}</span></span>
+<span id="cb28-23"><a href=""></a>    <span class="op">}</span></span>
+<span id="cb28-24"><a href=""></a><span class="op">}</span></span>
+<span id="cb28-25"><a href=""></a></span>
+<span id="cb28-26"><a href=""></a><span class="kw">fn</span> process_lines(</span>
+<span id="cb28-27"><a href=""></a>    lines<span class="op">:</span> <span class="op">&amp;</span>[<span class="dt">String</span>]<span class="op">,</span></span>
+<span id="cb28-28"><a href=""></a>    config<span class="op">:</span> Rc<span class="op">&lt;</span>RefCell<span class="op">&lt;</span>Config<span class="op">&gt;&gt;,</span>  <span class="co">// Smart pointer for shared config</span></span>
+<span id="cb28-29"><a href=""></a>) <span class="op">-&gt;</span> <span class="dt">Result</span><span class="op">&lt;</span><span class="dt">Vec</span><span class="op">&lt;</span><span class="dt">String</span><span class="op">&gt;,</span> ProcessError<span class="op">&gt;</span> <span class="op">{</span>  <span class="co">// Result for error handling</span></span>
+<span id="cb28-30"><a href=""></a>    lines</span>
+<span id="cb28-31"><a href=""></a>        <span class="op">.</span>iter()  <span class="co">// Iterator</span></span>
+<span id="cb28-32"><a href=""></a>        <span class="op">.</span>map(<span class="op">|</span>line<span class="op">|</span> <span class="op">{</span></span>
+<span id="cb28-33"><a href=""></a>            <span class="kw">let</span> cfg <span class="op">=</span> config<span class="op">.</span>borrow()<span class="op">;</span></span>
+<span id="cb28-34"><a href=""></a>            <span class="kw">let</span> len <span class="op">=</span> line<span class="op">.</span>len()<span class="op">;</span></span>
+<span id="cb28-35"><a href=""></a></span>
+<span id="cb28-36"><a href=""></a>            <span class="cf">if</span> len <span class="op">&lt;</span> cfg<span class="op">.</span>min_length <span class="op">{</span></span>
+<span id="cb28-37"><a href=""></a>                <span class="cn">Err</span>(<span class="pp">ProcessError::</span>LineTooShort(line<span class="op">.</span>clone()))</span>
+<span id="cb28-38"><a href=""></a>            <span class="op">}</span> <span class="cf">else</span> <span class="cf">if</span> len <span class="op">&gt;</span> cfg<span class="op">.</span>max_length <span class="op">{</span></span>
+<span id="cb28-39"><a href=""></a>                <span class="cn">Err</span>(<span class="pp">ProcessError::</span>LineTooLong(line<span class="op">.</span>clone()))</span>
+<span id="cb28-40"><a href=""></a>            <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></span>
+<span id="cb28-41"><a href=""></a>                <span class="cn">Ok</span>(line<span class="op">.</span>to_uppercase())  <span class="co">// Transform on success</span></span>
+<span id="cb28-42"><a href=""></a>            <span class="op">}</span></span>
+<span id="cb28-43"><a href=""></a>        <span class="op">}</span>)</span>
+<span id="cb28-44"><a href=""></a>        <span class="op">.</span>collect()  <span class="co">// Collect into Result&lt;Vec&lt;_&gt;, _&gt;</span></span>
+<span id="cb28-45"><a href=""></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <aside class="notes">
 <p>This is production Rust! Iterators for data flow, Rc/RefCell for shared state, Result for safety.</p>
 <style type="text/css">
@@ -1412,7 +1414,6 @@ Brandon M. Greenwell
 <p><strong>Lab 13</strong>: Due Sunday at 11:59 PM</p>
 <p><strong>Good luck and have fun with idiomatic Rust!</strong> 🦀</p>
 
-
 </section></section>
     </div>
   <div class="quarto-auto-generated-content" style="display: none;">
@@ -1422,20 +1423,20 @@ Brandon M. Greenwell
 </div></div>
 
   <script>window.backupDefine = window.define; window.define = undefined;</script>
-  <script src="../site_libs/revealjs/dist/reveal.js"></script>
+  <script src="IS4010_W13_Idiomatic_Rust_files/libs/revealjs/dist/reveal.js"></script>
   <!-- reveal.js plugins -->
-  <script src="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
-  <script src="../site_libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
-  <script src="../site_libs/revealjs/plugin/reveal-menu/menu.js"></script>
-  <script src="../site_libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
-  <script src="../site_libs/revealjs/plugin/reveal-chalkboard/plugin.js"></script>
-  <script src="../site_libs/revealjs/plugin/quarto-support/support.js"></script>
+  <script src="IS4010_W13_Idiomatic_Rust_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="IS4010_W13_Idiomatic_Rust_files/libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="IS4010_W13_Idiomatic_Rust_files/libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="IS4010_W13_Idiomatic_Rust_files/libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="IS4010_W13_Idiomatic_Rust_files/libs/revealjs/plugin/reveal-chalkboard/plugin.js"></script>
+  <script src="IS4010_W13_Idiomatic_Rust_files/libs/revealjs/plugin/quarto-support/support.js"></script>
   
 
-  <script src="../site_libs/revealjs/plugin/notes/notes.js"></script>
-  <script src="../site_libs/revealjs/plugin/search/search.js"></script>
-  <script src="../site_libs/revealjs/plugin/zoom/zoom.js"></script>
-  <script src="../site_libs/revealjs/plugin/math/math.js"></script>
+  <script src="IS4010_W13_Idiomatic_Rust_files/libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="IS4010_W13_Idiomatic_Rust_files/libs/revealjs/plugin/search/search.js"></script>
+  <script src="IS4010_W13_Idiomatic_Rust_files/libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="IS4010_W13_Idiomatic_Rust_files/libs/revealjs/plugin/math/math.js"></script>
   <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
 
   <script>
@@ -1701,7 +1702,7 @@ Brandon M. Greenwell
         }
           var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
           var mailtoRegex = new RegExp(/^mailto:/);
-            var filterRegex = new RegExp("https:\/\/bgreenwell\.github\.io\/is4010-website\/");
+            var filterRegex = new RegExp('/' + window.location.host + '/');
           var isInternal = (href) => {
               return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
           }

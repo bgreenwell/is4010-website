@@ -1,23 +1,25 @@
 <!DOCTYPE html>
 <html lang="en"><head>
-<link href="../images/uc-logo-2.png" rel="icon" type="image/png">
-<script src="../site_libs/clipboard/clipboard.min.js"></script>
-<script src="../site_libs/quarto-html/tabby.min.js"></script>
-<script src="../site_libs/quarto-html/popper.min.js"></script>
-<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
-<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-4d9afe2b8d18ee9fa5d0d57b5ed4214d.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.8.27">
+<script src="IS4010_W15_Advanced_AI_Workflows_files/libs/clipboard/clipboard.min.js"></script>
+<script src="IS4010_W15_Advanced_AI_Workflows_files/libs/quarto-html/tabby.min.js"></script>
+<script src="IS4010_W15_Advanced_AI_Workflows_files/libs/quarto-html/popper.min.js"></script>
+<script src="IS4010_W15_Advanced_AI_Workflows_files/libs/quarto-html/tippy.umd.min.js"></script>
+<link href="IS4010_W15_Advanced_AI_Workflows_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="IS4010_W15_Advanced_AI_Workflows_files/libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="IS4010_W15_Advanced_AI_Workflows_files/libs/quarto-html/quarto-syntax-highlighting-dark-f418161beb48e0141c760e455f12af2c.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.9.36">
 
   <meta name="author" content="Brandon M. Greenwell">
-  <title>IS 4010 - App Dev with AI – IS4010: AI-Enhanced Application Development</title>
+  <title>IS4010: AI-Enhanced Application Development</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
-  <link rel="stylesheet" href="../site_libs/revealjs/dist/reset.css">
-  <link rel="stylesheet" href="../site_libs/revealjs/dist/reveal.css">
+  <link rel="stylesheet" href="IS4010_W15_Advanced_AI_Workflows_files/libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="IS4010_W15_Advanced_AI_Workflows_files/libs/revealjs/dist/reveal.css">
   <style>
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
     div.columns{display: flex; gap: min(4vw, 1.5em);}
@@ -96,14 +98,14 @@
     code span.vs { color: #abe338; } /* VerbatimString */
     code span.wa { color: #dcc6e0; } /* Warning */
   </style>
-  <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto-a1d3734469117662d4af4794742e8c15.css">
+  <link rel="stylesheet" href="IS4010_W15_Advanced_AI_Workflows_files/libs/revealjs/dist/theme/quarto-fdc93494f2580a7e050003a96af38920.css">
   <link rel="stylesheet" href="custom.css">
-  <link href="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
-  <link href="../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
-  <link href="../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
-  <link href="../site_libs/revealjs/plugin/reveal-chalkboard/font-awesome/css/all.css" rel="stylesheet">
-  <link href="../site_libs/revealjs/plugin/reveal-chalkboard/style.css" rel="stylesheet">
-  <link href="../site_libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <link href="IS4010_W15_Advanced_AI_Workflows_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="IS4010_W15_Advanced_AI_Workflows_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="IS4010_W15_Advanced_AI_Workflows_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="IS4010_W15_Advanced_AI_Workflows_files/libs/revealjs/plugin/reveal-chalkboard/font-awesome/css/all.css" rel="stylesheet">
+  <link href="IS4010_W15_Advanced_AI_Workflows_files/libs/revealjs/plugin/reveal-chalkboard/style.css" rel="stylesheet">
+  <link href="IS4010_W15_Advanced_AI_Workflows_files/libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
   <style type="text/css">
     .reveal div.sourceCode {
       margin: 0;
@@ -509,14 +511,14 @@ For each issue found:
 <section id="code-review-examples" class="slide level2 smaller">
 <h2>Code Review Examples</h2>
 <p><strong>Reviewing for performance:</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb21"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a></a><span class="co"># Original code</span></span>
-<span id="cb21-2"><a></a><span class="kw">def</span> find_duplicates(items):</span>
-<span id="cb21-3"><a></a>    duplicates <span class="op">=</span> []</span>
-<span id="cb21-4"><a></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(items)):</span>
-<span id="cb21-5"><a></a>        <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(i <span class="op">+</span> <span class="dv">1</span>, <span class="bu">len</span>(items)):</span>
-<span id="cb21-6"><a></a>            <span class="cf">if</span> items[i] <span class="op">==</span> items[j]:</span>
-<span id="cb21-7"><a></a>                duplicates.append(items[i])</span>
-<span id="cb21-8"><a></a>    <span class="cf">return</span> duplicates</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb21"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href=""></a><span class="co"># Original code</span></span>
+<span id="cb21-2"><a href=""></a><span class="kw">def</span> find_duplicates(items):</span>
+<span id="cb21-3"><a href=""></a>    duplicates <span class="op">=</span> []</span>
+<span id="cb21-4"><a href=""></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(items)):</span>
+<span id="cb21-5"><a href=""></a>        <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(i <span class="op">+</span> <span class="dv">1</span>, <span class="bu">len</span>(items)):</span>
+<span id="cb21-6"><a href=""></a>            <span class="cf">if</span> items[i] <span class="op">==</span> items[j]:</span>
+<span id="cb21-7"><a href=""></a>                duplicates.append(items[i])</span>
+<span id="cb21-8"><a href=""></a>    <span class="cf">return</span> duplicates</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p><strong>Prompt:</strong></p>
 <pre><code>Review this Python function for performance issues. What's
 the time complexity? How could we improve it? Show a more
@@ -663,12 +665,12 @@ malformed rows, encoding issues</code></pre>
 <section id="try-it-yourself-code-review" class="slide level2 smaller">
 <h2>🎯 Try It Yourself: Code Review</h2>
 <p><strong>Exercise</strong>: Use AI to review this code</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb31"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a></a><span class="kw">def</span> calculate_total(items):</span>
-<span id="cb31-2"><a></a>    total <span class="op">=</span> <span class="dv">0</span></span>
-<span id="cb31-3"><a></a>    <span class="cf">for</span> i <span class="kw">in</span> items:</span>
-<span id="cb31-4"><a></a>        total <span class="op">=</span> total <span class="op">+</span> i[<span class="st">'price'</span>] <span class="op">*</span> i[<span class="st">'quantity'</span>]</span>
-<span id="cb31-5"><a></a>    tax <span class="op">=</span> total <span class="op">*</span> <span class="fl">0.08</span></span>
-<span id="cb31-6"><a></a>    <span class="cf">return</span> total <span class="op">+</span> tax</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb31"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href=""></a><span class="kw">def</span> calculate_total(items):</span>
+<span id="cb31-2"><a href=""></a>    total <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb31-3"><a href=""></a>    <span class="cf">for</span> i <span class="kw">in</span> items:</span>
+<span id="cb31-4"><a href=""></a>        total <span class="op">=</span> total <span class="op">+</span> i[<span class="st">'price'</span>] <span class="op">*</span> i[<span class="st">'quantity'</span>]</span>
+<span id="cb31-5"><a href=""></a>    tax <span class="op">=</span> total <span class="op">*</span> <span class="fl">0.08</span></span>
+<span id="cb31-6"><a href=""></a>    <span class="cf">return</span> total <span class="op">+</span> tax</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p><strong>Prompt to try:</strong></p>
 <pre><code>Review this Python function for:
 1. Edge cases and error handling
@@ -758,36 +760,36 @@ Focus on:
 <section id="documentation-example" class="slide level2 smaller">
 <h2>Documentation Example</h2>
 <p><strong>Code to document:</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb34"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb34-1"><a></a><span class="kw">pub</span> <span class="kw">fn</span> parse_log_entry(line<span class="op">:</span> <span class="op">&amp;</span><span class="dt">str</span>) <span class="op">-&gt;</span> <span class="dt">Result</span><span class="op">&lt;</span>LogEntry<span class="op">,</span> ParseError<span class="op">&gt;</span> <span class="op">{</span></span>
-<span id="cb34-2"><a></a>    <span class="co">// Implementation</span></span>
-<span id="cb34-3"><a></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb34"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb34-1"><a href=""></a><span class="kw">pub</span> <span class="kw">fn</span> parse_log_entry(line<span class="op">:</span> <span class="op">&amp;</span><span class="dt">str</span>) <span class="op">-&gt;</span> <span class="dt">Result</span><span class="op">&lt;</span>LogEntry<span class="op">,</span> ParseError<span class="op">&gt;</span> <span class="op">{</span></span>
+<span id="cb34-2"><a href=""></a>    <span class="co">// Implementation</span></span>
+<span id="cb34-3"><a href=""></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p><strong>AI-generated documentation:</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb35"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb35-1"><a></a><span class="co">/// Parses a single log entry from Apache Common Log Format.</span></span>
-<span id="cb35-2"><a></a><span class="co">///</span></span>
-<span id="cb35-3"><a></a><span class="co">/// This function takes a raw log line and converts it into a</span></span>
-<span id="cb35-4"><a></a><span class="co">/// structured `LogEntry`. It handles standard Apache CLF format</span></span>
-<span id="cb35-5"><a></a><span class="co">/// and gracefully handles malformed entries.</span></span>
-<span id="cb35-6"><a></a><span class="co">///</span></span>
-<span id="cb35-7"><a></a><span class="co">/// # Arguments</span></span>
-<span id="cb35-8"><a></a><span class="co">///</span></span>
-<span id="cb35-9"><a></a><span class="co">/// * `line` - A string slice containing a single log line</span></span>
-<span id="cb35-10"><a></a><span class="co">///</span></span>
-<span id="cb35-11"><a></a><span class="co">/// # Returns</span></span>
-<span id="cb35-12"><a></a><span class="co">///</span></span>
-<span id="cb35-13"><a></a><span class="co">/// * `Ok(LogEntry)` - Successfully parsed log entry</span></span>
-<span id="cb35-14"><a></a><span class="co">/// * `Err(ParseError)` - Line doesn't match expected format</span></span>
-<span id="cb35-15"><a></a><span class="co">///</span></span>
-<span id="cb35-16"><a></a><span class="co">/// # Examples</span></span>
-<span id="cb35-17"><a></a><span class="co">///</span></span>
-<span id="cb35-18"><a></a><span class="co">/// ```</span></span>
-<span id="cb35-19"><a></a><span class="co">/// let line = r#"127.0.0.1 - frank [10/Oct/2000:13:55:36 -0700] "GET /index.html HTTP/1.0" 200 2326"#;</span></span>
-<span id="cb35-20"><a></a><span class="co">/// let entry = parse_log_entry(line)?;</span></span>
-<span id="cb35-21"><a></a><span class="co">/// assert_eq!(entry.status_code, 200);</span></span>
-<span id="cb35-22"><a></a><span class="co">/// ```</span></span>
-<span id="cb35-23"><a></a><span class="co">///</span></span>
-<span id="cb35-24"><a></a><span class="co">/// # Performance</span></span>
-<span id="cb35-25"><a></a><span class="co">///</span></span>
-<span id="cb35-26"><a></a><span class="co">/// O(n) where n is the line length. Uses zero-copy parsing.</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb35"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb35-1"><a href=""></a><span class="co">/// Parses a single log entry from Apache Common Log Format.</span></span>
+<span id="cb35-2"><a href=""></a><span class="co">///</span></span>
+<span id="cb35-3"><a href=""></a><span class="co">/// This function takes a raw log line and converts it into a</span></span>
+<span id="cb35-4"><a href=""></a><span class="co">/// structured `LogEntry`. It handles standard Apache CLF format</span></span>
+<span id="cb35-5"><a href=""></a><span class="co">/// and gracefully handles malformed entries.</span></span>
+<span id="cb35-6"><a href=""></a><span class="co">///</span></span>
+<span id="cb35-7"><a href=""></a><span class="co">/// # Arguments</span></span>
+<span id="cb35-8"><a href=""></a><span class="co">///</span></span>
+<span id="cb35-9"><a href=""></a><span class="co">/// * `line` - A string slice containing a single log line</span></span>
+<span id="cb35-10"><a href=""></a><span class="co">///</span></span>
+<span id="cb35-11"><a href=""></a><span class="co">/// # Returns</span></span>
+<span id="cb35-12"><a href=""></a><span class="co">///</span></span>
+<span id="cb35-13"><a href=""></a><span class="co">/// * `Ok(LogEntry)` - Successfully parsed log entry</span></span>
+<span id="cb35-14"><a href=""></a><span class="co">/// * `Err(ParseError)` - Line doesn't match expected format</span></span>
+<span id="cb35-15"><a href=""></a><span class="co">///</span></span>
+<span id="cb35-16"><a href=""></a><span class="co">/// # Examples</span></span>
+<span id="cb35-17"><a href=""></a><span class="co">///</span></span>
+<span id="cb35-18"><a href=""></a><span class="co">/// ```</span></span>
+<span id="cb35-19"><a href=""></a><span class="co">/// let line = r#"127.0.0.1 - frank [10/Oct/2000:13:55:36 -0700] "GET /index.html HTTP/1.0" 200 2326"#;</span></span>
+<span id="cb35-20"><a href=""></a><span class="co">/// let entry = parse_log_entry(line)?;</span></span>
+<span id="cb35-21"><a href=""></a><span class="co">/// assert_eq!(entry.status_code, 200);</span></span>
+<span id="cb35-22"><a href=""></a><span class="co">/// ```</span></span>
+<span id="cb35-23"><a href=""></a><span class="co">///</span></span>
+<span id="cb35-24"><a href=""></a><span class="co">/// # Performance</span></span>
+<span id="cb35-25"><a href=""></a><span class="co">///</span></span>
+<span id="cb35-26"><a href=""></a><span class="co">/// O(n) where n is the line length. Uses zero-copy parsing.</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <aside class="notes">
 <p>This is good AI-generated documentation. Notice it includes why, examples, and performance notes. This is what to aim for.</p>
 <style type="text/css">
@@ -933,26 +935,26 @@ For each test:
 <h2>Building Custom Workflows</h2>
 <p><strong>Example: Git commit message generation</strong></p>
 <p><strong>Workflow:</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb43"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb43-1"><a></a><span class="co"># 1. Stage changes</span></span>
-<span id="cb43-2"><a></a><span class="fu">git</span> add .</span>
-<span id="cb43-3"><a></a></span>
-<span id="cb43-4"><a></a><span class="co"># 2. Get diff</span></span>
-<span id="cb43-5"><a></a><span class="fu">git</span> diff <span class="at">--staged</span></span>
-<span id="cb43-6"><a></a></span>
-<span id="cb43-7"><a></a><span class="co"># 3. Prompt AI</span></span>
-<span id="cb43-8"><a></a><span class="st">"Generate a conventional commit message for these changes.</span></span>
-<span id="cb43-9"><a></a><span class="st">Format: &lt;type&gt;(&lt;scope&gt;): &lt;description&gt;</span></span>
-<span id="cb43-10"><a></a><span class="st">Types: feat, fix, docs, refactor, test, chore</span></span>
-<span id="cb43-11"><a></a><span class="st">Keep description under 50 chars.</span></span>
-<span id="cb43-12"><a></a></span>
-<span id="cb43-13"><a></a><span class="st">Changes:</span></span>
-<span id="cb43-14"><a></a><span class="st">[paste diff]"</span></span>
-<span id="cb43-15"><a></a></span>
-<span id="cb43-16"><a></a><span class="co"># 4. Review and use</span></span>
-<span id="cb43-17"><a></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"[AI-generated message]"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb43"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb43-1"><a href=""></a><span class="co"># 1. Stage changes</span></span>
+<span id="cb43-2"><a href=""></a><span class="fu">git</span> add .</span>
+<span id="cb43-3"><a href=""></a></span>
+<span id="cb43-4"><a href=""></a><span class="co"># 2. Get diff</span></span>
+<span id="cb43-5"><a href=""></a><span class="fu">git</span> diff <span class="at">--staged</span></span>
+<span id="cb43-6"><a href=""></a></span>
+<span id="cb43-7"><a href=""></a><span class="co"># 3. Prompt AI</span></span>
+<span id="cb43-8"><a href=""></a><span class="st">"Generate a conventional commit message for these changes.</span></span>
+<span id="cb43-9"><a href=""></a><span class="st">Format: &lt;type&gt;(&lt;scope&gt;): &lt;description&gt;</span></span>
+<span id="cb43-10"><a href=""></a><span class="st">Types: feat, fix, docs, refactor, test, chore</span></span>
+<span id="cb43-11"><a href=""></a><span class="st">Keep description under 50 chars.</span></span>
+<span id="cb43-12"><a href=""></a></span>
+<span id="cb43-13"><a href=""></a><span class="st">Changes:</span></span>
+<span id="cb43-14"><a href=""></a><span class="st">[paste diff]"</span></span>
+<span id="cb43-15"><a href=""></a></span>
+<span id="cb43-16"><a href=""></a><span class="co"># 4. Review and use</span></span>
+<span id="cb43-17"><a href=""></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"[AI-generated message]"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p><strong>Automate further:</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb44"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb44-1"><a></a><span class="co"># Create a git alias or script</span></span>
-<span id="cb44-2"><a></a><span class="fu">git</span> config <span class="at">--global</span> alias.ai-commit <span class="st">'!git diff --staged | gemini "Generate commit message..."'</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb44"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb44-1"><a href=""></a><span class="co"># Create a git alias or script</span></span>
+<span id="cb44-2"><a href=""></a><span class="fu">git</span> config <span class="at">--global</span> alias.ai-commit <span class="st">'!git diff --staged | gemini "Generate commit message..."'</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p><a href="https://www.conventionalcommits.org/">📖 Conventional Commits</a></p>
 <aside class="notes">
 <p>Custom workflows save time on repetitive tasks. Identify your common patterns and create prompts for them.</p>
@@ -1048,17 +1050,17 @@ Audience: Junior developers familiar with Rust basics</code></pre>
 <h2>Evaluating AI Output Quality</h2>
 <p><strong>Red flags in AI-generated code:</strong></p>
 <p>🚩 <strong>Hallucinated APIs</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb47"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb47-1"><a></a><span class="co"># This doesn't exist in standard library!</span></span>
-<span id="cb47-2"><a></a><span class="im">from</span> requests <span class="im">import</span> super_fast_download</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb47"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb47-1"><a href=""></a><span class="co"># This doesn't exist in standard library!</span></span>
+<span id="cb47-2"><a href=""></a><span class="im">from</span> requests <span class="im">import</span> super_fast_download</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>🚩 <strong>Outdated patterns</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb48"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb48-1"><a></a><span class="co">// Old Rust 2015 style</span></span>
-<span id="cb48-2"><a></a><span class="kw">extern</span> <span class="kw">crate</span> serde<span class="op">;</span>  <span class="co">// Not needed in 2021 edition</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb48"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb48-1"><a href=""></a><span class="co">// Old Rust 2015 style</span></span>
+<span id="cb48-2"><a href=""></a><span class="kw">extern</span> <span class="kw">crate</span> serde<span class="op">;</span>  <span class="co">// Not needed in 2021 edition</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>🚩 <strong>Over-complicated</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb49"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb49-1"><a></a><span class="co"># AI wrote 50 lines when 5 would work</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb49"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb49-1"><a href=""></a><span class="co"># AI wrote 50 lines when 5 would work</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>🚩 <strong>Missing error handling</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb50"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb50-1"><a></a><span class="kw">let</span> file <span class="op">=</span> <span class="pp">File::</span>open(<span class="st">"data.txt"</span>)<span class="op">.</span>unwrap()<span class="op">;</span>  <span class="co">// Never unwrap in production!</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb50"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb50-1"><a href=""></a><span class="kw">let</span> file <span class="op">=</span> <span class="pp">File::</span>open(<span class="st">"data.txt"</span>)<span class="op">.</span>unwrap()<span class="op">;</span>  <span class="co">// Never unwrap in production!</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>🚩 <strong>Security issues</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb51"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb51-1"><a></a><span class="bu">eval</span>(user_input)  <span class="co"># Never do this!</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb51"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb51-1"><a href=""></a><span class="bu">eval</span>(user_input)  <span class="co"># Never do this!</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <aside class="notes">
 <p>Always verify AI code. Test it, review it, understand it. AI is a tool, not a replacement for your judgment.</p>
 <style type="text/css">
@@ -1244,8 +1246,8 @@ Please:
 <p><strong>Recommended workflow setup:</strong></p>
 <p><strong>In-editor (GitHub Copilot):</strong> - Tab completion for code - Function generation - Quick documentation</p>
 <p><strong>Terminal (Gemini CLI):</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb57"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb57-1"><a></a><span class="ex">gem</span> <span class="st">"explain this error: [error message]"</span></span>
-<span id="cb57-2"><a></a><span class="ex">gem</span> <span class="st">"write git commit message for: </span><span class="va">$(</span><span class="fu">git</span> diff <span class="at">--staged</span><span class="va">)</span><span class="st">"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb57"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb57-1"><a href=""></a><span class="ex">gem</span> <span class="st">"explain this error: [error message]"</span></span>
+<span id="cb57-2"><a href=""></a><span class="ex">gem</span> <span class="st">"write git commit message for: </span><span class="va">$(</span><span class="fu">git</span> diff <span class="at">--staged</span><span class="va">)</span><span class="st">"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p><strong>Browser (Claude/ChatGPT):</strong> - Architecture discussions - Complex debugging - Learning new concepts</p>
 <p><strong>Documentation (Cursor, Continue.dev):</strong> - Codebase-aware AI - Multi-file refactoring - Project-specific context</p>
 <p><strong>Create a personal prompt library:</strong> - Save effective prompts you use often - Customize for your projects - Share with teammates</p>
@@ -1377,7 +1379,6 @@ How could I improve this workflow for better results?</code></pre>
 <p><strong>You’re ready to be an AI-enhanced developer in the modern software industry!</strong> 🚀</p>
 <p><strong>Good luck with your final projects!</strong> 🦀</p>
 
-
 </section></section>
     </div>
   <div class="quarto-auto-generated-content" style="display: none;">
@@ -1387,20 +1388,20 @@ How could I improve this workflow for better results?</code></pre>
 </div></div>
 
   <script>window.backupDefine = window.define; window.define = undefined;</script>
-  <script src="../site_libs/revealjs/dist/reveal.js"></script>
+  <script src="IS4010_W15_Advanced_AI_Workflows_files/libs/revealjs/dist/reveal.js"></script>
   <!-- reveal.js plugins -->
-  <script src="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
-  <script src="../site_libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
-  <script src="../site_libs/revealjs/plugin/reveal-menu/menu.js"></script>
-  <script src="../site_libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
-  <script src="../site_libs/revealjs/plugin/reveal-chalkboard/plugin.js"></script>
-  <script src="../site_libs/revealjs/plugin/quarto-support/support.js"></script>
+  <script src="IS4010_W15_Advanced_AI_Workflows_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="IS4010_W15_Advanced_AI_Workflows_files/libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="IS4010_W15_Advanced_AI_Workflows_files/libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="IS4010_W15_Advanced_AI_Workflows_files/libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="IS4010_W15_Advanced_AI_Workflows_files/libs/revealjs/plugin/reveal-chalkboard/plugin.js"></script>
+  <script src="IS4010_W15_Advanced_AI_Workflows_files/libs/revealjs/plugin/quarto-support/support.js"></script>
   
 
-  <script src="../site_libs/revealjs/plugin/notes/notes.js"></script>
-  <script src="../site_libs/revealjs/plugin/search/search.js"></script>
-  <script src="../site_libs/revealjs/plugin/zoom/zoom.js"></script>
-  <script src="../site_libs/revealjs/plugin/math/math.js"></script>
+  <script src="IS4010_W15_Advanced_AI_Workflows_files/libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="IS4010_W15_Advanced_AI_Workflows_files/libs/revealjs/plugin/search/search.js"></script>
+  <script src="IS4010_W15_Advanced_AI_Workflows_files/libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="IS4010_W15_Advanced_AI_Workflows_files/libs/revealjs/plugin/math/math.js"></script>
   <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
 
   <script>
@@ -1666,7 +1667,7 @@ How could I improve this workflow for better results?</code></pre>
         }
           var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
           var mailtoRegex = new RegExp(/^mailto:/);
-            var filterRegex = new RegExp("https:\/\/bgreenwell\.github\.io\/is4010-website\/");
+            var filterRegex = new RegExp('/' + window.location.host + '/');
           var isInternal = (href) => {
               return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
           }

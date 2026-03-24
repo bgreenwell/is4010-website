@@ -1,23 +1,25 @@
 <!DOCTYPE html>
 <html lang="en"><head>
-<link href="../images/uc-logo-2.png" rel="icon" type="image/png">
-<script src="../site_libs/clipboard/clipboard.min.js"></script>
-<script src="../site_libs/quarto-html/tabby.min.js"></script>
-<script src="../site_libs/quarto-html/popper.min.js"></script>
-<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
-<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-4d9afe2b8d18ee9fa5d0d57b5ed4214d.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.8.27">
+<script src="IS4010_W02_AI_Copilots_files/libs/clipboard/clipboard.min.js"></script>
+<script src="IS4010_W02_AI_Copilots_files/libs/quarto-html/tabby.min.js"></script>
+<script src="IS4010_W02_AI_Copilots_files/libs/quarto-html/popper.min.js"></script>
+<script src="IS4010_W02_AI_Copilots_files/libs/quarto-html/tippy.umd.min.js"></script>
+<link href="IS4010_W02_AI_Copilots_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="IS4010_W02_AI_Copilots_files/libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="IS4010_W02_AI_Copilots_files/libs/quarto-html/quarto-syntax-highlighting-dark-f418161beb48e0141c760e455f12af2c.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.9.36">
 
   <meta name="author" content="Brandon M. Greenwell">
-  <title>IS 4010 - App Dev with AI – IS4010: AI-Enhanced Application Development</title>
+  <title>IS4010: AI-Enhanced Application Development</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
-  <link rel="stylesheet" href="../site_libs/revealjs/dist/reset.css">
-  <link rel="stylesheet" href="../site_libs/revealjs/dist/reveal.css">
+  <link rel="stylesheet" href="IS4010_W02_AI_Copilots_files/libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="IS4010_W02_AI_Copilots_files/libs/revealjs/dist/reveal.css">
   <style>
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
     div.columns{display: flex; gap: min(4vw, 1.5em);}
@@ -96,11 +98,13 @@
     code span.vs { color: #abe338; } /* VerbatimString */
     code span.wa { color: #dcc6e0; } /* Warning */
   </style>
-  <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto-a1d3734469117662d4af4794742e8c15.css">
-  <link href="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
-  <link href="../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
-  <link href="../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
-  <link href="../site_libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <link rel="stylesheet" href="IS4010_W02_AI_Copilots_files/libs/revealjs/dist/theme/quarto-fdc93494f2580a7e050003a96af38920.css">
+  <link href="IS4010_W02_AI_Copilots_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="IS4010_W02_AI_Copilots_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="IS4010_W02_AI_Copilots_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="IS4010_W02_AI_Copilots_files/libs/revealjs/plugin/reveal-chalkboard/font-awesome/css/all.css" rel="stylesheet">
+  <link href="IS4010_W02_AI_Copilots_files/libs/revealjs/plugin/reveal-chalkboard/style.css" rel="stylesheet">
+  <link href="IS4010_W02_AI_Copilots_files/libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
   <style type="text/css">
     .reveal div.sourceCode {
       margin: 0;
@@ -526,23 +530,23 @@ Brandon M. Greenwell
 <section class="slide level2">
 
 <p>An example of Numpy-style docstrings:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a></a><span class="kw">def</span> add(num1, num2):</span>
-<span id="cb6-2"><a></a>    <span class="co">"""</span></span>
-<span id="cb6-3"><a></a><span class="co">    Add two numbers together.</span></span>
-<span id="cb6-4"><a></a></span>
-<span id="cb6-5"><a></a><span class="co">    Parameters</span></span>
-<span id="cb6-6"><a></a><span class="co">    ----------</span></span>
-<span id="cb6-7"><a></a><span class="co">    num1 : int</span></span>
-<span id="cb6-8"><a></a><span class="co">        The first number.</span></span>
-<span id="cb6-9"><a></a><span class="co">    num2 : int</span></span>
-<span id="cb6-10"><a></a><span class="co">        The second number.</span></span>
-<span id="cb6-11"><a></a></span>
-<span id="cb6-12"><a></a><span class="co">    Returns</span></span>
-<span id="cb6-13"><a></a><span class="co">    -------</span></span>
-<span id="cb6-14"><a></a><span class="co">    int</span></span>
-<span id="cb6-15"><a></a><span class="co">        The sum of the two numbers.</span></span>
-<span id="cb6-16"><a></a><span class="co">    """</span></span>
-<span id="cb6-17"><a></a>    <span class="cf">return</span> num1 <span class="op">+</span> num2</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href=""></a><span class="kw">def</span> add(num1, num2):</span>
+<span id="cb6-2"><a href=""></a>    <span class="co">"""</span></span>
+<span id="cb6-3"><a href=""></a><span class="co">    Add two numbers together.</span></span>
+<span id="cb6-4"><a href=""></a></span>
+<span id="cb6-5"><a href=""></a><span class="co">    Parameters</span></span>
+<span id="cb6-6"><a href=""></a><span class="co">    ----------</span></span>
+<span id="cb6-7"><a href=""></a><span class="co">    num1 : int</span></span>
+<span id="cb6-8"><a href=""></a><span class="co">        The first number.</span></span>
+<span id="cb6-9"><a href=""></a><span class="co">    num2 : int</span></span>
+<span id="cb6-10"><a href=""></a><span class="co">        The second number.</span></span>
+<span id="cb6-11"><a href=""></a></span>
+<span id="cb6-12"><a href=""></a><span class="co">    Returns</span></span>
+<span id="cb6-13"><a href=""></a><span class="co">    -------</span></span>
+<span id="cb6-14"><a href=""></a><span class="co">    int</span></span>
+<span id="cb6-15"><a href=""></a><span class="co">        The sum of the two numbers.</span></span>
+<span id="cb6-16"><a href=""></a><span class="co">    """</span></span>
+<span id="cb6-17"><a href=""></a>    <span class="cf">return</span> num1 <span class="op">+</span> num2</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <aside class="notes">
 <p>Show the <a href="https://numpy.org/">NumPy</a> docstring format that will be used throughout the course. This is important for Lab 02 where students will be working with docstrings extensively.</p>
 <p>Point out: - The brief description first - Parameters section with types and descriptions<br>
@@ -769,17 +773,17 @@ Brandon M. Greenwell
 <h2><a href="https://github.com/google-gemini/gemini-cli">Gemini CLI</a></h2>
 <h3 id="free-ai-in-your-terminal">(Free) AI in your terminal 🖥️</h3>
 <p><strong>Common usage patterns:</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a></a><span class="co"># Start an interactive gemini session</span></span>
-<span id="cb7-2"><a></a><span class="ex">gemini</span></span>
-<span id="cb7-3"><a></a></span>
-<span id="cb7-4"><a></a><span class="co"># Quick code questions</span></span>
-<span id="cb7-5"><a></a><span class="ex">gemini</span> <span class="st">"How do I install [pytest](https://pytest.org/) in [Python](https://www.python.org/)?"</span></span>
-<span id="cb7-6"><a></a></span>
-<span id="cb7-7"><a></a><span class="co"># Code generation</span></span>
-<span id="cb7-8"><a></a><span class="ex">gemini</span> <span class="st">"Write a [Rust](https://www.rust-lang.org/) function to read a CSV file"</span></span>
-<span id="cb7-9"><a></a></span>
-<span id="cb7-10"><a></a><span class="co"># Debugging help</span></span>
-<span id="cb7-11"><a></a><span class="ex">gemini</span> <span class="st">"Explain this error: ImportError: No module named 'requests'"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href=""></a><span class="co"># Start an interactive gemini session</span></span>
+<span id="cb7-2"><a href=""></a><span class="ex">gemini</span></span>
+<span id="cb7-3"><a href=""></a></span>
+<span id="cb7-4"><a href=""></a><span class="co"># Quick code questions</span></span>
+<span id="cb7-5"><a href=""></a><span class="ex">gemini</span> <span class="st">"How do I install [pytest](https://pytest.org/) in [Python](https://www.python.org/)?"</span></span>
+<span id="cb7-6"><a href=""></a></span>
+<span id="cb7-7"><a href=""></a><span class="co"># Code generation</span></span>
+<span id="cb7-8"><a href=""></a><span class="ex">gemini</span> <span class="st">"Write a [Rust](https://www.rust-lang.org/) function to read a CSV file"</span></span>
+<span id="cb7-9"><a href=""></a></span>
+<span id="cb7-10"><a href=""></a><span class="co"># Debugging help</span></span>
+<span id="cb7-11"><a href=""></a><span class="ex">gemini</span> <span class="st">"Explain this error: ImportError: No module named 'requests'"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <aside class="notes">
 <p>Prepare a live demo of Gemini CLI. Have it installed and configured beforehand.</p>
 <p>Show practical examples: 1. Quick package installation help 2. Language translation (<a href="https://www.python.org/">Python</a> to <a href="https://www.rust-lang.org/">Rust</a>) 3. Error message explanation 4. Code review of a file: <code>cat script.py | gemini "Review this code for bugs"</code></p>
@@ -800,14 +804,14 @@ Brandon M. Greenwell
 <h2><a href="https://github.com/features/copilot/cli">GitHub Copilot CLI</a></h2>
 <h3 id="free-tier-natural-language-terminal">(Free tier) Natural language terminal ⌨️</h3>
 <p><strong>Common usage patterns:</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a></a><span class="co"># Ask how to do something in the terminal</span></span>
-<span id="cb8-2"><a></a><span class="ex">gh</span> copilot suggest <span class="st">"list all python files larger than 1MB"</span></span>
-<span id="cb8-3"><a></a></span>
-<span id="cb8-4"><a></a><span class="co"># Explain a complex command</span></span>
-<span id="cb8-5"><a></a><span class="ex">gh</span> copilot explain <span class="st">"find . -name '*.py' -size +1M"</span></span>
-<span id="cb8-6"><a></a></span>
-<span id="cb8-7"><a></a><span class="co"># Execute suggestions directly</span></span>
-<span id="cb8-8"><a></a><span class="co"># (Follow the prompts to execute or copy)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href=""></a><span class="co"># Ask how to do something in the terminal</span></span>
+<span id="cb8-2"><a href=""></a><span class="ex">gh</span> copilot suggest <span class="st">"list all python files larger than 1MB"</span></span>
+<span id="cb8-3"><a href=""></a></span>
+<span id="cb8-4"><a href=""></a><span class="co"># Explain a complex command</span></span>
+<span id="cb8-5"><a href=""></a><span class="ex">gh</span> copilot explain <span class="st">"find . -name '*.py' -size +1M"</span></span>
+<span id="cb8-6"><a href=""></a></span>
+<span id="cb8-7"><a href=""></a><span class="co"># Execute suggestions directly</span></span>
+<span id="cb8-8"><a href=""></a><span class="co"># (Follow the prompts to execute or copy)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <aside class="notes">
 <p>GitHub Copilot CLI is part of the <code>gh</code> (GitHub CLI) tool. It’s excellent for when you know <em>what</em> you want to do in the terminal but forget the exact flags or syntax.</p>
 <p>Key feature: It doesn’t just give you code; it gives you terminal commands and explains what they do before you run them.</p>
@@ -1007,29 +1011,29 @@ Brandon M. Greenwell
 <li>Please navigate to <a href="https://github.com/bgreenwell/is4010-course/blob/main/week02/lab02.md"><code>week02/lab02.md</code></a> in the course repository for step-by-step instructions</li>
 </ul>
 
-
 </section></section>
     </div>
   <div class="quarto-auto-generated-content" style="display: none;">
 <div class="footer footer-default">
-
+<p>IS4010: App Development with AI</p>
 </div>
 </div></div>
 
   <script>window.backupDefine = window.define; window.define = undefined;</script>
-  <script src="../site_libs/revealjs/dist/reveal.js"></script>
+  <script src="IS4010_W02_AI_Copilots_files/libs/revealjs/dist/reveal.js"></script>
   <!-- reveal.js plugins -->
-  <script src="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
-  <script src="../site_libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
-  <script src="../site_libs/revealjs/plugin/reveal-menu/menu.js"></script>
-  <script src="../site_libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
-  <script src="../site_libs/revealjs/plugin/quarto-support/support.js"></script>
+  <script src="IS4010_W02_AI_Copilots_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="IS4010_W02_AI_Copilots_files/libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="IS4010_W02_AI_Copilots_files/libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="IS4010_W02_AI_Copilots_files/libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="IS4010_W02_AI_Copilots_files/libs/revealjs/plugin/reveal-chalkboard/plugin.js"></script>
+  <script src="IS4010_W02_AI_Copilots_files/libs/revealjs/plugin/quarto-support/support.js"></script>
   
 
-  <script src="../site_libs/revealjs/plugin/notes/notes.js"></script>
-  <script src="../site_libs/revealjs/plugin/search/search.js"></script>
-  <script src="../site_libs/revealjs/plugin/zoom/zoom.js"></script>
-  <script src="../site_libs/revealjs/plugin/math/math.js"></script>
+  <script src="IS4010_W02_AI_Copilots_files/libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="IS4010_W02_AI_Copilots_files/libs/revealjs/plugin/search/search.js"></script>
+  <script src="IS4010_W02_AI_Copilots_files/libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="IS4010_W02_AI_Copilots_files/libs/revealjs/plugin/math/math.js"></script>
   <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
 
   <script>
@@ -1038,13 +1042,14 @@ Brandon M. Greenwell
       // https://revealjs.com/config/
       Reveal.initialize({
 'controlsAuto': true,
-'previewLinksAuto': false,
+'previewLinksAuto': true,
 'pdfSeparateFragments': false,
 'autoAnimateEasing': "ease",
 'autoAnimateDuration': 1,
 'autoAnimateUnmatched': true,
 'jumpToSlide': true,
-'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\"><kbd>r</kbd> Scroll View Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
+'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\"><kbd>r</kbd> Scroll View Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleChalkboard(event)\"><kbd>b</kbd> Toggle Chalkboard</a></li>\n<li class=\"slide-tool-item\" data-item=\"6\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleNotesCanvas(event)\"><kbd>c</kbd> Toggle Notes Canvas</a></li>\n<li class=\"slide-tool-item\" data-item=\"7\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.downloadDrawings(event)\"><kbd>d</kbd> Download Drawings</a></li>\n<li class=\"slide-tool-item\" data-item=\"8\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
+'chalkboard': {"buttons":true},
 'smaller': false,
  
         // Display controls in the bottom right corner
@@ -1065,7 +1070,7 @@ Brandon M. Greenwell
         progress: true,
 
         // Display the page number of the current slide
-        slideNumber: false,
+        slideNumber: 'c/t',
 
         // 'all', 'print', or 'speaker'
         showSlideNumber: 'all',
@@ -1215,7 +1220,7 @@ Brandon M. Greenwell
         },
 
         // reveal.js plugins
-        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, QuartoSupport,
+        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, RevealChalkboard, QuartoSupport,
 
           RevealMath,
           RevealNotes,
@@ -1294,7 +1299,7 @@ Brandon M. Greenwell
         }
           var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
           var mailtoRegex = new RegExp(/^mailto:/);
-            var filterRegex = new RegExp("https:\/\/bgreenwell\.github\.io\/is4010-website\/");
+            var filterRegex = new RegExp('/' + window.location.host + '/');
           var isInternal = (href) => {
               return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
           }
