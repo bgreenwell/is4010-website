@@ -1,0 +1,323 @@
+---
+title: "IS4010: AI-Enhanced Application Development"
+subtitle: "Week 14: CLI Applications"
+author: "Brandon M. Greenwell"
+format:
+  revealjs:
+    theme: dracula
+    transition: fade
+    slide-number: true
+    chalkboard: true
+    preview-links: auto
+    footer: "IS4010: App Development with AI"
+    scrollable: true
+    css: custom.css
+---
+
+## Week 14 Overview {.inverse}
+
+**Session 1: CLI Architecture & `clap`**
+- The anatomy of a CLI tool
+- Argument parsing with the `clap` crate
+- Subcommands and flags
+
+**Session 2: Capstone Integration**
+- Managing external crates (`rand`)
+- Structuring larger projects (modules)
+- Synthesizing traits, ownership, and error handling
+
+---
+
+# Session 1: CLI Architecture & `clap` {.inverse}
+
+---
+
+## The Power of the CLI
+
+While graphical interfaces (GUIs) are great for end-users, command-line interfaces (CLIs) remain the backbone of developer tooling.
+
+**Why build CLI tools?**
+- **Automation:** Easily scriptable in CI/CD pipelines
+- **Speed:** Faster for power users to execute complex commands
+- **Composability:** Can be piped together (`grep | wc -l`)
+- **Low Overhead:** Minimal system resources required
+
+*Think about the tools you use: `git`, `python`, `cargo`, `pytest`.*
+
+::: {.notes}
+Ask students what their favorite CLI tool is and why. 
+Remind them of Week 8 when we built a Python CLI using `argparse`. Today we do the Rust equivalent.
+:::
+
+---
+
+## Anatomy of a CLI Command
+
+```bash
+cargo run --bin password_gen -- random --length 16 --symbols
+```
+
+Let's break this down:
+1. **Executable:** `cargo run --bin password_gen --` (The program itself)
+2. **Subcommand:** `random` (A major action the program can take)
+3. **Option / Argument:** `--length 16` (A named parameter with a value)
+4. **Flag:** `--symbols` (A boolean toggle, no value needed)
+
+---
+
+## Argument Parsing in Rust
+
+You *could* parse arguments manually using `std::env::args()`. 
+
+```rust
+use std::env;
+
+fn main() {
+    let args: Vec<String> = env::args().collect();
+    if args.len() > 1 && args[1] == "random" {
+        // ... string matching, error handling, manual parsing ...
+    }
+}
+```
+
+**Why is this bad?**
+- Manual string parsing is error-prone.
+- Type conversion (String to integer) is tedious.
+- Generating `--help` menus manually is a nightmare.
+
+---
+
+## Enter `clap` 👏
+
+`clap` (Command Line Argument Parser) is the industry standard crate for building CLIs in Rust.
+
+**Features:**
+- Declarative macro-based or derive-based API
+- Automatic `--help` and `--version` generation
+- Built-in type validation and bounds checking
+- Subcommand routing
+
+*Fun Fact: The Cargo CLI itself uses `clap` under the hood!*
+
+---
+
+## Setting up `clap`
+
+First, add it to your `Cargo.toml`. We enable the `derive` feature to use Rust's powerful attribute macros.
+
+```toml
+[dependencies]
+clap = { version = "4.5", features = ["derive"] }
+```
+
+::: {.notes}
+Explain that `features = ["derive"]` is crucial. It allows us to define our CLI using Rust structs and enums rather than a builder pattern.
+:::
+
+---
+
+## Defining a CLI with `clap` (Struct)
+
+We define our expected arguments as a standard Rust `struct`.
+
+```rust
+use clap::Parser;
+
+/// A simple password generator
+#[derive(Parser, Debug)]
+#[command(version, about, long_about = None)]
+struct Cli {
+    /// Length of the password
+    #[arg(short, long, default_value_t = 12)]
+    length: u8,
+
+    /// Include special symbols
+    #[arg(short, long)]
+    symbols: bool,
+}
+
+fn main() {
+    let cli = Cli::parse();
+    println!("Length: {}, Symbols: {}", cli.length, cli.symbols);
+}
+```
+
+---
+
+## Subcommands with `clap` (Enum)
+
+For complex tools (like `git` or `cargo`), you use subcommands. We model these using an `enum`.
+
+```rust
+use clap::{Parser, Subcommand};
+
+#[derive(Parser)]
+#[command(version, about)]
+struct Cli {
+    #[command(subcommand)]
+    command: Commands,
+}
+
+#[derive(Subcommand)]
+enum Commands {
+    /// Generate a random password
+    Random {
+        #[arg(short, long, default_value_t = 12)]
+        length: u8,
+    },
+    /// Validate an existing password
+    Validate {
+        password: String,
+    },
+}
+```
+
+---
+
+## Pattern Matching on Subcommands
+
+Once parsed, we use Rust's powerful `match` statement to route the logic:
+
+```rust
+fn main() {
+    let cli = Cli::parse();
+
+    match &cli.command {
+        Commands::Random { length } => {
+            println!("Generating password of length {}", length);
+            // Call generation logic...
+        }
+        Commands::Validate { password } => {
+            println!("Validating: {}", password);
+            // Call validation logic...
+        }
+    }
+}
+```
+
+::: {.notes}
+Emphasize how cleanly this maps to Rust's ownership and enum features we learned in Week 11.
+:::
+
+---
+
+# Session 2: Capstone Integration {.inverse}
+
+---
+
+## Synthesizing 14 Weeks of Rust
+
+Building a CLI application isn't just about parsing arguments. It requires pulling together everything we've learned:
+
+1. **Project Structure:** Using modules (`mod`) to separate UI from logic.
+2. **External Crates:** Using `rand` for secure number generation.
+3. **Traits & Generics:** Printing output cleanly and handling diverse data types.
+4. **Ownership:** Safely passing strings between validators and generators.
+
+---
+
+## Structuring Larger Projects
+
+Don't put everything in `main.rs`. A professional CLI tool separates the argument parsing (the interface) from the actual business logic.
+
+```
+src/
+├── main.rs       # CLI definition and command routing
+├── generator.rs  # Password generation logic
+└── validator.rs  # Password strength calculation
+```
+
+In `main.rs`:
+```rust
+mod generator;
+mod validator;
+
+// Now you can call generator::generate_random(...)
+```
+
+---
+
+## Working with the `rand` Crate
+
+Randomness is not built into the Rust standard library (unlike Python's `import random`). You must use an external crate.
+
+```toml
+[dependencies]
+rand = "0.8"
+```
+
+```rust
+use rand::Rng;
+
+fn main() {
+    let mut rng = rand::thread_rng();
+    
+    // Generate a random boolean
+    let coin_flip: bool = rng.gen();
+    
+    // Generate a number in a range
+    let secret_pin: u32 = rng.gen_range(0..9999);
+}
+```
+
+---
+
+## Selecting Random Characters
+
+To generate a password, we often need to select random characters from a slice.
+
+```rust
+use rand::Rng;
+use rand::seq::SliceRandom;
+
+fn main() {
+    let charset: &[u8] = b"abcdefghijklmnopqrstuvwxyz0123456789";
+    let mut rng = rand::thread_rng();
+    
+    // Pick a random byte from the slice and convert to char
+    let random_char = *charset.choose(&mut rng).unwrap() as char;
+    
+    println!("Random char: {}", random_char);
+}
+```
+
+::: {.notes}
+Explain why we use `b"..."` (byte strings) and `SliceRandom`. This is a very common pattern in Rust for password generation.
+:::
+
+---
+
+## Lab 14: The Capstone CLI
+
+For your final lab, you will build a complete Password Utility CLI.
+
+**Features to implement:**
+1. `random`: Generate passwords from character sets.
+2. `passphrase`: Generate correct-horse-battery-staple style passphrases.
+3. `pin`: Generate numeric PINs.
+4. `validate`: Calculate entropy and check for common patterns in existing passwords.
+
+You will implement the logic in `generator.rs` and `validator.rs`, and wire it up to the `clap` parser in `main.rs`.
+
+---
+
+## Reviewing AI Prompting for Rust
+
+As you tackle the capstone, remember your AI Copilot strategies:
+
+* **Good Prompt:** "I need to implement this Rust function: `fn generate_pin(length: usize) -> String`. I have the `rand` crate installed. Explain the approach using a `for` loop before showing any code."
+* **Bad Prompt:** "Write my capstone lab."
+
+Use AI to help you understand compiler errors, explore the `clap` documentation, and suggest idiomatic iterator patterns.
+
+---
+
+## Wrapping Up Rust
+
+Congratulations! You've traversed the steepest learning curve in modern programming. 
+
+You've moved from Python's dynamic, interpreted flexibility to Rust's compiled, type-safe, and blazingly fast memory safety. 
+
+You now have the vocabulary and experience to choose the right tool for the job.
+
+**Next week:** Advanced AI Workflows.

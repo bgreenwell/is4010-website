@@ -1,5 +1,5 @@
 ---
-title: "Week 14: Multithreading"
+title: "Week 14: CLI applications"
 ---
 
 ## Introduction
@@ -8,12 +8,14 @@ This week you'll build a complete command-line application that synthesizes ever
 
 ## Recommended readings
 
-- [Chapter 16: Fearless concurrency](https://doc.rust-lang.org/book/ch16-00-concurrency.html) - Threads and message passing
+- [Chapter 12: An I/O Project: Building a Command Line Program](https://doc.rust-lang.org/book/ch12-00-an-io-project.html) - Rust Book
+- [Command Line Applications in Rust](https://rust-cli.github.io/book/) - Official CLI Book
+- [clap documentation](https://docs.rs/clap/latest/clap/) - Argument parser
 
 ## Lectures
 
-- [**Slides: Multithreaded applications**](../slides/IS4010_W14_Multithreaded_Applications.qmd)
+- [**Slides: CLI applications**](../slides/IS4010_W14_CLI_Applications.qmd)
 
 ## Lab assignment
 
-- [Lab 14: Multithreading](https://github.com/bgreenwell/is4010-rust/blob/main/week14/lab14.md)
+- [Lab 14: CLI application](https://github.com/bgreenwell/is4010-rust/blob/main/week14/lab14.md)

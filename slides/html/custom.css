@@ -1,0 +1,59 @@
+/* Custom CSS for IS4010 Week 3 Python Basics Slides */
+/* Reduces font sizes to help fit more content on slides */
+
+.reveal {
+  font-size: 30px; /* Default was ~32px */
+}
+
+.reveal h1 {
+  font-size: 2.2em; /* Slightly smaller than default 2.5em */
+}
+
+.reveal h2 {
+  font-size: 1.8em; /* Slightly smaller than default 2em */
+}
+
+.reveal h3 {
+  font-size: 1.4em; /* Slightly smaller than default 1.6em */
+}
+
+.reveal p, .reveal li {
+  font-size: 0.9em; /* 90% of current size */
+  line-height: 1.3; /* Tighter line spacing */
+}
+
+.reveal pre {
+  font-size: 0.8em; /* Smaller code blocks */
+  line-height: 1.2;
+}
+
+.reveal code {
+  font-size: 0.85em; /* Slightly smaller inline code */
+}
+
+/* Incremental lists with better spacing */
+.reveal .incremental li {
+  margin-bottom: 0.3em; /* Reduced from default */
+}
+
+/* Code blocks with better spacing */
+.reveal pre code {
+  max-height: 500px; /* Limit code block height */
+  line-height: 1.15;
+}
+
+/* Notes styling - keep readable for instructor */
+.reveal .notes {
+  font-size: 0.8em;
+  line-height: 1.2;
+}
+
+/* Better spacing for bullet points */
+.reveal ul, .reveal ol {
+  margin-bottom: 0.5em;
+}
+
+/* Compact spacing for nested elements */
+.reveal .incremental > * {
+  margin-bottom: 0.4em;
+}

@@ -1,0 +1,1531 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.25">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>IS4010: AI-Enhanced Application Development – IS 4010 - App Dev with AI</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../images/uc-logo-2.png" rel="icon" type="image/png">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-bcb4737e8fbcf1e9dfc00b59f8305558.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="nav-sidebar docked quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">IS4010: AI-Enhanced Application Development</li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+      <a href="../index.html" class="sidebar-logo-link">
+      </a>
+      <div class="sidebar-tools-main tools-wide">
+    <a href="https://github.com/bgreenwell/is4010-python" title="Python Labs" class="quarto-navigation-tool px-1" aria-label="Python Labs"><i class="bi bi-github"></i></a>
+    <a href="https://github.com/bgreenwell/is4010-rust" title="Rust Labs" class="quarto-navigation-tool px-1" aria-label="Rust Labs"><i class="bi bi-github"></i></a>
+    <a href="https://uc.instructure.com/" title="Canvas" class="quarto-navigation-tool px-1" aria-label="Canvas"><i class="bi bi-journal-text"></i></a>
+</div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Home</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../syllabus.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Syllabus</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../project.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Final project</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false">
+ <span class="menu-text">Resources</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../resources/setup.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Setup guide</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../resources/troubleshooting.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Troubleshooting</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../resources/packages.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Python packages</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false">
+ <span class="menu-text">Weekly schedule</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../weeks/week01.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 01: Toolkit setup</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../weeks/week02.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 02: AI-assisted dev</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../weeks/week03.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 03: Python basics</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../weeks/week04.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 04: Data structures</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../weeks/week05.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 05: Functions &amp; errors</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../weeks/week06.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 06: OOP</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../weeks/week07.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 07: External data</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../weeks/week08.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 08: Professional Python</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../weeks/week09.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 09: Welcome to Rust</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../weeks/week10.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 10: Soul of Rust</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../weeks/week11.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 11: Structuring code</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../weeks/week12.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 12: Generics &amp; traits</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../weeks/week13.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 13: Idiomatic Rust</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../weeks/week14.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 14: Multithreading</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#week-7-working-with-external-data---interactive-notebook" id="toc-week-7-working-with-external-data---interactive-notebook" class="nav-link active" data-scroll-target="#week-7-working-with-external-data---interactive-notebook">Week 7: Working with External Data - Interactive Notebook</a></li>
+  <li><a href="#working-with-external-data" id="toc-working-with-external-data" class="nav-link" data-scroll-target="#working-with-external-data">🌐 Working with External Data</a>
+  <ul class="collapse">
+  <li><a href="#from-local-files-to-the-entire-web" id="toc-from-local-files-to-the-entire-web" class="nav-link" data-scroll-target="#from-local-files-to-the-entire-web">From local files to the entire web 🎯</a></li>
+  <li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link" data-scroll-target="#learning-objectives">Learning Objectives</a></li>
+  <li><a href="#how-to-use-this-notebook" id="toc-how-to-use-this-notebook" class="nav-link" data-scroll-target="#how-to-use-this-notebook">How to Use This Notebook</a></li>
+  </ul></li>
+  <li><a href="#part-1-files-json" id="toc-part-1-files-json" class="nav-link" data-scroll-target="#part-1-files-json">Part 1: Files &amp; JSON 📁</a>
+  <ul class="collapse">
+  <li><a href="#the-problem-programs-have-amnesia" id="toc-the-problem-programs-have-amnesia" class="nav-link" data-scroll-target="#the-problem-programs-have-amnesia">🤔 The Problem: Programs Have Amnesia</a>
+  <ul class="collapse">
+  <li><a href="#when-the-script-ends-everything-disappears" id="toc-when-the-script-ends-everything-disappears" class="nav-link" data-scroll-target="#when-the-script-ends-everything-disappears">When the script ends, everything disappears</a></li>
+  </ul></li>
+  <li><a href="#reading-and-writing-files-in-python" id="toc-reading-and-writing-files-in-python" class="nav-link" data-scroll-target="#reading-and-writing-files-in-python">Reading and Writing Files in Python</a>
+  <ul class="collapse">
+  <li><a href="#the-standard-pattern-with-open-context-manager" id="toc-the-standard-pattern-with-open-context-manager" class="nav-link" data-scroll-target="#the-standard-pattern-with-open-context-manager">The standard pattern: <code>with open()</code> context manager</a></li>
+  <li><a href="#exercise-1-file-writing-practice" id="toc-exercise-1-file-writing-practice" class="nav-link" data-scroll-target="#exercise-1-file-writing-practice">🏋️‍♀️ Exercise 1: File Writing Practice</a></li>
+  </ul></li>
+  <li><a href="#the-problem-with-plain-text-files" id="toc-the-problem-with-plain-text-files" class="nav-link" data-scroll-target="#the-problem-with-plain-text-files">🚧 The Problem with Plain Text Files</a>
+  <ul class="collapse">
+  <li><a href="#text-is-unstructured-and-hard-to-parse" id="toc-text-is-unstructured-and-hard-to-parse" class="nav-link" data-scroll-target="#text-is-unstructured-and-hard-to-parse">Text is unstructured and hard to parse</a></li>
+  </ul></li>
+  <li><a href="#enter-json-the-universal-data-format" id="toc-enter-json-the-universal-data-format" class="nav-link" data-scroll-target="#enter-json-the-universal-data-format">Enter JSON: The Universal Data Format 🌍</a>
+  <ul class="collapse">
+  <li><a href="#javascript-object-notation---the-language-of-the-web" id="toc-javascript-object-notation---the-language-of-the-web" class="nav-link" data-scroll-target="#javascript-object-notation---the-language-of-the-web">JavaScript Object Notation - The language of the web</a></li>
+  </ul></li>
+  <li><a href="#json-structure-maps-to-python" id="toc-json-structure-maps-to-python" class="nav-link" data-scroll-target="#json-structure-maps-to-python">JSON Structure Maps to Python</a>
+  <ul class="collapse">
+  <li><a href="#almost-identical-syntax" id="toc-almost-identical-syntax" class="nav-link" data-scroll-target="#almost-identical-syntax">Almost identical syntax</a></li>
+  </ul></li>
+  <li><a href="#using-pythons-json-library" id="toc-using-pythons-json-library" class="nav-link" data-scroll-target="#using-pythons-json-library">Using Python’s <code>json</code> Library</a>
+  <ul class="collapse">
+  <li><a href="#two-key-functions-dump-and-load" id="toc-two-key-functions-dump-and-load" class="nav-link" data-scroll-target="#two-key-functions-dump-and-load">Two key functions: <code>dump()</code> and <code>load()</code></a></li>
+  <li><a href="#what-the-generated-json-looks-like" id="toc-what-the-generated-json-looks-like" class="nav-link" data-scroll-target="#what-the-generated-json-looks-like">🎯 What the Generated JSON Looks Like</a></li>
+  <li><a href="#exercise-2-json-practice" id="toc-exercise-2-json-practice" class="nav-link" data-scroll-target="#exercise-2-json-practice">🏋️‍♀️ Exercise 2: JSON Practice</a></li>
+  </ul></li>
+  <li><a href="#why-json-matters-for-apis-preview" id="toc-why-json-matters-for-apis-preview" class="nav-link" data-scroll-target="#why-json-matters-for-apis-preview">💡 Why JSON Matters for APIs (Preview)</a>
+  <ul class="collapse">
+  <li><a href="#the-connection-to-part-2" id="toc-the-connection-to-part-2" class="nav-link" data-scroll-target="#the-connection-to-part-2">The connection to Part 2</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#part-2-working-with-apis" id="toc-part-2-working-with-apis" class="nav-link" data-scroll-target="#part-2-working-with-apis">Part 2: Working with APIs 🔌</a>
+  <ul class="collapse">
+  <li><a href="#what-is-an-api" id="toc-what-is-an-api" class="nav-link" data-scroll-target="#what-is-an-api">What is an API?</a>
+  <ul class="collapse">
+  <li><a href="#application-programming-interface" id="toc-application-programming-interface" class="nav-link" data-scroll-target="#application-programming-interface">Application Programming Interface</a></li>
+  </ul></li>
+  <li><a href="#web-apis-apps-talking-over-the-internet" id="toc-web-apis-apps-talking-over-the-internet" class="nav-link" data-scroll-target="#web-apis-apps-talking-over-the-internet">🌐 Web APIs: Apps Talking Over the Internet</a>
+  <ul class="collapse">
+  <li><a href="#http-as-the-communication-protocol" id="toc-http-as-the-communication-protocol" class="nav-link" data-scroll-target="#http-as-the-communication-protocol">HTTP as the communication protocol</a></li>
+  </ul></li>
+  <li><a href="#anatomy-of-a-web-api-request" id="toc-anatomy-of-a-web-api-request" class="nav-link" data-scroll-target="#anatomy-of-a-web-api-request">🔍 Anatomy of a Web API Request</a>
+  <ul class="collapse">
+  <li><a href="#url-structure-and-http-methods" id="toc-url-structure-and-http-methods" class="nav-link" data-scroll-target="#url-structure-and-http-methods">URL structure and HTTP methods</a></li>
+  </ul></li>
+  <li><a href="#installing-the-requests-library" id="toc-installing-the-requests-library" class="nav-link" data-scroll-target="#installing-the-requests-library">Installing the <code>requests</code> Library</a>
+  <ul class="collapse">
+  <li><a href="#pythons-most-popular-http-library" id="toc-pythons-most-popular-http-library" class="nav-link" data-scroll-target="#pythons-most-popular-http-library">Python’s most popular HTTP library</a></li>
+  </ul></li>
+  <li><a href="#making-your-first-api-request" id="toc-making-your-first-api-request" class="nav-link" data-scroll-target="#making-your-first-api-request">Making Your First API Request</a>
+  <ul class="collapse">
+  <li><a href="#get-request-to-a-public-api" id="toc-get-request-to-a-public-api" class="nav-link" data-scroll-target="#get-request-to-a-public-api">GET request to a public API</a></li>
+  <li><a href="#exercise-3-explore-pokeapi" id="toc-exercise-3-explore-pokeapi" class="nav-link" data-scroll-target="#exercise-3-explore-pokeapi">🏋️‍♀️ Exercise 3: Explore PokeAPI</a></li>
+  </ul></li>
+  <li><a href="#http-status-codes" id="toc-http-status-codes" class="nav-link" data-scroll-target="#http-status-codes">📊 HTTP Status Codes</a>
+  <ul class="collapse">
+  <li><a href="#the-servers-way-of-telling-you-what-happened" id="toc-the-servers-way-of-telling-you-what-happened" class="nav-link" data-scroll-target="#the-servers-way-of-telling-you-what-happened">The server’s way of telling you what happened</a></li>
+  </ul></li>
+  <li><a href="#the-json-connection-same-format-different-source" id="toc-the-json-connection-same-format-different-source" class="nav-link" data-scroll-target="#the-json-connection-same-format-different-source">🔗 The JSON Connection: Same Format, Different Source</a>
+  <ul class="collapse">
+  <li><a href="#comparison-files-vs-apis" id="toc-comparison-files-vs-apis" class="nav-link" data-scroll-target="#comparison-files-vs-apis">Comparison: Files vs APIs</a></li>
+  </ul></li>
+  <li><a href="#real-world-api-examples" id="toc-real-world-api-examples" class="nav-link" data-scroll-target="#real-world-api-examples">🚀 Real-World API Examples</a>
+  <ul class="collapse">
+  <li><a href="#apis-you-can-use-right-now-no-api-key-needed" id="toc-apis-you-can-use-right-now-no-api-key-needed" class="nav-link" data-scroll-target="#apis-you-can-use-right-now-no-api-key-needed">APIs you can use right now (no API key needed)</a></li>
+  <li><a href="#exercise-4-try-different-apis" id="toc-exercise-4-try-different-apis" class="nav-link" data-scroll-target="#exercise-4-try-different-apis">🏋️‍♀️ Exercise 4: Try Different APIs</a></li>
+  </ul></li>
+  <li><a href="#error-handling-with-apis" id="toc-error-handling-with-apis" class="nav-link" data-scroll-target="#error-handling-with-apis">🛡️ Error Handling with APIs</a>
+  <ul class="collapse">
+  <li><a href="#networks-are-unreliable---plan-for-failure" id="toc-networks-are-unreliable---plan-for-failure" class="nav-link" data-scroll-target="#networks-are-unreliable---plan-for-failure">Networks are unreliable - plan for failure</a></li>
+  <li><a href="#error-handling-best-practices" id="toc-error-handling-best-practices" class="nav-link" data-scroll-target="#error-handling-best-practices">Error Handling Best Practices</a></li>
+  </ul></li>
+  <li><a href="#api-best-practices" id="toc-api-best-practices" class="nav-link" data-scroll-target="#api-best-practices">⚡ API Best Practices</a>
+  <ul class="collapse">
+  <li><a href="#being-a-good-api-citizen" id="toc-being-a-good-api-citizen" class="nav-link" data-scroll-target="#being-a-good-api-citizen">Being a good API citizen</a></li>
+  </ul></li>
+  <li><a href="#putting-it-all-together-files-apis" id="toc-putting-it-all-together-files-apis" class="nav-link" data-scroll-target="#putting-it-all-together-files-apis">🎯 Putting It All Together: Files + APIs</a>
+  <ul class="collapse">
+  <li><a href="#a-complete-data-workflow" id="toc-a-complete-data-workflow" class="nav-link" data-scroll-target="#a-complete-data-workflow">A complete data workflow</a></li>
+  <li><a href="#exercise-5-complete-workflow" id="toc-exercise-5-complete-workflow" class="nav-link" data-scroll-target="#exercise-5-complete-workflow">🏋️‍♀️ Exercise 5: Complete Workflow</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#summary-and-next-steps" id="toc-summary-and-next-steps" class="nav-link" data-scroll-target="#summary-and-next-steps">Summary and Next Steps</a>
+  <ul class="collapse">
+  <li><a href="#what-youve-learned" id="toc-what-youve-learned" class="nav-link" data-scroll-target="#what-youve-learned">What You’ve Learned 🎯</a></li>
+  <li><a href="#key-takeaways" id="toc-key-takeaways" class="nav-link" data-scroll-target="#key-takeaways">Key Takeaways ✨</a></li>
+  <li><a href="#career-relevance" id="toc-career-relevance" class="nav-link" data-scroll-target="#career-relevance">Career Relevance 🚀</a>
+  <ul class="collapse">
+  <li><a href="#technical-interview-preparation" id="toc-technical-interview-preparation" class="nav-link" data-scroll-target="#technical-interview-preparation">Technical Interview Preparation</a></li>
+  <li><a href="#industry-applications" id="toc-industry-applications" class="nav-link" data-scroll-target="#industry-applications">Industry Applications</a></li>
+  </ul></li>
+  <li><a href="#next-steps" id="toc-next-steps" class="nav-link" data-scroll-target="#next-steps">Next Steps 🎯</a></li>
+  <li><a href="#resources-for-continued-learning" id="toc-resources-for-continued-learning" class="nav-link" data-scroll-target="#resources-for-continued-learning">Resources for Continued Learning 📚</a>
+  <ul class="collapse">
+  <li><a href="#official-documentation" id="toc-official-documentation" class="nav-link" data-scroll-target="#official-documentation">Official Documentation</a></li>
+  <li><a href="#learning-resources" id="toc-learning-resources" class="nav-link" data-scroll-target="#learning-resources">Learning Resources</a></li>
+  <li><a href="#ai-assisted-development" id="toc-ai-assisted-development" class="nav-link" data-scroll-target="#ai-assisted-development">AI-Assisted Development</a></li>
+  </ul></li>
+  <li><a href="#final-thoughts" id="toc-final-thoughts" class="nav-link" data-scroll-target="#final-thoughts">Final Thoughts 💭</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">IS4010: AI-Enhanced Application Development</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="week-7-working-with-external-data---interactive-notebook" class="level2">
+<h2 class="anchored" data-anchor-id="week-7-working-with-external-data---interactive-notebook">Week 7: Working with External Data - Interactive Notebook</h2>
+<p><strong>Instructor:</strong> Brandon M. Greenwell <strong>Course:</strong> IS4010 - AI-Enhanced Application Development</p>
+<hr>
+</section>
+<section id="working-with-external-data" class="level2">
+<h2 class="anchored" data-anchor-id="working-with-external-data">🌐 Working with External Data</h2>
+<section id="from-local-files-to-the-entire-web" class="level3">
+<h3 class="anchored" data-anchor-id="from-local-files-to-the-entire-web">From local files to the entire web 🎯</h3>
+<p><strong>The progression</strong>: Your app → Files → JSON → APIs → The world</p>
+<ul>
+<li><strong>Why this matters</strong>: No app exists in isolation - data flows between systems constantly</li>
+<li><strong>Real-world reality</strong>: Twitter, Stripe, GitHub, OpenAI - all expose APIs you can use</li>
+<li><strong>Career skill</strong>: API integration is one of the most in-demand programming capabilities</li>
+<li><strong>This week</strong>: Build apps that persist data locally AND fetch live data from the internet</li>
+</ul>
+<blockquote class="blockquote">
+<p>📝 <strong>Additional Notes</strong>: <strong>Session structure</strong>: Part 1 covers file I/O and JSON (the foundation of data persistence). Part 2 covers HTTP APIs (connecting to external services). <strong>Unified theme</strong>: JSON is the universal language that makes data portable across files and networks. <strong>Lab 07 application</strong>: You’ll combine both concepts - save/load local data AND fetch live API data.</p>
+</blockquote>
+</section>
+<section id="learning-objectives" class="level3">
+<h3 class="anchored" data-anchor-id="learning-objectives">Learning Objectives</h3>
+<p>By the end of this notebook, you will be able to: - <strong>Read and write files</strong> using Python’s context manager pattern - <strong>Work with JSON</strong> for structured data storage and exchange - <strong>Make HTTP requests</strong> to public APIs using the requests library - <strong>Parse JSON responses</strong> from APIs into Python data structures - <strong>Handle errors</strong> gracefully when working with files and network requests - <strong>Combine file persistence with API integration</strong> for real-world applications</p>
+</section>
+<section id="how-to-use-this-notebook" class="level3">
+<h3 class="anchored" data-anchor-id="how-to-use-this-notebook">How to Use This Notebook</h3>
+<ul>
+<li><strong>Run each cell</strong> by clicking the play button or pressing Shift+Enter</li>
+<li><strong>Experiment</strong> with the code - modify values and see what happens</li>
+<li><strong>Complete the exercises</strong> marked with 🏋️‍♀️ for hands-on practice</li>
+<li><strong>Use AI assistants</strong> to help you understand concepts or explore variations</li>
+</ul>
+<hr>
+</section>
+</section>
+<section id="part-1-files-json" class="level1">
+<h1>Part 1: Files &amp; JSON 📁</h1>
+<section id="the-problem-programs-have-amnesia" class="level2">
+<h2 class="anchored" data-anchor-id="the-problem-programs-have-amnesia">🤔 The Problem: Programs Have Amnesia</h2>
+<section id="when-the-script-ends-everything-disappears" class="level3">
+<h3 class="anchored" data-anchor-id="when-the-script-ends-everything-disappears">When the script ends, everything disappears</h3>
+<p><strong>Every program so far</strong>: Variables, lists, dictionaries - all gone when the program exits</p>
+<p><strong>Real apps need memory</strong>: - Contact lists (your phone remembers contacts even when apps close) - Game progress (video games save your state) - User preferences (VS Code remembers your recent files) - Shopping carts (e-commerce sites persist your cart)</p>
+<p><strong>The solution</strong>: <strong>Persistence</strong> - saving data to permanent storage (files, databases)</p>
+<p><strong>This enables</strong>: - Apps that remember state between runs - Data analysis on large datasets - Sharing data between programs</p>
+<blockquote class="blockquote">
+<p>📝 <strong>Additional Notes</strong>: <strong>Professional context</strong>: All production applications need some form of data persistence, whether it’s files, databases, or cloud storage. <strong>Development workflow</strong>: File-based persistence is perfect for prototyping and small applications before scaling to databases.</p>
+</blockquote>
+</section>
+</section>
+<section id="reading-and-writing-files-in-python" class="level2">
+<h2 class="anchored" data-anchor-id="reading-and-writing-files-in-python">Reading and Writing Files in Python</h2>
+<section id="the-standard-pattern-with-open-context-manager" class="level3">
+<h3 class="anchored" data-anchor-id="the-standard-pattern-with-open-context-manager">The standard pattern: <code>with open()</code> context manager</h3>
+<p>Python’s built-in file handling uses the <strong>context manager</strong> pattern for safe file operations:</p>
+<ul>
+<li><strong>Why <code>with</code>?</strong>: Automatically closes the file even if errors occur</li>
+<li><strong>File modes</strong>: <code>"r"</code> (read), <code>"w"</code> (write/overwrite), <code>"a"</code> (append)</li>
+<li><strong>Best practice</strong>: Always use <code>with</code> - prevents file corruption and resource leaks</li>
+<li>📚 <a href="https://docs.python.org/3/tutorial/inputoutput.html#reading-and-writing-files">Python file I/O documentation</a></li>
+</ul>
+<div id="cell-4" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Write to a file (overwrites existing content)</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">"my_note.txt"</span>, <span class="st">"w"</span>) <span class="im">as</span> f:</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    f.write(<span class="st">"Hello from our application!"</span>)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Read the content back</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">"my_note.txt"</span>, <span class="st">"r"</span>) <span class="im">as</span> f:</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    content <span class="op">=</span> f.read()</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(content)  <span class="co"># Output: Hello from our application!</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="exercise-1-file-writing-practice" class="level3">
+<h3 class="anchored" data-anchor-id="exercise-1-file-writing-practice">🏋️‍♀️ Exercise 1: File Writing Practice</h3>
+<ol type="1">
+<li>Create a file called <code>todo.txt</code> with your top 3 tasks</li>
+<li>Read it back and print the contents</li>
+<li>Use append mode (<code>"a"</code>) to add a 4th task</li>
+</ol>
+<div id="cell-6" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Your code here</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+</section>
+<section id="the-problem-with-plain-text-files" class="level2">
+<h2 class="anchored" data-anchor-id="the-problem-with-plain-text-files">🚧 The Problem with Plain Text Files</h2>
+<section id="text-is-unstructured-and-hard-to-parse" class="level3">
+<h3 class="anchored" data-anchor-id="text-is-unstructured-and-hard-to-parse">Text is unstructured and hard to parse</h3>
+<p>When storing structured data in plain text files, you face several challenges:</p>
+<ul>
+<li><strong>Custom delimiters</strong>: You have to invent your own format (like using <code>|</code> or <code>,</code>)</li>
+<li><strong>Fragile parsing</strong>: What if data contains your delimiter character?</li>
+<li><strong>No nested data</strong>: How do you represent complex hierarchies?</li>
+<li><strong>No type information</strong>: Everything is text - numbers, booleans, etc. need manual conversion</li>
+</ul>
+<p><strong>The real solution</strong>: We need a <strong>standard data format</strong> everyone agrees on!</p>
+<div id="cell-8" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Saving a contact list to a text file - messy!</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">"contacts.txt"</span>, <span class="st">"w"</span>) <span class="im">as</span> f:</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    f.write(<span class="st">"Alice|alice@example.com|555-1234</span><span class="ch">\n</span><span class="st">"</span>)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    f.write(<span class="st">"Bob|bob@example.com|555-5678</span><span class="ch">\n</span><span class="st">"</span>)</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Reading it back - lots of manual parsing</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">"contacts.txt"</span>, <span class="st">"r"</span>) <span class="im">as</span> f:</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> line <span class="kw">in</span> f:</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>        parts <span class="op">=</span> line.strip().split(<span class="st">"|"</span>)</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>        name, email, phone <span class="op">=</span> parts</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span>name<span class="sc">}</span><span class="ss">: </span><span class="sc">{</span>email<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<hr>
+</section>
+</section>
+<section id="enter-json-the-universal-data-format" class="level2">
+<h2 class="anchored" data-anchor-id="enter-json-the-universal-data-format">Enter JSON: The Universal Data Format 🌍</h2>
+<section id="javascript-object-notation---the-language-of-the-web" class="level3">
+<h3 class="anchored" data-anchor-id="javascript-object-notation---the-language-of-the-web">JavaScript Object Notation - The language of the web</h3>
+<p><strong>JSON</strong> is a simple, human-readable text format for representing structured data:</p>
+<ul>
+<li><strong>Created</strong>: Early 2000s by Douglas Crockford - became the web’s standard</li>
+<li><strong>Why it won</strong>: Simple, language-agnostic, maps perfectly to most programming languages</li>
+<li><strong>Ubiquity</strong>: APIs, config files, databases, logs - JSON is everywhere</li>
+<li><strong>Python advantage</strong>: JSON maps directly to Python’s built-in types</li>
+<li>📚 <a href="https://www.json.org/">JSON.org official specification</a></li>
+</ul>
+<blockquote class="blockquote">
+<p>📝 <strong>Additional Notes</strong>: <strong>Industry adoption</strong>: JSON has largely replaced XML for web APIs and configuration. <strong>Cross-language</strong>: Every major programming language has excellent JSON support. <strong>Human-readable</strong>: Unlike binary formats, you can open JSON files in any text editor.</p>
+</blockquote>
+</section>
+</section>
+<section id="json-structure-maps-to-python" class="level2">
+<h2 class="anchored" data-anchor-id="json-structure-maps-to-python">JSON Structure Maps to Python</h2>
+<section id="almost-identical-syntax" class="level3">
+<h3 class="anchored" data-anchor-id="almost-identical-syntax">Almost identical syntax</h3>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>JSON Type</th>
+<th>Python Type</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Object <code>{}</code></td>
+<td>Dictionary</td>
+<td><code>{"name": "Alice", "age": 30}</code></td>
+</tr>
+<tr class="even">
+<td>Array <code>[]</code></td>
+<td>List</td>
+<td><code>[1, 2, 3, 4, 5]</code></td>
+</tr>
+<tr class="odd">
+<td>String</td>
+<td>String</td>
+<td><code>"hello"</code></td>
+</tr>
+<tr class="even">
+<td>Number</td>
+<td>int/float</td>
+<td><code>42</code>, <code>3.14</code></td>
+</tr>
+<tr class="odd">
+<td>Boolean</td>
+<td>Boolean</td>
+<td><code>true</code> → <code>True</code>, <code>false</code> → <code>False</code></td>
+</tr>
+<tr class="even">
+<td>Null</td>
+<td>None</td>
+<td><code>null</code> → <code>None</code></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Key insight</strong>: If you know Python dicts/lists, you already know JSON!</p>
+</section>
+</section>
+<section id="using-pythons-json-library" class="level2">
+<h2 class="anchored" data-anchor-id="using-pythons-json-library">Using Python’s <code>json</code> Library</h2>
+<section id="two-key-functions-dump-and-load" class="level3">
+<h3 class="anchored" data-anchor-id="two-key-functions-dump-and-load">Two key functions: <code>dump()</code> and <code>load()</code></h3>
+<p>The <a href="https://docs.python.org/3/library/json.html">json module</a> provides simple functions for working with JSON:</p>
+<ul>
+<li><strong><code>json.dump(obj, file)</code></strong>: Python object → JSON file</li>
+<li><strong><code>json.load(file)</code></strong>: JSON file → Python object<br>
+</li>
+<li><strong><code>indent=4</code></strong>: Makes JSON human-readable (use in development, skip in production)</li>
+</ul>
+<div id="cell-12" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> json</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Python dictionary (complex, nested structure)</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>contacts <span class="op">=</span> {</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"people"</span>: [</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>        {<span class="st">"name"</span>: <span class="st">"Alice"</span>, <span class="st">"email"</span>: <span class="st">"alice@example.com"</span>, <span class="st">"age"</span>: <span class="dv">30</span>},</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>        {<span class="st">"name"</span>: <span class="st">"Bob"</span>, <span class="st">"email"</span>: <span class="st">"bob@example.com"</span>, <span class="st">"age"</span>: <span class="dv">25</span>}</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    ],</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">"count"</span>: <span class="dv">2</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Write Python object to JSON file</span></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">"contacts.json"</span>, <span class="st">"w"</span>) <span class="im">as</span> f:</span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>    json.dump(contacts, f, indent<span class="op">=</span><span class="dv">4</span>)  <span class="co"># indent=4 makes it readable</span></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"✅ Saved contacts to contacts.json"</span>)</span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Read JSON file back into Python object</span></span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">"contacts.json"</span>, <span class="st">"r"</span>) <span class="im">as</span> f:</span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>    data <span class="op">=</span> json.load(f)</span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"</span><span class="ch">\n</span><span class="ss">First contact: </span><span class="sc">{</span>data[<span class="st">'people'</span>][<span class="dv">0</span>][<span class="st">'name'</span>]<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"Total contacts: </span><span class="sc">{</span>data[<span class="st">'count'</span>]<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="what-the-generated-json-looks-like" class="level3">
+<h3 class="anchored" data-anchor-id="what-the-generated-json-looks-like">🎯 What the Generated JSON Looks Like</h3>
+<p>The <code>contacts.json</code> file created above looks like this:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode json code-with-copy"><code class="sourceCode json"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    <span class="dt">"people"</span><span class="fu">:</span> <span class="ot">[</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>        <span class="fu">{</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>            <span class="dt">"name"</span><span class="fu">:</span> <span class="st">"Alice"</span><span class="fu">,</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>            <span class="dt">"email"</span><span class="fu">:</span> <span class="st">"alice@example.com"</span><span class="fu">,</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>            <span class="dt">"age"</span><span class="fu">:</span> <span class="dv">30</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>        <span class="fu">}</span><span class="ot">,</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>        <span class="fu">{</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>            <span class="dt">"name"</span><span class="fu">:</span> <span class="st">"Bob"</span><span class="fu">,</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>            <span class="dt">"email"</span><span class="fu">:</span> <span class="st">"bob@example.com"</span><span class="fu">,</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>            <span class="dt">"age"</span><span class="fu">:</span> <span class="dv">25</span></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>        <span class="fu">}</span></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>    <span class="ot">]</span><span class="fu">,</span></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>    <span class="dt">"count"</span><span class="fu">:</span> <span class="dv">2</span></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Human-readable</strong>: You can open it in any text editor</p>
+<p><strong>Standard format</strong>: Any language can read this (JavaScript, Java, C#, etc.)</p>
+<p><strong>Portable</strong>: Email this file to a teammate, they can load it instantly</p>
+</section>
+<section id="exercise-2-json-practice" class="level3">
+<h3 class="anchored" data-anchor-id="exercise-2-json-practice">🏋️‍♀️ Exercise 2: JSON Practice</h3>
+<ol type="1">
+<li>Create a Python dictionary representing your favorite movies (title, year, rating)</li>
+<li>Save it to <code>movies.json</code> with nice formatting</li>
+<li>Load it back and print the movie with the highest rating</li>
+</ol>
+<div id="cell-15" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Your code here</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+</section>
+<section id="why-json-matters-for-apis-preview" class="level2">
+<h2 class="anchored" data-anchor-id="why-json-matters-for-apis-preview">💡 Why JSON Matters for APIs (Preview)</h2>
+<section id="the-connection-to-part-2" class="level3">
+<h3 class="anchored" data-anchor-id="the-connection-to-part-2">The connection to Part 2</h3>
+<p><strong>Files are local</strong>: Your computer reads/writes JSON files</p>
+<p><strong>APIs are remote</strong>: Other computers send/receive JSON over the internet</p>
+<p><strong>Same format</strong>: The JSON you just learned works for BOTH</p>
+<p><strong>This means</strong>: Once you can work with JSON files, you can work with web APIs</p>
+<p><strong>Coming up</strong>: How to fetch JSON from remote servers using HTTP requests</p>
+<blockquote class="blockquote">
+<p>📝 <strong>Additional Notes</strong>: <strong>Unified skill</strong>: JSON is the universal translator between systems. Your app speaks JSON, APIs speak JSON, databases speak JSON. Learning JSON once unlocks both file persistence AND web integration.</p>
+</blockquote>
+<hr>
+</section>
+</section>
+</section>
+<section id="part-2-working-with-apis" class="level1">
+<h1>Part 2: Working with APIs 🔌</h1>
+<section id="what-is-an-api" class="level2">
+<h2 class="anchored" data-anchor-id="what-is-an-api">What is an API?</h2>
+<section id="application-programming-interface" class="level3">
+<h3 class="anchored" data-anchor-id="application-programming-interface">Application Programming Interface</h3>
+<p><strong>An API</strong> is a set of rules that allows different software applications to communicate</p>
+<p><strong>Simple analogy</strong>: A restaurant menu - Menu (API) tells you what you can order (available operations) - You don’t need to know how the kitchen works (implementation details) - You just make a request, and get food back (data)</p>
+<p><strong>APIs define</strong>: - What operations are available - What data to send - What you get back</p>
+<p>📚 <a href="https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Client-side_web_APIs/Introduction">What is an API? (MDN)</a></p>
+<blockquote class="blockquote">
+<p>📝 <strong>Additional Notes</strong>: <strong>Examples you use daily</strong>: Instagram API (Buffer posts programmatically), Google Maps API (Uber/Lyft navigation), Stripe API (e-commerce payments), OpenAI API (ChatGPT-powered apps). <strong>Career relevance</strong>: Every modern application integrates with external services through APIs.</p>
+</blockquote>
+</section>
+</section>
+<section id="web-apis-apps-talking-over-the-internet" class="level2">
+<h2 class="anchored" data-anchor-id="web-apis-apps-talking-over-the-internet">🌐 Web APIs: Apps Talking Over the Internet</h2>
+<section id="http-as-the-communication-protocol" class="level3">
+<h3 class="anchored" data-anchor-id="http-as-the-communication-protocol">HTTP as the communication protocol</h3>
+<p><strong>Web APIs</strong> use <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Overview">HTTP</a> (HyperText Transfer Protocol) to communicate over the internet</p>
+<p><strong>Same protocol</strong>: Your web browser uses HTTP to load websites</p>
+<p><strong>The exchange</strong>: 1. Your app sends an <strong>HTTP request</strong> to a URL 2. Remote server processes the request 3. Server sends back an <strong>HTTP response</strong> with data (usually JSON!)</p>
+<p><strong>Key insight</strong>: Reading API data is just like reading a JSON file, but from a remote server</p>
+</section>
+</section>
+<section id="anatomy-of-a-web-api-request" class="level2">
+<h2 class="anchored" data-anchor-id="anatomy-of-a-web-api-request">🔍 Anatomy of a Web API Request</h2>
+<section id="url-structure-and-http-methods" class="level3">
+<h3 class="anchored" data-anchor-id="url-structure-and-http-methods">URL structure and HTTP methods</h3>
+<pre><code>https://api.github.com/users/octocat/repos
+└─┬─┘ └────────┬─────────┘ └─────┬────────┘
+  │          base URL         endpoint path
+protocol</code></pre>
+<p><strong>Components</strong>: - <strong>Base URL</strong>: <code>https://api.github.com</code> - the server you’re talking to - <strong>Endpoint</strong>: <code>/users/octocat/repos</code> - the specific resource you want - <strong>HTTP method</strong>: <code>GET</code> (retrieve data), <code>POST</code> (send data), <code>PUT</code> (update), <code>DELETE</code> (remove)</p>
+<p><strong>For now</strong>: We’ll focus on <code>GET</code> requests to retrieve data</p>
+<p>📚 <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods">HTTP methods explained</a></p>
+</section>
+</section>
+<section id="installing-the-requests-library" class="level2">
+<h2 class="anchored" data-anchor-id="installing-the-requests-library">Installing the <code>requests</code> Library</h2>
+<section id="pythons-most-popular-http-library" class="level3">
+<h3 class="anchored" data-anchor-id="pythons-most-popular-http-library">Python’s most popular HTTP library</h3>
+<p>The <a href="https://requests.readthedocs.io/en/latest/">requests library</a> makes HTTP requests simple in Python:</p>
+<ul>
+<li><strong>Not built-in</strong>: Unlike <code>json</code>, we need to install it first</li>
+<li><strong>Why requests?</strong>: Clean, simple API - much easier than Python’s built-in <code>urllib</code></li>
+<li><strong>Industry standard</strong>: Used by millions of Python developers</li>
+</ul>
+<p><strong>Installation</strong> (run in your terminal, not in this notebook):</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install requests</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Let’s verify it’s installed:</p>
+<div id="cell-21" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Import and check requests library</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="cf">try</span>:</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    <span class="im">import</span> requests</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"✅ requests library installed (version </span><span class="sc">{</span>requests<span class="sc">.</span>__version__<span class="sc">}</span><span class="ss">)"</span>)</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="cf">except</span> <span class="pp">ImportError</span>:</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"❌ requests library not installed. Run: pip install requests"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+</section>
+<section id="making-your-first-api-request" class="level2">
+<h2 class="anchored" data-anchor-id="making-your-first-api-request">Making Your First API Request</h2>
+<section id="get-request-to-a-public-api" class="level3">
+<h3 class="anchored" data-anchor-id="get-request-to-a-public-api">GET request to a public API</h3>
+<p>Let’s fetch data from the <a href="https://pokeapi.co/docs/v2">PokeAPI</a> - a free, public Pokemon database:</p>
+<ul>
+<li><strong><code>requests.get(url)</code></strong>: Makes HTTP GET request, returns response object</li>
+<li><strong><code>response.status_code</code></strong>: HTTP status code (200 = success)</li>
+<li><strong><code>response.json()</code></strong>: Parses JSON response → Python dict (same as <code>json.load()</code>!)</li>
+</ul>
+<div id="cell-23" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> requests</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Make a GET request to the PokeAPI</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>url <span class="op">=</span> <span class="st">"https://pokeapi.co/api/v2/pokemon/pikachu"</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>response <span class="op">=</span> requests.get(url)</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Check if the request was successful</span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> response.status_code <span class="op">==</span> <span class="dv">200</span>:</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Parse the JSON response into a Python dictionary</span></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>    data <span class="op">=</span> response.json()</span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"Name: </span><span class="sc">{</span>data[<span class="st">'name'</span>]<span class="sc">.</span>title()<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"Height: </span><span class="sc">{</span>data[<span class="st">'height'</span>]<span class="sc">}</span><span class="ss"> decimetres"</span>)</span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"Weight: </span><span class="sc">{</span>data[<span class="st">'weight'</span>]<span class="sc">}</span><span class="ss"> hectograms"</span>)</span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"</span><span class="ch">\n</span><span class="ss">Abilities:"</span>)</span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> ability <span class="kw">in</span> data[<span class="st">'abilities'</span>]:</span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f"  - </span><span class="sc">{</span>ability[<span class="st">'ability'</span>][<span class="st">'name'</span>]<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span>:</span>
+<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"Error: Received status code </span><span class="sc">{</span>response<span class="sc">.</span>status_code<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="exercise-3-explore-pokeapi" class="level3">
+<h3 class="anchored" data-anchor-id="exercise-3-explore-pokeapi">🏋️‍♀️ Exercise 3: Explore PokeAPI</h3>
+<ol type="1">
+<li>Fetch data for a different Pokemon (replace “pikachu” with another name)</li>
+<li>Print the Pokemon’s types (hint: look at <code>data['types']</code>)</li>
+<li>Try an invalid Pokemon name - what happens?</li>
+</ol>
+<div id="cell-25" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Your code here</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+</section>
+<section id="http-status-codes" class="level2">
+<h2 class="anchored" data-anchor-id="http-status-codes">📊 HTTP Status Codes</h2>
+<section id="the-servers-way-of-telling-you-what-happened" class="level3">
+<h3 class="anchored" data-anchor-id="the-servers-way-of-telling-you-what-happened">The server’s way of telling you what happened</h3>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Code</th>
+<th>Meaning</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>200</td>
+<td>OK - Success</td>
+<td>Data retrieved successfully</td>
+</tr>
+<tr class="even">
+<td>201</td>
+<td>Created</td>
+<td>New resource created</td>
+</tr>
+<tr class="odd">
+<td>400</td>
+<td>Bad Request</td>
+<td>Invalid data sent</td>
+</tr>
+<tr class="even">
+<td>401</td>
+<td>Unauthorized</td>
+<td>Need authentication</td>
+</tr>
+<tr class="odd">
+<td>404</td>
+<td>Not Found</td>
+<td>Resource doesn’t exist</td>
+</tr>
+<tr class="even">
+<td>500</td>
+<td>Server Error</td>
+<td>Something broke on server</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Always check</strong>: <code>response.status_code</code> before processing data</p>
+<p><strong>Error handling</strong>: Different codes need different responses</p>
+<p>📚 <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Status">HTTP status codes reference</a></p>
+</section>
+</section>
+<section id="the-json-connection-same-format-different-source" class="level2">
+<h2 class="anchored" data-anchor-id="the-json-connection-same-format-different-source">🔗 The JSON Connection: Same Format, Different Source</h2>
+<section id="comparison-files-vs-apis" class="level3">
+<h3 class="anchored" data-anchor-id="comparison-files-vs-apis">Comparison: Files vs APIs</h3>
+<p><strong>Reading JSON from a file:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> json</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">"data.json"</span>, <span class="st">"r"</span>) <span class="im">as</span> f:</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>    data <span class="op">=</span> json.load(f)</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(data[<span class="st">"name"</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Reading JSON from an API:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> requests</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>response <span class="op">=</span> requests.get(url)</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> response.json()</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(data[<span class="st">"name"</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Same result</strong>: Both give you a Python dictionary</p>
+<p><strong>Same skills</strong>: Working with dicts, lists, accessing nested data</p>
+<p><strong>Different source</strong>: One is local, one is remote</p>
+<p><strong>Key takeaway</strong>: JSON knowledge transfers directly between files and APIs!</p>
+</section>
+</section>
+<section id="real-world-api-examples" class="level2">
+<h2 class="anchored" data-anchor-id="real-world-api-examples">🚀 Real-World API Examples</h2>
+<section id="apis-you-can-use-right-now-no-api-key-needed" class="level3">
+<h3 class="anchored" data-anchor-id="apis-you-can-use-right-now-no-api-key-needed">APIs you can use right now (no API key needed)</h3>
+<p>These public APIs are perfect for learning and practice:</p>
+<ul>
+<li><strong><a href="https://pokeapi.co/">PokeAPI</a></strong>: Pokemon data (what we just used)</li>
+<li><strong><a href="https://restcountries.com/">REST Countries</a></strong>: Country data (population, flags, currencies)</li>
+<li><strong><a href="https://thedogapi.com/">The Dog API</a></strong>: Random dog pictures and breed info</li>
+<li><strong><a href="https://jokeapi.dev/">JokeAPI</a></strong>: Random jokes and puns</li>
+<li><strong><a href="https://api.chucknorris.io/">Chuck Norris API</a></strong>: Random Chuck Norris jokes</li>
+<li><strong><a href="https://catfact.ninja/">Cat Facts API</a></strong>: Random cat facts</li>
+</ul>
+<p><strong>Thousands more</strong>: <a href="https://github.com/public-apis/public-apis">Public APIs directory</a></p>
+<blockquote class="blockquote">
+<p>📝 <strong>Additional Notes</strong>: <strong>Lab 07 application</strong>: Students will choose one of these APIs to build a data viewer application. <strong>API keys</strong>: Some APIs require free API keys (OpenWeatherMap, NASA) - simple signup process. <strong>Best practice</strong>: Always explore API documentation before coding.</p>
+</blockquote>
+</section>
+<section id="exercise-4-try-different-apis" class="level3">
+<h3 class="anchored" data-anchor-id="exercise-4-try-different-apis">🏋️‍♀️ Exercise 4: Try Different APIs</h3>
+<p>Pick one of the APIs above and: 1. Read its documentation to find an interesting endpoint 2. Make a GET request to that endpoint 3. Parse and display the interesting data from the response</p>
+<div id="cell-30" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Your code here - explore a new API!</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+</section>
+<section id="error-handling-with-apis" class="level2">
+<h2 class="anchored" data-anchor-id="error-handling-with-apis">🛡️ Error Handling with APIs</h2>
+<section id="networks-are-unreliable---plan-for-failure" class="level3">
+<h3 class="anchored" data-anchor-id="networks-are-unreliable---plan-for-failure">Networks are unreliable - plan for failure</h3>
+<p>APIs can fail for many reasons: - Network connection issues - Server downtime - Invalid requests - Rate limiting - Slow responses</p>
+<p><strong>Professional code handles errors gracefully</strong>:</p>
+<div id="cell-32" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> requests</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>url <span class="op">=</span> <span class="st">"https://pokeapi.co/api/v2/pokemon/charizard"</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="cf">try</span>:</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>    response <span class="op">=</span> requests.get(url, timeout<span class="op">=</span><span class="dv">5</span>)  <span class="co"># 5 second timeout</span></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>    response.raise_for_status()  <span class="co"># Raises exception for 4xx/5xx codes</span></span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>    data <span class="op">=</span> response.json()</span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"✅ Success: </span><span class="sc">{</span>data[<span class="st">'name'</span>]<span class="sc">.</span>title()<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"   Types: </span><span class="sc">{</span><span class="st">', '</span><span class="sc">.</span>join(t[<span class="st">'type'</span>][<span class="st">'name'</span>] <span class="cf">for</span> t <span class="kw">in</span> data[<span class="st">'types'</span>])<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a><span class="cf">except</span> requests.exceptions.Timeout:</span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"❌ Error: Request timed out"</span>)</span>
+<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a><span class="cf">except</span> requests.exceptions.<span class="pp">ConnectionError</span>:</span>
+<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"❌ Error: Could not connect to server"</span>)</span>
+<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a><span class="cf">except</span> requests.exceptions.HTTPError <span class="im">as</span> e:</span>
+<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"❌ Error: HTTP </span><span class="sc">{</span>e<span class="sc">.</span>response<span class="sc">.</span>status_code<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb15-19"><a href="#cb15-19" aria-hidden="true" tabindex="-1"></a><span class="cf">except</span> requests.exceptions.JSONDecodeError:</span>
+<span id="cb15-20"><a href="#cb15-20" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"❌ Error: Response was not valid JSON"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="error-handling-best-practices" class="level3">
+<h3 class="anchored" data-anchor-id="error-handling-best-practices">Error Handling Best Practices</h3>
+<ul>
+<li><strong>Timeouts</strong>: Set with <code>timeout=</code> parameter (seconds) - don’t let your app hang forever</li>
+<li><strong><code>raise_for_status()</code></strong>: Converts error codes (4xx, 5xx) into Python exceptions</li>
+<li><strong>Specific exceptions</strong>: Catch different error types for specific handling</li>
+<li><strong>User-friendly messages</strong>: Don’t show raw error traces to end users</li>
+</ul>
+</section>
+</section>
+<section id="api-best-practices" class="level2">
+<h2 class="anchored" data-anchor-id="api-best-practices">⚡ API Best Practices</h2>
+<section id="being-a-good-api-citizen" class="level3">
+<h3 class="anchored" data-anchor-id="being-a-good-api-citizen">Being a good API citizen</h3>
+<p><strong>Read the docs first</strong>: Every API has different rules and endpoints</p>
+<p><strong>Respect rate limits</strong>: Most free APIs limit requests (e.g., 1000/day) - GitHub API: 60 requests/hour (unauthenticated), 5000/hour (authenticated) - OpenWeatherMap: 1000 requests/day (free tier) - Exceeding limits → 429 Too Many Requests error</p>
+<p><strong>Cache responses</strong>: Don’t request the same data repeatedly</p>
+<p><strong>Use timeouts</strong>: Don’t let your app hang forever waiting for response</p>
+<p><strong>Check status codes</strong>: Handle errors gracefully</p>
+<p><strong>API keys</strong>: Keep them secret (use <code>.env</code> files, never commit to git)</p>
+<p>📚 <a href="https://swagger.io/resources/articles/best-practices-in-api-design/">API development best practices</a></p>
+<blockquote class="blockquote">
+<p>📝 <strong>Additional Notes</strong>: <strong>Professional context</strong>: Rate limiting is essential for API sustainability. Excessive requests can get your IP address banned. <strong>Caching</strong>: Save API responses locally to reduce calls and improve performance.</p>
+</blockquote>
+</section>
+</section>
+<section id="putting-it-all-together-files-apis" class="level2">
+<h2 class="anchored" data-anchor-id="putting-it-all-together-files-apis">🎯 Putting It All Together: Files + APIs</h2>
+<section id="a-complete-data-workflow" class="level3">
+<h3 class="anchored" data-anchor-id="a-complete-data-workflow">A complete data workflow</h3>
+<p>This example demonstrates the full pattern: <strong>Fetch → Process → Store</strong></p>
+<p>Why cache API data locally? - <strong>Faster loading</strong>: No network delay when reading from disk - <strong>Works offline</strong>: Data available even without internet - <strong>Reduces API calls</strong>: Avoid hitting rate limits - <strong>Real apps do this</strong>: Weather apps, news readers, social media feeds</p>
+<blockquote class="blockquote">
+<p>📝 <strong>Additional Notes</strong>: <strong>Production pattern</strong>: Most real applications cache API responses with expiration timestamps. <strong>Database alternative</strong>: For simple apps, JSON files work great as a lightweight database.</p>
+</blockquote>
+<div id="cell-36" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> json</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> requests</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Fetch live data from API</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"📡 Fetching Pokemon data from API..."</span>)</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>response <span class="op">=</span> requests.get(<span class="st">"https://pokeapi.co/api/v2/pokemon/ditto"</span>)</span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>pokemon_data <span class="op">=</span> response.json()</span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Process the data (extract what we need)</span></span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>simplified <span class="op">=</span> {</span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>    <span class="st">"name"</span>: pokemon_data[<span class="st">"name"</span>],</span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>    <span class="st">"height"</span>: pokemon_data[<span class="st">"height"</span>],</span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>    <span class="st">"weight"</span>: pokemon_data[<span class="st">"weight"</span>],</span>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a>    <span class="st">"types"</span>: [t[<span class="st">"type"</span>][<span class="st">"name"</span>] <span class="cf">for</span> t <span class="kw">in</span> pokemon_data[<span class="st">"types"</span>]],</span>
+<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a>    <span class="st">"abilities"</span>: [a[<span class="st">"ability"</span>][<span class="st">"name"</span>] <span class="cf">for</span> a <span class="kw">in</span> pokemon_data[<span class="st">"abilities"</span>]]</span>
+<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. Save to local JSON file for offline use</span></span>
+<span id="cb16-19"><a href="#cb16-19" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">"pokemon_cache.json"</span>, <span class="st">"w"</span>) <span class="im">as</span> f:</span>
+<span id="cb16-20"><a href="#cb16-20" aria-hidden="true" tabindex="-1"></a>    json.dump(simplified, f, indent<span class="op">=</span><span class="dv">4</span>)</span>
+<span id="cb16-21"><a href="#cb16-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-22"><a href="#cb16-22" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"✅ Data fetched from API and saved locally!"</span>)</span>
+<span id="cb16-23"><a href="#cb16-23" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"</span><span class="ch">\n</span><span class="sc">{</span>simplified[<span class="st">'name'</span>]<span class="sc">.</span>title()<span class="sc">}</span><span class="ss"> has been cached:"</span>)</span>
+<span id="cb16-24"><a href="#cb16-24" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"  Height: </span><span class="sc">{</span>simplified[<span class="st">'height'</span>]<span class="sc">}</span><span class="ss"> decimetres"</span>)</span>
+<span id="cb16-25"><a href="#cb16-25" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"  Weight: </span><span class="sc">{</span>simplified[<span class="st">'weight'</span>]<span class="sc">}</span><span class="ss"> hectograms"</span>)</span>
+<span id="cb16-26"><a href="#cb16-26" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"  Types: </span><span class="sc">{</span><span class="st">', '</span><span class="sc">.</span>join(simplified[<span class="st">'types'</span>])<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb16-27"><a href="#cb16-27" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"  Abilities: </span><span class="sc">{</span><span class="st">', '</span><span class="sc">.</span>join(simplified[<span class="st">'abilities'</span>])<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb16-28"><a href="#cb16-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-29"><a href="#cb16-29" aria-hidden="true" tabindex="-1"></a><span class="co"># 4. Later, load from cache instead of making another API call</span></span>
+<span id="cb16-30"><a href="#cb16-30" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">📂 Loading from cache..."</span>)</span>
+<span id="cb16-31"><a href="#cb16-31" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">"pokemon_cache.json"</span>, <span class="st">"r"</span>) <span class="im">as</span> f:</span>
+<span id="cb16-32"><a href="#cb16-32" aria-hidden="true" tabindex="-1"></a>    cached_data <span class="op">=</span> json.load(f)</span>
+<span id="cb16-33"><a href="#cb16-33" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"Cached: </span><span class="sc">{</span>cached_data[<span class="st">'name'</span>]<span class="sc">.</span>title()<span class="sc">}</span><span class="ss"> (no API call needed!)"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="exercise-5-complete-workflow" class="level3">
+<h3 class="anchored" data-anchor-id="exercise-5-complete-workflow">🏋️‍♀️ Exercise 5: Complete Workflow</h3>
+<p>Build a complete data workflow: 1. Choose an API from the list above 2. Fetch data from that API 3. Process/filter the data to extract interesting information 4. Save it to a JSON file 5. Load it back and display a formatted report</p>
+<div id="cell-38" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Your complete workflow here</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<hr>
+</section>
+</section>
+</section>
+<section id="summary-and-next-steps" class="level1">
+<h1>Summary and Next Steps</h1>
+<section id="what-youve-learned" class="level2">
+<h2 class="anchored" data-anchor-id="what-youve-learned">What You’ve Learned 🎯</h2>
+<ol type="1">
+<li><strong>File I/O basics</strong> - Reading and writing files with the <code>with open()</code> context manager</li>
+<li><strong>JSON format</strong> - Universal data exchange format that maps to Python dictionaries</li>
+<li><strong>API fundamentals</strong> - HTTP requests, status codes, and JSON responses</li>
+<li><strong>Requests library</strong> - Making GET requests and parsing responses</li>
+<li><strong>Error handling</strong> - Timeouts, exceptions, and graceful failure</li>
+<li><strong>Complete workflow</strong> - Fetching data, processing it, and caching locally</li>
+</ol>
+</section>
+<section id="key-takeaways" class="level2">
+<h2 class="anchored" data-anchor-id="key-takeaways">Key Takeaways ✨</h2>
+<ul>
+<li><strong>Persistence</strong>: Files let your programs remember state between runs</li>
+<li><strong>JSON</strong>: Universal data format - works for files AND APIs</li>
+<li><strong>APIs</strong>: Let your apps communicate with other systems over the internet</li>
+<li><strong>HTTP</strong>: The protocol that powers the web and most APIs</li>
+<li><strong>Requests library</strong>: Makes HTTP requests simple in Python</li>
+<li><strong>Error handling</strong>: Always check status codes and handle failures gracefully</li>
+<li><strong>The connection</strong>: <code>json.load()</code> (files) and <code>response.json()</code> (APIs) both give you Python dicts</li>
+</ul>
+</section>
+<section id="career-relevance" class="level2">
+<h2 class="anchored" data-anchor-id="career-relevance">Career Relevance 🚀</h2>
+<section id="technical-interview-preparation" class="level3">
+<h3 class="anchored" data-anchor-id="technical-interview-preparation">Technical Interview Preparation</h3>
+<ul>
+<li><strong>API integration</strong>: “How would you integrate Stripe payment processing?”</li>
+<li><strong>Data handling</strong>: “Design a weather dashboard that caches forecasts”</li>
+<li><strong>Error handling</strong>: “How do you handle network failures gracefully?”</li>
+</ul>
+</section>
+<section id="industry-applications" class="level3">
+<h3 class="anchored" data-anchor-id="industry-applications">Industry Applications</h3>
+<ul>
+<li><strong>Every modern app</strong>: Integrates with external services (payments, auth, maps, notifications)</li>
+<li><strong>Job requirements</strong>: “Experience with RESTful APIs” appears in 80%+ of backend/full-stack postings</li>
+<li><strong>Real companies using APIs</strong>:
+<ul>
+<li>Stripe: Payment processing API ($95B valuation)</li>
+<li>Twilio: SMS/Voice API ($12B valuation)</li>
+<li>Mapbox: Maps API (powers Snapchat, Instacart)</li>
+</ul></li>
+</ul>
+</section>
+</section>
+<section id="next-steps" class="level2">
+<h2 class="anchored" data-anchor-id="next-steps">Next Steps 🎯</h2>
+<ol type="1">
+<li><strong>Complete Lab 07</strong> - Build contact book + API data viewer</li>
+<li><strong>Explore APIs</strong> - Browse <a href="https://github.com/public-apis/public-apis">Public APIs directory</a></li>
+<li><strong>Cache strategically</strong> - Implement expiration times for cached data</li>
+<li><strong>Practice error handling</strong> - Make your API code production-ready</li>
+<li><strong>Build a project</strong> - Create a CLI tool that uses your favorite API</li>
+</ol>
+</section>
+<section id="resources-for-continued-learning" class="level2">
+<h2 class="anchored" data-anchor-id="resources-for-continued-learning">Resources for Continued Learning 📚</h2>
+<section id="official-documentation" class="level3">
+<h3 class="anchored" data-anchor-id="official-documentation">Official Documentation</h3>
+<ul>
+<li><strong><a href="https://docs.python.org/3/tutorial/inputoutput.html#reading-and-writing-files">Python file I/O tutorial</a></strong></li>
+<li><strong><a href="https://docs.python.org/3/library/json.html">JSON module documentation</a></strong></li>
+<li><strong><a href="https://requests.readthedocs.io/en/latest/">Requests library docs</a></strong></li>
+<li><strong><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods">HTTP methods reference</a></strong></li>
+</ul>
+</section>
+<section id="learning-resources" class="level3">
+<h3 class="anchored" data-anchor-id="learning-resources">Learning Resources</h3>
+<ul>
+<li><strong><a href="https://realpython.com/python-api/">Real Python: Working with APIs</a></strong></li>
+<li><strong><a href="https://github.com/public-apis/public-apis">Public APIs directory</a></strong></li>
+<li><strong><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Status">HTTP status codes</a></strong></li>
+<li><strong><a href="https://swagger.io/resources/articles/best-practices-in-api-design/">API design best practices</a></strong></li>
+</ul>
+</section>
+<section id="ai-assisted-development" class="level3">
+<h3 class="anchored" data-anchor-id="ai-assisted-development">AI-Assisted Development</h3>
+<ul>
+<li><strong>ChatGPT/Claude prompts</strong>: “Help me understand how to parse this API response: [paste JSON]”</li>
+<li><strong>GitHub Copilot</strong>: Generate API request boilerplate and error handling</li>
+<li><strong>Code review</strong>: Ask AI assistants to review your error handling patterns</li>
+</ul>
+<hr>
+</section>
+</section>
+<section id="final-thoughts" class="level2">
+<h2 class="anchored" data-anchor-id="final-thoughts">Final Thoughts 💭</h2>
+<p><strong>Working with external data - whether from files or APIs - is fundamental to modern software development.</strong> The skills you’ve learned here enable you to build applications that persist data, integrate with external services, and provide real value to users.</p>
+<p><strong>JSON is your universal translator</strong> - master it once, use it everywhere. Files, APIs, databases, configuration - JSON is the common language that connects systems.</p>
+<p><strong>Practice building real applications!</strong> Choose APIs that interest you, cache the data intelligently, and build tools that solve actual problems. This is how you develop portfolio-worthy projects.</p>
+<p><strong>Now go fetch some data!</strong> 🌐📊</p>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+<p>IS 4010 - App Dev with AI</p>
+</div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>

@@ -1,0 +1,1678 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.25">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>IS4010: AI-Enhanced Application Development – IS 4010 - App Dev with AI</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../images/uc-logo-2.png" rel="icon" type="image/png">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-bcb4737e8fbcf1e9dfc00b59f8305558.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="nav-sidebar docked quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">IS4010: AI-Enhanced Application Development</li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+      <a href="../index.html" class="sidebar-logo-link">
+      </a>
+      <div class="sidebar-tools-main tools-wide">
+    <a href="https://github.com/bgreenwell/is4010-python" title="Python Labs" class="quarto-navigation-tool px-1" aria-label="Python Labs"><i class="bi bi-github"></i></a>
+    <a href="https://github.com/bgreenwell/is4010-rust" title="Rust Labs" class="quarto-navigation-tool px-1" aria-label="Rust Labs"><i class="bi bi-github"></i></a>
+    <a href="https://uc.instructure.com/" title="Canvas" class="quarto-navigation-tool px-1" aria-label="Canvas"><i class="bi bi-journal-text"></i></a>
+</div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Home</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../syllabus.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Syllabus</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../project.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Final project</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false">
+ <span class="menu-text">Resources</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../resources/setup.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Setup guide</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../resources/troubleshooting.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Troubleshooting</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../resources/packages.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Python packages</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false">
+ <span class="menu-text">Weekly schedule</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../weeks/week01.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 01: Toolkit setup</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../weeks/week02.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 02: AI-assisted dev</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../weeks/week03.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 03: Python basics</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../weeks/week04.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 04: Data structures</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../weeks/week05.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 05: Functions &amp; errors</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../weeks/week06.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 06: OOP</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../weeks/week07.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 07: External data</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../weeks/week08.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 08: Professional Python</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../weeks/week09.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 09: Welcome to Rust</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../weeks/week10.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 10: Soul of Rust</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../weeks/week11.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 11: Structuring code</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../weeks/week12.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 12: Generics &amp; traits</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../weeks/week13.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 13: Idiomatic Rust</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../weeks/week14.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 14: Multithreading</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#week-4-python-data-structures---interactive-companion-notebook" id="toc-week-4-python-data-structures---interactive-companion-notebook" class="nav-link active" data-scroll-target="#week-4-python-data-structures---interactive-companion-notebook">Week 4: Python Data Structures - Interactive Companion Notebook</a>
+  <ul class="collapse">
+  <li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link" data-scroll-target="#learning-objectives">🎯 Learning Objectives</a></li>
+  <li><a href="#prerequisites" id="toc-prerequisites" class="nav-link" data-scroll-target="#prerequisites">🛠️ Prerequisites</a></li>
+  <li><a href="#resources" id="toc-resources" class="nav-link" data-scroll-target="#resources">🔗 Resources</a></li>
+  </ul></li>
+  <li><a href="#welcome-to-python-data-structures" id="toc-welcome-to-python-data-structures" class="nav-link" data-scroll-target="#welcome-to-python-data-structures">📦 Welcome to Python Data Structures</a>
+  <ul class="collapse">
+  <li><a href="#the-foundation-of-organized-programming" id="toc-the-foundation-of-organized-programming" class="nav-link" data-scroll-target="#the-foundation-of-organized-programming">The Foundation of Organized Programming</a>
+  <ul class="collapse">
+  <li><a href="#reflection-question" id="toc-reflection-question" class="nav-link" data-scroll-target="#reflection-question">🤔 Reflection Question</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#session-1-sequences-collections" id="toc-session-1-sequences-collections" class="nav-link" data-scroll-target="#session-1-sequences-collections">Session 1: Sequences &amp; Collections</a>
+  <ul class="collapse">
+  <li><a href="#what-is-a-data-structure" id="toc-what-is-a-data-structure" class="nav-link" data-scroll-target="#what-is-a-data-structure">What is a Data Structure? 🤔</a></li>
+  <li><a href="#the-list-a-mutable-sequence" id="toc-the-list-a-mutable-sequence" class="nav-link" data-scroll-target="#the-list-a-mutable-sequence">The List: A Mutable Sequence 📝</a>
+  <ul class="collapse">
+  <li><a href="#your-turn-practice-with-lists" id="toc-your-turn-practice-with-lists" class="nav-link" data-scroll-target="#your-turn-practice-with-lists">🛠️ Your Turn: Practice with Lists</a></li>
+  </ul></li>
+  <li><a href="#the-tuple-an-immutable-sequence" id="toc-the-tuple-an-immutable-sequence" class="nav-link" data-scroll-target="#the-tuple-an-immutable-sequence">The Tuple: An Immutable Sequence 🔒</a>
+  <ul class="collapse">
+  <li><a href="#your-turn-practice-with-tuples" id="toc-your-turn-practice-with-tuples" class="nav-link" data-scroll-target="#your-turn-practice-with-tuples">🛠️ Your Turn: Practice with Tuples</a></li>
+  </ul></li>
+  <li><a href="#quick-introduction-list-comprehensions" id="toc-quick-introduction-list-comprehensions" class="nav-link" data-scroll-target="#quick-introduction-list-comprehensions">Quick Introduction: List Comprehensions 📝</a>
+  <ul class="collapse">
+  <li><a href="#your-turn-practice-list-comprehensions" id="toc-your-turn-practice-list-comprehensions" class="nav-link" data-scroll-target="#your-turn-practice-list-comprehensions">🛠️ Your Turn: Practice List Comprehensions</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#interactive-exercise-ai-assisted-performance-detective" id="toc-interactive-exercise-ai-assisted-performance-detective" class="nav-link" data-scroll-target="#interactive-exercise-ai-assisted-performance-detective">🔬 Interactive Exercise: AI-Assisted Performance Detective</a>
+  <ul class="collapse">
+  <li><a href="#step-1-the-slow-code" id="toc-step-1-the-slow-code" class="nav-link" data-scroll-target="#step-1-the-slow-code">Step 1: The Slow Code</a></li>
+  <li><a href="#step-2-consult-your-ai-partner" id="toc-step-2-consult-your-ai-partner" class="nav-link" data-scroll-target="#step-2-consult-your-ai-partner">Step 2: Consult Your AI Partner 🤖</a></li>
+  <li><a href="#key-insights-from-ai" id="toc-key-insights-from-ai" class="nav-link" data-scroll-target="#key-insights-from-ai"><strong>Key insights from AI:</strong></a></li>
+  <li><a href="#step-3-implement-the-ais-recommendation" id="toc-step-3-implement-the-ais-recommendation" class="nav-link" data-scroll-target="#step-3-implement-the-ais-recommendation">Step 3: Implement the AI’s Recommendation</a></li>
+  <li><a href="#step-4-reflection-and-learning" id="toc-step-4-reflection-and-learning" class="nav-link" data-scroll-target="#step-4-reflection-and-learning">Step 4: Reflection and Learning</a>
+  <ul class="collapse">
+  <li><a href="#key-takeaways" id="toc-key-takeaways" class="nav-link" data-scroll-target="#key-takeaways">🎯 Key Takeaways</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#session-2-mappings-collections" id="toc-session-2-mappings-collections" class="nav-link" data-scroll-target="#session-2-mappings-collections">Session 2: Mappings &amp; Collections</a>
+  <ul class="collapse">
+  <li><a href="#the-dictionary-key-value-pairs" id="toc-the-dictionary-key-value-pairs" class="nav-link" data-scroll-target="#the-dictionary-key-value-pairs">The Dictionary: Key-Value Pairs 🗝️</a>
+  <ul class="collapse">
+  <li><a href="#dictionary-deep-dive-indexing-methods-best-practices" id="toc-dictionary-deep-dive-indexing-methods-best-practices" class="nav-link" data-scroll-target="#dictionary-deep-dive-indexing-methods-best-practices">🔍 Dictionary Deep Dive: Indexing, Methods &amp; Best Practices</a></li>
+  <li><a href="#your-turn-dictionary-mastery-practice" id="toc-your-turn-dictionary-mastery-practice" class="nav-link" data-scroll-target="#your-turn-dictionary-mastery-practice">🛠️ Your Turn: Dictionary Mastery Practice</a></li>
+  </ul></li>
+  <li><a href="#the-set-unique-items-only" id="toc-the-set-unique-items-only" class="nav-link" data-scroll-target="#the-set-unique-items-only">The Set: Unique Items Only 🎯</a>
+  <ul class="collapse">
+  <li><a href="#set-deep-dive-advanced-operations-mathematical-power" id="toc-set-deep-dive-advanced-operations-mathematical-power" class="nav-link" data-scroll-target="#set-deep-dive-advanced-operations-mathematical-power">🎯 Set Deep Dive: Advanced Operations &amp; Mathematical Power</a></li>
+  <li><a href="#your-turn-set-mastery-practice" id="toc-your-turn-set-mastery-practice" class="nav-link" data-scroll-target="#your-turn-set-mastery-practice">🛠️ Your Turn: Set Mastery Practice</a></li>
+  <li><a href="#combining-dictionaries-and-sets-real-world-applications" id="toc-combining-dictionaries-and-sets-real-world-applications" class="nav-link" data-scroll-target="#combining-dictionaries-and-sets-real-world-applications">🔄 Combining Dictionaries and Sets: Real-World Applications</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#putting-it-all-together-lab-04-integration" id="toc-putting-it-all-together-lab-04-integration" class="nav-link" data-scroll-target="#putting-it-all-together-lab-04-integration">🎯 Putting It All Together: Lab 04 Integration</a>
+  <ul class="collapse">
+  <li><a href="#your-ai-pair-programming-toolkit" id="toc-your-ai-pair-programming-toolkit" class="nav-link" data-scroll-target="#your-ai-pair-programming-toolkit">Your AI Pair Programming Toolkit 🤖</a>
+  <ul class="collapse">
+  <li><a href="#for-performance-analysis" id="toc-for-performance-analysis" class="nav-link" data-scroll-target="#for-performance-analysis"><strong>For Performance Analysis:</strong></a></li>
+  <li><a href="#for-data-structure-selection" id="toc-for-data-structure-selection" class="nav-link" data-scroll-target="#for-data-structure-selection"><strong>For Data Structure Selection:</strong></a></li>
+  <li><a href="#for-code-review" id="toc-for-code-review" class="nav-link" data-scroll-target="#for-code-review"><strong>For Code Review:</strong></a></li>
+  </ul></li>
+  <li><a href="#success-strategy-for-lab-04" id="toc-success-strategy-for-lab-04" class="nav-link" data-scroll-target="#success-strategy-for-lab-04">Success Strategy for Lab 04</a></li>
+  <li><a href="#key-concepts-to-apply" id="toc-key-concepts-to-apply" class="nav-link" data-scroll-target="#key-concepts-to-apply">Key Concepts to Apply</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">IS4010: AI-Enhanced Application Development</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="week-4-python-data-structures---interactive-companion-notebook" class="level2">
+<h2 class="anchored" data-anchor-id="week-4-python-data-structures---interactive-companion-notebook">Week 4: Python Data Structures - Interactive Companion Notebook</h2>
+<p><strong>Instructor:</strong> Brandon M. Greenwell<br>
+<strong>Course:</strong> IS4010: AI-Enhanced Application Development<br>
+<strong>Week:</strong> 4 - Python Data Structures</p>
+<hr>
+<section id="learning-objectives" class="level3">
+<h3 class="anchored" data-anchor-id="learning-objectives">🎯 Learning Objectives</h3>
+<p>By the end of this interactive session, you will be able to:</p>
+<ul>
+<li><strong>Master all four core Python data structures</strong>: lists, tuples, dictionaries, and sets</li>
+<li><strong>Make performance-driven decisions</strong> about data structure choice with measurable results</li>
+<li><strong>Collaborate effectively with AI tools</strong> for code optimization and design</li>
+<li><strong>Apply list comprehensions</strong> for concise and readable data processing</li>
+<li><strong>Design optimal data structures</strong> for real-world scenarios</li>
+<li><strong>Critically evaluate AI recommendations</strong> and document your reasoning</li>
+</ul>
+</section>
+<section id="prerequisites" class="level3">
+<h3 class="anchored" data-anchor-id="prerequisites">🛠️ Prerequisites</h3>
+<ul>
+<li>Python 3.10+ installed</li>
+<li>Access to a GenAI tool (Claude, ChatGPT, Gemini, etc.)</li>
+<li>Basic understanding of Python variables, loops, and functions</li>
+<li>Completed Labs 1-3</li>
+</ul>
+</section>
+<section id="resources" class="level3">
+<h3 class="anchored" data-anchor-id="resources">🔗 Resources</h3>
+<ul>
+<li><a href="https://docs.python.org/3/tutorial/datastructures.html">Python Data Structures Documentation</a></li>
+<li><a href="https://docs.python.org/3/tutorial/datastructures.html#list-comprehensions">List Comprehensions Guide</a></li>
+<li><a href="https://github.com/bgreenwell/is4010-course-template/blob/main/labs/lab04/README.md">Lab 04 Instructions</a></li>
+</ul>
+<hr>
+</section>
+</section>
+<section id="welcome-to-python-data-structures" class="level1">
+<h1>📦 Welcome to Python Data Structures</h1>
+<section id="the-foundation-of-organized-programming" class="level2">
+<h2 class="anchored" data-anchor-id="the-foundation-of-organized-programming">The Foundation of Organized Programming</h2>
+<p><strong>Data structures</strong> are the backbone of efficient programming. They determine how we organize, store, and access information. Every app you use relies on sophisticated data organization:</p>
+<ul>
+<li><strong>Instagram feeds</strong>: Lists of posts ordered by time</li>
+<li><strong>User profiles</strong>: Dictionaries mapping usernames to account information<br>
+</li>
+<li><strong>Unique hashtags</strong>: Sets ensuring no duplicates</li>
+<li><strong>GPS coordinates</strong>: Tuples of immutable latitude/longitude pairs</li>
+</ul>
+<p>Understanding data structures is essential for: - ✅ <strong>Technical interviews</strong> - Common coding questions - ✅ <strong>Performance optimization</strong> - Right structure = faster apps - ✅ <strong>Career relevance</strong> - Industry standard knowledge - ✅ <strong>AI collaboration</strong> - Better prompts, better results</p>
+<section id="reflection-question" class="level3">
+<h3 class="anchored" data-anchor-id="reflection-question">🤔 Reflection Question</h3>
+<p>Before we dive in, think about an app you use daily. What types of data does it organize? How might different data structures be used?</p>
+<p><em>Write your thoughts in the cell below:</em></p>
+<p><strong>Your reflection here:</strong></p>
+<p><em>Double-click this cell to edit and write your thoughts about data organization in apps you use.</em></p>
+<hr>
+</section>
+</section>
+</section>
+<section id="session-1-sequences-collections" class="level1">
+<h1>Session 1: Sequences &amp; Collections</h1>
+<section id="what-is-a-data-structure" class="level2">
+<h2 class="anchored" data-anchor-id="what-is-a-data-structure">What is a Data Structure? 🤔</h2>
+<p>A <strong>data structure</strong> is a way to organize and store multiple pieces of data in a single variable. Think of them as <strong>specialized containers</strong> for your data.</p>
+<p><strong>Python’s built-in arsenal:</strong> - <strong><a href="https://docs.python.org/3/tutorial/introduction.html#lists">Lists</a></strong> - Ordered, changeable sequences - <strong><a href="https://docs.python.org/3/tutorial/datastructures.html#tuples-and-sequences">Tuples</a></strong> - Ordered, unchangeable sequences<br>
+- <strong><a href="https://docs.python.org/3/tutorial/datastructures.html#dictionaries">Dictionaries</a></strong> - Key-value pair mappings - <strong><a href="https://docs.python.org/3/tutorial/datastructures.html#sets">Sets</a></strong> - Unique item collections</p>
+<p><strong>Why choosing wisely matters:</strong> - The right data structure makes your code faster, cleaner, and more maintainable - Different structures excel at different operations - Performance can vary from milliseconds to nanoseconds!</p>
+</section>
+<section id="the-list-a-mutable-sequence" class="level2">
+<h2 class="anchored" data-anchor-id="the-list-a-mutable-sequence">The List: A Mutable Sequence 📝</h2>
+<p>A <strong><a href="https://docs.python.org/3/tutorial/introduction.html#lists">list</a></strong> is an ordered, changeable collection of items - the workhorse of Python programming.</p>
+<p><strong>Key characteristics:</strong> - <strong>Ordered</strong>: Items maintain their position - <strong>Mutable</strong>: Add, remove, or modify items after creation - <strong>Dynamic size</strong>: Grow or shrink as needed - <strong>Zero-based indexing</strong>: First item is at index 0</p>
+<div id="cell-6" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Creating and working with lists - Computer Science Pioneers</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>pioneers <span class="op">=</span> [<span class="st">"Grace Hopper"</span>, <span class="st">"Ada Lovelace"</span>, <span class="st">"Katherine Johnson"</span>]</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Original list: </span><span class="sc">{</span>pioneers<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Number of pioneers: </span><span class="sc">{</span><span class="bu">len</span>(pioneers)<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"First pioneer: </span><span class="sc">{</span>pioneers[<span class="dv">0</span>]<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Last pioneer: </span><span class="sc">{</span>pioneers[<span class="op">-</span><span class="dv">1</span>]<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div id="cell-7" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Modifying lists - Adding new pioneers</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>pioneers.append(<span class="st">"Dorothy Vaughan"</span>)  <span class="co"># Add to end</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>pioneers.insert(<span class="dv">1</span>, <span class="st">"Hedy Lamarr"</span>)   <span class="co"># Insert at specific position</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Update an item</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>pioneers[<span class="dv">0</span>] <span class="op">=</span> <span class="st">"Rear Admiral Grace Hopper"</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Updated list: </span><span class="sc">{</span>pioneers<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Now we have </span><span class="sc">{</span><span class="bu">len</span>(pioneers)<span class="sc">}</span><span class="ss"> pioneers!"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div id="cell-8" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Useful list methods</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Index of Ada Lovelace: </span><span class="sc">{</span>pioneers<span class="sc">.</span>index(<span class="st">'Ada Lovelace'</span>)<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Count of 'Ada Lovelace': </span><span class="sc">{</span>pioneers<span class="sc">.</span>count(<span class="st">'Ada Lovelace'</span>)<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Remove items</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>removed <span class="op">=</span> pioneers.pop()  <span class="co"># Remove and return last item</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Removed: </span><span class="sc">{</span>removed<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Final list: </span><span class="sc">{</span>pioneers<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<section id="your-turn-practice-with-lists" class="level3">
+<h3 class="anchored" data-anchor-id="your-turn-practice-with-lists">🛠️ Your Turn: Practice with Lists</h3>
+<p>Create your own list and practice the operations:</p>
+<div id="cell-10" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TODO</span><span class="co">: Create a list of your favorite programming languages</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>my_languages <span class="op">=</span> []</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TODO</span><span class="co">: Add at least 3 languages to your list</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TODO</span><span class="co">: Print the list and its length</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TODO</span><span class="co">: Access the first and last items</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TODO</span><span class="co">: Insert a new language at position 1</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TODO</span><span class="co">: Remove the last language and print what was removed</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+</section>
+<section id="the-tuple-an-immutable-sequence" class="level2">
+<h2 class="anchored" data-anchor-id="the-tuple-an-immutable-sequence">The Tuple: An Immutable Sequence 🔒</h2>
+<p>A <strong><a href="https://docs.python.org/3/tutorial/datastructures.html#tuples-and-sequences">tuple</a></strong> is an ordered, unchangeable collection of items.</p>
+<p><strong>Key characteristics:</strong> - <strong>Ordered</strong>: Like lists, items maintain their position - <strong>Immutable</strong>: Cannot add, remove, or change items after creation - <strong>Performance advantage</strong>: Slightly faster than lists for accessing elements - <strong>Memory efficient</strong>: Less overhead due to immutability</p>
+<p><strong>Perfect for:</strong> - Coordinates (latitude, longitude) - RGB color values - Database records - Function return values</p>
+<div id="cell-12" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Real-world tuple examples</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Cincinnati coordinates (latitude, longitude)</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>cincinnati_location <span class="op">=</span> (<span class="fl">39.1031</span>, <span class="op">-</span><span class="fl">84.5120</span>)</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>denver_location <span class="op">=</span> (<span class="fl">39.7391</span>, <span class="op">-</span><span class="fl">104.9847</span>)</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Cincinnati: </span><span class="sc">{</span>cincinnati_location<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Denver: </span><span class="sc">{</span>denver_location<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="co"># UC Brand Colors (RGB values)</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>uc_blue <span class="op">=</span> (<span class="dv">0</span>, <span class="dv">123</span>, <span class="dv">191</span>)</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>uc_red <span class="op">=</span> (<span class="dv">224</span>, <span class="dv">18</span>, <span class="dv">34</span>)</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>black <span class="op">=</span> (<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>)</span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>brand_colors <span class="op">=</span> (uc_blue, uc_red, black)</span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"UC Brand Colors: </span><span class="sc">{</span>brand_colors<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div id="cell-13" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Tuple unpacking - A very common Python pattern!</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>lat, lon <span class="op">=</span> cincinnati_location</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Cincinnati is at latitude </span><span class="sc">{</span>lat<span class="sc">}</span><span class="ss">, longitude </span><span class="sc">{</span>lon<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Multiple return values from functions</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> get_student_info():</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="st">"Alice Johnson"</span>, <span class="fl">95.5</span>, <span class="st">"IS4010"</span>  <span class="co"># Returns a tuple!</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>name, grade, course <span class="op">=</span> get_student_info()  <span class="co"># Tuple unpacking</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Student: </span><span class="sc">{</span>name<span class="sc">}</span><span class="ss">, Grade: </span><span class="sc">{</span>grade<span class="sc">}</span><span class="ss">, Course: </span><span class="sc">{</span>course<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<section id="your-turn-practice-with-tuples" class="level3">
+<h3 class="anchored" data-anchor-id="your-turn-practice-with-tuples">🛠️ Your Turn: Practice with Tuples</h3>
+<div id="cell-15" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TODO</span><span class="co">: Create a tuple representing your favorite restaurant's location (name, latitude, longitude)</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TODO</span><span class="co">: Unpack the tuple into separate variables</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TODO</span><span class="co">: Print a formatted message about the restaurant</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TODO</span><span class="co">: Create a function that returns multiple pieces of information about yourself</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="co"># (name, major, year, favorite_color) and unpack the result</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TODO</span><span class="co">: Call the function and unpack the results</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+</section>
+<section id="quick-introduction-list-comprehensions" class="level2">
+<h2 class="anchored" data-anchor-id="quick-introduction-list-comprehensions">Quick Introduction: List Comprehensions 📝</h2>
+<p>Python has a concise way to create lists called <strong><a href="https://docs.python.org/3/tutorial/datastructures.html#list-comprehensions">list comprehensions</a></strong> - perfect for generating test data!</p>
+<p><strong>Pattern:</strong> <code>[expression for item in iterable]</code></p>
+<p><strong>Why learn this now?</strong> - Perfect for generating test data (which we’ll need for performance testing!) - More readable and Pythonic than traditional loops - We’ll use this pattern extensively in data processing</p>
+<div id="cell-17" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Traditional approach with loops</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>numbers <span class="op">=</span> []</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">5</span>):</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>    numbers.append(i <span class="op">*</span> <span class="dv">2</span>)</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Traditional loop: </span><span class="sc">{</span>numbers<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="co"># List comprehension - more concise!</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>numbers_comp <span class="op">=</span> [i <span class="op">*</span> <span class="dv">2</span> <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">5</span>)]</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"List comprehension: </span><span class="sc">{</span>numbers_comp<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Pattern: [expression for item in iterable]</span></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>emails <span class="op">=</span> [<span class="ss">f"user_</span><span class="sc">{</span>i<span class="sc">}</span><span class="ss">@email.com"</span> <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">3</span>)]</span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Generated emails: </span><span class="sc">{</span>emails<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<section id="your-turn-practice-list-comprehensions" class="level3">
+<h3 class="anchored" data-anchor-id="your-turn-practice-list-comprehensions">🛠️ Your Turn: Practice List Comprehensions</h3>
+<div id="cell-19" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TODO</span><span class="co">: Create a list of squares for numbers 1-10 using a list comprehension</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TODO</span><span class="co">: Create a list of even numbers from 0-20 using a list comprehension</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TODO</span><span class="co">: Create a list of customer emails for customer IDs 100-105</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<hr>
+</section>
+</section>
+</section>
+<section id="interactive-exercise-ai-assisted-performance-detective" class="level1">
+<h1>🔬 Interactive Exercise: AI-Assisted Performance Detective</h1>
+<p><strong>Challenge:</strong> Help optimize this slow code using GenAI tools!</p>
+<section id="step-1-the-slow-code" class="level2">
+<h2 class="anchored" data-anchor-id="step-1-the-slow-code">Step 1: The Slow Code</h2>
+<p>First, let’s create some test data and implement a slow customer VIP lookup system.</p>
+<div id="cell-21" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> time</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate large customer database using list comprehensions!</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>customers <span class="op">=</span> [<span class="ss">f"customer_</span><span class="sc">{</span>i<span class="sc">}</span><span class="ss">@email.com"</span> <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">50000</span>)]</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>vip_customers <span class="op">=</span> [<span class="ss">f"customer_</span><span class="sc">{</span>i<span class="sc">}</span><span class="ss">@email.com"</span> <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">0</span>, <span class="dv">50000</span>, <span class="dv">100</span>)]  <span class="co"># Every 100th customer</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Total customers: </span><span class="sc">{</span><span class="bu">len</span>(customers)<span class="sc">:,}</span><span class="ss">"</span>)</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"VIP customers: </span><span class="sc">{</span><span class="bu">len</span>(vip_customers)<span class="sc">:,}</span><span class="ss">"</span>)</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"First few VIPs: </span><span class="sc">{</span>vip_customers[:<span class="dv">5</span>]<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div id="cell-22" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Slow approach - checking VIP status using list membership</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> is_vip_slow(email, vip_list):</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Check if customer is VIP - using list membership"""</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> email <span class="kw">in</span> vip_list</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Let's time this approach</span></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>start_time <span class="op">=</span> time.time()</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>vip_count <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> customer <span class="kw">in</span> customers[:<span class="dv">1000</span>]:  <span class="co"># Check first 1000 customers</span></span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> is_vip_slow(customer, vip_customers):</span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>        vip_count <span class="op">+=</span> <span class="dv">1</span></span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>slow_time <span class="op">=</span> time.time() <span class="op">-</span> start_time</span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Slow approach: </span><span class="sc">{</span>slow_time<span class="sc">:.4f}</span><span class="ss"> seconds, found </span><span class="sc">{</span>vip_count<span class="sc">}</span><span class="ss"> VIPs"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="step-2-consult-your-ai-partner" class="level2">
+<h2 class="anchored" data-anchor-id="step-2-consult-your-ai-partner">Step 2: Consult Your AI Partner 🤖</h2>
+<p><strong>Your Mission:</strong> 1. Open your preferred GenAI tool (Claude, ChatGPT, Gemini, etc.) 2. Use this prompt (copy and paste):</p>
+<pre><code>Analyze this Python code for performance bottlenecks and suggest optimizations using different data structures:
+
+[Copy the slow code from above]
+
+Focus on:
+- What data structure would be better for VIP lookups?
+- Why is the current approach slow?
+- What's the time complexity difference?</code></pre>
+<p><strong>Document your AI’s response here:</strong></p>
+<p><strong>AI Response Documentation:</strong></p>
+<p><em>Double-click this cell and paste your AI’s recommendations here. Include the key insights about data structure choice and performance.</em></p>
+</section>
+<section id="key-insights-from-ai" class="level2">
+<h2 class="anchored" data-anchor-id="key-insights-from-ai"><strong>Key insights from AI:</strong></h2>
+<ul>
+<li></li>
+<li></li>
+</ul>
+<p><strong>Recommended data structure:</strong></p>
+<p><strong>Reasoning:</strong></p>
+</section>
+<section id="step-3-implement-the-ais-recommendation" class="level2">
+<h2 class="anchored" data-anchor-id="step-3-implement-the-ais-recommendation">Step 3: Implement the AI’s Recommendation</h2>
+<div id="cell-26" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Optimized approach - After consulting with GenAI</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert VIP list to set for O(1) lookups (AI recommendation!)</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>vip_customers_set <span class="op">=</span> <span class="bu">set</span>(vip_customers)</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> is_vip_fast(email, vip_set):</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Check if customer is VIP - using set membership"""</span></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> email <span class="kw">in</span> vip_set</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Time the optimized approach</span></span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>start_time <span class="op">=</span> time.time()</span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>vip_count_fast <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> customer <span class="kw">in</span> customers[:<span class="dv">1000</span>]:</span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> is_vip_fast(customer, vip_customers_set):</span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>        vip_count_fast <span class="op">+=</span> <span class="dv">1</span></span>
+<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a>fast_time <span class="op">=</span> time.time() <span class="op">-</span> start_time</span>
+<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Fast approach: </span><span class="sc">{</span>fast_time<span class="sc">:.4f}</span><span class="ss"> seconds, found </span><span class="sc">{</span>vip_count_fast<span class="sc">}</span><span class="ss"> VIPs"</span>)</span>
+<span id="cb13-20"><a href="#cb13-20" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Speedup: </span><span class="sc">{</span>slow_time<span class="op">/</span>fast_time<span class="sc">:.1f}</span><span class="ss">x faster!"</span>)</span>
+<span id="cb13-21"><a href="#cb13-21" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Time saved: </span><span class="sc">{</span>(slow_time <span class="op">-</span> fast_time)<span class="op">*</span><span class="dv">1000</span><span class="sc">:.1f}</span><span class="ss"> milliseconds"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="step-4-reflection-and-learning" class="level2">
+<h2 class="anchored" data-anchor-id="step-4-reflection-and-learning">Step 4: Reflection and Learning</h2>
+<p><strong>Discussion Questions:</strong> 1. How accurate was your AI’s recommendation? 2. What surprised you about the performance difference? 3. When might you still prefer a list over a set? 4. What other optimizations did your AI suggest?</p>
+<p><strong>Your Reflection:</strong></p>
+<p><em>Double-click to edit and write your thoughts about the AI collaboration and performance results.</em></p>
+<section id="key-takeaways" class="level3">
+<h3 class="anchored" data-anchor-id="key-takeaways">🎯 Key Takeaways</h3>
+<ul>
+<li><strong>List membership (<code>in</code>)</strong>: O(n) - slow for large datasets</li>
+<li><strong>Set membership (<code>in</code>)</strong>: O(1) - extremely fast</li>
+<li><strong>AI tools excel</strong> at identifying common optimization patterns</li>
+<li><strong>Real impact</strong>: This optimization matters in production systems</li>
+<li><strong>Learning loop</strong>: AI suggestions → implementation → measurement → iteration</li>
+</ul>
+<hr>
+</section>
+</section>
+</section>
+<section id="session-2-mappings-collections" class="level1">
+<h1>Session 2: Mappings &amp; Collections</h1>
+<section id="the-dictionary-key-value-pairs" class="level2">
+<h2 class="anchored" data-anchor-id="the-dictionary-key-value-pairs">The Dictionary: Key-Value Pairs 🗝️</h2>
+<p>A <strong><a href="https://docs.python.org/3/tutorial/datastructures.html#dictionaries">dictionary</a></strong> is a collection of <code>key: value</code> pairs optimized for lightning-fast lookups.</p>
+<p><strong>Key characteristics:</strong> - <strong>Fast lookups</strong>: O(1) average time to find values by key - <strong>Unique keys</strong>: Each key appears only once - <strong>Mutable</strong>: Add, remove, or change items after creation - <strong>Ordered</strong> (Python 3.7+): Maintains insertion order</p>
+<div id="cell-32" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Real-world dictionary example - User profile system</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>user_profile <span class="op">=</span> {</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"username"</span>: <span class="st">"ada_lovelace"</span>,</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"first_name"</span>: <span class="st">"Ada"</span>,</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"last_name"</span>: <span class="st">"Lovelace"</span>,</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"birth_year"</span>: <span class="dv">1815</span>,</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">"occupation"</span>: <span class="st">"Mathematician"</span>,</span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">"famous_for"</span>: <span class="st">"First computer programmer"</span>,</span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">"followers"</span>: <span class="dv">125000</span>,</span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">"verified"</span>: <span class="va">True</span>,</span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>    <span class="st">"programming_languages"</span>: [<span class="st">"Analytical Engine"</span>, <span class="st">"Mathematics"</span>]</span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Accessing values (multiple ways)</span></span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"User: </span><span class="sc">{</span>user_profile[<span class="st">'username'</span>]<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Born: </span><span class="sc">{</span>user_profile<span class="sc">.</span>get(<span class="st">'birth_year'</span>, <span class="st">'Unknown'</span>)<span class="sc">}</span><span class="ss">"</span>)  <span class="co"># Safe access</span></span>
+<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Followers: </span><span class="sc">{</span>user_profile[<span class="st">'followers'</span>]<span class="sc">:,}</span><span class="ss">"</span>)</span>
+<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-19"><a href="#cb14-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Adding and updating</span></span>
+<span id="cb14-20"><a href="#cb14-20" aria-hidden="true" tabindex="-1"></a>user_profile[<span class="st">"location"</span>] <span class="op">=</span> <span class="st">"London, England"</span></span>
+<span id="cb14-21"><a href="#cb14-21" aria-hidden="true" tabindex="-1"></a>user_profile[<span class="st">"followers"</span>] <span class="op">+=</span> <span class="dv">1000</span>  <span class="co"># New followers!</span></span>
+<span id="cb14-22"><a href="#cb14-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-23"><a href="#cb14-23" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Updated: </span><span class="sc">{</span>user_profile[<span class="st">'username'</span>]<span class="sc">}</span><span class="ss"> now has </span><span class="sc">{</span>user_profile[<span class="st">'followers'</span>]<span class="sc">:,}</span><span class="ss"> followers"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>User: ada_lovelace
+Born: 1815
+Followers: 125,000
+Updated: ada_lovelace now has 126,000 followers</code></pre>
+</div>
+</div>
+<section id="dictionary-deep-dive-indexing-methods-best-practices" class="level3">
+<h3 class="anchored" data-anchor-id="dictionary-deep-dive-indexing-methods-best-practices">🔍 Dictionary Deep Dive: Indexing, Methods &amp; Best Practices</h3>
+<p>Now let’s explore the full power of Python dictionaries with advanced indexing techniques and essential methods.</p>
+<div id="cell-34" class="cell" data-execution_count="4">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Dictionary indexing and safe access methods</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"=== Dictionary Indexing Examples ==="</span>)</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Direct indexing - fast but can raise KeyError</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Username: </span><span class="sc">{</span>user_profile[<span class="st">'username'</span>]<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Safe access with .get() - returns None or default if key missing</span></span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Middle name: </span><span class="sc">{</span>user_profile<span class="sc">.</span>get(<span class="st">'middle_name'</span>, <span class="st">'Not provided'</span>)<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Age: </span><span class="sc">{</span>user_profile<span class="sc">.</span>get(<span class="st">'age'</span>, <span class="st">'Unknown'</span>)<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Check if key exists before accessing</span></span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="st">'birth_year'</span> <span class="kw">in</span> user_profile:</span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>    current_year <span class="op">=</span> <span class="dv">2024</span></span>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a>    age <span class="op">=</span> current_year <span class="op">-</span> user_profile[<span class="st">'birth_year'</span>]</span>
+<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"Calculated age: </span><span class="sc">{</span>age<span class="sc">}</span><span class="ss"> years old"</span>)</span>
+<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Multiple ways to handle missing keys</span></span>
+<span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a><span class="cf">try</span>:</span>
+<span id="cb16-19"><a href="#cb16-19" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(user_profile[<span class="st">'nonexistent_key'</span>])</span>
+<span id="cb16-20"><a href="#cb16-20" aria-hidden="true" tabindex="-1"></a><span class="cf">except</span> <span class="pp">KeyError</span>:</span>
+<span id="cb16-21"><a href="#cb16-21" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"KeyError handled gracefully"</span>)</span>
+<span id="cb16-22"><a href="#cb16-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-23"><a href="#cb16-23" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Followers with default: </span><span class="sc">{</span>user_profile<span class="sc">.</span>get(<span class="st">'followers'</span>, <span class="dv">0</span>)<span class="sc">:,}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>=== Dictionary Indexing Examples ===
+Username: ada_lovelace
+Middle name: Not provided
+Age: Unknown
+Calculated age: 209 years old
+KeyError handled gracefully
+Followers with default: 126,000</code></pre>
+</div>
+</div>
+<div id="cell-35" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Essential dictionary methods - the complete toolkit</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"=== Dictionary Methods in Action ==="</span>)</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="co"># View all available methods</span></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Dictionary methods:"</span>, [method <span class="cf">for</span> method <span class="kw">in</span> <span class="bu">dir</span>(user_profile) <span class="cf">if</span> <span class="kw">not</span> method.startswith(<span class="st">'_'</span>)][:<span class="dv">10</span>])</span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Keys, values, and items</span></span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"All keys: </span><span class="sc">{</span><span class="bu">list</span>(user_profile.keys())<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"All values: </span><span class="sc">{</span><span class="bu">list</span>(user_profile.values())[:<span class="dv">3</span>]<span class="sc">}</span><span class="ss">..."</span>)  <span class="co"># First 3 values</span></span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"All items: </span><span class="sc">{</span><span class="bu">list</span>(user_profile.items())[:<span class="dv">2</span>]<span class="sc">}</span><span class="ss">..."</span>)    <span class="co"># First 2 key-value pairs</span></span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Update with another dictionary</span></span>
+<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a>social_media <span class="op">=</span> {</span>
+<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a>    <span class="st">"twitter"</span>: <span class="st">"@ada_lovelace_codes"</span>,</span>
+<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a>    <span class="st">"github"</span>: <span class="st">"ada-codes"</span>,</span>
+<span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a>    <span class="st">"linkedin"</span>: <span class="st">"ada-lovelace-dev"</span></span>
+<span id="cb18-17"><a href="#cb18-17" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb18-18"><a href="#cb18-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-19"><a href="#cb18-19" aria-hidden="true" tabindex="-1"></a>user_profile.update(social_media)</span>
+<span id="cb18-20"><a href="#cb18-20" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"After update: </span><span class="sc">{</span><span class="bu">list</span>(user_profile.keys())[<span class="op">-</span><span class="dv">3</span>:]<span class="sc">}</span><span class="ss">"</span>)  <span class="co"># Last 3 keys added</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div id="cell-36" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>[<span class="bu">type</span>(value) <span class="cf">for</span> value <span class="kw">in</span> user_profile.values()]  <span class="co"># IGNORE</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Write the above list comprehension in a for loop</span></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>types <span class="op">=</span> []</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> value <span class="kw">in</span> user_profile.values():</span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>    types.append(<span class="bu">type</span>(value))</span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(types)  <span class="co"># IGNORE</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="8">
+<pre><code>[str, str, str, int, str, str, int, bool, list, str]</code></pre>
+</div>
+</div>
+<div id="cell-38" class="cell" data-execution_count="13">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Advanced dictionary operations and patterns</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"=== Advanced Dictionary Patterns ==="</span>)</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Dictionary comprehensions - like list comprehensions but for dicts!</span></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>numbers <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>]</span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>squared_dict <span class="op">=</span> {num: num<span class="op">**</span><span class="dv">2</span> <span class="cf">for</span> num <span class="kw">in</span> numbers}</span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Squared dictionary: </span><span class="sc">{</span>squared_dict<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Filtering with dictionary comprehensions</span></span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>active_users <span class="op">=</span> {</span>
+<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a>    <span class="st">"alice"</span>: {<span class="st">"last_login"</span>: <span class="st">"2024-01-15"</span>, <span class="st">"status"</span>: <span class="st">"active"</span>},</span>
+<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a>    <span class="st">"bob"</span>: {<span class="st">"last_login"</span>: <span class="st">"2023-12-20"</span>, <span class="st">"status"</span>: <span class="st">"inactive"</span>},</span>
+<span id="cb21-13"><a href="#cb21-13" aria-hidden="true" tabindex="-1"></a>    <span class="st">"charlie"</span>: {<span class="st">"last_login"</span>: <span class="st">"2024-01-16"</span>, <span class="st">"status"</span>: <span class="st">"active"</span>}</span>
+<span id="cb21-14"><a href="#cb21-14" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb21-15"><a href="#cb21-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-16"><a href="#cb21-16" aria-hidden="true" tabindex="-1"></a>active_only <span class="op">=</span> {name: data <span class="cf">for</span> name, data <span class="kw">in</span> active_users.items() <span class="cf">if</span> data[<span class="st">"status"</span>] <span class="op">==</span> <span class="st">"active"</span>}</span>
+<span id="cb21-17"><a href="#cb21-17" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Active users only: </span><span class="sc">{</span>active_only<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb21-18"><a href="#cb21-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-19"><a href="#cb21-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Nested dictionary access</span></span>
+<span id="cb21-20"><a href="#cb21-20" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Alice's last login: </span><span class="sc">{</span>active_users[<span class="st">'alice'</span>][<span class="st">'last_login'</span>]<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb21-21"><a href="#cb21-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-22"><a href="#cb21-22" aria-hidden="true" tabindex="-1"></a><span class="co"># Safe nested access with get()</span></span>
+<span id="cb21-23"><a href="#cb21-23" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Bob's email: </span><span class="sc">{</span>active_users<span class="sc">.</span>get(<span class="st">'bob'</span>, {})<span class="sc">.</span>get(<span class="st">'email'</span>, <span class="st">'Not provided'</span>)<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb21-24"><a href="#cb21-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-25"><a href="#cb21-25" aria-hidden="true" tabindex="-1"></a><span class="co"># setdefault - add key only if it doesn't exist</span></span>
+<span id="cb21-26"><a href="#cb21-26" aria-hidden="true" tabindex="-1"></a>user_profile.setdefault(<span class="st">'achievements'</span>, [])</span>
+<span id="cb21-27"><a href="#cb21-27" aria-hidden="true" tabindex="-1"></a>user_profile[<span class="st">'achievements'</span>].append(<span class="st">'First programmer'</span>)</span>
+<span id="cb21-28"><a href="#cb21-28" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Achievements: </span><span class="sc">{</span>user_profile[<span class="st">'achievements'</span>]<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>=== Advanced Dictionary Patterns ===
+Squared dictionary: {1: 1, 2: 4, 3: 9, 4: 16, 5: 25}
+Active users only: {'alice': {'last_login': '2024-01-15', 'status': 'active'}, 'charlie': {'last_login': '2024-01-16', 'status': 'active'}}
+Alice's last login: 2024-01-15
+Bob's email: Not provided
+Achievements: ['First programmer']</code></pre>
+</div>
+</div>
+<div id="cell-39" class="cell" data-execution_count="10">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>numbers <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>]</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>squared_dict <span class="op">=</span> {<span class="bu">str</span>(num): num<span class="op">**</span><span class="dv">2</span> <span class="cf">for</span> num <span class="kw">in</span> numbers}</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(squared_dict)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>{'1': 1, '2': 4, '3': 9, '4': 16, '5': 25}</code></pre>
+</div>
+</div>
+<div id="cell-40" class="cell" data-execution_count="12">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>squared_dict[<span class="st">'2'</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="12">
+<pre><code>4</code></pre>
+</div>
+</div>
+</section>
+<section id="your-turn-dictionary-mastery-practice" class="level3">
+<h3 class="anchored" data-anchor-id="your-turn-dictionary-mastery-practice">🛠️ Your Turn: Dictionary Mastery Practice</h3>
+<p>Practice the dictionary concepts with these hands-on exercises:</p>
+<div id="cell-42" class="cell" data-execution_count="21">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TODO</span><span class="co">: Create a product inventory dictionary</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Include: product_id, name, price, stock_quantity, category</span></span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>inventory <span class="op">=</span> {</span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"LAPTOP001"</span>: {<span class="st">"name"</span>: <span class="st">"Gaming Laptop"</span>, <span class="st">"price"</span>: <span class="fl">1299.99</span>, <span class="st">"stock"</span>: <span class="dv">15</span>, <span class="st">"category"</span>: <span class="st">"Electronics"</span>},</span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"PHONE001"</span>: {<span class="st">"name"</span>: <span class="st">"Smartphone"</span>, <span class="st">"price"</span>: <span class="fl">699.99</span>, <span class="st">"stock"</span>: <span class="dv">0</span>, <span class="st">"category"</span>: <span class="st">"Electronics"</span>},</span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"BOOK001"</span>: {<span class="st">"name"</span>: <span class="st">"Python Programming"</span>, <span class="st">"price"</span>: <span class="fl">39.99</span>, <span class="st">"stock"</span>: <span class="dv">25</span>, <span class="st">"category"</span>: <span class="st">"Books"</span>}</span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TODO</span><span class="co">: Practice safe access - get the price of "LAPTOP001"</span></span>
+<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a><span class="cf">try</span>:</span>
+<span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a>    inventory[<span class="st">"LAPTOP001"</span>][<span class="st">"type"</span>]</span>
+<span id="cb27-12"><a href="#cb27-12" aria-hidden="true" tabindex="-1"></a><span class="cf">except</span> <span class="pp">KeyError</span>:</span>
+<span id="cb27-13"><a href="#cb27-13" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"KeyError handled gracefully"</span>)</span>
+<span id="cb27-14"><a href="#cb27-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-15"><a href="#cb27-15" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TODO</span><span class="co">: Check if "PHONE001" is in stock (stock_quantity &gt; 0)</span></span>
+<span id="cb27-16"><a href="#cb27-16" aria-hidden="true" tabindex="-1"></a>is_in_stock <span class="op">=</span> inventory.get(<span class="st">"PHONE001"</span>, {}).get(<span class="st">"stock"</span>, <span class="dv">0</span>) <span class="op">&gt;</span> <span class="dv">0</span></span>
+<span id="cb27-17"><a href="#cb27-17" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Is PHONE001 in stock? </span><span class="sc">{</span><span class="st">'Yes'</span> <span class="cf">if</span> is_in_stock <span class="cf">else</span> <span class="st">'No'</span><span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb27-18"><a href="#cb27-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-19"><a href="#cb27-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-20"><a href="#cb27-20" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TODO</span><span class="co">: Add a new product using setdefault</span></span>
+<span id="cb27-21"><a href="#cb27-21" aria-hidden="true" tabindex="-1"></a>inventory.setdefault(<span class="st">"TABLET001"</span>, {<span class="st">"name"</span>: <span class="st">"Tablet"</span>, <span class="st">"price"</span>: <span class="fl">499.99</span>, <span class="st">"stock"</span>: <span class="dv">30</span>, <span class="st">"category"</span>: <span class="st">"Electronics"</span>})</span>
+<span id="cb27-22"><a href="#cb27-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-23"><a href="#cb27-23" aria-hidden="true" tabindex="-1"></a><span class="co"># Add to dict using []</span></span>
+<span id="cb27-24"><a href="#cb27-24" aria-hidden="true" tabindex="-1"></a>inventory[<span class="st">"HEADPHONES001"</span>] <span class="op">=</span> {<span class="st">"name"</span>: <span class="st">"Wireless Headphones"</span>, <span class="st">"price"</span>: <span class="fl">199.99</span>, <span class="st">"stock"</span>: <span class="dv">50</span>, <span class="st">"category"</span>: <span class="st">"Electronics"</span>}</span>
+<span id="cb27-25"><a href="#cb27-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-26"><a href="#cb27-26" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TODO</span><span class="co">: Create a dictionary comprehension to get all product names</span></span>
+<span id="cb27-27"><a href="#cb27-27" aria-hidden="true" tabindex="-1"></a>product_names <span class="op">=</span> {pid: details[<span class="st">"name"</span>] <span class="cf">for</span> pid, details <span class="kw">in</span> inventory.items()}</span>
+<span id="cb27-28"><a href="#cb27-28" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Product names: </span><span class="sc">{</span>product_names<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb27-29"><a href="#cb27-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-30"><a href="#cb27-30" aria-hidden="true" tabindex="-1"></a><span class="co"># DO the same using a list comprehension</span></span>
+<span id="cb27-31"><a href="#cb27-31" aria-hidden="true" tabindex="-1"></a>product_names_list <span class="op">=</span> [details[<span class="st">"name"</span>] <span class="cf">for</span> details <span class="kw">in</span> inventory.values()]</span>
+<span id="cb27-32"><a href="#cb27-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-33"><a href="#cb27-33" aria-hidden="true" tabindex="-1"></a><span class="co"># Now use a for loop to print each product name</span></span>
+<span id="cb27-34"><a href="#cb27-34" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> name <span class="kw">in</span> inventory.values():</span>
+<span id="cb27-35"><a href="#cb27-35" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(name[<span class="st">"name"</span>])</span>
+<span id="cb27-36"><a href="#cb27-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-37"><a href="#cb27-37" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TODO</span><span class="co">: Filter to get only products with stock &gt; 10</span></span>
+<span id="cb27-38"><a href="#cb27-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-39"><a href="#cb27-39" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TODO</span><span class="co">: Use .pop() to remove PHONE001 and print what was removed</span></span>
+<span id="cb27-40"><a href="#cb27-40" aria-hidden="true" tabindex="-1"></a>inventory.pop(<span class="st">"PHONE001"</span>, <span class="va">None</span>)  <span class="co"># Remove PHONE001 if it exists</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>KeyError handled gracefully
+Is PHONE001 in stock? No
+Product names: {'LAPTOP001': 'Gaming Laptop', 'PHONE001': 'Smartphone', 'BOOK001': 'Python Programming', 'TABLET001': 'Tablet', 'HEADPHONES001': 'Wireless Headphones'}
+Gaming Laptop
+Smartphone
+Python Programming
+Tablet
+Wireless Headphones</code></pre>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="21">
+<pre><code>{'name': 'Smartphone', 'price': 699.99, 'stock': 0, 'category': 'Electronics'}</code></pre>
+</div>
+</div>
+<div id="cell-43" class="cell" data-execution_count="22">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>inventory</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="22">
+<pre><code>{'LAPTOP001': {'name': 'Gaming Laptop',
+  'price': 1299.99,
+  'stock': 15,
+  'category': 'Electronics'},
+ 'BOOK001': {'name': 'Python Programming',
+  'price': 39.99,
+  'stock': 25,
+  'category': 'Books'},
+ 'TABLET001': {'name': 'Tablet',
+  'price': 499.99,
+  'stock': 30,
+  'category': 'Electronics'},
+ 'HEADPHONES001': {'name': 'Wireless Headphones',
+  'price': 199.99,
+  'stock': 50,
+  'category': 'Electronics'}}</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="the-set-unique-items-only" class="level2">
+<h2 class="anchored" data-anchor-id="the-set-unique-items-only">The Set: Unique Items Only 🎯</h2>
+<p>A <strong><a href="https://docs.python.org/3/tutorial/datastructures.html#sets">set</a></strong> is an unordered collection of <strong>unique</strong> items.</p>
+<p><strong>Key characteristics:</strong> - <strong>No duplicates</strong>: Automatically removes duplicate entries - <strong>Fast membership testing</strong>: <code>item in set</code> is extremely efficient - <strong>Mathematical operations</strong>: Union, intersection, difference - <strong>Mutable</strong>: Add and remove items after creation</p>
+<div id="cell-45" class="cell" data-execution_count="23">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Website analytics: tracking unique visitors</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>daily_visitors <span class="op">=</span> [<span class="st">"alice"</span>, <span class="st">"bob"</span>, <span class="st">"charlie"</span>, <span class="st">"alice"</span>, <span class="st">"david"</span>, <span class="st">"alice"</span>, <span class="st">"eve"</span>]</span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>monthly_visitors <span class="op">=</span> [<span class="st">"alice"</span>, <span class="st">"frank"</span>, <span class="st">"george"</span>, <span class="st">"bob"</span>, <span class="st">"helen"</span>]</span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Remove duplicates and get unique visitors</span></span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a>unique_daily <span class="op">=</span> <span class="bu">set</span>(daily_visitors)</span>
+<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a>unique_monthly <span class="op">=</span> <span class="bu">set</span>(monthly_visitors)</span>
+<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-9"><a href="#cb32-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Daily visitors (with duplicates): </span><span class="sc">{</span>daily_visitors<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb32-10"><a href="#cb32-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Unique daily visitors: </span><span class="sc">{</span>unique_daily<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb32-11"><a href="#cb32-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Unique daily count: </span><span class="sc">{</span><span class="bu">len</span>(unique_daily)<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb32-12"><a href="#cb32-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-13"><a href="#cb32-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Set operations (mathematical set theory)</span></span>
+<span id="cb32-14"><a href="#cb32-14" aria-hidden="true" tabindex="-1"></a>all_visitors <span class="op">=</span> unique_daily <span class="op">|</span> unique_monthly        <span class="co"># Union</span></span>
+<span id="cb32-15"><a href="#cb32-15" aria-hidden="true" tabindex="-1"></a>returning_visitors <span class="op">=</span> unique_daily <span class="op">&amp;</span> unique_monthly  <span class="co"># Intersection</span></span>
+<span id="cb32-16"><a href="#cb32-16" aria-hidden="true" tabindex="-1"></a>new_visitors <span class="op">=</span> unique_monthly <span class="op">-</span> unique_daily        <span class="co"># Difference</span></span>
+<span id="cb32-17"><a href="#cb32-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-18"><a href="#cb32-18" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"All unique visitors: </span><span class="sc">{</span>all_visitors<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb32-19"><a href="#cb32-19" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Returning visitors: </span><span class="sc">{</span>returning_visitors<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb32-20"><a href="#cb32-20" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"New visitors this month: </span><span class="sc">{</span>new_visitors<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Daily visitors (with duplicates): ['alice', 'bob', 'charlie', 'alice', 'david', 'alice', 'eve']
+Unique daily visitors: {'david', 'bob', 'charlie', 'eve', 'alice'}
+Unique daily count: 5
+All unique visitors: {'david', 'bob', 'helen', 'charlie', 'george', 'frank', 'eve', 'alice'}
+Returning visitors: {'bob', 'alice'}
+New visitors this month: {'frank', 'george', 'helen'}</code></pre>
+</div>
+</div>
+<section id="set-deep-dive-advanced-operations-mathematical-power" class="level3">
+<h3 class="anchored" data-anchor-id="set-deep-dive-advanced-operations-mathematical-power">🎯 Set Deep Dive: Advanced Operations &amp; Mathematical Power</h3>
+<p>Sets are much more powerful than just removing duplicates. Let’s explore their full mathematical capabilities and practical applications.</p>
+<div id="cell-47" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Advanced set operations - the mathematical toolkit</span></span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"=== Set Operations in Business Analytics ==="</span>)</span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Customer segments from different marketing campaigns</span></span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a>email_campaign <span class="op">=</span> {<span class="st">"alice"</span>, <span class="st">"bob"</span>, <span class="st">"charlie"</span>, <span class="st">"diana"</span>, <span class="st">"eve"</span>}</span>
+<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a>social_media <span class="op">=</span> {<span class="st">"bob"</span>, <span class="st">"diana"</span>, <span class="st">"frank"</span>, <span class="st">"grace"</span>, <span class="st">"henry"</span>}</span>
+<span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a>referral_program <span class="op">=</span> {<span class="st">"alice"</span>, <span class="st">"charlie"</span>, <span class="st">"frank"</span>, <span class="st">"ivan"</span>, <span class="st">"jane"</span>}</span>
+<span id="cb34-8"><a href="#cb34-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-9"><a href="#cb34-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Email campaign: </span><span class="sc">{</span>email_campaign<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb34-10"><a href="#cb34-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Social media: </span><span class="sc">{</span>social_media<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb34-11"><a href="#cb34-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Referral program: </span><span class="sc">{</span>referral_program<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb34-12"><a href="#cb34-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-13"><a href="#cb34-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Union (|) - All customers reached by ANY campaign</span></span>
+<span id="cb34-14"><a href="#cb34-14" aria-hidden="true" tabindex="-1"></a>all_customers <span class="op">=</span> email_campaign <span class="op">|</span> social_media <span class="op">|</span> referral_program</span>
+<span id="cb34-15"><a href="#cb34-15" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Total unique customers reached: </span><span class="sc">{</span><span class="bu">len</span>(all_customers)<span class="sc">}</span><span class="ss"> -&gt; </span><span class="sc">{</span>all_customers<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb34-16"><a href="#cb34-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-17"><a href="#cb34-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Intersection (&amp;) - Customers reached by ALL campaigns</span></span>
+<span id="cb34-18"><a href="#cb34-18" aria-hidden="true" tabindex="-1"></a>super_engaged <span class="op">=</span> email_campaign <span class="op">&amp;</span> social_media <span class="op">&amp;</span> referral_program</span>
+<span id="cb34-19"><a href="#cb34-19" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Super engaged (all 3 campaigns): </span><span class="sc">{</span>super_engaged<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb34-20"><a href="#cb34-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-21"><a href="#cb34-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Difference (-) - Customers only in email, not in social media</span></span>
+<span id="cb34-22"><a href="#cb34-22" aria-hidden="true" tabindex="-1"></a>email_only <span class="op">=</span> email_campaign <span class="op">-</span> social_media</span>
+<span id="cb34-23"><a href="#cb34-23" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Email-only customers: </span><span class="sc">{</span>email_only<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb34-24"><a href="#cb34-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-25"><a href="#cb34-25" aria-hidden="true" tabindex="-1"></a><span class="co"># Symmetric difference (^) - Customers in email OR social media, but not both</span></span>
+<span id="cb34-26"><a href="#cb34-26" aria-hidden="true" tabindex="-1"></a>exclusive_reach <span class="op">=</span> email_campaign <span class="op">^</span> social_media</span>
+<span id="cb34-27"><a href="#cb34-27" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Exclusive reach (email XOR social): </span><span class="sc">{</span>exclusive_reach<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div id="cell-48" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Set methods and membership testing</span></span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"=== Set Methods and Testing ==="</span>)</span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Available set methods</span></span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a>sample_set <span class="op">=</span> {<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>}</span>
+<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Set methods:"</span>, [method <span class="cf">for</span> method <span class="kw">in</span> <span class="bu">dir</span>(sample_set) <span class="cf">if</span> <span class="kw">not</span> method.startswith(<span class="st">'_'</span>)][:<span class="dv">10</span>])</span>
+<span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-8"><a href="#cb35-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a skills tracking system</span></span>
+<span id="cb35-9"><a href="#cb35-9" aria-hidden="true" tabindex="-1"></a>required_skills <span class="op">=</span> {<span class="st">"python"</span>, <span class="st">"sql"</span>, <span class="st">"git"</span>, <span class="st">"statistics"</span>}</span>
+<span id="cb35-10"><a href="#cb35-10" aria-hidden="true" tabindex="-1"></a>applicant_a <span class="op">=</span> {<span class="st">"python"</span>, <span class="st">"java"</span>, <span class="st">"git"</span>, <span class="st">"docker"</span>}</span>
+<span id="cb35-11"><a href="#cb35-11" aria-hidden="true" tabindex="-1"></a>applicant_b <span class="op">=</span> {<span class="st">"python"</span>, <span class="st">"sql"</span>, <span class="st">"git"</span>, <span class="st">"statistics"</span>, <span class="st">"machine-learning"</span>}</span>
+<span id="cb35-12"><a href="#cb35-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-13"><a href="#cb35-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Required skills: </span><span class="sc">{</span>required_skills<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb35-14"><a href="#cb35-14" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Applicant A skills: </span><span class="sc">{</span>applicant_a<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb35-15"><a href="#cb35-15" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Applicant B skills: </span><span class="sc">{</span>applicant_b<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb35-16"><a href="#cb35-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-17"><a href="#cb35-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Check qualifications using set methods</span></span>
+<span id="cb35-18"><a href="#cb35-18" aria-hidden="true" tabindex="-1"></a>a_qualified <span class="op">=</span> required_skills.issubset(applicant_a)</span>
+<span id="cb35-19"><a href="#cb35-19" aria-hidden="true" tabindex="-1"></a>b_qualified <span class="op">=</span> required_skills.issubset(applicant_b)</span>
+<span id="cb35-20"><a href="#cb35-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-21"><a href="#cb35-21" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Applicant A qualified: </span><span class="sc">{</span>a_qualified<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb35-22"><a href="#cb35-22" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Applicant B qualified: </span><span class="sc">{</span>b_qualified<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb35-23"><a href="#cb35-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-24"><a href="#cb35-24" aria-hidden="true" tabindex="-1"></a><span class="co"># Find missing and extra skills</span></span>
+<span id="cb35-25"><a href="#cb35-25" aria-hidden="true" tabindex="-1"></a>a_missing <span class="op">=</span> required_skills <span class="op">-</span> applicant_a</span>
+<span id="cb35-26"><a href="#cb35-26" aria-hidden="true" tabindex="-1"></a>a_extra <span class="op">=</span> applicant_a <span class="op">-</span> required_skills</span>
+<span id="cb35-27"><a href="#cb35-27" aria-hidden="true" tabindex="-1"></a>b_extra <span class="op">=</span> applicant_b <span class="op">-</span> required_skills</span>
+<span id="cb35-28"><a href="#cb35-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-29"><a href="#cb35-29" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Applicant A missing: </span><span class="sc">{</span>a_missing<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb35-30"><a href="#cb35-30" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Applicant A extra skills: </span><span class="sc">{</span>a_extra<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb35-31"><a href="#cb35-31" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Applicant B extra skills: </span><span class="sc">{</span>b_extra<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb35-32"><a href="#cb35-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-33"><a href="#cb35-33" aria-hidden="true" tabindex="-1"></a><span class="co"># Fast membership testing</span></span>
+<span id="cb35-34"><a href="#cb35-34" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Does applicant A know Python? </span><span class="sc">{</span><span class="st">'python'</span> <span class="kw">in</span> applicant_a<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb35-35"><a href="#cb35-35" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Does applicant A know Rust? </span><span class="sc">{</span><span class="st">'rust'</span> <span class="kw">in</span> applicant_a<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div id="cell-49" class="cell" data-execution_count="24">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Set comprehensions and advanced patterns</span></span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"=== Set Comprehensions and Performance ==="</span>)</span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Set comprehension - like list comprehensions but creates sets</span></span>
+<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a>even_squares <span class="op">=</span> {x<span class="op">**</span><span class="dv">2</span> <span class="cf">for</span> x <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">10</span>) <span class="cf">if</span> x <span class="op">%</span> <span class="dv">2</span> <span class="op">==</span> <span class="dv">0</span>}</span>
+<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Even squares: </span><span class="sc">{</span>even_squares<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb36-7"><a href="#cb36-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-8"><a href="#cb36-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Performance comparison: list vs set for membership testing</span></span>
+<span id="cb36-9"><a href="#cb36-9" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> time</span>
+<span id="cb36-10"><a href="#cb36-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-11"><a href="#cb36-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Large datasets</span></span>
+<span id="cb36-12"><a href="#cb36-12" aria-hidden="true" tabindex="-1"></a>large_list <span class="op">=</span> <span class="bu">list</span>(<span class="bu">range</span>(<span class="dv">100000</span>))</span>
+<span id="cb36-13"><a href="#cb36-13" aria-hidden="true" tabindex="-1"></a>large_set <span class="op">=</span> <span class="bu">set</span>(<span class="bu">range</span>(<span class="dv">100000</span>))</span>
+<span id="cb36-14"><a href="#cb36-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-15"><a href="#cb36-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Test membership in list</span></span>
+<span id="cb36-16"><a href="#cb36-16" aria-hidden="true" tabindex="-1"></a>start <span class="op">=</span> time.time()</span>
+<span id="cb36-17"><a href="#cb36-17" aria-hidden="true" tabindex="-1"></a>result1 <span class="op">=</span> <span class="dv">99999</span> <span class="kw">in</span> large_list</span>
+<span id="cb36-18"><a href="#cb36-18" aria-hidden="true" tabindex="-1"></a>list_time <span class="op">=</span> time.time() <span class="op">-</span> start</span>
+<span id="cb36-19"><a href="#cb36-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-20"><a href="#cb36-20" aria-hidden="true" tabindex="-1"></a><span class="co"># Test membership in set</span></span>
+<span id="cb36-21"><a href="#cb36-21" aria-hidden="true" tabindex="-1"></a>start <span class="op">=</span> time.time()</span>
+<span id="cb36-22"><a href="#cb36-22" aria-hidden="true" tabindex="-1"></a>result2 <span class="op">=</span> <span class="dv">99999</span> <span class="kw">in</span> large_set</span>
+<span id="cb36-23"><a href="#cb36-23" aria-hidden="true" tabindex="-1"></a>set_time <span class="op">=</span> time.time() <span class="op">-</span> start</span>
+<span id="cb36-24"><a href="#cb36-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-25"><a href="#cb36-25" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"List membership test: </span><span class="sc">{</span>list_time<span class="sc">:.6f}</span><span class="ss"> seconds"</span>)</span>
+<span id="cb36-26"><a href="#cb36-26" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Set membership test: </span><span class="sc">{</span>set_time<span class="sc">:.6f}</span><span class="ss"> seconds"</span>)</span>
+<span id="cb36-27"><a href="#cb36-27" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Set is </span><span class="sc">{</span>list_time<span class="op">/</span>set_time<span class="sc">:.1f}</span><span class="ss">x faster for membership testing!"</span>)</span>
+<span id="cb36-28"><a href="#cb36-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-29"><a href="#cb36-29" aria-hidden="true" tabindex="-1"></a><span class="co"># Remove duplicates from large list</span></span>
+<span id="cb36-30"><a href="#cb36-30" aria-hidden="true" tabindex="-1"></a>data_with_duplicates <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">4</span>, <span class="dv">4</span>, <span class="dv">4</span>] <span class="op">*</span> <span class="dv">1000</span></span>
+<span id="cb36-31"><a href="#cb36-31" aria-hidden="true" tabindex="-1"></a>unique_data <span class="op">=</span> <span class="bu">list</span>(<span class="bu">set</span>(data_with_duplicates))</span>
+<span id="cb36-32"><a href="#cb36-32" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Original list size: </span><span class="sc">{</span><span class="bu">len</span>(data_with_duplicates)<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb36-33"><a href="#cb36-33" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"After removing duplicates: </span><span class="sc">{</span><span class="bu">len</span>(unique_data)<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb36-34"><a href="#cb36-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-35"><a href="#cb36-35" aria-hidden="true" tabindex="-1"></a><span class="co"># Working with immutable sets</span></span>
+<span id="cb36-36"><a href="#cb36-36" aria-hidden="true" tabindex="-1"></a>frozen_permissions <span class="op">=</span> <span class="bu">frozenset</span>([<span class="st">"read"</span>, <span class="st">"write"</span>, <span class="st">"execute"</span>])</span>
+<span id="cb36-37"><a href="#cb36-37" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Frozen set (immutable): </span><span class="sc">{</span>frozen_permissions<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb36-38"><a href="#cb36-38" aria-hidden="true" tabindex="-1"></a><span class="co"># frozen_permissions.add("admin")  # This would raise an AttributeError!</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>=== Set Comprehensions and Performance ===
+Even squares: {0, 64, 4, 36, 16}
+List membership test: 0.001083 seconds
+Set membership test: 0.000030 seconds
+Set is 36.0x faster for membership testing!
+Original list size: 10000
+After removing duplicates: 4
+Frozen set (immutable): frozenset({'read', 'write', 'execute'})</code></pre>
+</div>
+</div>
+</section>
+<section id="your-turn-set-mastery-practice" class="level3">
+<h3 class="anchored" data-anchor-id="your-turn-set-mastery-practice">🛠️ Your Turn: Set Mastery Practice</h3>
+<p>Apply set operations to solve real-world problems:</p>
+<div id="cell-51" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb38"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TODO</span><span class="co">: Social media platform analysis</span></span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>instagram_followers <span class="op">=</span> {<span class="st">"alice"</span>, <span class="st">"bob"</span>, <span class="st">"charlie"</span>, <span class="st">"diana"</span>, <span class="st">"eve"</span>, <span class="st">"frank"</span>}</span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>twitter_followers <span class="op">=</span> {<span class="st">"bob"</span>, <span class="st">"diana"</span>, <span class="st">"grace"</span>, <span class="st">"henry"</span>, <span class="st">"ivan"</span>, <span class="st">"frank"</span>}</span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a>tiktok_followers <span class="op">=</span> {<span class="st">"alice"</span>, <span class="st">"charlie"</span>, <span class="st">"grace"</span>, <span class="st">"jane"</span>, <span class="st">"diana"</span>}</span>
+<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TODO</span><span class="co">: Find followers who follow you on ALL platforms</span></span>
+<span id="cb38-7"><a href="#cb38-7" aria-hidden="true" tabindex="-1"></a>all_platforms <span class="op">=</span> instagram_followers <span class="op">&amp;</span> twitter_followers <span class="op">&amp;</span> tiktok_followers</span>
+<span id="cb38-8"><a href="#cb38-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-9"><a href="#cb38-9" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TODO</span><span class="co">: Find your total unique audience across all platforms</span></span>
+<span id="cb38-10"><a href="#cb38-10" aria-hidden="true" tabindex="-1"></a>total_audience <span class="op">=</span> instagram_followers <span class="op">|</span> twitter_followers <span class="op">|</span> tiktok_followers</span>
+<span id="cb38-11"><a href="#cb38-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Do the same using set.union()</span></span>
+<span id="cb38-12"><a href="#cb38-12" aria-hidden="true" tabindex="-1"></a>total_audience_union <span class="op">=</span> <span class="bu">set</span>().union(instagram_followers, twitter_followers, tiktok_followers)</span>
+<span id="cb38-13"><a href="#cb38-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-14"><a href="#cb38-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-15"><a href="#cb38-15" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TODO</span><span class="co">: Find followers who are ONLY on Instagram</span></span>
+<span id="cb38-16"><a href="#cb38-16" aria-hidden="true" tabindex="-1"></a>instagram_only <span class="op">=</span> instagram_followers <span class="op">-</span> (twitter_followers <span class="op">|</span> tiktok_followers)</span>
+<span id="cb38-17"><a href="#cb38-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-18"><a href="#cb38-18" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TODO</span><span class="co">: Find followers who are on Instagram OR Twitter, but not both</span></span>
+<span id="cb38-19"><a href="#cb38-19" aria-hidden="true" tabindex="-1"></a>instagram_twitter_xor <span class="op">=</span> instagram_followers <span class="op">^</span> twitter_followers</span>
+<span id="cb38-20"><a href="#cb38-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-21"><a href="#cb38-21" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TODO</span><span class="co">: Use set comprehension to create tags from a blog post</span></span>
+<span id="cb38-22"><a href="#cb38-22" aria-hidden="true" tabindex="-1"></a>blog_post <span class="op">=</span> <span class="st">"Python programming data science machine learning AI artificial intelligence"</span></span>
+<span id="cb38-23"><a href="#cb38-23" aria-hidden="true" tabindex="-1"></a>tags <span class="op">=</span> {word.lower() <span class="cf">for</span> word <span class="kw">in</span> blog_post.split()}</span>
+<span id="cb38-24"><a href="#cb38-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-25"><a href="#cb38-25" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TODO</span><span class="co">: Check if required skills are a subset of candidate skills</span></span>
+<span id="cb38-26"><a href="#cb38-26" aria-hidden="true" tabindex="-1"></a>required_job_skills <span class="op">=</span> {<span class="st">"python"</span>, <span class="st">"sql"</span>, <span class="st">"excel"</span>}</span>
+<span id="cb38-27"><a href="#cb38-27" aria-hidden="true" tabindex="-1"></a>candidate_skills <span class="op">=</span> {<span class="st">"python"</span>, <span class="st">"sql"</span>, <span class="st">"excel"</span>, <span class="st">"tableau"</span>, <span class="st">"r"</span>}</span>
+<span id="cb38-28"><a href="#cb38-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-29"><a href="#cb38-29" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TODO</span><span class="co">: Find what additional skills the candidate brings</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="combining-dictionaries-and-sets-real-world-applications" class="level3">
+<h3 class="anchored" data-anchor-id="combining-dictionaries-and-sets-real-world-applications">🔄 Combining Dictionaries and Sets: Real-World Applications</h3>
+<p>The most powerful solutions often combine multiple data structures. Let’s see dictionaries and sets working together:</p>
+<div id="cell-53" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb39"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Real-world example: E-commerce recommendation system</span></span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"=== E-commerce Recommendation System ==="</span>)</span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a><span class="co"># User purchase history (dictionary with sets as values)</span></span>
+<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a>user_purchases <span class="op">=</span> {</span>
+<span id="cb39-6"><a href="#cb39-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"alice"</span>: {<span class="st">"laptop"</span>, <span class="st">"mouse"</span>, <span class="st">"keyboard"</span>, <span class="st">"monitor"</span>},</span>
+<span id="cb39-7"><a href="#cb39-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">"bob"</span>: {<span class="st">"phone"</span>, <span class="st">"case"</span>, <span class="st">"charger"</span>},</span>
+<span id="cb39-8"><a href="#cb39-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">"charlie"</span>: {<span class="st">"laptop"</span>, <span class="st">"mouse"</span>, <span class="st">"headphones"</span>},</span>
+<span id="cb39-9"><a href="#cb39-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">"diana"</span>: {<span class="st">"tablet"</span>, <span class="st">"stylus"</span>, <span class="st">"case"</span>, <span class="st">"headphones"</span>}</span>
+<span id="cb39-10"><a href="#cb39-10" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb39-11"><a href="#cb39-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-12"><a href="#cb39-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Product categories (dictionary mapping products to their categories)</span></span>
+<span id="cb39-13"><a href="#cb39-13" aria-hidden="true" tabindex="-1"></a>product_categories <span class="op">=</span> {</span>
+<span id="cb39-14"><a href="#cb39-14" aria-hidden="true" tabindex="-1"></a>    <span class="st">"laptop"</span>: <span class="st">"computers"</span>, <span class="st">"mouse"</span>: <span class="st">"accessories"</span>, <span class="st">"keyboard"</span>: <span class="st">"accessories"</span>,</span>
+<span id="cb39-15"><a href="#cb39-15" aria-hidden="true" tabindex="-1"></a>    <span class="st">"monitor"</span>: <span class="st">"displays"</span>, <span class="st">"phone"</span>: <span class="st">"mobile"</span>, <span class="st">"case"</span>: <span class="st">"accessories"</span>,</span>
+<span id="cb39-16"><a href="#cb39-16" aria-hidden="true" tabindex="-1"></a>    <span class="st">"charger"</span>: <span class="st">"accessories"</span>, <span class="st">"headphones"</span>: <span class="st">"audio"</span>, <span class="st">"tablet"</span>: <span class="st">"mobile"</span>,</span>
+<span id="cb39-17"><a href="#cb39-17" aria-hidden="true" tabindex="-1"></a>    <span class="st">"stylus"</span>: <span class="st">"accessories"</span></span>
+<span id="cb39-18"><a href="#cb39-18" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb39-19"><a href="#cb39-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-20"><a href="#cb39-20" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"User purchase history:"</span>)</span>
+<span id="cb39-21"><a href="#cb39-21" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> user, products <span class="kw">in</span> user_purchases.items():</span>
+<span id="cb39-22"><a href="#cb39-22" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"  </span><span class="sc">{</span>user<span class="sc">}</span><span class="ss">: </span><span class="sc">{</span>products<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb39-23"><a href="#cb39-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-24"><a href="#cb39-24" aria-hidden="true" tabindex="-1"></a><span class="co"># Find users who bought similar products</span></span>
+<span id="cb39-25"><a href="#cb39-25" aria-hidden="true" tabindex="-1"></a>alice_products <span class="op">=</span> user_purchases[<span class="st">"alice"</span>]</span>
+<span id="cb39-26"><a href="#cb39-26" aria-hidden="true" tabindex="-1"></a>charlie_products <span class="op">=</span> user_purchases[<span class="st">"charlie"</span>]</span>
+<span id="cb39-27"><a href="#cb39-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-28"><a href="#cb39-28" aria-hidden="true" tabindex="-1"></a>common_products <span class="op">=</span> alice_products <span class="op">&amp;</span> charlie_products</span>
+<span id="cb39-29"><a href="#cb39-29" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Alice and Charlie both bought: </span><span class="sc">{</span>common_products<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb39-30"><a href="#cb39-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-31"><a href="#cb39-31" aria-hidden="true" tabindex="-1"></a><span class="co"># Recommendation: products Alice bought that Charlie didn't</span></span>
+<span id="cb39-32"><a href="#cb39-32" aria-hidden="true" tabindex="-1"></a>recommendations_for_charlie <span class="op">=</span> alice_products <span class="op">-</span> charlie_products</span>
+<span id="cb39-33"><a href="#cb39-33" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Recommend to Charlie (based on Alice): </span><span class="sc">{</span>recommendations_for_charlie<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb39-34"><a href="#cb39-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-35"><a href="#cb39-35" aria-hidden="true" tabindex="-1"></a><span class="co"># Find all users who bought accessories</span></span>
+<span id="cb39-36"><a href="#cb39-36" aria-hidden="true" tabindex="-1"></a>accessory_buyers <span class="op">=</span> <span class="bu">set</span>()</span>
+<span id="cb39-37"><a href="#cb39-37" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> user, products <span class="kw">in</span> user_purchases.items():</span>
+<span id="cb39-38"><a href="#cb39-38" aria-hidden="true" tabindex="-1"></a>    user_categories <span class="op">=</span> {product_categories[product] <span class="cf">for</span> product <span class="kw">in</span> products}</span>
+<span id="cb39-39"><a href="#cb39-39" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="st">"accessories"</span> <span class="kw">in</span> user_categories:</span>
+<span id="cb39-40"><a href="#cb39-40" aria-hidden="true" tabindex="-1"></a>        accessory_buyers.add(user)</span>
+<span id="cb39-41"><a href="#cb39-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-42"><a href="#cb39-42" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Users who bought accessories: </span><span class="sc">{</span>accessory_buyers<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb39-43"><a href="#cb39-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-44"><a href="#cb39-44" aria-hidden="true" tabindex="-1"></a><span class="co"># Category analysis using dictionary and set comprehensions</span></span>
+<span id="cb39-45"><a href="#cb39-45" aria-hidden="true" tabindex="-1"></a>category_buyers <span class="op">=</span> {}</span>
+<span id="cb39-46"><a href="#cb39-46" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> category <span class="kw">in</span> <span class="bu">set</span>(product_categories.values()):</span>
+<span id="cb39-47"><a href="#cb39-47" aria-hidden="true" tabindex="-1"></a>    buyers <span class="op">=</span> {user <span class="cf">for</span> user, products <span class="kw">in</span> user_purchases.items() </span>
+<span id="cb39-48"><a href="#cb39-48" aria-hidden="true" tabindex="-1"></a>              <span class="cf">if</span> <span class="bu">any</span>(product_categories[product] <span class="op">==</span> category <span class="cf">for</span> product <span class="kw">in</span> products)}</span>
+<span id="cb39-49"><a href="#cb39-49" aria-hidden="true" tabindex="-1"></a>    category_buyers[category] <span class="op">=</span> buyers</span>
+<span id="cb39-50"><a href="#cb39-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-51"><a href="#cb39-51" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Buyers by category:"</span>)</span>
+<span id="cb39-52"><a href="#cb39-52" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> category, buyers <span class="kw">in</span> category_buyers.items():</span>
+<span id="cb39-53"><a href="#cb39-53" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"  </span><span class="sc">{</span>category<span class="sc">}</span><span class="ss">: </span><span class="sc">{</span>buyers<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<hr>
+</section>
+</section>
+</section>
+<section id="putting-it-all-together-lab-04-integration" class="level1">
+<h1>🎯 Putting It All Together: Lab 04 Integration</h1>
+<p>You’ve experienced the power of AI-assisted data structure optimization. Now apply those skills in <a href="https://github.com/bgreenwell/is4010-course-template/blob/main/labs/lab04/README.md">Lab 04</a>!</p>
+<section id="your-ai-pair-programming-toolkit" class="level2">
+<h2 class="anchored" data-anchor-id="your-ai-pair-programming-toolkit">Your AI Pair Programming Toolkit 🤖</h2>
+<p>Based on today’s exercises, here are proven prompt templates for Lab 04 success:</p>
+<section id="for-performance-analysis" class="level3">
+<h3 class="anchored" data-anchor-id="for-performance-analysis"><strong>For Performance Analysis:</strong></h3>
+<pre><code>Analyze this Python code for performance bottlenecks and suggest optimizations using different data structures:
+
+[Your code here]
+
+Focus on:
+- What data structure would be better for [specific operation]?
+- Why is the current approach slow?
+- What's the time complexity difference?</code></pre>
+</section>
+<section id="for-data-structure-selection" class="level3">
+<h3 class="anchored" data-anchor-id="for-data-structure-selection"><strong>For Data Structure Selection:</strong></h3>
+<pre><code>I need to design data structures for this scenario:
+
+[Describe your problem]
+
+Requirements:
+- Fast lookup of [items] by [key]
+- Quick filtering by [criteria]  
+- Efficient [specific operation]
+
+What data structures should I use and why?</code></pre>
+</section>
+<section id="for-code-review" class="level3">
+<h3 class="anchored" data-anchor-id="for-code-review"><strong>For Code Review:</strong></h3>
+<pre><code>Review this Python implementation and suggest improvements for:
+- Data structure choice
+- Code readability  
+- Performance optimization
+
+[Your code here]
+
+What improvements can you suggest?</code></pre>
+</section>
+</section>
+<section id="success-strategy-for-lab-04" class="level2">
+<h2 class="anchored" data-anchor-id="success-strategy-for-lab-04">Success Strategy for Lab 04</h2>
+<ol type="1">
+<li>🤖 <strong>Collaborate with AI</strong> for data structure recommendations</li>
+<li>💡 <strong>Test and validate</strong> AI suggestions with real code<br>
+</li>
+<li>📝 <strong>Document your reasoning</strong> in <code>lab04_prompts.md</code></li>
+<li>✅ <strong>Verify with automation</strong> using GitHub Actions</li>
+</ol>
+</section>
+<section id="key-concepts-to-apply" class="level2">
+<h2 class="anchored" data-anchor-id="key-concepts-to-apply">Key Concepts to Apply</h2>
+<ul>
+<li><strong>List vs Set performance</strong>: When uniqueness and fast membership matter</li>
+<li><strong>Dictionary optimization</strong>: Fast key-based lookups for complex data</li>
+<li><strong>List comprehensions</strong>: Concise data generation and processing</li>
+<li><strong>Critical evaluation</strong>: Balance AI suggestions with your understanding</li>
+</ul>
+<p><strong>Remember:</strong> The goal isn’t just to get the right answer, but to understand <em>why</em> it’s right and <em>when</em> to use each approach.</p>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+<p>IS 4010 - App Dev with AI</p>
+</div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>

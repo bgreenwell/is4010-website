@@ -1,6 +1,8 @@
 on:
   push:
     branches: main
+  schedule:
+    - cron: '0 0 * * 1'  # Run every Monday at midnight UTC
 
 name: Render and Publish
 
@@ -16,9 +18,25 @@ jobs:
       - name: Set up Quarto
         uses: quarto-dev/quarto-actions/setup@v2
 
-      - name: Render and Publish
-        uses: quarto-dev/quarto-actions/publish@v2
+      - name: Render Website
+        run: |
+          quarto render . --output-dir _site
+
+      - name: Render Slides
+        run: |
+          quarto render slides/ --output-dir html
+          mkdir -p _site/slides
+          cp -r slides/html/* _site/slides/
+
+      - name: Link Checker
+        uses: lycheeverse/lychee-action@v1.9.0
         with:
-          target: gh-pages
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          args: --verbose --no-progress "_site/**/*.html"
+          fail: false  # Report but don't fail the build for broken links
+
+      - name: Publish to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        if: github.ref == 'refs/heads/main'
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./_site
