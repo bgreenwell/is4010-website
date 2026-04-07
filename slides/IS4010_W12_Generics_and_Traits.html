@@ -231,7 +231,12 @@ Brandon M. Greenwell
 <li>Implementing traits for custom types</li>
 </ul>
 <aside class="notes">
-<p>This week focuses on Rust’s powerful abstraction mechanisms. Generics enable code reuse without runtime cost. Traits define shared behavior and enable polymorphism without inheritance.</p>
+<p>This week focuses on Rust’s two big abstraction tools: generics and traits. If you’re coming from Python, you’ve likely solved similar problems in very different ways.</p>
+<p><strong>Python vs.&nbsp;Rust abstraction philosophy:</strong></p>
+<p>In Python, you generally don’t worry about code reuse across types — duck typing lets you write one function and call it with anything that has the right methods at runtime. Python will simply raise an AttributeError or TypeError if something goes wrong. This is flexible but pushes errors to runtime.</p>
+<p>In Rust, the compiler needs to know at <em>compile time</em> exactly what types are used and what operations they support. Generics and traits are how you tell the compiler “this code works for any type, as long as it can do these specific things.” The payoff: you catch type errors before your program ever runs, and the generated code is just as fast as if you’d written a separate version for each type.</p>
+<p><strong>Session 1</strong> covers generics — how to write one function or struct that works across many types. <strong>Session 2</strong> goes deeper on traits — how to define and enforce shared behavior contracts.</p>
+<p>Keep this framing in mind all week: Rust trades Python’s runtime flexibility for compile-time correctness and performance.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -260,7 +265,9 @@ Brandon M. Greenwell
 <li><a href="https://serde.rs/">Serde</a>: Generic serialization framework</li>
 </ul>
 <aside class="notes">
-<p>Generics are foundational to Rust’s design philosophy. They enable the standard library’s power while maintaining performance.</p>
+<p>Point out that Python has generics too (via the <code>typing</code> module and, since 3.9, built-in syntax like <code>list[int]</code>), but Python generics are mostly documentation and tooling hints — they aren’t enforced at runtime. In Rust, generics are fully enforced at compile time with zero extra cost at runtime.</p>
+<p>The “zero-cost abstractions” point is worth dwelling on. When you write <code>Vec&lt;i32&gt;</code>, Rust generates machine code that is identical to what you’d write if you hardcoded <code>i32</code> everywhere. There’s no boxing, no virtual dispatch, no overhead — the compiler monomorphizes (creates a concrete copy of) the generic code for each type you use it with. In Python, a list holds heterogeneous objects via pointers and the overhead of the interpreter is always present.</p>
+<p><code>Vec&lt;T&gt;</code>, <code>Option&lt;T&gt;</code>, and <code>Result&lt;T, E&gt;</code> are the most important generic types they’ve already seen in this course. Pointing to Servo, Tokio, and Serde reinforces that these aren’t just academic concepts — they’re the backbone of real, production Rust systems.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -305,7 +312,21 @@ Brandon M. Greenwell
 <span id="cb1-19"><a href=""></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p><strong>Problem</strong>: Same logic, different types → code duplication!</p>
 <aside class="notes">
-<p>This motivates generics. Ask students: “What happens when you need largest_u32, largest_char, etc.?”</p>
+<p>In Python, this problem simply doesn’t exist at the function-writing level:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href=""></a><span class="kw">def</span> largest(lst):</span>
+<span id="cb2-2"><a href=""></a>    result <span class="op">=</span> lst[<span class="dv">0</span>]</span>
+<span id="cb2-3"><a href=""></a>    <span class="cf">for</span> item <span class="kw">in</span> lst:</span>
+<span id="cb2-4"><a href=""></a>        <span class="cf">if</span> item <span class="op">&gt;</span> result:</span>
+<span id="cb2-5"><a href=""></a>            result <span class="op">=</span> item</span>
+<span id="cb2-6"><a href=""></a>    <span class="cf">return</span> result</span>
+<span id="cb2-7"><a href=""></a></span>
+<span id="cb2-8"><a href=""></a>largest([<span class="dv">34</span>, <span class="dv">50</span>, <span class="dv">25</span>, <span class="dv">100</span>])   <span class="co"># works</span></span>
+<span id="cb2-9"><a href=""></a>largest([<span class="fl">3.14</span>, <span class="fl">2.71</span>, <span class="fl">1.41</span>])  <span class="co"># also works</span></span>
+<span id="cb2-10"><a href=""></a>largest([<span class="st">'y'</span>, <span class="st">'m'</span>, <span class="st">'a'</span>])     <span class="co"># also works!</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Python’s duck typing lets you write one function that silently handles any type that supports <code>&gt;</code>. There’s no duplication problem.</p>
+<p>But notice: what happens if you pass an object that doesn’t support <code>&gt;</code>? Python raises a <code>TypeError</code> at <em>runtime</em> — you only find out when that code path is actually executed. In a large application, that might not happen until you’re in production.</p>
+<p>Rust forces you to think about this upfront. The two <code>largest_i32</code>/<code>largest_f64</code> functions show what you’d be stuck with <em>without</em> generics: copy-paste programming that’s painful to maintain. Ask students: what if you needed to fix a bug in this logic — you’d have to fix it in every copy!</p>
+<p>This is the motivating problem generics solve.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -321,26 +342,40 @@ Brandon M. Greenwell
 <section id="introducing-generics" class="slide level2 smaller">
 <h2>Introducing Generics</h2>
 <p><strong>Generic functions work with multiple types:</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb2-1"><a href=""></a><span class="kw">fn</span> largest<span class="op">&lt;</span>T<span class="op">:</span> <span class="bu">PartialOrd</span><span class="op">&gt;</span>(list<span class="op">:</span> <span class="op">&amp;</span>[T]) <span class="op">-&gt;</span> <span class="op">&amp;</span>T <span class="op">{</span></span>
-<span id="cb2-2"><a href=""></a>    <span class="kw">let</span> <span class="kw">mut</span> largest <span class="op">=</span> <span class="op">&amp;</span>list[<span class="dv">0</span>]<span class="op">;</span></span>
-<span id="cb2-3"><a href=""></a>    <span class="cf">for</span> item <span class="kw">in</span> list <span class="op">{</span></span>
-<span id="cb2-4"><a href=""></a>        <span class="cf">if</span> item <span class="op">&gt;</span> largest <span class="op">{</span></span>
-<span id="cb2-5"><a href=""></a>            largest <span class="op">=</span> item<span class="op">;</span></span>
-<span id="cb2-6"><a href=""></a>        <span class="op">}</span></span>
-<span id="cb2-7"><a href=""></a>    <span class="op">}</span></span>
-<span id="cb2-8"><a href=""></a>    largest</span>
-<span id="cb2-9"><a href=""></a><span class="op">}</span></span>
-<span id="cb2-10"><a href=""></a></span>
-<span id="cb2-11"><a href=""></a><span class="co">// Works with any type that can be compared!</span></span>
-<span id="cb2-12"><a href=""></a><span class="kw">let</span> numbers <span class="op">=</span> <span class="pp">vec!</span>[<span class="dv">34</span><span class="op">,</span> <span class="dv">50</span><span class="op">,</span> <span class="dv">25</span><span class="op">,</span> <span class="dv">100</span><span class="op">,</span> <span class="dv">65</span>]<span class="op">;</span></span>
-<span id="cb2-13"><a href=""></a><span class="kw">let</span> result <span class="op">=</span> largest(<span class="op">&amp;</span>numbers)<span class="op">;</span></span>
-<span id="cb2-14"><a href=""></a></span>
-<span id="cb2-15"><a href=""></a><span class="kw">let</span> chars <span class="op">=</span> <span class="pp">vec!</span>[<span class="ch">'y'</span><span class="op">,</span> <span class="ch">'m'</span><span class="op">,</span> <span class="ch">'a'</span><span class="op">,</span> <span class="ch">'q'</span>]<span class="op">;</span></span>
-<span id="cb2-16"><a href=""></a><span class="kw">let</span> result <span class="op">=</span> largest(<span class="op">&amp;</span>chars)<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb3-1"><a href=""></a><span class="kw">fn</span> largest<span class="op">&lt;</span>T<span class="op">:</span> <span class="bu">PartialOrd</span><span class="op">&gt;</span>(list<span class="op">:</span> <span class="op">&amp;</span>[T]) <span class="op">-&gt;</span> <span class="op">&amp;</span>T <span class="op">{</span></span>
+<span id="cb3-2"><a href=""></a>    <span class="kw">let</span> <span class="kw">mut</span> largest <span class="op">=</span> <span class="op">&amp;</span>list[<span class="dv">0</span>]<span class="op">;</span></span>
+<span id="cb3-3"><a href=""></a>    <span class="cf">for</span> item <span class="kw">in</span> list <span class="op">{</span></span>
+<span id="cb3-4"><a href=""></a>        <span class="cf">if</span> item <span class="op">&gt;</span> largest <span class="op">{</span></span>
+<span id="cb3-5"><a href=""></a>            largest <span class="op">=</span> item<span class="op">;</span></span>
+<span id="cb3-6"><a href=""></a>        <span class="op">}</span></span>
+<span id="cb3-7"><a href=""></a>    <span class="op">}</span></span>
+<span id="cb3-8"><a href=""></a>    largest</span>
+<span id="cb3-9"><a href=""></a><span class="op">}</span></span>
+<span id="cb3-10"><a href=""></a></span>
+<span id="cb3-11"><a href=""></a><span class="co">// Works with any type that can be compared!</span></span>
+<span id="cb3-12"><a href=""></a><span class="kw">let</span> numbers <span class="op">=</span> <span class="pp">vec!</span>[<span class="dv">34</span><span class="op">,</span> <span class="dv">50</span><span class="op">,</span> <span class="dv">25</span><span class="op">,</span> <span class="dv">100</span><span class="op">,</span> <span class="dv">65</span>]<span class="op">;</span></span>
+<span id="cb3-13"><a href=""></a><span class="kw">let</span> result <span class="op">=</span> largest(<span class="op">&amp;</span>numbers)<span class="op">;</span></span>
+<span id="cb3-14"><a href=""></a></span>
+<span id="cb3-15"><a href=""></a><span class="kw">let</span> chars <span class="op">=</span> <span class="pp">vec!</span>[<span class="ch">'y'</span><span class="op">,</span> <span class="ch">'m'</span><span class="op">,</span> <span class="ch">'a'</span><span class="op">,</span> <span class="ch">'q'</span>]<span class="op">;</span></span>
+<span id="cb3-16"><a href=""></a><span class="kw">let</span> result <span class="op">=</span> largest(<span class="op">&amp;</span>chars)<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p><strong>Key concept</strong>: <code>T: PartialOrd</code> is a <a href="https://doc.rust-lang.org/book/ch10-02-traits.html#trait-bounds">trait bound</a> - T must implement PartialOrd.</p>
 <p><a href="https://doc.rust-lang.org/book/ch10-01-syntax.html">📖 Rust Book: Generic Data Types</a></p>
 <aside class="notes">
-<p>Emphasize that generics are checked at compile time. No runtime cost!</p>
+<p>Break down the syntax carefully — it’s dense the first time you see it:</p>
+<ul>
+<li><code>&lt;T&gt;</code> after the function name declares that <code>T</code> is a generic type parameter. It’s like saying “let T stand for any type.”</li>
+<li><code>T: PartialOrd</code> is the <em>trait bound</em> — it says “T can be any type, but it must implement the <code>PartialOrd</code> trait,” which means it supports <code>&lt;</code>, <code>&gt;</code>, <code>&lt;=</code>, <code>&gt;=</code> comparisons.</li>
+<li><code>list: &amp;[T]</code> is a slice of T values (a reference to a contiguous sequence).</li>
+<li>The return type <code>&amp;T</code> is a reference to a T value inside that slice.</li>
+</ul>
+<p><strong>Python parallel:</strong> The closest Python equivalent is a type annotation with <code>TypeVar</code>:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href=""></a><span class="im">from</span> typing <span class="im">import</span> TypeVar</span>
+<span id="cb4-2"><a href=""></a>T <span class="op">=</span> TypeVar(<span class="st">'T'</span>)</span>
+<span id="cb4-3"><a href=""></a></span>
+<span id="cb4-4"><a href=""></a><span class="kw">def</span> largest(lst: <span class="bu">list</span>[T]) <span class="op">-&gt;</span> T:</span>
+<span id="cb4-5"><a href=""></a>    ...</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>But again, Python doesn’t enforce this at runtime. In Rust, if you try to call <code>largest</code> with a type that doesn’t implement <code>PartialOrd</code>, the compiler rejects it immediately with a helpful error message.</p>
+<p><strong>Monomorphization:</strong> When Rust compiles <code>largest::&lt;i32&gt;</code> and <code>largest::&lt;char&gt;</code>, it generates two completely separate machine code functions — one for i32, one for char. You write it once, but the compiler produces the type-specific versions. This is exactly as fast as <code>largest_i32</code> and <code>largest_char</code> written by hand.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -356,27 +391,36 @@ Brandon M. Greenwell
 <section id="generic-structs" class="slide level2 smaller">
 <h2>Generic Structs</h2>
 <p><strong>Define structs that work with any type:</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb3-1"><a href=""></a><span class="kw">struct</span> Point<span class="op">&lt;</span>T<span class="op">&gt;</span> <span class="op">{</span></span>
-<span id="cb3-2"><a href=""></a>    x<span class="op">:</span> T<span class="op">,</span></span>
-<span id="cb3-3"><a href=""></a>    y<span class="op">:</span> T<span class="op">,</span></span>
-<span id="cb3-4"><a href=""></a><span class="op">}</span></span>
-<span id="cb3-5"><a href=""></a></span>
-<span id="cb3-6"><a href=""></a><span class="kw">fn</span> main() <span class="op">{</span></span>
-<span id="cb3-7"><a href=""></a>    <span class="kw">let</span> integer_point <span class="op">=</span> Point <span class="op">{</span> x<span class="op">:</span> <span class="dv">5</span><span class="op">,</span> y<span class="op">:</span> <span class="dv">10</span> <span class="op">};</span></span>
-<span id="cb3-8"><a href=""></a>    <span class="kw">let</span> float_point <span class="op">=</span> Point <span class="op">{</span> x<span class="op">:</span> <span class="dv">1.0</span><span class="op">,</span> y<span class="op">:</span> <span class="dv">4.0</span> <span class="op">};</span></span>
-<span id="cb3-9"><a href=""></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb5-1"><a href=""></a><span class="kw">struct</span> Point<span class="op">&lt;</span>T<span class="op">&gt;</span> <span class="op">{</span></span>
+<span id="cb5-2"><a href=""></a>    x<span class="op">:</span> T<span class="op">,</span></span>
+<span id="cb5-3"><a href=""></a>    y<span class="op">:</span> T<span class="op">,</span></span>
+<span id="cb5-4"><a href=""></a><span class="op">}</span></span>
+<span id="cb5-5"><a href=""></a></span>
+<span id="cb5-6"><a href=""></a><span class="kw">fn</span> main() <span class="op">{</span></span>
+<span id="cb5-7"><a href=""></a>    <span class="kw">let</span> integer_point <span class="op">=</span> Point <span class="op">{</span> x<span class="op">:</span> <span class="dv">5</span><span class="op">,</span> y<span class="op">:</span> <span class="dv">10</span> <span class="op">};</span></span>
+<span id="cb5-8"><a href=""></a>    <span class="kw">let</span> float_point <span class="op">=</span> Point <span class="op">{</span> x<span class="op">:</span> <span class="dv">1.0</span><span class="op">,</span> y<span class="op">:</span> <span class="dv">4.0</span> <span class="op">};</span></span>
+<span id="cb5-9"><a href=""></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p><strong>Multiple type parameters:</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb4-1"><a href=""></a><span class="kw">struct</span> Point<span class="op">&lt;</span>T<span class="op">,</span> U<span class="op">&gt;</span> <span class="op">{</span></span>
-<span id="cb4-2"><a href=""></a>    x<span class="op">:</span> T<span class="op">,</span></span>
-<span id="cb4-3"><a href=""></a>    y<span class="op">:</span> U<span class="op">,</span></span>
-<span id="cb4-4"><a href=""></a><span class="op">}</span></span>
-<span id="cb4-5"><a href=""></a></span>
-<span id="cb4-6"><a href=""></a><span class="kw">fn</span> main() <span class="op">{</span></span>
-<span id="cb4-7"><a href=""></a>    <span class="kw">let</span> mixed <span class="op">=</span> Point <span class="op">{</span> x<span class="op">:</span> <span class="dv">5</span><span class="op">,</span> y<span class="op">:</span> <span class="dv">4.0</span> <span class="op">};</span>  <span class="co">// T=i32, U=f64</span></span>
-<span id="cb4-8"><a href=""></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb6-1"><a href=""></a><span class="kw">struct</span> Point<span class="op">&lt;</span>T<span class="op">,</span> U<span class="op">&gt;</span> <span class="op">{</span></span>
+<span id="cb6-2"><a href=""></a>    x<span class="op">:</span> T<span class="op">,</span></span>
+<span id="cb6-3"><a href=""></a>    y<span class="op">:</span> U<span class="op">,</span></span>
+<span id="cb6-4"><a href=""></a><span class="op">}</span></span>
+<span id="cb6-5"><a href=""></a></span>
+<span id="cb6-6"><a href=""></a><span class="kw">fn</span> main() <span class="op">{</span></span>
+<span id="cb6-7"><a href=""></a>    <span class="kw">let</span> mixed <span class="op">=</span> Point <span class="op">{</span> x<span class="op">:</span> <span class="dv">5</span><span class="op">,</span> y<span class="op">:</span> <span class="dv">4.0</span> <span class="op">};</span>  <span class="co">// T=i32, U=f64</span></span>
+<span id="cb6-8"><a href=""></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p><a href="https://doc.rust-lang.org/book/ch10-01-syntax.html#in-struct-definitions">📖 Rust Book: Generic Structs</a></p>
 <aside class="notes">
-<p>Show that each type parameter can be different. This is more flexible than requiring all fields to be the same type.</p>
+<p><strong>Python parallel:</strong> Think of a Python dataclass — it’s always generic in the sense that fields can be any type. But there’s no mechanism to express “this field and that field must be the <em>same</em> type”:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href=""></a><span class="im">from</span> dataclasses <span class="im">import</span> dataclass</span>
+<span id="cb7-2"><a href=""></a></span>
+<span id="cb7-3"><a href=""></a><span class="at">@dataclass</span></span>
+<span id="cb7-4"><a href=""></a><span class="kw">class</span> Point:</span>
+<span id="cb7-5"><a href=""></a>    x: <span class="bu">float</span></span>
+<span id="cb7-6"><a href=""></a>    y: <span class="bu">float</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>In Python you can put <code>x=1</code> and <code>y=4.0</code> without issue (int and float) because Python doesn’t enforce type annotations at runtime. In Rust with <code>Point&lt;T&gt;</code>, if you declare <code>Point { x: 5, y: 4.0 }</code>, Rust will reject it because <code>5</code> is an integer and <code>4.0</code> is a float — they’d need to be the same type T.</p>
+<p>That’s where <code>Point&lt;T, U&gt;</code> comes in: it says x and y can be <em>different</em> types. This is explicit, controlled flexibility — you’re in charge of what’s allowed.</p>
+<p><strong>Syntax note:</strong> The <code>&lt;T&gt;</code> and <code>&lt;T, U&gt;</code> always appear right after the struct name in the definition. When you create an instance, Rust usually infers the type from the values you provide — you rarely need to write <code>Point::&lt;i32, f64&gt; { x: 5, y: 4.0 }</code> explicitly.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -392,28 +436,31 @@ Brandon M. Greenwell
 <section id="generic-enums" class="slide level2 smaller">
 <h2>Generic Enums</h2>
 <p><strong>You’ve been using generic enums all along:</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb5-1"><a href=""></a><span class="co">// Option&lt;T&gt; from standard library</span></span>
-<span id="cb5-2"><a href=""></a><span class="kw">enum</span> <span class="dt">Option</span><span class="op">&lt;</span>T<span class="op">&gt;</span> <span class="op">{</span></span>
-<span id="cb5-3"><a href=""></a>    <span class="cn">Some</span>(T)<span class="op">,</span></span>
-<span id="cb5-4"><a href=""></a>    <span class="cn">None</span><span class="op">,</span></span>
-<span id="cb5-5"><a href=""></a><span class="op">}</span></span>
-<span id="cb5-6"><a href=""></a></span>
-<span id="cb5-7"><a href=""></a><span class="co">// Result&lt;T, E&gt; for error handling</span></span>
-<span id="cb5-8"><a href=""></a><span class="kw">enum</span> <span class="dt">Result</span><span class="op">&lt;</span>T<span class="op">,</span> E<span class="op">&gt;</span> <span class="op">{</span></span>
-<span id="cb5-9"><a href=""></a>    <span class="cn">Ok</span>(T)<span class="op">,</span></span>
-<span id="cb5-10"><a href=""></a>    <span class="cn">Err</span>(E)<span class="op">,</span></span>
-<span id="cb5-11"><a href=""></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb8-1"><a href=""></a><span class="co">// Option&lt;T&gt; from standard library</span></span>
+<span id="cb8-2"><a href=""></a><span class="kw">enum</span> <span class="dt">Option</span><span class="op">&lt;</span>T<span class="op">&gt;</span> <span class="op">{</span></span>
+<span id="cb8-3"><a href=""></a>    <span class="cn">Some</span>(T)<span class="op">,</span></span>
+<span id="cb8-4"><a href=""></a>    <span class="cn">None</span><span class="op">,</span></span>
+<span id="cb8-5"><a href=""></a><span class="op">}</span></span>
+<span id="cb8-6"><a href=""></a></span>
+<span id="cb8-7"><a href=""></a><span class="co">// Result&lt;T, E&gt; for error handling</span></span>
+<span id="cb8-8"><a href=""></a><span class="kw">enum</span> <span class="dt">Result</span><span class="op">&lt;</span>T<span class="op">,</span> E<span class="op">&gt;</span> <span class="op">{</span></span>
+<span id="cb8-9"><a href=""></a>    <span class="cn">Ok</span>(T)<span class="op">,</span></span>
+<span id="cb8-10"><a href=""></a>    <span class="cn">Err</span>(E)<span class="op">,</span></span>
+<span id="cb8-11"><a href=""></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p><strong>Usage:</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb6-1"><a href=""></a><span class="kw">fn</span> divide(a<span class="op">:</span> <span class="dt">f64</span><span class="op">,</span> b<span class="op">:</span> <span class="dt">f64</span>) <span class="op">-&gt;</span> <span class="dt">Result</span><span class="op">&lt;</span><span class="dt">f64</span><span class="op">,</span> <span class="dt">String</span><span class="op">&gt;</span> <span class="op">{</span></span>
-<span id="cb6-2"><a href=""></a>    <span class="cf">if</span> b <span class="op">==</span> <span class="dv">0.0</span> <span class="op">{</span></span>
-<span id="cb6-3"><a href=""></a>        <span class="cn">Err</span>(<span class="dt">String</span><span class="pp">::</span>from(<span class="st">"Division by zero"</span>))</span>
-<span id="cb6-4"><a href=""></a>    <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></span>
-<span id="cb6-5"><a href=""></a>        <span class="cn">Ok</span>(a <span class="op">/</span> b)</span>
-<span id="cb6-6"><a href=""></a>    <span class="op">}</span></span>
-<span id="cb6-7"><a href=""></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb9-1"><a href=""></a><span class="kw">fn</span> divide(a<span class="op">:</span> <span class="dt">f64</span><span class="op">,</span> b<span class="op">:</span> <span class="dt">f64</span>) <span class="op">-&gt;</span> <span class="dt">Result</span><span class="op">&lt;</span><span class="dt">f64</span><span class="op">,</span> <span class="dt">String</span><span class="op">&gt;</span> <span class="op">{</span></span>
+<span id="cb9-2"><a href=""></a>    <span class="cf">if</span> b <span class="op">==</span> <span class="dv">0.0</span> <span class="op">{</span></span>
+<span id="cb9-3"><a href=""></a>        <span class="cn">Err</span>(<span class="dt">String</span><span class="pp">::</span>from(<span class="st">"Division by zero"</span>))</span>
+<span id="cb9-4"><a href=""></a>    <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></span>
+<span id="cb9-5"><a href=""></a>        <span class="cn">Ok</span>(a <span class="op">/</span> b)</span>
+<span id="cb9-6"><a href=""></a>    <span class="op">}</span></span>
+<span id="cb9-7"><a href=""></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p><a href="https://doc.rust-lang.org/book/ch10-01-syntax.html#in-enum-definitions">📖 Rust Book: Generic Enums</a></p>
 <aside class="notes">
-<p>Connect to previous week - they’ve already used generic enums without realizing it!</p>
+<p>This is a great “aha moment” slide. Students have been writing <code>Option&lt;T&gt;</code> and <code>Result&lt;T, E&gt;</code> for weeks — now they can see exactly what those are: generic enums defined in the standard library. They’re not magic built-in types; they’re just well-designed Rust code.</p>
+<p><strong>Python parallel:</strong> Python’s equivalent to <code>Option&lt;T&gt;</code> is <code>Optional[T]</code> (or <code>T | None</code> in modern Python). But in Python, <code>None</code> is a valid value for <em>any</em> variable — you don’t get a compile-time guarantee that you’ve handled the null case. Rust’s <code>Option&lt;T&gt;</code> forces you to explicitly handle <code>Some(value)</code> and <code>None</code> via pattern matching.</p>
+<p>Python’s equivalent to <code>Result&lt;T, E&gt;</code> is raising and catching exceptions. The big difference: in Python, any function might raise an exception and you might not know about it until runtime. In Rust, a function that returns <code>Result&lt;T, E&gt;</code> is <em>advertising</em> in its type signature that it can fail, and the caller is forced to handle both cases.</p>
+<p>Connecting to the <code>divide</code> example: a Python equivalent would just use a try/except block. The Rust version makes the possibility of failure part of the function’s public contract. Ask: which approach makes code easier to maintain and reason about?</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -429,27 +476,46 @@ Brandon M. Greenwell
 <section id="generic-methods" class="slide level2 smaller">
 <h2>Generic Methods</h2>
 <p><strong>Methods on generic structs:</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb7-1"><a href=""></a><span class="kw">struct</span> Point<span class="op">&lt;</span>T<span class="op">&gt;</span> <span class="op">{</span></span>
-<span id="cb7-2"><a href=""></a>    x<span class="op">:</span> T<span class="op">,</span></span>
-<span id="cb7-3"><a href=""></a>    y<span class="op">:</span> T<span class="op">,</span></span>
-<span id="cb7-4"><a href=""></a><span class="op">}</span></span>
-<span id="cb7-5"><a href=""></a></span>
-<span id="cb7-6"><a href=""></a><span class="kw">impl</span><span class="op">&lt;</span>T<span class="op">&gt;</span> Point<span class="op">&lt;</span>T<span class="op">&gt;</span> <span class="op">{</span></span>
-<span id="cb7-7"><a href=""></a>    <span class="kw">fn</span> x(<span class="op">&amp;</span><span class="kw">self</span>) <span class="op">-&gt;</span> <span class="op">&amp;</span>T <span class="op">{</span></span>
-<span id="cb7-8"><a href=""></a>        <span class="op">&amp;</span><span class="kw">self</span><span class="op">.</span>x</span>
-<span id="cb7-9"><a href=""></a>    <span class="op">}</span></span>
-<span id="cb7-10"><a href=""></a><span class="op">}</span></span>
-<span id="cb7-11"><a href=""></a></span>
-<span id="cb7-12"><a href=""></a><span class="co">// Method only for specific type</span></span>
-<span id="cb7-13"><a href=""></a><span class="kw">impl</span> Point<span class="op">&lt;</span><span class="dt">f32</span><span class="op">&gt;</span> <span class="op">{</span></span>
-<span id="cb7-14"><a href=""></a>    <span class="kw">fn</span> distance_from_origin(<span class="op">&amp;</span><span class="kw">self</span>) <span class="op">-&gt;</span> <span class="dt">f32</span> <span class="op">{</span></span>
-<span id="cb7-15"><a href=""></a>        (<span class="kw">self</span><span class="op">.</span>x<span class="op">.</span>powi(<span class="dv">2</span>) <span class="op">+</span> <span class="kw">self</span><span class="op">.</span>y<span class="op">.</span>powi(<span class="dv">2</span>))<span class="op">.</span>sqrt()</span>
-<span id="cb7-16"><a href=""></a>    <span class="op">}</span></span>
-<span id="cb7-17"><a href=""></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb10-1"><a href=""></a><span class="kw">struct</span> Point<span class="op">&lt;</span>T<span class="op">&gt;</span> <span class="op">{</span></span>
+<span id="cb10-2"><a href=""></a>    x<span class="op">:</span> T<span class="op">,</span></span>
+<span id="cb10-3"><a href=""></a>    y<span class="op">:</span> T<span class="op">,</span></span>
+<span id="cb10-4"><a href=""></a><span class="op">}</span></span>
+<span id="cb10-5"><a href=""></a></span>
+<span id="cb10-6"><a href=""></a><span class="kw">impl</span><span class="op">&lt;</span>T<span class="op">&gt;</span> Point<span class="op">&lt;</span>T<span class="op">&gt;</span> <span class="op">{</span></span>
+<span id="cb10-7"><a href=""></a>    <span class="kw">fn</span> x(<span class="op">&amp;</span><span class="kw">self</span>) <span class="op">-&gt;</span> <span class="op">&amp;</span>T <span class="op">{</span></span>
+<span id="cb10-8"><a href=""></a>        <span class="op">&amp;</span><span class="kw">self</span><span class="op">.</span>x</span>
+<span id="cb10-9"><a href=""></a>    <span class="op">}</span></span>
+<span id="cb10-10"><a href=""></a><span class="op">}</span></span>
+<span id="cb10-11"><a href=""></a></span>
+<span id="cb10-12"><a href=""></a><span class="co">// Method only for specific type</span></span>
+<span id="cb10-13"><a href=""></a><span class="kw">impl</span> Point<span class="op">&lt;</span><span class="dt">f32</span><span class="op">&gt;</span> <span class="op">{</span></span>
+<span id="cb10-14"><a href=""></a>    <span class="kw">fn</span> distance_from_origin(<span class="op">&amp;</span><span class="kw">self</span>) <span class="op">-&gt;</span> <span class="dt">f32</span> <span class="op">{</span></span>
+<span id="cb10-15"><a href=""></a>        (<span class="kw">self</span><span class="op">.</span>x<span class="op">.</span>powi(<span class="dv">2</span>) <span class="op">+</span> <span class="kw">self</span><span class="op">.</span>y<span class="op">.</span>powi(<span class="dv">2</span>))<span class="op">.</span>sqrt()</span>
+<span id="cb10-16"><a href=""></a>    <span class="op">}</span></span>
+<span id="cb10-17"><a href=""></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p><strong>Notice</strong>: <code>impl&lt;T&gt;</code> declares the generic, then <code>Point&lt;T&gt;</code> uses it.</p>
 <p><a href="https://doc.rust-lang.org/book/ch10-01-syntax.html#in-method-definitions">📖 Rust Book: Generic Methods</a></p>
 <aside class="notes">
-<p>Show that you can implement methods for all T, or only for specific types.</p>
+<p>The <code>impl&lt;T&gt; Point&lt;T&gt;</code> syntax is one of the most confusing parts for newcomers. Break it down:</p>
+<ul>
+<li><code>impl&lt;T&gt;</code> — “I’m about to implement something, and T is a generic parameter I’ll use”</li>
+<li><code>Point&lt;T&gt;</code> — “I’m implementing it for the type <code>Point&lt;T&gt;</code> where T matches what I just declared”</li>
+</ul>
+<p>You need to declare <code>&lt;T&gt;</code> on the <code>impl</code> so Rust knows that the T in <code>Point&lt;T&gt;</code> is a generic parameter (not some concrete type named T).</p>
+<p><strong>Python parallel:</strong> This is similar to defining methods inside a Python class:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href=""></a><span class="kw">class</span> Point:</span>
+<span id="cb11-2"><a href=""></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, x, y):</span>
+<span id="cb11-3"><a href=""></a>        <span class="va">self</span>.x <span class="op">=</span> x</span>
+<span id="cb11-4"><a href=""></a>        <span class="va">self</span>.y <span class="op">=</span> y</span>
+<span id="cb11-5"><a href=""></a></span>
+<span id="cb11-6"><a href=""></a>    <span class="kw">def</span> x_coord(<span class="va">self</span>):       <span class="co"># works for any x type</span></span>
+<span id="cb11-7"><a href=""></a>        <span class="cf">return</span> <span class="va">self</span>.x</span>
+<span id="cb11-8"><a href=""></a></span>
+<span id="cb11-9"><a href=""></a>    <span class="co"># Only relevant for numeric types, but Python won't enforce this:</span></span>
+<span id="cb11-10"><a href=""></a>    <span class="kw">def</span> distance_from_origin(<span class="va">self</span>):</span>
+<span id="cb11-11"><a href=""></a>        <span class="cf">return</span> (<span class="va">self</span>.x<span class="op">**</span><span class="dv">2</span> <span class="op">+</span> <span class="va">self</span>.y<span class="op">**</span><span class="dv">2</span>) <span class="op">**</span> <span class="fl">0.5</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>In Python, <code>distance_from_origin</code> will crash at runtime if <code>x</code> and <code>y</code> aren’t numbers. In Rust, <code>impl Point&lt;f32&gt;</code> limits that method to <em>only</em> <code>Point&lt;f32&gt;</code> instances — if you have a <code>Point&lt;i32&gt;</code> and try to call <code>.distance_from_origin()</code>, the compiler rejects it. That’s a meaningful safety guarantee.</p>
+<p>This is a powerful pattern: you can add “bonus” methods to specific instantiations of your generic type, while keeping the core interface generic.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -465,24 +531,46 @@ Brandon M. Greenwell
 <section id="what-are-traits" class="slide level2 smaller">
 <h2>What Are Traits?</h2>
 <p><strong>Traits define shared behavior:</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb8-1"><a href=""></a><span class="kw">pub</span> <span class="kw">trait</span> Summary <span class="op">{</span></span>
-<span id="cb8-2"><a href=""></a>    <span class="kw">fn</span> summarize(<span class="op">&amp;</span><span class="kw">self</span>) <span class="op">-&gt;</span> <span class="dt">String</span><span class="op">;</span></span>
-<span id="cb8-3"><a href=""></a><span class="op">}</span></span>
-<span id="cb8-4"><a href=""></a></span>
-<span id="cb8-5"><a href=""></a><span class="kw">struct</span> NewsArticle <span class="op">{</span></span>
-<span id="cb8-6"><a href=""></a>    headline<span class="op">:</span> <span class="dt">String</span><span class="op">,</span></span>
-<span id="cb8-7"><a href=""></a>    content<span class="op">:</span> <span class="dt">String</span><span class="op">,</span></span>
-<span id="cb8-8"><a href=""></a><span class="op">}</span></span>
-<span id="cb8-9"><a href=""></a></span>
-<span id="cb8-10"><a href=""></a><span class="kw">impl</span> Summary <span class="cf">for</span> NewsArticle <span class="op">{</span></span>
-<span id="cb8-11"><a href=""></a>    <span class="kw">fn</span> summarize(<span class="op">&amp;</span><span class="kw">self</span>) <span class="op">-&gt;</span> <span class="dt">String</span> <span class="op">{</span></span>
-<span id="cb8-12"><a href=""></a>        <span class="pp">format!</span>(<span class="st">"{}: {}"</span><span class="op">,</span> <span class="kw">self</span><span class="op">.</span>headline<span class="op">,</span> <span class="kw">self</span><span class="op">.</span>content)</span>
-<span id="cb8-13"><a href=""></a>    <span class="op">}</span></span>
-<span id="cb8-14"><a href=""></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb12-1"><a href=""></a><span class="kw">pub</span> <span class="kw">trait</span> Summary <span class="op">{</span></span>
+<span id="cb12-2"><a href=""></a>    <span class="kw">fn</span> summarize(<span class="op">&amp;</span><span class="kw">self</span>) <span class="op">-&gt;</span> <span class="dt">String</span><span class="op">;</span></span>
+<span id="cb12-3"><a href=""></a><span class="op">}</span></span>
+<span id="cb12-4"><a href=""></a></span>
+<span id="cb12-5"><a href=""></a><span class="kw">struct</span> NewsArticle <span class="op">{</span></span>
+<span id="cb12-6"><a href=""></a>    headline<span class="op">:</span> <span class="dt">String</span><span class="op">,</span></span>
+<span id="cb12-7"><a href=""></a>    content<span class="op">:</span> <span class="dt">String</span><span class="op">,</span></span>
+<span id="cb12-8"><a href=""></a><span class="op">}</span></span>
+<span id="cb12-9"><a href=""></a></span>
+<span id="cb12-10"><a href=""></a><span class="kw">impl</span> Summary <span class="cf">for</span> NewsArticle <span class="op">{</span></span>
+<span id="cb12-11"><a href=""></a>    <span class="kw">fn</span> summarize(<span class="op">&amp;</span><span class="kw">self</span>) <span class="op">-&gt;</span> <span class="dt">String</span> <span class="op">{</span></span>
+<span id="cb12-12"><a href=""></a>        <span class="pp">format!</span>(<span class="st">"{}: {}"</span><span class="op">,</span> <span class="kw">self</span><span class="op">.</span>headline<span class="op">,</span> <span class="kw">self</span><span class="op">.</span>content)</span>
+<span id="cb12-13"><a href=""></a>    <span class="op">}</span></span>
+<span id="cb12-14"><a href=""></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p><strong>Think of traits as:</strong> - Interfaces (Java/C#) - Protocols (Swift) - Type classes (Haskell)</p>
 <p><a href="https://doc.rust-lang.org/book/ch10-02-traits.html">📖 Rust Book: Traits</a></p>
 <aside class="notes">
-<p>Traits are Rust’s way of defining shared behavior without inheritance.</p>
+<p><strong>Python parallel — Abstract Base Classes (ABCs):</strong> The closest Python equivalent is <code>abc.ABC</code>:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href=""></a><span class="im">from</span> abc <span class="im">import</span> ABC, abstractmethod</span>
+<span id="cb13-2"><a href=""></a></span>
+<span id="cb13-3"><a href=""></a><span class="kw">class</span> Summary(ABC):</span>
+<span id="cb13-4"><a href=""></a>    <span class="at">@abstractmethod</span></span>
+<span id="cb13-5"><a href=""></a>    <span class="kw">def</span> summarize(<span class="va">self</span>) <span class="op">-&gt;</span> <span class="bu">str</span>:</span>
+<span id="cb13-6"><a href=""></a>        <span class="cf">pass</span></span>
+<span id="cb13-7"><a href=""></a></span>
+<span id="cb13-8"><a href=""></a><span class="kw">class</span> NewsArticle(Summary):</span>
+<span id="cb13-9"><a href=""></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, headline, content):</span>
+<span id="cb13-10"><a href=""></a>        <span class="va">self</span>.headline <span class="op">=</span> headline</span>
+<span id="cb13-11"><a href=""></a>        <span class="va">self</span>.content <span class="op">=</span> content</span>
+<span id="cb13-12"><a href=""></a></span>
+<span id="cb13-13"><a href=""></a>    <span class="kw">def</span> summarize(<span class="va">self</span>) <span class="op">-&gt;</span> <span class="bu">str</span>:</span>
+<span id="cb13-14"><a href=""></a>        <span class="cf">return</span> <span class="ss">f"</span><span class="sc">{</span><span class="va">self</span><span class="sc">.</span>headline<span class="sc">}</span><span class="ss">: </span><span class="sc">{</span><span class="va">self</span><span class="sc">.</span>content<span class="sc">}</span><span class="ss">"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>The concepts map closely: - <code>trait Summary</code> ↔︎ <code>class Summary(ABC)</code> - <code>fn summarize(&amp;self) -&gt; String</code> ↔︎ <code>@abstractmethod def summarize(self) -&gt; str</code> - <code>impl Summary for NewsArticle</code> ↔︎ <code>class NewsArticle(Summary)</code></p>
+<p><strong>A better Python parallel — Protocols (Python 3.8+):</strong> Python’s <code>typing.Protocol</code> is actually closer to Rust traits because it uses <em>structural</em> typing (duck typing with type checking), not class inheritance:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href=""></a><span class="im">from</span> typing <span class="im">import</span> Protocol</span>
+<span id="cb14-2"><a href=""></a></span>
+<span id="cb14-3"><a href=""></a><span class="kw">class</span> Summary(Protocol):</span>
+<span id="cb14-4"><a href=""></a>    <span class="kw">def</span> summarize(<span class="va">self</span>) <span class="op">-&gt;</span> <span class="bu">str</span>: ...</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>The key difference:</strong> Rust traits are <em>nominal</em> — a type explicitly declares it implements a trait with <code>impl Trait for Type</code>. Python Protocols are <em>structural</em> — any class with the right methods satisfies the Protocol, even if it never heard of the Protocol. Rust’s approach is more explicit and makes intent clearer.</p>
+<p>Also note: Rust has no inheritance. There’s no “is-a” relationship between structs. Traits are the <em>only</em> way to express shared behavior, which forces a cleaner, more compositional design.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -498,28 +586,49 @@ Brandon M. Greenwell
 <section id="default-trait-implementations" class="slide level2 smaller">
 <h2>Default Trait Implementations</h2>
 <p><strong>Traits can provide default behavior:</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb9-1"><a href=""></a><span class="kw">pub</span> <span class="kw">trait</span> Summary <span class="op">{</span></span>
-<span id="cb9-2"><a href=""></a>    <span class="kw">fn</span> summarize_author(<span class="op">&amp;</span><span class="kw">self</span>) <span class="op">-&gt;</span> <span class="dt">String</span><span class="op">;</span></span>
-<span id="cb9-3"><a href=""></a></span>
-<span id="cb9-4"><a href=""></a>    <span class="kw">fn</span> summarize(<span class="op">&amp;</span><span class="kw">self</span>) <span class="op">-&gt;</span> <span class="dt">String</span> <span class="op">{</span></span>
-<span id="cb9-5"><a href=""></a>        <span class="pp">format!</span>(<span class="st">"(Read more from {}...)"</span><span class="op">,</span> <span class="kw">self</span><span class="op">.</span>summarize_author())</span>
-<span id="cb9-6"><a href=""></a>    <span class="op">}</span></span>
-<span id="cb9-7"><a href=""></a><span class="op">}</span></span>
-<span id="cb9-8"><a href=""></a></span>
-<span id="cb9-9"><a href=""></a><span class="kw">struct</span> Tweet <span class="op">{</span></span>
-<span id="cb9-10"><a href=""></a>    username<span class="op">:</span> <span class="dt">String</span><span class="op">,</span></span>
-<span id="cb9-11"><a href=""></a>    content<span class="op">:</span> <span class="dt">String</span><span class="op">,</span></span>
-<span id="cb9-12"><a href=""></a><span class="op">}</span></span>
-<span id="cb9-13"><a href=""></a></span>
-<span id="cb9-14"><a href=""></a><span class="kw">impl</span> Summary <span class="cf">for</span> Tweet <span class="op">{</span></span>
-<span id="cb9-15"><a href=""></a>    <span class="kw">fn</span> summarize_author(<span class="op">&amp;</span><span class="kw">self</span>) <span class="op">-&gt;</span> <span class="dt">String</span> <span class="op">{</span></span>
-<span id="cb9-16"><a href=""></a>        <span class="pp">format!</span>(<span class="st">"@{}"</span><span class="op">,</span> <span class="kw">self</span><span class="op">.</span>username)</span>
-<span id="cb9-17"><a href=""></a>    <span class="op">}</span></span>
-<span id="cb9-18"><a href=""></a>    <span class="co">// summarize() uses the default implementation</span></span>
-<span id="cb9-19"><a href=""></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb15-1"><a href=""></a><span class="kw">pub</span> <span class="kw">trait</span> Summary <span class="op">{</span></span>
+<span id="cb15-2"><a href=""></a>    <span class="kw">fn</span> summarize_author(<span class="op">&amp;</span><span class="kw">self</span>) <span class="op">-&gt;</span> <span class="dt">String</span><span class="op">;</span></span>
+<span id="cb15-3"><a href=""></a></span>
+<span id="cb15-4"><a href=""></a>    <span class="kw">fn</span> summarize(<span class="op">&amp;</span><span class="kw">self</span>) <span class="op">-&gt;</span> <span class="dt">String</span> <span class="op">{</span></span>
+<span id="cb15-5"><a href=""></a>        <span class="pp">format!</span>(<span class="st">"(Read more from {}...)"</span><span class="op">,</span> <span class="kw">self</span><span class="op">.</span>summarize_author())</span>
+<span id="cb15-6"><a href=""></a>    <span class="op">}</span></span>
+<span id="cb15-7"><a href=""></a><span class="op">}</span></span>
+<span id="cb15-8"><a href=""></a></span>
+<span id="cb15-9"><a href=""></a><span class="kw">struct</span> Tweet <span class="op">{</span></span>
+<span id="cb15-10"><a href=""></a>    username<span class="op">:</span> <span class="dt">String</span><span class="op">,</span></span>
+<span id="cb15-11"><a href=""></a>    content<span class="op">:</span> <span class="dt">String</span><span class="op">,</span></span>
+<span id="cb15-12"><a href=""></a><span class="op">}</span></span>
+<span id="cb15-13"><a href=""></a></span>
+<span id="cb15-14"><a href=""></a><span class="kw">impl</span> Summary <span class="cf">for</span> Tweet <span class="op">{</span></span>
+<span id="cb15-15"><a href=""></a>    <span class="kw">fn</span> summarize_author(<span class="op">&amp;</span><span class="kw">self</span>) <span class="op">-&gt;</span> <span class="dt">String</span> <span class="op">{</span></span>
+<span id="cb15-16"><a href=""></a>        <span class="pp">format!</span>(<span class="st">"@{}"</span><span class="op">,</span> <span class="kw">self</span><span class="op">.</span>username)</span>
+<span id="cb15-17"><a href=""></a>    <span class="op">}</span></span>
+<span id="cb15-18"><a href=""></a>    <span class="co">// summarize() uses the default implementation</span></span>
+<span id="cb15-19"><a href=""></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p><a href="https://doc.rust-lang.org/book/ch10-02-traits.html#default-implementations">📖 Rust Book: Default Implementations</a></p>
 <aside class="notes">
-<p>Default implementations reduce boilerplate. Types can override or use the default.</p>
+<p><strong>Python parallel:</strong> This is exactly like providing a non-abstract method in a Python ABC or base class:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href=""></a><span class="im">from</span> abc <span class="im">import</span> ABC, abstractmethod</span>
+<span id="cb16-2"><a href=""></a></span>
+<span id="cb16-3"><a href=""></a><span class="kw">class</span> Summary(ABC):</span>
+<span id="cb16-4"><a href=""></a>    <span class="at">@abstractmethod</span></span>
+<span id="cb16-5"><a href=""></a>    <span class="kw">def</span> summarize_author(<span class="va">self</span>) <span class="op">-&gt;</span> <span class="bu">str</span>:</span>
+<span id="cb16-6"><a href=""></a>        <span class="cf">pass</span></span>
+<span id="cb16-7"><a href=""></a></span>
+<span id="cb16-8"><a href=""></a>    <span class="kw">def</span> summarize(<span class="va">self</span>) <span class="op">-&gt;</span> <span class="bu">str</span>:   <span class="co"># default implementation</span></span>
+<span id="cb16-9"><a href=""></a>        <span class="cf">return</span> <span class="ss">f"(Read more from </span><span class="sc">{</span><span class="va">self</span><span class="sc">.</span>summarize_author()<span class="sc">}</span><span class="ss">...)"</span></span>
+<span id="cb16-10"><a href=""></a></span>
+<span id="cb16-11"><a href=""></a><span class="kw">class</span> Tweet(Summary):</span>
+<span id="cb16-12"><a href=""></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, username, content):</span>
+<span id="cb16-13"><a href=""></a>        <span class="va">self</span>.username <span class="op">=</span> username</span>
+<span id="cb16-14"><a href=""></a>        <span class="va">self</span>.content <span class="op">=</span> content</span>
+<span id="cb16-15"><a href=""></a></span>
+<span id="cb16-16"><a href=""></a>    <span class="kw">def</span> summarize_author(<span class="va">self</span>) <span class="op">-&gt;</span> <span class="bu">str</span>:</span>
+<span id="cb16-17"><a href=""></a>        <span class="cf">return</span> <span class="ss">f"@</span><span class="sc">{</span><span class="va">self</span><span class="sc">.</span>username<span class="sc">}</span><span class="ss">"</span></span>
+<span id="cb16-18"><a href=""></a>    <span class="co"># summarize() is inherited from the base class</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>In both Python and Rust, you can: 1. Define a required method (<code>summarize_author</code>) — must be implemented by each type 2. Define a default method (<code>summarize</code>) — uses the required method, can be overridden</p>
+<p><strong>An important Rust pattern:</strong> Default implementations can call other methods in the same trait — even ones that don’t have defaults. This lets you build up complex behavior from a few required “primitive” methods. The Iterator trait is the ultimate example: you implement only <code>next()</code>, and you get dozens of methods like <code>map</code>, <code>filter</code>, <code>zip</code>, and <code>enumerate</code> for free.</p>
+<p><strong>Overriding defaults:</strong> Just like Python, if a type wants different behavior, it can provide its own <code>summarize()</code> implementation. The custom implementation takes precedence.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -532,25 +641,41 @@ Brandon M. Greenwell
           display:block!important;
       }</style></aside>
 </section>
-<section id="traits-as-parameters" class="slide level2 smaller">
+<section id="traits-as-parameters" class="slide level2 smaller scrollable">
 <h2>Traits as Parameters</h2>
 <p><strong>Accept any type implementing a trait:</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb10-1"><a href=""></a><span class="kw">pub</span> <span class="kw">fn</span> notify(item<span class="op">:</span> <span class="op">&amp;</span><span class="kw">impl</span> Summary) <span class="op">{</span></span>
-<span id="cb10-2"><a href=""></a>    <span class="pp">println!</span>(<span class="st">"Breaking news! {}"</span><span class="op">,</span> item<span class="op">.</span>summarize())<span class="op">;</span></span>
-<span id="cb10-3"><a href=""></a><span class="op">}</span></span>
-<span id="cb10-4"><a href=""></a></span>
-<span id="cb10-5"><a href=""></a><span class="co">// Longer syntax (trait bound):</span></span>
-<span id="cb10-6"><a href=""></a><span class="kw">pub</span> <span class="kw">fn</span> notify<span class="op">&lt;</span>T<span class="op">:</span> Summary<span class="op">&gt;</span>(item<span class="op">:</span> <span class="op">&amp;</span>T) <span class="op">{</span></span>
-<span id="cb10-7"><a href=""></a>    <span class="pp">println!</span>(<span class="st">"Breaking news! {}"</span><span class="op">,</span> item<span class="op">.</span>summarize())<span class="op">;</span></span>
-<span id="cb10-8"><a href=""></a><span class="op">}</span></span>
-<span id="cb10-9"><a href=""></a></span>
-<span id="cb10-10"><a href=""></a><span class="co">// Multiple trait bounds:</span></span>
-<span id="cb10-11"><a href=""></a><span class="kw">pub</span> <span class="kw">fn</span> notify<span class="op">&lt;</span>T<span class="op">:</span> Summary <span class="op">+</span> <span class="bu">Display</span><span class="op">&gt;</span>(item<span class="op">:</span> <span class="op">&amp;</span>T) <span class="op">{</span></span>
-<span id="cb10-12"><a href=""></a>    <span class="co">// Can call summarize() and also use {} formatting</span></span>
-<span id="cb10-13"><a href=""></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb17-1"><a href=""></a><span class="kw">pub</span> <span class="kw">fn</span> notify(item<span class="op">:</span> <span class="op">&amp;</span><span class="kw">impl</span> Summary) <span class="op">{</span></span>
+<span id="cb17-2"><a href=""></a>    <span class="pp">println!</span>(<span class="st">"Breaking news! {}"</span><span class="op">,</span> item<span class="op">.</span>summarize())<span class="op">;</span></span>
+<span id="cb17-3"><a href=""></a><span class="op">}</span></span>
+<span id="cb17-4"><a href=""></a></span>
+<span id="cb17-5"><a href=""></a><span class="co">// Longer syntax (trait bound):</span></span>
+<span id="cb17-6"><a href=""></a><span class="kw">pub</span> <span class="kw">fn</span> notify<span class="op">&lt;</span>T<span class="op">:</span> Summary<span class="op">&gt;</span>(item<span class="op">:</span> <span class="op">&amp;</span>T) <span class="op">{</span></span>
+<span id="cb17-7"><a href=""></a>    <span class="pp">println!</span>(<span class="st">"Breaking news! {}"</span><span class="op">,</span> item<span class="op">.</span>summarize())<span class="op">;</span></span>
+<span id="cb17-8"><a href=""></a><span class="op">}</span></span>
+<span id="cb17-9"><a href=""></a></span>
+<span id="cb17-10"><a href=""></a><span class="co">// Multiple trait bounds:</span></span>
+<span id="cb17-11"><a href=""></a><span class="kw">pub</span> <span class="kw">fn</span> notify<span class="op">&lt;</span>T<span class="op">:</span> Summary <span class="op">+</span> <span class="bu">Display</span><span class="op">&gt;</span>(item<span class="op">:</span> <span class="op">&amp;</span>T) <span class="op">{</span></span>
+<span id="cb17-12"><a href=""></a>    <span class="co">// Can call summarize() and also use {} formatting</span></span>
+<span id="cb17-13"><a href=""></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p><a href="https://doc.rust-lang.org/book/ch10-02-traits.html#traits-as-parameters">📖 Rust Book: Traits as Parameters</a></p>
 <aside class="notes">
-<p><code>impl Trait</code> is syntactic sugar for trait bounds. Use whichever is clearer.</p>
+<p>This is where generics and traits come together. There are three syntaxes shown — they all mean the same thing, just with different readability trade-offs:</p>
+<ol type="1">
+<li><code>&amp;impl Summary</code> — “any reference to something that implements Summary” — reads naturally, use for simple cases</li>
+<li><code>&lt;T: Summary&gt;</code> — the explicit trait bound syntax — necessary when T appears multiple times or you need to reference it elsewhere</li>
+<li><code>&lt;T: Summary + Display&gt;</code> — multiple bounds, meaning T must implement <em>both</em> Summary and Display</li>
+</ol>
+<p><strong>Python parallel:</strong> This is similar to Python type hints with Protocol:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb18"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href=""></a><span class="im">from</span> typing <span class="im">import</span> Protocol</span>
+<span id="cb18-2"><a href=""></a></span>
+<span id="cb18-3"><a href=""></a><span class="kw">class</span> Summary(Protocol):</span>
+<span id="cb18-4"><a href=""></a>    <span class="kw">def</span> summarize(<span class="va">self</span>) <span class="op">-&gt;</span> <span class="bu">str</span>: ...</span>
+<span id="cb18-5"><a href=""></a></span>
+<span id="cb18-6"><a href=""></a><span class="kw">def</span> notify(item: Summary) <span class="op">-&gt;</span> <span class="va">None</span>:</span>
+<span id="cb18-7"><a href=""></a>    <span class="bu">print</span>(<span class="ss">f"Breaking news! </span><span class="sc">{</span>item<span class="sc">.</span>summarize()<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Python type checkers like mypy will flag calls to <code>notify</code> with non-conforming types. But at runtime, Python doesn’t care — it’ll call <code>.summarize()</code> on whatever you pass and only fail if the method doesn’t exist.</p>
+<p><strong>When to use which Rust syntax:</strong> - Use <code>impl Trait</code> for simple, single-use cases where T doesn’t need a name - Use <code>&lt;T: Trait&gt;</code> when the type T needs to be referenced in multiple places (e.g., parameter and return type are both T) - Use <code>where</code> clauses when you have multiple type parameters or complex bounds (next slide!)</p>
+<p>Also note that <code>+</code> for multiple bounds in Rust is analogous to defining a Protocol that inherits from multiple other Protocols in Python.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -566,23 +691,34 @@ Brandon M. Greenwell
 <section id="the-where-clause" class="slide level2 smaller">
 <h2>The <code>where</code> Clause</h2>
 <p><strong>Make complex trait bounds readable:</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb11-1"><a href=""></a><span class="co">// Hard to read:</span></span>
-<span id="cb11-2"><a href=""></a><span class="kw">fn</span> some_function<span class="op">&lt;</span>T<span class="op">:</span> <span class="bu">Display</span> <span class="op">+</span> <span class="bu">Clone</span><span class="op">,</span> U<span class="op">:</span> <span class="bu">Clone</span> <span class="op">+</span> <span class="bu">Debug</span><span class="op">&gt;</span>(t<span class="op">:</span> <span class="op">&amp;</span>T<span class="op">,</span> u<span class="op">:</span> <span class="op">&amp;</span>U) <span class="op">-&gt;</span> <span class="dt">i32</span> <span class="op">{</span></span>
-<span id="cb11-3"><a href=""></a>    <span class="co">// ...</span></span>
-<span id="cb11-4"><a href=""></a><span class="op">}</span></span>
-<span id="cb11-5"><a href=""></a></span>
-<span id="cb11-6"><a href=""></a><span class="co">// Much clearer with where clause:</span></span>
-<span id="cb11-7"><a href=""></a><span class="kw">fn</span> some_function<span class="op">&lt;</span>T<span class="op">,</span> U<span class="op">&gt;</span>(t<span class="op">:</span> <span class="op">&amp;</span>T<span class="op">,</span> u<span class="op">:</span> <span class="op">&amp;</span>U) <span class="op">-&gt;</span> <span class="dt">i32</span></span>
-<span id="cb11-8"><a href=""></a><span class="kw">where</span></span>
-<span id="cb11-9"><a href=""></a>    T<span class="op">:</span> <span class="bu">Display</span> <span class="op">+</span> <span class="bu">Clone</span><span class="op">,</span></span>
-<span id="cb11-10"><a href=""></a>    U<span class="op">:</span> <span class="bu">Clone</span> <span class="op">+</span> <span class="bu">Debug</span><span class="op">,</span></span>
-<span id="cb11-11"><a href=""></a><span class="op">{</span></span>
-<span id="cb11-12"><a href=""></a>    <span class="co">// ...</span></span>
-<span id="cb11-13"><a href=""></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb19"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb19-1"><a href=""></a><span class="co">// Hard to read:</span></span>
+<span id="cb19-2"><a href=""></a><span class="kw">fn</span> some_function<span class="op">&lt;</span>T<span class="op">:</span> <span class="bu">Display</span> <span class="op">+</span> <span class="bu">Clone</span><span class="op">,</span> U<span class="op">:</span> <span class="bu">Clone</span> <span class="op">+</span> <span class="bu">Debug</span><span class="op">&gt;</span>(t<span class="op">:</span> <span class="op">&amp;</span>T<span class="op">,</span> u<span class="op">:</span> <span class="op">&amp;</span>U) <span class="op">-&gt;</span> <span class="dt">i32</span> <span class="op">{</span></span>
+<span id="cb19-3"><a href=""></a>    <span class="co">// ...</span></span>
+<span id="cb19-4"><a href=""></a><span class="op">}</span></span>
+<span id="cb19-5"><a href=""></a></span>
+<span id="cb19-6"><a href=""></a><span class="co">// Much clearer with where clause:</span></span>
+<span id="cb19-7"><a href=""></a><span class="kw">fn</span> some_function<span class="op">&lt;</span>T<span class="op">,</span> U<span class="op">&gt;</span>(t<span class="op">:</span> <span class="op">&amp;</span>T<span class="op">,</span> u<span class="op">:</span> <span class="op">&amp;</span>U) <span class="op">-&gt;</span> <span class="dt">i32</span></span>
+<span id="cb19-8"><a href=""></a><span class="kw">where</span></span>
+<span id="cb19-9"><a href=""></a>    T<span class="op">:</span> <span class="bu">Display</span> <span class="op">+</span> <span class="bu">Clone</span><span class="op">,</span></span>
+<span id="cb19-10"><a href=""></a>    U<span class="op">:</span> <span class="bu">Clone</span> <span class="op">+</span> <span class="bu">Debug</span><span class="op">,</span></span>
+<span id="cb19-11"><a href=""></a><span class="op">{</span></span>
+<span id="cb19-12"><a href=""></a>    <span class="co">// ...</span></span>
+<span id="cb19-13"><a href=""></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p><strong>Use <code>where</code> when:</strong> - Multiple trait bounds - Complex generic relationships - Improves readability</p>
 <p><a href="https://doc.rust-lang.org/book/ch10-02-traits.html#clearer-trait-bounds-with-where-clauses">📖 Rust Book: where Clauses</a></p>
 <aside class="notes">
-<p>Where clauses are especially helpful with associated types and lifetime bounds.</p>
+<p>There’s no real Python equivalent for <code>where</code> clauses because Python doesn’t have the same richness of compile-time type constraints. Think of it purely as a formatting/readability feature.</p>
+<p><strong>The problem it solves:</strong> Once you start writing real Rust with multiple type parameters and multiple bounds, function signatures can get very long:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb20"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb20-1"><a href=""></a><span class="kw">fn</span> some_function<span class="op">&lt;</span>T<span class="op">:</span> <span class="bu">Display</span> <span class="op">+</span> <span class="bu">Clone</span> <span class="op">+</span> <span class="bu">Debug</span> <span class="op">+</span> <span class="bu">PartialEq</span><span class="op">,</span> U<span class="op">:</span> <span class="bu">Clone</span> <span class="op">+</span> <span class="bu">Iterator</span> <span class="op">+</span> <span class="bu">Debug</span><span class="op">&gt;</span>(t<span class="op">:</span> <span class="op">&amp;</span>T<span class="op">,</span> u<span class="op">:</span> <span class="op">&amp;</span>U) <span class="op">{</span> <span class="op">...</span> <span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>That’s nearly unreadable! The <code>where</code> clause lets you separate the generic declarations from the bounds:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb21"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb21-1"><a href=""></a><span class="kw">fn</span> some_function<span class="op">&lt;</span>T<span class="op">,</span> U<span class="op">&gt;</span>(t<span class="op">:</span> <span class="op">&amp;</span>T<span class="op">,</span> u<span class="op">:</span> <span class="op">&amp;</span>U)</span>
+<span id="cb21-2"><a href=""></a><span class="kw">where</span></span>
+<span id="cb21-3"><a href=""></a>    T<span class="op">:</span> <span class="bu">Display</span> <span class="op">+</span> <span class="bu">Clone</span> <span class="op">+</span> <span class="bu">Debug</span> <span class="op">+</span> <span class="bu">PartialEq</span><span class="op">,</span></span>
+<span id="cb21-4"><a href=""></a>    U<span class="op">:</span> <span class="bu">Clone</span> <span class="op">+</span> <span class="bu">Iterator</span> <span class="op">+</span> <span class="bu">Debug</span><span class="op">,</span></span>
+<span id="cb21-5"><a href=""></a><span class="op">{</span> <span class="op">...</span> <span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Rule of thumb:</strong> If the bounds fit comfortably on one line with the function signature, use inline syntax. If they don’t, use <code>where</code>.</p>
+<p><strong>More advanced uses</strong> (preview for curious students): <code>where</code> clauses also support associated type bounds like <code>where T::Item: Display</code>, which you can’t express inline. These become important when working with the Iterator trait.</p>
+<p>Emphasize that both styles compile to exactly the same code. This is purely about making the code readable for humans.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -598,24 +734,38 @@ Brandon M. Greenwell
 <section id="returning-trait-types" class="slide level2 smaller">
 <h2>Returning Trait Types</h2>
 <p><strong>Return types that implement traits:</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb12-1"><a href=""></a><span class="kw">fn</span> returns_summarizable() <span class="op">-&gt;</span> <span class="kw">impl</span> Summary <span class="op">{</span></span>
-<span id="cb12-2"><a href=""></a>    Tweet <span class="op">{</span></span>
-<span id="cb12-3"><a href=""></a>        username<span class="op">:</span> <span class="dt">String</span><span class="pp">::</span>from(<span class="st">"rustacean"</span>)<span class="op">,</span></span>
-<span id="cb12-4"><a href=""></a>        content<span class="op">:</span> <span class="dt">String</span><span class="pp">::</span>from(<span class="st">"Rust is awesome!"</span>)<span class="op">,</span></span>
-<span id="cb12-5"><a href=""></a>    <span class="op">}</span></span>
-<span id="cb12-6"><a href=""></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb22"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb22-1"><a href=""></a><span class="kw">fn</span> returns_summarizable() <span class="op">-&gt;</span> <span class="kw">impl</span> Summary <span class="op">{</span></span>
+<span id="cb22-2"><a href=""></a>    Tweet <span class="op">{</span></span>
+<span id="cb22-3"><a href=""></a>        username<span class="op">:</span> <span class="dt">String</span><span class="pp">::</span>from(<span class="st">"rustacean"</span>)<span class="op">,</span></span>
+<span id="cb22-4"><a href=""></a>        content<span class="op">:</span> <span class="dt">String</span><span class="pp">::</span>from(<span class="st">"Rust is awesome!"</span>)<span class="op">,</span></span>
+<span id="cb22-5"><a href=""></a>    <span class="op">}</span></span>
+<span id="cb22-6"><a href=""></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p><strong>Limitation</strong>: Can only return ONE concrete type:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb13-1"><a href=""></a><span class="co">// ❌ ERROR: Can't return different types</span></span>
-<span id="cb13-2"><a href=""></a><span class="kw">fn</span> returns_summarizable(switch<span class="op">:</span> <span class="dt">bool</span>) <span class="op">-&gt;</span> <span class="kw">impl</span> Summary <span class="op">{</span></span>
-<span id="cb13-3"><a href=""></a>    <span class="cf">if</span> switch <span class="op">{</span></span>
-<span id="cb13-4"><a href=""></a>        NewsArticle <span class="op">{</span> <span class="co">/* ... */</span> <span class="op">}</span></span>
-<span id="cb13-5"><a href=""></a>    <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></span>
-<span id="cb13-6"><a href=""></a>        Tweet <span class="op">{</span> <span class="co">/* ... */</span> <span class="op">}</span>  <span class="co">// Error!</span></span>
-<span id="cb13-7"><a href=""></a>    <span class="op">}</span></span>
-<span id="cb13-8"><a href=""></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb23"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb23-1"><a href=""></a><span class="co">// ❌ ERROR: Can't return different types</span></span>
+<span id="cb23-2"><a href=""></a><span class="kw">fn</span> returns_summarizable(switch<span class="op">:</span> <span class="dt">bool</span>) <span class="op">-&gt;</span> <span class="kw">impl</span> Summary <span class="op">{</span></span>
+<span id="cb23-3"><a href=""></a>    <span class="cf">if</span> switch <span class="op">{</span></span>
+<span id="cb23-4"><a href=""></a>        NewsArticle <span class="op">{</span> <span class="co">/* ... */</span> <span class="op">}</span></span>
+<span id="cb23-5"><a href=""></a>    <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></span>
+<span id="cb23-6"><a href=""></a>        Tweet <span class="op">{</span> <span class="co">/* ... */</span> <span class="op">}</span>  <span class="co">// Error!</span></span>
+<span id="cb23-7"><a href=""></a>    <span class="op">}</span></span>
+<span id="cb23-8"><a href=""></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p><a href="https://doc.rust-lang.org/book/ch10-02-traits.html#returning-types-that-implement-traits">📖 Rust Book: Returning Traits</a></p>
 <aside class="notes">
-<p>For returning different types, you need trait objects (Box<dyn trait="">) - advanced topic.</dyn></p>
+<p><strong>Python parallel:</strong> Python return type annotations can express this naturally:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb24"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href=""></a><span class="kw">def</span> returns_summarizable() <span class="op">-&gt;</span> Summary:</span>
+<span id="cb24-2"><a href=""></a>    <span class="cf">return</span> Tweet(username<span class="op">=</span><span class="st">"rustacean"</span>, content<span class="op">=</span><span class="st">"Rust is awesome!"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>And Python has no problem returning different types from different branches — the duck typing just works. This is an area where Rust is more restrictive.</p>
+<p><strong>Why the limitation exists:</strong> When Rust compiles <code>-&gt; impl Summary</code>, it needs to know the <em>exact</em> concrete type at compile time for monomorphization. If different branches return <code>NewsArticle</code> and <code>Tweet</code>, those are different sizes in memory and the compiler can’t handle that with <code>impl Trait</code>.</p>
+<p><strong>The fix for the limitation (preview, don’t go deep here):</strong> <code>Box&lt;dyn Summary&gt;</code> uses a trait <em>object</em> — a pointer with a vtable for runtime dispatch, like Python’s normal object dispatch. This has a small runtime cost but enables returning different types:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb25"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb25-1"><a href=""></a><span class="kw">fn</span> returns_summarizable(switch<span class="op">:</span> <span class="dt">bool</span>) <span class="op">-&gt;</span> <span class="dt">Box</span><span class="op">&lt;</span><span class="kw">dyn</span> Summary<span class="op">&gt;</span> <span class="op">{</span></span>
+<span id="cb25-2"><a href=""></a>    <span class="cf">if</span> switch <span class="op">{</span></span>
+<span id="cb25-3"><a href=""></a>        <span class="dt">Box</span><span class="pp">::</span>new(NewsArticle <span class="op">{</span> <span class="co">/* ... */</span> <span class="op">}</span>)</span>
+<span id="cb25-4"><a href=""></a>    <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></span>
+<span id="cb25-5"><a href=""></a>        <span class="dt">Box</span><span class="pp">::</span>new(Tweet <span class="op">{</span> <span class="co">/* ... */</span> <span class="op">}</span>)  <span class="co">// Works!</span></span>
+<span id="cb25-6"><a href=""></a>    <span class="op">}</span></span>
+<span id="cb25-7"><a href=""></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><code>impl Trait</code> = compile-time dispatch (faster, like a C++ template) <code>dyn Trait</code> = runtime dispatch (more flexible, like Python objects)</p>
+<p>Students will encounter <code>dyn Trait</code> naturally as they write more complex Rust. Mention it briefly here but don’t go deep — they’ll see it next week or when they hit the limitation in their projects.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -644,7 +794,81 @@ Brandon M. Greenwell
 </ul>
 <p><a href="https://doc.rust-lang.org/std/#traits">📖 Rust Standard Library Traits</a></p>
 <aside class="notes">
-<p>These traits are fundamental. Most can be automatically derived with #[derive(…)].</p>
+<p>Help students map these to Python’s “dunder” (double underscore) methods, which serve a similar role — they’re special interfaces the language and standard library know about:</p>
+<table class="caption-top">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Rust trait</th>
+<th>Python equivalent</th>
+<th>What it enables</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>Debug</code></td>
+<td><code>__repr__</code></td>
+<td>Programmer-facing string representation (<code>{:?}</code>)</td>
+</tr>
+<tr class="even">
+<td><code>Display</code></td>
+<td><code>__str__</code></td>
+<td>User-facing string representation (<code>{}</code>)</td>
+</tr>
+<tr class="odd">
+<td><code>Clone</code></td>
+<td><code>copy.deepcopy()</code></td>
+<td>Explicit deep copy</td>
+</tr>
+<tr class="even">
+<td><code>Copy</code></td>
+<td>(automatic for primitives)</td>
+<td>Implicit bitwise copy, no move semantics</td>
+</tr>
+<tr class="odd">
+<td><code>PartialEq</code></td>
+<td><code>__eq__</code></td>
+<td><code>==</code> and <code>!=</code> operators</td>
+</tr>
+<tr class="even">
+<td><code>Eq</code></td>
+<td>(full equivalence, no NaN)</td>
+<td>Required by HashMap keys, sort stability</td>
+</tr>
+<tr class="odd">
+<td><code>PartialOrd</code></td>
+<td><code>__lt__</code>/<code>__gt__</code>/etc.</td>
+<td><code>&lt;</code>, <code>&gt;</code>, <code>&lt;=</code>, <code>&gt;=</code> operators</td>
+</tr>
+<tr class="even">
+<td><code>Ord</code></td>
+<td><code>__lt__</code> + total order</td>
+<td><code>sort()</code>, <code>min()</code>, <code>max()</code></td>
+</tr>
+<tr class="odd">
+<td><code>Iterator</code></td>
+<td><code>__iter__</code> + <code>__next__</code></td>
+<td><code>for</code> loops, iterator adapters</td>
+</tr>
+<tr class="even">
+<td><code>Hash</code></td>
+<td><code>__hash__</code></td>
+<td>Use as HashMap/HashSet key</td>
+</tr>
+<tr class="odd">
+<td><code>Default</code></td>
+<td><code>__init__</code> defaults</td>
+<td><code>Type::default()</code> constructor</td>
+</tr>
+</tbody>
+</table>
+<p><strong>PartialEq vs Eq:</strong> Python doesn’t have this distinction. In Rust, <code>PartialEq</code> allows values that aren’t equal to themselves (like <code>f32::NAN != f32::NAN</code>). <code>Eq</code> means every value is equal to itself — a stronger guarantee. Types need <code>Eq</code> to be used as <code>HashMap</code> keys.</p>
+<p><strong>PartialOrd vs Ord:</strong> Same pattern. <code>f32</code> only implements <code>PartialOrd</code> because NaN comparisons are undefined. <code>i32</code> implements <code>Ord</code> because integers have a total, unambiguous ordering.</p>
+<p>This is a great reference slide to return to throughout the semester.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -660,24 +884,41 @@ Brandon M. Greenwell
 <section id="deriving-traits" class="slide level2 smaller">
 <h2>Deriving Traits</h2>
 <p><strong>Automatically implement common traits:</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb14-1"><a href=""></a><span class="at">#[</span>derive<span class="at">(</span><span class="bu">Debug</span><span class="op">,</span> <span class="bu">Clone</span><span class="op">,</span> <span class="bu">PartialEq</span><span class="op">,</span> <span class="bu">Eq</span><span class="at">)]</span></span>
-<span id="cb14-2"><a href=""></a><span class="kw">struct</span> Point <span class="op">{</span></span>
-<span id="cb14-3"><a href=""></a>    x<span class="op">:</span> <span class="dt">i32</span><span class="op">,</span></span>
-<span id="cb14-4"><a href=""></a>    y<span class="op">:</span> <span class="dt">i32</span><span class="op">,</span></span>
-<span id="cb14-5"><a href=""></a><span class="op">}</span></span>
-<span id="cb14-6"><a href=""></a></span>
-<span id="cb14-7"><a href=""></a><span class="kw">fn</span> main() <span class="op">{</span></span>
-<span id="cb14-8"><a href=""></a>    <span class="kw">let</span> p1 <span class="op">=</span> Point <span class="op">{</span> x<span class="op">:</span> <span class="dv">1</span><span class="op">,</span> y<span class="op">:</span> <span class="dv">2</span> <span class="op">};</span></span>
-<span id="cb14-9"><a href=""></a>    <span class="kw">let</span> p2 <span class="op">=</span> p1<span class="op">.</span>clone()<span class="op">;</span></span>
-<span id="cb14-10"><a href=""></a></span>
-<span id="cb14-11"><a href=""></a>    <span class="pp">println!</span>(<span class="st">"{:?}"</span><span class="op">,</span> p1)<span class="op">;</span>  <span class="co">// Debug</span></span>
-<span id="cb14-12"><a href=""></a>    <span class="pp">assert_eq!</span>(p1<span class="op">,</span> p2)<span class="op">;</span>    <span class="co">// PartialEq</span></span>
-<span id="cb14-13"><a href=""></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb26"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb26-1"><a href=""></a><span class="at">#[</span>derive<span class="at">(</span><span class="bu">Debug</span><span class="op">,</span> <span class="bu">Clone</span><span class="op">,</span> <span class="bu">PartialEq</span><span class="op">,</span> <span class="bu">Eq</span><span class="at">)]</span></span>
+<span id="cb26-2"><a href=""></a><span class="kw">struct</span> Point <span class="op">{</span></span>
+<span id="cb26-3"><a href=""></a>    x<span class="op">:</span> <span class="dt">i32</span><span class="op">,</span></span>
+<span id="cb26-4"><a href=""></a>    y<span class="op">:</span> <span class="dt">i32</span><span class="op">,</span></span>
+<span id="cb26-5"><a href=""></a><span class="op">}</span></span>
+<span id="cb26-6"><a href=""></a></span>
+<span id="cb26-7"><a href=""></a><span class="kw">fn</span> main() <span class="op">{</span></span>
+<span id="cb26-8"><a href=""></a>    <span class="kw">let</span> p1 <span class="op">=</span> Point <span class="op">{</span> x<span class="op">:</span> <span class="dv">1</span><span class="op">,</span> y<span class="op">:</span> <span class="dv">2</span> <span class="op">};</span></span>
+<span id="cb26-9"><a href=""></a>    <span class="kw">let</span> p2 <span class="op">=</span> p1<span class="op">.</span>clone()<span class="op">;</span></span>
+<span id="cb26-10"><a href=""></a></span>
+<span id="cb26-11"><a href=""></a>    <span class="pp">println!</span>(<span class="st">"{:?}"</span><span class="op">,</span> p1)<span class="op">;</span>  <span class="co">// Debug</span></span>
+<span id="cb26-12"><a href=""></a>    <span class="pp">assert_eq!</span>(p1<span class="op">,</span> p2)<span class="op">;</span>    <span class="co">// PartialEq</span></span>
+<span id="cb26-13"><a href=""></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p><strong>Can derive:</strong> - <code>Debug</code>, <code>Clone</code>, <code>Copy</code> - <code>PartialEq</code>, <code>Eq</code>, <code>PartialOrd</code>, <code>Ord</code> - <code>Hash</code>, <code>Default</code></p>
 <p><strong>Cannot derive</strong>: <code>Display</code>, <code>Iterator</code> (must implement manually)</p>
 <p><a href="https://doc.rust-lang.org/book/appendix-03-derivable-traits.html">📖 Rust Book: Derivable Traits</a></p>
 <aside class="notes">
-<p>Derive whenever possible - it’s less error-prone than manual implementation.</p>
+<p><strong>Python parallel:</strong> The <code>#[derive(...)]</code> attribute is most similar to Python’s <code>@dataclass</code> decorator, which auto-generates <code>__init__</code>, <code>__repr__</code>, <code>__eq__</code>, and optionally <code>__hash__</code> and <code>__lt__</code>:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb27"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href=""></a><span class="im">from</span> dataclasses <span class="im">import</span> dataclass</span>
+<span id="cb27-2"><a href=""></a></span>
+<span id="cb27-3"><a href=""></a><span class="at">@dataclass</span></span>
+<span id="cb27-4"><a href=""></a><span class="kw">class</span> Point:</span>
+<span id="cb27-5"><a href=""></a>    x: <span class="bu">int</span></span>
+<span id="cb27-6"><a href=""></a>    y: <span class="bu">int</span></span>
+<span id="cb27-7"><a href=""></a><span class="co"># Automatically gets __repr__, __eq__, and field-based __init__</span></span>
+<span id="cb27-8"><a href=""></a></span>
+<span id="cb27-9"><a href=""></a><span class="at">@dataclass</span>(order<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb27-10"><a href=""></a><span class="kw">class</span> Point:</span>
+<span id="cb27-11"><a href=""></a>    x: <span class="bu">int</span></span>
+<span id="cb27-12"><a href=""></a>    y: <span class="bu">int</span></span>
+<span id="cb27-13"><a href=""></a><span class="co"># Also gets __lt__, __le__, __gt__, __ge__</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>The Rust <code>#[derive(Debug, Clone, PartialEq)]</code> is conceptually the same — the compiler auto-generates the trait implementation based on the struct’s fields.</p>
+<p><strong>How derive works:</strong> The derived implementation is <em>field-recursive</em>. For <code>PartialEq</code>, two <code>Point</code>s are equal if and only if both <code>x</code> fields are equal AND both <code>y</code> fields are equal. For <code>Debug</code>, it formats each field. This works as long as all the fields themselves implement the trait.</p>
+<p><strong>Why can’t <code>Display</code> and <code>Iterator</code> be derived?</strong> Because there’s no obvious “default” for user-facing formatting — should Point display as <code>(1, 2)</code> or <code>Point { x: 1, y: 2 }</code> or <code>1,2</code>? That’s a design decision only you can make. Similarly, there’s no default for what “the next item” means for a custom type.</p>
+<p><strong>Common gotcha:</strong> If any field doesn’t implement the trait you’re trying to derive, the derive will fail with a compiler error. For example, you can’t <code>#[derive(Clone)]</code> on a struct that contains a <code>File</code> handle, because <code>File</code> doesn’t implement <code>Clone</code>.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -693,26 +934,48 @@ Brandon M. Greenwell
 <section id="implementing-display-trait" class="slide level2 smaller">
 <h2>Implementing Display Trait</h2>
 <p><strong>Custom formatting for user-facing output:</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb15-1"><a href=""></a><span class="kw">use</span> <span class="pp">std::</span>fmt<span class="op">;</span></span>
-<span id="cb15-2"><a href=""></a></span>
-<span id="cb15-3"><a href=""></a><span class="kw">struct</span> Point <span class="op">{</span></span>
-<span id="cb15-4"><a href=""></a>    x<span class="op">:</span> <span class="dt">i32</span><span class="op">,</span></span>
-<span id="cb15-5"><a href=""></a>    y<span class="op">:</span> <span class="dt">i32</span><span class="op">,</span></span>
-<span id="cb15-6"><a href=""></a><span class="op">}</span></span>
-<span id="cb15-7"><a href=""></a></span>
-<span id="cb15-8"><a href=""></a><span class="kw">impl</span> <span class="pp">fmt::</span><span class="bu">Display</span> <span class="cf">for</span> Point <span class="op">{</span></span>
-<span id="cb15-9"><a href=""></a>    <span class="kw">fn</span> fmt(<span class="op">&amp;</span><span class="kw">self</span><span class="op">,</span> f<span class="op">:</span> <span class="op">&amp;</span><span class="kw">mut</span> <span class="pp">fmt::</span>Formatter) <span class="op">-&gt;</span> <span class="pp">fmt::</span><span class="dt">Result</span> <span class="op">{</span></span>
-<span id="cb15-10"><a href=""></a>        <span class="pp">write!</span>(f<span class="op">,</span> <span class="st">"({}, {})"</span><span class="op">,</span> <span class="kw">self</span><span class="op">.</span>x<span class="op">,</span> <span class="kw">self</span><span class="op">.</span>y)</span>
-<span id="cb15-11"><a href=""></a>    <span class="op">}</span></span>
-<span id="cb15-12"><a href=""></a><span class="op">}</span></span>
-<span id="cb15-13"><a href=""></a></span>
-<span id="cb15-14"><a href=""></a><span class="kw">fn</span> main() <span class="op">{</span></span>
-<span id="cb15-15"><a href=""></a>    <span class="kw">let</span> p <span class="op">=</span> Point <span class="op">{</span> x<span class="op">:</span> <span class="dv">1</span><span class="op">,</span> y<span class="op">:</span> <span class="dv">2</span> <span class="op">};</span></span>
-<span id="cb15-16"><a href=""></a>    <span class="pp">println!</span>(<span class="st">"Point: {}"</span><span class="op">,</span> p)<span class="op">;</span>  <span class="co">// Point: (1, 2)</span></span>
-<span id="cb15-17"><a href=""></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb28"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb28-1"><a href=""></a><span class="kw">use</span> <span class="pp">std::</span>fmt<span class="op">;</span></span>
+<span id="cb28-2"><a href=""></a></span>
+<span id="cb28-3"><a href=""></a><span class="kw">struct</span> Point <span class="op">{</span></span>
+<span id="cb28-4"><a href=""></a>    x<span class="op">:</span> <span class="dt">i32</span><span class="op">,</span></span>
+<span id="cb28-5"><a href=""></a>    y<span class="op">:</span> <span class="dt">i32</span><span class="op">,</span></span>
+<span id="cb28-6"><a href=""></a><span class="op">}</span></span>
+<span id="cb28-7"><a href=""></a></span>
+<span id="cb28-8"><a href=""></a><span class="kw">impl</span> <span class="pp">fmt::</span><span class="bu">Display</span> <span class="cf">for</span> Point <span class="op">{</span></span>
+<span id="cb28-9"><a href=""></a>    <span class="kw">fn</span> fmt(<span class="op">&amp;</span><span class="kw">self</span><span class="op">,</span> f<span class="op">:</span> <span class="op">&amp;</span><span class="kw">mut</span> <span class="pp">fmt::</span>Formatter) <span class="op">-&gt;</span> <span class="pp">fmt::</span><span class="dt">Result</span> <span class="op">{</span></span>
+<span id="cb28-10"><a href=""></a>        <span class="pp">write!</span>(f<span class="op">,</span> <span class="st">"({}, {})"</span><span class="op">,</span> <span class="kw">self</span><span class="op">.</span>x<span class="op">,</span> <span class="kw">self</span><span class="op">.</span>y)</span>
+<span id="cb28-11"><a href=""></a>    <span class="op">}</span></span>
+<span id="cb28-12"><a href=""></a><span class="op">}</span></span>
+<span id="cb28-13"><a href=""></a></span>
+<span id="cb28-14"><a href=""></a><span class="kw">fn</span> main() <span class="op">{</span></span>
+<span id="cb28-15"><a href=""></a>    <span class="kw">let</span> p <span class="op">=</span> Point <span class="op">{</span> x<span class="op">:</span> <span class="dv">1</span><span class="op">,</span> y<span class="op">:</span> <span class="dv">2</span> <span class="op">};</span></span>
+<span id="cb28-16"><a href=""></a>    <span class="pp">println!</span>(<span class="st">"Point: {}"</span><span class="op">,</span> p)<span class="op">;</span>  <span class="co">// Point: (1, 2)</span></span>
+<span id="cb28-17"><a href=""></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p><a href="https://doc.rust-lang.org/std/fmt/trait.Display.html">📖 Rust Book: Display Trait</a></p>
 <aside class="notes">
-<p>Display is for user-facing output. Debug is for programmer-facing output.</p>
+<p><strong>Python parallel:</strong> Implementing <code>Display</code> is almost identical to Python’s <code>__str__</code>:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb29"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href=""></a><span class="kw">class</span> Point:</span>
+<span id="cb29-2"><a href=""></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, x, y):</span>
+<span id="cb29-3"><a href=""></a>        <span class="va">self</span>.x <span class="op">=</span> x</span>
+<span id="cb29-4"><a href=""></a>        <span class="va">self</span>.y <span class="op">=</span> y</span>
+<span id="cb29-5"><a href=""></a></span>
+<span id="cb29-6"><a href=""></a>    <span class="kw">def</span> <span class="fu">__str__</span>(<span class="va">self</span>):</span>
+<span id="cb29-7"><a href=""></a>        <span class="cf">return</span> <span class="ss">f"(</span><span class="sc">{</span><span class="va">self</span><span class="sc">.</span>x<span class="sc">}</span><span class="ss">, </span><span class="sc">{</span><span class="va">self</span><span class="sc">.</span>y<span class="sc">}</span><span class="ss">)"</span></span>
+<span id="cb29-8"><a href=""></a></span>
+<span id="cb29-9"><a href=""></a>p <span class="op">=</span> Point(<span class="dv">1</span>, <span class="dv">2</span>)</span>
+<span id="cb29-10"><a href=""></a><span class="bu">print</span>(<span class="ss">f"Point: </span><span class="sc">{</span>p<span class="sc">}</span><span class="ss">"</span>)   <span class="co"># Point: (1, 2)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>And Python’s <code>__repr__</code> maps to Rust’s <code>Debug</code> trait:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb30"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href=""></a><span class="kw">def</span> <span class="fu">__repr__</span>(<span class="va">self</span>):</span>
+<span id="cb30-2"><a href=""></a>    <span class="cf">return</span> <span class="ss">f"Point(x=</span><span class="sc">{</span><span class="va">self</span><span class="sc">.</span>x<span class="sc">}</span><span class="ss">, y=</span><span class="sc">{</span><span class="va">self</span><span class="sc">.</span>y<span class="sc">}</span><span class="ss">)"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Rust-specific details in the code:</strong></p>
+<ul>
+<li><code>use std::fmt</code> brings the formatting traits into scope — required because <code>fmt::Display</code> is in a sub-module</li>
+<li><code>impl fmt::Display for Point</code> — you’re implementing the <code>Display</code> trait from the <code>fmt</code> module for your <code>Point</code> type</li>
+<li><code>fn fmt(&amp;self, f: &amp;mut fmt::Formatter) -&gt; fmt::Result</code> — this is the exact signature the trait requires; you must match it exactly</li>
+<li><code>write!(f, "({}, {})", self.x, self.y)</code> — <code>write!</code> is a macro that writes formatted text to the formatter <code>f</code>. It returns <code>fmt::Result</code>, which your function returns directly.</li>
+</ul>
+<p><strong>When to implement each:</strong> - <code>Debug</code> (via <code>#[derive(Debug)]</code>) — always, for debugging and logging - <code>Display</code> (manual) — when you have a user-facing string representation that makes semantic sense for your type</p>
+<p><strong>Automatic bonus:</strong> Once a type implements <code>Display</code>, it automatically implements the <code>ToString</code> trait, which gives you a <code>.to_string()</code> method for free.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -728,31 +991,78 @@ Brandon M. Greenwell
 <section id="implementing-iterator-trait" class="slide level2 smaller">
 <h2>Implementing Iterator Trait</h2>
 <p><strong>Make your types iterable:</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb16-1"><a href=""></a><span class="kw">struct</span> Counter <span class="op">{</span></span>
-<span id="cb16-2"><a href=""></a>    count<span class="op">:</span> <span class="dt">u32</span><span class="op">,</span></span>
-<span id="cb16-3"><a href=""></a><span class="op">}</span></span>
-<span id="cb16-4"><a href=""></a></span>
-<span id="cb16-5"><a href=""></a><span class="kw">impl</span> Counter <span class="op">{</span></span>
-<span id="cb16-6"><a href=""></a>    <span class="kw">fn</span> new() <span class="op">-&gt;</span> Counter <span class="op">{</span></span>
-<span id="cb16-7"><a href=""></a>        Counter <span class="op">{</span> count<span class="op">:</span> <span class="dv">0</span> <span class="op">}</span></span>
-<span id="cb16-8"><a href=""></a>    <span class="op">}</span></span>
-<span id="cb16-9"><a href=""></a><span class="op">}</span></span>
-<span id="cb16-10"><a href=""></a></span>
-<span id="cb16-11"><a href=""></a><span class="kw">impl</span> <span class="bu">Iterator</span> <span class="cf">for</span> Counter <span class="op">{</span></span>
-<span id="cb16-12"><a href=""></a>    <span class="kw">type</span> Item <span class="op">=</span> <span class="dt">u32</span><span class="op">;</span>  <span class="co">// Associated type</span></span>
-<span id="cb16-13"><a href=""></a></span>
-<span id="cb16-14"><a href=""></a>    <span class="kw">fn</span> next(<span class="op">&amp;</span><span class="kw">mut</span> <span class="kw">self</span>) <span class="op">-&gt;</span> <span class="dt">Option</span><span class="op">&lt;</span><span class="dt">Self</span><span class="pp">::</span>Item<span class="op">&gt;</span> <span class="op">{</span></span>
-<span id="cb16-15"><a href=""></a>        <span class="cf">if</span> <span class="kw">self</span><span class="op">.</span>count <span class="op">&lt;</span> <span class="dv">5</span> <span class="op">{</span></span>
-<span id="cb16-16"><a href=""></a>            <span class="kw">self</span><span class="op">.</span>count <span class="op">+=</span> <span class="dv">1</span><span class="op">;</span></span>
-<span id="cb16-17"><a href=""></a>            <span class="cn">Some</span>(<span class="kw">self</span><span class="op">.</span>count)</span>
-<span id="cb16-18"><a href=""></a>        <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></span>
-<span id="cb16-19"><a href=""></a>            <span class="cn">None</span></span>
-<span id="cb16-20"><a href=""></a>        <span class="op">}</span></span>
-<span id="cb16-21"><a href=""></a>    <span class="op">}</span></span>
-<span id="cb16-22"><a href=""></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb31"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb31-1"><a href=""></a><span class="kw">struct</span> Counter <span class="op">{</span></span>
+<span id="cb31-2"><a href=""></a>    count<span class="op">:</span> <span class="dt">u32</span><span class="op">,</span></span>
+<span id="cb31-3"><a href=""></a><span class="op">}</span></span>
+<span id="cb31-4"><a href=""></a></span>
+<span id="cb31-5"><a href=""></a><span class="kw">impl</span> Counter <span class="op">{</span></span>
+<span id="cb31-6"><a href=""></a>    <span class="kw">fn</span> new() <span class="op">-&gt;</span> Counter <span class="op">{</span></span>
+<span id="cb31-7"><a href=""></a>        Counter <span class="op">{</span> count<span class="op">:</span> <span class="dv">0</span> <span class="op">}</span></span>
+<span id="cb31-8"><a href=""></a>    <span class="op">}</span></span>
+<span id="cb31-9"><a href=""></a><span class="op">}</span></span>
+<span id="cb31-10"><a href=""></a></span>
+<span id="cb31-11"><a href=""></a><span class="kw">impl</span> <span class="bu">Iterator</span> <span class="cf">for</span> Counter <span class="op">{</span></span>
+<span id="cb31-12"><a href=""></a>    <span class="kw">type</span> Item <span class="op">=</span> <span class="dt">u32</span><span class="op">;</span>  <span class="co">// Associated type</span></span>
+<span id="cb31-13"><a href=""></a></span>
+<span id="cb31-14"><a href=""></a>    <span class="kw">fn</span> next(<span class="op">&amp;</span><span class="kw">mut</span> <span class="kw">self</span>) <span class="op">-&gt;</span> <span class="dt">Option</span><span class="op">&lt;</span><span class="dt">Self</span><span class="pp">::</span>Item<span class="op">&gt;</span> <span class="op">{</span></span>
+<span id="cb31-15"><a href=""></a>        <span class="cf">if</span> <span class="kw">self</span><span class="op">.</span>count <span class="op">&lt;</span> <span class="dv">5</span> <span class="op">{</span></span>
+<span id="cb31-16"><a href=""></a>            <span class="kw">self</span><span class="op">.</span>count <span class="op">+=</span> <span class="dv">1</span><span class="op">;</span></span>
+<span id="cb31-17"><a href=""></a>            <span class="cn">Some</span>(<span class="kw">self</span><span class="op">.</span>count)</span>
+<span id="cb31-18"><a href=""></a>        <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></span>
+<span id="cb31-19"><a href=""></a>            <span class="cn">None</span></span>
+<span id="cb31-20"><a href=""></a>        <span class="op">}</span></span>
+<span id="cb31-21"><a href=""></a>    <span class="op">}</span></span>
+<span id="cb31-22"><a href=""></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p><a href="https://doc.rust-lang.org/book/ch13-02-iterators.html">📖 Rust Book: Iterator Trait</a></p>
 <aside class="notes">
-<p>Iterator is powerful - once implemented, you get all iterator methods for free!</p>
+<p><strong>Python parallel:</strong> This is exactly how Python iterators work, with <code>__iter__</code> and <code>__next__</code>:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb32"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href=""></a><span class="kw">class</span> Counter:</span>
+<span id="cb32-2"><a href=""></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>):</span>
+<span id="cb32-3"><a href=""></a>        <span class="va">self</span>.count <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb32-4"><a href=""></a></span>
+<span id="cb32-5"><a href=""></a>    <span class="kw">def</span> <span class="fu">__iter__</span>(<span class="va">self</span>):</span>
+<span id="cb32-6"><a href=""></a>        <span class="cf">return</span> <span class="va">self</span></span>
+<span id="cb32-7"><a href=""></a></span>
+<span id="cb32-8"><a href=""></a>    <span class="kw">def</span> <span class="fu">__next__</span>(<span class="va">self</span>):</span>
+<span id="cb32-9"><a href=""></a>        <span class="cf">if</span> <span class="va">self</span>.count <span class="op">&lt;</span> <span class="dv">5</span>:</span>
+<span id="cb32-10"><a href=""></a>            <span class="va">self</span>.count <span class="op">+=</span> <span class="dv">1</span></span>
+<span id="cb32-11"><a href=""></a>            <span class="cf">return</span> <span class="va">self</span>.count</span>
+<span id="cb32-12"><a href=""></a>        <span class="cf">else</span>:</span>
+<span id="cb32-13"><a href=""></a>            <span class="cf">raise</span> <span class="pp">StopIteration</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>The mapping is very direct:</p>
+<table class="caption-top">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Python</th>
+<th>Rust</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>__iter__(self)</code> returning <code>self</code></td>
+<td><code>impl Iterator for Counter</code> declaration</td>
+</tr>
+<tr class="even">
+<td><code>__next__(self)</code></td>
+<td><code>fn next(&amp;mut self)</code></td>
+</tr>
+<tr class="odd">
+<td><code>raise StopIteration</code></td>
+<td>return <code>None</code></td>
+</tr>
+<tr class="even">
+<td><code>return value</code></td>
+<td>return <code>Some(value)</code></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Associated types:</strong> The <code>type Item = u32;</code> line introduces an <em>associated type</em> — a type that’s part of the trait’s interface. The <code>Iterator</code> trait says “you must define what type your items are.” This is more type-safe than a generic parameter would be.</p>
+<p><strong>The free lunch:</strong> Once you implement <code>next()</code>, Rust’s standard library provides all of these methods automatically on your <code>Counter</code> type: - <code>.map()</code>, <code>.filter()</code>, <code>.fold()</code>, <code>.collect()</code> - <code>.zip()</code>, <code>.enumerate()</code>, <code>.take()</code>, <code>.skip()</code> - <code>.sum()</code>, <code>.product()</code>, <code>.count()</code> - And many more!</p>
+<p>This is the same philosophy as Python’s <code>__iter__</code>/<code>__next__</code> — implement the primitive, get the ecosystem for free. But Rust’s iterator adapters are all zero-cost: they compile down to simple loops with no heap allocation.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -768,30 +1078,46 @@ Brandon M. Greenwell
 <section id="generic-stack-example" class="slide level2 smaller">
 <h2>Generic Stack Example</h2>
 <p><strong>Building a generic data structure:</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb17-1"><a href=""></a><span class="kw">struct</span> Stack<span class="op">&lt;</span>T<span class="op">&gt;</span> <span class="op">{</span></span>
-<span id="cb17-2"><a href=""></a>    items<span class="op">:</span> <span class="dt">Vec</span><span class="op">&lt;</span>T<span class="op">&gt;,</span></span>
-<span id="cb17-3"><a href=""></a><span class="op">}</span></span>
-<span id="cb17-4"><a href=""></a></span>
-<span id="cb17-5"><a href=""></a><span class="kw">impl</span><span class="op">&lt;</span>T<span class="op">&gt;</span> Stack<span class="op">&lt;</span>T<span class="op">&gt;</span> <span class="op">{</span></span>
-<span id="cb17-6"><a href=""></a>    <span class="kw">fn</span> new() <span class="op">-&gt;</span> Stack<span class="op">&lt;</span>T<span class="op">&gt;</span> <span class="op">{</span></span>
-<span id="cb17-7"><a href=""></a>        Stack <span class="op">{</span> items<span class="op">:</span> <span class="dt">Vec</span><span class="pp">::</span>new() <span class="op">}</span></span>
-<span id="cb17-8"><a href=""></a>    <span class="op">}</span></span>
-<span id="cb17-9"><a href=""></a></span>
-<span id="cb17-10"><a href=""></a>    <span class="kw">fn</span> push(<span class="op">&amp;</span><span class="kw">mut</span> <span class="kw">self</span><span class="op">,</span> item<span class="op">:</span> T) <span class="op">{</span></span>
-<span id="cb17-11"><a href=""></a>        <span class="kw">self</span><span class="op">.</span>items<span class="op">.</span>push(item)<span class="op">;</span></span>
-<span id="cb17-12"><a href=""></a>    <span class="op">}</span></span>
-<span id="cb17-13"><a href=""></a></span>
-<span id="cb17-14"><a href=""></a>    <span class="kw">fn</span> pop(<span class="op">&amp;</span><span class="kw">mut</span> <span class="kw">self</span>) <span class="op">-&gt;</span> <span class="dt">Option</span><span class="op">&lt;</span>T<span class="op">&gt;</span> <span class="op">{</span></span>
-<span id="cb17-15"><a href=""></a>        <span class="kw">self</span><span class="op">.</span>items<span class="op">.</span>pop()</span>
-<span id="cb17-16"><a href=""></a>    <span class="op">}</span></span>
-<span id="cb17-17"><a href=""></a></span>
-<span id="cb17-18"><a href=""></a>    <span class="kw">fn</span> is_empty(<span class="op">&amp;</span><span class="kw">self</span>) <span class="op">-&gt;</span> <span class="dt">bool</span> <span class="op">{</span></span>
-<span id="cb17-19"><a href=""></a>        <span class="kw">self</span><span class="op">.</span>items<span class="op">.</span>is_empty()</span>
-<span id="cb17-20"><a href=""></a>    <span class="op">}</span></span>
-<span id="cb17-21"><a href=""></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb33"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb33-1"><a href=""></a><span class="kw">struct</span> Stack<span class="op">&lt;</span>T<span class="op">&gt;</span> <span class="op">{</span></span>
+<span id="cb33-2"><a href=""></a>    items<span class="op">:</span> <span class="dt">Vec</span><span class="op">&lt;</span>T<span class="op">&gt;,</span></span>
+<span id="cb33-3"><a href=""></a><span class="op">}</span></span>
+<span id="cb33-4"><a href=""></a></span>
+<span id="cb33-5"><a href=""></a><span class="kw">impl</span><span class="op">&lt;</span>T<span class="op">&gt;</span> Stack<span class="op">&lt;</span>T<span class="op">&gt;</span> <span class="op">{</span></span>
+<span id="cb33-6"><a href=""></a>    <span class="kw">fn</span> new() <span class="op">-&gt;</span> Stack<span class="op">&lt;</span>T<span class="op">&gt;</span> <span class="op">{</span></span>
+<span id="cb33-7"><a href=""></a>        Stack <span class="op">{</span> items<span class="op">:</span> <span class="dt">Vec</span><span class="pp">::</span>new() <span class="op">}</span></span>
+<span id="cb33-8"><a href=""></a>    <span class="op">}</span></span>
+<span id="cb33-9"><a href=""></a></span>
+<span id="cb33-10"><a href=""></a>    <span class="kw">fn</span> push(<span class="op">&amp;</span><span class="kw">mut</span> <span class="kw">self</span><span class="op">,</span> item<span class="op">:</span> T) <span class="op">{</span></span>
+<span id="cb33-11"><a href=""></a>        <span class="kw">self</span><span class="op">.</span>items<span class="op">.</span>push(item)<span class="op">;</span></span>
+<span id="cb33-12"><a href=""></a>    <span class="op">}</span></span>
+<span id="cb33-13"><a href=""></a></span>
+<span id="cb33-14"><a href=""></a>    <span class="kw">fn</span> pop(<span class="op">&amp;</span><span class="kw">mut</span> <span class="kw">self</span>) <span class="op">-&gt;</span> <span class="dt">Option</span><span class="op">&lt;</span>T<span class="op">&gt;</span> <span class="op">{</span></span>
+<span id="cb33-15"><a href=""></a>        <span class="kw">self</span><span class="op">.</span>items<span class="op">.</span>pop()</span>
+<span id="cb33-16"><a href=""></a>    <span class="op">}</span></span>
+<span id="cb33-17"><a href=""></a></span>
+<span id="cb33-18"><a href=""></a>    <span class="kw">fn</span> is_empty(<span class="op">&amp;</span><span class="kw">self</span>) <span class="op">-&gt;</span> <span class="dt">bool</span> <span class="op">{</span></span>
+<span id="cb33-19"><a href=""></a>        <span class="kw">self</span><span class="op">.</span>items<span class="op">.</span>is_empty()</span>
+<span id="cb33-20"><a href=""></a>    <span class="op">}</span></span>
+<span id="cb33-21"><a href=""></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p><a href="https://play.rust-lang.org/">🎮 Try it in Playground</a></p>
 <aside class="notes">
-<p>This will be the basis for Lab 12. Students will implement and test this.</p>
+<p><strong>Python parallel:</strong> Python’s built-in list already acts as a stack. You’d normally just use it directly:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb34"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href=""></a>stack <span class="op">=</span> []</span>
+<span id="cb34-2"><a href=""></a>stack.append(<span class="dv">42</span>)       <span class="co"># push</span></span>
+<span id="cb34-3"><a href=""></a>stack.pop()            <span class="co"># pop (returns and removes last element)</span></span>
+<span id="cb34-4"><a href=""></a>stack[<span class="op">-</span><span class="dv">1</span>]              <span class="co"># peek (look at top without removing)</span></span>
+<span id="cb34-5"><a href=""></a><span class="bu">len</span>(stack) <span class="op">==</span> <span class="dv">0</span>        <span class="co"># is_empty</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>In Rust, this is a teaching example — the purpose is to practice generics and traits, not to build something Python doesn’t have. That said, a Rust <code>Stack&lt;T&gt;</code> has a real advantage: it’s a <em>type-safe contract</em>. A <code>Stack&lt;i32&gt;</code> can <em>only</em> hold i32s. Python lists can hold anything mixed together.</p>
+<p><strong>Walk through the code:</strong></p>
+<ul>
+<li><code>struct Stack&lt;T&gt;</code> — generic struct that wraps a <code>Vec&lt;T&gt;</code></li>
+<li><code>impl&lt;T&gt; Stack&lt;T&gt;</code> — implementing methods for all T; remember the <code>impl&lt;T&gt;</code> declares the generic before <code>Stack&lt;T&gt;</code> uses it</li>
+<li><code>fn new() -&gt; Stack&lt;T&gt;</code> — constructor that returns an empty stack</li>
+<li><code>fn push(&amp;mut self, item: T)</code> — <code>&amp;mut self</code> because we’re modifying the stack; <code>item: T</code> means it takes ownership of the item</li>
+<li><code>fn pop(&amp;mut self) -&gt; Option&lt;T&gt;</code> — returns <code>Option&lt;T&gt;</code> because the stack might be empty; <code>Vec::pop()</code> already returns <code>Option</code>, so this is a clean passthrough</li>
+<li><code>fn is_empty(&amp;self)</code> — <code>&amp;self</code> (read-only reference) is enough since we’re not modifying anything</li>
+</ul>
+<p><strong>Lab preview:</strong> Students will extend this with <code>peek</code>, <code>len</code>, and then implement <code>Display</code> and <code>Iterator</code> for it — applying everything from today’s session in one integrated exercise.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -804,13 +1130,21 @@ Brandon M. Greenwell
           display:block!important;
       }</style></aside>
 </section>
-<section id="ai-prompting-generics-and-traits" class="slide level2 smaller">
+<section id="ai-prompting-generics-and-traits" class="slide level2 smaller scrollable">
 <h2>🤖 AI Prompting: Generics and Traits</h2>
 <p><strong>Design assistance:</strong> - “Help me design a generic cache data structure in Rust” - “What traits should my custom type implement for common operations?” - “Explain when to use trait bounds vs where clauses”</p>
 <p><strong>Implementation help:</strong> - “How do I implement the Iterator trait for my custom struct?” - “Why can’t I return different types from a function returning impl Trait?” - “Help me fix this trait bound error: [paste error]”</p>
 <p><strong>Code review:</strong> - “Is this the idiomatic way to use generics in Rust?” - “Should this be a generic function or use dynamic dispatch?” - “How can I make these trait bounds more readable?”</p>
 <aside class="notes">
-<p>AI is excellent for explaining trait system complexities and suggesting appropriate trait bounds.</p>
+<p>Rust’s trait system is one of the areas where AI assistants are genuinely most helpful — compiler error messages involving trait bounds can be long and dense, and an AI can often explain the underlying issue in plain language.</p>
+<p><strong>Specific scenarios where AI shines here:</strong></p>
+<ol type="1">
+<li><p><strong>Trait bound errors:</strong> When you see messages like “the trait <code>std::fmt::Display</code> is not implemented for <code>MyType</code>” or “the type parameter T must implement Debug”, paste the full error into the AI. It’s very good at explaining what the error means and suggesting the minimal fix.</p></li>
+<li><p><strong>Design questions:</strong> “Should I use generics or dynamic dispatch (<code>dyn Trait</code>) here?” This is a nuanced question that depends on context, and AI can reason through the trade-offs with you.</p></li>
+<li><p><strong>Translating Python patterns to Rust:</strong> Students can literally say “I have a Python class that uses ABC to define a shared interface — how do I express this in Rust with traits?” This is a great use of AI for language transition.</p></li>
+<li><p><strong>Iterator chains:</strong> AI can help design complex iterator pipelines and explain what each step does — students can gradually build intuition about chaining <code>.map()</code>, <code>.filter()</code>, <code>.collect()</code> etc.</p></li>
+</ol>
+<p><strong>Caution to share with students:</strong> AI can sometimes suggest over-complicated trait bounds or suggest <code>dyn Trait</code> when <code>impl Trait</code> is simpler. Always try the simpler approach first and check that the compiler is happy with it.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -844,7 +1178,10 @@ Brandon M. Greenwell
 </ul>
 <p><strong>Goal</strong>: Master Rust’s powerful trait system for polymorphism and code reuse</p>
 <aside class="notes">
-<p>Traits are one of Rust’s most powerful features. They enable abstraction without inheritance.</p>
+<p>Session 2 is a deeper pass at traits, revisiting the concepts from Session 1 with more detail and more examples. Use this slide to quickly re-orient students after the break.</p>
+<p><strong>Key message to set up Session 2:</strong> In Python, polymorphism comes almost entirely from inheritance and duck typing. In Rust, <em>traits are the entire story</em>. Rust has no class hierarchy, no mixins, no multiple inheritance. Everything that would be solved with inheritance in Python gets solved with traits in Rust — and the result tends to be more composable and easier to reason about.</p>
+<p>The four concepts to emphasize this session: 1. Writing your own traits (not just implementing standard ones) 2. Default implementations for reuse without inheritance 3. Using traits to write flexible function signatures 4. The common standard library traits that appear in almost every Rust program</p>
+<p>By the end of Session 2 students should feel comfortable reading and writing <code>impl Trait for Type</code> blocks and understanding what trait bounds in function signatures are saying.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -857,7 +1194,7 @@ Brandon M. Greenwell
           display:block!important;
       }</style></aside>
 </section>
-<section id="lab-12-preview-generic-stack" class="slide level2 inverse">
+<section id="lab-12-preview-generic-stack" class="slide level2 inverse scrollable">
 <h2>Lab 12 Preview: Generic Stack</h2>
 <p><strong>What you’ll build:</strong></p>
 <ul>
@@ -876,7 +1213,20 @@ Brandon M. Greenwell
 </ul>
 <p><strong>Deliverable</strong>: A fully functional, well-tested generic stack!</p>
 <aside class="notes">
-<p>This lab applies all the concepts from this week. Students will see how generics and traits work together in practice.</p>
+<p>This lab is designed to be the “putting it all together” moment for week 12. Each part of the lab exercises a specific concept:</p>
+<ul>
+<li><strong><code>Stack&lt;T&gt;</code> core methods</strong> — practicing generic structs and <code>impl&lt;T&gt;</code> blocks; analogous to building a Python class around a list</li>
+<li><strong><code>Display</code> implementation</strong> — practicing manual trait implementation; analogous to Python’s <code>__str__</code></li>
+<li><strong><code>Iterator</code> implementation</strong> — the most challenging part; analogous to Python’s <code>__iter__</code>/<code>__next__</code></li>
+</ul>
+<p><strong>Common student stumbling blocks to warn about:</strong></p>
+<ol type="1">
+<li><strong>Forgetting <code>impl&lt;T&gt;</code></strong> — writing <code>impl Stack&lt;T&gt;</code> without declaring <code>&lt;T&gt;</code> first on impl will confuse the compiler</li>
+<li><strong><code>peek</code> returns a reference</strong> — <code>fn peek(&amp;self) -&gt; Option&lt;&amp;T&gt;</code>, not <code>Option&lt;T&gt;</code>, because you’re just looking, not removing; this connects back to borrowing from earlier weeks</li>
+<li><strong>Iterator and mutable state</strong> — <code>next</code> takes <code>&amp;mut self</code> because it modifies the counter or index; students may try <code>&amp;self</code> first</li>
+<li><strong><code>collect()</code> on custom iterators</strong> — to collect into a <code>Vec</code>, the iterator’s <code>Item</code> type needs to be fully specified; type inference usually handles this but students may see cryptic errors</li>
+</ol>
+<p><strong>Encourage early starts:</strong> The <code>Display</code> and <code>Iterator</code> implementations feel intimidating the first time. Encourage students to get the basic methods working first, then tackle the trait implementations one at a time. AI assistance is great for getting the trait signature boilerplate right — students can then focus on the logic.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -896,7 +1246,11 @@ Brandon M. Greenwell
 <p><strong>Traits/Interfaces:</strong> - Interface design skills transfer to all languages - Composition over inheritance (modern best practice) - Critical for extensible systems and plugin architectures - Type system understanding for advanced roles</p>
 <p><strong>Real interview questions:</strong> - “Explain the difference between generics and dynamic dispatch” - “Design an interface for [problem] - what methods would it have?” - “How would you make this code reusable across different types?” - “What are the tradeoffs between compile-time and runtime polymorphism?”</p>
 <aside class="notes">
-<p>These skills are transferable across all modern programming languages. Employers value developers who understand abstraction mechanisms.</p>
+<p>Reinforce that learning Rust’s explicit type system makes students <em>better</em> Python developers, not just Rust developers. After this course, they’ll understand what Python type hints are actually modeling, when duck typing is the right tool, and when stronger contracts would prevent bugs.</p>
+<p><strong>The mental model shift:</strong> Python encourages “EAFP” (Easier to Ask Forgiveness than Permission) — try the operation, catch the exception. Rust enforces “LBYL” (Look Before You Leap) at compile time. Understanding both paradigms makes you a more thoughtful programmer in any language.</p>
+<p><strong>For the interview question on generics vs dynamic dispatch:</strong> Compile-time generics (Rust’s <code>impl Trait</code> / Java’s <code>&lt;T&gt;</code> / C++’s templates) generate specialized code per type — faster, but larger binary. Runtime dispatch (Rust’s <code>dyn Trait</code> / Java’s interface polymorphism / Python’s default behavior) uses a vtable — slightly slower, but more flexible. Being able to explain this trade-off, and give an example of when you’d choose each, is a strong signal in technical interviews.</p>
+<p><strong>Languages to connect this to:</strong> - Java/C#: Generics look almost identical — <code>List&lt;T&gt;</code>, <code>&lt;T extends Comparable&lt;T&gt;&gt;</code> - TypeScript: Generics and interfaces map very closely to Rust’s model - Go: Uses interfaces similarly to Rust traits, though without explicit <code>impl</code> - Haskell: Type classes are the direct theoretical ancestor of Rust traits</p>
+<p>Students who understand Rust traits will find Java interfaces, TypeScript generics, and Go interfaces much easier to learn.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -915,7 +1269,62 @@ Brandon M. Greenwell
 <p><strong>Traits:</strong> - Define shared behavior across types - Enable polymorphism without inheritance - Foundation of Rust’s standard library - Can have default implementations for convenience</p>
 <p><strong>Together:</strong> - Generics + Traits = Powerful, reusable abstractions - Type safety at compile time - Expressive code that’s still performant - Industry-standard design patterns</p>
 <aside class="notes">
-<p>These concepts work together to enable Rust’s unique combination of performance and abstraction.</p>
+<p>Use this slide to close the loop on the Python-to-Rust journey for the week.</p>
+<p><strong>The core insight for Python developers:</strong></p>
+<p>In Python, you get flexibility for free and pay for it in runtime errors and the need for comprehensive test coverage. In Rust, you pay upfront with explicit type annotations and trait bounds, and the compiler pays you back with a program that’s harder to break.</p>
+<p>Neither approach is universally better. Python’s expressiveness is genuinely valuable for rapid prototyping, data science, and scripts. Rust’s guarantees are genuinely valuable for systems programming, performance-critical code, and large teams where the compiler catches whole classes of bugs.</p>
+<p><strong>Quick mental map to leave students with:</strong></p>
+<table class="caption-top">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Python concept</th>
+<th>Rust concept</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Duck typing — any method that exists works</td>
+<td>Trait bounds — required methods declared explicitly</td>
+</tr>
+<tr class="even">
+<td><code>Optional[T]</code> type hint</td>
+<td><code>Option&lt;T&gt;</code> enforced by compiler</td>
+</tr>
+<tr class="odd">
+<td>Exception-based error handling</td>
+<td><code>Result&lt;T, E&gt;</code> in the type signature</td>
+</tr>
+<tr class="even">
+<td><code>__str__</code> / <code>__repr__</code></td>
+<td><code>Display</code> / <code>Debug</code> traits</td>
+</tr>
+<tr class="odd">
+<td><code>__eq__</code> / <code>__lt__</code></td>
+<td><code>PartialEq</code> / <code>PartialOrd</code> traits</td>
+</tr>
+<tr class="even">
+<td><code>__iter__</code> / <code>__next__</code></td>
+<td><code>Iterator</code> trait with <code>next()</code></td>
+</tr>
+<tr class="odd">
+<td>ABC abstract methods</td>
+<td>Required (non-default) trait methods</td>
+</tr>
+<tr class="even">
+<td>ABC concrete methods</td>
+<td>Default trait implementations</td>
+</tr>
+<tr class="odd">
+<td><code>@dataclass</code></td>
+<td><code>#[derive(...)]</code></td>
+</tr>
+</tbody>
+</table>
+<p>This table is a useful cheat sheet — consider posting it in the course Teams channel.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -928,13 +1337,20 @@ Brandon M. Greenwell
           display:block!important;
       }</style></aside>
 </section>
-<section id="additional-resources" class="slide level2 smaller">
+<section id="additional-resources" class="slide level2 smaller scrollable">
 <h2>Additional Resources</h2>
 <p><strong>Official documentation:</strong> - <a href="https://doc.rust-lang.org/book/ch10-00-generics.html">The Rust Book - Chapter 10: Generic Types, Traits, and Lifetimes</a> - <a href="https://doc.rust-lang.org/rust-by-example/generics.html">Rust by Example: Generics</a> - <a href="https://doc.rust-lang.org/rust-by-example/trait.html">Rust by Example: Traits</a> - <a href="https://doc.rust-lang.org/std/#traits">Rust Standard Library Traits</a></p>
 <p><strong>Articles and guides:</strong> - <a href="https://oswalt.dev/2021/09/rust-traits-a-deep-dive/">Rust Traits: A Deep Dive</a> - <a href="https://blog.rust-lang.org/2022/10/28/gats-stabilization.html">Generic Associated Types</a> - <a href="https://github.com/pretzelhammer/rust-blog/blob/master/posts/tour-of-rusts-standard-library-traits.md">Tour of Rust’s Standard Library Traits</a></p>
 <p><strong>Tools:</strong> - <a href="https://play.rust-lang.org/">Rust Playground</a> - Test code online - <a href="https://docs.rs/">docs.rs</a> - Browse crate documentation</p>
 <aside class="notes">
-<p>Encourage students to explore these resources, especially the Tour of Rust’s Standard Library Traits.</p>
+<p>Point students toward these resources in order of priority:</p>
+<ol type="1">
+<li><p><strong>Rust Book Chapter 10</strong> — the definitive reference; covers everything in this lecture in more depth with additional examples. If students read only one resource this week, this should be it.</p></li>
+<li><p><strong>Tour of Rust’s Standard Library Traits</strong> (the pretzelhammer blog post) — this is a long but excellent deep dive into every important standard library trait. It’s too detailed to read all at once, but it’s an invaluable reference to bookmark and return to. Especially recommend the Iterator section.</p></li>
+<li><p><strong>Rust by Example: Traits</strong> — more code-focused with runnable examples. Great for students who learn by reading and tweaking code rather than reading prose explanations.</p></li>
+<li><p><strong>Rust Playground</strong> — encourage students to paste code snippets from the slides and experiment with them. Try breaking things (remove a trait bound, return the wrong type) to see what error messages look like. The compiler error messages for trait-related issues are among the most educational in any language.</p></li>
+</ol>
+<p><strong>For students coming from Python specifically:</strong> The Rust Book’s Chapter 10 occasionally mentions Java interfaces as a comparison point, which may not resonate as strongly. When reading, students can mentally substitute “Python ABC” or “Python Protocol” wherever it says “Java interface” — the concept maps well.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -960,7 +1376,13 @@ Brandon M. Greenwell
 <p><strong>Why it matters</strong>: Learn to build complete, tested, distributable applications</p>
 <p><strong>Focus</strong>: Final project work begins - no new lab assignments</p>
 <aside class="notes">
-<p>Week 13 covers testing and packaging so students can build complete applications for their final projects.</p>
+<p>Week 13’s topics build naturally on this week. A few connections to foreshadow:</p>
+<ul>
+<li><strong>Unit testing generic types:</strong> Testing <code>Stack&lt;T&gt;</code> with multiple concrete types (e.g., <code>Stack&lt;i32&gt;</code> and <code>Stack&lt;String&gt;</code>) is good practice — mention that they’ll write more such tests in the lab</li>
+<li><strong>Error handling with <code>Result</code>:</strong> Students have seen <code>Result&lt;T, E&gt;</code> as a generic enum — Week 13 goes deeper on using it idiomatically, which involves trait bounds on the error type (<code>E: std::error::Error</code>)</li>
+<li><strong>Packaging:</strong> When packaging a Rust library or binary, the public API uses trait bounds extensively in function signatures; understanding this week’s material is a prerequisite</li>
+</ul>
+<p><strong>No new lab for Week 13</strong> means students should be in good shape to dedicate time to polishing Lab 12 and beginning to think about final project structure. Encourage them to use the extra time to fully implement the Iterator trait for their Stack — it’s the hardest part and most satisfying when it works.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
