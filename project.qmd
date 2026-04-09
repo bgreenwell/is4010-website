@@ -5,30 +5,115 @@ subtitle: "The solo capstone project for IS 4010"
 
 ## Overview
 
-The final assessment allows you to demonstrate your comprehensive understanding of course concepts through a solo capstone project. You will build a professional command-line application in either **Python** or **Rust**.
+The final assessment is your chance to build something **you actually want to build.** You will design and ship a command-line application of your own choosing, in either **Python** or **Rust**, from scratch. There is no provided starter code and no prescribed problem to solve — that creative decision is entirely yours.
 
-## Project requirements
+The goal is simple: demonstrate that you can take an idea, structure it as a real software project, write code that works, test it, document it, and deliver it through a professional workflow. Think of this as your first real portfolio piece.
 
-While the full specification is coming soon, your project will be evaluated on the following core components:
+::: {.callout-tip}
+### Not sure what to build?
 
-*   **Functionality**: Does the application solve a real-world problem or provide useful utility?
-*   **Code Quality**: Is the code idiomatic, well-structured, and easy to read?
-*   **Testing**: Does the project include a comprehensive test suite with high coverage?
-*   **Documentation**: Is there a clear `README.md` and an `AGENTS.md` file documenting your AI tool usage?
-*   **Professionalism**: Does the repository use CI/CD (GitHub Actions) and proper version control?
+Pick something you would actually use. A few sparks to get you thinking:
+
+- A **task manager** or habit tracker that reads/writes a local file
+- A **unit converter**, tip calculator, or other handy math tool
+- A **word count / text analyzer** that reads from a file or stdin
+- A **quiz or flashcard app** driven by a JSON data file
+- A **personal finance tracker** that logs income and expenses
+- A **weather CLI** that fetches data from a free public API
+- A **note-taking tool** that saves and searches plain-text notes
+- A **random generator** (passwords, usernames, dice rolls, story prompts)
+- A **sports or stock stats fetcher** using a public API
+
+Keep scope small. A polished, well-tested tool that does one thing well is far more impressive than a sprawling project that barely works.
+:::
+
+## Minimum requirements
+
+Your project must meet **all** of the following requirements to receive full credit.
+
+### 1. GitHub repository
+
+Your project must live in a **public GitHub repository** that you created for this project (not a fork of a course repo). The repo must show a meaningful commit history — commit early and often throughout development.
+
+### 2. README
+
+Your `README.md` must be thorough and written for someone who has never seen your project. At minimum it must include:
+
+- **What it does** — a clear, one- to two-paragraph description of your tool and the problem it solves
+- **Installation** — step-by-step instructions for installing dependencies and/or building the project
+- **Usage** — how to run the program, with concrete command examples and expected output
+- **Examples** — at least two or three realistic usage examples showing different features or flags
+- **Known limitations or future ideas** (optional but encouraged)
+
+### 3. Tests
+
+Your project must include a **meaningful test suite**:
+
+- **Python**: use `pytest` with at least five tests covering core logic
+- **Rust**: use Rust's built-in `#[test]` framework with at least five tests covering core logic
+
+Tests should cover real behavior — not just that the program runs, but that it produces correct output for known inputs. Edge cases and error handling are fair game.
+
+### 4. CI/CD pipeline
+
+Your repository must include a **GitHub Actions workflow** (`.github/workflows/`) that automatically runs your test suite on every push to `main`. The workflow should:
+
+- Install dependencies (if any)
+- Build the project (Rust only)
+- Run all tests
+- Pass cleanly on your final submission
+
+### 5. AGENTS.md
+
+Include an `AGENTS.md` file in the root of your repository documenting how you used AI tools during development. This is not a formality — write honestly about where AI helped, where it steered you wrong, and what you learned from the collaboration.
+
+---
+
+## Grading rubric
+
+Your project is worth **35 points** (20% of your course grade).
+
+| Component | Points | What we're looking for |
+|:----------|-------:|:-----------------------|
+| Functionality | 10 | The program runs without errors, solves the stated problem, and handles bad input gracefully |
+| Code quality | 8 | Code is readable, well-organized, and idiomatic for the chosen language |
+| Tests | 7 | Test suite is meaningful, covers core logic and edge cases, and all tests pass |
+| README | 5 | Clear, complete, and accurate — a stranger could install and use the tool from the README alone |
+| CI/CD pipeline | 5 | Workflow runs and passes on every push; no manual steps required to verify tests |
+| **Total** | **35** | |
+
+::: {.callout-note}
+### Partial credit
+
+Partial credit is available within each component. A project that is mostly complete but missing one piece (e.g., tests exist but CI is broken) will not lose full points for that category. Show your work and explain anything incomplete in your README.
+:::
+
+---
 
 ## Key dates
 
-*   **Project proposal**: [Coming soon]
-*   **Final submission**: Sunday, May 3, 2026 at 11:59 PM
+- **Project proposal**: Not required — just start building!
+- **Final submission**: Sunday, May 3, 2026 at 11:59 PM
+
+Submit a link to your public GitHub repository via Canvas by the deadline.
+
+---
+
+## Submission checklist
+
+Before submitting, verify the following:
+
+- [ ] Repository is public and accessible
+- [ ] `README.md` covers installation, usage, and examples
+- [ ] All tests pass locally
+- [ ] GitHub Actions workflow passes on the `main` branch
+- [ ] `AGENTS.md` is present and honest
+- [ ] Commit history reflects ongoing work (not one giant commit at the end)
+
+---
 
 ::: {.callout-important}
 ### Academic integrity
-As with all assignments in this course, you are encouraged to use AI as your "co-pilot," but you must be the "pilot." You must be able to explain every line of code in your final submission.
+
+You are encouraged to use AI as your co-pilot on this project — that is a skill this course was designed to build. However, you are the pilot. You must be able to explain every line of code in your final submission. Submitting code you do not understand is academic misconduct and subject to the Two Strikes Policy outlined in the syllabus.
 :::
-
-## Resources & examples
-
-*   [AGENTS.md template](https://github.com/bgreenwell/is4010-course/blob/main/AGENTS.md)
-*   [Example Python project] (Coming soon)
-*   [Example Rust project] (Coming soon)
