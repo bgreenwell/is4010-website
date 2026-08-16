@@ -22,4 +22,4 @@ In programming, how we organize data is just as important as the data itself. Th
 
 ## Lab assignment
 
-- [Lab 04: Data structures](https://github.com/bgreenwell/is4010-python/blob/main/week04/lab04.md)
+- [Lab 04: Data structures](https://github.com/bgreenwell/is4010-labs/blob/main/week04/lab04.md)

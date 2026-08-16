@@ -16,4 +16,4 @@ This week you'll master Rust's revolutionary memory safety system that makes it 
 
 ## Lab assignment
 
-- [Lab 10: Soul of Rust](https://github.com/bgreenwell/is4010-rust/blob/main/week10/lab10.md)
+- [Lab 10: Soul of Rust](https://github.com/bgreenwell/is4010-labs/blob/main/week10/lab10.md)

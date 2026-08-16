@@ -18,4 +18,4 @@ This week you'll build a complete command-line application that synthesizes ever
 
 ## Lab assignment
 
-- [Lab 14: CLI application](https://github.com/bgreenwell/is4010-rust/blob/main/week14/lab14.md)
+- [Lab 14: CLI application](https://github.com/bgreenwell/is4010-labs/blob/main/week14/lab14.md)

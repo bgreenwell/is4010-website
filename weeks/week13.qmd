@@ -17,4 +17,4 @@ This week you'll master advanced Rust patterns that make code elegant, efficient
 
 ## Lab assignment
 
-- [Lab 13: Idiomatic Rust](https://github.com/bgreenwell/is4010-rust/blob/main/week13/lab13.md)
+- [Lab 13: Idiomatic Rust](https://github.com/bgreenwell/is4010-labs/blob/main/week13/lab13.md)

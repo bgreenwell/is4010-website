@@ -53,8 +53,8 @@ Upon successful completion of this course, the learner will be able to:
 * [Visual Studio Code (VS Code)](https://code.visualstudio.com/)
 * [Git](https://git-scm.com/) & a [GitHub account](https://github.com/)
 * [Python 3.10+](https://www.python.org/downloads/)
-* [The Rust programming language toolchain](https://www.rust-lang.org/tools/install)
-* [GitHub Copilot](https://github.com/features/copilot) (available for free via the [GitHub Student Developer Pack](https://education.github.com/pack))
+* [The Rust programming language toolchain](https://www.rust-lang.org/tools/install) (install at the start of Week 09)
+* An AI coding assistant of your choice, such as [GitHub Copilot](https://github.com/features/copilot), [ChatGPT](https://chatgpt.com/), [Gemini](https://gemini.google.com/), or [Claude](https://claude.ai/)
 
 ## **Optional tools** 
 
@@ -63,9 +63,9 @@ Upon successful completion of this course, the learner will be able to:
 ## **Course materials & repository**
 
 * **No required textbook** - All course materials are provided digitally
-* **Course template repository**: [https://github.com/bgreenwell/is4010-course](https://github.com/bgreenwell/is4010-course) - Contains all lab assignments, project specifications, and student resources. Students will clone/fork this repository to access assignments and submit their work.
-* **Lecture slides and additional materials**: Available via [Canvas](https://uc.instructure.com) and linked from the course template repository's README
-* **Submission workflow**: All coding assignments are submitted via individual GitHub repositories following the workflow established in Lab 01
+* **Labs repository**: [https://github.com/bgreenwell/is4010-labs](https://github.com/bgreenwell/is4010-labs) - Contains all 14 lab assignments and their automated checks. Students fork and clone this repository once in Lab 01.
+* **Lecture slides and additional materials**: Available on the [course website](https://bgreenwell.github.io/is4010-website/) and via [Canvas](https://uc.instructure.com)
+* **Submission workflow**: Submit the URL of your single fork in Lab 01. For Labs 02–14, push your work and verify the matching README badge is green; the same fork remains your Canvas submission record for the semester.
 
 # VI. Commitment to all perspectives
 
@@ -173,30 +173,16 @@ Title IX is a federal civil rights law that prohibits discrimination on the basi
 
 Late submissions will be penalized 10% per calendar day unless prior arrangements have been made with the instructor. Since labs are due on Sundays at 11:59 PM, late penalties begin Monday morning. Extensions may be granted for documented emergencies or health issues. All requests for extensions must be made before the due date when possible.
 
-## **Automated grading & feedback system**
+## **Automated grading and feedback**
 
-This course utilizes an advanced automated grading system designed to provide students with immediate, detailed feedback on their lab submissions while ensuring consistent and objective evaluation.
+Each lab has an independent GitHub Actions workflow and matching badge in the repository README. A push automatically runs the checks for the files you changed.
 
-### **How it works**
-- **Automated assessment**: Sophisticated scripts automatically evaluate your [GitHub](https://github.com/) repositories for code quality, functionality, and submission requirements
-- **Immediate feedback**: Receive detailed feedback typically within 24-48 hours of submission through [GitHub](https://github.com/) Issues in your repository
-- **Comprehensive analysis**: Each submission is evaluated for repository setup, code functionality, documentation quality, and adherence to requirements
-- **Transparent scoring**: Detailed point breakdowns show exactly how points were earned or lost for each component
+- A **green badge** means every required check passed and the lab earns 10 points.
+- A **failing badge** links to the workflow run, where you can inspect the failed test or quality check, revise your work, and push again.
+- Tests use deterministic local data and mocks; grading does not require your API keys or access to live external services.
+- You may ask questions during office hours or on Teams whenever a failure message is unclear.
 
-### **Feedback format**
-Students receive personalized [GitHub](https://github.com/) Issues containing:
-- **Point breakdown**: Clear explanation of points earned for each grading component
-- **Specific test results**: For code submissions, see which functions/features pass or fail automated tests
-- **Improvement guidance**: Actionable next steps to address any issues identified
-- **Success recognition**: Celebration of components that work correctly
-
-### **Benefits**
-- **Learning-focused**: Feedback designed to enhance understanding and guide improvement
-- **Consistent evaluation**: Objective, automated assessment ensures fair grading across all students
-- **Industry alignment**: Experience with automated testing and continuous integration practices used in professional development
-- **Instructor availability**: Automated grading of routine tasks allows instructor to focus on higher-level guidance during office hours
-
-**Note**: Students earning perfect scores (10/10 points) typically will not receive feedback issues, as the system optimizes for providing detailed help where improvement is needed. Students can always ask questions about their submissions during office hours or via the Teams channel.
+This workflow provides immediate, consistent feedback while building the same continuous-integration habits used in professional development.
 
 ## **LCB weather related and emergency protocol** 
 
@@ -216,7 +202,7 @@ Your course grades will be based on your performance on the following:
 | Assignment | Points | Weight |
 |------------|--------|--------|
 | Labs (14 labs × 10 pts each) | 140 | 80% |
-| Final exam/project | 35 | 20% |
+| Final project | 35 | 20% |
 | **Total** | **175** | **100%** |
 
 ### Grading scale
@@ -230,11 +216,11 @@ Your course grades will be based on your performance on the following:
 
 #### *Labs (80%)*
 
-Students will complete 14 hands-on lab assignments (10 points each) that progress from basic [Python](https://www.python.org/) programming through advanced [Rust](https://www.rust-lang.org/) development. Labs emphasize practical application of programming concepts with AI assistance. Each assignment includes automated testing where applicable and must be submitted via [GitHub](https://github.com/).
+Students will complete 14 hands-on lab assignments (10 points each). Lab 01 establishes the semester repository, Lab 02 previews Python through AI collaboration, Labs 03–08 develop Python applications, and Labs 09–14 develop Rust applications. Each lab has an independent GitHub Actions badge; a green badge earns the full 10 points.
 
-**Automated grading & feedback system**: Labs are evaluated using sophisticated automated grading scripts that provide immediate, detailed feedback. Students receive personalized feedback through [GitHub](https://github.com/) Issues in their repositories, typically within 24-48 hours of submission. This feedback includes specific point breakdowns, test results, and actionable improvement guidance. Students earning perfect scores may not receive feedback issues, as the system optimizes for providing help where it's most needed.
+**Automated grading and feedback**: Each push runs the matching GitHub Actions workflow. Open a failed run to see which check did not pass, revise your work, and push again. When the matching README badge is green, the lab earns all 10 points.
 
-#### *Final exam/project (20%)*
+#### *Final project (20%)*
 
 The final assessment allows students to demonstrate comprehensive understanding of course concepts through a solo capstone project. Students will build a command-line application in either [Python](https://www.python.org/) or [Rust](https://www.rust-lang.org/), with automated testing, CI/CD integration, and professional documentation. All projects must include documentation of AI tool usage in an AGENTS.md file.
 
@@ -256,7 +242,7 @@ The final assessment allows students to demonstrate comprehensive understanding 
 | 11 | Mar 31, Apr 2 | New frontiers: [Rust](https://www.rust-lang.org/) | Structs, Enums, and Modules | **Lab 11** (Apr 5, 11:59 PM) | |
 | 12 | Apr 7, 9 | New frontiers: [Rust](https://www.rust-lang.org/) | Generics and traits | **Lab 12** (Apr 12, 11:59 PM) | |
 | 13 | Apr 14, 16 | New frontiers: [Rust](https://www.rust-lang.org/) | Idiomatic Rust | **Lab 13** (Apr 19, 11:59 PM) | |
-| 14 | Apr 21, 23 | New frontiers: [Rust](https://www.rust-lang.org/) | Multithreaded applications | **Lab 14** (Apr 26, 11:59 PM) | |
+| 14 | Apr 21, 23 | New frontiers: [Rust](https://www.rust-lang.org/) | Command-line applications | **Lab 14** (Apr 26, 11:59 PM) | |
 | 15 | Apr 28, 30 | Final project | Final project workshop and polish | | *Last classes* |
 | 16 | May 4-9 | Exam week | **Final project due Sunday, May 3 at 11:59 PM** | | *No final exam - project only* |
 
@@ -317,8 +303,8 @@ The final assessment allows students to demonstrate comprehensive understanding 
 • **April 14, 2026 (Tues)**: Iterators & closures - Functional programming patterns in Rust
 • **April 16, 2026 (Thurs)**: Smart pointers - Box, Rc, RefCell, and interior mutability
 
-#### Week 14: Multithreaded applications
-• **April 21, 2026 (Tues)**: Building CLI Apps - Argument parsing with clap, project structure
+#### Week 14: Command-line applications
+• **April 21, 2026 (Tues)**: Building CLI apps - Argument parsing with clap, project structure
 • **April 23, 2026 (Thurs)**: Polishing & publishing - Documentation, release builds, publishing to Crates.io
 
 #### Week 15: Final project

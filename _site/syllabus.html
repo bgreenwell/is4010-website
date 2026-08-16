@@ -101,9 +101,8 @@ ul.task-list li input[type="checkbox"] {
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
       <a href="./index.html" class="sidebar-logo-link">
       </a>
-      <div class="sidebar-tools-main tools-wide">
-    <a href="https://github.com/bgreenwell/is4010-python" title="Python Labs" class="quarto-navigation-tool px-1" aria-label="Python Labs"><i class="bi bi-github"></i></a>
-    <a href="https://github.com/bgreenwell/is4010-rust" title="Rust Labs" class="quarto-navigation-tool px-1" aria-label="Rust Labs"><i class="bi bi-github"></i></a>
+      <div class="sidebar-tools-main">
+    <a href="https://github.com/bgreenwell/is4010-labs" title="Labs" class="quarto-navigation-tool px-1" aria-label="Labs"><i class="bi bi-github"></i></a>
     <a href="https://uc.instructure.com/" title="Canvas" class="quarto-navigation-tool px-1" aria-label="Canvas"><i class="bi bi-journal-text"></i></a>
 </div>
       </div>
@@ -251,7 +250,7 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./weeks/week14.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Week 14: Multithreading</span></a>
+ <span class="menu-text">Week 14: CLI applications</span></a>
   </div>
 </li>
       </ul>
@@ -300,12 +299,7 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#counseling-services-at-lindner" id="toc-counseling-services-at-lindner" class="nav-link" data-scroll-target="#counseling-services-at-lindner"><strong>Counseling services at Lindner</strong></a></li>
   <li><a href="#title-ix" id="toc-title-ix" class="nav-link" data-scroll-target="#title-ix"><strong>Title IX</strong></a></li>
   <li><a href="#missed-andor-late-examinations-quizzes-and-graded-exercises" id="toc-missed-andor-late-examinations-quizzes-and-graded-exercises" class="nav-link" data-scroll-target="#missed-andor-late-examinations-quizzes-and-graded-exercises"><strong>Missed and/or late examinations, quizzes, and graded exercises</strong></a></li>
-  <li><a href="#automated-grading-feedback-system" id="toc-automated-grading-feedback-system" class="nav-link" data-scroll-target="#automated-grading-feedback-system"><strong>Automated grading &amp; feedback system</strong></a>
-  <ul class="collapse">
-  <li><a href="#how-it-works" id="toc-how-it-works" class="nav-link" data-scroll-target="#how-it-works"><strong>How it works</strong></a></li>
-  <li><a href="#feedback-format" id="toc-feedback-format" class="nav-link" data-scroll-target="#feedback-format"><strong>Feedback format</strong></a></li>
-  <li><a href="#benefits" id="toc-benefits" class="nav-link" data-scroll-target="#benefits"><strong>Benefits</strong></a></li>
-  </ul></li>
+  <li><a href="#automated-grading-and-feedback" id="toc-automated-grading-and-feedback" class="nav-link" data-scroll-target="#automated-grading-and-feedback"><strong>Automated grading and feedback</strong></a></li>
   <li><a href="#lcb-weather-related-and-emergency-protocol" id="toc-lcb-weather-related-and-emergency-protocol" class="nav-link" data-scroll-target="#lcb-weather-related-and-emergency-protocol"><strong>LCB weather related and emergency protocol</strong></a>
   <ul class="collapse">
   <li><a href="#point-allocation" id="toc-point-allocation" class="nav-link" data-scroll-target="#point-allocation">Point allocation:</a></li>
@@ -410,8 +404,8 @@ ul.task-list li input[type="checkbox"] {
 <li><a href="https://code.visualstudio.com/">Visual Studio Code (VS Code)</a></li>
 <li><a href="https://git-scm.com/">Git</a> &amp; a <a href="https://github.com/">GitHub account</a></li>
 <li><a href="https://www.python.org/downloads/">Python 3.10+</a></li>
-<li><a href="https://www.rust-lang.org/tools/install">The Rust programming language toolchain</a></li>
-<li><a href="https://github.com/features/copilot">GitHub Copilot</a> (available for free via the <a href="https://education.github.com/pack">GitHub Student Developer Pack</a>)</li>
+<li><a href="https://www.rust-lang.org/tools/install">The Rust programming language toolchain</a> (install at the start of Week 09)</li>
+<li>An AI coding assistant of your choice, such as <a href="https://github.com/features/copilot">GitHub Copilot</a>, <a href="https://chatgpt.com/">ChatGPT</a>, <a href="https://gemini.google.com/">Gemini</a>, or <a href="https://claude.ai/">Claude</a></li>
 </ul>
 </section>
 <section id="optional-tools" class="level2">
@@ -424,9 +418,9 @@ ul.task-list li input[type="checkbox"] {
 <h2 class="anchored" data-anchor-id="course-materials-repository"><strong>Course materials &amp; repository</strong></h2>
 <ul>
 <li><strong>No required textbook</strong> - All course materials are provided digitally</li>
-<li><strong>Course template repository</strong>: <a href="https://github.com/bgreenwell/is4010-course">https://github.com/bgreenwell/is4010-course</a> - Contains all lab assignments, project specifications, and student resources. Students will clone/fork this repository to access assignments and submit their work.</li>
-<li><strong>Lecture slides and additional materials</strong>: Available via <a href="https://uc.instructure.com">Canvas</a> and linked from the course template repository’s README</li>
-<li><strong>Submission workflow</strong>: All coding assignments are submitted via individual GitHub repositories following the workflow established in Lab 01</li>
+<li><strong>Labs repository</strong>: <a href="https://github.com/bgreenwell/is4010-labs">https://github.com/bgreenwell/is4010-labs</a> - Contains all 14 lab assignments and their automated checks. Students fork and clone this repository once in Lab 01.</li>
+<li><strong>Lecture slides and additional materials</strong>: Available on the <a href="https://bgreenwell.github.io/is4010-website/">course website</a> and via <a href="https://uc.instructure.com">Canvas</a></li>
+<li><strong>Submission workflow</strong>: Submit the URL of your single fork in Lab 01. For Labs 02–14, push your work and verify the matching README badge is green; the same fork remains your Canvas submission record for the semester.</li>
 </ul>
 </section>
 </section>
@@ -537,32 +531,16 @@ This course aligns with PACE, the Lindner College of Business platform for devel
 <h2 class="anchored" data-anchor-id="missed-andor-late-examinations-quizzes-and-graded-exercises"><strong>Missed and/or late examinations, quizzes, and graded exercises</strong></h2>
 <p>Late submissions will be penalized 10% per calendar day unless prior arrangements have been made with the instructor. Since labs are due on Sundays at 11:59 PM, late penalties begin Monday morning. Extensions may be granted for documented emergencies or health issues. All requests for extensions must be made before the due date when possible.</p>
 </section>
-<section id="automated-grading-feedback-system" class="level2">
-<h2 class="anchored" data-anchor-id="automated-grading-feedback-system"><strong>Automated grading &amp; feedback system</strong></h2>
-<p>This course utilizes an advanced automated grading system designed to provide students with immediate, detailed feedback on their lab submissions while ensuring consistent and objective evaluation.</p>
-<section id="how-it-works" class="level3">
-<h3 class="anchored" data-anchor-id="how-it-works"><strong>How it works</strong></h3>
+<section id="automated-grading-and-feedback" class="level2">
+<h2 class="anchored" data-anchor-id="automated-grading-and-feedback"><strong>Automated grading and feedback</strong></h2>
+<p>Each lab has an independent GitHub Actions workflow and matching badge in the repository README. A push automatically runs the checks for the files you changed.</p>
 <ul>
-<li><strong>Automated assessment</strong>: Sophisticated scripts automatically evaluate your <a href="https://github.com/">GitHub</a> repositories for code quality, functionality, and submission requirements</li>
-<li><strong>Immediate feedback</strong>: Receive detailed feedback typically within 24-48 hours of submission through <a href="https://github.com/">GitHub</a> Issues in your repository</li>
-<li><strong>Comprehensive analysis</strong>: Each submission is evaluated for repository setup, code functionality, documentation quality, and adherence to requirements</li>
-<li><strong>Transparent scoring</strong>: Detailed point breakdowns show exactly how points were earned or lost for each component</li>
+<li>A <strong>green badge</strong> means every required check passed and the lab earns 10 points.</li>
+<li>A <strong>failing badge</strong> links to the workflow run, where you can inspect the failed test or quality check, revise your work, and push again.</li>
+<li>Tests use deterministic local data and mocks; grading does not require your API keys or access to live external services.</li>
+<li>You may ask questions during office hours or on Teams whenever a failure message is unclear.</li>
 </ul>
-</section>
-<section id="feedback-format" class="level3">
-<h3 class="anchored" data-anchor-id="feedback-format"><strong>Feedback format</strong></h3>
-<p>Students receive personalized <a href="https://github.com/">GitHub</a> Issues containing: - <strong>Point breakdown</strong>: Clear explanation of points earned for each grading component - <strong>Specific test results</strong>: For code submissions, see which functions/features pass or fail automated tests - <strong>Improvement guidance</strong>: Actionable next steps to address any issues identified - <strong>Success recognition</strong>: Celebration of components that work correctly</p>
-</section>
-<section id="benefits" class="level3">
-<h3 class="anchored" data-anchor-id="benefits"><strong>Benefits</strong></h3>
-<ul>
-<li><strong>Learning-focused</strong>: Feedback designed to enhance understanding and guide improvement</li>
-<li><strong>Consistent evaluation</strong>: Objective, automated assessment ensures fair grading across all students</li>
-<li><strong>Industry alignment</strong>: Experience with automated testing and continuous integration practices used in professional development</li>
-<li><strong>Instructor availability</strong>: Automated grading of routine tasks allows instructor to focus on higher-level guidance during office hours</li>
-</ul>
-<p><strong>Note</strong>: Students earning perfect scores (10/10 points) typically will not receive feedback issues, as the system optimizes for providing detailed help where improvement is needed. Students can always ask questions about their submissions during office hours or via the Teams channel.</p>
-</section>
+<p>This workflow provides immediate, consistent feedback while building the same continuous-integration habits used in professional development.</p>
 </section>
 <section id="lcb-weather-related-and-emergency-protocol" class="level2">
 <h2 class="anchored" data-anchor-id="lcb-weather-related-and-emergency-protocol"><strong>LCB weather related and emergency protocol</strong></h2>
@@ -589,7 +567,7 @@ Your course grades will be based on your performance on the following:</p>
 <td>80%</td>
 </tr>
 <tr class="even">
-<td>Final exam/project</td>
+<td>Final project</td>
 <td>35</td>
 <td>20%</td>
 </tr>
@@ -612,11 +590,11 @@ Your course grades will be based on your performance on the following:</p>
 <h3 class="anchored" data-anchor-id="description-of-major-assignments">Description of major assignments</h3>
 <section id="labs-80" class="level4">
 <h4 class="anchored" data-anchor-id="labs-80"><em>Labs (80%)</em></h4>
-<p>Students will complete 14 hands-on lab assignments (10 points each) that progress from basic <a href="https://www.python.org/">Python</a> programming through advanced <a href="https://www.rust-lang.org/">Rust</a> development. Labs emphasize practical application of programming concepts with AI assistance. Each assignment includes automated testing where applicable and must be submitted via <a href="https://github.com/">GitHub</a>.</p>
-<p><strong>Automated grading &amp; feedback system</strong>: Labs are evaluated using sophisticated automated grading scripts that provide immediate, detailed feedback. Students receive personalized feedback through <a href="https://github.com/">GitHub</a> Issues in their repositories, typically within 24-48 hours of submission. This feedback includes specific point breakdowns, test results, and actionable improvement guidance. Students earning perfect scores may not receive feedback issues, as the system optimizes for providing help where it’s most needed.</p>
+<p>Students will complete 14 hands-on lab assignments (10 points each). Lab 01 establishes the semester repository, Lab 02 previews Python through AI collaboration, Labs 03–08 develop Python applications, and Labs 09–14 develop Rust applications. Each lab has an independent GitHub Actions badge; a green badge earns the full 10 points.</p>
+<p><strong>Automated grading and feedback</strong>: Each push runs the matching GitHub Actions workflow. Open a failed run to see which check did not pass, revise your work, and push again. When the matching README badge is green, the lab earns all 10 points.</p>
 </section>
-<section id="final-examproject-20" class="level4">
-<h4 class="anchored" data-anchor-id="final-examproject-20"><em>Final exam/project (20%)</em></h4>
+<section id="final-project-20" class="level4">
+<h4 class="anchored" data-anchor-id="final-project-20"><em>Final project (20%)</em></h4>
 <p>The final assessment allows students to demonstrate comprehensive understanding of course concepts through a solo capstone project. Students will build a command-line application in either <a href="https://www.python.org/">Python</a> or <a href="https://www.rust-lang.org/">Rust</a>, with automated testing, CI/CD integration, and professional documentation. All projects must include documentation of AI tool usage in an AGENTS.md file.</p>
 </section>
 </section>
@@ -752,7 +730,7 @@ Your course grades will be based on your performance on the following:</p>
 <td style="text-align: left;">14</td>
 <td style="text-align: left;">Apr 21, 23</td>
 <td style="text-align: left;">New frontiers: <a href="https://www.rust-lang.org/">Rust</a></td>
-<td style="text-align: left;">Multithreaded applications</td>
+<td style="text-align: left;">Command-line applications</td>
 <td style="text-align: left;"><strong>Lab 14</strong> (Apr 26, 11:59 PM)</td>
 <td style="text-align: left;"></td>
 </tr>
@@ -832,9 +810,9 @@ Your course grades will be based on your performance on the following:</p>
 <h4 class="anchored" data-anchor-id="week-13-idiomatic-rust">Week 13: Idiomatic Rust</h4>
 <p>• <strong>April 14, 2026 (Tues)</strong>: Iterators &amp; closures - Functional programming patterns in Rust • <strong>April 16, 2026 (Thurs)</strong>: Smart pointers - Box, Rc, RefCell, and interior mutability</p>
 </section>
-<section id="week-14-multithreaded-applications" class="level4">
-<h4 class="anchored" data-anchor-id="week-14-multithreaded-applications">Week 14: Multithreaded applications</h4>
-<p>• <strong>April 21, 2026 (Tues)</strong>: Building CLI Apps - Argument parsing with clap, project structure • <strong>April 23, 2026 (Thurs)</strong>: Polishing &amp; publishing - Documentation, release builds, publishing to Crates.io</p>
+<section id="week-14-command-line-applications" class="level4">
+<h4 class="anchored" data-anchor-id="week-14-command-line-applications">Week 14: Command-line applications</h4>
+<p>• <strong>April 21, 2026 (Tues)</strong>: Building CLI apps - Argument parsing with clap, project structure • <strong>April 23, 2026 (Thurs)</strong>: Polishing &amp; publishing - Documentation, release builds, publishing to Crates.io</p>
 </section>
 <section id="week-15-final-project" class="level4">
 <h4 class="anchored" data-anchor-id="week-15-final-project">Week 15: Final project</h4>

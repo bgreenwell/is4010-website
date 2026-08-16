@@ -669,7 +669,7 @@ Do you need multiple owners?
         └─ For: Shared mutable data (single-threaded)
 ```
 
-**Multi-threaded variants** (covered next week):
+**Multi-threaded variants** (for future study):
 
 - `Arc<T>`: Thread-safe `Rc<T>` (Atomic Reference Counting)
 - `Mutex<T>`: Thread-safe `RefCell<T>` (Mutual Exclusion)
@@ -1060,10 +1060,10 @@ The lab walks through each concept step-by-step. Start early - there's a lot to 
 - `Result<T, E>` makes errors part of your API
 - These patterns appear in every Rust codebase
 
-**Next week**: Multithreaded applications with Lab 14!
+**Next week**: Build a complete command-line application with Lab 14!
 
 ::: {.notes}
-Next week builds on this - we'll use Arc<Mutex<T>> for thread-safe shared state.
+Next week synthesizes these patterns in a tested password generator and validator CLI built with `clap`.
 :::
 
 ---

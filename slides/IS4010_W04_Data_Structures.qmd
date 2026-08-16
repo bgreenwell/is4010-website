@@ -1000,7 +1000,7 @@ courses = [
 - 🚀 **Optimization requests**: "Suggest the fastest data structure for..."
 - 🔍 **Code review**: "What improvements can you suggest for..."
 
-**Navigate to**: [`week04/lab04.md`](https://github.com/bgreenwell/is4010-course/blob/main/week04/lab04.md)
+**Navigate to**: [`week04/lab04.md`](https://github.com/bgreenwell/is4010-labs/blob/main/week04/lab04.md)
 
 **Success Strategy:**
 1. 🤖 **Collaborate with AI** for data structure recommendations

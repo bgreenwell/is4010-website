@@ -133,9 +133,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
       <a href="../index.html" class="sidebar-logo-link">
       </a>
-      <div class="sidebar-tools-main tools-wide">
-    <a href="https://github.com/bgreenwell/is4010-python" title="Python Labs" class="quarto-navigation-tool px-1" aria-label="Python Labs"><i class="bi bi-github"></i></a>
-    <a href="https://github.com/bgreenwell/is4010-rust" title="Rust Labs" class="quarto-navigation-tool px-1" aria-label="Rust Labs"><i class="bi bi-github"></i></a>
+      <div class="sidebar-tools-main">
+    <a href="https://github.com/bgreenwell/is4010-labs" title="Labs" class="quarto-navigation-tool px-1" aria-label="Labs"><i class="bi bi-github"></i></a>
     <a href="https://uc.instructure.com/" title="Canvas" class="quarto-navigation-tool px-1" aria-label="Canvas"><i class="bi bi-journal-text"></i></a>
 </div>
       </div>
@@ -283,7 +282,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../weeks/week14.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Week 14: Multithreading</span></a>
+ <span class="menu-text">Week 14: CLI applications</span></a>
   </div>
 </li>
       </ul>
@@ -336,7 +335,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul class="collapse">
   <li><a href="#your-turn-final-exercise" id="toc-your-turn-final-exercise" class="nav-link" data-scroll-target="#your-turn-final-exercise">🎯 Your Turn: Final Exercise</a></li>
   </ul></li>
-  <li><a href="#next-steps-applying-to-your-midterm" id="toc-next-steps-applying-to-your-midterm" class="nav-link" data-scroll-target="#next-steps-applying-to-your-midterm">🚀 Next Steps: Applying to Your Midterm</a>
+  <li><a href="#next-steps-applying-to-your-final-project" id="toc-next-steps-applying-to-your-final-project" class="nav-link" data-scroll-target="#next-steps-applying-to-your-final-project">🚀 Next Steps: Applying to Your Final project</a>
   <ul class="collapse">
   <li><a href="#action-items-for-this-week" id="toc-action-items-for-this-week" class="nav-link" data-scroll-target="#action-items-for-this-week">Action Items for This Week:</a></li>
   <li><a href="#resources" id="toc-resources" class="nav-link" data-scroll-target="#resources">Resources</a></li>
@@ -382,7 +381,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><strong>Structure Python projects</strong> as proper packages with <code>__init__.py</code> and clean imports</li>
 <li><strong>Understand the <code>__name__ == "__main__"</code> pattern</strong> for dual-purpose scripts</li>
 <li><strong>Make your code installable</strong> using modern <code>pyproject.toml</code> configuration</li>
-<li><strong>Apply these patterns</strong> to your midterm project for professional-quality code</li>
+<li><strong>Apply these patterns</strong> to your final project for professional-quality code</li>
 </ol>
 <hr>
 </section>
@@ -734,13 +733,13 @@ python calculator.py 10 5 --operation multiply # Should print 50</code></pre>
 </div>
 <section id="your-turn-exercise-4" class="level3">
 <h3 class="anchored" data-anchor-id="your-turn-exercise-4">🎯 Your Turn: Exercise 4</h3>
-<p>Design a package structure for your midterm project. Include: 1. A main package directory name 2. At least 3 module files (<code>.py</code> files) with their purposes 3. What you would put in <code>__init__.py</code></p>
+<p>Design a package structure for your final project. Include: 1. A main package directory name 2. At least 3 module files (<code>.py</code> files) with their purposes 3. What you would put in <code>__init__.py</code></p>
 <p>Write your design as comments or markdown in the cell below.</p>
 <div id="cell-22" class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Your package structure design here</span></span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Example:</span></span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="co"># my_midterm_project/</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="co"># my_final_project/</span></span>
 <span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="co">#   ├── pokemon_api/              # Main package</span></span>
 <span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="co">#   │   ├── __init__.py           # Package initialization</span></span>
 <span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="co">#   │   ├── client.py             # API client logic</span></span>
@@ -888,7 +887,7 @@ python calculator.py 10 5 --operation multiply # Should print 50</code></pre>
 </div>
 <section id="your-turn-final-exercise" class="level3">
 <h3 class="anchored" data-anchor-id="your-turn-final-exercise">🎯 Your Turn: Final Exercise</h3>
-<p>Design a complete CLI application for your midterm project:</p>
+<p>Design a complete CLI application for your final project:</p>
 <ol type="1">
 <li><strong>Create a class</strong> for your API client (like <code>APIClient</code> above)</li>
 <li><strong>Create a CLI parser</strong> with appropriate arguments for your project</li>
@@ -897,7 +896,7 @@ python calculator.py 10 5 --operation multiply # Should print 50</code></pre>
 </ol>
 <p>Test it with simulated arguments.</p>
 <div id="cell-30" class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Your complete midterm CLI design here</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Your complete final project CLI design here</span></span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TODO</span><span class="co">: Create your API client class</span></span>
 <span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> YourAPIClient:</span>
@@ -918,8 +917,8 @@ python calculator.py 10 5 --operation multiply # Should print 50</code></pre>
 <hr>
 </section>
 </section>
-<section id="next-steps-applying-to-your-midterm" class="level1">
-<h1>🚀 Next Steps: Applying to Your Midterm</h1>
+<section id="next-steps-applying-to-your-final-project" class="level1">
+<h1>🚀 Next Steps: Applying to Your Final project</h1>
 <section id="action-items-for-this-week" class="level2">
 <h2 class="anchored" data-anchor-id="action-items-for-this-week">Action Items for This Week:</h2>
 <ol type="1">

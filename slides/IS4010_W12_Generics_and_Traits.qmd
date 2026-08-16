@@ -1158,28 +1158,27 @@ Point students toward these resources in order of priority:
 
 ---
 
-## Next Week: Testing and Packaging {.inverse}
+## Next week: Idiomatic Rust {.inverse}
 
 **Week 13 topics:**
 
-- Test-driven development (TDD) workflow
-- Unit testing vs integration testing
-- Error handling with Result and Option
-- Packaging Rust applications
-- Building command-line tools
+- Iterators and closures
+- Smart pointers: `Box`, `Rc`, and `RefCell`
+- Idiomatic error handling with `Result`
+- A new Lab 13 assignment
 
-**Why it matters**: Learn to build complete, tested, distributable applications
+**Why it matters**: These patterns make Rust code expressive, safe, and production-ready.
 
-**Focus**: Final project work begins - no new lab assignments
+**Focus**: Transfer this week's trait and generic foundations into idiomatic Rust patterns.
 
 ::: {.notes}
 Week 13's topics build naturally on this week. A few connections to foreshadow:
 
-- **Unit testing generic types:** Testing `Stack<T>` with multiple concrete types (e.g., `Stack<i32>` and `Stack<String>`) is good practice — mention that they'll write more such tests in the lab
-- **Error handling with `Result`:** Students have seen `Result<T, E>` as a generic enum — Week 13 goes deeper on using it idiomatically, which involves trait bounds on the error type (`E: std::error::Error`)
-- **Packaging:** When packaging a Rust library or binary, the public API uses trait bounds extensively in function signatures; understanding this week's material is a prerequisite
+- **Iterators:** The `Iterator` implementation for `Stack<T>` provides the bridge to Week 13's iterator pipelines and closures.
+- **Error handling with `Result`:** Students have seen `Result<T, E>` as a generic enum; Week 13 develops that pattern more idiomatically.
+- **Smart pointers:** Trait bounds and generic types remain central when students work with `Box`, `Rc`, and `RefCell`.
 
-**No new lab for Week 13** means students should be in good shape to dedicate time to polishing Lab 12 and beginning to think about final project structure. Encourage them to use the extra time to fully implement the Iterator trait for their Stack — it's the hardest part and most satisfying when it works.
+Lab 13 continues the weekly cadence. Encourage students to finish Lab 12's Iterator implementation before moving on.
 :::
 
 ---
@@ -1195,15 +1194,15 @@ Week 13's topics build naturally on this week. A few connections to foreshadow:
 
 **This week's materials:**
 
-- [Week 12 Lecture Notes](../../resources/lecture-notes/W12_Generics_and_Traits_notes.md)
-- [Week 12 Interactive Exercises](../../resources/lecture-notes/W12_Generics_and_Traits_exercises.md)
-- [Lab 12: Generic Stack](../../week12/lab12.md)
+- [Week 12 course page](../weeks/week12.qmd)
+- [Rust Book Chapter 10](https://doc.rust-lang.org/book/ch10-00-generics.html)
+- [Lab 12: Generic stack](https://github.com/bgreenwell/is4010-labs/blob/main/week12/lab12.md)
 
 ---
 
 ## Start Lab 12! {.inverse}
 
-**Lab due: Sunday, November 23, 2025, at 11:59 PM**
+**Lab due: Sunday, April 12, 2026, at 11:59 PM**
 
 **What to do:**
 

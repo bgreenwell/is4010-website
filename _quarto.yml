@@ -15,11 +15,8 @@ website:
     collapse-level: 1
     tools:
       - icon: github
-        href: https://github.com/bgreenwell/is4010-python
-        text: "Python Labs"
-      - icon: github
-        href: https://github.com/bgreenwell/is4010-rust
-        text: "Rust Labs"
+        href: https://github.com/bgreenwell/is4010-labs
+        text: "Labs"
       - icon: journal-text
         href: https://uc.instructure.com/
         text: "Canvas"
@@ -66,7 +63,7 @@ website:
             href: weeks/week12.qmd
           - text: "Week 13: Idiomatic Rust"
             href: weeks/week13.qmd
-          - text: "Week 14: Multithreading"
+          - text: "Week 14: CLI applications"
             href: weeks/week14.qmd
 
 format:

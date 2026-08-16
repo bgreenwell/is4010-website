@@ -609,7 +609,7 @@ laptop.price = 1199.99  # Valid price change
 
 ::: {.incremental}
 - **Next week**: Working with data - APIs, JSON, and object serialization
-- **Project applications**: Your midterm projects will benefit from OOP design
+- **Project applications**: Your final projects will benefit from OOP design
 - **Industry preparation**: System design interviews focus on class relationships
 - **Continuous learning**: Explore design patterns, SOLID principles, architectural patterns
 - **AI enhancement**: Use AI tools to refine your OOP designs and implementations

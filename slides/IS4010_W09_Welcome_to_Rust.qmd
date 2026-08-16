@@ -17,17 +17,6 @@ format:
 Open with energy - students are transitioning from Python to a systems language. Emphasize that Rust is challenging but incredibly rewarding. Show brief demo of Rust Playground.
 :::
 
-## Housekeeping: midterm project
-
--   **Reminder**: Your midterm project is due this Sunday at 11:59 PM!
--   Make sure you've tested your code locally and pushed all changes to GitHub
--   The automated grading system will run on Monday morning
--   If you have questions, reach out on Teams before Sunday
-
-::: {.notes}
-Check in with students about midterm progress. Offer to answer quick questions after class.
-:::
-
 ## Welcome to a new frontier
 
 ::: {.incremental}

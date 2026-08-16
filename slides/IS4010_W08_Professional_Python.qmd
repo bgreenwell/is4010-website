@@ -20,13 +20,13 @@ format:
 - **Command-line interfaces (CLIs)**: The backbone of automation, scripting, and developer tools
 - **Package structure**: Organizing code for reusability, testing, and distribution
 - **Career relevance**: Every Python job expects these skills - from data science to web development
-- **Midterm connection**: These patterns will elevate your projects from "works on my machine" to professional quality
+- **Final project connection**: These patterns will elevate your projects from "works on my machine" to professional quality
 :::
 
 ::: {.notes}
 **TEACHING NOTES:**
 
-- **Timing context**: Students are working on midterm projects - this is just-in-time instruction
+- **Timing context**: Students are completing Lab 08's weather application, so this is just-in-time instruction
 - **Professional transition**: Moving from learning Python syntax to building real applications
 - **Industry standards**: These practices are universal across tech companies
 - **Career preparation**: CLI tools and proper package structure appear in every Python interview
@@ -59,7 +59,7 @@ format:
 - **Career examples**: Data scientists use CLI tools for dataset downloads, web developers for deployment
 - **Unix philosophy**: Small, composable tools that do one thing well
 - **Student connection**: They've used `git`, `pip`, `python` - all CLI tools
-- **Midterm application**: Their projects should have CLI interfaces for easy testing and demonstration
+- **Final project application**: Their projects should have CLI interfaces for easy testing and demonstration
 - **Time savings**: Automation is a force multiplier for productivity
 :::
 
@@ -73,7 +73,7 @@ format:
 - **Web frameworks**: [`django-admin`](https://docs.djangoproject.com/en/stable/ref/django-admin/) - `startproject`, `migrate`, `runserver`
 - **AWS CLI**: [`aws`](https://aws.amazon.com/cli/) - Manage cloud infrastructure from the terminal
 - **Data science**: [`jupyter`](https://jupyter.readthedocs.io/en/latest/running.html) - `jupyter notebook`, `jupyter lab`
-- **Your midterm**: Create professional CLIs for your API projects
+- **Your final project**: Create professional CLIs for your API projects
 :::
 
 ::: {.notes}
@@ -304,7 +304,7 @@ if __name__ == "__main__":
 - **Short and long forms**: `-l` and `--limit` both work (convention)
 - **Choices**: Restricts to valid options, auto-validates
 - **Integration**: CLI arguments map cleanly to function parameters
-- **Midterm application**: This pattern works perfectly for their API projects
+- **Final project application**: This pattern works perfectly for their API projects
 - **Real-world**: Show how this mirrors tools like `curl`, `wget`, `httpie`
 :::
 
@@ -371,7 +371,7 @@ if __name__ == "__main__":
 - **Organization**: Each subcommand has its own function and arguments
 - **Function dispatch**: `set_defaults(func=...)` enables clean routing
 - **Professional pattern**: Used in Django, Flask, AWS CLI, and more
-- **Midterm application**: Students could add subcommands for different API operations
+- **Final project application**: Students could add subcommands for different API operations
 - **Help per subcommand**: `python project_manager.py init --help` works
 :::
 
@@ -404,10 +404,10 @@ if __name__ == "__main__":
 
 ---
 
-## 💡 Practical example: API CLI for midterm projects
+## 💡 Practical example: API CLI for final projects
 
 ```python
-"""my_api_tool.py - Professional CLI for your midterm API project."""
+"""my_api_tool.py - Professional CLI for your final project API project."""
 import argparse
 import sys
 from typing import Optional
@@ -450,7 +450,7 @@ if __name__ == "__main__":
 ::: {.notes}
 **TEACHING NOTES:**
 
-- **Midterm application**: This is directly applicable to their projects
+- **Final project application**: This is directly applicable to their projects
 - **Error handling**: Try/except at top level catches all errors
 - **Exit codes**: `sys.exit(main())` returns proper codes
 - **Optional arguments**: `nargs="?"` makes positional arg optional
@@ -516,7 +516,7 @@ if __name__ == "__main__":
 **TEACHING NOTES:**
 
 - **Natural progression**: Students are transitioning from Stage 1 to Stage 2
-- **Midterm timing**: Perfect moment to introduce Stage 3
+- **Final project timing**: Perfect moment to introduce Stage 3
 - **Industry expectation**: All professional Python is packaged
 - **Framework requirement**: Django, Flask, FastAPI all expect package structure
 - **Interview relevance**: System design questions assume understanding of packages
@@ -541,7 +541,7 @@ if __name__ == "__main__":
 ::: {.incremental}
 - **[Django](https://github.com/django/django)**: Models, views, templates organized in packages
 - **[Requests](https://github.com/psf/requests)**: `requests/`, `requests/auth/`, `requests/models/`
-- **Your midterm**: Transform a script into a proper package structure
+- **Your final project**: Transform a script into a proper package structure
 :::
 
 ::: {.notes}
@@ -962,12 +962,12 @@ source .venv/bin/activate
 
 ---
 
-## 💡 Practical example: Midterm project structure
+## 💡 Practical example: Final project structure
 
-### **Recommended structure for your midterm:**
+### **Recommended structure for your final project:**
 
 ```
-my_midterm_project/
+my_final_project/
 │
 ├── src/
 │   └── my_api_tool/
@@ -996,7 +996,7 @@ my_midterm_project/
 ::: {.notes}
 **TEACHING NOTES:**
 
-- **Midterm application**: This is the target structure for their projects
+- **Final project application**: This is the target structure for their projects
 - **Gradual adoption**: Can start simpler and refactor
 - **Testing**: Structure makes testing easier
 - **CI/CD**: GitHub Actions can run tests automatically
@@ -1094,7 +1094,7 @@ my-api-tool pokemon --format json
 **TEACHING NOTES:**
 
 - **Transition preview**: Prepare students for next week's Rust intro
-- **Fresh perspective**: Python midterm experience will highlight Rust's advantages
+- **Fresh perspective**: Python final project experience will highlight Rust's advantages
 - **Comparison learning**: Understanding Python packages makes Cargo appreciation deeper
 - **Motivation**: "You've learned the hard way, now see the automatic way"
 - **Career context**: Understanding both approaches makes better engineers
@@ -1140,7 +1140,7 @@ my-api-tool pokemon --format json
 
 ---
 
-## 🎯 Applying to your midterm project
+## 🎯 Applying to your final project
 
 ### **This week's work session:**
 
@@ -1167,11 +1167,11 @@ my-api-tool pokemon --format json
 **TEACHING NOTES:**
 
 - **Actionable**: Students should leave with clear next steps
-- **Midterm focus**: Everything ties back to their projects
+- **Final project focus**: Everything ties back to their projects
 - **Quality bar**: Set expectations for professional-level work
 - **Support**: Encourage office hours for structure questions
 - **AI assistance**: Perfect use case for AI pair programming
-- **Timeline**: Due next week - emphasize time management
+- **Timeline**: Treat this as an early preview of the final project's quality bar
 - **Grading**: Structure and CLI quality are assessment criteria
 :::
 
@@ -1185,7 +1185,7 @@ my-api-tool pokemon --format json
 - **`__name__ == "__main__"`**: Make code both runnable and importable
 - **Modern tooling**: `pyproject.toml` and `uv` represent the future of Python development
 - **Integration**: CLI + packages = professional, maintainable applications
-- **Midterm application**: Apply these patterns immediately to elevate your projects
+- **Final project application**: Apply these patterns immediately to elevate your projects
 - **Next week**: See how Rust's Cargo handles all this automatically
 :::
 
@@ -1193,7 +1193,7 @@ my-api-tool pokemon --format json
 **TEACHING NOTES:**
 
 - **Concept reinforcement**: Review the most important patterns
-- **Practical focus**: Everything learned today applies to midterm
+- **Practical focus**: Everything learned today applies to final project
 - **Confidence building**: Students have the tools to build professional software
 - **Career preparation**: These are fundamental professional Python skills
 - **Course progression**: Sets up perfect contrast with Rust next week
@@ -1208,7 +1208,7 @@ my-api-tool pokemon --format json
 ### **Today's goals:**
 
 ::: {.incremental}
-- Restructure your midterm project with proper package layout
+- Restructure your final project with proper package layout
 - Implement a CLI interface with argparse
 - Create clean module organization
 - Test your CLI and fix any issues
@@ -1234,7 +1234,7 @@ my-api-tool pokemon --format json
 - **Availability**: Circulate to help with questions
 - **Common issues**: Be ready to debug import errors, argparse confusion
 - **Encouragement**: Refactoring is professional skill - embrace it
-- **Time management**: Midterm due next week - use this time wisely
+- **Time management**: Use this work session to finish Lab 08 and capture ideas for the final project
 - **Collaboration**: Students can help each other with structure questions
 - **Quality focus**: Better structure now = easier maintenance later
 :::

@@ -273,7 +273,7 @@ Emphasize the course AI policy: use AI freely, but understand everything you sub
 :::
 
 ::: notes
-This bridges from the AI discussion to the practical lab work. Students need to understand docstrings before Lab 02 Part 1.
+This bridges from the AI discussion to the practical lab work. Lab 02 is a guided Python preview, so students need only enough context to read a function and describe its intent.
 
 Emphasize the connection: clear human communication (docstrings) leads to better AI assistance. This reinforces that AI tools respond to human intent and clarity.
 :::
@@ -321,16 +321,17 @@ Point out:
 - Returns section with type and description
 - Clear, consistent formatting
 
-This style works particularly well with AI tools because it provides structured, detailed context about function intent.
+This style works particularly well with AI tools because it provides structured, detailed context about function intent. Full Python instruction begins in Week 03.
 :::
 
 ---
 
-## Introducing Lab 02 (Part 1) 🧪
+## Introducing Lab 02: Code preview 🧪
 
-- Your next lab assignment will give you hands-on practice with both AI tool types
-- **Part 1**: "Copilot driving school" - Use **[GitHub Copilot](https://github.com/features/copilot) specifically**
-- **Objective**: You will be given [Python](https://www.python.org/) function stubs with [NumPy](https://numpy.org/)-style docstrings. Let Copilot generate the implementations based on your clear documentation
+- Use any AI coding assistant available to you; GitHub Copilot is not required
+- Ask it to help implement three small Python functions: `make_greeting`, `is_even`, and `count_vowels`
+- Read every suggestion, run the provided tests, and revise the result instead of accepting code blindly
+- This is a preview of Python and testing; formal Python instruction begins in Week 03
 
 ---
 
@@ -729,19 +730,18 @@ Ask: "What questions do you have about integrating AI into your development work
 
 ---
 
-## Introducing Lab 02 (Part 2) 🚀
+## Introducing Lab 02: Prompt journal 🚀
 
-- **Part 2**: "Prompt engineering challenge" - Use **any conversational AI model**
-- **Your choice**: [Gemini](https://gemini.google.com/), [ChatGPT](https://chat.openai.com/), [Claude](https://claude.ai/), or others
-- **Objective**: Debug, refactor, and document buggy [Python](https://www.python.org/) code snippets by crafting high-quality, effective prompts using the CPTF method
-- All instructions will be in `week02/lab02.md`
+- Save the prompts that produced your first draft, explanation, tests, and revision
+- Record one meaningful change you made after checking the AI's output
+- Reflect on what the assistant did well, what required judgment, and what you now understand
+- The automated check validates both the Python behavior and the completed journal
 
 ---
 
 ## Time for Lab 02! 🧪
 
-- Your next hands-on lab: AI-assisted [Python](https://www.python.org/) development
-- **Part 1**: "Copilot driving school" - hands-on practice with inline suggestions
-- **Part 2**: "Prompt engineering challenge" - master conversational AI debugging
-- Please navigate to [`week02/lab02.md`](https://github.com/bgreenwell/is4010-course/blob/main/week02/lab02.md) in the course repository for step-by-step instructions
-
+- Your next hands-on lab: an AI-assisted [Python](https://www.python.org/) preview
+- Complete `week02/lab02.py` and `week02/lab02_prompts.md`
+- Run the provided tests, push your work, and confirm the Lab 02 README badge is green
+- Navigate to [`week02/lab02.md`](https://github.com/bgreenwell/is4010-labs/blob/main/week02/lab02.md) for step-by-step instructions

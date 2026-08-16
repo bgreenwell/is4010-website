@@ -30,7 +30,9 @@ We use VS Code as our primary IDE.
     *   **Windows**: Check "Add python.exe to PATH" during installation.
 *   **Verify**: `python --version` (or `python3 --version`).
 
-### 4. Rust setup
+### 4. Rust setup (Week 09)
+
+You do not need Rust for Labs 01–08. Return to this section at the start of Week 09.
 *   **Install**: Run the following command (macOS/Linux/WSL):
     ```bash
     curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh

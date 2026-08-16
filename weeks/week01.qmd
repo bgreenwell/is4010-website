@@ -15,11 +15,6 @@ Welcome to the first week of IS 4010! This week is all about building your found
 
 - [**Slides: Course introduction & version control**](../slides/IS4010_W01_Introduction.qmd)
 
-## Interactive notebooks
-
-- {{< iconify bi github >}} [Open in GitHub](https://github.com/bgreenwell/is4010-course/blob/main/week01/week01.ipynb)
-- {{< iconify bi google >}} [Open in Colab](https://colab.research.google.com/github/bgreenwell/is4010-course/blob/main/week01/week01.ipynb)
-
 ## Lab assignment
 
-- [Lab 01: Git & GitHub fundamentals](https://github.com/bgreenwell/is4010-python/blob/main/week01/lab01.md)
+- [Lab 01: Fork and clone your semester repository](https://github.com/bgreenwell/is4010-labs/blob/main/week01/lab01.md)

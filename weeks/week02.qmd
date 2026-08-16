@@ -23,4 +23,4 @@ This week, we'll explore the rapidly evolving landscape of AI-assisted software 
 
 ## Lab assignment
 
-- [Lab 02: AI tools for programming](https://github.com/bgreenwell/is4010-python/blob/main/week02/lab02.md)
+- [Lab 02: AI-assisted Python preview](https://github.com/bgreenwell/is4010-labs/blob/main/week02/lab02.md)

@@ -1035,7 +1035,7 @@ git push origin main
 
 Your comprehensive Python fundamentals lab awaits:
 
-- **Navigate to**: [`week03/lab03.md`](https://github.com/bgreenwell/is4010-course/blob/main/week03/lab03.md)
+- **Navigate to**: [`week03/lab03.md`](https://github.com/bgreenwell/is4010-labs/blob/main/week03/lab03.md)
 - **Build**: Mad Libs generator and number guessing game
 - **Setup**: Professional automated testing workflow
 - **Master**: Variables, I/O, control flow, and testing
