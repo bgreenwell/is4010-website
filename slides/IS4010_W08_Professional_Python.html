@@ -227,12 +227,12 @@ Brandon M. Greenwell
 <li class="fragment"><strong>Command-line interfaces (CLIs)</strong>: The backbone of automation, scripting, and developer tools</li>
 <li class="fragment"><strong>Package structure</strong>: Organizing code for reusability, testing, and distribution</li>
 <li class="fragment"><strong>Career relevance</strong>: Every Python job expects these skills - from data science to web development</li>
-<li class="fragment"><strong>Midterm connection</strong>: These patterns will elevate your projects from “works on my machine” to professional quality</li>
+<li class="fragment"><strong>Final project connection</strong>: These patterns will elevate your projects from “works on my machine” to professional quality</li>
 </ul>
 <aside class="notes">
 <p><strong>TEACHING NOTES:</strong></p>
 <ul>
-<li><strong>Timing context</strong>: Students are working on midterm projects - this is just-in-time instruction</li>
+<li><strong>Timing context</strong>: Students are completing Lab 08’s weather application, so this is just-in-time instruction</li>
 <li><strong>Professional transition</strong>: Moving from learning Python syntax to building real applications</li>
 <li><strong>Industry standards</strong>: These practices are universal across tech companies</li>
 <li><strong>Career preparation</strong>: CLI tools and proper package structure appear in every Python interview</li>
@@ -276,7 +276,7 @@ Brandon M. Greenwell
 <li><strong>Career examples</strong>: Data scientists use CLI tools for dataset downloads, web developers for deployment</li>
 <li><strong>Unix philosophy</strong>: Small, composable tools that do one thing well</li>
 <li><strong>Student connection</strong>: They’ve used <code>git</code>, <code>pip</code>, <code>python</code> - all CLI tools</li>
-<li><strong>Midterm application</strong>: Their projects should have CLI interfaces for easy testing and demonstration</li>
+<li><strong>Final project application</strong>: Their projects should have CLI interfaces for easy testing and demonstration</li>
 <li><strong>Time savings</strong>: Automation is a force multiplier for productivity</li>
 </ul>
 <style type="text/css">
@@ -299,7 +299,7 @@ Brandon M. Greenwell
 <li class="fragment"><strong>Web frameworks</strong>: <a href="https://docs.djangoproject.com/en/stable/ref/django-admin/"><code>django-admin</code></a> - <code>startproject</code>, <code>migrate</code>, <code>runserver</code></li>
 <li class="fragment"><strong>AWS CLI</strong>: <a href="https://aws.amazon.com/cli/"><code>aws</code></a> - Manage cloud infrastructure from the terminal</li>
 <li class="fragment"><strong>Data science</strong>: <a href="https://jupyter.readthedocs.io/en/latest/running.html"><code>jupyter</code></a> - <code>jupyter notebook</code>, <code>jupyter lab</code></li>
-<li class="fragment"><strong>Your midterm</strong>: Create professional CLIs for your API projects</li>
+<li class="fragment"><strong>Your final project</strong>: Create professional CLIs for your API projects</li>
 </ul>
 <aside class="notes">
 <p><strong>TEACHING NOTES:</strong></p>
@@ -557,7 +557,7 @@ Brandon M. Greenwell
 <li><strong>Short and long forms</strong>: <code>-l</code> and <code>--limit</code> both work (convention)</li>
 <li><strong>Choices</strong>: Restricts to valid options, auto-validates</li>
 <li><strong>Integration</strong>: CLI arguments map cleanly to function parameters</li>
-<li><strong>Midterm application</strong>: This pattern works perfectly for their API projects</li>
+<li><strong>Final project application</strong>: This pattern works perfectly for their API projects</li>
 <li><strong>Real-world</strong>: Show how this mirrors tools like <code>curl</code>, <code>wget</code>, <code>httpie</code></li>
 </ul>
 <style type="text/css">
@@ -630,7 +630,7 @@ Brandon M. Greenwell
 <li><strong>Organization</strong>: Each subcommand has its own function and arguments</li>
 <li><strong>Function dispatch</strong>: <code>set_defaults(func=...)</code> enables clean routing</li>
 <li><strong>Professional pattern</strong>: Used in Django, Flask, AWS CLI, and more</li>
-<li><strong>Midterm application</strong>: Students could add subcommands for different API operations</li>
+<li><strong>Final project application</strong>: Students could add subcommands for different API operations</li>
 <li><strong>Help per subcommand</strong>: <code>python project_manager.py init --help</code> works</li>
 </ul>
 <style type="text/css">
@@ -680,9 +680,9 @@ Brandon M. Greenwell
           display:block!important;
       }</style></aside>
 </section>
-<section id="practical-example-api-cli-for-midterm-projects" class="slide level2">
-<h2>💡 Practical example: API CLI for midterm projects</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="" aria-label="1"></a><span class="co">"""my_api_tool.py - Professional CLI for your midterm API project."""</span></span>
+<section id="practical-example-api-cli-for-final-projects" class="slide level2">
+<h2>💡 Practical example: API CLI for final projects</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="" aria-label="1"></a><span class="co">"""my_api_tool.py - Professional CLI for your final project API project."""</span></span>
 <span id="cb6-2"><a href="" aria-label="2"></a><span class="im">import</span> argparse</span>
 <span id="cb6-3"><a href="" aria-label="3"></a><span class="im">import</span> sys</span>
 <span id="cb6-4"><a href="" aria-label="4"></a><span class="im">from</span> typing <span class="im">import</span> Optional</span>
@@ -723,7 +723,7 @@ Brandon M. Greenwell
 <aside class="notes">
 <p><strong>TEACHING NOTES:</strong></p>
 <ul>
-<li><strong>Midterm application</strong>: This is directly applicable to their projects</li>
+<li><strong>Final project application</strong>: This is directly applicable to their projects</li>
 <li><strong>Error handling</strong>: Try/except at top level catches all errors</li>
 <li><strong>Exit codes</strong>: <code>sys.exit(main())</code> returns proper codes</li>
 <li><strong>Optional arguments</strong>: <code>nargs="?"</code> makes positional arg optional</li>
@@ -805,7 +805,7 @@ Brandon M. Greenwell
 <p><strong>TEACHING NOTES:</strong></p>
 <ul>
 <li><strong>Natural progression</strong>: Students are transitioning from Stage 1 to Stage 2</li>
-<li><strong>Midterm timing</strong>: Perfect moment to introduce Stage 3</li>
+<li><strong>Final project timing</strong>: Perfect moment to introduce Stage 3</li>
 <li><strong>Industry expectation</strong>: All professional Python is packaged</li>
 <li><strong>Framework requirement</strong>: Django, Flask, FastAPI all expect package structure</li>
 <li><strong>Interview relevance</strong>: System design questions assume understanding of packages</li>
@@ -837,7 +837,7 @@ Brandon M. Greenwell
 <ul>
 <li class="fragment"><strong><a href="https://github.com/django/django">Django</a></strong>: Models, views, templates organized in packages</li>
 <li class="fragment"><strong><a href="https://github.com/psf/requests">Requests</a></strong>: <code>requests/</code>, <code>requests/auth/</code>, <code>requests/models/</code></li>
-<li class="fragment"><strong>Your midterm</strong>: Transform a script into a proper package structure</li>
+<li class="fragment"><strong>Your final project</strong>: Transform a script into a proper package structure</li>
 </ul>
 <aside class="notes">
 <p><strong>TEACHING NOTES:</strong></p>
@@ -1281,10 +1281,10 @@ Brandon M. Greenwell
           display:block!important;
       }</style></aside>
 </section>
-<section id="practical-example-midterm-project-structure" class="slide level2">
-<h2>💡 Practical example: Midterm project structure</h2>
-<h3 id="recommended-structure-for-your-midterm"><strong>Recommended structure for your midterm:</strong></h3>
-<pre><code>my_midterm_project/
+<section id="practical-example-final-project-structure" class="slide level2">
+<h2>💡 Practical example: Final project structure</h2>
+<h3 id="recommended-structure-for-your-final-project"><strong>Recommended structure for your final project:</strong></h3>
+<pre><code>my_final_project/
 │
 ├── src/
 │   └── my_api_tool/
@@ -1311,7 +1311,7 @@ Brandon M. Greenwell
 <aside class="notes">
 <p><strong>TEACHING NOTES:</strong></p>
 <ul>
-<li><strong>Midterm application</strong>: This is the target structure for their projects</li>
+<li><strong>Final project application</strong>: This is the target structure for their projects</li>
 <li><strong>Gradual adoption</strong>: Can start simpler and refactor</li>
 <li><strong>Testing</strong>: Structure makes testing easier</li>
 <li><strong>CI/CD</strong>: GitHub Actions can run tests automatically</li>
@@ -1411,7 +1411,7 @@ Brandon M. Greenwell
 <p><strong>TEACHING NOTES:</strong></p>
 <ul>
 <li><strong>Transition preview</strong>: Prepare students for next week’s Rust intro</li>
-<li><strong>Fresh perspective</strong>: Python midterm experience will highlight Rust’s advantages</li>
+<li><strong>Fresh perspective</strong>: Python final project experience will highlight Rust’s advantages</li>
 <li><strong>Comparison learning</strong>: Understanding Python packages makes Cargo appreciation deeper</li>
 <li><strong>Motivation</strong>: “You’ve learned the hard way, now see the automatic way”</li>
 <li><strong>Career context</strong>: Understanding both approaches makes better engineers</li>
@@ -1471,8 +1471,8 @@ Brandon M. Greenwell
           display:block!important;
       }</style></aside>
 </section>
-<section id="applying-to-your-midterm-project" class="slide level2">
-<h2>🎯 Applying to your midterm project</h2>
+<section id="applying-to-your-final-project" class="slide level2">
+<h2>🎯 Applying to your final project</h2>
 <h3 id="this-weeks-work-session"><strong>This week’s work session:</strong></h3>
 <ul>
 <li class="fragment"><strong>Restructure your code</strong> into a proper package with <code>src/</code> layout</li>
@@ -1494,11 +1494,11 @@ Brandon M. Greenwell
 <p><strong>TEACHING NOTES:</strong></p>
 <ul>
 <li><strong>Actionable</strong>: Students should leave with clear next steps</li>
-<li><strong>Midterm focus</strong>: Everything ties back to their projects</li>
+<li><strong>Final project focus</strong>: Everything ties back to their projects</li>
 <li><strong>Quality bar</strong>: Set expectations for professional-level work</li>
 <li><strong>Support</strong>: Encourage office hours for structure questions</li>
 <li><strong>AI assistance</strong>: Perfect use case for AI pair programming</li>
-<li><strong>Timeline</strong>: Due next week - emphasize time management</li>
+<li><strong>Timeline</strong>: Treat this as an early preview of the final project’s quality bar</li>
 <li><strong>Grading</strong>: Structure and CLI quality are assessment criteria</li>
 </ul>
 <style type="text/css">
@@ -1521,14 +1521,14 @@ Brandon M. Greenwell
 <li class="fragment"><strong><code>__name__ == "__main__"</code></strong>: Make code both runnable and importable</li>
 <li class="fragment"><strong>Modern tooling</strong>: <code>pyproject.toml</code> and <code>uv</code> represent the future of Python development</li>
 <li class="fragment"><strong>Integration</strong>: CLI + packages = professional, maintainable applications</li>
-<li class="fragment"><strong>Midterm application</strong>: Apply these patterns immediately to elevate your projects</li>
+<li class="fragment"><strong>Final project application</strong>: Apply these patterns immediately to elevate your projects</li>
 <li class="fragment"><strong>Next week</strong>: See how Rust’s Cargo handles all this automatically</li>
 </ul>
 <aside class="notes">
 <p><strong>TEACHING NOTES:</strong></p>
 <ul>
 <li><strong>Concept reinforcement</strong>: Review the most important patterns</li>
-<li><strong>Practical focus</strong>: Everything learned today applies to midterm</li>
+<li><strong>Practical focus</strong>: Everything learned today applies to final project</li>
 <li><strong>Confidence building</strong>: Students have the tools to build professional software</li>
 <li><strong>Career preparation</strong>: These are fundamental professional Python skills</li>
 <li><strong>Course progression</strong>: Sets up perfect contrast with Rust next week</li>
@@ -1551,7 +1551,7 @@ Brandon M. Greenwell
 <h2>🚀 Work session: Build your professional Python application</h2>
 <h3 id="todays-goals"><strong>Today’s goals:</strong></h3>
 <ul>
-<li class="fragment">Restructure your midterm project with proper package layout</li>
+<li class="fragment">Restructure your final project with proper package layout</li>
 <li class="fragment">Implement a CLI interface with argparse</li>
 <li class="fragment">Create clean module organization</li>
 <li class="fragment">Test your CLI and fix any issues</li>
@@ -1573,7 +1573,7 @@ Brandon M. Greenwell
 <li><strong>Availability</strong>: Circulate to help with questions</li>
 <li><strong>Common issues</strong>: Be ready to debug import errors, argparse confusion</li>
 <li><strong>Encouragement</strong>: Refactoring is professional skill - embrace it</li>
-<li><strong>Time management</strong>: Midterm due next week - use this time wisely</li>
+<li><strong>Time management</strong>: Use this work session to finish Lab 08 and capture ideas for the final project</li>
 <li><strong>Collaboration</strong>: Students can help each other with structure questions</li>
 <li><strong>Quality focus</strong>: Better structure now = easier maintenance later</li>
 </ul>

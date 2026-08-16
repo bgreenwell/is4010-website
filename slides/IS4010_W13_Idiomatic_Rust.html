@@ -944,7 +944,7 @@ Brandon M. Greenwell
     │
     └─ YES → Use Rc&lt;RefCell&lt;T&gt;&gt;
         └─ For: Shared mutable data (single-threaded)</code></pre>
-<p><strong>Multi-threaded variants</strong> (covered next week):</p>
+<p><strong>Multi-threaded variants</strong> (for future study):</p>
 <ul>
 <li><code>Arc&lt;T&gt;</code>: Thread-safe <code>Rc&lt;T&gt;</code> (Atomic Reference Counting)</li>
 <li><code>Mutex&lt;T&gt;</code>: Thread-safe <code>RefCell&lt;T&gt;</code> (Mutual Exclusion)</li>
@@ -1372,9 +1372,9 @@ Brandon M. Greenwell
 <li><code>Result&lt;T, E&gt;</code> makes errors part of your API</li>
 <li>These patterns appear in every Rust codebase</li>
 </ul>
-<p><strong>Next week</strong>: Multithreaded applications with Lab 14!</p>
+<p><strong>Next week</strong>: Build a complete command-line application with Lab 14!</p>
 <aside class="notes">
-<p>Next week builds on this - we’ll use Arc&lt;Mutex<t>&gt; for thread-safe shared state.</t></p>
+<p>Next week synthesizes these patterns in a tested password generator and validator CLI built with <code>clap</code>.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;

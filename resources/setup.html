@@ -82,7 +82,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-fbc5b4e29cc3cf7a21410927c5af7b66.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-03a0d00fd5ba774dd8e50f606f192499.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -140,9 +140,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="../">IS 4010 - App Dev with AI</a> 
-        <div class="sidebar-tools-main tools-wide">
-    <a href="https://github.com/bgreenwell/is4010-python" title="Python Labs" class="quarto-navigation-tool px-1" aria-label="Python Labs"><i class="bi bi-github"></i></a>
-    <a href="https://github.com/bgreenwell/is4010-rust" title="Rust Labs" class="quarto-navigation-tool px-1" aria-label="Rust Labs"><i class="bi bi-github"></i></a>
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/bgreenwell/is4010-labs" title="Labs" class="quarto-navigation-tool px-1" aria-label="Labs"><i class="bi bi-github"></i></a>
     <a href="https://uc.instructure.com/" title="Canvas" class="quarto-navigation-tool px-1" aria-label="Canvas"><i class="bi bi-journal-text"></i></a>
 </div>
     </div>
@@ -291,7 +290,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../weeks/week14.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Week 14: Multithreading</span></a>
+ <span class="menu-text">Week 14: CLI applications</span></a>
   </div>
 </li>
       </ul>
@@ -309,7 +308,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#visual-studio-code-vs-code" id="toc-visual-studio-code-vs-code" class="nav-link active" data-scroll-target="#visual-studio-code-vs-code">1. Visual Studio Code (VS Code)</a></li>
   <li><a href="#git-github" id="toc-git-github" class="nav-link" data-scroll-target="#git-github">2. Git &amp; GitHub</a></li>
   <li><a href="#python-setup" id="toc-python-setup" class="nav-link" data-scroll-target="#python-setup">3. Python setup</a></li>
-  <li><a href="#rust-setup" id="toc-rust-setup" class="nav-link" data-scroll-target="#rust-setup">4. Rust setup</a></li>
+  <li><a href="#rust-setup-week-09" id="toc-rust-setup-week-09" class="nav-link" data-scroll-target="#rust-setup-week-09">4. Rust setup (Week 09)</a></li>
   <li><a href="#gemini-cli" id="toc-gemini-cli" class="nav-link" data-scroll-target="#gemini-cli">5. Gemini CLI</a></li>
   <li><a href="#github-copilot" id="toc-github-copilot" class="nav-link" data-scroll-target="#github-copilot">6. GitHub Copilot</a></li>
   </ul>
@@ -378,16 +377,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><strong>Verify</strong>: <code>python --version</code> (or <code>python3 --version</code>).</li>
 </ul>
 </section>
-<section id="rust-setup" class="level3">
-<h3 class="anchored" data-anchor-id="rust-setup">4. Rust setup</h3>
-<ul>
-<li><p><strong>Install</strong>: Run the following command (macOS/Linux/WSL):</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="at">--proto</span> <span class="st">'=https'</span> <span class="at">--tlsv1.2</span> <span class="at">-sSf</span> https://sh.rustup.rs <span class="kw">|</span> <span class="fu">sh</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<ul>
-<li><strong>Windows</strong>: Download <code>rustup-init.exe</code> from <a href="https://www.rust-lang.org/tools/install">rust-lang.org</a>.</li>
-</ul></li>
-<li><p><strong>Verify</strong>: <code>cargo --version</code>.</p></li>
-</ul>
+<section id="rust-setup-week-09" class="level3">
+<h3 class="anchored" data-anchor-id="rust-setup-week-09">4. Rust setup (Week 09)</h3>
+<p>You do not need Rust for Labs 01–08. Return to this section at the start of Week 09. * <strong>Install</strong>: Run the following command (macOS/Linux/WSL): <code>bash     curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh</code> * <strong>Windows</strong>: Download <code>rustup-init.exe</code> from <a href="https://www.rust-lang.org/tools/install">rust-lang.org</a>. * <strong>Verify</strong>: <code>cargo --version</code>.</p>
 </section>
 <section id="gemini-cli" class="level3">
 <h3 class="anchored" data-anchor-id="gemini-cli">5. Gemini CLI</h3>

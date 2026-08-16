@@ -1366,26 +1366,25 @@ Brandon M. Greenwell
           display:block!important;
       }</style></aside>
 </section>
-<section id="next-week-testing-and-packaging" class="slide level2 inverse">
-<h2>Next Week: Testing and Packaging</h2>
+<section id="next-week-idiomatic-rust" class="slide level2 inverse">
+<h2>Next week: Idiomatic Rust</h2>
 <p><strong>Week 13 topics:</strong></p>
 <ul>
-<li>Test-driven development (TDD) workflow</li>
-<li>Unit testing vs integration testing</li>
-<li>Error handling with Result and Option</li>
-<li>Packaging Rust applications</li>
-<li>Building command-line tools</li>
+<li>Iterators and closures</li>
+<li>Smart pointers: <code>Box</code>, <code>Rc</code>, and <code>RefCell</code></li>
+<li>Idiomatic error handling with <code>Result</code></li>
+<li>A new Lab 13 assignment</li>
 </ul>
-<p><strong>Why it matters</strong>: Learn to build complete, tested, distributable applications</p>
-<p><strong>Focus</strong>: Final project work begins - no new lab assignments</p>
+<p><strong>Why it matters</strong>: These patterns make Rust code expressive, safe, and production-ready.</p>
+<p><strong>Focus</strong>: Transfer this week’s trait and generic foundations into idiomatic Rust patterns.</p>
 <aside class="notes">
 <p>Week 13’s topics build naturally on this week. A few connections to foreshadow:</p>
 <ul>
-<li><strong>Unit testing generic types:</strong> Testing <code>Stack&lt;T&gt;</code> with multiple concrete types (e.g., <code>Stack&lt;i32&gt;</code> and <code>Stack&lt;String&gt;</code>) is good practice — mention that they’ll write more such tests in the lab</li>
-<li><strong>Error handling with <code>Result</code>:</strong> Students have seen <code>Result&lt;T, E&gt;</code> as a generic enum — Week 13 goes deeper on using it idiomatically, which involves trait bounds on the error type (<code>E: std::error::Error</code>)</li>
-<li><strong>Packaging:</strong> When packaging a Rust library or binary, the public API uses trait bounds extensively in function signatures; understanding this week’s material is a prerequisite</li>
+<li><strong>Iterators:</strong> The <code>Iterator</code> implementation for <code>Stack&lt;T&gt;</code> provides the bridge to Week 13’s iterator pipelines and closures.</li>
+<li><strong>Error handling with <code>Result</code>:</strong> Students have seen <code>Result&lt;T, E&gt;</code> as a generic enum; Week 13 develops that pattern more idiomatically.</li>
+<li><strong>Smart pointers:</strong> Trait bounds and generic types remain central when students work with <code>Box</code>, <code>Rc</code>, and <code>RefCell</code>.</li>
 </ul>
-<p><strong>No new lab for Week 13</strong> means students should be in good shape to dedicate time to polishing Lab 12 and beginning to think about final project structure. Encourage them to use the extra time to fully implement the Iterator trait for their Stack — it’s the hardest part and most satisfying when it works.</p>
+<p>Lab 13 continues the weekly cadence. Encourage students to finish Lab 12’s Iterator implementation before moving on.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1409,14 +1408,14 @@ Brandon M. Greenwell
 </ul>
 <p><strong>This week’s materials:</strong></p>
 <ul>
-<li><a href="../../resources/lecture-notes/W12_Generics_and_Traits_notes.md">Week 12 Lecture Notes</a></li>
-<li><a href="../../resources/lecture-notes/W12_Generics_and_Traits_exercises.md">Week 12 Interactive Exercises</a></li>
-<li><a href="../../week12/lab12.md">Lab 12: Generic Stack</a></li>
+<li><a href="../weeks/week12.qmd">Week 12 course page</a></li>
+<li><a href="https://doc.rust-lang.org/book/ch10-00-generics.html">Rust Book Chapter 10</a></li>
+<li><a href="https://github.com/bgreenwell/is4010-labs/blob/main/week12/lab12.md">Lab 12: Generic stack</a></li>
 </ul>
 </section>
 <section id="start-lab-12" class="slide level2 inverse scrollable">
 <h2>Start Lab 12!</h2>
-<p><strong>Lab due: Sunday, November 23, 2025, at 11:59 PM</strong></p>
+<p><strong>Lab due: Sunday, April 12, 2026, at 11:59 PM</strong></p>
 <p><strong>What to do:</strong></p>
 <ol type="1">
 <li>Review lecture materials and examples</li>
