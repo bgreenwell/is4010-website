@@ -1,54 +1,114 @@
-# IS 4010: Application Development with Artificial Intelligence - Website Repository
+# Agent context for the IS4010 course website
 
-This repository contains the source code for the official course website for **IS 4010: Application Development with Artificial Intelligence**, taught by Brandon M. Greenwell, PhD, at the University of Cincinnati.
+This repository is the public course website for **IS4010: AI-enhanced application development**, taught by Brandon M. Greenwell, PhD, at the University of Cincinnati. Treat this file as the definitive context and operating contract for work in this repository.
 
-## Directory Overview
+## Course model
 
-This is a **Quarto-based website project**. It uses Quarto Markdown (`.qmd`) files to generate a static website and Reveal.js presentation slides.
+IS4010 is a 15-week course built around modern software development with AI assistants as collaborators:
 
-- **`index.qmd`**: The landing page of the course website.
-- **`syllabus.qmd`**: The comprehensive course syllabus, including policies, grading, and schedule.
-- **`project.qmd`**: Details regarding the final solo capstone project.
-- **`weeks/`**: Contains weekly module pages (`week01.qmd` through `week14.qmd`) that outline the curriculum.
-- **`slides/`**: Contains Quarto source files for Reveal.js lecture slides.
-- **`resources/`**: Supplemental guides for students (setup, troubleshooting, packages).
-- **`_quarto.yml`**: The main configuration file for the website's structure, navigation, and theme.
-- **`styles.css`**: Custom CSS for the website.
-- **`.github/workflows/publish.yml`**: GitHub Actions workflow for automated rendering and deployment to GitHub Pages.
+- Week 01: terminal basics, `uv`, Git, GitHub, and repository setup
+- Week 02: browser AI chats, GitHub Copilot in VS Code, GitHub Copilot CLI, and Antigravity CLI
+- Weeks 03–08: Python fundamentals and application development
+- Weeks 09–14: Rust fundamentals and application development
+- Week 15: advanced AI workflows and final-project support
 
-## Key Files
+The course has 14 labs and one final solo project. There is no midterm. Students fork `bgreenwell/is4010-labs` in Lab 01 and use that single repository for the semester. Each lab is worth 10 points; a green badge in the repository README represents full credit.
 
-- **`_quarto.yml`**: Define the sidebar, navbar, and global site metadata here.
-- **`syllabus.qmd`**: The "source of truth" for course dates and policies.
-- **`slides/*.qmd`**: Individual slide decks rendered as Reveal.js presentations.
-- **`AGENTS.md`** (in parent or root): Contains specific instructions for AI agents regarding tone (AI Co-Pilot), casing (Sentence Case), and security.
+Students are expected to install and try both Copilot CLI and Antigravity CLI in Week 02. After comparing them on the same task, they may use whichever combination of browser chat, Copilot in VS Code, Copilot CLI, and Antigravity CLI best fits their work.
 
-## Usage & Development
+## Source-of-truth boundaries
 
-### Local Development
-To preview the website locally as you make changes:
-```bash
-quarto preview
-```
+- **Official syllabus:** Simple Syllabus is authoritative. Until its published URL is available, preserve the explicit placeholder in `syllabus.qmd`; never invent or infer the URL.
+- **Course schedule and public teaching content:** The Quarto sources in this repository control the website.
+- **Lab requirements and grading behavior:** `bgreenwell/is4010-labs` is authoritative.
+- **Instructor implementations:** `bgreenwell/is4010-labs-solutions` is private and must never be exposed here.
+- **Canvas handouts:** Sources and generated DOCX files live in the sibling `../is4010-canvas/` directory.
 
-### Rendering
-To render the entire site to the `_site/` (or `docs/`) directory:
-```bash
-quarto render
-```
+When a change affects both teaching content and a lab contract, update the public and private lab repositories first or alongside this website so instructions, tests, workflows, and examples remain aligned.
 
-To render only the slides to a specific directory (e.g., for Canvas upload):
-```bash
-cd slides
-quarto render . --output-dir html
-```
+## Repository map
 
-### Deployment
-Deployment is automated. Any push to the `main` branch triggers a GitHub Action that renders the site and publishes it to the `gh-pages` branch.
+- `_quarto.yml`: website navigation, metadata, and global format configuration
+- `index.qmd`: course landing page
+- `syllabus.qmd`: Simple Syllabus link placeholder plus a non-authoritative planning reference
+- `project.qmd`: final solo project requirements
+- `weeks/`: weekly module pages and interactive notebooks
+- `slides/`: Reveal.js lecture sources
+- `resources/`: setup, troubleshooting, and Python environment guides
+- `_site/`: rendered website output tracked for the current published state
+- `.github/workflows/publish.yml`: render, link-check, and GitHub Pages deployment workflow
 
-## Development Conventions
+The Week 01 instructor introduction should point to the instructor's GitHub profile README at <https://github.com/bgreenwell> rather than maintaining a separate biography in the deck.
 
-- **Tone**: Maintain an encouraging, professional, and practical "AI Co-Pilot" tone.
-- **Formatting**: Use **Sentence case** for all titles, headings, and subheadings (e.g., "Course overview" instead of "Course Overview").
-- **Consistency**: Ensure code examples and terminology (Python vs. Rust) align with the weekly modules.
-- **Security**: Never commit sensitive instructor materials or API keys to this repository.
+## Current development standards
+
+### Python
+
+- Use Python 3.12 managed by [`uv`](https://docs.astral.sh/uv/).
+- Use `uv sync --locked` to reproduce the course environment.
+- Run scripts with `uv run python path/to/script.py`.
+- Run tests with `uv run python -m pytest` or the lab-specific documented command.
+- Use `uv add PACKAGE` in examples that intentionally add a dependency to a student's own project.
+- Do not teach `pip install`, manual `venv` creation, environment activation, `requirements.txt`, or bare `python`/`pytest` commands as the course workflow.
+
+### Rust
+
+- Rust begins in Week 09; do not require its toolchain during Weeks 01–08.
+- Use Cargo for builds, tests, formatting, and linting.
+- Standard validation is `cargo test`, `cargo fmt --check`, and `cargo clippy -- -D warnings`.
+
+### AI tools
+
+- Browser chat may be ChatGPT, Gemini, Claude, or another suitable interface.
+- GitHub Copilot is the editor assistant used in VS Code.
+- The two course CLI agents are GitHub Copilot CLI (`copilot`) and Antigravity CLI (`agy`).
+- Gemini CLI is not the individual-user course tool; Antigravity CLI replaced it.
+- Link to current official setup documentation instead of copying installer commands that may become stale.
+- Teach students to start agents inside the intended repository, review proposed commands, inspect `git diff`, and keep credentials out of prompts and committed files.
+
+## Content conventions
+
+1. Use sentence case for every title, heading, subheading, table label, and navigation label.
+2. Maintain an encouraging, professional tone that treats AI as a collaborator while making the student responsible for the submitted result.
+3. Prefer plain language and concrete, testable examples.
+4. Keep terminology, commands, dates, lab names, and tool expectations consistent across the website, slides, notebooks, labs, and Canvas handouts.
+5. Prefer authoritative documentation for setup and technical instructions.
+6. Preserve accessible link text, image alt text, readable contrast, and sensible heading hierarchy.
+7. Never include API keys, access tokens, passwords, private instructor material, or solution code.
+
+## Editing workflow
+
+1. Edit source files, not generated HTML, as the primary change.
+2. Update every affected surface. A tooling change may require edits to setup resources, slides, notebooks, weekly pages, syllabus references, and Canvas sources.
+3. Render the complete site from the repository root:
+
+   ```bash
+   quarto render
+   ```
+
+4. Inspect the rendered `_site/` changes and resolve errors or unexpected omissions.
+5. For slide-specific work, confirm the relevant Reveal.js output renders correctly.
+6. Run `git diff --check` and scan changed sources for stale commands, obsolete tool names, placeholders that should have been filled, credentials, and private content.
+7. Commit source and intended tracked rendered output together.
+
+Do not edit generated files under `_site/` as a substitute for changing their source. The publishing workflow renders the website and slides again, runs a link checker, and deploys to GitHub Pages on pushes to `main`.
+
+## Validation checklist
+
+- `quarto render` completes successfully for the full 45-item project.
+- Modified notebooks remain valid JSON.
+- Changed slides render without missing assets.
+- The Simple Syllabus URL remains an explicit placeholder until the instructor supplies it.
+- Python examples use `uv` and Python 3.12 consistently.
+- AI-tool references use Copilot CLI and Antigravity CLI consistently.
+- Lab names, commands, and grading language match `is4010-labs`.
+- `git diff --check` reports no whitespace errors.
+- The GitHub Actions render, link-check, publish, and Pages deployment jobs pass after publishing.
+
+## Related repositories and protected areas
+
+- Public labs: <https://github.com/bgreenwell/is4010-labs>
+- Private solutions: <https://github.com/bgreenwell/is4010-labs-solutions>
+- Published website: <https://bgreenwell.github.io/is4010-website/>
+
+Sibling `is4010-python*` and `is4010-rust*` repositories are legacy migration sources. Do not add current course content to them. The sibling `../archived/` directory is frozen and must not be edited.

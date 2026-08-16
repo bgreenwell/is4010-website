@@ -297,17 +297,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#is-4010-application-development-with-artificial-intelligence---website-repository" id="toc-is-4010-application-development-with-artificial-intelligence---website-repository" class="nav-link active" data-scroll-target="#is-4010-application-development-with-artificial-intelligence---website-repository">IS 4010: Application Development with Artificial Intelligence - Website Repository</a>
+  <li><a href="#agent-context-for-the-is4010-course-website" id="toc-agent-context-for-the-is4010-course-website" class="nav-link active" data-scroll-target="#agent-context-for-the-is4010-course-website">Agent context for the IS4010 course website</a>
   <ul class="collapse">
-  <li><a href="#directory-overview" id="toc-directory-overview" class="nav-link" data-scroll-target="#directory-overview">Directory Overview</a></li>
-  <li><a href="#key-files" id="toc-key-files" class="nav-link" data-scroll-target="#key-files">Key Files</a></li>
-  <li><a href="#usage-development" id="toc-usage-development" class="nav-link" data-scroll-target="#usage-development">Usage &amp; Development</a>
+  <li><a href="#course-model" id="toc-course-model" class="nav-link" data-scroll-target="#course-model">Course model</a></li>
+  <li><a href="#source-of-truth-boundaries" id="toc-source-of-truth-boundaries" class="nav-link" data-scroll-target="#source-of-truth-boundaries">Source-of-truth boundaries</a></li>
+  <li><a href="#repository-map" id="toc-repository-map" class="nav-link" data-scroll-target="#repository-map">Repository map</a></li>
+  <li><a href="#current-development-standards" id="toc-current-development-standards" class="nav-link" data-scroll-target="#current-development-standards">Current development standards</a>
   <ul class="collapse">
-  <li><a href="#local-development" id="toc-local-development" class="nav-link" data-scroll-target="#local-development">Local Development</a></li>
-  <li><a href="#rendering" id="toc-rendering" class="nav-link" data-scroll-target="#rendering">Rendering</a></li>
-  <li><a href="#deployment" id="toc-deployment" class="nav-link" data-scroll-target="#deployment">Deployment</a></li>
+  <li><a href="#python" id="toc-python" class="nav-link" data-scroll-target="#python">Python</a></li>
+  <li><a href="#rust" id="toc-rust" class="nav-link" data-scroll-target="#rust">Rust</a></li>
+  <li><a href="#ai-tools" id="toc-ai-tools" class="nav-link" data-scroll-target="#ai-tools">AI tools</a></li>
   </ul></li>
-  <li><a href="#development-conventions" id="toc-development-conventions" class="nav-link" data-scroll-target="#development-conventions">Development Conventions</a></li>
+  <li><a href="#content-conventions" id="toc-content-conventions" class="nav-link" data-scroll-target="#content-conventions">Content conventions</a></li>
+  <li><a href="#editing-workflow" id="toc-editing-workflow" class="nav-link" data-scroll-target="#editing-workflow">Editing workflow</a></li>
+  <li><a href="#validation-checklist" id="toc-validation-checklist" class="nav-link" data-scroll-target="#validation-checklist">Validation checklist</a></li>
+  <li><a href="#related-repositories-and-protected-areas" id="toc-related-repositories-and-protected-areas" class="nav-link" data-scroll-target="#related-repositories-and-protected-areas">Related repositories and protected areas</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -318,61 +322,129 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 
-<section id="is-4010-application-development-with-artificial-intelligence---website-repository" class="level1">
-<h1>IS 4010: Application Development with Artificial Intelligence - Website Repository</h1>
-<p>This repository contains the source code for the official course website for <strong>IS 4010: Application Development with Artificial Intelligence</strong>, taught by Brandon M. Greenwell, PhD, at the University of Cincinnati.</p>
-<section id="directory-overview" class="level2">
-<h2 class="anchored" data-anchor-id="directory-overview">Directory Overview</h2>
-<p>This is a <strong>Quarto-based website project</strong>. It uses Quarto Markdown (<code>.qmd</code>) files to generate a static website and Reveal.js presentation slides.</p>
+<section id="agent-context-for-the-is4010-course-website" class="level1">
+<h1>Agent context for the IS4010 course website</h1>
+<p>This repository is the public course website for <strong>IS4010: AI-enhanced application development</strong>, taught by Brandon M. Greenwell, PhD, at the University of Cincinnati. Treat this file as the definitive context and operating contract for work in this repository.</p>
+<section id="course-model" class="level2">
+<h2 class="anchored" data-anchor-id="course-model">Course model</h2>
+<p>IS4010 is a 15-week course built around modern software development with AI assistants as collaborators:</p>
 <ul>
-<li><strong><code>index.qmd</code></strong>: The landing page of the course website.</li>
-<li><strong><code>syllabus.qmd</code></strong>: The comprehensive course syllabus, including policies, grading, and schedule.</li>
-<li><strong><code>project.qmd</code></strong>: Details regarding the final solo capstone project.</li>
-<li><strong><code>weeks/</code></strong>: Contains weekly module pages (<code>week01.qmd</code> through <code>week14.qmd</code>) that outline the curriculum.</li>
-<li><strong><code>slides/</code></strong>: Contains Quarto source files for Reveal.js lecture slides.</li>
-<li><strong><code>resources/</code></strong>: Supplemental guides for students (setup, troubleshooting, packages).</li>
-<li><strong><code>_quarto.yml</code></strong>: The main configuration file for the website’s structure, navigation, and theme.</li>
-<li><strong><code>styles.css</code></strong>: Custom CSS for the website.</li>
-<li><strong><code>.github/workflows/publish.yml</code></strong>: GitHub Actions workflow for automated rendering and deployment to GitHub Pages.</li>
+<li>Week 01: terminal basics, <code>uv</code>, Git, GitHub, and repository setup</li>
+<li>Week 02: browser AI chats, GitHub Copilot in VS Code, GitHub Copilot CLI, and Antigravity CLI</li>
+<li>Weeks 03–08: Python fundamentals and application development</li>
+<li>Weeks 09–14: Rust fundamentals and application development</li>
+<li>Week 15: advanced AI workflows and final-project support</li>
+</ul>
+<p>The course has 14 labs and one final solo project. There is no midterm. Students fork <code>bgreenwell/is4010-labs</code> in Lab 01 and use that single repository for the semester. Each lab is worth 10 points; a green badge in the repository README represents full credit.</p>
+<p>Students are expected to install and try both Copilot CLI and Antigravity CLI in Week 02. After comparing them on the same task, they may use whichever combination of browser chat, Copilot in VS Code, Copilot CLI, and Antigravity CLI best fits their work.</p>
+</section>
+<section id="source-of-truth-boundaries" class="level2">
+<h2 class="anchored" data-anchor-id="source-of-truth-boundaries">Source-of-truth boundaries</h2>
+<ul>
+<li><strong>Official syllabus:</strong> Simple Syllabus is authoritative. Until its published URL is available, preserve the explicit placeholder in <code>syllabus.qmd</code>; never invent or infer the URL.</li>
+<li><strong>Course schedule and public teaching content:</strong> The Quarto sources in this repository control the website.</li>
+<li><strong>Lab requirements and grading behavior:</strong> <code>bgreenwell/is4010-labs</code> is authoritative.</li>
+<li><strong>Instructor implementations:</strong> <code>bgreenwell/is4010-labs-solutions</code> is private and must never be exposed here.</li>
+<li><strong>Canvas handouts:</strong> Sources and generated DOCX files live in the sibling <code>../is4010-canvas/</code> directory.</li>
+</ul>
+<p>When a change affects both teaching content and a lab contract, update the public and private lab repositories first or alongside this website so instructions, tests, workflows, and examples remain aligned.</p>
+</section>
+<section id="repository-map" class="level2">
+<h2 class="anchored" data-anchor-id="repository-map">Repository map</h2>
+<ul>
+<li><code>_quarto.yml</code>: website navigation, metadata, and global format configuration</li>
+<li><code>index.qmd</code>: course landing page</li>
+<li><code>syllabus.qmd</code>: Simple Syllabus link placeholder plus a non-authoritative planning reference</li>
+<li><code>project.qmd</code>: final solo project requirements</li>
+<li><code>weeks/</code>: weekly module pages and interactive notebooks</li>
+<li><code>slides/</code>: Reveal.js lecture sources</li>
+<li><code>resources/</code>: setup, troubleshooting, and Python environment guides</li>
+<li><code>_site/</code>: rendered website output tracked for the current published state</li>
+<li><code>.github/workflows/publish.yml</code>: render, link-check, and GitHub Pages deployment workflow</li>
+</ul>
+<p>The Week 01 instructor introduction should point to the instructor’s GitHub profile README at <a href="https://github.com/bgreenwell" class="uri">https://github.com/bgreenwell</a> rather than maintaining a separate biography in the deck.</p>
+</section>
+<section id="current-development-standards" class="level2">
+<h2 class="anchored" data-anchor-id="current-development-standards">Current development standards</h2>
+<section id="python" class="level3">
+<h3 class="anchored" data-anchor-id="python">Python</h3>
+<ul>
+<li>Use Python 3.12 managed by <a href="https://docs.astral.sh/uv/"><code>uv</code></a>.</li>
+<li>Use <code>uv sync --locked</code> to reproduce the course environment.</li>
+<li>Run scripts with <code>uv run python path/to/script.py</code>.</li>
+<li>Run tests with <code>uv run python -m pytest</code> or the lab-specific documented command.</li>
+<li>Use <code>uv add PACKAGE</code> in examples that intentionally add a dependency to a student’s own project.</li>
+<li>Do not teach <code>pip install</code>, manual <code>venv</code> creation, environment activation, <code>requirements.txt</code>, or bare <code>python</code>/<code>pytest</code> commands as the course workflow.</li>
 </ul>
 </section>
-<section id="key-files" class="level2">
-<h2 class="anchored" data-anchor-id="key-files">Key Files</h2>
+<section id="rust" class="level3">
+<h3 class="anchored" data-anchor-id="rust">Rust</h3>
 <ul>
-<li><strong><code>_quarto.yml</code></strong>: Define the sidebar, navbar, and global site metadata here.</li>
-<li><strong><code>syllabus.qmd</code></strong>: The “source of truth” for course dates and policies.</li>
-<li><strong><code>slides/*.qmd</code></strong>: Individual slide decks rendered as Reveal.js presentations.</li>
-<li><strong><code>AGENTS.md</code></strong> (in parent or root): Contains specific instructions for AI agents regarding tone (AI Co-Pilot), casing (Sentence Case), and security.</li>
+<li>Rust begins in Week 09; do not require its toolchain during Weeks 01–08.</li>
+<li>Use Cargo for builds, tests, formatting, and linting.</li>
+<li>Standard validation is <code>cargo test</code>, <code>cargo fmt --check</code>, and <code>cargo clippy -- -D warnings</code>.</li>
 </ul>
 </section>
-<section id="usage-development" class="level2">
-<h2 class="anchored" data-anchor-id="usage-development">Usage &amp; Development</h2>
-<section id="local-development" class="level3">
-<h3 class="anchored" data-anchor-id="local-development">Local Development</h3>
-<p>To preview the website locally as you make changes:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto</span> preview</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</section>
-<section id="rendering" class="level3">
-<h3 class="anchored" data-anchor-id="rendering">Rendering</h3>
-<p>To render the entire site to the <code>_site/</code> (or <code>docs/</code>) directory:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto</span> render</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>To render only the slides to a specific directory (e.g., for Canvas upload):</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> slides</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto</span> render . <span class="at">--output-dir</span> html</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</section>
-<section id="deployment" class="level3">
-<h3 class="anchored" data-anchor-id="deployment">Deployment</h3>
-<p>Deployment is automated. Any push to the <code>main</code> branch triggers a GitHub Action that renders the site and publishes it to the <code>gh-pages</code> branch.</p>
-</section>
-</section>
-<section id="development-conventions" class="level2">
-<h2 class="anchored" data-anchor-id="development-conventions">Development Conventions</h2>
+<section id="ai-tools" class="level3">
+<h3 class="anchored" data-anchor-id="ai-tools">AI tools</h3>
 <ul>
-<li><strong>Tone</strong>: Maintain an encouraging, professional, and practical “AI Co-Pilot” tone.</li>
-<li><strong>Formatting</strong>: Use <strong>Sentence case</strong> for all titles, headings, and subheadings (e.g., “Course overview” instead of “Course Overview”).</li>
-<li><strong>Consistency</strong>: Ensure code examples and terminology (Python vs.&nbsp;Rust) align with the weekly modules.</li>
-<li><strong>Security</strong>: Never commit sensitive instructor materials or API keys to this repository.</li>
+<li>Browser chat may be ChatGPT, Gemini, Claude, or another suitable interface.</li>
+<li>GitHub Copilot is the editor assistant used in VS Code.</li>
+<li>The two course CLI agents are GitHub Copilot CLI (<code>copilot</code>) and Antigravity CLI (<code>agy</code>).</li>
+<li>Gemini CLI is not the individual-user course tool; Antigravity CLI replaced it.</li>
+<li>Link to current official setup documentation instead of copying installer commands that may become stale.</li>
+<li>Teach students to start agents inside the intended repository, review proposed commands, inspect <code>git diff</code>, and keep credentials out of prompts and committed files.</li>
 </ul>
+</section>
+</section>
+<section id="content-conventions" class="level2">
+<h2 class="anchored" data-anchor-id="content-conventions">Content conventions</h2>
+<ol type="1">
+<li>Use sentence case for every title, heading, subheading, table label, and navigation label.</li>
+<li>Maintain an encouraging, professional tone that treats AI as a collaborator while making the student responsible for the submitted result.</li>
+<li>Prefer plain language and concrete, testable examples.</li>
+<li>Keep terminology, commands, dates, lab names, and tool expectations consistent across the website, slides, notebooks, labs, and Canvas handouts.</li>
+<li>Prefer authoritative documentation for setup and technical instructions.</li>
+<li>Preserve accessible link text, image alt text, readable contrast, and sensible heading hierarchy.</li>
+<li>Never include API keys, access tokens, passwords, private instructor material, or solution code.</li>
+</ol>
+</section>
+<section id="editing-workflow" class="level2">
+<h2 class="anchored" data-anchor-id="editing-workflow">Editing workflow</h2>
+<ol type="1">
+<li><p>Edit source files, not generated HTML, as the primary change.</p></li>
+<li><p>Update every affected surface. A tooling change may require edits to setup resources, slides, notebooks, weekly pages, syllabus references, and Canvas sources.</p></li>
+<li><p>Render the complete site from the repository root:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto</span> render</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
+<li><p>Inspect the rendered <code>_site/</code> changes and resolve errors or unexpected omissions.</p></li>
+<li><p>For slide-specific work, confirm the relevant Reveal.js output renders correctly.</p></li>
+<li><p>Run <code>git diff --check</code> and scan changed sources for stale commands, obsolete tool names, placeholders that should have been filled, credentials, and private content.</p></li>
+<li><p>Commit source and intended tracked rendered output together.</p></li>
+</ol>
+<p>Do not edit generated files under <code>_site/</code> as a substitute for changing their source. The publishing workflow renders the website and slides again, runs a link checker, and deploys to GitHub Pages on pushes to <code>main</code>.</p>
+</section>
+<section id="validation-checklist" class="level2">
+<h2 class="anchored" data-anchor-id="validation-checklist">Validation checklist</h2>
+<ul>
+<li><code>quarto render</code> completes successfully for the full 45-item project.</li>
+<li>Modified notebooks remain valid JSON.</li>
+<li>Changed slides render without missing assets.</li>
+<li>The Simple Syllabus URL remains an explicit placeholder until the instructor supplies it.</li>
+<li>Python examples use <code>uv</code> and Python 3.12 consistently.</li>
+<li>AI-tool references use Copilot CLI and Antigravity CLI consistently.</li>
+<li>Lab names, commands, and grading language match <code>is4010-labs</code>.</li>
+<li><code>git diff --check</code> reports no whitespace errors.</li>
+<li>The GitHub Actions render, link-check, publish, and Pages deployment jobs pass after publishing.</li>
+</ul>
+</section>
+<section id="related-repositories-and-protected-areas" class="level2">
+<h2 class="anchored" data-anchor-id="related-repositories-and-protected-areas">Related repositories and protected areas</h2>
+<ul>
+<li>Public labs: <a href="https://github.com/bgreenwell/is4010-labs" class="uri">https://github.com/bgreenwell/is4010-labs</a></li>
+<li>Private solutions: <a href="https://github.com/bgreenwell/is4010-labs-solutions" class="uri">https://github.com/bgreenwell/is4010-labs-solutions</a></li>
+<li>Published website: <a href="https://bgreenwell.github.io/is4010-website/" class="uri">https://bgreenwell.github.io/is4010-website/</a></li>
+</ul>
+<p>Sibling <code>is4010-python*</code> and <code>is4010-rust*</code> repositories are legacy migration sources. Do not add current course content to them. The sibling <code>../archived/</code> directory is frozen and must not be edited.</p>
 
 
 </section>
