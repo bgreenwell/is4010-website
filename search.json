@@ -3462,11 +3462,11 @@
     "text": "Questions?\nRemember: - Modules organize code, structs/enums organize data - Option&lt;T&gt; eliminates null pointer errors - Result&lt;T, E&gt; makes error handling explicit - Collections (Vec, String, HashMap) follow ownership rules - Use AI to explore design patterns and learn idioms\nLab 11 due: Sunday, November 16 at 11:59 PM\nOffice hours: Available on Microsoft Teams - reach out anytime!\n\nEnd on an encouraging note. Today’s content is dense but practical. Every concept (modules, structs, enums, Result, collections) is used daily in production Rust. The lab lets them apply it all. Remind them that understanding ownership makes this week easier."
   },
   {
-    "objectID": "slides/IS4010_W01_Introduction.html#about-me",
-    "href": "slides/IS4010_W01_Introduction.html#about-me",
+    "objectID": "slides/IS4010_W01_Introduction.html#about-the-instructor",
+    "href": "slides/IS4010_W01_Introduction.html#about-the-instructor",
     "title": "IS4010: AI-Enhanced Application Development",
-    "section": "About me",
-    "text": "About me\n\nMy personal “website”"
+    "section": "About the instructor",
+    "text": "About the instructor\nRead my GitHub profile README"
   },
   {
     "objectID": "slides/IS4010_W01_Introduction.html#the-software-world-has-changed",
