@@ -315,12 +315,12 @@ Brandon M. Greenwell
 <ol type="1">
 <li class="fragment"><strong>Command line execution</strong>: Run complete programs from files
 <ul>
-<li class="fragment"><code>python script.py</code> - Execute a Python file</li>
-<li class="fragment"><code>python -c "print('Hello World')"</code> - Run a single command</li>
+<li class="fragment"><code>uv run python script.py</code> - Execute a Python file in the course environment</li>
+<li class="fragment"><code>uv run python -c "print('Hello World')"</code> - Run a single command</li>
 </ul></li>
 <li class="fragment"><strong>Interactive REPL</strong>: Test code snippets and explore
 <ul>
-<li class="fragment"><code>python</code> - Start interactive Python shell</li>
+<li class="fragment"><code>uv run python</code> - Start the managed interactive Python shell</li>
 <li class="fragment">Great for testing, learning, and debugging</li>
 </ul></li>
 <li class="fragment"><strong>Integrated Development Environment (IDE)</strong>: Professional development
@@ -1173,8 +1173,8 @@ Brandon M. Greenwell
 <ul>
 <li class="fragment"><strong>Standard library</strong>: Batteries included - modules like <a href="https://docs.python.org/3/library/random.html"><code>random</code></a>, <a href="https://docs.python.org/3/library/math.html"><code>math</code></a>, <a href="https://docs.python.org/3/library/datetime.html"><code>datetime</code></a></li>
 <li class="fragment"><strong>Third-party packages</strong>: Over 400,000 packages on <a href="https://pypi.org/">PyPI</a></li>
-<li class="fragment"><strong>Package manager</strong>: <a href="https://pip.pypa.io/en/stable/"><code>pip install package_name</code></a> to add functionality</li>
-<li class="fragment"><strong>Virtual environments</strong>: Isolate project dependencies</li>
+<li class="fragment"><strong>Project manager</strong>: <a href="https://docs.astral.sh/uv/"><code>uv</code></a> manages Python, dependencies, environments, and lockfiles</li>
+<li class="fragment"><strong>Virtual environments</strong>: <code>uv sync</code> creates an isolated project environment</li>
 <li class="fragment"><strong>Popular packages</strong>: <code>requests</code> (web), <code>pandas</code> (data), <code>flask</code> (web apps)</li>
 </ul>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="" aria-label="1"></a><span class="co"># Standard library examples</span></span>
@@ -1195,7 +1195,7 @@ Brandon M. Greenwell
 <span id="cb17-16"><a href="" aria-label="16"></a>formatted <span class="op">=</span> today.strftime(<span class="st">"%B </span><span class="sc">%d</span><span class="st">, %Y"</span>)</span>
 <span id="cb17-17"><a href="" aria-label="17"></a></span>
 <span id="cb17-18"><a href="" aria-label="18"></a><span class="co"># Coming later: third-party packages</span></span>
-<span id="cb17-19"><a href="" aria-label="19"></a><span class="co"># pip install requests</span></span>
+<span id="cb17-19"><a href="" aria-label="19"></a><span class="co"># In the terminal for your own project: uv add requests</span></span>
 <span id="cb17-20"><a href="" aria-label="20"></a><span class="co"># import requests</span></span>
 <span id="cb17-21"><a href="" aria-label="21"></a><span class="co"># response = requests.get("https://api.github.com/users/bgreenwell")</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <aside class="notes">
@@ -1203,8 +1203,8 @@ Brandon M. Greenwell
 <ul>
 <li><strong>Batteries included</strong>: Python’s standard library is extensive</li>
 <li><strong>Import statement</strong>: Show different ways to import (import, from…import)</li>
-<li><strong>pip</strong>: Don’t go too deep, just preview package management</li>
-<li><strong>Virtual environments</strong>: Mention concept, cover properly in later weeks</li>
+<li><strong>uv</strong>: Connect this to the environment students prepared in Lab 01</li>
+<li><strong>Virtual environments</strong>: <code>uv run</code> selects the project environment without manual activation</li>
 <li><strong>Real applications</strong>: Show how these modules enable complex applications</li>
 <li><strong>Preview next weeks</strong>: We’ll use requests for API calls, pandas for data analysis</li>
 </ul>
@@ -1314,12 +1314,14 @@ Brandon M. Greenwell
 <span id="cb19-7"><a href="" aria-label="7"></a><span class="at">  </span><span class="fu">build</span><span class="kw">:</span></span>
 <span id="cb19-8"><a href="" aria-label="8"></a><span class="at">    </span><span class="fu">runs-on</span><span class="kw">:</span><span class="at"> ubuntu-latest</span><span class="co">  # Fresh Linux machine</span></span>
 <span id="cb19-9"><a href="" aria-label="9"></a><span class="at">    </span><span class="fu">steps</span><span class="kw">:</span></span>
-<span id="cb19-10"><a href="" aria-label="10"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">uses</span><span class="kw">:</span><span class="at"> actions/checkout@v3</span><span class="co">      # Get your code</span></span>
-<span id="cb19-11"><a href="" aria-label="11"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">uses</span><span class="kw">:</span><span class="at"> actions/setup-python@v4</span><span class="co">  # Install Python</span></span>
-<span id="cb19-12"><a href="" aria-label="12"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Install dependencies</span></span>
-<span id="cb19-13"><a href="" aria-label="13"></a><span class="at">        </span><span class="fu">run</span><span class="kw">:</span><span class="at"> pip install pytest</span><span class="co">        # Install testing tools</span></span>
-<span id="cb19-14"><a href="" aria-label="14"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Test with pytest</span></span>
-<span id="cb19-15"><a href="" aria-label="15"></a><span class="at">        </span><span class="fu">run</span><span class="kw">:</span><span class="at"> pytest</span><span class="co">                   # Run all tests</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb19-10"><a href="" aria-label="10"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">uses</span><span class="kw">:</span><span class="at"> actions/checkout@v6</span><span class="co">      # Get your code</span></span>
+<span id="cb19-11"><a href="" aria-label="11"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">uses</span><span class="kw">:</span><span class="at"> astral-sh/setup-uv@c771a70e6277c0a99b617c7a806ffedaca235ff9</span></span>
+<span id="cb19-12"><a href="" aria-label="12"></a><span class="at">        </span><span class="fu">with</span><span class="kw">:</span></span>
+<span id="cb19-13"><a href="" aria-label="13"></a><span class="at">          </span><span class="fu">enable-cache</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
+<span id="cb19-14"><a href="" aria-label="14"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Install dependencies</span></span>
+<span id="cb19-15"><a href="" aria-label="15"></a><span class="at">        </span><span class="fu">run</span><span class="kw">:</span><span class="at"> uv sync --locked</span></span>
+<span id="cb19-16"><a href="" aria-label="16"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Test with pytest</span></span>
+<span id="cb19-17"><a href="" aria-label="17"></a><span class="at">        </span><span class="fu">run</span><span class="kw">:</span><span class="at"> uv run python -m pytest</span><span class="co">  # Run all tests</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <aside class="notes">
 <p><strong>TEACHING NOTES:</strong></p>
 <ul>

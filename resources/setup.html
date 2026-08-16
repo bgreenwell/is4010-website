@@ -305,12 +305,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#visual-studio-code-vs-code" id="toc-visual-studio-code-vs-code" class="nav-link active" data-scroll-target="#visual-studio-code-vs-code">1. Visual Studio Code (VS Code)</a></li>
-  <li><a href="#git-github" id="toc-git-github" class="nav-link" data-scroll-target="#git-github">2. Git &amp; GitHub</a></li>
-  <li><a href="#python-setup" id="toc-python-setup" class="nav-link" data-scroll-target="#python-setup">3. Python setup</a></li>
-  <li><a href="#rust-setup-week-09" id="toc-rust-setup-week-09" class="nav-link" data-scroll-target="#rust-setup-week-09">4. Rust setup (Week 09)</a></li>
-  <li><a href="#gemini-cli" id="toc-gemini-cli" class="nav-link" data-scroll-target="#gemini-cli">5. Gemini CLI</a></li>
-  <li><a href="#github-copilot" id="toc-github-copilot" class="nav-link" data-scroll-target="#github-copilot">6. GitHub Copilot</a></li>
+  <li><a href="#week-01-editor-terminal-git-and-python" id="toc-week-01-editor-terminal-git-and-python" class="nav-link active" data-scroll-target="#week-01-editor-terminal-git-and-python">Week 01: Editor, terminal, Git, and Python</a>
+  <ul class="collapse">
+  <li><a href="#visual-studio-code" id="toc-visual-studio-code" class="nav-link" data-scroll-target="#visual-studio-code">Visual Studio Code</a></li>
+  <li><a href="#git-and-github" id="toc-git-and-github" class="nav-link" data-scroll-target="#git-and-github">Git and GitHub</a></li>
+  <li><a href="#python-through-uv" id="toc-python-through-uv" class="nav-link" data-scroll-target="#python-through-uv">Python through uv</a></li>
+  </ul></li>
+  <li><a href="#week-02-ai-tools" id="toc-week-02-ai-tools" class="nav-link" data-scroll-target="#week-02-ai-tools">Week 02: AI tools</a>
+  <ul class="collapse">
+  <li><a href="#github-copilot-in-vs-code" id="toc-github-copilot-in-vs-code" class="nav-link" data-scroll-target="#github-copilot-in-vs-code">GitHub Copilot in VS Code</a></li>
+  <li><a href="#github-copilot-cli" id="toc-github-copilot-cli" class="nav-link" data-scroll-target="#github-copilot-cli">GitHub Copilot CLI</a></li>
+  <li><a href="#antigravity-cli" id="toc-antigravity-cli" class="nav-link" data-scroll-target="#antigravity-cli">Antigravity CLI</a></li>
+  </ul></li>
+  <li><a href="#week-09-rust" id="toc-week-09-rust" class="nav-link" data-scroll-target="#week-09-rust">Week 09: Rust</a></li>
   </ul>
 </nav>
     </div>
@@ -320,7 +327,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../resources/setup.html">Resources</a></li><li class="breadcrumb-item"><a href="../resources/setup.html">Setup guide</a></li></ol></nav>
 <div class="quarto-title">
 <h1 class="title">Setup guide</h1>
-<p class="subtitle lead">Step-by-step instructions for setting up your development environment</p>
+<p class="subtitle lead">Install only what you need, when you need it</p>
 </div>
 
 
@@ -337,64 +344,94 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<p>Welcome to IS 4010! This guide provides step-by-step instructions for setting up your computer with all the necessary tools for this course.</p>
-<section id="visual-studio-code-vs-code" class="level3">
-<h3 class="anchored" data-anchor-id="visual-studio-code-vs-code">1. Visual Studio Code (VS Code)</h3>
-<p>We use VS Code as our primary IDE.</p>
+<p>Welcome to IS 4010! We use official setup documentation so these instructions stay useful when tools change. Complete the Week 01 section before Lab 01, the Week 02 section before Lab 02, and the Rust section at the start of Week 09.</p>
+<section id="week-01-editor-terminal-git-and-python" class="level2">
+<h2 class="anchored" data-anchor-id="week-01-editor-terminal-git-and-python">Week 01: Editor, terminal, Git, and Python</h2>
+<section id="visual-studio-code" class="level3">
+<h3 class="anchored" data-anchor-id="visual-studio-code">Visual Studio Code</h3>
 <ul>
-<li><strong>Download</strong>: <a href="https://code.visualstudio.com/download">code.visualstudio.com</a></li>
-<li><strong>Install</strong>: Run the installer for your OS.
-<ul>
-<li><strong>Windows</strong>: Check “Add to PATH”.</li>
-<li><strong>macOS</strong>: Open VS Code, press <code>Cmd+Shift+P</code>, type “Shell Command”, and select <strong>Install ‘code’ command in PATH</strong>.</li>
-</ul></li>
+<li>Follow the official <a href="https://code.visualstudio.com/docs/setup/setup-overview">VS Code setup documentation</a>.</li>
+<li>On Windows, use <strong>Git Bash</strong> as your course shell. On macOS or Linux, use your default shell.</li>
+<li>You may work in a standalone terminal or choose <strong>Terminal &gt; New Terminal</strong> in VS Code.</li>
 </ul>
 </section>
-<section id="git-github" class="level3">
-<h3 class="anchored" data-anchor-id="git-github">2. Git &amp; GitHub</h3>
+<section id="git-and-github" class="level3">
+<h3 class="anchored" data-anchor-id="git-and-github">Git and GitHub</h3>
 <ul>
-<li><strong>Git</strong>: <a href="https://git-scm.com/downloads">Download and install</a>.
-<ul>
-<li><strong>Windows Users</strong>: We strongly recommend installing <strong>Git Bash</strong> (via the Git for Windows installer) and using it as your default terminal profile in <a href="https://apps.microsoft.com/detail/9n0dx20hk701">Windows Terminal</a>.</li>
-</ul></li>
-<li><strong>GitHub</strong>:
+<li>Install Git from the official <a href="https://git-scm.com/downloads">Git downloads page</a>.</li>
+<li>Create a <a href="https://github.com/signup">GitHub account</a>.</li>
+<li>Apply for <a href="https://education.github.com/pack">GitHub Education benefits</a>.</li>
+<li>Configure your name and the email associated with GitHub:</li>
+</ul>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> config <span class="at">--global</span> user.name <span class="st">"Your name"</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> config <span class="at">--global</span> user.email <span class="st">"your.email@example.com"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="python-through-uv" class="level3">
+<h3 class="anchored" data-anchor-id="python-through-uv">Python through uv</h3>
+<p>We use Python 3.12, managed by <code>uv</code>. Do not install Python separately unless <code>uv</code>’s official documentation tells you that your system requires it.</p>
 <ol type="1">
-<li><p>Create an account at <a href="https://github.com">github.com</a>.</p></li>
-<li><p>Sign up for the <a href="https://education.github.com/pack">Student Developer Pack</a> (free Copilot!).</p></li>
-<li><p><strong>Configure Git</strong>:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> config <span class="at">--global</span> user.name <span class="st">"Your Name"</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> config <span class="at">--global</span> user.email <span class="st">"your.email@example.com"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
-</ol></li>
+<li>Follow the official <a href="https://docs.astral.sh/uv/getting-started/installation/"><code>uv</code> installation guide</a>.</li>
+<li>From your cloned labs repository, create the locked course environment:</li>
+</ol>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> sync <span class="at">--locked</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<ol start="3" type="1">
+<li>Verify the tools and the managed Python version:</li>
+</ol>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">code</span> <span class="at">--version</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> <span class="at">--version</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> <span class="at">--version</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> run python <span class="at">--version</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><code>uv sync</code> creates <code>.venv</code> and installs the dependencies in <code>uv.lock</code>. You do not need to activate the environment.</p>
+</section>
+</section>
+<section id="week-02-ai-tools" class="level2">
+<h2 class="anchored" data-anchor-id="week-02-ai-tools">Week 02: AI tools</h2>
+<p>Use any browser chat that helps you learn, including <a href="https://chatgpt.com/">ChatGPT</a>, <a href="https://gemini.google.com/">Gemini</a>, or <a href="https://claude.ai/">Claude</a>. We will also use all three development surfaces below.</p>
+<section id="github-copilot-in-vs-code" class="level3">
+<h3 class="anchored" data-anchor-id="github-copilot-in-vs-code">GitHub Copilot in VS Code</h3>
+<ul>
+<li>Follow the official <a href="https://docs.github.com/en/copilot/how-tos/set-up/install-copilot-extension">Copilot setup guide for VS Code</a>.</li>
+<li>Sign in with your GitHub account.</li>
 </ul>
 </section>
-<section id="python-setup" class="level3">
-<h3 class="anchored" data-anchor-id="python-setup">3. Python setup</h3>
+<section id="github-copilot-cli" class="level3">
+<h3 class="anchored" data-anchor-id="github-copilot-cli">GitHub Copilot CLI</h3>
 <ul>
-<li><strong>Install</strong>: Python 3.10+ from <a href="https://www.python.org/downloads/">python.org</a>.
-<ul>
-<li><strong>Windows</strong>: Check “Add python.exe to PATH” during installation.</li>
-</ul></li>
-<li><strong>Verify</strong>: <code>python --version</code> (or <code>python3 --version</code>).</li>
+<li>Follow the official <a href="https://docs.github.com/en/copilot/how-tos/copilot-cli/set-up-copilot-cli/install-copilot-cli">Copilot CLI installation guide</a>.</li>
+<li>Complete its supported authentication flow.</li>
 </ul>
 </section>
-<section id="rust-setup-week-09" class="level3">
-<h3 class="anchored" data-anchor-id="rust-setup-week-09">4. Rust setup (Week 09)</h3>
-<p>You do not need Rust for Labs 01–08. Return to this section at the start of Week 09. * <strong>Install</strong>: Run the following command (macOS/Linux/WSL): <code>bash     curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh</code> * <strong>Windows</strong>: Download <code>rustup-init.exe</code> from <a href="https://www.rust-lang.org/tools/install">rust-lang.org</a>. * <strong>Verify</strong>: <code>cargo --version</code>.</p>
-</section>
-<section id="gemini-cli" class="level3">
-<h3 class="anchored" data-anchor-id="gemini-cli">5. Gemini CLI</h3>
+<section id="antigravity-cli" class="level3">
+<h3 class="anchored" data-anchor-id="antigravity-cli">Antigravity CLI</h3>
 <ul>
-<li><strong>Prerequisite</strong>: Node.js v20+.</li>
-<li><strong>Install</strong>: <code>npm install -g @google/gemini-cli</code>.</li>
-<li><strong>Authenticate</strong>: Run <code>gemini</code> and log in with your Google account.</li>
+<li>Follow the official <a href="https://antigravity.google/docs/cli/overview/">Antigravity CLI overview and setup guide</a>.</li>
+<li>Complete its supported authentication flow.</li>
 </ul>
+<p>Install and try both CLI tools for Lab 02. After comparing them, you may use whichever combination of browser chat, VS Code Copilot, Copilot CLI, and Antigravity CLI fits the task.</p>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Run a coding agent from inside the repository you want it to inspect. Read proposed commands before approving them, use <code>git diff</code> to review edits, and never place credentials in prompts or committed files.</p>
+</div>
+</div>
 </section>
-<section id="github-copilot" class="level3">
-<h3 class="anchored" data-anchor-id="github-copilot">6. GitHub Copilot</h3>
+</section>
+<section id="week-09-rust" class="level2">
+<h2 class="anchored" data-anchor-id="week-09-rust">Week 09: Rust</h2>
+<p>You do not need Rust for Labs 01–08. At the start of Week 09:</p>
 <ul>
-<li>Install the <strong>GitHub Copilot</strong> extension in VS Code.</li>
-<li>Sign in with your GitHub account (ensure you have the Student Developer Pack activated).</li>
+<li>Follow the official <a href="https://www.rust-lang.org/tools/install">Rust installation guide</a>.</li>
+<li>Restart the terminal if needed, then verify:</li>
 </ul>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">cargo</span> <span class="at">--version</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="ex">rustc</span> <span class="at">--version</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 
 
 </section>

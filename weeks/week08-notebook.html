@@ -444,14 +444,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a><span class="co"># Test it out (simulating command-line arguments)</span></span>
 <span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>parser <span class="op">=</span> create_greeter_parser()</span>
 <span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a><span class="co"># Simulate: python greeter.py Alice</span></span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a><span class="co"># Simulate: uv run python greeter.py Alice</span></span>
 <span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>args <span class="op">=</span> parser.parse_args([<span class="st">"Alice"</span>])</span>
 <span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a>greeting <span class="op">=</span> <span class="ss">f"Hello, </span><span class="sc">{</span>args<span class="sc">.</span>name<span class="sc">}</span><span class="ss">!"</span></span>
 <span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> args.loud:</span>
 <span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a>    greeting <span class="op">=</span> greeting.upper()</span>
 <span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(greeting)</span>
 <span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a><span class="co"># Simulate: python greeter.py Bob --loud</span></span>
+<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a><span class="co"># Simulate: uv run python greeter.py Bob --loud</span></span>
 <span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a>args <span class="op">=</span> parser.parse_args([<span class="st">"Bob"</span>, <span class="st">"--loud"</span>])</span>
 <span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a>greeting <span class="op">=</span> <span class="ss">f"Hello, </span><span class="sc">{</span>args<span class="sc">.</span>name<span class="sc">}</span><span class="ss">!"</span></span>
 <span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> args.loud:</span>
@@ -462,8 +462,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h3 class="anchored" data-anchor-id="your-turn-exercise-1">🎯 Your Turn: Exercise 1</h3>
 <p>Create a CLI calculator that: 1. Takes two numbers as positional arguments 2. Has a <code>--operation</code> flag with choices: add, subtract, multiply, divide 3. Prints the result</p>
 <p>Example usage:</p>
-<pre><code>python calculator.py 10 5 --operation add     # Should print 15
-python calculator.py 10 5 --operation multiply # Should print 50</code></pre>
+<pre><code>uv run python calculator.py 10 5 --operation add     # Should print 15
+uv run python calculator.py 10 5 --operation multiply # Should print 50</code></pre>
 <div id="cell-6" class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Your code here</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> create_calculator_parser():</span>
@@ -525,7 +525,7 @@ python calculator.py 10 5 --operation multiply # Should print 50</code></pre>
 <span id="cb5-37"><a href="#cb5-37" aria-hidden="true" tabindex="-1"></a><span class="co"># Test the parser</span></span>
 <span id="cb5-38"><a href="#cb5-38" aria-hidden="true" tabindex="-1"></a>parser <span class="op">=</span> create_api_fetcher_parser()</span>
 <span id="cb5-39"><a href="#cb5-39" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-40"><a href="#cb5-40" aria-hidden="true" tabindex="-1"></a><span class="co"># Simulate: python api_fetcher.py pokemon pikachu -l 5 --format json</span></span>
+<span id="cb5-40"><a href="#cb5-40" aria-hidden="true" tabindex="-1"></a><span class="co"># Simulate: uv run python api_fetcher.py pokemon pikachu -l 5 --format json</span></span>
 <span id="cb5-41"><a href="#cb5-41" aria-hidden="true" tabindex="-1"></a>args <span class="op">=</span> parser.parse_args([<span class="st">"pokemon"</span>, <span class="st">"pikachu"</span>, <span class="st">"-l"</span>, <span class="st">"5"</span>, <span class="st">"--format"</span>, <span class="st">"json"</span>])</span>
 <span id="cb5-42"><a href="#cb5-42" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Fetching </span><span class="sc">{</span>args<span class="sc">.</span>limit<span class="sc">}</span><span class="ss"> </span><span class="sc">{</span>args<span class="sc">.</span>resource<span class="sc">}</span><span class="ss"> from </span><span class="sc">{</span>args<span class="sc">.</span>api<span class="sc">}</span><span class="ss"> API"</span>)</span>
 <span id="cb5-43"><a href="#cb5-43" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Format: </span><span class="sc">{</span>args<span class="sc">.</span><span class="bu">format</span><span class="sc">}</span><span class="ss">"</span>)</span>
@@ -596,14 +596,14 @@ python calculator.py 10 5 --operation multiply # Should print 50</code></pre>
 <span id="cb7-41"><a href="#cb7-41" aria-hidden="true" tabindex="-1"></a><span class="co"># Test subcommands</span></span>
 <span id="cb7-42"><a href="#cb7-42" aria-hidden="true" tabindex="-1"></a>parser <span class="op">=</span> create_project_manager_parser()</span>
 <span id="cb7-43"><a href="#cb7-43" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-44"><a href="#cb7-44" aria-hidden="true" tabindex="-1"></a><span class="co"># Simulate: python project_manager.py init my_app --template django</span></span>
+<span id="cb7-44"><a href="#cb7-44" aria-hidden="true" tabindex="-1"></a><span class="co"># Simulate: uv run python project_manager.py init my_app --template django</span></span>
 <span id="cb7-45"><a href="#cb7-45" aria-hidden="true" tabindex="-1"></a>args <span class="op">=</span> parser.parse_args([<span class="st">"init"</span>, <span class="st">"my_app"</span>, <span class="st">"--template"</span>, <span class="st">"django"</span>])</span>
 <span id="cb7-46"><a href="#cb7-46" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="bu">hasattr</span>(args, <span class="st">"func"</span>):</span>
 <span id="cb7-47"><a href="#cb7-47" aria-hidden="true" tabindex="-1"></a>    args.func(args)</span>
 <span id="cb7-48"><a href="#cb7-48" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-49"><a href="#cb7-49" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">---</span><span class="ch">\n</span><span class="st">"</span>)</span>
 <span id="cb7-50"><a href="#cb7-50" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-51"><a href="#cb7-51" aria-hidden="true" tabindex="-1"></a><span class="co"># Simulate: python project_manager.py deploy prod</span></span>
+<span id="cb7-51"><a href="#cb7-51" aria-hidden="true" tabindex="-1"></a><span class="co"># Simulate: uv run python project_manager.py deploy prod</span></span>
 <span id="cb7-52"><a href="#cb7-52" aria-hidden="true" tabindex="-1"></a>args <span class="op">=</span> parser.parse_args([<span class="st">"deploy"</span>, <span class="st">"prod"</span>])</span>
 <span id="cb7-53"><a href="#cb7-53" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="bu">hasattr</span>(args, <span class="st">"func"</span>):</span>
 <span id="cb7-54"><a href="#cb7-54" aria-hidden="true" tabindex="-1"></a>    args.func(args)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -664,7 +664,7 @@ python calculator.py 10 5 --operation multiply # Should print 50</code></pre>
 </div>
 <section id="why-this-matters" class="level3">
 <h3 class="anchored" data-anchor-id="why-this-matters">Why This Matters</h3>
-<p>The <code>__name__ == "__main__"</code> pattern allows your code to be: 1. <strong>Runnable as a script</strong>: <code>python my_module.py</code> 2. <strong>Importable as a library</strong>: <code>from my_module import greet</code></p>
+<p>The <code>__name__ == "__main__"</code> pattern allows your code to be: 1. <strong>Runnable as a script</strong>: <code>uv run python my_module.py</code> 2. <strong>Importable as a library</strong>: <code>from my_module import greet</code></p>
 <p>This is essential for: - Testing individual modules - Creating reusable code - Professional project structure</p>
 <hr>
 </section>
@@ -823,7 +823,7 @@ python calculator.py 10 5 --operation multiply # Should print 50</code></pre>
 <span id="cb14-29"><a href="#cb14-29" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Example pyproject.toml configuration:"</span>)</span>
 <span id="cb14-30"><a href="#cb14-30" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(pyproject_toml_example)</span>
 <span id="cb14-31"><a href="#cb14-31" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-32"><a href="#cb14-32" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">✅ After 'pip install -e .', you can:"</span>)</span>
+<span id="cb14-32"><a href="#cb14-32" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">✅ After 'uv sync', you can:"</span>)</span>
 <span id="cb14-33"><a href="#cb14-33" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"   - Import your package from anywhere"</span>)</span>
 <span id="cb14-34"><a href="#cb14-34" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"   - Run your CLI with the command name (my-api)"</span>)</span>
 <span id="cb14-35"><a href="#cb14-35" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"   - Share your package with others"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -950,7 +950,7 @@ python calculator.py 10 5 --operation multiply # Should print 50</code></pre>
 </ul></li>
 <li><strong>Test installation</strong>
 <ul>
-<li>Run <code>pip install -e .</code> in your project directory</li>
+<li>Run <code>uv sync</code> in your project directory</li>
 <li>Test your CLI command</li>
 <li>Verify imports work from other directories</li>
 </ul></li>

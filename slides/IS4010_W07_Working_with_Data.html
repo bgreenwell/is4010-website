@@ -531,7 +531,7 @@ protocol</code></pre>
 <section id="installing-the-requests-library" class="slide level2">
 <h2>Installing the <code>requests</code> library</h2>
 <h3 id="pythons-most-popular-http-library"><strong>Python’s most popular HTTP library</strong></h3>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="" aria-label="1"></a><span class="ex">pip</span> install requests</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="" aria-label="1"></a><span class="ex">uv</span> add requests</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <ul>
 <li class="fragment"><strong>Not built-in</strong>: Unlike <code>json</code>, we need to install <a href="https://requests.readthedocs.io/en/latest/">requests</a></li>
 <li class="fragment"><strong>Why requests?</strong>: Clean, simple API - much easier than Python’s built-in <code>urllib</code></li>
@@ -539,7 +539,7 @@ protocol</code></pre>
 <li class="fragment"><strong>Alternative</strong>: Python 3.11+ has <code>urllib3</code>, but <code>requests</code> is still preferred for simplicity</li>
 </ul>
 <aside class="notes">
-<p><strong>Installation tips:</strong> - Make sure students activate virtual environment first - Show how to verify installation: <code>python -c "import requests; print(requests.__version__)"</code></p>
+<p><strong>Installation tips:</strong> - The course repository already includes <code>requests</code>; <code>uv sync --locked</code> installs it. - <code>uv add requests</code> is the command students would use in their own project. - Show how to verify installation: <code>uv run python -c "import requests; print(requests.__version__)"</code></p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
