@@ -22,7 +22,7 @@ My [personal "website"](https://github.com/bgreenwell)
 ## The software world has changed 🌍
 
 ::: {.incremental}
-- AI code assistants (like [GitHub Copilot](https://github.com/features/copilot), [Claude Code](https://claude.ai/code), and [Gemini CLI](https://ai.google.dev/gemini-api/docs/get-started/tutorial?lang=rest#start-command-line)) are no longer a novelty; they're rapidly becoming a standard part of the professional developer's toolkit.
+- AI code assistants in the browser, editor, and terminal are no longer a novelty; they're rapidly becoming a standard part of the professional developer's toolkit.
 - Knowing how to use these tools effectively is becoming a required skill for new graduates.
 - Our goal is to make you proficient not just in a language, but in this new AI-augmented workflow.
 :::
@@ -80,7 +80,7 @@ My [personal "website"](https://github.com/bgreenwell)
 ::: {.incremental}
 - **Course Canvas:** [uc.instructure.com](https://uc.instructure.com/courses/1812798) (grades, slides, labs, due dates, etc.)
 - **Labs repository:** [GitHub](https://github.com/bgreenwell/is4010-labs) (all 14 labs and status badges)
-- **Course syllabus:** [Online syllabus](https://bgreenwell.github.io/is4010-website/syllabus.html) (always up-to-date)
+- **Official syllabus:** Simple Syllabus link to be added when published
 - **Communication:** [Microsoft Teams](https://teams.microsoft.com/l/team/19%3ASjdonOkpgQOXFJf6qmHIWfJIwzgKl-xvmnkNVUkg8k81%40thread.tacv2/conversations?groupId=5c3ca09e-ec41-473c-8395-ab28de92a041&tenantId=f5222e6c-5fc6-48eb-8f03-73db18203b63) (primary discussion, questions about the material, questions about the labs, etc.)
 :::
 
@@ -103,30 +103,109 @@ My [personal "website"](https://github.com/bgreenwell)
 - We'll now spend the rest of the session setting up our development environment.
 - **Checklist:** Follow the detailed [setup guide](https://bgreenwell.github.io/is4010-website/resources/setup.html).
     - Install [Visual Studio Code](https://code.visualstudio.com/)
-    - Install [Python 3.10+](https://www.python.org/downloads/)
     - Install [Git](https://git-scm.com/downloads)
+    - Install [`uv`](https://docs.astral.sh/uv/getting-started/installation/) (it manages Python 3.12 for us)
     - Defer the [Rust toolchain](https://rustup.rs/) until Week 09
-    - Install [Gemini CLI](https://github.com/google-gemini/gemini-cli?tab=readme-ov-file#quick-install) (optional)
+
 ---
 
 ## How to know it's working ✅
 
 - Open your terminal or command prompt and run the following commands:
   - [`git --version`](https://git-scm.com/)
-  - [`python --version`](https://www.python.org/) (or `python3 --version`)
-  - [`cargo --version`](https://rustup.rs/)
-  - [`gemini --version`](https://rustup.rs/)
-- In VS Code, check for the GitHub Copilot icon in the bottom status bar.
+  - [`uv --version`](https://docs.astral.sh/uv/)
+  - `uv run python --version`
 - We'll walk through this together.
 
 ---
 
-## For next time 📅
+## Lab 01 this week 📅
 
 ::: {.incremental}
-- Please ensure you've finished the complete setup before our next class.
 - Create your [GitHub account](https://github.com/join) if you haven't already.
-- **Next session:** we'll dive deep into Git and GitHub, the foundation of collaborative software development.
+- Use the terminal, fork and clone the semester repository, then run `uv sync --locked`.
+- Submit your fork URL in Canvas and confirm the Week 01 badge is green.
+:::
+
+---
+
+# Terminal basics
+
+---
+
+## Terminal, shell, and prompt
+
+::: {.incremental}
+- The **terminal** is the text window where you work.
+- The **shell** reads a command and asks the operating system to run it.
+- The **prompt** shows that the shell is ready for your next command.
+- In this course: use Git Bash on Windows or your default shell on macOS/Linux.
+- VS Code's integrated terminal is the same kind of interface inside the editor.
+:::
+
+---
+
+## Location and command anatomy
+
+```text
+uv run python hello.py
+│  └──────── arguments ────────┘
+└ command
+```
+
+::: {.incremental}
+- Every terminal has a **current working directory**.
+- Relative paths begin from that directory; absolute paths name the full location.
+- Spaces separate the command from its arguments.
+- A command can read, create, change, or delete files—read it before pressing Enter.
+:::
+
+---
+
+## Five commands to start
+
+```bash
+pwd                 # Where am I?
+ls                  # What is here?
+cd path/to/folder   # Move to another folder
+mkdir practice      # Create a folder
+code .              # Open this folder in VS Code
+```
+
+::: {.incremental}
+- Press **Tab** to complete a path.
+- Press **Up arrow** to reuse a command.
+- Press **Ctrl+C** to stop a running command.
+- Use `pwd` and `git status` whenever you are unsure where you are.
+:::
+
+---
+
+## Safe terminal habits
+
+::: {.incremental}
+- Work inside the repository for the current task.
+- Read AI-suggested commands before approving them.
+- Pause when a command says it will delete, overwrite, install globally, or request elevated access.
+- Never paste passwords, tokens, or API keys into prompts or committed files.
+- Use `git diff` before committing so you know exactly what changed.
+:::
+
+---
+
+## Live demo: From a folder to VS Code
+
+```bash
+pwd
+ls
+mkdir is4010-demo
+cd is4010-demo
+pwd
+code .
+```
+
+::: {.notes}
+Narrate the prompt, current directory, relative path, command, and argument. Demonstrate Tab completion, Up arrow, Ctrl+C, and an intentional wrong directory corrected with `pwd` and `cd`. Keep this light: the goal is enough fluency to understand the Git commands that follow.
 :::
 
 ---

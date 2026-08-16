@@ -2,10 +2,14 @@
 title: "Syllabus"
 ---
 
-::: {.callout-note appearance="simple"}
-### Downloadable versions
-* {{< iconify bi file-pdf >}} [Download PDF version](downloads/syllabus.pdf)
-* {{< iconify bi file-word >}} [Download Word version](downloads/syllabus.docx)
+::: {.callout-important appearance="simple"}
+### Official syllabus
+
+The official, current syllabus will be hosted in **Simple Syllabus**.
+
+**Simple Syllabus URL:** *Placeholder — add the published course URL here.*
+
+The material below remains a course-planning reference while the Simple Syllabus version is the authoritative record.
 :::
 
 ![Lindner College of Business logo](images/lindner_logo.jpg)
@@ -52,13 +56,11 @@ Upon successful completion of this course, the learner will be able to:
 
 * [Visual Studio Code (VS Code)](https://code.visualstudio.com/)
 * [Git](https://git-scm.com/) & a [GitHub account](https://github.com/)
-* [Python 3.10+](https://www.python.org/downloads/)
+* [`uv`](https://docs.astral.sh/uv/getting-started/installation/) (manages the course's Python 3.12 environment)
 * [The Rust programming language toolchain](https://www.rust-lang.org/tools/install) (install at the start of Week 09)
-* An AI coding assistant of your choice, such as [GitHub Copilot](https://github.com/features/copilot), [ChatGPT](https://chatgpt.com/), [Gemini](https://gemini.google.com/), or [Claude](https://claude.ai/)
-
-## **Optional tools** 
-
-* [Gemini CLI](https://github.com/google-gemini/gemini-cli) (Google's AI assistant for terminal-based development)
+* A browser AI chat of your choice, such as [ChatGPT](https://chatgpt.com/), [Gemini](https://gemini.google.com/), or [Claude](https://claude.ai/)
+* [GitHub Copilot](https://github.com/features/copilot) in VS Code
+* [GitHub Copilot CLI](https://docs.github.com/en/copilot/how-tos/copilot-cli/set-up-copilot-cli/install-copilot-cli) and [Antigravity CLI](https://antigravity.google/docs/cli/overview/) (install and try both in Week 02; then use whichever combination fits your work)
 
 ## **Course materials & repository**
 
@@ -228,8 +230,8 @@ The final assessment allows students to demonstrate comprehensive understanding 
 
 | Week | Dates | Module | Topic(s) | Labs (10 pts each) | Notes |
 |:-----|:------|:-------|:---------|:---------|:------|
-| 1 | Jan 13, 15 | Foundations & modern tooling | Course intro, [Git](https://git-scm.com/), [GitHub](https://github.com/), developer toolkit | **Lab 01** (Jan 18, 11:59 PM) | |
-| 2 | Jan 20, 22 | Foundations & modern tooling | AI code assistants ([Copilot](https://github.com/features/copilot), [Gemini](https://gemini.google.com/)), prompting | **Lab 02** (Jan 25, 11:59 PM) | No class Mon Jan 19 (MLK) |
+| 1 | Jan 13, 15 | Foundations & modern tooling | Course intro, terminal basics, `uv`, [Git](https://git-scm.com/), and [GitHub](https://github.com/) | **Lab 01** (Jan 18, 11:59 PM) | |
+| 2 | Jan 20, 22 | Foundations & modern tooling | Browser chats, Copilot in VS Code, Copilot CLI, Antigravity CLI, and prompting | **Lab 02** (Jan 25, 11:59 PM) | No class Mon Jan 19 (MLK) |
 | 3 | Jan 27, 29 | [Python](https://www.python.org/) fundamentals | Variables, data types, control flow, and loops | **Lab 03** (Feb 1, 11:59 PM) | |
 | 4 | Feb 3, 5 | [Python](https://www.python.org/) fundamentals | Data structures: lists, tuples, dicts, and sets | **Lab 04** (Feb 8, 11:59 PM) | |
 | 5 | Feb 10, 12 | [Python](https://www.python.org/) fundamentals | Functions and error handling | **Lab 05** (Feb 15, 11:59 PM) | |
@@ -326,7 +328,8 @@ This section provides a summary of free Large Language Model (LLM) clients that 
 | **[Claude](https://claude.ai/)** | Web UI | Strong capabilities in creative writing, summarization, and analysis | Free tier with daily message limits | Sophisticated writing tasks and in-depth document analysis |
 | **[Gemini on the web](https://gemini.google.com)** | Web UI | User-friendly interface for direct chat, content generation, and analysis | Free access to a powerful model, with some limits on usage | Everyday tasks, brainstorming, writing assistance, and learning LLM capabilities |
 | **[GitHub Copilot](https://github.com/features/copilot)** | IDE Extension | AI-powered code completion, suggestions, and chat within your editor | Free for verified students, teachers, and maintainers of popular open-source projects | Seamlessly integrating AI assistance into the software development workflow |
-| **[Gemini CLI](https://github.com/google/gemini-cli)** | Command-line | Direct access to Gemini models, scripting, automation | Free tier with rate limits (requests per minute) | Developers and power users for terminal-based tasks |
+| **[GitHub Copilot CLI](https://docs.github.com/en/copilot/how-tos/copilot-cli/set-up-copilot-cli/install-copilot-cli)** | Command-line | Repository-aware coding agent in the terminal | Available with GitHub Copilot plans | Testing, editing, and explaining code without leaving the terminal |
+| **[Antigravity CLI](https://antigravity.google/docs/cli/overview/)** | Command-line | Google's repository-aware coding agent, launched with `agy` | Free access available | Comparing agent approaches and working from repository context |
 | **[LM Studio](https://lmstudio.ai/)** | Desktop app | Run open-source LLMs locally, offline capability | Completely free software; uses your computer's resources | Running models offline and experimenting with privacy |
 | **[Ollama](https://ollama.ai/)** | CLI / local server | Easily run and manage open-source LLMs locally, provides an API | Completely free software; uses your computer's resources | Developers building applications on top of local LLMs |
 | **[Hugging Face chat](https://huggingface.co/chat/)** | Web UI | Access and chat with a wide variety of open-source models | Completely free to use | Quickly trying out and comparing open-source models |

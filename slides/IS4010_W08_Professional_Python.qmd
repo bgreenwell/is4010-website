@@ -58,7 +58,7 @@ format:
 - **Real-world motivation**: Show how professionals use CLI tools constantly
 - **Career examples**: Data scientists use CLI tools for dataset downloads, web developers for deployment
 - **Unix philosophy**: Small, composable tools that do one thing well
-- **Student connection**: They've used `git`, `pip`, `python` - all CLI tools
+- **Student connection**: They've used `git`, `uv`, and `python` - all CLI tools
 - **Final project application**: Their projects should have CLI interfaces for easy testing and demonstration
 - **Time savings**: Automation is a force multiplier for productivity
 :::
@@ -69,7 +69,7 @@ format:
 
 ::: {.incremental}
 - **Version control**: [`git`](https://git-scm.com/docs) - `git add`, `git commit`, `git push`
-- **Package management**: [`pip`](https://pip.pypa.io/en/stable/cli/pip/) - `pip install`, `pip list`, `pip freeze`
+- **Python project management**: [`uv`](https://docs.astral.sh/uv/) - `uv sync`, `uv add`, `uv run`
 - **Web frameworks**: [`django-admin`](https://docs.djangoproject.com/en/stable/ref/django-admin/) - `startproject`, `migrate`, `runserver`
 - **AWS CLI**: [`aws`](https://aws.amazon.com/cli/) - Manage cloud infrastructure from the terminal
 - **Data science**: [`jupyter`](https://jupyter.readthedocs.io/en/latest/running.html) - `jupyter notebook`, `jupyter lab`
@@ -202,7 +202,7 @@ if __name__ == "__main__":
 
 ### **Getting help:**
 ```bash
-$ python simple_greeter.py --help
+$ uv run python simple_greeter.py --help
 usage: simple_greeter.py [-h] [--loud] name
 
 A simple greeting tool
@@ -219,13 +219,13 @@ Thanks for using the greeter!
 
 ### **Using the tool:**
 ```bash
-$ python simple_greeter.py Alice
+$ uv run python simple_greeter.py Alice
 Hello, Alice!
 
-$ python simple_greeter.py Bob --loud
+$ uv run python simple_greeter.py Bob --loud
 HELLO, BOB!
 
-$ python simple_greeter.py
+$ uv run python simple_greeter.py
 usage: simple_greeter.py [-h] [--loud] name
 simple_greeter.py: error: the following arguments are required: name
 ```
@@ -372,7 +372,7 @@ if __name__ == "__main__":
 - **Function dispatch**: `set_defaults(func=...)` enables clean routing
 - **Professional pattern**: Used in Django, Flask, AWS CLI, and more
 - **Final project application**: Students could add subcommands for different API operations
-- **Help per subcommand**: `python project_manager.py init --help` works
+- **Help per subcommand**: `uv run python project_manager.py init --help` works
 :::
 
 ---
@@ -425,7 +425,7 @@ def main():
     parser = argparse.ArgumentParser(
         prog="my_api_tool",
         description="Interact with [Your API Name] from the command line",
-        epilog="Example: python my_api_tool.py pokemon pikachu --format json"
+        epilog="Example: uv run python my_api_tool.py pokemon pikachu --format json"
     )
 
     parser.add_argument("resource", help="Resource type to fetch")
@@ -508,7 +508,7 @@ if __name__ == "__main__":
 - **Stage 1**: Single `.py` file - `my_script.py` does everything
 - **Stage 2**: Multiple files - `utils.py`, `api.py`, `cli.py` in one folder
 - **Stage 3**: Package structure - Organized directories with `__init__.py` files
-- **Stage 4**: Installable package - Can `pip install` your own code
+- **Stage 4**: Installable package - Can run your own code through `uv`
 - **Career reality**: Professional projects are always Stage 3 or 4
 :::
 
@@ -598,7 +598,8 @@ my_api_project/
 │   └── test_cli.py
 │
 ├── main.py                  # Entry point script
-├── requirements.txt         # Dependencies
+├── pyproject.toml           # Project metadata and dependencies
+├── uv.lock                  # Exact resolved environment
 └── README.md               # Documentation
 ```
 
@@ -755,7 +756,7 @@ if __name__ == "__main__":
 
 ```bash
 # Run as script
-$ python my_api/api.py
+$ uv run python my_api/api.py
 Fetching from pokemon
 {'data': 'example'}
 ```
@@ -844,7 +845,7 @@ version = "0.1.0"
 description = "A professional API client for [Your API]"
 authors = [{name = "Your Name", email = "you@example.com"}]
 readme = "README.md"
-requires-python = ">=3.10"
+requires-python = ">=3.12"
 dependencies = [
     "requests>=2.31.0",
 ]
@@ -863,14 +864,14 @@ my-api = "my_api.cli:main"  # Creates a 'my-api' command
 ### **Installing in editable mode:**
 
 ```bash
-# Install your package locally for development
-pip install -e .
+# Install and lock the project for development
+uv sync
 
 # Now you can import it anywhere
-python -c "from my_api import fetch_data"
+uv run python -c "from my_api import fetch_data"
 
 # And use the CLI command
-my-api pokemon pikachu
+uv run my-api pokemon pikachu
 ```
 
 ::: {.notes}
@@ -887,41 +888,39 @@ my-api pokemon pikachu
 
 ---
 
-## ⚡ Modern Python tooling: Enter `uv`
+## ⚡ One project workflow with `uv`
 
 ::: {.incremental}
-- **[`uv`](https://github.com/astral-sh/uv)** is a blazingly fast Python package installer and resolver (written in Rust!)
-- **10-100× faster** than pip for most operations
-- **Drop-in replacement**: `uv pip install` works like `pip install`
-- **Created by Astral**: Same team behind [Ruff](https://github.com/astral-sh/ruff) (the fast Python linter)
-- **Growing adoption**: Becoming the standard for new Python projects
-- **Learning curve**: Minimal - works like pip but faster
+- **[`uv`](https://docs.astral.sh/uv/)** manages Python versions, environments, dependencies, commands, and lockfiles
+- **Reproducible**: `pyproject.toml` declares dependencies and `uv.lock` records exact resolutions
+- **No activation step**: `uv run` executes inside the project environment
+- **One local/CI interface**: The same commands work on a laptop and in GitHub Actions
+- **Written in Rust**: A useful bridge to the next half of the course
 :::
 
 ### **Basic usage:**
 
 ```bash
-# Install uv
-curl -LsSf https://astral.sh/uv/install.sh | sh
+# Reproduce a committed project
+uv sync --locked
 
-# Use it like pip
-uv pip install requests
-uv pip install -e .           # Editable install
+# Add dependencies in your own project
+uv add requests
+uv add --dev pytest
 
-# Create virtual environments
-uv venv
-source .venv/bin/activate
+# Run inside the project environment
+uv run python -m pytest
+uv run my-api --help
 ```
 
 ::: {.notes}
 **TEACHING NOTES:**
 
-- **Performance**: Show speed comparison demos if possible
+- **Official docs**: Point installation questions to the current uv guide
 - **Rust connection**: Perfect bridge to next week's Rust introduction
 - **Modern tooling**: Python ecosystem is modernizing rapidly
-- **Optional**: Students can stick with pip if they prefer
-- **Industry trend**: Major projects adopting uv
-- **Simplicity**: Don't overcomplicate - it's just a faster pip
+- **Course consistency**: uv is the standard workflow, not an optional alternative
+- **Simplicity**: `sync`, `add`, and `run` cover the core course workflow
 - **Future-proofing**: Learning modern tools prepares for career
 :::
 
@@ -990,7 +989,7 @@ my_final_project/
 ├── pyproject.toml               # Project configuration
 ├── README.md                    # Your documentation
 ├── .gitignore                   # Git exclusions
-└── requirements.txt             # Or use pyproject.toml dependencies
+└── uv.lock                      # Exact resolved dependencies
 ```
 
 ::: {.notes}
@@ -1051,8 +1050,8 @@ if __name__ == "__main__":
 ### **Usage after install:**
 
 ```bash
-pip install -e .
-my-api-tool pokemon --format json
+uv sync
+uv run my-api-tool pokemon --format json
 ```
 
 ::: {.notes}
@@ -1156,7 +1155,7 @@ my-api-tool pokemon --format json
 ### **Success criteria:**
 
 ::: {.incremental}
-- Can run `pip install -e .` to install your project
+- Can run `uv sync` and launch the project with `uv run`
 - CLI works with intuitive arguments and helpful error messages
 - Code is organized in logical modules with clean imports
 - `--help` flag provides clear usage instructions

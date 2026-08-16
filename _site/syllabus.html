@@ -43,7 +43,6 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="site_libs/bootstrap/bootstrap-bcb4737e8fbcf1e9dfc00b59f8305558.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
-<script src="site_libs/quarto-contrib/iconify-3.0.0/iconify-icon.min.js"></script>
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -272,7 +271,6 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#v.-course-materials" id="toc-v.-course-materials" class="nav-link" data-scroll-target="#v.-course-materials">V. Course materials</a>
   <ul class="collapse">
   <li><a href="#required-tools" id="toc-required-tools" class="nav-link" data-scroll-target="#required-tools"><strong>Required tools</strong></a></li>
-  <li><a href="#optional-tools" id="toc-optional-tools" class="nav-link" data-scroll-target="#optional-tools"><strong>Optional tools</strong></a></li>
   <li><a href="#course-materials-repository" id="toc-course-materials-repository" class="nav-link" data-scroll-target="#course-materials-repository"><strong>Course materials &amp; repository</strong></a></li>
   </ul></li>
   <li><a href="#vi.-commitment-to-all-perspectives" id="toc-vi.-commitment-to-all-perspectives" class="nav-link" data-scroll-target="#vi.-commitment-to-all-perspectives">VI. Commitment to all perspectives</a></li>
@@ -337,20 +335,19 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<div class="callout callout-style-simple callout-note callout-titled">
+<div class="callout callout-style-simple callout-important callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Downloadable versions
+<span class="screen-reader-only">Important</span>Official syllabus
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<ul>
-<li><iconify-icon role="img" inline="" icon="bi:file-pdf" aria-label="Icon file-pdf from bi Iconify.design set." title="Icon file-pdf from bi Iconify.design set."></iconify-icon> <a href="downloads/syllabus.pdf">Download PDF version</a></li>
-<li><iconify-icon role="img" inline="" icon="bi:file-word" aria-label="Icon file-word from bi Iconify.design set." title="Icon file-word from bi Iconify.design set."></iconify-icon> <a href="downloads/syllabus.docx">Download Word version</a></li>
-</ul>
+<p>The official, current syllabus will be hosted in <strong>Simple Syllabus</strong>.</p>
+<p><strong>Simple Syllabus URL:</strong> <em>Placeholder — add the published course URL here.</em></p>
+<p>The material below remains a course-planning reference while the Simple Syllabus version is the authoritative record.</p>
 </div>
 </div>
 <div class="quarto-figure quarto-figure-center">
@@ -403,15 +400,11 @@ ul.task-list li input[type="checkbox"] {
 <ul>
 <li><a href="https://code.visualstudio.com/">Visual Studio Code (VS Code)</a></li>
 <li><a href="https://git-scm.com/">Git</a> &amp; a <a href="https://github.com/">GitHub account</a></li>
-<li><a href="https://www.python.org/downloads/">Python 3.10+</a></li>
+<li><a href="https://docs.astral.sh/uv/getting-started/installation/"><code>uv</code></a> (manages the course’s Python 3.12 environment)</li>
 <li><a href="https://www.rust-lang.org/tools/install">The Rust programming language toolchain</a> (install at the start of Week 09)</li>
-<li>An AI coding assistant of your choice, such as <a href="https://github.com/features/copilot">GitHub Copilot</a>, <a href="https://chatgpt.com/">ChatGPT</a>, <a href="https://gemini.google.com/">Gemini</a>, or <a href="https://claude.ai/">Claude</a></li>
-</ul>
-</section>
-<section id="optional-tools" class="level2">
-<h2 class="anchored" data-anchor-id="optional-tools"><strong>Optional tools</strong></h2>
-<ul>
-<li><a href="https://github.com/google-gemini/gemini-cli">Gemini CLI</a> (Google’s AI assistant for terminal-based development)</li>
+<li>A browser AI chat of your choice, such as <a href="https://chatgpt.com/">ChatGPT</a>, <a href="https://gemini.google.com/">Gemini</a>, or <a href="https://claude.ai/">Claude</a></li>
+<li><a href="https://github.com/features/copilot">GitHub Copilot</a> in VS Code</li>
+<li><a href="https://docs.github.com/en/copilot/how-tos/copilot-cli/set-up-copilot-cli/install-copilot-cli">GitHub Copilot CLI</a> and <a href="https://antigravity.google/docs/cli/overview/">Antigravity CLI</a> (install and try both in Week 02; then use whichever combination fits your work)</li>
 </ul>
 </section>
 <section id="course-materials-repository" class="level2">
@@ -618,7 +611,7 @@ Your course grades will be based on your performance on the following:</p>
 <td style="text-align: left;">1</td>
 <td style="text-align: left;">Jan 13, 15</td>
 <td style="text-align: left;">Foundations &amp; modern tooling</td>
-<td style="text-align: left;">Course intro, <a href="https://git-scm.com/">Git</a>, <a href="https://github.com/">GitHub</a>, developer toolkit</td>
+<td style="text-align: left;">Course intro, terminal basics, <code>uv</code>, <a href="https://git-scm.com/">Git</a>, and <a href="https://github.com/">GitHub</a></td>
 <td style="text-align: left;"><strong>Lab 01</strong> (Jan 18, 11:59 PM)</td>
 <td style="text-align: left;"></td>
 </tr>
@@ -626,7 +619,7 @@ Your course grades will be based on your performance on the following:</p>
 <td style="text-align: left;">2</td>
 <td style="text-align: left;">Jan 20, 22</td>
 <td style="text-align: left;">Foundations &amp; modern tooling</td>
-<td style="text-align: left;">AI code assistants (<a href="https://github.com/features/copilot">Copilot</a>, <a href="https://gemini.google.com/">Gemini</a>), prompting</td>
+<td style="text-align: left;">Browser chats, Copilot in VS Code, Copilot CLI, Antigravity CLI, and prompting</td>
 <td style="text-align: left;"><strong>Lab 02</strong> (Jan 25, 11:59 PM)</td>
 <td style="text-align: left;">No class Mon Jan 19 (MLK)</td>
 </tr>
@@ -868,41 +861,48 @@ Your course grades will be based on your performance on the following:</p>
 <td style="text-align: left;">Seamlessly integrating AI assistance into the software development workflow</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;"><strong><a href="https://github.com/google/gemini-cli">Gemini CLI</a></strong></td>
+<td style="text-align: left;"><strong><a href="https://docs.github.com/en/copilot/how-tos/copilot-cli/set-up-copilot-cli/install-copilot-cli">GitHub Copilot CLI</a></strong></td>
 <td style="text-align: left;">Command-line</td>
-<td style="text-align: left;">Direct access to Gemini models, scripting, automation</td>
-<td style="text-align: left;">Free tier with rate limits (requests per minute)</td>
-<td style="text-align: left;">Developers and power users for terminal-based tasks</td>
+<td style="text-align: left;">Repository-aware coding agent in the terminal</td>
+<td style="text-align: left;">Available with GitHub Copilot plans</td>
+<td style="text-align: left;">Testing, editing, and explaining code without leaving the terminal</td>
 </tr>
 <tr class="even">
+<td style="text-align: left;"><strong><a href="https://antigravity.google/docs/cli/overview/">Antigravity CLI</a></strong></td>
+<td style="text-align: left;">Command-line</td>
+<td style="text-align: left;">Google’s repository-aware coding agent, launched with <code>agy</code></td>
+<td style="text-align: left;">Free access available</td>
+<td style="text-align: left;">Comparing agent approaches and working from repository context</td>
+</tr>
+<tr class="odd">
 <td style="text-align: left;"><strong><a href="https://lmstudio.ai/">LM Studio</a></strong></td>
 <td style="text-align: left;">Desktop app</td>
 <td style="text-align: left;">Run open-source LLMs locally, offline capability</td>
 <td style="text-align: left;">Completely free software; uses your computer’s resources</td>
 <td style="text-align: left;">Running models offline and experimenting with privacy</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;"><strong><a href="https://ollama.ai/">Ollama</a></strong></td>
 <td style="text-align: left;">CLI / local server</td>
 <td style="text-align: left;">Easily run and manage open-source LLMs locally, provides an API</td>
 <td style="text-align: left;">Completely free software; uses your computer’s resources</td>
 <td style="text-align: left;">Developers building applications on top of local LLMs</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;"><strong><a href="https://huggingface.co/chat/">Hugging Face chat</a></strong></td>
 <td style="text-align: left;">Web UI</td>
 <td style="text-align: left;">Access and chat with a wide variety of open-source models</td>
 <td style="text-align: left;">Completely free to use</td>
 <td style="text-align: left;">Quickly trying out and comparing open-source models</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;"><strong><a href="https://poe.com">Poe by Quora</a></strong></td>
 <td style="text-align: left;">Web &amp; mobile app</td>
 <td style="text-align: left;">Access a mix of popular models (Claude, Gemini, etc.) in one app</td>
 <td style="text-align: left;">Free daily message limits for most models</td>
 <td style="text-align: left;">Comparing different flagship models, especially on mobile</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;"><strong><a href="https://aistudio.google.com/">Google AI Studio</a></strong></td>
 <td style="text-align: left;">Web UI</td>
 <td style="text-align: left;">Prototype prompts for the Gemini API, generate code</td>

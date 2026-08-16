@@ -4,12 +4,14 @@ title: "Week 02: AI-assisted dev"
 
 ## Introduction
 
-This week, we'll explore the rapidly evolving landscape of AI-assisted software development. We'll compare the "big three" conversational models—Gemini, ChatGPT, and Claude—and dive deep into GitHub Copilot, our primary "Co-Pilot" for the semester. You'll learn the art of prompt engineering using the CPTF framework and discover how to leverage AI to explain, debug, and refactor your code effectively.
+This week, we'll explore the rapidly evolving landscape of AI-assisted software development. We'll compare browser chats, use GitHub Copilot inside VS Code, and install both GitHub Copilot CLI and Antigravity CLI. You'll give the two CLI agents the same small Python task, compare their suggestions, and use tests and `git diff` to decide what to keep.
 
 ## Recommended readings
 
 - [GitHub Copilot documentation](https://docs.github.com/en/copilot) - Official guide to GitHub Copilot
 - [The art of prompt engineering](https://github.com/features/copilot/prompt-engineering) - Best practices for prompting AI code assistants
+- [Copilot CLI installation](https://docs.github.com/en/copilot/how-tos/copilot-cli/set-up-copilot-cli/install-copilot-cli) - Official setup instructions
+- [Antigravity CLI overview](https://antigravity.google/docs/cli/overview/) - Official setup and usage guide
 
 ## Lectures
 
@@ -23,4 +25,4 @@ This week, we'll explore the rapidly evolving landscape of AI-assisted software 
 
 ## Lab assignment
 
-- [Lab 02: AI-assisted Python preview](https://github.com/bgreenwell/is4010-labs/blob/main/week02/lab02.md)
+- [Lab 02: Compare CLI coding agents](https://github.com/bgreenwell/is4010-labs/blob/main/week02/lab02.md)

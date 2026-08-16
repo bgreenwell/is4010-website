@@ -4,17 +4,18 @@ title: "Week 01: Toolkit setup"
 
 ## Introduction
 
-Welcome to the first week of IS 4010! This week is all about building your foundation. We'll introduce the course philosophy of "AI-enhanced development," set up your professional developer toolkit, and dive into the world of version control with Git and GitHub. By the end of this module, you'll have a fully configured environment and your first repository ready to go.
+Welcome to the first week of IS 4010! This week is all about building your foundation. We'll introduce the course philosophy of "AI-enhanced development," learn the terminal basics that support the rest of the course, set up `uv`, and dive into version control with Git and GitHub. By the end of this module, you'll have a configured Python environment and your semester repository ready to go.
 
 ## Recommended readings
 
 - [Pro Git Book (Ch 1-3)](https://git-scm.com/book/en/v2) - The definitive guide to Git
 - [GitHub Guides](https://guides.github.com/) - Essential tutorials for working with GitHub
+- [uv installation guide](https://docs.astral.sh/uv/getting-started/installation/) - Official setup instructions for the course Python tool
 
 ## Lectures
 
-- [**Slides: Course introduction & version control**](../slides/IS4010_W01_Introduction.qmd)
+- [**Slides: Course introduction, terminal, and version control**](../slides/IS4010_W01_Introduction.qmd)
 
 ## Lab assignment
 
-- [Lab 01: Fork and clone your semester repository](https://github.com/bgreenwell/is4010-labs/blob/main/week01/lab01.md)
+- [Lab 01: Repository and development setup](https://github.com/bgreenwell/is4010-labs/blob/main/week01/lab01.md)

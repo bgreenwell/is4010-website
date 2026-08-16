@@ -18,7 +18,7 @@ This course uses two primary, free, and open-source resources:
 We will reference specific chapters from these books each week to support our hands-on labs.
 
 ## Quick links
-* [**Syllabus**](syllabus.qmd)
+* [**Syllabus**](syllabus.qmd) — the official Simple Syllabus link will be added when published
 * [Weekly schedule](weeks/week01.qmd)
 * [Labs repository](https://github.com/bgreenwell/is4010-labs)
 * [Canvas (LMS)](https://uc.instructure.com/)

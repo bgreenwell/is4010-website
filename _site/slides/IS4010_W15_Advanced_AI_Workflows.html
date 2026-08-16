@@ -644,7 +644,7 @@ malformed rows, encoding issues</code></pre>
 <p><strong>Different tools for different tasks:</strong></p>
 <p><strong>GitHub Copilot</strong> (in-editor): - Autocompleting functions - Generating boilerplate - Quick inline suggestions - Pattern completion</p>
 <p><strong>ChatGPT/Claude</strong> (conversational): - Complex explanations - Architecture decisions - Debugging multi-file issues - Learning new concepts</p>
-<p><strong>Gemini CLI</strong> (terminal): - Explaining error messages - Generating shell scripts - Quick command lookups - Repository analysis</p>
+<p><strong>Copilot CLI or Antigravity CLI</strong> (terminal): - Explaining error messages - Generating shell scripts - Quick command lookups - Repository analysis</p>
 <p><strong>Perplexity</strong> (research): - Finding documentation - Comparing approaches - Staying current with ecosystem changes</p>
 <aside class="notes">
 <p>Master developers use the right tool for the job. Each AI tool has strengths - learn them and combine strategically.</p>
@@ -1243,9 +1243,7 @@ Please:
 <h2>Building Your AI Toolkit</h2>
 <p><strong>Recommended workflow setup:</strong></p>
 <p><strong>In-editor (GitHub Copilot):</strong> - Tab completion for code - Function generation - Quick documentation</p>
-<p><strong>Terminal (Gemini CLI):</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb57"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb57-1"><a></a><span class="ex">gem</span> <span class="st">"explain this error: [error message]"</span></span>
-<span id="cb57-2"><a></a><span class="ex">gem</span> <span class="st">"write git commit message for: </span><span class="va">$(</span><span class="fu">git</span> diff <span class="at">--staged</span><span class="va">)</span><span class="st">"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Terminal (Copilot CLI or Antigravity CLI):</strong> - Start the agent from inside the intended repository. - Ask it to inspect a concrete error or the staged diff. - Review every proposed command and edit before approval.</p>
 <p><strong>Browser (Claude/ChatGPT):</strong> - Architecture discussions - Complex debugging - Learning new concepts</p>
 <p><strong>Documentation (Cursor, Continue.dev):</strong> - Codebase-aware AI - Multi-file refactoring - Project-specific context</p>
 <p><strong>Create a personal prompt library:</strong> - Save effective prompts you use often - Customize for your projects - Share with teammates</p>
@@ -1320,7 +1318,7 @@ How could I improve this workflow for better results?</code></pre>
 <section id="additional-resources" class="slide level2 smaller">
 <h2>Additional Resources</h2>
 <p><strong>Prompt engineering:</strong> - <a href="https://platform.openai.com/docs/guides/prompt-engineering">OpenAI Prompt Engineering Guide</a> - <a href="https://docs.anthropic.com/claude/prompt-library">Anthropic Prompt Library</a> - <a href="https://learnprompting.org/">Learn Prompting</a> - <a href="https://github.com/prompt-engineering/prompt-patterns">Prompt Engineering Patterns</a></p>
-<p><strong>AI tools:</strong> - <a href="https://docs.github.com/copilot">GitHub Copilot Documentation</a> - <a href="https://claude.ai">Claude AI</a> - <a href="https://chat.openai.com">ChatGPT</a> - <a href="https://github.com/google/generative-ai-python">Gemini CLI</a></p>
+<p><strong>AI tools:</strong> - <a href="https://docs.github.com/copilot">GitHub Copilot Documentation</a> - <a href="https://claude.ai">Claude AI</a> - <a href="https://chat.openai.com">ChatGPT</a> - <a href="https://docs.github.com/en/copilot/how-tos/copilot-cli/set-up-copilot-cli/install-copilot-cli">GitHub Copilot CLI</a> - <a href="https://antigravity.google/docs/cli/overview/">Antigravity CLI</a></p>
 <p><strong>Best practices:</strong> - <a href="https://google.github.io/eng-practices/review/">Google Code Review Guidelines</a> - <a href="https://refactoring.com/catalog/">Refactoring Catalog</a> - <a href="https://www.uc.edu/conduct/academic-integrity.html">Academic Integrity Resources</a></p>
 <aside class="notes">
 <p>Encourage students to explore these resources. Prompt engineering is an evolving field - stay current.</p>
@@ -1363,7 +1361,7 @@ How could I improve this workflow for better results?</code></pre>
 <ul>
 <li>Office hours: <a href="https://teams.microsoft.com">Schedule on Teams</a></li>
 <li>Course discussion: Microsoft Teams channel</li>
-<li>AI tools: Claude, ChatGPT, GitHub Copilot, Gemini CLI</li>
+<li>AI tools: browser chat, GitHub Copilot, Copilot CLI, Antigravity CLI</li>
 <li>Prompt engineering communities</li>
 </ul>
 <p><strong>Final project deadline approaching - make it exceptional!</strong></p>

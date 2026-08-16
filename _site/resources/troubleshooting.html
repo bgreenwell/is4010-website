@@ -264,10 +264,10 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#python-issues" id="toc-python-issues" class="nav-link active" data-scroll-target="#python-issues">Python issues</a></li>
-  <li><a href="#git-github-issues" id="toc-git-github-issues" class="nav-link" data-scroll-target="#git-github-issues">Git &amp; GitHub issues</a></li>
+  <li><a href="#python-and-uv-issues" id="toc-python-and-uv-issues" class="nav-link active" data-scroll-target="#python-and-uv-issues">Python and uv issues</a></li>
+  <li><a href="#git-and-github-issues" id="toc-git-and-github-issues" class="nav-link" data-scroll-target="#git-and-github-issues">Git and GitHub issues</a></li>
   <li><a href="#rust-issues" id="toc-rust-issues" class="nav-link" data-scroll-target="#rust-issues">Rust issues</a></li>
-  <li><a href="#github-actions" id="toc-github-actions" class="nav-link" data-scroll-target="#github-actions">GitHub Actions</a></li>
+  <li><a href="#github-actions-issues" id="toc-github-actions-issues" class="nav-link" data-scroll-target="#github-actions-issues">GitHub Actions issues</a></li>
   </ul>
 </nav>
     </div>
@@ -294,24 +294,54 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>Welcome to IS 4010! Here are some common issues and their solutions.</p>
-<section id="python-issues" class="level3">
-<h3 class="anchored" data-anchor-id="python-issues">Python issues</h3>
-<p><strong><code>ModuleNotFoundError: No module named 'labXX'</code></strong> * <strong>Fix</strong>: Ensure you are running <code>pytest</code> from the <strong>repository root</strong>, not inside the <code>weekXX</code> folder. * Command: <code>pytest weekXX/tests/</code></p>
-<p><strong><code>python: command not found</code></strong> * <strong>Fix</strong>: Try using <code>python3</code> instead. If on Windows, ensure you checked “Add to PATH” during installation.</p>
+<section id="python-and-uv-issues" class="level2">
+<h2 class="anchored" data-anchor-id="python-and-uv-issues">Python and uv issues</h2>
+<p><strong><code>uv: command not found</code></strong></p>
+<ul>
+<li>Restart the terminal after installation so its PATH refreshes.</li>
+<li>Revisit the official <a href="https://docs.astral.sh/uv/getting-started/installation/"><code>uv</code> installation guide</a> for your operating system.</li>
+</ul>
+<p><strong>The environment is missing or out of date</strong></p>
+<ul>
+<li>From the repository root, run <code>uv sync --locked</code>.</li>
+<li>Run Python as <code>uv run python ...</code>; no manual activation is required.</li>
+</ul>
+<p><strong><code>ModuleNotFoundError: No module named 'labXX'</code></strong></p>
+<ul>
+<li>Run the exact command shown in the lab from the repository root.</li>
+<li>Example: <code>uv run --directory week03 python -m pytest tests/ -v</code>.</li>
+</ul>
 </section>
-<section id="git-github-issues" class="level3">
-<h3 class="anchored" data-anchor-id="git-github-issues">Git &amp; GitHub issues</h3>
-<p><strong><code>Permission denied (publickey)</code></strong> * <strong>Fix</strong>: You are likely trying to push without setting up authentication. * <strong>Solution</strong>: Use a <strong>Personal Access Token (PAT)</strong> as your password when prompted, or set up SSH keys.</p>
-<p><strong>Changes not showing on GitHub</strong> * <strong>Fix</strong>: Did you <code>git push</code>? Committing only saves changes locally.</p>
+<section id="git-and-github-issues" class="level2">
+<h2 class="anchored" data-anchor-id="git-and-github-issues">Git and GitHub issues</h2>
+<p><strong>Authentication failed or permission was denied</strong></p>
+<ul>
+<li>Follow GitHub’s current <a href="https://docs.github.com/en/authentication">authentication documentation</a>.</li>
+<li>Confirm <code>git remote -v</code> points to your fork, not the instructor repository.</li>
+<li>Never save a token in the repository.</li>
+</ul>
+<p><strong>Changes are not showing on GitHub</strong></p>
+<ul>
+<li>Run <code>git status</code> and <code>git log -1</code>.</li>
+<li>A commit remains local until you run <code>git push origin main</code>.</li>
+</ul>
 </section>
-<section id="rust-issues" class="level3">
-<h3 class="anchored" data-anchor-id="rust-issues">Rust issues</h3>
-<p><strong><code>cargo: command not found</code></strong> * <strong>Fix</strong>: You may need to restart your terminal after installing Rust to refresh your PATH.</p>
+<section id="rust-issues" class="level2">
+<h2 class="anchored" data-anchor-id="rust-issues">Rust issues</h2>
+<p><strong><code>cargo: command not found</code></strong></p>
+<ul>
+<li>Restart the terminal after installing Rust so its PATH refreshes.</li>
+<li>Revisit the official <a href="https://www.rust-lang.org/tools/install">Rust installation guide</a>.</li>
+</ul>
 </section>
-<section id="github-actions" class="level3">
-<h3 class="anchored" data-anchor-id="github-actions">GitHub Actions</h3>
-<p><strong>Workflow not triggering</strong> * <strong>Fix</strong>: For your first lab, go to the <strong>Actions</strong> tab on GitHub and click “I understand my workflows, enable them”. * <strong>Fix</strong>: Ensure you pushed your code!</p>
+<section id="github-actions-issues" class="level2">
+<h2 class="anchored" data-anchor-id="github-actions-issues">GitHub Actions issues</h2>
+<p><strong>A workflow did not run</strong></p>
+<ul>
+<li>In a new fork, open <strong>Actions</strong> and enable the inherited workflows.</li>
+<li>Confirm you pushed the required files to <code>main</code>.</li>
+<li>Select the badge or workflow run to read the first failing step.</li>
+</ul>
 
 
 </section>

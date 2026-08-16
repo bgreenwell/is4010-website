@@ -222,7 +222,7 @@ Brandon M. Greenwell
 <section id="the-software-world-has-changed" class="slide level2">
 <h2>The software world has changed 🌍</h2>
 <ul>
-<li class="fragment">AI code assistants (like <a href="https://github.com/features/copilot">GitHub Copilot</a>, <a href="https://claude.ai/code">Claude Code</a>, and <a href="https://ai.google.dev/gemini-api/docs/get-started/tutorial?lang=rest#start-command-line">Gemini CLI</a>) are no longer a novelty; they’re rapidly becoming a standard part of the professional developer’s toolkit.</li>
+<li class="fragment">AI code assistants in the browser, editor, and terminal are no longer a novelty; they’re rapidly becoming a standard part of the professional developer’s toolkit.</li>
 <li class="fragment">Knowing how to use these tools effectively is becoming a required skill for new graduates.</li>
 <li class="fragment">Our goal is to make you proficient not just in a language, but in this new AI-augmented workflow.</li>
 </ul>
@@ -270,7 +270,7 @@ Brandon M. Greenwell
 <ul>
 <li class="fragment"><strong>Course Canvas:</strong> <a href="https://uc.instructure.com/courses/1812798">uc.instructure.com</a> (grades, slides, labs, due dates, etc.)</li>
 <li class="fragment"><strong>Labs repository:</strong> <a href="https://github.com/bgreenwell/is4010-labs">GitHub</a> (all 14 labs and status badges)</li>
-<li class="fragment"><strong>Course syllabus:</strong> <a href="https://bgreenwell.github.io/is4010-website/syllabus.html">Online syllabus</a> (always up-to-date)</li>
+<li class="fragment"><strong>Official syllabus:</strong> Simple Syllabus link to be added when published</li>
 <li class="fragment"><strong>Communication:</strong> <a href="https://teams.microsoft.com/l/team/19%3ASjdonOkpgQOXFJf6qmHIWfJIwzgKl-xvmnkNVUkg8k81%40thread.tacv2/conversations?groupId=5c3ca09e-ec41-473c-8395-ab28de92a041&amp;tenantId=f5222e6c-5fc6-48eb-8f03-73db18203b63">Microsoft Teams</a> (primary discussion, questions about the material, questions about the labs, etc.)</li>
 </ul>
 </section>
@@ -291,10 +291,9 @@ Brandon M. Greenwell
 <li><strong>Checklist:</strong> Follow the detailed <a href="https://bgreenwell.github.io/is4010-website/resources/setup.html">setup guide</a>.
 <ul>
 <li>Install <a href="https://code.visualstudio.com/">Visual Studio Code</a></li>
-<li>Install <a href="https://www.python.org/downloads/">Python 3.10+</a></li>
 <li>Install <a href="https://git-scm.com/downloads">Git</a></li>
+<li>Install <a href="https://docs.astral.sh/uv/getting-started/installation/"><code>uv</code></a> (it manages Python 3.12 for us)</li>
 <li>Defer the <a href="https://rustup.rs/">Rust toolchain</a> until Week 09</li>
-<li><h2 id="install-gemini-cli-optional">Install <a href="https://github.com/google-gemini/gemini-cli?tab=readme-ov-file#quick-install">Gemini CLI</a> (optional)</h2></li>
 </ul></li>
 </ul>
 </section>
@@ -304,21 +303,95 @@ Brandon M. Greenwell
 <li>Open your terminal or command prompt and run the following commands:
 <ul>
 <li><a href="https://git-scm.com/"><code>git --version</code></a></li>
-<li><a href="https://www.python.org/"><code>python --version</code></a> (or <code>python3 --version</code>)</li>
-<li><a href="https://rustup.rs/"><code>cargo --version</code></a></li>
-<li><a href="https://rustup.rs/"><code>gemini --version</code></a></li>
+<li><a href="https://docs.astral.sh/uv/"><code>uv --version</code></a></li>
+<li><code>uv run python --version</code></li>
 </ul></li>
-<li>In VS Code, check for the GitHub Copilot icon in the bottom status bar.</li>
 <li>We’ll walk through this together.</li>
 </ul>
 </section>
-<section id="for-next-time" class="slide level2">
-<h2>For next time 📅</h2>
+<section id="lab-01-this-week" class="slide level2">
+<h2>Lab 01 this week 📅</h2>
 <ul>
-<li class="fragment">Please ensure you’ve finished the complete setup before our next class.</li>
 <li class="fragment">Create your <a href="https://github.com/join">GitHub account</a> if you haven’t already.</li>
-<li class="fragment"><strong>Next session:</strong> we’ll dive deep into Git and GitHub, the foundation of collaborative software development.</li>
+<li class="fragment">Use the terminal, fork and clone the semester repository, then run <code>uv sync --locked</code>.</li>
+<li class="fragment">Submit your fork URL in Canvas and confirm the Week 01 badge is green.</li>
 </ul>
+</section>
+<section class="slide level2">
+
+</section></section>
+<section>
+<section id="terminal-basics" class="title-slide slide level1 center">
+<h1>Terminal basics</h1>
+
+</section>
+<section id="terminal-shell-and-prompt" class="slide level2">
+<h2>Terminal, shell, and prompt</h2>
+<ul>
+<li class="fragment">The <strong>terminal</strong> is the text window where you work.</li>
+<li class="fragment">The <strong>shell</strong> reads a command and asks the operating system to run it.</li>
+<li class="fragment">The <strong>prompt</strong> shows that the shell is ready for your next command.</li>
+<li class="fragment">In this course: use Git Bash on Windows or your default shell on macOS/Linux.</li>
+<li class="fragment">VS Code’s integrated terminal is the same kind of interface inside the editor.</li>
+</ul>
+</section>
+<section id="location-and-command-anatomy" class="slide level2">
+<h2>Location and command anatomy</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode numberSource text number-lines code-with-copy"><code class="sourceCode"><span id="cb1-1"><a></a>uv run python hello.py</span>
+<span id="cb1-2"><a></a>│  └──────── arguments ────────┘</span>
+<span id="cb1-3"><a></a>└ command</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<ul>
+<li class="fragment">Every terminal has a <strong>current working directory</strong>.</li>
+<li class="fragment">Relative paths begin from that directory; absolute paths name the full location.</li>
+<li class="fragment">Spaces separate the command from its arguments.</li>
+<li class="fragment">A command can read, create, change, or delete files—read it before pressing Enter.</li>
+</ul>
+</section>
+<section id="five-commands-to-start" class="slide level2">
+<h2>Five commands to start</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a></a><span class="bu">pwd</span>                 <span class="co"># Where am I?</span></span>
+<span id="cb2-2"><a></a><span class="fu">ls</span>                  <span class="co"># What is here?</span></span>
+<span id="cb2-3"><a></a><span class="bu">cd</span> path/to/folder   <span class="co"># Move to another folder</span></span>
+<span id="cb2-4"><a></a><span class="fu">mkdir</span> practice      <span class="co"># Create a folder</span></span>
+<span id="cb2-5"><a></a><span class="ex">code</span> .              <span class="co"># Open this folder in VS Code</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<ul>
+<li class="fragment">Press <strong>Tab</strong> to complete a path.</li>
+<li class="fragment">Press <strong>Up arrow</strong> to reuse a command.</li>
+<li class="fragment">Press <strong>Ctrl+C</strong> to stop a running command.</li>
+<li class="fragment">Use <code>pwd</code> and <code>git status</code> whenever you are unsure where you are.</li>
+</ul>
+</section>
+<section id="safe-terminal-habits" class="slide level2">
+<h2>Safe terminal habits</h2>
+<ul>
+<li class="fragment">Work inside the repository for the current task.</li>
+<li class="fragment">Read AI-suggested commands before approving them.</li>
+<li class="fragment">Pause when a command says it will delete, overwrite, install globally, or request elevated access.</li>
+<li class="fragment">Never paste passwords, tokens, or API keys into prompts or committed files.</li>
+<li class="fragment">Use <code>git diff</code> before committing so you know exactly what changed.</li>
+</ul>
+</section>
+<section id="live-demo-from-a-folder-to-vs-code" class="slide level2">
+<h2>Live demo: From a folder to VS Code</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a></a><span class="bu">pwd</span></span>
+<span id="cb3-2"><a></a><span class="fu">ls</span></span>
+<span id="cb3-3"><a></a><span class="fu">mkdir</span> is4010-demo</span>
+<span id="cb3-4"><a></a><span class="bu">cd</span> is4010-demo</span>
+<span id="cb3-5"><a></a><span class="bu">pwd</span></span>
+<span id="cb3-6"><a></a><span class="ex">code</span> .</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<aside class="notes">
+<p>Narrate the prompt, current directory, relative path, command, and argument. Demonstrate Tab completion, Up arrow, Ctrl+C, and an intentional wrong directory corrected with <code>pwd</code> and <code>cd</code>. Keep this light: the goal is enough fluency to understand the Git commands that follow.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section class="slide level2">
 
@@ -482,22 +555,22 @@ Brandon M. Greenwell
 <section id="the-git-workflow-in-action" class="slide level2">
 <h2>The Git workflow in action 💻</h2>
 <p>Here’s what the commands actually look like:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a></a><span class="co"># Check what's changed</span></span>
-<span id="cb1-2"><a></a><span class="ex">$</span> git status</span>
-<span id="cb1-3"><a></a><span class="ex">On</span> branch main</span>
-<span id="cb1-4"><a></a><span class="ex">Changes</span> not staged for commit:</span>
-<span id="cb1-5"><a></a>  <span class="ex">modified:</span>   hello.py</span>
-<span id="cb1-6"><a></a></span>
-<span id="cb1-7"><a></a><span class="co"># Stage your changes</span></span>
-<span id="cb1-8"><a></a><span class="ex">$</span> git add hello.py</span>
-<span id="cb1-9"><a></a></span>
-<span id="cb1-10"><a></a><span class="co"># Commit with a message</span></span>
-<span id="cb1-11"><a></a><span class="ex">$</span> git commit <span class="at">-m</span> <span class="st">"Fix greeting message"</span></span>
-<span id="cb1-12"><a></a><span class="ex">[main</span> 1a2b3c4] Fix greeting message</span>
-<span id="cb1-13"><a></a> <span class="ex">1</span> file changed, 1 insertion<span class="er">(</span><span class="ex">+</span><span class="kw">)</span><span class="ex">,</span> 1 deletion<span class="er">(</span><span class="ex">-</span><span class="kw">)</span></span>
-<span id="cb1-14"><a></a></span>
-<span id="cb1-15"><a></a><span class="co"># Push to GitHub</span></span>
-<span id="cb1-16"><a></a><span class="ex">$</span> git push origin main</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a></a><span class="co"># Check what's changed</span></span>
+<span id="cb4-2"><a></a><span class="ex">$</span> git status</span>
+<span id="cb4-3"><a></a><span class="ex">On</span> branch main</span>
+<span id="cb4-4"><a></a><span class="ex">Changes</span> not staged for commit:</span>
+<span id="cb4-5"><a></a>  <span class="ex">modified:</span>   hello.py</span>
+<span id="cb4-6"><a></a></span>
+<span id="cb4-7"><a></a><span class="co"># Stage your changes</span></span>
+<span id="cb4-8"><a></a><span class="ex">$</span> git add hello.py</span>
+<span id="cb4-9"><a></a></span>
+<span id="cb4-10"><a></a><span class="co"># Commit with a message</span></span>
+<span id="cb4-11"><a></a><span class="ex">$</span> git commit <span class="at">-m</span> <span class="st">"Fix greeting message"</span></span>
+<span id="cb4-12"><a></a><span class="ex">[main</span> 1a2b3c4] Fix greeting message</span>
+<span id="cb4-13"><a></a> <span class="ex">1</span> file changed, 1 insertion<span class="er">(</span><span class="ex">+</span><span class="kw">)</span><span class="ex">,</span> 1 deletion<span class="er">(</span><span class="ex">-</span><span class="kw">)</span></span>
+<span id="cb4-14"><a></a></span>
+<span id="cb4-15"><a></a><span class="co"># Push to GitHub</span></span>
+<span id="cb4-16"><a></a><span class="ex">$</span> git push origin main</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <aside class="notes">
 <p><strong>LIVE DEMO NOTES:</strong> - Open terminal and navigate to a demo repository - Modify a file (edit hello.py to change the message) - Run each command and explain the output - Show how <code>git status</code> changes after each step - Demonstrate the GitHub page updating after push - If time permits, show <code>git log</code> to see the commit history</p>
 <style type="text/css">
@@ -614,21 +687,21 @@ Brandon M. Greenwell
 <section id="quick-reference-cheat-sheet" class="slide level2">
 <h2>Quick reference cheat sheet 📋</h2>
 <p>Commands you’ll use constantly:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a></a><span class="co"># Getting started</span></span>
-<span id="cb2-2"><a></a><span class="fu">git</span> clone <span class="op">&lt;</span>url<span class="op">&gt;</span>         <span class="co"># Download a repository</span></span>
-<span id="cb2-3"><a></a><span class="fu">git</span> status              <span class="co"># See what's changed</span></span>
-<span id="cb2-4"><a></a><span class="fu">git</span> log <span class="at">--oneline</span>       <span class="co"># View commit history</span></span>
-<span id="cb2-5"><a></a></span>
-<span id="cb2-6"><a></a><span class="co"># Making changes  </span></span>
-<span id="cb2-7"><a></a><span class="fu">git</span> add <span class="op">&lt;</span>file<span class="op">&gt;</span>          <span class="co"># Stage specific file</span></span>
-<span id="cb2-8"><a></a><span class="fu">git</span> add .               <span class="co"># Stage all changes</span></span>
-<span id="cb2-9"><a></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"message"</span> <span class="co"># Save your changes</span></span>
-<span id="cb2-10"><a></a><span class="fu">git</span> push                <span class="co"># Send to GitHub</span></span>
-<span id="cb2-11"><a></a></span>
-<span id="cb2-12"><a></a><span class="co"># Fixing mistakes</span></span>
-<span id="cb2-13"><a></a><span class="fu">git</span> diff                <span class="co"># See what changed</span></span>
-<span id="cb2-14"><a></a><span class="fu">git</span> reset HEAD <span class="op">&lt;</span>file<span class="op">&gt;</span>   <span class="co"># Unstage a file</span></span>
-<span id="cb2-15"><a></a><span class="fu">git</span> commit <span class="at">--amend</span>      <span class="co"># Fix last commit message</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a></a><span class="co"># Getting started</span></span>
+<span id="cb5-2"><a></a><span class="fu">git</span> clone <span class="op">&lt;</span>url<span class="op">&gt;</span>         <span class="co"># Download a repository</span></span>
+<span id="cb5-3"><a></a><span class="fu">git</span> status              <span class="co"># See what's changed</span></span>
+<span id="cb5-4"><a></a><span class="fu">git</span> log <span class="at">--oneline</span>       <span class="co"># View commit history</span></span>
+<span id="cb5-5"><a></a></span>
+<span id="cb5-6"><a></a><span class="co"># Making changes  </span></span>
+<span id="cb5-7"><a></a><span class="fu">git</span> add <span class="op">&lt;</span>file<span class="op">&gt;</span>          <span class="co"># Stage specific file</span></span>
+<span id="cb5-8"><a></a><span class="fu">git</span> add .               <span class="co"># Stage all changes</span></span>
+<span id="cb5-9"><a></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"message"</span> <span class="co"># Save your changes</span></span>
+<span id="cb5-10"><a></a><span class="fu">git</span> push                <span class="co"># Send to GitHub</span></span>
+<span id="cb5-11"><a></a></span>
+<span id="cb5-12"><a></a><span class="co"># Fixing mistakes</span></span>
+<span id="cb5-13"><a></a><span class="fu">git</span> diff                <span class="co"># See what changed</span></span>
+<span id="cb5-14"><a></a><span class="fu">git</span> reset HEAD <span class="op">&lt;</span>file<span class="op">&gt;</span>   <span class="co"># Unstage a file</span></span>
+<span id="cb5-15"><a></a><span class="fu">git</span> commit <span class="at">--amend</span>      <span class="co"># Fix last commit message</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="time-for-lab-01" class="slide level2">
 <h2>Time for Lab 01 🧪</h2>

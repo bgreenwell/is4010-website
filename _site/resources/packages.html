@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Python packages &amp; environments – IS 4010 - App Dev with AI</title>
+<title>Python packages and environments – IS 4010 - App Dev with AI</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -299,16 +299,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#installing-core-packages" id="toc-installing-core-packages" class="nav-link active" data-scroll-target="#installing-core-packages">📦 Installing core packages</a>
-  <ul class="collapse">
-  <li><a href="#the-essentials" id="toc-the-essentials" class="nav-link" data-scroll-target="#the-essentials">The essentials</a></li>
-  </ul></li>
-  <li><a href="#virtual-environments" id="toc-virtual-environments" class="nav-link" data-scroll-target="#virtual-environments">🛠️ Virtual environments</a>
-  <ul class="collapse">
-  <li><a href="#option-1-using-uv-recommended" id="toc-option-1-using-uv-recommended" class="nav-link" data-scroll-target="#option-1-using-uv-recommended">Option 1: Using <code>uv</code> (recommended)</a></li>
-  <li><a href="#option-2-using-venv-built-in" id="toc-option-2-using-venv-built-in" class="nav-link" data-scroll-target="#option-2-using-venv-built-in">Option 2: Using <code>venv</code> (built-in)</a></li>
-  </ul></li>
-  <li><a href="#tips-for-success" id="toc-tips-for-success" class="nav-link" data-scroll-target="#tips-for-success">💡 Tips for success</a></li>
+  <li><a href="#set-up-the-lab-environment" id="toc-set-up-the-lab-environment" class="nav-link active" data-scroll-target="#set-up-the-lab-environment">Set up the lab environment</a></li>
+  <li><a href="#run-python-and-tests" id="toc-run-python-and-tests" class="nav-link" data-scroll-target="#run-python-and-tests">Run Python and tests</a></li>
+  <li><a href="#add-a-dependency-to-your-own-project" id="toc-add-a-dependency-to-your-own-project" class="nav-link" data-scroll-target="#add-a-dependency-to-your-own-project">Add a dependency to your own project</a></li>
+  <li><a href="#keep-the-environment-synchronized" id="toc-keep-the-environment-synchronized" class="nav-link" data-scroll-target="#keep-the-environment-synchronized">Keep the environment synchronized</a></li>
   </ul>
 </nav>
     </div>
@@ -317,8 +311,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../resources/setup.html">Resources</a></li><li class="breadcrumb-item"><a href="../resources/packages.html">Python packages</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Python packages &amp; environments</h1>
-<p class="subtitle lead">Managing dependencies and virtual environments</p>
+<h1 class="title">Python packages and environments</h1>
+<p class="subtitle lead">Using uv for the course Python environment</p>
 </div>
 
 
@@ -335,73 +329,47 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<p>This course uses a small set of Python libraries for testing and data processing. To keep your system clean and avoid version conflicts, we recommend using a virtual environment.</p>
-<section id="installing-core-packages" class="level2">
-<h2 class="anchored" data-anchor-id="installing-core-packages">📦 Installing core packages</h2>
-<p>Once your environment is active (see below), you can install the required libraries directly using <code>pip</code> or <code>uv</code>.</p>
-<section id="the-essentials" class="level3">
-<h3 class="anchored" data-anchor-id="the-essentials">The essentials</h3>
-<p>We primarily use three packages throughout the Python portion of the course:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Using standard pip</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install pytest pytest-cov requests</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Using uv (recommended)</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> pip install pytest pytest-cov requests</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>This course uses <a href="https://docs.astral.sh/uv/"><code>uv</code></a> to manage Python 3.12, the virtual environment, project dependencies, and the lockfile. The labs repository already contains the project configuration; you usually need only the commands on this page.</p>
+<section id="set-up-the-lab-environment" class="level2">
+<h2 class="anchored" data-anchor-id="set-up-the-lab-environment">Set up the lab environment</h2>
+<p>From the root of your cloned <code>is4010-labs</code> repository:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> sync <span class="at">--locked</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>This command reads:</p>
 <ul>
-<li><strong>pytest</strong>: The industry-standard testing framework.</li>
-<li><strong>pytest-cov</strong>: Tools for measuring how much of your code is covered by tests.</li>
-<li><strong>requests</strong>: The “HTTP for Humans” library used for interacting with web APIs.</li>
+<li><code>.python-version</code> for the course Python version</li>
+<li><code>pyproject.toml</code> for direct dependencies</li>
+<li><code>uv.lock</code> for the exact resolved environment</li>
 </ul>
-<hr>
+<p>It creates <code>.venv</code> automatically. You do not need to activate it because <code>uv run</code> selects the project environment for each command.</p>
 </section>
+<section id="run-python-and-tests" class="level2">
+<h2 class="anchored" data-anchor-id="run-python-and-tests">Run Python and tests</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Check the managed Python version</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> run python <span class="at">--version</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Run a script</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> run python path/to/script.py</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Run the test command printed in a lab</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> run <span class="at">--directory</span> week03 python <span class="at">-m</span> pytest tests/ <span class="at">-v</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Use <code>python -m pytest</code> after <code>uv run</code>; this makes the project interpreter and import path explicit.</p>
 </section>
-<section id="virtual-environments" class="level2">
-<h2 class="anchored" data-anchor-id="virtual-environments">🛠️ Virtual environments</h2>
-<p>A virtual environment is an isolated space where you can install packages without affecting other projects or your global Python installation. <strong>Always create one for your lab repository.</strong></p>
-<section id="option-1-using-uv-recommended" class="level3">
-<h3 class="anchored" data-anchor-id="option-1-using-uv-recommended">Option 1: Using <code>uv</code> (recommended)</h3>
-<p><a href="https://github.com/astral-sh/uv"><code>uv</code></a> is an extremely fast Python package manager written in Rust. It is significantly faster than standard tools and handles environment creation automatically.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Install uv (one-time setup)</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co"># macOS/Linux: curl -LsSf https://astral-sh.github.io/uv/install.sh | sh</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Windows: powershell -c "irm https://astral-sh.github.io/uv/install.ps1 | iex"</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Create and activate a venv</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> venv</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="bu">source</span> .venv/bin/activate  <span class="co"># macOS/Linux</span></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="bu">source</span> .venv/Scripts/activate <span class="co"># Windows (Git Bash)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<section id="add-a-dependency-to-your-own-project" class="level2">
+<h2 class="anchored" data-anchor-id="add-a-dependency-to-your-own-project">Add a dependency to your own project</h2>
+<p>The course repository’s dependencies are instructor-managed. In your own project, use:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> add requests</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> add <span class="at">--dev</span> pytest</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><code>uv add</code> updates both <code>pyproject.toml</code> and <code>uv.lock</code>. Commit those two files so collaborators and CI reproduce the same environment.</p>
 </section>
-<section id="option-2-using-venv-built-in" class="level3">
-<h3 class="anchored" data-anchor-id="option-2-using-venv-built-in">Option 2: Using <code>venv</code> (built-in)</h3>
-<p>If you prefer not to install extra tools, you can use Python’s built-in module:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Create the environment</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> <span class="at">-m</span> venv venv</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Activate it</span></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="bu">source</span> venv/bin/activate  <span class="co"># macOS/Linux</span></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="bu">source</span> venv/Scripts/activate <span class="co"># Windows (Git Bash)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<hr>
-</section>
-</section>
-<section id="tips-for-success" class="level2">
-<h2 class="anchored" data-anchor-id="tips-for-success">💡 Tips for success</h2>
-<ul>
-<li><strong>Activation is key</strong>: Remember to activate your environment every time you open a new terminal window. You’ll know it’s active if you see <code>(venv)</code> or <code>(.venv)</code> in your command prompt.</li>
-<li><strong>VS Code integration</strong>: When you open your repository, VS Code will usually detect your virtual environment. Always click <strong>Yes</strong> when it asks to set it as the workspace interpreter.</li>
-<li><strong>Don’t commit your venv</strong>: Your environment folder contains thousands of files. It should <strong>never</strong> be pushed to GitHub. Our lab templates include this in the <code>.gitignore</code> by default.</li>
-</ul>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>Pro tip: Why use a requirements file?
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>While direct installation is fine for this course, professional projects use a <code>requirements.txt</code> file to ensure every developer on a team is using the exact same versions of every library. It’s the “recipe” for your project’s environment!</p>
-</div>
-</div>
+<section id="keep-the-environment-synchronized" class="level2">
+<h2 class="anchored" data-anchor-id="keep-the-environment-synchronized">Keep the environment synchronized</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Reproduce the committed lockfile exactly</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> sync <span class="at">--locked</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Intentionally update the lockfile after changing dependencies</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> lock</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Do not commit <code>.venv</code>; it is a machine-local build artifact. Do commit <code>.python-version</code>, <code>pyproject.toml</code>, and <code>uv.lock</code>.</p>
+<p>For additional workflows, use the official <a href="https://docs.astral.sh/uv/guides/projects/"><code>uv</code> project guide</a> and <a href="https://docs.astral.sh/uv/concepts/projects/run/"><code>uv run</code> documentation</a>.</p>
 
 
 </section>

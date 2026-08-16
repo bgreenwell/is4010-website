@@ -1,50 +1,85 @@
 ---
 title: "Setup guide"
-subtitle: "Step-by-step instructions for setting up your development environment"
+subtitle: "Install only what you need, when you need it"
 ---
 
-Welcome to IS 4010! This guide provides step-by-step instructions for setting up your computer with all the necessary tools for this course.
+Welcome to IS 4010! We use official setup documentation so these instructions stay useful when tools change. Complete the Week 01 section before Lab 01, the Week 02 section before Lab 02, and the Rust section at the start of Week 09.
 
-### 1. Visual Studio Code (VS Code)
-We use VS Code as our primary IDE.
+## Week 01: Editor, terminal, Git, and Python
 
-*   **Download**: [code.visualstudio.com](https://code.visualstudio.com/download)
-*   **Install**: Run the installer for your OS.
-    *   **Windows**: Check "Add to PATH".
-    *   **macOS**: Open VS Code, press `Cmd+Shift+P`, type "Shell Command", and select **Install 'code' command in PATH**.
+### Visual Studio Code
 
-### 2. Git & GitHub
-*   **Git**: [Download and install](https://git-scm.com/downloads).
-    *   **Windows Users**: We strongly recommend installing **Git Bash** (via the Git for Windows installer) and using it as your default terminal profile in [Windows Terminal](https://apps.microsoft.com/detail/9n0dx20hk701).
-*   **GitHub**: 
-    1.  Create an account at [github.com](https://github.com).
-    2.  Sign up for the [Student Developer Pack](https://education.github.com/pack) (free Copilot!).
-    3.  **Configure Git**:
-        ```bash
-        git config --global user.name "Your Name"
-        git config --global user.email "your.email@example.com"
-        ```
+- Follow the official [VS Code setup documentation](https://code.visualstudio.com/docs/setup/setup-overview).
+- On Windows, use **Git Bash** as your course shell. On macOS or Linux, use your default shell.
+- You may work in a standalone terminal or choose **Terminal > New Terminal** in VS Code.
 
-### 3. Python setup
-*   **Install**: Python 3.10+ from [python.org](https://www.python.org/downloads/).
-    *   **Windows**: Check "Add python.exe to PATH" during installation.
-*   **Verify**: `python --version` (or `python3 --version`).
+### Git and GitHub
 
-### 4. Rust setup (Week 09)
+- Install Git from the official [Git downloads page](https://git-scm.com/downloads).
+- Create a [GitHub account](https://github.com/signup).
+- Apply for [GitHub Education benefits](https://education.github.com/pack).
+- Configure your name and the email associated with GitHub:
 
-You do not need Rust for Labs 01–08. Return to this section at the start of Week 09.
-*   **Install**: Run the following command (macOS/Linux/WSL):
-    ```bash
-    curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
-    ```
-    *   **Windows**: Download `rustup-init.exe` from [rust-lang.org](https://www.rust-lang.org/tools/install).
-*   **Verify**: `cargo --version`.
+```bash
+git config --global user.name "Your name"
+git config --global user.email "your.email@example.com"
+```
 
-### 5. Gemini CLI
-*   **Prerequisite**: Node.js v20+.
-*   **Install**: `npm install -g @google/gemini-cli`.
-*   **Authenticate**: Run `gemini` and log in with your Google account.
+### Python through uv
 
-### 6. GitHub Copilot
-*   Install the **GitHub Copilot** extension in VS Code.
-*   Sign in with your GitHub account (ensure you have the Student Developer Pack activated).
+We use Python 3.12, managed by `uv`. Do not install Python separately unless `uv`'s official documentation tells you that your system requires it.
+
+1. Follow the official [`uv` installation guide](https://docs.astral.sh/uv/getting-started/installation/).
+2. From your cloned labs repository, create the locked course environment:
+
+```bash
+uv sync --locked
+```
+
+3. Verify the tools and the managed Python version:
+
+```bash
+code --version
+git --version
+uv --version
+uv run python --version
+```
+
+`uv sync` creates `.venv` and installs the dependencies in `uv.lock`. You do not need to activate the environment.
+
+## Week 02: AI tools
+
+Use any browser chat that helps you learn, including [ChatGPT](https://chatgpt.com/), [Gemini](https://gemini.google.com/), or [Claude](https://claude.ai/). We will also use all three development surfaces below.
+
+### GitHub Copilot in VS Code
+
+- Follow the official [Copilot setup guide for VS Code](https://docs.github.com/en/copilot/how-tos/set-up/install-copilot-extension).
+- Sign in with your GitHub account.
+
+### GitHub Copilot CLI
+
+- Follow the official [Copilot CLI installation guide](https://docs.github.com/en/copilot/how-tos/copilot-cli/set-up-copilot-cli/install-copilot-cli).
+- Complete its supported authentication flow.
+
+### Antigravity CLI
+
+- Follow the official [Antigravity CLI overview and setup guide](https://antigravity.google/docs/cli/overview/).
+- Complete its supported authentication flow.
+
+Install and try both CLI tools for Lab 02. After comparing them, you may use whichever combination of browser chat, VS Code Copilot, Copilot CLI, and Antigravity CLI fits the task.
+
+::: {.callout-warning}
+Run a coding agent from inside the repository you want it to inspect. Read proposed commands before approving them, use `git diff` to review edits, and never place credentials in prompts or committed files.
+:::
+
+## Week 09: Rust
+
+You do not need Rust for Labs 01–08. At the start of Week 09:
+
+- Follow the official [Rust installation guide](https://www.rust-lang.org/tools/install).
+- Restart the terminal if needed, then verify:
+
+```bash
+cargo --version
+rustc --version
+```

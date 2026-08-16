@@ -1,73 +1,62 @@
 ---
-title: "Python packages & environments"
-subtitle: "Managing dependencies and virtual environments"
+title: "Python packages and environments"
+subtitle: "Using uv for the course Python environment"
 ---
 
-This course uses a small set of Python libraries for testing and data processing. To keep your system clean and avoid version conflicts, we recommend using a virtual environment.
+This course uses [`uv`](https://docs.astral.sh/uv/) to manage Python 3.12, the virtual environment, project dependencies, and the lockfile. The labs repository already contains the project configuration; you usually need only the commands on this page.
 
-## 📦 Installing core packages
+## Set up the lab environment
 
-Once your environment is active (see below), you can install the required libraries directly using `pip` or `uv`.
-
-### The essentials
-
-We primarily use three packages throughout the Python portion of the course:
+From the root of your cloned `is4010-labs` repository:
 
 ```bash
-# Using standard pip
-pip install pytest pytest-cov requests
-
-# Using uv (recommended)
-uv pip install pytest pytest-cov requests
+uv sync --locked
 ```
 
-*   **pytest**: The industry-standard testing framework.
-*   **pytest-cov**: Tools for measuring how much of your code is covered by tests.
-*   **requests**: The "HTTP for Humans" library used for interacting with web APIs.
+This command reads:
 
----
+- `.python-version` for the course Python version
+- `pyproject.toml` for direct dependencies
+- `uv.lock` for the exact resolved environment
 
-## 🛠️ Virtual environments
+It creates `.venv` automatically. You do not need to activate it because `uv run` selects the project environment for each command.
 
-A virtual environment is an isolated space where you can install packages without affecting other projects or your global Python installation. **Always create one for your lab repository.**
-
-### Option 1: Using `uv` (recommended)
-
-[`uv`](https://github.com/astral-sh/uv) is an extremely fast Python package manager written in Rust. It is significantly faster than standard tools and handles environment creation automatically.
+## Run Python and tests
 
 ```bash
-# 1. Install uv (one-time setup)
-# macOS/Linux: curl -LsSf https://astral-sh.github.io/uv/install.sh | sh
-# Windows: powershell -c "irm https://astral-sh.github.io/uv/install.ps1 | iex"
+# Check the managed Python version
+uv run python --version
 
-# 2. Create and activate a venv
-uv venv
-source .venv/bin/activate  # macOS/Linux
-source .venv/Scripts/activate # Windows (Git Bash)
+# Run a script
+uv run python path/to/script.py
+
+# Run the test command printed in a lab
+uv run --directory week03 python -m pytest tests/ -v
 ```
 
-### Option 2: Using `venv` (built-in)
+Use `python -m pytest` after `uv run`; this makes the project interpreter and import path explicit.
 
-If you prefer not to install extra tools, you can use Python's built-in module:
+## Add a dependency to your own project
+
+The course repository's dependencies are instructor-managed. In your own project, use:
 
 ```bash
-# 1. Create the environment
-python -m venv venv
-
-# 2. Activate it
-source venv/bin/activate  # macOS/Linux
-source venv/Scripts/activate # Windows (Git Bash)
+uv add requests
+uv add --dev pytest
 ```
 
----
+`uv add` updates both `pyproject.toml` and `uv.lock`. Commit those two files so collaborators and CI reproduce the same environment.
 
-## 💡 Tips for success
+## Keep the environment synchronized
 
-*   **Activation is key**: Remember to activate your environment every time you open a new terminal window. You'll know it's active if you see `(venv)` or `(.venv)` in your command prompt.
-*   **VS Code integration**: When you open your repository, VS Code will usually detect your virtual environment. Always click **Yes** when it asks to set it as the workspace interpreter.
-*   **Don't commit your venv**: Your environment folder contains thousands of files. It should **never** be pushed to GitHub. Our lab templates include this in the `.gitignore` by default.
+```bash
+# Reproduce the committed lockfile exactly
+uv sync --locked
 
-::: {.callout-tip}
-### Pro tip: Why use a requirements file?
-While direct installation is fine for this course, professional projects use a `requirements.txt` file to ensure every developer on a team is using the exact same versions of every library. It's the "recipe" for your project's environment!
-:::
+# Intentionally update the lockfile after changing dependencies
+uv lock
+```
+
+Do not commit `.venv`; it is a machine-local build artifact. Do commit `.python-version`, `pyproject.toml`, and `uv.lock`.
+
+For additional workflows, use the official [`uv` project guide](https://docs.astral.sh/uv/guides/projects/) and [`uv run` documentation](https://docs.astral.sh/uv/concepts/projects/run/).

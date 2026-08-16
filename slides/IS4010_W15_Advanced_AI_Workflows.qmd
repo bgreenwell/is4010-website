@@ -472,7 +472,7 @@ Don't expect perfection in one prompt. Build iteratively, like you would with a 
 - Debugging multi-file issues
 - Learning new concepts
 
-**Gemini CLI** (terminal):
+**Copilot CLI or Antigravity CLI** (terminal):
 - Explaining error messages
 - Generating shell scripts
 - Quick command lookups
@@ -1149,11 +1149,10 @@ These are real patterns from industry. AI augments human developers, not replace
 - Function generation
 - Quick documentation
 
-**Terminal (Gemini CLI):**
-```bash
-gem "explain this error: [error message]"
-gem "write git commit message for: $(git diff --staged)"
-```
+**Terminal (Copilot CLI or Antigravity CLI):**
+- Start the agent from inside the intended repository.
+- Ask it to inspect a concrete error or the staged diff.
+- Review every proposed command and edit before approval.
 
 **Browser (Claude/ChatGPT):**
 - Architecture discussions
@@ -1256,7 +1255,8 @@ These skills compound over time. The better you get at prompting, the more produ
 - [GitHub Copilot Documentation](https://docs.github.com/copilot)
 - [Claude AI](https://claude.ai)
 - [ChatGPT](https://chat.openai.com)
-- [Gemini CLI](https://github.com/google/generative-ai-python)
+- [GitHub Copilot CLI](https://docs.github.com/en/copilot/how-tos/copilot-cli/set-up-copilot-cli/install-copilot-cli)
+- [Antigravity CLI](https://antigravity.google/docs/cli/overview/)
 
 **Best practices:**
 - [Google Code Review Guidelines](https://google.github.io/eng-practices/review/)
@@ -1305,7 +1305,7 @@ This is the last chance to apply these techniques before project submission. Emp
 
 - Office hours: [Schedule on Teams](https://teams.microsoft.com)
 - Course discussion: Microsoft Teams channel
-- AI tools: Claude, ChatGPT, GitHub Copilot, Gemini CLI
+- AI tools: browser chat, GitHub Copilot, Copilot CLI, Antigravity CLI
 - Prompt engineering communities
 
 **Final project deadline approaching - make it exceptional!**

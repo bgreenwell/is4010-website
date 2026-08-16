@@ -3,33 +3,47 @@ title: "Troubleshooting"
 subtitle: "Common issues and their solutions"
 ---
 
-Welcome to IS 4010! Here are some common issues and their solutions.
+## Python and uv issues
 
-### Python issues
+**`uv: command not found`**
+
+- Restart the terminal after installation so its PATH refreshes.
+- Revisit the official [`uv` installation guide](https://docs.astral.sh/uv/getting-started/installation/) for your operating system.
+
+**The environment is missing or out of date**
+
+- From the repository root, run `uv sync --locked`.
+- Run Python as `uv run python ...`; no manual activation is required.
 
 **`ModuleNotFoundError: No module named 'labXX'`**
-*   **Fix**: Ensure you are running `pytest` from the **repository root**, not inside the `weekXX` folder.
-*   Command: `pytest weekXX/tests/`
 
-**`python: command not found`**
-*   **Fix**: Try using `python3` instead. If on Windows, ensure you checked "Add to PATH" during installation.
+- Run the exact command shown in the lab from the repository root.
+- Example: `uv run --directory week03 python -m pytest tests/ -v`.
 
-### Git & GitHub issues
+## Git and GitHub issues
 
-**`Permission denied (publickey)`**
-*   **Fix**: You are likely trying to push without setting up authentication.
-*   **Solution**: Use a **Personal Access Token (PAT)** as your password when prompted, or set up SSH keys.
+**Authentication failed or permission was denied**
 
-**Changes not showing on GitHub**
-*   **Fix**: Did you `git push`? Committing only saves changes locally.
+- Follow GitHub's current [authentication documentation](https://docs.github.com/en/authentication).
+- Confirm `git remote -v` points to your fork, not the instructor repository.
+- Never save a token in the repository.
 
-### Rust issues
+**Changes are not showing on GitHub**
+
+- Run `git status` and `git log -1`.
+- A commit remains local until you run `git push origin main`.
+
+## Rust issues
 
 **`cargo: command not found`**
-*   **Fix**: You may need to restart your terminal after installing Rust to refresh your PATH.
 
-### GitHub Actions
+- Restart the terminal after installing Rust so its PATH refreshes.
+- Revisit the official [Rust installation guide](https://www.rust-lang.org/tools/install).
 
-**Workflow not triggering**
-*   **Fix**: For your first lab, go to the **Actions** tab on GitHub and click "I understand my workflows, enable them".
-*   **Fix**: Ensure you pushed your code!
+## GitHub Actions issues
+
+**A workflow did not run**
+
+- In a new fork, open **Actions** and enable the inherited workflows.
+- Confirm you pushed the required files to `main`.
+- Select the badge or workflow run to read the first failing step.

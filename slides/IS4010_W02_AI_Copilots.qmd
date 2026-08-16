@@ -89,16 +89,15 @@ Set expectations: These tools are incredibly useful but require human judgment a
 
 ---
 
-## Four main categories:
+## Three working surfaces
 ::: {.incremental}
-- **Conversational AI models**: General-purpose models (Gemini, ChatGPT, Claude)
-- **Specialized code assistants**: Purpose-built for coding ([GitHub Copilot](https://github.com/features/copilot), [Claude Code](https://claude.ai/code))
-- **Command-line tools**: Terminal-based AI access ([Gemini CLI](https://github.com/google-gemini/gemini-cli), [Copilot CLI](https://github.com/features/copilot/cli))
-- **Code analysis tools**: Project-wide review and feedback ([Google Jules](https://jules.google/))
+- **Browser chat**: General-purpose conversation and explanations (Gemini, ChatGPT, Claude, and others)
+- **Editor assistant**: Contextual completion, chat, and edits with [GitHub Copilot](https://github.com/features/copilot) in VS Code
+- **CLI agents**: Repository-aware work in the terminal with [Copilot CLI](https://github.com/features/copilot/cli) and [Antigravity CLI](https://antigravity.google/docs/cli/overview/)
 :::
 
 ::: notes
-Frame these as the five core use cases students will encounter most frequently. Every AI interaction should fit into one of these categories.
+Frame these as surfaces rather than permanent tool loyalties. The same model or provider may appear in more than one surface, but the context and workflow differ.
 
 Ask students: "Which of these sounds most useful to you right now?" Get a sense of where they are in their programming journey.
 :::
@@ -512,100 +511,63 @@ Students may ask: "Why not just use the browser?" Answer: When you're deep in te
 
 ---
 
-## [Gemini CLI](https://github.com/google-gemini/gemini-cli)
+## [Antigravity CLI](https://antigravity.google/docs/cli/overview/)
 
-### (Free) AI in your terminal 🖥️
+### Google's coding agent in your terminal 🖥️
 
-**Common usage patterns:**
+::: {.incremental}
+- Launch with `agy` from inside the repository you want it to inspect.
+- Ask questions, request a plan, inspect files, and propose edits from one session.
+- Review requested permissions and commands before approval.
+- Use the official setup guide because installation and authentication flows can change.
+:::
 
 ```bash
-# Start an interactive gemini session
-gemini
-
-# Quick code questions
-gemini "How do I install [pytest](https://pytest.org/) in [Python](https://www.python.org/)?"
-
-# Code generation
-gemini "Write a [Rust](https://www.rust-lang.org/) function to read a CSV file"
-
-# Debugging help
-gemini "Explain this error: ImportError: No module named 'requests'"
+cd ~/is4010/is4010-labs
+agy
 ```
 
 ::: notes
-Prepare a live demo of Gemini CLI. Have it installed and configured beforehand.
-
-Show practical examples:
-1. Quick package installation help
-2. Language translation ([Python](https://www.python.org/) to [Rust](https://www.rust-lang.org/))
-3. Error message explanation
-4. Code review of a file: `cat script.py | gemini "Review this code for bugs"`
-
-Mention that students can get a free API key from [Google AI Studio](https://aistudio.google.com/).
+Explain the 2026 product transition: the individual Gemini CLI experience moved to Antigravity CLI. Enterprise/API Gemini CLI cases may still exist, but `agy` is the course-facing Google CLI.
 :::
 
 ---
 
 ## [GitHub Copilot CLI](https://github.com/features/copilot/cli)
 
-### (Free tier) Natural language terminal ⌨️
+### GitHub's coding agent in your terminal ⌨️
 
-**Common usage patterns:**
+::: {.incremental}
+- Install the standalone tool from the current official GitHub documentation.
+- Launch with `copilot` from inside the repository you want it to inspect.
+- It can reason about repository context, propose edits, and help run checks.
+- Review its plan, permissions, commands, and final diff.
+:::
 
 ```bash
-# Ask how to do something in the terminal
-gh copilot suggest "list all python files larger than 1MB"
-
-# Explain a complex command
-gh copilot explain "find . -name '*.py' -size +1M"
-
-# Execute suggestions directly
-# (Follow the prompts to execute or copy)
+cd ~/is4010/is4010-labs
+copilot
 ```
 
 ::: notes
-GitHub Copilot CLI is part of the `gh` (GitHub CLI) tool. It's excellent for when you know *what* you want to do in the terminal but forget the exact flags or syntax.
-
-Key feature: It doesn't just give you code; it gives you terminal commands and explains what they do before you run them.
-
-Students with the GitHub Student Developer Pack get this as part of their Copilot access.
+The current Copilot CLI is a standalone agent, not the older `gh copilot suggest` and `gh copilot explain` extension. Open the official install page during class instead of copying an installer command into the deck.
 :::
 
 ---
 
-## [Claude Code](https://claude.ai/code)
-
-### (Not free) AI in your terminal 🖥️
-
-**What is it?**
+## The comparison protocol
 
 ::: {.incremental}
-- **Anthropic's premium CLI tool** for professional development
-- **Advanced features**: Project context, file editing, test generation, and much, much more!
-- **Industry adoption**: Popular in professional development
-- **Subscription required**: Currently better than free alternatives
-:::
-
----
-
-## [Claude Code](https://claude.ai/code)
-
-### (Not free) AI in your terminal 🖥️
-
-**Why mention it?**
-
-::: {.incremental}
-- **Career awareness**: You'll likely encounter it in industry
-- **Feature preview**: Shows where AI coding tools are heading
-- **Upgrade path**: When you outgrow free tools, this is an option
+1. Start both agents in the same repository.
+2. Give both the exact same small, testable prompt.
+3. Compare correctness, assumptions, clarity, and proposed commands.
+4. Select or combine an approach; do not accept changes merely because they look plausible.
+5. Run `uv run --directory week02 python -m pytest tests/ -v`.
+6. Inspect `git diff` before committing.
 :::
 
 ::: notes
-We're not doing a live demo since it's a paid tool, but students should be aware it exists.
-
-Position this as "what you might use in your first job" - many companies are adopting premium AI tools for their development teams.
-
-Key message: Start with free tools (Gemini, Copilot free tier), but be aware of the premium tools available for career purposes.
+Use `count_vowels` for the live comparison so class mirrors Lab 02. CI can validate the code and journal structure, but it cannot inspect local tool installations.
 :::
 
 ---
@@ -657,23 +619,21 @@ Emphasize that this is perfect for their lab submissions - they can get AI feedb
 
 **Required for this course (free):**
 
-- [GitHub Copilot](https://github.com/features/copilot) 
-- [Gemini CLI](https://github.com/google-gemini/gemini-cli) 
+- A browser chat of your choice
+- [GitHub Copilot](https://github.com/features/copilot) in VS Code
+- [GitHub Copilot CLI](https://docs.github.com/en/copilot/how-tos/copilot-cli/set-up-copilot-cli/install-copilot-cli)
+- [Antigravity CLI](https://antigravity.google/docs/cli/overview/)
 
-**Recommended for this course (also free):**
+**After Lab 02:**
 
-- [GitHub Copilot CLI](https://github.com/features/copilot/cli)
-- [Gemini web interface](https://gemini.google.com/) 
-- [Google Jules](https://jules.google/)
+- Keep both CLIs installed so you can compare when useful.
+- Use whichever browser, editor, and CLI combination best fits the task.
+- Tool preference never replaces tests, inspection, or your responsibility for the result.
 
 ::: notes
 Give clear guidance on what students need vs. what's nice to have.
 
-[GitHub Copilot](https://github.com/features/copilot) is required because it integrates directly with [VS Code](https://code.visualstudio.com/) and provides the best learning experience for the course.
-
-Everything else is optional but recommended for exploration. Encourage students to try different tools and find their preferences.
-
-Remind them that many tools offer free tiers or student discounts.
+Students install and try both CLI agents. The point is comparison and informed choice, not declaring one permanent winner.
 :::
 
 ---
@@ -730,18 +690,19 @@ Ask: "What questions do you have about integrating AI into your development work
 
 ---
 
-## Introducing Lab 02: Prompt journal 🚀
+## Introducing Lab 02: CLI comparison 🚀
 
-- Save the prompts that produced your first draft, explanation, tests, and revision
-- Record one meaningful change you made after checking the AI's output
-- Reflect on what the assistant did well, what required judgment, and what you now understand
+- Install and authenticate both CLI tools using their official documentation
+- Give both agents the exact same `count_vowels` task
+- Compare their suggestions, then select, test, and revise an implementation
+- Reflect on the browser, editor, and CLI combination you prefer
 - The automated check validates both the Python behavior and the completed journal
 
 ---
 
 ## Time for Lab 02! 🧪
 
-- Your next hands-on lab: an AI-assisted [Python](https://www.python.org/) preview
+- Your next hands-on lab: compare two CLI coding agents on a small [Python](https://www.python.org/) task
 - Complete `week02/lab02.py` and `week02/lab02_prompts.md`
-- Run the provided tests, push your work, and confirm the Lab 02 README badge is green
+- Run the provided tests, inspect `git diff`, push your work, and confirm the Lab 02 README badge is green
 - Navigate to [`week02/lab02.md`](https://github.com/bgreenwell/is4010-labs/blob/main/week02/lab02.md) for step-by-step instructions

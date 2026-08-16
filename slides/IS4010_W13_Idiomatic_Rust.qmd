@@ -1096,7 +1096,7 @@ Next week synthesizes these patterns in a tested password generator and validato
 
 **Office hours**: See syllabus
 
-**AI assistance**: GitHub Copilot, ChatGPT, Claude, Gemini CLI
+**AI assistance**: Browser chat, GitHub Copilot, Copilot CLI, Antigravity CLI
 
 **Lab 13**: Due Sunday at 11:59 PM
 

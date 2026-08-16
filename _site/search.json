@@ -137,7 +137,7 @@
     "href": "slides/IS4010_W15_Advanced_AI_Workflows.html#multi-tool-strategies",
     "title": "IS4010: AI-Enhanced Application Development",
     "section": "Multi-Tool Strategies",
-    "text": "Multi-Tool Strategies\nDifferent tools for different tasks:\nGitHub Copilot (in-editor): - Autocompleting functions - Generating boilerplate - Quick inline suggestions - Pattern completion\nChatGPT/Claude (conversational): - Complex explanations - Architecture decisions - Debugging multi-file issues - Learning new concepts\nGemini CLI (terminal): - Explaining error messages - Generating shell scripts - Quick command lookups - Repository analysis\nPerplexity (research): - Finding documentation - Comparing approaches - Staying current with ecosystem changes\n\nMaster developers use the right tool for the job. Each AI tool has strengths - learn them and combine strategically."
+    "text": "Multi-Tool Strategies\nDifferent tools for different tasks:\nGitHub Copilot (in-editor): - Autocompleting functions - Generating boilerplate - Quick inline suggestions - Pattern completion\nChatGPT/Claude (conversational): - Complex explanations - Architecture decisions - Debugging multi-file issues - Learning new concepts\nCopilot CLI or Antigravity CLI (terminal): - Explaining error messages - Generating shell scripts - Quick command lookups - Repository analysis\nPerplexity (research): - Finding documentation - Comparing approaches - Staying current with ecosystem changes\n\nMaster developers use the right tool for the job. Each AI tool has strengths - learn them and combine strategically."
   },
   {
     "objectID": "slides/IS4010_W15_Advanced_AI_Workflows.html#try-it-yourself-code-review",
@@ -277,7 +277,7 @@
     "href": "slides/IS4010_W15_Advanced_AI_Workflows.html#building-your-ai-toolkit",
     "title": "IS4010: AI-Enhanced Application Development",
     "section": "Building Your AI Toolkit",
-    "text": "Building Your AI Toolkit\nRecommended workflow setup:\nIn-editor (GitHub Copilot): - Tab completion for code - Function generation - Quick documentation\nTerminal (Gemini CLI):\ngem \"explain this error: [error message]\"\ngem \"write git commit message for: $(git diff --staged)\"\nBrowser (Claude/ChatGPT): - Architecture discussions - Complex debugging - Learning new concepts\nDocumentation (Cursor, Continue.dev): - Codebase-aware AI - Multi-file refactoring - Project-specific context\nCreate a personal prompt library: - Save effective prompts you use often - Customize for your projects - Share with teammates\n\nBuild your toolkit gradually. Master one tool before adding another. Quality over quantity."
+    "text": "Building Your AI Toolkit\nRecommended workflow setup:\nIn-editor (GitHub Copilot): - Tab completion for code - Function generation - Quick documentation\nTerminal (Copilot CLI or Antigravity CLI): - Start the agent from inside the intended repository. - Ask it to inspect a concrete error or the staged diff. - Review every proposed command and edit before approval.\nBrowser (Claude/ChatGPT): - Architecture discussions - Complex debugging - Learning new concepts\nDocumentation (Cursor, Continue.dev): - Codebase-aware AI - Multi-file refactoring - Project-specific context\nCreate a personal prompt library: - Save effective prompts you use often - Customize for your projects - Share with teammates\n\nBuild your toolkit gradually. Master one tool before adding another. Quality over quantity."
   },
   {
     "objectID": "slides/IS4010_W15_Advanced_AI_Workflows.html#ai-prompting-meta-level",
@@ -298,7 +298,7 @@
     "href": "slides/IS4010_W15_Advanced_AI_Workflows.html#additional-resources",
     "title": "IS4010: AI-Enhanced Application Development",
     "section": "Additional Resources",
-    "text": "Additional Resources\nPrompt engineering: - OpenAI Prompt Engineering Guide - Anthropic Prompt Library - Learn Prompting - Prompt Engineering Patterns\nAI tools: - GitHub Copilot Documentation - Claude AI - ChatGPT - Gemini CLI\nBest practices: - Google Code Review Guidelines - Refactoring Catalog - Academic Integrity Resources\n\nEncourage students to explore these resources. Prompt engineering is an evolving field - stay current."
+    "text": "Additional Resources\nPrompt engineering: - OpenAI Prompt Engineering Guide - Anthropic Prompt Library - Learn Prompting - Prompt Engineering Patterns\nAI tools: - GitHub Copilot Documentation - Claude AI - ChatGPT - GitHub Copilot CLI - Antigravity CLI\nBest practices: - Google Code Review Guidelines - Refactoring Catalog - Academic Integrity Resources\n\nEncourage students to explore these resources. Prompt engineering is an evolving field - stay current."
   },
   {
     "objectID": "slides/IS4010_W15_Advanced_AI_Workflows.html#final-project-application",
@@ -312,7 +312,7 @@
     "href": "slides/IS4010_W15_Advanced_AI_Workflows.html#questions",
     "title": "IS4010: AI-Enhanced Application Development",
     "section": "Questions?",
-    "text": "Questions?\nGet help:\n\nOffice hours: Schedule on Teams\nCourse discussion: Microsoft Teams channel\nAI tools: Claude, ChatGPT, GitHub Copilot, Gemini CLI\nPrompt engineering communities\n\nFinal project deadline approaching - make it exceptional!\nRemember: AI is your assistant, not your replacement. Use it to amplify your skills, not replace your thinking."
+    "text": "Questions?\nGet help:\n\nOffice hours: Schedule on Teams\nCourse discussion: Microsoft Teams channel\nAI tools: browser chat, GitHub Copilot, Copilot CLI, Antigravity CLI\nPrompt engineering communities\n\nFinal project deadline approaching - make it exceptional!\nRemember: AI is your assistant, not your replacement. Use it to amplify your skills, not replace your thinking."
   },
   {
     "objectID": "slides/IS4010_W15_Advanced_AI_Workflows.html#thank-you",
@@ -333,14 +333,14 @@
     "href": "slides/IS4010_W08_Professional_Python.html#why-clis-matter-the-power-of-automation",
     "title": "IS4010: AI-Enhanced Application Development",
     "section": "🤔 Why CLIs matter: The power of automation",
-    "text": "🤔 Why CLIs matter: The power of automation\nThe Problem: Manual, repetitive tasks\n\nScenario: You need to fetch data from an API multiple times per day\nManual approach: Open browser, navigate to site, copy data, paste into file\nTime waste: 5 minutes per fetch × 10 times per day = 50 minutes daily\nError-prone: Manual copy-paste leads to mistakes and inconsistencies\nSolution: A CLI tool that automates the entire workflow in seconds\n\n\nTEACHING NOTES:\n\nReal-world motivation: Show how professionals use CLI tools constantly\nCareer examples: Data scientists use CLI tools for dataset downloads, web developers for deployment\nUnix philosophy: Small, composable tools that do one thing well\nStudent connection: They’ve used git, pip, python - all CLI tools\nFinal project application: Their projects should have CLI interfaces for easy testing and demonstration\nTime savings: Automation is a force multiplier for productivity"
+    "text": "🤔 Why CLIs matter: The power of automation\nThe Problem: Manual, repetitive tasks\n\nScenario: You need to fetch data from an API multiple times per day\nManual approach: Open browser, navigate to site, copy data, paste into file\nTime waste: 5 minutes per fetch × 10 times per day = 50 minutes daily\nError-prone: Manual copy-paste leads to mistakes and inconsistencies\nSolution: A CLI tool that automates the entire workflow in seconds\n\n\nTEACHING NOTES:\n\nReal-world motivation: Show how professionals use CLI tools constantly\nCareer examples: Data scientists use CLI tools for dataset downloads, web developers for deployment\nUnix philosophy: Small, composable tools that do one thing well\nStudent connection: They’ve used git, uv, and python - all CLI tools\nFinal project application: Their projects should have CLI interfaces for easy testing and demonstration\nTime savings: Automation is a force multiplier for productivity"
   },
   {
     "objectID": "slides/IS4010_W08_Professional_Python.html#cli-tools-in-the-wild-examples-everywhere",
     "href": "slides/IS4010_W08_Professional_Python.html#cli-tools-in-the-wild-examples-everywhere",
     "title": "IS4010: AI-Enhanced Application Development",
     "section": "🛠️ CLI tools in the wild: Examples everywhere",
-    "text": "🛠️ CLI tools in the wild: Examples everywhere\n\nVersion control: git - git add, git commit, git push\nPackage management: pip - pip install, pip list, pip freeze\nWeb frameworks: django-admin - startproject, migrate, runserver\nAWS CLI: aws - Manage cloud infrastructure from the terminal\nData science: jupyter - jupyter notebook, jupyter lab\nYour final project: Create professional CLIs for your API projects\n\n\nTEACHING NOTES:\n\nUbiquity: Students have been using CLIs without realizing it\nDesign patterns: Notice common patterns - commands, subcommands, flags\nProfessional standard: Every major framework provides CLI tools\nCareer skills: Building CLIs is a resume-worthy skill\nInterview topics: CLI design often appears in system design discussions\nEcosystem: Python has excellent CLI libraries - argparse, click, typer"
+    "text": "🛠️ CLI tools in the wild: Examples everywhere\n\nVersion control: git - git add, git commit, git push\nPython project management: uv - uv sync, uv add, uv run\nWeb frameworks: django-admin - startproject, migrate, runserver\nAWS CLI: aws - Manage cloud infrastructure from the terminal\nData science: jupyter - jupyter notebook, jupyter lab\nYour final project: Create professional CLIs for your API projects\n\n\nTEACHING NOTES:\n\nUbiquity: Students have been using CLIs without realizing it\nDesign patterns: Notice common patterns - commands, subcommands, flags\nProfessional standard: Every major framework provides CLI tools\nCareer skills: Building CLIs is a resume-worthy skill\nInterview topics: CLI design often appears in system design discussions\nEcosystem: Python has excellent CLI libraries - argparse, click, typer"
   },
   {
     "objectID": "slides/IS4010_W08_Professional_Python.html#introducing-argparse-pythons-built-in-cli-library",
@@ -368,7 +368,7 @@
     "href": "slides/IS4010_W08_Professional_Python.html#running-the-cli-usage-examples",
     "title": "IS4010: AI-Enhanced Application Development",
     "section": "🚀 Running the CLI: Usage examples",
-    "text": "🚀 Running the CLI: Usage examples\nGetting help:\n$ python simple_greeter.py --help\nusage: simple_greeter.py [-h] [--loud] name\n\nA simple greeting tool\n\npositional arguments:\n  name        The name of the person to greet\n\noptions:\n  -h, --help  show this help message and exit\n  --loud      Greet in ALL CAPS\n\nThanks for using the greeter!\nUsing the tool:\n$ python simple_greeter.py Alice\nHello, Alice!\n\n$ python simple_greeter.py Bob --loud\nHELLO, BOB!\n\n$ python simple_greeter.py\nusage: simple_greeter.py [-h] [--loud] name\nsimple_greeter.py: error: the following arguments are required: name\n\nTEACHING NOTES:\n\nAuto-generated help: argparse creates this from our code\nError handling: Automatic validation and helpful error messages\nUser experience: Notice how intuitive the interface is\nProfessional quality: This rivals commercial CLI tools\nNo extra code: We didn’t write any error handling or help text rendering\nBest practices: This is the gold standard for Python CLI design"
+    "text": "🚀 Running the CLI: Usage examples\nGetting help:\n$ uv run python simple_greeter.py --help\nusage: simple_greeter.py [-h] [--loud] name\n\nA simple greeting tool\n\npositional arguments:\n  name        The name of the person to greet\n\noptions:\n  -h, --help  show this help message and exit\n  --loud      Greet in ALL CAPS\n\nThanks for using the greeter!\nUsing the tool:\n$ uv run python simple_greeter.py Alice\nHello, Alice!\n\n$ uv run python simple_greeter.py Bob --loud\nHELLO, BOB!\n\n$ uv run python simple_greeter.py\nusage: simple_greeter.py [-h] [--loud] name\nsimple_greeter.py: error: the following arguments are required: name\n\nTEACHING NOTES:\n\nAuto-generated help: argparse creates this from our code\nError handling: Automatic validation and helpful error messages\nUser experience: Notice how intuitive the interface is\nProfessional quality: This rivals commercial CLI tools\nNo extra code: We didn’t write any error handling or help text rendering\nBest practices: This is the gold standard for Python CLI design"
   },
   {
     "objectID": "slides/IS4010_W08_Professional_Python.html#advanced-argparse-multiple-arguments-and-types",
@@ -382,7 +382,7 @@
     "href": "slides/IS4010_W08_Professional_Python.html#subcommands-building-multi-function-tools",
     "title": "IS4010: AI-Enhanced Application Development",
     "section": "🌟 Subcommands: Building multi-function tools",
-    "text": "🌟 Subcommands: Building multi-function tools\n\"\"\"project_manager.py - Manage your project with subcommands.\"\"\"\nimport argparse\n\ndef cmd_init(args):\n    \"\"\"Initialize a new project.\"\"\"\n    print(f\"Initializing project: {args.name}\")\n    print(f\"Template: {args.template}\")\n\ndef cmd_build(args):\n    \"\"\"Build the project.\"\"\"\n    print(f\"Building project...\")\n    if args.verbose:\n        print(\"Verbose output enabled\")\n\ndef cmd_deploy(args):\n    \"\"\"Deploy the project.\"\"\"\n    print(f\"Deploying to {args.environment}\")\n\ndef main():\n    parser = argparse.ArgumentParser(description=\"Project management tool\")\n    subparsers = parser.add_subparsers(dest=\"command\", help=\"Available commands\")\n\n    # 'init' subcommand\n    init_parser = subparsers.add_parser(\"init\", help=\"Initialize a new project\")\n    init_parser.add_argument(\"name\", help=\"Project name\")\n    init_parser.add_argument(\"--template\", default=\"basic\", help=\"Project template\")\n    init_parser.set_defaults(func=cmd_init)\n\n    # 'build' subcommand\n    build_parser = subparsers.add_parser(\"build\", help=\"Build the project\")\n    build_parser.add_argument(\"-v\", \"--verbose\", action=\"store_true\")\n    build_parser.set_defaults(func=cmd_build)\n\n    # 'deploy' subcommand\n    deploy_parser = subparsers.add_parser(\"deploy\", help=\"Deploy the project\")\n    deploy_parser.add_argument(\"environment\", choices=[\"dev\", \"staging\", \"prod\"])\n    deploy_parser.set_defaults(func=cmd_deploy)\n\n    args = parser.parse_args()\n\n    # Call the appropriate function\n    if hasattr(args, \"func\"):\n        args.func(args)\n    else:\n        parser.print_help()\n\nif __name__ == \"__main__\":\n    main()\n\nTEACHING NOTES:\n\nGit-style: This pattern mirrors git add, git commit, etc.\nScalability: Easy to add new subcommands without refactoring\nOrganization: Each subcommand has its own function and arguments\nFunction dispatch: set_defaults(func=...) enables clean routing\nProfessional pattern: Used in Django, Flask, AWS CLI, and more\nFinal project application: Students could add subcommands for different API operations\nHelp per subcommand: python project_manager.py init --help works"
+    "text": "🌟 Subcommands: Building multi-function tools\n\"\"\"project_manager.py - Manage your project with subcommands.\"\"\"\nimport argparse\n\ndef cmd_init(args):\n    \"\"\"Initialize a new project.\"\"\"\n    print(f\"Initializing project: {args.name}\")\n    print(f\"Template: {args.template}\")\n\ndef cmd_build(args):\n    \"\"\"Build the project.\"\"\"\n    print(f\"Building project...\")\n    if args.verbose:\n        print(\"Verbose output enabled\")\n\ndef cmd_deploy(args):\n    \"\"\"Deploy the project.\"\"\"\n    print(f\"Deploying to {args.environment}\")\n\ndef main():\n    parser = argparse.ArgumentParser(description=\"Project management tool\")\n    subparsers = parser.add_subparsers(dest=\"command\", help=\"Available commands\")\n\n    # 'init' subcommand\n    init_parser = subparsers.add_parser(\"init\", help=\"Initialize a new project\")\n    init_parser.add_argument(\"name\", help=\"Project name\")\n    init_parser.add_argument(\"--template\", default=\"basic\", help=\"Project template\")\n    init_parser.set_defaults(func=cmd_init)\n\n    # 'build' subcommand\n    build_parser = subparsers.add_parser(\"build\", help=\"Build the project\")\n    build_parser.add_argument(\"-v\", \"--verbose\", action=\"store_true\")\n    build_parser.set_defaults(func=cmd_build)\n\n    # 'deploy' subcommand\n    deploy_parser = subparsers.add_parser(\"deploy\", help=\"Deploy the project\")\n    deploy_parser.add_argument(\"environment\", choices=[\"dev\", \"staging\", \"prod\"])\n    deploy_parser.set_defaults(func=cmd_deploy)\n\n    args = parser.parse_args()\n\n    # Call the appropriate function\n    if hasattr(args, \"func\"):\n        args.func(args)\n    else:\n        parser.print_help()\n\nif __name__ == \"__main__\":\n    main()\n\nTEACHING NOTES:\n\nGit-style: This pattern mirrors git add, git commit, etc.\nScalability: Easy to add new subcommands without refactoring\nOrganization: Each subcommand has its own function and arguments\nFunction dispatch: set_defaults(func=...) enables clean routing\nProfessional pattern: Used in Django, Flask, AWS CLI, and more\nFinal project application: Students could add subcommands for different API operations\nHelp per subcommand: uv run python project_manager.py init --help works"
   },
   {
     "objectID": "slides/IS4010_W08_Professional_Python.html#cli-ux-best-practices-professional-polish",
@@ -396,7 +396,7 @@
     "href": "slides/IS4010_W08_Professional_Python.html#practical-example-api-cli-for-final-projects",
     "title": "IS4010: AI-Enhanced Application Development",
     "section": "💡 Practical example: API CLI for final projects",
-    "text": "💡 Practical example: API CLI for final projects\n\"\"\"my_api_tool.py - Professional CLI for your final project API project.\"\"\"\nimport argparse\nimport sys\nfrom typing import Optional\n\ndef fetch_resource(resource_type: str, resource_id: Optional[str], limit: int):\n    \"\"\"Fetch data from your API.\"\"\"\n    # Your API integration code here\n    print(f\"Fetching {resource_type}...\")\n    if resource_id:\n        print(f\"ID: {resource_id}\")\n    print(f\"Limit: {limit}\")\n    # Return the data\n\ndef main():\n    parser = argparse.ArgumentParser(\n        prog=\"my_api_tool\",\n        description=\"Interact with [Your API Name] from the command line\",\n        epilog=\"Example: python my_api_tool.py pokemon pikachu --format json\"\n    )\n\n    parser.add_argument(\"resource\", help=\"Resource type to fetch\")\n    parser.add_argument(\"id\", nargs=\"?\", help=\"Optional resource ID\")\n    parser.add_argument(\"-l\", \"--limit\", type=int, default=10, help=\"Number of items\")\n    parser.add_argument(\"--format\", choices=[\"json\", \"pretty\"], default=\"pretty\")\n    parser.add_argument(\"-o\", \"--output\", help=\"Save to file instead of printing\")\n\n    try:\n        args = parser.parse_args()\n        result = fetch_resource(args.resource, args.id, args.limit)\n        print(\"Success!\")\n        return 0  # Success exit code\n    except Exception as e:\n        print(f\"Error: {e}\", file=sys.stderr)\n        return 1  # Error exit code\n\nif __name__ == \"__main__\":\n    sys.exit(main())\n\nTEACHING NOTES:\n\nFinal project application: This is directly applicable to their projects\nError handling: Try/except at top level catches all errors\nExit codes: sys.exit(main()) returns proper codes\nOptional arguments: nargs=\"?\" makes positional arg optional\nstderr: Errors go to stderr, not stdout (Unix convention)\nProg name: Customize how the tool appears in help text\nEpilog: Provide usage examples in help output\nCareer skill: This pattern is interview-worthy"
+    "text": "💡 Practical example: API CLI for final projects\n\"\"\"my_api_tool.py - Professional CLI for your final project API project.\"\"\"\nimport argparse\nimport sys\nfrom typing import Optional\n\ndef fetch_resource(resource_type: str, resource_id: Optional[str], limit: int):\n    \"\"\"Fetch data from your API.\"\"\"\n    # Your API integration code here\n    print(f\"Fetching {resource_type}...\")\n    if resource_id:\n        print(f\"ID: {resource_id}\")\n    print(f\"Limit: {limit}\")\n    # Return the data\n\ndef main():\n    parser = argparse.ArgumentParser(\n        prog=\"my_api_tool\",\n        description=\"Interact with [Your API Name] from the command line\",\n        epilog=\"Example: uv run python my_api_tool.py pokemon pikachu --format json\"\n    )\n\n    parser.add_argument(\"resource\", help=\"Resource type to fetch\")\n    parser.add_argument(\"id\", nargs=\"?\", help=\"Optional resource ID\")\n    parser.add_argument(\"-l\", \"--limit\", type=int, default=10, help=\"Number of items\")\n    parser.add_argument(\"--format\", choices=[\"json\", \"pretty\"], default=\"pretty\")\n    parser.add_argument(\"-o\", \"--output\", help=\"Save to file instead of printing\")\n\n    try:\n        args = parser.parse_args()\n        result = fetch_resource(args.resource, args.id, args.limit)\n        print(\"Success!\")\n        return 0  # Success exit code\n    except Exception as e:\n        print(f\"Error: {e}\", file=sys.stderr)\n        return 1  # Error exit code\n\nif __name__ == \"__main__\":\n    sys.exit(main())\n\nTEACHING NOTES:\n\nFinal project application: This is directly applicable to their projects\nError handling: Try/except at top level catches all errors\nExit codes: sys.exit(main()) returns proper codes\nOptional arguments: nargs=\"?\" makes positional arg optional\nstderr: Errors go to stderr, not stdout (Unix convention)\nProg name: Customize how the tool appears in help text\nEpilog: Provide usage examples in help output\nCareer skill: This pattern is interview-worthy"
   },
   {
     "objectID": "slides/IS4010_W08_Professional_Python.html#ai-assisted-cli-development",
@@ -410,7 +410,7 @@
     "href": "slides/IS4010_W08_Professional_Python.html#from-scripts-to-packages-the-evolution",
     "title": "IS4010: AI-Enhanced Application Development",
     "section": "🏗️ From scripts to packages: The evolution",
-    "text": "🏗️ From scripts to packages: The evolution\nThe journey every Python developer takes:\n\nStage 1: Single .py file - my_script.py does everything\nStage 2: Multiple files - utils.py, api.py, cli.py in one folder\nStage 3: Package structure - Organized directories with __init__.py files\nStage 4: Installable package - Can pip install your own code\nCareer reality: Professional projects are always Stage 3 or 4\n\n\nTEACHING NOTES:\n\nNatural progression: Students are transitioning from Stage 1 to Stage 2\nFinal project timing: Perfect moment to introduce Stage 3\nIndustry expectation: All professional Python is packaged\nFramework requirement: Django, Flask, FastAPI all expect package structure\nInterview relevance: System design questions assume understanding of packages\nCareer preparation: Portfolio projects should demonstrate proper structure"
+    "text": "🏗️ From scripts to packages: The evolution\nThe journey every Python developer takes:\n\nStage 1: Single .py file - my_script.py does everything\nStage 2: Multiple files - utils.py, api.py, cli.py in one folder\nStage 3: Package structure - Organized directories with __init__.py files\nStage 4: Installable package - Can run your own code through uv\nCareer reality: Professional projects are always Stage 3 or 4\n\n\nTEACHING NOTES:\n\nNatural progression: Students are transitioning from Stage 1 to Stage 2\nFinal project timing: Perfect moment to introduce Stage 3\nIndustry expectation: All professional Python is packaged\nFramework requirement: Django, Flask, FastAPI all expect package structure\nInterview relevance: System design questions assume understanding of packages\nCareer preparation: Portfolio projects should demonstrate proper structure"
   },
   {
     "objectID": "slides/IS4010_W08_Professional_Python.html#why-package-structure-matters",
@@ -431,7 +431,7 @@
     "href": "slides/IS4010_W08_Professional_Python.html#basic-package-structure-a-practical-example",
     "title": "IS4010: AI-Enhanced Application Development",
     "section": "🗂️ Basic package structure: A practical example",
-    "text": "🗂️ Basic package structure: A practical example\nmy_api_project/\n│\n├── my_api/                  # Main package directory\n│   ├── __init__.py         # Marks this as a package\n│   ├── api.py              # API client code\n│   ├── cli.py              # CLI interface\n│   └── utils.py            # Utility functions\n│\n├── tests/                   # Test directory\n│   ├── __init__.py\n│   ├── test_api.py\n│   └── test_cli.py\n│\n├── main.py                  # Entry point script\n├── requirements.txt         # Dependencies\n└── README.md               # Documentation\nUsing this structure:\n# In main.py\nfrom my_api.cli import main\nfrom my_api.api import fetch_data\nfrom my_api.utils import format_output\n\nif __name__ == \"__main__\":\n    main()\n\nTEACHING NOTES:\n\nNaming convention: Package name should be lowercase, underscores OK\nTest structure: Tests mirror the package structure\nEntry point: main.py is the script users run\nImports: Clean, explicit import statements\nDiscoverability: Structure makes it easy to find code\nScalability: Easy to add new modules without refactoring\nIDE support: Better autocomplete and navigation"
+    "text": "🗂️ Basic package structure: A practical example\nmy_api_project/\n│\n├── my_api/                  # Main package directory\n│   ├── __init__.py         # Marks this as a package\n│   ├── api.py              # API client code\n│   ├── cli.py              # CLI interface\n│   └── utils.py            # Utility functions\n│\n├── tests/                   # Test directory\n│   ├── __init__.py\n│   ├── test_api.py\n│   └── test_cli.py\n│\n├── main.py                  # Entry point script\n├── pyproject.toml           # Project metadata and dependencies\n├── uv.lock                  # Exact resolved environment\n└── README.md               # Documentation\nUsing this structure:\n# In main.py\nfrom my_api.cli import main\nfrom my_api.api import fetch_data\nfrom my_api.utils import format_output\n\nif __name__ == \"__main__\":\n    main()\n\nTEACHING NOTES:\n\nNaming convention: Package name should be lowercase, underscores OK\nTest structure: Tests mirror the package structure\nEntry point: main.py is the script users run\nImports: Clean, explicit import statements\nDiscoverability: Structure makes it easy to find code\nScalability: Easy to add new modules without refactoring\nIDE support: Better autocomplete and navigation"
   },
   {
     "objectID": "slides/IS4010_W08_Professional_Python.html#the-__init__.py-file-package-initialization",
@@ -452,7 +452,7 @@
     "href": "slides/IS4010_W08_Professional_Python.html#the-__name__-__main__-pattern",
     "title": "IS4010: AI-Enhanced Application Development",
     "section": "🎭 The __name__ == \"__main__\" pattern",
-    "text": "🎭 The __name__ == \"__main__\" pattern\nUnderstanding Python execution:\n\nWhen Python runs a file directly: __name__ is set to \"__main__\"\nWhen Python imports a file: __name__ is the module name\nThis allows code to be both a script (runnable) and a module (importable)\n\nThe pattern:\n# my_api/api.py\n\ndef fetch_data(api_name: str):\n    \"\"\"Fetch data from an API.\"\"\"\n    print(f\"Fetching from {api_name}\")\n    return {\"data\": \"example\"}\n\ndef main():\n    \"\"\"Entry point for running as a script.\"\"\"\n    result = fetch_data(\"pokemon\")\n    print(result)\n\n# Script mode: runs when file is executed directly\nif __name__ == \"__main__\":\n    main()\nUsage:\n# Run as script\n$ python my_api/api.py\nFetching from pokemon\n{'data': 'example'}\n# Import as module (main() doesn't run)\nfrom my_api.api import fetch_data\n\nTEACHING NOTES:\n\nDual purpose: Same file can be script or library\nTesting: Allows easy manual testing of modules\nConvention: Every Python developer knows this pattern\nProtection: Prevents code from running on import\nEntry points: Often combined with CLI parsing\nInterview topic: Frequently asked in Python interviews\nBest practice: All modules should be importable without side effects"
+    "text": "🎭 The __name__ == \"__main__\" pattern\nUnderstanding Python execution:\n\nWhen Python runs a file directly: __name__ is set to \"__main__\"\nWhen Python imports a file: __name__ is the module name\nThis allows code to be both a script (runnable) and a module (importable)\n\nThe pattern:\n# my_api/api.py\n\ndef fetch_data(api_name: str):\n    \"\"\"Fetch data from an API.\"\"\"\n    print(f\"Fetching from {api_name}\")\n    return {\"data\": \"example\"}\n\ndef main():\n    \"\"\"Entry point for running as a script.\"\"\"\n    result = fetch_data(\"pokemon\")\n    print(result)\n\n# Script mode: runs when file is executed directly\nif __name__ == \"__main__\":\n    main()\nUsage:\n# Run as script\n$ uv run python my_api/api.py\nFetching from pokemon\n{'data': 'example'}\n# Import as module (main() doesn't run)\nfrom my_api.api import fetch_data\n\nTEACHING NOTES:\n\nDual purpose: Same file can be script or library\nTesting: Allows easy manual testing of modules\nConvention: Every Python developer knows this pattern\nProtection: Prevents code from running on import\nEntry points: Often combined with CLI parsing\nInterview topic: Frequently asked in Python interviews\nBest practice: All modules should be importable without side effects"
   },
   {
     "objectID": "slides/IS4010_W08_Professional_Python.html#modern-project-layout-the-src-structure",
@@ -466,14 +466,14 @@
     "href": "slides/IS4010_W08_Professional_Python.html#making-code-installable-pyproject.toml",
     "title": "IS4010: AI-Enhanced Application Development",
     "section": "🔧 Making code installable: pyproject.toml",
-    "text": "🔧 Making code installable: pyproject.toml\nModern Python packaging with pyproject.toml:\n[build-system]\nrequires = [\"hatchling\"]\nbuild-backend = \"hatchling.build\"\n\n[project]\nname = \"my-api-tool\"\nversion = \"0.1.0\"\ndescription = \"A professional API client for [Your API]\"\nauthors = [{name = \"Your Name\", email = \"you@example.com\"}]\nreadme = \"README.md\"\nrequires-python = \"&gt;=3.10\"\ndependencies = [\n    \"requests&gt;=2.31.0\",\n]\n\n[project.optional-dependencies]\ndev = [\n    \"pytest&gt;=7.0.0\",\n    \"black&gt;=23.0.0\",\n    \"ruff&gt;=0.1.0\",\n]\n\n[project.scripts]\nmy-api = \"my_api.cli:main\"  # Creates a 'my-api' command\nInstalling in editable mode:\n# Install your package locally for development\npip install -e .\n\n# Now you can import it anywhere\npython -c \"from my_api import fetch_data\"\n\n# And use the CLI command\nmy-api pokemon pikachu\n\nTEACHING NOTES:\n\nModern standard: pyproject.toml replaces setup.py\nPEP 621: Standardized project metadata format\nEditable install: -e flag links to source code\nScripts: Automatically creates CLI commands\nDependencies: Central place for all requirements\nTool config: Can include black, pytest, ruff config\nCareer relevance: All new Python projects use this format"
+    "text": "🔧 Making code installable: pyproject.toml\nModern Python packaging with pyproject.toml:\n[build-system]\nrequires = [\"hatchling\"]\nbuild-backend = \"hatchling.build\"\n\n[project]\nname = \"my-api-tool\"\nversion = \"0.1.0\"\ndescription = \"A professional API client for [Your API]\"\nauthors = [{name = \"Your Name\", email = \"you@example.com\"}]\nreadme = \"README.md\"\nrequires-python = \"&gt;=3.12\"\ndependencies = [\n    \"requests&gt;=2.31.0\",\n]\n\n[project.optional-dependencies]\ndev = [\n    \"pytest&gt;=7.0.0\",\n    \"black&gt;=23.0.0\",\n    \"ruff&gt;=0.1.0\",\n]\n\n[project.scripts]\nmy-api = \"my_api.cli:main\"  # Creates a 'my-api' command\nInstalling in editable mode:\n# Install and lock the project for development\nuv sync\n\n# Now you can import it anywhere\nuv run python -c \"from my_api import fetch_data\"\n\n# And use the CLI command\nuv run my-api pokemon pikachu\n\nTEACHING NOTES:\n\nModern standard: pyproject.toml replaces setup.py\nPEP 621: Standardized project metadata format\nEditable install: -e flag links to source code\nScripts: Automatically creates CLI commands\nDependencies: Central place for all requirements\nTool config: Can include black, pytest, ruff config\nCareer relevance: All new Python projects use this format"
   },
   {
-    "objectID": "slides/IS4010_W08_Professional_Python.html#modern-python-tooling-enter-uv",
-    "href": "slides/IS4010_W08_Professional_Python.html#modern-python-tooling-enter-uv",
+    "objectID": "slides/IS4010_W08_Professional_Python.html#one-project-workflow-with-uv",
+    "href": "slides/IS4010_W08_Professional_Python.html#one-project-workflow-with-uv",
     "title": "IS4010: AI-Enhanced Application Development",
-    "section": "⚡ Modern Python tooling: Enter uv",
-    "text": "⚡ Modern Python tooling: Enter uv\n\nuv is a blazingly fast Python package installer and resolver (written in Rust!)\n10-100× faster than pip for most operations\nDrop-in replacement: uv pip install works like pip install\nCreated by Astral: Same team behind Ruff (the fast Python linter)\nGrowing adoption: Becoming the standard for new Python projects\nLearning curve: Minimal - works like pip but faster\n\nBasic usage:\n# Install uv\ncurl -LsSf https://astral.sh/uv/install.sh | sh\n\n# Use it like pip\nuv pip install requests\nuv pip install -e .           # Editable install\n\n# Create virtual environments\nuv venv\nsource .venv/bin/activate\n\nTEACHING NOTES:\n\nPerformance: Show speed comparison demos if possible\nRust connection: Perfect bridge to next week’s Rust introduction\nModern tooling: Python ecosystem is modernizing rapidly\nOptional: Students can stick with pip if they prefer\nIndustry trend: Major projects adopting uv\nSimplicity: Don’t overcomplicate - it’s just a faster pip\nFuture-proofing: Learning modern tools prepares for career"
+    "section": "⚡ One project workflow with uv",
+    "text": "⚡ One project workflow with uv\n\nuv manages Python versions, environments, dependencies, commands, and lockfiles\nReproducible: pyproject.toml declares dependencies and uv.lock records exact resolutions\nNo activation step: uv run executes inside the project environment\nOne local/CI interface: The same commands work on a laptop and in GitHub Actions\nWritten in Rust: A useful bridge to the next half of the course\n\nBasic usage:\n# Reproduce a committed project\nuv sync --locked\n\n# Add dependencies in your own project\nuv add requests\nuv add --dev pytest\n\n# Run inside the project environment\nuv run python -m pytest\nuv run my-api --help\n\nTEACHING NOTES:\n\nOfficial docs: Point installation questions to the current uv guide\nRust connection: Perfect bridge to next week’s Rust introduction\nModern tooling: Python ecosystem is modernizing rapidly\nCourse consistency: uv is the standard workflow, not an optional alternative\nSimplicity: sync, add, and run cover the core course workflow\nFuture-proofing: Learning modern tools prepares for career"
   },
   {
     "objectID": "slides/IS4010_W08_Professional_Python.html#ai-assisted-package-scaffolding",
@@ -487,14 +487,14 @@
     "href": "slides/IS4010_W08_Professional_Python.html#practical-example-final-project-structure",
     "title": "IS4010: AI-Enhanced Application Development",
     "section": "💡 Practical example: Final project structure",
-    "text": "💡 Practical example: Final project structure\nRecommended structure for your final project:\nmy_final_project/\n│\n├── src/\n│   └── my_api_tool/\n│       ├── __init__.py          # Package initialization\n│       ├── api_client.py        # API interaction logic\n│       ├── cli.py               # argparse CLI interface\n│       ├── models.py            # Data models/classes\n│       └── utils.py             # Helper functions\n│\n├── tests/\n│   ├── __init__.py\n│   ├── test_api_client.py      # API tests\n│   ├── test_cli.py              # CLI tests\n│   └── test_models.py           # Model tests\n│\n├── .github/\n│   └── workflows/\n│       └── tests.yml            # GitHub Actions CI/CD\n│\n├── pyproject.toml               # Project configuration\n├── README.md                    # Your documentation\n├── .gitignore                   # Git exclusions\n└── requirements.txt             # Or use pyproject.toml dependencies\n\nTEACHING NOTES:\n\nFinal project application: This is the target structure for their projects\nGradual adoption: Can start simpler and refactor\nTesting: Structure makes testing easier\nCI/CD: GitHub Actions can run tests automatically\nPortfolio quality: This structure impresses employers\nFlexibility: Can adapt structure to project needs\nDocumentation: README is essential for grading and sharing"
+    "text": "💡 Practical example: Final project structure\nRecommended structure for your final project:\nmy_final_project/\n│\n├── src/\n│   └── my_api_tool/\n│       ├── __init__.py          # Package initialization\n│       ├── api_client.py        # API interaction logic\n│       ├── cli.py               # argparse CLI interface\n│       ├── models.py            # Data models/classes\n│       └── utils.py             # Helper functions\n│\n├── tests/\n│   ├── __init__.py\n│   ├── test_api_client.py      # API tests\n│   ├── test_cli.py              # CLI tests\n│   └── test_models.py           # Model tests\n│\n├── .github/\n│   └── workflows/\n│       └── tests.yml            # GitHub Actions CI/CD\n│\n├── pyproject.toml               # Project configuration\n├── README.md                    # Your documentation\n├── .gitignore                   # Git exclusions\n└── uv.lock                      # Exact resolved dependencies\n\nTEACHING NOTES:\n\nFinal project application: This is the target structure for their projects\nGradual adoption: Can start simpler and refactor\nTesting: Structure makes testing easier\nCI/CD: GitHub Actions can run tests automatically\nPortfolio quality: This structure impresses employers\nFlexibility: Can adapt structure to project needs\nDocumentation: README is essential for grading and sharing"
   },
   {
     "objectID": "slides/IS4010_W08_Professional_Python.html#putting-it-all-together-cli-package-structure",
     "href": "slides/IS4010_W08_Professional_Python.html#putting-it-all-together-cli-package-structure",
     "title": "IS4010: AI-Enhanced Application Development",
     "section": "🔗 Putting it all together: CLI + Package structure",
-    "text": "🔗 Putting it all together: CLI + Package structure\nEntry point (main.py or src/my_api_tool/__main__.py):\n\"\"\"Entry point for the my_api_tool CLI.\"\"\"\nfrom my_api_tool.cli import main\n\nif __name__ == \"__main__\":\n    main()\nCLI module (src/my_api_tool/cli.py):\n\"\"\"Command-line interface for API tool.\"\"\"\nimport argparse\nimport sys\nfrom my_api_tool.api_client import APIClient\nfrom my_api_tool.utils import format_output\n\ndef main():\n    parser = argparse.ArgumentParser(description=\"API client tool\")\n    parser.add_argument(\"resource\", help=\"Resource to fetch\")\n    parser.add_argument(\"--format\", choices=[\"json\", \"pretty\"], default=\"pretty\")\n\n    args = parser.parse_args()\n\n    try:\n        client = APIClient()\n        data = client.fetch(args.resource)\n        print(format_output(data, args.format))\n        return 0\n    except Exception as e:\n        print(f\"Error: {e}\", file=sys.stderr)\n        return 1\n\nif __name__ == \"__main__\":\n    sys.exit(main())\nUsage after install:\npip install -e .\nmy-api-tool pokemon --format json\n\nTEACHING NOTES:\n\nIntegration: Shows how CLI and package structure work together\nClean imports: Package structure enables clear module organization\nProfessional pattern: This is production-quality code structure\nTestability: Each component can be tested independently\nMaintainability: Easy to find and modify code\nScalability: Can grow from simple to complex without refactoring\nCareer preparation: This is exactly how professional tools are structured"
+    "text": "🔗 Putting it all together: CLI + Package structure\nEntry point (main.py or src/my_api_tool/__main__.py):\n\"\"\"Entry point for the my_api_tool CLI.\"\"\"\nfrom my_api_tool.cli import main\n\nif __name__ == \"__main__\":\n    main()\nCLI module (src/my_api_tool/cli.py):\n\"\"\"Command-line interface for API tool.\"\"\"\nimport argparse\nimport sys\nfrom my_api_tool.api_client import APIClient\nfrom my_api_tool.utils import format_output\n\ndef main():\n    parser = argparse.ArgumentParser(description=\"API client tool\")\n    parser.add_argument(\"resource\", help=\"Resource to fetch\")\n    parser.add_argument(\"--format\", choices=[\"json\", \"pretty\"], default=\"pretty\")\n\n    args = parser.parse_args()\n\n    try:\n        client = APIClient()\n        data = client.fetch(args.resource)\n        print(format_output(data, args.format))\n        return 0\n    except Exception as e:\n        print(f\"Error: {e}\", file=sys.stderr)\n        return 1\n\nif __name__ == \"__main__\":\n    sys.exit(main())\nUsage after install:\nuv sync\nuv run my-api-tool pokemon --format json\n\nTEACHING NOTES:\n\nIntegration: Shows how CLI and package structure work together\nClean imports: Package structure enables clear module organization\nProfessional pattern: This is production-quality code structure\nTestability: Each component can be tested independently\nMaintainability: Easy to find and modify code\nScalability: Can grow from simple to complex without refactoring\nCareer preparation: This is exactly how professional tools are structured"
   },
   {
     "objectID": "slides/IS4010_W08_Professional_Python.html#bridge-to-rust-a-preview-of-next-week",
@@ -515,7 +515,7 @@
     "href": "slides/IS4010_W08_Professional_Python.html#applying-to-your-final-project",
     "title": "IS4010: AI-Enhanced Application Development",
     "section": "🎯 Applying to your final project",
-    "text": "🎯 Applying to your final project\nThis week’s work session:\n\nRestructure your code into a proper package with src/ layout\nAdd a CLI interface with argparse for easy testing and demonstration\nCreate clean imports between your modules\nAdd entry point in pyproject.toml for your CLI command\nDocument usage in your README with examples\nTest your CLI with different arguments and edge cases\n\nSuccess criteria:\n\nCan run pip install -e . to install your project\nCLI works with intuitive arguments and helpful error messages\nCode is organized in logical modules with clean imports\n--help flag provides clear usage instructions\nREADME explains installation and usage\n\n\nTEACHING NOTES:\n\nActionable: Students should leave with clear next steps\nFinal project focus: Everything ties back to their projects\nQuality bar: Set expectations for professional-level work\nSupport: Encourage office hours for structure questions\nAI assistance: Perfect use case for AI pair programming\nTimeline: Treat this as an early preview of the final project’s quality bar\nGrading: Structure and CLI quality are assessment criteria"
+    "text": "🎯 Applying to your final project\nThis week’s work session:\n\nRestructure your code into a proper package with src/ layout\nAdd a CLI interface with argparse for easy testing and demonstration\nCreate clean imports between your modules\nAdd entry point in pyproject.toml for your CLI command\nDocument usage in your README with examples\nTest your CLI with different arguments and edge cases\n\nSuccess criteria:\n\nCan run uv sync and launch the project with uv run\nCLI works with intuitive arguments and helpful error messages\nCode is organized in logical modules with clean imports\n--help flag provides clear usage instructions\nREADME explains installation and usage\n\n\nTEACHING NOTES:\n\nActionable: Students should leave with clear next steps\nFinal project focus: Everything ties back to their projects\nQuality bar: Set expectations for professional-level work\nSupport: Encourage office hours for structure questions\nAI assistance: Perfect use case for AI pair programming\nTimeline: Treat this as an early preview of the final project’s quality bar\nGrading: Structure and CLI quality are assessment criteria"
   },
   {
     "objectID": "slides/IS4010_W08_Professional_Python.html#summary-key-takeaways",
@@ -760,7 +760,7 @@
     "href": "slides/IS4010_W13_Idiomatic_Rust.html#questions",
     "title": "IS4010: AI-Enhanced Application Development",
     "section": "Questions?",
-    "text": "Questions?\nOffice hours: See syllabus\nAI assistance: GitHub Copilot, ChatGPT, Claude, Gemini CLI\nLab 13: Due Sunday at 11:59 PM\nGood luck and have fun with idiomatic Rust! 🦀"
+    "text": "Questions?\nOffice hours: See syllabus\nAI assistance: Browser chat, GitHub Copilot, Copilot CLI, Antigravity CLI\nLab 13: Due Sunday at 11:59 PM\nGood luck and have fun with idiomatic Rust! 🦀"
   },
   {
     "objectID": "slides/IS4010_W11_Structuring_Code_and_Data.html#session-1-organizing-code-and-custom-types",
@@ -1033,7 +1033,7 @@
     "href": "slides/IS4010_W09_Welcome_to_Rust.html#meet-cargo-your-rust-build-tool",
     "title": "IS4010: AI-Enhanced Application Development",
     "section": "Meet cargo, your Rust build tool",
-    "text": "Meet cargo, your Rust build tool\n\ncargo is Rust’s official build system and package manager, and it’s one of the language’s best features\nIt handles creating new projects, compiling your code, running your application, and managing external libraries (called “crates” in Rust)\nThink of it as Python’s pip + pytest + black + mypy all rolled into one amazing tool!\nCargo is why Rust development feels so smooth and professional\n\n\nCargo is like pip + pytest + setuptools all in one tool. It’s incredibly well-designed. Show live demo: cargo new demo && cd demo && cargo run. Point out the automatic git init and .gitignore creation."
+    "text": "Meet cargo, your Rust build tool\n\ncargo is Rust’s official build system and package manager, and it’s one of the language’s best features\nIt handles creating new projects, compiling your code, running your application, and managing external libraries (called “crates” in Rust)\nThink of it as Python’s uv + pytest + formatter + type checker rolled into one tool!\nCargo is why Rust development feels so smooth and professional\n\n\nCargo combines project creation, dependency management, building, testing, and running. Compare that unified experience with our uv plus pytest workflow. Show a live demo: cargo new demo, cd demo, and cargo run. Point out the automatic Git initialization and .gitignore creation."
   },
   {
     "objectID": "slides/IS4010_W09_Welcome_to_Rust.html#essential-cargo-commands",
@@ -1759,42 +1759,53 @@
   {
     "objectID": "resources/packages.html",
     "href": "resources/packages.html",
-    "title": "Python packages & environments",
+    "title": "Python packages and environments",
     "section": "",
-    "text": "This course uses a small set of Python libraries for testing and data processing. To keep your system clean and avoid version conflicts, we recommend using a virtual environment.",
+    "text": "This course uses uv to manage Python 3.12, the virtual environment, project dependencies, and the lockfile. The labs repository already contains the project configuration; you usually need only the commands on this page.",
     "crumbs": [
       "Resources",
       "Python packages"
     ]
   },
   {
-    "objectID": "resources/packages.html#installing-core-packages",
-    "href": "resources/packages.html#installing-core-packages",
-    "title": "Python packages & environments",
-    "section": "📦 Installing core packages",
-    "text": "📦 Installing core packages\nOnce your environment is active (see below), you can install the required libraries directly using pip or uv.\n\nThe essentials\nWe primarily use three packages throughout the Python portion of the course:\n# Using standard pip\npip install pytest pytest-cov requests\n\n# Using uv (recommended)\nuv pip install pytest pytest-cov requests\n\npytest: The industry-standard testing framework.\npytest-cov: Tools for measuring how much of your code is covered by tests.\nrequests: The “HTTP for Humans” library used for interacting with web APIs.",
+    "objectID": "resources/packages.html#set-up-the-lab-environment",
+    "href": "resources/packages.html#set-up-the-lab-environment",
+    "title": "Python packages and environments",
+    "section": "Set up the lab environment",
+    "text": "Set up the lab environment\nFrom the root of your cloned is4010-labs repository:\nuv sync --locked\nThis command reads:\n\n.python-version for the course Python version\npyproject.toml for direct dependencies\nuv.lock for the exact resolved environment\n\nIt creates .venv automatically. You do not need to activate it because uv run selects the project environment for each command.",
     "crumbs": [
       "Resources",
       "Python packages"
     ]
   },
   {
-    "objectID": "resources/packages.html#virtual-environments",
-    "href": "resources/packages.html#virtual-environments",
-    "title": "Python packages & environments",
-    "section": "🛠️ Virtual environments",
-    "text": "🛠️ Virtual environments\nA virtual environment is an isolated space where you can install packages without affecting other projects or your global Python installation. Always create one for your lab repository.\n\nOption 1: Using uv (recommended)\nuv is an extremely fast Python package manager written in Rust. It is significantly faster than standard tools and handles environment creation automatically.\n# 1. Install uv (one-time setup)\n# macOS/Linux: curl -LsSf https://astral-sh.github.io/uv/install.sh | sh\n# Windows: powershell -c \"irm https://astral-sh.github.io/uv/install.ps1 | iex\"\n\n# 2. Create and activate a venv\nuv venv\nsource .venv/bin/activate  # macOS/Linux\nsource .venv/Scripts/activate # Windows (Git Bash)\n\n\nOption 2: Using venv (built-in)\nIf you prefer not to install extra tools, you can use Python’s built-in module:\n# 1. Create the environment\npython -m venv venv\n\n# 2. Activate it\nsource venv/bin/activate  # macOS/Linux\nsource venv/Scripts/activate # Windows (Git Bash)",
+    "objectID": "resources/packages.html#run-python-and-tests",
+    "href": "resources/packages.html#run-python-and-tests",
+    "title": "Python packages and environments",
+    "section": "Run Python and tests",
+    "text": "Run Python and tests\n# Check the managed Python version\nuv run python --version\n\n# Run a script\nuv run python path/to/script.py\n\n# Run the test command printed in a lab\nuv run --directory week03 python -m pytest tests/ -v\nUse python -m pytest after uv run; this makes the project interpreter and import path explicit.",
     "crumbs": [
       "Resources",
       "Python packages"
     ]
   },
   {
-    "objectID": "resources/packages.html#tips-for-success",
-    "href": "resources/packages.html#tips-for-success",
-    "title": "Python packages & environments",
-    "section": "💡 Tips for success",
-    "text": "💡 Tips for success\n\nActivation is key: Remember to activate your environment every time you open a new terminal window. You’ll know it’s active if you see (venv) or (.venv) in your command prompt.\nVS Code integration: When you open your repository, VS Code will usually detect your virtual environment. Always click Yes when it asks to set it as the workspace interpreter.\nDon’t commit your venv: Your environment folder contains thousands of files. It should never be pushed to GitHub. Our lab templates include this in the .gitignore by default.\n\n\n\n\n\n\n\nTipPro tip: Why use a requirements file?\n\n\n\nWhile direct installation is fine for this course, professional projects use a requirements.txt file to ensure every developer on a team is using the exact same versions of every library. It’s the “recipe” for your project’s environment!",
+    "objectID": "resources/packages.html#add-a-dependency-to-your-own-project",
+    "href": "resources/packages.html#add-a-dependency-to-your-own-project",
+    "title": "Python packages and environments",
+    "section": "Add a dependency to your own project",
+    "text": "Add a dependency to your own project\nThe course repository’s dependencies are instructor-managed. In your own project, use:\nuv add requests\nuv add --dev pytest\nuv add updates both pyproject.toml and uv.lock. Commit those two files so collaborators and CI reproduce the same environment.",
+    "crumbs": [
+      "Resources",
+      "Python packages"
+    ]
+  },
+  {
+    "objectID": "resources/packages.html#keep-the-environment-synchronized",
+    "href": "resources/packages.html#keep-the-environment-synchronized",
+    "title": "Python packages and environments",
+    "section": "Keep the environment synchronized",
+    "text": "Keep the environment synchronized\n# Reproduce the committed lockfile exactly\nuv sync --locked\n\n# Intentionally update the lockfile after changing dependencies\nuv lock\nDo not commit .venv; it is a machine-local build artifact. Do commit .python-version, pyproject.toml, and uv.lock.\nFor additional workflows, use the official uv project guide and uv run documentation.",
     "crumbs": [
       "Resources",
       "Python packages"
@@ -1805,7 +1816,7 @@
     "href": "weeks/week02.html",
     "title": "Week 02: AI-assisted dev",
     "section": "",
-    "text": "This week, we’ll explore the rapidly evolving landscape of AI-assisted software development. We’ll compare the “big three” conversational models—Gemini, ChatGPT, and Claude—and dive deep into GitHub Copilot, our primary “Co-Pilot” for the semester. You’ll learn the art of prompt engineering using the CPTF framework and discover how to leverage AI to explain, debug, and refactor your code effectively.",
+    "text": "This week, we’ll explore the rapidly evolving landscape of AI-assisted software development. We’ll compare browser chats, use GitHub Copilot inside VS Code, and install both GitHub Copilot CLI and Antigravity CLI. You’ll give the two CLI agents the same small Python task, compare their suggestions, and use tests and git diff to decide what to keep.",
     "crumbs": [
       "Weekly schedule",
       "Week 02: AI-assisted dev"
@@ -1816,7 +1827,7 @@
     "href": "weeks/week02.html#introduction",
     "title": "Week 02: AI-assisted dev",
     "section": "",
-    "text": "This week, we’ll explore the rapidly evolving landscape of AI-assisted software development. We’ll compare the “big three” conversational models—Gemini, ChatGPT, and Claude—and dive deep into GitHub Copilot, our primary “Co-Pilot” for the semester. You’ll learn the art of prompt engineering using the CPTF framework and discover how to leverage AI to explain, debug, and refactor your code effectively.",
+    "text": "This week, we’ll explore the rapidly evolving landscape of AI-assisted software development. We’ll compare browser chats, use GitHub Copilot inside VS Code, and install both GitHub Copilot CLI and Antigravity CLI. You’ll give the two CLI agents the same small Python task, compare their suggestions, and use tests and git diff to decide what to keep.",
     "crumbs": [
       "Weekly schedule",
       "Week 02: AI-assisted dev"
@@ -1827,7 +1838,7 @@
     "href": "weeks/week02.html#recommended-readings",
     "title": "Week 02: AI-assisted dev",
     "section": "Recommended readings",
-    "text": "Recommended readings\n\nGitHub Copilot documentation - Official guide to GitHub Copilot\nThe art of prompt engineering - Best practices for prompting AI code assistants",
+    "text": "Recommended readings\n\nGitHub Copilot documentation - Official guide to GitHub Copilot\nThe art of prompt engineering - Best practices for prompting AI code assistants\nCopilot CLI installation - Official setup instructions\nAntigravity CLI overview - Official setup and usage guide",
     "crumbs": [
       "Weekly schedule",
       "Week 02: AI-assisted dev"
@@ -1860,7 +1871,7 @@
     "href": "weeks/week02.html#lab-assignment",
     "title": "Week 02: AI-assisted dev",
     "section": "Lab assignment",
-    "text": "Lab assignment\n\nLab 02: AI-assisted Python preview",
+    "text": "Lab assignment\n\nLab 02: Compare CLI coding agents",
     "crumbs": [
       "Weekly schedule",
       "Week 02: AI-assisted dev"
@@ -2144,177 +2155,58 @@
   {
     "objectID": "weeks/week02-notebook.html",
     "href": "weeks/week02-notebook.html",
-    "title": "IS4010: AI-Enhanced Application Development",
+    "title": "Week 02: AI-assisted development",
     "section": "",
-    "text": "Instructor: Brandon M. Greenwell\nCourse: IS4010: AI-Enhanced Application Development\nWeek: 2 - AI Tools for Programming\n\n\n\nBy the end of this interactive session, you will be able to:\n\nUnderstand the landscape of AI programming tools and their different use cases\nWork with AI as a pair programming partner using the augment-not-automate philosophy\nCraft effective prompts using the Context-Persona-Task-Format (CPTF) framework\nCompare conversational AI models (Gemini, ChatGPT, Claude) for programming tasks\nUse GitHub Copilot for inline code suggestions and conversational assistance\nApply prompt engineering techniques to debug, refactor, and document code\nWrite NumPy-style docstrings to communicate intent to AI assistants\n\n\n\n\n\nPython 3.10+ installed\nAccess to a conversational AI tool (Gemini, ChatGPT, or Claude)\nGitHub Copilot extension for VS Code (free for students)\nBasic understanding of Python variables and functions\n\n\n\n\n\nGitHub Copilot\nGemini CLI\nNumPy Docstring Style Guide\nLab 02 Instructions"
+    "text": "This notebook prepares you to compare AI tools without treating any one response as automatically correct. Formal Python instruction begins in Week 03; today, Python is a small artifact that we can describe, inspect, and test."
   },
   {
-    "objectID": "weeks/week02-notebook.html#week-2-ai-tools-for-programming---interactive-companion-notebook",
-    "href": "weeks/week02-notebook.html#week-2-ai-tools-for-programming---interactive-companion-notebook",
-    "title": "IS4010: AI-Enhanced Application Development",
-    "section": "",
-    "text": "Instructor: Brandon M. Greenwell\nCourse: IS4010: AI-Enhanced Application Development\nWeek: 2 - AI Tools for Programming\n\n\n\nBy the end of this interactive session, you will be able to:\n\nUnderstand the landscape of AI programming tools and their different use cases\nWork with AI as a pair programming partner using the augment-not-automate philosophy\nCraft effective prompts using the Context-Persona-Task-Format (CPTF) framework\nCompare conversational AI models (Gemini, ChatGPT, Claude) for programming tasks\nUse GitHub Copilot for inline code suggestions and conversational assistance\nApply prompt engineering techniques to debug, refactor, and document code\nWrite NumPy-style docstrings to communicate intent to AI assistants\n\n\n\n\n\nPython 3.10+ installed\nAccess to a conversational AI tool (Gemini, ChatGPT, or Claude)\nGitHub Copilot extension for VS Code (free for students)\nBasic understanding of Python variables and functions\n\n\n\n\n\nGitHub Copilot\nGemini CLI\nNumPy Docstring Style Guide\nLab 02 Instructions"
+    "objectID": "weeks/week02-notebook.html#learning-objectives",
+    "href": "weeks/week02-notebook.html#learning-objectives",
+    "title": "Week 02: AI-assisted development",
+    "section": "Learning objectives",
+    "text": "Learning objectives\nBy the end of this activity, you can:\n\ndistinguish browser chat, editor assistance, and CLI agents;\nwrite a prompt with context, persona, task, and format;\ncompare two agents on the same request;\nuse tests as evidence rather than trusting a plausible answer; and\ninspect changes before committing them."
   },
   {
-    "objectID": "weeks/week02-notebook.html#the-ai-revolution-in-programming",
-    "href": "weeks/week02-notebook.html#the-ai-revolution-in-programming",
-    "title": "IS4010: AI-Enhanced Application Development",
-    "section": "The AI Revolution in Programming 🚀",
-    "text": "The AI Revolution in Programming 🚀\nAI tools are transforming how we write code, but the key is understanding how to use them effectively. In this session, you’ll learn to work with AI as your pair programming partner, not your autopilot.\n\nThe Course Motto: Augment, Don’t Automate!\nThink of AI as your co-pilot, not your autopilot: - AI provides suggestions → You review and approve - AI explains possibilities → You make decisions - AI generates code → You understand and own it - You remain responsible for all code you submit\nRemember: The pilot is always responsible for the flight!"
+    "objectID": "weeks/week02-notebook.html#three-working-surfaces",
+    "href": "weeks/week02-notebook.html#three-working-surfaces",
+    "title": "Week 02: AI-assisted development",
+    "section": "Three working surfaces",
+    "text": "Three working surfaces\n\nBrowser chat — ChatGPT, Gemini, Claude, or another chat for explanations, brainstorming, and isolated examples.\nEditor assistant — GitHub Copilot in VS Code for inline suggestions, chat, and edits with editor context.\nCLI agents — GitHub Copilot CLI and Antigravity CLI for repository-aware work from the terminal.\n\nInstall both CLI agents with their official guides: Copilot CLI and Antigravity CLI. You will try both, then choose whichever combination fits later tasks."
   },
   {
-    "objectID": "weeks/week02-notebook.html#understanding-large-language-models-llms",
-    "href": "weeks/week02-notebook.html#understanding-large-language-models-llms",
-    "title": "IS4010: AI-Enhanced Application Development",
-    "section": "Understanding Large Language Models (LLMs) 🧠",
-    "text": "Understanding Large Language Models (LLMs) 🧠\nBefore we dive into using AI tools, let’s understand what they are:\n\nLarge Language Models (LLMs): AI systems trained on massive amounts of text from the internet\nPattern recognition experts: They’ve learned patterns in human language and code\nSophisticated autocomplete: Like your phone’s predictive text, but incredibly advanced\nNot databases: They predict what text should come next based on patterns\nGood at code: Programming languages follow patterns, just like natural language\n\n\nKey Insight\nLLMs were trained on billions of lines of code from GitHub and other sources. They learned that certain patterns appear together (like function definitions followed by return statements). This makes them surprisingly good at code completion, but they still require human judgment and verification."
+    "objectID": "weeks/week02-notebook.html#the-cptf-prompt-framework",
+    "href": "weeks/week02-notebook.html#the-cptf-prompt-framework",
+    "title": "Week 02: AI-assisted development",
+    "section": "The CPTF prompt framework",
+    "text": "The CPTF prompt framework\n\nContext: What repository, file, audience, constraints, and existing behavior matter?\nPersona: What useful perspective should the assistant take?\nTask: What observable result do you need?\nFormat: What should the response contain, and what should it omit?\n\nA precise prompt does not guarantee correct code. It makes the result easier to evaluate."
   },
   {
-    "objectID": "weeks/week02-notebook.html#four-main-categories-of-ai-tools",
-    "href": "weeks/week02-notebook.html#four-main-categories-of-ai-tools",
-    "title": "IS4010: AI-Enhanced Application Development",
-    "section": "Four Main Categories of AI Tools 🛠️",
-    "text": "Four Main Categories of AI Tools 🛠️\nAI programming tools fall into four main categories:\n\nConversational AI models: General-purpose models (Gemini, ChatGPT, Claude)\nSpecialized code assistants: Purpose-built for coding (GitHub Copilot, Claude Code)\nCommand-line tools: Terminal-based AI access (Gemini CLI)\nCode analysis tools: Project-wide review and feedback (Google Jules)\n\nEach has unique strengths. Let’s explore when and how to use each one."
+    "objectID": "weeks/week02-notebook.html#shared-comparison-task",
+    "href": "weeks/week02-notebook.html#shared-comparison-task",
+    "title": "Week 02: AI-assisted development",
+    "section": "Shared comparison task",
+    "text": "Shared comparison task\nGive both CLI agents the exact same prompt for this contract:\ndef count_vowels(text: str) -&gt; int:\n    \"\"\"Count a, e, i, o, and u without regard to case; do not count y.\"\"\"\nInclude empty strings, uppercase vowels, and text with no vowels in the context. Ask for a short explanation followed by one function, and tell the agent not to edit tests.\n\nDraft your shared prompt\nWrite one prompt here before opening either CLI. Keeping the prompt fixed makes the comparison more meaningful.\n\nReplace this line with your CPTF prompt."
   },
   {
-    "objectID": "weeks/week02-notebook.html#the-big-three-gemini-chatgpt-and-claude",
-    "href": "weeks/week02-notebook.html#the-big-three-gemini-chatgpt-and-claude",
-    "title": "IS4010: AI-Enhanced Application Development",
-    "section": "The Big Three: Gemini, ChatGPT, and Claude 🤖",
-    "text": "The Big Three: Gemini, ChatGPT, and Claude 🤖\nThese general-purpose AI models can help with programming tasks:\n\nAll offer free tiers - No cost barrier to entry\nStrong programming support - Excellent for Python, explanations, and debugging\nDifferent personalities - Each has unique strengths\nWeb-based interfaces - Easy to access from any browser\nGreat for learning - Perfect for explanations and code review\n\n\nWhen to Use Conversational AI\n\nExplaining code: “What does this function do?”\nDebugging help: “Why am I getting this error?”\nArchitecture advice: “Should I use a list or dictionary here?”\nLearning: “Explain list comprehensions in simple terms”\nCode review: “What improvements could be made to this function?”"
+    "objectID": "weeks/week02-notebook.html#compare-before-choosing",
+    "href": "weeks/week02-notebook.html#compare-before-choosing",
+    "title": "Week 02: AI-assisted development",
+    "section": "Compare before choosing",
+    "text": "Compare before choosing\nFor each response, ask:\n\nDoes it satisfy every part of the contract?\nWhat assumptions does it make?\nIs the explanation consistent with the code?\nDoes it propose commands or edits outside the task?\nWhat test would expose a subtle mistake?\n\nSelect one approach or combine ideas only after you can explain the final code.\n\ndef count_vowels(text: str) -&gt; int:\n    \"\"\"Replace this body with the approach you selected and reviewed.\"\"\"\n    raise NotImplementedError\n\n\n# These checks are evidence, not decoration. Add one case of your own.\nassert count_vowels(\"OpenAI\") == 4\nassert count_vowels(\"rhythms\") == 0\nassert count_vowels(\"\") == 0"
   },
   {
-    "objectID": "weeks/week02-notebook.html#the-cptf-prompt-engineering-framework",
-    "href": "weeks/week02-notebook.html#the-cptf-prompt-engineering-framework",
-    "title": "IS4010: AI-Enhanced Application Development",
-    "section": "The CPTF Prompt Engineering Framework 📝",
-    "text": "The CPTF Prompt Engineering Framework 📝\nThe quality of AI responses depends on the quality of your prompts. Use the CPTF framework:\n\nContext\nProvide the situation and relevant information\n\n\nPersona\nTell the AI who to act as (e.g., “Act as a senior Python developer”)\n\n\nTask\nBe specific about what you want the AI to do\n\n\nFormat\nSpecify how you want the response structured\n\n\nExample: Bad Prompt vs Good Prompt\nBad: “Fix my code”\nGood:\nContext: I'm writing a Python function to calculate student grades.\nPersona: Act as a senior Python developer reviewing my code.\nTask: Here's my function [paste code]. Find any potential bugs and suggest improvements.\nFormat: Provide your answer as a numbered list with explanations and corrected code."
+    "objectID": "weeks/week02-notebook.html#safe-repository-workflow",
+    "href": "weeks/week02-notebook.html#safe-repository-workflow",
+    "title": "Week 02: AI-assisted development",
+    "section": "Safe repository workflow",
+    "text": "Safe repository workflow\nStart each agent inside the intended repository. Read commands before approval, keep credentials out of prompts and files, and inspect the final changes. For Lab 02, the independent checks are:\nuv run --directory week02 python -m pytest tests/ -v\ngit diff -- week02/lab02.py week02/lab02_prompts.md\nGitHub Actions validates the code and journal structure. It cannot verify which programs are installed on your computer."
   },
   {
-    "objectID": "weeks/week02-notebook.html#your-turn-craft-a-cptf-prompt",
-    "href": "weeks/week02-notebook.html#your-turn-craft-a-cptf-prompt",
-    "title": "IS4010: AI-Enhanced Application Development",
-    "section": "🎯 Your Turn: Craft a CPTF Prompt",
-    "text": "🎯 Your Turn: Craft a CPTF Prompt\nLet’s practice crafting a prompt using the CPTF framework. You’ll use this for Lab 02 Part 2.\nScenario: You have a buggy function that’s supposed to calculate the sum of even numbers in a list.\nYour Task: 1. Read the buggy code below 2. Craft a prompt using the CPTF framework 3. Test your prompt with a conversational AI model 4. Document the results\n\n# Buggy code - can you spot the error?\ndef sum_of_evens(numbers):\n    \"\"\"Calculates the sum of all even numbers in a list.\"\"\"\n    total = 0\n    for num in numbers:\n        if num % 2 == 1:  # This line has a bug!\n            total += num\n    return total\n\n# Test the buggy function\ntest_numbers = [1, 2, 3, 4, 5, 6]\nresult = sum_of_evens(test_numbers)\nprint(f\"Sum of evens in {test_numbers}: {result}\")\nprint(f\"Expected: {2 + 4 + 6} = 12\")\nprint(f\"Actual: {result}\")\n\n\n✍️ Exercise: Your CPTF Prompt\nDouble-click this cell to edit and write your prompt:\nContext: [Describe what the code is supposed to do and what problem you’re facing]\nPersona: [Who should the AI act as?]\nTask: [What specific help do you need?]\nFormat: [How should the response be structured?]\n\nAI Response Summary: [After testing your prompt, summarize what the AI said and whether it was helpful]"
-  },
-  {
-    "objectID": "weeks/week02-notebook.html#five-essential-prompt-patterns",
-    "href": "weeks/week02-notebook.html#five-essential-prompt-patterns",
-    "title": "IS4010: AI-Enhanced Application Development",
-    "section": "Five Essential Prompt Patterns 📋",
-    "text": "Five Essential Prompt Patterns 📋\nHere are five prompt patterns you’ll use frequently:\n\n1. Explain This Code\n“Explain this Python dictionary comprehension step by step: {word: len(word) for word in text.split() if len(word) &gt; 3}”\n\n\n2. Generate Boilerplate\n“Write a NumPy-style docstring for a function that calculates the area of a circle given its radius.”\n\n\n3. Refactor for Clarity\n“Convert this for loop into a more Pythonic equivalent using list comprehension or built-in functions.”\n\n\n4. Debug Assistance\n“I’m getting a ‘TypeError: unsupported operand type(s)’ on line 15. Here’s my code… What’s the likely cause and how do I fix it?”\n\n\n5. Architecture Advice\n“I need to store student information (name, ID, grades). Should I use a list of dictionaries or create a Student class? Explain the pros and cons of each approach.”"
-  },
-  {
-    "objectID": "weeks/week02-notebook.html#your-turn-practice-prompt-patterns",
-    "href": "weeks/week02-notebook.html#your-turn-practice-prompt-patterns",
-    "title": "IS4010: AI-Enhanced Application Development",
-    "section": "🎯 Your Turn: Practice Prompt Patterns",
-    "text": "🎯 Your Turn: Practice Prompt Patterns\nTry each of the five prompt patterns with a conversational AI model:\n\nPick ONE pattern from above\nUse it with your preferred AI (Gemini, ChatGPT, or Claude)\nDocument the result in the cell below\n\nWhich pattern did you try? [Write your answer here]\nWhat was the AI’s response? [Summarize the response here]\nHow helpful was it on a scale of 1-5? [Your rating and why]"
-  },
-  {
-    "objectID": "weeks/week02-notebook.html#numpy-style-docstrings-communicating-with-ai",
-    "href": "weeks/week02-notebook.html#numpy-style-docstrings-communicating-with-ai",
-    "title": "IS4010: AI-Enhanced Application Development",
-    "section": "NumPy-Style Docstrings: Communicating with AI 📝",
-    "text": "NumPy-Style Docstrings: Communicating with AI 📝\nA docstring is a string literal (enclosed in triple quotes \"\"\") that occurs as the first statement in a module, function, class, or method. Its purpose is to explain what the code does.\n\nWhy Docstrings Matter for AI\n\nClear communication: Good docstrings lead to good AI-generated code\nIntent specification: Tell the AI what you want the function to do\nType information: Specify parameter and return types\nExamples: Show the AI what correct usage looks like\n\n\n\nNumPy Docstring Format\nWe use the NumPy style for its clarity and readability:\n\ndef calculate_area(length, width):\n    \"\"\"\n    Calculate the area of a rectangle.\n\n    Parameters\n    ----------\n    length : float\n        The length of the rectangle in meters.\n    width : float\n        The width of the rectangle in meters.\n\n    Returns\n    -------\n    float\n        The area of the rectangle in square meters.\n\n    Examples\n    --------\n    &gt;&gt;&gt; calculate_area(5, 3)\n    15.0\n    \n    &gt;&gt;&gt; calculate_area(10, 2.5)\n    25.0\n    \"\"\"\n    return length * width\n\n# Test the function\nprint(calculate_area(5, 3))\nprint(calculate_area(10, 2.5))\n\n\n\nDocstring Structure Breakdown\n\nBrief description: One-line summary of what the function does\nParameters section: Lists all parameters with types and descriptions\nReturns section: Describes the return value type and meaning\nExamples section (optional but recommended): Shows usage examples\n\n\n\nWhy This Style Works Well with AI\n\nStructured format: AI tools recognize and understand this pattern\nType hints: Helps AI generate type-appropriate code\nClear intent: Detailed descriptions guide code generation\nExamples: Show AI exactly what correct behavior looks like"
-  },
-  {
-    "objectID": "weeks/week02-notebook.html#your-turn-write-a-numpy-style-docstring",
-    "href": "weeks/week02-notebook.html#your-turn-write-a-numpy-style-docstring",
-    "title": "IS4010: AI-Enhanced Application Development",
-    "section": "🎯 Your Turn: Write a NumPy-Style Docstring",
-    "text": "🎯 Your Turn: Write a NumPy-Style Docstring\nPractice writing a professional docstring for this function:\n\ndef calculate_grade(score, total_points):\n    # TODO: Add a complete NumPy-style docstring above this comment\n    # Include: description, parameters, returns, and at least one example\n    \n    percentage = (score / total_points) * 100\n    \n    if percentage &gt;= 90:\n        return 'A'\n    elif percentage &gt;= 80:\n        return 'B'\n    elif percentage &gt;= 70:\n        return 'C'\n    elif percentage &gt;= 60:\n        return 'D'\n    else:\n        return 'F'\n\n# Test your documentation\nprint(calculate_grade(85, 100))\nprint(calculate_grade(72, 80))"
-  },
-  {
-    "objectID": "weeks/week02-notebook.html#what-is-github-copilot",
-    "href": "weeks/week02-notebook.html#what-is-github-copilot",
-    "title": "IS4010: AI-Enhanced Application Development",
-    "section": "What is GitHub Copilot? 💻",
-    "text": "What is GitHub Copilot? 💻\nGitHub Copilot is a purpose-built AI code assistant that integrates directly into VS Code:\n\nTrained specifically on code: Billions of lines from GitHub repositories\nTwo main modes: Inline suggestions and Copilot Chat\nContext-aware: Sees your current file, open files, and project structure\nReal-time assistance: Get help as you type\nProfessional workflow: Stay in your editor, maintain flow state\n\n\nTwo Ways to Use Copilot\n\nInline Suggestions: Ghost text appears as you type (press Tab to accept)\nCopilot Chat: Conversational interface within VS Code"
-  },
-  {
-    "objectID": "weeks/week02-notebook.html#inline-suggestions-the-magic-of-ghost-text",
-    "href": "weeks/week02-notebook.html#inline-suggestions-the-magic-of-ghost-text",
-    "title": "IS4010: AI-Enhanced Application Development",
-    "section": "Inline Suggestions: The Magic of Ghost Text ✨",
-    "text": "Inline Suggestions: The Magic of Ghost Text ✨\nHow it works: 1. Write a descriptive comment or docstring 2. Start typing your function definition 3. Copilot suggests code in gray “ghost text” 4. Press Tab to accept, Esc to reject 5. Use Alt + ] (Windows) or Option + ] (Mac) to see alternative suggestions\n\nBest Practices for Inline Suggestions\n\nClear comments: # Calculate the factorial of a positive integer\nDescriptive names: calculate_factorial not calc_fact\nType hints: def factorial(n: int) -&gt; int:\nGood docstrings: Detailed NumPy-style documentation"
-  },
-  {
-    "objectID": "weeks/week02-notebook.html#example-github-copilot-workflow",
-    "href": "weeks/week02-notebook.html#example-github-copilot-workflow",
-    "title": "IS4010: AI-Enhanced Application Development",
-    "section": "Example: GitHub Copilot Workflow",
-    "text": "Example: GitHub Copilot Workflow\nHere’s what a typical Copilot workflow looks like. In VS Code, you would:\n\nWrite the docstring (communicates intent to Copilot)\nStart the function definition\nCopilot suggests the implementation\nReview and accept (or modify) the suggestion\n\n\nExample Function Stub (For Lab 02)\n\ndef factorial(n):\n    \"\"\"Calculate the factorial of a non-negative integer.\n\n    Parameters\n    ----------\n    n : int\n        The non-negative integer to calculate the factorial of.\n\n    Returns\n    -------\n    int\n        The factorial of n. Returns 1 for n = 0.\n        \n    Examples\n    --------\n    &gt;&gt;&gt; factorial(5)\n    120\n    \n    &gt;&gt;&gt; factorial(0)\n    1\n    \"\"\"\n    # When you place your cursor here in VS Code and wait,\n    # Copilot will suggest an implementation based on the docstring!\n    \n    # For this notebook, here's a manual implementation:\n    if n == 0:\n        return 1\n    result = 1\n    for i in range(1, n + 1):\n        result *= i\n    return result\n\n# Test the function\nprint(f\"factorial(5) = {factorial(5)}\")\nprint(f\"factorial(0) = {factorial(0)}\")\nprint(f\"factorial(7) = {factorial(7)}\")"
-  },
-  {
-    "objectID": "weeks/week02-notebook.html#copilot-chat-conversational-help-in-your-editor",
-    "href": "weeks/week02-notebook.html#copilot-chat-conversational-help-in-your-editor",
-    "title": "IS4010: AI-Enhanced Application Development",
-    "section": "Copilot Chat: Conversational Help in Your Editor 💬",
-    "text": "Copilot Chat: Conversational Help in Your Editor 💬\nCopilot Chat provides three powerful modes:\n\n1. Planning Mode\nFor architectural decisions and project structure: - “How should I structure a student gradebook application?” - “What’s the best way to organize this code into functions?”\n\n\n2. Ask Mode\nFor questions, explanations, and debugging: - “Explain this regex pattern” - “Why am I getting this error?” - “What does this function do?”\n\n\n3. Agent Mode\nFor autonomous task completion: - “Refactor this class to use data classes” - “Add error handling to all functions” - “Generate tests for this module”\n\n\nSpecial Copilot Chat Commands\n\n/explain - Explain selected code\n/fix - Suggest fixes for problems\n/tests - Generate unit tests\n/doc - Add documentation"
-  },
-  {
-    "objectID": "weeks/week02-notebook.html#your-turn-plan-your-lab-02-approach",
-    "href": "weeks/week02-notebook.html#your-turn-plan-your-lab-02-approach",
-    "title": "IS4010: AI-Enhanced Application Development",
-    "section": "🎯 Your Turn: Plan Your Lab 02 Approach",
-    "text": "🎯 Your Turn: Plan Your Lab 02 Approach\nThink about how you’ll use AI tools for Lab 02:\nPart 1 (Copilot Driving School): - Write detailed docstrings for each function stub - Let Copilot suggest implementations - Review and test each suggestion - Accept, modify, or reject based on your understanding\nPart 2 (Prompt Engineering Challenge): - Use CPTF framework for each problem - Test prompts with conversational AI (Gemini, ChatGPT, or Claude) - Document your prompts and AI responses in lab02_prompts.md - Understand the AI’s solutions before using them\n\nPlanning Exercise\nWrite down your strategy:\nWhich AI tool will you use for Part 2? [Your answer here]\nHow will you ensure you understand the AI-generated code? [Your approach here]\nWhat will you do if Copilot’s suggestion doesn’t work? [Your strategy here]"
-  },
-  {
-    "objectID": "weeks/week02-notebook.html#gemini-cli-ai-in-your-terminal",
-    "href": "weeks/week02-notebook.html#gemini-cli-ai-in-your-terminal",
-    "title": "IS4010: AI-Enhanced Application Development",
-    "section": "Gemini CLI: AI in Your Terminal 🖥️",
-    "text": "Gemini CLI: AI in Your Terminal 🖥️\nThe Gemini CLI brings AI assistance directly to your command line:\n\nWhy Use Terminal-Based AI?\n\nStay in your workflow: No switching between terminal and browser\nQuick queries: Fast answers without leaving the command line\nScriptable: Can be integrated into automated workflows\nCode context: Easy to pipe file contents directly to AI\n\n\n\nCommon Usage Patterns\n# Start interactive session\ngemini\n\n# Quick question\ngemini \"How do I install pytest in Python?\"\n\n# Code generation\ngemini \"Write a Python function to read a CSV file\"\n\n# Debugging help\ngemini \"Explain this error: ImportError: No module named 'requests'\"\n\n# Code review\ncat script.py | gemini \"Review this code for bugs\"\n\n\nWhen to Use Gemini CLI\n\nQuick package help: “How do I install X?”\nError explanations: “What does this error mean?”\nCommand examples: “Show me how to use git stash”\nCode snippets: “Generate a function to do X”"
-  },
-  {
-    "objectID": "weeks/week02-notebook.html#google-jules-ai-powered-code-review",
-    "href": "weeks/week02-notebook.html#google-jules-ai-powered-code-review",
-    "title": "IS4010: AI-Enhanced Application Development",
-    "section": "Google Jules: AI-Powered Code Review 🔍",
-    "text": "Google Jules: AI-Powered Code Review 🔍\nGoogle Jules represents a new category of AI tools that understand entire codebases:\n\nRevolutionary Capabilities\n\nUnderstands entire codebases, not just individual files\nComprehensive analysis: Security, performance, maintainability\nContext-aware suggestions: Considers your project’s architecture\nEducational feedback: Explains why changes are recommended\n\n\n\nWhen to Use Jules\n\nBefore submitting labs: Get AI feedback on your complete solution\nCode review: Identify issues across multiple files\nLearning: Understand best practices in real projects\nRefactoring: Find improvement opportunities\nAddressing pull requests: Get help with PR feedback\n\n\n\nExample Use Case\nBefore submitting Lab 02: 1. Upload your lab02/ folder to Jules 2. Get comprehensive feedback on all three functions 3. Review suggestions for improvements 4. Make informed decisions about changes 5. Submit with confidence"
-  },
-  {
-    "objectID": "weeks/week02-notebook.html#your-professional-ai-toolkit",
-    "href": "weeks/week02-notebook.html#your-professional-ai-toolkit",
-    "title": "IS4010: AI-Enhanced Application Development",
-    "section": "Your Professional AI Toolkit 🧰",
-    "text": "Your Professional AI Toolkit 🧰\n\nRequired for This Course (Free)\n\nGitHub Copilot - Integrated code assistance in VS Code\nGemini CLI - Terminal-based AI for quick queries\n\n\n\nRecommended for This Course (Also Free)\n\nGemini web interface - Conversational AI for problem-solving\nGoogle Jules - Comprehensive code review and analysis\n\n\n\nOptional (But Worth Exploring)\n\nChatGPT - Alternative conversational AI\nClaude - Another excellent conversational AI\nClaude Code - Premium CLI tool (paid subscription)"
-  },
-  {
-    "objectID": "weeks/week02-notebook.html#your-professional-ai-workflow",
-    "href": "weeks/week02-notebook.html#your-professional-ai-workflow",
-    "title": "IS4010: AI-Enhanced Application Development",
-    "section": "Your Professional AI Workflow 🔄",
-    "text": "Your Professional AI Workflow 🔄\nHere’s a recommended workflow for AI-assisted development:\n\nDaily Development\n\nStart with comments: Describe your intent clearly\nUse Copilot inline: Accept, modify, or reject suggestions\nChat for complex problems: Switch to conversational help when stuck\nCommand-line for quick help: Terminal queries for efficiency\n\n\n\nCode Review and Submission\n\nJules analysis: Upload complete projects for review\nAI-assisted debugging: Use chat to identify and fix issues\nDocumentation: Generate docstrings with AI help\nTesting: Auto-generate test cases with /tests command\n\n\n\nThe Golden Rule\nNever submit code you don’t understand!\n\nAI provides suggestions → You make decisions\nAI explains possibilities → You choose the best approach\nAI generates code → You understand and verify it\nAI finds patterns → You apply domain knowledge\nYou remain responsible for the final product"
-  },
-  {
-    "objectID": "weeks/week02-notebook.html#ethics-and-limitations",
-    "href": "weeks/week02-notebook.html#ethics-and-limitations",
-    "title": "IS4010: AI-Enhanced Application Development",
-    "section": "Ethics and Limitations ⚠️",
-    "text": "Ethics and Limitations ⚠️\nAI tools are powerful but require human oversight:\n\nAI Can Hallucinate\n\nModels sometimes generate plausible-looking but incorrect code\nAdvice may sound authoritative but be outdated or wrong\nSubtle logical errors may not be immediately obvious\n\n\n\nYou Own the Code\n\nNever submit code you don’t understand\nTest all AI-generated code thoroughly\nTake responsibility for all submissions\n\n\n\nPrivacy Matters\n\nBe cautious about sharing sensitive information\nDon’t paste real passwords, API keys, or personal data\nUse example data for prompts when possible\n\n\n\nAcademic Integrity\n\nDocument your AI usage in assignments\nUnderstand the code you submit\nAI should accelerate learning, not replace it\nFollow course policies on AI assistance"
-  },
-  {
-    "objectID": "weeks/week02-notebook.html#lab-02-success-strategy",
-    "href": "weeks/week02-notebook.html#lab-02-success-strategy",
-    "title": "IS4010: AI-Enhanced Application Development",
-    "section": "Lab 02 Success Strategy",
-    "text": "Lab 02 Success Strategy\n\nPart 1: Copilot Driving School\n\nWrite clear docstrings - Use NumPy format with detailed descriptions\nLet Copilot suggest - Place cursor in function body and wait\nReview carefully - Understand what Copilot suggests\nTest thoroughly - Verify functions work correctly\nModify if needed - Don’t blindly accept suggestions\n\n\n\nPart 2: Prompt Engineering Challenge\n\nUse CPTF framework - Context, Persona, Task, Format\nBe specific - Clear prompts get better responses\nDocument everything - Save prompts and responses in lab02_prompts.md\nUnderstand solutions - Don’t copy-paste without understanding\nIterate if needed - Refine prompts for better results"
-  },
-  {
-    "objectID": "weeks/week02-notebook.html#your-ai-assistant-checklist",
-    "href": "weeks/week02-notebook.html#your-ai-assistant-checklist",
-    "title": "IS4010: AI-Enhanced Application Development",
-    "section": "Your AI Assistant Checklist",
-    "text": "Your AI Assistant Checklist\nBefore starting Lab 02, make sure you have:\n\nGitHub Copilot installed and activated in VS Code\nAccess to a conversational AI (Gemini, ChatGPT, or Claude)\nUnderstanding of NumPy-style docstrings\nCPTF framework memorized or bookmarked\nCommitment to understanding all AI-generated code"
-  },
-  {
-    "objectID": "weeks/week02-notebook.html#remember-you-are-the-pilot",
-    "href": "weeks/week02-notebook.html#remember-you-are-the-pilot",
-    "title": "IS4010: AI-Enhanced Application Development",
-    "section": "Remember: You Are the Pilot ✈️",
-    "text": "Remember: You Are the Pilot ✈️\n\nAI provides suggestions → You make decisions\nAI explains possibilities → You choose the best approach\nAI generates code → You understand and verify it\nAlways maintain responsibility for your work\n\nGood luck with Lab 02! Use AI wisely, learn actively, and code confidently!"
+    "objectID": "weeks/week02-notebook.html#lab-02-handoff",
+    "href": "weeks/week02-notebook.html#lab-02-handoff",
+    "title": "Week 02: AI-assisted development",
+    "section": "Lab 02 handoff",
+    "text": "Lab 02 handoff\nComplete week02/lab02.md. Install and authenticate both CLI tools, record the shared prompt and comparison, implement all three functions, run the tests, inspect the diff, and push until the Week 02 badge is green."
   },
   {
     "objectID": "weeks/week11.html",
@@ -2577,7 +2469,7 @@
     "href": "weeks/week07-notebook.html#installing-the-requests-library",
     "title": "IS4010: AI-Enhanced Application Development",
     "section": "Installing the requests Library",
-    "text": "Installing the requests Library\n\nPython’s most popular HTTP library\nThe requests library makes HTTP requests simple in Python:\n\nNot built-in: Unlike json, we need to install it first\nWhy requests?: Clean, simple API - much easier than Python’s built-in urllib\nIndustry standard: Used by millions of Python developers\n\nInstallation (run in your terminal, not in this notebook):\npip install requests\nLet’s verify it’s installed:\n\n# Import and check requests library\ntry:\n    import requests\n    print(f\"✅ requests library installed (version {requests.__version__})\")\nexcept ImportError:\n    print(\"❌ requests library not installed. Run: pip install requests\")"
+    "text": "Installing the requests Library\n\nPython’s most popular HTTP library\nThe requests library makes HTTP requests simple in Python:\n\nNot built-in: Unlike json, we need to install it first\nWhy requests?: Clean, simple API - much easier than Python’s built-in urllib\nIndustry standard: Used by millions of Python developers\n\nInstallation (run in your terminal, not in this notebook):\nuv add requests\nLet’s verify it’s installed:\n\n# Import and check requests library\ntry:\n    import requests\n    print(f\"✅ requests library installed (version {requests.__version__})\")\nexcept ImportError:\n    print(\"❌ requests library not installed. Run: uv sync --locked\")"
   },
   {
     "objectID": "weeks/week07-notebook.html#making-your-first-api-request",
@@ -3013,21 +2905,21 @@
     "href": "weeks/week08-notebook.html#basic-argparse-your-first-cli",
     "title": "IS4010: AI-Enhanced Application Development",
     "section": "Basic argparse: Your First CLI",
-    "text": "Basic argparse: Your First CLI\n\n# Example 1: Simple greeter CLI\n\ndef create_greeter_parser():\n    \"\"\"Create a parser for a simple greeting tool.\"\"\"\n    parser = argparse.ArgumentParser(\n        description=\"A simple greeting tool\",\n        epilog=\"Thanks for using the greeter!\"\n    )\n    \n    # Positional argument (required)\n    parser.add_argument(\n        \"name\",\n        help=\"The name of the person to greet\"\n    )\n    \n    # Optional flag\n    parser.add_argument(\n        \"--loud\",\n        action=\"store_true\",\n        help=\"Greet in ALL CAPS\"\n    )\n    \n    return parser\n\n# Test it out (simulating command-line arguments)\nparser = create_greeter_parser()\n\n# Simulate: python greeter.py Alice\nargs = parser.parse_args([\"Alice\"])\ngreeting = f\"Hello, {args.name}!\"\nif args.loud:\n    greeting = greeting.upper()\nprint(greeting)\n\n# Simulate: python greeter.py Bob --loud\nargs = parser.parse_args([\"Bob\", \"--loud\"])\ngreeting = f\"Hello, {args.name}!\"\nif args.loud:\n    greeting = greeting.upper()\nprint(greeting)\n\n\n🎯 Your Turn: Exercise 1\nCreate a CLI calculator that: 1. Takes two numbers as positional arguments 2. Has a --operation flag with choices: add, subtract, multiply, divide 3. Prints the result\nExample usage:\npython calculator.py 10 5 --operation add     # Should print 15\npython calculator.py 10 5 --operation multiply # Should print 50\n\n# Your code here\ndef create_calculator_parser():\n    \"\"\"Create a parser for a calculator CLI.\"\"\"\n    parser = argparse.ArgumentParser(description=\"Simple calculator\")\n    \n    # TODO: Add positional arguments for two numbers\n    # TODO: Add --operation flag with choices\n    \n    return parser\n\n# Test your calculator\n# parser = create_calculator_parser()\n# args = parser.parse_args([\"10\", \"5\", \"--operation\", \"add\"])\n# print(f\"Result: {args.num1 + args.num2}\")  # Adjust based on your implementation"
+    "text": "Basic argparse: Your First CLI\n\n# Example 1: Simple greeter CLI\n\ndef create_greeter_parser():\n    \"\"\"Create a parser for a simple greeting tool.\"\"\"\n    parser = argparse.ArgumentParser(\n        description=\"A simple greeting tool\",\n        epilog=\"Thanks for using the greeter!\"\n    )\n    \n    # Positional argument (required)\n    parser.add_argument(\n        \"name\",\n        help=\"The name of the person to greet\"\n    )\n    \n    # Optional flag\n    parser.add_argument(\n        \"--loud\",\n        action=\"store_true\",\n        help=\"Greet in ALL CAPS\"\n    )\n    \n    return parser\n\n# Test it out (simulating command-line arguments)\nparser = create_greeter_parser()\n\n# Simulate: uv run python greeter.py Alice\nargs = parser.parse_args([\"Alice\"])\ngreeting = f\"Hello, {args.name}!\"\nif args.loud:\n    greeting = greeting.upper()\nprint(greeting)\n\n# Simulate: uv run python greeter.py Bob --loud\nargs = parser.parse_args([\"Bob\", \"--loud\"])\ngreeting = f\"Hello, {args.name}!\"\nif args.loud:\n    greeting = greeting.upper()\nprint(greeting)\n\n\n🎯 Your Turn: Exercise 1\nCreate a CLI calculator that: 1. Takes two numbers as positional arguments 2. Has a --operation flag with choices: add, subtract, multiply, divide 3. Prints the result\nExample usage:\nuv run python calculator.py 10 5 --operation add     # Should print 15\nuv run python calculator.py 10 5 --operation multiply # Should print 50\n\n# Your code here\ndef create_calculator_parser():\n    \"\"\"Create a parser for a calculator CLI.\"\"\"\n    parser = argparse.ArgumentParser(description=\"Simple calculator\")\n    \n    # TODO: Add positional arguments for two numbers\n    # TODO: Add --operation flag with choices\n    \n    return parser\n\n# Test your calculator\n# parser = create_calculator_parser()\n# args = parser.parse_args([\"10\", \"5\", \"--operation\", \"add\"])\n# print(f\"Result: {args.num1 + args.num2}\")  # Adjust based on your implementation"
   },
   {
     "objectID": "weeks/week08-notebook.html#advanced-argparse-types-defaults-and-validation",
     "href": "weeks/week08-notebook.html#advanced-argparse-types-defaults-and-validation",
     "title": "IS4010: AI-Enhanced Application Development",
     "section": "Advanced argparse: Types, Defaults, and Validation",
-    "text": "Advanced argparse: Types, Defaults, and Validation\n\n# Example 2: API fetcher with multiple argument types\n\ndef create_api_fetcher_parser():\n    \"\"\"Create a parser for an API data fetcher.\"\"\"\n    parser = argparse.ArgumentParser(\n        description=\"Fetch data from various APIs\"\n    )\n    \n    # Positional arguments\n    parser.add_argument(\"api\", help=\"API name (e.g., 'pokemon', 'weather')\")\n    parser.add_argument(\"resource\", help=\"Resource to fetch\")\n    \n    # Optional argument with type conversion\n    parser.add_argument(\n        \"-l\", \"--limit\",\n        type=int,\n        default=10,\n        help=\"Number of items to fetch (default: 10)\"\n    )\n    \n    # Choices restriction\n    parser.add_argument(\n        \"--format\",\n        choices=[\"json\", \"csv\", \"txt\"],\n        default=\"json\",\n        help=\"Output format (default: json)\"\n    )\n    \n    # Optional output file\n    parser.add_argument(\n        \"-o\", \"--output\",\n        help=\"Output file path (prints to console if not specified)\"\n    )\n    \n    return parser\n\n# Test the parser\nparser = create_api_fetcher_parser()\n\n# Simulate: python api_fetcher.py pokemon pikachu -l 5 --format json\nargs = parser.parse_args([\"pokemon\", \"pikachu\", \"-l\", \"5\", \"--format\", \"json\"])\nprint(f\"Fetching {args.limit} {args.resource} from {args.api} API\")\nprint(f\"Format: {args.format}\")\nprint(f\"Output: {args.output if args.output else 'console'}\")\n\n\n🎯 Your Turn: Exercise 2\nCreate a file processor CLI that: 1. Takes a filename as positional argument 2. Has --lines flag (integer) for number of lines to process (default: 10) 3. Has --mode flag with choices: read, count, search 4. Has --pattern flag (string) for search mode\nPrint out what the tool would do based on the arguments.\n\n# Your code here\ndef create_file_processor_parser():\n    \"\"\"Create a parser for a file processing tool.\"\"\"\n    # TODO: Implement the parser\n    pass\n\n# Test your parser\n# parser = create_file_processor_parser()\n# args = parser.parse_args([\"data.txt\", \"--lines\", \"20\", \"--mode\", \"search\", \"--pattern\", \"error\"])\n# print(f\"Processing {args.filename}: {args.mode} mode, {args.lines} lines\")"
+    "text": "Advanced argparse: Types, Defaults, and Validation\n\n# Example 2: API fetcher with multiple argument types\n\ndef create_api_fetcher_parser():\n    \"\"\"Create a parser for an API data fetcher.\"\"\"\n    parser = argparse.ArgumentParser(\n        description=\"Fetch data from various APIs\"\n    )\n    \n    # Positional arguments\n    parser.add_argument(\"api\", help=\"API name (e.g., 'pokemon', 'weather')\")\n    parser.add_argument(\"resource\", help=\"Resource to fetch\")\n    \n    # Optional argument with type conversion\n    parser.add_argument(\n        \"-l\", \"--limit\",\n        type=int,\n        default=10,\n        help=\"Number of items to fetch (default: 10)\"\n    )\n    \n    # Choices restriction\n    parser.add_argument(\n        \"--format\",\n        choices=[\"json\", \"csv\", \"txt\"],\n        default=\"json\",\n        help=\"Output format (default: json)\"\n    )\n    \n    # Optional output file\n    parser.add_argument(\n        \"-o\", \"--output\",\n        help=\"Output file path (prints to console if not specified)\"\n    )\n    \n    return parser\n\n# Test the parser\nparser = create_api_fetcher_parser()\n\n# Simulate: uv run python api_fetcher.py pokemon pikachu -l 5 --format json\nargs = parser.parse_args([\"pokemon\", \"pikachu\", \"-l\", \"5\", \"--format\", \"json\"])\nprint(f\"Fetching {args.limit} {args.resource} from {args.api} API\")\nprint(f\"Format: {args.format}\")\nprint(f\"Output: {args.output if args.output else 'console'}\")\n\n\n🎯 Your Turn: Exercise 2\nCreate a file processor CLI that: 1. Takes a filename as positional argument 2. Has --lines flag (integer) for number of lines to process (default: 10) 3. Has --mode flag with choices: read, count, search 4. Has --pattern flag (string) for search mode\nPrint out what the tool would do based on the arguments.\n\n# Your code here\ndef create_file_processor_parser():\n    \"\"\"Create a parser for a file processing tool.\"\"\"\n    # TODO: Implement the parser\n    pass\n\n# Test your parser\n# parser = create_file_processor_parser()\n# args = parser.parse_args([\"data.txt\", \"--lines\", \"20\", \"--mode\", \"search\", \"--pattern\", \"error\"])\n# print(f\"Processing {args.filename}: {args.mode} mode, {args.lines} lines\")"
   },
   {
     "objectID": "weeks/week08-notebook.html#subcommands-git-style-clis",
     "href": "weeks/week08-notebook.html#subcommands-git-style-clis",
     "title": "IS4010: AI-Enhanced Application Development",
     "section": "Subcommands: Git-Style CLIs",
-    "text": "Subcommands: Git-Style CLIs\n\n# Example 3: Project manager with subcommands\n\ndef cmd_init(args):\n    \"\"\"Initialize a new project.\"\"\"\n    print(f\"Initializing project: {args.name}\")\n    print(f\"Template: {args.template}\")\n\ndef cmd_build(args):\n    \"\"\"Build the project.\"\"\"\n    print(\"Building project...\")\n    if args.verbose:\n        print(\"Verbose output enabled\")\n\ndef cmd_deploy(args):\n    \"\"\"Deploy the project.\"\"\"\n    print(f\"Deploying to {args.environment}\")\n\ndef create_project_manager_parser():\n    \"\"\"Create a parser with subcommands.\"\"\"\n    parser = argparse.ArgumentParser(description=\"Project management tool\")\n    subparsers = parser.add_subparsers(dest=\"command\", help=\"Available commands\")\n    \n    # 'init' subcommand\n    init_parser = subparsers.add_parser(\"init\", help=\"Initialize a new project\")\n    init_parser.add_argument(\"name\", help=\"Project name\")\n    init_parser.add_argument(\"--template\", default=\"basic\", help=\"Project template\")\n    init_parser.set_defaults(func=cmd_init)\n    \n    # 'build' subcommand\n    build_parser = subparsers.add_parser(\"build\", help=\"Build the project\")\n    build_parser.add_argument(\"-v\", \"--verbose\", action=\"store_true\")\n    build_parser.set_defaults(func=cmd_build)\n    \n    # 'deploy' subcommand\n    deploy_parser = subparsers.add_parser(\"deploy\", help=\"Deploy the project\")\n    deploy_parser.add_argument(\"environment\", choices=[\"dev\", \"staging\", \"prod\"])\n    deploy_parser.set_defaults(func=cmd_deploy)\n    \n    return parser\n\n# Test subcommands\nparser = create_project_manager_parser()\n\n# Simulate: python project_manager.py init my_app --template django\nargs = parser.parse_args([\"init\", \"my_app\", \"--template\", \"django\"])\nif hasattr(args, \"func\"):\n    args.func(args)\n\nprint(\"\\n---\\n\")\n\n# Simulate: python project_manager.py deploy prod\nargs = parser.parse_args([\"deploy\", \"prod\"])\nif hasattr(args, \"func\"):\n    args.func(args)\n\n\n🎯 Your Turn: Exercise 3\nCreate a data management CLI with three subcommands: 1. fetch - Fetch data from an API (takes source as argument) 2. clean - Clean a dataset (takes filename and optional --method) 3. export - Export data (takes filename and --format with choices: json, csv, excel)\nEach subcommand should print what action it would take.\n\n# Your code here\ndef create_data_manager_parser():\n    \"\"\"Create a parser for a data management tool with subcommands.\"\"\"\n    # TODO: Implement parser with subcommands\n    pass\n\n# Test your data manager\n# parser = create_data_manager_parser()\n# args = parser.parse_args([\"export\", \"data.json\", \"--format\", \"csv\"])\n# if hasattr(args, \"func\"):\n#     args.func(args)"
+    "text": "Subcommands: Git-Style CLIs\n\n# Example 3: Project manager with subcommands\n\ndef cmd_init(args):\n    \"\"\"Initialize a new project.\"\"\"\n    print(f\"Initializing project: {args.name}\")\n    print(f\"Template: {args.template}\")\n\ndef cmd_build(args):\n    \"\"\"Build the project.\"\"\"\n    print(\"Building project...\")\n    if args.verbose:\n        print(\"Verbose output enabled\")\n\ndef cmd_deploy(args):\n    \"\"\"Deploy the project.\"\"\"\n    print(f\"Deploying to {args.environment}\")\n\ndef create_project_manager_parser():\n    \"\"\"Create a parser with subcommands.\"\"\"\n    parser = argparse.ArgumentParser(description=\"Project management tool\")\n    subparsers = parser.add_subparsers(dest=\"command\", help=\"Available commands\")\n    \n    # 'init' subcommand\n    init_parser = subparsers.add_parser(\"init\", help=\"Initialize a new project\")\n    init_parser.add_argument(\"name\", help=\"Project name\")\n    init_parser.add_argument(\"--template\", default=\"basic\", help=\"Project template\")\n    init_parser.set_defaults(func=cmd_init)\n    \n    # 'build' subcommand\n    build_parser = subparsers.add_parser(\"build\", help=\"Build the project\")\n    build_parser.add_argument(\"-v\", \"--verbose\", action=\"store_true\")\n    build_parser.set_defaults(func=cmd_build)\n    \n    # 'deploy' subcommand\n    deploy_parser = subparsers.add_parser(\"deploy\", help=\"Deploy the project\")\n    deploy_parser.add_argument(\"environment\", choices=[\"dev\", \"staging\", \"prod\"])\n    deploy_parser.set_defaults(func=cmd_deploy)\n    \n    return parser\n\n# Test subcommands\nparser = create_project_manager_parser()\n\n# Simulate: uv run python project_manager.py init my_app --template django\nargs = parser.parse_args([\"init\", \"my_app\", \"--template\", \"django\"])\nif hasattr(args, \"func\"):\n    args.func(args)\n\nprint(\"\\n---\\n\")\n\n# Simulate: uv run python project_manager.py deploy prod\nargs = parser.parse_args([\"deploy\", \"prod\"])\nif hasattr(args, \"func\"):\n    args.func(args)\n\n\n🎯 Your Turn: Exercise 3\nCreate a data management CLI with three subcommands: 1. fetch - Fetch data from an API (takes source as argument) 2. clean - Clean a dataset (takes filename and optional --method) 3. export - Export data (takes filename and --format with choices: json, csv, excel)\nEach subcommand should print what action it would take.\n\n# Your code here\ndef create_data_manager_parser():\n    \"\"\"Create a parser for a data management tool with subcommands.\"\"\"\n    # TODO: Implement parser with subcommands\n    pass\n\n# Test your data manager\n# parser = create_data_manager_parser()\n# args = parser.parse_args([\"export\", \"data.json\", \"--format\", \"csv\"])\n# if hasattr(args, \"func\"):\n#     args.func(args)"
   },
   {
     "objectID": "weeks/week08-notebook.html#understanding-python-packages",
@@ -3041,7 +2933,7 @@
     "href": "weeks/week08-notebook.html#the-__name__-__main__-pattern",
     "title": "IS4010: AI-Enhanced Application Development",
     "section": "The __name__ == \"__main__\" Pattern",
-    "text": "The __name__ == \"__main__\" Pattern\n\n# Example 4: Understanding __name__\n\n# When Python runs a file directly, __name__ is \"__main__\"\n# When Python imports a file, __name__ is the module name\n\ndef greet(name: str) -&gt; str:\n    \"\"\"Return a greeting message.\"\"\"\n    return f\"Hello, {name}!\"\n\ndef main():\n    \"\"\"Entry point when run as a script.\"\"\"\n    print(\"This is the main function\")\n    print(greet(\"World\"))\n\n# This code only runs when the file is executed directly\n# It does NOT run when the file is imported\nif __name__ == \"__main__\":\n    print(f\"__name__ is: {__name__}\")\n    main()\nelse:\n    print(f\"This module was imported. __name__ is: {__name__}\")\n\n\nWhy This Matters\nThe __name__ == \"__main__\" pattern allows your code to be: 1. Runnable as a script: python my_module.py 2. Importable as a library: from my_module import greet\nThis is essential for: - Testing individual modules - Creating reusable code - Professional project structure"
+    "text": "The __name__ == \"__main__\" Pattern\n\n# Example 4: Understanding __name__\n\n# When Python runs a file directly, __name__ is \"__main__\"\n# When Python imports a file, __name__ is the module name\n\ndef greet(name: str) -&gt; str:\n    \"\"\"Return a greeting message.\"\"\"\n    return f\"Hello, {name}!\"\n\ndef main():\n    \"\"\"Entry point when run as a script.\"\"\"\n    print(\"This is the main function\")\n    print(greet(\"World\"))\n\n# This code only runs when the file is executed directly\n# It does NOT run when the file is imported\nif __name__ == \"__main__\":\n    print(f\"__name__ is: {__name__}\")\n    main()\nelse:\n    print(f\"This module was imported. __name__ is: {__name__}\")\n\n\nWhy This Matters\nThe __name__ == \"__main__\" pattern allows your code to be: 1. Runnable as a script: uv run python my_module.py 2. Importable as a library: from my_module import greet\nThis is essential for: - Testing individual modules - Creating reusable code - Professional project structure"
   },
   {
     "objectID": "weeks/week08-notebook.html#package-structure-example",
@@ -3069,14 +2961,14 @@
     "href": "weeks/week08-notebook.html#modern-python-pyproject.toml",
     "title": "IS4010: AI-Enhanced Application Development",
     "section": "Modern Python: pyproject.toml",
-    "text": "Modern Python: pyproject.toml\n\n# Example 8: Understanding pyproject.toml\n\npyproject_toml_example = \"\"\"\n[build-system]\nrequires = [\"hatchling\"]\nbuild-backend = \"hatchling.build\"\n\n[project]\nname = \"my-api-tool\"\nversion = \"0.1.0\"\ndescription = \"A professional API client\"\nauthors = [{name = \"Your Name\", email = \"you@example.com\"}]\nreadme = \"README.md\"\nrequires-python = \"&gt;=3.10\"\ndependencies = [\n    \"requests&gt;=2.31.0\",\n]\n\n[project.optional-dependencies]\ndev = [\n    \"pytest&gt;=7.0.0\",\n    \"black&gt;=23.0.0\",\n]\n\n[project.scripts]\nmy-api = \"my_api.cli:main\"  # Creates a 'my-api' command\n\"\"\"\n\nprint(\"Example pyproject.toml configuration:\")\nprint(pyproject_toml_example)\n\nprint(\"\\n✅ After 'pip install -e .', you can:\")\nprint(\"   - Import your package from anywhere\")\nprint(\"   - Run your CLI with the command name (my-api)\")\nprint(\"   - Share your package with others\")"
+    "text": "Modern Python: pyproject.toml\n\n# Example 8: Understanding pyproject.toml\n\npyproject_toml_example = \"\"\"\n[build-system]\nrequires = [\"hatchling\"]\nbuild-backend = \"hatchling.build\"\n\n[project]\nname = \"my-api-tool\"\nversion = \"0.1.0\"\ndescription = \"A professional API client\"\nauthors = [{name = \"Your Name\", email = \"you@example.com\"}]\nreadme = \"README.md\"\nrequires-python = \"&gt;=3.10\"\ndependencies = [\n    \"requests&gt;=2.31.0\",\n]\n\n[project.optional-dependencies]\ndev = [\n    \"pytest&gt;=7.0.0\",\n    \"black&gt;=23.0.0\",\n]\n\n[project.scripts]\nmy-api = \"my_api.cli:main\"  # Creates a 'my-api' command\n\"\"\"\n\nprint(\"Example pyproject.toml configuration:\")\nprint(pyproject_toml_example)\n\nprint(\"\\n✅ After 'uv sync', you can:\")\nprint(\"   - Import your package from anywhere\")\nprint(\"   - Run your CLI with the command name (my-api)\")\nprint(\"   - Share your package with others\")"
   },
   {
     "objectID": "weeks/week08-notebook.html#action-items-for-this-week",
     "href": "weeks/week08-notebook.html#action-items-for-this-week",
     "title": "IS4010: AI-Enhanced Application Development",
     "section": "Action Items for This Week:",
-    "text": "Action Items for This Week:\n\nRestructure your project with proper package layout\n\nCreate package directory with __init__.py\nSeparate concerns into modules (api, cli, utils, models)\nAdd tests/ directory\n\nAdd CLI interface using argparse\n\nDesign intuitive commands and arguments\nAdd help text for all options\nInclude error handling and validation\n\nCreate pyproject.toml for your project\n\nDefine project metadata\nList dependencies\nCreate CLI entry point\n\nTest installation\n\nRun pip install -e . in your project directory\nTest your CLI command\nVerify imports work from other directories\n\nUpdate README.md\n\nInstallation instructions\nUsage examples with your CLI\nProject structure explanation"
+    "text": "Action Items for This Week:\n\nRestructure your project with proper package layout\n\nCreate package directory with __init__.py\nSeparate concerns into modules (api, cli, utils, models)\nAdd tests/ directory\n\nAdd CLI interface using argparse\n\nDesign intuitive commands and arguments\nAdd help text for all options\nInclude error handling and validation\n\nCreate pyproject.toml for your project\n\nDefine project metadata\nList dependencies\nCreate CLI entry point\n\nTest installation\n\nRun uv sync in your project directory\nTest your CLI command\nVerify imports work from other directories\n\nUpdate README.md\n\nInstallation instructions\nUsage examples with your CLI\nProject structure explanation"
   },
   {
     "objectID": "weeks/week08-notebook.html#resources",
@@ -3577,7 +3469,7 @@
     "href": "weeks/week01.html",
     "title": "Week 01: Toolkit setup",
     "section": "",
-    "text": "Welcome to the first week of IS 4010! This week is all about building your foundation. We’ll introduce the course philosophy of “AI-enhanced development,” set up your professional developer toolkit, and dive into the world of version control with Git and GitHub. By the end of this module, you’ll have a fully configured environment and your first repository ready to go.",
+    "text": "Welcome to the first week of IS 4010! This week is all about building your foundation. We’ll introduce the course philosophy of “AI-enhanced development,” learn the terminal basics that support the rest of the course, set up uv, and dive into version control with Git and GitHub. By the end of this module, you’ll have a configured Python environment and your semester repository ready to go.",
     "crumbs": [
       "Weekly schedule",
       "Week 01: Toolkit setup"
@@ -3588,7 +3480,7 @@
     "href": "weeks/week01.html#introduction",
     "title": "Week 01: Toolkit setup",
     "section": "",
-    "text": "Welcome to the first week of IS 4010! This week is all about building your foundation. We’ll introduce the course philosophy of “AI-enhanced development,” set up your professional developer toolkit, and dive into the world of version control with Git and GitHub. By the end of this module, you’ll have a fully configured environment and your first repository ready to go.",
+    "text": "Welcome to the first week of IS 4010! This week is all about building your foundation. We’ll introduce the course philosophy of “AI-enhanced development,” learn the terminal basics that support the rest of the course, set up uv, and dive into version control with Git and GitHub. By the end of this module, you’ll have a configured Python environment and your semester repository ready to go.",
     "crumbs": [
       "Weekly schedule",
       "Week 01: Toolkit setup"
@@ -3599,7 +3491,7 @@
     "href": "weeks/week01.html#recommended-readings",
     "title": "Week 01: Toolkit setup",
     "section": "Recommended readings",
-    "text": "Recommended readings\n\nPro Git Book (Ch 1-3) - The definitive guide to Git\nGitHub Guides - Essential tutorials for working with GitHub",
+    "text": "Recommended readings\n\nPro Git Book (Ch 1-3) - The definitive guide to Git\nGitHub Guides - Essential tutorials for working with GitHub\nuv installation guide - Official setup instructions for the course Python tool",
     "crumbs": [
       "Weekly schedule",
       "Week 01: Toolkit setup"
@@ -3610,7 +3502,7 @@
     "href": "weeks/week01.html#lectures",
     "title": "Week 01: Toolkit setup",
     "section": "Lectures",
-    "text": "Lectures\n\nSlides: Course introduction & version control",
+    "text": "Lectures\n\nSlides: Course introduction, terminal, and version control",
     "crumbs": [
       "Weekly schedule",
       "Week 01: Toolkit setup"
@@ -3621,7 +3513,7 @@
     "href": "weeks/week01.html#lab-assignment",
     "title": "Week 01: Toolkit setup",
     "section": "Lab assignment",
-    "text": "Lab assignment\n\nLab 01: Fork and clone your semester repository",
+    "text": "Lab assignment\n\nLab 01: Repository and development setup",
     "crumbs": [
       "Weekly schedule",
       "Week 01: Toolkit setup"
@@ -3751,7 +3643,51 @@
     "href": "resources/troubleshooting.html",
     "title": "Troubleshooting",
     "section": "",
-    "text": "Welcome to IS 4010! Here are some common issues and their solutions.\n\nPython issues\nModuleNotFoundError: No module named 'labXX' * Fix: Ensure you are running pytest from the repository root, not inside the weekXX folder. * Command: pytest weekXX/tests/\npython: command not found * Fix: Try using python3 instead. If on Windows, ensure you checked “Add to PATH” during installation.\n\n\nGit & GitHub issues\nPermission denied (publickey) * Fix: You are likely trying to push without setting up authentication. * Solution: Use a Personal Access Token (PAT) as your password when prompted, or set up SSH keys.\nChanges not showing on GitHub * Fix: Did you git push? Committing only saves changes locally.\n\n\nRust issues\ncargo: command not found * Fix: You may need to restart your terminal after installing Rust to refresh your PATH.\n\n\nGitHub Actions\nWorkflow not triggering * Fix: For your first lab, go to the Actions tab on GitHub and click “I understand my workflows, enable them”. * Fix: Ensure you pushed your code!",
+    "text": "uv: command not found\n\nRestart the terminal after installation so its PATH refreshes.\nRevisit the official uv installation guide for your operating system.\n\nThe environment is missing or out of date\n\nFrom the repository root, run uv sync --locked.\nRun Python as uv run python ...; no manual activation is required.\n\nModuleNotFoundError: No module named 'labXX'\n\nRun the exact command shown in the lab from the repository root.\nExample: uv run --directory week03 python -m pytest tests/ -v.",
+    "crumbs": [
+      "Resources",
+      "Troubleshooting"
+    ]
+  },
+  {
+    "objectID": "resources/troubleshooting.html#python-and-uv-issues",
+    "href": "resources/troubleshooting.html#python-and-uv-issues",
+    "title": "Troubleshooting",
+    "section": "",
+    "text": "uv: command not found\n\nRestart the terminal after installation so its PATH refreshes.\nRevisit the official uv installation guide for your operating system.\n\nThe environment is missing or out of date\n\nFrom the repository root, run uv sync --locked.\nRun Python as uv run python ...; no manual activation is required.\n\nModuleNotFoundError: No module named 'labXX'\n\nRun the exact command shown in the lab from the repository root.\nExample: uv run --directory week03 python -m pytest tests/ -v.",
+    "crumbs": [
+      "Resources",
+      "Troubleshooting"
+    ]
+  },
+  {
+    "objectID": "resources/troubleshooting.html#git-and-github-issues",
+    "href": "resources/troubleshooting.html#git-and-github-issues",
+    "title": "Troubleshooting",
+    "section": "Git and GitHub issues",
+    "text": "Git and GitHub issues\nAuthentication failed or permission was denied\n\nFollow GitHub’s current authentication documentation.\nConfirm git remote -v points to your fork, not the instructor repository.\nNever save a token in the repository.\n\nChanges are not showing on GitHub\n\nRun git status and git log -1.\nA commit remains local until you run git push origin main.",
+    "crumbs": [
+      "Resources",
+      "Troubleshooting"
+    ]
+  },
+  {
+    "objectID": "resources/troubleshooting.html#rust-issues",
+    "href": "resources/troubleshooting.html#rust-issues",
+    "title": "Troubleshooting",
+    "section": "Rust issues",
+    "text": "Rust issues\ncargo: command not found\n\nRestart the terminal after installing Rust so its PATH refreshes.\nRevisit the official Rust installation guide.",
+    "crumbs": [
+      "Resources",
+      "Troubleshooting"
+    ]
+  },
+  {
+    "objectID": "resources/troubleshooting.html#github-actions-issues",
+    "href": "resources/troubleshooting.html#github-actions-issues",
+    "title": "Troubleshooting",
+    "section": "GitHub Actions issues",
+    "text": "GitHub Actions issues\nA workflow did not run\n\nIn a new fork, open Actions and enable the inherited workflows.\nConfirm you pushed the required files to main.\nSelect the badge or workflow run to read the first failing step.",
     "crumbs": [
       "Resources",
       "Troubleshooting"
@@ -3762,7 +3698,40 @@
     "href": "resources/setup.html",
     "title": "Setup guide",
     "section": "",
-    "text": "Welcome to IS 4010! This guide provides step-by-step instructions for setting up your computer with all the necessary tools for this course.\n\n1. Visual Studio Code (VS Code)\nWe use VS Code as our primary IDE.\n\nDownload: code.visualstudio.com\nInstall: Run the installer for your OS.\n\nWindows: Check “Add to PATH”.\nmacOS: Open VS Code, press Cmd+Shift+P, type “Shell Command”, and select Install ‘code’ command in PATH.\n\n\n\n\n2. Git & GitHub\n\nGit: Download and install.\n\nWindows Users: We strongly recommend installing Git Bash (via the Git for Windows installer) and using it as your default terminal profile in Windows Terminal.\n\nGitHub:\n\nCreate an account at github.com.\nSign up for the Student Developer Pack (free Copilot!).\nConfigure Git: bash     git config --global user.name \"Your Name\"     git config --global user.email \"your.email@example.com\"\n\n\n\n\n3. Python setup\n\nInstall: Python 3.10+ from python.org.\n\nWindows: Check “Add python.exe to PATH” during installation.\n\nVerify: python --version (or python3 --version).\n\n\n\n4. Rust setup (Week 09)\nYou do not need Rust for Labs 01–08. Return to this section at the start of Week 09. * Install: Run the following command (macOS/Linux/WSL): bash     curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh * Windows: Download rustup-init.exe from rust-lang.org. * Verify: cargo --version.\n\n\n5. Gemini CLI\n\nPrerequisite: Node.js v20+.\nInstall: npm install -g @google/gemini-cli.\nAuthenticate: Run gemini and log in with your Google account.\n\n\n\n6. GitHub Copilot\n\nInstall the GitHub Copilot extension in VS Code.\nSign in with your GitHub account (ensure you have the Student Developer Pack activated).",
+    "text": "Welcome to IS 4010! We use official setup documentation so these instructions stay useful when tools change. Complete the Week 01 section before Lab 01, the Week 02 section before Lab 02, and the Rust section at the start of Week 09.",
+    "crumbs": [
+      "Resources",
+      "Setup guide"
+    ]
+  },
+  {
+    "objectID": "resources/setup.html#week-01-editor-terminal-git-and-python",
+    "href": "resources/setup.html#week-01-editor-terminal-git-and-python",
+    "title": "Setup guide",
+    "section": "Week 01: Editor, terminal, Git, and Python",
+    "text": "Week 01: Editor, terminal, Git, and Python\n\nVisual Studio Code\n\nFollow the official VS Code setup documentation.\nOn Windows, use Git Bash as your course shell. On macOS or Linux, use your default shell.\nYou may work in a standalone terminal or choose Terminal &gt; New Terminal in VS Code.\n\n\n\nGit and GitHub\n\nInstall Git from the official Git downloads page.\nCreate a GitHub account.\nApply for GitHub Education benefits.\nConfigure your name and the email associated with GitHub:\n\ngit config --global user.name \"Your name\"\ngit config --global user.email \"your.email@example.com\"\n\n\nPython through uv\nWe use Python 3.12, managed by uv. Do not install Python separately unless uv’s official documentation tells you that your system requires it.\n\nFollow the official uv installation guide.\nFrom your cloned labs repository, create the locked course environment:\n\nuv sync --locked\n\nVerify the tools and the managed Python version:\n\ncode --version\ngit --version\nuv --version\nuv run python --version\nuv sync creates .venv and installs the dependencies in uv.lock. You do not need to activate the environment.",
+    "crumbs": [
+      "Resources",
+      "Setup guide"
+    ]
+  },
+  {
+    "objectID": "resources/setup.html#week-02-ai-tools",
+    "href": "resources/setup.html#week-02-ai-tools",
+    "title": "Setup guide",
+    "section": "Week 02: AI tools",
+    "text": "Week 02: AI tools\nUse any browser chat that helps you learn, including ChatGPT, Gemini, or Claude. We will also use all three development surfaces below.\n\nGitHub Copilot in VS Code\n\nFollow the official Copilot setup guide for VS Code.\nSign in with your GitHub account.\n\n\n\nGitHub Copilot CLI\n\nFollow the official Copilot CLI installation guide.\nComplete its supported authentication flow.\n\n\n\nAntigravity CLI\n\nFollow the official Antigravity CLI overview and setup guide.\nComplete its supported authentication flow.\n\nInstall and try both CLI tools for Lab 02. After comparing them, you may use whichever combination of browser chat, VS Code Copilot, Copilot CLI, and Antigravity CLI fits the task.\n\n\n\n\n\n\nWarning\n\n\n\nRun a coding agent from inside the repository you want it to inspect. Read proposed commands before approving them, use git diff to review edits, and never place credentials in prompts or committed files.",
+    "crumbs": [
+      "Resources",
+      "Setup guide"
+    ]
+  },
+  {
+    "objectID": "resources/setup.html#week-09-rust",
+    "href": "resources/setup.html#week-09-rust",
+    "title": "Setup guide",
+    "section": "Week 09: Rust",
+    "text": "Week 09: Rust\nYou do not need Rust for Labs 01–08. At the start of Week 09:\n\nFollow the official Rust installation guide.\nRestart the terminal if needed, then verify:\n\ncargo --version\nrustc --version",
     "crumbs": [
       "Resources",
       "Setup guide"
@@ -3803,7 +3772,7 @@
     "href": "index.html#quick-links",
     "title": "IS 4010: Application Development with Artificial Intelligence",
     "section": "Quick links",
-    "text": "Quick links\n\nSyllabus\nWeekly schedule\nLabs repository\nCanvas (LMS)",
+    "text": "Quick links\n\nSyllabus — the official Simple Syllabus link will be added when published\nWeekly schedule\nLabs repository\nCanvas (LMS)",
     "crumbs": [
       "Home"
     ]
@@ -3907,7 +3876,7 @@
     "href": "slides/IS4010_W07_Working_with_Data.html#installing-the-requests-library",
     "title": "IS4010: AI-Enhanced Application Development",
     "section": "Installing the requests library",
-    "text": "Installing the requests library\nPython’s most popular HTTP library\npip install requests\n\nNot built-in: Unlike json, we need to install requests\nWhy requests?: Clean, simple API - much easier than Python’s built-in urllib\nIndustry standard: Used by millions of Python developers\nAlternative: Python 3.11+ has urllib3, but requests is still preferred for simplicity\n\n\nInstallation tips: - Make sure students activate virtual environment first - Show how to verify installation: python -c \"import requests; print(requests.__version__)\""
+    "text": "Installing the requests library\nPython’s most popular HTTP library\nuv add requests\n\nNot built-in: Unlike json, we need to install requests\nWhy requests?: Clean, simple API - much easier than Python’s built-in urllib\nIndustry standard: Used by millions of Python developers\nAlternative: Python 3.11+ has urllib3, but requests is still preferred for simplicity\n\n\nInstallation tips: - The course repository already includes requests; uv sync --locked installs it. - uv add requests is the command students would use in their own project. - Show how to verify installation: uv run python -c \"import requests; print(requests.__version__)\""
   },
   {
     "objectID": "slides/IS4010_W07_Working_with_Data.html#making-your-first-api-request",
@@ -4316,11 +4285,11 @@
     "text": "Under the hood: LLMs 🧠\n\nLarge Language Models (LLMs): AI systems trained on massive amounts of text from the internet\nPattern recognition experts: They’ve learned patterns in human language and code\nSophisticated autocomplete: Like your phone’s predictive text, but incredibly advanced\nNot databases: They don’t “know” facts—they predict what text should come next\nSurprisingly good at code: Programming languages follow patterns, just like natural language\n\n\nThis is crucial foundational knowledge. Students often think AI “knows” things, when really it’s predicting based on patterns.\nKey analogies to use: - Autocomplete on steroids: Everyone understands phone predictive text - Pattern matching: Like learning to recognize handwriting, but for language/code patterns - Very sophisticated parrot: Can produce remarkably coherent text without true “understanding”\nImportant points: - LLMs were trained on billions of lines of code from GitHub and other sources - They learned that certain patterns appear together (if you write a function definition, a return statement usually follows) - This is why they’re good at code completion but can make subtle logical errors - They work the same way for Python, Rust, English, or any other language—it’s all just patterns in text\nSet expectations: These tools are incredibly useful but require human judgment and verification."
   },
   {
-    "objectID": "slides/IS4010_W02_AI_Copilots.html#four-main-categories",
-    "href": "slides/IS4010_W02_AI_Copilots.html#four-main-categories",
+    "objectID": "slides/IS4010_W02_AI_Copilots.html#three-working-surfaces",
+    "href": "slides/IS4010_W02_AI_Copilots.html#three-working-surfaces",
     "title": "IS4010: AI-Enhanced Application Development",
-    "section": "Four main categories:",
-    "text": "Four main categories:\n\nConversational AI models: General-purpose models (Gemini, ChatGPT, Claude)\nSpecialized code assistants: Purpose-built for coding (GitHub Copilot, Claude Code)\nCommand-line tools: Terminal-based AI access (Gemini CLI, Copilot CLI)\nCode analysis tools: Project-wide review and feedback (Google Jules)\n\n\nFrame these as the five core use cases students will encounter most frequently. Every AI interaction should fit into one of these categories.\nAsk students: “Which of these sounds most useful to you right now?” Get a sense of where they are in their programming journey."
+    "section": "Three working surfaces",
+    "text": "Three working surfaces\n\nBrowser chat: General-purpose conversation and explanations (Gemini, ChatGPT, Claude, and others)\nEditor assistant: Contextual completion, chat, and edits with GitHub Copilot in VS Code\nCLI agents: Repository-aware work in the terminal with Copilot CLI and Antigravity CLI\n\n\nFrame these as surfaces rather than permanent tool loyalties. The same model or provider may appear in more than one surface, but the context and workflow differ.\nAsk students: “Which of these sounds most useful to you right now?” Get a sense of where they are in their programming journey."
   },
   {
     "objectID": "slides/IS4010_W02_AI_Copilots.html#conversational-ai-models",
@@ -4449,32 +4418,25 @@
     "text": "Command-line AI assistants 💻\nWhy use terminal-based AI?\n\nStay in your workflow: No need to switch between terminal and browser\nQuick queries: Fast answers without leaving the command line\nScriptable: Can be integrated into automated workflows\nCode context: Easy to pipe file contents directly to AI\nPrivacy options: Some tools offer better data handling\n\n\nSet up the value proposition for command-line tools. These are for “power users” who want to integrate AI into their terminal workflow.\nStudents may ask: “Why not just use the browser?” Answer: When you’re deep in terminal work (git operations, file manipulation, debugging), switching to a browser breaks your flow."
   },
   {
-    "objectID": "slides/IS4010_W02_AI_Copilots.html#gemini-cli",
-    "href": "slides/IS4010_W02_AI_Copilots.html#gemini-cli",
+    "objectID": "slides/IS4010_W02_AI_Copilots.html#antigravity-cli",
+    "href": "slides/IS4010_W02_AI_Copilots.html#antigravity-cli",
     "title": "IS4010: AI-Enhanced Application Development",
-    "section": "Gemini CLI",
-    "text": "Gemini CLI\n(Free) AI in your terminal 🖥️\nCommon usage patterns:\n# Start an interactive gemini session\ngemini\n\n# Quick code questions\ngemini \"How do I install [pytest](https://pytest.org/) in [Python](https://www.python.org/)?\"\n\n# Code generation\ngemini \"Write a [Rust](https://www.rust-lang.org/) function to read a CSV file\"\n\n# Debugging help\ngemini \"Explain this error: ImportError: No module named 'requests'\"\n\nPrepare a live demo of Gemini CLI. Have it installed and configured beforehand.\nShow practical examples: 1. Quick package installation help 2. Language translation (Python to Rust) 3. Error message explanation 4. Code review of a file: cat script.py | gemini \"Review this code for bugs\"\nMention that students can get a free API key from Google AI Studio."
+    "section": "Antigravity CLI",
+    "text": "Antigravity CLI\nGoogle’s coding agent in your terminal 🖥️\n\nLaunch with agy from inside the repository you want it to inspect.\nAsk questions, request a plan, inspect files, and propose edits from one session.\nReview requested permissions and commands before approval.\nUse the official setup guide because installation and authentication flows can change.\n\ncd ~/is4010/is4010-labs\nagy\n\nExplain the 2026 product transition: the individual Gemini CLI experience moved to Antigravity CLI. Enterprise/API Gemini CLI cases may still exist, but agy is the course-facing Google CLI."
   },
   {
     "objectID": "slides/IS4010_W02_AI_Copilots.html#github-copilot-cli",
     "href": "slides/IS4010_W02_AI_Copilots.html#github-copilot-cli",
     "title": "IS4010: AI-Enhanced Application Development",
     "section": "GitHub Copilot CLI",
-    "text": "GitHub Copilot CLI\n(Free tier) Natural language terminal ⌨️\nCommon usage patterns:\n# Ask how to do something in the terminal\ngh copilot suggest \"list all python files larger than 1MB\"\n\n# Explain a complex command\ngh copilot explain \"find . -name '*.py' -size +1M\"\n\n# Execute suggestions directly\n# (Follow the prompts to execute or copy)\n\nGitHub Copilot CLI is part of the gh (GitHub CLI) tool. It’s excellent for when you know what you want to do in the terminal but forget the exact flags or syntax.\nKey feature: It doesn’t just give you code; it gives you terminal commands and explains what they do before you run them.\nStudents with the GitHub Student Developer Pack get this as part of their Copilot access."
+    "text": "GitHub Copilot CLI\nGitHub’s coding agent in your terminal ⌨️\n\nInstall the standalone tool from the current official GitHub documentation.\nLaunch with copilot from inside the repository you want it to inspect.\nIt can reason about repository context, propose edits, and help run checks.\nReview its plan, permissions, commands, and final diff.\n\ncd ~/is4010/is4010-labs\ncopilot\n\nThe current Copilot CLI is a standalone agent, not the older gh copilot suggest and gh copilot explain extension. Open the official install page during class instead of copying an installer command into the deck."
   },
   {
-    "objectID": "slides/IS4010_W02_AI_Copilots.html#claude-code",
-    "href": "slides/IS4010_W02_AI_Copilots.html#claude-code",
+    "objectID": "slides/IS4010_W02_AI_Copilots.html#the-comparison-protocol",
+    "href": "slides/IS4010_W02_AI_Copilots.html#the-comparison-protocol",
     "title": "IS4010: AI-Enhanced Application Development",
-    "section": "Claude Code",
-    "text": "Claude Code\n(Not free) AI in your terminal 🖥️\nWhat is it?\n\nAnthropic’s premium CLI tool for professional development\nAdvanced features: Project context, file editing, test generation, and much, much more!\nIndustry adoption: Popular in professional development\nSubscription required: Currently better than free alternatives"
-  },
-  {
-    "objectID": "slides/IS4010_W02_AI_Copilots.html#claude-code-1",
-    "href": "slides/IS4010_W02_AI_Copilots.html#claude-code-1",
-    "title": "IS4010: AI-Enhanced Application Development",
-    "section": "Claude Code",
-    "text": "Claude Code\n(Not free) AI in your terminal 🖥️\nWhy mention it?\n\nCareer awareness: You’ll likely encounter it in industry\nFeature preview: Shows where AI coding tools are heading\nUpgrade path: When you outgrow free tools, this is an option\n\n\nWe’re not doing a live demo since it’s a paid tool, but students should be aware it exists.\nPosition this as “what you might use in your first job” - many companies are adopting premium AI tools for their development teams.\nKey message: Start with free tools (Gemini, Copilot free tier), but be aware of the premium tools available for career purposes."
+    "section": "The comparison protocol",
+    "text": "The comparison protocol\n\nStart both agents in the same repository.\nGive both the exact same small, testable prompt.\nCompare correctness, assumptions, clarity, and proposed commands.\nSelect or combine an approach; do not accept changes merely because they look plausible.\nRun uv run --directory week02 python -m pytest tests/ -v.\nInspect git diff before committing.\n\n\nUse count_vowels for the live comparison so class mirrors Lab 02. CI can validate the code and journal structure, but it cannot inspect local tool installations."
   },
   {
     "objectID": "slides/IS4010_W02_AI_Copilots.html#google-jules",
@@ -4495,7 +4457,7 @@
     "href": "slides/IS4010_W02_AI_Copilots.html#choosing-your-ai-toolkit",
     "title": "IS4010: AI-Enhanced Application Development",
     "section": "Choosing your AI toolkit 🧰",
-    "text": "Choosing your AI toolkit 🧰\nRequired for this course (free):\n\nGitHub Copilot\nGemini CLI\n\nRecommended for this course (also free):\n\nGitHub Copilot CLI\nGemini web interface\nGoogle Jules\n\n\nGive clear guidance on what students need vs. what’s nice to have.\nGitHub Copilot is required because it integrates directly with VS Code and provides the best learning experience for the course.\nEverything else is optional but recommended for exploration. Encourage students to try different tools and find their preferences.\nRemind them that many tools offer free tiers or student discounts."
+    "text": "Choosing your AI toolkit 🧰\nRequired for this course (free):\n\nA browser chat of your choice\nGitHub Copilot in VS Code\nGitHub Copilot CLI\nAntigravity CLI\n\nAfter Lab 02:\n\nKeep both CLIs installed so you can compare when useful.\nUse whichever browser, editor, and CLI combination best fits the task.\nTool preference never replaces tests, inspection, or your responsibility for the result.\n\n\nGive clear guidance on what students need vs. what’s nice to have.\nStudents install and try both CLI agents. The point is comparison and informed choice, not declaring one permanent winner."
   },
   {
     "objectID": "slides/IS4010_W02_AI_Copilots.html#your-professional-ai-workflow",
@@ -4519,18 +4481,18 @@
     "text": "Remember: You are the pilot ✈️\n\nAI provides suggestions → You make decisions\nAI explains possibilities → You choose the best approach\nAI generates code → You understand and verify it\nAI finds patterns → You apply domain knowledge\nAlways maintain responsibility for the final product\n\nThe golden rule: Never submit code you don’t understand!\n\nEnd with the core philosophy. Students should leave feeling empowered, not dependent.\nThe goal is to make students better programmers faster, not to replace their thinking. AI should accelerate learning and remove tedious barriers, but students must remain intellectually engaged.\nAsk: “What questions do you have about integrating AI into your development workflow?”"
   },
   {
-    "objectID": "slides/IS4010_W02_AI_Copilots.html#introducing-lab-02-prompt-journal",
-    "href": "slides/IS4010_W02_AI_Copilots.html#introducing-lab-02-prompt-journal",
+    "objectID": "slides/IS4010_W02_AI_Copilots.html#introducing-lab-02-cli-comparison",
+    "href": "slides/IS4010_W02_AI_Copilots.html#introducing-lab-02-cli-comparison",
     "title": "IS4010: AI-Enhanced Application Development",
-    "section": "Introducing Lab 02: Prompt journal 🚀",
-    "text": "Introducing Lab 02: Prompt journal 🚀\n\nSave the prompts that produced your first draft, explanation, tests, and revision\nRecord one meaningful change you made after checking the AI’s output\nReflect on what the assistant did well, what required judgment, and what you now understand\nThe automated check validates both the Python behavior and the completed journal"
+    "section": "Introducing Lab 02: CLI comparison 🚀",
+    "text": "Introducing Lab 02: CLI comparison 🚀\n\nInstall and authenticate both CLI tools using their official documentation\nGive both agents the exact same count_vowels task\nCompare their suggestions, then select, test, and revise an implementation\nReflect on the browser, editor, and CLI combination you prefer\nThe automated check validates both the Python behavior and the completed journal"
   },
   {
     "objectID": "slides/IS4010_W02_AI_Copilots.html#time-for-lab-02",
     "href": "slides/IS4010_W02_AI_Copilots.html#time-for-lab-02",
     "title": "IS4010: AI-Enhanced Application Development",
     "section": "Time for Lab 02! 🧪",
-    "text": "Time for Lab 02! 🧪\n\nYour next hands-on lab: an AI-assisted Python preview\nComplete week02/lab02.py and week02/lab02_prompts.md\nRun the provided tests, push your work, and confirm the Lab 02 README badge is green\nNavigate to week02/lab02.md for step-by-step instructions"
+    "text": "Time for Lab 02! 🧪\n\nYour next hands-on lab: compare two CLI coding agents on a small Python task\nComplete week02/lab02.py and week02/lab02_prompts.md\nRun the provided tests, inspect git diff, push your work, and confirm the Lab 02 README badge is green\nNavigate to week02/lab02.md for step-by-step instructions"
   },
   {
     "objectID": "slides/IS4010_W01_Introduction.html#about-me",
@@ -4544,7 +4506,7 @@
     "href": "slides/IS4010_W01_Introduction.html#the-software-world-has-changed",
     "title": "IS4010: AI-Enhanced Application Development",
     "section": "The software world has changed 🌍",
-    "text": "The software world has changed 🌍\n\nAI code assistants (like GitHub Copilot, Claude Code, and Gemini CLI) are no longer a novelty; they’re rapidly becoming a standard part of the professional developer’s toolkit.\nKnowing how to use these tools effectively is becoming a required skill for new graduates.\nOur goal is to make you proficient not just in a language, but in this new AI-augmented workflow."
+    "text": "The software world has changed 🌍\n\nAI code assistants in the browser, editor, and terminal are no longer a novelty; they’re rapidly becoming a standard part of the professional developer’s toolkit.\nKnowing how to use these tools effectively is becoming a required skill for new graduates.\nOur goal is to make you proficient not just in a language, but in this new AI-augmented workflow."
   },
   {
     "objectID": "slides/IS4010_W01_Introduction.html#our-course-philosophy",
@@ -4579,7 +4541,7 @@
     "href": "slides/IS4010_W01_Introduction.html#important-course-links",
     "title": "IS4010: AI-Enhanced Application Development",
     "section": "Important course links 🔗",
-    "text": "Important course links 🔗\n\nCourse Canvas: uc.instructure.com (grades, slides, labs, due dates, etc.)\nLabs repository: GitHub (all 14 labs and status badges)\nCourse syllabus: Online syllabus (always up-to-date)\nCommunication: Microsoft Teams (primary discussion, questions about the material, questions about the labs, etc.)"
+    "text": "Important course links 🔗\n\nCourse Canvas: uc.instructure.com (grades, slides, labs, due dates, etc.)\nLabs repository: GitHub (all 14 labs and status badges)\nOfficial syllabus: Simple Syllabus link to be added when published\nCommunication: Microsoft Teams (primary discussion, questions about the material, questions about the labs, etc.)"
   },
   {
     "objectID": "slides/IS4010_W01_Introduction.html#the-final-project-your-portfolio-piece",
@@ -4593,21 +4555,56 @@
     "href": "slides/IS4010_W01_Introduction.html#setup-fest",
     "title": "IS4010: AI-Enhanced Application Development",
     "section": "Setup fest 🛠️",
-    "text": "Setup fest 🛠️\n\nTime to get our hands dirty.\nWe’ll now spend the rest of the session setting up our development environment.\nChecklist: Follow the detailed setup guide.\n\nInstall Visual Studio Code\nInstall Python 3.10+\nInstall Git\nDefer the Rust toolchain until Week 09\nInstall Gemini CLI (optional)"
+    "text": "Setup fest 🛠️\n\nTime to get our hands dirty.\nWe’ll now spend the rest of the session setting up our development environment.\nChecklist: Follow the detailed setup guide.\n\nInstall Visual Studio Code\nInstall Git\nInstall uv (it manages Python 3.12 for us)\nDefer the Rust toolchain until Week 09"
   },
   {
     "objectID": "slides/IS4010_W01_Introduction.html#how-to-know-its-working",
     "href": "slides/IS4010_W01_Introduction.html#how-to-know-its-working",
     "title": "IS4010: AI-Enhanced Application Development",
     "section": "How to know it’s working ✅",
-    "text": "How to know it’s working ✅\n\nOpen your terminal or command prompt and run the following commands:\n\ngit --version\npython --version (or python3 --version)\ncargo --version\ngemini --version\n\nIn VS Code, check for the GitHub Copilot icon in the bottom status bar.\nWe’ll walk through this together."
+    "text": "How to know it’s working ✅\n\nOpen your terminal or command prompt and run the following commands:\n\ngit --version\nuv --version\nuv run python --version\n\nWe’ll walk through this together."
   },
   {
-    "objectID": "slides/IS4010_W01_Introduction.html#for-next-time",
-    "href": "slides/IS4010_W01_Introduction.html#for-next-time",
+    "objectID": "slides/IS4010_W01_Introduction.html#lab-01-this-week",
+    "href": "slides/IS4010_W01_Introduction.html#lab-01-this-week",
     "title": "IS4010: AI-Enhanced Application Development",
-    "section": "For next time 📅",
-    "text": "For next time 📅\n\nPlease ensure you’ve finished the complete setup before our next class.\nCreate your GitHub account if you haven’t already.\nNext session: we’ll dive deep into Git and GitHub, the foundation of collaborative software development."
+    "section": "Lab 01 this week 📅",
+    "text": "Lab 01 this week 📅\n\nCreate your GitHub account if you haven’t already.\nUse the terminal, fork and clone the semester repository, then run uv sync --locked.\nSubmit your fork URL in Canvas and confirm the Week 01 badge is green."
+  },
+  {
+    "objectID": "slides/IS4010_W01_Introduction.html#terminal-shell-and-prompt",
+    "href": "slides/IS4010_W01_Introduction.html#terminal-shell-and-prompt",
+    "title": "IS4010: AI-Enhanced Application Development",
+    "section": "Terminal, shell, and prompt",
+    "text": "Terminal, shell, and prompt\n\nThe terminal is the text window where you work.\nThe shell reads a command and asks the operating system to run it.\nThe prompt shows that the shell is ready for your next command.\nIn this course: use Git Bash on Windows or your default shell on macOS/Linux.\nVS Code’s integrated terminal is the same kind of interface inside the editor."
+  },
+  {
+    "objectID": "slides/IS4010_W01_Introduction.html#location-and-command-anatomy",
+    "href": "slides/IS4010_W01_Introduction.html#location-and-command-anatomy",
+    "title": "IS4010: AI-Enhanced Application Development",
+    "section": "Location and command anatomy",
+    "text": "Location and command anatomy\nuv run python hello.py\n│  └──────── arguments ────────┘\n└ command\n\nEvery terminal has a current working directory.\nRelative paths begin from that directory; absolute paths name the full location.\nSpaces separate the command from its arguments.\nA command can read, create, change, or delete files—read it before pressing Enter."
+  },
+  {
+    "objectID": "slides/IS4010_W01_Introduction.html#five-commands-to-start",
+    "href": "slides/IS4010_W01_Introduction.html#five-commands-to-start",
+    "title": "IS4010: AI-Enhanced Application Development",
+    "section": "Five commands to start",
+    "text": "Five commands to start\npwd                 # Where am I?\nls                  # What is here?\ncd path/to/folder   # Move to another folder\nmkdir practice      # Create a folder\ncode .              # Open this folder in VS Code\n\nPress Tab to complete a path.\nPress Up arrow to reuse a command.\nPress Ctrl+C to stop a running command.\nUse pwd and git status whenever you are unsure where you are."
+  },
+  {
+    "objectID": "slides/IS4010_W01_Introduction.html#safe-terminal-habits",
+    "href": "slides/IS4010_W01_Introduction.html#safe-terminal-habits",
+    "title": "IS4010: AI-Enhanced Application Development",
+    "section": "Safe terminal habits",
+    "text": "Safe terminal habits\n\nWork inside the repository for the current task.\nRead AI-suggested commands before approving them.\nPause when a command says it will delete, overwrite, install globally, or request elevated access.\nNever paste passwords, tokens, or API keys into prompts or committed files.\nUse git diff before committing so you know exactly what changed."
+  },
+  {
+    "objectID": "slides/IS4010_W01_Introduction.html#live-demo-from-a-folder-to-vs-code",
+    "href": "slides/IS4010_W01_Introduction.html#live-demo-from-a-folder-to-vs-code",
+    "title": "IS4010: AI-Enhanced Application Development",
+    "section": "Live demo: From a folder to VS Code",
+    "text": "Live demo: From a folder to VS Code\npwd\nls\nmkdir is4010-demo\ncd is4010-demo\npwd\ncode .\n\nNarrate the prompt, current directory, relative path, command, and argument. Demonstrate Tab completion, Up arrow, Ctrl+C, and an intentional wrong directory corrected with pwd and cd. Keep this light: the goal is enough fluency to understand the Git commands that follow."
   },
   {
     "objectID": "slides/IS4010_W01_Introduction.html#what-is-version-control",
@@ -4747,7 +4744,7 @@
     "href": "slides/IS4010_W03_Python_Basics.html#how-to-run-python-code",
     "title": "IS4010: AI-Enhanced Application Development",
     "section": "How to run Python code 💻",
-    "text": "How to run Python code 💻\nThere are three main ways to execute Python code, each with different use cases:\n\nCommand line execution: Run complete programs from files\n\npython script.py - Execute a Python file\npython -c \"print('Hello World')\" - Run a single command\n\nInteractive REPL: Test code snippets and explore\n\npython - Start interactive Python shell\nGreat for testing, learning, and debugging\n\nIntegrated Development Environment (IDE): Professional development\n\nVS Code with Python extension\nPyCharm, Sublime Text, Vim\nBuilt-in terminals, debugging, and code completion\n\n\n\nTEACHING NOTES:\n\nDemo all three: Show live examples of each execution method\nREPL demonstration: Show how to use python command to get interactive shell\nVS Code focus: Since this is what students should be using in the course\nFile execution: Show how their lab scripts will be run\nDebugging: Mention that IDEs make debugging much easier"
+    "text": "How to run Python code 💻\nThere are three main ways to execute Python code, each with different use cases:\n\nCommand line execution: Run complete programs from files\n\nuv run python script.py - Execute a Python file in the course environment\nuv run python -c \"print('Hello World')\" - Run a single command\n\nInteractive REPL: Test code snippets and explore\n\nuv run python - Start the managed interactive Python shell\nGreat for testing, learning, and debugging\n\nIntegrated Development Environment (IDE): Professional development\n\nVS Code with Python extension\nPyCharm, Sublime Text, Vim\nBuilt-in terminals, debugging, and code completion\n\n\n\nTEACHING NOTES:\n\nDemo all three: Show live examples of each execution method\nREPL demonstration: Show how to use python command to get interactive shell\nVS Code focus: Since this is what students should be using in the course\nFile execution: Show how their lab scripts will be run\nDebugging: Mention that IDEs make debugging much easier"
   },
   {
     "objectID": "slides/IS4010_W03_Python_Basics.html#modern-python-toolchain",
@@ -4873,7 +4870,7 @@
     "href": "slides/IS4010_W03_Python_Basics.html#python-ecosystem-preview",
     "title": "IS4010: AI-Enhanced Application Development",
     "section": "Python ecosystem preview 🌍",
-    "text": "Python ecosystem preview 🌍\n\nStandard library: Batteries included - modules like random, math, datetime\nThird-party packages: Over 400,000 packages on PyPI\nPackage manager: pip install package_name to add functionality\nVirtual environments: Isolate project dependencies\nPopular packages: requests (web), pandas (data), flask (web apps)\n\n# Standard library examples\nimport random\nimport math\nimport datetime\n\n# Random numbers for games, simulations\nlucky_number = random.randint(1, 10)\ncoin_flip = random.choice([\"heads\", \"tails\"])\n\n# Mathematical functions\narea = math.pi * (radius ** 2)\nsquare_root = math.sqrt(16)\n\n# Date and time operations\ntoday = datetime.date.today()\nformatted = today.strftime(\"%B %d, %Y\")\n\n# Coming later: third-party packages\n# pip install requests\n# import requests\n# response = requests.get(\"https://api.github.com/users/bgreenwell\")\n\nTEACHING NOTES:\n\nBatteries included: Python’s standard library is extensive\nImport statement: Show different ways to import (import, from…import)\npip: Don’t go too deep, just preview package management\nVirtual environments: Mention concept, cover properly in later weeks\nReal applications: Show how these modules enable complex applications\nPreview next weeks: We’ll use requests for API calls, pandas for data analysis"
+    "text": "Python ecosystem preview 🌍\n\nStandard library: Batteries included - modules like random, math, datetime\nThird-party packages: Over 400,000 packages on PyPI\nProject manager: uv manages Python, dependencies, environments, and lockfiles\nVirtual environments: uv sync creates an isolated project environment\nPopular packages: requests (web), pandas (data), flask (web apps)\n\n# Standard library examples\nimport random\nimport math\nimport datetime\n\n# Random numbers for games, simulations\nlucky_number = random.randint(1, 10)\ncoin_flip = random.choice([\"heads\", \"tails\"])\n\n# Mathematical functions\narea = math.pi * (radius ** 2)\nsquare_root = math.sqrt(16)\n\n# Date and time operations\ntoday = datetime.date.today()\nformatted = today.strftime(\"%B %d, %Y\")\n\n# Coming later: third-party packages\n# In the terminal for your own project: uv add requests\n# import requests\n# response = requests.get(\"https://api.github.com/users/bgreenwell\")\n\nTEACHING NOTES:\n\nBatteries included: Python’s standard library is extensive\nImport statement: Show different ways to import (import, from…import)\nuv: Connect this to the environment students prepared in Lab 01\nVirtual environments: uv run selects the project environment without manual activation\nReal applications: Show how these modules enable complex applications\nPreview next weeks: We’ll use requests for API calls, pandas for data analysis"
   },
   {
     "objectID": "slides/IS4010_W03_Python_Basics.html#professional-development-practices",
@@ -4894,7 +4891,7 @@
     "href": "slides/IS4010_W03_Python_Basics.html#github-actions-automation-in-the-cloud",
     "title": "IS4010: AI-Enhanced Application Development",
     "section": "GitHub Actions: Automation in the cloud ☁️",
-    "text": "GitHub Actions: Automation in the cloud ☁️\n\nBuilt into GitHub: No additional setup required\nEvent-driven: Runs automatically when you push code\nVirtual machines: Spins up fresh Linux containers for testing\nFree for public repos: GitHub provides free compute time for open source\nProfessional workflow: Same tools used by major tech companies\n\n# .github/workflows/main.yml\nname: run-pytest\n\non: [push]  # Run when code is pushed\n\njobs:\n  build:\n    runs-on: ubuntu-latest  # Fresh Linux machine\n    steps:\n      - uses: actions/checkout@v3      # Get your code\n      - uses: actions/setup-python@v4  # Install Python\n      - name: Install dependencies\n        run: pip install pytest        # Install testing tools\n      - name: Test with pytest\n        run: pytest                   # Run all tests\n\nTEACHING NOTES:\n\nYAML format: Configuration files use YAML (Yet Another Markup Language)\nSteps sequence: Each step runs in order, failure stops the process\nFresh environment: Each run starts with a clean machine\nPublic repos: Free tier includes 2000 minutes/month for private repos\nIndustry standard: This is how real companies deploy software"
+    "text": "GitHub Actions: Automation in the cloud ☁️\n\nBuilt into GitHub: No additional setup required\nEvent-driven: Runs automatically when you push code\nVirtual machines: Spins up fresh Linux containers for testing\nFree for public repos: GitHub provides free compute time for open source\nProfessional workflow: Same tools used by major tech companies\n\n# .github/workflows/main.yml\nname: run-pytest\n\non: [push]  # Run when code is pushed\n\njobs:\n  build:\n    runs-on: ubuntu-latest  # Fresh Linux machine\n    steps:\n      - uses: actions/checkout@v6      # Get your code\n      - uses: astral-sh/setup-uv@c771a70e6277c0a99b617c7a806ffedaca235ff9\n        with:\n          enable-cache: true\n      - name: Install dependencies\n        run: uv sync --locked\n      - name: Test with pytest\n        run: uv run python -m pytest  # Run all tests\n\nTEACHING NOTES:\n\nYAML format: Configuration files use YAML (Yet Another Markup Language)\nSteps sequence: Each step runs in order, failure stops the process\nFresh environment: Each run starts with a clean machine\nPublic repos: Free tier includes 2000 minutes/month for private repos\nIndustry standard: This is how real companies deploy software"
   },
   {
     "objectID": "slides/IS4010_W03_Python_Basics.html#your-instant-feedback-system",
@@ -5055,7 +5052,7 @@
     "href": "syllabus.html",
     "title": "Syllabus",
     "section": "",
-    "text": "NoteDownloadable versions\n\n\n\n\n Download PDF version\n Download Word version",
+    "text": "ImportantOfficial syllabus\n\n\n\nThe official, current syllabus will be hosted in Simple Syllabus.\nSimple Syllabus URL: Placeholder — add the published course URL here.\nThe material below remains a course-planning reference while the Simple Syllabus version is the authoritative record.",
     "crumbs": [
       "Syllabus"
     ]
@@ -5065,17 +5062,7 @@
     "href": "syllabus.html#required-tools",
     "title": "Syllabus",
     "section": "Required tools",
-    "text": "Required tools\n\nVisual Studio Code (VS Code)\nGit & a GitHub account\nPython 3.10+\nThe Rust programming language toolchain (install at the start of Week 09)\nAn AI coding assistant of your choice, such as GitHub Copilot, ChatGPT, Gemini, or Claude",
-    "crumbs": [
-      "Syllabus"
-    ]
-  },
-  {
-    "objectID": "syllabus.html#optional-tools",
-    "href": "syllabus.html#optional-tools",
-    "title": "Syllabus",
-    "section": "Optional tools",
-    "text": "Optional tools\n\nGemini CLI (Google’s AI assistant for terminal-based development)",
+    "text": "Required tools\n\nVisual Studio Code (VS Code)\nGit & a GitHub account\nuv (manages the course’s Python 3.12 environment)\nThe Rust programming language toolchain (install at the start of Week 09)\nA browser AI chat of your choice, such as ChatGPT, Gemini, or Claude\nGitHub Copilot in VS Code\nGitHub Copilot CLI and Antigravity CLI (install and try both in Week 02; then use whichever combination fits your work)",
     "crumbs": [
       "Syllabus"
     ]

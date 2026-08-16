@@ -305,7 +305,7 @@ protocol
 ### **Python's most popular HTTP library**
 
 ```bash
-pip install requests
+uv add requests
 ```
 
 ::: {.incremental}
@@ -317,8 +317,9 @@ pip install requests
 
 ::: {.notes}
 **Installation tips:**
-- Make sure students activate virtual environment first
-- Show how to verify installation: `python -c "import requests; print(requests.__version__)"`
+- The course repository already includes `requests`; `uv sync --locked` installs it.
+- `uv add requests` is the command students would use in their own project.
+- Show how to verify installation: `uv run python -c "import requests; print(requests.__version__)"`
 :::
 
 ---

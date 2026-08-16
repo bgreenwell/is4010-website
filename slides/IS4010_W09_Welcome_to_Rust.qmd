@@ -62,12 +62,12 @@ Analogy: Interpreted = simultaneous translation (slower, more flexible). Compile
 ::: {.incremental}
 -   [`cargo`](https://doc.rust-lang.org/cargo/guide/) is Rust's official build system and package manager, and it's one of the language's best features
 -   It handles creating new projects, compiling your code, running your application, and managing external libraries (called "[crates](https://crates.io/)" in Rust)
--   Think of it as Python's pip + pytest + black + mypy all rolled into one amazing tool!
+-   Think of it as Python's uv + pytest + formatter + type checker rolled into one tool!
 -   Cargo is why Rust development feels so smooth and professional
 :::
 
 ::: {.notes}
-Cargo is like pip + pytest + setuptools all in one tool. It's incredibly well-designed. Show live demo: cargo new demo && cd demo && cargo run. Point out the automatic git init and .gitignore creation.
+Cargo combines project creation, dependency management, building, testing, and running. Compare that unified experience with our `uv` plus `pytest` workflow. Show a live demo: `cargo new demo`, `cd demo`, and `cargo run`. Point out the automatic Git initialization and `.gitignore` creation.
 :::
 
 ---

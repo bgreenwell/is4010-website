@@ -94,11 +94,11 @@ There are three main ways to execute Python code, each with different use cases:
 
 ::: {.incremental}
 1. **Command line execution**: Run complete programs from files
-   - `python script.py` - Execute a Python file
-   - `python -c "print('Hello World')"` - Run a single command
+   - `uv run python script.py` - Execute a Python file in the course environment
+   - `uv run python -c "print('Hello World')"` - Run a single command
    
 2. **Interactive REPL**: Test code snippets and explore
-   - `python` - Start interactive Python shell
+   - `uv run python` - Start the managed interactive Python shell
    - Great for testing, learning, and debugging
    
 3. **Integrated Development Environment (IDE)**: Professional development
@@ -828,8 +828,8 @@ if __name__ == '__main__':
 ::: {.incremental}
 - **Standard library**: Batteries included - modules like [`random`](https://docs.python.org/3/library/random.html), [`math`](https://docs.python.org/3/library/math.html), [`datetime`](https://docs.python.org/3/library/datetime.html)
 - **Third-party packages**: Over 400,000 packages on [PyPI](https://pypi.org/)
-- **Package manager**: [`pip install package_name`](https://pip.pypa.io/en/stable/) to add functionality
-- **Virtual environments**: Isolate project dependencies
+- **Project manager**: [`uv`](https://docs.astral.sh/uv/) manages Python, dependencies, environments, and lockfiles
+- **Virtual environments**: `uv sync` creates an isolated project environment
 - **Popular packages**: `requests` (web), `pandas` (data), `flask` (web apps)
 :::
 
@@ -852,7 +852,7 @@ today = datetime.date.today()
 formatted = today.strftime("%B %d, %Y")
 
 # Coming later: third-party packages
-# pip install requests
+# In the terminal for your own project: uv add requests
 # import requests
 # response = requests.get("https://api.github.com/users/bgreenwell")
 ```
@@ -862,8 +862,8 @@ formatted = today.strftime("%B %d, %Y")
 
 - **Batteries included**: Python's standard library is extensive
 - **Import statement**: Show different ways to import (import, from...import)
-- **pip**: Don't go too deep, just preview package management
-- **Virtual environments**: Mention concept, cover properly in later weeks
+- **uv**: Connect this to the environment students prepared in Lab 01
+- **Virtual environments**: `uv run` selects the project environment without manual activation
 - **Real applications**: Show how these modules enable complex applications
 - **Preview next weeks**: We'll use requests for API calls, pandas for data analysis
 :::
@@ -951,12 +951,14 @@ jobs:
   build:
     runs-on: ubuntu-latest  # Fresh Linux machine
     steps:
-      - uses: actions/checkout@v3      # Get your code
-      - uses: actions/setup-python@v4  # Install Python
+      - uses: actions/checkout@v6      # Get your code
+      - uses: astral-sh/setup-uv@c771a70e6277c0a99b617c7a806ffedaca235ff9
+        with:
+          enable-cache: true
       - name: Install dependencies
-        run: pip install pytest        # Install testing tools
+        run: uv sync --locked
       - name: Test with pytest
-        run: pytest                   # Run all tests
+        run: uv run python -m pytest  # Run all tests
 ```
 
 ::: {.notes}
