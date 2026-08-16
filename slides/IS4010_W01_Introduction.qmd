@@ -11,11 +11,9 @@ format:
 
 # Course introduction
 
-## About me
+## About the instructor
 
-![](images/ollie_and_zoey.jpeg)
-
-My [personal "website"](https://github.com/bgreenwell)
+[Read my GitHub profile README](https://github.com/bgreenwell)
 
 ---
 
