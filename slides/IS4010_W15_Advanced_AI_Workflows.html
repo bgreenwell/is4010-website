@@ -10,7 +10,7 @@
   <meta name="generator" content="quarto-1.10.18">
 
   <meta name="author" content="Brandon M. Greenwell">
-  <title>IS4010: AI-Enhanced Application Development</title>
+  <title>IS4010: AI-enhanced application development</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -203,8 +203,8 @@
     <div class="slides">
 
 <section id="title-slide" class="quarto-title-block center">
-  <h1 class="title">IS4010: AI-Enhanced Application Development</h1>
-  <p class="subtitle">Week 15: Advanced AI Workflows &amp; Prompt Engineering</p>
+  <h1 class="title">IS4010: AI-enhanced application development</h1>
+  <p class="subtitle">Week 15: Advanced AI workflows and prompting</p>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -216,24 +216,24 @@ Brandon M. Greenwell
 
 </section>
 <section id="week-15-overview" class="slide level2 inverse">
-<h2>Week 15 Overview</h2>
-<p><strong>Session 1: Advanced Prompt Engineering</strong></p>
+<h2>Week 15 overview</h2>
+<p><strong>Session 1: advanced prompting</strong></p>
 <ul>
-<li>Strategic prompting techniques</li>
+<li>Outcome-focused prompting</li>
 <li>Context management and iteration</li>
 <li>AI-assisted code review</li>
 <li>Debugging with AI</li>
 </ul>
-<p><strong>Session 2: Professional AI Workflows</strong></p>
+<p><strong>Session 2: repeatable AI workflows</strong></p>
 <ul>
 <li>Documentation generation</li>
 <li>Refactoring strategies</li>
 <li>Custom AI workflows</li>
 <li>Evaluating AI outputs</li>
-<li>Limitations and best practices</li>
+<li>Limitations and verification practices</li>
 </ul>
 <aside class="notes">
-<p>This is the final technical week before project completion. Focus on making students more effective with AI tools they’re already using. Emphasize strategic thinking over simple code generation.</p>
+<p>This is the final technical week before project completion. Focus on defining outcomes, supplying relevant context, and evaluating results with tests, documentation, diffs, and primary sources.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -246,23 +246,18 @@ Brandon M. Greenwell
           display:block!important;
       }</style></aside>
 </section>
-<section id="why-advanced-ai-skills-matter" class="slide level2 inverse">
-<h2>Why Advanced AI Skills Matter</h2>
-<p><strong>The AI-enhanced developer:</strong></p>
+<section id="why-ai-workflow-skills-matter" class="slide level2 inverse">
+<h2>Why AI workflow skills matter</h2>
+<p><strong>A useful workflow can:</strong></p>
 <ul>
-<li><strong>10x productivity</strong>: Studies show 55% faster task completion with AI tools</li>
-<li><strong>Competitive advantage</strong>: AI proficiency is becoming a required skill</li>
-<li><strong>Better code quality</strong>: AI assists with reviews, testing, documentation</li>
-<li><strong>Continuous learning</strong>: AI helps you understand unfamiliar codebases faster</li>
+<li>Reduce time spent on routine drafts and repetitive edits</li>
+<li>Help explain unfamiliar code and compiler messages</li>
+<li>Generate candidate tests, documentation, and refactors for review</li>
+<li>Make assumptions and verification steps visible</li>
 </ul>
-<p><strong>Industry reality:</strong></p>
-<ul>
-<li><a href="https://github.com/features/copilot">GitHub Copilot</a>: 46% of code now AI-assisted</li>
-<li>Companies expect AI tool proficiency in 2025</li>
-<li>Knowing <em>how</em> to use AI is as important as <em>what</em> you code</li>
-</ul>
+<p><strong>The important question is not whether AI was used. It is whether the final result is correct, understood, tested, and appropriate for the project.</strong></p>
 <aside class="notes">
-<p>This isn’t about replacing programming skills - it’s about augmenting them. The best developers use AI strategically, not as a crutch.</p>
+<p>Avoid universal productivity claims: results depend on the task, model, developer, and evaluation method. Emphasize observable evidence from the student’s own workflow.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -279,19 +274,19 @@ Brandon M. Greenwell
 
 </section>
 <section>
-<section id="session-1-advanced-prompt-engineering" class="title-slide slide level1 center">
-<h1>Session 1: Advanced Prompt Engineering</h1>
+<section id="session-1-advanced-prompting" class="title-slide slide level1 center">
+<h1>Session 1: advanced prompting</h1>
 
 </section>
-<section id="the-anatomy-of-good-prompts" class="slide level2 smaller">
-<h2>The Anatomy of Good Prompts</h2>
+<section id="anatomy-of-a-useful-prompt" class="slide level2 smaller">
+<h2>Anatomy of a useful prompt</h2>
 <p><strong>Poor prompt:</strong></p>
 <pre><code>write a function to sort a list</code></pre>
 <p><strong>Better prompt:</strong></p>
 <pre><code>Write a Python function that sorts a list of dictionaries by a
 specified key. Include type hints, docstring, and handle edge
 cases like missing keys.</code></pre>
-<p><strong>Best prompt:</strong></p>
+<p><strong>More complete prompt:</strong></p>
 <pre><code>I'm building a data processing pipeline in Python. I need a
 function that:
 - Takes a list of dictionaries and a key name
@@ -302,9 +297,9 @@ function that:
 - Should this be case-sensitive for string values?
 
 Example input: [{"name": "Alice", "age": 30}, {"name": "Bob"}]</code></pre>
-<p><a href="https://platform.openai.com/docs/guides/prompt-engineering">📖 OpenAI Prompt Engineering Guide</a></p>
+<p><a href="https://developers.openai.com/api/docs/guides/latest-model">OpenAI guidance for current models</a></p>
 <aside class="notes">
-<p>The best prompts provide context, constraints, and examples. They ask questions when requirements are ambiguous.</p>
+<p>Useful prompts state the goal, relevant context, hard constraints, success criteria, and requested output. Add detail because it changes the result, not simply to make the prompt longer.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -317,23 +312,23 @@ Example input: [{"name": "Alice", "age": 30}, {"name": "Bob"}]</code></pre>
           display:block!important;
       }</style></aside>
 </section>
-<section id="the-five-cs-of-effective-prompting" class="slide level2 smaller">
-<h2>The Five C’s of Effective Prompting</h2>
+<section id="five-prompt-checks" class="slide level2 smaller">
+<h2>Five prompt checks</h2>
 <p><strong>1. Context</strong> - Provide background information</p>
 <pre><code>I'm working on a Rust CLI tool for processing log files...</code></pre>
 <p><strong>2. Constraints</strong> - Specify requirements and limitations</p>
 <pre><code>Must use only standard library, no external dependencies</code></pre>
 <p><strong>3. Clarity</strong> - Be specific and unambiguous</p>
 <pre><code>Parse Apache Common Log Format, not generic logs</code></pre>
-<p><strong>4. Completeness</strong> - Include all necessary details</p>
-<pre><code>Input: access.log with 10M+ lines
+<p><strong>4. Success criteria</strong> - State how the result will be evaluated</p>
+<pre><code>Input: representative `access.log` fixture
 Output: JSON summary of status codes
-Performance requirement: &lt;5 seconds</code></pre>
-<p><strong>5. Conversation</strong> - Iterate and refine</p>
+Check: fixture output matches the expected counts</code></pre>
+<p><strong>5. Evidence</strong> - Request checks or sources that can be inspected</p>
 <pre><code>That's good, but can you make it handle malformed lines
 without crashing?</code></pre>
 <aside class="notes">
-<p>This framework helps structure prompts systematically. Most prompt failures come from missing one of these elements.</p>
+<p>Use this as a checklist, not a formula. Start lean and add an element when it communicates a real requirement or corrects a measured failure.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -346,16 +341,16 @@ without crashing?</code></pre>
           display:block!important;
       }</style></aside>
 </section>
-<section id="prompt-pattern-persona-assignment" class="slide level2 smaller">
-<h2>Prompt Pattern: Persona Assignment</h2>
-<p><strong>Technique</strong>: Ask AI to adopt a specific role or perspective</p>
+<section id="prompt-pattern-review-perspective" class="slide level2 smaller">
+<h2>Prompt pattern: review perspective</h2>
+<p><strong>Technique</strong>: Name the review perspective and the evidence you want</p>
 <p><strong>Generic approach:</strong></p>
 <pre><code>How do I optimize this Python code?</code></pre>
-<p><strong>Persona approach:</strong></p>
-<pre><code>You are a senior Python performance engineer reviewing code
-for a high-traffic web service. Analyze this function for
-performance bottlenecks and suggest optimizations with
-benchmarking strategies.</code></pre>
+<p><strong>Specific review approach:</strong></p>
+<pre><code>Review this function for performance risks in a high-traffic
+web service. Identify the suspected bottleneck, explain what
+measurement would confirm it, and propose the smallest change
+worth benchmarking.</code></pre>
 <p><strong>Examples:</strong></p>
 <ul>
 <li>“You are a security auditor reviewing this code…”</li>
@@ -365,7 +360,7 @@ benchmarking strategies.</code></pre>
 </ul>
 <p><a href="https://github.com/prompt-engineering/prompt-patterns">📖 Prompt Engineering Patterns</a></p>
 <aside class="notes">
-<p>Personas shape the AI’s response style and focus. Use different personas for different aspects: security, performance, readability, etc.</p>
+<p>The named perspective can focus a review, but concrete criteria matter more than an impressive role label. Ask for evidence, uncertainty, and a way to test each claim.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -378,25 +373,25 @@ benchmarking strategies.</code></pre>
           display:block!important;
       }</style></aside>
 </section>
-<section id="prompt-pattern-chain-of-thought" class="slide level2 smaller">
-<h2>Prompt Pattern: Chain-of-Thought</h2>
-<p><strong>Technique</strong>: Ask AI to explain its reasoning step-by-step</p>
+<section id="prompt-pattern-explanations-and-evidence" class="slide level2 smaller">
+<h2>Prompt pattern: explanations and evidence</h2>
+<p><strong>Technique</strong>: Ask for a concise explanation that you can check</p>
 <p><strong>Standard prompt:</strong></p>
 <pre><code>Why doesn't this Rust code compile?
 [code snippet]</code></pre>
-<p><strong>Chain-of-thought prompt:</strong></p>
-<pre><code>This Rust code doesn't compile. Walk me through the
-compilation process step-by-step:
-1. What does the borrow checker analyze first?
-2. Where does it detect the problem?
-3. Why is this specific pattern invalid?
-4. What are two different ways to fix it?
+<p><strong>Evidence-focused prompt:</strong></p>
+<pre><code>This Rust code doesn't compile. Using the compiler message:
+1. Identify the conflicting borrows and their source lines.
+2. State the ownership rule involved.
+3. Propose two fixes and explain their trade-offs.
+4. Show the smallest corrected example.
+5. Give the Cargo command that verifies the fix.
 
 [code snippet]</code></pre>
-<p><strong>Benefits:</strong> - Deeper understanding, not just fixes - Reveals AI’s reasoning process - Helps you learn patterns, not just solutions - Better for debugging complex issues</p>
-<p><a href="https://arxiv.org/abs/2201.11903">📖 Chain-of-Thought Prompting</a></p>
+<p><strong>Benefits:</strong> - Grounds the explanation in visible code and compiler output - Produces claims that can be checked independently - Separates alternative fixes from the chosen fix - Ends with an executable verification step</p>
+<p><a href="https://developers.openai.com/api/docs/guides/latest-model">📖 OpenAI model guidance</a></p>
 <aside class="notes">
-<p>Chain-of-thought is especially powerful for debugging and learning. It forces the AI to show its work, which helps you verify correctness.</p>
+<p>Do not present generated step-by-step text as access to a model’s hidden reasoning. Verification comes from source lines, documentation, compiler output, tests, and reproducible commands.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -409,8 +404,8 @@ compilation process step-by-step:
           display:block!important;
       }</style></aside>
 </section>
-<section id="prompt-pattern-few-shot-learning" class="slide level2 smaller">
-<h2>Prompt Pattern: Few-Shot Learning</h2>
+<section id="prompt-pattern-examples" class="slide level2 smaller">
+<h2>Prompt pattern: examples</h2>
 <p><strong>Technique</strong>: Provide examples of desired input/output</p>
 <p><strong>Without examples (zero-shot):</strong></p>
 <pre><code>Convert this function to use type hints</code></pre>
@@ -430,7 +425,7 @@ def process_data(items, threshold):
     return [x for x in items if x &gt; threshold]</code></pre>
 <p><strong>When to use:</strong> - Specific output formatting - Consistent code style - Complex transformations - Domain-specific patterns</p>
 <aside class="notes">
-<p>Few-shot learning is powerful when you need consistency. Provide 2-3 examples for best results. More examples don’t always help.</p>
+<p>Examples can clarify a format or edge case. Use the smallest set that communicates a real requirement, then test the result on cases not shown in the prompt.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -444,7 +439,7 @@ def process_data(items, threshold):
       }</style></aside>
 </section>
 <section id="context-management-strategies" class="slide level2 smaller">
-<h2>Context Management Strategies</h2>
+<h2>Context management strategies</h2>
 <p><strong>Problem</strong>: AI tools have limited context windows</p>
 <p><strong>Strategy 1: Chunking</strong></p>
 <pre><code>First, let's focus on the data structures (send relevant code)
@@ -464,7 +459,7 @@ Now let's add the query builder...</code></pre>
 <pre><code>Let's start a new conversation. Here's the complete current
 state of the module... [provide full context]</code></pre>
 <aside class="notes">
-<p>Context management is crucial for long coding sessions. Don’t fight context limits - work with them strategically.</p>
+<p>Send the smallest complete context for the current task. When assumptions drift, restate the verified state or begin a new conversation with the current files and requirements.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -478,7 +473,7 @@ state of the module... [provide full context]</code></pre>
       }</style></aside>
 </section>
 <section id="ai-assisted-code-review" class="slide level2 smaller">
-<h2>AI-Assisted Code Review</h2>
+<h2>AI-assisted code review</h2>
 <p><strong>Effective review prompt:</strong></p>
 <pre><code>Review this Rust function for:
 
@@ -511,8 +506,8 @@ For each issue found:
           display:block!important;
       }</style></aside>
 </section>
-<section id="code-review-examples" class="slide level2 smaller">
-<h2>Code Review Examples</h2>
+<section id="code-review-example" class="slide level2 smaller">
+<h2>Code review example</h2>
 <p><strong>Reviewing for performance:</strong></p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb21"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="" aria-label="1"></a><span class="co"># Original code</span></span>
 <span id="cb21-2"><a href="" aria-label="2"></a><span class="kw">def</span> find_duplicates(items):</span>
@@ -526,9 +521,9 @@ For each issue found:
 <pre><code>Review this Python function for performance issues. What's
 the time complexity? How could we improve it? Show a more
 efficient implementation using appropriate data structures.</code></pre>
-<p><strong>Expected AI feedback:</strong> - Identifies O(n²) complexity - Suggests using sets for O(n) solution - Provides improved implementation - Explains trade-offs (memory vs.&nbsp;speed)</p>
+<p><strong>Evaluate the response:</strong> - Does it identify the actual complexity from the supplied code? - Does the proposed data structure preserve ordering and duplicate behavior? - Do tests distinguish the original and revised implementations? - Does a benchmark support any performance claim?</p>
 <aside class="notes">
-<p>Good code review with AI requires you to know what to ask. You still need to understand the fundamentals to ask the right questions.</p>
+<p>Use project requirements and known failure modes as review criteria. If the assistant raises a new concern, reproduce it before accepting it as a finding.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -543,7 +538,7 @@ efficient implementation using appropriate data structures.</code></pre>
 </section>
 <section id="debugging-with-ai" class="slide level2 smaller">
 <h2>Debugging with AI</h2>
-<p><strong>Strategic debugging prompt:</strong></p>
+<p><strong>Focused debugging prompt:</strong></p>
 <pre><code>I'm getting this error in my Rust program:
 
 [paste error message]
@@ -552,7 +547,7 @@ Here's the relevant code:
 [paste minimal reproducing code]
 
 Context:
-- Using Rust 1.75
+- Using the repository's current stable Rust toolchain
 - This worked before I added the new caching feature
 - Error only happens with concurrent requests
 
@@ -565,7 +560,7 @@ Please:
 <pre><code>fix this error [paste entire file]</code></pre>
 <p><a href="https://doc.rust-lang.org/error-index.html">📖 Rust Error Index</a></p>
 <aside class="notes">
-<p>Debugging prompts should isolate the problem. Provide context about when it started happening - this helps AI identify the root cause.</p>
+<p>Debugging prompts should isolate the problem and include the exact diagnostic, relevant code, reproduction steps, and recent change. Treat proposed causes as hypotheses until reproduced.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -578,8 +573,8 @@ Please:
           display:block!important;
       }</style></aside>
 </section>
-<section id="debugging-pattern-rubber-duck-ai" class="slide level2 smaller">
-<h2>Debugging Pattern: Rubber Duck + AI</h2>
+<section id="debugging-pattern-rubber-duck-and-ai" class="slide level2 smaller">
+<h2>Debugging pattern: rubber duck and AI</h2>
 <p><strong>Technique</strong>: Explain the problem as if teaching someone</p>
 <p><strong>Effective debugging conversation:</strong></p>
 <pre><code>I'm confused about this borrow checker error. Let me walk
@@ -597,9 +592,9 @@ I'm not sure of the best pattern to solve it. Should I:
 - Restructure to avoid modification?
 
 What's the most idiomatic Rust approach?</code></pre>
-<p><strong>Why this works:</strong> - Demonstrates you understand the problem - Shows what you’ve tried - Asks for trade-offs, not just solutions</p>
+<p><strong>Why this works:</strong> - Demonstrates you understand the problem - Shows what you’ve tried - Requests trade-offs alongside proposed solutions</p>
 <aside class="notes">
-<p>When you explain the problem clearly, you often solve it yourself. When you don’t, the AI has all the context to help effectively.</p>
+<p>Writing the explanation can expose a missing assumption. The same explanation also gives an assistant a more precise problem to analyze.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -613,12 +608,12 @@ What's the most idiomatic Rust approach?</code></pre>
       }</style></aside>
 </section>
 <section id="iterative-refinement" class="slide level2 smaller">
-<h2>Iterative Refinement</h2>
+<h2>Iterative refinement</h2>
 <p><strong>Conversation pattern:</strong></p>
 <p><strong>Turn 1:</strong> Get initial implementation</p>
 <pre><code>Create a Python function to parse CSV files with error handling</code></pre>
 <p><strong>Turn 2:</strong> Add requirements</p>
-<pre><code>Great start. Now add:
+<pre><code>Review the first draft. Then add these missing requirements:
 - Support for custom delimiters
 - Type validation for numeric columns
 - Progress reporting for large files</code></pre>
@@ -626,12 +621,12 @@ What's the most idiomatic Rust approach?</code></pre>
 <pre><code>This works but it's slow on my 50MB file. Can you optimize it
 to process in chunks and use a streaming approach?</code></pre>
 <p><strong>Turn 4:</strong> Polish</p>
-<pre><code>Add comprehensive docstring and type hints following NumPy style</code></pre>
+<pre><code>Add a NumPy-style docstring and type hints for the public interface</code></pre>
 <p><strong>Turn 5:</strong> Test</p>
 <pre><code>Generate pytest tests covering edge cases: empty files,
 malformed rows, encoding issues</code></pre>
 <aside class="notes">
-<p>Don’t expect perfection in one prompt. Build iteratively, like you would with a junior developer. Each iteration adds detail.</p>
+<p>Treat the first response as a draft. Evaluate it against the requirements, add missing evidence or constraints, and iterate only where the result needs improvement.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -645,14 +640,14 @@ malformed rows, encoding issues</code></pre>
       }</style></aside>
 </section>
 <section id="multi-tool-strategies" class="slide level2 smaller">
-<h2>Multi-Tool Strategies</h2>
+<h2>Multi-tool strategies</h2>
 <p><strong>Different tools for different tasks:</strong></p>
 <p><strong>GitHub Copilot</strong> (in-editor): - Autocompleting functions - Generating boilerplate - Quick inline suggestions - Pattern completion</p>
-<p><strong>ChatGPT/Claude</strong> (conversational): - Complex explanations - Architecture decisions - Debugging multi-file issues - Learning new concepts</p>
+<p><strong>Browser chat</strong> (conversational): - Complex explanations - Architecture decisions - Debugging multi-file issues - Learning new concepts</p>
 <p><strong>Copilot CLI or Antigravity CLI</strong> (terminal): - Explaining error messages - Generating shell scripts - Quick command lookups - Repository analysis</p>
-<p><strong>Perplexity</strong> (research): - Finding documentation - Comparing approaches - Staying current with ecosystem changes</p>
+<p><strong>Primary documentation and search</strong>: - Verifying current APIs and commands - Comparing claims with authoritative sources - Finding release notes and migration guidance</p>
 <aside class="notes">
-<p>Master developers use the right tool for the job. Each AI tool has strengths - learn them and combine strategically.</p>
+<p>Choose tools based on the context they can access and the evidence the task requires. Product capabilities change, so verify them in current documentation.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -666,7 +661,7 @@ malformed rows, encoding issues</code></pre>
       }</style></aside>
 </section>
 <section id="try-it-yourself-code-review" class="slide level2 smaller">
-<h2>🎯 Try It Yourself: Code Review</h2>
+<h2>Try it yourself: code review</h2>
 <p><strong>Exercise</strong>: Use AI to review this code</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb31"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="" aria-label="1"></a><span class="kw">def</span> calculate_total(items):</span>
 <span id="cb31-2"><a href="" aria-label="2"></a>    total <span class="op">=</span> <span class="dv">0</span></span>
@@ -701,14 +696,14 @@ Provide specific improvements with explanations.</code></pre>
 
 </section></section>
 <section>
-<section id="session-2-professional-ai-workflows" class="title-slide slide level1 center">
-<h1>Session 2: Professional AI Workflows</h1>
+<section id="session-2-repeatable-ai-workflows" class="title-slide slide level1 center">
+<h1>Session 2: repeatable AI workflows</h1>
 
 </section>
 <section id="ai-generated-documentation" class="slide level2 smaller">
-<h2>AI-Generated Documentation</h2>
-<p><strong>Strategic documentation prompt:</strong></p>
-<pre><code>Generate comprehensive documentation for this Python module:
+<h2>AI-generated documentation</h2>
+<p><strong>Focused documentation prompt:</strong></p>
+<pre><code>Draft documentation for this Python module:
 
 [paste code]
 
@@ -720,13 +715,13 @@ Please create:
 5. Common usage patterns section
 
 Focus on:
-- WHY to use each function, not just what it does
-- Practical examples with real-world context
+- Why to use each function, along with what it does
+- Executable examples using the module's documented inputs
 - Edge cases and limitations
 - Performance characteristics</code></pre>
-<p><strong>Why this works:</strong> - Specifies format (NumPy style) - Asks for context, not just signatures - Requests examples and edge cases - Structures output clearly</p>
+<p><strong>Why this works:</strong> - Specifies format (NumPy style) - Requests usage context alongside signatures - Requests examples and edge cases - Structures output clearly</p>
 <aside class="notes">
-<p>AI excels at documentation when given structure. But always review - AI can document what code does, but may miss why it exists.</p>
+<p>Models can draft documentation from a clear structure, but the author still needs to verify behavior and add design context the code does not reveal.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -740,14 +735,14 @@ Focus on:
       }</style></aside>
 </section>
 <section id="documentation-quality-checklist" class="slide level2 smaller">
-<h2>Documentation Quality Checklist</h2>
+<h2>Documentation quality checklist</h2>
 <p><strong>After AI generates documentation, verify:</strong></p>
 <p><strong>Accuracy:</strong> - [ ] Parameter types match actual code - [ ] Return values correctly described - [ ] Examples actually work - [ ] No hallucinated features</p>
 <p><strong>Completeness:</strong> - [ ] All public functions documented - [ ] Edge cases mentioned - [ ] Error conditions explained - [ ] Performance characteristics noted</p>
 <p><strong>Clarity:</strong> - [ ] Written for target audience - [ ] Examples are practical - [ ] Jargon explained - [ ] Links to related functions</p>
 <p><strong>Maintenance:</strong> - [ ] Matches current code version - [ ] Breaking changes highlighted - [ ] Deprecation warnings included</p>
 <aside class="notes">
-<p>AI documentation is a starting point, not the finish line. Always review and refine, especially for public APIs.</p>
+<p>Generated documentation is a draft. Run examples and verify every signature, exception, complexity statement, and behavior claim against the code.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -761,17 +756,17 @@ Focus on:
       }</style></aside>
 </section>
 <section id="documentation-example" class="slide level2 smaller">
-<h2>Documentation Example</h2>
+<h2>Documentation example</h2>
 <p><strong>Code to document:</strong></p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb34"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb34-1"><a href="" aria-label="1"></a><span class="kw">pub</span> <span class="kw">fn</span> parse_log_entry(line<span class="op">:</span> <span class="op">&amp;</span><span class="dt">str</span>) <span class="op">-&gt;</span> <span class="dt">Result</span><span class="op">&lt;</span>LogEntry<span class="op">,</span> ParseError<span class="op">&gt;</span> <span class="op">{</span></span>
 <span id="cb34-2"><a href="" aria-label="2"></a>    <span class="co">// Implementation</span></span>
 <span id="cb34-3"><a href="" aria-label="3"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p><strong>AI-generated documentation:</strong></p>
+<p><strong>Draft documentation to review:</strong></p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb35"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb35-1"><a href="" aria-label="1"></a><span class="co">/// Parses a single log entry from Apache Common Log Format.</span></span>
 <span id="cb35-2"><a href="" aria-label="2"></a><span class="co">///</span></span>
 <span id="cb35-3"><a href="" aria-label="3"></a><span class="co">/// This function takes a raw log line and converts it into a</span></span>
 <span id="cb35-4"><a href="" aria-label="4"></a><span class="co">/// structured `LogEntry`. It handles standard Apache CLF format</span></span>
-<span id="cb35-5"><a href="" aria-label="5"></a><span class="co">/// and gracefully handles malformed entries.</span></span>
+<span id="cb35-5"><a href="" aria-label="5"></a><span class="co">/// and returns a parsing error for malformed entries.</span></span>
 <span id="cb35-6"><a href="" aria-label="6"></a><span class="co">///</span></span>
 <span id="cb35-7"><a href="" aria-label="7"></a><span class="co">/// # Arguments</span></span>
 <span id="cb35-8"><a href="" aria-label="8"></a><span class="co">///</span></span>
@@ -789,12 +784,9 @@ Focus on:
 <span id="cb35-20"><a href="" aria-label="20"></a><span class="co">/// let entry = parse_log_entry(line)?;</span></span>
 <span id="cb35-21"><a href="" aria-label="21"></a><span class="co">/// assert_eq!(entry.status_code, 200);</span></span>
 <span id="cb35-22"><a href="" aria-label="22"></a><span class="co">/// ```</span></span>
-<span id="cb35-23"><a href="" aria-label="23"></a><span class="co">///</span></span>
-<span id="cb35-24"><a href="" aria-label="24"></a><span class="co">/// # Performance</span></span>
-<span id="cb35-25"><a href="" aria-label="25"></a><span class="co">///</span></span>
-<span id="cb35-26"><a href="" aria-label="26"></a><span class="co">/// O(n) where n is the line length. Uses zero-copy parsing.</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb35-23"><a href="" aria-label="23"></a><span class="co">///</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <aside class="notes">
-<p>This is good AI-generated documentation. Notice it includes why, examples, and performance notes. This is what to aim for.</p>
+<p>This draft still needs evidence. Confirm that the example compiles in the crate’s documentation context, that <code>status_code</code> exists, and that the parser accepts the shown line. Do not add complexity or zero-copy claims without inspecting and measuring the implementation.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -833,7 +825,7 @@ Please:
 [paste code]</code></pre>
 <p><a href="https://refactoring.com/">📖 Martin Fowler - Refactoring</a></p>
 <aside class="notes">
-<p>Good refactoring prompts explain the problems and goals clearly. AI can suggest patterns, but you must validate the approach makes sense.</p>
+<p>Tie each proposed refactor to a named problem and a test that preserves behavior. Reject abstractions that add indirection without serving a requirement.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -847,7 +839,7 @@ Please:
       }</style></aside>
 </section>
 <section id="refactoring-patterns" class="slide level2 smaller">
-<h2>Refactoring Patterns</h2>
+<h2>Refactoring patterns</h2>
 <p><strong>Common refactoring requests:</strong></p>
 <p><strong>Extract function:</strong></p>
 <pre><code>This function does validation, processing, and logging.
@@ -865,7 +857,7 @@ to accept a connection as a parameter for better testing.</code></pre>
 <pre><code>This nested if-else chain is hard to read. Refactor using
 early returns or match expressions.</code></pre>
 <aside class="notes">
-<p>Name the refactoring pattern you want. AI knows common patterns from literature - use the standard terminology.</p>
+<p>Standard terminology can make the request precise, but verify that the pattern fits the code instead of applying it mechanically.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -879,8 +871,8 @@ early returns or match expressions.</code></pre>
       }</style></aside>
 </section>
 <section id="test-generation-with-ai" class="slide level2 smaller">
-<h2>Test Generation with AI</h2>
-<p><strong>Comprehensive test prompt:</strong></p>
+<h2>Test generation with AI</h2>
+<p><strong>Focused test prompt:</strong></p>
 <pre><code>Generate pytest tests for this Python function:
 
 [paste function]
@@ -897,10 +889,10 @@ For each test:
 - Add docstrings explaining what's being tested
 - Use pytest fixtures for common setup
 - Include assertions with helpful failure messages</code></pre>
-<p><strong>Result</strong>: Comprehensive test suite covering scenarios you might have missed</p>
+<p><strong>Result to inspect</strong>: Candidate cases that must be checked against the function contract</p>
 <p><a href="https://docs.pytest.org/">📖 pytest Documentation</a></p>
 <aside class="notes">
-<p>AI is excellent at generating test cases. It often thinks of edge cases humans miss. But review for business logic coverage.</p>
+<p>Generated tests may suggest useful cases, but they can also assert invented behavior or reproduce the implementation’s mistake. Derive expected results from the specification and confirm that a test fails for the defect it is meant to catch.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -914,9 +906,9 @@ For each test:
       }</style></aside>
 </section>
 <section id="test-quality-review" class="slide level2 smaller">
-<h2>Test Quality Review</h2>
+<h2>Test quality review</h2>
 <p><strong>After AI generates tests, check:</strong></p>
-<p><strong>Coverage:</strong> - [ ] All code paths tested - [ ] Edge cases included - [ ] Error conditions verified - [ ] Integration scenarios covered</p>
+<p><strong>Coverage:</strong> - [ ] Required behavior and important branches tested - [ ] Edge cases included - [ ] Error conditions verified - [ ] Integration scenarios covered</p>
 <p><strong>Quality:</strong> - [ ] Tests are independent (no shared state) - [ ] Meaningful test names - [ ] Clear assertions - [ ] Good failure messages</p>
 <p><strong>Practicality:</strong> - [ ] Tests actually run and pass - [ ] No flaky tests - [ ] Reasonable execution time - [ ] Mock external dependencies</p>
 <p><strong>Maintenance:</strong> - [ ] Tests will remain stable as code evolves - [ ] Not too brittle (over-specified) - [ ] Well-organized</p>
@@ -935,11 +927,11 @@ For each test:
       }</style></aside>
 </section>
 <section id="building-custom-workflows" class="slide level2 smaller">
-<h2>Building Custom Workflows</h2>
+<h2>Building custom workflows</h2>
 <p><strong>Example: Git commit message generation</strong></p>
 <p><strong>Workflow:</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb43"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb43-1"><a href="" aria-label="1"></a><span class="co"># 1. Stage changes</span></span>
-<span id="cb43-2"><a href="" aria-label="2"></a><span class="fu">git</span> add .</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb43"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb43-1"><a href="" aria-label="1"></a><span class="co"># 1. Stage only the files you reviewed</span></span>
+<span id="cb43-2"><a href="" aria-label="2"></a><span class="fu">git</span> add path/to/file.py path/to/test_file.py</span>
 <span id="cb43-3"><a href="" aria-label="3"></a></span>
 <span id="cb43-4"><a href="" aria-label="4"></a><span class="co"># 2. Get diff</span></span>
 <span id="cb43-5"><a href="" aria-label="5"></a><span class="fu">git</span> diff <span class="at">--staged</span></span>
@@ -955,12 +947,10 @@ For each test:
 <span id="cb43-15"><a href="" aria-label="15"></a></span>
 <span id="cb43-16"><a href="" aria-label="16"></a><span class="co"># 4. Review and use</span></span>
 <span id="cb43-17"><a href="" aria-label="17"></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"[AI-generated message]"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p><strong>Automate further:</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb44"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb44-1"><a href="" aria-label="1"></a><span class="co"># Create a git alias or script</span></span>
-<span id="cb44-2"><a href="" aria-label="2"></a><span class="fu">git</span> config <span class="at">--global</span> alias.ai-commit <span class="st">'!git diff --staged | gemini "Generate commit message..."'</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Then give the staged diff to Copilot CLI or Antigravity CLI from inside the repository. Review the proposed message before running <code>git commit</code>; do not create a global alias that silently sends every staged diff to an external tool.</p>
 <p><a href="https://www.conventionalcommits.org/">📖 Conventional Commits</a></p>
 <aside class="notes">
-<p>Custom workflows save time on repetitive tasks. Identify your common patterns and create prompts for them.</p>
+<p>Keep custom workflows visible and reviewable. Confirm what repository content leaves the machine and avoid sending secrets, credentials, or unrelated staged files.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -974,7 +964,7 @@ For each test:
       }</style></aside>
 </section>
 <section id="workflow-pr-description-generation" class="slide level2 smaller">
-<h2>Workflow: PR Description Generation</h2>
+<h2>Workflow: PR description generation</h2>
 <p><strong>Custom GitHub PR workflow:</strong></p>
 <pre><code>Generate a pull request description for these changes:
 
@@ -1019,7 +1009,7 @@ Please create:
       }</style></aside>
 </section>
 <section id="workflow-code-explanation-for-teams" class="slide level2 smaller">
-<h2>Workflow: Code Explanation for Teams</h2>
+<h2>Workflow: code explanation for teams</h2>
 <p><strong>When explaining complex code to teammates:</strong></p>
 <pre><code>Help me explain this code to my team in our documentation:
 
@@ -1034,9 +1024,9 @@ Create an explanation that:
 6. **Common questions**: What might teammates ask?
 
 Audience: Junior developers familiar with Rust basics</code></pre>
-<p><strong>Result</strong>: Clear documentation that helps team onboarding</p>
+<p><strong>Result to inspect</strong>: An explanation whose examples and claims can be checked against the code</p>
 <aside class="notes">
-<p>Use AI to translate complex code into understandable explanations. Great for documentation and knowledge sharing.</p>
+<p>Ask for an explanation at the reader’s level, then verify the control flow, terminology, and examples against the code.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1050,22 +1040,22 @@ Audience: Junior developers familiar with Rust basics</code></pre>
       }</style></aside>
 </section>
 <section id="evaluating-ai-output-quality" class="slide level2 smaller">
-<h2>Evaluating AI Output Quality</h2>
+<h2>Evaluating AI output quality</h2>
 <p><strong>Red flags in AI-generated code:</strong></p>
 <p>🚩 <strong>Hallucinated APIs</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb47"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb47-1"><a href="" aria-label="1"></a><span class="co"># This doesn't exist in standard library!</span></span>
-<span id="cb47-2"><a href="" aria-label="2"></a><span class="im">from</span> requests <span class="im">import</span> super_fast_download</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb46"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb46-1"><a href="" aria-label="1"></a><span class="co"># This doesn't exist in standard library!</span></span>
+<span id="cb46-2"><a href="" aria-label="2"></a><span class="im">from</span> requests <span class="im">import</span> super_fast_download</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>🚩 <strong>Outdated patterns</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb48"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb48-1"><a href="" aria-label="1"></a><span class="co">// Old Rust 2015 style</span></span>
-<span id="cb48-2"><a href="" aria-label="2"></a><span class="kw">extern</span> <span class="kw">crate</span> serde<span class="op">;</span>  <span class="co">// Not needed in 2021 edition</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb47"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb47-1"><a href="" aria-label="1"></a><span class="co">// Old Rust 2015 style</span></span>
+<span id="cb47-2"><a href="" aria-label="2"></a><span class="kw">extern</span> <span class="kw">crate</span> serde<span class="op">;</span>  <span class="co">// Not needed in 2021 edition</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>🚩 <strong>Over-complicated</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb49"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb49-1"><a href="" aria-label="1"></a><span class="co"># AI wrote 50 lines when 5 would work</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb48"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb48-1"><a href="" aria-label="1"></a><span class="co"># AI wrote 50 lines when 5 would work</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>🚩 <strong>Missing error handling</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb50"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb50-1"><a href="" aria-label="1"></a><span class="kw">let</span> file <span class="op">=</span> <span class="pp">File::</span>open(<span class="st">"data.txt"</span>)<span class="op">.</span>unwrap()<span class="op">;</span>  <span class="co">// Never unwrap in production!</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb49"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb49-1"><a href="" aria-label="1"></a><span class="kw">let</span> file <span class="op">=</span> <span class="pp">File::</span>open(<span class="st">"data.txt"</span>)<span class="op">.</span>unwrap()<span class="op">;</span>  <span class="co">// Unhandled failure path</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>🚩 <strong>Security issues</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb51"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb51-1"><a href="" aria-label="1"></a><span class="bu">eval</span>(user_input)  <span class="co"># Never do this!</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb50"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb50-1"><a href="" aria-label="1"></a><span class="bu">eval</span>(user_input)  <span class="co"># Never do this!</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <aside class="notes">
-<p>Always verify AI code. Test it, review it, understand it. AI is a tool, not a replacement for your judgment.</p>
+<p>Use the red flags as hypotheses: compile or run the code, inspect the referenced API documentation, and create a focused test before deciding on a fix.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1079,7 +1069,7 @@ Audience: Junior developers familiar with Rust basics</code></pre>
       }</style></aside>
 </section>
 <section id="quality-verification-checklist" class="slide level2 smaller">
-<h2>Quality Verification Checklist</h2>
+<h2>Quality verification checklist</h2>
 <p><strong>Before using AI-generated code:</strong></p>
 <p><strong>Correctness:</strong> - [ ] Code actually compiles/runs - [ ] Logic is sound - [ ] Edge cases handled - [ ] No hallucinated functions/APIs</p>
 <p><strong>Security:</strong> - [ ] Input validation present - [ ] No SQL injection risks - [ ] No command injection - [ ] Secrets not hardcoded</p>
@@ -1100,12 +1090,12 @@ Audience: Junior developers familiar with Rust basics</code></pre>
       }</style></aside>
 </section>
 <section id="understanding-ai-limitations" class="slide level2 smaller">
-<h2>Understanding AI Limitations</h2>
-<p><strong>What AI does well:</strong> - ✅ Generating boilerplate code - ✅ Explaining existing code - ✅ Suggesting common patterns - ✅ Writing tests for known behaviors - ✅ Documentation drafting - ✅ Syntax translation between languages</p>
-<p><strong>What AI struggles with:</strong> - ❌ Novel algorithms or architectures - ❌ Complex business logic - ❌ Performance optimization (without profiling) - ❌ Security vulnerabilities (incomplete detection) - ❌ Maintaining consistency across large codebases - ❌ Understanding project-specific context</p>
-<p><strong>The solution:</strong> Use AI for what it’s good at, rely on your expertise for the rest</p>
+<h2>Understanding AI limitations</h2>
+<p><strong>Tasks that often have useful drafts:</strong> - Boilerplate with an explicit template - Explanations of supplied code - Common implementation candidates - Test cases for specified behavior - Documentation outlines - Syntax translation with verification</p>
+<p><strong>Tasks that need stronger evidence:</strong> - Novel or context-dependent designs - Business rules absent from the prompt or repository - Performance claims without profiling - Security conclusions from a single review - Cross-file consistency in a large or partially supplied codebase - Decisions that depend on unstated project history</p>
+<p><strong>Response:</strong> Define the task, inspect the output, and use independent evidence to decide what to keep</p>
 <aside class="notes">
-<p>Understanding limitations prevents frustration and misuse. AI is a powerful assistant, not a senior architect.</p>
+<p>Capability varies by model, context, and tool access. Calibrate trust to the evidence available for this specific result.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1119,7 +1109,7 @@ Audience: Junior developers familiar with Rust basics</code></pre>
       }</style></aside>
 </section>
 <section id="when-not-to-use-ai" class="slide level2 smaller">
-<h2>When NOT to Use AI</h2>
+<h2>When not to use AI</h2>
 <p><strong>Situations where AI may hurt more than help:</strong></p>
 <p><strong>Learning fundamentals:</strong></p>
 <pre><code>Bad: "Write a binary search tree implementation for me"
@@ -1131,13 +1121,13 @@ Good: "Explain how BST insertion works, then I'll implement it"</code></pre>
 - Permission checks
 - Input sanitization</code></pre>
 <p><strong>Novel problem solving:</strong></p>
-<pre><code>AI excels at known patterns, not creative solutions to
-unique business problems</code></pre>
+<pre><code>Models often reproduce familiar patterns more reliably than they solve
+novel, context-dependent problems</code></pre>
 <p><strong>Production hotfixes:</strong></p>
 <pre><code>Under pressure, AI mistakes are more likely. Understand
 the fix before deploying.</code></pre>
 <aside class="notes">
-<p>Know when to put the AI tool down and think deeply yourself. Some problems require human creativity and judgment.</p>
+<p>Pause tool use when it is adding guesses, complexity, or repeated suggestions without new evidence. Return to the specification, a minimal reproduction, primary documentation, or a human reviewer.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1151,14 +1141,20 @@ the fix before deploying.</code></pre>
       }</style></aside>
 </section>
 <section id="academic-integrity-with-ai" class="slide level2 smaller">
-<h2>Academic Integrity with AI</h2>
-<p><strong>In this course, acceptable AI use:</strong></p>
-<p>✅ <strong>Allowed:</strong> - Explaining concepts and documentation - Debugging help (but understand the fix) - Code review and suggestions - Test case generation - Refactoring assistance</p>
-<p>❌ <strong>Not allowed (unless specified):</strong> - Having AI complete entire assignments - Copying AI code without understanding - Using AI without disclosure - Submitting AI output without verification</p>
+<h2>Academic integrity with AI</h2>
+<p><strong>In this course:</strong></p>
+<ul>
+<li>AI use is encouraged as part of the development workflow</li>
+<li>Each lab’s written instructions define its required files and any AI-specific activity</li>
+<li>Do not modify supplied tests or workflows unless the assignment explicitly permits it</li>
+<li>Never include passwords, tokens, API keys, or authentication output in a prompt or repository</li>
+<li>Inspect <code>git diff</code>, run the documented checks, and understand every submitted line</li>
+<li>Document AI use where the assignment requires it; the final project requires an honest <code>AGENTS.md</code></li>
+</ul>
 <p><strong>The standard:</strong> &gt; You must be able to explain every line of code you submit, &gt; whether you wrote it, AI wrote it, or you found it online.</p>
 <p><a href="https://www.uc.edu/conduct/academic-integrity.html">📖 UC Academic Integrity Policy</a></p>
 <aside class="notes">
-<p>AI is a tool for learning, not a shortcut to avoid learning. Using AI ethically means using it to enhance your understanding.</p>
+<p>The course evaluates the submitted result and the student’s understanding. Tool use does not transfer responsibility for correctness or academic integrity.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1171,8 +1167,8 @@ the fix before deploying.</code></pre>
           display:block!important;
       }</style></aside>
 </section>
-<section id="prompt-engineering-for-learning" class="slide level2 smaller">
-<h2>Prompt Engineering for Learning</h2>
+<section id="prompting-for-learning" class="slide level2 smaller">
+<h2>Prompting for learning</h2>
 <p><strong>Instead of:</strong> “Write this entire program for me”</p>
 <p><strong>Try:</strong> “I’m learning error handling in Rust. Help me understand…”</p>
 <p><strong>Learning-focused prompts:</strong></p>
@@ -1190,7 +1186,7 @@ Please:
 <p><strong>Goal:</strong> Use AI as a tutor, not a solution generator</p>
 <p><a href="https://en.wikipedia.org/wiki/Socratic_method">📖 Socratic Method</a></p>
 <aside class="notes">
-<p>The best learning happens when you struggle a bit. Use AI to guide that struggle productively, not to skip it.</p>
+<p>Ask for a hint, example, counterexample, or question that helps you make the next decision. Then write or revise the code and test your understanding.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1203,14 +1199,12 @@ Please:
           display:block!important;
       }</style></aside>
 </section>
-<section id="career-relevance" class="slide level2 smaller">
-<h2>Career Relevance</h2>
-<p><strong>Why these skills matter professionally:</strong></p>
-<p><strong>AI proficiency is expected:</strong> - Job postings increasingly mention AI tool experience - Companies assume developers use AI assistants - Interviews may ask about AI workflow</p>
-<p><strong>Strategic AI use demonstrates:</strong> - <strong>Efficiency</strong>: Get more done in less time - <strong>Code quality</strong>: Consistent reviews and testing - <strong>Communication</strong>: Clear documentation - <strong>Adaptability</strong>: Learning new tools/languages faster - <strong>Judgment</strong>: Knowing when to use AI vs.&nbsp;manual work</p>
-<p><strong>Interview examples:</strong> - “How do you use AI in your development workflow?” - “Describe a time AI helped you solve a complex problem” - “What are the limitations of AI coding assistants?” - “How do you verify AI-generated code quality?”</p>
+<section id="explaining-your-ai-workflow" class="slide level2 smaller">
+<h2>Explaining your AI workflow</h2>
+<p><strong>A clear workflow can demonstrate:</strong> - <strong>Efficiency</strong>: Get more done in less time - <strong>Code quality</strong>: Consistent reviews and testing - <strong>Communication</strong>: Clear documentation - <strong>Adaptability</strong>: Learning new tools/languages faster - <strong>Judgment</strong>: Knowing when to use AI vs.&nbsp;manual work</p>
+<p><strong>Questions you should be ready to answer:</strong> - “How do you use AI in your development workflow?” - “Describe a time AI helped you solve a complex problem” - “What are the limitations of AI coding assistants?” - “How do you verify AI-generated code quality?”</p>
 <aside class="notes">
-<p>AI skills are now professional skills. Employers want developers who use AI effectively and responsibly.</p>
+<p>Use examples from your own work: the task, the tool’s suggestion, the evidence you checked, what you changed, and what you learned.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1223,15 +1217,11 @@ Please:
           display:block!important;
       }</style></aside>
 </section>
-<section id="real-world-ai-workflows" class="slide level2 smaller">
-<h2>Real-World AI Workflows</h2>
-<p><strong>How professionals use AI:</strong></p>
-<p><strong>At Microsoft:</strong> - 60% of developers use GitHub Copilot daily - Primary use: Boilerplate, tests, documentation - Still require code review for all AI output</p>
-<p><strong>At Stripe:</strong> - AI-assisted code reviews - Documentation generation from code - Migration scripts between API versions</p>
-<p><strong>At startups:</strong> - Rapid prototyping with AI - Learning unfamiliar codebases - Generating integration tests</p>
-<p><strong>Common patterns:</strong> - AI for first draft, human for refinement - AI for explanations, human for decisions - AI for tedious work, human for creative work</p>
+<section id="common-ai-workflow-patterns" class="slide level2 smaller">
+<h2>Common AI workflow patterns</h2>
+<p><strong>Patterns to evaluate in your own work:</strong> - AI for first draft, human for refinement - AI for explanations, human for decisions - AI for tedious work, human for creative work - Tests, documentation, and source code as independent evidence - Small diffs and reversible changes during iteration</p>
 <aside class="notes">
-<p>These are real patterns from industry. AI augments human developers, not replaces them.</p>
+<p>Ask which steps are faster, which produce better results, and which introduce new review work. Keep a pattern only when it improves the measured outcome.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1245,15 +1235,15 @@ Please:
       }</style></aside>
 </section>
 <section id="building-your-ai-toolkit" class="slide level2 smaller">
-<h2>Building Your AI Toolkit</h2>
+<h2>Building your AI toolkit</h2>
 <p><strong>Recommended workflow setup:</strong></p>
 <p><strong>In-editor (GitHub Copilot):</strong> - Tab completion for code - Function generation - Quick documentation</p>
 <p><strong>Terminal (Copilot CLI or Antigravity CLI):</strong> - Start the agent from inside the intended repository. - Ask it to inspect a concrete error or the staged diff. - Review every proposed command and edit before approval.</p>
-<p><strong>Browser (Claude/ChatGPT):</strong> - Architecture discussions - Complex debugging - Learning new concepts</p>
-<p><strong>Documentation (Cursor, Continue.dev):</strong> - Codebase-aware AI - Multi-file refactoring - Project-specific context</p>
+<p><strong>Browser chat:</strong> - Architecture discussions - Complex debugging - Learning new concepts</p>
+<p><strong>Documentation and search:</strong> - Current authoritative instructions - Release notes and migration details - Evidence for factual or time-sensitive claims</p>
 <p><strong>Create a personal prompt library:</strong> - Save effective prompts you use often - Customize for your projects - Share with teammates</p>
 <aside class="notes">
-<p>Build your toolkit gradually. Master one tool before adding another. Quality over quantity.</p>
+<p>Add a tool when it solves a specific problem in your workflow. Product lists become stale quickly; the browser/editor/terminal distinction is more durable.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1266,8 +1256,8 @@ Please:
           display:block!important;
       }</style></aside>
 </section>
-<section id="ai-prompting-meta-level" class="slide level2 smaller">
-<h2>🤖 AI Prompting: Meta Level</h2>
+<section id="meta-prompting" class="slide level2 smaller">
+<h2>Meta-prompting</h2>
 <p><strong>Prompts about prompting:</strong></p>
 <p><strong>Improve your prompts:</strong></p>
 <pre><code>I want to ask an AI to help me optimize this Rust code.
@@ -1275,7 +1265,7 @@ What information should I include in my prompt to get the
 best advice?</code></pre>
 <p><strong>Generate custom prompts:</strong></p>
 <pre><code>Create a prompt template I can reuse for generating
-comprehensive pytest tests for Python functions. Include
+focused pytest tests for Python functions. Include
 placeholders for [function_code] and [special_requirements].</code></pre>
 <p><strong>Learn from AI:</strong></p>
 <pre><code>What are the most effective techniques for prompting AI to
@@ -1287,7 +1277,7 @@ different approaches.</code></pre>
 
 How could I improve this workflow for better results?</code></pre>
 <aside class="notes">
-<p>Meta-prompting - using AI to improve how you use AI. This accelerates your learning curve with AI tools.</p>
+<p>Treat a generated prompt template as a draft. Remove generic instructions, add the project’s actual constraints, and test it on representative tasks.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1301,13 +1291,13 @@ How could I improve this workflow for better results?</code></pre>
       }</style></aside>
 </section>
 <section id="key-takeaways" class="slide level2 inverse">
-<h2>Key Takeaways</h2>
-<p><strong>Advanced prompting:</strong> - Use the Five C’s: Context, Constraints, Clarity, Completeness, Conversation - Apply patterns: Persona, Chain-of-Thought, Few-Shot - Manage context strategically</p>
-<p><strong>Professional workflows:</strong> - AI for documentation, testing, refactoring - Build custom workflows for repetitive tasks - Always verify and validate output</p>
-<p><strong>Quality and ethics:</strong> - Understand AI limitations - Verify before using generated code - Use AI to enhance learning, not replace it - Maintain academic and professional integrity</p>
-<p><strong>Strategic thinking:</strong> - Choose the right tool for each task - Iterate and refine - Focus on understanding, not just solutions</p>
+<h2>Key takeaways</h2>
+<p><strong>Advanced prompting:</strong> - State the outcome, relevant context, constraints, and success criteria - Apply review criteria and examples when they communicate a real requirement - Manage context around the current task</p>
+<p><strong>Repeatable workflows:</strong> - AI for documentation, testing, refactoring - Build custom workflows for repetitive tasks - Verify output with independent evidence</p>
+<p><strong>Quality and ethics:</strong> - Understand AI limitations - Verify before using generated code - Use AI to enhance learning, not replace it - Maintain academic integrity and honest attribution</p>
+<p><strong>Decision making:</strong> - Choose the right tool for each task - Iterate and refine - Focus on understanding and verifiable solutions</p>
 <aside class="notes">
-<p>These skills compound over time. The better you get at prompting, the more productive you become.</p>
+<p>The durable skill is evaluation: define success, inspect the evidence, and refine the workflow based on observed results.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1321,12 +1311,12 @@ How could I improve this workflow for better results?</code></pre>
       }</style></aside>
 </section>
 <section id="additional-resources" class="slide level2 smaller">
-<h2>Additional Resources</h2>
-<p><strong>Prompt engineering:</strong> - <a href="https://platform.openai.com/docs/guides/prompt-engineering">OpenAI Prompt Engineering Guide</a> - <a href="https://docs.anthropic.com/claude/prompt-library">Anthropic Prompt Library</a> - <a href="https://learnprompting.org/">Learn Prompting</a> - <a href="https://github.com/prompt-engineering/prompt-patterns">Prompt Engineering Patterns</a></p>
+<h2>Additional resources</h2>
+<p><strong>Model guidance:</strong> - <a href="https://developers.openai.com/api/docs/guides/latest-model">OpenAI guidance for current models</a> - <a href="https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering/overview">Anthropic prompting documentation</a></p>
 <p><strong>AI tools:</strong> - <a href="https://docs.github.com/copilot">GitHub Copilot Documentation</a> - <a href="https://claude.ai">Claude AI</a> - <a href="https://chat.openai.com">ChatGPT</a> - <a href="https://docs.github.com/en/copilot/how-tos/copilot-cli/set-up-copilot-cli/install-copilot-cli">GitHub Copilot CLI</a> - <a href="https://antigravity.google/docs/cli/overview/">Antigravity CLI</a></p>
 <p><strong>Best practices:</strong> - <a href="https://google.github.io/eng-practices/review/">Google Code Review Guidelines</a> - <a href="https://refactoring.com/catalog/">Refactoring Catalog</a> - <a href="https://www.uc.edu/conduct/academic-integrity.html">Academic Integrity Resources</a></p>
 <aside class="notes">
-<p>Encourage students to explore these resources. Prompt engineering is an evolving field - stay current.</p>
+<p>Use current primary documentation for the selected tool and compare its advice with observed results on course tasks.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1340,14 +1330,14 @@ How could I improve this workflow for better results?</code></pre>
       }</style></aside>
 </section>
 <section id="final-project-application" class="slide level2 inverse">
-<h2>Final Project Application</h2>
+<h2>Final project application</h2>
 <p><strong>Apply these skills to your final project:</strong></p>
-<p><strong>Documentation:</strong> - [ ] Generate comprehensive README - [ ] Add docstrings to all functions - [ ] Create usage examples - [ ] Document installation steps</p>
-<p><strong>Code quality:</strong> - [ ] AI-assisted code review - [ ] Refactor complex functions - [ ] Add comprehensive tests - [ ] Check for security issues</p>
-<p><strong>Professional polish:</strong> - [ ] Write clear commit messages - [ ] Create detailed PR descriptions (if applicable) - [ ] Add inline code comments - [ ] Include performance notes</p>
-<p><strong>Use AI strategically to make your project portfolio-worthy!</strong></p>
+<p><strong>Documentation:</strong> - [ ] Draft and verify a complete README - [ ] Add docstrings where they clarify public behavior - [ ] Create usage examples - [ ] Document installation steps</p>
+<p><strong>Code quality:</strong> - [ ] AI-assisted code review - [ ] Refactor complex functions - [ ] Add tests for required behavior, failure paths, and important boundaries - [ ] Check for security issues</p>
+<p><strong>Repository polish:</strong> - [ ] Write clear commit messages - [ ] Create detailed PR descriptions (if applicable) - [ ] Add comments where the reason for a choice is not evident from the code - [ ] Include performance notes only when they are measured and relevant</p>
+<p><strong>Use AI where it improves a rubric requirement, and verify every resulting change.</strong></p>
 <aside class="notes">
-<p>This is the last chance to apply these techniques before project submission. Emphasize that AI can help make their projects more professional.</p>
+<p>Tie each activity to the published project rubric: functionality, code quality, tests, README, and CI/CD. Do not invent additional requirements.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1367,24 +1357,23 @@ How could I improve this workflow for better results?</code></pre>
 <li>Office hours: <a href="https://teams.microsoft.com">Schedule on Teams</a></li>
 <li>Course discussion: Microsoft Teams channel</li>
 <li>AI tools: browser chat, GitHub Copilot, Copilot CLI, Antigravity CLI</li>
-<li>Prompt engineering communities</li>
+<li>Primary documentation for the tool in use</li>
 </ul>
-<p><strong>Final project deadline approaching - make it exceptional!</strong></p>
-<p>Remember: AI is your assistant, not your replacement. Use it to amplify your skills, not replace your thinking.</p>
+<p><strong>Follow the final-project deadline shown on the course site and in Canvas.</strong></p>
+<p>Remember: tool output is a proposal. You remain responsible for the requirements, evidence, and submitted result.</p>
 </section>
-<section id="thank-you" class="slide level2 inverse">
-<h2>Thank You!</h2>
-<p><strong>You’ve completed IS4010!</strong></p>
-<p><strong>Throughout this course, you’ve learned:</strong> - Python and Rust programming - Professional development practices - Testing, CI/CD, and distribution - <strong>Strategic AI-enhanced development workflows</strong></p>
-<p><strong>What’s next:</strong> - Complete your final project with professional polish - Build your portfolio with published work - Continue practicing AI-enhanced development - Apply these skills in your career</p>
-<p><strong>You’re ready to be an AI-enhanced developer in the modern software industry!</strong> 🚀</p>
-<p><strong>Good luck with your final projects!</strong> 🦀</p>
+<section id="course-wrap-up" class="slide level2 inverse">
+<h2>Course wrap-up</h2>
+<p><strong>You have reached the final project stage.</strong></p>
+<p><strong>Throughout this course, you’ve learned:</strong> - Python and Rust programming - Repeatable development practices - Testing, CI/CD, and distribution - <strong>Evidence-based AI-enhanced development workflows</strong></p>
+<p><strong>What’s next:</strong> - Complete the final project against the published rubric - Publish work only when its configuration and data are safe to share - Continue practicing AI-enhanced development - Apply the same verification habits in future projects</p>
+<p><strong>Finish the final project by testing the behavior, reviewing the diff, and checking every rubric item.</strong></p>
 
 </section></section>
     </div>
   <div class="quarto-auto-generated-content" style="display: none;">
 <div class="footer footer-default">
-<p>IS4010: App Development with AI</p>
+<p>IS4010: App development with AI</p>
 </div>
 </div></div>
 

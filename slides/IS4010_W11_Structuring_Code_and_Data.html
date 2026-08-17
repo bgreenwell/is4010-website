@@ -10,7 +10,7 @@
   <meta name="generator" content="quarto-1.10.18">
 
   <meta name="author" content="Brandon M. Greenwell">
-  <title>IS4010: AI-Enhanced Application Development</title>
+  <title>IS4010: AI-enhanced application development</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -203,8 +203,8 @@
     <div class="slides">
 
 <section id="title-slide" class="quarto-title-block center">
-  <h1 class="title">IS4010: AI-Enhanced Application Development</h1>
-  <p class="subtitle">Week 11: Structuring Code and Data in Rust</p>
+  <h1 class="title">IS4010: AI-enhanced application development</h1>
+  <p class="subtitle">Week 11: Structuring code and data in Rust</p>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -216,9 +216,9 @@ Brandon M. Greenwell
 
 </section>
 <section id="session-1-organizing-code-and-custom-types" class="slide level2">
-<h2>Session 1: Organizing Code and Custom Types</h2>
+<h2>Session 1: organizing code and custom types</h2>
 <aside class="notes">
-<p>This week builds directly on ownership fundamentals from Week 10. Students now know how memory works in Rust - today they learn how to structure programs and data. Start with motivation: “You can write Rust code - now let’s organize it like professionals do.”</p>
+<p>This week builds on the Week 10 ownership model. Move from one source file to modules and from primitive values to types that encode the lab’s domain rules.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -236,11 +236,11 @@ Brandon M. Greenwell
 <ul>
 <li class="fragment">So far, we’ve written small <a href="https://www.rust-lang.org/">Rust</a> programs in a single <code>main.rs</code> file</li>
 <li class="fragment">Real applications need <strong>organization</strong>: separate files, logical grouping, reusable components</li>
-<li class="fragment"><a href="https://www.rust-lang.org/">Rust</a>’s <a href="https://doc.rust-lang.org/book/ch07-00-managing-growing-projects-with-packages-crates-and-modules.html">module system</a> provides powerful tools for structuring code</li>
-<li class="fragment">Today we learn how professionals organize <a href="https://www.rust-lang.org/">Rust</a> projects</li>
+<li class="fragment"><a href="https://www.rust-lang.org/">Rust</a>’s <a href="https://doc.rust-lang.org/book/ch07-00-managing-growing-projects-with-packages-crates-and-modules.html">module system</a> controls structure, paths, and visibility</li>
+<li class="fragment">Today we learn how modules organize a growing <a href="https://www.rust-lang.org/">Rust</a> project</li>
 </ul>
 <aside class="notes">
-<p>Transition from “can you write Rust?” to “can you organize Rust?” Students have the fundamentals - now we scale up to real programs. The module system is Rust’s answer to organization.</p>
+<p>Transition from a single source file to a small multi-module program. Keep the examples close to the supplied lab structure.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -338,7 +338,7 @@ Brandon M. Greenwell
       }</style></aside>
 </section>
 <section id="quick-rule-of-thumb-when-do-you-need-pub" class="slide level2">
-<h2>Quick rule of thumb: when do you need <code>pub</code>? 🤔</h2>
+<h2>Quick rule of thumb: when do you need <code>pub</code>?</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
 <p><strong>✅ Use <code>pub</code> when accessed from:</strong></p>
@@ -503,13 +503,13 @@ Brandon M. Greenwell
           display:block!important;
       }</style></aside>
 </section>
-<section id="ai-co-pilot-technique-module-organization" class="slide level2">
-<h2>🤖 AI co-pilot technique: module organization</h2>
+<section id="ai-copilot-technique-module-organization" class="slide level2">
+<h2>AI copilot technique: module organization</h2>
 <p>When organizing code into modules, ask your <a href="https://claude.ai/">AI assistant</a>:</p>
 <p><strong>Effective prompts:</strong> - <em>“How should I organize this Rust project into modules? [describe project]”</em> - <em>“What should be public vs private in this module? [paste code]”</em> - <em>“Explain the difference between ‘use’ and ‘mod’ in Rust”</em> - <em>“Help me split this large main.rs into separate modules”</em></p>
 <p><strong>Pro tip:</strong> Ask AI to explain the module tree structure - visualizations help!</p>
 <aside class="notes">
-<p>Module organization is a design skill. AI can suggest logical groupings and explain privacy trade-offs. Students should use AI to learn patterns, not just copy structure. Understanding module design makes code maintainable.</p>
+<p>Module organization is a design skill. AI can suggest logical groupings and explain privacy trade-offs, but students should be able to justify the resulting structure. Understanding those boundaries makes code easier to maintain.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -581,7 +581,7 @@ Brandon M. Greenwell
 <span id="cb10-23"><a href="" aria-label="23"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p><a href="https://play.rust-lang.org/?version=stable&amp;mode=debug&amp;edition=2021&amp;code=struct+User+%7B%0A++++username%3A+String%2C%0A++++email%3A+String%2C%0A++++active%3A+bool%2C%0A%7D%0Afn+main%28%29+%7B%0A++++let+user1+%3D+User+%7B%0A++++++++email%3A+String%3A%3Afrom%28%22ada%40example.com%22%29%2C%0A++++++++username%3A+String%3A%3Afrom%28%22ada_lovelace%22%29%2C%0A++++++++active%3A+true%2C%0A++++%7D%3B%0A++++println%21%28%22Username%3A+%7B%7D%22%2C+user1.username%29%3B%0A%7D">Try it in Rust Playground</a></p>
 <aside class="notes">
-<p><strong>LIVE DEMO</strong>: Create a struct instance. Show that the entire struct must be mutable to change any field - Rust doesn’t have per-field mutability. This is consistent with Rust’s ownership model.</p>
+<p><strong>Live demo:</strong> Create a struct instance. Show that the binding must be mutable to change a field—Rust does not apply mutability to individual fields of an otherwise immutable binding.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -622,7 +622,7 @@ Brandon M. Greenwell
 <span id="cb11-24"><a href="" aria-label="24"></a></span>
 <span id="cb11-25"><a href="" aria-label="25"></a>    <span class="kw">let</span> sq <span class="op">=</span> <span class="pp">Rectangle::</span>square(<span class="dv">10</span>)<span class="op">;</span></span>
 <span id="cb11-26"><a href="" aria-label="26"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p><a href="https://play.rust-lang.org/?version=stable&amp;mode=debug&amp;edition=2021&amp;code=struct+Rectangle+%7B%0A++++width%3A+u32%2C%0A++++height%3A+u32%2C%0A%7D%0Aimpl+Rectangle+%7B%0A++++fn+area%28%26self%29+-%3E+u32+%7B%0A++++++++self.width+*+self.height%0A++++%7D%0A++++fn+square%28size%3A+u32%29+-%3E+Rectangle+%7B%0A++++++++Rectangle+%7B+width%3A+size%2C+height%3A+size+%7D%0A++++%7D%0A%7D%0Afn+main%28%29+%7B%0A++++let+rect+%3D+Rectangle+%7B+width%3A+30%2C+height%3A+50+%7D%3B%0A++++println%21%28%22Area%3A+%7B%7D%22%2C+rect.area%28%29%29%3B%0A++++let+sq+%3D+Rectangle%3A%3Asquare%28%2810%29%3B%0A%7D">Try it in Rust Playground</a></p>
+<p><a href="https://play.rust-lang.org/?version=stable&amp;mode=debug&amp;edition=2021&amp;code=struct+Rectangle+%7B%0A++++width%3A+u32%2C%0A++++height%3A+u32%2C%0A%7D%0Aimpl+Rectangle+%7B%0A++++fn+area%28%26self%29+-%3E+u32+%7B%0A++++++++self.width+*+self.height%0A++++%7D%0A++++fn+square%28size%3A+u32%29+-%3E+Rectangle+%7B%0A++++++++Rectangle+%7B+width%3A+size%2C+height%3A+size+%7D%0A++++%7D%0A%7D%0Afn+main%28%29+%7B%0A++++let+rect+%3D+Rectangle+%7B+width%3A+30%2C+height%3A+50+%7D%3B%0A++++println%21%28%22Area%3A+%7B%7D%22%2C+rect.area%28%29%29%3B%0A++++let+sq+%3D+Rectangle%3A%3Asquare%2810%29%3B%0A%7D">Try it in Rust Playground</a></p>
 <aside class="notes">
 <p>impl blocks add methods to structs. Methods take self (or &amp;self or &amp;mut self). Associated functions don’t take self - they’re like constructors or static methods. You can have multiple impl blocks for organization.</p>
 <style type="text/css">
@@ -641,9 +641,9 @@ Brandon M. Greenwell
 <h2>Modeling choices with <a href="https://doc.rust-lang.org/book/ch06-00-enums.html"><code>enum</code></a></h2>
 <ul>
 <li class="fragment">An <a href="https://doc.rust-lang.org/book/ch06-01-defining-an-enum.html"><code>enum</code></a> (enumeration) represents a value that can be one of several variants</li>
-<li class="fragment"><strong>Much more powerful</strong> than enums in <a href="https://en.cppreference.com/w/c">C</a>, <a href="https://www.java.com/">Java</a>, or <a href="https://www.python.org/">Python</a></li>
+<li class="fragment">Each variant can carry different data, making Rust enums useful for modeling alternatives</li>
 <li class="fragment">Each variant can hold different types of data</li>
-<li class="fragment">Perfect for modeling “this OR that OR that” situations</li>
+<li class="fragment">Useful when one value must be exactly one of several named variants</li>
 </ul>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb12-1"><a href="" aria-label="1"></a><span class="kw">enum</span> Shape <span class="op">{</span>  <span class="co">// Define an enum to represent different geometric shapes</span></span>
 <span id="cb12-2"><a href="" aria-label="2"></a>    Circle(<span class="dt">f64</span>)<span class="op">,</span>              <span class="co">// Circle variant holds radius</span></span>
@@ -657,7 +657,7 @@ Brandon M. Greenwell
 <span id="cb12-10"><a href="" aria-label="10"></a><span class="kw">let</span> triangle <span class="op">=</span> <span class="pp">Shape::</span>Triangle(<span class="dv">3.0</span><span class="op">,</span> <span class="dv">8.0</span>)<span class="op">;</span>           <span class="co">// Triangle with base 3.0, height 8.0</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p><a href="https://play.rust-lang.org/?version=stable&amp;mode=debug&amp;edition=2021&amp;code=enum+Shape+%7B%0A++++Circle%28f64%29%2C%0A++++Rectangle%28f64%2C+f64%29%2C%0A++++Triangle%28f64%2C+f64%29%2C%0A%7D%0A%0Afn+main%28%29+%7B%0A++++let+circle+%3D+Shape%3A%3ACircle%285.0%29%3B%0A++++let+rectangle+%3D+Shape%3A%3ARectangle%284.0%2C+6.0%29%3B%0A++++let+triangle+%3D+Shape%3A%3ATriangle%283.0%2C+8.0%29%3B%0A++++%0A++++println%21%28%22Created+three+shapes%21%22%29%3B%0A%7D">Try it in Rust Playground</a></p>
 <aside class="notes">
-<p>Rust enums are algebraic data types - incredibly powerful! Each variant can hold different amounts and types of data. Circle needs one dimension (radius), Rectangle needs two (width, height), Triangle needs two (base, height). This is the perfect use case for enums - same concept (shape) but different data structure. This is much more powerful than C-style enums which are just named integers.</p>
+<p>Rust enums are algebraic data types: each variant can hold different data. Circle needs one dimension, while Rectangle and Triangle need two. This representation keeps the alternatives in one type and differs from C-style enums, which are named integer constants.</p>
 <p><strong>Computer science terminology</strong>: Rust enums are “sum types” or “tagged unions” from functional programming. They encode different states and their associated data within a single type, which the compiler checks exhaustively. The Shape example clearly shows this - each variant is mutually exclusive (a shape is a circle OR rectangle OR triangle, never multiple at once).</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
@@ -703,7 +703,7 @@ Brandon M. Greenwell
 <span id="cb13-28"><a href="" aria-label="28"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p><a href="https://play.rust-lang.org/?version=stable&amp;mode=debug&amp;edition=2021&amp;code=enum+Shape+%7B%0A++++Circle%28f64%29%2C%0A++++Rectangle%28f64%2C+f64%29%2C%0A++++Triangle%28f64%2C+f64%29%2C%0A%7D%0A%0Afn+area%28shape%3A+Shape%29+-%3E+f64+%7B%0A++++match+shape+%7B%0A++++++++Shape%3A%3ACircle%28r%29+%3D%3E+%7B%0A++++++++++++println%21%28%22Calculating+area+of+circle+with+radius+%7B%7D%22%2C+r%29%3B%0A++++++++++++3.14159+*+r+*+r%0A++++++++%7D%0A++++++++Shape%3A%3ARectangle%28w%2C+h%29+%3D%3E+w+*+h%2C%0A++++++++Shape%3A%3ATriangle%28b%2C+h%29+%3D%3E+0.5+*+b+*+h%2C%0A++++%7D%0A%7D%0A%0Afn+main%28%29+%7B%0A++++let+circle+%3D+Shape%3A%3ACircle%285.0%29%3B%0A++++println%21%28%22Area%3A+%7B%3A.2%7D+square+units%22%2C+area%28circle%29%29%3B%0A++++%0A++++let+rect+%3D+Shape%3A%3ARectangle%284.0%2C+6.0%29%3B%0A++++println%21%28%22Area%3A+%7B%3A.2%7D+square+units%22%2C+area%28rect%29%29%3B%0A%7D">Try it in Rust Playground</a></p>
 <aside class="notes">
-<p><strong>LIVE DEMO</strong>: This perfectly shows why match with enums is powerful! Each shape needs a different formula - pattern matching makes this natural and safe. The compiler ensures exhaustiveness - you MUST handle every variant. If you add a new shape later, the compiler will force you to update every match statement. Pattern matching extracts the data (radius, width/height, base/height) so you can use it in calculations. This prevents forgotten cases that cause bugs in other languages. Try removing one match arm to see the compiler error!</p>
+<p>For the live demo, remove one match arm and inspect the exhaustiveness error. Pattern matching extracts each variant’s data for its formula. Adding a variant can reveal match expressions that need updating, unless they use a wildcard arm.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -716,13 +716,13 @@ Brandon M. Greenwell
           display:block!important;
       }</style></aside>
 </section>
-<section id="ai-co-pilot-technique-designing-with-structs-and-enums" class="slide level2">
-<h2>🤖 AI co-pilot technique: designing with structs and enums</h2>
+<section id="ai-copilot-technique-designing-with-structs-and-enums" class="slide level2">
+<h2>AI copilot technique: designing with structs and enums</h2>
 <p>When modeling data, ask your <a href="https://claude.ai/">AI assistant</a>:</p>
 <p><strong>Effective prompts:</strong> - <em>“Should I use a struct or enum for this? [describe data]”</em> - <em>“Help me model a [domain concept] in Rust with structs and enums”</em> - <em>“What fields should this struct have? [describe requirements]”</em> - <em>“Show me how to use match to handle all cases of this enum”</em></p>
 <p><strong>Example:</strong> <em>“I need to model a blog post that can be Draft, Published, or Archived. Each state has different data. How should I structure this in Rust?”</em></p>
 <aside class="notes">
-<p>Data modeling is a design skill. AI can suggest struct vs enum trade-offs and show idiomatic patterns. Ask AI to explain the reasoning, not just provide code. Understanding design choices makes better Rust developers.</p>
+<p>Data modeling is a design skill. AI can compare struct and enum trade-offs and show idiomatic patterns. Ask for the reasoning with the code, then evaluate whether each variant represents the domain accurately.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -736,7 +736,7 @@ Brandon M. Greenwell
       }</style></aside>
 </section>
 <section id="session-2-error-handling-and-collections" class="slide level2">
-<h2>Session 2: Error Handling and Collections</h2>
+<h2>Session 2: error handling and collections</h2>
 <aside class="notes">
 <p>Second session builds on structs/enums. Now we use two special enums (Option and Result) and work with dynamic collections. Emphasize that these aren’t “advanced” - they’re everyday Rust. Tie to ownership from last week.</p>
 <style type="text/css">
@@ -803,7 +803,7 @@ Brandon M. Greenwell
 <span id="cb14-26"><a href="" aria-label="26"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p><a href="https://play.rust-lang.org/?version=stable&amp;mode=debug&amp;edition=2021&amp;code=fn+find_user%28id%3A+u32%29+-%3E+Option%3CString%3E+%7B%0A++++if+id+%3D%3D+1+%7B%0A++++++++Some%28String%3A%3Afrom%28%22Alice%22%29%29%0A++++%7D+else+%7B%0A++++++++None%0A++++%7D%0A%7D%0Afn+main%28%29+%7B%0A++++match+find_user%281%29+%7B%0A++++++++Some%28name%29+%3D%3E+println%21%28%22Found%3A+%7B%7D%22%2C+name%29%2C%0A++++++++None+%3D%3E+println%21%28%22User+not+found%22%29%2C%0A++++%7D%0A%7D">Try it in Rust Playground</a></p>
 <aside class="notes">
-<p><strong>LIVE DEMO</strong>: Show Option in action. The type system forces you to handle the None case - you can’t forget. Show both match and if let patterns. if let is syntactic sugar for matching one pattern and ignoring others.</p>
+<p><strong>Live demo:</strong> Show <code>Option</code> in action. Accessing the contained value requires considering whether it is <code>Some</code> or <code>None</code>; compare <code>match</code> with <code>if let</code> when only one pattern needs special handling.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -889,13 +889,13 @@ Brandon M. Greenwell
           display:block!important;
       }</style></aside>
 </section>
-<section id="ai-co-pilot-technique-error-handling-patterns" class="slide level2">
-<h2>🤖 AI co-pilot technique: error handling patterns</h2>
+<section id="ai-copilot-technique-error-handling-patterns" class="slide level2">
+<h2>AI copilot technique: error-handling patterns</h2>
 <p>When handling errors, ask your <a href="https://claude.ai/">AI assistant</a>:</p>
 <p><strong>Effective prompts:</strong> - <em>“When should I use Option vs Result in Rust?”</em> - <em>“Help me handle this error idiomatically: [paste code]”</em> - <em>“Explain the ? operator and when I can use it”</em> - <em>“Convert this match error handling to use ? operator”</em></p>
 <p><strong>Pro tip:</strong> Ask AI to show both verbose (match) and concise (? operator) versions to understand what’s happening under the hood.</p>
 <aside class="notes">
-<p>Error handling patterns take practice. AI can show idiomatic approaches and explain trade-offs. Students should understand both match and ? operator - ? is sugar for match patterns. Ask AI to explain, not just provide code.</p>
+<p>Error-handling patterns take practice. AI can show idiomatic approaches and explain trade-offs. Students should understand both <code>match</code> and the <code>?</code> operator: <code>?</code> provides concise propagation for compatible error types.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -936,8 +936,8 @@ Brandon M. Greenwell
 <span id="cb17-18"><a href="" aria-label="18"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p><a href="https://play.rust-lang.org/?version=stable&amp;mode=debug&amp;edition=2021&amp;code=fn+main%28%29+%7B%0A++++let+mut+v+%3D+vec%21%5B1%2C+2%2C+3%5D%3B%0A++++v.push%284%29%3B%0A++++for+i+in+%26v+%7B%0A++++++++println%21%28%22%7B%7D%22%2C+i%29%3B%0A++++%7D%0A++++let+third+%3D+%26v%5B2%5D%3B%0A++++println%21%28%22Third%3A+%7B%7D%22%2C+third%29%3B%0A%7D">Try it in Rust Playground</a></p>
 <aside class="notes">
-<p><strong>LIVE DEMO</strong>: Show Vec creation, push, indexing, and iteration. Explain the two ways to access: [] panics if out of bounds, .get() returns Option. This ties back to Option from earlier. Vectors follow ownership rules - you can’t modify while iterating immutably.</p>
-<p><strong>Performance insight</strong>: Mention that when a <code>Vec</code>’s capacity is exceeded, it must perform a new allocation on the heap and copy all existing elements over. For performance-critical code, pre-allocating with <code>Vec::with_capacity</code> can be a useful optimization.</p>
+<p><strong>Live demo:</strong> Show <code>Vec</code> creation, <code>push</code>, indexing, and iteration. Explain that indexing panics when out of bounds while <code>.get()</code> returns <code>Option</code>. Show why an active immutable borrow prevents mutation through that vector binding.</p>
+<p><strong>Performance note:</strong> When a <code>Vec</code> grows beyond its capacity, it may allocate a larger buffer and move its elements. If measurements show repeated growth matters and the approximate size is known, <code>Vec::with_capacity</code> can reduce reallocations.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -950,8 +950,8 @@ Brandon M. Greenwell
           display:block!important;
       }</style></aside>
 </section>
-<section id="strings-in-rust-string-vs-str" class="slide level2">
-<h2>Strings in Rust: <a href="https://doc.rust-lang.org/std/string/struct.String.html"><code>String</code></a> vs <a href="https://doc.rust-lang.org/std/primitive.str.html"><code>&amp;str</code></a></h2>
+<section id="strings-in-rust-string-and-str" class="slide level2">
+<h2>Strings in Rust: <a href="https://doc.rust-lang.org/std/string/struct.String.html"><code>String</code></a> and <a href="https://doc.rust-lang.org/std/primitive.str.html"><code>&amp;str</code></a></h2>
 <ul>
 <li class="fragment"><a href="https://www.rust-lang.org/">Rust</a> has two main string types (not one!):</li>
 <li class="fragment"><strong><a href="https://doc.rust-lang.org/std/string/struct.String.html"><code>String</code></a></strong> - Owned, growable, heap-allocated (like <code>Vec&lt;u8&gt;</code>)</li>
@@ -976,7 +976,7 @@ Brandon M. Greenwell
 <p><a href="https://play.rust-lang.org/?version=stable&amp;mode=debug&amp;edition=2021&amp;code=fn+main%28%29+%7B%0A++++let+mut+s+%3D+String%3A%3Afrom%28%22hello%22%29%3B%0A++++s.push_str%28%22+world%22%29%3B%0A++++println%21%28%22%7B%7D%22%2C+s%29%3B%0A++++let+slice%3A+%26str+%3D+%26s%5B0..5%5D%3B%0A++++println%21%28%22Slice%3A+%7B%7D%22%2C+slice%29%3B%0A%7D">Try it in Rust Playground</a></p>
 <aside class="notes">
 <p>String vs &amp;str confuses everyone. String is owned data, &amp;str is a view into string data. Think: String is like Vec<u8>, &amp;str is like &amp;[u8]. String literals in code are &amp;str with ’static lifetime. This follows ownership from Week 10.</u8></p>
-<p><strong>Best practice</strong>: Emphasize that functions should almost always accept <code>&amp;str</code> as a parameter instead of <code>String</code>. This is more flexible as you can pass either a <code>String</code> (as <code>&amp;my_string</code>) or a string literal, and it avoids unnecessary memory allocations.</p>
+<p><strong>API design:</strong> When a function only needs to read text, accepting <code>&amp;str</code> is often more flexible than taking ownership of a <code>String</code>. Callers can pass a string slice or borrow a <code>String</code> without an unnecessary ownership transfer.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1017,7 +1017,7 @@ Brandon M. Greenwell
 <span id="cb19-24"><a href="" aria-label="24"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p><a href="https://play.rust-lang.org/?version=stable&amp;mode=debug&amp;edition=2021&amp;code=use+std%3A%3Acollections%3A%3AHashMap%3B%0Afn+main%28%29+%7B%0A++++let+mut+scores+%3D+HashMap%3A%3Anew%28%29%3B%0A++++scores.insert%28String%3A%3Afrom%28%22Blue%22%29%2C+10%29%3B%0A++++scores.insert%28String%3A%3Afrom%28%22Yellow%22%29%2C+50%29%3B%0A++++for+%28key%2C+value%29+in+%26scores+%7B%0A++++++++println%21%28%22%7B%7D%3A+%7B%7D%22%2C+key%2C+value%29%3B%0A++++%7D%0A%7D">Try it in Rust Playground</a></p>
 <aside class="notes">
-<p><strong>LIVE DEMO</strong>: Show HashMap creation, insertion, and lookup. Note that .get() returns Option - the key might not exist! HashMap owns its keys and values. When you insert, ownership moves into the HashMap. This is consistent with ownership rules.</p>
+<p><strong>Live demo:</strong> Show <code>HashMap</code> creation, insertion, and lookup. Note that <code>.get()</code> returns <code>Option</code> because a key might not exist. Inserting owned values normally moves them into the map.</p>
 <p><strong>Performance insight</strong>: Clarify that <code>HashMap</code> provides <em>amortized O(1)</em> (average constant time) performance for insertions and lookups, which is why it’s so fast. This is a key data structures concept.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
@@ -1037,7 +1037,7 @@ Brandon M. Greenwell
 <p><strong><a href="https://doc.rust-lang.org/std/string/struct.String.html"><code>String</code></a></strong> - Use when: - You need owned, growable text - Building strings dynamically</p>
 <p><strong><a href="https://doc.rust-lang.org/std/collections/struct.HashMap.html"><code>HashMap&lt;K, V&gt;</code></a></strong> - Use when: - You need key-value lookups - Order doesn’t matter - Fast access by key is important</p>
 <aside class="notes">
-<p>Choosing collections is a design decision. Vec for lists, HashMap for lookups, String for text. These cover 95% of use cases. There are other collections (BTreeMap, HashSet, etc.) but start with these three. Ask yourself: How will I access this data?</p>
+<p>Choosing collections is a design decision. Start with <code>Vec</code> for ordered sequences, <code>HashMap</code> for key-based lookups, and <code>String</code> for owned text. Rust also provides collections such as <code>BTreeMap</code> and <code>HashSet</code>. Ask: how will this program access and update the data?</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1050,8 +1050,8 @@ Brandon M. Greenwell
           display:block!important;
       }</style></aside>
 </section>
-<section id="real-world-example-building-a-phone-book" class="slide level2">
-<h2>Real-world example: building a phone book</h2>
+<section id="example-building-a-phone-book" class="slide level2">
+<h2>Example: building a phone book</h2>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb20"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb20-1"><a href="" aria-label="1"></a><span class="kw">use</span> <span class="pp">std::collections::</span>HashMap<span class="op">;</span></span>
 <span id="cb20-2"><a href="" aria-label="2"></a></span>
 <span id="cb20-3"><a href="" aria-label="3"></a><span class="kw">struct</span> Contact <span class="op">{</span></span>
@@ -1095,13 +1095,13 @@ Brandon M. Greenwell
           display:block!important;
       }</style></aside>
 </section>
-<section id="ai-co-pilot-technique-working-with-collections" class="slide level2">
-<h2>🤖 AI co-pilot technique: working with collections</h2>
+<section id="ai-copilot-technique-working-with-collections" class="slide level2">
+<h2>AI copilot technique: working with collections</h2>
 <p>When using collections, ask your <a href="https://claude.ai/">AI assistant</a>:</p>
 <p><strong>Effective prompts:</strong> - <em>“Which Rust collection should I use for [describe use case]?”</em> - <em>“Help me convert this Python list comprehension to Rust: [paste code]”</em> - <em>“Show me how to iterate over a HashMap in Rust”</em> - <em>“How do I handle the Option returned by HashMap.get()?”</em> - <em>“What’s the difference between Vec::push and Vec::append?”</em></p>
 <p><strong>Example:</strong> <em>“I have a list of user IDs and need fast lookup. Should I use Vec or HashMap?”</em></p>
 <aside class="notes">
-<p>Collections have many methods. AI can help find the right one and show idiomatic patterns. Students should ask AI to explain trade-offs (Vec vs HashMap performance), not just provide syntax. Understanding when to use each collection is key.</p>
+<p>Collections have many methods. AI can help locate a method and compare trade-offs such as ordered traversal versus key-based lookup. Students should verify that the suggested collection matches the program’s access patterns.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1114,32 +1114,27 @@ Brandon M. Greenwell
           display:block!important;
       }</style></aside>
 </section>
-<section id="introducing-lab-11-data-modeling-challenge" class="slide level2 scrollable">
-<h2>Introducing Lab 11: data modeling challenge</h2>
-<p><strong>This week’s lab has three parts:</strong></p>
+<section id="introducing-lab-11-structs-enums-and-methods" class="slide level2 scrollable">
+<h2>Introducing Lab 11: structs, enums, and methods</h2>
+<p><strong>Implement the supplied types in <code>src/student.rs</code>:</strong></p>
 <ol type="1">
-<li class="fragment"><strong>Structs and Enums</strong>
+<li class="fragment"><strong><code>Student</code> methods</strong>
 <ul>
-<li class="fragment">Model a library system with custom types</li>
-<li class="fragment">Use structs for Book/DVD data</li>
-<li class="fragment">Use enums for ItemStatus (Available/CheckedOut)</li>
+<li class="fragment">Construction, credits, class standing, graduation eligibility, grades, and GPA</li>
 </ul></li>
-<li class="fragment"><strong>Error Handling</strong>
+<li class="fragment"><strong><code>Grade</code> and <code>CourseGrade</code> methods</strong>
 <ul>
-<li class="fragment">Return <code>Result</code> from functions that can fail</li>
-<li class="fragment">Use <code>Option</code> for optional data</li>
-<li class="fragment">Practice the <code>?</code> operator</li>
+<li class="fragment">Parse letter grades, convert GPA points, and calculate quality points</li>
 </ul></li>
-<li class="fragment"><strong>Collections in Action</strong>
+<li class="fragment"><strong><code>StudentDatabase</code> methods</strong>
 <ul>
-<li class="fragment">Store items in <code>Vec&lt;T&gt;</code></li>
-<li class="fragment">Build <code>HashMap&lt;K, V&gt;</code> for fast lookups</li>
-<li class="fragment">Iterate and search</li>
+<li class="fragment">Store students in a <code>HashMap</code>, reject duplicate IDs, search, count, and summarize GPA</li>
 </ul></li>
 </ol>
-<p><strong>Full instructions:</strong> <code>week11/lab11.md</code></p>
+<p>Do not change the supplied types or test module. Rename placeholder parameters by dropping their leading underscore.</p>
+<p><strong>Full instructions:</strong> <a href="https://github.com/bgreenwell/is4010-labs/blob/main/week11/lab11.md"><code>week11/lab11.md</code></a></p>
 <aside class="notes">
-<p>Lab 11 applies everything from today. Students will design data structures, handle errors properly, and use collections. This is practical Rust - the kind they’ll write in real projects. Emphasize that this builds on ownership from last week.</p>
+<p>Connect each method to today’s structs, enums, <code>impl</code> blocks, <code>Option</code>, <code>Result</code>, and <code>HashMap</code> examples. The data model is supplied; students implement its behavior.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1152,17 +1147,17 @@ Brandon M. Greenwell
           display:block!important;
       }</style></aside>
 </section>
-<section id="career-relevance-production-rust-patterns" class="slide level2">
-<h2>Career relevance: production Rust patterns</h2>
-<p><strong>What you learned today is used daily in industry:</strong></p>
+<section id="where-these-rust-patterns-appear" class="slide level2">
+<h2>Where these Rust patterns appear</h2>
+<p><strong>Examples to investigate:</strong></p>
 <ul>
 <li class="fragment"><strong><a href="https://discord.com/blog/why-discord-is-switching-from-go-to-rust">Discord</a></strong> - Structs for message data, enums for event types</li>
 <li class="fragment"><strong><a href="https://dropbox.tech/infrastructure/rewriting-the-heart-of-our-sync-engine">Dropbox</a></strong> - Result for error handling, HashMap for file tracking</li>
 <li class="fragment"><strong><a href="https://blog.cloudflare.com/how-we-built-pingora-the-proxy-that-connects-cloudflare-to-the-internet/">Cloudflare</a></strong> - Vec for request queues, modules for organization</li>
 </ul>
-<p><strong>Interview topics:</strong> - “How does Rust handle errors differently than exceptions?” - “When would you use an enum instead of inheritance?” - “Explain Option vs Result”</p>
+<p><strong>Questions for review:</strong> - “How does Rust handle errors differently than exceptions?” - “When would you use an enum instead of inheritance?” - “Explain Option vs Result”</p>
 <aside class="notes">
-<p>These patterns aren’t academic - they’re production Rust. Companies choose Rust partly because of these features (Result vs exceptions, enums vs inheritance). Students learning these concepts now are learning industry standards.</p>
+<p>These patterns appear throughout Rust libraries and applications. Ask students to connect each one to a concrete benefit: explicit failure paths with <code>Result</code>, valid-state modeling with enums, and ownership-aware collections.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1175,8 +1170,8 @@ Brandon M. Greenwell
           display:block!important;
       }</style></aside>
 </section>
-<section id="preview-youve-been-using-generics" class="slide level2 inverse">
-<h2>Preview: You’ve Been Using Generics!</h2>
+<section id="preview-you-have-been-using-generics" class="slide level2 inverse">
+<h2>Preview: you have been using generics</h2>
 <p><strong>Notice the angle brackets?</strong></p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb21"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb21-1"><a href="" aria-label="1"></a><span class="kw">let</span> <span class="kw">mut</span> numbers<span class="op">:</span> <span class="dt">Vec</span><span class="op">&lt;</span><span class="dt">i32</span><span class="op">&gt;</span> <span class="op">=</span> <span class="dt">Vec</span><span class="pp">::</span>new()<span class="op">;</span></span>
 <span id="cb21-2"><a href="" aria-label="2"></a><span class="kw">let</span> result<span class="op">:</span> <span class="dt">Result</span><span class="op">&lt;</span><span class="dt">String</span><span class="op">,</span> <span class="pp">io::</span><span class="bu">Error</span><span class="op">&gt;</span> <span class="op">=</span> read_file()<span class="op">;</span></span>
@@ -1185,7 +1180,7 @@ Brandon M. Greenwell
 <p><strong>What <code>&lt;T&gt;</code> means:</strong> - <code>Vec&lt;i32&gt;</code> = “a vector of i32 values” - <code>Result&lt;String, io::Error&gt;</code> = “success gives String, error gives io::Error” - <code>Option&lt;&amp;str&gt;</code> = “maybe a &amp;str, maybe nothing” - <code>HashMap&lt;String, i32&gt;</code> = “map from String keys to i32 values”</p>
 <p><strong>You’ve been using <a href="https://doc.rust-lang.org/book/ch10-00-generics.html">generic types</a> all along!</strong></p>
 <aside class="notes">
-<p>This is a key realization moment. Students have been using Vec<t>, Option<t>, Result&lt;T, E&gt; without necessarily understanding the generic nature. Point out that the angle brackets always mean “generic over some type”. This primes them for next week where they’ll write their own generic types.</t></t></p>
+<p>Students have already used <code>Vec&lt;T&gt;</code>, <code>Option&lt;T&gt;</code>, and <code>Result&lt;T, E&gt;</code>. Point out that the type parameters inside angle brackets identify the concrete types involved; next week they will define their own generic types.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1199,13 +1194,13 @@ Brandon M. Greenwell
       }</style></aside>
 </section>
 <section id="next-week-writing-your-own-generics" class="slide level2 smaller">
-<h2>Next Week: Writing Your Own Generics</h2>
+<h2>Next week: writing your own generics</h2>
 <p><strong>Week 12 preview - Generics and Traits:</strong></p>
 <p>You’ll learn to: - Write generic functions that work with any type - Create generic structs like <code>Stack&lt;T&gt;</code> or <code>Cache&lt;K, V&gt;</code> - Define <a href="https://doc.rust-lang.org/book/ch10-02-traits.html">traits</a> (Rust’s version of interfaces) - Implement traits like <code>Display</code>, <code>Iterator</code>, <code>Clone</code> - Use trait bounds to constrain generic types</p>
-<p><strong>Why it matters:</strong> - Write reusable code without duplication - Zero runtime cost (Rust generates specialized code) - Type-safe abstractions - Professional Rust development pattern</p>
+<p><strong>Why it matters:</strong> - Write reusable code without duplication - Static dispatch can generate specialized code; dynamic dispatch remains available when needed - Trait bounds state which operations a generic implementation requires - Patterns used throughout Rust libraries and applications</p>
 <p><strong>Teaser:</strong> Lab 12 will have you build a generic <code>Stack&lt;T&gt;</code> that works with any type!</p>
 <aside class="notes">
-<p>Build excitement for next week. Emphasize that they already understand how to USE generics (Vec, Option, Result) - now they’ll learn to CREATE them. This is the jump from consumer to creator. The Stack<t> lab is a classic data structures exercise that demonstrates the power of generics.</t></p>
+<p>Connect familiar uses—<code>Vec&lt;T&gt;</code>, <code>Option&lt;T&gt;</code>, and <code>Result&lt;T, E&gt;</code>—to next week’s task of defining <code>Stack&lt;T&gt;</code> and its trait bounds.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1223,7 +1218,7 @@ Brandon M. Greenwell
 <p><strong>Official <a href="https://www.rust-lang.org/">Rust</a> documentation:</strong> - <a href="https://doc.rust-lang.org/book/ch07-00-managing-growing-projects-with-packages-crates-and-modules.html">The Rust Book - Chapter 7: Modules</a> - <a href="https://doc.rust-lang.org/book/ch05-00-structs.html">The Rust Book - Chapter 5: Structs</a> - <a href="https://doc.rust-lang.org/book/ch06-00-enums.html">The Rust Book - Chapter 6: Enums and Pattern Matching</a> - <a href="https://doc.rust-lang.org/book/ch09-00-error-handling.html">The Rust Book - Chapter 9: Error Handling</a> - <a href="https://doc.rust-lang.org/book/ch08-00-common-collections.html">The Rust Book - Chapter 8: Collections</a></p>
 <p><strong>Interactive practice:</strong> - <a href="https://doc.rust-lang.org/rust-by-example/mod.html">Rust by Example - Modules</a> - <a href="https://doc.rust-lang.org/rust-by-example/error.html">Rust by Example - Error Handling</a> - <a href="https://github.com/rust-lang/rustlings">Rustlings - Structs Exercises</a></p>
 <aside class="notes">
-<p>All these links are essential reading. Chapter 8 (Collections) and Chapter 9 (Error Handling) are particularly important. Rustlings has great exercises for structs and enums. Encourage students to work through these after the lab.</p>
+<p>Treat the Rust Book chapters as primary references and Rustlings as optional practice. Route students to the chapter that matches the specific concept they need.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1239,7 +1234,14 @@ Brandon M. Greenwell
 <section id="questions" class="slide level2">
 <h2>Questions?</h2>
 <p><strong>Remember:</strong> - Modules organize code, structs/enums organize data - <code>Option&lt;T&gt;</code> eliminates null pointer errors - <code>Result&lt;T, E&gt;</code> makes error handling explicit - Collections (<code>Vec</code>, <code>String</code>, <code>HashMap</code>) follow ownership rules - Use <a href="https://claude.ai/">AI</a> to explore design patterns and learn idioms</p>
-<p><strong>Lab 11 due:</strong> Sunday, November 16 at 11:59 PM</p>
+<p><strong>Lab 11 workflow:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb22"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb22-1"><a href="" aria-label="1"></a><span class="ex">cargo</span> test</span>
+<span id="cb22-2"><a href="" aria-label="2"></a><span class="ex">cargo</span> fmt</span>
+<span id="cb22-3"><a href="" aria-label="3"></a><span class="ex">cargo</span> clippy <span class="at">--</span> <span class="at">-D</span> warnings</span>
+<span id="cb22-4"><a href="" aria-label="4"></a><span class="fu">git</span> add week11/</span>
+<span id="cb22-5"><a href="" aria-label="5"></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"Complete lab 11"</span></span>
+<span id="cb22-6"><a href="" aria-label="6"></a><span class="fu">git</span> push origin main</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>A green Week 11 badge represents the complete 10-point lab.</p>
 <p><strong>Office hours:</strong> Available on <a href="https://www.microsoft.com/en-us/microsoft-teams/group-chat-software">Microsoft Teams</a> - reach out anytime!</p>
 <aside class="notes">
 <p>End on an encouraging note. Today’s content is dense but practical. Every concept (modules, structs, enums, Result, collections) is used daily in production Rust. The lab lets them apply it all. Remind them that understanding ownership makes this week easier.</p>

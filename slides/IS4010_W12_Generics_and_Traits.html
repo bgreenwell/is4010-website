@@ -10,7 +10,7 @@
   <meta name="generator" content="quarto-1.10.18">
 
   <meta name="author" content="Brandon M. Greenwell">
-  <title>IS4010: AI-Enhanced Application Development</title>
+  <title>IS4010: AI-enhanced application development</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -203,8 +203,8 @@
     <div class="slides">
 
 <section id="title-slide" class="quarto-title-block center">
-  <h1 class="title">IS4010: AI-Enhanced Application Development</h1>
-  <p class="subtitle">Week 12: Generics and Traits</p>
+  <h1 class="title">IS4010: AI-enhanced application development</h1>
+  <p class="subtitle">Week 12: Generics and traits</p>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -216,8 +216,8 @@ Brandon M. Greenwell
 
 </section>
 <section id="week-12-overview" class="slide level2 inverse">
-<h2>Week 12 Overview</h2>
-<p><strong>Session 1: Generic Types</strong></p>
+<h2>Week 12 overview</h2>
+<p><strong>Session 1: generic types</strong></p>
 <ul>
 <li>Understanding the problem: code duplication</li>
 <li>Generic functions and structs</li>
@@ -225,7 +225,7 @@ Brandon M. Greenwell
 <li>Generic methods and implementations</li>
 <li>Introduction to trait bounds</li>
 </ul>
-<p><strong>Session 2: Traits Deep Dive</strong></p>
+<p><strong>Session 2: traits in more depth</strong></p>
 <ul>
 <li>Trait definitions and implementations</li>
 <li>Default implementations and trait parameters</li>
@@ -237,9 +237,9 @@ Brandon M. Greenwell
 <p>This week focuses on Rust’s two big abstraction tools: generics and traits. If you’re coming from Python, you’ve likely solved similar problems in very different ways.</p>
 <p><strong>Python vs.&nbsp;Rust abstraction philosophy:</strong></p>
 <p>In Python, you generally don’t worry about code reuse across types — duck typing lets you write one function and call it with anything that has the right methods at runtime. Python will simply raise an AttributeError or TypeError if something goes wrong. This is flexible but pushes errors to runtime.</p>
-<p>In Rust, the compiler needs to know at <em>compile time</em> exactly what types are used and what operations they support. Generics and traits are how you tell the compiler “this code works for any type, as long as it can do these specific things.” The payoff: you catch type errors before your program ever runs, and the generated code is just as fast as if you’d written a separate version for each type.</p>
+<p>In Rust, the compiler needs to know at <em>compile time</em> what types are used and what operations they support. Generics and traits express “this code works for any type that provides these behaviors.” This catches many type errors before execution, and static dispatch can produce specialized code without a virtual-call cost.</p>
 <p><strong>Session 1</strong> covers generics — how to write one function or struct that works across many types. <strong>Session 2</strong> goes deeper on traits — how to define and enforce shared behavior contracts.</p>
-<p>Keep this framing in mind all week: Rust trades Python’s runtime flexibility for compile-time correctness and performance.</p>
+<p>Keep the comparison scoped: Rust checks declared trait constraints at compile time, while Python normally relies on runtime behavior plus optional static analysis. Neither choice removes the need for tests.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -253,24 +253,24 @@ Brandon M. Greenwell
       }</style></aside>
 </section>
 <section id="why-generics-and-traits-matter" class="slide level2 inverse">
-<h2>Why Generics and Traits Matter</h2>
-<p><strong>Real-world impact:</strong></p>
+<h2>Why generics and traits matter</h2>
+<p><strong>Where they appear:</strong></p>
 <ul>
 <li><strong>Rust standard library</strong>: Built on generics (<code>Vec&lt;T&gt;</code>, <code>Option&lt;T&gt;</code>, <code>Result&lt;T, E&gt;</code>)</li>
 <li><strong>Code reuse</strong>: Write once, use with any type</li>
-<li><strong>Type safety</strong>: Compile-time guarantees without runtime cost</li>
-<li><strong>Zero-cost abstractions</strong>: No performance penalty</li>
+<li><strong>Type checking</strong>: Trait constraints are checked at compile time</li>
+<li><strong>Static abstraction</strong>: Generic code can be specialized without dynamic dispatch</li>
 </ul>
-<p><strong>Industry examples:</strong></p>
+<p><strong>Library examples:</strong></p>
 <ul>
 <li><a href="https://servo.org/">Servo</a>: Mozilla’s parallel browser engine</li>
 <li><a href="https://tokio.rs/">Tokio</a>: Async runtime using generic futures</li>
 <li><a href="https://serde.rs/">Serde</a>: Generic serialization framework</li>
 </ul>
 <aside class="notes">
-<p>Point out that Python has generics too (via the <code>typing</code> module and, since 3.9, built-in syntax like <code>list[int]</code>), but Python generics are mostly documentation and tooling hints — they aren’t enforced at runtime. In Rust, generics are fully enforced at compile time with zero extra cost at runtime.</p>
-<p>The “zero-cost abstractions” point is worth dwelling on. When you write <code>Vec&lt;i32&gt;</code>, Rust generates machine code that is identical to what you’d write if you hardcoded <code>i32</code> everywhere. There’s no boxing, no virtual dispatch, no overhead — the compiler monomorphizes (creates a concrete copy of) the generic code for each type you use it with. In Python, a list holds heterogeneous objects via pointers and the overhead of the interpreter is always present.</p>
-<p><code>Vec&lt;T&gt;</code>, <code>Option&lt;T&gt;</code>, and <code>Result&lt;T, E&gt;</code> are the most important generic types they’ve already seen in this course. Pointing to Servo, Tokio, and Serde reinforces that these aren’t just academic concepts — they’re the backbone of real, production Rust systems.</p>
+<p>Point out that Python has generics too (via the <code>typing</code> module and built-in syntax such as <code>list[int]</code>), but those annotations are normally checked by external tools rather than enforced by the runtime. Rust checks generic constraints at compile time.</p>
+<p>Explain monomorphization: for many generic functions and types, Rust creates concrete code for the type arguments used. This often avoids dynamic dispatch, although optimization, code size, and performance still depend on the program and compiler. CPython lists store references to Python objects and operations pass through the dynamic runtime, so the representation and trade-offs differ.</p>
+<p>Use <code>Vec&lt;T&gt;</code>, <code>Option&lt;T&gt;</code>, and <code>Result&lt;T, E&gt;</code> as familiar examples. Servo, Tokio, and Serde show the same language features at a larger scale, but their designs involve more than generics alone.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -288,11 +288,11 @@ Brandon M. Greenwell
 </section>
 <section>
 <section id="session-1-generics-and-traits" class="title-slide slide level1 center">
-<h1>Session 1: Generics and Traits</h1>
+<h1>Session 1: generics and traits</h1>
 
 </section>
 <section id="understanding-the-problem" class="slide level2 smaller">
-<h2>Understanding the Problem</h2>
+<h2>Understanding the problem</h2>
 <p><strong>Without generics, you need duplicate code:</strong></p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb1-1"><a href="" aria-label="1"></a><span class="kw">fn</span> largest_i32(list<span class="op">:</span> <span class="op">&amp;</span>[<span class="dt">i32</span>]) <span class="op">-&gt;</span> <span class="op">&amp;</span><span class="dt">i32</span> <span class="op">{</span></span>
 <span id="cb1-2"><a href="" aria-label="2"></a>    <span class="kw">let</span> <span class="kw">mut</span> largest <span class="op">=</span> <span class="op">&amp;</span>list[<span class="dv">0</span>]<span class="op">;</span></span>
@@ -343,7 +343,7 @@ Brandon M. Greenwell
       }</style></aside>
 </section>
 <section id="introducing-generics" class="slide level2 smaller">
-<h2>Introducing Generics</h2>
+<h2>Introducing generics</h2>
 <p><strong>Generic functions work with multiple types:</strong></p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb3-1"><a href="" aria-label="1"></a><span class="kw">fn</span> largest<span class="op">&lt;</span>T<span class="op">:</span> <span class="bu">PartialOrd</span><span class="op">&gt;</span>(list<span class="op">:</span> <span class="op">&amp;</span>[T]) <span class="op">-&gt;</span> <span class="op">&amp;</span>T <span class="op">{</span></span>
 <span id="cb3-2"><a href="" aria-label="2"></a>    <span class="kw">let</span> <span class="kw">mut</span> largest <span class="op">=</span> <span class="op">&amp;</span>list[<span class="dv">0</span>]<span class="op">;</span></span>
@@ -392,7 +392,7 @@ Brandon M. Greenwell
       }</style></aside>
 </section>
 <section id="generic-structs" class="slide level2 smaller">
-<h2>Generic Structs</h2>
+<h2>Generic structs</h2>
 <p><strong>Define structs that work with any type:</strong></p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb5-1"><a href="" aria-label="1"></a><span class="kw">struct</span> Point<span class="op">&lt;</span>T<span class="op">&gt;</span> <span class="op">{</span></span>
 <span id="cb5-2"><a href="" aria-label="2"></a>    x<span class="op">:</span> T<span class="op">,</span></span>
@@ -414,7 +414,7 @@ Brandon M. Greenwell
 <span id="cb6-8"><a href="" aria-label="8"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p><a href="https://doc.rust-lang.org/book/ch10-01-syntax.html#in-struct-definitions">📖 Rust Book: Generic Structs</a></p>
 <aside class="notes">
-<p><strong>Python parallel:</strong> Think of a Python dataclass — it’s always generic in the sense that fields can be any type. But there’s no mechanism to express “this field and that field must be the <em>same</em> type”:</p>
+<p><strong>Python parallel:</strong> An unparameterized Python dataclass may accept values dynamically. A generic dataclass can express relationships with <code>TypeVar</code>, but enforcement normally comes from a static type checker rather than the runtime:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="" aria-label="1"></a><span class="im">from</span> dataclasses <span class="im">import</span> dataclass</span>
 <span id="cb7-2"><a href="" aria-label="2"></a></span>
 <span id="cb7-3"><a href="" aria-label="3"></a><span class="at">@dataclass</span></span>
@@ -437,7 +437,7 @@ Brandon M. Greenwell
       }</style></aside>
 </section>
 <section id="generic-enums" class="slide level2 smaller">
-<h2>Generic Enums</h2>
+<h2>Generic enums</h2>
 <p><strong>You’ve been using generic enums all along:</strong></p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb8-1"><a href="" aria-label="1"></a><span class="co">// Option&lt;T&gt; from standard library</span></span>
 <span id="cb8-2"><a href="" aria-label="2"></a><span class="kw">enum</span> <span class="dt">Option</span><span class="op">&lt;</span>T<span class="op">&gt;</span> <span class="op">{</span></span>
@@ -451,19 +451,19 @@ Brandon M. Greenwell
 <span id="cb8-10"><a href="" aria-label="10"></a>    <span class="cn">Err</span>(E)<span class="op">,</span></span>
 <span id="cb8-11"><a href="" aria-label="11"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p><strong>Usage:</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb9-1"><a href="" aria-label="1"></a><span class="kw">fn</span> divide(a<span class="op">:</span> <span class="dt">f64</span><span class="op">,</span> b<span class="op">:</span> <span class="dt">f64</span>) <span class="op">-&gt;</span> <span class="dt">Result</span><span class="op">&lt;</span><span class="dt">f64</span><span class="op">,</span> <span class="dt">String</span><span class="op">&gt;</span> <span class="op">{</span></span>
-<span id="cb9-2"><a href="" aria-label="2"></a>    <span class="cf">if</span> b <span class="op">==</span> <span class="dv">0.0</span> <span class="op">{</span></span>
-<span id="cb9-3"><a href="" aria-label="3"></a>        <span class="cn">Err</span>(<span class="dt">String</span><span class="pp">::</span>from(<span class="st">"Division by zero"</span>))</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb9-1"><a href="" aria-label="1"></a><span class="kw">fn</span> validate_username(name<span class="op">:</span> <span class="op">&amp;</span><span class="dt">str</span>) <span class="op">-&gt;</span> <span class="dt">Result</span><span class="op">&lt;&amp;</span><span class="dt">str</span><span class="op">,</span> <span class="dt">String</span><span class="op">&gt;</span> <span class="op">{</span></span>
+<span id="cb9-2"><a href="" aria-label="2"></a>    <span class="cf">if</span> name<span class="op">.</span>trim()<span class="op">.</span>is_empty() <span class="op">{</span></span>
+<span id="cb9-3"><a href="" aria-label="3"></a>        <span class="cn">Err</span>(<span class="dt">String</span><span class="pp">::</span>from(<span class="st">"Username cannot be empty"</span>))</span>
 <span id="cb9-4"><a href="" aria-label="4"></a>    <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></span>
-<span id="cb9-5"><a href="" aria-label="5"></a>        <span class="cn">Ok</span>(a <span class="op">/</span> b)</span>
+<span id="cb9-5"><a href="" aria-label="5"></a>        <span class="cn">Ok</span>(name)</span>
 <span id="cb9-6"><a href="" aria-label="6"></a>    <span class="op">}</span></span>
 <span id="cb9-7"><a href="" aria-label="7"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p><a href="https://doc.rust-lang.org/book/ch10-01-syntax.html#in-enum-definitions">📖 Rust Book: Generic Enums</a></p>
 <aside class="notes">
-<p>This is a great “aha moment” slide. Students have been writing <code>Option&lt;T&gt;</code> and <code>Result&lt;T, E&gt;</code> for weeks — now they can see exactly what those are: generic enums defined in the standard library. They’re not magic built-in types; they’re just well-designed Rust code.</p>
+<p>Students have been writing <code>Option&lt;T&gt;</code> and <code>Result&lt;T, E&gt;</code> for weeks. Use their definitions to show that these are generic standard-library enums rather than special syntax.</p>
 <p><strong>Python parallel:</strong> Python’s equivalent to <code>Option&lt;T&gt;</code> is <code>Optional[T]</code> (or <code>T | None</code> in modern Python). But in Python, <code>None</code> is a valid value for <em>any</em> variable — you don’t get a compile-time guarantee that you’ve handled the null case. Rust’s <code>Option&lt;T&gt;</code> forces you to explicitly handle <code>Some(value)</code> and <code>None</code> via pattern matching.</p>
-<p>Python’s equivalent to <code>Result&lt;T, E&gt;</code> is raising and catching exceptions. The big difference: in Python, any function might raise an exception and you might not know about it until runtime. In Rust, a function that returns <code>Result&lt;T, E&gt;</code> is <em>advertising</em> in its type signature that it can fail, and the caller is forced to handle both cases.</p>
-<p>Connecting to the <code>divide</code> example: a Python equivalent would just use a try/except block. The Rust version makes the possibility of failure part of the function’s public contract. Ask: which approach makes code easier to maintain and reason about?</p>
+<p>Python commonly reports comparable failures by raising exceptions, which are not normally declared in the function’s type. A Rust function returning <code>Result&lt;T, E&gt;</code> advertises an expected failure channel in its signature; code must inspect or transform the result to access the success value.</p>
+<p>Connecting to the <code>validate_username</code> example: Python code might raise an exception or return a sentinel value. The Rust version makes the expected failure part of the function’s public contract. Ask: which approach makes code easier to maintain and reason about?</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -477,7 +477,7 @@ Brandon M. Greenwell
       }</style></aside>
 </section>
 <section id="generic-methods" class="slide level2 smaller">
-<h2>Generic Methods</h2>
+<h2>Generic methods</h2>
 <p><strong>Methods on generic structs:</strong></p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb10-1"><a href="" aria-label="1"></a><span class="kw">struct</span> Point<span class="op">&lt;</span>T<span class="op">&gt;</span> <span class="op">{</span></span>
 <span id="cb10-2"><a href="" aria-label="2"></a>    x<span class="op">:</span> T<span class="op">,</span></span>
@@ -518,7 +518,7 @@ Brandon M. Greenwell
 <span id="cb11-10"><a href="" aria-label="10"></a>    <span class="kw">def</span> distance_from_origin(<span class="va">self</span>):</span>
 <span id="cb11-11"><a href="" aria-label="11"></a>        <span class="cf">return</span> (<span class="va">self</span>.x<span class="op">**</span><span class="dv">2</span> <span class="op">+</span> <span class="va">self</span>.y<span class="op">**</span><span class="dv">2</span>) <span class="op">**</span> <span class="fl">0.5</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>In Python, <code>distance_from_origin</code> will crash at runtime if <code>x</code> and <code>y</code> aren’t numbers. In Rust, <code>impl Point&lt;f32&gt;</code> limits that method to <em>only</em> <code>Point&lt;f32&gt;</code> instances — if you have a <code>Point&lt;i32&gt;</code> and try to call <code>.distance_from_origin()</code>, the compiler rejects it. That’s a meaningful safety guarantee.</p>
-<p>This is a powerful pattern: you can add “bonus” methods to specific instantiations of your generic type, while keeping the core interface generic.</p>
+<p>This pattern adds methods to one concrete instantiation while keeping the core interface generic.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -532,7 +532,7 @@ Brandon M. Greenwell
       }</style></aside>
 </section>
 <section id="what-are-traits" class="slide level2 smaller">
-<h2>What Are Traits?</h2>
+<h2>What are traits?</h2>
 <p><strong>Traits define shared behavior:</strong></p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb12-1"><a href="" aria-label="1"></a><span class="kw">pub</span> <span class="kw">trait</span> Summary <span class="op">{</span></span>
 <span id="cb12-2"><a href="" aria-label="2"></a>    <span class="kw">fn</span> summarize(<span class="op">&amp;</span><span class="kw">self</span>) <span class="op">-&gt;</span> <span class="dt">String</span><span class="op">;</span></span>
@@ -572,8 +572,8 @@ Brandon M. Greenwell
 <span id="cb14-2"><a href="" aria-label="2"></a></span>
 <span id="cb14-3"><a href="" aria-label="3"></a><span class="kw">class</span> Summary(Protocol):</span>
 <span id="cb14-4"><a href="" aria-label="4"></a>    <span class="kw">def</span> summarize(<span class="va">self</span>) <span class="op">-&gt;</span> <span class="bu">str</span>: ...</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p><strong>The key difference:</strong> Rust traits are <em>nominal</em> — a type explicitly declares it implements a trait with <code>impl Trait for Type</code>. Python Protocols are <em>structural</em> — any class with the right methods satisfies the Protocol, even if it never heard of the Protocol. Rust’s approach is more explicit and makes intent clearer.</p>
-<p>Also note: Rust has no inheritance. There’s no “is-a” relationship between structs. Traits are the <em>only</em> way to express shared behavior, which forces a cleaner, more compositional design.</p>
+<p><strong>The key difference:</strong> Rust trait implementation is <em>nominal</em>—a type explicitly uses <code>impl Trait for Type</code>. Python protocols are <em>structural</em>—a static checker can accept a class with the required members even when it never names the protocol.</p>
+<p>Rust structs do not form class-inheritance hierarchies. Traits express shared behavior, while enums, composition, and generic parameters model other relationships.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -587,7 +587,7 @@ Brandon M. Greenwell
       }</style></aside>
 </section>
 <section id="default-trait-implementations" class="slide level2 smaller">
-<h2>Default Trait Implementations</h2>
+<h2>Default trait implementations</h2>
 <p><strong>Traits can provide default behavior:</strong></p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb15-1"><a href="" aria-label="1"></a><span class="kw">pub</span> <span class="kw">trait</span> Summary <span class="op">{</span></span>
 <span id="cb15-2"><a href="" aria-label="2"></a>    <span class="kw">fn</span> summarize_author(<span class="op">&amp;</span><span class="kw">self</span>) <span class="op">-&gt;</span> <span class="dt">String</span><span class="op">;</span></span>
@@ -645,7 +645,7 @@ Brandon M. Greenwell
       }</style></aside>
 </section>
 <section id="traits-as-parameters" class="slide level2 smaller scrollable">
-<h2>Traits as Parameters</h2>
+<h2>Traits as parameters</h2>
 <p><strong>Accept any type implementing a trait:</strong></p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb17-1"><a href="" aria-label="1"></a><span class="kw">pub</span> <span class="kw">fn</span> notify(item<span class="op">:</span> <span class="op">&amp;</span><span class="kw">impl</span> Summary) <span class="op">{</span></span>
 <span id="cb17-2"><a href="" aria-label="2"></a>    <span class="pp">println!</span>(<span class="st">"Breaking news! {}"</span><span class="op">,</span> item<span class="op">.</span>summarize())<span class="op">;</span></span>
@@ -692,7 +692,7 @@ Brandon M. Greenwell
       }</style></aside>
 </section>
 <section id="the-where-clause" class="slide level2 smaller">
-<h2>The <code>where</code> Clause</h2>
+<h2>The <code>where</code> clause</h2>
 <p><strong>Make complex trait bounds readable:</strong></p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb19"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb19-1"><a href="" aria-label="1"></a><span class="co">// Hard to read:</span></span>
 <span id="cb19-2"><a href="" aria-label="2"></a><span class="kw">fn</span> some_function<span class="op">&lt;</span>T<span class="op">:</span> <span class="bu">Display</span> <span class="op">+</span> <span class="bu">Clone</span><span class="op">,</span> U<span class="op">:</span> <span class="bu">Clone</span> <span class="op">+</span> <span class="bu">Debug</span><span class="op">&gt;</span>(t<span class="op">:</span> <span class="op">&amp;</span>T<span class="op">,</span> u<span class="op">:</span> <span class="op">&amp;</span>U) <span class="op">-&gt;</span> <span class="dt">i32</span> <span class="op">{</span></span>
@@ -735,7 +735,7 @@ Brandon M. Greenwell
       }</style></aside>
 </section>
 <section id="returning-trait-types" class="slide level2 smaller">
-<h2>Returning Trait Types</h2>
+<h2>Returning trait types</h2>
 <p><strong>Return types that implement traits:</strong></p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb22"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb22-1"><a href="" aria-label="1"></a><span class="kw">fn</span> returns_summarizable() <span class="op">-&gt;</span> <span class="kw">impl</span> Summary <span class="op">{</span></span>
 <span id="cb22-2"><a href="" aria-label="2"></a>    Tweet <span class="op">{</span></span>
@@ -758,7 +758,7 @@ Brandon M. Greenwell
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb24"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="" aria-label="1"></a><span class="kw">def</span> returns_summarizable() <span class="op">-&gt;</span> Summary:</span>
 <span id="cb24-2"><a href="" aria-label="2"></a>    <span class="cf">return</span> Tweet(username<span class="op">=</span><span class="st">"rustacean"</span>, content<span class="op">=</span><span class="st">"Rust is awesome!"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>And Python has no problem returning different types from different branches — the duck typing just works. This is an area where Rust is more restrictive.</p>
-<p><strong>Why the limitation exists:</strong> When Rust compiles <code>-&gt; impl Summary</code>, it needs to know the <em>exact</em> concrete type at compile time for monomorphization. If different branches return <code>NewsArticle</code> and <code>Tweet</code>, those are different sizes in memory and the compiler can’t handle that with <code>impl Trait</code>.</p>
+<p><strong>Why the limitation exists:</strong> A return-position <code>impl Summary</code> represents one hidden concrete return type. Returning <code>NewsArticle</code> from one branch and <code>Tweet</code> from another would select two concrete types, so this signature does not accept it.</p>
 <p><strong>The fix for the limitation (preview, don’t go deep here):</strong> <code>Box&lt;dyn Summary&gt;</code> uses a trait <em>object</em> — a pointer with a vtable for runtime dispatch, like Python’s normal object dispatch. This has a small runtime cost but enables returning different types:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb25"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb25-1"><a href="" aria-label="1"></a><span class="kw">fn</span> returns_summarizable(switch<span class="op">:</span> <span class="dt">bool</span>) <span class="op">-&gt;</span> <span class="dt">Box</span><span class="op">&lt;</span><span class="kw">dyn</span> Summary<span class="op">&gt;</span> <span class="op">{</span></span>
 <span id="cb25-2"><a href="" aria-label="2"></a>    <span class="cf">if</span> switch <span class="op">{</span></span>
@@ -782,7 +782,7 @@ Brandon M. Greenwell
       }</style></aside>
 </section>
 <section id="common-standard-library-traits" class="slide level2 smaller">
-<h2>Common Standard Library Traits</h2>
+<h2>Common standard library traits</h2>
 <p><strong>Frequently used traits you should know:</strong></p>
 <ul>
 <li><strong><a href="https://doc.rust-lang.org/std/fmt/trait.Debug.html"><code>Debug</code></a></strong>: Format with <code>{:?}</code> (derive with <code>#[derive(Debug)]</code>)</li>
@@ -885,7 +885,7 @@ Brandon M. Greenwell
       }</style></aside>
 </section>
 <section id="deriving-traits" class="slide level2 smaller">
-<h2>Deriving Traits</h2>
+<h2>Deriving traits</h2>
 <p><strong>Automatically implement common traits:</strong></p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb26"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb26-1"><a href="" aria-label="1"></a><span class="at">#[</span>derive<span class="at">(</span><span class="bu">Debug</span><span class="op">,</span> <span class="bu">Clone</span><span class="op">,</span> <span class="bu">PartialEq</span><span class="op">,</span> <span class="bu">Eq</span><span class="at">)]</span></span>
 <span id="cb26-2"><a href="" aria-label="2"></a><span class="kw">struct</span> Point <span class="op">{</span></span>
@@ -934,8 +934,8 @@ Brandon M. Greenwell
           display:block!important;
       }</style></aside>
 </section>
-<section id="implementing-display-trait" class="slide level2 smaller">
-<h2>Implementing Display Trait</h2>
+<section id="implementing-the-display-trait" class="slide level2 smaller">
+<h2>Implementing the <code>Display</code> trait</h2>
 <p><strong>Custom formatting for user-facing output:</strong></p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb28"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb28-1"><a href="" aria-label="1"></a><span class="kw">use</span> <span class="pp">std::</span>fmt<span class="op">;</span></span>
 <span id="cb28-2"><a href="" aria-label="2"></a></span>
@@ -977,7 +977,7 @@ Brandon M. Greenwell
 <li><code>fn fmt(&amp;self, f: &amp;mut fmt::Formatter) -&gt; fmt::Result</code> — this is the exact signature the trait requires; you must match it exactly</li>
 <li><code>write!(f, "({}, {})", self.x, self.y)</code> — <code>write!</code> is a macro that writes formatted text to the formatter <code>f</code>. It returns <code>fmt::Result</code>, which your function returns directly.</li>
 </ul>
-<p><strong>When to implement each:</strong> - <code>Debug</code> (via <code>#[derive(Debug)]</code>) — always, for debugging and logging - <code>Display</code> (manual) — when you have a user-facing string representation that makes semantic sense for your type</p>
+<p><strong>When to implement each:</strong> - <code>Debug</code> (often via <code>#[derive(Debug)]</code>) — when diagnostic formatting is useful - <code>Display</code> (manual) — when you have a user-facing string representation that makes semantic sense for your type</p>
 <p><strong>Automatic bonus:</strong> Once a type implements <code>Display</code>, it automatically implements the <code>ToString</code> trait, which gives you a <code>.to_string()</code> method for free.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
@@ -991,8 +991,8 @@ Brandon M. Greenwell
           display:block!important;
       }</style></aside>
 </section>
-<section id="implementing-iterator-trait" class="slide level2 smaller">
-<h2>Implementing Iterator Trait</h2>
+<section id="implementing-the-iterator-trait" class="slide level2 smaller">
+<h2>Implementing the <code>Iterator</code> trait</h2>
 <p><strong>Make your types iterable:</strong></p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb31"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb31-1"><a href="" aria-label="1"></a><span class="kw">struct</span> Counter <span class="op">{</span></span>
 <span id="cb31-2"><a href="" aria-label="2"></a>    count<span class="op">:</span> <span class="dt">u32</span><span class="op">,</span></span>
@@ -1063,9 +1063,9 @@ Brandon M. Greenwell
 </tr>
 </tbody>
 </table>
-<p><strong>Associated types:</strong> The <code>type Item = u32;</code> line introduces an <em>associated type</em> — a type that’s part of the trait’s interface. The <code>Iterator</code> trait says “you must define what type your items are.” This is more type-safe than a generic parameter would be.</p>
-<p><strong>The free lunch:</strong> Once you implement <code>next()</code>, Rust’s standard library provides all of these methods automatically on your <code>Counter</code> type: - <code>.map()</code>, <code>.filter()</code>, <code>.fold()</code>, <code>.collect()</code> - <code>.zip()</code>, <code>.enumerate()</code>, <code>.take()</code>, <code>.skip()</code> - <code>.sum()</code>, <code>.product()</code>, <code>.count()</code> - And many more!</p>
-<p>This is the same philosophy as Python’s <code>__iter__</code>/<code>__next__</code> — implement the primitive, get the ecosystem for free. But Rust’s iterator adapters are all zero-cost: they compile down to simple loops with no heap allocation.</p>
+<p><strong>Associated types:</strong> The <code>type Item = u32;</code> line selects the item type for this implementation of <code>Iterator</code>. This design makes one <code>Item</code> type part of each implementation’s trait contract.</p>
+<p><strong>Provided adaptors:</strong> Once you implement <code>next()</code>, the <code>Iterator</code> trait’s provided methods become available on <code>Counter</code>: - <code>.map()</code>, <code>.filter()</code>, <code>.fold()</code>, <code>.collect()</code> - <code>.zip()</code>, <code>.enumerate()</code>, <code>.take()</code>, <code>.skip()</code> - <code>.sum()</code>, <code>.product()</code>, <code>.count()</code> - And many more!</p>
+<p>This resembles Python’s <code>__iter__</code>/<code>__next__</code>: implement the primitive operation and gain provided adaptor methods. Rust’s adaptors are lazy and often inline into efficient loops, but terminal operations such as <code>collect()</code> may allocate and performance still depends on the full pipeline.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1079,7 +1079,7 @@ Brandon M. Greenwell
       }</style></aside>
 </section>
 <section id="generic-stack-example" class="slide level2 smaller">
-<h2>Generic Stack Example</h2>
+<h2>Generic stack example</h2>
 <p><strong>Building a generic data structure:</strong></p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb33"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb33-1"><a href="" aria-label="1"></a><span class="kw">struct</span> Stack<span class="op">&lt;</span>T<span class="op">&gt;</span> <span class="op">{</span></span>
 <span id="cb33-2"><a href="" aria-label="2"></a>    items<span class="op">:</span> <span class="dt">Vec</span><span class="op">&lt;</span>T<span class="op">&gt;,</span></span>
@@ -1087,19 +1087,19 @@ Brandon M. Greenwell
 <span id="cb33-4"><a href="" aria-label="4"></a></span>
 <span id="cb33-5"><a href="" aria-label="5"></a><span class="kw">impl</span><span class="op">&lt;</span>T<span class="op">&gt;</span> Stack<span class="op">&lt;</span>T<span class="op">&gt;</span> <span class="op">{</span></span>
 <span id="cb33-6"><a href="" aria-label="6"></a>    <span class="kw">fn</span> new() <span class="op">-&gt;</span> Stack<span class="op">&lt;</span>T<span class="op">&gt;</span> <span class="op">{</span></span>
-<span id="cb33-7"><a href="" aria-label="7"></a>        Stack <span class="op">{</span> items<span class="op">:</span> <span class="dt">Vec</span><span class="pp">::</span>new() <span class="op">}</span></span>
+<span id="cb33-7"><a href="" aria-label="7"></a>        <span class="pp">todo!</span>(<span class="st">"construct an empty stack"</span>)</span>
 <span id="cb33-8"><a href="" aria-label="8"></a>    <span class="op">}</span></span>
 <span id="cb33-9"><a href="" aria-label="9"></a></span>
 <span id="cb33-10"><a href="" aria-label="10"></a>    <span class="kw">fn</span> push(<span class="op">&amp;</span><span class="kw">mut</span> <span class="kw">self</span><span class="op">,</span> item<span class="op">:</span> T) <span class="op">{</span></span>
-<span id="cb33-11"><a href="" aria-label="11"></a>        <span class="kw">self</span><span class="op">.</span>items<span class="op">.</span>push(item)<span class="op">;</span></span>
+<span id="cb33-11"><a href="" aria-label="11"></a>        <span class="pp">todo!</span>(<span class="st">"place item on top"</span>)</span>
 <span id="cb33-12"><a href="" aria-label="12"></a>    <span class="op">}</span></span>
 <span id="cb33-13"><a href="" aria-label="13"></a></span>
 <span id="cb33-14"><a href="" aria-label="14"></a>    <span class="kw">fn</span> pop(<span class="op">&amp;</span><span class="kw">mut</span> <span class="kw">self</span>) <span class="op">-&gt;</span> <span class="dt">Option</span><span class="op">&lt;</span>T<span class="op">&gt;</span> <span class="op">{</span></span>
-<span id="cb33-15"><a href="" aria-label="15"></a>        <span class="kw">self</span><span class="op">.</span>items<span class="op">.</span>pop()</span>
+<span id="cb33-15"><a href="" aria-label="15"></a>        <span class="pp">todo!</span>(<span class="st">"remove and return the top item"</span>)</span>
 <span id="cb33-16"><a href="" aria-label="16"></a>    <span class="op">}</span></span>
 <span id="cb33-17"><a href="" aria-label="17"></a></span>
 <span id="cb33-18"><a href="" aria-label="18"></a>    <span class="kw">fn</span> is_empty(<span class="op">&amp;</span><span class="kw">self</span>) <span class="op">-&gt;</span> <span class="dt">bool</span> <span class="op">{</span></span>
-<span id="cb33-19"><a href="" aria-label="19"></a>        <span class="kw">self</span><span class="op">.</span>items<span class="op">.</span>is_empty()</span>
+<span id="cb33-19"><a href="" aria-label="19"></a>        <span class="pp">todo!</span>(<span class="st">"report whether the stack has no items"</span>)</span>
 <span id="cb33-20"><a href="" aria-label="20"></a>    <span class="op">}</span></span>
 <span id="cb33-21"><a href="" aria-label="21"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p><a href="https://play.rust-lang.org/">🎮 Try it in Playground</a></p>
@@ -1111,16 +1111,16 @@ Brandon M. Greenwell
 <span id="cb34-4"><a href="" aria-label="4"></a>stack[<span class="op">-</span><span class="dv">1</span>]              <span class="co"># peek (look at top without removing)</span></span>
 <span id="cb34-5"><a href="" aria-label="5"></a><span class="bu">len</span>(stack) <span class="op">==</span> <span class="dv">0</span>        <span class="co"># is_empty</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>In Rust, this is a teaching example — the purpose is to practice generics and traits, not to build something Python doesn’t have. That said, a Rust <code>Stack&lt;T&gt;</code> has a real advantage: it’s a <em>type-safe contract</em>. A <code>Stack&lt;i32&gt;</code> can <em>only</em> hold i32s. Python lists can hold anything mixed together.</p>
-<p><strong>Walk through the code:</strong></p>
+<p><strong>Walk through the signatures:</strong></p>
 <ul>
 <li><code>struct Stack&lt;T&gt;</code> — generic struct that wraps a <code>Vec&lt;T&gt;</code></li>
 <li><code>impl&lt;T&gt; Stack&lt;T&gt;</code> — implementing methods for all T; remember the <code>impl&lt;T&gt;</code> declares the generic before <code>Stack&lt;T&gt;</code> uses it</li>
-<li><code>fn new() -&gt; Stack&lt;T&gt;</code> — constructor that returns an empty stack</li>
-<li><code>fn push(&amp;mut self, item: T)</code> — <code>&amp;mut self</code> because we’re modifying the stack; <code>item: T</code> means it takes ownership of the item</li>
-<li><code>fn pop(&amp;mut self) -&gt; Option&lt;T&gt;</code> — returns <code>Option&lt;T&gt;</code> because the stack might be empty; <code>Vec::pop()</code> already returns <code>Option</code>, so this is a clean passthrough</li>
-<li><code>fn is_empty(&amp;self)</code> — <code>&amp;self</code> (read-only reference) is enough since we’re not modifying anything</li>
+<li><code>fn new() -&gt; Stack&lt;T&gt;</code> — associated function that returns an empty stack</li>
+<li><code>fn push(&amp;mut self, item: T)</code> — mutably borrows the stack and takes ownership of <code>item</code></li>
+<li><code>fn pop(&amp;mut self) -&gt; Option&lt;T&gt;</code> — returns <code>None</code> when the stack is empty</li>
+<li><code>fn is_empty(&amp;self)</code> — needs only an immutable borrow</li>
 </ul>
-<p><strong>Lab preview:</strong> Students will extend this with <code>peek</code>, <code>len</code>, and then implement <code>Display</code> and <code>Iterator</code> for it — applying everything from today’s session in one integrated exercise.</p>
+<p><strong>Lab preview:</strong> Students will extend this with <code>peek</code> and <code>len</code>, then implement <code>Display</code> for it. The supplied tests cover the required behavior.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1134,7 +1134,7 @@ Brandon M. Greenwell
       }</style></aside>
 </section>
 <section id="ai-prompting-generics-and-traits" class="slide level2 smaller scrollable">
-<h2>🤖 AI Prompting: Generics and Traits</h2>
+<h2>AI prompting: generics and traits</h2>
 <p><strong>Design assistance:</strong> - “Help me design a generic cache data structure in Rust” - “What traits should my custom type implement for common operations?” - “Explain when to use trait bounds vs where clauses”</p>
 <p><strong>Implementation help:</strong> - “How do I implement the Iterator trait for my custom struct?” - “Why can’t I return different types from a function returning impl Trait?” - “Help me fix this trait bound error: [paste error]”</p>
 <p><strong>Code review:</strong> - “Is this the idiomatic way to use generics in Rust?” - “Should this be a generic function or use dynamic dispatch?” - “How can I make these trait bounds more readable?”</p>
@@ -1164,12 +1164,12 @@ Brandon M. Greenwell
 
 </section></section>
 <section>
-<section id="session-2-traits-deep-dive" class="title-slide slide level1 center">
-<h1>Session 2: Traits Deep Dive</h1>
+<section id="session-2-traits-in-more-depth" class="title-slide slide level1 center">
+<h1>Session 2: traits in more depth</h1>
 
 </section>
 <section id="traits-defining-shared-behavior" class="slide level2 inverse">
-<h2>Traits: Defining Shared Behavior</h2>
+<h2>Traits: defining shared behavior</h2>
 <p><strong>What we’ll cover:</strong></p>
 <ul>
 <li>Trait definitions and custom traits</li>
@@ -1179,11 +1179,11 @@ Brandon M. Greenwell
 <li>Advanced trait bounds with where clauses</li>
 <li>Common standard library traits</li>
 </ul>
-<p><strong>Goal</strong>: Master Rust’s powerful trait system for polymorphism and code reuse</p>
+<p><strong>Goal</strong>: Read and write trait implementations, bounds, and generic interfaces</p>
 <aside class="notes">
 <p>Session 2 is a deeper pass at traits, revisiting the concepts from Session 1 with more detail and more examples. Use this slide to quickly re-orient students after the break.</p>
-<p><strong>Key message to set up Session 2:</strong> In Python, polymorphism comes almost entirely from inheritance and duck typing. In Rust, <em>traits are the entire story</em>. Rust has no class hierarchy, no mixins, no multiple inheritance. Everything that would be solved with inheritance in Python gets solved with traits in Rust — and the result tends to be more composable and easier to reason about.</p>
-<p>The four concepts to emphasize this session: 1. Writing your own traits (not just implementing standard ones) 2. Default implementations for reuse without inheritance 3. Using traits to write flexible function signatures 4. The common standard library traits that appear in almost every Rust program</p>
+<p><strong>Key message to set up Session 2:</strong> Python commonly uses inheritance, protocols, and duck typing for polymorphism. Rust has no class hierarchy; traits express shared behavior and support both static and dynamic dispatch. Compare the designs in context rather than treating one as universally clearer.</p>
+<p>The four concepts to emphasize this session: 1. Writing your own traits alongside implementations of standard traits 2. Default implementations for reuse without inheritance 3. Using traits to write flexible function signatures 4. Common standard-library traits that appear throughout Rust code</p>
 <p>By the end of Session 2 students should feel comfortable reading and writing <code>impl Trait for Type</code> blocks and understanding what trait bounds in function signatures are saying.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
@@ -1197,39 +1197,46 @@ Brandon M. Greenwell
           display:block!important;
       }</style></aside>
 </section>
-<section id="lab-12-preview-generic-stack" class="slide level2 inverse scrollable">
-<h2>Lab 12 Preview: Generic Stack</h2>
+<section id="lab-12-preview-generic-stack" class="slide level2 inverse">
+<h2>Lab 12 preview: generic stack</h2>
 <p><strong>What you’ll build:</strong></p>
 <ul>
 <li>Generic <code>Stack&lt;T&gt;</code> data structure</li>
 <li>Implement core methods: <code>push</code>, <code>pop</code>, <code>peek</code>, <code>is_empty</code>, <code>len</code></li>
 <li>Implement <code>Display</code> trait for custom formatting</li>
-<li>Implement <code>Iterator</code> trait to make your stack iterable</li>
-<li>Comprehensive test suite with 15+ tests</li>
+<li>Use the supplied test suite without modifying it</li>
 </ul>
 <p><strong>Learning goals:</strong></p>
 <ul>
 <li>Apply generics to create reusable data structures</li>
 <li>Implement standard library traits</li>
 <li>Understand trait bounds in practice</li>
-<li>Write tests for generic types</li>
+<li>Read tests for generic types and use their failures as evidence</li>
 </ul>
-<p><strong>Deliverable</strong>: A fully functional, well-tested generic stack!</p>
+</section>
+<section id="lab-12-workflow" class="slide level2 inverse scrollable">
+<h2>Lab 12 workflow</h2>
+<p><strong>Deliverable</strong>: Complete the <code>todo!()</code> implementations in the supplied <code>Stack&lt;T&gt;</code> project without modifying the test module.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb35"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb35-1"><a href="" aria-label="1"></a><span class="ex">cargo</span> test</span>
+<span id="cb35-2"><a href="" aria-label="2"></a><span class="ex">cargo</span> fmt</span>
+<span id="cb35-3"><a href="" aria-label="3"></a><span class="ex">cargo</span> clippy <span class="at">--</span> <span class="at">-D</span> warnings</span>
+<span id="cb35-4"><a href="" aria-label="4"></a><span class="fu">git</span> add week12/</span>
+<span id="cb35-5"><a href="" aria-label="5"></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"Complete lab 12"</span></span>
+<span id="cb35-6"><a href="" aria-label="6"></a><span class="fu">git</span> push origin main</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Confirm the Week 12 README badge is green; that badge is the complete 10-point grade. See <a href="https://github.com/bgreenwell/is4010-labs/blob/main/week12/lab12.md"><code>week12/lab12.md</code></a>.</p>
 <aside class="notes">
-<p>This lab is designed to be the “putting it all together” moment for week 12. Each part of the lab exercises a specific concept:</p>
+<p>Each part of the lab exercises a specific concept:</p>
 <ul>
 <li><strong><code>Stack&lt;T&gt;</code> core methods</strong> — practicing generic structs and <code>impl&lt;T&gt;</code> blocks; analogous to building a Python class around a list</li>
 <li><strong><code>Display</code> implementation</strong> — practicing manual trait implementation; analogous to Python’s <code>__str__</code></li>
-<li><strong><code>Iterator</code> implementation</strong> — the most challenging part; analogous to Python’s <code>__iter__</code>/<code>__next__</code></li>
 </ul>
 <p><strong>Common student stumbling blocks to warn about:</strong></p>
 <ol type="1">
 <li><strong>Forgetting <code>impl&lt;T&gt;</code></strong> — writing <code>impl Stack&lt;T&gt;</code> without declaring <code>&lt;T&gt;</code> first on impl will confuse the compiler</li>
 <li><strong><code>peek</code> returns a reference</strong> — <code>fn peek(&amp;self) -&gt; Option&lt;&amp;T&gt;</code>, not <code>Option&lt;T&gt;</code>, because you’re just looking, not removing; this connects back to borrowing from earlier weeks</li>
-<li><strong>Iterator and mutable state</strong> — <code>next</code> takes <code>&amp;mut self</code> because it modifies the counter or index; students may try <code>&amp;self</code> first</li>
-<li><strong><code>collect()</code> on custom iterators</strong> — to collect into a <code>Vec</code>, the iterator’s <code>Item</code> type needs to be fully specified; type inference usually handles this but students may see cryptic errors</li>
+<li><strong>Formatting bounds</strong> — the <code>Display</code> implementation must require <code>T: Display</code> before formatting stack elements</li>
 </ol>
-<p><strong>Encourage early starts:</strong> The <code>Display</code> and <code>Iterator</code> implementations feel intimidating the first time. Encourage students to get the basic methods working first, then tackle the trait implementations one at a time. AI assistance is great for getting the trait signature boilerplate right — students can then focus on the logic.</p>
+<p>Encourage students to get the core methods working first, then implement <code>Display</code>. AI assistance can explain a trait-bound error, but the compiler and tests determine whether the implementation satisfies the contract.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1242,18 +1249,17 @@ Brandon M. Greenwell
           display:block!important;
       }</style></aside>
 </section>
-<section id="career-relevance" class="slide level2 smaller">
-<h2>Career Relevance</h2>
+<section id="where-traits-and-generics-are-used" class="slide level2 smaller">
+<h2>Where traits and generics are used</h2>
 <p><strong>Why these skills matter:</strong></p>
-<p><strong>Generics:</strong> - Foundation of modern language features (Java, C#, TypeScript, Swift, Go) - Essential for library and framework development - Interview questions: “Design a generic data structure” - Understanding constraints and bounds</p>
-<p><strong>Traits/Interfaces:</strong> - Interface design skills transfer to all languages - Composition over inheritance (modern best practice) - Critical for extensible systems and plugin architectures - Type system understanding for advanced roles</p>
-<p><strong>Real interview questions:</strong> - “Explain the difference between generics and dynamic dispatch” - “Design an interface for [problem] - what methods would it have?” - “How would you make this code reusable across different types?” - “What are the tradeoffs between compile-time and runtime polymorphism?”</p>
+<p><strong>Generics:</strong> - Foundation of modern language features (Java, C#, TypeScript, Swift, Go) - Reusable library and application interfaces - Constraints and bounds that document supported operations</p>
+<p><strong>Traits/Interfaces:</strong> - Interface design skills transfer to all languages - Composition as an alternative to inheritance hierarchies - Extensible interfaces and selected plugin architectures - Explicit reasoning about static and dynamic dispatch</p>
+<p><strong>Questions for review:</strong> - “Explain the difference between generics and dynamic dispatch” - “Design an interface for [problem] - what methods would it have?” - “How would you make this code reusable across different types?” - “What are the tradeoffs between compile-time and runtime polymorphism?”</p>
 <aside class="notes">
-<p>Reinforce that learning Rust’s explicit type system makes students <em>better</em> Python developers, not just Rust developers. After this course, they’ll understand what Python type hints are actually modeling, when duck typing is the right tool, and when stronger contracts would prevent bugs.</p>
-<p><strong>The mental model shift:</strong> Python encourages “EAFP” (Easier to Ask Forgiveness than Permission) — try the operation, catch the exception. Rust enforces “LBYL” (Look Before You Leap) at compile time. Understanding both paradigms makes you a more thoughtful programmer in any language.</p>
-<p><strong>For the interview question on generics vs dynamic dispatch:</strong> Compile-time generics (Rust’s <code>impl Trait</code> / Java’s <code>&lt;T&gt;</code> / C++’s templates) generate specialized code per type — faster, but larger binary. Runtime dispatch (Rust’s <code>dyn Trait</code> / Java’s interface polymorphism / Python’s default behavior) uses a vtable — slightly slower, but more flexible. Being able to explain this trade-off, and give an example of when you’d choose each, is a strong signal in technical interviews.</p>
-<p><strong>Languages to connect this to:</strong> - Java/C#: Generics look almost identical — <code>List&lt;T&gt;</code>, <code>&lt;T extends Comparable&lt;T&gt;&gt;</code> - TypeScript: Generics and interfaces map very closely to Rust’s model - Go: Uses interfaces similarly to Rust traits, though without explicit <code>impl</code> - Haskell: Type classes are the direct theoretical ancestor of Rust traits</p>
-<p>Students who understand Rust traits will find Java interfaces, TypeScript generics, and Go interfaces much easier to learn.</p>
+<p>Use the comparison to sharpen specific questions: Which operations does the function require? Who checks that contract? At what stage does a mismatch appear? Avoid mapping Rust’s type system to Python’s separate EAFP-versus-LBYL runtime style choice.</p>
+<p><strong>For the generics-versus-dynamic-dispatch question:</strong> Rust’s statically dispatched generics are typically monomorphized, which can enable optimization but increase code size. Rust trait objects use a vtable for runtime dispatch, trading some optimization opportunities for runtime flexibility. Measure when performance matters and explain when each representation fits the design.</p>
+<p><strong>Languages to connect this to:</strong> - Java/C#: Similar parameter syntax, but different runtime representations and variance rules - TypeScript: Generic and structural interfaces checked by the TypeScript compiler - Go: Structural interface satisfaction rather than Rust’s explicit trait implementation - Haskell: Type classes as a useful comparison for behavior constraints</p>
+<p>Ask students to name one similarity and one difference before transferring the Rust mental model to another language.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1267,14 +1273,14 @@ Brandon M. Greenwell
       }</style></aside>
 </section>
 <section id="key-takeaways" class="slide level2 inverse">
-<h2>Key Takeaways</h2>
-<p><strong>Generics:</strong> - Enable code reuse without sacrificing type safety - Zero-cost abstractions - no runtime overhead - Work with structs, enums, functions, and methods - Use trait bounds to constrain type parameters</p>
+<h2>Key takeaways</h2>
+<p><strong>Generics:</strong> - Enable code reuse without sacrificing type safety - Static dispatch can avoid a virtual-call cost; measure the complete program when performance matters - Work with structs, enums, functions, and methods - Use trait bounds to constrain type parameters</p>
 <p><strong>Traits:</strong> - Define shared behavior across types - Enable polymorphism without inheritance - Foundation of Rust’s standard library - Can have default implementations for convenience</p>
-<p><strong>Together:</strong> - Generics + Traits = Powerful, reusable abstractions - Type safety at compile time - Expressive code that’s still performant - Industry-standard design patterns</p>
+<p><strong>Together:</strong> - Generics and traits support reusable abstractions with compile-time constraints - Type safety at compile time - Explicit reusable interfaces with static or dynamic dispatch choices - Patterns used throughout Rust’s standard library and ecosystem</p>
 <aside class="notes">
-<p>Use this slide to close the loop on the Python-to-Rust journey for the week.</p>
+<p>Use this slide to close the week’s Python-to-Rust comparison.</p>
 <p><strong>The core insight for Python developers:</strong></p>
-<p>In Python, you get flexibility for free and pay for it in runtime errors and the need for comprehensive test coverage. In Rust, you pay upfront with explicit type annotations and trait bounds, and the compiler pays you back with a program that’s harder to break.</p>
+<p>Python’s dynamic runtime and optional static typing support rapid iteration but move some mismatches to tests or execution. Rust requires more contracts at compile time and can reject many type mismatches before execution. Both still need tests for behavior the type system does not express.</p>
 <p>Neither approach is universally better. Python’s expressiveness is genuinely valuable for rapid prototyping, data science, and scripts. Rust’s guarantees are genuinely valuable for systems programming, performance-critical code, and large teams where the compiler catches whole classes of bugs.</p>
 <p><strong>Quick mental map to leave students with:</strong></p>
 <table class="caption-top">
@@ -1341,17 +1347,17 @@ Brandon M. Greenwell
       }</style></aside>
 </section>
 <section id="additional-resources" class="slide level2 smaller scrollable">
-<h2>Additional Resources</h2>
+<h2>Additional resources</h2>
 <p><strong>Official documentation:</strong> - <a href="https://doc.rust-lang.org/book/ch10-00-generics.html">The Rust Book - Chapter 10: Generic Types, Traits, and Lifetimes</a> - <a href="https://doc.rust-lang.org/rust-by-example/generics.html">Rust by Example: Generics</a> - <a href="https://doc.rust-lang.org/rust-by-example/trait.html">Rust by Example: Traits</a> - <a href="https://doc.rust-lang.org/std/#traits">Rust Standard Library Traits</a></p>
 <p><strong>Articles and guides:</strong> - <a href="https://oswalt.dev/2021/09/rust-traits-a-deep-dive/">Rust Traits: A Deep Dive</a> - <a href="https://blog.rust-lang.org/2022/10/28/gats-stabilization.html">Generic Associated Types</a> - <a href="https://github.com/pretzelhammer/rust-blog/blob/master/posts/tour-of-rusts-standard-library-traits.md">Tour of Rust’s Standard Library Traits</a></p>
 <p><strong>Tools:</strong> - <a href="https://play.rust-lang.org/">Rust Playground</a> - Test code online - <a href="https://docs.rs/">docs.rs</a> - Browse crate documentation</p>
 <aside class="notes">
 <p>Point students toward these resources in order of priority:</p>
 <ol type="1">
-<li><p><strong>Rust Book Chapter 10</strong> — the definitive reference; covers everything in this lecture in more depth with additional examples. If students read only one resource this week, this should be it.</p></li>
-<li><p><strong>Tour of Rust’s Standard Library Traits</strong> (the pretzelhammer blog post) — this is a long but excellent deep dive into every important standard library trait. It’s too detailed to read all at once, but it’s an invaluable reference to bookmark and return to. Especially recommend the Iterator section.</p></li>
-<li><p><strong>Rust by Example: Traits</strong> — more code-focused with runnable examples. Great for students who learn by reading and tweaking code rather than reading prose explanations.</p></li>
-<li><p><strong>Rust Playground</strong> — encourage students to paste code snippets from the slides and experiment with them. Try breaking things (remove a trait bound, return the wrong type) to see what error messages look like. The compiler error messages for trait-related issues are among the most educational in any language.</p></li>
+<li><p><strong>Rust Book Chapter 10</strong> — the primary reference for this lecture’s generics, traits, and lifetime material.</p></li>
+<li><p><strong>Tour of Rust’s Standard Library Traits</strong> (the pretzelhammer blog post) — optional secondary reading with more detail on standard-library traits.</p></li>
+<li><p><strong>Rust by Example: Traits</strong> — runnable examples for experimentation.</p></li>
+<li><p><strong>Rust Playground</strong> — change one trait bound or return type at a time and interpret the resulting diagnostic.</p></li>
 </ol>
 <p><strong>For students coming from Python specifically:</strong> The Rust Book’s Chapter 10 occasionally mentions Java interfaces as a comparison point, which may not resonate as strongly. When reading, students can mentally substitute “Python ABC” or “Python Protocol” wherever it says “Java interface” — the concept maps well.</p>
 <style type="text/css">
@@ -1367,7 +1373,7 @@ Brandon M. Greenwell
       }</style></aside>
 </section>
 <section id="next-week-idiomatic-rust" class="slide level2 inverse">
-<h2>Next week: Idiomatic Rust</h2>
+<h2>Next week: idiomatic Rust</h2>
 <p><strong>Week 13 topics:</strong></p>
 <ul>
 <li>Iterators and closures</li>
@@ -1375,16 +1381,16 @@ Brandon M. Greenwell
 <li>Idiomatic error handling with <code>Result</code></li>
 <li>A new Lab 13 assignment</li>
 </ul>
-<p><strong>Why it matters</strong>: These patterns make Rust code expressive, safe, and production-ready.</p>
+<p><strong>Why it matters</strong>: These patterns help express reusable behavior while preserving Rust’s compile-time checks.</p>
 <p><strong>Focus</strong>: Transfer this week’s trait and generic foundations into idiomatic Rust patterns.</p>
 <aside class="notes">
 <p>Week 13’s topics build naturally on this week. A few connections to foreshadow:</p>
 <ul>
-<li><strong>Iterators:</strong> The <code>Iterator</code> implementation for <code>Stack&lt;T&gt;</code> provides the bridge to Week 13’s iterator pipelines and closures.</li>
+<li><strong>Iterators:</strong> Today’s separate <code>Counter</code> example provides the bridge to Week 13’s iterator pipelines and closures.</li>
 <li><strong>Error handling with <code>Result</code>:</strong> Students have seen <code>Result&lt;T, E&gt;</code> as a generic enum; Week 13 develops that pattern more idiomatically.</li>
 <li><strong>Smart pointers:</strong> Trait bounds and generic types remain central when students work with <code>Box</code>, <code>Rc</code>, and <code>RefCell</code>.</li>
 </ul>
-<p>Lab 13 continues the weekly cadence. Encourage students to finish Lab 12’s Iterator implementation before moving on.</p>
+<p>Lab 13 continues the weekly cadence. Encourage students to finish Lab 12’s <code>Display</code> implementation before moving on.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1403,7 +1409,7 @@ Brandon M. Greenwell
 <ul>
 <li>Office hours: <a href="https://teams.microsoft.com">Schedule on Teams</a></li>
 <li>Course discussion: Microsoft Teams channel</li>
-<li>AI tools: Claude, ChatGPT, GitHub Copilot</li>
+<li>AI tools: browser chat, GitHub Copilot, Copilot CLI, or Antigravity CLI</li>
 <li>Rust community: <a href="https://users.rust-lang.org">users.rust-lang.org</a></li>
 </ul>
 <p><strong>This week’s materials:</strong></p>
@@ -1414,25 +1420,25 @@ Brandon M. Greenwell
 </ul>
 </section>
 <section id="start-lab-12" class="slide level2 inverse scrollable">
-<h2>Start Lab 12!</h2>
-<p><strong>Lab due: Sunday, April 12, 2026, at 11:59 PM</strong></p>
+<h2>Start Lab 12</h2>
+<p><strong>Follow the due date shown in Canvas.</strong></p>
 <p><strong>What to do:</strong></p>
 <ol type="1">
 <li>Review lecture materials and examples</li>
 <li>Work through interactive exercises</li>
 <li>Begin Lab 12: Generic Stack implementation</li>
 <li>Apply generics and traits from this week</li>
-<li>Write comprehensive tests for your implementation</li>
+<li>Run the supplied tests, formatter check, and Clippy</li>
 <li>Ask questions early and often</li>
 </ol>
-<p><strong>Remember</strong>: You’re not just learning Rust - you’re learning universal programming concepts that apply everywhere!</p>
+<p><strong>Remember</strong>: A green Week 12 badge represents the complete 10-point lab.</p>
 <p><strong>Good luck!</strong> 🦀</p>
 
 </section></section>
     </div>
   <div class="quarto-auto-generated-content" style="display: none;">
 <div class="footer footer-default">
-<p>IS4010: App Development with AI</p>
+<p>IS4010: App development with AI</p>
 </div>
 </div></div>
 

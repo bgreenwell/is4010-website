@@ -10,7 +10,7 @@
   <meta name="generator" content="quarto-1.10.18">
 
   <meta name="author" content="Brandon M. Greenwell">
-  <title>IS4010: AI-Enhanced Application Development</title>
+  <title>IS4010: AI-enhanced application development</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -203,8 +203,8 @@
     <div class="slides">
 
 <section id="title-slide" class="quarto-title-block center">
-  <h1 class="title">IS4010: AI-Enhanced Application Development</h1>
-  <p class="subtitle">Week 8: Building Professional Python Applications</p>
+  <h1 class="title">IS4010: AI-enhanced application development</h1>
+  <p class="subtitle">Week 08: Building professional Python applications</p>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -217,27 +217,25 @@ Brandon M. Greenwell
 </section>
 <section>
 <section id="building-professional-python-applications" class="title-slide slide level1 center">
-<h1>Building Professional Python Applications 🏗️</h1>
+<h1>Building professional Python applications</h1>
 
 </section>
-<section id="from-scripts-to-production-ready-tools" class="slide level2">
-<h2>From scripts to production-ready tools 🎯</h2>
+<section id="from-scripts-to-maintainable-tools" class="slide level2">
+<h2>From scripts to maintainable tools</h2>
 <ul>
-<li class="fragment"><strong>Professional Python development</strong> goes beyond simple scripts to create robust, maintainable applications</li>
-<li class="fragment"><strong>Command-line interfaces (CLIs)</strong>: The backbone of automation, scripting, and developer tools</li>
+<li class="fragment"><strong>Application development</strong> adds a clear interface, structure, tests, and documentation to a script</li>
+<li class="fragment"><strong>Command-line interfaces (CLIs)</strong>: A composable interface for automation and developer tools</li>
 <li class="fragment"><strong>Package structure</strong>: Organizing code for reusability, testing, and distribution</li>
-<li class="fragment"><strong>Career relevance</strong>: Every Python job expects these skills - from data science to web development</li>
-<li class="fragment"><strong>Final project connection</strong>: These patterns will elevate your projects from “works on my machine” to professional quality</li>
+<li class="fragment"><strong>Final project connection</strong>: Every project needs a usable CLI, tests, documentation, and a repeatable environment</li>
 </ul>
 <aside class="notes">
 <p><strong>TEACHING NOTES:</strong></p>
 <ul>
 <li><strong>Timing context</strong>: Students are completing Lab 08’s weather application, so this is just-in-time instruction</li>
-<li><strong>Professional transition</strong>: Moving from learning Python syntax to building real applications</li>
-<li><strong>Industry standards</strong>: These practices are universal across tech companies</li>
-<li><strong>Career preparation</strong>: CLI tools and proper package structure appear in every Python interview</li>
-<li><strong>Framework foundation</strong>: Understanding packages prepares students for Django, Flask, FastAPI</li>
-<li><strong>Course arc</strong>: This completes Python education before transitioning to Rust next week</li>
+<li><strong>Course transition</strong>: Combine Python syntax, tests, external data, and a user interface</li>
+<li><strong>Scope</strong>: Separate course requirements from optional packaging techniques</li>
+<li><strong>Transfer</strong>: Module and package concepts apply to many Python frameworks</li>
+<li><strong>Course arc</strong>: This closes the Python sequence before the Rust sequence begins</li>
 </ul>
 <style type="text/css">
         span.MJX_Assistive_MathML {
@@ -256,28 +254,28 @@ Brandon M. Greenwell
 </section></section>
 <section>
 <section id="part-1-command-line-interfaces" class="title-slide slide level1 center">
-<h1>Part 1: Command-Line Interfaces</h1>
+<h1>Part 1: command-line interfaces</h1>
 
 </section>
-<section id="why-clis-matter-the-power-of-automation" class="slide level2">
-<h2>🤔 Why CLIs matter: The power of automation</h2>
-<h3 id="the-problem-manual-repetitive-tasks"><strong>The Problem</strong>: Manual, repetitive tasks</h3>
+<section id="why-clis-matter-automation" class="slide level2">
+<h2>Why CLIs matter: automation</h2>
+<h3 id="the-problem-manual-repetitive-tasks"><strong>The problem</strong>: manual, repetitive tasks</h3>
 <ul>
 <li class="fragment"><strong>Scenario</strong>: You need to fetch data from an API multiple times per day</li>
 <li class="fragment"><strong>Manual approach</strong>: Open browser, navigate to site, copy data, paste into file</li>
-<li class="fragment"><strong>Time waste</strong>: 5 minutes per fetch × 10 times per day = 50 minutes daily</li>
+<li class="fragment"><strong>Repeated work</strong>: Manual steps take time and can be difficult to reproduce</li>
 <li class="fragment"><strong>Error-prone</strong>: Manual copy-paste leads to mistakes and inconsistencies</li>
-<li class="fragment"><strong>Solution</strong>: A CLI tool that automates the entire workflow in seconds</li>
+<li class="fragment"><strong>Solution</strong>: A CLI tool that makes the steps repeatable with one command</li>
 </ul>
 <aside class="notes">
 <p><strong>TEACHING NOTES:</strong></p>
 <ul>
-<li><strong>Real-world motivation</strong>: Show how professionals use CLI tools constantly</li>
-<li><strong>Career examples</strong>: Data scientists use CLI tools for dataset downloads, web developers for deployment</li>
+<li><strong>Concrete motivation</strong>: Connect the design to <code>git</code>, <code>uv</code>, and other CLIs students already use</li>
+<li><strong>Examples</strong>: Dataset downloads, project checks, and deployment tools may expose CLI interfaces</li>
 <li><strong>Unix philosophy</strong>: Small, composable tools that do one thing well</li>
 <li><strong>Student connection</strong>: They’ve used <code>git</code>, <code>uv</code>, and <code>python</code> - all CLI tools</li>
 <li><strong>Final project application</strong>: Their projects should have CLI interfaces for easy testing and demonstration</li>
-<li><strong>Time savings</strong>: Automation is a force multiplier for productivity</li>
+<li><strong>Evaluation</strong>: Compare repeatability, failure handling, and elapsed time with the manual steps</li>
 </ul>
 <style type="text/css">
         span.MJX_Assistive_MathML {
@@ -291,24 +289,23 @@ Brandon M. Greenwell
           display:block!important;
       }</style></aside>
 </section>
-<section id="cli-tools-in-the-wild-examples-everywhere" class="slide level2">
-<h2>🛠️ CLI tools in the wild: Examples everywhere</h2>
+<section id="cli-tools-in-the-wild" class="slide level2">
+<h2>CLI tools in the wild</h2>
 <ul>
 <li class="fragment"><strong>Version control</strong>: <a href="https://git-scm.com/docs"><code>git</code></a> - <code>git add</code>, <code>git commit</code>, <code>git push</code></li>
 <li class="fragment"><strong>Python project management</strong>: <a href="https://docs.astral.sh/uv/"><code>uv</code></a> - <code>uv sync</code>, <code>uv add</code>, <code>uv run</code></li>
 <li class="fragment"><strong>Web frameworks</strong>: <a href="https://docs.djangoproject.com/en/stable/ref/django-admin/"><code>django-admin</code></a> - <code>startproject</code>, <code>migrate</code>, <code>runserver</code></li>
 <li class="fragment"><strong>AWS CLI</strong>: <a href="https://aws.amazon.com/cli/"><code>aws</code></a> - Manage cloud infrastructure from the terminal</li>
 <li class="fragment"><strong>Data science</strong>: <a href="https://jupyter.readthedocs.io/en/latest/running.html"><code>jupyter</code></a> - <code>jupyter notebook</code>, <code>jupyter lab</code></li>
-<li class="fragment"><strong>Your final project</strong>: Create professional CLIs for your API projects</li>
+<li class="fragment"><strong>Your final project</strong>: Provide the working CLI required by the rubric</li>
 </ul>
 <aside class="notes">
 <p><strong>TEACHING NOTES:</strong></p>
 <ul>
 <li><strong>Ubiquity</strong>: Students have been using CLIs without realizing it</li>
 <li><strong>Design patterns</strong>: Notice common patterns - commands, subcommands, flags</li>
-<li><strong>Professional standard</strong>: Every major framework provides CLI tools</li>
-<li><strong>Career skills</strong>: Building CLIs is a resume-worthy skill</li>
-<li><strong>Interview topics</strong>: CLI design often appears in system design discussions</li>
+<li><strong>Common interface</strong>: Many frameworks provide CLI tools for setup and automation</li>
+<li><strong>Design review</strong>: Compare commands, subcommands, flags, error messages, and exit codes</li>
 <li><strong>Ecosystem</strong>: Python has excellent CLI libraries - argparse, click, typer</li>
 </ul>
 <style type="text/css">
@@ -324,22 +321,21 @@ Brandon M. Greenwell
       }</style></aside>
 </section>
 <section id="introducing-argparse-pythons-built-in-cli-library" class="slide level2">
-<h2>📦 Introducing argparse: Python’s built-in CLI library</h2>
+<h2>Introducing <code>argparse</code>: Python’s built-in CLI library</h2>
 <ul>
 <li class="fragment"><strong><a href="https://docs.python.org/3/library/argparse.html"><code>argparse</code></a></strong> is Python’s standard library for creating command-line interfaces</li>
 <li class="fragment"><strong>Built-in</strong>: No installation required, part of Python’s standard library</li>
-<li class="fragment"><strong>Powerful</strong>: Handles arguments, flags, subcommands, help text, validation</li>
-<li class="fragment"><strong>Automatic help</strong>: Generates <code>--help</code> documentation for free</li>
-<li class="fragment"><strong>Industry standard</strong>: Used in production at Google, Netflix, and countless startups</li>
-<li class="fragment"><strong>Learning path</strong>: Start with argparse, graduate to <a href="https://click.palletsprojects.com/">Click</a> or <a href="https://typer.tiangolo.com/">Typer</a> for advanced projects</li>
+<li class="fragment"><strong>Capabilities</strong>: Handles arguments, flags, subcommands, help text, and validation</li>
+<li class="fragment"><strong>Automatic help</strong>: Generates <code>--help</code> output from the parser definition</li>
+<li class="fragment"><strong>Established tool</strong>: Used by many Python command-line applications</li>
+<li class="fragment"><strong>Alternatives</strong>: <a href="https://click.palletsprojects.com/">Click</a> and <a href="https://typer.tiangolo.com/">Typer</a> offer different APIs when a project needs them</li>
 </ul>
 <aside class="notes">
 <p><strong>TEACHING NOTES:</strong></p>
 <ul>
 <li><strong>Standard library advantage</strong>: No dependency management needed for basic CLIs</li>
 <li><strong>Learning foundation</strong>: Concepts transfer to all CLI libraries</li>
-<li><strong>Progression</strong>: argparse → Click (Flask-style) → Typer (modern, type-hint based)</li>
-<li><strong>Production usage</strong>: Many major tools still use argparse despite newer alternatives</li>
+<li><strong>Comparison</strong>: Keep this course example in the standard library; compare third-party options only when their features matter</li>
 <li><strong>Type hints</strong>: argparse predates type hints but integrates well with them</li>
 <li><strong>Documentation</strong>: Emphasize the excellent official documentation</li>
 </ul>
@@ -355,9 +351,9 @@ Brandon M. Greenwell
           display:block!important;
       }</style></aside>
 </section>
-<section id="cli-design-patterns-arguments-vs-flags" class="slide level2">
-<h2>🎯 CLI design patterns: Arguments vs flags</h2>
-<h3 id="three-types-of-cli-inputs"><strong>Three types of CLI inputs:</strong></h3>
+<section id="cli-design-patterns-arguments-and-flags" class="slide level2">
+<h2>CLI design patterns: arguments and flags</h2>
+<h3 id="three-types-of-cli-inputs"><strong>Three types of CLI inputs</strong></h3>
 <ul>
 <li class="fragment"><strong>Positional arguments</strong>: Required, order matters - <code>git commit message.txt</code></li>
 <li class="fragment"><strong>Optional arguments (flags)</strong>: Named, order flexible - <code>git commit --amend -m "Fix bug"</code></li>
@@ -393,7 +389,7 @@ Brandon M. Greenwell
       }</style></aside>
 </section>
 <section id="basic-argparse-your-first-cli" class="slide level2">
-<h2>💻 Basic argparse: Your first CLI</h2>
+<h2>Basic <code>argparse</code>: your first CLI</h2>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="" aria-label="1"></a><span class="co">"""simple_greeter.py - A friendly CLI greeter."""</span></span>
 <span id="cb1-2"><a href="" aria-label="2"></a><span class="im">import</span> argparse</span>
 <span id="cb1-3"><a href="" aria-label="3"></a></span>
@@ -452,7 +448,7 @@ Brandon M. Greenwell
       }</style></aside>
 </section>
 <section id="running-the-cli-usage-examples" class="slide level2">
-<h2>🚀 Running the CLI: Usage examples</h2>
+<h2>Running the CLI: usage examples</h2>
 <h3 id="getting-help"><strong>Getting help:</strong></h3>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="" aria-label="1"></a><span class="ex">$</span> uv run python simple_greeter.py <span class="at">--help</span></span>
 <span id="cb2-2"><a href="" aria-label="2"></a><span class="ex">usage:</span> simple_greeter.py <span class="pp">[-</span><span class="ss">h</span><span class="pp">]</span> <span class="pp">[--</span><span class="ss">loud</span><span class="pp">]</span> name</span>
@@ -483,9 +479,9 @@ Brandon M. Greenwell
 <li><strong>Auto-generated help</strong>: argparse creates this from our code</li>
 <li><strong>Error handling</strong>: Automatic validation and helpful error messages</li>
 <li><strong>User experience</strong>: Notice how intuitive the interface is</li>
-<li><strong>Professional quality</strong>: This rivals commercial CLI tools</li>
+<li><strong>Generated behavior</strong>: The parser supplies consistent help and missing-argument errors</li>
 <li><strong>No extra code</strong>: We didn’t write any error handling or help text rendering</li>
-<li><strong>Best practices</strong>: This is the gold standard for Python CLI design</li>
+<li><strong>Review</strong>: Test the help, success, and invalid-input paths explicitly</li>
 </ul>
 <style type="text/css">
         span.MJX_Assistive_MathML {
@@ -500,7 +496,7 @@ Brandon M. Greenwell
       }</style></aside>
 </section>
 <section id="advanced-argparse-multiple-arguments-and-types" class="slide level2">
-<h2>🎨 Advanced argparse: Multiple arguments and types</h2>
+<h2>Advanced <code>argparse</code>: multiple arguments and types</h2>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="" aria-label="1"></a><span class="co">"""api_fetcher.py - Fetch data from APIs with configurable options."""</span></span>
 <span id="cb4-2"><a href="" aria-label="2"></a><span class="im">import</span> argparse</span>
 <span id="cb4-3"><a href="" aria-label="3"></a></span>
@@ -553,12 +549,12 @@ Brandon M. Greenwell
 <p><strong>TEACHING NOTES:</strong></p>
 <ul>
 <li><strong>Type conversion</strong>: <code>type=int</code> automatically converts and validates</li>
-<li><strong>Defaults</strong>: Professional CLIs have sensible defaults</li>
+<li><strong>Defaults</strong>: Choose defaults that are safe and visible in <code>--help</code></li>
 <li><strong>Short and long forms</strong>: <code>-l</code> and <code>--limit</code> both work (convention)</li>
 <li><strong>Choices</strong>: Restricts to valid options, auto-validates</li>
 <li><strong>Integration</strong>: CLI arguments map cleanly to function parameters</li>
-<li><strong>Final project application</strong>: This pattern works perfectly for their API projects</li>
-<li><strong>Real-world</strong>: Show how this mirrors tools like <code>curl</code>, <code>wget</code>, <code>httpie</code></li>
+<li><strong>Final project application</strong>: This pattern can separate commands for different user tasks</li>
+<li><strong>Comparison</strong>: Identify one convention shared with <code>curl</code>, <code>wget</code>, or HTTPie</li>
 </ul>
 <style type="text/css">
         span.MJX_Assistive_MathML {
@@ -573,7 +569,7 @@ Brandon M. Greenwell
       }</style></aside>
 </section>
 <section id="subcommands-building-multi-function-tools" class="slide level2">
-<h2>🌟 Subcommands: Building multi-function tools</h2>
+<h2>Subcommands: building multi-function tools</h2>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="" aria-label="1"></a><span class="co">"""project_manager.py - Manage your project with subcommands."""</span></span>
 <span id="cb5-2"><a href="" aria-label="2"></a><span class="im">import</span> argparse</span>
 <span id="cb5-3"><a href="" aria-label="3"></a></span>
@@ -629,7 +625,7 @@ Brandon M. Greenwell
 <li><strong>Scalability</strong>: Easy to add new subcommands without refactoring</li>
 <li><strong>Organization</strong>: Each subcommand has its own function and arguments</li>
 <li><strong>Function dispatch</strong>: <code>set_defaults(func=...)</code> enables clean routing</li>
-<li><strong>Professional pattern</strong>: Used in Django, Flask, AWS CLI, and more</li>
+<li><strong>Dispatch pattern</strong>: <code>set_defaults(func=...)</code> associates each parsed subcommand with a handler</li>
 <li><strong>Final project application</strong>: Students could add subcommands for different API operations</li>
 <li><strong>Help per subcommand</strong>: <code>uv run python project_manager.py init --help</code> works</li>
 </ul>
@@ -645,8 +641,8 @@ Brandon M. Greenwell
           display:block!important;
       }</style></aside>
 </section>
-<section id="cli-ux-best-practices-professional-polish" class="slide level2">
-<h2>🎯 CLI UX best practices: Professional polish</h2>
+<section id="cli-usability-practices" class="slide level2">
+<h2>CLI usability practices</h2>
 <ul>
 <li class="fragment"><strong>Clear error messages</strong>: “Error: API key not found. Set POKEAPI_KEY environment variable.”</li>
 <li class="fragment"><strong>Progress indicators</strong>: Show activity for long-running operations</li>
@@ -662,11 +658,11 @@ Brandon M. Greenwell
 <ul>
 <li><strong>User experience</strong>: CLI UX is as important as GUI UX</li>
 <li><strong>Error messages</strong>: Compare good vs bad examples from real tools</li>
-<li><strong>Exit codes</strong>: Essential for CI/CD pipelines and shell scripts</li>
-<li><strong>Professional touch</strong>: These details separate hobby projects from professional tools</li>
-<li><strong>Libraries</strong>: Show rich library for amazing terminal output</li>
-<li><strong>Accessibility</strong>: Clear messages help all users, not just experts</li>
-<li><strong>Career impact</strong>: Attention to UX details impresses employers</li>
+<li><strong>Exit codes</strong>: Shell scripts and CI jobs can branch on success or failure</li>
+<li><strong>Priorities</strong>: Correct behavior and clear text matter before optional color or animation</li>
+<li><strong>Libraries</strong>: Treat Rich and Colorama as optional dependencies</li>
+<li><strong>Accessibility</strong>: Clear messages help users with different levels of experience</li>
+<li><strong>Accessibility</strong>: Do not rely on color alone to communicate status</li>
 </ul>
 <style type="text/css">
         span.MJX_Assistive_MathML {
@@ -680,9 +676,9 @@ Brandon M. Greenwell
           display:block!important;
       }</style></aside>
 </section>
-<section id="practical-example-api-cli-for-final-projects" class="slide level2">
-<h2>💡 Practical example: API CLI for final projects</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="" aria-label="1"></a><span class="co">"""my_api_tool.py - Professional CLI for your final project API project."""</span></span>
+<section id="practical-example-api-cli" class="slide level2">
+<h2>Practical example: API CLI</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="" aria-label="1"></a><span class="co">"""Command-line interface for an API project."""</span></span>
 <span id="cb6-2"><a href="" aria-label="2"></a><span class="im">import</span> argparse</span>
 <span id="cb6-3"><a href="" aria-label="3"></a><span class="im">import</span> sys</span>
 <span id="cb6-4"><a href="" aria-label="4"></a><span class="im">from</span> typing <span class="im">import</span> Optional</span>
@@ -714,8 +710,8 @@ Brandon M. Greenwell
 <span id="cb6-30"><a href="" aria-label="30"></a>        result <span class="op">=</span> fetch_resource(args.resource, args.<span class="bu">id</span>, args.limit)</span>
 <span id="cb6-31"><a href="" aria-label="31"></a>        <span class="bu">print</span>(<span class="st">"Success!"</span>)</span>
 <span id="cb6-32"><a href="" aria-label="32"></a>        <span class="cf">return</span> <span class="dv">0</span>  <span class="co"># Success exit code</span></span>
-<span id="cb6-33"><a href="" aria-label="33"></a>    <span class="cf">except</span> <span class="pp">Exception</span> <span class="im">as</span> e:</span>
-<span id="cb6-34"><a href="" aria-label="34"></a>        <span class="bu">print</span>(<span class="ss">f"Error: </span><span class="sc">{</span>e<span class="sc">}</span><span class="ss">"</span>, <span class="bu">file</span><span class="op">=</span>sys.stderr)</span>
+<span id="cb6-33"><a href="" aria-label="33"></a>    <span class="cf">except</span> (<span class="pp">OSError</span>, <span class="pp">ValueError</span>) <span class="im">as</span> error:</span>
+<span id="cb6-34"><a href="" aria-label="34"></a>        <span class="bu">print</span>(<span class="ss">f"Error: </span><span class="sc">{</span>error<span class="sc">}</span><span class="ss">"</span>, <span class="bu">file</span><span class="op">=</span>sys.stderr)</span>
 <span id="cb6-35"><a href="" aria-label="35"></a>        <span class="cf">return</span> <span class="dv">1</span>  <span class="co"># Error exit code</span></span>
 <span id="cb6-36"><a href="" aria-label="36"></a></span>
 <span id="cb6-37"><a href="" aria-label="37"></a><span class="cf">if</span> <span class="va">__name__</span> <span class="op">==</span> <span class="st">"__main__"</span>:</span>
@@ -724,13 +720,13 @@ Brandon M. Greenwell
 <p><strong>TEACHING NOTES:</strong></p>
 <ul>
 <li><strong>Final project application</strong>: This is directly applicable to their projects</li>
-<li><strong>Error handling</strong>: Try/except at top level catches all errors</li>
-<li><strong>Exit codes</strong>: <code>sys.exit(main())</code> returns proper codes</li>
+<li><strong>Error handling</strong>: Catch documented operational failures; let programming defects remain visible during development</li>
+<li><strong>Exit codes</strong>: <code>sys.exit(main())</code> returns the status chosen by <code>main</code></li>
 <li><strong>Optional arguments</strong>: <code>nargs="?"</code> makes positional arg optional</li>
 <li><strong>stderr</strong>: Errors go to stderr, not stdout (Unix convention)</li>
 <li><strong>Prog name</strong>: Customize how the tool appears in help text</li>
 <li><strong>Epilog</strong>: Provide usage examples in help output</li>
-<li><strong>Career skill</strong>: This pattern is interview-worthy</li>
+<li><strong>Verification</strong>: Test the normal path, invalid input, and a simulated request failure</li>
 </ul>
 <style type="text/css">
         span.MJX_Assistive_MathML {
@@ -745,7 +741,7 @@ Brandon M. Greenwell
       }</style></aside>
 </section>
 <section id="ai-assisted-cli-development" class="slide level2">
-<h2>🚀 AI-assisted CLI development</h2>
+<h2>AI-assisted CLI development</h2>
 <h3 id="prompt-strategies-for-building-clis"><strong>Prompt strategies for building CLIs:</strong></h3>
 <ul>
 <li class="fragment"><strong>Starter prompt</strong>: “Create a Python argparse CLI for fetching data from the [API Name] API with options for resource type, limit, and output format”</li>
@@ -753,23 +749,23 @@ Brandon M. Greenwell
 <li class="fragment"><strong>Refinement prompt</strong>: “Improve error handling and add input validation for API parameters”</li>
 <li class="fragment"><strong>Testing prompt</strong>: “Generate test cases for this CLI including error scenarios”</li>
 </ul>
-<h3 id="ai-tools-excel-at"><strong>AI tools excel at:</strong></h3>
+<h3 id="cli-tasks-an-assistant-can-draft"><strong>CLI tasks an assistant can draft:</strong></h3>
 <ul>
 <li class="fragment">Generating boilerplate argparse setup</li>
-<li class="fragment">Creating comprehensive help text</li>
+<li class="fragment">Drafting help text from the specified arguments</li>
 <li class="fragment">Adding input validation logic</li>
 <li class="fragment">Designing argument structures</li>
 </ul>
 <aside class="notes">
 <p><strong>TEACHING NOTES:</strong></p>
 <ul>
-<li><strong>AI partnership</strong>: Perfect use case for AI assistance</li>
+<li><strong>AI partnership</strong>: Ask for a parser draft, then test every argument and exit path</li>
 <li><strong>Iterative refinement</strong>: Start simple, enhance progressively</li>
 <li><strong>Learning approach</strong>: Understand the generated code, don’t just copy</li>
 <li><strong>Customization</strong>: AI provides the structure, student adds domain logic</li>
 <li><strong>Copilot advantage</strong>: Real-time suggestions as students type</li>
 <li><strong>Testing</strong>: AI can generate test cases for different CLI scenarios</li>
-<li><strong>Documentation</strong>: AI can help write comprehensive help text</li>
+<li><strong>Documentation</strong>: Verify generated help against the implemented parser</li>
 </ul>
 <style type="text/css">
         span.MJX_Assistive_MathML {
@@ -787,29 +783,28 @@ Brandon M. Greenwell
 
 </section></section>
 <section>
-<section id="part-2-python-packages-project-structure" class="title-slide slide level1 center">
-<h1>Part 2: Python Packages &amp; Project Structure</h1>
+<section id="part-2-python-packages-and-project-structure" class="title-slide slide level1 center">
+<h1>Part 2: Python packages and project structure</h1>
 
 </section>
-<section id="from-scripts-to-packages-the-evolution" class="slide level2">
-<h2>🏗️ From scripts to packages: The evolution</h2>
-<h3 id="the-journey-every-python-developer-takes"><strong>The journey every Python developer takes:</strong></h3>
+<section id="from-scripts-to-packages" class="slide level2">
+<h2>From scripts to packages</h2>
+<h3 id="one-possible-progression"><strong>One possible progression</strong></h3>
 <ul>
 <li class="fragment"><strong>Stage 1</strong>: Single <code>.py</code> file - <code>my_script.py</code> does everything</li>
 <li class="fragment"><strong>Stage 2</strong>: Multiple files - <code>utils.py</code>, <code>api.py</code>, <code>cli.py</code> in one folder</li>
 <li class="fragment"><strong>Stage 3</strong>: Package structure - Organized directories with <code>__init__.py</code> files</li>
 <li class="fragment"><strong>Stage 4</strong>: Installable package - Can run your own code through <code>uv</code></li>
-<li class="fragment"><strong>Career reality</strong>: Professional projects are always Stage 3 or 4</li>
+<li class="fragment"><strong>Design choice</strong>: Add structure when it improves imports, tests, or maintenance</li>
 </ul>
 <aside class="notes">
 <p><strong>TEACHING NOTES:</strong></p>
 <ul>
 <li><strong>Natural progression</strong>: Students are transitioning from Stage 1 to Stage 2</li>
-<li><strong>Final project timing</strong>: Perfect moment to introduce Stage 3</li>
-<li><strong>Industry expectation</strong>: All professional Python is packaged</li>
-<li><strong>Framework requirement</strong>: Django, Flask, FastAPI all expect package structure</li>
-<li><strong>Interview relevance</strong>: System design questions assume understanding of packages</li>
-<li><strong>Career preparation</strong>: Portfolio projects should demonstrate proper structure</li>
+<li><strong>Final project timing</strong>: Compare this structure with the scope of the chosen project</li>
+<li><strong>Scope check</strong>: A single module can be appropriate for a small project</li>
+<li><strong>Framework context</strong>: Larger frameworks introduce their own project conventions</li>
+<li><strong>Decision rule</strong>: Add a package when it clarifies imports, testing, or ownership boundaries</li>
 </ul>
 <style type="text/css">
         span.MJX_Assistive_MathML {
@@ -824,20 +819,20 @@ Brandon M. Greenwell
       }</style></aside>
 </section>
 <section id="why-package-structure-matters" class="slide level2">
-<h2>🤔 Why package structure matters</h2>
+<h2>Why package structure matters</h2>
 <ul>
 <li class="fragment"><strong>Code organization</strong>: Logical grouping of related functionality</li>
 <li class="fragment"><strong>Reusability</strong>: Import code across multiple projects</li>
 <li class="fragment"><strong>Collaboration</strong>: Team members work on different modules without conflicts</li>
 <li class="fragment"><strong>Testing</strong>: Easier to test individual components in isolation</li>
 <li class="fragment"><strong>Distribution</strong>: Share your code with others via PyPI</li>
-<li class="fragment"><strong>Professionalism</strong>: Signals you understand production Python development</li>
+<li class="fragment"><strong>Reviewability</strong>: Makes module responsibilities and imports visible</li>
 </ul>
-<h3 id="real-world-examples"><strong>Real-world examples:</strong></h3>
+<h3 id="examples"><strong>Examples</strong></h3>
 <ul>
 <li class="fragment"><strong><a href="https://github.com/django/django">Django</a></strong>: Models, views, templates organized in packages</li>
 <li class="fragment"><strong><a href="https://github.com/psf/requests">Requests</a></strong>: <code>requests/</code>, <code>requests/auth/</code>, <code>requests/models/</code></li>
-<li class="fragment"><strong>Your final project</strong>: Transform a script into a proper package structure</li>
+<li class="fragment"><strong>Your final project</strong>: Use modules or a package when that structure improves the chosen project</li>
 </ul>
 <aside class="notes">
 <p><strong>TEACHING NOTES:</strong></p>
@@ -847,7 +842,7 @@ Brandon M. Greenwell
 <li><strong>Import advantages</strong>: Clean import statements</li>
 <li><strong>Testing structure</strong>: Tests mirror package structure</li>
 <li><strong>Documentation</strong>: Package structure serves as architecture documentation</li>
-<li><strong>Career impact</strong>: Employers review GitHub repos - structure matters</li>
+<li><strong>Reviewability</strong>: A reader should be able to locate the CLI, domain logic, and tests quickly</li>
 </ul>
 <style type="text/css">
         span.MJX_Assistive_MathML {
@@ -862,24 +857,24 @@ Brandon M. Greenwell
       }</style></aside>
 </section>
 <section id="what-is-a-python-package" class="slide level2">
-<h2>📦 What is a Python package?</h2>
+<h2>What is a Python package?</h2>
 <ul>
-<li class="fragment">A <strong><a href="https://docs.python.org/3/tutorial/modules.html#packages">package</a></strong> is a directory containing an <code>__init__.py</code> file</li>
+<li class="fragment">A regular <strong><a href="https://docs.python.org/3/tutorial/modules.html#packages">package</a></strong> is a directory containing an <code>__init__.py</code> file</li>
 <li class="fragment"><strong>Module</strong>: A single <code>.py</code> file</li>
 <li class="fragment"><strong>Package</strong>: A directory of modules with <code>__init__.py</code></li>
 <li class="fragment"><strong>Subpackage</strong>: A package inside another package</li>
 <li class="fragment"><strong><code>__init__.py</code></strong>: Marks directory as package, can contain initialization code</li>
-<li class="fragment"><strong>Modern Python (3.3+)</strong>: <code>__init__.py</code> optional but still recommended</li>
+<li class="fragment"><strong>Namespace packages</strong>: Can omit <code>__init__.py</code>; this course uses regular packages unless a namespace is intentionally required</li>
 </ul>
 <aside class="notes">
 <p><strong>TEACHING NOTES:</strong></p>
 <ul>
 <li><strong>Historical context</strong>: PEP 420 made <code>__init__.py</code> optional</li>
-<li><strong>Best practice</strong>: Still include it for clarity and initialization</li>
+<li><strong>Course convention</strong>: Include it for regular packages, and keep initialization minimal</li>
 <li><strong>Empty file</strong>: Often <code>__init__.py</code> is empty - that’s fine</li>
 <li><strong>Import control</strong>: Can control what’s exposed from package</li>
 <li><strong>Package discovery</strong>: Helps tools find and index your code</li>
-<li><strong>Backward compatibility</strong>: Ensures code works on older Python versions</li>
+<li><strong>Clarity</strong>: It makes the regular-package boundary explicit in this course</li>
 </ul>
 <style type="text/css">
         span.MJX_Assistive_MathML {
@@ -894,7 +889,7 @@ Brandon M. Greenwell
       }</style></aside>
 </section>
 <section id="basic-package-structure-a-practical-example" class="slide level2">
-<h2>🗂️ Basic package structure: A practical example</h2>
+<h2>Basic package structure: a practical example</h2>
 <pre><code>my_api_project/
 │
 ├── my_api/                  # Main package directory
@@ -944,13 +939,13 @@ Brandon M. Greenwell
       }</style></aside>
 </section>
 <section id="the-__init__.py-file-package-initialization" class="slide level2">
-<h2>🎯 The <code>__init__.py</code> file: Package initialization</h2>
+<h2>The <code>__init__.py</code> file: package initialization</h2>
 <h3 id="empty-__init__.py-most-common"><strong>Empty <code>__init__.py</code> (most common):</strong></h3>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="" aria-label="1"></a><span class="co"># my_api/__init__.py</span></span>
 <span id="cb9-2"><a href="" aria-label="2"></a><span class="co"># Empty file - marks directory as package</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <h3 id="with-initialization-code"><strong>With initialization code:</strong></h3>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="" aria-label="1"></a><span class="co"># my_api/__init__.py</span></span>
-<span id="cb10-2"><a href="" aria-label="2"></a><span class="co">"""My API Client Package - A professional API wrapper."""</span></span>
+<span id="cb10-2"><a href="" aria-label="2"></a><span class="co">"""Public interface for the API client package."""</span></span>
 <span id="cb10-3"><a href="" aria-label="3"></a></span>
 <span id="cb10-4"><a href="" aria-label="4"></a><span class="co"># Import key functions for convenient access</span></span>
 <span id="cb10-5"><a href="" aria-label="5"></a><span class="im">from</span> my_api.api <span class="im">import</span> fetch_data, APIClient</span>
@@ -977,7 +972,7 @@ Brandon M. Greenwell
 <li><strong>Public API</strong>: <code>__all__</code> defines the official interface</li>
 <li><strong>Documentation</strong>: Good place for package-level docstring</li>
 <li><strong>Initialization</strong>: Can set up logging, config, etc.</li>
-<li><strong>Best practice</strong>: Keep it minimal - complex init code slows imports</li>
+<li><strong>Import behavior</strong>: Keep it minimal because its code runs when the package is imported</li>
 </ul>
 <style type="text/css">
         span.MJX_Assistive_MathML {
@@ -991,8 +986,8 @@ Brandon M. Greenwell
           display:block!important;
       }</style></aside>
 </section>
-<section id="import-systems-absolute-vs-relative" class="slide level2">
-<h2>🔀 Import systems: Absolute vs relative</h2>
+<section id="import-systems-absolute-and-relative" class="slide level2">
+<h2>Import systems: absolute and relative</h2>
 <h3 id="absolute-imports-preferred"><strong>Absolute imports (preferred):</strong></h3>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="" aria-label="1"></a><span class="co"># my_api/cli.py</span></span>
 <span id="cb12-2"><a href="" aria-label="2"></a><span class="im">from</span> my_api.api <span class="im">import</span> fetch_data</span>
@@ -1005,7 +1000,7 @@ Brandon M. Greenwell
 <span id="cb13-4"><a href="" aria-label="4"></a><span class="im">from</span> ..other_package <span class="im">import</span> helper <span class="co"># Parent directory</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <h3 id="when-to-use-each"><strong>When to use each:</strong></h3>
 <ul>
-<li class="fragment"><strong>Absolute imports</strong>: Default choice, always clear where code comes from</li>
+<li class="fragment"><strong>Absolute imports</strong>: Often clearer about the package a name comes from</li>
 <li class="fragment"><strong>Relative imports</strong>: Useful for large packages, makes refactoring easier</li>
 <li class="fragment"><strong><a href="https://peps.python.org/pep-0008/#imports">PEP 8</a> recommendation</strong>: Prefer absolute imports unless path becomes excessively long</li>
 </ul>
@@ -1017,7 +1012,7 @@ Brandon M. Greenwell
 <li><strong>Main script issue</strong>: Relative imports don’t work in <code>__main__</code> scripts</li>
 <li><strong>Team preference</strong>: Some teams prefer one style consistently</li>
 <li><strong>IDE support</strong>: Absolute imports have better IDE autocomplete</li>
-<li><strong>Best practice</strong>: Be consistent within a project</li>
+<li><strong>Project convention</strong>: Be consistent within a project</li>
 <li><strong>Learning curve</strong>: Start with absolute, learn relative later</li>
 </ul>
 <style type="text/css">
@@ -1033,7 +1028,7 @@ Brandon M. Greenwell
       }</style></aside>
 </section>
 <section id="the-__name__-__main__-pattern" class="slide level2">
-<h2>🎭 The <code>__name__ == "__main__"</code> pattern</h2>
+<h2>The <code>__name__ == "__main__"</code> pattern</h2>
 <h3 id="understanding-python-execution"><strong>Understanding Python execution:</strong></h3>
 <ul>
 <li class="fragment">When Python runs a file directly: <code>__name__</code> is set to <code>"__main__"</code></li>
@@ -1068,11 +1063,10 @@ Brandon M. Greenwell
 <ul>
 <li><strong>Dual purpose</strong>: Same file can be script or library</li>
 <li><strong>Testing</strong>: Allows easy manual testing of modules</li>
-<li><strong>Convention</strong>: Every Python developer knows this pattern</li>
+<li><strong>Convention</strong>: This pattern is common in runnable Python modules</li>
 <li><strong>Protection</strong>: Prevents code from running on import</li>
 <li><strong>Entry points</strong>: Often combined with CLI parsing</li>
-<li><strong>Interview topic</strong>: Frequently asked in Python interviews</li>
-<li><strong>Best practice</strong>: All modules should be importable without side effects</li>
+<li><strong>Testability</strong>: Importing a module should not unexpectedly launch the CLI or perform network I/O</li>
 </ul>
 <style type="text/css">
         span.MJX_Assistive_MathML {
@@ -1086,12 +1080,12 @@ Brandon M. Greenwell
           display:block!important;
       }</style></aside>
 </section>
-<section id="modern-project-layout-the-src-structure" class="slide level2">
-<h2>📐 Modern project layout: The <code>src/</code> structure</h2>
-<h3 id="recommended-professional-structure"><strong>Recommended professional structure:</strong></h3>
+<section id="the-src-project-layout" class="slide level2">
+<h2>The <code>src/</code> project layout</h2>
+<h3 id="example-structure"><strong>Example structure</strong></h3>
 <pre><code>my_api_project/
 │
-├── src/                     # Source code (modern best practice)
+├── src/                     # Optional source-layout directory
 │   └── my_api/
 │       ├── __init__.py
 │       ├── api.py
@@ -1113,18 +1107,18 @@ Brandon M. Greenwell
 <ul>
 <li class="fragment"><strong>Import discipline</strong>: Ensures you test installed version, not local files</li>
 <li class="fragment"><strong>Namespace clarity</strong>: Prevents accidental relative imports</li>
-<li class="fragment"><strong>Professional standard</strong>: Adopted by Python Packaging Authority (<a href="https://packaging.python.org/en/latest/discussions/src-layout-vs-flat-layout/">PyPA</a>)</li>
+<li class="fragment"><strong>Documented option</strong>: <a href="https://packaging.python.org/en/latest/discussions/src-layout-vs-flat-layout/">PyPA compares source and flat layouts</a></li>
 <li class="fragment"><strong>Build isolation</strong>: Cleaner separation of source and build artifacts</li>
 </ul>
 <aside class="notes">
 <p><strong>TEACHING NOTES:</strong></p>
 <ul>
-<li><strong>Modern trend</strong>: <code>src/</code> layout gaining popularity</li>
+<li><strong>Design option</strong>: A <code>src/</code> layout adds import discipline at the cost of setup complexity</li>
 <li><strong>Testing benefit</strong>: Forces proper package installation</li>
 <li><strong>Flat vs src</strong>: Flat layout is simpler for beginners</li>
 <li><strong>Migration</strong>: Easy to adopt later if needed</li>
-<li><strong>Tool support</strong>: Modern tools (Poetry, PDM, Hatch) prefer <code>src/</code></li>
-<li><strong>Career preparation</strong>: New projects should use <code>src/</code></li>
+<li><strong>Tool support</strong>: Confirm the selected build backend’s package-discovery configuration</li>
+<li><strong>Course scope</strong>: The final-project rubric does not require a <code>src/</code> layout</li>
 <li><strong>Legacy code</strong>: Many projects still use flat layout - both are valid</li>
 </ul>
 <style type="text/css">
@@ -1140,7 +1134,7 @@ Brandon M. Greenwell
       }</style></aside>
 </section>
 <section id="making-code-installable-pyproject.toml" class="slide level2">
-<h2>🔧 Making code installable: <code>pyproject.toml</code></h2>
+<h2>Making code installable: <code>pyproject.toml</code></h2>
 <h3 id="modern-python-packaging-with-pyproject.toml"><strong>Modern Python packaging with <a href="https://packaging.python.org/en/latest/guides/writing-pyproject-toml/"><code>pyproject.toml</code></a>:</strong></h3>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb18"><pre class="sourceCode numberSource toml number-lines code-with-copy"><code class="sourceCode toml"><span id="cb18-1"><a href="" aria-label="1"></a><span class="kw">[build-system]</span></span>
 <span id="cb18-2"><a href="" aria-label="2"></a><span class="dt">requires</span> <span class="op">=</span> <span class="op">[</span><span class="st">"hatchling"</span><span class="op">]</span></span>
@@ -1149,23 +1143,17 @@ Brandon M. Greenwell
 <span id="cb18-5"><a href="" aria-label="5"></a><span class="kw">[project]</span></span>
 <span id="cb18-6"><a href="" aria-label="6"></a><span class="dt">name</span> <span class="op">=</span> <span class="st">"my-api-tool"</span></span>
 <span id="cb18-7"><a href="" aria-label="7"></a><span class="dt">version</span> <span class="op">=</span> <span class="st">"0.1.0"</span></span>
-<span id="cb18-8"><a href="" aria-label="8"></a><span class="dt">description</span> <span class="op">=</span> <span class="st">"A professional API client for [Your API]"</span></span>
+<span id="cb18-8"><a href="" aria-label="8"></a><span class="dt">description</span> <span class="op">=</span> <span class="st">"An API client for [Your API]"</span></span>
 <span id="cb18-9"><a href="" aria-label="9"></a><span class="dt">authors</span> <span class="op">=</span> <span class="op">[{</span><span class="dt">name</span><span class="op"> =</span> <span class="st">"Your Name"</span><span class="op">, </span><span class="dt">email</span><span class="op"> =</span> <span class="st">"you@example.com"</span><span class="op">}]</span></span>
 <span id="cb18-10"><a href="" aria-label="10"></a><span class="dt">readme</span> <span class="op">=</span> <span class="st">"README.md"</span></span>
 <span id="cb18-11"><a href="" aria-label="11"></a><span class="dt">requires-python</span> <span class="op">=</span> <span class="st">"&gt;=3.12"</span></span>
-<span id="cb18-12"><a href="" aria-label="12"></a><span class="dt">dependencies</span> <span class="op">=</span> <span class="op">[</span></span>
-<span id="cb18-13"><a href="" aria-label="13"></a>    <span class="st">"requests&gt;=2.31.0"</span><span class="op">,</span></span>
-<span id="cb18-14"><a href="" aria-label="14"></a><span class="op">]</span></span>
-<span id="cb18-15"><a href="" aria-label="15"></a></span>
-<span id="cb18-16"><a href="" aria-label="16"></a><span class="kw">[project.optional-dependencies]</span></span>
-<span id="cb18-17"><a href="" aria-label="17"></a><span class="dt">dev</span> <span class="op">=</span> <span class="op">[</span></span>
-<span id="cb18-18"><a href="" aria-label="18"></a>    <span class="st">"pytest&gt;=7.0.0"</span><span class="op">,</span></span>
-<span id="cb18-19"><a href="" aria-label="19"></a>    <span class="st">"black&gt;=23.0.0"</span><span class="op">,</span></span>
-<span id="cb18-20"><a href="" aria-label="20"></a>    <span class="st">"ruff&gt;=0.1.0"</span><span class="op">,</span></span>
-<span id="cb18-21"><a href="" aria-label="21"></a><span class="op">]</span></span>
-<span id="cb18-22"><a href="" aria-label="22"></a></span>
-<span id="cb18-23"><a href="" aria-label="23"></a><span class="kw">[project.scripts]</span></span>
-<span id="cb18-24"><a href="" aria-label="24"></a><span class="dt">my-api</span> <span class="op">=</span> <span class="st">"my_api.cli:main"</span>  <span class="co"># Creates a 'my-api' command</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb18-12"><a href="" aria-label="12"></a><span class="dt">dependencies</span> <span class="op">=</span> <span class="op">[</span><span class="st">"requests"</span><span class="op">]</span></span>
+<span id="cb18-13"><a href="" aria-label="13"></a></span>
+<span id="cb18-14"><a href="" aria-label="14"></a><span class="kw">[project.optional-dependencies]</span></span>
+<span id="cb18-15"><a href="" aria-label="15"></a><span class="dt">dev</span> <span class="op">=</span> <span class="op">[</span><span class="st">"pytest"</span><span class="op">,</span> <span class="st">"ruff"</span><span class="op">]</span></span>
+<span id="cb18-16"><a href="" aria-label="16"></a></span>
+<span id="cb18-17"><a href="" aria-label="17"></a><span class="kw">[project.scripts]</span></span>
+<span id="cb18-18"><a href="" aria-label="18"></a><span class="dt">my-api</span> <span class="op">=</span> <span class="st">"my_api.cli:main"</span>  <span class="co"># Creates a 'my-api' command</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <h3 id="installing-in-editable-mode"><strong>Installing in editable mode:</strong></h3>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb19"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb19-1"><a href="" aria-label="1"></a><span class="co"># Install and lock the project for development</span></span>
 <span id="cb19-2"><a href="" aria-label="2"></a><span class="ex">uv</span> sync</span>
@@ -1180,11 +1168,11 @@ Brandon M. Greenwell
 <ul>
 <li><strong>Modern standard</strong>: <code>pyproject.toml</code> replaces <code>setup.py</code></li>
 <li><strong>PEP 621</strong>: Standardized project metadata format</li>
-<li><strong>Editable install</strong>: <code>-e</code> flag links to source code</li>
+<li><strong>Project environment</strong>: <code>uv sync</code> installs the declared project and dependency groups according to the lockfile</li>
 <li><strong>Scripts</strong>: Automatically creates CLI commands</li>
 <li><strong>Dependencies</strong>: Central place for all requirements</li>
 <li><strong>Tool config</strong>: Can include black, pytest, ruff config</li>
-<li><strong>Career relevance</strong>: All new Python projects use this format</li>
+<li><strong>Course relevance</strong>: The repository already uses <code>pyproject.toml</code> and <code>uv.lock</code></li>
 </ul>
 <style type="text/css">
         span.MJX_Assistive_MathML {
@@ -1199,7 +1187,7 @@ Brandon M. Greenwell
       }</style></aside>
 </section>
 <section id="one-project-workflow-with-uv" class="slide level2">
-<h2>⚡ One project workflow with <code>uv</code></h2>
+<h2>One project workflow with <code>uv</code></h2>
 <ul>
 <li class="fragment"><strong><a href="https://docs.astral.sh/uv/"><code>uv</code></a></strong> manages Python versions, environments, dependencies, commands, and lockfiles</li>
 <li class="fragment"><strong>Reproducible</strong>: <code>pyproject.toml</code> declares dependencies and <code>uv.lock</code> records exact resolutions</li>
@@ -1222,11 +1210,11 @@ Brandon M. Greenwell
 <p><strong>TEACHING NOTES:</strong></p>
 <ul>
 <li><strong>Official docs</strong>: Point installation questions to the current uv guide</li>
-<li><strong>Rust connection</strong>: Perfect bridge to next week’s Rust introduction</li>
+<li><strong>Rust connection</strong>: Compare this workflow with Cargo next week</li>
 <li><strong>Modern tooling</strong>: Python ecosystem is modernizing rapidly</li>
 <li><strong>Course consistency</strong>: uv is the standard workflow, not an optional alternative</li>
 <li><strong>Simplicity</strong>: <code>sync</code>, <code>add</code>, and <code>run</code> cover the core course workflow</li>
-<li><strong>Future-proofing</strong>: Learning modern tools prepares for career</li>
+<li><strong>Scope</strong>: Learn the commands used by the repository instead of predicting which tool will dominate later</li>
 </ul>
 <style type="text/css">
         span.MJX_Assistive_MathML {
@@ -1241,32 +1229,32 @@ Brandon M. Greenwell
       }</style></aside>
 </section>
 <section id="ai-assisted-package-scaffolding" class="slide level2">
-<h2>🤖 AI-assisted package scaffolding</h2>
+<h2>AI-assisted package scaffolding</h2>
 <h3 id="prompt-strategies-for-project-structure"><strong>Prompt strategies for project structure:</strong></h3>
 <ul>
-<li class="fragment"><strong>Initial scaffold</strong>: “Create a Python package structure for an API client project with CLI, tests, and proper imports”</li>
-<li class="fragment"><strong>Best practices</strong>: “Show me a modern Python project layout with src/ structure and pyproject.toml”</li>
-<li class="fragment"><strong>Migration</strong>: “Convert my single-file script into a proper Python package with separate modules”</li>
+<li class="fragment"><strong>Initial scaffold</strong>: “Propose the smallest Python project tree for this API client, CLI, and tests. Explain the purpose of every file”</li>
+<li class="fragment"><strong>Alternative</strong>: “Compare a flat layout with a <code>src/</code> layout for this project and name the configuration each requires”</li>
+<li class="fragment"><strong>Migration</strong>: “Plan a behavior-preserving split of this script into modules; do not edit until the current tests pass”</li>
 <li class="fragment"><strong>Documentation</strong>: “Generate a README with installation and usage instructions for my package”</li>
 </ul>
-<h3 id="ai-tools-excel-at-1"><strong>AI tools excel at:</strong></h3>
+<h3 id="package-tasks-an-assistant-can-draft"><strong>Package tasks an assistant can draft:</strong></h3>
 <ul>
 <li class="fragment">Generating boilerplate directory structures</li>
 <li class="fragment">Creating <code>__init__.py</code> files with proper imports</li>
 <li class="fragment">Writing <code>pyproject.toml</code> configurations</li>
 <li class="fragment">Setting up testing frameworks</li>
-<li class="fragment">Generating comprehensive README files</li>
+<li class="fragment">Drafting README sections from verified commands and behavior</li>
 </ul>
 <aside class="notes">
 <p><strong>TEACHING NOTES:</strong></p>
 <ul>
-<li><strong>Scaffolding</strong>: AI is perfect for generating project skeletons</li>
+<li><strong>Scaffolding</strong>: AI can draft a project tree, but verify every file has a purpose</li>
 <li><strong>Learning opportunity</strong>: Study the generated structure to understand patterns</li>
 <li><strong>Customization</strong>: AI provides template, student adds domain logic</li>
 <li><strong>Iteration</strong>: Refine structure through conversation with AI</li>
-<li><strong>Best practices</strong>: AI incorporates current Python packaging standards</li>
-<li><strong>Time savings</strong>: Reduces tedious setup work</li>
-<li><strong>Career skill</strong>: Knowing how to use AI for project setup is valuable</li>
+<li><strong>Current guidance</strong>: Check generated configuration against the selected backend’s documentation</li>
+<li><strong>Scope control</strong>: Remove files and options that do not serve the project</li>
+<li><strong>Review skill</strong>: Remove generated files and configuration that the project does not need</li>
 </ul>
 <style type="text/css">
         span.MJX_Assistive_MathML {
@@ -1281,8 +1269,8 @@ Brandon M. Greenwell
       }</style></aside>
 </section>
 <section id="practical-example-final-project-structure" class="slide level2">
-<h2>💡 Practical example: Final project structure</h2>
-<h3 id="recommended-structure-for-your-final-project"><strong>Recommended structure for your final project:</strong></h3>
+<h2>Practical example: final-project structure</h2>
+<h3 id="one-possible-structure-for-the-final-project"><strong>One possible structure for the final project</strong></h3>
 <pre><code>my_final_project/
 │
 ├── src/
@@ -1310,11 +1298,11 @@ Brandon M. Greenwell
 <aside class="notes">
 <p><strong>TEACHING NOTES:</strong></p>
 <ul>
-<li><strong>Final project application</strong>: This is the target structure for their projects</li>
+<li><strong>Final project application</strong>: This is an optional reference structure, not a required tree</li>
 <li><strong>Gradual adoption</strong>: Can start simpler and refactor</li>
 <li><strong>Testing</strong>: Structure makes testing easier</li>
 <li><strong>CI/CD</strong>: GitHub Actions can run tests automatically</li>
-<li><strong>Portfolio quality</strong>: This structure impresses employers</li>
+<li><strong>Reviewability</strong>: The tree makes source, tests, documentation, and metadata easy to locate</li>
 <li><strong>Flexibility</strong>: Can adapt structure to project needs</li>
 <li><strong>Documentation</strong>: README is essential for grading and sharing</li>
 </ul>
@@ -1330,8 +1318,8 @@ Brandon M. Greenwell
           display:block!important;
       }</style></aside>
 </section>
-<section id="putting-it-all-together-cli-package-structure" class="slide level2">
-<h2>🔗 Putting it all together: CLI + Package structure</h2>
+<section id="putting-it-all-together-cli-and-package-structure" class="slide level2">
+<h2>Putting it all together: CLI and package structure</h2>
 <h3 id="entry-point-main.py-or-srcmy_api_tool__main__.py"><strong>Entry point (<code>main.py</code> or <code>src/my_api_tool/__main__.py</code>):</strong></h3>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb22"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="" aria-label="1"></a><span class="co">"""Entry point for the my_api_tool CLI."""</span></span>
 <span id="cb22-2"><a href="" aria-label="2"></a><span class="im">from</span> my_api_tool.cli <span class="im">import</span> main</span>
@@ -1357,8 +1345,8 @@ Brandon M. Greenwell
 <span id="cb23-16"><a href="" aria-label="16"></a>        data <span class="op">=</span> client.fetch(args.resource)</span>
 <span id="cb23-17"><a href="" aria-label="17"></a>        <span class="bu">print</span>(format_output(data, args.<span class="bu">format</span>))</span>
 <span id="cb23-18"><a href="" aria-label="18"></a>        <span class="cf">return</span> <span class="dv">0</span></span>
-<span id="cb23-19"><a href="" aria-label="19"></a>    <span class="cf">except</span> <span class="pp">Exception</span> <span class="im">as</span> e:</span>
-<span id="cb23-20"><a href="" aria-label="20"></a>        <span class="bu">print</span>(<span class="ss">f"Error: </span><span class="sc">{</span>e<span class="sc">}</span><span class="ss">"</span>, <span class="bu">file</span><span class="op">=</span>sys.stderr)</span>
+<span id="cb23-19"><a href="" aria-label="19"></a>    <span class="cf">except</span> (<span class="pp">OSError</span>, <span class="pp">ValueError</span>) <span class="im">as</span> error:</span>
+<span id="cb23-20"><a href="" aria-label="20"></a>        <span class="bu">print</span>(<span class="ss">f"Error: </span><span class="sc">{</span>error<span class="sc">}</span><span class="ss">"</span>, <span class="bu">file</span><span class="op">=</span>sys.stderr)</span>
 <span id="cb23-21"><a href="" aria-label="21"></a>        <span class="cf">return</span> <span class="dv">1</span></span>
 <span id="cb23-22"><a href="" aria-label="22"></a></span>
 <span id="cb23-23"><a href="" aria-label="23"></a><span class="cf">if</span> <span class="va">__name__</span> <span class="op">==</span> <span class="st">"__main__"</span>:</span>
@@ -1371,11 +1359,11 @@ Brandon M. Greenwell
 <ul>
 <li><strong>Integration</strong>: Shows how CLI and package structure work together</li>
 <li><strong>Clean imports</strong>: Package structure enables clear module organization</li>
-<li><strong>Professional pattern</strong>: This is production-quality code structure</li>
+<li><strong>Example, not requirement</strong>: This is one testable separation of entry point, CLI, client, and formatting logic</li>
 <li><strong>Testability</strong>: Each component can be tested independently</li>
 <li><strong>Maintainability</strong>: Easy to find and modify code</li>
-<li><strong>Scalability</strong>: Can grow from simple to complex without refactoring</li>
-<li><strong>Career preparation</strong>: This is exactly how professional tools are structured</li>
+<li><strong>Change cost</strong>: Add more layers only when new behavior needs them</li>
+<li><strong>Course contract</strong>: The rubric evaluates a working CLI, tests, documentation, and CI—not this exact tree</li>
 </ul>
 <style type="text/css">
         span.MJX_Assistive_MathML {
@@ -1390,7 +1378,7 @@ Brandon M. Greenwell
       }</style></aside>
 </section>
 <section id="bridge-to-rust-a-preview-of-next-week" class="slide level2">
-<h2>🌉 Bridge to Rust: A preview of next week</h2>
+<h2>Bridge to Rust: a preview of next week</h2>
 <h3 id="python-packaging-challenges-weve-seen"><strong>Python packaging challenges we’ve seen:</strong></h3>
 <ul>
 <li class="fragment"><strong>Manual structure</strong>: Create directories, <code>__init__.py</code> files by hand</li>
@@ -1400,20 +1388,20 @@ Brandon M. Greenwell
 </ul>
 <h3 id="next-week-in-rust"><strong>Next week in Rust:</strong></h3>
 <ul>
-<li class="fragment"><strong><a href="https://doc.rust-lang.org/cargo/">Cargo</a></strong> handles <strong>everything</strong> automatically</li>
-<li class="fragment"><strong>One command</strong>: <code>cargo new my_project</code> creates perfect structure</li>
-<li class="fragment"><strong>Built-in</strong>: Package management, building, testing, documentation</li>
-<li class="fragment"><strong>No decisions</strong>: One standard way to structure projects</li>
-<li class="fragment"><strong>Comparison point</strong>: “Remember Python packages? Rust’s Cargo solves all those pain points”</li>
+<li class="fragment"><strong><a href="https://doc.rust-lang.org/cargo/">Cargo</a></strong> provides one interface for common Rust project tasks</li>
+<li class="fragment"><strong>One command</strong>: <code>cargo new my_project</code> creates a conventional starting structure</li>
+<li class="fragment"><strong>Integrated commands</strong>: Dependency management, building, testing, and documentation</li>
+<li class="fragment"><strong>Conventions</strong>: <code>cargo new</code> supplies defaults, while larger projects still require design decisions</li>
+<li class="fragment"><strong>Comparison point</strong>: Compare Cargo’s defaults with Python’s explicit project configuration</li>
 </ul>
 <aside class="notes">
 <p><strong>TEACHING NOTES:</strong></p>
 <ul>
 <li><strong>Transition preview</strong>: Prepare students for next week’s Rust intro</li>
-<li><strong>Fresh perspective</strong>: Python final project experience will highlight Rust’s advantages</li>
+<li><strong>Balanced comparison</strong>: Identify both the convenience and the constraints of each toolchain</li>
 <li><strong>Comparison learning</strong>: Understanding Python packages makes Cargo appreciation deeper</li>
-<li><strong>Motivation</strong>: “You’ve learned the hard way, now see the automatic way”</li>
-<li><strong>Career context</strong>: Understanding both approaches makes better engineers</li>
+<li><strong>Motivation</strong>: Compare an explicit Python configuration with Cargo’s generated defaults</li>
+<li><strong>Transfer</strong>: Understanding both approaches gives students more than one project model</li>
 <li><strong>Ecosystem differences</strong>: Python’s flexibility vs Rust’s opinionation</li>
 <li><strong>Learning sequence</strong>: Intentional - Python first shows why Cargo matters</li>
 </ul>
@@ -1430,8 +1418,8 @@ Brandon M. Greenwell
       }</style></aside>
 </section>
 <section id="resources-and-further-learning" class="slide level2">
-<h2>📚 Resources and further learning</h2>
-<h3 id="official-documentation"><strong>Official documentation:</strong></h3>
+<h2>Resources and further learning</h2>
+<h3 id="official-documentation"><strong>Official documentation</strong></h3>
 <ul>
 <li class="fragment"><strong><a href="https://docs.python.org/3/library/argparse.html">argparse</a></strong> - Python standard library CLI tool</li>
 <li class="fragment"><strong><a href="https://docs.python.org/3/tutorial/modules.html#packages">Python Packages</a></strong> - Official modules and packages guide</li>
@@ -1441,7 +1429,7 @@ Brandon M. Greenwell
 <li class="fragment"><strong><a href="https://rich.readthedocs.io/">Rich</a></strong> - Beautiful terminal output</li>
 <li class="fragment"><strong><a href="https://github.com/astral-sh/uv">uv documentation</a></strong> - Fast Python package installer</li>
 </ul>
-<h3 id="advanced-topics"><strong>Advanced topics:</strong></h3>
+<h3 id="advanced-topics"><strong>Advanced topics</strong></h3>
 <ul>
 <li class="fragment"><strong><a href="https://peps.python.org/pep-0008/">PEP 8</a></strong> - Python style guide</li>
 <li class="fragment"><strong><a href="https://peps.python.org/pep-0621/">PEP 621</a></strong> - Project metadata in <code>pyproject.toml</code></li>
@@ -1452,9 +1440,9 @@ Brandon M. Greenwell
 <p><strong>TEACHING NOTES:</strong></p>
 <ul>
 <li><strong>Progressive depth</strong>: Start with basics, explore advanced topics as needed</li>
-<li><strong>Career resources</strong>: Bookmark these for future reference</li>
+<li><strong>Reference use</strong>: Start with the primary documentation for the feature at hand</li>
 <li><strong>Community</strong>: Python packaging is well-documented</li>
-<li><strong>Modern practices</strong>: Links focus on current best practices</li>
+<li><strong>Current guidance</strong>: Prefer primary documentation and recheck it when tool behavior changes</li>
 <li><strong>Tool ecosystem</strong>: Many options - all are valid choices</li>
 <li><strong>AI assistance</strong>: Can help understand these docs</li>
 </ul>
@@ -1470,18 +1458,18 @@ Brandon M. Greenwell
           display:block!important;
       }</style></aside>
 </section>
-<section id="applying-to-your-final-project" class="slide level2">
-<h2>🎯 Applying to your final project</h2>
-<h3 id="this-weeks-work-session"><strong>This week’s work session:</strong></h3>
+<section id="applying-this-to-the-final-project" class="slide level2">
+<h2>Applying this to the final project</h2>
+<h3 id="this-weeks-work-session"><strong>This week’s work session</strong></h3>
 <ul>
-<li class="fragment"><strong>Restructure your code</strong> into a proper package with <code>src/</code> layout</li>
+<li class="fragment"><strong>Choose a clear structure</strong>; a <code>src/</code> package is useful for larger Python projects but is not required</li>
 <li class="fragment"><strong>Add a CLI interface</strong> with argparse for easy testing and demonstration</li>
 <li class="fragment"><strong>Create clean imports</strong> between your modules</li>
-<li class="fragment"><strong>Add entry point</strong> in <code>pyproject.toml</code> for your CLI command</li>
+<li class="fragment"><strong>Consider an entry point</strong> in <code>pyproject.toml</code> when it improves installation and use</li>
 <li class="fragment"><strong>Document usage</strong> in your README with examples</li>
 <li class="fragment"><strong>Test your CLI</strong> with different arguments and edge cases</li>
 </ul>
-<h3 id="success-criteria"><strong>Success criteria:</strong></h3>
+<h3 id="success-criteria"><strong>Success criteria</strong></h3>
 <ul>
 <li class="fragment">Can run <code>uv sync</code> and launch the project with <code>uv run</code></li>
 <li class="fragment">CLI works with intuitive arguments and helpful error messages</li>
@@ -1494,11 +1482,11 @@ Brandon M. Greenwell
 <ul>
 <li><strong>Actionable</strong>: Students should leave with clear next steps</li>
 <li><strong>Final project focus</strong>: Everything ties back to their projects</li>
-<li><strong>Quality bar</strong>: Set expectations for professional-level work</li>
+<li><strong>Quality bar</strong>: Tie each expectation to the published final-project rubric</li>
 <li><strong>Support</strong>: Encourage office hours for structure questions</li>
-<li><strong>AI assistance</strong>: Perfect use case for AI pair programming</li>
+<li><strong>AI assistance</strong>: Use AI for a small, testable refactor rather than an unreviewed rewrite</li>
 <li><strong>Timeline</strong>: Treat this as an early preview of the final project’s quality bar</li>
-<li><strong>Grading</strong>: Structure and CLI quality are assessment criteria</li>
+<li><strong>Grading</strong>: The rubric requires a working CLI, readable organization, tests, documentation, and CI; it does not prescribe a <code>src/</code> layout</li>
 </ul>
 <style type="text/css">
         span.MJX_Assistive_MathML {
@@ -1513,26 +1501,26 @@ Brandon M. Greenwell
       }</style></aside>
 </section>
 <section id="summary-key-takeaways" class="slide level2">
-<h2>📋 Summary: Key takeaways</h2>
+<h2>Summary: key takeaways</h2>
 <ul>
-<li class="fragment"><strong>CLI with argparse</strong>: Create professional command-line tools with automatic help and validation</li>
+<li class="fragment"><strong>CLI with argparse</strong>: Create command-line tools with generated help and validation</li>
 <li class="fragment"><strong>Package structure</strong>: Organize code with <code>__init__.py</code>, proper imports, and logical modules</li>
 <li class="fragment"><strong><code>__name__ == "__main__"</code></strong>: Make code both runnable and importable</li>
-<li class="fragment"><strong>Modern tooling</strong>: <code>pyproject.toml</code> and <code>uv</code> represent the future of Python development</li>
-<li class="fragment"><strong>Integration</strong>: CLI + packages = professional, maintainable applications</li>
-<li class="fragment"><strong>Final project application</strong>: Apply these patterns immediately to elevate your projects</li>
-<li class="fragment"><strong>Next week</strong>: See how Rust’s Cargo handles all this automatically</li>
+<li class="fragment"><strong>Modern tooling</strong>: <code>pyproject.toml</code> describes a project and <code>uv</code> reproduces its environment</li>
+<li class="fragment"><strong>Integration</strong>: A CLI plus clear module boundaries can improve testing and maintenance</li>
+<li class="fragment"><strong>Final project application</strong>: Apply the patterns that make your chosen project easier to run and test</li>
+<li class="fragment"><strong>Next week</strong>: Compare this workflow with Cargo’s defaults and commands</li>
 </ul>
 <aside class="notes">
 <p><strong>TEACHING NOTES:</strong></p>
 <ul>
 <li><strong>Concept reinforcement</strong>: Review the most important patterns</li>
 <li><strong>Practical focus</strong>: Everything learned today applies to final project</li>
-<li><strong>Confidence building</strong>: Students have the tools to build professional software</li>
-<li><strong>Career preparation</strong>: These are fundamental professional Python skills</li>
-<li><strong>Course progression</strong>: Sets up perfect contrast with Rust next week</li>
+<li><strong>Readiness check</strong>: Students can explain how the CLI, modules, tests, and environment fit together</li>
+<li><strong>Transfer</strong>: The same interface-and-verification questions apply to Rust</li>
+<li><strong>Course progression</strong>: Sets up a concrete comparison with Cargo next week</li>
 <li><strong>Support</strong>: Office hours available for implementation questions</li>
-<li><strong>Celebration</strong>: Students have now learned comprehensive Python development</li>
+<li><strong>Reflection</strong>: Students can now combine Python, tests, a CLI, and project tooling</li>
 </ul>
 <style type="text/css">
         span.MJX_Assistive_MathML {
@@ -1546,11 +1534,28 @@ Brandon M. Greenwell
           display:block!important;
       }</style></aside>
 </section>
-<section id="work-session-build-your-professional-python-application" class="slide level2">
-<h2>🚀 Work session: Build your professional Python application</h2>
-<h3 id="todays-goals"><strong>Today’s goals:</strong></h3>
+<section id="lab-08-checkpoint-weather-cli" class="slide level2 smaller">
+<h2>Lab 08 checkpoint: weather CLI</h2>
+<p><strong>Complete the supplied three-module contract:</strong></p>
 <ul>
-<li class="fragment">Restructure your final project with proper package layout</li>
+<li><code>favorites.py</code>: <code>FavoritesManager</code> stores case-insensitive favorites in JSON and recovers from missing or corrupted files</li>
+<li><code>weather_api.py</code>: <code>WeatherAPI</code> calls the specified current and forecast endpoints with <code>params</code> and <code>timeout=10</code>; formatting functions produce the required text</li>
+<li><code>weather.py</code>: <code>load_api_key()</code>, <code>build_parser()</code>, and <code>main(argv=None)</code> implement the documented commands, favorite lookup, standard-error messages, and exit status</li>
+<li>Automated tests use fake responses; manual API use requires an ignored <code>config.py</code> or the <code>WEATHER_API_KEY</code> environment variable</li>
+<li>Do not modify the supplied tests, workflow, <code>config.example.py</code>, or root <code>.gitignore</code></li>
+</ul>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb25"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb25-1"><a href="" aria-label="1"></a><span class="ex">uv</span> run python <span class="at">-m</span> pytest week08/tests/ <span class="at">-v</span></span>
+<span id="cb25-2"><a href="" aria-label="2"></a><span class="fu">git</span> add week08/favorites.py week08/weather_api.py week08/weather.py</span>
+<span id="cb25-3"><a href="" aria-label="3"></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"Complete Lab 08"</span></span>
+<span id="cb25-4"><a href="" aria-label="4"></a><span class="fu">git</span> push origin main</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Confirm the Week 08 README badge is green; that badge is the complete 10-point grade.</p>
+<p><strong>Instructions:</strong> <a href="https://github.com/bgreenwell/is4010-labs/blob/main/week08/lab08.md"><code>week08/lab08.md</code></a></p>
+</section>
+<section id="work-session-build-a-maintainable-python-application" class="slide level2">
+<h2>Work session: build a maintainable Python application</h2>
+<h3 id="todays-goals"><strong>Today’s goals</strong></h3>
+<ul>
+<li class="fragment">Choose a structure that fits the size of your final project</li>
 <li class="fragment">Implement a CLI interface with argparse</li>
 <li class="fragment">Create clean module organization</li>
 <li class="fragment">Test your CLI and fix any issues</li>
@@ -1564,17 +1569,17 @@ Brandon M. Greenwell
 <li class="fragment">Reference the official documentation</li>
 <li class="fragment">Test frequently as you refactor</li>
 </ul>
-<p><strong>Let’s build something professional!</strong> 🎉</p>
+<p><strong>Build one small, testable improvement before adding more structure.</strong></p>
 <aside class="notes">
 <p><strong>TEACHING NOTES:</strong></p>
 <ul>
 <li><strong>Hands-on time</strong>: Students work on their projects during class</li>
 <li><strong>Availability</strong>: Circulate to help with questions</li>
 <li><strong>Common issues</strong>: Be ready to debug import errors, argparse confusion</li>
-<li><strong>Encouragement</strong>: Refactoring is professional skill - embrace it</li>
+<li><strong>Refactoring</strong>: Make one behavior-preserving change at a time</li>
 <li><strong>Time management</strong>: Use this work session to finish Lab 08 and capture ideas for the final project</li>
 <li><strong>Collaboration</strong>: Students can help each other with structure questions</li>
-<li><strong>Quality focus</strong>: Better structure now = easier maintenance later</li>
+<li><strong>Quality focus</strong>: Keep structure proportional to the project’s size and tested behavior</li>
 </ul>
 <style type="text/css">
         span.MJX_Assistive_MathML {

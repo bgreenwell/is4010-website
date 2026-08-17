@@ -10,7 +10,7 @@
   <meta name="generator" content="quarto-1.10.18">
 
   <meta name="author" content="Brandon M. Greenwell">
-  <title>IS4010: AI-Enhanced Application Development</title>
+  <title>IS4010: AI-enhanced application development</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -203,7 +203,7 @@
     <div class="slides">
 
 <section id="title-slide" class="quarto-title-block center">
-  <h1 class="title">IS4010: AI-Enhanced Application Development</h1>
+  <h1 class="title">IS4010: AI-enhanced application development</h1>
   <p class="subtitle">Week 13: Idiomatic Rust</p>
 
 <div class="quarto-title-authors">
@@ -216,16 +216,16 @@ Brandon M. Greenwell
 
 </section>
 <section id="week-13-overview" class="slide level2 inverse">
-<h2>Week 13 Overview</h2>
-<p><strong>Session 1: Iterators and Closures</strong></p>
+<h2>Week 13 overview</h2>
+<p><strong>Session 1: iterators and closures</strong></p>
 <ul>
 <li>Iterator methods (<code>.map()</code>, <code>.filter()</code>, <code>.fold()</code>, <code>.collect()</code>)</li>
 <li>Closures and capture semantics</li>
 <li>Closure traits: <code>Fn</code>, <code>FnMut</code>, <code>FnOnce</code></li>
 <li>Building data processing pipelines</li>
-<li>Lazy evaluation and zero-cost abstractions</li>
+<li>Lazy evaluation and allocation choices</li>
 </ul>
-<p><strong>Session 2: Smart Pointers and Error Handling</strong></p>
+<p><strong>Session 2: smart pointers and error handling</strong></p>
 <ul>
 <li>Smart pointers: <code>Box&lt;T&gt;</code>, <code>Rc&lt;T&gt;</code>, <code>RefCell&lt;T&gt;</code></li>
 <li>Interior mutability patterns</li>
@@ -234,7 +234,7 @@ Brandon M. Greenwell
 <li>The <code>?</code> operator and custom error types</li>
 </ul>
 <aside class="notes">
-<p>This week focuses on patterns that make Rust code elegant, efficient, and truly “Rusty”. These patterns are used throughout professional Rust codebases.</p>
+<p>This week focuses on iterator composition, closure capture, shared ownership, interior mutability, and explicit error propagation. Evaluate each pattern by the ownership or control-flow problem it solves.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -248,22 +248,22 @@ Brandon M. Greenwell
       }</style></aside>
 </section>
 <section id="why-idiomatic-rust-matters" class="slide level2 inverse">
-<h2>Why Idiomatic Rust Matters</h2>
-<p><strong>Real-world impact:</strong></p>
+<h2>Why idiomatic Rust matters</h2>
+<p><strong>What the patterns provide:</strong></p>
 <ul>
 <li><strong>Functional style</strong>: Process data without manual loops</li>
 <li><strong>Flexible ownership</strong>: Build complex data structures safely</li>
-<li><strong>Explicit errors</strong>: No surprises, no crashes</li>
-<li><strong>Zero-cost abstractions</strong>: High-level code, low-level performance</li>
+<li><strong>Explicit errors</strong>: Expected failure categories in return types</li>
+<li><strong>Iterator composition</strong>: Lazy adaptors that can avoid intermediate collections</li>
 </ul>
-<p><strong>Industry examples:</strong></p>
+<p><strong>Project examples:</strong></p>
 <ul>
 <li><a href="https://github.com/BurntSushi/ripgrep">Ripgrep</a>: Fast search tool using iterators</li>
 <li><a href="https://servo.org/">Servo</a>: Browser engine with smart pointers</li>
 <li><a href="https://tokio.rs/">Tokio</a>: Async runtime with Result-based APIs</li>
 </ul>
 <aside class="notes">
-<p>These patterns separate Rust beginners from experts. Mastering them makes you think in Rust’s unique way.</p>
+<p>These patterns appear often in Rust code. Learn to recognize their trade-offs and start with the simplest ownership model that satisfies the requirement.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -281,11 +281,11 @@ Brandon M. Greenwell
 </section>
 <section>
 <section id="session-1-iterators-and-closures" class="title-slide slide level1 center">
-<h1>Session 1: Iterators and Closures</h1>
+<h1>Session 1: iterators and closures</h1>
 
 </section>
 <section id="the-problem-manual-iteration" class="slide level2 smaller">
-<h2>The Problem: Manual Iteration</h2>
+<h2>The problem: manual iteration</h2>
 <p><strong>Traditional loop-based approach:</strong></p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb1-1"><a href="" aria-label="1"></a><span class="kw">let</span> numbers <span class="op">=</span> <span class="pp">vec!</span>[<span class="dv">1</span><span class="op">,</span> <span class="dv">2</span><span class="op">,</span> <span class="dv">3</span><span class="op">,</span> <span class="dv">4</span><span class="op">,</span> <span class="dv">5</span><span class="op">,</span> <span class="dv">6</span>]<span class="op">;</span></span>
 <span id="cb1-2"><a href="" aria-label="2"></a><span class="kw">let</span> <span class="kw">mut</span> result <span class="op">=</span> <span class="dt">Vec</span><span class="pp">::</span>new()<span class="op">;</span></span>
@@ -319,7 +319,7 @@ Brandon M. Greenwell
       }</style></aside>
 </section>
 <section id="introducing-iterators" class="slide level2 smaller">
-<h2>Introducing Iterators</h2>
+<h2>Introducing iterators</h2>
 <p><strong>Functional approach with iterator chains:</strong></p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb2-1"><a href="" aria-label="1"></a><span class="kw">let</span> numbers <span class="op">=</span> <span class="pp">vec!</span>[<span class="dv">1</span><span class="op">,</span> <span class="dv">2</span><span class="op">,</span> <span class="dv">3</span><span class="op">,</span> <span class="dv">4</span><span class="op">,</span> <span class="dv">5</span><span class="op">,</span> <span class="dv">6</span>]<span class="op">;</span></span>
 <span id="cb2-2"><a href="" aria-label="2"></a></span>
@@ -335,7 +335,7 @@ Brandon M. Greenwell
 <li>Declarative: says <em>what</em> to do, not <em>how</em></li>
 <li>Composable: chain operations together</li>
 <li>Lazy: only evaluates when needed</li>
-<li>Zero-cost: compiles to same code as manual loops!</li>
+<li>Optimizable: iterator chains can compile to efficient loops, but measure when performance matters</li>
 </ul>
 <p><a href="https://doc.rust-lang.org/std/iter/trait.Iterator.html">📖 Iterator trait documentation</a></p>
 <aside class="notes">
@@ -353,7 +353,7 @@ Brandon M. Greenwell
       }</style></aside>
 </section>
 <section id="common-iterator-methods" class="slide level2 smaller">
-<h2>Common Iterator Methods</h2>
+<h2>Common iterator methods</h2>
 <p><strong>Transformation:</strong></p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb3-1"><a href="" aria-label="1"></a><span class="co">// map: transform each element</span></span>
 <span id="cb3-2"><a href="" aria-label="2"></a><span class="pp">vec!</span>[<span class="dv">1</span><span class="op">,</span> <span class="dv">2</span><span class="op">,</span> <span class="dv">3</span>]<span class="op">.</span>iter()<span class="op">.</span>map(<span class="op">|</span>x<span class="op">|</span> x <span class="op">*</span> <span class="dv">2</span>)  <span class="co">// [2, 4, 6]</span></span>
@@ -376,7 +376,7 @@ Brandon M. Greenwell
 <span id="cb4-8"><a href="" aria-label="8"></a>(<span class="dv">1</span><span class="op">..=</span><span class="dv">5</span>)<span class="op">.</span><span class="pp">collect::</span><span class="op">&lt;</span><span class="dt">Vec</span><span class="op">&lt;</span><span class="dt">i32</span><span class="op">&gt;&gt;</span>()  <span class="co">// [1, 2, 3, 4, 5]</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p><a href="https://doc.rust-lang.org/std/iter/trait.Iterator.html#provided-methods">📖 Iterator methods</a></p>
 <aside class="notes">
-<p>Point out that these are zero-cost - compiler optimizes them to loops.</p>
+<p>Explain that iterator adaptors are lazy and usually inline well. <code>collect()</code> intentionally allocates a collection; inspect optimized output or benchmark before claiming equivalence with a particular loop.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -389,38 +389,18 @@ Brandon M. Greenwell
           display:block!important;
       }</style></aside>
 </section>
-<section id="practical-example-text-analysis" class="slide level2 smaller">
-<h2>Practical Example: Text Analysis</h2>
-<p><strong>Count words, find average length, get longest word:</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb5-1"><a href="" aria-label="1"></a><span class="kw">fn</span> analyze_text(text<span class="op">:</span> <span class="op">&amp;</span><span class="dt">str</span>) <span class="op">-&gt;</span> (<span class="dt">usize</span><span class="op">,</span> <span class="dt">f64</span><span class="op">,</span> <span class="dt">String</span>) <span class="op">{</span></span>
-<span id="cb5-2"><a href="" aria-label="2"></a>    <span class="kw">let</span> words<span class="op">:</span> <span class="dt">Vec</span><span class="op">&lt;&amp;</span><span class="dt">str</span><span class="op">&gt;</span> <span class="op">=</span> text</span>
-<span id="cb5-3"><a href="" aria-label="3"></a>        <span class="op">.</span>split_whitespace()</span>
-<span id="cb5-4"><a href="" aria-label="4"></a>        <span class="op">.</span>collect()<span class="op">;</span></span>
-<span id="cb5-5"><a href="" aria-label="5"></a></span>
-<span id="cb5-6"><a href="" aria-label="6"></a>    <span class="cf">if</span> words<span class="op">.</span>is_empty() <span class="op">{</span></span>
-<span id="cb5-7"><a href="" aria-label="7"></a>        <span class="cf">return</span> (<span class="dv">0</span><span class="op">,</span> <span class="dv">0.0</span><span class="op">,</span> <span class="dt">String</span><span class="pp">::</span>new())<span class="op">;</span></span>
-<span id="cb5-8"><a href="" aria-label="8"></a>    <span class="op">}</span></span>
-<span id="cb5-9"><a href="" aria-label="9"></a></span>
-<span id="cb5-10"><a href="" aria-label="10"></a>    <span class="kw">let</span> word_count <span class="op">=</span> words<span class="op">.</span>len()<span class="op">;</span></span>
-<span id="cb5-11"><a href="" aria-label="11"></a></span>
-<span id="cb5-12"><a href="" aria-label="12"></a>    <span class="co">// Average word length using iterator methods</span></span>
-<span id="cb5-13"><a href="" aria-label="13"></a>    <span class="kw">let</span> total_length<span class="op">:</span> <span class="dt">usize</span> <span class="op">=</span> words</span>
-<span id="cb5-14"><a href="" aria-label="14"></a>        <span class="op">.</span>iter()</span>
-<span id="cb5-15"><a href="" aria-label="15"></a>        <span class="op">.</span>map(<span class="op">|</span>word<span class="op">|</span> word<span class="op">.</span>len())</span>
-<span id="cb5-16"><a href="" aria-label="16"></a>        <span class="op">.</span>sum()<span class="op">;</span></span>
-<span id="cb5-17"><a href="" aria-label="17"></a>    <span class="kw">let</span> average_length <span class="op">=</span> total_length <span class="kw">as</span> <span class="dt">f64</span> <span class="op">/</span> word_count <span class="kw">as</span> <span class="dt">f64</span><span class="op">;</span></span>
-<span id="cb5-18"><a href="" aria-label="18"></a></span>
-<span id="cb5-19"><a href="" aria-label="19"></a>    <span class="co">// Find longest word</span></span>
-<span id="cb5-20"><a href="" aria-label="20"></a>    <span class="kw">let</span> longest_word <span class="op">=</span> words</span>
-<span id="cb5-21"><a href="" aria-label="21"></a>        <span class="op">.</span>iter()</span>
-<span id="cb5-22"><a href="" aria-label="22"></a>        <span class="op">.</span>max_by_key(<span class="op">|</span>word<span class="op">|</span> word<span class="op">.</span>len())</span>
-<span id="cb5-23"><a href="" aria-label="23"></a>        <span class="op">.</span>unwrap_or(<span class="op">&amp;</span><span class="st">""</span>)</span>
-<span id="cb5-24"><a href="" aria-label="24"></a>        <span class="op">.</span>to_string()<span class="op">;</span></span>
-<span id="cb5-25"><a href="" aria-label="25"></a></span>
-<span id="cb5-26"><a href="" aria-label="26"></a>    (word_count<span class="op">,</span> average_length<span class="op">,</span> longest_word)</span>
-<span id="cb5-27"><a href="" aria-label="27"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<section id="practical-example-line-lengths" class="slide level2 smaller">
+<h2>Practical example: line lengths</h2>
+<p><strong>Trim nonempty lines and record their lengths:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb5-1"><a href="" aria-label="1"></a><span class="kw">fn</span> nonempty_line_lengths(text<span class="op">:</span> <span class="op">&amp;</span><span class="dt">str</span>) <span class="op">-&gt;</span> <span class="dt">Vec</span><span class="op">&lt;</span><span class="dt">usize</span><span class="op">&gt;</span> <span class="op">{</span></span>
+<span id="cb5-2"><a href="" aria-label="2"></a>    text<span class="op">.</span>lines()</span>
+<span id="cb5-3"><a href="" aria-label="3"></a>        <span class="op">.</span>map(<span class="dt">str</span><span class="pp">::</span>trim)</span>
+<span id="cb5-4"><a href="" aria-label="4"></a>        <span class="op">.</span>filter(<span class="op">|</span>line<span class="op">|</span> <span class="op">!</span>line<span class="op">.</span>is_empty())</span>
+<span id="cb5-5"><a href="" aria-label="5"></a>        <span class="op">.</span>map(<span class="dt">str</span><span class="pp">::</span>len)</span>
+<span id="cb5-6"><a href="" aria-label="6"></a>        <span class="op">.</span>collect()</span>
+<span id="cb5-7"><a href="" aria-label="7"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <aside class="notes">
-<p>This shows real-world iterator usage. Much clearer than nested loops!</p>
+<p>Compare this iterator version with a loop using the same requirements. Prefer the version whose data flow the class can explain and test.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -434,21 +414,21 @@ Brandon M. Greenwell
       }</style></aside>
 </section>
 <section id="try-it-yourself-iterator-chains" class="slide level2 inverse smaller">
-<h2>Try It Yourself: Iterator Chains</h2>
-<p><strong>Challenge</strong>: Filter and transform numbers</p>
+<h2>Try it yourself: iterator chains</h2>
+<p><strong>Challenge</strong>: Build an iterator pipeline</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb6-1"><a href="" aria-label="1"></a><span class="co">// Given this vector:</span></span>
 <span id="cb6-2"><a href="" aria-label="2"></a><span class="kw">let</span> numbers <span class="op">=</span> <span class="pp">vec!</span>[<span class="dv">1</span><span class="op">,</span> <span class="dv">2</span><span class="op">,</span> <span class="dv">3</span><span class="op">,</span> <span class="dv">4</span><span class="op">,</span> <span class="dv">5</span><span class="op">,</span> <span class="dv">6</span><span class="op">,</span> <span class="dv">7</span><span class="op">,</span> <span class="dv">8</span><span class="op">,</span> <span class="dv">9</span><span class="op">,</span> <span class="dv">10</span>]<span class="op">;</span></span>
 <span id="cb6-3"><a href="" aria-label="3"></a></span>
 <span id="cb6-4"><a href="" aria-label="4"></a><span class="co">// Use iterator methods to:</span></span>
-<span id="cb6-5"><a href="" aria-label="5"></a><span class="co">// 1. Keep only even numbers</span></span>
-<span id="cb6-6"><a href="" aria-label="6"></a><span class="co">// 2. Square each number</span></span>
+<span id="cb6-5"><a href="" aria-label="5"></a><span class="co">// 1. Keep values greater than 5</span></span>
+<span id="cb6-6"><a href="" aria-label="6"></a><span class="co">// 2. Double each value</span></span>
 <span id="cb6-7"><a href="" aria-label="7"></a><span class="co">// 3. Sum the results</span></span>
-<span id="cb6-8"><a href="" aria-label="8"></a><span class="co">// Expected: 220 (2² + 4² + 6² + 8² + 10² = 4 + 16 + 36 + 64 + 100)</span></span>
+<span id="cb6-8"><a href="" aria-label="8"></a><span class="co">// Expected: 80</span></span>
 <span id="cb6-9"><a href="" aria-label="9"></a></span>
 <span id="cb6-10"><a href="" aria-label="10"></a><span class="kw">let</span> result<span class="op">:</span> <span class="dt">i32</span> <span class="op">=</span> numbers</span>
 <span id="cb6-11"><a href="" aria-label="11"></a>    <span class="op">.</span>iter()</span>
-<span id="cb6-12"><a href="" aria-label="12"></a>    <span class="op">.</span>filter(<span class="op">|&amp;&amp;</span>n<span class="op">|</span> n <span class="op">%</span> <span class="dv">2</span> <span class="op">==</span> <span class="dv">0</span>)</span>
-<span id="cb6-13"><a href="" aria-label="13"></a>    <span class="op">.</span>map(<span class="op">|&amp;</span>n<span class="op">|</span> n <span class="op">*</span> n)</span>
+<span id="cb6-12"><a href="" aria-label="12"></a>    <span class="op">.</span>filter(<span class="op">|&amp;&amp;</span>n<span class="op">|</span> n <span class="op">&gt;</span> <span class="dv">5</span>)</span>
+<span id="cb6-13"><a href="" aria-label="13"></a>    <span class="op">.</span>map(<span class="op">|&amp;</span>n<span class="op">|</span> n <span class="op">*</span> <span class="dv">2</span>)</span>
 <span id="cb6-14"><a href="" aria-label="14"></a>    <span class="op">.</span>sum()<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p><strong>Try on <a href="https://play.rust-lang.org/">Rust Playground</a></strong></p>
 <aside class="notes">
@@ -466,7 +446,7 @@ Brandon M. Greenwell
       }</style></aside>
 </section>
 <section id="closures-anonymous-functions" class="slide level2 smaller">
-<h2>Closures: Anonymous Functions</h2>
+<h2>Closures: anonymous functions</h2>
 <p><strong>Closures are functions that can capture their environment:</strong></p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb7-1"><a href="" aria-label="1"></a><span class="co">// Regular function</span></span>
 <span id="cb7-2"><a href="" aria-label="2"></a><span class="kw">fn</span> add_one(x<span class="op">:</span> <span class="dt">i32</span>) <span class="op">-&gt;</span> <span class="dt">i32</span> <span class="op">{</span></span>
@@ -504,8 +484,8 @@ Brandon M. Greenwell
           display:block!important;
       }</style></aside>
 </section>
-<section id="closure-traits-fn-fnmut-fnonce" class="slide level2 smaller">
-<h2>Closure Traits: Fn, FnMut, FnOnce</h2>
+<section id="closure-traits-fn-fnmut-and-fnonce" class="slide level2 smaller">
+<h2>Closure traits: <code>Fn</code>, <code>FnMut</code>, and <code>FnOnce</code></h2>
 <p><strong>Rust has three closure traits based on how they capture variables:</strong></p>
 <p><strong><code>Fn</code></strong> - Borrows immutably:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb9-1"><a href="" aria-label="1"></a><span class="kw">let</span> x <span class="op">=</span> <span class="dv">10</span><span class="op">;</span></span>
@@ -535,35 +515,24 @@ Brandon M. Greenwell
           display:block!important;
       }</style></aside>
 </section>
-<section id="practical-example-custom-counter" class="slide level2 smaller">
-<h2>Practical Example: Custom Counter</h2>
-<p><strong>Create a closure that tracks state:</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb12-1"><a href="" aria-label="1"></a><span class="kw">fn</span> make_counter() <span class="op">-&gt;</span> <span class="kw">impl</span> <span class="bu">FnMut</span>() <span class="op">-&gt;</span> <span class="dt">i32</span> <span class="op">{</span></span>
-<span id="cb12-2"><a href="" aria-label="2"></a>    <span class="kw">let</span> <span class="kw">mut</span> count <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
-<span id="cb12-3"><a href="" aria-label="3"></a></span>
-<span id="cb12-4"><a href="" aria-label="4"></a>    <span class="kw">move</span> <span class="op">||</span> <span class="op">{</span></span>
-<span id="cb12-5"><a href="" aria-label="5"></a>        count <span class="op">+=</span> <span class="dv">1</span><span class="op">;</span></span>
-<span id="cb12-6"><a href="" aria-label="6"></a>        count</span>
-<span id="cb12-7"><a href="" aria-label="7"></a>    <span class="op">}</span></span>
-<span id="cb12-8"><a href="" aria-label="8"></a><span class="op">}</span></span>
-<span id="cb12-9"><a href="" aria-label="9"></a></span>
-<span id="cb12-10"><a href="" aria-label="10"></a><span class="co">// Use it:</span></span>
-<span id="cb12-11"><a href="" aria-label="11"></a><span class="kw">let</span> <span class="kw">mut</span> counter <span class="op">=</span> make_counter()<span class="op">;</span></span>
-<span id="cb12-12"><a href="" aria-label="12"></a><span class="pp">println!</span>(<span class="st">"{}"</span><span class="op">,</span> counter())<span class="op">;</span>  <span class="co">// 1</span></span>
-<span id="cb12-13"><a href="" aria-label="13"></a><span class="pp">println!</span>(<span class="st">"{}"</span><span class="op">,</span> counter())<span class="op">;</span>  <span class="co">// 2</span></span>
-<span id="cb12-14"><a href="" aria-label="14"></a><span class="pp">println!</span>(<span class="st">"{}"</span><span class="op">,</span> counter())<span class="op">;</span>  <span class="co">// 3</span></span>
-<span id="cb12-15"><a href="" aria-label="15"></a></span>
-<span id="cb12-16"><a href="" aria-label="16"></a><span class="co">// Each counter is independent!</span></span>
-<span id="cb12-17"><a href="" aria-label="17"></a><span class="kw">let</span> <span class="kw">mut</span> counter2 <span class="op">=</span> make_counter()<span class="op">;</span></span>
-<span id="cb12-18"><a href="" aria-label="18"></a><span class="pp">println!</span>(<span class="st">"{}"</span><span class="op">,</span> counter2())<span class="op">;</span>  <span class="co">// 1</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<section id="practical-example-captured-state" class="slide level2 smaller">
+<h2>Practical example: captured state</h2>
+<p><strong>A closure can update a value from its environment:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb12-1"><a href="" aria-label="1"></a><span class="kw">let</span> <span class="kw">mut</span> total <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb12-2"><a href="" aria-label="2"></a><span class="kw">let</span> <span class="kw">mut</span> add_to_total <span class="op">=</span> <span class="op">|</span>amount<span class="op">|</span> <span class="op">{</span></span>
+<span id="cb12-3"><a href="" aria-label="3"></a>    total <span class="op">+=</span> amount<span class="op">;</span></span>
+<span id="cb12-4"><a href="" aria-label="4"></a>    total</span>
+<span id="cb12-5"><a href="" aria-label="5"></a><span class="op">};</span></span>
+<span id="cb12-6"><a href="" aria-label="6"></a></span>
+<span id="cb12-7"><a href="" aria-label="7"></a><span class="pp">println!</span>(<span class="st">"{}"</span><span class="op">,</span> add_to_total(<span class="dv">4</span>))<span class="op">;</span>  <span class="co">// 4</span></span>
+<span id="cb12-8"><a href="" aria-label="8"></a><span class="pp">println!</span>(<span class="st">"{}"</span><span class="op">,</span> add_to_total(<span class="dv">7</span>))<span class="op">;</span>  <span class="co">// 11</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p><strong>Key concepts:</strong></p>
 <ul>
-<li><code>move</code> keyword transfers ownership into closure</li>
-<li><code>FnMut</code> because closure mutates captured <code>count</code></li>
-<li>Each closure instance has its own state</li>
+<li><code>FnMut</code> because the closure mutates captured <code>total</code></li>
+<li>The mutable borrow lasts while the closure may still be used</li>
 </ul>
 <aside class="notes">
-<p>This is powerful - closures as stateful objects!</p>
+<p>The captured variable gives this closure state that persists between calls.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -576,8 +545,8 @@ Brandon M. Greenwell
           display:block!important;
       }</style></aside>
 </section>
-<section id="real-world-iterator-closure-pattern" class="slide level2 smaller">
-<h2>Real-World Iterator + Closure Pattern</h2>
+<section id="iterator-and-closure-pattern" class="slide level2 smaller">
+<h2>Iterator and closure pattern</h2>
 <p><strong>Processing collections with closures:</strong></p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb13-1"><a href="" aria-label="1"></a><span class="at">#[</span>derive<span class="at">(</span><span class="bu">Debug</span><span class="at">)]</span></span>
 <span id="cb13-2"><a href="" aria-label="2"></a><span class="kw">struct</span> Student <span class="op">{</span></span>
@@ -599,9 +568,9 @@ Brandon M. Greenwell
 <span id="cb13-18"><a href="" aria-label="18"></a>    <span class="op">.</span>collect()<span class="op">;</span></span>
 <span id="cb13-19"><a href="" aria-label="19"></a></span>
 <span id="cb13-20"><a href="" aria-label="20"></a><span class="co">// honor_roll = ["Alice", "Charlie"]</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p><strong>Career relevance</strong>: This pattern appears in every Rust codebase!</p>
+<p><strong>Transfer</strong>: The same filter-map-collect pipeline appears in many Rust APIs.</p>
 <aside class="notes">
-<p>Emphasize that this is the Rust way. Database queries, API filtering, data processing all use this.</p>
+<p>Trace the item type after each adaptor and confirm which values are borrowed. Avoid presenting a pipeline as automatically clearer than a loop.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -614,10 +583,16 @@ Brandon M. Greenwell
           display:block!important;
       }</style></aside>
 </section>
-<section id="session-1-ends-here" class="slide level2 inverse">
-<h2>Session 1 Ends Here</h2>
+<section id="end-of-session-1" class="slide level2 inverse">
+<h2>End of session 1</h2>
 <p><strong>What we covered:</strong></p>
-<p>✅ Iterator methods (<code>.map()</code>, <code>.filter()</code>, <code>.sum()</code>, <code>.collect()</code>) ✅ Building data processing pipelines ✅ Closures and capture semantics ✅ Closure traits (<code>Fn</code>, <code>FnMut</code>, <code>FnOnce</code>) ✅ Real-world patterns combining iterators + closures</p>
+<ul>
+<li>Iterator methods (<code>.map()</code>, <code>.filter()</code>, <code>.sum()</code>, <code>.collect()</code>)</li>
+<li>Building data-processing pipelines</li>
+<li>Closures and capture semantics</li>
+<li>Closure traits (<code>Fn</code>, <code>FnMut</code>, <code>FnOnce</code>)</li>
+<li>Combining iterators and closures</li>
+</ul>
 <p><strong>Next session:</strong> Smart pointers and error handling</p>
 <aside class="notes">
 <p>Take a break. When we return, we’ll cover smart pointers for flexible memory management.</p>
@@ -638,11 +613,11 @@ Brandon M. Greenwell
 </section></section>
 <section>
 <section id="session-2-smart-pointers" class="title-slide slide level1 center">
-<h1>Session 2: Smart Pointers</h1>
+<h1>Session 2: smart pointers</h1>
 
 </section>
 <section id="the-problem-ownership-limitations" class="slide level2 smaller">
-<h2>The Problem: Ownership Limitations</h2>
+<h2>The problem: ownership limitations</h2>
 <p><strong>Rust’s ownership rules are strict:</strong></p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb14-1"><a href="" aria-label="1"></a><span class="co">// ❌ Can't do this - multiple ownership</span></span>
 <span id="cb14-2"><a href="" aria-label="2"></a><span class="kw">let</span> data <span class="op">=</span> <span class="pp">vec!</span>[<span class="dv">1</span><span class="op">,</span> <span class="dv">2</span><span class="op">,</span> <span class="dv">3</span>]<span class="op">;</span></span>
@@ -672,8 +647,8 @@ Brandon M. Greenwell
           display:block!important;
       }</style></aside>
 </section>
-<section id="smart-pointers-overview" class="slide level2 smaller">
-<h2>Smart Pointers Overview</h2>
+<section id="smart-pointer-overview" class="slide level2 smaller">
+<h2>Smart pointer overview</h2>
 <p><strong>Three essential smart pointers:</strong></p>
 <table class="caption-top">
 <thead>
@@ -710,7 +685,7 @@ Brandon M. Greenwell
 </ul>
 <p><a href="https://doc.rust-lang.org/book/ch15-00-smart-pointers.html">📖 Smart Pointers in Rust Book</a></p>
 <aside class="notes">
-<p>These unlock advanced patterns that regular references can’t handle.</p>
+<p>These types express ownership patterns that ordinary references cannot represent, but they also add complexity.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -723,8 +698,8 @@ Brandon M. Greenwell
           display:block!important;
       }</style></aside>
 </section>
-<section id="box-heap-allocation" class="slide level2 smaller">
-<h2>Box<t>: Heap Allocation</t></h2>
+<section id="boxt-heap-allocation" class="slide level2 smaller">
+<h2><code>Box&lt;T&gt;</code>: heap allocation</h2>
 <p><strong><code>Box&lt;T&gt;</code> stores data on the heap with known size:</strong></p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb17-1"><a href="" aria-label="1"></a><span class="co">// Simple heap allocation</span></span>
 <span id="cb17-2"><a href="" aria-label="2"></a><span class="kw">let</span> boxed_int <span class="op">=</span> <span class="dt">Box</span><span class="pp">::</span>new(<span class="dv">5</span>)<span class="op">;</span></span>
@@ -764,7 +739,7 @@ Brandon M. Greenwell
       }</style></aside>
 </section>
 <section id="practical-example-binary-tree" class="slide level2 smaller">
-<h2>Practical Example: Binary Tree</h2>
+<h2>Practical example: binary tree</h2>
 <p><strong>Building a binary tree with Box:</strong></p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb18"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb18-1"><a href="" aria-label="1"></a><span class="kw">impl</span><span class="op">&lt;</span>T<span class="op">&gt;</span> BinaryTree<span class="op">&lt;</span>T<span class="op">&gt;</span> <span class="op">{</span></span>
 <span id="cb18-2"><a href="" aria-label="2"></a>    <span class="co">/// Creates a new empty tree</span></span>
@@ -811,8 +786,8 @@ Brandon M. Greenwell
           display:block!important;
       }</style></aside>
 </section>
-<section id="rc-reference-counting" class="slide level2 smaller">
-<h2>Rc<t>: Reference Counting</t></h2>
+<section id="rct-reference-counting" class="slide level2 smaller">
+<h2><code>Rc&lt;T&gt;</code>: reference counting</h2>
 <p><strong><code>Rc&lt;T&gt;</code> enables multiple owners of the same data:</strong></p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb19"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb19-1"><a href="" aria-label="1"></a><span class="kw">use</span> <span class="pp">std::rc::</span>Rc<span class="op">;</span></span>
 <span id="cb19-2"><a href="" aria-label="2"></a></span>
@@ -837,7 +812,7 @@ Brandon M. Greenwell
 <p><strong>Important</strong>: <code>Rc::clone</code> is cheap - it only increments a counter, doesn’t copy data!</p>
 <p><a href="https://doc.rust-lang.org/std/rc/struct.Rc.html">📖 Rc documentation</a></p>
 <aside class="notes">
-<p>Rc is perfect for graph structures where nodes share children.</p>
+<p><code>Rc&lt;T&gt;</code> is useful for single-threaded structures in which multiple owners share a value, such as some graph representations.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -850,8 +825,8 @@ Brandon M. Greenwell
           display:block!important;
       }</style></aside>
 </section>
-<section id="refcell-interior-mutability" class="slide level2 smaller">
-<h2>RefCell<t>: Interior Mutability</t></h2>
+<section id="refcellt-interior-mutability" class="slide level2 smaller">
+<h2><code>RefCell&lt;T&gt;</code>: interior mutability</h2>
 <p><strong><code>RefCell&lt;T&gt;</code> allows mutation through shared references (runtime borrow checking):</strong></p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb20"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb20-1"><a href="" aria-label="1"></a><span class="kw">use</span> <span class="pp">std::cell::</span>RefCell<span class="op">;</span></span>
 <span id="cb20-2"><a href="" aria-label="2"></a></span>
@@ -890,7 +865,7 @@ Brandon M. Greenwell
       }</style></aside>
 </section>
 <section id="combining-rc-and-refcell" class="slide level2 smaller">
-<h2>Combining Rc and RefCell</h2>
+<h2>Combining <code>Rc</code> and <code>RefCell</code></h2>
 <p><strong>Pattern: Shared mutable data (single-threaded)</strong></p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb22"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb22-1"><a href="" aria-label="1"></a><span class="kw">use</span> <span class="pp">std::rc::</span>Rc<span class="op">;</span></span>
 <span id="cb22-2"><a href="" aria-label="2"></a><span class="kw">use</span> <span class="pp">std::cell::</span>RefCell<span class="op">;</span></span>
@@ -932,7 +907,7 @@ Brandon M. Greenwell
       }</style></aside>
 </section>
 <section id="when-to-use-each-smart-pointer" class="slide level2 smaller">
-<h2>When to Use Each Smart Pointer</h2>
+<h2>When to use each smart pointer</h2>
 <p><strong>Decision tree:</strong></p>
 <pre><code>Do you need multiple owners?
 ├─ NO → Use Box&lt;T&gt;
@@ -951,7 +926,7 @@ Brandon M. Greenwell
 <li><code>Arc&lt;Mutex&lt;T&gt;&gt;</code>: Thread-safe shared mutable data</li>
 </ul>
 <aside class="notes">
-<p>For now, focus on single-threaded. Next week we’ll add threading to Lab 14.</p>
+<p>For now, focus on single-threaded ownership. <code>Arc&lt;T&gt;</code> and <code>Mutex&lt;T&gt;</code> are optional follow-up topics and are not required in Lab 14.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -965,14 +940,14 @@ Brandon M. Greenwell
       }</style></aside>
 </section>
 <section id="idiomatic-error-handling" class="slide level2 inverse scrollable">
-<h2>Idiomatic Error Handling</h2>
-<p><strong>Rust doesn’t have exceptions. It uses <code>Result&lt;T, E&gt;</code> for errors.</strong></p>
-<p><strong>Why this is better:</strong></p>
+<h2>Idiomatic error handling</h2>
+<p><strong>Rust uses <code>Result&lt;T, E&gt;</code> for recoverable errors rather than catchable exceptions.</strong></p>
+<p><strong>What this provides:</strong></p>
 <ul>
 <li>Errors are explicit in function signatures</li>
-<li>Compiler forces you to handle them</li>
-<li>No surprise runtime exceptions</li>
-<li>Zero-cost: <code>Result</code> is just an enum</li>
+<li>Code must inspect or transform the result to access the success value</li>
+<li>Expected failure categories are visible to callers</li>
+<li><code>Result</code> is an enum whose representation and runtime cost depend on its variants and use</li>
 </ul>
 <p><strong>Two approaches:</strong></p>
 <ol type="1">
@@ -994,32 +969,31 @@ Brandon M. Greenwell
       }</style></aside>
 </section>
 <section id="resultt-e-basics" class="slide level2 smaller">
-<h2>Result&lt;T, E&gt; Basics</h2>
+<h2><code>Result&lt;T, E&gt;</code> basics</h2>
 <p><strong><code>Result</code> is an enum with two variants:</strong></p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb24"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb24-1"><a href="" aria-label="1"></a><span class="kw">enum</span> <span class="dt">Result</span><span class="op">&lt;</span>T<span class="op">,</span> E<span class="op">&gt;</span> <span class="op">{</span></span>
 <span id="cb24-2"><a href="" aria-label="2"></a>    <span class="cn">Ok</span>(T)<span class="op">,</span>   <span class="co">// Success - contains value</span></span>
 <span id="cb24-3"><a href="" aria-label="3"></a>    <span class="cn">Err</span>(E)<span class="op">,</span>  <span class="co">// Failure - contains error</span></span>
 <span id="cb24-4"><a href="" aria-label="4"></a><span class="op">}</span></span>
 <span id="cb24-5"><a href="" aria-label="5"></a></span>
-<span id="cb24-6"><a href="" aria-label="6"></a><span class="co">// Example: division that can fail</span></span>
-<span id="cb24-7"><a href="" aria-label="7"></a><span class="kw">fn</span> divide(a<span class="op">:</span> <span class="dt">f64</span><span class="op">,</span> b<span class="op">:</span> <span class="dt">f64</span>) <span class="op">-&gt;</span> <span class="dt">Result</span><span class="op">&lt;</span><span class="dt">f64</span><span class="op">,</span> <span class="dt">String</span><span class="op">&gt;</span> <span class="op">{</span></span>
-<span id="cb24-8"><a href="" aria-label="8"></a>    <span class="cf">if</span> b <span class="op">==</span> <span class="dv">0.0</span> <span class="op">{</span></span>
-<span id="cb24-9"><a href="" aria-label="9"></a>        <span class="cn">Err</span>(<span class="dt">String</span><span class="pp">::</span>from(<span class="st">"Division by zero"</span>))</span>
-<span id="cb24-10"><a href="" aria-label="10"></a>    <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></span>
-<span id="cb24-11"><a href="" aria-label="11"></a>        <span class="cn">Ok</span>(a <span class="op">/</span> b)</span>
-<span id="cb24-12"><a href="" aria-label="12"></a>    <span class="op">}</span></span>
-<span id="cb24-13"><a href="" aria-label="13"></a><span class="op">}</span></span>
-<span id="cb24-14"><a href="" aria-label="14"></a></span>
-<span id="cb24-15"><a href="" aria-label="15"></a><span class="co">// Usage with match:</span></span>
-<span id="cb24-16"><a href="" aria-label="16"></a><span class="cf">match</span> divide(<span class="dv">10.0</span><span class="op">,</span> <span class="dv">2.0</span>) <span class="op">{</span></span>
-<span id="cb24-17"><a href="" aria-label="17"></a>    <span class="cn">Ok</span>(result) <span class="op">=&gt;</span> <span class="pp">println!</span>(<span class="st">"Result: {}"</span><span class="op">,</span> result)<span class="op">,</span></span>
-<span id="cb24-18"><a href="" aria-label="18"></a>    <span class="cn">Err</span>(e) <span class="op">=&gt;</span> <span class="pp">println!</span>(<span class="st">"Error: {}"</span><span class="op">,</span> e)<span class="op">,</span></span>
-<span id="cb24-19"><a href="" aria-label="19"></a><span class="op">}</span></span>
-<span id="cb24-20"><a href="" aria-label="20"></a></span>
-<span id="cb24-21"><a href="" aria-label="21"></a><span class="co">// Or with if let:</span></span>
-<span id="cb24-22"><a href="" aria-label="22"></a><span class="cf">if</span> <span class="kw">let</span> <span class="cn">Ok</span>(result) <span class="op">=</span> divide(<span class="dv">10.0</span><span class="op">,</span> <span class="dv">2.0</span>) <span class="op">{</span></span>
-<span id="cb24-23"><a href="" aria-label="23"></a>    <span class="pp">println!</span>(<span class="st">"Result: {}"</span><span class="op">,</span> result)<span class="op">;</span></span>
-<span id="cb24-24"><a href="" aria-label="24"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb24-6"><a href="" aria-label="6"></a><span class="co">// Example: parsing a network port</span></span>
+<span id="cb24-7"><a href="" aria-label="7"></a><span class="kw">fn</span> parse_port(input<span class="op">:</span> <span class="op">&amp;</span><span class="dt">str</span>) <span class="op">-&gt;</span> <span class="dt">Result</span><span class="op">&lt;</span><span class="dt">u16</span><span class="op">,</span> <span class="dt">String</span><span class="op">&gt;</span> <span class="op">{</span></span>
+<span id="cb24-8"><a href="" aria-label="8"></a>    input</span>
+<span id="cb24-9"><a href="" aria-label="9"></a>        <span class="op">.</span>trim()</span>
+<span id="cb24-10"><a href="" aria-label="10"></a>        <span class="op">.</span><span class="pp">parse::</span><span class="op">&lt;</span><span class="dt">u16</span><span class="op">&gt;</span>()</span>
+<span id="cb24-11"><a href="" aria-label="11"></a>        <span class="op">.</span>map_err(<span class="op">|</span>_<span class="op">|</span> <span class="pp">format!</span>(<span class="st">"Invalid port: {input}"</span>))</span>
+<span id="cb24-12"><a href="" aria-label="12"></a><span class="op">}</span></span>
+<span id="cb24-13"><a href="" aria-label="13"></a></span>
+<span id="cb24-14"><a href="" aria-label="14"></a><span class="co">// Usage with match:</span></span>
+<span id="cb24-15"><a href="" aria-label="15"></a><span class="cf">match</span> parse_port(<span class="st">"8080"</span>) <span class="op">{</span></span>
+<span id="cb24-16"><a href="" aria-label="16"></a>    <span class="cn">Ok</span>(port) <span class="op">=&gt;</span> <span class="pp">println!</span>(<span class="st">"Port: {port}"</span>)<span class="op">,</span></span>
+<span id="cb24-17"><a href="" aria-label="17"></a>    <span class="cn">Err</span>(e) <span class="op">=&gt;</span> <span class="pp">println!</span>(<span class="st">"Error: {}"</span><span class="op">,</span> e)<span class="op">,</span></span>
+<span id="cb24-18"><a href="" aria-label="18"></a><span class="op">}</span></span>
+<span id="cb24-19"><a href="" aria-label="19"></a></span>
+<span id="cb24-20"><a href="" aria-label="20"></a><span class="co">// Or with if let:</span></span>
+<span id="cb24-21"><a href="" aria-label="21"></a><span class="cf">if</span> <span class="kw">let</span> <span class="cn">Ok</span>(port) <span class="op">=</span> parse_port(<span class="st">"3000"</span>) <span class="op">{</span></span>
+<span id="cb24-22"><a href="" aria-label="22"></a>    <span class="pp">println!</span>(<span class="st">"Port: {port}"</span>)<span class="op">;</span></span>
+<span id="cb24-23"><a href="" aria-label="23"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p><a href="https://doc.rust-lang.org/std/result/enum.Result.html">📖 Result documentation</a></p>
 <aside class="notes">
 <p>Result forces you to think about errors upfront, not as an afterthought.</p>
@@ -1036,7 +1010,7 @@ Brandon M. Greenwell
       }</style></aside>
 </section>
 <section id="the-operator-error-propagation" class="slide level2 smaller">
-<h2>The ? Operator: Error Propagation</h2>
+<h2>The <code>?</code> operator: error propagation</h2>
 <p><strong>The <code>?</code> operator makes error handling ergonomic:</strong></p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb25"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb25-1"><a href="" aria-label="1"></a><span class="kw">use</span> <span class="pp">std::fs::</span>File<span class="op">;</span></span>
 <span id="cb25-2"><a href="" aria-label="2"></a><span class="kw">use</span> <span class="pp">std::io::</span><span class="op">{</span><span class="kw">self</span><span class="op">,</span> <span class="bu">Read</span><span class="op">};</span></span>
@@ -1080,7 +1054,7 @@ Brandon M. Greenwell
       }</style></aside>
 </section>
 <section id="custom-error-types" class="slide level2 smaller">
-<h2>Custom Error Types</h2>
+<h2>Custom error types</h2>
 <p><strong>Create domain-specific errors:</strong></p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb26"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb26-1"><a href="" aria-label="1"></a><span class="kw">use</span> <span class="pp">std::</span>fmt<span class="op">;</span></span>
 <span id="cb26-2"><a href="" aria-label="2"></a></span>
@@ -1088,7 +1062,7 @@ Brandon M. Greenwell
 <span id="cb26-4"><a href="" aria-label="4"></a><span class="kw">enum</span> ParseError <span class="op">{</span></span>
 <span id="cb26-5"><a href="" aria-label="5"></a>    EmptyInput<span class="op">,</span></span>
 <span id="cb26-6"><a href="" aria-label="6"></a>    InvalidNumber(<span class="dt">String</span>)<span class="op">,</span></span>
-<span id="cb26-7"><a href="" aria-label="7"></a>    OutOfRange(<span class="dt">i32</span>)<span class="op">,</span></span>
+<span id="cb26-7"><a href="" aria-label="7"></a>    InvalidPercentage(<span class="dt">i32</span>)<span class="op">,</span></span>
 <span id="cb26-8"><a href="" aria-label="8"></a><span class="op">}</span></span>
 <span id="cb26-9"><a href="" aria-label="9"></a></span>
 <span id="cb26-10"><a href="" aria-label="10"></a><span class="co">// Implement Display for pretty error messages</span></span>
@@ -1097,28 +1071,30 @@ Brandon M. Greenwell
 <span id="cb26-13"><a href="" aria-label="13"></a>        <span class="cf">match</span> <span class="kw">self</span> <span class="op">{</span></span>
 <span id="cb26-14"><a href="" aria-label="14"></a>            <span class="pp">ParseError::</span>EmptyInput <span class="op">=&gt;</span> <span class="pp">write!</span>(f<span class="op">,</span> <span class="st">"Input string is empty"</span>)<span class="op">,</span></span>
 <span id="cb26-15"><a href="" aria-label="15"></a>            <span class="pp">ParseError::</span>InvalidNumber(s) <span class="op">=&gt;</span> <span class="pp">write!</span>(f<span class="op">,</span> <span class="st">"Invalid number: {}"</span><span class="op">,</span> s)<span class="op">,</span></span>
-<span id="cb26-16"><a href="" aria-label="16"></a>            <span class="pp">ParseError::</span>OutOfRange(n) <span class="op">=&gt;</span> <span class="pp">write!</span>(f<span class="op">,</span> <span class="st">"Number {} out of range (1-100)"</span><span class="op">,</span> n)<span class="op">,</span></span>
-<span id="cb26-17"><a href="" aria-label="17"></a>        <span class="op">}</span></span>
-<span id="cb26-18"><a href="" aria-label="18"></a>    <span class="op">}</span></span>
-<span id="cb26-19"><a href="" aria-label="19"></a><span class="op">}</span></span>
-<span id="cb26-20"><a href="" aria-label="20"></a></span>
-<span id="cb26-21"><a href="" aria-label="21"></a><span class="co">// Use custom error type</span></span>
-<span id="cb26-22"><a href="" aria-label="22"></a><span class="kw">fn</span> parse_positive_number(input<span class="op">:</span> <span class="op">&amp;</span><span class="dt">str</span>) <span class="op">-&gt;</span> <span class="dt">Result</span><span class="op">&lt;</span><span class="dt">i32</span><span class="op">,</span> ParseError<span class="op">&gt;</span> <span class="op">{</span></span>
-<span id="cb26-23"><a href="" aria-label="23"></a>    <span class="cf">if</span> input<span class="op">.</span>is_empty() <span class="op">{</span></span>
-<span id="cb26-24"><a href="" aria-label="24"></a>        <span class="cf">return</span> <span class="cn">Err</span>(<span class="pp">ParseError::</span>EmptyInput)<span class="op">;</span></span>
-<span id="cb26-25"><a href="" aria-label="25"></a>    <span class="op">}</span></span>
-<span id="cb26-26"><a href="" aria-label="26"></a></span>
-<span id="cb26-27"><a href="" aria-label="27"></a>    <span class="kw">let</span> num<span class="op">:</span> <span class="dt">i32</span> <span class="op">=</span> input<span class="op">.</span>trim()<span class="op">.</span>parse()</span>
-<span id="cb26-28"><a href="" aria-label="28"></a>        <span class="op">.</span>map_err(<span class="op">|</span>_<span class="op">|</span> <span class="pp">ParseError::</span>InvalidNumber(input<span class="op">.</span>to_string()))<span class="op">?;</span></span>
-<span id="cb26-29"><a href="" aria-label="29"></a></span>
-<span id="cb26-30"><a href="" aria-label="30"></a>    <span class="cf">if</span> num <span class="op">&lt;</span> <span class="dv">1</span> <span class="op">||</span> num <span class="op">&gt;</span> <span class="dv">100</span> <span class="op">{</span></span>
-<span id="cb26-31"><a href="" aria-label="31"></a>        <span class="cf">return</span> <span class="cn">Err</span>(<span class="pp">ParseError::</span>OutOfRange(num))<span class="op">;</span></span>
-<span id="cb26-32"><a href="" aria-label="32"></a>    <span class="op">}</span></span>
-<span id="cb26-33"><a href="" aria-label="33"></a></span>
-<span id="cb26-34"><a href="" aria-label="34"></a>    <span class="cn">Ok</span>(num)</span>
-<span id="cb26-35"><a href="" aria-label="35"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb26-16"><a href="" aria-label="16"></a>            <span class="pp">ParseError::</span>InvalidPercentage(n) <span class="op">=&gt;</span> <span class="op">{</span></span>
+<span id="cb26-17"><a href="" aria-label="17"></a>                <span class="pp">write!</span>(f<span class="op">,</span> <span class="st">"Percentage {n} must be between 0 and 100"</span>)</span>
+<span id="cb26-18"><a href="" aria-label="18"></a>            <span class="op">}</span></span>
+<span id="cb26-19"><a href="" aria-label="19"></a>        <span class="op">}</span></span>
+<span id="cb26-20"><a href="" aria-label="20"></a>    <span class="op">}</span></span>
+<span id="cb26-21"><a href="" aria-label="21"></a><span class="op">}</span></span>
+<span id="cb26-22"><a href="" aria-label="22"></a></span>
+<span id="cb26-23"><a href="" aria-label="23"></a><span class="co">// Use custom error type</span></span>
+<span id="cb26-24"><a href="" aria-label="24"></a><span class="kw">fn</span> parse_percentage(input<span class="op">:</span> <span class="op">&amp;</span><span class="dt">str</span>) <span class="op">-&gt;</span> <span class="dt">Result</span><span class="op">&lt;</span><span class="dt">i32</span><span class="op">,</span> ParseError<span class="op">&gt;</span> <span class="op">{</span></span>
+<span id="cb26-25"><a href="" aria-label="25"></a>    <span class="cf">if</span> input<span class="op">.</span>trim()<span class="op">.</span>is_empty() <span class="op">{</span></span>
+<span id="cb26-26"><a href="" aria-label="26"></a>        <span class="cf">return</span> <span class="cn">Err</span>(<span class="pp">ParseError::</span>EmptyInput)<span class="op">;</span></span>
+<span id="cb26-27"><a href="" aria-label="27"></a>    <span class="op">}</span></span>
+<span id="cb26-28"><a href="" aria-label="28"></a></span>
+<span id="cb26-29"><a href="" aria-label="29"></a>    <span class="kw">let</span> num<span class="op">:</span> <span class="dt">i32</span> <span class="op">=</span> input<span class="op">.</span>trim()<span class="op">.</span>parse()</span>
+<span id="cb26-30"><a href="" aria-label="30"></a>        <span class="op">.</span>map_err(<span class="op">|</span>_<span class="op">|</span> <span class="pp">ParseError::</span>InvalidNumber(input<span class="op">.</span>to_string()))<span class="op">?;</span></span>
+<span id="cb26-31"><a href="" aria-label="31"></a></span>
+<span id="cb26-32"><a href="" aria-label="32"></a>    <span class="cf">if</span> <span class="op">!</span>(<span class="dv">0</span><span class="op">..=</span><span class="dv">100</span>)<span class="op">.</span>contains(<span class="op">&amp;</span>num) <span class="op">{</span></span>
+<span id="cb26-33"><a href="" aria-label="33"></a>        <span class="cf">return</span> <span class="cn">Err</span>(<span class="pp">ParseError::</span>InvalidPercentage(num))<span class="op">;</span></span>
+<span id="cb26-34"><a href="" aria-label="34"></a>    <span class="op">}</span></span>
+<span id="cb26-35"><a href="" aria-label="35"></a></span>
+<span id="cb26-36"><a href="" aria-label="36"></a>    <span class="cn">Ok</span>(num)</span>
+<span id="cb26-37"><a href="" aria-label="37"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <aside class="notes">
-<p>Custom errors make your API self-documenting. Users know exactly what can fail.</p>
+<p>Custom error variants communicate expected failure categories, but documentation and tests are still needed and unrelated panics may remain.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1132,7 +1108,7 @@ Brandon M. Greenwell
       }</style></aside>
 </section>
 <section id="try-it-yourself-error-handling" class="slide level2 inverse smaller">
-<h2>Try It Yourself: Error Handling</h2>
+<h2>Try it yourself: error handling</h2>
 <p><strong>Challenge</strong>: Parse user input with good error messages</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb27"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb27-1"><a href="" aria-label="1"></a><span class="co">// Given this function signature:</span></span>
 <span id="cb27-2"><a href="" aria-label="2"></a><span class="kw">fn</span> parse_age(input<span class="op">:</span> <span class="op">&amp;</span><span class="dt">str</span>) <span class="op">-&gt;</span> <span class="dt">Result</span><span class="op">&lt;</span><span class="dt">u8</span><span class="op">,</span> <span class="dt">String</span><span class="op">&gt;</span> <span class="op">{</span></span>
@@ -1161,8 +1137,8 @@ Brandon M. Greenwell
           display:block!important;
       }</style></aside>
 </section>
-<section id="integrative-pattern-all-three-concepts" class="slide level2 smaller">
-<h2>Integrative Pattern: All Three Concepts</h2>
+<section id="integrative-pattern-three-concepts" class="slide level2 smaller">
+<h2>Integrative pattern: three concepts</h2>
 <p><strong>Combining iterators, smart pointers, and error handling:</strong></p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb28"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb28-1"><a href="" aria-label="1"></a><span class="kw">use</span> <span class="pp">std::rc::</span>Rc<span class="op">;</span></span>
 <span id="cb28-2"><a href="" aria-label="2"></a><span class="kw">use</span> <span class="pp">std::cell::</span>RefCell<span class="op">;</span></span>
@@ -1210,7 +1186,7 @@ Brandon M. Greenwell
 <span id="cb28-44"><a href="" aria-label="44"></a>        <span class="op">.</span>collect()  <span class="co">// Collect into Result&lt;Vec&lt;_&gt;, _&gt;</span></span>
 <span id="cb28-45"><a href="" aria-label="45"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <aside class="notes">
-<p>This is production Rust! Iterators for data flow, Rc/RefCell for shared state, Result for safety.</p>
+<p>Summarize the decision points: iterator versus loop, single versus shared ownership, compile-time versus runtime borrow checking, and <code>Result</code> propagation versus local handling.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1223,8 +1199,8 @@ Brandon M. Greenwell
           display:block!important;
       }</style></aside>
 </section>
-<section id="real-world-career-applications" class="slide level2 inverse smaller">
-<h2>Real-World Career Applications</h2>
+<section id="where-these-patterns-appear" class="slide level2 inverse smaller">
+<h2>Where these patterns appear</h2>
 <p><strong>Where you’ll use these patterns:</strong></p>
 <p><strong>Iterators:</strong></p>
 <ul>
@@ -1233,23 +1209,23 @@ Brandon M. Greenwell
 <li>Database query building</li>
 <li>JSON/XML parsing</li>
 </ul>
-<p><strong>Smart Pointers:</strong></p>
+<p><strong>Smart pointers:</strong></p>
 <ul>
 <li>Graph databases (Rc for shared nodes)</li>
 <li>Game engines (entity-component systems)</li>
 <li>Compilers (AST with shared subtrees)</li>
 <li>UI frameworks (shared state management)</li>
 </ul>
-<p><strong>Error Handling:</strong></p>
+<p><strong>Error handling:</strong></p>
 <ul>
-<li>Every library API in Rust</li>
+<li>Library APIs that expose recoverable failure</li>
 <li>File I/O, network requests, parsing</li>
 <li>Database operations</li>
 <li>Command-line tools</li>
 </ul>
-<p><strong>Job interview topics</strong>: All three appear in Rust coding interviews!</p>
+<p><strong>Review prompt</strong>: For each pattern, name the ownership or error-handling constraint that motivates it.</p>
 <aside class="notes">
-<p>Emphasize that these aren’t academic - they’re daily tools for professional Rust developers.</p>
+<p>Use one primary-source example for each pattern and identify where a simpler owned value, loop, or local error branch would be sufficient.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1262,8 +1238,8 @@ Brandon M. Greenwell
           display:block!important;
       }</style></aside>
 </section>
-<section id="common-pitfalls-and-best-practices" class="slide level2 smaller">
-<h2>Common Pitfalls and Best Practices</h2>
+<section id="common-pitfalls-and-practices" class="slide level2 smaller">
+<h2>Common pitfalls and practices</h2>
 <p><strong>Iterators:</strong></p>
 <p>❌ Collecting unnecessarily: <code>.collect::&lt;Vec&lt;_&gt;&gt;()</code> then iterate again ✅ Chain operations: <code>.map().filter().sum()</code> in one go</p>
 <p>❌ Using <code>clone()</code> in iterators when reference works ✅ Use references or <code>Copy</code> types</p>
@@ -1287,8 +1263,8 @@ Brandon M. Greenwell
           display:block!important;
       }</style></aside>
 </section>
-<section id="advanced-topics-optional" class="slide level2 inverse smaller">
-<h2>Advanced Topics (Optional)</h2>
+<section id="optional-advanced-topics" class="slide level2 inverse smaller">
+<h2>Optional advanced topics</h2>
 <p><strong>If you want to go deeper:</strong></p>
 <p><strong>Custom Iterators:</strong></p>
 <ul>
@@ -1323,32 +1299,32 @@ Brandon M. Greenwell
       }</style></aside>
 </section>
 <section id="lab-13-preview" class="slide level2 inverse">
-<h2>Lab 13 Preview</h2>
-<p><strong>This week’s lab covers everything we discussed:</strong></p>
-<p><strong>Part 1: Iterators and Closures (30%)</strong></p>
+<h2>Lab 13 preview</h2>
+<p><strong>This week’s lab focuses on two parts:</strong></p>
+<p><strong>Part 1: iterators and closures</strong></p>
 <ul>
 <li>Text analysis with iterator chains</li>
 <li>Custom data processing pipelines</li>
 <li>Stateful closures</li>
 </ul>
-<p><strong>Part 2: Smart Pointers (30%)</strong></p>
-<ul>
-<li>Binary tree with <code>Box&lt;T&gt;</code></li>
-<li>Shared ownership with <code>Rc&lt;T&gt;</code></li>
-<li>Interior mutability with <code>RefCell&lt;T&gt;</code></li>
-</ul>
-<p><strong>Part 3: Error Handling (30%)</strong></p>
+<p><strong>Part 2: error handling with <code>Result</code></strong></p>
 <ul>
 <li>Division with <code>Result</code></li>
-<li>File operations with <code>?</code> operator</li>
-<li>Custom error types</li>
+<li><code>Display</code> messages for the supplied <code>ParseError</code> variants</li>
+<li>Parsing a positive integer into <code>Result&lt;i32, ParseError&gt;</code></li>
 </ul>
-<p><strong>Part 4: Integrative Exercise (10%)</strong></p>
-<ul>
-<li>Combine all three concepts in one program!</li>
-</ul>
+</section>
+<section id="lab-13-workflow" class="slide level2 inverse">
+<h2>Lab 13 workflow</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb29"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb29-1"><a href="" aria-label="1"></a><span class="ex">cargo</span> test</span>
+<span id="cb29-2"><a href="" aria-label="2"></a><span class="ex">cargo</span> fmt</span>
+<span id="cb29-3"><a href="" aria-label="3"></a><span class="ex">cargo</span> clippy <span class="at">--</span> <span class="at">-D</span> warnings</span>
+<span id="cb29-4"><a href="" aria-label="4"></a><span class="fu">git</span> add week13/</span>
+<span id="cb29-5"><a href="" aria-label="5"></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"Complete lab 13"</span></span>
+<span id="cb29-6"><a href="" aria-label="6"></a><span class="fu">git</span> push origin main</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Confirm the Week 13 README badge is green; that badge is the complete 10-point grade. See <a href="https://github.com/bgreenwell/is4010-labs/blob/main/week13/lab13.md"><code>week13/lab13.md</code></a>.</p>
 <aside class="notes">
-<p>The lab walks through each concept step-by-step. Start early - there’s a lot to absorb!</p>
+<p>Smart pointers remain lecture enrichment; they are not Lab 13 deliverables. Students implement every <code>todo!()</code> in the supplied <code>src/main.rs</code> and do not modify the tests.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1362,15 +1338,20 @@ Brandon M. Greenwell
       }</style></aside>
 </section>
 <section id="week-13-summary" class="slide level2 inverse">
-<h2>Week 13 Summary</h2>
+<h2>Week 13 summary</h2>
 <p><strong>What makes Rust code “idiomatic”:</strong></p>
-<p>✅ <strong>Iterators</strong>: Functional data processing ✅ <strong>Closures</strong>: Functions that capture environment ✅ <strong>Smart pointers</strong>: Flexible memory management ✅ <strong>Error handling</strong>: Explicit, recoverable errors</p>
+<ul>
+<li><strong>Iterators</strong>: Composable data processing</li>
+<li><strong>Closures</strong>: Functions that can capture their environment</li>
+<li><strong>Smart pointers</strong>: Optional tools for ownership patterns that references cannot express</li>
+<li><strong>Error handling</strong>: Explicit, recoverable errors</li>
+</ul>
 <p><strong>Key takeaways:</strong></p>
 <ul>
-<li>Iterators are zero-cost abstractions</li>
-<li>Smart pointers unlock advanced patterns</li>
+<li>Iterator chains are lazy and often optimize well; collection and algorithm choices still matter</li>
+<li>Smart pointers add capabilities and complexity; start with ordinary ownership and borrowing</li>
 <li><code>Result&lt;T, E&gt;</code> makes errors part of your API</li>
-<li>These patterns appear in every Rust codebase</li>
+<li>These patterns appear throughout Rust’s standard library and ecosystem</li>
 </ul>
 <p><strong>Next week</strong>: Build a complete command-line application with Lab 14!</p>
 <aside class="notes">
@@ -1388,7 +1369,7 @@ Brandon M. Greenwell
       }</style></aside>
 </section>
 <section id="resources-and-further-reading" class="slide level2 smaller">
-<h2>Resources and Further Reading</h2>
+<h2>Resources and further reading</h2>
 <p><strong>Official Documentation:</strong></p>
 <ul>
 <li><a href="https://doc.rust-lang.org/book/ch13-00-functional-features.html">The Rust Book Ch 13 - Functional Features</a></li>
@@ -1414,14 +1395,14 @@ Brandon M. Greenwell
 <h2>Questions?</h2>
 <p><strong>Office hours</strong>: See syllabus</p>
 <p><strong>AI assistance</strong>: Browser chat, GitHub Copilot, Copilot CLI, Antigravity CLI</p>
-<p><strong>Lab 13</strong>: Due Sunday at 11:59 PM</p>
+<p><strong>Lab 13</strong>: Follow the due date shown in Canvas</p>
 <p><strong>Good luck and have fun with idiomatic Rust!</strong> 🦀</p>
 
 </section></section>
     </div>
   <div class="quarto-auto-generated-content" style="display: none;">
 <div class="footer footer-default">
-<p>IS4010: App Development with AI</p>
+<p>IS4010: App development with AI</p>
 </div>
 </div></div>
 

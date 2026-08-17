@@ -10,7 +10,7 @@
   <meta name="generator" content="quarto-1.10.18">
 
   <meta name="author" content="Brandon M. Greenwell">
-  <title>IS4010: AI-Enhanced Application Development</title>
+  <title>IS4010: AI-enhanced application development</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -203,8 +203,8 @@
     <div class="slides">
 
 <section id="title-slide" class="quarto-title-block center">
-  <h1 class="title">IS4010: AI-Enhanced Application Development</h1>
-  <p class="subtitle">Week 10: The Soul of Rust - Ownership &amp; Borrowing</p>
+  <h1 class="title">IS4010: AI-enhanced application development</h1>
+  <p class="subtitle">Week 10: The soul of Rust — ownership and borrowing</p>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -216,9 +216,9 @@ Brandon M. Greenwell
 
 </section>
 <section id="session-1-the-ownership-model" class="slide level2">
-<h2>Session 1: The Ownership Model</h2>
+<h2>Session 1: the ownership model</h2>
 <aside class="notes">
-<p>This is THE defining feature of Rust. Take time here - students coming from Python will find this challenging but transformative. Use analogies and build slowly. Show enthusiasm about how elegant this system is.</p>
+<p>Ownership is the organizing concept for this week. Build from concrete values, moves, and borrows before introducing lifetimes, and state where each analogy stops matching the implementation.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -231,16 +231,16 @@ Brandon M. Greenwell
           display:block!important;
       }</style></aside>
 </section>
-<section id="why-ownership-matters-a-real-world-crisis" class="slide level2">
-<h2>Why ownership matters: a real-world crisis</h2>
+<section id="why-ownership-matters-memory-safety-defects" class="slide level2">
+<h2>Why ownership matters: memory-safety defects</h2>
 <ul>
-<li class="fragment">In 2014, the <a href="https://heartbleed.com/">Heartbleed bug</a> exposed millions of users’ private data due to a memory management error in <a href="https://www.openssl.org/">OpenSSL</a></li>
-<li class="fragment"><a href="https://msrc.microsoft.com/blog/2019/07/a-proactive-approach-to-more-secure-code/">70% of security vulnerabilities</a> in <a href="https://www.microsoft.com/">Microsoft</a> and <a href="https://www.google.com/">Google</a> products are memory safety issues</li>
-<li class="fragment">These bugs happen in <a href="https://en.cppreference.com/w/c">C</a>/<a href="https://en.cppreference.com/w/">C++</a> because programmers must manually manage memory</li>
-<li class="fragment"><a href="https://www.rust-lang.org/">Rust</a> eliminates these entire categories of bugs at <strong>compile time</strong> with its <a href="https://doc.rust-lang.org/book/ch04-00-understanding-ownership.html">ownership system</a></li>
+<li class="fragment">The 2014 <a href="https://heartbleed.com/">Heartbleed bug</a> was an out-of-bounds read in <a href="https://www.openssl.org/">OpenSSL</a></li>
+<li class="fragment">A <a href="https://msrc.microsoft.com/blog/2019/07/a-proactive-approach-to-more-secure-code/">Microsoft Security Response Center analysis</a> reported that memory-safety issues were a large share of the vulnerabilities it examined</li>
+<li class="fragment">C and C++ permit low-level memory operations; safe use depends on language features, libraries, tools, and programmer discipline</li>
+<li class="fragment">Safe <a href="https://www.rust-lang.org/">Rust</a> rejects many invalid memory-access patterns through <a href="https://doc.rust-lang.org/book/ch04-00-understanding-ownership.html">ownership and borrowing</a></li>
 </ul>
 <aside class="notes">
-<p>Real-world impact: Heartbleed was a buffer over-read vulnerability. Microsoft and Google data shows 70% of CVEs are memory issues. Rust’s ownership system makes these bugs impossible. This isn’t academic - this is career-relevant and industry-critical.</p>
+<p>Heartbleed was a buffer over-read vulnerability. Use it as an example of the class of memory-access errors that safe Rust is designed to prevent; avoid implying that ownership prevents every security vulnerability.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -253,18 +253,17 @@ Brandon M. Greenwell
           display:block!important;
       }</style></aside>
 </section>
-<section id="the-memory-management-trilemma" class="slide level2 scrollable">
-<h2>The memory management trilemma</h2>
-<p><strong>Historically, you had to pick two out of three:</strong></p>
+<section id="memory-management-trade-offs" class="slide level2 scrollable">
+<h2>Memory-management trade-offs</h2>
+<p>Languages make different trade-offs among:</p>
 <ol type="1">
-<li class="fragment"><strong>Performance</strong> (fast execution, low overhead)</li>
-<li class="fragment"><strong>Safety</strong> (no crashes, no security vulnerabilities)</li>
-<li class="fragment"><strong>Ease of use</strong> (simple mental model)</li>
+<li class="fragment"><strong>Runtime overhead and predictability</strong></li>
+<li class="fragment"><strong>Compile-time guarantees</strong></li>
+<li class="fragment"><strong>Programmer control and implementation complexity</strong></li>
 </ol>
-<p><strong>Traditional choices:</strong> - <a href="https://www.python.org/">Python</a>, <a href="https://www.java.com/">Java</a>: Safety + Ease → <a href="https://en.wikipedia.org/wiki/Garbage_collection_(computer_science)">Garbage collector</a> costs performance - <a href="https://en.cppreference.com/w/c">C</a>, <a href="https://en.cppreference.com/w/">C++</a>: Performance + Ease → Manual memory management sacrifices safety</p>
-<p><strong><a href="https://www.rust-lang.org/">Rust</a>’s innovation:</strong> Achieves all three through <a href="https://doc.rust-lang.org/book/ch04-00-understanding-ownership.html">ownership</a>!</p>
+<p><strong>Examples:</strong> - <a href="https://www.python.org/">Python</a> automates memory management and accepts runtime overhead - <a href="https://en.cppreference.com/w/c">C</a> exposes manual memory operations and few compile-time protections - Modern <a href="https://en.cppreference.com/w/">C++</a> often uses RAII and smart pointers, while still permitting low-level operations - <a href="https://www.rust-lang.org/">Rust</a> uses ownership and borrowing to enforce many memory-safety rules in safe code without a tracing garbage collector</p>
 <aside class="notes">
-<p>This is the key insight. Rust breaks the traditional trade-off. Draw a triangle diagram on the board. Emphasize that this was thought to be impossible until Rust proved otherwise. This is why Rust is revolutionary.</p>
+<p>The important distinction is enforcement time: Rust moves many checks to compilation. That improves safety and runtime predictability, but it adds concepts that students must learn.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -280,14 +279,14 @@ Brandon M. Greenwell
 <section id="how-python-handles-memory-garbage-collection" class="slide level2">
 <h2>How Python handles memory (garbage collection)</h2>
 <ul>
-<li class="fragment"><a href="https://www.python.org/">Python</a> uses a <a href="https://docs.python.org/3/library/gc.html">garbage collector (GC)</a> that runs in the background</li>
-<li class="fragment">The GC periodically scans memory to find objects that are no longer referenced</li>
-<li class="fragment">When it finds “garbage,” it automatically frees that memory</li>
-<li class="fragment"><strong>Pros</strong>: You never think about memory management</li>
-<li class="fragment"><strong>Cons</strong>: GC pauses slow down your program, uses extra memory, unpredictable timing</li>
+<li class="fragment">Python implementations manage memory automatically</li>
+<li class="fragment">CPython primarily uses reference counting and supplements it with a cyclic <a href="https://docs.python.org/3/library/gc.html">garbage collector</a></li>
+<li class="fragment">Most objects are reclaimed when their reference count reaches zero; the cyclic collector detects unreachable reference cycles</li>
+<li class="fragment"><strong>Benefit</strong>: Application code rarely allocates or frees memory directly</li>
+<li class="fragment"><strong>Trade-off</strong>: Reference counting and cycle detection add runtime and memory overhead</li>
 </ul>
 <aside class="notes">
-<p>Python’s approach: convenient but costly. GC pauses can be milliseconds to seconds depending on heap size. Fine for web apps, terrible for real-time systems (games, embedded, high-frequency trading). Show enthusiasm for how Rust solves this.</p>
+<p>Keep the comparison implementation-specific. CPython, PyPy, and other Python implementations can manage memory differently, and performance should be measured for the workload rather than inferred from the language alone.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -303,10 +302,10 @@ Brandon M. Greenwell
 <section id="how-cc-handles-memory-manual-management" class="slide level2">
 <h2>How C/C++ handles memory (manual management)</h2>
 <ul>
-<li class="fragment">In <a href="https://en.cppreference.com/w/c">C</a>/<a href="https://en.cppreference.com/w/">C++</a>, <strong>you</strong> are responsible for allocating and freeing memory</li>
-<li class="fragment">Use <a href="https://en.cppreference.com/w/c/memory/malloc"><code>malloc()</code></a>/<a href="https://en.cppreference.com/w/cpp/language/new"><code>new</code></a> to allocate, <a href="https://en.cppreference.com/w/c/memory/free"><code>free()</code></a>/<a href="https://en.cppreference.com/w/cpp/language/delete"><code>delete</code></a> to deallocate</li>
-<li class="fragment"><strong>Pros</strong>: Maximum performance and control</li>
-<li class="fragment"><strong>Cons</strong>: Easy to make mistakes:
+<li class="fragment">C exposes manual allocation with <a href="https://en.cppreference.com/w/c/memory/malloc"><code>malloc()</code></a> and <a href="https://en.cppreference.com/w/c/memory/free"><code>free()</code></a></li>
+<li class="fragment">C++ also provides RAII, containers, and smart pointers; low-level <a href="https://en.cppreference.com/w/cpp/language/new"><code>new</code></a> and <a href="https://en.cppreference.com/w/cpp/language/delete"><code>delete</code></a> remain available</li>
+<li class="fragment"><strong>Benefit</strong>: Direct control over representation, allocation, and lifetime</li>
+<li class="fragment"><strong>Risk</strong>: Low-level operations can introduce mistakes:
 <ul>
 <li class="fragment"><strong>Use-after-free</strong>: Using memory after it’s been freed (security vulnerability)</li>
 <li class="fragment"><strong>Double-free</strong>: Freeing the same memory twice (crashes)</li>
@@ -314,7 +313,7 @@ Brandon M. Greenwell
 </ul></li>
 </ul>
 <aside class="notes">
-<p>Manual memory management is incredibly error-prone. Even experienced C++ developers make these mistakes. These aren’t hypothetical - these cause real CVEs and production outages. Rust makes these bugs impossible.</p>
+<p>Modern C++ can reduce these risks with RAII, containers, and smart pointers. Safe Rust rules out many invalid memory-access patterns, while <code>unsafe</code> Rust remains available for operations the compiler cannot verify.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -333,12 +332,12 @@ Brandon M. Greenwell
 <li class="fragment"><a href="https://www.rust-lang.org/">Rust</a> introduces a third approach: the <a href="https://doc.rust-lang.org/book/ch04-00-understanding-ownership.html">ownership system</a></li>
 <li class="fragment">The compiler enforces <strong>ownership rules</strong> at compile time</li>
 <li class="fragment">If your code violates these rules, it <strong>won’t compile</strong></li>
-<li class="fragment">No runtime overhead (zero-cost abstraction)</li>
+<li class="fragment">Ownership checks themselves occur at compile time</li>
 <li class="fragment">No garbage collector needed</li>
-<li class="fragment">Memory safety <strong>guaranteed</strong> by the type system</li>
+<li class="fragment">Safe Rust prevents many memory-safety errors through the type system</li>
 </ul>
 <aside class="notes">
-<p>This is the big reveal. Rust’s ownership is checked entirely at compile time. Zero runtime cost. If it compiles, memory safety is guaranteed. This is why Rust is called “fearless concurrency” - you can’t accidentally create data races.</p>
+<p>Ownership and borrowing are checked at compile time. In safe Rust, the type system prevents data races and many invalid memory accesses; compilation does not guarantee that the program is free of logic, security, or performance bugs.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -353,11 +352,11 @@ Brandon M. Greenwell
 </section>
 <section id="the-three-ownership-rules" class="slide level2 scrollable">
 <h2>The three ownership rules</h2>
-<p>These three rules are <strong>always</strong> enforced by the <a href="https://doc.rust-lang.org/rustc/what-is-rustc.html">Rust compiler</a>:</p>
+<p>Use these three rules as the course model for owned values in safe <a href="https://doc.rust-lang.org/rustc/what-is-rustc.html">Rust</a>:</p>
 <ol type="1">
-<li class="fragment"><strong>Each value has a variable that’s called its owner</strong>
+<li class="fragment"><strong>Each value has an owner</strong>
 <ul>
-<li class="fragment">Every piece of data in memory has exactly one variable that owns it</li>
+<li class="fragment">A binding, collection, or other value may own its data</li>
 </ul></li>
 <li class="fragment"><strong>There can only be one owner at a time</strong>
 <ul>
@@ -385,14 +384,13 @@ Brandon M. Greenwell
 <section id="ownership-in-action-the-stack-and-the-heap" class="slide level2">
 <h2>Ownership in action: the stack and the heap</h2>
 <ul>
-<li class="fragment">Simple values like integers are stored on the <strong><a href="https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html#the-stack-and-the-heap">stack</a></strong> (fast, fixed size, automatically managed)</li>
-<li class="fragment">Complex values like <a href="https://doc.rust-lang.org/std/string/struct.String.html"><code>String</code></a> are stored on the <strong><a href="https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html#the-stack-and-the-heap">heap</a></strong> (flexible size, slower, needs management)</li>
-<li class="fragment">The <a href="https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html#the-stack-and-the-heap">stack</a> holds the pointer, capacity, and length</li>
-<li class="fragment">The <a href="https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html#the-stack-and-the-heap">heap</a> holds the actual string data</li>
-<li class="fragment">When ownership moves, the stack data moves, but heap data stays put (just the pointer changes)</li>
+<li class="fragment">Fixed-size values can be stored directly in a stack frame or inside another allocation</li>
+<li class="fragment">A <a href="https://doc.rust-lang.org/std/string/struct.String.html"><code>String</code></a> value contains a pointer, length, and capacity; its text buffer is normally allocated on the <a href="https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html#the-stack-and-the-heap">heap</a></li>
+<li class="fragment">Moving a <code>String</code> transfers that fixed-size header; the heap buffer is not duplicated</li>
+<li class="fragment">Storage location and ownership are related concepts, but they are not the same rule</li>
 </ul>
 <aside class="notes">
-<p>Draw a memory diagram on the board. Stack on the left, heap on the right. Show how a String has three stack values (ptr, len, cap) pointing to heap data. This visual is crucial for understanding moves vs copies.</p>
+<p>Draw one local <code>String</code> as a pointer-length-capacity header in the stack frame and a byte buffer on the heap. Then move the header to a new binding and mark the old binding unavailable.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -423,7 +421,7 @@ Brandon M. Greenwell
 </ul></li>
 </ul>
 <aside class="notes">
-<p>Mise en place is French for “everything in its place” — a foundational concept in professional cooking. The analogy: stack data is small, fixed-size, and automatically managed; heap data is flexible, larger, and needs explicit tracking. Consider showing an image of a chef’s mise en place station if you have one handy. The key properties to emphasize: <em>size known at compile time</em> (stack) vs.&nbsp;<em>size determined at runtime</em> (heap).</p>
+<p>Mise en place means “everything in its place.” Use the analogy only to contrast fixed-size frame data with separately allocated buffers. Then return to the actual <code>String</code> representation so students do not equate <code>Copy</code> with stack storage or heap allocation with ownership.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -440,13 +438,13 @@ Brandon M. Greenwell
 <h2>From the kitchen to Rust</h2>
 <p>The analogy maps directly to <a href="https://www.rust-lang.org/">Rust</a> types:</p>
 <ul>
-<li class="fragment"><strong>Mise en place bowl</strong> (fixed size, cheap to duplicate) → <code>i32</code>, <code>f64</code>, <code>bool</code> on the <strong>stack</strong> — implement <a href="https://doc.rust-lang.org/std/marker/trait.Copy.html"><code>Copy</code></a></li>
-<li class="fragment"><strong>Pantry item</strong> (variable size, one of a kind) → <a href="https://doc.rust-lang.org/std/string/struct.String.html"><code>String</code></a>, <a href="https://doc.rust-lang.org/std/vec/struct.Vec.html"><code>Vec&lt;T&gt;</code></a> on the <strong>heap</strong> — subject to <strong>ownership rules</strong></li>
+<li class="fragment"><strong>Mise en place bowl</strong> (fixed size, cheap to duplicate) → values such as <code>i32</code>, <code>f64</code>, and <code>bool</code> that implement <a href="https://doc.rust-lang.org/std/marker/trait.Copy.html"><code>Copy</code></a></li>
+<li class="fragment"><strong>Pantry claim ticket</strong> plus stored item → the fixed-size header and heap buffer used by <a href="https://doc.rust-lang.org/std/string/struct.String.html"><code>String</code></a> or <a href="https://doc.rust-lang.org/std/vec/struct.Vec.html"><code>Vec&lt;T&gt;</code></a></li>
 <li class="fragment"><strong>Handing a bowl across the counter</strong> → cheap <code>Copy</code> (both keep their data)</li>
 <li class="fragment"><strong>Handing off the pantry item</strong> → <strong>move</strong> — you no longer have it; they do</li>
 </ul>
 <aside class="notes">
-<p>This bridge slide connects the analogy directly to the code examples that follow. The key insight: Copy types are like mise en place — cheap and fast to duplicate. Heap types (String, Vec) are like the big pantry item — there is one of them, handing it off is a move, and the original is gone. This sets up the move example on the next slide.</p>
+<p>State the limit of the analogy: <code>Copy</code> is a trait about duplication semantics, not a guarantee that a value physically resides on the stack. <code>String</code> and <code>Vec</code> contain fixed-size metadata plus owned buffers.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -470,7 +468,7 @@ Brandon M. Greenwell
 <span id="cb1-7"><a href="" aria-label="7"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p><a href="https://play.rust-lang.org/?version=stable&amp;mode=debug&amp;edition=2021&amp;code=fn+main%28%29+%7B%0A++++let+s1+%3D+String%3A%3Afrom%28%22hello%22%29%3B%0A++++let+s2+%3D+s1%3B+%2F%2F+Ownership+moves%0A++++println%21%28%22%7B%7D%22%2C+s2%29%3B%0A%7D">Try it in Rust Playground</a></p>
 <aside class="notes">
-<p><strong>LIVE DEMO</strong>: Uncomment the s1 line to show the error. Read the compiler error message aloud - it’s excellent! Explain that this prevents double-free bugs. In C++, this code would crash or cause undefined behavior.</p>
+<p><strong>Live demo:</strong> Uncomment the <code>s1</code> line, read the diagnostic, and trace which assignment moved the value. Explain why invalidating the old binding gives one owner responsibility for dropping the buffer.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -492,7 +490,7 @@ Brandon M. Greenwell
 <li class="fragment">The <a href="https://doc.rust-lang.org/book/ch04-02-references-and-borrowing.html#the-rules-of-references">borrow checker</a> enforces this at compile time</li>
 </ul>
 <aside class="notes">
-<p>Double-free errors are CVE-worthy bugs in C/C++. They can be exploited to execute arbitrary code. Rust makes them impossible by design. This is the “fearless” in fearless concurrency.</p>
+<p>Double-free defects can be security vulnerabilities. Safe Rust’s ownership rules prevent two ordinary owners from independently dropping the same allocation; unsafe code still requires its invariants to be reviewed.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -510,7 +508,7 @@ Brandon M. Greenwell
 <ul>
 <li class="fragment">Simple types like <a href="https://doc.rust-lang.org/std/primitive.i32.html"><code>i32</code></a>, <a href="https://doc.rust-lang.org/std/primitive.f64.html"><code>f64</code></a>, <a href="https://doc.rust-lang.org/std/primitive.bool.html"><code>bool</code></a>, and <a href="https://doc.rust-lang.org/std/primitive.char.html"><code>char</code></a> implement the <a href="https://doc.rust-lang.org/std/marker/trait.Copy.html"><code>Copy</code> trait</a></li>
 <li class="fragment">Types with <a href="https://doc.rust-lang.org/std/marker/trait.Copy.html"><code>Copy</code></a> are <strong>copied</strong> instead of <strong>moved</strong></li>
-<li class="fragment">This is efficient because they live entirely on the <a href="https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html#the-stack-and-the-heap">stack</a> (no heap allocation)</li>
+<li class="fragment">Their values have copy semantics and do not own resources that require custom cleanup</li>
 <li class="fragment">After copying, both variables remain valid</li>
 </ul>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb2-1"><a href="" aria-label="1"></a><span class="kw">let</span> x <span class="op">=</span> <span class="dv">5</span><span class="op">;</span></span>
@@ -530,11 +528,11 @@ Brandon M. Greenwell
           display:block!important;
       }</style></aside>
 </section>
-<section id="ai-co-pilot-technique-understanding-moves" class="slide level2">
-<h2>🤖 AI co-pilot technique: understanding moves</h2>
+<section id="ai-copilot-technique-understanding-moves" class="slide level2">
+<h2>AI copilot technique: understanding moves</h2>
 <p>When you encounter move errors, ask your <a href="https://claude.ai/">AI assistant</a> for help:</p>
 <p><strong>Effective prompts:</strong> - <em>“Explain this Rust move error in simple terms: [paste error message]”</em> - <em>“Why does Rust move String but copy i32?”</em> - <em>“How do I use a value after it’s been moved?”</em> - <em>“What’s the difference between Copy and Clone in Rust?”</em></p>
-<p><strong>Pro tip:</strong> The <a href="https://doc.rust-lang.org/error_codes/error-index.html">Rust compiler error messages</a> are incredibly helpful on their own - read them carefully before asking AI!</p>
+<p><strong>First step:</strong> Read the <a href="https://doc.rust-lang.org/error_codes/error-index.html">compiler diagnostic</a>, identify the values and borrows it names, and then ask an AI assistant about the specific rule that remains unclear.</p>
 <aside class="notes">
 <p>Teach students to read compiler errors first. Rust’s error messages are some of the best in any language. Then use AI to deepen understanding, not as a first resort.</p>
 <style type="text/css">
@@ -576,8 +574,8 @@ Brandon M. Greenwell
           display:block!important;
       }</style></aside>
 </section>
-<section id="python-silently-accepts-a-dangerous-pattern" class="slide level2">
-<h2>Python silently accepts a dangerous pattern</h2>
+<section id="python-permits-mutation-during-iteration" class="slide level2">
+<h2>Python permits mutation during iteration</h2>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="" aria-label="1"></a><span class="co"># Goal: remove all even numbers from a list</span></span>
 <span id="cb4-2"><a href="" aria-label="2"></a>items <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">6</span>, <span class="dv">7</span>, <span class="dv">8</span>]</span>
 <span id="cb4-3"><a href="" aria-label="3"></a></span>
@@ -590,7 +588,7 @@ Brandon M. Greenwell
 <ul>
 <li class="fragment">Python runs to completion — no error, no warning, exit code 0</li>
 <li class="fragment">When <code>4</code> is removed at index 2, the list shifts left; the iterator advances to <code>7</code>, skipping <code>6</code> entirely</li>
-<li class="fragment">This is a <strong>silent bug</strong>: your program lies to you with no indication anything went wrong</li>
+<li class="fragment">This is a <strong>logic bug</strong>: the language permits the operation, so tests must detect the incorrect result</li>
 </ul>
 <aside class="notes">
 <p>LIVE DEMO opportunity: Run this in the Python REPL and ask students to predict the output BEFORE running it. The mechanism: removing 2 (index 1) shifts the list; the iterator advances to index 2 which is now 4. Removing 4 (index 2) shifts again; the iterator advances to index 3 which is now 7 — skipping 6, which has shifted into index 2. 6 is even and should have been removed but never gets checked. The bug appears whenever two consecutive removal candidates are adjacent in the list.</p>
@@ -606,8 +604,8 @@ Brandon M. Greenwell
           display:block!important;
       }</style></aside>
 </section>
-<section id="why-python-gets-it-wrong" class="slide level2">
-<h2>Why Python gets it wrong</h2>
+<section id="why-the-python-loop-skips-an-item" class="slide level2">
+<h2>Why the Python loop skips an item</h2>
 <p><code>for item in items</code> tracks a hidden <strong>index counter</strong> — it increments by 1 each step, unaware of any list changes:</p>
 <ul>
 <li class="fragment">Index 0 → <code>1</code> (odd, skip). List: <code>[1, 2, 3, 4, 6, 7, 8]</code></li>
@@ -655,11 +653,11 @@ Brandon M. Greenwell
 <li class="fragment"><code>for item in &amp;items</code> takes an <strong>immutable borrow</strong> of the whole vector</li>
 <li class="fragment"><code>.retain()</code> needs a <strong>mutable borrow</strong> of the same vector — at the same time</li>
 <li class="fragment">Rust’s rule: you cannot hold both simultaneously — so this <strong>does not compile</strong></li>
-<li class="fragment">The bug Python hid at runtime, Rust surfaces at <strong>compile time</strong> before a single line runs</li>
+<li class="fragment">The logic bug that ran in Python is rejected by Rust’s borrowing rules before execution</li>
 </ul>
 <p><a href="https://play.rust-lang.org/?version=stable&amp;mode=debug&amp;edition=2021&amp;code=fn+main%28%29+%7B%0A++++let+mut+items+%3D+vec%21%5B1%2C+2%2C+3%2C+4%2C+6%2C+7%2C+8%5D%3B%0A%0A++++for+item+in+%26items+%7B%0A++++++++if+item+%25+2+%3D%3D+0+%7B%0A++++++++++++items.retain%28%7Cx%7C+x+%21%3D+item%29%3B%0A++++++++%7D%0A++++%7D%0A%7D">Try it in Rust Playground</a></p>
 <aside class="notes">
-<p>This is the borrow checker rule from earlier in the session — one mutable OR many immutable, never both — catching a real, recognizable bug. Emphasize the contrast: Python ran to completion with wrong output and exit code 0; Rust refused to compile. Read the compiler error message aloud. It names the exact lines involved and explains precisely why the code is rejected. This is what “the compiler is your friend” means in practice.</p>
+<p>Connect this to the course borrowing rule: while an immutable borrow is in use, a conflicting mutable borrow cannot overlap it. Contrast the Python program’s incorrect output with Rust’s compile-time diagnostic, then have students identify the two operations that conflict.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -719,7 +717,7 @@ Brandon M. Greenwell
 </ul>
 <p><a href="https://play.rust-lang.org/?version=stable&amp;mode=debug&amp;edition=2021&amp;code=fn+main%28%29+%7B%0A++++let+items+%3D+vec%21%5B1%2C+2%2C+3%2C+4%2C+6%2C+7%2C+8%5D%3B%0A%0A++++let+odds%3A+Vec%3Ci32%3E+%3D+items%0A++++++++.into_iter%28%29%0A++++++++.filter%28%7Cx%7C+x+%25+2+%21%3D+0%29%0A++++++++.collect%28%29%3B%0A%0A++++println%21%28%22%7B%3A%3F%7D%22%2C+odds%29%3B%0A%7D">Try it in Rust Playground</a></p>
 <aside class="notes">
-<p>The payoff: the borrow checker does not just prevent bugs — it steers students toward a better pattern. Iterator adapters (into_iter / filter / map / collect) are idiomatic Rust and appear constantly in real code. Connecting to the Python list comprehension from Week 4 reinforces that the concept is familiar; only the safety enforcement is new. The borrow checker is a teacher, not an obstacle.</p>
+<p>The borrow checker rejects mutation during iteration, which motivates a pipeline using <code>into_iter</code>, <code>filter</code>, <code>map</code>, and <code>collect</code>. Connect this pattern to the Python list comprehensions from Week 4: the data transformation is familiar, while Rust checks the borrowing rules at compile time.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -732,8 +730,8 @@ Brandon M. Greenwell
           display:block!important;
       }</style></aside>
 </section>
-<section id="session-2-borrowing-references-lifetimes" class="slide level2">
-<h2>Session 2: Borrowing, References &amp; Lifetimes</h2>
+<section id="session-2-borrowing-references-and-lifetimes" class="slide level2">
+<h2>Session 2: borrowing, references, and lifetimes</h2>
 <aside class="notes">
 <p>This builds directly on ownership. Borrowing is how we work with data without taking ownership. Students will struggle with the borrow checker at first - normalize that struggle and emphasize the error messages are your friend.</p>
 <style type="text/css">
@@ -810,8 +808,8 @@ Brandon M. Greenwell
           display:block!important;
       }</style></aside>
 </section>
-<section id="immutable-vs.-mutable-references" class="slide level2">
-<h2>Immutable vs.&nbsp;mutable references</h2>
+<section id="immutable-and-mutable-references" class="slide level2">
+<h2>Immutable and mutable references</h2>
 <ul>
 <li class="fragment">By default, <a href="https://doc.rust-lang.org/book/ch04-02-references-and-borrowing.html">references</a> are <strong>immutable</strong> (<code>&amp;T</code>)</li>
 <li class="fragment">You can create a <strong><a href="https://doc.rust-lang.org/book/ch04-02-references-and-borrowing.html#mutable-references">mutable reference</a></strong> with <code>&amp;mut T</code></li>
@@ -829,7 +827,7 @@ Brandon M. Greenwell
 <span id="cb10-9"><a href="" aria-label="9"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p><a href="https://play.rust-lang.org/?version=stable&amp;mode=debug&amp;edition=2021&amp;code=fn+add_world%28s%3A+%26mut+String%29+%7B%0A++++s.push_str%28%22%2C+world%22%29%3B%0A%7D%0A%0Afn+main%28%29+%7B%0A++++let+mut+my_string+%3D+String%3A%3Afrom%28%22hello%22%29%3B%0A++++add_world%28%26mut+my_string%29%3B%0A++++println%21%28%22%7B%7D%22%2C+my_string%29%3B%0A%7D">Try it in Rust Playground</a></p>
 <aside class="notes">
-<p>Note that the variable must also be declared <code>mut</code>. Rust’s mutability is opt-in at every level. This is defensive by default - prevents accidental modification.</p>
+<p>Note that the binding must also be declared <code>mut</code>. Rust requires mutation to be explicit at the binding and borrow sites, which makes intended state changes visible in the code.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -851,7 +849,7 @@ Brandon M. Greenwell
 <li class="fragment">One <a href="https://doc.rust-lang.org/book/ch04-02-references-and-borrowing.html#mutable-references">mutable reference</a> (<code>&amp;mut T</code>)</li>
 <li class="fragment">OR any number of <a href="https://doc.rust-lang.org/book/ch04-02-references-and-borrowing.html">immutable references</a> (<code>&amp;T</code>)</li>
 </ul></li>
-<li class="fragment"><strong>References must always be valid</strong>
+<li class="fragment"><strong>A reference cannot outlive the value it borrows</strong>
 <ul>
 <li class="fragment">No <a href="https://doc.rust-lang.org/book/ch04-02-references-and-borrowing.html#dangling-references">dangling references</a> (pointing to freed memory)</li>
 </ul></li>
@@ -888,7 +886,7 @@ Brandon M. Greenwell
 </ul>
 <p><a href="https://play.rust-lang.org/?version=stable&amp;mode=debug&amp;edition=2021&amp;code=fn+main%28%29+%7B%0A++++let+mut+s+%3D+String%3A%3Afrom%28%22hello%22%29%3B%0A++++let+r1+%3D+%26mut+s%3B%0A++++let+r2+%3D+%26mut+s%3B%0A++++println%21%28%22%7B%7D%2C+%7B%7D%22%2C+r1%2C+r2%29%3B%0A%7D">Try it in Rust Playground</a></p>
 <aside class="notes">
-<p><strong>LIVE DEMO</strong>: Show this error. Read the compiler message - it’s incredibly clear! Explain that iterator invalidation (a common C++ bug) is impossible in Rust because of this rule.</p>
+<p><strong>Live demo:</strong> Show this error and trace the overlapping mutable borrows named in the diagnostic. Explain that safe Rust rejects this pattern before it could create invalidated references.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -948,7 +946,7 @@ Brandon M. Greenwell
 <span id="cb15-8"><a href="" aria-label="8"></a><span class="pp">println!</span>(<span class="st">"{}"</span><span class="op">,</span> r3)<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p><a href="https://play.rust-lang.org/?version=stable&amp;mode=debug&amp;edition=2021&amp;code=fn+main%28%29+%7B%0A++++let+mut+s+%3D+String%3A%3Afrom%28%22hello%22%29%3B%0A++++let+r1+%3D+%26s%3B%0A++++let+r2+%3D+%26s%3B%0A++++println%21%28%22%7B%7D%2C+%7B%7D%22%2C+r1%2C+r2%29%3B%0A++++let+r3+%3D+%26mut+s%3B%0A++++println%21%28%22%7B%7D%22%2C+r3%29%3B%0A%7D">Try it in Rust Playground</a></p>
 <aside class="notes">
-<p>NLL was a major usability improvement in Rust 2018. Before NLL, this code wouldn’t compile. Now the compiler is smart enough to see that r1 and r2 aren’t used after their last println. Celebrate this - the language is getting better!</p>
+<p>Non-lexical lifetimes let the compiler end these borrows after their last use rather than at the closing brace. Ask students to move the final use of <code>r1</code> below <code>r3</code> and compare the diagnostic.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -961,13 +959,13 @@ Brandon M. Greenwell
           display:block!important;
       }</style></aside>
 </section>
-<section id="ai-co-pilot-technique-debugging-borrow-checker-errors" class="slide level2">
-<h2>🤖 AI co-pilot technique: debugging borrow checker errors</h2>
+<section id="ai-copilot-technique-debugging-borrow-checker-errors" class="slide level2">
+<h2>AI copilot technique: debugging borrow-checker errors</h2>
 <p>The <a href="https://doc.rust-lang.org/book/ch04-02-references-and-borrowing.html#the-rules-of-references">borrow checker</a> is your friend, but it takes practice. Use <a href="https://claude.ai/">AI</a> to accelerate your learning:</p>
 <p><strong>Effective prompts:</strong> - <em>“Explain this borrow checker error: [paste full error message]”</em> - <em>“Why can’t I borrow this variable as mutable? [paste code]”</em> - <em>“How do I fix ‘cannot borrow as mutable more than once’?”</em> - <em>“What’s a <a href="https://doc.rust-lang.org/book/ch04-02-references-and-borrowing.html#dangling-references">dangling reference</a> and how does Rust prevent them?”</em></p>
 <p><strong>Best practice:</strong> Read the <a href="https://doc.rust-lang.org/error_codes/error-index.html">error message</a> first, understand the rule being violated, then ask AI for deeper insight or alternative solutions.</p>
 <aside class="notes">
-<p>Teach the workflow: 1) Read compiler error carefully, 2) Try to understand the rule, 3) Use AI to explain WHY that rule exists, 4) Ask AI for the idiomatic fix. This builds understanding, not just copy-pasting.</p>
+<p>Teach the workflow: 1) Read the compiler error carefully, 2) identify the rule, 3) use AI to explain why the rule exists, and 4) ask for an idiomatic fix. Require students to explain the final change in their own words.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -985,7 +983,7 @@ Brandon M. Greenwell
 <ul>
 <li class="fragment">A <strong><a href="https://doc.rust-lang.org/book/ch04-02-references-and-borrowing.html#dangling-references">dangling reference</a></strong> is a pointer to memory that has been freed</li>
 <li class="fragment">This is a critical security vulnerability in <a href="https://en.cppreference.com/w/c">C</a>/<a href="https://en.cppreference.com/w/">C++</a> (use-after-free)</li>
-<li class="fragment"><a href="https://www.rust-lang.org/">Rust</a> makes dangling references <strong>impossible</strong> at compile time</li>
+<li class="fragment">Safe <a href="https://www.rust-lang.org/">Rust</a> prevents references from outliving the values they borrow</li>
 </ul>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb16-1"><a href="" aria-label="1"></a><span class="kw">fn</span> dangle() <span class="op">-&gt;</span> <span class="op">&amp;</span><span class="dt">String</span> <span class="op">{</span>  <span class="co">// ❌ Won't compile!</span></span>
 <span id="cb16-2"><a href="" aria-label="2"></a>    <span class="kw">let</span> s <span class="op">=</span> <span class="dt">String</span><span class="pp">::</span>from(<span class="st">"hello"</span>)<span class="op">;</span></span>
@@ -997,7 +995,7 @@ Brandon M. Greenwell
 <span id="cb17-3"><a href="" aria-label="3"></a>    s  <span class="co">// Move ownership out</span></span>
 <span id="cb17-4"><a href="" aria-label="4"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <aside class="notes">
-<p>Dangling pointers are CVE-level bugs in C/C++. They can be exploited for arbitrary code execution. Rust makes them impossible. This is a major security advantage.</p>
+<p>Use-after-free defects can create serious security vulnerabilities. Safe Rust rejects references that outlive the borrowed value; unsafe code and external interfaces still require separate review.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1120,13 +1118,13 @@ Brandon M. Greenwell
           display:block!important;
       }</style></aside>
 </section>
-<section id="ai-co-pilot-technique-understanding-lifetimes" class="slide level2">
-<h2>🤖 AI co-pilot technique: understanding lifetimes</h2>
+<section id="ai-copilot-technique-understanding-lifetimes" class="slide level2">
+<h2>AI copilot technique: understanding lifetimes</h2>
 <p><a href="https://doc.rust-lang.org/book/ch10-03-lifetime-syntax.html">Lifetimes</a> can be confusing. Use <a href="https://claude.ai/">AI</a> to build intuition:</p>
 <p><strong>Effective prompts:</strong> - <em>“Explain Rust lifetimes like I’m coming from Python”</em> - <em>“Why does this code need a lifetime annotation? [paste code]”</em> - <em>“What does ‘a mean in this function signature? [paste signature]“<em> - </em>”How do I fix ’lifetime may not live long enough’?”</em> - <em>“When can I omit lifetime annotations in Rust?”</em></p>
 <p><strong>Pro tip:</strong> Use <a href="https://play.rust-lang.org/">Rust Playground</a> to experiment. Change code, see errors, ask AI to explain the errors.</p>
 <aside class="notes">
-<p>Lifetimes are abstract. AI can provide multiple explanations and analogies until one clicks. Encourage iterative learning: try → error → AI explanation → try again. Playground is perfect for this.</p>
+<p>Lifetimes can feel abstract. Compare more than one explanation, but bring each analogy back to the concrete question: which borrowed value must remain valid, and for how long? Use Playground to test the explanation.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1158,7 +1156,7 @@ Brandon M. Greenwell
 </ul>
 <p><a href="https://play.rust-lang.org/?version=stable&amp;mode=debug&amp;edition=2021&amp;code=struct+Excerpt%3C%27a%3E+%7B%0A++++text%3A+%26%27a+str%2C%0A%7D%0A%0Afn+main%28%29+%7B%0A++++let+novel+%3D+String%3A%3Afrom%28%22Call+me+Ishmael.+Some+years+ago...%22%29%3B%0A++++let+first_sentence+%3D+novel.split%28%27.%27%29.next%28%29.unwrap%28%29%3B%0A++++let+excerpt+%3D+Excerpt+%7B+text%3A+first_sentence+%7D%3B%0A++++println%21%28%22%7B%7D%22%2C+excerpt.text%29%3B%0A%7D">Try it in Rust Playground</a></p>
 <aside class="notes">
-<p>Structs with references are less common than owned data. But when you need them, lifetimes are essential. This prevents the struct from outliving the data it points to.</p>
+<p>When a struct stores references, its type may need lifetime parameters that relate the struct to the borrowed data. The compiler then rejects a value that would outlive that data.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1173,11 +1171,11 @@ Brandon M. Greenwell
 </section>
 <section id="the-big-picture-why-ownership-matters" class="slide level2">
 <h2>The big picture: why ownership matters</h2>
-<p><strong>What ownership gives you:</strong> - <strong>Memory safety</strong> without garbage collection - <strong>No data races</strong> (guaranteed at compile time) - <strong>Predictable performance</strong> (no GC pauses) - <strong>Zero-cost abstractions</strong> (compile-time checks, zero runtime overhead)</p>
-<p><strong>The trade-off:</strong> - <strong>Steeper learning curve</strong> (you’re learning now!) - <strong>Fight the borrow checker</strong> (initially - then you’ll think differently) - <strong>More upfront thinking</strong> about data ownership</p>
-<p><strong>Career insight:</strong> Once you understand ownership, you’ll write better code in <em>every</em> language. You’ll think about memory and references more carefully even in <a href="https://www.python.org/">Python</a> or <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript">JavaScript</a>.</p>
+<p><strong>What ownership gives you:</strong> - <strong>Memory safety</strong> without garbage collection - <strong>No data races in safe Rust</strong> (enforced at compile time) - <strong>Predictable performance</strong> (no GC pauses) - <strong>Compile-time checks</strong> that usually do not add runtime work</p>
+<p><strong>The trade-off:</strong> - <strong>Steeper learning curve</strong> (you’re learning now!) - <strong>Resolve borrow-checker feedback</strong> while learning the ownership model - <strong>More upfront thinking</strong> about data ownership</p>
+<p><strong>Transfer:</strong> Ownership practice gives you another way to reason about resource lifetimes, aliases, and mutation in <a href="https://www.python.org/">Python</a>, <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript">JavaScript</a>, and other languages.</p>
 <aside class="notes">
-<p>This is the payoff slide. Emphasize that fighting the borrow checker is temporary. Once you internalize these concepts, you’ll write better code everywhere. This is transferable knowledge.</p>
+<p>Emphasize the transferable questions: who owns this resource, who may mutate it, and how long must a reference remain valid?</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1190,18 +1188,18 @@ Brandon M. Greenwell
           display:block!important;
       }</style></aside>
 </section>
-<section id="real-world-performance-wins" class="slide level2">
-<h2>Real-world performance wins</h2>
-<p><strong>Examples of <a href="https://www.rust-lang.org/">Rust</a>’s ownership system delivering real results:</strong></p>
+<section id="case-studies-to-investigate" class="slide level2">
+<h2>Case studies to investigate</h2>
+<p><strong>Examples of organizations describing Rust migrations:</strong></p>
 <ul>
-<li class="fragment"><strong><a href="https://discord.com/blog/why-discord-is-switching-from-go-to-rust">Discord</a></strong>: Switched from <a href="https://go.dev/">Go</a> to Rust, reduced latency spikes from seconds to milliseconds (10x improvement)</li>
-<li class="fragment"><strong><a href="https://dropbox.tech/infrastructure/rewriting-the-heart-of-our-sync-engine">Dropbox</a></strong>: Rewrote sync engine in Rust, reduced memory usage by 2x, improved performance</li>
-<li class="fragment"><strong><a href="https://www.rust-lang.org/static/pdfs/Rust-npm-Whitepaper.pdf">npm</a></strong>: Rewrote CPU-heavy services in Rust, 10x performance improvement</li>
-<li class="fragment"><strong><a href="https://msrc.microsoft.com/blog/2019/07/a-proactive-approach-to-more-secure-code/">Microsoft</a></strong>: Using Rust in Windows to prevent 70% of security vulnerabilities</li>
+<li class="fragment"><strong><a href="https://discord.com/blog/why-discord-is-switching-from-go-to-rust">Discord</a></strong>: Discusses latency behavior in one service migration from Go to Rust</li>
+<li class="fragment"><strong><a href="https://dropbox.tech/infrastructure/rewriting-the-heart-of-our-sync-engine">Dropbox</a></strong>: Describes design choices in a cross-platform sync engine</li>
+<li class="fragment"><strong><a href="https://www.rust-lang.org/static/pdfs/Rust-npm-Whitepaper.pdf">npm</a></strong>: Reports results from selected CPU-bound services</li>
+<li class="fragment"><strong><a href="https://msrc.microsoft.com/blog/2019/07/a-proactive-approach-to-more-secure-code/">Microsoft</a></strong>: Discusses memory-safety vulnerabilities and safer systems-language research</li>
 </ul>
-<p><strong>The common thread:</strong> No garbage collector + memory safety = high performance + security</p>
+<p><strong>Discussion question:</strong> Which results come from the language, the new design, the workload, or the implementation team?</p>
 <aside class="notes">
-<p>These are real stories, not marketing. Discord’s blog post is excellent - show it to students. npm’s case study shows 10x improvements. Microsoft’s 70% figure is from their security team. This is industry validation.</p>
+<p>Treat these as case studies, not controlled language benchmarks. Ask students to identify the baseline, workload, metric, and other changes that accompanied each rewrite.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1233,26 +1231,29 @@ Brandon M. Greenwell
           display:block!important;
       }</style></aside>
 </section>
-<section id="introducing-lab-10-ownership-and-borrowing-mastery" class="slide level2 scrollable">
-<h2>Introducing Lab 10: ownership and borrowing mastery</h2>
+<section id="introducing-lab-10-ownership-and-borrowing" class="slide level2 scrollable">
+<h2>Introducing Lab 10: ownership and borrowing</h2>
 <p><strong>This week’s lab has two parts:</strong></p>
 <ol type="1">
-<li class="fragment"><strong>The Borrow Checker Game</strong>
+<li class="fragment"><strong>Borrow-checker puzzles (practice)</strong>
 <ul>
-<li class="fragment">Fix 5-7 progressively challenging ownership and borrowing errors</li>
-<li class="fragment">Learn to interpret <a href="https://doc.rust-lang.org/error_codes/error-index.html">compiler error messages</a></li>
-<li class="fragment">Practice the fix-compile-test cycle</li>
+<li class="fragment">Fix and run the seven commented ownership and borrowing examples</li>
+<li class="fragment">Interpret each <a href="https://doc.rust-lang.org/error_codes/error-index.html">compiler diagnostic</a></li>
 </ul></li>
-<li class="fragment"><strong>Hands-on Ownership Exercises</strong>
+<li class="fragment"><strong>Implementation exercises (graded)</strong>
 <ul>
-<li class="fragment">Implement functions demonstrating ownership concepts</li>
-<li class="fragment">Work with references and borrowing patterns</li>
-<li class="fragment">Test your understanding with <a href="https://doc.rust-lang.org/cargo/commands/cargo-test.html"><code>cargo test</code></a></li>
+<li class="fragment">Implement <code>to_uppercase_owned</code>, <code>string_length</code>, <code>append_suffix</code>, and <code>concat_strings</code></li>
+<li class="fragment">Do not modify the supplied test module</li>
+</ul></li>
+<li class="fragment"><strong>Required checks</strong>
+<ul>
+<li class="fragment">Run <code>cargo test</code>, <code>cargo fmt</code>, and <code>cargo clippy -- -D warnings</code></li>
+<li class="fragment">Push <code>week10/</code> and confirm the matching README badge is green</li>
 </ul></li>
 </ol>
-<p><strong>Full instructions:</strong> <code>week10/lab10.md</code></p>
+<p><strong>Full instructions:</strong> <a href="https://github.com/bgreenwell/is4010-labs/blob/main/week10/lab10.md"><code>week10/lab10.md</code></a></p>
 <aside class="notes">
-<p>Lab 10 is all about practice with the borrow checker. Part 1 is diagnostic - can you read errors and fix them? Part 2 is constructive - can you write correct code from scratch? Both essential skills.</p>
+<p>Part 1 is not graded automatically; part 2 and the supplied checks define the automated contract. The green Week 10 badge is the complete 10-point grade.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1271,7 +1272,7 @@ Brandon M. Greenwell
 <p><strong>Interactive learning:</strong> - <a href="https://play.rust-lang.org/">Rust Playground</a> - experiment in your browser - <a href="https://github.com/rust-lang/rustlings">Rustlings</a> - small exercises to get you used to reading and writing Rust code</p>
 <p><strong>Community:</strong> - <a href="https://www.reddit.com/r/rust/">r/rust</a> - Rust subreddit - <a href="https://discord.gg/rust-lang">The Rust Programming Language Discord</a></p>
 <aside class="notes">
-<p>The Rust book Chapter 4 is essential reading. Rustlings is excellent for practice. The community is friendly and helpful - encourage students to engage. The Rustonomicon is advanced - mention it but don’t overwhelm students yet.</p>
+<p>Use Rust Book Chapter 4 as the primary reference. Rustlings is optional practice, and the Rustonomicon is outside this lab’s required scope.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1287,7 +1288,7 @@ Brandon M. Greenwell
 <section id="looking-ahead-next-week" class="slide level2">
 <h2>Looking ahead: next week</h2>
 <p><strong>Week 11 preview: structs, enums, and pattern matching</strong> - Creating custom data types with <a href="https://doc.rust-lang.org/book/ch05-00-structs.html"><code>struct</code></a> - Rust’s powerful <a href="https://doc.rust-lang.org/book/ch06-00-enums.html"><code>enum</code></a> type - Pattern matching with <a href="https://doc.rust-lang.org/book/ch06-02-match.html"><code>match</code></a> - <a href="https://claude.ai/">AI-assisted</a> data modeling strategies</p>
-<p><strong>For now:</strong> Focus on mastering <a href="https://doc.rust-lang.org/book/ch04-00-understanding-ownership.html">ownership</a> and <a href="https://doc.rust-lang.org/book/ch04-02-references-and-borrowing.html">borrowing</a>. These concepts underpin everything else in Rust!</p>
+<p><strong>For now:</strong> Practice <a href="https://doc.rust-lang.org/book/ch04-00-understanding-ownership.html">ownership</a> and <a href="https://doc.rust-lang.org/book/ch04-02-references-and-borrowing.html">borrowing</a>. These concepts support the Rust topics that follow.</p>
 <aside class="notes">
 <p>Next week builds on this foundation. Everything in Rust flows from ownership. Structs and enums are easier once ownership is clear. Encourage students to struggle with the borrow checker this week - it’s normal and valuable.</p>
 <style type="text/css">
@@ -1304,7 +1305,7 @@ Brandon M. Greenwell
 </section>
 <section id="questions" class="slide level2">
 <h2>Questions?</h2>
-<p><strong>Remember:</strong> - The <a href="https://doc.rust-lang.org/book/ch04-02-references-and-borrowing.html#the-rules-of-references">borrow checker</a> is your friend (even when it feels like your enemy) - <a href="https://doc.rust-lang.org/error_codes/error-index.html">Compiler error messages</a> are incredibly helpful - read them carefully - Use <a href="https://claude.ai/">AI assistants</a> to deepen understanding, not to skip learning - Fighting with Rust now makes you a better programmer forever</p>
+<p><strong>Remember:</strong> - The <a href="https://doc.rust-lang.org/book/ch04-02-references-and-borrowing.html#the-rules-of-references">borrow checker</a> is your friend (even when it feels like your enemy) - Read the <a href="https://doc.rust-lang.org/error_codes/error-index.html">compiler diagnostic</a> before deciding on a fix - Use <a href="https://claude.ai/">AI assistants</a> to deepen understanding, not to skip learning - Explain each ownership fix in terms of the value, owner, and borrow involved</p>
 <p><strong>Office hours:</strong> Available on <a href="https://www.microsoft.com/en-us/microsoft-teams/group-chat-software">Microsoft Teams</a> - reach out anytime!</p>
 <aside class="notes">
 <p>End on an encouraging note. Ownership is hard but worth it. Normalize the struggle. Remind them you’re available for help. This is the most important concept in the entire Rust portion of the course.</p>

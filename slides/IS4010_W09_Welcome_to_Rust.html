@@ -10,7 +10,7 @@
   <meta name="generator" content="quarto-1.10.18">
 
   <meta name="author" content="Brandon M. Greenwell">
-  <title>IS4010: AI-Enhanced Application Development</title>
+  <title>IS4010: AI-enhanced application development</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -203,7 +203,7 @@
     <div class="slides">
 
 <section id="title-slide" class="quarto-title-block center">
-  <h1 class="title">IS4010: AI-Enhanced Application Development</h1>
+  <h1 class="title">IS4010: AI-enhanced application development</h1>
   <p class="subtitle">Week 09: Welcome to Rust</p>
 
 <div class="quarto-title-authors">
@@ -216,9 +216,9 @@ Brandon M. Greenwell
 
 </section>
 <section id="session-1-why-rust" class="slide level2">
-<h2>Session 1: Why Rust?</h2>
+<h2>Session 1: why Rust?</h2>
 <aside class="notes">
-<p>Open with energy - students are transitioning from Python to a systems language. Emphasize that Rust is challenging but incredibly rewarding. Show brief demo of Rust Playground.</p>
+<p>Students are transitioning from Python to a systems language. Acknowledge the steeper learning curve, connect it to the safety guarantees they will study, and show a brief Rust Playground demo.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -236,7 +236,7 @@ Brandon M. Greenwell
 <ul>
 <li class="fragment">For the next few weeks, we are shifting from <a href="https://www.python.org/">Python</a> to our second language, <a href="https://www.rust-lang.org/">Rust</a></li>
 <li class="fragment"><a href="https://doc.rust-lang.org/book/">Rust</a> is a modern, compiled language focused on three primary goals: <strong>performance</strong>, <strong>reliability</strong>, and <strong>safety</strong></li>
-<li class="fragment">It has a steeper learning curve than Python, but it gives us the power to write incredibly fast and memory-efficient code, which is essential for systems programming, game development, and high-performance computing</li>
+<li class="fragment">It has a steeper learning curve than Python, but it supports high-performance, memory-efficient programs for domains such as systems programming, game development, and scientific computing</li>
 <li class="fragment">Created by <a href="https://www.technologyreview.com/2023/02/14/1067869/rust-worlds-fastest-growing-programming-language/">Graydon Hoare at Mozilla Research</a> in 2006, first stable release in 2015</li>
 </ul>
 <aside class="notes">
@@ -253,17 +253,17 @@ Brandon M. Greenwell
           display:block!important;
       }</style></aside>
 </section>
-<section id="why-rust-matters-in-2025" class="slide level2">
-<h2>Why Rust matters in 2025</h2>
+<section id="why-rust-matters" class="slide level2">
+<h2>Why Rust matters</h2>
 <ul>
 <li class="fragment"><strong>Industry adoption</strong>: Used by <a href="https://www.microsoft.com/en-us/security/blog/2019/07/16/rustc-brings-rust-to-windows/">Microsoft</a>, <a href="https://aws.amazon.com/blogs/opensource/why-aws-loves-rust-and-how-wed-like-to-help/">Amazon Web Services</a>, <a href="https://security.googleblog.com/2021/04/rust-in-linux-kernel.html">Google</a>, <a href="https://engineering.fb.com/2021/04/29/developer-tools/rust/">Meta</a>, and <a href="https://discord.com/blog/why-discord-is-switching-from-go-to-rust">Discord</a></li>
-<li class="fragment"><strong>Firefox browser</strong>: Large portions rewritten in Rust for performance and security</li>
-<li class="fragment"><strong>Linux kernel</strong>: <a href="https://www.zdnet.com/article/linus-torvalds-rust-will-go-into-linux-6-1/">Rust support added in 2022</a> for driver development</li>
-<li class="fragment"><strong>WebAssembly</strong>: Rust is the #1 language for <a href="https://webassembly.org/">WebAssembly</a> development</li>
-<li class="fragment"><strong>Job market</strong>: Consistently highest-paid programming language in <a href="https://survey.stackoverflow.co/2024/technology#top-paying-technologies">Stack Overflow surveys</a></li>
+<li class="fragment"><strong>Firefox browser</strong>: Rust is used in components where performance and memory safety matter</li>
+<li class="fragment"><strong>Linux kernel</strong>: The kernel includes <a href="https://docs.kernel.org/rust/">Rust support and documentation</a></li>
+<li class="fragment"><strong>WebAssembly</strong>: Rust has mature tooling for targeting <a href="https://webassembly.org/">WebAssembly</a></li>
+<li class="fragment"><strong>Developer surveys</strong>: The <a href="https://survey.stackoverflow.co/2024/technology">2024 Stack Overflow Developer Survey</a> reported strong satisfaction among its Rust respondents</li>
 </ul>
 <aside class="notes">
-<p>Real-world relevance: Discord saw 10x performance improvements switching from Go to Rust. Dropbox uses Rust for their file synchronization engine. This isn’t academic - this is what industry needs.</p>
+<p>Use the linked engineering posts as case studies. Ask what part of each system changed, what metric improved, and which gains came from language features versus redesign or workload differences.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -276,16 +276,16 @@ Brandon M. Greenwell
           display:block!important;
       }</style></aside>
 </section>
-<section id="compiled-vs.-interpreted-languages" class="slide level2">
-<h2>Compiled vs.&nbsp;interpreted languages</h2>
+<section id="compiled-and-interpreted-languages" class="slide level2">
+<h2>Compiled and interpreted languages</h2>
 <ul>
-<li class="fragment"><a href="https://www.python.org/">Python</a> is an <strong>interpreted</strong> language. An interpreter reads and executes your code line by line. This makes it flexible and easy to use, but it can be slower</li>
+<li class="fragment"><a href="https://www.python.org/">Python</a> is commonly executed by an interpreter and virtual machine. Its dynamic runtime makes experimentation convenient but adds overhead for some workloads</li>
 <li class="fragment"><a href="https://www.rust-lang.org/">Rust</a> is a <strong>compiled</strong> language. A <a href="https://doc.rust-lang.org/rustc/what-is-rustc.html">compiler</a> translates your entire program into machine code—the raw instructions the computer’s CPU understands—before you run it</li>
 <li class="fragment">This ahead-of-time compilation is a major reason for Rust’s high performance. It catches errors early and optimizes the code for speed</li>
 <li class="fragment">Bonus: Compiled Rust programs don’t need a runtime or interpreter installed to run</li>
 </ul>
 <aside class="notes">
-<p>Analogy: Interpreted = simultaneous translation (slower, more flexible). Compiled = translating an entire book before reading (upfront work, but faster execution). Rust can be 10-100x faster than Python for CPU-intensive tasks.</p>
+<p>Analogy: interpretation is like translating while reading; ahead-of-time compilation translates before execution. Actual performance depends on the program, libraries, compiler settings, and workload, so benchmark the operation that matters.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -304,7 +304,7 @@ Brandon M. Greenwell
 <li class="fragment"><a href="https://doc.rust-lang.org/cargo/guide/"><code>cargo</code></a> is Rust’s official build system and package manager, and it’s one of the language’s best features</li>
 <li class="fragment">It handles creating new projects, compiling your code, running your application, and managing external libraries (called “<a href="https://crates.io/">crates</a>” in Rust)</li>
 <li class="fragment">Think of it as Python’s uv + pytest + formatter + type checker rolled into one tool!</li>
-<li class="fragment">Cargo is why Rust development feels so smooth and professional</li>
+<li class="fragment">Cargo provides one interface for the build, test, run, and dependency workflows used in this course</li>
 </ul>
 <aside class="notes">
 <p>Cargo combines project creation, dependency management, building, testing, and running. Compare that unified experience with our <code>uv</code> plus <code>pytest</code> workflow. Show a live demo: <code>cargo new demo</code>, <code>cd demo</code>, and <code>cargo run</code>. Point out the automatic Git initialization and <code>.gitignore</code> creation.</p>
@@ -326,7 +326,7 @@ Brandon M. Greenwell
 <p><strong>Building and running:</strong> - <a href="https://doc.rust-lang.org/cargo/commands/cargo-build.html"><code>cargo build</code></a>: compiles your code (debug mode) - <a href="https://doc.rust-lang.org/cargo/commands/cargo-run.html"><code>cargo run</code></a>: compiles and runs in one command - <a href="https://doc.rust-lang.org/cargo/commands/cargo-build.html"><code>cargo build --release</code></a>: optimized production build</p>
 <p><strong>Development workflow:</strong> - <a href="https://doc.rust-lang.org/cargo/commands/cargo-check.html"><code>cargo check</code></a>: fast compile check (no executable) - <a href="https://doc.rust-lang.org/cargo/commands/cargo-test.html"><code>cargo test</code></a>: run all tests - <a href="https://doc.rust-lang.org/cargo/commands/cargo-clean.html"><code>cargo clean</code></a>: delete build artifacts</p>
 <aside class="notes">
-<p>Emphasize cargo check - it’s MUCH faster than cargo build because it doesn’t generate an executable. Use it constantly while coding! cargo build –release is 10-100x faster than debug builds but takes longer to compile.</p>
+<p>Explain that <code>cargo check</code> often gives a faster edit-feedback loop because it checks the crate without producing a final executable. Release builds enable optimizations and usually take longer to compile; runtime improvement depends on the program and should be measured.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -339,12 +339,12 @@ Brandon M. Greenwell
           display:block!important;
       }</style></aside>
 </section>
-<section id="cargos-secret-weapons-clippy-and-rustfmt" class="slide level2">
-<h2>Cargo’s secret weapons: <a href="https://doc.rust-lang.org/clippy/">clippy</a> and <a href="https://github.com/rust-lang/rustfmt">rustfmt</a></h2>
-<p><strong><a href="https://doc.rust-lang.org/clippy/"><code>cargo clippy</code></a></strong> - your personal Rust mentor: - Catches common mistakes and suggests better approaches - Over 500 lints for code quality, performance, and style - Like having a senior Rust developer review your code - Example: “you can simplify this code” or “this might panic”</p>
+<section id="cargo-tools-clippy-and-rustfmt" class="slide level2">
+<h2>Cargo tools: <a href="https://doc.rust-lang.org/clippy/">Clippy</a> and <a href="https://github.com/rust-lang/rustfmt">rustfmt</a></h2>
+<p><strong><a href="https://doc.rust-lang.org/clippy/"><code>cargo clippy</code></a></strong> - your personal Rust mentor: - Catches common mistakes and suggests better approaches - Over 500 lints for code quality, performance, and style - Provides automated feedback based on established Rust lints - Example: “you can simplify this code” or “this might panic”</p>
 <p><strong><a href="https://github.com/rust-lang/rustfmt"><code>cargo fmt</code></a></strong> - automatic code formatting: - Formats your code to match Rust community style - No more debates about spacing, indentation, or style - Run before every commit - keeps code consistent - Like Python’s <a href="https://github.com/psf/black">black</a> formatter</p>
 <aside class="notes">
-<p><strong>LIVE DEMO</strong>: Show clippy catching a mistake. Show fmt before/after messy code. Explain that these come with rustup, no separate install needed. Emphasize that using these tools is NOT cheating - it’s professional Rust development. All Rust developers use them.</p>
+<p><strong>Live demo:</strong> Show Clippy catching a mistake and rustfmt reformatting inconsistent code. Explain that these tools are standard parts of the Rust toolchain and are required in the course workflow.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -359,7 +359,7 @@ Brandon M. Greenwell
 </section>
 <section id="your-rust-development-workflow" class="slide level2 scrollable">
 <h2>Your Rust development workflow</h2>
-<p>This is what professional Rust developers do:</p>
+<p>Use this repeatable development loop:</p>
 <ol type="1">
 <li class="fragment"><strong>Write code</strong> in your editor</li>
 <li class="fragment"><strong><code>cargo check</code></strong> - fast compilation check while coding</li>
@@ -368,9 +368,9 @@ Brandon M. Greenwell
 <li class="fragment"><strong><code>cargo fmt</code></strong> - format code before committing</li>
 <li class="fragment"><strong><code>cargo run</code></strong> - try out your program</li>
 </ol>
-<p><strong>Pro tip:</strong> Run <code>cargo check</code> constantly. It’s 10x faster than <code>cargo build</code>!</p>
+<p><strong>Practice:</strong> Use <code>cargo check</code> for quick compiler feedback, then run the full required checks before submitting.</p>
 <aside class="notes">
-<p>This is the actual workflow. cargo check gives you immediate feedback. clippy teaches you better Rust. fmt keeps code clean. Get students in this habit NOW. Mention that VS Code with rust-analyzer runs cargo check automatically in the background.</p>
+<p>Explain how each command supplies a different kind of evidence. Mention that rust-analyzer can run checks in the editor, but students must still run the required commands before submitting.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -388,12 +388,12 @@ Brandon M. Greenwell
 <ul>
 <li class="fragment">Before installing anything, you can experiment with Rust in your browser at <a href="https://play.rust-lang.org/">play.rust-lang.org</a></li>
 <li class="fragment">The <a href="https://play.rust-lang.org/">Rust Playground</a> lets you write, compile, and run Rust code instantly</li>
-<li class="fragment">Perfect for testing small examples, sharing code snippets, and learning syntax</li>
+<li class="fragment">Useful for testing small examples, sharing snippets, and learning syntax</li>
 <li class="fragment"><strong>Every code example in these slides has a clickable Playground link</strong> - try them all!</li>
 <li class="fragment">You’ll use the Playground extensively in this week’s practice exercises</li>
 </ul>
 <aside class="notes">
-<p><strong>LIVE DEMO</strong>: Open Playground now and run a Hello World example. Show how to: 1. Edit code and click Run 2. See compile errors in red 3. Use the Share button to save/share 4. Change to different Rust editions Mention that professional Rust developers use Playground daily for quick experiments and collaboration. Encourage students to open Playground in another tab RIGHT NOW and follow along.</p>
+<p><strong>Live demo:</strong> Open Playground and run a Hello World example. Show how to: 1. Edit code and click Run 2. See compile errors in red 3. Use the Share button to save/share 4. Change to different Rust editions Explain that Playground is useful for isolated experiments and shareable examples. Invite students to open it in another tab and follow along.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -407,8 +407,8 @@ Brandon M. Greenwell
       }</style></aside>
 </section>
 <section id="live-demo-your-first-rust-code" class="slide level2 scrollable">
-<h2>🎮 <strong>Live Demo: Your first Rust code!</strong></h2>
-<p><strong>👉 Everyone open this link NOW:</strong> <a href="https://play.rust-lang.org/">play.rust-lang.org</a></p>
+<h2>Live demo: your first Rust code</h2>
+<p><strong>Open:</strong> <a href="https://play.rust-lang.org/">play.rust-lang.org</a></p>
 <p><strong>Follow along:</strong></p>
 <ol type="1">
 <li><strong>Click “Run”</strong> - see “Hello, world!” in the output</li>
@@ -432,11 +432,11 @@ Brandon M. Greenwell
       }</style></aside>
 </section>
 <section id="hello-rust" class="slide level2">
-<h2>Hello, Rust!</h2>
+<h2>Hello, Rust</h2>
 <ul>
 <li class="fragment">When you run <code>cargo new hello_rust</code>, it creates a simple project structure for you</li>
 <li class="fragment">The main source code lives in <code>src/main.rs</code></li>
-<li class="fragment">The <code>fn main()</code> block is the entry point for every Rust executable</li>
+<li class="fragment">The <code>fn main()</code> function is the entry point for a standard Rust binary</li>
 <li class="fragment"><a href="https://doc.rust-lang.org/std/macro.println.html"><code>println!</code></a> is a <strong>macro</strong> (not a function, note the <code>!</code>) that prints text to the console</li>
 </ul>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb1-1"><a href="" aria-label="1"></a><span class="co">// Inside src/main.rs</span></span>
@@ -446,7 +446,7 @@ Brandon M. Greenwell
 <p><strong>🎮 Try it yourself:</strong> <a href="https://play.rust-lang.org/?version=stable&amp;mode=debug&amp;edition=2021&amp;code=fn+main%28%29+%7B%0A++++println%21%28%22Hello%2C+Rust%21%22%29%3B%0A%7D">▶ Run in Rust Playground</a></p>
 <p><strong>Your turn:</strong> Modify the message and add a second <code>println!</code> line!</p>
 <aside class="notes">
-<p>Point out the exclamation mark - macros are a powerful Rust feature. They’re code that writes code. We’ll use them without creating our own for now. Give students 30 seconds to try it in Playground.</p>
+<p>Point out the exclamation mark and describe a macro as syntax expanded into Rust code during compilation. This week uses standard macros without defining new ones.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -490,7 +490,7 @@ Brandon M. Greenwell
 <p><strong>🎮 Try it yourself:</strong> <a href="https://play.rust-lang.org/?version=stable&amp;mode=debug&amp;edition=2021&amp;code=fn+main%28%29+%7B%0A++++let+x+%3D+5%3B%0A++++let+mut+y+%3D+10%3B%0A++++y+%3D+15%3B%0A++++println%21%28%22x%3A+%7B%7D%2C+y%3A+%7B%7D%22%2C+x%2C+y%29%3B%0A%7D">▶ Experiment in Playground</a></p>
 <p><strong>🎯 Challenge:</strong> Uncomment the <code>x = 6;</code> line. What error do you get? Read it carefully!</p>
 <aside class="notes">
-<p>Why immutable by default? Prevents entire categories of bugs (race conditions, unexpected mutations). If you need to change a value, you declare that intent upfront. <strong>HAVE STUDENTS uncomment the x = 6 line in Playground</strong> to see the compiler error. The error message is incredibly helpful - point this out!</p>
+<p>Immutability by default makes mutation explicit and rules out some accidental state changes. Have students uncomment the <code>x = 6</code> line, then read the diagnostic and identify the suggested change.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -591,12 +591,12 @@ Brandon M. Greenwell
 <h2>How do we know our code works?</h2>
 <ul>
 <li class="fragment">In the Python section, we used the <code>pytest</code> library to run our tests</li>
-<li class="fragment">Rust has a powerful <a href="https://doc.rust-lang.org/book/ch11-00-testing.html">testing framework</a> built directly into the language and its tooling</li>
+<li class="fragment">Rust includes a <a href="https://doc.rust-lang.org/book/ch11-00-testing.html">test harness</a> integrated with Cargo</li>
 <li class="fragment">We can write tests for our code and run them from the command line using a simple, built-in command: <a href="https://doc.rust-lang.org/cargo/commands/cargo-test.html"><code>cargo test</code></a></li>
 <li class="fragment">No need to install separate testing libraries - testing is first-class in Rust!</li>
 </ul>
 <aside class="notes">
-<p>Testing culture in Rust is strong. Most crates (libraries) have excellent test coverage. Cargo makes it effortless - tests live alongside code.</p>
+<p>Rust projects commonly keep unit tests beside the code they exercise. Cargo provides one consistent command for discovering and running them.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -675,10 +675,10 @@ Brandon M. Greenwell
 <li class="fragment">For the Rust labs, we will provide the test suite for you</li>
 <li class="fragment">Your workflow should be:
 <ol type="1">
-<li class="fragment">Write your solution code in <code>src/main.rs</code></li>
-<li class="fragment">Append our provided test module to the bottom of that file</li>
-<li class="fragment">Run <code>cargo test</code> in your terminal to check your work locally</li>
-<li class="fragment">Once all tests pass, commit and push your code to <a href="https://github.com/">GitHub</a></li>
+<li class="fragment">Open the supplied Week 09 Cargo project and implement each <code>todo!()</code> in <code>src/main.rs</code></li>
+<li class="fragment">Do not modify the supplied test module</li>
+<li class="fragment">Run <code>cargo test</code>, <code>cargo fmt</code>, and <code>cargo clippy -- -D warnings</code></li>
+<li class="fragment">Once all checks pass, commit <code>week09/</code>, push, and inspect the Week 09 badge</li>
 </ol></li>
 <li class="fragment">This gives you instant feedback without having to wait for the CI/CD pipeline</li>
 <li class="fragment">Green tests = you’re ready to submit! 🎉</li>
@@ -701,15 +701,15 @@ Brandon M. Greenwell
 <h2>Introducing Lab 09</h2>
 <ul>
 <li class="fragment">This week’s lab is your first hands-on introduction to Rust</li>
-<li class="fragment">You’ll install the <a href="https://www.rust-lang.org/tools/install">Rust toolchain</a> using <a href="https://rustup.rs/">rustup</a></li>
-<li class="fragment">Create your first <a href="https://doc.rust-lang.org/cargo/guide/creating-a-new-project.html">Cargo project</a></li>
-<li class="fragment">Practice with variables, data types, and functions</li>
-<li class="fragment">Write and run tests with <code>cargo test</code></li>
+<li class="fragment">Install the <a href="https://www.rust-lang.org/tools/install">Rust toolchain</a> using <a href="https://rustup.rs/">rustup</a> if it is not already installed</li>
+<li class="fragment">Open the supplied <code>week09</code> Cargo project</li>
+<li class="fragment">Implement arithmetic, string, slice, and vector functions in <code>src/main.rs</code></li>
+<li class="fragment">Run the required Cargo test, format, and lint commands</li>
 <li class="fragment">Full instructions are in <code>week09/lab09.md</code></li>
 <li class="fragment">Don’t forget the <a href="https://play.rust-lang.org/">Rust Playground exercises</a> for extra practice!</li>
 </ul>
 <aside class="notes">
-<p>Remind students: Rust has a steeper learning curve, but the compiler is incredibly helpful. Read the error messages - they often tell you exactly how to fix the problem. Use AI assistants, but make sure you understand the code.</p>
+<p>Remind students that compiler diagnostics often identify the relevant type or ownership rule and may suggest a correction. Use AI assistants for explanation, then verify the change with Cargo and explain it in your own words.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -730,7 +730,7 @@ Brandon M. Greenwell
 <li class="fragment">🏃 <a href="https://github.com/rust-lang/rustlings/">Rustlings</a> - small exercises to get you used to reading and writing Rust code</li>
 <li class="fragment">💬 <a href="https://users.rust-lang.org/">Rust Users Forum</a> - friendly community for questions</li>
 <li class="fragment">📺 <a href="https://www.youtube.com/playlist?list=PLlrxD0HtieHjbTjrchBwOVks_sr8EVW1x">Microsoft Rust course on YouTube</a> - free video series</li>
-<li class="fragment">🤖 Use <a href="https://github.com/features/copilot">GitHub Copilot</a> and <a href="https://claude.ai/">Claude</a> - but always understand the code!</li>
+<li class="fragment">🤖 Use your chosen browser, editor, or CLI assistant, then verify every change with Cargo</li>
 </ul>
 <aside class="notes">
 <p>The Rust community is exceptionally welcoming. The book (often called “the Rust book”) is the gold standard - well-written and free. Rustlings is great for building muscle memory with Rust syntax.</p>
