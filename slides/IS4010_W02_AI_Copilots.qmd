@@ -1,6 +1,6 @@
 ---
-title: "IS4010: AI-Enhanced Application Development"
-subtitle: "Week 02"
+title: "IS4010: AI-enhanced application development"
+subtitle: "Week 02: AI copilots and comparison workflows"
 author: "Brandon M. Greenwell"
 format: 
   revealjs:
@@ -11,10 +11,10 @@ format:
 
 # AI tools for programming
 
-## Welcome to the AI revolution
+## AI-assisted development is already here
 
 ::: {.incremental}
-- Today we'll explore the landscape of AI programming tools
+- Today we'll compare AI programming tools across the browser, editor, and terminal
 - You'll learn to work with AI as your **pair programming partner**
 - We'll compare the major players and find the right tool for each job
 - By the end, you'll understand how to "talk" to AI about code
@@ -28,7 +28,7 @@ Demo hook: Have three browser tabs open (Gemini, ChatGPT, Claude) and be ready t
 
 ---
 
-## Course motto: 
+## Course motto:
 
 > Augment, don't automate!
 
@@ -60,18 +60,18 @@ Use the pilot/co-pilot analogy throughout the course. It's memorable and accurat
 
 ---
 
-## Under the hood: LLMs 🧠
+## Under the hood: LLMs
 
 ::: {.incremental}
 - **Large Language Models (LLMs)**: AI systems trained on massive amounts of text from the internet
 - **Pattern recognition experts**: They've learned patterns in human language *and code*
-- **Sophisticated autocomplete**: Like your phone's predictive text, but incredibly advanced
-- **Not databases**: They don't "know" facts—they predict what text should come next
+- **Statistical language models**: They generate likely continuations from the prompt and available context
+- **Not authoritative sources**: Fluent answers can still be incomplete, outdated, or wrong
 - **Surprisingly good at code**: Programming languages follow patterns, just like natural language
 :::
 
 ::: notes
-This is crucial foundational knowledge. Students often think AI "knows" things, when really it's predicting based on patterns.
+Keep this explanation practical: generated text is not evidence. Students should verify claims and run generated code.
 
 Key analogies to use:
 - **Autocomplete on steroids**: Everyone understands phone predictive text
@@ -84,7 +84,7 @@ Important points:
 - This is why they're good at code completion but can make subtle logical errors
 - They work the same way for Python, Rust, English, or any other language—it's all just patterns in text
 
-Set expectations: These tools are incredibly useful but require human judgment and verification.
+Set expectations: These tools can be useful, but their output requires human judgment and verification.
 :::
 
 ---
@@ -99,34 +99,34 @@ Set expectations: These tools are incredibly useful but require human judgment a
 ::: notes
 Frame these as surfaces rather than permanent tool loyalties. The same model or provider may appear in more than one surface, but the context and workflow differ.
 
-Ask students: "Which of these sounds most useful to you right now?" Get a sense of where they are in their programming journey.
+Ask students which surface fits a task they have already performed and why.
 :::
 
 ---
 
-## Conversational AI models 🤖
+## Browser-based AI assistants
 
-**The big three:** [Gemini](https://gemini.google.com/), [ChatGPT](https://chat.openai.com/), and [Claude](https://claude.ai/) (These are general-purpose AI models that can help with programming.)
+**Examples:** [Gemini](https://gemini.google.com/), [ChatGPT](https://chat.openai.com/), and [Claude](https://claude.ai/) are general-purpose assistants that can help with programming.
 
 ::: {.incremental}
-- **All offer free tiers** - Cost shouldn't be a barrier!
-- **Strong programming support** - Excellent for [Python](https://www.python.org/), explanations, and debugging
-- **Different personalities** - Each has unique strengths
+- **Access varies** - Free tiers, limits, and available models can change
+- **Programming support** - Useful for [Python](https://www.python.org/), explanations, and debugging
+- **Different outputs** - Compare responses against the same requirements and tests
 - **Web-based interfaces** - Easy to access
-- **Great for learning** - Perfect for explanations, brainstorming, and code review
+- **Useful for learning** - Ask for explanations, examples, and review, then verify the result
 :::
 
 ::: notes
 Emphasize that these are general-purpose AI models, not specialized coding tools. They're excellent for learning, explanations, and brainstorming, but they're different from purpose-built code assistants.
 
-All three have free tiers - cost shouldn't be a barrier for students. Each has different strengths, and we'll see this in the live demo.
+Access, rate limits, and available models change. Confirm the current course options before class and offer an equivalent route if a student's account differs.
 
 Point out that we're focusing on the web interfaces first - this is the easiest entry point for beginners.
 :::
 
 ---
 
-## Conversational coding 💬
+## Conversational coding
 
 **The CPTF framework for great prompts:**
 
@@ -138,7 +138,7 @@ Point out that we're focusing on the web interfaces first - this is the easiest 
 :::
 
 ::: notes
-This is crucial - the quality of AI responses depends entirely on prompt quality. Students often start with vague prompts like "fix my code" and get frustrated with the results.
+Prompt quality matters, but it is not the only factor. Model capability, repository context, tool access, and verification also affect the result.
 
 Have a few examples ready:
 - Bad: "Make this better"
@@ -147,7 +147,7 @@ Have a few examples ready:
 
 ---
 
-## Five essential prompt patterns
+## Five prompt patterns
 
 ### 1. **Explain this code**
 ```
@@ -167,14 +167,14 @@ Have a few examples ready:
 ```
 
 ::: notes
-Walk through each pattern with a concrete example. These are the patterns students will use 80% of the time.
+Walk through each pattern with a concrete example. Students will reuse these patterns throughout the course.
 
 Emphasize that good prompts are specific and provide context. The AI needs to understand what you're trying to accomplish.
 :::
 
 ---
 
-## More essential patterns
+## Two more prompt patterns
 
 ### 4. **Debug assistance**
 ```
@@ -187,14 +187,12 @@ Emphasize that good prompts are specific and provide context. The AI needs to un
 ```
 
 ::: notes
-Pattern 4 is incredibly valuable - students often get cryptic error messages and spend hours debugging what an AI can spot in seconds.
-
-Pattern 5 shows how AI can help with design decisions, not just code generation. This is where the "senior developer" persona really shines.
+For pattern 4, require the exact error, the smallest relevant code, and what the student already tried. For pattern 5, ask for trade-offs and evidence instead of treating a role label as expertise.
 :::
 
 ---
 
-## Live demo: Head-to-head comparison 🥊
+## Live demo: head-to-head comparison
 
 **Our challenge**: Create a [Python](https://www.python.org/) function that takes a filename and returns the number of lines in the file, handling potential `FileNotFoundError` exceptions.
 
@@ -220,7 +218,7 @@ This demonstrates that models have different "personalities" and there's no sing
 
 ---
 
-## What did we learn? 🧠
+## What did we learn?
 
 ::: {.incremental}
 - **Different models, different strengths**: Each AI has its own "personality"
@@ -241,7 +239,7 @@ This reinforces that AI tools are aids to human judgment, not replacements for i
 
 ---
 
-## Ethics and limitations ⚠️
+## Ethics and limitations
 
 ::: {.incremental}
 - **AI can hallucinate**: Models sometimes generate plausible-looking but incorrect code
@@ -261,7 +259,7 @@ Emphasize the course AI policy: use AI freely, but understand everything you sub
 
 ---
 
-## A quick note on docstrings 📝
+## A quick note on docstrings
 
 ::: {.incremental}
 - Before our lab, we need to introduce a key concept: the **docstring**
@@ -325,7 +323,7 @@ This style works particularly well with AI tools because it provides structured,
 
 ---
 
-## Introducing Lab 02: Code preview 🧪
+## Introducing Lab 02: code preview
 
 - Use any AI coding assistant available to you; GitHub Copilot is not required
 - Ask it to help implement three small Python functions: `make_greeting`, `is_even`, and `count_vowels`
@@ -334,9 +332,9 @@ This style works particularly well with AI tools because it provides structured,
 
 ---
 
-# AI in your editor & beyond
+# AI in your editor and terminal
 
-## From browser to IDE
+## From browser to editor
 
 Why integration matters 🔗
 
@@ -345,7 +343,7 @@ Why integration matters 🔗
 - **Keep your hands on the keyboard**: Faster than copy-paste workflows
 - **Context awareness**: AI can see your entire project
 - **Real-time assistance**: Get help as you type
-- **Professional workflow**: This is how AI is used in the industry
+- **Workflow integration**: Suggestions appear beside the code and tools being used
 :::
 
 ::: notes
@@ -362,11 +360,11 @@ Make sure students have [VS Code](https://code.visualstudio.com/) open and ready
 
 ::: {.incremental}
 - Purpose-built for coding and integrates directly into [VS Code](https://code.visualstudio.com/)!
-- Trained specifically on code repositories from GitHub
+- Generates code and explanations from the prompt and available editor context
 - Provides **two main modes** of assistance:
   - **Inline suggestions**: "Ghost text" appears as you type
   - **Copilot Chat**: Conversational interface within your editor
-- **Context-aware**: Sees your current file, open files, and project structure
+- **Context-aware**: Can use current files and repository context according to the selected mode and permissions
 :::
 
 ::: notes
@@ -377,7 +375,7 @@ Key point: Context awareness and integration. Copilot can see variable names, fu
 
 ---
 
-## The magic of inline suggestions ✨
+## Inline suggestions
 
 **How it works:**
 
@@ -391,7 +389,7 @@ Key point: Context awareness and integration. Copilot can see variable names, fu
 
 ---
 
-## The magic of inline suggestions ✨
+## Inline suggestion practices
 
 **Best practices:**
 
@@ -418,16 +416,16 @@ This is the "classic" Copilot experience that most people think of. Prepare a li
 4. Let Copilot complete the function
 5. Show how to cycle through alternatives
 
-Emphasize that the quality of suggestions depends heavily on the quality of your comments and function names.
+Clear names and nearby context can improve a suggestion, but every completion still needs review and testing.
 :::
 
 ---
 
-## Copilot Chat
+## Copilot Chat modes
 
 **Your conversational partner** 💬
 
-Three powerful modes:
+Common interaction modes (labels can change):
 
 ::: {.incremental}
 - **Planning mode**: Architectural decisions and project structure
@@ -437,7 +435,7 @@ Three powerful modes:
 
 ---
 
-## Copilot Chat
+## When to use each Copilot Chat mode
 
 **Your conversational partner** 💬
 
@@ -450,7 +448,7 @@ When to use each mode:
 :::
 
 ::: notes
-This is new content that distinguishes between different interaction patterns. Students need to understand when to use each mode:
+Use the current Copilot documentation and interface during class because labels and capabilities can change. Distinguish the interaction patterns:
 
 **Planning mode**: High-level architectural decisions. Use when you're not sure how to approach a problem.
 
@@ -463,7 +461,7 @@ Prepare examples for each mode to show during the demo.
 
 ---
 
-## Live demo 🎬
+## Live demo
 
 **Building a [Python](https://www.python.org/) utility with AI assistance:**
 
@@ -473,8 +471,8 @@ Prepare examples for each mode to show during the demo.
 3. **Use Chat to enhance**:
    - `/explain` the generated code
    - "Add a [NumPy](https://numpy.org/)-style docstring and type hints"
-   - `/tests` to generate [pytest](https://pytest.org/) unit tests
-4. **Refactor and debug**: "Make this function more robust" or "Find the bug in this code"
+   - Ask for candidate [pytest](https://pytest.org/) cases derived from the function contract
+4. **Refactor and debug**: Name the behavior to preserve or provide a failing test
 :::
 
 ::: notes
@@ -483,7 +481,7 @@ This is the centerpiece demonstration. Have a live coding session where you buil
 Key moments to highlight:
 1. How inline suggestions save typing
 2. How chat can explain unfamiliar code
-3. The "wow" moment when `/tests` generates complete unit tests
+3. How proposed tests can still encode an incorrect assumption
 4. How to iteratively improve code with AI feedback
 
 If something goes wrong (AI gives bad suggestions), use it as a teaching moment about verification and human oversight.
@@ -491,29 +489,27 @@ If something goes wrong (AI gives bad suggestions), use it as a teaching moment 
 
 ---
 
-## Command-line AI assistants 💻
+## Command-line AI assistants
 
 **Why use terminal-based AI?**
 
 ::: {.incremental}
 - **Stay in your workflow**: No need to switch between terminal and browser
 - **Quick queries**: Fast answers without leaving the command line
-- **Scriptable**: Can be integrated into automated workflows
-- **Code context**: Easy to pipe file contents directly to AI
-- **Privacy options**: Some tools offer better data handling
+- **Repository context**: Can inspect relevant files when permission is granted
+- **Repeatable checks**: Can help run the same local validation commands
+- **Permission boundaries**: Review requested file access, commands, and data handling
 :::
 
 ::: notes
-Set up the value proposition for command-line tools. These are for "power users" who want to integrate AI into their terminal workflow.
-
-Students may ask: "Why not just use the browser?" Answer: When you're deep in terminal work (git operations, file manipulation, debugging), switching to a browser breaks your flow.
+Frame the terminal as another working surface, not a skill ranking. It is useful when the task already lives in a repository and the assistant needs local context or needs to run checks.
 :::
 
 ---
 
 ## [Antigravity CLI](https://antigravity.google/docs/cli/overview/)
 
-### Google's coding agent in your terminal 🖥️
+### Google's coding agent in your terminal
 
 ::: {.incremental}
 - Launch with `agy` from inside the repository you want it to inspect.
@@ -528,14 +524,14 @@ agy
 ```
 
 ::: notes
-Explain the 2026 product transition: the individual Gemini CLI experience moved to Antigravity CLI. Enterprise/API Gemini CLI cases may still exist, but `agy` is the course-facing Google CLI.
+Use the current official setup guide during class. The course-facing Google terminal tool is Antigravity CLI, launched with `agy`; installation and account flows may change.
 :::
 
 ---
 
 ## [GitHub Copilot CLI](https://github.com/features/copilot/cli)
 
-### GitHub's coding agent in your terminal ⌨️
+### GitHub's coding agent in your terminal
 
 ::: {.incremental}
 - Install the standalone tool from the current official GitHub documentation.
@@ -572,24 +568,24 @@ Use `count_vowels` for the live comparison so class mirrors Lab 02. CI can valid
 
 ---
 
-## [Google Jules](https://jules.google/)
+## [Google Jules](https://jules.google/): repository workflow
 
-**AI-powered code review** 🔍
+**Repository-based coding agent**
 
-Revolutionary approach:
+Repository-based workflow:
 
 ::: {.incremental}
-- **Understands entire codebases**, not just individual files
-- **Comprehensive analysis**: Security, performance, maintainability
-- **Context-aware suggestions**: Considers your project's architecture
-- **Educational feedback**: Explains *why* changes are recommended
+- Connects to an authorized GitHub repository and branch
+- Clones the repository into a virtual machine for an assigned task
+- Proposes a plan before editing and presents a diff for review
+- Can publish its changes to a branch or pull request after review
 :::
 
 ---
 
-## [Google Jules](https://jules.google/)
+## [Google Jules](https://jules.google/): review uses
 
-**AI-powered code review** 🔍
+**Repository-based coding agent**
 
 Good for:
 
@@ -602,22 +598,14 @@ Good for:
 :::
 
 ::: notes
-Jules represents a new category of AI tools - those that can understand and analyze entire projects, not just individual functions.
-
-Prepare a demo with a small [Python](https://www.python.org/) project (maybe 3-4 files). Upload it to [Jules](https://jules.google/) and show:
-1. How it analyzes code structure
-2. Security and performance recommendations
-3. Suggestions for code organization
-4. Educational explanations of why changes are recommended
-
-Emphasize that this is perfect for their lab submissions - they can get AI feedback before turning in their work.
+Use a small disposable repository for the demonstration. Show the authorization boundary, proposed plan, diff, and checks. Do not present an agent's security or performance suggestions as findings until they are verified.
 :::
 
 ---
 
-## Choosing your AI toolkit 🧰
+## Choosing your AI toolkit
 
-**Required for this course (free):**
+**Required working surfaces for this course:**
 
 - A browser chat of your choice
 - [GitHub Copilot](https://github.com/features/copilot) in VS Code
@@ -638,7 +626,7 @@ Students install and try both CLI agents. The point is comparison and informed c
 
 ---
 
-## Your professional AI workflow 🔄
+## AI workflow: implementation
 
 **Daily development:**
 
@@ -649,14 +637,14 @@ Students install and try both CLI agents. The point is comparison and informed c
 
 ---
 
-## Your professional AI workflow 🔄
+## AI workflow: review and submission
 
 **Code review and submission:**
 
-1. **Jules analysis**: Upload complete projects for comprehensive review
+1. **Repository task**: Assign a scoped task to Jules when an asynchronous agent is useful
 2. **AI-assisted debugging**: Use chat to identify and fix issues
 3. **Documentation**: Generate docstrings and comments with AI help
-4. **Testing**: Auto-generate test cases with `/tests` command
+4. **Testing**: Propose test cases, then inspect and run them
 
 ::: notes
 This gives students a complete workflow they can start using immediately.
@@ -668,7 +656,7 @@ The key insight: different tools for different phases of development. You wouldn
 
 ---
 
-## Remember: You are the pilot ✈️
+## Remember: you are the pilot
 
 ::: {.incremental}
 - **AI provides suggestions** → You make decisions
@@ -678,7 +666,7 @@ The key insight: different tools for different phases of development. You wouldn
 - **Always maintain responsibility** for the final product
 :::
 
-**The golden rule**: Never submit code you don't understand!
+**Submission rule**: Do not submit code you cannot explain and verify.
 
 ::: notes
 End with the core philosophy. Students should leave feeling empowered, not dependent.
@@ -690,7 +678,7 @@ Ask: "What questions do you have about integrating AI into your development work
 
 ---
 
-## Introducing Lab 02: CLI comparison 🚀
+## Introducing Lab 02: CLI comparison
 
 - Install and authenticate both CLI tools using their official documentation
 - Give both agents the exact same `count_vowels` task
@@ -700,7 +688,7 @@ Ask: "What questions do you have about integrating AI into your development work
 
 ---
 
-## Time for Lab 02! 🧪
+## Time for Lab 02
 
 - Your next hands-on lab: compare two CLI coding agents on a small [Python](https://www.python.org/) task
 - Complete `week02/lab02.py` and `week02/lab02_prompts.md`

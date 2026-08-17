@@ -1,6 +1,6 @@
 ---
-title: "IS4010: AI-Enhanced Application Development"
-subtitle: "Week 01"
+title: "IS4010: AI-enhanced application development"
+subtitle: "Week 01: Course introduction and setup"
 author: "Brandon M. Greenwell"
 format: 
   revealjs:
@@ -17,52 +17,52 @@ format:
 
 ---
 
-## The software world has changed 🌍
+## The software world has changed
 
 ::: {.incremental}
-- AI code assistants in the browser, editor, and terminal are no longer a novelty; they're rapidly becoming a standard part of the professional developer's toolkit.
+- AI code assistants now appear in browser, editor, terminal, and repository workflows.
 - Knowing how to use these tools effectively is becoming a required skill for new graduates.
-- Our goal is to make you proficient not just in a language, but in this new AI-augmented workflow.
+- Our goal is proficiency in both programming languages and AI-augmented development workflows.
 :::
 
 ---
 
-## Our course philosophy 💭
+## Our course philosophy
 
 ::: {.incremental}
 - This course directly addresses the valid concerns of using AI in education.
 - We'll use AI to handle boilerplate and accelerate development, not to do our thinking for us.
 - **You're the pilot! ✈️** You're responsible for every line of code, and you must understand, test, and be able to explain the code you submit.
-- We'll critically examine where AI excels and where it fails, addressing issues like short-term memory, hallucinations, and repeatability.
+- We'll test where AI assistance is useful or unreliable, including context limits, fabricated claims, and repeatability.
 :::
 
 ---
 
-## What we'll learn 🎯
+## What we'll learn
 
 ::: {.incremental}
-- Write clean, professional [Python](https://www.python.org/) and [Rust](https://www.rust-lang.org/) code.
+- Write readable, tested [Python](https://www.python.org/) and [Rust](https://www.rust-lang.org/) code.
 - Use [Git](https://git-scm.com/) and [GitHub](https://github.com/) for version control and collaboration.
 - Leverage AI code assistants to write, debug, and refactor code.
-- Build data-driven applications that interact with real-world APIs. 🌐
+- Build data-driven applications that interact with documented APIs.
 - Create a unique portfolio project that showcases your skills to future employers. 💼
 :::
 
 ---
 
-## Our roadmap 🗺️
+## Our roadmap
 
 ::: {.incremental}
 - **Foundations & modern tooling** ([Git](https://git-scm.com/), [GitHub](https://github.com/), AI assistants) (weeks 1-2)
 - **[Python](https://www.python.org/) fundamentals with an AI partner** (from basics to OOP) (weeks 3-6)
 - **Building a Python application** (APIs and professional tools) (weeks 7-8)
-- **New frontiers: [Rust](https://www.rust-lang.org/)** (performance, safety, and a new ecosystem) (weeks 10-12)
-- **Synthesis & the final project** (your portfolio piece) (weeks 13-14)
+- **[Rust](https://www.rust-lang.org/) fundamentals and application development** (weeks 9-14)
+- **Advanced AI workflows and final-project support** (week 15)
 :::
 
 ---
 
-## Key course components 📊
+## Key course components
 
 ::: {.incremental}
 - Our grading is designed to reflect hands-on, applied skill.
@@ -73,7 +73,7 @@ format:
 
 ---
 
-## Important course links 🔗
+## Important course links
 
 ::: {.incremental}
 - **Course Canvas:** [uc.instructure.com](https://uc.instructure.com/courses/1812798) (grades, slides, labs, due dates, etc.)
@@ -84,7 +84,7 @@ format:
 
 ---
 
-## The final project: Your portfolio piece 🎨
+## The final project: your portfolio piece
 
 ::: {.incremental}
 - The culmination of this course is a student-choice final project.
@@ -95,7 +95,7 @@ format:
 
 ---
 
-## Setup fest 🛠️
+## Setup fest
 
 - Time to get our hands dirty.
 - We'll now spend the rest of the session setting up our development environment.
@@ -107,7 +107,7 @@ format:
 
 ---
 
-## How to know it's working ✅
+## How to know it's working
 
 - Open your terminal or command prompt and run the following commands:
   - [`git --version`](https://git-scm.com/)
@@ -117,7 +117,7 @@ format:
 
 ---
 
-## Lab 01 this week 📅
+## Lab 01 this week
 
 ::: {.incremental}
 - Create your [GitHub account](https://github.com/join) if you haven't already.
@@ -191,7 +191,7 @@ code .              # Open this folder in VS Code
 
 ---
 
-## Live demo: From a folder to VS Code
+## Live demo: from a folder to VS Code
 
 ```bash
 pwd
@@ -208,11 +208,11 @@ Narrate the prompt, current directory, relative path, command, and argument. Dem
 
 ---
 
-# Version control with Git & GitHub 📝
+# Version control with Git and GitHub
 
 ---
 
-## What is version control? ⏰
+## What is version control?
 
 ::: {.incremental}
 - Think of it as a [time machine for your code](https://github.com/bgreenwell/timewarp/tree/main).
@@ -223,15 +223,15 @@ Narrate the prompt, current directory, relative path, command, and argument. Dem
 
 ---
 
-## A brief history of version control 📚
+## A brief history of version control
 
 ::: {.incremental}
 - **Early days (1970s-90s):** [RCS](https://www.gnu.org/software/rcs/), [SCCS](https://en.wikipedia.org/wiki/Source_Code_Control_System) - single files, no networking
 - **Centralized era (2000s):** [Subversion (SVN)](https://subversion.apache.org/), [CVS](https://www.nongnu.org/cvs/) - single server, everyone syncs to it
-- **Distributed revolution (2005):** Git was created by [Linus Torvalds](https://www.reddit.com/r/linux/comments/vbvxiv/10_years_ago_today_linus_torvalds_to_nvidia_fu_you/?utm_source=share&utm_medium=web3x&utm_name=web3xcss&utm_term=1&utm_content=share_button) for Linux kernel development
+- **Distributed systems (2005):** Git was created by [Linus Torvalds](https://git-scm.com/book/en/v2/Getting-Started-A-Short-History-of-Git) for Linux kernel development
   - Born out of frustration with existing tools for Linux development
   - Designed for speed, data integrity, and distributed workflows
-- **Modern landscape:** Git dominates (~90% market share), with hosting platforms competing on features
+- **Today:** Git is widely used, with hosting platforms competing on collaboration and automation features
 :::
 
 ::: {.notes}
@@ -239,14 +239,14 @@ Narrate the prompt, current directory, relative path, command, and argument. Dem
 
 - **RCS/SCCS context:** These were for individual developers - imagine saving "essay_v1.docx", "essay_v2.docx" but automated
 - **Centralized problems:** If the SVN server went down, nobody could save their work! All collaboration stopped
-- **Enter Linus Torvalds:** Built Git in just 2 weeks after [BitKeeper](https://en.wikipedia.org/wiki/BitKeeper) (previous tool) revoked free access. The link shows his famous "F you NVIDIA" moment - he's known for strong opinions!
+- **Enter Linus Torvalds:** Began Git after the Linux kernel community lost free access to BitKeeper. Focus on the design goals: speed, integrity, and distributed work.
 - **Why it matters:** Understanding this history explains why Git feels complex - it was built by kernel developers for kernel developers
-- **Modern dominance:** Even Microsoft moved from their own TFS to Git - that's when you know a technology won
+- **Modern adoption:** Git supports workflows ranging from solo projects to large distributed teams.
 :::
 
 ---
 
-## Version control systems 📊 {.smaller}
+## Version control systems {.smaller}
 
 **Centralized vs. Distributed:**
 
@@ -263,7 +263,7 @@ Narrate the prompt, current directory, relative path, command, and argument. Dem
 
 ---
 
-## Git hosting platforms 🏠 {.smaller}
+## Git hosting platforms {.smaller}
 
 | Platform | Strengths | Best For |
 |----------|-----------|----------|
@@ -274,12 +274,12 @@ Narrate the prompt, current directory, relative path, command, and argument. Dem
 
 ::: {.incremental}
 - All use Git under the hood - the collaboration features differ
-- **For this course:** We'll use GitHub for its student-friendly features and industry relevance
+- **For this course:** GitHub hosts the labs, workflows, badges, and submissions
 :::
 
 ---
 
-## Git 🆚 GitHub
+## Git and GitHub
 
 ::: {.incremental}
 - This is a common point of confusion.
@@ -289,11 +289,11 @@ Narrate the prompt, current directory, relative path, command, and argument. Dem
 
 ---
 
-## The core workflow 🔄
+## The core workflow
 
 ::: {.incremental}
 - **Remote (GitHub):** a project lives on GitHub.
-- **`git clone`:** you download a perfect copy to your local machine.
+- **`git clone`:** you create a local copy of the repository and its history.
 - **Local (your computer):** you edit files, write code, and fix bugs.
 - **`git add` & `git commit`:** you save a snapshot (a commit) of your changes to your local history.
 - **`git push`:** you upload your new commits from your computer back to GitHub.
@@ -301,7 +301,7 @@ Narrate the prompt, current directory, relative path, command, and argument. Dem
 
 ---
 
-## Key terminology 📖
+## Key terminology
 
 ::: {.incremental}
 - **Repository (repo):** a folder that contains your project and its entire history.
@@ -312,20 +312,20 @@ Narrate the prompt, current directory, relative path, command, and argument. Dem
 
 ---
 
-## Essential Git commands 🛠️
+## Core Git commands
 
 ::: {.incremental}
 - **`git clone <url>`** - Download a repository from GitHub to your computer
 - **`git status`** - See what files have changed and what's ready to commit
 - **`git add <file>`** - Stage specific files for your next commit
-- **`git add .`** - Stage ALL changed files for your next commit
+- **`git add <reviewed-file>`** - Stage another file after reviewing it
 - **`git commit -m "message"`** - Save your staged changes with a descriptive message
 - **`git push`** - Send your commits from local to remote
 :::
 
 ---
 
-## The Git workflow in action 💻
+## The Git workflow in action
 
 Here's what the commands actually look like:
 
@@ -360,7 +360,7 @@ $ git push origin main
 
 ---
 
-## Live demo time! 🎬
+## Live demo time!
 
 We'll create repositories two ways, then walk through the basic Git workflow:
 
@@ -386,7 +386,7 @@ We'll create repositories two ways, then walk through the basic Git workflow:
 
 **Add code to GitHub-first repo only:**
 - Add hello.py: `print("Hello from GitHub first!")`
-- Show workflow: `git status` → `git add .` → `git commit -m "Add hello script"` → `git push`
+- Show workflow: `git status` → `git add hello.py` → `git diff --staged` → `git commit -m "Add hello script"` → `git push`
 
 **Demonstrate git pull:**
 - Edit hello.py directly on GitHub (add a comment or change message)
@@ -402,7 +402,7 @@ We'll create repositories two ways, then walk through the basic Git workflow:
 
 ---
 
-## More useful Git commands 📚
+## More useful Git commands
 
 ::: {.incremental}
 - **`git log`** - See the history of your commits
@@ -414,7 +414,7 @@ We'll create repositories two ways, then walk through the basic Git workflow:
 
 ---
 
-## Understanding Git's three stages 🔄
+## Understanding Git's three stages
 
 ```{mermaid}
 %%| echo: false
@@ -438,7 +438,7 @@ graph LR
 
 ---
 
-## Common Git scenarios & fixes 🚑
+## Common Git scenarios and fixes
 
 ::: {.incremental}
 - **"I made a typo in my commit message"**
@@ -453,21 +453,21 @@ graph LR
 
 ---
 
-## Want to learn more? 📚
+## Want to learn more?
 
-Essential resources for mastering Git and GitHub:
+Useful resources for learning Git and GitHub:
 
 ::: {.incremental}
-- **[Pro Git Book](https://git-scm.com/book/en/v2)** - The definitive free guide (chapters 1-3 are perfect for beginners)
+- **[Pro Git Book](https://git-scm.com/book/en/v2)** - A free reference; chapters 1–3 cover the course foundations
 - **[GitHub Skills](https://skills.github.com/)** - Interactive tutorials directly on GitHub
 - **[Learn Git Branching](https://learngitbranching.js.org/)** - Visual, interactive Git concepts
 - **[GitHub Desktop](https://desktop.github.com/)** - GUI alternative for those who prefer visual tools
-- **[Atlassian Git Tutorials](https://www.atlassian.com/git/tutorials)** - Comprehensive beginner to advanced guides
+- **[Atlassian Git Tutorials](https://www.atlassian.com/git/tutorials)** - Additional topic-based tutorials
 :::
 
 ---
 
-## Quick reference cheat sheet 📋
+## Quick reference cheat sheet
 
 Commands you'll use constantly:
 
@@ -477,9 +477,9 @@ git clone <url>         # Download a repository
 git status              # See what's changed
 git log --oneline       # View commit history
 
-# Making changes  
+# Making changes
 git add <file>          # Stage specific file
-git add .               # Stage all changes
+git add <reviewed-file> # Stage a file after reviewing it
 git commit -m "message" # Save your changes
 git push                # Send to GitHub
 
@@ -491,7 +491,7 @@ git commit --amend      # Fix last commit message
 
 ---
 
-## Time for Lab 01 🧪
+## Time for Lab 01
 
 - Your first hands-on lab: Git and GitHub fundamentals.
 - **Objective:** fork the semester labs repository, clone your fork, complete the setup record, and push it to GitHub.

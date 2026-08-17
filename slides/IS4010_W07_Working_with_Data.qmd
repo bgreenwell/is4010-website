@@ -1,6 +1,6 @@
 ---
-title: "IS4010: AI-Enhanced Application Development"
-subtitle: "Week 7: Working with External Data"
+title: "IS4010: AI-enhanced application development"
+subtitle: "Week 07: Working with external data"
 author: "Brandon M. Greenwell"
 format:
   revealjs:
@@ -11,35 +11,33 @@ format:
     css: custom.css
 ---
 
-# Working with External Data 🌐
+# Working with external data
 
-## From local files to the entire web
+## From local files to web APIs
 
 ::: {.incremental}
-- **The progression**: Your app → Files → JSON → APIs → The world
-- **Why this matters**: No app exists in isolation - data flows between systems constantly
-- **Real-world reality**: Twitter, Stripe, GitHub, OpenAI - all expose APIs you can use
-- **Career skill**: API integration is one of the most in-demand programming capabilities
-- **This week**: Build apps that persist data locally AND fetch live data from the internet
+- **The progression**: Python values → files → JSON → HTTP responses
+- **Why this matters**: Applications often exchange data across process and system boundaries
+- **Examples**: GitHub, weather, mapping, and payment services document APIs for client applications
+- **This week**: Persist contacts locally and implement a testable HTTP client
 :::
 
 ::: {.notes}
-**Session Overview:**
-- Part 1: File I/O and JSON - The foundation of data persistence
-- Part 2: HTTP APIs - Connecting your apps to external services
-- Unified theme: JSON is the universal language that makes data portable across files and networks
-- Lab 07 will combine both: save/load local data AND fetch live API data
+**Session overview:**
+- Part 1: file I/O and JSON for persistence
+- Part 2: HTTP APIs and response handling
+- Lab 07 tests file behavior and an API client with local fakes, so the graded checks do not require network access
 :::
 
 ---
 
-# Part 1: Files & JSON 📁
+# Part 1: files and JSON
 
 ---
 
-## 🤔 The problem: Programs have amnesia
+## The problem: programs have no persistent state
 
-### **When the script ends, everything disappears**
+### **Values in memory disappear when the process ends**
 
 ::: {.incremental}
 - **Every program so far**: Variables, lists, dictionaries - all gone when the program exits
@@ -76,7 +74,7 @@ with open("my_note.txt", "r") as f:
 ::: {.incremental}
 - **Why `with`?**: Automatically closes the file even if errors occur
 - **File modes**: `"r"` (read), `"w"` (write/overwrite), `"a"` (append)
-- **Best practice**: Always use `with` - prevents file corruption and resource leaks
+- **Practice**: Use `with` so the file closes reliably when the block exits
 - 📚 [Python file I/O documentation](https://docs.python.org/3/tutorial/inputoutput.html#reading-and-writing-files)
 :::
 
@@ -89,7 +87,7 @@ with open("my_note.txt", "r") as f:
 
 ---
 
-## 🚧 The problem with plain text files
+## The problem with plain text files
 
 ### **Text is unstructured and hard to parse**
 
@@ -115,14 +113,14 @@ with open("contacts.txt", "r") as f:
 
 ---
 
-## Enter JSON: The universal data format 🌍
+## Enter JSON: a common data format
 
-### **JavaScript Object Notation - The language of the web**
+### **JavaScript Object Notation**
 
 ::: {.incremental}
 - **JSON** is a simple, human-readable text format for representing structured data
 - **Created**: Early 2000s by Douglas Crockford - became the web's standard ([JSON.org](https://www.json.org/))
-- **Why it won**: Simple, language-agnostic, maps perfectly to most programming languages
+- **Why it is common**: It is text-based, language-independent, and maps naturally to familiar collections
 - **Ubiquity**: APIs, config files, databases, logs - JSON is everywhere
 - **Python advantage**: JSON maps directly to Python's built-in types
 :::
@@ -143,8 +141,8 @@ with open("contacts.txt", "r") as f:
 | Null | None | `null` → `None` |
 
 ::: {.incremental}
-- **Key insight**: If you know Python dicts/lists, you already know JSON
-- **This makes**: Reading/writing JSON in Python incredibly easy
+- **Key insight**: JSON objects and arrays map closely to Python dictionaries and lists
+- **Limitation**: JSON supports fewer data types than Python
 :::
 
 ---
@@ -184,7 +182,7 @@ with open("contacts.json", "r") as f:
 
 ---
 
-## 🎯 What the generated JSON looks like
+## What the generated JSON looks like
 
 ### **contacts.json**
 
@@ -214,9 +212,9 @@ with open("contacts.json", "r") as f:
 
 ---
 
-## 💡 Why JSON matters for APIs (preview)
+## Why JSON matters for APIs
 
-### **The connection to Part 2**
+### **The connection to part 2**
 
 ::: {.incremental}
 - **Files are local**: Your computer reads/writes JSON files
@@ -235,7 +233,7 @@ with open("contacts.json", "r") as f:
 
 ---
 
-# Part 2: Working with APIs 🔌
+# Part 2: working with APIs
 
 ---
 
@@ -245,25 +243,21 @@ with open("contacts.json", "r") as f:
 
 ::: {.incremental}
 - **An API** is a set of rules that allows different software applications to communicate
-- **Simple analogy**: A restaurant menu
+- **Working analogy**: A restaurant menu
   - Menu (API) tells you what you can order (available operations)
   - You don't need to know how the kitchen works (implementation details)
   - You just make a request, and get food back (data)
 - **APIs define**: What operations are available, what data to send, what you get back
-- 📚 [What is an API? (MDN)](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Client-side_web_APIs/Introduction)
+- [What is an API? (MDN)](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Client-side_web_APIs/Introduction)
 :::
 
 ::: {.notes}
-**Examples of APIs students use daily:**
-- Instagram API: Apps like Buffer post to Instagram programmatically
-- Google Maps API: Uber/Lyft use it for navigation
-- Stripe API: E-commerce sites process payments
-- OpenAI API: ChatGPT-powered applications
+Use the GitHub endpoint in the deck as the concrete example. Product integrations change; avoid asserting which private vendor a named application uses unless a current primary source supports it.
 :::
 
 ---
 
-## 🌐 Web APIs: Apps talking over the internet
+## Web APIs: applications exchanging data
 
 ### **HTTP as the communication protocol**
 
@@ -274,12 +268,12 @@ with open("contacts.json", "r") as f:
   1. Your app sends an **HTTP request** to a URL
   2. Remote server processes the request
   3. Server sends back an **HTTP response** with data (usually JSON!)
-- **Key insight**: Reading API data is just like reading a JSON file, but from a remote server
+- **Connection**: Both paths can produce Python dictionaries and lists, but HTTP adds status codes, latency, authentication, and network failures
 :::
 
 ---
 
-## 🔍 Anatomy of a web API request
+## Anatomy of a web API request
 
 ### **URL structure and HTTP methods**
 
@@ -295,14 +289,14 @@ protocol
 - **Endpoint**: `/users/octocat/repos` - the specific resource you want
 - **HTTP method**: `GET` (retrieve data), `POST` (send data), `PUT` (update), `DELETE` (remove)
 - **For now**: We'll focus on `GET` requests to retrieve data
-- 📚 [HTTP methods explained](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods)
+- [HTTP methods explained](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods)
 :::
 
 ---
 
 ## Installing the `requests` library
 
-### **Python's most popular HTTP library**
+### **A widely used third-party HTTP library**
 
 ```bash
 uv add requests
@@ -310,9 +304,8 @@ uv add requests
 
 ::: {.incremental}
 - **Not built-in**: Unlike `json`, we need to install [requests](https://requests.readthedocs.io/en/latest/)
-- **Why requests?**: Clean, simple API - much easier than Python's built-in `urllib`
-- **Industry standard**: Used by millions of Python developers
-- **Alternative**: Python 3.11+ has `urllib3`, but `requests` is still preferred for simplicity
+- **Why requests?**: A concise interface for common HTTP operations
+- **Standard-library alternative**: Python includes `urllib.request`; `urllib3` is a separate third-party package
 :::
 
 ::: {.notes}
@@ -333,7 +326,7 @@ import requests
 
 # Make a GET request to the PokeAPI
 url = "https://pokeapi.co/api/v2/pokemon/pikachu"
-response = requests.get(url)
+response = requests.get(url, timeout=10)
 
 # Check if the request was successful
 if response.status_code == 200:
@@ -355,7 +348,7 @@ else:
 
 ---
 
-## 📊 HTTP status codes
+## HTTP status codes
 
 ### **The server's way of telling you what happened**
 
@@ -369,16 +362,16 @@ else:
 | 500 | Server Error | Something broke on server |
 
 ::: {.incremental}
-- **Always check**: `response.status_code` before processing data
+- **Check failures**: Inspect the status or call `raise_for_status()` before processing data
 - **Error handling**: Different codes need different responses
 - 📚 [HTTP status codes reference](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status)
 :::
 
 ---
 
-## 🔗 The JSON connection: Same format, different source
+## The JSON connection: same format, different source
 
-### **Comparison: Files vs APIs**
+### **Comparison: files and APIs**
 
 ::: {.columns}
 ::: {.column width="50%"}
@@ -413,30 +406,27 @@ print(data["name"])
 
 ---
 
-## 🚀 Real-world API examples
+## API examples
 
-### **APIs you can use right now (no API key needed)**
+### **Examples with different access requirements**
 
 ::: {.incremental}
 - **[PokeAPI](https://pokeapi.co/)**: Pokemon data (what we just used)
-- **[OpenWeatherMap](https://openweathermap.org/api)**: Current weather and forecasts (free tier)
+- **[OpenWeatherMap](https://openweathermap.org/api)**: Current weather and forecasts (account and API key required)
 - **[REST Countries](https://restcountries.com/)**: Country data (population, flags, currencies)
-- **[The Dog API](https://thedogapi.com/)**: Random dog pictures and breed info
-- **[NASA API](https://api.nasa.gov/)**: Astronomy picture of the day, Mars rover photos
+- **[The Dog API](https://thedogapi.com/)**: Dog pictures and breed information; some usage requires a key
+- **[NASA API](https://api.nasa.gov/)**: Astronomy and space data (API key required)
 - **[JokeAPI](https://jokeapi.dev/)**: Random jokes and puns
 - **Thousands more**: [Public APIs directory](https://github.com/public-apis/public-apis)
 :::
 
 ::: {.notes}
-**For Lab 07:**
-- Students will choose one of these APIs
-- Some require free API keys (OpenWeatherMap, NASA) - simple signup
-- Emphasize exploring documentation before coding
+These are optional examples, not Lab 07 choices. Lab tests use local fakes and never contact a live API. Check current documentation before adopting any external service.
 :::
 
 ---
 
-## 🛡️ Error handling with APIs
+## Error handling with APIs
 
 ### **Networks are unreliable - plan for failure**
 
@@ -470,7 +460,7 @@ except requests.exceptions.JSONDecodeError:
 
 ---
 
-## ⚡ API best practices
+## API practices
 
 ### **Being a good API citizen**
 
@@ -493,7 +483,7 @@ except requests.exceptions.JSONDecodeError:
 
 ---
 
-## 🎯 Putting it all together: Files + APIs
+## Putting it all together: files and APIs
 
 ### **A complete data workflow**
 
@@ -502,7 +492,11 @@ import json
 import requests
 
 # 1. Fetch live data from API
-response = requests.get("https://pokeapi.co/api/v2/pokemon/ditto")
+response = requests.get(
+    "https://pokeapi.co/api/v2/pokemon/ditto",
+    timeout=10,
+)
+response.raise_for_status()
 pokemon_data = response.json()
 
 # 2. Process the data (extract what we need)
@@ -523,97 +517,91 @@ print("Data fetched from API and saved locally!")
 ::: {.incremental}
 - **The pattern**: Fetch → Process → Store
 - **Why cache?**: Faster loading, works offline, reduces API calls
-- **Real apps do this**: Weather apps, news readers, social media feeds
+- **Design question**: Decide how long cached data remains acceptable and how the app behaves when a refresh fails
 :::
 
 ---
 
-## 🧪 Lab 07 overview
+## Lab 07 overview
 
-### **Two-part lab: Local persistence + Live API integration**
+### **JSON persistence and a testable API client**
 
 ::: {.incremental}
-- **Part 1**: Build a contact book application
-  - Store contacts as JSON file
-  - Load contacts when app starts
-  - Add, view, and search contacts
-  - Data persists between runs
-- **Part 2**: Choose a public API and build a data viewer
-  - Pick an API that interests you
-  - Fetch live data with `requests`
-  - Parse JSON response
-  - Display formatted output to user
-- **Bonus challenge**: Combine both - cache API responses to JSON files!
+- **`lab07_contact_book.py`**: Implement `save_contacts_to_json` and `load_contacts_from_json`
+- Use a context manager and `indent=4`; return an empty list when the file is missing
+- **`lab07_api_client.py`**: Implement `get_api_data(url)`
+- Use `requests.get(url, timeout=10)`, `raise_for_status()`, and `response.json()`
+- Return `None` for request failures or invalid JSON
+- Do not modify the supplied tests; they replace network calls with local fakes
 :::
 
 ::: {.notes}
-**Lab guidance:**
-- Part 1 builds on Week 6 OOP concepts (optional: make Contact class)
-- Part 2 is open-ended - encourage creativity
-- Grading focuses on: proper error handling, clean JSON structure, user-friendly output
-- Common issues: forgetting to handle file not found, not checking API status codes
+```bash
+uv run --directory week07 python -m pytest tests/ -v
+git add week07/lab07_contact_book.py week07/lab07_api_client.py
+git commit -m "Complete Lab 07"
+git push
+```
+
+A green Week 07 badge earns the complete 10 points.
 :::
 
 ---
 
-## 🚀 Career relevance: Why this matters
+## Where these skills are used
 
-### **API integration is a core professional skill**
+### **Files and APIs use many of the same data skills**
 
 ::: {.incremental}
-- **Every modern app**: Integrates with external services (payments, auth, maps, notifications)
-- **Job requirements**: "Experience with RESTful APIs" appears in 80%+ of backend/full-stack job postings
-- **Interview questions**: "How would you integrate Stripe payment processing?" "Design a weather dashboard"
-- **Real companies using APIs**:
-  - Stripe: Payment processing API ($95B valuation)
-  - Twilio: SMS/Voice API ($12B valuation)
-  - Mapbox: Maps API (powers Snapchat, Instacart)
-- **Your portfolio**: API projects demonstrate practical, real-world skills
+- **Application integration**: Payments, authentication, maps, and notifications often use APIs
+- **Data exchange**: JSON is common in web services, configuration, and persisted application data
+- **Review questions**: What can fail, which errors should the caller see, and what data shape should the function return?
+- **Project connection**: A small API client demonstrates networking, parsing, and failure handling
 :::
 
 ---
 
-## 📚 Key takeaways
+## Key takeaways
 
 ::: {.incremental}
 - **Persistence**: Files let your programs remember state between runs
-- **JSON**: Universal data format - works for files AND APIs
+- **JSON**: A common text format used in files and many APIs
 - **APIs**: Let your apps communicate with other systems over the internet
-- **HTTP**: The protocol that powers the web and most APIs
-- **Requests library**: Makes HTTP requests simple in Python
-- **Error handling**: Always check status codes and handle failures gracefully
+- **HTTP**: A request-response protocol used by the web
+- **Requests library**: Provides a Python interface for HTTP requests
+- **Error handling**: Define behavior for HTTP, connection, timeout, and decoding failures
 - **The connection**: `json.load()` (files) and `response.json()` (APIs) both give you Python dicts
 :::
 
 ---
 
-## 🔗 Essential resources
+## Resources
 
 ### **Documentation and learning materials**
 
 ::: {.incremental}
-- 📘 [Python file I/O tutorial](https://docs.python.org/3/tutorial/inputoutput.html#reading-and-writing-files)
-- 📗 [JSON module documentation](https://docs.python.org/3/library/json.html)
-- 📕 [Requests library docs](https://requests.readthedocs.io/en/latest/)
-- 📙 [HTTP methods reference](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods)
-- 📓 [Public APIs directory](https://github.com/public-apis/public-apis)
-- 🎓 [Real Python: Working with APIs](https://realpython.com/python-api/)
+- [Python file I/O tutorial](https://docs.python.org/3/tutorial/inputoutput.html#reading-and-writing-files)
+- [JSON module documentation](https://docs.python.org/3/library/json.html)
+- [Requests library documentation](https://requests.readthedocs.io/en/latest/)
+- [HTTP methods reference](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods)
+- [Public APIs directory](https://github.com/public-apis/public-apis)
+- [Real Python: Working with APIs](https://realpython.com/python-api/)
 :::
 
 ---
 
-## 💬 Questions?
+## Questions?
 
 **Next steps:**
 - Review Lab 07 instructions in `week07/lab07.md`
-- Choose an API that interests you
-- Start with simple examples, then build complexity
+- Implement the two specified modules
+- Run the offline tests before pushing
 
-**Office hours:** Available for API selection guidance and debugging!
+**Office hours:** Bring the failing test, traceback, and current diff.
 
 ::: {.notes}
 **Wrap-up reminders:**
-- Encourage students to start early - API integration can be tricky first time
-- Suggest pairing up to explore different APIs together
-- Remind about error handling - it's part of the grading rubric
+- Remind students that the tests replace network calls with local fakes
+- Trace one request failure and one JSON-decoding failure through `get_api_data`
+- Use the lab contract, not an optional live API, to resolve ambiguous behavior
 :::

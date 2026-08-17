@@ -11,7 +11,7 @@
   <meta name="generator" content="quarto-1.8.25">
 
   <meta name="author" content="Brandon M. Greenwell">
-  <title>IS 4010 - App Dev with AI – IS4010: AI-Enhanced Application Development</title>
+  <title>IS 4010 - App Dev with AI – IS4010: AI-enhanced application development</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -196,8 +196,8 @@
     <div class="slides">
 
 <section id="title-slide" class="quarto-title-block center">
-  <h1 class="title">IS4010: AI-Enhanced Application Development</h1>
-  <p class="subtitle">Week 4: Python Data Structures</p>
+  <h1 class="title">IS4010: AI-enhanced application development</h1>
+  <p class="subtitle">Week 04: Python data structures</p>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -210,25 +210,25 @@ Brandon M. Greenwell
 </section>
 <section>
 <section id="welcome-to-python-data-structures" class="title-slide slide level1 center">
-<h1>Welcome to Python Data Structures 📦</h1>
+<h1>Welcome to Python data structures</h1>
 
 </section>
 <section id="the-foundation-of-organized-programming" class="slide level2">
-<h2>The foundation of organized programming 🏗️</h2>
+<h2>The foundation of organized programming</h2>
 <ul>
-<li class="fragment"><strong>Data structures</strong> are the backbone of efficient programming</li>
+<li class="fragment"><strong>Data structures</strong> organize values for particular operations</li>
 <li class="fragment">They determine how we organize, store, and access information</li>
-<li class="fragment"><strong>Python’s philosophy</strong>: “Batteries included” - powerful built-in data structures ready to use</li>
-<li class="fragment"><strong>Career relevance</strong>: Understanding data structures is essential for technical interviews</li>
-<li class="fragment"><strong>Real-world impact</strong>: Every app you use relies on sophisticated data organization</li>
+<li class="fragment"><strong>Built-in choices</strong>: Python provides lists, tuples, dictionaries, and sets</li>
+<li class="fragment"><strong>Program design</strong>: The representation you choose affects clarity, correctness, and performance</li>
+<li class="fragment"><strong>Practical impact</strong>: Lists, dictionaries, tuples, and sets solve different data problems</li>
 </ul>
 <aside class="notes">
 <p><strong>TEACHING NOTES:</strong></p>
 <ul>
-<li><strong>Career connection</strong>: Data structure questions are common in coding interviews</li>
-<li><strong>Real-world examples</strong>: Instagram feeds (lists), user profiles (dictionaries), unique hashtags (sets)</li>
-<li><strong>Python advantage</strong>: Compare to languages like C where you build data structures from scratch</li>
-<li><strong>Course progression</strong>: This builds foundation for database design later in the course</li>
+<li><strong>Review question</strong>: Ask which operations—order, lookup, uniqueness, or mutation—the representation must support</li>
+<li><strong>Examples</strong>: Ordered events (list), fixed coordinates (tuple), profiles (dictionary), unique tags (set)</li>
+<li><strong>Language comparison</strong>: Compare the built-in interfaces without implying that other languages lack collections</li>
+<li><strong>Course progression</strong>: These choices support later file, JSON, and API work</li>
 <li><strong>Historical context</strong>: Data structures were formalized in the 1960s, fundamental to computer science</li>
 </ul>
 <style type="text/css">
@@ -247,17 +247,17 @@ Brandon M. Greenwell
 
 </section></section>
 <section>
-<section id="session-1-sequences-collections" class="title-slide slide level1 center">
-<h1>Session 1: Sequences &amp; collections</h1>
+<section id="session-1-sequences-and-collections" class="title-slide slide level1 center">
+<h1>Session 1: sequences and collections</h1>
 
 </section>
 <section id="what-is-a-data-structure" class="slide level2">
-<h2>What is a data structure? 🤔</h2>
+<h2>What is a data structure?</h2>
 <ul>
 <li class="fragment">A <strong>data structure</strong> is a way to organize and store multiple pieces of data in a single variable</li>
 <li class="fragment">Think of them as <strong>specialized containers</strong> for your data</li>
-<li class="fragment"><strong>Python’s built-in arsenal</strong>: <a href="https://docs.python.org/3/tutorial/introduction.html#lists">Lists</a>, <a href="https://docs.python.org/3/tutorial/datastructures.html#tuples-and-sequences">tuples</a>, <a href="https://docs.python.org/3/tutorial/datastructures.html#dictionaries">dictionaries</a>, and <a href="https://docs.python.org/3/tutorial/datastructures.html#sets">sets</a></li>
-<li class="fragment"><strong>Choosing wisely</strong>: The right data structure makes your code faster, cleaner, and more maintainable</li>
+<li class="fragment"><strong>Python’s built-in collections</strong>: <a href="https://docs.python.org/3/tutorial/introduction.html#lists">Lists</a>, <a href="https://docs.python.org/3/tutorial/datastructures.html#tuples-and-sequences">tuples</a>, <a href="https://docs.python.org/3/tutorial/datastructures.html#dictionaries">dictionaries</a>, and <a href="https://docs.python.org/3/tutorial/datastructures.html#sets">sets</a></li>
+<li class="fragment"><strong>Choosing deliberately</strong>: Match the representation to the operations and invariants you need</li>
 <li class="fragment"><strong>Performance matters</strong>: Different structures excel at different operations</li>
 </ul>
 <aside class="notes">
@@ -282,7 +282,7 @@ Brandon M. Greenwell
       }</style></aside>
 </section>
 <section id="the-list-a-mutable-sequence" class="slide level2">
-<h2>The list: a mutable sequence 📝</h2>
+<h2>The list: a mutable sequence</h2>
 <ul>
 <li class="fragment">A <strong><a href="https://docs.python.org/3/tutorial/introduction.html#lists">list</a></strong> is an ordered, changeable collection of items</li>
 <li class="fragment"><strong>Most versatile</strong>: Lists are the workhorses of Python programming</li>
@@ -332,7 +332,7 @@ Brandon M. Greenwell
       }</style></aside>
 </section>
 <section id="the-tuple-an-immutable-sequence" class="slide level2">
-<h2>The tuple: an immutable sequence 🔒</h2>
+<h2>The tuple: an immutable sequence</h2>
 <ul>
 <li class="fragment">A <strong><a href="https://docs.python.org/3/tutorial/datastructures.html#tuples-and-sequences">tuple</a></strong> is an ordered, unchangeable collection of items</li>
 <li class="fragment"><strong>Ordered</strong>: Like lists, items maintain their position</li>
@@ -387,8 +387,8 @@ Brandon M. Greenwell
           display:block!important;
       }</style></aside>
 </section>
-<section id="accessing-items-indexing-slicing" class="slide level2">
-<h2>Accessing items: indexing &amp; slicing 🎯</h2>
+<section id="accessing-items-indexing-and-slicing" class="slide level2">
+<h2>Accessing items: indexing and slicing</h2>
 <ul>
 <li class="fragment"><strong>Zero-based indexing</strong>: Python counts from 0, not 1 (like most programming languages)</li>
 <li class="fragment"><strong>Positive indices</strong>: <code>my_list[0]</code> first item, <code>my_list[1]</code> second item, etc.</li>
@@ -421,7 +421,7 @@ Brandon M. Greenwell
 <p><strong>TEACHING NOTES:</strong></p>
 <ul>
 <li><strong>Zero-based confusion</strong>: This trips up beginners - relate to array indexing in other languages</li>
-<li><strong>Negative indexing</strong>: Unique Python feature that makes code more readable</li>
+<li><strong>Negative indexing</strong>: Access items relative to the end, such as <code>items[-1]</code></li>
 <li><strong>Slice notation</strong>: [start:stop:step] - stop is exclusive (common source of off-by-one errors)</li>
 <li><strong>Memory efficiency</strong>: Slicing creates new objects, doesn’t modify originals</li>
 <li><strong>Real applications</strong>: Processing data chunks, pagination, extracting subsets</li>
@@ -440,7 +440,7 @@ Brandon M. Greenwell
       }</style></aside>
 </section>
 <section id="common-sequence-operations" class="slide level2">
-<h2>Common sequence operations 🛠️</h2>
+<h2>Common sequence operations</h2>
 <ul>
 <li class="fragment"><strong>Length</strong>: <code>len(sequence)</code> returns number of items</li>
 <li class="fragment"><strong>Membership</strong>: <code>item in sequence</code> checks if item exists</li>
@@ -499,7 +499,7 @@ Brandon M. Greenwell
       }</style></aside>
 </section>
 <section id="quick-introduction-list-comprehensions" class="slide level2">
-<h2>Quick Introduction: List Comprehensions 📝</h2>
+<h2>Quick introduction: list comprehensions</h2>
 <p><strong>Python has a concise way to create lists called <a href="https://docs.python.org/3/tutorial/datastructures.html#list-comprehensions">list comprehensions</a>:</strong></p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a></a><span class="co"># Traditional approach with loops</span></span>
 <span id="cb5-2"><a></a>numbers <span class="op">=</span> []</span>
@@ -514,7 +514,7 @@ Brandon M. Greenwell
 <span id="cb5-11"><a></a><span class="co"># Pattern: [expression for item in iterable]</span></span>
 <span id="cb5-12"><a></a>emails <span class="op">=</span> [<span class="ss">f"user_</span><span class="sc">{</span>i<span class="sc">}</span><span class="ss">@email.com"</span> <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">3</span>)]</span>
 <span id="cb5-13"><a></a><span class="bu">print</span>(emails)  <span class="co"># ['user_0@email.com', 'user_1@email.com', 'user_2@email.com']</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p><strong>Why learn this now?</strong> - Perfect for generating test data (which we’ll need for performance testing!) - More readable and Pythonic than traditional loops - We’ll use this pattern extensively in data processing</p>
+<p><strong>Why learn this now?</strong> - Useful for generating compact test data for the timing exercise - More readable and Pythonic than traditional loops - We’ll use this pattern extensively in data processing</p>
 <aside class="notes">
 <p><strong>TEACHING NOTES:</strong></p>
 <ul>
@@ -538,8 +538,8 @@ Brandon M. Greenwell
       }</style></aside>
 </section>
 <section id="live-exercise-ai-assisted-performance-detective" class="slide level2 scrollable">
-<h2>🔬 Live Exercise: AI-Assisted Performance Detective</h2>
-<p><strong>Challenge:</strong> Help me optimize this slow code using GenAI tools!</p>
+<h2>Live exercise: AI-assisted performance detective</h2>
+<p><strong>Challenge:</strong> Ask an AI assistant to identify the bottleneck, then verify its claim with timing evidence.</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a></a><span class="co"># SLOW CODE - Let's time this together!</span></span>
 <span id="cb6-2"><a></a><span class="im">import</span> time</span>
 <span id="cb6-3"><a></a></span>
@@ -561,7 +561,7 @@ Brandon M. Greenwell
 <span id="cb6-19"><a></a>slow_time <span class="op">=</span> time.time() <span class="op">-</span> start_time</span>
 <span id="cb6-20"><a></a></span>
 <span id="cb6-21"><a></a><span class="bu">print</span>(<span class="ss">f"Slow approach: </span><span class="sc">{</span>slow_time<span class="sc">:.4f}</span><span class="ss"> seconds, found </span><span class="sc">{</span>vip_count<span class="sc">}</span><span class="ss"> VIPs"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p><strong>Your Turn with GenAI:</strong></p>
+<p><strong>Your turn with an AI assistant:</strong></p>
 <ol type="1">
 <li>🤖 <strong>Ask Claude/Gemini/ChatGPT</strong>: “How can I optimize this customer VIP lookup code?”</li>
 <li>📊 <strong>Get timing comparison</strong>: What data structure should we use instead?</li>
@@ -590,9 +590,9 @@ Brandon M. Greenwell
           display:block!important;
       }</style></aside>
 </section>
-<section id="optimized-solution-with-genai-help" class="slide level2">
-<h2>🚀 Optimized Solution (with GenAI help!)</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a></a><span class="co"># FAST CODE - After consulting with GenAI</span></span>
+<section id="revised-solution-use-a-set-for-membership" class="slide level2">
+<h2>Revised solution: use a set for membership</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a></a><span class="co"># Revised code after reviewing the suggestion</span></span>
 <span id="cb7-2"><a></a><span class="im">import</span> time</span>
 <span id="cb7-3"><a></a></span>
 <span id="cb7-4"><a></a><span class="co"># Convert VIP list to set for O(1) lookups</span></span>
@@ -613,11 +613,11 @@ Brandon M. Greenwell
 <span id="cb7-19"><a></a><span class="bu">print</span>(<span class="ss">f"Fast approach: </span><span class="sc">{</span>fast_time<span class="sc">:.4f}</span><span class="ss"> seconds, found </span><span class="sc">{</span>vip_count<span class="sc">}</span><span class="ss"> VIPs"</span>)</span>
 <span id="cb7-20"><a></a><span class="bu">print</span>(<span class="ss">f"Speedup: </span><span class="sc">{</span>slow_time<span class="op">/</span>fast_time<span class="sc">:.1f}</span><span class="ss">x faster!"</span>)</span>
 <span id="cb7-21"><a></a></span>
-<span id="cb7-22"><a></a><span class="co"># GenAI bonus: What other optimizations could we make?</span></span>
+<span id="cb7-22"><a></a><span class="co"># Follow-up: What other changes might matter at a larger scale?</span></span>
 <span id="cb7-23"><a></a><span class="co"># - Pre-compute VIP status in a dictionary</span></span>
 <span id="cb7-24"><a></a><span class="co"># - Use database indexing for larger datasets</span></span>
 <span id="cb7-25"><a></a><span class="co"># - Cache frequently accessed results</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p><strong>Results Discussion:</strong> - 📈 <strong>Performance gain</strong>: Typically 10-100x faster for large datasets - 🧠 <strong>AI insight</strong>: GenAI tools excel at identifying these patterns - 💼 <strong>Real impact</strong>: This optimization matters in production systems - 🔄 <strong>Learning loop</strong>: AI suggestions → implementation → measurement → iteration</p>
+<p><strong>Results Discussion:</strong> - <strong>Performance effect</strong>: Set membership is average-case O(1), while list membership is O(n) - <strong>AI role</strong>: Generate candidate explanations; timing results determine whether they apply here - 💼 <strong>Real impact</strong>: This optimization matters in production systems - 🔄 <strong>Learning loop</strong>: AI suggestions → implementation → measurement → iteration</p>
 <aside class="notes">
 <p><strong>DISCUSSION FACILITATION:</strong></p>
 <ul>
@@ -625,7 +625,7 @@ Brandon M. Greenwell
 <li><strong>AI reflection</strong>: “What did the AI get right? What did it miss?”</li>
 <li><strong>Real-world connection</strong>: “Where would this optimization matter in real apps?”</li>
 <li><strong>Critical thinking</strong>: “When might a list still be better than a set?”</li>
-<li><strong>Career relevance</strong>: “This type of optimization thinking is valued in technical interviews”</li>
+<li><strong>Evidence check</strong>: “Which measurement supports the recommendation?”</li>
 <li><strong>Next steps</strong>: “What other performance bottlenecks might AI help us find?”</li>
 </ul>
 <style type="text/css">
@@ -644,15 +644,15 @@ Brandon M. Greenwell
 
 </section></section>
 <section>
-<section id="session-2-mappings-collections" class="title-slide slide level1 center">
-<h1>Session 2: Mappings &amp; collections</h1>
+<section id="session-2-mappings-and-collections" class="title-slide slide level1 center">
+<h1>Session 2: mappings and collections</h1>
 
 </section>
 <section id="the-dictionary-key-value-pairs" class="slide level2">
-<h2>The dictionary: key-value pairs 🗝️</h2>
+<h2>The dictionary: key-value pairs</h2>
 <ul>
 <li class="fragment">A <strong><a href="https://docs.python.org/3/tutorial/datastructures.html#dictionaries">dictionary</a></strong> is a collection of <code>key: value</code> pairs</li>
-<li class="fragment"><strong>Lightning fast lookups</strong>: Optimized for retrieving values when you know the key</li>
+<li class="fragment"><strong>Key-based lookups</strong>: Average-case O(1) retrieval when you know the key</li>
 <li class="fragment"><strong>Real-world analogy</strong>: Like a phone book or actual dictionary - look up by name/word, get number/definition</li>
 <li class="fragment"><strong>Unique keys</strong>: Each key can appear only once, but values can be duplicated</li>
 <li class="fragment"><strong>Key types</strong>: Strings, numbers, tuples (immutable types only)</li>
@@ -707,9 +707,9 @@ Brandon M. Greenwell
           display:block!important;
       }</style></aside>
 </section>
-<section id="live-exercise-ai-powered-code-refactoring" class="slide level2 scrollable">
-<h2>🛠️ Live Exercise: AI-Powered Code Refactoring</h2>
-<p><strong>Challenge:</strong> This code works, but it’s messy and slow. Let’s fix it with GenAI!</p>
+<section id="live-exercise-data-structure-refactoring" class="slide level2 scrollable">
+<h2>Live exercise: data-structure refactoring</h2>
+<p><strong>Challenge:</strong> This code works, but positional fields make it hard to read and change.</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a></a><span class="co"># MESSY CODE - Student registration system (needs help!)</span></span>
 <span id="cb9-2"><a></a><span class="kw">def</span> process_student_data():</span>
 <span id="cb9-3"><a></a>    <span class="co"># Raw data from registration form</span></span>
@@ -739,12 +739,12 @@ Brandon M. Greenwell
 <span id="cb9-27"><a></a><span class="co"># Call the function</span></span>
 <span id="cb9-28"><a></a>students, avg <span class="op">=</span> process_student_data()</span>
 <span id="cb9-29"><a></a><span class="bu">print</span>(<span class="ss">f"IS4010 students: </span><span class="sc">{</span><span class="bu">len</span>(students)<span class="sc">}</span><span class="ss">, Average: </span><span class="sc">{</span>avg<span class="sc">:.1f}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p><strong>GenAI Prompt Challenge:</strong> 🤖 <em>“Analyze this Python code and suggest improvements for data structure choice, readability, and performance. Focus on eliminating magic numbers and handling duplicate data.”</em></p>
+<p><strong>AI review prompt:</strong> 🤖 <em>“Analyze this Python code and suggest improvements for data structure choice, readability, and performance. Focus on eliminating magic numbers and handling duplicate data.”</em></p>
 <aside class="notes">
 <p><strong>INTERACTIVE EXERCISE FLOW:</strong></p>
 <ol type="1">
 <li><strong>Problem identification (3 min)</strong>: Ask students what’s wrong with this code</li>
-<li><strong>AI consultation (5 min)</strong>: Students ask their GenAI tool for refactoring suggestions</li>
+<li><strong>AI consultation (5 min)</strong>: Students ask an AI assistant for refactoring suggestions</li>
 <li><strong>Solution discussion (5 min)</strong>: Collect AI recommendations from students</li>
 <li><strong>Live refactoring (7 min)</strong>: Implement the best suggestions together</li>
 </ol>
@@ -762,9 +762,9 @@ Brandon M. Greenwell
           display:block!important;
       }</style></aside>
 </section>
-<section id="refactored-solution-ai-assisted" class="slide level2">
-<h2>🎯 Refactored Solution (AI-Assisted)</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a></a><span class="co"># CLEAN CODE - After GenAI consultation</span></span>
+<section id="refactored-solution" class="slide level2">
+<h2>Refactored solution</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a></a><span class="co"># Revised code after reviewing the suggestions</span></span>
 <span id="cb10-2"><a></a><span class="im">from</span> collections <span class="im">import</span> defaultdict</span>
 <span id="cb10-3"><a></a></span>
 <span id="cb10-4"><a></a><span class="kw">def</span> process_student_data_improved():</span>
@@ -797,7 +797,7 @@ Brandon M. Greenwell
 <span id="cb10-31"><a></a><span class="co"># Much cleaner!</span></span>
 <span id="cb10-32"><a></a>students, avg <span class="op">=</span> process_student_data_improved()</span>
 <span id="cb10-33"><a></a><span class="bu">print</span>(<span class="ss">f"IS4010 students: </span><span class="sc">{</span><span class="bu">len</span>(students)<span class="sc">}</span><span class="ss">, Average: </span><span class="sc">{</span>avg<span class="sc">:.1f}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p><strong>What GenAI helped us achieve:</strong> - 🗂️ <strong>Better structure</strong>: Dictionaries instead of magic indices - 🚫 <strong>Duplicate handling</strong>: Sets for unique enrollment tracking - 📊 <strong>Efficient grouping</strong>: defaultdict for course organization - 📖 <strong>Readable code</strong>: Self-documenting variable names - ⚡ <strong>Performance</strong>: Faster lookups and processing</p>
+<p><strong>What changed:</strong> - <strong>Clearer records</strong>: Dictionaries replace positional indices - <strong>Duplicate handling</strong>: A set tracks unique enrollments - <strong>Grouping</strong>: <code>defaultdict</code> collects records by course - <strong>Readable code</strong>: Field and variable names state their purpose</p>
 <aside class="notes">
 <p><strong>DISCUSSION POINTS:</strong></p>
 <ul>
@@ -820,7 +820,7 @@ Brandon M. Greenwell
       }</style></aside>
 </section>
 <section id="the-set-unique-items-only" class="slide level2">
-<h2>The set: unique items only 🎯</h2>
+<h2>The set: unique items only</h2>
 <ul>
 <li class="fragment">A <strong><a href="https://docs.python.org/3/tutorial/datastructures.html#sets">set</a></strong> is an unordered collection of <strong>unique</strong> items</li>
 <li class="fragment"><strong>No duplicates allowed</strong>: Automatically removes duplicate entries</li>
@@ -884,9 +884,9 @@ Brandon M. Greenwell
           display:block!important;
       }</style></aside>
 </section>
-<section id="live-exercise-ai-powered-api-data-design" class="slide level2 scrollable">
-<h2>📡 Live Exercise: AI-Powered API Data Design</h2>
-<p><strong>Scenario:</strong> You’re building a student dashboard that needs to process this GitHub API-style data efficiently. Let’s design the optimal data structures with GenAI!</p>
+<section id="live-exercise-choose-structures-for-api-data" class="slide level2 scrollable">
+<h2>Live exercise: choose structures for API data</h2>
+<p><strong>Scenario:</strong> Design structures for the stated dashboard queries, then explain the trade-offs.</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a></a><span class="co"># Realistic API response from student management system</span></span>
 <span id="cb12-2"><a></a>api_response <span class="op">=</span> {</span>
 <span id="cb12-3"><a></a>    <span class="st">"students"</span>: [</span>
@@ -930,12 +930,12 @@ Brandon M. Greenwell
 <span id="cb12-41"><a></a>        <span class="st">"api_version"</span>: <span class="st">"v2.1"</span></span>
 <span id="cb12-42"><a></a>    }</span>
 <span id="cb12-43"><a></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p><strong>GenAI Design Challenge:</strong> 🤖 <em>“I need to design data structures for a student dashboard with these requirements:<em> </em>1. Fast lookup of students by username<em> </em>2. Quick filtering by course enrollment<em> </em>3. Efficient permission checking<em> </em>4. Find students with specific activities<em> </em>What data structures should I use and why?”</em></p>
+<p><strong>AI design prompt:</strong> 🤖 <em>“I need to design data structures for a student dashboard with these requirements:<em> </em>1. Fast lookup of students by username<em> </em>2. Quick filtering by course enrollment<em> </em>3. Efficient permission checking<em> </em>4. Find students with specific activities<em> </em>What data structures should I use and why?”</em></p>
 <aside class="notes">
 <p><strong>EXERCISE STRUCTURE (15 minutes total):</strong></p>
 <ol type="1">
 <li><strong>Problem analysis (3 min)</strong>: Students identify the different query patterns needed</li>
-<li><strong>AI consultation (5 min)</strong>: Students ask GenAI for data structure recommendations</li>
+<li><strong>AI consultation (5 min)</strong>: Students ask an AI assistant for data structure recommendations</li>
 <li><strong>Solution sharing (4 min)</strong>: Compare different AI suggestions from the class</li>
 <li><strong>Live implementation (3 min)</strong>: Code the best approach together</li>
 </ol>
@@ -953,9 +953,9 @@ Brandon M. Greenwell
           display:block!important;
       }</style></aside>
 </section>
-<section id="optimized-data-structures-ai-designed" class="slide level2">
-<h2>🏗️ Optimized Data Structures (AI-Designed)</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a></a><span class="co"># After consulting GenAI, let's build efficient access structures</span></span>
+<section id="data-structures-for-common-queries" class="slide level2">
+<h2>Data structures for common queries</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a></a><span class="co"># Build structures that support the required queries</span></span>
 <span id="cb13-2"><a></a><span class="kw">def</span> process_student_api_data(api_response):</span>
 <span id="cb13-3"><a></a>    students_data <span class="op">=</span> api_response[<span class="st">"students"</span>]</span>
 <span id="cb13-4"><a></a></span>
@@ -971,7 +971,7 @@ Brandon M. Greenwell
 <span id="cb13-14"><a></a>    <span class="co"># 4. Permission checking - Dictionary of sets</span></span>
 <span id="cb13-15"><a></a>    students_by_permission <span class="op">=</span> {}</span>
 <span id="cb13-16"><a></a></span>
-<span id="cb13-17"><a></a>    <span class="co"># Process each student (GenAI suggested this structure)</span></span>
+<span id="cb13-17"><a></a>    <span class="co"># Process each student into the query structures</span></span>
 <span id="cb13-18"><a></a>    <span class="cf">for</span> student <span class="kw">in</span> students_data:</span>
 <span id="cb13-19"><a></a>        username <span class="op">=</span> student[<span class="st">"username"</span>]</span>
 <span id="cb13-20"><a></a>        students_by_username[username] <span class="op">=</span> student</span>
@@ -1005,7 +1005,7 @@ Brandon M. Greenwell
 <span id="cb13-48"><a></a><span class="co"># Build the optimized structures</span></span>
 <span id="cb13-49"><a></a>optimized_data <span class="op">=</span> process_student_api_data(api_response)</span>
 <span id="cb13-50"><a></a></span>
-<span id="cb13-51"><a></a><span class="co"># Now queries are lightning fast!</span></span>
+<span id="cb13-51"><a></a><span class="co"># These structures avoid repeated full-list scans</span></span>
 <span id="cb13-52"><a></a><span class="bu">print</span>(<span class="ss">f"Students in IS4010: </span><span class="sc">{</span>optimized_data[<span class="st">'by_course'</span>][<span class="st">'IS4010'</span>]<span class="sc">}</span><span class="ss">"</span>)</span>
 <span id="cb13-53"><a></a><span class="bu">print</span>(<span class="ss">f"ACM members: </span><span class="sc">{</span>optimized_data[<span class="st">'by_activity'</span>][<span class="st">'ACM'</span>]<span class="sc">}</span><span class="ss">"</span>)</span>
 <span id="cb13-54"><a></a><span class="bu">print</span>(<span class="ss">f"Teaching assistants: </span><span class="sc">{</span>optimized_data[<span class="st">'by_permission'</span>][<span class="st">'teaching_assistant'</span>]<span class="sc">}</span><span class="ss">"</span>)</span>
@@ -1015,7 +1015,7 @@ Brandon M. Greenwell
 <span id="cb13-58"><a></a>acm_members <span class="op">=</span> optimized_data[<span class="st">'by_activity'</span>][<span class="st">'ACM'</span>]</span>
 <span id="cb13-59"><a></a>is4010_acm <span class="op">=</span> is4010_students <span class="op">&amp;</span> acm_members  <span class="co"># Set intersection!</span></span>
 <span id="cb13-60"><a></a><span class="bu">print</span>(<span class="ss">f"IS4010 + ACM: </span><span class="sc">{</span>is4010_acm<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p><strong>GenAI Success Metrics:</strong> - 🚀 <strong>O(1) lookups</strong> instead of O(n) searches - 🔍 <strong>Set operations</strong> for complex filtering - 📊 <strong>Multiple access patterns</strong> supported efficiently - 💾 <strong>Memory trade-off</strong> for speed (typical AI recommendation)</p>
+<p><strong>Check the result:</strong> - 🚀 <strong>O(1) lookups</strong> instead of O(n) searches - 🔍 <strong>Set operations</strong> for complex filtering - 📊 <strong>Multiple access patterns</strong> supported efficiently - 💾 <strong>Memory trade-off</strong> for speed (typical AI recommendation)</p>
 <aside class="notes">
 <p><strong>DISCUSSION FACILITATORS:</strong></p>
 <ul>
@@ -1024,7 +1024,7 @@ Brandon M. Greenwell
 <li><strong>Real-world</strong>: “Where would you see this pattern in actual applications?”</li>
 <li><strong>Scaling</strong>: “How would this perform with 10,000 students?”</li>
 <li><strong>Extensions</strong>: “What other queries might we need to optimize for?”</li>
-<li><strong>Career connection</strong>: “This type of system design thinking appears in technical interviews”</li>
+<li><strong>Design check</strong>: “Which queries became simpler, and what memory did we add?”</li>
 </ul>
 <style type="text/css">
         span.MJX_Assistive_MathML {
@@ -1039,7 +1039,7 @@ Brandon M. Greenwell
       }</style></aside>
 </section>
 <section id="choosing-the-right-data-structure" class="slide level2">
-<h2>Choosing the right data structure 🎯</h2>
+<h2>Choosing the right data structure</h2>
 <ul>
 <li class="fragment"><strong>Use a <code>list</code></strong> when you need an ordered, changeable collection
 <ul>
@@ -1099,7 +1099,7 @@ Brandon M. Greenwell
 <ul>
 <li><strong>Performance matters</strong>: Emphasize the practical impact of choosing the right structure</li>
 <li><strong>Real applications</strong>: Use concrete examples students can relate to</li>
-<li><strong>Interview relevance</strong>: Data structure choice is a common technical interview topic</li>
+<li><strong>Transfer</strong>: The same choice appears whenever order, uniqueness, and lookup speed differ</li>
 <li><strong>Scalability</strong>: Wrong choice can make apps slow with large datasets</li>
 <li><strong>Memory considerations</strong>: Different structures have different memory overhead</li>
 <li><strong>Future learning</strong>: This foundation helps with database design and algorithms</li>
@@ -1116,10 +1116,10 @@ Brandon M. Greenwell
           display:block!important;
       }</style></aside>
 </section>
-<section id="interactive-challenge-ai-pair-programming-session" class="slide level2">
-<h2>🎮 Interactive Challenge: AI Pair Programming Session</h2>
-<p><strong>Mini-Hackathon Time!</strong> Work with GenAI to solve these real-world data structure problems in 15 minutes.</p>
-<h3 id="challenge-1-social-media-analytics"><strong>Challenge 1: Social Media Analytics</strong> 📱</h3>
+<section id="interactive-challenge-data-structure-choices" class="slide level2">
+<h2>Interactive challenge: data-structure choices</h2>
+<p>Work with an AI assistant for 15 minutes, then verify its recommendation against each requirement.</p>
+<h3 id="challenge-1-social-media-analytics"><strong>Challenge 1: social media analytics</strong></h3>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a></a><span class="co"># Raw social media engagement data</span></span>
 <span id="cb15-2"><a></a>posts <span class="op">=</span> [</span>
 <span id="cb15-3"><a></a>    {<span class="st">"id"</span>: <span class="dv">1</span>, <span class="st">"user"</span>: <span class="st">"alice"</span>, <span class="st">"likes"</span>: [<span class="st">"bob"</span>, <span class="st">"carol"</span>, <span class="st">"dave"</span>], <span class="st">"tags"</span>: [<span class="st">"python"</span>, <span class="st">"coding"</span>]},</span>
@@ -1129,7 +1129,7 @@ Brandon M. Greenwell
 <span id="cb15-7"><a></a></span>
 <span id="cb15-8"><a></a><span class="co"># Goals: Find most popular user, most used tags, mutual connections</span></span>
 <span id="cb15-9"><a></a><span class="co"># Ask your AI: "What data structures optimize social media analytics?"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<h3 id="challenge-2-e-commerce-inventory"><strong>Challenge 2: E-commerce Inventory</strong> 🛒</h3>
+<h3 id="challenge-2-e-commerce-inventory"><strong>Challenge 2: e-commerce inventory</strong></h3>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a></a><span class="co"># Product inventory system</span></span>
 <span id="cb16-2"><a></a>inventory <span class="op">=</span> [</span>
 <span id="cb16-3"><a></a>    {<span class="st">"sku"</span>: <span class="st">"LAP001"</span>, <span class="st">"name"</span>: <span class="st">"Laptop"</span>, <span class="st">"price"</span>: <span class="dv">999</span>, <span class="st">"categories"</span>: [<span class="st">"electronics"</span>, <span class="st">"computers"</span>], <span class="st">"stock"</span>: <span class="dv">5</span>},</span>
@@ -1139,7 +1139,7 @@ Brandon M. Greenwell
 <span id="cb16-7"><a></a></span>
 <span id="cb16-8"><a></a><span class="co"># Goals: Fast product lookup, category filtering, inventory alerts</span></span>
 <span id="cb16-9"><a></a><span class="co"># Ask your AI: "How do I optimize product search and filtering?"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<h3 id="challenge-3-university-course-scheduler"><strong>Challenge 3: University Course Scheduler</strong> 📚</h3>
+<h3 id="challenge-3-university-course-scheduler"><strong>Challenge 3: university course scheduler</strong></h3>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a></a><span class="co"># Course scheduling conflicts</span></span>
 <span id="cb17-2"><a></a>courses <span class="op">=</span> [</span>
 <span id="cb17-3"><a></a>    {<span class="st">"code"</span>: <span class="st">"IS4010"</span>, <span class="st">"time"</span>: <span class="st">"MWF 10:00"</span>, <span class="st">"room"</span>: <span class="st">"Lindner 100"</span>, <span class="st">"students"</span>: [<span class="st">"alice"</span>, <span class="st">"bob"</span>]},</span>
@@ -1149,10 +1149,10 @@ Brandon M. Greenwell
 <span id="cb17-7"><a></a></span>
 <span id="cb17-8"><a></a><span class="co"># Goals: Detect time conflicts, room utilization, student schedules</span></span>
 <span id="cb17-9"><a></a><span class="co"># Ask your AI: "What's the best way to handle scheduling conflicts?"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p><strong>Your Mission:</strong> 1. 🤖 <strong>Pick ONE challenge</strong> that interests you most 2. 💬 <strong>Consult your GenAI tool</strong> for data structure recommendations 3. 🚀 <strong>Be ready to share</strong> your AI’s best suggestion with the class 4. 🏆 <strong>Bonus</strong>: Implement a quick prototype if you’re feeling ambitious!</p>
+<p><strong>Your task:</strong> 1. 🤖 <strong>Pick ONE challenge</strong> that interests you most 2. <strong>Consult an AI assistant</strong> for data structure recommendations 3. 🚀 <strong>Be ready to share</strong> your AI’s best suggestion with the class 4. 🏆 <strong>Bonus</strong>: Implement a quick prototype if you’re feeling ambitious!</p>
 <aside class="notes">
 <p><strong>FACILITATING THE MINI-HACKATHON:</strong></p>
-<p><strong>Setup (2 minutes):</strong> - Students choose their challenge - Form small groups or work individually - Open GenAI tools (Claude, ChatGPT, etc.)</p>
+<p><strong>Setup (2 minutes):</strong> - Students choose their challenge - Form small groups or work individually - Open a browser, editor, or CLI assistant</p>
 <p><strong>Work time (10 minutes):</strong> - Circulate and observe AI interactions - Help with prompt refinement if needed - Look for interesting AI recommendations to highlight</p>
 <p><strong>Share-out (8 minutes):</strong> - Each challenge gets 2-3 minutes for solutions - Focus on AI recommendations and reasoning - Highlight creative or unexpected suggestions - Connect back to core data structure principles</p>
 <p><strong>Wrap-up questions:</strong> - “Which AI suggestion surprised you most?” - “What did AI miss that a human developer might catch?” - “How would you validate these recommendations in production?”</p>
@@ -1168,31 +1168,31 @@ Brandon M. Greenwell
           display:block!important;
       }</style></aside>
 </section>
-<section id="challenge-solutions-showcase" class="slide level2">
-<h2>🎯 Challenge Solutions Showcase</h2>
-<p><strong>Let’s see what GenAI recommended for each challenge!</strong></p>
-<h3 id="social-media-analytics---expected-ai-solutions"><strong>Social Media Analytics - Expected AI Solutions:</strong></h3>
+<section id="challenge-solution-discussion" class="slide level2">
+<h2>Challenge solution discussion</h2>
+<p><strong>Compare the recommendations with the requirements and trade-offs.</strong></p>
+<h3 id="social-media-analytics-expected-approaches"><strong>Social media analytics: expected approaches</strong></h3>
 <ul>
 <li><strong>User popularity</strong>: Dictionary counting mentions across all likes lists</li>
 <li><strong>Tag frequency</strong>: Counter or defaultdict for tag occurrence tracking</li>
 <li><strong>Mutual connections</strong>: Set intersections for finding common connections</li>
 <li><strong>Performance</strong>: Sets for fast membership checking in large user bases</li>
 </ul>
-<h3 id="e-commerce-inventory---expected-ai-solutions"><strong>E-commerce Inventory - Expected AI Solutions:</strong></h3>
+<h3 id="e-commerce-inventory-expected-approaches"><strong>E-commerce inventory: expected approaches</strong></h3>
 <ul>
 <li><strong>Product lookup</strong>: Dictionary with SKU as key for O(1) access</li>
 <li><strong>Category filtering</strong>: Dictionary mapping categories to product sets</li>
 <li><strong>Inventory alerts</strong>: Separate low-stock tracking with threshold checking</li>
 <li><strong>Price queries</strong>: Sorted structures or separate indexing for range queries</li>
 </ul>
-<h3 id="course-scheduling---expected-ai-solutions"><strong>Course Scheduling - Expected AI Solutions:</strong></h3>
+<h3 id="course-scheduling-expected-approaches"><strong>Course scheduling: expected approaches</strong></h3>
 <ul>
 <li><strong>Time conflict detection</strong>: Dictionary grouping courses by time slots</li>
 <li><strong>Room utilization</strong>: Dictionary tracking room→courses mapping</li>
 <li><strong>Student schedules</strong>: Dictionary with student→courses for individual schedules</li>
 <li><strong>Conflict resolution</strong>: Set operations for finding overlapping students/times</li>
 </ul>
-<p><strong>Key AI Insights:</strong> - 🧠 <strong>Pattern recognition</strong>: AI excels at identifying common optimization patterns - 🔄 <strong>Trade-off analysis</strong>: AI often suggests multiple approaches with pros/cons - 📈 <strong>Scalability thinking</strong>: AI frequently considers performance at scale - 🚨 <strong>Edge case awareness</strong>: Good AI prompts reveal boundary conditions</p>
+<p><strong>Key AI Insights:</strong> - <strong>Candidate generation</strong>: Ask an assistant for more than one representation - <strong>Trade-off analysis</strong>: Require a cost and benefit for each candidate - <strong>Measurement</strong>: Benchmark the operation before accepting a performance claim - <strong>Edge cases</strong>: Test duplicates, missing values, empty inputs, and ordering</p>
 <aside class="notes">
 <p><strong>DEBRIEF DISCUSSION:</strong></p>
 <ul>
@@ -1215,26 +1215,23 @@ Brandon M. Greenwell
       }</style></aside>
 </section>
 <section id="putting-it-all-together-lab-04" class="slide level2">
-<h2>Putting It All Together: Lab 04 🚀</h2>
-<p><strong>You’ve experienced the power of AI-assisted data structure optimization. Now apply those skills!</strong></p>
-<p><strong>Lab 04 Challenge:</strong></p>
+<h2>Putting it all together: Lab 04</h2>
+<p><strong>Lab 04 asks you to implement three functions in <code>week04/lab04.py</code>:</strong></p>
 <ul>
-<li class="fragment"><strong>AI-guided design</strong>: Use GenAI to recommend optimal data structures for three real scenarios</li>
-<li class="fragment"><strong>Performance validation</strong>: Test your AI’s recommendations with actual code</li>
-<li class="fragment"><strong>Professional documentation</strong>: Record your AI interactions and reasoning</li>
-<li class="fragment"><strong>Automated verification</strong>: GitHub Actions will test your implementations</li>
-<li class="fragment"><strong>Real-world application</strong>: Problems mirror the challenges we solved today</li>
+<li class="fragment"><code>find_common_elements(list1, list2)</code> returns values found in both lists</li>
+<li class="fragment"><code>find_user_by_name(users, name)</code> returns a matching user dictionary or <code>None</code></li>
+<li class="fragment"><code>get_list_of_even_numbers(numbers)</code> retains even integers in their original order</li>
+<li class="fragment">Empty inputs, zero, and negative even numbers must behave as specified</li>
+<li class="fragment">The supplied tests must not be modified</li>
 </ul>
-<p><strong>From Today’s Exercises to Your Lab:</strong> - 🔬 <strong>Performance Detective</strong> → Lab’s efficiency requirements - 🛠️ <strong>Code Refactoring</strong> → Lab’s clean implementation standards - 📡 <strong>API Data Design</strong> → Lab’s complex data structure challenges - 🎮 <strong>Problem Solving</strong> → Lab’s critical thinking with AI assistance</p>
-<p><strong>Your AI Pair Programming Toolkit:</strong> - 💬 <strong>Effective prompts</strong>: “Analyze this code for performance bottlenecks…” - 📊 <strong>Trade-off analysis</strong>: “Compare list vs set for this use case…” - 🚀 <strong>Optimization requests</strong>: “Suggest the fastest data structure for…” - 🔍 <strong>Code review</strong>: “What improvements can you suggest for…”</p>
-<p><strong>Navigate to</strong>: <a href="https://github.com/bgreenwell/is4010-labs/blob/main/week04/lab04.md"><code>week04/lab04.md</code></a></p>
-<p><strong>Success Strategy:</strong> 1. 🤖 <strong>Collaborate with AI</strong> for data structure recommendations 2. 💡 <strong>Test and validate</strong> AI suggestions with real code 3. 📝 <strong>Document your reasoning</strong> for future reference 4. ✅ <strong>Verify with automation</strong> using GitHub Actions</p>
+<p><strong>Workflow:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb18"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb18-1"><a></a><span class="ex">uv</span> run <span class="at">--directory</span> week04 python <span class="at">-m</span> pytest tests/ <span class="at">-v</span></span>
+<span id="cb18-2"><a></a><span class="fu">git</span> add week04/lab04.py</span>
+<span id="cb18-3"><a></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"Complete Lab 04"</span></span>
+<span id="cb18-4"><a></a><span class="fu">git</span> push</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Instructions:</strong> <a href="https://github.com/bgreenwell/is4010-labs/blob/main/week04/lab04.md"><code>week04/lab04.md</code></a></p>
 <aside class="notes">
-<p><strong>FINAL CLASS WRAP-UP:</strong></p>
-<p><strong>Connection reinforcement (3 minutes):</strong> - “How will today’s exercises help with your lab?” - “Which AI prompting techniques will you use?” - “What performance insights will guide your choices?”</p>
-<p><strong>Lab preview (2 minutes):</strong> - Emphasize the AI collaboration requirement - Mention that AI recommendations must be documented - Preview that automated tests will validate their choices</p>
-<p><strong>Next week setup:</strong> - “Keep experimenting with AI for code optimization” - “Consider performance implications in all your coding” - “Practice explaining AI recommendations to others”</p>
-<p><strong>Career connection:</strong> - “These AI collaboration skills are increasingly valuable in industry” - “Data structure optimization thinking appears in technical interviews” - “Portfolio demonstration: show both AI usage and critical evaluation”</p>
+<p>Students should ask an AI assistant to explain its recommended representation before implementing a function. The submitted deliverable is the tested Python file; no prompt journal or performance benchmark is required. A green Week 04 badge earns the complete 10 points.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;

@@ -1,6 +1,6 @@
 ---
-title: "IS4010: AI-Enhanced Application Development"
-subtitle: "Week 4: Python Data Structures"
+title: "IS4010: AI-enhanced application development"
+subtitle: "Week 04: Python data structures"
 author: "Brandon M. Greenwell"
 format:
   revealjs:
@@ -11,41 +11,41 @@ format:
     css: custom.css
 ---
 
-# Welcome to Python Data Structures 📦
+# Welcome to Python data structures
 
-## The foundation of organized programming 🏗️
+## The foundation of organized programming
 
 ::: {.incremental}
-- **Data structures** are the backbone of efficient programming
+- **Data structures** organize values for particular operations
 - They determine how we organize, store, and access information
-- **Python's philosophy**: "Batteries included" - powerful built-in data structures ready to use
-- **Career relevance**: Understanding data structures is essential for technical interviews
-- **Real-world impact**: Every app you use relies on sophisticated data organization
+- **Built-in choices**: Python provides lists, tuples, dictionaries, and sets
+- **Program design**: The representation you choose affects clarity, correctness, and performance
+- **Practical impact**: Lists, dictionaries, tuples, and sets solve different data problems
 :::
 
 ::: {.notes}
 **TEACHING NOTES:**
 
-- **Career connection**: Data structure questions are common in coding interviews
-- **Real-world examples**: Instagram feeds (lists), user profiles (dictionaries), unique hashtags (sets)
-- **Python advantage**: Compare to languages like C where you build data structures from scratch
-- **Course progression**: This builds foundation for database design later in the course
+- **Review question**: Ask which operations—order, lookup, uniqueness, or mutation—the representation must support
+- **Examples**: Ordered events (list), fixed coordinates (tuple), profiles (dictionary), unique tags (set)
+- **Language comparison**: Compare the built-in interfaces without implying that other languages lack collections
+- **Course progression**: These choices support later file, JSON, and API work
 - **Historical context**: Data structures were formalized in the 1960s, fundamental to computer science
 :::
 
 ---
 
-# Session 1: Sequences & collections
+# Session 1: sequences and collections
 
 ---
 
-## What is a data structure? 🤔
+## What is a data structure?
 
 ::: {.incremental}
 - A **data structure** is a way to organize and store multiple pieces of data in a single variable
 - Think of them as **specialized containers** for your data
-- **Python's built-in arsenal**: [Lists](https://docs.python.org/3/tutorial/introduction.html#lists), [tuples](https://docs.python.org/3/tutorial/datastructures.html#tuples-and-sequences), [dictionaries](https://docs.python.org/3/tutorial/datastructures.html#dictionaries), and [sets](https://docs.python.org/3/tutorial/datastructures.html#sets)
-- **Choosing wisely**: The right data structure makes your code faster, cleaner, and more maintainable
+- **Python's built-in collections**: [Lists](https://docs.python.org/3/tutorial/introduction.html#lists), [tuples](https://docs.python.org/3/tutorial/datastructures.html#tuples-and-sequences), [dictionaries](https://docs.python.org/3/tutorial/datastructures.html#dictionaries), and [sets](https://docs.python.org/3/tutorial/datastructures.html#sets)
+- **Choosing deliberately**: Match the representation to the operations and invariants you need
 - **Performance matters**: Different structures excel at different operations
 :::
 
@@ -61,7 +61,7 @@ format:
 
 ---
 
-## The list: a mutable sequence 📝
+## The list: a mutable sequence
 
 ::: {.incremental}
 - A **[list](https://docs.python.org/3/tutorial/introduction.html#lists)** is an ordered, changeable collection of items
@@ -106,7 +106,7 @@ print(f"Last pioneer: {pioneers[-1]}")
 
 ---
 
-## The tuple: an immutable sequence 🔒
+## The tuple: an immutable sequence
 
 ::: {.incremental}
 - A **[tuple](https://docs.python.org/3/tutorial/datastructures.html#tuples-and-sequences)** is an ordered, unchangeable collection of items
@@ -157,7 +157,7 @@ single_item = (42,)  # Without comma, it's just parentheses for grouping
 
 ---
 
-## Accessing items: indexing & slicing 🎯
+## Accessing items: indexing and slicing
 
 ::: {.incremental}
 - **Zero-based indexing**: Python counts from 0, not 1 (like most programming languages)
@@ -195,7 +195,7 @@ print(f"2D coordinates: ({x}, {y})")
 **TEACHING NOTES:**
 
 - **Zero-based confusion**: This trips up beginners - relate to array indexing in other languages
-- **Negative indexing**: Unique Python feature that makes code more readable
+- **Negative indexing**: Access items relative to the end, such as `items[-1]`
 - **Slice notation**: [start:stop:step] - stop is exclusive (common source of off-by-one errors)
 - **Memory efficiency**: Slicing creates new objects, doesn't modify originals
 - **Real applications**: Processing data chunks, pagination, extracting subsets
@@ -204,7 +204,7 @@ print(f"2D coordinates: ({x}, {y})")
 
 ---
 
-## Common sequence operations 🛠️
+## Common sequence operations
 
 ::: {.incremental}
 - **Length**: `len(sequence)` returns number of items
@@ -258,7 +258,7 @@ print(f"Short language names: {short_names}")
 
 ---
 
-## Quick Introduction: List Comprehensions 📝
+## Quick introduction: list comprehensions
 
 **Python has a concise way to create lists called [list comprehensions](https://docs.python.org/3/tutorial/datastructures.html#list-comprehensions):**
 
@@ -279,7 +279,7 @@ print(emails)  # ['user_0@email.com', 'user_1@email.com', 'user_2@email.com']
 ```
 
 **Why learn this now?**
-- Perfect for generating test data (which we'll need for performance testing!)
+- Useful for generating compact test data for the timing exercise
 - More readable and Pythonic than traditional loops
 - We'll use this pattern extensively in data processing
 
@@ -296,9 +296,9 @@ print(emails)  # ['user_0@email.com', 'user_1@email.com', 'user_2@email.com']
 
 ---
 
-## 🔬 Live Exercise: AI-Assisted Performance Detective
+## Live exercise: AI-assisted performance detective
 
-**Challenge:** Help me optimize this slow code using GenAI tools!
+**Challenge:** Ask an AI assistant to identify the bottleneck, then verify its claim with timing evidence.
 
 ```python
 # SLOW CODE - Let's time this together!
@@ -324,7 +324,7 @@ slow_time = time.time() - start_time
 print(f"Slow approach: {slow_time:.4f} seconds, found {vip_count} VIPs")
 ```
 
-**Your Turn with GenAI:**
+**Your turn with an AI assistant:**
 
 1. 🤖 **Ask Claude/Gemini/ChatGPT**: "How can I optimize this customer VIP lookup code?"
 2. 📊 **Get timing comparison**: What data structure should we use instead?
@@ -344,10 +344,10 @@ print(f"Slow approach: {slow_time:.4f} seconds, found {vip_count} VIPs")
 
 ---
 
-## 🚀 Optimized Solution (with GenAI help!)
+## Revised solution: use a set for membership
 
 ```python
-# FAST CODE - After consulting with GenAI
+# Revised code after reviewing the suggestion
 import time
 
 # Convert VIP list to set for O(1) lookups
@@ -368,15 +368,15 @@ fast_time = time.time() - start_time
 print(f"Fast approach: {fast_time:.4f} seconds, found {vip_count} VIPs")
 print(f"Speedup: {slow_time/fast_time:.1f}x faster!")
 
-# GenAI bonus: What other optimizations could we make?
+# Follow-up: What other changes might matter at a larger scale?
 # - Pre-compute VIP status in a dictionary
 # - Use database indexing for larger datasets
 # - Cache frequently accessed results
 ```
 
 **Results Discussion:**
-- 📈 **Performance gain**: Typically 10-100x faster for large datasets
-- 🧠 **AI insight**: GenAI tools excel at identifying these patterns
+- **Performance effect**: Set membership is average-case O(1), while list membership is O(n)
+- **AI role**: Generate candidate explanations; timing results determine whether they apply here
 - 💼 **Real impact**: This optimization matters in production systems
 - 🔄 **Learning loop**: AI suggestions → implementation → measurement → iteration
 
@@ -387,21 +387,21 @@ print(f"Speedup: {slow_time/fast_time:.1f}x faster!")
 - **AI reflection**: "What did the AI get right? What did it miss?"
 - **Real-world connection**: "Where would this optimization matter in real apps?"
 - **Critical thinking**: "When might a list still be better than a set?"
-- **Career relevance**: "This type of optimization thinking is valued in technical interviews"
+- **Evidence check**: "Which measurement supports the recommendation?"
 - **Next steps**: "What other performance bottlenecks might AI help us find?"
 :::
 
 ---
 
-# Session 2: Mappings & collections
+# Session 2: mappings and collections
 
 ---
 
-## The dictionary: key-value pairs 🗝️
+## The dictionary: key-value pairs
 
 ::: {.incremental}
 - A **[dictionary](https://docs.python.org/3/tutorial/datastructures.html#dictionaries)** is a collection of `key: value` pairs
-- **Lightning fast lookups**: Optimized for retrieving values when you know the key
+- **Key-based lookups**: Average-case O(1) retrieval when you know the key
 - **Real-world analogy**: Like a phone book or actual dictionary - look up by name/word, get number/definition
 - **Unique keys**: Each key can appear only once, but values can be duplicated
 - **Key types**: Strings, numbers, tuples (immutable types only)
@@ -451,9 +451,9 @@ print(f"Updated profile: {user_profile['username']} now has {user_profile['follo
 
 ---
 
-## 🛠️ Live Exercise: AI-Powered Code Refactoring
+## Live exercise: data-structure refactoring
 
-**Challenge:** This code works, but it's messy and slow. Let's fix it with GenAI!
+**Challenge:** This code works, but positional fields make it hard to read and change.
 
 ```python
 # MESSY CODE - Student registration system (needs help!)
@@ -487,14 +487,14 @@ students, avg = process_student_data()
 print(f"IS4010 students: {len(students)}, Average: {avg:.1f}")
 ```
 
-**GenAI Prompt Challenge:**
+**AI review prompt:**
 🤖 *"Analyze this Python code and suggest improvements for data structure choice, readability, and performance. Focus on eliminating magic numbers and handling duplicate data."*
 
 ::: {.notes}
 **INTERACTIVE EXERCISE FLOW:**
 
 1. **Problem identification (3 min)**: Ask students what's wrong with this code
-2. **AI consultation (5 min)**: Students ask their GenAI tool for refactoring suggestions
+2. **AI consultation (5 min)**: Students ask an AI assistant for refactoring suggestions
 3. **Solution discussion (5 min)**: Collect AI recommendations from students
 4. **Live refactoring (7 min)**: Implement the best suggestions together
 
@@ -512,10 +512,10 @@ print(f"IS4010 students: {len(students)}, Average: {avg:.1f}")
 
 ---
 
-## 🎯 Refactored Solution (AI-Assisted)
+## Refactored solution
 
 ```python
-# CLEAN CODE - After GenAI consultation
+# Revised code after reviewing the suggestions
 from collections import defaultdict
 
 def process_student_data_improved():
@@ -550,12 +550,11 @@ students, avg = process_student_data_improved()
 print(f"IS4010 students: {len(students)}, Average: {avg:.1f}")
 ```
 
-**What GenAI helped us achieve:**
-- 🗂️ **Better structure**: Dictionaries instead of magic indices
-- 🚫 **Duplicate handling**: Sets for unique enrollment tracking
-- 📊 **Efficient grouping**: defaultdict for course organization
-- 📖 **Readable code**: Self-documenting variable names
-- ⚡ **Performance**: Faster lookups and processing
+**What changed:**
+- **Clearer records**: Dictionaries replace positional indices
+- **Duplicate handling**: A set tracks unique enrollments
+- **Grouping**: `defaultdict` collects records by course
+- **Readable code**: Field and variable names state their purpose
 
 ::: {.notes}
 **DISCUSSION POINTS:**
@@ -569,7 +568,7 @@ print(f"IS4010 students: {len(students)}, Average: {avg:.1f}")
 
 ---
 
-## The set: unique items only 🎯
+## The set: unique items only
 
 ::: {.incremental}
 - A **[set](https://docs.python.org/3/tutorial/datastructures.html#sets)** is an unordered collection of **unique** items
@@ -629,9 +628,9 @@ if "Python" in unique_languages:
 
 ---
 
-## 📡 Live Exercise: AI-Powered API Data Design
+## Live exercise: choose structures for API data
 
-**Scenario:** You're building a student dashboard that needs to process this GitHub API-style data efficiently. Let's design the optimal data structures with GenAI!
+**Scenario:** Design structures for the stated dashboard queries, then explain the trade-offs.
 
 ```python
 # Realistic API response from student management system
@@ -679,7 +678,7 @@ api_response = {
 }
 ```
 
-**GenAI Design Challenge:**
+**AI design prompt:**
 🤖 *"I need to design data structures for a student dashboard with these requirements:*
 *1. Fast lookup of students by username*
 *2. Quick filtering by course enrollment*
@@ -691,7 +690,7 @@ api_response = {
 **EXERCISE STRUCTURE (15 minutes total):**
 
 1. **Problem analysis (3 min)**: Students identify the different query patterns needed
-2. **AI consultation (5 min)**: Students ask GenAI for data structure recommendations
+2. **AI consultation (5 min)**: Students ask an AI assistant for data structure recommendations
 3. **Solution sharing (4 min)**: Compare different AI suggestions from the class
 4. **Live implementation (3 min)**: Code the best approach together
 
@@ -709,10 +708,10 @@ api_response = {
 
 ---
 
-## 🏗️ Optimized Data Structures (AI-Designed)
+## Data structures for common queries
 
 ```python
-# After consulting GenAI, let's build efficient access structures
+# Build structures that support the required queries
 def process_student_api_data(api_response):
     students_data = api_response["students"]
 
@@ -728,7 +727,7 @@ def process_student_api_data(api_response):
     # 4. Permission checking - Dictionary of sets
     students_by_permission = {}
 
-    # Process each student (GenAI suggested this structure)
+    # Process each student into the query structures
     for student in students_data:
         username = student["username"]
         students_by_username[username] = student
@@ -762,7 +761,7 @@ def process_student_api_data(api_response):
 # Build the optimized structures
 optimized_data = process_student_api_data(api_response)
 
-# Now queries are lightning fast!
+# These structures avoid repeated full-list scans
 print(f"Students in IS4010: {optimized_data['by_course']['IS4010']}")
 print(f"ACM members: {optimized_data['by_activity']['ACM']}")
 print(f"Teaching assistants: {optimized_data['by_permission']['teaching_assistant']}")
@@ -774,7 +773,7 @@ is4010_acm = is4010_students & acm_members  # Set intersection!
 print(f"IS4010 + ACM: {is4010_acm}")
 ```
 
-**GenAI Success Metrics:**
+**Check the result:**
 - 🚀 **O(1) lookups** instead of O(n) searches
 - 🔍 **Set operations** for complex filtering
 - 📊 **Multiple access patterns** supported efficiently
@@ -788,12 +787,12 @@ print(f"IS4010 + ACM: {is4010_acm}")
 - **Real-world**: "Where would you see this pattern in actual applications?"
 - **Scaling**: "How would this perform with 10,000 students?"
 - **Extensions**: "What other queries might we need to optimize for?"
-- **Career connection**: "This type of system design thinking appears in technical interviews"
+- **Design check**: "Which queries became simpler, and what memory did we add?"
 :::
 
 ---
 
-## Choosing the right data structure 🎯
+## Choosing the right data structure
 
 ::: {.incremental}
 - **Use a `list`** when you need an ordered, changeable collection
@@ -850,7 +849,7 @@ large_set = set(range(10000))
 
 - **Performance matters**: Emphasize the practical impact of choosing the right structure
 - **Real applications**: Use concrete examples students can relate to
-- **Interview relevance**: Data structure choice is a common technical interview topic
+- **Transfer**: The same choice appears whenever order, uniqueness, and lookup speed differ
 - **Scalability**: Wrong choice can make apps slow with large datasets
 - **Memory considerations**: Different structures have different memory overhead
 - **Future learning**: This foundation helps with database design and algorithms
@@ -858,11 +857,11 @@ large_set = set(range(10000))
 
 ---
 
-## 🎮 Interactive Challenge: AI Pair Programming Session
+## Interactive challenge: data-structure choices
 
-**Mini-Hackathon Time!** Work with GenAI to solve these real-world data structure problems in 15 minutes.
+Work with an AI assistant for 15 minutes, then verify its recommendation against each requirement.
 
-### **Challenge 1: Social Media Analytics** 📱
+### **Challenge 1: social media analytics**
 ```python
 # Raw social media engagement data
 posts = [
@@ -875,7 +874,7 @@ posts = [
 # Ask your AI: "What data structures optimize social media analytics?"
 ```
 
-### **Challenge 2: E-commerce Inventory** 🛒
+### **Challenge 2: e-commerce inventory**
 ```python
 # Product inventory system
 inventory = [
@@ -888,7 +887,7 @@ inventory = [
 # Ask your AI: "How do I optimize product search and filtering?"
 ```
 
-### **Challenge 3: University Course Scheduler** 📚
+### **Challenge 3: university course scheduler**
 ```python
 # Course scheduling conflicts
 courses = [
@@ -901,9 +900,9 @@ courses = [
 # Ask your AI: "What's the best way to handle scheduling conflicts?"
 ```
 
-**Your Mission:**
+**Your task:**
 1. 🤖 **Pick ONE challenge** that interests you most
-2. 💬 **Consult your GenAI tool** for data structure recommendations
+2. **Consult an AI assistant** for data structure recommendations
 3. 🚀 **Be ready to share** your AI's best suggestion with the class
 4. 🏆 **Bonus**: Implement a quick prototype if you're feeling ambitious!
 
@@ -913,7 +912,7 @@ courses = [
 **Setup (2 minutes):**
 - Students choose their challenge
 - Form small groups or work individually
-- Open GenAI tools (Claude, ChatGPT, etc.)
+- Open a browser, editor, or CLI assistant
 
 **Work time (10 minutes):**
 - Circulate and observe AI interactions
@@ -934,33 +933,33 @@ courses = [
 
 ---
 
-## 🎯 Challenge Solutions Showcase
+## Challenge solution discussion
 
-**Let's see what GenAI recommended for each challenge!**
+**Compare the recommendations with the requirements and trade-offs.**
 
-### **Social Media Analytics - Expected AI Solutions:**
+### **Social media analytics: expected approaches**
 - **User popularity**: Dictionary counting mentions across all likes lists
 - **Tag frequency**: Counter or defaultdict for tag occurrence tracking
 - **Mutual connections**: Set intersections for finding common connections
 - **Performance**: Sets for fast membership checking in large user bases
 
-### **E-commerce Inventory - Expected AI Solutions:**
+### **E-commerce inventory: expected approaches**
 - **Product lookup**: Dictionary with SKU as key for O(1) access
 - **Category filtering**: Dictionary mapping categories to product sets
 - **Inventory alerts**: Separate low-stock tracking with threshold checking
 - **Price queries**: Sorted structures or separate indexing for range queries
 
-### **Course Scheduling - Expected AI Solutions:**
+### **Course scheduling: expected approaches**
 - **Time conflict detection**: Dictionary grouping courses by time slots
 - **Room utilization**: Dictionary tracking room→courses mapping
 - **Student schedules**: Dictionary with student→courses for individual schedules
 - **Conflict resolution**: Set operations for finding overlapping students/times
 
 **Key AI Insights:**
-- 🧠 **Pattern recognition**: AI excels at identifying common optimization patterns
-- 🔄 **Trade-off analysis**: AI often suggests multiple approaches with pros/cons
-- 📈 **Scalability thinking**: AI frequently considers performance at scale
-- 🚨 **Edge case awareness**: Good AI prompts reveal boundary conditions
+- **Candidate generation**: Ask an assistant for more than one representation
+- **Trade-off analysis**: Require a cost and benefit for each candidate
+- **Measurement**: Benchmark the operation before accepting a performance claim
+- **Edge cases**: Test duplicates, missing values, empty inputs, and ordering
 
 ::: {.notes}
 **DEBRIEF DISCUSSION:**
@@ -974,60 +973,29 @@ courses = [
 
 ---
 
-## Putting It All Together: Lab 04 🚀
+## Putting it all together: Lab 04
 
-**You've experienced the power of AI-assisted data structure optimization. Now apply those skills!**
-
-**Lab 04 Challenge:**
+**Lab 04 asks you to implement three functions in `week04/lab04.py`:**
 
 ::: {.incremental}
-- **AI-guided design**: Use GenAI to recommend optimal data structures for three real scenarios
-- **Performance validation**: Test your AI's recommendations with actual code
-- **Professional documentation**: Record your AI interactions and reasoning
-- **Automated verification**: GitHub Actions will test your implementations
-- **Real-world application**: Problems mirror the challenges we solved today
+- `find_common_elements(list1, list2)` returns values found in both lists
+- `find_user_by_name(users, name)` returns a matching user dictionary or `None`
+- `get_list_of_even_numbers(numbers)` retains even integers in their original order
+- Empty inputs, zero, and negative even numbers must behave as specified
+- The supplied tests must not be modified
 :::
 
-**From Today's Exercises to Your Lab:**
-- 🔬 **Performance Detective** → Lab's efficiency requirements
-- 🛠️ **Code Refactoring** → Lab's clean implementation standards
-- 📡 **API Data Design** → Lab's complex data structure challenges
-- 🎮 **Problem Solving** → Lab's critical thinking with AI assistance
+**Workflow:**
 
-**Your AI Pair Programming Toolkit:**
-- 💬 **Effective prompts**: "Analyze this code for performance bottlenecks..."
-- 📊 **Trade-off analysis**: "Compare list vs set for this use case..."
-- 🚀 **Optimization requests**: "Suggest the fastest data structure for..."
-- 🔍 **Code review**: "What improvements can you suggest for..."
+```bash
+uv run --directory week04 python -m pytest tests/ -v
+git add week04/lab04.py
+git commit -m "Complete Lab 04"
+git push
+```
 
-**Navigate to**: [`week04/lab04.md`](https://github.com/bgreenwell/is4010-labs/blob/main/week04/lab04.md)
-
-**Success Strategy:**
-1. 🤖 **Collaborate with AI** for data structure recommendations
-2. 💡 **Test and validate** AI suggestions with real code
-3. 📝 **Document your reasoning** for future reference
-4. ✅ **Verify with automation** using GitHub Actions
+**Instructions:** [`week04/lab04.md`](https://github.com/bgreenwell/is4010-labs/blob/main/week04/lab04.md)
 
 ::: {.notes}
-**FINAL CLASS WRAP-UP:**
-
-**Connection reinforcement (3 minutes):**
-- "How will today's exercises help with your lab?"
-- "Which AI prompting techniques will you use?"
-- "What performance insights will guide your choices?"
-
-**Lab preview (2 minutes):**
-- Emphasize the AI collaboration requirement
-- Mention that AI recommendations must be documented
-- Preview that automated tests will validate their choices
-
-**Next week setup:**
-- "Keep experimenting with AI for code optimization"
-- "Consider performance implications in all your coding"
-- "Practice explaining AI recommendations to others"
-
-**Career connection:**
-- "These AI collaboration skills are increasingly valuable in industry"
-- "Data structure optimization thinking appears in technical interviews"
-- "Portfolio demonstration: show both AI usage and critical evaluation"
+Students should ask an AI assistant to explain its recommended representation before implementing a function. The submitted deliverable is the tested Python file; no prompt journal or performance benchmark is required. A green Week 04 badge earns the complete 10 points.
 :::

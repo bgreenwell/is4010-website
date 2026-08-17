@@ -1,6 +1,6 @@
 ---
-title: "IS4010: AI-Enhanced Application Development"
-subtitle: "Week 3: Python Basics & Control Flow"
+title: "IS4010: AI-enhanced application development"
+subtitle: "Week 03: Python basics and control flow"
 author: "Brandon M. Greenwell"
 format: 
   revealjs:
@@ -11,55 +11,55 @@ format:
     css: custom.css
 ---
 
-# Welcome to Python 🐍
+# Welcome to Python
 
-## A brief history of Python 📚
+## A brief history of Python
 
 ::: {.incremental}
 - **Born on Christmas 1989**: [Guido van Rossum](https://en.wikipedia.org/wiki/Guido_van_Rossum) started Python as a hobby project during the Christmas holidays
 - **Named after Monty Python**: Not the snake! Guido was reading Monty Python's Flying Circus scripts and thought it was a fun, short name
 - **First release (1991)**: Python 0.9.0 featured classes, functions, and exception handling
 - **Philosophy**: "There should be one obvious way to do it" - emphasis on readability and simplicity
-- **Modern dominance**: Now one of the world's most popular programming languages
+- **Current use**: Widely used in education, data work, automation, web services, and tooling
 :::
 
 ::: {.notes}
 **TEACHING NOTES:**
 
-- **Personal story angle**: Emphasize that Python started as one person's Christmas project - shows how individual creativity can change the world
+- **Origin story**: Python began as a personal project and developed through a wider open-source community
 - **Monty Python connection**: Students often remember this fun fact, and it shows the Python community's sense of humor
 - **1991 context**: This was before the World Wide Web! Python predates most of the internet as we know it
 - **Philosophy matters**: This emphasis on readability is why Python is so beginner-friendly
-- **Connect to today**: Python powers Instagram, YouTube, Netflix, and most AI/machine learning applications
+- **Connect to today**: Ask students to identify Python uses they can verify in education, automation, data work, or web services
 :::
 
 ---
 
-## Why Python matters today 🌟
+## Why Python matters today
 
 ::: {.incremental}
 - **Readability first**: "Code is read more often than it's written" - Python prioritizes human understanding
 - **Versatility**: Web development, data science, AI/ML, automation, scientific computing
-- **Huge ecosystem**: Over 400,000 packages available on [PyPI](https://pypi.org/)
-- **Industry adoption**: Powers Instagram, Spotify, Netflix, and most AI research
-- **Perfect learning language**: Gentle learning curve, powerful capabilities
-- **Career relevance**: Consistently ranks as one of the most in-demand programming languages
+- **Package ecosystem**: [PyPI](https://pypi.org/) distributes libraries for many application domains
+- **Broad adoption**: Used in web services, data analysis, automation, scientific computing, and machine learning
+- **Readable starting point**: Concise syntax lets us focus on program behavior
+- **Transfer value**: Its general-purpose syntax supports the programming foundations used throughout the course
 :::
 
 ::: {.notes}
 **TEACHING NOTES:**
 
 - **Readability example**: Show the same algorithm in C++ vs Python - the difference is striking
-- **Ecosystem power**: Compare to other languages - few have Python's breadth of libraries
-- **Industry examples**: These aren't toy applications - these are billion-dollar companies running on Python
+- **Ecosystem comparison**: Compare package availability for one concrete task in Python and another language
+- **Evidence check**: Avoid attributing an entire product to one language; discuss a documented component or library instead
 - **Learning progression**: Students can start simple and grow into complex applications
-- **Job market data**: Reference recent surveys showing Python's popularity with employers
+- **Current evidence**: If discussing adoption data, open a current survey and name its population and metric
 - **Connect to course**: This versatility is why we're teaching Python first, then Rust
 :::
 
 ---
 
-## The Zen of Python 🧘
+## The zen of Python
 
 ```python
 import this  # Try this in Python!
@@ -76,8 +76,8 @@ import this  # Try this in Python!
 :::
 
 ::: {.notes}
-**LIVE DEMO NOTE:**
-Open Python interpreter and type `import this` to show the full Zen of Python. Students always enjoy this Easter egg.
+**Live demo note:**
+Open the Python interpreter and type `import this`, then ask students which principle they can connect to a concrete code example.
 
 **Key principles to emphasize:**
 - These aren't just nice sayings - they influence language design decisions
@@ -88,7 +88,7 @@ Open Python interpreter and type `import this` to show the full Zen of Python. S
 
 ---
 
-## How to run Python code 💻
+## How to run Python code
 
 There are three main ways to execute Python code, each with different use cases:
 
@@ -119,43 +119,40 @@ There are three main ways to execute Python code, each with different use cases:
 
 ---
 
-## Modern Python toolchain 🛠️
+## Modern Python toolchain
 
 Python development has evolved with modern tools that make coding faster and more reliable:
 
 ::: {.incremental}
-- **[uv](https://docs.astral.sh/uv/)**: Ultra-fast Python package manager and project manager
-  - 10-100x faster than `pip` for installing packages
+- **[uv](https://docs.astral.sh/uv/)**: The course's Python and project manager
+  - Reproduces the committed environment from `uv.lock`
   - Handles virtual environments automatically
-  - `uv run script.py` - Run scripts with automatic dependency management
+  - `uv run python script.py` - Run scripts in the project environment
 
-- **[ruff](https://docs.astral.sh/ruff/)**: Lightning-fast Python linter and formatter  
-  - 10-100x faster than traditional tools (flake8, black, isort)
+- **[ruff](https://docs.astral.sh/ruff/)**: Python linter and formatter
+  - Reports style problems and common mistakes
   - Catches common errors and enforces style consistency
   - Integrates seamlessly with VS Code
 
-- **Why these matter**: Industry is rapidly adopting these tools for speed and reliability
-- **Course usage**: We'll primarily use traditional tools (pip, pytest) but be aware these exist
+- **Course usage**: Use `uv sync --locked` to reproduce the environment and `uv run python -m pytest` to run tests
 :::
 
 ::: {.notes}
 **TEACHING NOTES:**
 
-- **Modern landscape**: The Python tooling ecosystem is evolving rapidly
-- **Speed emphasis**: These tools solve real performance problems developers face
-- **Industry adoption**: Major companies are switching to these tools
-- **Course balance**: We teach fundamentals first, modern tools second
-- **Career relevance**: Students will encounter these in internships/jobs
-- **Optional exploration**: Encourage students to try these tools for personal projects
+- **Tooling context**: Demonstrate the versions and commands committed for this course
+- **Reproducibility**: The lockfile keeps student and grader environments aligned
+- **Course consistency**: Demonstrate the same commands used in the lab instructions
+- **Optional exploration**: Ruff is useful in personal projects, but it is not required by this lab
 :::
 
 ---
 
-# Session 1: Python fundamentals & data types
+# Session 1: Python fundamentals and data types
 
 ---
 
-## Understanding variables 📦
+## Understanding variables
 
 ::: {.incremental}
 - Think of a variable as a **labeled box** where you can store a piece of information
@@ -189,7 +186,7 @@ x = 1906             # What does 'x' represent?
 
 ---
 
-## Python naming conventions 🏷️
+## Python naming conventions
 
 ::: {.incremental}
 - **Variables and functions**: `snake_case` (words separated by underscores)
@@ -220,14 +217,14 @@ class BankAccount:
 
 - **Consistency matters**: Following conventions makes your code readable to other Python developers
 - **PEP 8**: Mention this is codified in PEP 8, Python's style guide
-- **Industry relevance**: Professional codebases follow these conventions religiously
+- **Collaboration**: Consistent names reduce the effort required to read unfamiliar code
 - **Tool support**: IDEs and linters will flag violations of these conventions
 - **Examples**: Use realistic business examples students might encounter in internships
 :::
 
 ---
 
-## Variable assignment patterns 🔄
+## Variable assignment patterns
 
 ::: {.incremental}
 - **Multiple assignment**: Assign several variables at once
@@ -265,7 +262,7 @@ score *= 2     # Same as: score = score * 2
 - **Warning**: Chained assignment can be confusing with mutable objects (save for later)
 :::
 
-## Core data types 🧩
+## Core data types
 
 ::: {.incremental}
 - **`str` (string)**: Text data, enclosed in quotes (`'` or `"`)
@@ -302,7 +299,7 @@ print(type(is_honors_student))  # <class 'bool'>
 
 ---
 
-## Strings: Working with text 📝
+## Strings: working with text
 
 ::: {.incremental}
 - **Single vs double quotes**: Both work the same, choose one style and be consistent
@@ -342,7 +339,7 @@ print(name.replace("alan", "Alan"))  # "  Alan turing  "
 
 ---
 
-## Numbers: Integers and floats 🔢
+## Numbers: integers and floats
 
 ::: {.incremental}
 - **Integers**: Whole numbers, unlimited precision in Python
@@ -385,7 +382,7 @@ pi_str = str(3.14159)     # Convert float to string
 - **Real applications**: GPA calculations, financial computations, scientific data
 :::
 
-## Getting user input 💬
+## Getting user input
 
 ::: {.incremental}
 - **`input()` function**: Gets text from user via keyboard
@@ -428,7 +425,7 @@ print(f"Hi {name}! You're {age} and love {favorite_color}.")
 
 ---
 
-## String formatting: Making output beautiful ✨
+## String formatting: making output readable
 
 ::: {.incremental}
 - **f-strings (modern)**: `f"Hello {name}!"` - preferred method
@@ -475,7 +472,7 @@ Performance: {accuracy:.1%}
 - **Common uses**: Reports, user interfaces, file output
 :::
 
-## Python debugging tips 🐛
+## Python debugging tips
 
 ::: {.incremental}
 - **Read error messages carefully**: Python gives helpful error descriptions
@@ -503,7 +500,7 @@ except ValueError:
 **TEACHING NOTES:**
 
 - **Error message reading**: Show how Python errors point to specific lines
-- **Debug prints**: Emphasize temporary print statements are professional debugging tools
+- **Debug prints**: Use temporary prints to inspect state, then remove or replace them before submission
 - **Try/except preview**: Don't go deep, just show the pattern exists
 - **IDE features**: Mention VS Code's debugger for advanced debugging
 - **Psychology**: Debugging is detective work - embrace the puzzle-solving aspect
@@ -511,7 +508,7 @@ except ValueError:
 
 ---
 
-## Let's build something (Part 1) 🎭
+## Let's build something (Part 1)
 
 **Mad Libs Generator Preview:**
 
@@ -520,7 +517,7 @@ except ValueError:
 - **User interaction**: Collect words from user input
 - **String manipulation**: Use f-strings to build a story
 - **Function design**: Write testable, reusable code
-- **Professional structure**: Follow naming conventions and documentation standards
+- **Structure**: Separate input/output from the function that returns the story
 :::
 
 ```python
@@ -536,10 +533,10 @@ def generate_mad_lib(adjective, noun, verb):
 
 # How it will be used (conceptual - you'll implement the function)
 # word1 = input("Give me an adjective: ")
-# word2 = input("Give me a noun: ")  
+# word2 = input("Give me a noun: ")
 # word3 = input("Give me a past-tense verb: ")
 # result = generate_mad_lib(word1, word2, word3)
-# print(result)  # Should print your creative story!
+# print(result) # Should print your creative story!
 ```
 
 ::: {.notes}
@@ -548,42 +545,41 @@ def generate_mad_lib(adjective, noun, verb):
 - **Function preview**: Students haven't learned functions yet, but show the lab structure
 - **Testability**: Emphasize why functions are better than input() inside the logic
 - **Lab connection**: This directly connects to what they'll build in lab
-- **Professional habits**: Even simple programs benefit from good structure
+- **Design habit**: Keeping input outside the function makes its behavior easier to test
 - **Creativity**: Encourage students to write creative, funny stories
 :::
 
 ---
 
-## Preparing for Session 2: Professional Development Workflows 📚
+## Preparing for session 2: development workflows
 
 **Suggested reading before our next class:**
 
 ::: {.incremental}
 - **[Understanding GitHub Actions](https://docs.github.com/en/actions/get-started/understand-github-actions)** - Learn the fundamentals of automated workflows
-- **[Continuous Integration with GitHub Actions](https://docs.github.com/en/actions/get-started/continuous-integration)** - How automated testing works in professional development  
-- **[Continuous Deployment with GitHub Actions](https://docs.github.com/en/actions/get-started/continuous-deployment)** - From testing to production deployment
+- **[Continuous Integration with GitHub Actions](https://docs.github.com/en/actions/get-started/continuous-integration)** - How a repository can repeat tests after a change
 
 **Why this matters:**
-- These are the same tools used by professional development teams
-- Understanding CI/CD workflows is increasingly expected by employers
-- You'll set up your first automated workflow in Lab 03
+- The supplied workflow repeats the Week 03 tests after a push
+- The Actions log provides a second source of evidence in addition to local tests
+- Lab 03 asks you to use the workflow, not create or edit it
 :::
 
 ::: {.notes}
 **TEACHING NOTES:**
 
 - **Optional but valuable**: Frame as "recommended" not "required" reading
-- **Career relevance**: Emphasize that understanding CI/CD is a marketable skill
+- **Scope**: Introduce continuous integration; deployment is outside this lab
 - **Lab connection**: This reading will make Lab 03's automated testing setup more meaningful
-- **Progressive disclosure**: Students will implement what they read about
-- **Professional context**: Many internship interviews ask about CI/CD knowledge
+- **Progressive disclosure**: Students first use the supplied workflow before studying workflow design
+- **Course context**: The supplied workflow makes test results visible after each push
 :::
 
 ---
 
-# Session 2: Control flow & professional testing
+# Session 2: control flow and automated testing
 
-## Conditional logic: Making decisions 🤔
+## Conditional logic: making decisions
 
 ::: {.incremental}
 - **Decision making**: Programs need to choose different actions based on conditions
@@ -624,7 +620,7 @@ else:
 
 ---
 
-## Boolean operators and logic 🧮
+## Boolean operators and logic
 
 ::: {.incremental}
 - **Comparison operators**: `==` (equal), `!=` (not equal), `<`, `>`, `<=`, `>=`
@@ -655,11 +651,11 @@ has_apple = "apple" in fruits              # True
 has_orange = "orange" not in fruits        # True
 
 # Complex conditions
-username = "alice"
-password = "secret123"
+username_is_valid = True
+password_is_valid = True
 is_admin = False
 
-if username == "alice" and password == "secret123" and not is_admin:
+if username_is_valid and password_is_valid and not is_admin:
     print("Regular user login successful")
 ```
 
@@ -675,7 +671,7 @@ if username == "alice" and password == "secret123" and not is_admin:
 
 ---
 
-## Loops: Repeating actions efficiently 🔄
+## Loops: repeating actions
 
 ::: {.incremental}
 - **Why loops?** Avoid repetitive code, process collections, create interactive programs
@@ -719,14 +715,14 @@ for i in range(10):
 
 - **range() function**: Explain start, stop, step parameters
 - **Collection iteration**: Show lists, strings, dictionaries (briefly)
-- **while loop danger**: Infinite loops - always ensure condition can become False
+- **`while` loop check**: Make sure the condition can eventually become `False`, unless an intentional `break` supplies the exit
 - **break/continue**: Show when these are useful vs making conditions more complex
 - **Real applications**: Menu systems, data processing, game loops
 :::
 
 ---
 
-## The `range()` function: Your loop companion 📏
+## The `range()` function: a loop companion
 
 ::: {.incremental}
 - **`range(stop)`**: Numbers from 0 to stop-1
@@ -769,7 +765,7 @@ for i, fruit in enumerate(fruits):
 - **Practical uses**: Counting, indexing, mathematical sequences
 :::
 
-## Let's build something (Part 2) 🎯
+## Let's build something (Part 2)
 
 **Number Guessing Game Preview:**
 
@@ -785,37 +781,22 @@ for i, fruit in enumerate(fruits):
 import random
 
 def guessing_game():
-    """
-    Plays a number guessing game with the user.
-    Demonstrates while loops, conditionals, and user interaction.
-    """
+    """Play the guessing game described in the Lab 03 contract."""
     secret = random.randint(1, 100)
     attempts = 0
-    
-    print("I'm thinking of a number between 1 and 100!")
-    
-    while True:  # Continue until user guesses correctly
-        guess = int(input("Enter your guess: "))
-        attempts += 1
-        
-        if guess < secret:
-            print("Too low! Try again.")
-        elif guess > secret:
-            print("Too high! Try again.")
-        else:
-            print(f"Correct! You guessed it in {attempts} attempts!")
-            break  # Exit the loop when correct
 
-# This allows the game to run when script is executed directly
-if __name__ == '__main__':
-    guessing_game()
+    while True:
+        guess = int(input("Enter your guess: "))
+        # TODO: count the attempt
+        # TODO: print "Too low!", "Too high!", or the success message
+        # TODO: exit the loop after the correct guess
 ```
 
 ::: {.notes}
 **TEACHING NOTES:**
 
 - **Random module**: First introduction to importing modules
-- **Infinite loop pattern**: `while True:` with `break` is common in games
+- **Loop contract**: Identify the single condition that should end `while True`
 - **Input validation**: Preview that we should handle invalid input (next week)
 - **if __name__ == '__main__'**: Explain this Python idiom briefly
 - **Game mechanics**: This pattern applies to many interactive programs
@@ -823,7 +804,7 @@ if __name__ == '__main__':
 
 ---
 
-## Python ecosystem preview 🌍
+## Python ecosystem preview
 
 ::: {.incremental}
 - **Standard library**: Batteries included - modules like [`random`](https://docs.python.org/3/library/random.html), [`math`](https://docs.python.org/3/library/math.html), [`datetime`](https://docs.python.org/3/library/datetime.html)
@@ -870,30 +851,30 @@ formatted = today.strftime("%B %d, %Y")
 
 ---
 
-## Professional development practices 🏗️
+## Development practices
 
 ::: {.incremental}
 - **Testing mindset**: Write code that proves your functions work correctly
 - **Continuous Integration (CI)**: Automatically test code every time changes are made
-- **Quality assurance**: Catch bugs early, before they reach users
-- **Documentation**: Code should explain itself and be well-documented
+- **Feedback**: Catch mismatches between the implementation and the tested contract
+- **Documentation**: Document behavior that a reader cannot infer from the name and signature
 - **Version control integration**: Tests run automatically when you push to GitHub
 :::
 
 ::: {.notes}
 **TEACHING NOTES:**
 
-- **Professional relevance**: This is how real software companies work
+- **Course relevance**: The same local-and-CI feedback loop appears in later labs
 - **Bug prevention**: Testing catches mistakes before they become problems
 - **Confidence**: Tests give you confidence to make changes and refactor
-- **Portfolio value**: Automated testing shows professionalism to employers
-- **Industry standard**: All major tech companies use CI/CD workflows
+- **Traceability**: The workflow log records which revision passed the checks
+- **Purpose**: CI repeats the same checks in a clean environment after a push
 :::
 
-## Testing with `pytest` 🧪
+## Testing with `pytest`
 
 ::: {.incremental}
-- **Industry standard**: Most Python projects use [pytest](https://pytest.org/) for testing
+- **Course tool**: We use [pytest](https://pytest.org/) for readable tests and automatic discovery
 - **Simple conventions**: Files start with `test_`, functions start with `test_`
 - **Automatic discovery**: pytest finds and runs all your tests
 - **Clear feedback**: Detailed output when tests pass or fail
@@ -931,18 +912,17 @@ def test_add_numbers():
 
 ---
 
-## GitHub Actions: Automation in the cloud ☁️
+## GitHub Actions: automation in the cloud
 
 ::: {.incremental}
-- **Built into GitHub**: No additional setup required
+- **Repository integration**: The course repository already contains the workflow file
 - **Event-driven**: Runs automatically when you push code
-- **Virtual machines**: Spins up fresh Linux containers for testing
-- **Free for public repos**: GitHub provides free compute time for open source
-- **Professional workflow**: Same tools used by major tech companies
+- **Hosted runner**: Starts a fresh Linux runner for the job
+- **Visible evidence**: Records each step, command, and result in the Actions log
 :::
 
 ```yaml
-# .github/workflows/main.yml
+# The supplied Week 03 workflow follows this pattern
 name: run-pytest
 
 on: [push]  # Run when code is pushed
@@ -967,25 +947,26 @@ jobs:
 - **YAML format**: Configuration files use YAML (Yet Another Markup Language)
 - **Steps sequence**: Each step runs in order, failure stops the process
 - **Fresh environment**: Each run starts with a clean machine
-- **Public repos**: Free tier includes 2000 minutes/month for private repos
-- **Industry standard**: This is how real companies deploy software
+- **Billing note**: Usage limits depend on the repository and account; the public course lab requires no paid setup
+- **Scope**: This workflow runs tests; deployment is a separate CI/CD activity
 :::
 
-## Your instant feedback system 🔄
+## Your feedback loop
 
 ::: {.incremental}
 - **Green checkmark ✅**: All tests passed - your code is working!
 - **Red X ❌**: Some tests failed - time to debug and fix
 - **Actions tab**: Click to see detailed test results and error messages
 - **Iterative process**: Fix issues, commit, push, and test again
-- **Professional habit**: Never merge code that fails tests
+- **Review habit**: Investigate failed tests before merging or submitting
 :::
 
 ```bash
-# Your development workflow
-git add lab03.py test_lab03.py .github/workflows/main.yml
+# From the repository root
+uv run --directory week03 python -m pytest tests/ -v
+git add week03/lab03.py
 git commit -m "Implement mad libs and guessing game"
-git push origin main
+git push
 
 # Then check GitHub Actions tab for results
 # Green = success, Red = needs fixing
@@ -994,62 +975,59 @@ git push origin main
 ::: {.notes}
 **TEACHING NOTES:**
 
-- **Instant gratification**: Students love seeing immediate results
+- **Feedback timing**: Compare the immediate local result with the hosted workflow result
 - **Learning opportunity**: Failed tests teach debugging skills
-- **Portfolio value**: Green checkmarks show working code to employers
+- **Assessment contract**: The matching green README badge is the complete 10-point grade
 - **Habit formation**: This creates good software development practices
-- **Real-world workflow**: This mirrors professional development practices
+- **Repeatability**: Local tests, the diff, and the hosted run provide complementary checks
 :::
 
 ---
 
-## Introducing Lab 03: Python fundamentals + CI/CD 🚀
+## Introducing Lab 03: Python basics and automated testing
 
 **What you'll build:**
 
 ::: {.incremental}
-- **Part 1**: Mad Libs generator (variables, input, string formatting)
-- **Part 2**: Number guessing game (loops, conditionals, random numbers)
-- **Part 3**: Professional testing setup (pytest + GitHub Actions)
-- **One-time setup**: This testing framework will work for all future labs
-- **Real-world skills**: The same tools used by professional developers
+- **Part 1**: Implement `generate_mad_lib(adjective, noun, verb)`
+- **Part 2**: Implement an interactive `guessing_game()`
+- **Provided tests**: Run the Week 03 tests without modifying them
+- **Submission**: Commit `week03/lab03.py`, push, and confirm the Week 03 badge is green
 :::
 
 **Key learning outcomes:**
-- Master Python fundamentals through practical application
-- Set up automated testing and continuous integration
-- Create interactive, user-friendly programs
-- Follow professional development practices
+- Practice strings, conditionals, loops, input, and functions
+- Use deterministic tests for random numbers and keyboard input
+- Read failures locally before pushing
 
 ::: {.notes}
 **TEACHING NOTES:**
 
 - **Progressive complexity**: Each part builds on previous knowledge
 - **Practical application**: Real programs students can show friends/family
-- **Professional relevance**: Emphasize career-relevant skills
-- **Portfolio building**: These projects demonstrate competency
-- **Foundation setting**: This testing setup serves the entire course
+- **Contract alignment**: The test suite and workflow are supplied; students implement only `week03/lab03.py`
+- **Foundation setting**: The same test-first feedback loop continues in later labs
 :::
 
 ---
 
-## Time for Lab 03! 🧪
+## Time for Lab 03
 
-Your comprehensive Python fundamentals lab awaits:
+Use the current lab instructions as the source of truth:
 
 - **Navigate to**: [`week03/lab03.md`](https://github.com/bgreenwell/is4010-labs/blob/main/week03/lab03.md)
 - **Build**: Mad Libs generator and number guessing game
-- **Setup**: Professional automated testing workflow
-- **Master**: Variables, I/O, control flow, and testing
+- **Test**: `uv run --directory week03 python -m pytest tests/ -v`
+- **Submit**: `week03/lab03.py`
 
-**Remember**: This is your first step into professional Python development!
+**Remember**: A green Week 03 badge represents the complete 10-point lab.
 
 ::: {.notes}
 **FINAL TEACHING NOTES:**
 
 - **Encouragement**: Emphasize that this lab builds foundational skills
 - **Support available**: Remind students about office hours, Teams channel, AI tools
-- **Professional context**: These aren't just exercises - they're building career skills
+- **Course context**: Connect the functions directly to the stated tests and requirements
 - **Next week preview**: We'll build on these fundamentals with data structures
-- **Success metrics**: Green checkmarks in GitHub Actions = mastery demonstrated
+- **Success metric**: A green Week 03 badge means the complete lab passed
 :::

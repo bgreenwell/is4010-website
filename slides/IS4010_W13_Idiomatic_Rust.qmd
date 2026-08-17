@@ -1,5 +1,5 @@
 ---
-title: "IS4010: AI-Enhanced Application Development"
+title: "IS4010: AI-enhanced application development"
 subtitle: "Week 13: Idiomatic Rust"
 author: "Brandon M. Greenwell"
 format:
@@ -9,22 +9,22 @@ format:
     slide-number: true
     chalkboard: true
     preview-links: auto
-    footer: "IS4010: App Development with AI"
+    footer: "IS4010: App development with AI"
     scrollable: true
     css: custom.css
 ---
 
-## Week 13 Overview {.inverse}
+## Week 13 overview {.inverse}
 
-**Session 1: Iterators and Closures**
+**Session 1: iterators and closures**
 
 - Iterator methods (`.map()`, `.filter()`, `.fold()`, `.collect()`)
 - Closures and capture semantics
 - Closure traits: `Fn`, `FnMut`, `FnOnce`
 - Building data processing pipelines
-- Lazy evaluation and zero-cost abstractions
+- Lazy evaluation and allocation choices
 
-**Session 2: Smart Pointers and Error Handling**
+**Session 2: smart pointers and error handling**
 
 - Smart pointers: `Box<T>`, `Rc<T>`, `RefCell<T>`
 - Interior mutability patterns
@@ -33,35 +33,35 @@ format:
 - The `?` operator and custom error types
 
 ::: {.notes}
-This week focuses on patterns that make Rust code elegant, efficient, and truly "Rusty". These patterns are used throughout professional Rust codebases.
+This week focuses on iterator composition, closure capture, shared ownership, interior mutability, and explicit error propagation. Evaluate each pattern by the ownership or control-flow problem it solves.
 :::
 
 ---
 
-## Why Idiomatic Rust Matters {.inverse}
+## Why idiomatic Rust matters {.inverse}
 
-**Real-world impact:**
+**What the patterns provide:**
 
 - **Functional style**: Process data without manual loops
 - **Flexible ownership**: Build complex data structures safely
-- **Explicit errors**: No surprises, no crashes
-- **Zero-cost abstractions**: High-level code, low-level performance
+- **Explicit errors**: Expected failure categories in return types
+- **Iterator composition**: Lazy adaptors that can avoid intermediate collections
 
-**Industry examples:**
+**Project examples:**
 
 - [Ripgrep](https://github.com/BurntSushi/ripgrep): Fast search tool using iterators
 - [Servo](https://servo.org/): Browser engine with smart pointers
 - [Tokio](https://tokio.rs/): Async runtime with Result-based APIs
 
 ::: {.notes}
-These patterns separate Rust beginners from experts. Mastering them makes you think in Rust's unique way.
+These patterns appear often in Rust code. Learn to recognize their trade-offs and start with the simplest ownership model that satisfies the requirement.
 :::
 
 ---
 
-# Session 1: Iterators and Closures
+# Session 1: iterators and closures
 
-## The Problem: Manual Iteration {.smaller}
+## The problem: manual iteration {.smaller}
 
 **Traditional loop-based approach:**
 
@@ -91,7 +91,7 @@ Ask students: "What if we had 5 different transformations? Code gets messy fast.
 
 ---
 
-## Introducing Iterators {.smaller}
+## Introducing iterators {.smaller}
 
 **Functional approach with iterator chains:**
 
@@ -112,7 +112,7 @@ let result: Vec<i32> = numbers
 - Declarative: says *what* to do, not *how*
 - Composable: chain operations together
 - Lazy: only evaluates when needed
-- Zero-cost: compiles to same code as manual loops!
+- Optimizable: iterator chains can compile to efficient loops, but measure when performance matters
 
 [📖 Iterator trait documentation](https://doc.rust-lang.org/std/iter/trait.Iterator.html)
 
@@ -122,7 +122,7 @@ Emphasize lazy evaluation - intermediate steps don't create temporary vectors.
 
 ---
 
-## Common Iterator Methods {.smaller}
+## Common iterator methods {.smaller}
 
 **Transformation:**
 
@@ -155,69 +155,49 @@ vec![1, 2, 3].iter().fold(0, |acc, x| acc + x)  // 6
 [📖 Iterator methods](https://doc.rust-lang.org/std/iter/trait.Iterator.html#provided-methods)
 
 ::: {.notes}
-Point out that these are zero-cost - compiler optimizes them to loops.
+Explain that iterator adaptors are lazy and usually inline well. `collect()` intentionally allocates a collection; inspect optimized output or benchmark before claiming equivalence with a particular loop.
 :::
 
 ---
 
-## Practical Example: Text Analysis {.smaller}
+## Practical example: line lengths {.smaller}
 
-**Count words, find average length, get longest word:**
+**Trim nonempty lines and record their lengths:**
 
 ```rust
-fn analyze_text(text: &str) -> (usize, f64, String) {
-    let words: Vec<&str> = text
-        .split_whitespace()
-        .collect();
-
-    if words.is_empty() {
-        return (0, 0.0, String::new());
-    }
-
-    let word_count = words.len();
-
-    // Average word length using iterator methods
-    let total_length: usize = words
-        .iter()
-        .map(|word| word.len())
-        .sum();
-    let average_length = total_length as f64 / word_count as f64;
-
-    // Find longest word
-    let longest_word = words
-        .iter()
-        .max_by_key(|word| word.len())
-        .unwrap_or(&"")
-        .to_string();
-
-    (word_count, average_length, longest_word)
+fn nonempty_line_lengths(text: &str) -> Vec<usize> {
+    text.lines()
+        .map(str::trim)
+        .filter(|line| !line.is_empty())
+        .map(str::len)
+        .collect()
 }
 ```
 
 ::: {.notes}
-This shows real-world iterator usage. Much clearer than nested loops!
+Compare this iterator version with a loop using the same requirements. Prefer the version whose data flow the class can explain and test.
 :::
 
 ---
 
-## Try It Yourself: Iterator Chains {.inverse .smaller}
+## Try it yourself: iterator chains {.inverse .smaller}
 
-**Challenge**: Filter and transform numbers
+**Challenge**: Build an iterator pipeline
 
 ```rust
 // Given this vector:
 let numbers = vec![1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
 // Use iterator methods to:
-// 1. Keep only even numbers
-// 2. Square each number
+// 1. Keep values greater than 5
+// 2. Double each value
 // 3. Sum the results
-// Expected: 220 (2² + 4² + 6² + 8² + 10² = 4 + 16 + 36 + 64 + 100)
+// Expected: 80
 
 let result: i32 = numbers
     .iter()
-    .filter(|&&n| n % 2 == 0)
-    .map(|&n| n * n)
+    .filter(|&&n| n > 5)
+    .map(|&n| n * 2)
     .sum();
 ```
 
@@ -229,7 +209,7 @@ Give students 3-4 minutes. Then show solution and discuss the pattern.
 
 ---
 
-## Closures: Anonymous Functions {.smaller}
+## Closures: anonymous functions {.smaller}
 
 **Closures are functions that can capture their environment:**
 
@@ -269,7 +249,7 @@ This is where closures shine - they remember their environment!
 
 ---
 
-## Closure Traits: Fn, FnMut, FnOnce {.smaller}
+## Closure traits: `Fn`, `FnMut`, and `FnOnce` {.smaller}
 
 **Rust has three closure traits based on how they capture variables:**
 
@@ -303,44 +283,33 @@ Most closures are Fn or FnMut. FnOnce is rare but important to understand.
 
 ---
 
-## Practical Example: Custom Counter {.smaller}
+## Practical example: captured state {.smaller}
 
-**Create a closure that tracks state:**
+**A closure can update a value from its environment:**
 
 ```rust
-fn make_counter() -> impl FnMut() -> i32 {
-    let mut count = 0;
+let mut total = 0;
+let mut add_to_total = |amount| {
+    total += amount;
+    total
+};
 
-    move || {
-        count += 1;
-        count
-    }
-}
-
-// Use it:
-let mut counter = make_counter();
-println!("{}", counter());  // 1
-println!("{}", counter());  // 2
-println!("{}", counter());  // 3
-
-// Each counter is independent!
-let mut counter2 = make_counter();
-println!("{}", counter2());  // 1
+println!("{}", add_to_total(4));  // 4
+println!("{}", add_to_total(7));  // 11
 ```
 
 **Key concepts:**
 
-- `move` keyword transfers ownership into closure
-- `FnMut` because closure mutates captured `count`
-- Each closure instance has its own state
+- `FnMut` because the closure mutates captured `total`
+- The mutable borrow lasts while the closure may still be used
 
 ::: {.notes}
-This is powerful - closures as stateful objects!
+The captured variable gives this closure state that persists between calls.
 :::
 
 ---
 
-## Real-World Iterator + Closure Pattern {.smaller}
+## Iterator and closure pattern {.smaller}
 
 **Processing collections with closures:**
 
@@ -367,23 +336,23 @@ let honor_roll: Vec<&str> = students
 // honor_roll = ["Alice", "Charlie"]
 ```
 
-**Career relevance**: This pattern appears in every Rust codebase!
+**Transfer**: The same filter-map-collect pipeline appears in many Rust APIs.
 
 ::: {.notes}
-Emphasize that this is the Rust way. Database queries, API filtering, data processing all use this.
+Trace the item type after each adaptor and confirm which values are borrowed. Avoid presenting a pipeline as automatically clearer than a loop.
 :::
 
 ---
 
-## Session 1 Ends Here {.inverse}
+## End of session 1 {.inverse}
 
 **What we covered:**
 
-✅ Iterator methods (`.map()`, `.filter()`, `.sum()`, `.collect()`)
-✅ Building data processing pipelines
-✅ Closures and capture semantics
-✅ Closure traits (`Fn`, `FnMut`, `FnOnce`)
-✅ Real-world patterns combining iterators + closures
+- Iterator methods (`.map()`, `.filter()`, `.sum()`, `.collect()`)
+- Building data-processing pipelines
+- Closures and capture semantics
+- Closure traits (`Fn`, `FnMut`, `FnOnce`)
+- Combining iterators and closures
 
 **Next session:** Smart pointers and error handling
 
@@ -393,9 +362,9 @@ Take a break. When we return, we'll cover smart pointers for flexible memory man
 
 ---
 
-# Session 2: Smart Pointers
+# Session 2: smart pointers
 
-## The Problem: Ownership Limitations {.smaller}
+## The problem: ownership limitations {.smaller}
 
 **Rust's ownership rules are strict:**
 
@@ -429,7 +398,7 @@ These limitations are by design - they prevent memory bugs. Smart pointers provi
 
 ---
 
-## Smart Pointers Overview {.smaller}
+## Smart pointer overview {.smaller}
 
 **Three essential smart pointers:**
 
@@ -450,12 +419,12 @@ These limitations are by design - they prevent memory bugs. Smart pointers provi
 [📖 Smart Pointers in Rust Book](https://doc.rust-lang.org/book/ch15-00-smart-pointers.html)
 
 ::: {.notes}
-These unlock advanced patterns that regular references can't handle.
+These types express ownership patterns that ordinary references cannot represent, but they also add complexity.
 :::
 
 ---
 
-## Box<T>: Heap Allocation {.smaller}
+## `Box<T>`: heap allocation {.smaller}
 
 **`Box<T>` stores data on the heap with known size:**
 
@@ -493,7 +462,7 @@ Without Box, compiler can't determine struct size. Box breaks the recursion.
 
 ---
 
-## Practical Example: Binary Tree {.smaller}
+## Practical example: binary tree {.smaller}
 
 **Building a binary tree with Box:**
 
@@ -537,7 +506,7 @@ This pattern appears in compilers, game engines, databases - anywhere trees are 
 
 ---
 
-## Rc<T>: Reference Counting {.smaller}
+## `Rc<T>`: reference counting {.smaller}
 
 **`Rc<T>` enables multiple owners of the same data:**
 
@@ -569,12 +538,12 @@ println!("Count: {}", Rc::strong_count(&data));  // 2
 [📖 Rc documentation](https://doc.rust-lang.org/std/rc/struct.Rc.html)
 
 ::: {.notes}
-Rc is perfect for graph structures where nodes share children.
+`Rc<T>` is useful for single-threaded structures in which multiple owners share a value, such as some graph representations.
 :::
 
 ---
 
-## RefCell<T>: Interior Mutability {.smaller}
+## `RefCell<T>`: interior mutability {.smaller}
 
 **`RefCell<T>` allows mutation through shared references (runtime borrow checking):**
 
@@ -614,7 +583,7 @@ Use RefCell when you need flexibility that the borrow checker can't statically v
 
 ---
 
-## Combining Rc and RefCell {.smaller}
+## Combining `Rc` and `RefCell` {.smaller}
 
 **Pattern: Shared mutable data (single-threaded)**
 
@@ -652,7 +621,7 @@ This is the secret sauce for shared mutable state in single-threaded Rust.
 
 ---
 
-## When to Use Each Smart Pointer {.smaller}
+## When to use each smart pointer {.smaller}
 
 **Decision tree:**
 
@@ -676,21 +645,21 @@ Do you need multiple owners?
 - `Arc<Mutex<T>>`: Thread-safe shared mutable data
 
 ::: {.notes}
-For now, focus on single-threaded. Next week we'll add threading to Lab 14.
+For now, focus on single-threaded ownership. `Arc<T>` and `Mutex<T>` are optional follow-up topics and are not required in Lab 14.
 :::
 
 ---
 
-## Idiomatic Error Handling {.inverse}
+## Idiomatic error handling {.inverse}
 
-**Rust doesn't have exceptions. It uses `Result<T, E>` for errors.**
+**Rust uses `Result<T, E>` for recoverable errors rather than catchable exceptions.**
 
-**Why this is better:**
+**What this provides:**
 
 - Errors are explicit in function signatures
-- Compiler forces you to handle them
-- No surprise runtime exceptions
-- Zero-cost: `Result` is just an enum
+- Code must inspect or transform the result to access the success value
+- Expected failure categories are visible to callers
+- `Result` is an enum whose representation and runtime cost depend on its variants and use
 
 **Two approaches:**
 
@@ -703,7 +672,7 @@ This is a fundamental mindset shift from exception-based languages.
 
 ---
 
-## Result<T, E> Basics {.smaller}
+## `Result<T, E>` basics {.smaller}
 
 **`Result` is an enum with two variants:**
 
@@ -713,24 +682,23 @@ enum Result<T, E> {
     Err(E),  // Failure - contains error
 }
 
-// Example: division that can fail
-fn divide(a: f64, b: f64) -> Result<f64, String> {
-    if b == 0.0 {
-        Err(String::from("Division by zero"))
-    } else {
-        Ok(a / b)
-    }
+// Example: parsing a network port
+fn parse_port(input: &str) -> Result<u16, String> {
+    input
+        .trim()
+        .parse::<u16>()
+        .map_err(|_| format!("Invalid port: {input}"))
 }
 
 // Usage with match:
-match divide(10.0, 2.0) {
-    Ok(result) => println!("Result: {}", result),
+match parse_port("8080") {
+    Ok(port) => println!("Port: {port}"),
     Err(e) => println!("Error: {}", e),
 }
 
 // Or with if let:
-if let Ok(result) = divide(10.0, 2.0) {
-    println!("Result: {}", result);
+if let Ok(port) = parse_port("3000") {
+    println!("Port: {port}");
 }
 ```
 
@@ -742,7 +710,7 @@ Result forces you to think about errors upfront, not as an afterthought.
 
 ---
 
-## The ? Operator: Error Propagation {.smaller}
+## The `?` operator: error propagation {.smaller}
 
 **The `?` operator makes error handling ergonomic:**
 
@@ -784,7 +752,7 @@ The ? operator is syntactic sugar that makes error handling look clean.
 
 ---
 
-## Custom Error Types {.smaller}
+## Custom error types {.smaller}
 
 **Create domain-specific errors:**
 
@@ -795,7 +763,7 @@ use std::fmt;
 enum ParseError {
     EmptyInput,
     InvalidNumber(String),
-    OutOfRange(i32),
+    InvalidPercentage(i32),
 }
 
 // Implement Display for pretty error messages
@@ -804,22 +772,24 @@ impl fmt::Display for ParseError {
         match self {
             ParseError::EmptyInput => write!(f, "Input string is empty"),
             ParseError::InvalidNumber(s) => write!(f, "Invalid number: {}", s),
-            ParseError::OutOfRange(n) => write!(f, "Number {} out of range (1-100)", n),
+            ParseError::InvalidPercentage(n) => {
+                write!(f, "Percentage {n} must be between 0 and 100")
+            }
         }
     }
 }
 
 // Use custom error type
-fn parse_positive_number(input: &str) -> Result<i32, ParseError> {
-    if input.is_empty() {
+fn parse_percentage(input: &str) -> Result<i32, ParseError> {
+    if input.trim().is_empty() {
         return Err(ParseError::EmptyInput);
     }
 
     let num: i32 = input.trim().parse()
         .map_err(|_| ParseError::InvalidNumber(input.to_string()))?;
 
-    if num < 1 || num > 100 {
-        return Err(ParseError::OutOfRange(num));
+    if !(0..=100).contains(&num) {
+        return Err(ParseError::InvalidPercentage(num));
     }
 
     Ok(num)
@@ -827,12 +797,12 @@ fn parse_positive_number(input: &str) -> Result<i32, ParseError> {
 ```
 
 ::: {.notes}
-Custom errors make your API self-documenting. Users know exactly what can fail.
+Custom error variants communicate expected failure categories, but documentation and tests are still needed and unrelated panics may remain.
 :::
 
 ---
 
-## Try It Yourself: Error Handling {.inverse .smaller}
+## Try it yourself: error handling {.inverse .smaller}
 
 **Challenge**: Parse user input with good error messages
 
@@ -860,7 +830,7 @@ Give students 5 minutes. This combines parsing, validation, and error handling.
 
 ---
 
-## Integrative Pattern: All Three Concepts {.smaller}
+## Integrative pattern: three concepts {.smaller}
 
 **Combining iterators, smart pointers, and error handling:**
 
@@ -913,12 +883,12 @@ fn process_lines(
 ```
 
 ::: {.notes}
-This is production Rust! Iterators for data flow, Rc/RefCell for shared state, Result for safety.
+Summarize the decision points: iterator versus loop, single versus shared ownership, compile-time versus runtime borrow checking, and `Result` propagation versus local handling.
 :::
 
 ---
 
-## Real-World Career Applications {.inverse .smaller}
+## Where these patterns appear {.inverse .smaller}
 
 **Where you'll use these patterns:**
 
@@ -929,29 +899,29 @@ This is production Rust! Iterators for data flow, Rc/RefCell for shared state, R
 - Database query building
 - JSON/XML parsing
 
-**Smart Pointers:**
+**Smart pointers:**
 
 - Graph databases (Rc for shared nodes)
 - Game engines (entity-component systems)
 - Compilers (AST with shared subtrees)
 - UI frameworks (shared state management)
 
-**Error Handling:**
+**Error handling:**
 
-- Every library API in Rust
+- Library APIs that expose recoverable failure
 - File I/O, network requests, parsing
 - Database operations
 - Command-line tools
 
-**Job interview topics**: All three appear in Rust coding interviews!
+**Review prompt**: For each pattern, name the ownership or error-handling constraint that motivates it.
 
 ::: {.notes}
-Emphasize that these aren't academic - they're daily tools for professional Rust developers.
+Use one primary-source example for each pattern and identify where a simpler owned value, loop, or local error branch would be sufficient.
 :::
 
 ---
 
-## Common Pitfalls and Best Practices {.smaller}
+## Common pitfalls and practices {.smaller}
 
 **Iterators:**
 
@@ -983,7 +953,7 @@ These mistakes are common in beginners. Avoid them from the start!
 
 ---
 
-## Advanced Topics (Optional) {.inverse .smaller}
+## Optional advanced topics {.inverse .smaller}
 
 **If you want to go deeper:**
 
@@ -1012,53 +982,58 @@ These are for students who want to explore beyond the basics.
 
 ---
 
-## Lab 13 Preview {.inverse}
+## Lab 13 preview {.inverse}
 
-**This week's lab covers everything we discussed:**
+**This week's lab focuses on two parts:**
 
-**Part 1: Iterators and Closures (30%)**
+**Part 1: iterators and closures**
 
 - Text analysis with iterator chains
 - Custom data processing pipelines
 - Stateful closures
 
-**Part 2: Smart Pointers (30%)**
-
-- Binary tree with `Box<T>`
-- Shared ownership with `Rc<T>`
-- Interior mutability with `RefCell<T>`
-
-**Part 3: Error Handling (30%)**
+**Part 2: error handling with `Result`**
 
 - Division with `Result`
-- File operations with `?` operator
-- Custom error types
+- `Display` messages for the supplied `ParseError` variants
+- Parsing a positive integer into `Result<i32, ParseError>`
 
-**Part 4: Integrative Exercise (10%)**
+---
 
-- Combine all three concepts in one program!
+## Lab 13 workflow {.inverse}
+
+```bash
+cargo test
+cargo fmt
+cargo clippy -- -D warnings
+git add week13/
+git commit -m "Complete lab 13"
+git push origin main
+```
+
+Confirm the Week 13 README badge is green; that badge is the complete 10-point grade. See [`week13/lab13.md`](https://github.com/bgreenwell/is4010-labs/blob/main/week13/lab13.md).
 
 ::: {.notes}
-The lab walks through each concept step-by-step. Start early - there's a lot to absorb!
+Smart pointers remain lecture enrichment; they are not Lab 13 deliverables. Students implement every `todo!()` in the supplied `src/main.rs` and do not modify the tests.
 :::
 
 ---
 
-## Week 13 Summary {.inverse}
+## Week 13 summary {.inverse}
 
 **What makes Rust code "idiomatic":**
 
-✅ **Iterators**: Functional data processing
-✅ **Closures**: Functions that capture environment
-✅ **Smart pointers**: Flexible memory management
-✅ **Error handling**: Explicit, recoverable errors
+- **Iterators**: Composable data processing
+- **Closures**: Functions that can capture their environment
+- **Smart pointers**: Optional tools for ownership patterns that references cannot express
+- **Error handling**: Explicit, recoverable errors
 
 **Key takeaways:**
 
-- Iterators are zero-cost abstractions
-- Smart pointers unlock advanced patterns
+- Iterator chains are lazy and often optimize well; collection and algorithm choices still matter
+- Smart pointers add capabilities and complexity; start with ordinary ownership and borrowing
 - `Result<T, E>` makes errors part of your API
-- These patterns appear in every Rust codebase
+- These patterns appear throughout Rust's standard library and ecosystem
 
 **Next week**: Build a complete command-line application with Lab 14!
 
@@ -1068,7 +1043,7 @@ Next week synthesizes these patterns in a tested password generator and validato
 
 ---
 
-## Resources and Further Reading {.smaller}
+## Resources and further reading {.smaller}
 
 **Official Documentation:**
 
@@ -1098,6 +1073,6 @@ Next week synthesizes these patterns in a tested password generator and validato
 
 **AI assistance**: Browser chat, GitHub Copilot, Copilot CLI, Antigravity CLI
 
-**Lab 13**: Due Sunday at 11:59 PM
+**Lab 13**: Follow the due date shown in Canvas
 
 **Good luck and have fun with idiomatic Rust!** 🦀

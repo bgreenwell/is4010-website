@@ -1,6 +1,6 @@
 ---
-title: "IS4010: AI-Enhanced Application Development"
-subtitle: "Week 14: CLI Applications"
+title: "IS4010: AI-enhanced application development"
+subtitle: "Week 14: CLI applications"
 author: "Brandon M. Greenwell"
 format:
   revealjs:
@@ -9,30 +9,30 @@ format:
     slide-number: true
     chalkboard: true
     preview-links: auto
-    footer: "IS4010: App Development with AI"
+    footer: "IS4010: App development with AI"
     scrollable: true
     css: custom.css
 ---
 
-## Week 14 Overview {.inverse}
+## Week 14 overview {.inverse}
 
-**Session 1: CLI Architecture & `clap`**
+**Session 1: CLI architecture and `clap`**
 - The anatomy of a CLI tool
 - Argument parsing with the `clap` crate
 - Subcommands and flags
 
-**Session 2: Capstone Integration**
+**Session 2: Capstone integration**
 - Managing external crates (`rand`)
 - Structuring larger projects (modules)
 - Synthesizing traits, ownership, and error handling
 
 ---
 
-# Session 1: CLI Architecture & `clap` {.inverse}
+# Session 1: CLI architecture and `clap` {.inverse}
 
 ---
 
-## The Power of the CLI
+## The value of a CLI
 
 While graphical interfaces (GUIs) are great for end-users, command-line interfaces (CLIs) remain the backbone of developer tooling.
 
@@ -51,21 +51,21 @@ Remind them of Week 8 when we built a Python CLI using `argparse`. Today we do t
 
 ---
 
-## Anatomy of a CLI Command
+## Anatomy of a CLI command
 
 ```bash
-cargo run --bin password_gen -- random --length 16 --symbols
+cargo run -- random --length 16 --symbols
 ```
 
 Let's break this down:
-1. **Executable:** `cargo run --bin password_gen --` (The program itself)
+1. **Executable:** `cargo run --` builds and starts the Week 14 binary
 2. **Subcommand:** `random` (A major action the program can take)
 3. **Option / Argument:** `--length 16` (A named parameter with a value)
 4. **Flag:** `--symbols` (A boolean toggle, no value needed)
 
 ---
 
-## Argument Parsing in Rust
+## Argument parsing in Rust
 
 You *could* parse arguments manually using `std::env::args()`. 
 
@@ -87,23 +87,23 @@ fn main() {
 
 ---
 
-## Enter `clap` 👏
+## Enter `clap`
 
-`clap` (Command Line Argument Parser) is the industry standard crate for building CLIs in Rust.
+`clap` (Command Line Argument Parser) is a widely used crate for building CLIs in Rust.
 
 **Features:**
 - Declarative macro-based or derive-based API
 - Automatic `--help` and `--version` generation
-- Built-in type validation and bounds checking
+- Type parsing and configurable value validation
 - Subcommand routing
 
-*Fun Fact: The Cargo CLI itself uses `clap` under the hood!*
+The course uses `clap`'s derive API so the command structure is visible in Rust structs and enums.
 
 ---
 
 ## Setting up `clap`
 
-First, add it to your `Cargo.toml`. We enable the `derive` feature to use Rust's powerful attribute macros.
+First, add it to your `Cargo.toml`. The `derive` feature enables the macro API used in these examples.
 
 ```toml
 [dependencies]
@@ -111,12 +111,12 @@ clap = { version = "4.5", features = ["derive"] }
 ```
 
 ::: {.notes}
-Explain that `features = ["derive"]` is crucial. It allows us to define our CLI using Rust structs and enums rather than a builder pattern.
+Explain that `features = ["derive"]` enables `Parser`, `Subcommand`, and related derive macros. The builder API is an alternative.
 :::
 
 ---
 
-## Defining a CLI with `clap` (Struct)
+## Defining a CLI with `clap` using a struct
 
 We define our expected arguments as a standard Rust `struct`.
 
@@ -144,7 +144,7 @@ fn main() {
 
 ---
 
-## Subcommands with `clap` (Enum)
+## Subcommands with `clap` using an enum
 
 For complex tools (like `git` or `cargo`), you use subcommands. We model these using an `enum`.
 
@@ -174,9 +174,9 @@ enum Commands {
 
 ---
 
-## Pattern Matching on Subcommands
+## Pattern matching on subcommands
 
-Once parsed, we use Rust's powerful `match` statement to route the logic:
+Once parsed, use `match` to route each subcommand:
 
 ```rust
 fn main() {
@@ -201,24 +201,24 @@ Emphasize how cleanly this maps to Rust's ownership and enum features we learned
 
 ---
 
-# Session 2: Capstone Integration {.inverse}
+# Session 2: capstone integration {.inverse}
 
 ---
 
-## Synthesizing 14 Weeks of Rust
+## Synthesizing six weeks of Rust
 
 Building a CLI application isn't just about parsing arguments. It requires pulling together everything we've learned:
 
-1. **Project Structure:** Using modules (`mod`) to separate UI from logic.
-2. **External Crates:** Using `rand` for secure number generation.
-3. **Traits & Generics:** Printing output cleanly and handling diverse data types.
-4. **Ownership:** Safely passing strings between validators and generators.
+1. **Project structure:** Use modules (`mod`) to separate the interface from logic.
+2. **External crates:** Use `rand` for random generation.
+3. **Traits and generics:** Format output and reuse behavior.
+4. **Ownership:** Pass strings between validators and generators safely.
 
 ---
 
-## Structuring Larger Projects
+## Structuring larger projects
 
-Don't put everything in `main.rs`. A professional CLI tool separates the argument parsing (the interface) from the actual business logic.
+Keep `main.rs` focused on parsing and routing; place password generation and validation in the supplied modules so they can be tested independently.
 
 ```
 src/
@@ -237,7 +237,7 @@ mod validator;
 
 ---
 
-## Working with the `rand` Crate
+## Working with the `rand` crate
 
 Randomness is not built into the Rust standard library (unlike Python's `import random`). You must use an external crate.
 
@@ -262,7 +262,7 @@ fn main() {
 
 ---
 
-## Selecting Random Characters
+## Selecting random characters
 
 To generate a password, we often need to select random characters from a slice.
 
@@ -287,9 +287,9 @@ Explain why we use `b"..."` (byte strings) and `SliceRandom`. This is a very com
 
 ---
 
-## Lab 14: The Capstone CLI
+## Lab 14: the capstone CLI
 
-For your final lab, you will build a complete Password Utility CLI.
+For your final lab, you will complete a password utility CLI.
 
 **Features to implement:**
 1. `random`: Generate passwords from character sets.
@@ -299,9 +299,18 @@ For your final lab, you will build a complete Password Utility CLI.
 
 You will implement the logic in `generator.rs` and `validator.rs`, and wire it up to the `clap` parser in `main.rs`.
 
+```bash
+cargo test
+cargo fmt
+cargo clippy -- -D warnings
+cargo run -- random --length 20 --symbols
+```
+
+A green Week 14 badge represents the complete 10-point lab.
+
 ---
 
-## Reviewing AI Prompting for Rust
+## Reviewing AI prompting for Rust
 
 As you tackle the capstone, remember your AI Copilot strategies:
 
@@ -312,12 +321,10 @@ Use AI to help you understand compiler errors, explore the `clap` documentation,
 
 ---
 
-## Wrapping Up Rust
+## Wrapping up Rust
 
-Congratulations! You've traversed the steepest learning curve in modern programming. 
+You have moved from Python's dynamic runtime model to Rust's compiled type and ownership systems.
 
-You've moved from Python's dynamic, interpreted flexibility to Rust's compiled, type-safe, and blazingly fast memory safety. 
+You now have enough vocabulary to compare the trade-offs and continue learning either language.
 
-You now have the vocabulary and experience to choose the right tool for the job.
-
-**Next week:** Advanced AI Workflows.
+**Next week:** Advanced AI workflows.

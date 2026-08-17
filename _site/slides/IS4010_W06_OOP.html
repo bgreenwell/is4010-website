@@ -11,7 +11,7 @@
   <meta name="generator" content="quarto-1.8.25">
 
   <meta name="author" content="Brandon M. Greenwell">
-  <title>IS 4010 - App Dev with AI – IS4010: AI-Enhanced Application Development</title>
+  <title>IS 4010 - App Dev with AI – IS4010: AI-enhanced application development</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -196,8 +196,8 @@
     <div class="slides">
 
 <section id="title-slide" class="quarto-title-block center">
-  <h1 class="title">IS4010: AI-Enhanced Application Development</h1>
-  <p class="subtitle">Week 6: Object-Oriented Programming</p>
+  <h1 class="title">IS4010: AI-enhanced application development</h1>
+  <p class="subtitle">Week 06: Object-oriented programming</p>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -209,28 +209,28 @@ Brandon M. Greenwell
 
 </section>
 <section>
-<section id="welcome-to-object-oriented-programming" class="title-slide slide level1 center">
-<h1>Welcome to Object-Oriented Programming 🏗️</h1>
+<section id="object-oriented-programming" class="title-slide slide level1 center">
+<h1>Object-oriented programming</h1>
 
 </section>
-<section id="the-foundation-of-scalable-software-architecture" class="slide level2">
-<h2>The foundation of scalable software architecture 🎯</h2>
+<section id="organizing-related-state-and-behavior" class="slide level2">
+<h2>Organizing related state and behavior</h2>
 <ul>
-<li class="fragment"><strong>Object-Oriented Programming (OOP)</strong> revolutionizes how we design and structure applications</li>
-<li class="fragment"><strong>Real-world modeling</strong>: Create digital representations of real-world entities and their interactions</li>
-<li class="fragment"><strong>Career relevance</strong>: Essential for modern software development, system design interviews, and team collaboration</li>
-<li class="fragment"><strong>Scalability</strong>: Build applications that can grow from prototypes to enterprise-level systems</li>
-<li class="fragment"><strong>Code organization</strong>: Transform chaotic procedural code into elegant, maintainable architectures</li>
+<li class="fragment"><strong>Object-oriented programming (OOP)</strong> groups related data and behavior into objects</li>
+<li class="fragment"><strong>Domain modeling</strong>: Represent entities, state, and allowed operations</li>
+<li class="fragment"><strong>Design context</strong>: Classes are one option alongside functions, modules, and composition</li>
+<li class="fragment"><strong>Change management</strong>: Keep related state and behavior behind a clear interface</li>
+<li class="fragment"><strong>Code organization</strong>: Give related state and operations a clear interface</li>
 </ul>
 <aside class="notes">
 <p><strong>TEACHING NOTES:</strong></p>
 <ul>
 <li><strong>Historical significance</strong>: OOP emerged in the 1960s with Simula, popularized by Smalltalk in the 1970s</li>
-<li><strong>Industry adoption</strong>: Nearly every major software system uses OOP principles - from operating systems to web frameworks</li>
-<li><strong>Career impact</strong>: OOP concepts appear in 90% of technical interviews for software engineering roles</li>
+<li><strong>Language context</strong>: Python supports procedural, functional, and object-oriented styles</li>
+<li><strong>Language connection</strong>: Classes are common in Python libraries and application code</li>
 <li><strong>Course progression</strong>: This builds foundation for design patterns, software architecture, and advanced Python features</li>
-<li><strong>Real-world examples</strong>: Instagram (User, Post, Comment classes), banking systems (Account, Transaction classes), games (Player, Inventory classes)</li>
-<li><strong>Python advantage</strong>: Python’s OOP is clean and intuitive compared to languages like C++ or Java</li>
+<li><strong>Examples</strong>: A <code>Book</code>, bank account, or game character can illustrate state plus behavior without claiming a product’s internal design</li>
+<li><strong>Language comparison</strong>: Focus on Python’s syntax and data model rather than ranking languages</li>
 </ul>
 <style type="text/css">
         span.MJX_Assistive_MathML {
@@ -249,24 +249,24 @@ Brandon M. Greenwell
 </section></section>
 <section>
 <section id="session-1-from-functions-to-objects" class="title-slide slide level1 center">
-<h1>Session 1: From functions to objects</h1>
+<h1>Session 1: from functions to objects</h1>
 
 </section>
 <section id="when-functions-arent-enough-a-shopping-cart-story" class="slide level2">
-<h2>🤔 When functions aren’t enough: A shopping cart story</h2>
-<h3 id="the-problem-managing-complex-state-with-functions"><strong>The Problem</strong>: Managing complex state with functions</h3>
+<h2>When functions aren’t enough: a shopping cart story</h2>
+<h3 id="the-problem-managing-complex-state-with-functions"><strong>The problem</strong>: managing complex state with functions</h3>
 <ul>
 <li class="fragment"><strong>Scenario</strong>: Building an e-commerce shopping cart system</li>
 <li class="fragment"><strong>Challenge</strong>: Multiple pieces of related data (items, totals, discounts, tax rates)</li>
 <li class="fragment"><strong>Function approach</strong>: Becomes unwieldy as complexity grows</li>
-<li class="fragment"><strong>Real pain points</strong>: Parameter passing chaos, state management nightmares, code duplication</li>
+<li class="fragment"><strong>Design pressure</strong>: Related state may be passed repeatedly, updated inconsistently, or duplicated</li>
 </ul>
 <aside class="notes">
 <p><strong>TEACHING NOTES:</strong></p>
 <ul>
 <li><strong>Relate to students</strong>: Everyone has used shopping carts online - Amazon, Target, etc.</li>
 <li><strong>Complexity evolution</strong>: Start simple, show how requirements naturally grow</li>
-<li><strong>Industry reality</strong>: Real shopping carts have dozens of features - promotions, shipping, inventory checks</li>
+<li><strong>Scope growth</strong>: Add one requirement at a time and observe how the function signatures change</li>
 <li><strong>Common mistake</strong>: Students often try to solve everything with functions first</li>
 <li><strong>Learning approach</strong>: Let them feel the pain of the function approach before showing the OOP solution</li>
 </ul>
@@ -282,8 +282,8 @@ Brandon M. Greenwell
           display:block!important;
       }</style></aside>
 </section>
-<section id="the-function-approach-shopping-cart-chaos" class="slide level2">
-<h2>❌ The function approach: Shopping cart chaos</h2>
+<section id="a-function-based-shopping-cart" class="slide level2">
+<h2>A function-based shopping cart</h2>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a></a><span class="co"># Creating and managing cart state with functions - gets messy fast!</span></span>
 <span id="cb1-2"><a></a><span class="kw">def</span> create_cart():</span>
 <span id="cb1-3"><a></a>    <span class="cf">return</span> {<span class="st">"items"</span>: [], <span class="st">"subtotal"</span>: <span class="dv">0</span>, <span class="st">"tax_rate"</span>: <span class="fl">0.08</span>, <span class="st">"discount"</span>: <span class="dv">0</span>}</span>
@@ -329,8 +329,8 @@ Brandon M. Greenwell
           display:block!important;
       }</style></aside>
 </section>
-<section id="the-class-approach-elegant-and-scalable" class="slide level2">
-<h2>✅ The class approach: Elegant and scalable</h2>
+<section id="a-class-based-shopping-cart" class="slide level2">
+<h2>A class-based shopping cart</h2>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a></a><span class="kw">class</span> ShoppingCart:</span>
 <span id="cb2-2"><a></a>    <span class="co">"""Represents a shopping cart with items, discounts, and tax calculation."""</span></span>
 <span id="cb2-3"><a></a></span>
@@ -372,7 +372,7 @@ Brandon M. Greenwell
 <li><strong>Extensibility</strong>: Easy to add features like <code>remove_item()</code>, <code>clear_cart()</code>, etc.</li>
 <li><strong>Error prevention</strong>: IDE can provide autocomplete, type checking catches errors earlier</li>
 <li><strong>Testing</strong>: Each method can be tested independently</li>
-<li><strong>Real-world parallel</strong>: This mirrors how actual e-commerce systems are designed</li>
+<li><strong>Model boundary</strong>: This is a teaching example, not a claim about a particular commerce system’s architecture</li>
 </ul>
 <style type="text/css">
         span.MJX_Assistive_MathML {
@@ -386,21 +386,20 @@ Brandon M. Greenwell
           display:block!important;
       }</style></aside>
 </section>
-<section id="why-object-oriented-programming-matters" class="slide level2">
-<h2>🚀 Why object-oriented programming matters</h2>
+<section id="when-object-oriented-programming-helps" class="slide level2">
+<h2>When object-oriented programming helps</h2>
 <ul>
 <li class="fragment"><strong><a href="https://docs.python.org/3/tutorial/classes.html#private-variables">Encapsulation</a></strong>: Bundle data and methods together, hide implementation details</li>
 <li class="fragment"><strong>Code reusability</strong>: Write once, use everywhere - create multiple cart instances</li>
 <li class="fragment"><strong>Maintainability</strong>: Changes to internal implementation don’t break external code</li>
 <li class="fragment"><strong>Collaboration</strong>: Team members can work on different classes independently</li>
-<li class="fragment"><strong>Industry standard</strong>: Every major framework (<a href="https://docs.djangoproject.com/en/stable/topics/class-based-views/">Django</a>, <a href="https://flask.palletsprojects.com/en/2.3.x/views/">Flask</a>, <a href="https://fastapi.tiangolo.com/tutorial/dependencies/classes-as-dependencies/">FastAPI</a>) uses OOP principles</li>
+<li class="fragment"><strong>Framework examples</strong>: <a href="https://docs.djangoproject.com/en/stable/topics/class-based-views/">Django</a>, <a href="https://flask.palletsprojects.com/en/2.3.x/views/">Flask</a>, and <a href="https://fastapi.tiangolo.com/tutorial/dependencies/classes-as-dependencies/">FastAPI</a> all provide class-based APIs</li>
 </ul>
 <aside class="notes">
 <p><strong>TEACHING NOTES:</strong></p>
 <ul>
 <li><strong>Historical context</strong>: Alan Kay coined “object-oriented” in the 1960s, inspired by biological cells</li>
-<li><strong>Industry adoption</strong>: Google, Facebook, Netflix - all built on OOP principles</li>
-<li><strong>Career preparation</strong>: System design interviews often focus on class relationships</li>
+<li><strong>Design judgment</strong>: Discuss when a class improves the interface and when functions remain simpler</li>
 <li><strong>Python’s advantage</strong>: Clean syntax makes OOP concepts easier to learn than C++ or Java</li>
 <li><strong>Framework examples</strong>: Show how popular web frameworks use classes for views, models, etc.</li>
 </ul>
@@ -417,7 +416,7 @@ Brandon M. Greenwell
       }</style></aside>
 </section>
 <section id="what-is-a-class" class="slide level2">
-<h2>🏛️ What is a class?</h2>
+<h2>What is a class?</h2>
 <ul>
 <li class="fragment">A <strong><a href="https://docs.python.org/3/tutorial/classes.html">class</a></strong> is a blueprint or template for creating objects</li>
 <li class="fragment">An <strong>object</strong> (or <strong>instance</strong>) is a specific item created from that class blueprint</li>
@@ -446,11 +445,11 @@ Brandon M. Greenwell
           display:block!important;
       }</style></aside>
 </section>
-<section id="the-__init__-method-object-construction" class="slide level2">
-<h2>🔧 The <code>__init__</code> method: Object construction</h2>
+<section id="the-__init__-method-object-initialization" class="slide level2">
+<h2>The <code>__init__</code> method: object initialization</h2>
 <ul>
 <li class="fragment">The <strong><a href="https://docs.python.org/3/reference/datamodel.html#object.__init__"><code>__init__</code> method</a></strong> is a special constructor function</li>
-<li class="fragment"><strong>Automatic execution</strong>: Runs immediately when a new object is created</li>
+<li class="fragment"><strong>Initialization hook</strong>: Runs after Python creates a new instance</li>
 <li class="fragment"><strong>Purpose</strong>: Initialize the object’s attributes with starting values</li>
 <li class="fragment"><strong>The <code>self</code> parameter</strong>: References the specific instance being created</li>
 <li class="fragment"><strong>Convention</strong>: Always the first parameter in instance methods</li>
@@ -478,7 +477,7 @@ Brandon M. Greenwell
 <li><strong>Type hints</strong>: Emphasize modern Python practices with type annotations</li>
 <li><strong>Default parameters</strong>: Show flexibility in constructor design</li>
 <li><strong>Instance vs class</strong>: Each account has its own balance, independent of others</li>
-<li><strong>Real-world modeling</strong>: Bank accounts are perfect OOP examples students understand</li>
+<li><strong>Example choice</strong>: A bank account combines state with operations that change that state</li>
 <li><strong>Memory visualization</strong>: Draw how each instance has its own memory space</li>
 <li><strong>Common errors</strong>: Forgetting <code>self</code>, incorrect parameter order</li>
 </ul>
@@ -495,13 +494,13 @@ Brandon M. Greenwell
       }</style></aside>
 </section>
 <section id="the-__str__-method-human-readable-representation" class="slide level2">
-<h2>📝 The <code>__str__</code> method: Human-readable representation</h2>
+<h2>The <code>__str__</code> method: human-readable representation</h2>
 <ul>
 <li class="fragment">The <strong><a href="https://docs.python.org/3/reference/datamodel.html#object.__str__"><code>__str__</code> method</a></strong> defines how objects appear when printed</li>
 <li class="fragment"><strong>Automatic invocation</strong>: Called by <code>print()</code>, <code>str()</code>, and string formatting</li>
 <li class="fragment"><strong>User-friendly</strong>: Should return meaningful information for end users</li>
-<li class="fragment"><strong>AI assistant friendly</strong>: Perfect boilerplate code to generate with AI tools</li>
-<li class="fragment"><strong>Debugging essential</strong>: Makes testing and troubleshooting much easier</li>
+<li class="fragment"><strong>AI exercise</strong>: Ask for a draft, then verify its attributes and exact string output</li>
+<li class="fragment"><strong>Debugging aid</strong>: A useful representation makes object state easier to inspect</li>
 </ul>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a></a><span class="kw">class</span> User:</span>
 <span id="cb4-2"><a></a>    <span class="co">"""Represents a user in a social media application."""</span></span>
@@ -533,7 +532,7 @@ Brandon M. Greenwell
 <li><strong>String formatting</strong>: Show f-strings, <code>.format()</code>, and other approaches</li>
 <li><strong>Unicode symbols</strong>: Verification checkmarks make output more engaging</li>
 <li><strong>Debugging value</strong>: Good <code>__str__</code> methods save hours of debugging time</li>
-<li><strong>Professional practice</strong>: All production classes should have meaningful <code>__str__</code> methods</li>
+<li><strong>Design choice</strong>: Add <code>__str__</code> when a human-readable representation is useful</li>
 <li><strong>AI integration</strong>: Show how to prompt AI assistants for good <code>__str__</code> implementations</li>
 </ul>
 <style type="text/css">
@@ -549,22 +548,22 @@ Brandon M. Greenwell
       }</style></aside>
 </section>
 <section id="introducing-lab-06-part-1" class="slide level2">
-<h2>💡 Introducing Lab 06 (Part 1)</h2>
+<h2>Introducing Lab 06: part 1</h2>
 <ul>
-<li class="fragment"><strong>Your mission</strong>: Create a <code>Book</code> class to model real-world books</li>
-<li class="fragment"><strong>AI partnership</strong>: Use AI assistants to help generate class structure and methods</li>
+<li class="fragment"><strong>Deliverable</strong>: Create the specified <code>Book</code> class in <code>week06/lab06.py</code></li>
+<li class="fragment"><strong>AI collaboration</strong>: Ask for an explanation or review, then verify every attribute and method against the tests</li>
 <li class="fragment"><strong>Core concepts</strong>: Practice <code>__init__</code> constructors and <code>__str__</code> representations</li>
-<li class="fragment"><strong>Real-world modeling</strong>: Transform abstract concepts into concrete code</li>
-<li class="fragment"><strong>Foundation building</strong>: Prepares you for more complex OOP concepts</li>
+<li class="fragment"><strong>Modeling</strong>: Connect the lab’s fields and methods to the class contract</li>
+<li class="fragment"><strong>Foundation</strong>: Prepare for inheritance in part 2</li>
 </ul>
 <aside class="notes">
 <p><strong>TEACHING NOTES:</strong></p>
 <ul>
 <li><strong>Lab connection</strong>: Direct tie-in to what students will implement</li>
-<li><strong>AI guidance</strong>: Encourage using AI tools as coding partners, not crutches</li>
+<li><strong>AI guidance</strong>: Ask the assistant to cite the exact requirement that supports each proposed method</li>
 <li><strong>Scaffolding</strong>: Start simple, build complexity gradually</li>
-<li><strong>Assessment preparation</strong>: These fundamentals appear in every OOP assessment</li>
-<li><strong>Portfolio building</strong>: Good class design is essential for project portfolios</li>
+<li><strong>Assessment contract</strong>: The supplied tests define the required behavior</li>
+<li><strong>Scope</strong>: Do not add fields or methods that the lab does not request</li>
 </ul>
 <style type="text/css">
         span.MJX_Assistive_MathML {
@@ -582,16 +581,16 @@ Brandon M. Greenwell
 
 </section></section>
 <section>
-<section id="session-2-methods-inheritance" class="title-slide slide level1 center">
-<h1>Session 2: Methods &amp; inheritance</h1>
+<section id="session-2-methods-and-inheritance" class="title-slide slide level1 center">
+<h1>Session 2: methods and inheritance</h1>
 
 </section>
 <section id="giving-objects-behavior-with-methods" class="slide level2">
-<h2>⚡ Giving objects behavior with methods</h2>
+<h2>Giving objects behavior with methods</h2>
 <ul>
 <li class="fragment"><strong><a href="https://docs.python.org/3/tutorial/classes.html#method-objects">Methods</a></strong> are functions defined inside a class that operate on object data</li>
 <li class="fragment"><strong>Instance methods</strong>: Most common type, always take <code>self</code> as first parameter</li>
-<li class="fragment"><strong>Behavior modeling</strong>: Define what objects can <em>do</em>, not just what they <em>are</em></li>
+<li class="fragment"><strong>Behavior modeling</strong>: Define an object’s operations alongside its data</li>
 <li class="fragment"><strong>Encapsulation</strong>: Methods can access and modify private object state safely</li>
 <li class="fragment"><strong>State management</strong>: Methods ensure object data stays consistent and valid</li>
 </ul>
@@ -639,7 +638,7 @@ Brandon M. Greenwell
 <li><strong>Method chaining</strong>: Mention how some methods could return <code>self</code> for fluent APIs</li>
 <li><strong>Error handling</strong>: Could add validation for negative damage/healing amounts</li>
 <li><strong>Complex interactions</strong>: Show how multiple methods work together to create behavior</li>
-<li><strong>Real-world parallel</strong>: Similar to user profile management in social media apps</li>
+<li><strong>Example scope</strong>: Use the profile only to demonstrate instance state and methods</li>
 </ul>
 <style type="text/css">
         span.MJX_Assistive_MathML {
@@ -653,22 +652,22 @@ Brandon M. Greenwell
           display:block!important;
       }</style></aside>
 </section>
-<section id="understanding-inheritance-code-reuse-at-scale" class="slide level2">
-<h2>🔗 Understanding inheritance: Code reuse at scale</h2>
+<section id="understanding-inheritance-reusing-behavior" class="slide level2">
+<h2>Understanding inheritance: reusing behavior</h2>
 <ul>
 <li class="fragment"><strong><a href="https://docs.python.org/3/tutorial/classes.html#inheritance">Inheritance</a></strong> allows classes to inherit attributes and methods from parent classes</li>
 <li class="fragment"><strong>Code reuse</strong>: Write common functionality once, share across multiple related classes</li>
 <li class="fragment"><strong>“Is-a” relationships</strong>: Child classes are specialized versions of parent classes</li>
-<li class="fragment"><strong>Hierarchical design</strong>: Models real-world relationships naturally</li>
-<li class="fragment"><strong>Professional development</strong>: Essential for frameworks, libraries, and large codebases</li>
+<li class="fragment"><strong>Hierarchical design</strong>: Can model genuine subtype relationships</li>
+<li class="fragment"><strong>Design trade-off</strong>: Inheritance can reuse behavior, but composition is often simpler</li>
 </ul>
 <aside class="notes">
 <p><strong>TEACHING NOTES:</strong></p>
 <ul>
-<li><strong>Real-world examples</strong>: Vehicle → Car/Truck/Motorcycle, Animal → Dog/Cat/Bird</li>
+<li><strong>Examples to test</strong>: Ask whether <code>Car</code> is substitutable for <code>Vehicle</code>, then compare composition</li>
 <li><strong>Framework usage</strong>: Django models, Flask views - all use inheritance extensively</li>
 <li><strong>Design principle</strong>: Favor composition over inheritance, but understand both</li>
-<li><strong>Interview topic</strong>: Inheritance vs composition is a common technical interview question</li>
+<li><strong>Design question</strong>: Compare inheritance with composition for the same requirement</li>
 <li><strong>Code organization</strong>: Helps create logical, maintainable class hierarchies</li>
 </ul>
 <style type="text/css">
@@ -684,11 +683,11 @@ Brandon M. Greenwell
       }</style></aside>
 </section>
 <section id="implementing-inheritance-the-super-function" class="slide level2">
-<h2>🏗️ Implementing inheritance: The <code>super()</code> function</h2>
+<h2>Implementing inheritance: the <code>super()</code> function</h2>
 <ul>
 <li class="fragment"><strong>Syntax</strong>: <code>class ChildClass(ParentClass):</code> establishes inheritance relationship</li>
 <li class="fragment"><strong><a href="https://docs.python.org/3/library/functions.html#super"><code>super()</code> function</a></strong>: Calls methods from the parent class</li>
-<li class="fragment"><strong>Constructor chaining</strong>: Child <code>__init__</code> must call parent <code>__init__</code> using <code>super()</code></li>
+<li class="fragment"><strong>Initializer reuse</strong>: A child initializer can call the parent initializer with <code>super()</code> when it needs the parent’s setup</li>
 <li class="fragment"><strong>Method override</strong>: Child classes can replace parent methods with specialized versions</li>
 <li class="fragment"><strong>Method extension</strong>: Or extend parent methods with additional functionality</li>
 </ul>
@@ -739,7 +738,7 @@ Brandon M. Greenwell
 <li><strong>Method resolution</strong>: Python searches child class first, then parent</li>
 <li><strong>super() benefits</strong>: Maintainable, handles multiple inheritance correctly</li>
 <li><strong>Override vs extend</strong>: Show both patterns - complete replacement vs enhancement</li>
-<li><strong>Real-world modeling</strong>: Vehicle hierarchy is intuitive for students</li>
+<li><strong>Modeling check</strong>: Use the vehicle hierarchy to test substitutability and override behavior</li>
 <li><strong>Code reuse demonstration</strong>: Show how much code is shared vs specialized</li>
 <li><strong>Common mistakes</strong>: Forgetting super() call, incorrect parameter passing</li>
 </ul>
@@ -756,7 +755,7 @@ Brandon M. Greenwell
       }</style></aside>
 </section>
 <section id="advanced-oop-concepts-preview" class="slide level2">
-<h2>🎯 Advanced OOP concepts preview</h2>
+<h2>Advanced OOP concepts preview</h2>
 <ul>
 <li class="fragment"><strong><a href="https://docs.python.org/3/tutorial/classes.html#class-and-instance-variables">Class variables</a></strong>: Shared data across all instances of a class</li>
 <li class="fragment"><strong><a href="https://docs.python.org/3/library/functions.html#property">Properties</a></strong>: Computed attributes using <code>@property</code> decorator</li>
@@ -805,16 +804,16 @@ Brandon M. Greenwell
 <span id="cb7-39"><a></a><span class="bu">print</span>(<span class="ss">f"Tax on laptop: $</span><span class="sc">{</span>Product<span class="sc">.</span>calculate_tax(laptop.price)<span class="sc">:.2f}</span><span class="ss">"</span>)  <span class="co"># Static method</span></span>
 <span id="cb7-40"><a></a></span>
 <span id="cb7-41"><a></a><span class="co"># Property with validation</span></span>
-<span id="cb7-42"><a></a><span class="co"># laptop.price = -100  # Would raise ValueError</span></span>
+<span id="cb7-42"><a></a><span class="co"># laptop.price = -100 # Would raise ValueError</span></span>
 <span id="cb7-43"><a></a>laptop.price <span class="op">=</span> <span class="fl">1199.99</span>  <span class="co"># Valid price change</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <aside class="notes">
 <p><strong>TEACHING NOTES:</strong></p>
 <ul>
 <li><strong>Class variables</strong>: Useful for counters, configuration, shared resources</li>
-<li><strong>Properties</strong>: Essential for data validation and computed attributes</li>
+<li><strong>Properties</strong>: Useful for computed attributes or controlled access when a method call would obscure the interface</li>
 <li><strong>Method types</strong>: Explain when to use each type of method</li>
 <li><strong>Naming conventions</strong>: Leading underscore indicates “private” (by convention)</li>
-<li><strong>Advanced topics</strong>: These concepts appear in professional Python codebases</li>
+<li><strong>Further topics</strong>: Properties, class methods, and static methods appear in Python libraries and applications</li>
 <li><strong>Framework examples</strong>: Django models use all these concepts extensively</li>
 </ul>
 <style type="text/css">
@@ -829,8 +828,8 @@ Brandon M. Greenwell
           display:block!important;
       }</style></aside>
 </section>
-<section id="real-world-applications-where-oop-shines" class="slide level2">
-<h2>🎨 Real-world applications: Where OOP shines</h2>
+<section id="where-oop-can-help" class="slide level2">
+<h2>Where OOP can help</h2>
 <ul>
 <li class="fragment"><strong>Web development</strong>: <a href="https://docs.djangoproject.com/en/stable/topics/db/models/">Django models</a>, <a href="https://fastapi.tiangolo.com/tutorial/dependencies/classes-as-dependencies/">FastAPI dependencies</a></li>
 <li class="fragment"><strong>Game development</strong>: Characters, items, game states, collision systems</li>
@@ -841,8 +840,7 @@ Brandon M. Greenwell
 <aside class="notes">
 <p><strong>TEACHING NOTES:</strong></p>
 <ul>
-<li><strong>Career paths</strong>: Show how OOP applies to different programming specializations</li>
-<li><strong>Industry examples</strong>: GitHub (repositories as objects), Netflix (user profiles, content)</li>
+<li><strong>Application areas</strong>: Compare an object model in a web app, desktop app, or game without asserting a named company’s private implementation</li>
 <li><strong>Design patterns</strong>: Mention that design patterns are built on OOP principles</li>
 <li><strong>Framework architecture</strong>: Most modern frameworks are object-oriented at their core</li>
 <li><strong>Portfolio projects</strong>: Encourage students to think in objects for their projects</li>
@@ -859,14 +857,14 @@ Brandon M. Greenwell
           display:block!important;
       }</style></aside>
 </section>
-<section id="computer-science-pioneers-oop-visionaries" class="slide level2">
-<h2>📚 Computer science pioneers: OOP visionaries</h2>
+<section id="computer-science-pioneers-oop" class="slide level2">
+<h2>Computer science pioneers: OOP</h2>
 <ul>
 <li class="fragment"><strong><a href="https://en.wikipedia.org/wiki/Alan_Kay">Alan Kay</a></strong> (1940-): Coined “object-oriented programming,” created Smalltalk</li>
 <li class="fragment"><strong><a href="https://en.wikipedia.org/wiki/Kristen_Nygaard">Kristen Nygaard</a></strong> (1926-2002): Co-invented Simula, the first OOP language</li>
 <li class="fragment"><strong><a href="https://en.wikipedia.org/wiki/Ole-Johan_Dahl">Ole-Johan Dahl</a></strong> (1931-2002): Co-creator of Simula, Turing Award winner</li>
-<li class="fragment"><strong>Legacy</strong>: Their ideas revolutionized software development and enabled modern applications</li>
-<li class="fragment"><strong>Philosophy</strong>: “Objects are not just data structures, they are living entities that communicate”</li>
+<li class="fragment"><strong>Legacy</strong>: Their work influenced later object-oriented languages and interfaces</li>
+<li class="fragment"><strong>Design idea</strong>: Objects combine state with behavior exposed through methods</li>
 </ul>
 <aside class="notes">
 <p><strong>TEACHING NOTES:</strong></p>
@@ -891,12 +889,12 @@ Brandon M. Greenwell
       }</style></aside>
 </section>
 <section id="introducing-lab-06-part-2" class="slide level2">
-<h2>🎯 Introducing Lab 06 (Part 2)</h2>
+<h2>Introducing Lab 06: part 2</h2>
 <ul>
 <li class="fragment"><strong>Build on Part 1</strong>: Extend your <code>Book</code> class with meaningful methods</li>
 <li class="fragment"><strong>Inheritance practice</strong>: Create an <code>EBook</code> class that inherits from <code>Book</code></li>
 <li class="fragment"><strong>Method override</strong>: Customize <code>__str__</code> method in the child class</li>
-<li class="fragment"><strong>Real-world skills</strong>: These patterns appear in every professional codebase</li>
+<li class="fragment"><strong>Required skills</strong>: Reuse the parent initializer and override <code>__str__</code></li>
 <li class="fragment"><strong>AI collaboration</strong>: Use AI assistants to explore different implementation approaches</li>
 </ul>
 <aside class="notes">
@@ -922,23 +920,22 @@ Brandon M. Greenwell
       }</style></aside>
 </section>
 <section id="looking-ahead-oop-in-practice" class="slide level2">
-<h2>🚀 Looking ahead: OOP in practice</h2>
+<h2>Looking ahead: OOP in practice</h2>
 <ul>
 <li class="fragment"><strong>Next week</strong>: Working with data - APIs, JSON, and object serialization</li>
 <li class="fragment"><strong>Project applications</strong>: Your final projects will benefit from OOP design</li>
-<li class="fragment"><strong>Industry preparation</strong>: System design interviews focus on class relationships</li>
-<li class="fragment"><strong>Continuous learning</strong>: Explore design patterns, SOLID principles, architectural patterns</li>
+<li class="fragment"><strong>Further study</strong>: Explore composition, protocols, and selected design patterns</li>
 <li class="fragment"><strong>AI enhancement</strong>: Use AI tools to refine your OOP designs and implementations</li>
 </ul>
 <aside class="notes">
 <p><strong>TEACHING NOTES:</strong></p>
 <ul>
 <li><strong>Course integration</strong>: Connect to upcoming topics and projects</li>
-<li><strong>Career preparation</strong>: Mention system design interviews at tech companies</li>
+<li><strong>Design practice</strong>: Compare inheritance with composition for one small example</li>
 <li><strong>Advanced concepts</strong>: SOLID principles, design patterns for motivated students</li>
 <li><strong>AI integration</strong>: Show how AI can help with architectural decisions</li>
-<li><strong>Portfolio development</strong>: Good OOP skills are essential for impressive projects</li>
-<li><strong>Industry trends</strong>: Mention modern patterns like composition over inheritance</li>
+<li><strong>Project connection</strong>: Use a class only when it improves the final project’s interface</li>
+<li><strong>Trade-off</strong>: Discuss composition over inheritance as an option, not a universal rule</li>
 </ul>
 <style type="text/css">
         span.MJX_Assistive_MathML {
@@ -953,20 +950,20 @@ Brandon M. Greenwell
       }</style></aside>
 </section>
 <section id="summary-key-takeaways" class="slide level2">
-<h2>📋 Summary: Key takeaways</h2>
+<h2>Summary: key takeaways</h2>
 <ul>
-<li class="fragment"><strong>OOP motivation</strong>: Solves complex state management problems that functions can’t handle elegantly</li>
+<li class="fragment"><strong>OOP motivation</strong>: Can give related state and behavior a clear interface</li>
 <li class="fragment"><strong>Core concepts</strong>: Classes (blueprints), objects (instances), attributes (data), methods (behavior)</li>
-<li class="fragment"><strong>Essential methods</strong>: <code>__init__</code> for construction, <code>__str__</code> for representation</li>
+<li class="fragment"><strong>Common methods</strong>: <code>__init__</code> initializes instances; <code>__str__</code> supplies a human-readable representation when useful</li>
 <li class="fragment"><strong>Inheritance</strong>: Enables code reuse and hierarchical relationships</li>
-<li class="fragment"><strong>Real-world relevance</strong>: Every major application and framework uses OOP principles</li>
+<li class="fragment"><strong>Design judgment</strong>: Use a class when it gives related state and behavior a clearer interface</li>
 </ul>
 <aside class="notes">
 <p><strong>TEACHING NOTES:</strong></p>
 <ul>
 <li><strong>Concept reinforcement</strong>: Emphasize the most important takeaways</li>
 <li><strong>Practical application</strong>: Remind students how this applies to their lab work</li>
-<li><strong>Confidence building</strong>: Students should feel ready to tackle Lab 06</li>
+<li><strong>Readiness check</strong>: Students should be able to construct, print, and extend the lab types</li>
 <li><strong>Next session prep</strong>: Brief mention of what’s coming in Session 2</li>
 <li><strong>Office hours</strong>: Encourage questions about OOP concepts or lab implementation</li>
 </ul>

@@ -1,6 +1,6 @@
 ---
-title: "IS4010: AI-Enhanced Application Development"
-subtitle: "Week 11: Structuring Code and Data in Rust"
+title: "IS4010: AI-enhanced application development"
+subtitle: "Week 11: Structuring code and data in Rust"
 author: "Brandon M. Greenwell"
 format:
   revealjs:
@@ -11,10 +11,10 @@ format:
     css: custom.css
 ---
 
-## Session 1: Organizing Code and Custom Types
+## Session 1: organizing code and custom types
 
 ::: {.notes}
-This week builds directly on ownership fundamentals from Week 10. Students now know how memory works in Rust - today they learn how to structure programs and data. Start with motivation: "You can write Rust code - now let's organize it like professionals do."
+This week builds on the Week 10 ownership model. Move from one source file to modules and from primitive values to types that encode the lab's domain rules.
 :::
 
 ---
@@ -24,12 +24,12 @@ This week builds directly on ownership fundamentals from Week 10. Students now k
 ::: {.incremental}
 - So far, we've written small [Rust](https://www.rust-lang.org/) programs in a single `main.rs` file
 - Real applications need **organization**: separate files, logical grouping, reusable components
-- [Rust](https://www.rust-lang.org/)'s [module system](https://doc.rust-lang.org/book/ch07-00-managing-growing-projects-with-packages-crates-and-modules.html) provides powerful tools for structuring code
-- Today we learn how professionals organize [Rust](https://www.rust-lang.org/) projects
+- [Rust](https://www.rust-lang.org/)'s [module system](https://doc.rust-lang.org/book/ch07-00-managing-growing-projects-with-packages-crates-and-modules.html) controls structure, paths, and visibility
+- Today we learn how modules organize a growing [Rust](https://www.rust-lang.org/) project
 :::
 
 ::: {.notes}
-Transition from "can you write Rust?" to "can you organize Rust?" Students have the fundamentals - now we scale up to real programs. The module system is Rust's answer to organization.
+Transition from a single source file to a small multi-module program. Keep the examples close to the supplied lab structure.
 :::
 
 ---
@@ -100,7 +100,7 @@ Contrast with Python where everything is public by convention. Rust enforces pri
 
 ---
 
-## Quick rule of thumb: when do you need `pub`? 🤔
+## Quick rule of thumb: when do you need `pub`?
 
 :::: {.columns}
 ::: {.column width="50%"}
@@ -261,7 +261,7 @@ Real projects split modules into separate files. The 'mod' declaration without b
 
 ---
 
-## 🤖 AI co-pilot technique: module organization
+## AI copilot technique: module organization
 
 When organizing code into modules, ask your [AI assistant](https://claude.ai/):
 
@@ -274,7 +274,7 @@ When organizing code into modules, ask your [AI assistant](https://claude.ai/):
 **Pro tip:** Ask AI to explain the module tree structure - visualizations help!
 
 ::: {.notes}
-Module organization is a design skill. AI can suggest logical groupings and explain privacy trade-offs. Students should use AI to learn patterns, not just copy structure. Understanding module design makes code maintainable.
+Module organization is a design skill. AI can suggest logical groupings and explain privacy trade-offs, but students should be able to justify the resulting structure. Understanding those boundaries makes code easier to maintain.
 :::
 
 ---
@@ -336,7 +336,7 @@ fn main() {
 [Try it in Rust Playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=struct+User+%7B%0A++++username%3A+String%2C%0A++++email%3A+String%2C%0A++++active%3A+bool%2C%0A%7D%0Afn+main%28%29+%7B%0A++++let+user1+%3D+User+%7B%0A++++++++email%3A+String%3A%3Afrom%28%22ada%40example.com%22%29%2C%0A++++++++username%3A+String%3A%3Afrom%28%22ada_lovelace%22%29%2C%0A++++++++active%3A+true%2C%0A++++%7D%3B%0A++++println%21%28%22Username%3A+%7B%7D%22%2C+user1.username%29%3B%0A%7D)
 
 ::: {.notes}
-**LIVE DEMO**: Create a struct instance. Show that the entire struct must be mutable to change any field - Rust doesn't have per-field mutability. This is consistent with Rust's ownership model.
+**Live demo:** Create a struct instance. Show that the binding must be mutable to change a field—Rust does not apply mutability to individual fields of an otherwise immutable binding.
 :::
 
 ---
@@ -372,7 +372,7 @@ fn main() {
 }
 ```
 
-[Try it in Rust Playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=struct+Rectangle+%7B%0A++++width%3A+u32%2C%0A++++height%3A+u32%2C%0A%7D%0Aimpl+Rectangle+%7B%0A++++fn+area%28%26self%29+-%3E+u32+%7B%0A++++++++self.width+*+self.height%0A++++%7D%0A++++fn+square%28size%3A+u32%29+-%3E+Rectangle+%7B%0A++++++++Rectangle+%7B+width%3A+size%2C+height%3A+size+%7D%0A++++%7D%0A%7D%0Afn+main%28%29+%7B%0A++++let+rect+%3D+Rectangle+%7B+width%3A+30%2C+height%3A+50+%7D%3B%0A++++println%21%28%22Area%3A+%7B%7D%22%2C+rect.area%28%29%29%3B%0A++++let+sq+%3D+Rectangle%3A%3Asquare%28%2810%29%3B%0A%7D)
+[Try it in Rust Playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=struct+Rectangle+%7B%0A++++width%3A+u32%2C%0A++++height%3A+u32%2C%0A%7D%0Aimpl+Rectangle+%7B%0A++++fn+area%28%26self%29+-%3E+u32+%7B%0A++++++++self.width+*+self.height%0A++++%7D%0A++++fn+square%28size%3A+u32%29+-%3E+Rectangle+%7B%0A++++++++Rectangle+%7B+width%3A+size%2C+height%3A+size+%7D%0A++++%7D%0A%7D%0Afn+main%28%29+%7B%0A++++let+rect+%3D+Rectangle+%7B+width%3A+30%2C+height%3A+50+%7D%3B%0A++++println%21%28%22Area%3A+%7B%7D%22%2C+rect.area%28%29%29%3B%0A++++let+sq+%3D+Rectangle%3A%3Asquare%2810%29%3B%0A%7D)
 
 ::: {.notes}
 impl blocks add methods to structs. Methods take self (or &self or &mut self). Associated functions don't take self - they're like constructors or static methods. You can have multiple impl blocks for organization.
@@ -384,9 +384,9 @@ impl blocks add methods to structs. Methods take self (or &self or &mut self). A
 
 ::: {.incremental}
 - An [`enum`](https://doc.rust-lang.org/book/ch06-01-defining-an-enum.html) (enumeration) represents a value that can be one of several variants
-- **Much more powerful** than enums in [C](https://en.cppreference.com/w/c), [Java](https://www.java.com/), or [Python](https://www.python.org/)
+- Each variant can carry different data, making Rust enums useful for modeling alternatives
 - Each variant can hold different types of data
-- Perfect for modeling "this OR that OR that" situations
+- Useful when one value must be exactly one of several named variants
 :::
 
 ```rust
@@ -405,7 +405,7 @@ let triangle = Shape::Triangle(3.0, 8.0);           // Triangle with base 3.0, h
 [Try it in Rust Playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=enum+Shape+%7B%0A++++Circle%28f64%29%2C%0A++++Rectangle%28f64%2C+f64%29%2C%0A++++Triangle%28f64%2C+f64%29%2C%0A%7D%0A%0Afn+main%28%29+%7B%0A++++let+circle+%3D+Shape%3A%3ACircle%285.0%29%3B%0A++++let+rectangle+%3D+Shape%3A%3ARectangle%284.0%2C+6.0%29%3B%0A++++let+triangle+%3D+Shape%3A%3ATriangle%283.0%2C+8.0%29%3B%0A++++%0A++++println%21%28%22Created+three+shapes%21%22%29%3B%0A%7D)
 
 ::: {.notes}
-Rust enums are algebraic data types - incredibly powerful! Each variant can hold different amounts and types of data. Circle needs one dimension (radius), Rectangle needs two (width, height), Triangle needs two (base, height). This is the perfect use case for enums - same concept (shape) but different data structure. This is much more powerful than C-style enums which are just named integers.
+Rust enums are algebraic data types: each variant can hold different data. Circle needs one dimension, while Rectangle and Triangle need two. This representation keeps the alternatives in one type and differs from C-style enums, which are named integer constants.
 
 **Computer science terminology**: Rust enums are "sum types" or "tagged unions" from functional programming. They encode different states and their associated data within a single type, which the compiler checks exhaustively. The Shape example clearly shows this - each variant is mutually exclusive (a shape is a circle OR rectangle OR triangle, never multiple at once).
 :::
@@ -448,12 +448,12 @@ fn main() {
 [Try it in Rust Playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=enum+Shape+%7B%0A++++Circle%28f64%29%2C%0A++++Rectangle%28f64%2C+f64%29%2C%0A++++Triangle%28f64%2C+f64%29%2C%0A%7D%0A%0Afn+area%28shape%3A+Shape%29+-%3E+f64+%7B%0A++++match+shape+%7B%0A++++++++Shape%3A%3ACircle%28r%29+%3D%3E+%7B%0A++++++++++++println%21%28%22Calculating+area+of+circle+with+radius+%7B%7D%22%2C+r%29%3B%0A++++++++++++3.14159+*+r+*+r%0A++++++++%7D%0A++++++++Shape%3A%3ARectangle%28w%2C+h%29+%3D%3E+w+*+h%2C%0A++++++++Shape%3A%3ATriangle%28b%2C+h%29+%3D%3E+0.5+*+b+*+h%2C%0A++++%7D%0A%7D%0A%0Afn+main%28%29+%7B%0A++++let+circle+%3D+Shape%3A%3ACircle%285.0%29%3B%0A++++println%21%28%22Area%3A+%7B%3A.2%7D+square+units%22%2C+area%28circle%29%29%3B%0A++++%0A++++let+rect+%3D+Shape%3A%3ARectangle%284.0%2C+6.0%29%3B%0A++++println%21%28%22Area%3A+%7B%3A.2%7D+square+units%22%2C+area%28rect%29%29%3B%0A%7D)
 
 ::: {.notes}
-**LIVE DEMO**: This perfectly shows why match with enums is powerful! Each shape needs a different formula - pattern matching makes this natural and safe. The compiler ensures exhaustiveness - you MUST handle every variant. If you add a new shape later, the compiler will force you to update every match statement. Pattern matching extracts the data (radius, width/height, base/height) so you can use it in calculations. This prevents forgotten cases that cause bugs in other languages. Try removing one match arm to see the compiler error!
+For the live demo, remove one match arm and inspect the exhaustiveness error. Pattern matching extracts each variant's data for its formula. Adding a variant can reveal match expressions that need updating, unless they use a wildcard arm.
 :::
 
 ---
 
-## 🤖 AI co-pilot technique: designing with structs and enums
+## AI copilot technique: designing with structs and enums
 
 When modeling data, ask your [AI assistant](https://claude.ai/):
 
@@ -466,12 +466,12 @@ When modeling data, ask your [AI assistant](https://claude.ai/):
 **Example:** *"I need to model a blog post that can be Draft, Published, or Archived. Each state has different data. How should I structure this in Rust?"*
 
 ::: {.notes}
-Data modeling is a design skill. AI can suggest struct vs enum trade-offs and show idiomatic patterns. Ask AI to explain the reasoning, not just provide code. Understanding design choices makes better Rust developers.
+Data modeling is a design skill. AI can compare struct and enum trade-offs and show idiomatic patterns. Ask for the reasoning with the code, then evaluate whether each variant represents the domain accurately.
 :::
 
 ---
 
-## Session 2: Error Handling and Collections
+## Session 2: error handling and collections
 
 ::: {.notes}
 Second session builds on structs/enums. Now we use two special enums (Option and Result) and work with dynamic collections. Emphasize that these aren't "advanced" - they're everyday Rust. Tie to ownership from last week.
@@ -528,7 +528,7 @@ fn main() {
 [Try it in Rust Playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=fn+find_user%28id%3A+u32%29+-%3E+Option%3CString%3E+%7B%0A++++if+id+%3D%3D+1+%7B%0A++++++++Some%28String%3A%3Afrom%28%22Alice%22%29%29%0A++++%7D+else+%7B%0A++++++++None%0A++++%7D%0A%7D%0Afn+main%28%29+%7B%0A++++match+find_user%281%29+%7B%0A++++++++Some%28name%29+%3D%3E+println%21%28%22Found%3A+%7B%7D%22%2C+name%29%2C%0A++++++++None+%3D%3E+println%21%28%22User+not+found%22%29%2C%0A++++%7D%0A%7D)
 
 ::: {.notes}
-**LIVE DEMO**: Show Option in action. The type system forces you to handle the None case - you can't forget. Show both match and if let patterns. if let is syntactic sugar for matching one pattern and ignoring others.
+**Live demo:** Show `Option` in action. Accessing the contained value requires considering whether it is `Some` or `None`; compare `match` with `if let` when only one pattern needs special handling.
 :::
 
 ---
@@ -598,7 +598,7 @@ The ? operator is syntactic sugar for error propagation. If Result is Err, it re
 
 ---
 
-## 🤖 AI co-pilot technique: error handling patterns
+## AI copilot technique: error-handling patterns
 
 When handling errors, ask your [AI assistant](https://claude.ai/):
 
@@ -611,7 +611,7 @@ When handling errors, ask your [AI assistant](https://claude.ai/):
 **Pro tip:** Ask AI to show both verbose (match) and concise (? operator) versions to understand what's happening under the hood.
 
 ::: {.notes}
-Error handling patterns take practice. AI can show idiomatic approaches and explain trade-offs. Students should understand both match and ? operator - ? is sugar for match patterns. Ask AI to explain, not just provide code.
+Error-handling patterns take practice. AI can show idiomatic approaches and explain trade-offs. Students should understand both `match` and the `?` operator: `?` provides concise propagation for compatible error types.
 :::
 
 ---
@@ -649,14 +649,14 @@ fn main() {
 [Try it in Rust Playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=fn+main%28%29+%7B%0A++++let+mut+v+%3D+vec%21%5B1%2C+2%2C+3%5D%3B%0A++++v.push%284%29%3B%0A++++for+i+in+%26v+%7B%0A++++++++println%21%28%22%7B%7D%22%2C+i%29%3B%0A++++%7D%0A++++let+third+%3D+%26v%5B2%5D%3B%0A++++println%21%28%22Third%3A+%7B%7D%22%2C+third%29%3B%0A%7D)
 
 ::: {.notes}
-**LIVE DEMO**: Show Vec creation, push, indexing, and iteration. Explain the two ways to access: [] panics if out of bounds, .get() returns Option. This ties back to Option from earlier. Vectors follow ownership rules - you can't modify while iterating immutably.
+**Live demo:** Show `Vec` creation, `push`, indexing, and iteration. Explain that indexing panics when out of bounds while `.get()` returns `Option`. Show why an active immutable borrow prevents mutation through that vector binding.
 
-**Performance insight**: Mention that when a `Vec`'s capacity is exceeded, it must perform a new allocation on the heap and copy all existing elements over. For performance-critical code, pre-allocating with `Vec::with_capacity` can be a useful optimization.
+**Performance note:** When a `Vec` grows beyond its capacity, it may allocate a larger buffer and move its elements. If measurements show repeated growth matters and the approximate size is known, `Vec::with_capacity` can reduce reallocations.
 :::
 
 ---
 
-## Strings in Rust: [`String`](https://doc.rust-lang.org/std/string/struct.String.html) vs [`&str`](https://doc.rust-lang.org/std/primitive.str.html)
+## Strings in Rust: [`String`](https://doc.rust-lang.org/std/string/struct.String.html) and [`&str`](https://doc.rust-lang.org/std/primitive.str.html)
 
 ::: {.incremental}
 - [Rust](https://www.rust-lang.org/) has two main string types (not one!):
@@ -688,7 +688,7 @@ fn main() {
 ::: {.notes}
 String vs &str confuses everyone. String is owned data, &str is a view into string data. Think: String is like Vec<u8>, &str is like &[u8]. String literals in code are &str with 'static lifetime. This follows ownership from Week 10.
 
-**Best practice**: Emphasize that functions should almost always accept `&str` as a parameter instead of `String`. This is more flexible as you can pass either a `String` (as `&my_string`) or a string literal, and it avoids unnecessary memory allocations.
+**API design:** When a function only needs to read text, accepting `&str` is often more flexible than taking ownership of a `String`. Callers can pass a string slice or borrow a `String` without an unnecessary ownership transfer.
 :::
 
 ---
@@ -725,7 +725,7 @@ fn main() {
 [Try it in Rust Playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=use+std%3A%3Acollections%3A%3AHashMap%3B%0Afn+main%28%29+%7B%0A++++let+mut+scores+%3D+HashMap%3A%3Anew%28%29%3B%0A++++scores.insert%28String%3A%3Afrom%28%22Blue%22%29%2C+10%29%3B%0A++++scores.insert%28String%3A%3Afrom%28%22Yellow%22%29%2C+50%29%3B%0A++++for+%28key%2C+value%29+in+%26scores+%7B%0A++++++++println%21%28%22%7B%7D%3A+%7B%7D%22%2C+key%2C+value%29%3B%0A++++%7D%0A%7D)
 
 ::: {.notes}
-**LIVE DEMO**: Show HashMap creation, insertion, and lookup. Note that .get() returns Option - the key might not exist! HashMap owns its keys and values. When you insert, ownership moves into the HashMap. This is consistent with ownership rules.
+**Live demo:** Show `HashMap` creation, insertion, and lookup. Note that `.get()` returns `Option` because a key might not exist. Inserting owned values normally moves them into the map.
 
 **Performance insight**: Clarify that `HashMap` provides *amortized O(1)* (average constant time) performance for insertions and lookups, which is why it's so fast. This is a key data structures concept.
 :::
@@ -751,12 +751,12 @@ fn main() {
 :::
 
 ::: {.notes}
-Choosing collections is a design decision. Vec for lists, HashMap for lookups, String for text. These cover 95% of use cases. There are other collections (BTreeMap, HashSet, etc.) but start with these three. Ask yourself: How will I access this data?
+Choosing collections is a design decision. Start with `Vec` for ordered sequences, `HashMap` for key-based lookups, and `String` for owned text. Rust also provides collections such as `BTreeMap` and `HashSet`. Ask: how will this program access and update the data?
 :::
 
 ---
 
-## Real-world example: building a phone book
+## Example: building a phone book
 
 ```rust
 use std::collections::HashMap;
@@ -797,7 +797,7 @@ This example ties everything together: struct for Contact, Option for optional e
 
 ---
 
-## 🤖 AI co-pilot technique: working with collections
+## AI copilot technique: working with collections
 
 When using collections, ask your [AI assistant](https://claude.ai/):
 
@@ -811,62 +811,56 @@ When using collections, ask your [AI assistant](https://claude.ai/):
 **Example:** *"I have a list of user IDs and need fast lookup. Should I use Vec or HashMap?"*
 
 ::: {.notes}
-Collections have many methods. AI can help find the right one and show idiomatic patterns. Students should ask AI to explain trade-offs (Vec vs HashMap performance), not just provide syntax. Understanding when to use each collection is key.
+Collections have many methods. AI can help locate a method and compare trade-offs such as ordered traversal versus key-based lookup. Students should verify that the suggested collection matches the program's access patterns.
 :::
 
 ---
 
-## Introducing Lab 11: data modeling challenge
+## Introducing Lab 11: structs, enums, and methods
 
 ::: {.incremental}
-**This week's lab has three parts:**
+**Implement the supplied types in `src/student.rs`:**
 
-1. **Structs and Enums**
-   - Model a library system with custom types
-   - Use structs for Book/DVD data
-   - Use enums for ItemStatus (Available/CheckedOut)
+1. **`Student` methods**
+   - Construction, credits, class standing, graduation eligibility, grades, and GPA
+2. **`Grade` and `CourseGrade` methods**
+   - Parse letter grades, convert GPA points, and calculate quality points
+3. **`StudentDatabase` methods**
+   - Store students in a `HashMap`, reject duplicate IDs, search, count, and summarize GPA
 
-2. **Error Handling**
-   - Return `Result` from functions that can fail
-   - Use `Option` for optional data
-   - Practice the `?` operator
+Do not change the supplied types or test module. Rename placeholder parameters by dropping their leading underscore.
 
-3. **Collections in Action**
-   - Store items in `Vec<T>`
-   - Build `HashMap<K, V>` for fast lookups
-   - Iterate and search
-
-**Full instructions:** `week11/lab11.md`
+**Full instructions:** [`week11/lab11.md`](https://github.com/bgreenwell/is4010-labs/blob/main/week11/lab11.md)
 :::
 
 ::: {.notes}
-Lab 11 applies everything from today. Students will design data structures, handle errors properly, and use collections. This is practical Rust - the kind they'll write in real projects. Emphasize that this builds on ownership from last week.
+Connect each method to today's structs, enums, `impl` blocks, `Option`, `Result`, and `HashMap` examples. The data model is supplied; students implement its behavior.
 :::
 
 ---
 
-## Career relevance: production Rust patterns
+## Where these Rust patterns appear
 
 ::: {.incremental}
-**What you learned today is used daily in industry:**
+**Examples to investigate:**
 
 - **[Discord](https://discord.com/blog/why-discord-is-switching-from-go-to-rust)** - Structs for message data, enums for event types
 - **[Dropbox](https://dropbox.tech/infrastructure/rewriting-the-heart-of-our-sync-engine)** - Result for error handling, HashMap for file tracking
 - **[Cloudflare](https://blog.cloudflare.com/how-we-built-pingora-the-proxy-that-connects-cloudflare-to-the-internet/)** - Vec for request queues, modules for organization
 
-**Interview topics:**
+**Questions for review:**
 - "How does Rust handle errors differently than exceptions?"
 - "When would you use an enum instead of inheritance?"
 - "Explain Option vs Result"
 :::
 
 ::: {.notes}
-These patterns aren't academic - they're production Rust. Companies choose Rust partly because of these features (Result vs exceptions, enums vs inheritance). Students learning these concepts now are learning industry standards.
+These patterns appear throughout Rust libraries and applications. Ask students to connect each one to a concrete benefit: explicit failure paths with `Result`, valid-state modeling with enums, and ownership-aware collections.
 :::
 
 ---
 
-## Preview: You've Been Using Generics! {.inverse}
+## Preview: you have been using generics {.inverse}
 
 **Notice the angle brackets?**
 
@@ -886,12 +880,12 @@ let mut scores: HashMap<String, i32> = HashMap::new();
 **You've been using [generic types](https://doc.rust-lang.org/book/ch10-00-generics.html) all along!**
 
 ::: {.notes}
-This is a key realization moment. Students have been using Vec<T>, Option<T>, Result<T, E> without necessarily understanding the generic nature. Point out that the angle brackets always mean "generic over some type". This primes them for next week where they'll write their own generic types.
+Students have already used `Vec<T>`, `Option<T>`, and `Result<T, E>`. Point out that the type parameters inside angle brackets identify the concrete types involved; next week they will define their own generic types.
 :::
 
 ---
 
-## Next Week: Writing Your Own Generics {.smaller}
+## Next week: writing your own generics {.smaller}
 
 **Week 12 preview - Generics and Traits:**
 
@@ -904,14 +898,14 @@ You'll learn to:
 
 **Why it matters:**
 - Write reusable code without duplication
-- Zero runtime cost (Rust generates specialized code)
-- Type-safe abstractions
-- Professional Rust development pattern
+- Static dispatch can generate specialized code; dynamic dispatch remains available when needed
+- Trait bounds state which operations a generic implementation requires
+- Patterns used throughout Rust libraries and applications
 
 **Teaser:** Lab 12 will have you build a generic `Stack<T>` that works with any type!
 
 ::: {.notes}
-Build excitement for next week. Emphasize that they already understand how to USE generics (Vec, Option, Result) - now they'll learn to CREATE them. This is the jump from consumer to creator. The Stack<T> lab is a classic data structures exercise that demonstrates the power of generics.
+Connect familiar uses—`Vec<T>`, `Option<T>`, and `Result<T, E>`—to next week's task of defining `Stack<T>` and its trait bounds.
 :::
 
 ---
@@ -931,7 +925,7 @@ Build excitement for next week. Emphasize that they already understand how to US
 - [Rustlings - Structs Exercises](https://github.com/rust-lang/rustlings)
 
 ::: {.notes}
-All these links are essential reading. Chapter 8 (Collections) and Chapter 9 (Error Handling) are particularly important. Rustlings has great exercises for structs and enums. Encourage students to work through these after the lab.
+Treat the Rust Book chapters as primary references and Rustlings as optional practice. Route students to the chapter that matches the specific concept they need.
 :::
 
 ---
@@ -945,7 +939,18 @@ All these links are essential reading. Chapter 8 (Collections) and Chapter 9 (Er
 - Collections (`Vec`, `String`, `HashMap`) follow ownership rules
 - Use [AI](https://claude.ai/) to explore design patterns and learn idioms
 
-**Lab 11 due:** Sunday, November 16 at 11:59 PM
+**Lab 11 workflow:**
+
+```bash
+cargo test
+cargo fmt
+cargo clippy -- -D warnings
+git add week11/
+git commit -m "Complete lab 11"
+git push origin main
+```
+
+A green Week 11 badge represents the complete 10-point lab.
 
 **Office hours:** Available on [Microsoft Teams](https://www.microsoft.com/en-us/microsoft-teams/group-chat-software) - reach out anytime!
 

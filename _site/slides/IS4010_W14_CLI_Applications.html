@@ -11,7 +11,7 @@
   <meta name="generator" content="quarto-1.8.25">
 
   <meta name="author" content="Brandon M. Greenwell">
-  <title>IS 4010 - App Dev with AI – IS4010: AI-Enhanced Application Development</title>
+  <title>IS 4010 - App Dev with AI – IS4010: AI-enhanced application development</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -198,8 +198,8 @@
     <div class="slides">
 
 <section id="title-slide" class="quarto-title-block center">
-  <h1 class="title">IS4010: AI-Enhanced Application Development</h1>
-  <p class="subtitle">Week 14: CLI Applications</p>
+  <h1 class="title">IS4010: AI-enhanced application development</h1>
+  <p class="subtitle">Week 14: CLI applications</p>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -211,20 +211,20 @@ Brandon M. Greenwell
 
 </section>
 <section id="week-14-overview" class="slide level2 inverse">
-<h2>Week 14 Overview</h2>
-<p><strong>Session 1: CLI Architecture &amp; <code>clap</code></strong> - The anatomy of a CLI tool - Argument parsing with the <code>clap</code> crate - Subcommands and flags</p>
-<p><strong>Session 2: Capstone Integration</strong> - Managing external crates (<code>rand</code>) - Structuring larger projects (modules) - Synthesizing traits, ownership, and error handling</p>
+<h2>Week 14 overview</h2>
+<p><strong>Session 1: CLI architecture and <code>clap</code></strong> - The anatomy of a CLI tool - Argument parsing with the <code>clap</code> crate - Subcommands and flags</p>
+<p><strong>Session 2: Capstone integration</strong> - Managing external crates (<code>rand</code>) - Structuring larger projects (modules) - Synthesizing traits, ownership, and error handling</p>
 </section>
 <section class="slide level2">
 
 </section>
 <section>
-<section id="session-1-cli-architecture-clap" class="title-slide slide level1 inverse center">
-<h1>Session 1: CLI Architecture &amp; <code>clap</code></h1>
+<section id="session-1-cli-architecture-and-clap" class="title-slide slide level1 inverse center">
+<h1>Session 1: CLI architecture and <code>clap</code></h1>
 
 </section>
-<section id="the-power-of-the-cli" class="slide level2">
-<h2>The Power of the CLI</h2>
+<section id="the-value-of-a-cli" class="slide level2">
+<h2>The value of a CLI</h2>
 <p>While graphical interfaces (GUIs) are great for end-users, command-line interfaces (CLIs) remain the backbone of developer tooling.</p>
 <p><strong>Why build CLI tools?</strong> - <strong>Automation:</strong> Easily scriptable in CI/CD pipelines - <strong>Speed:</strong> Faster for power users to execute complex commands - <strong>Composability:</strong> Can be piped together (<code>grep | wc -l</code>) - <strong>Low Overhead:</strong> Minimal system resources required</p>
 <p><em>Think about the tools you use: <code>git</code>, <code>python</code>, <code>cargo</code>, <code>pytest</code>.</em></p>
@@ -243,12 +243,12 @@ Brandon M. Greenwell
       }</style></aside>
 </section>
 <section id="anatomy-of-a-cli-command" class="slide level2">
-<h2>Anatomy of a CLI Command</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a></a><span class="ex">cargo</span> run <span class="at">--bin</span> password_gen <span class="at">--</span> random <span class="at">--length</span> 16 <span class="at">--symbols</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Let’s break this down: 1. <strong>Executable:</strong> <code>cargo run --bin password_gen --</code> (The program itself) 2. <strong>Subcommand:</strong> <code>random</code> (A major action the program can take) 3. <strong>Option / Argument:</strong> <code>--length 16</code> (A named parameter with a value) 4. <strong>Flag:</strong> <code>--symbols</code> (A boolean toggle, no value needed)</p>
+<h2>Anatomy of a CLI command</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a></a><span class="ex">cargo</span> run <span class="at">--</span> random <span class="at">--length</span> 16 <span class="at">--symbols</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Let’s break this down: 1. <strong>Executable:</strong> <code>cargo run --</code> builds and starts the Week 14 binary 2. <strong>Subcommand:</strong> <code>random</code> (A major action the program can take) 3. <strong>Option / Argument:</strong> <code>--length 16</code> (A named parameter with a value) 4. <strong>Flag:</strong> <code>--symbols</code> (A boolean toggle, no value needed)</p>
 </section>
 <section id="argument-parsing-in-rust" class="slide level2">
-<h2>Argument Parsing in Rust</h2>
+<h2>Argument parsing in Rust</h2>
 <p>You <em>could</em> parse arguments manually using <code>std::env::args()</code>.</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb2-1"><a></a><span class="kw">use</span> <span class="pp">std::</span>env<span class="op">;</span></span>
 <span id="cb2-2"><a></a></span>
@@ -261,18 +261,18 @@ Brandon M. Greenwell
 <p><strong>Why is this bad?</strong> - Manual string parsing is error-prone. - Type conversion (String to integer) is tedious. - Generating <code>--help</code> menus manually is a nightmare.</p>
 </section>
 <section id="enter-clap" class="slide level2">
-<h2>Enter <code>clap</code> 👏</h2>
-<p><code>clap</code> (Command Line Argument Parser) is the industry standard crate for building CLIs in Rust.</p>
-<p><strong>Features:</strong> - Declarative macro-based or derive-based API - Automatic <code>--help</code> and <code>--version</code> generation - Built-in type validation and bounds checking - Subcommand routing</p>
-<p><em>Fun Fact: The Cargo CLI itself uses <code>clap</code> under the hood!</em></p>
+<h2>Enter <code>clap</code></h2>
+<p><code>clap</code> (Command Line Argument Parser) is a widely used crate for building CLIs in Rust.</p>
+<p><strong>Features:</strong> - Declarative macro-based or derive-based API - Automatic <code>--help</code> and <code>--version</code> generation - Type parsing and configurable value validation - Subcommand routing</p>
+<p>The course uses <code>clap</code>’s derive API so the command structure is visible in Rust structs and enums.</p>
 </section>
 <section id="setting-up-clap" class="slide level2">
 <h2>Setting up <code>clap</code></h2>
-<p>First, add it to your <code>Cargo.toml</code>. We enable the <code>derive</code> feature to use Rust’s powerful attribute macros.</p>
+<p>First, add it to your <code>Cargo.toml</code>. The <code>derive</code> feature enables the macro API used in these examples.</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode numberSource toml number-lines code-with-copy"><code class="sourceCode toml"><span id="cb3-1"><a></a><span class="kw">[dependencies]</span></span>
 <span id="cb3-2"><a></a><span class="dt">clap</span> <span class="op">=</span> <span class="op">{ </span><span class="dt">version</span><span class="op"> =</span> <span class="st">"4.5"</span><span class="op">, </span><span class="dt">features</span><span class="op"> =</span> <span class="op">[</span><span class="st">"derive"</span><span class="op">] }</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <aside class="notes">
-<p>Explain that <code>features = ["derive"]</code> is crucial. It allows us to define our CLI using Rust structs and enums rather than a builder pattern.</p>
+<p>Explain that <code>features = ["derive"]</code> enables <code>Parser</code>, <code>Subcommand</code>, and related derive macros. The builder API is an alternative.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -285,8 +285,8 @@ Brandon M. Greenwell
           display:block!important;
       }</style></aside>
 </section>
-<section id="defining-a-cli-with-clap-struct" class="slide level2">
-<h2>Defining a CLI with <code>clap</code> (Struct)</h2>
+<section id="defining-a-cli-with-clap-using-a-struct" class="slide level2">
+<h2>Defining a CLI with <code>clap</code> using a struct</h2>
 <p>We define our expected arguments as a standard Rust <code>struct</code>.</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb4-1"><a></a><span class="kw">use</span> <span class="pp">clap::</span>Parser<span class="op">;</span></span>
 <span id="cb4-2"><a></a></span>
@@ -308,8 +308,8 @@ Brandon M. Greenwell
 <span id="cb4-18"><a></a>    <span class="pp">println!</span>(<span class="st">"Length: {}, Symbols: {}"</span><span class="op">,</span> cli<span class="op">.</span>length<span class="op">,</span> cli<span class="op">.</span>symbols)<span class="op">;</span></span>
 <span id="cb4-19"><a></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
-<section id="subcommands-with-clap-enum" class="slide level2">
-<h2>Subcommands with <code>clap</code> (Enum)</h2>
+<section id="subcommands-with-clap-using-an-enum" class="slide level2">
+<h2>Subcommands with <code>clap</code> using an enum</h2>
 <p>For complex tools (like <code>git</code> or <code>cargo</code>), you use subcommands. We model these using an <code>enum</code>.</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb5-1"><a></a><span class="kw">use</span> <span class="pp">clap::</span><span class="op">{</span>Parser<span class="op">,</span> Subcommand<span class="op">};</span></span>
 <span id="cb5-2"><a></a></span>
@@ -334,8 +334,8 @@ Brandon M. Greenwell
 <span id="cb5-21"><a></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="pattern-matching-on-subcommands" class="slide level2">
-<h2>Pattern Matching on Subcommands</h2>
-<p>Once parsed, we use Rust’s powerful <code>match</code> statement to route the logic:</p>
+<h2>Pattern matching on subcommands</h2>
+<p>Once parsed, use <code>match</code> to route each subcommand:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb6-1"><a></a><span class="kw">fn</span> main() <span class="op">{</span></span>
 <span id="cb6-2"><a></a>    <span class="kw">let</span> cli <span class="op">=</span> <span class="pp">Cli::</span>parse()<span class="op">;</span></span>
 <span id="cb6-3"><a></a></span>
@@ -369,22 +369,22 @@ Brandon M. Greenwell
 </section></section>
 <section>
 <section id="session-2-capstone-integration" class="title-slide slide level1 inverse center">
-<h1>Session 2: Capstone Integration</h1>
+<h1>Session 2: capstone integration</h1>
 
 </section>
-<section id="synthesizing-14-weeks-of-rust" class="slide level2 scrollable">
-<h2>Synthesizing 14 Weeks of Rust</h2>
+<section id="synthesizing-six-weeks-of-rust" class="slide level2 scrollable">
+<h2>Synthesizing six weeks of Rust</h2>
 <p>Building a CLI application isn’t just about parsing arguments. It requires pulling together everything we’ve learned:</p>
 <ol type="1">
-<li><strong>Project Structure:</strong> Using modules (<code>mod</code>) to separate UI from logic.</li>
-<li><strong>External Crates:</strong> Using <code>rand</code> for secure number generation.</li>
-<li><strong>Traits &amp; Generics:</strong> Printing output cleanly and handling diverse data types.</li>
-<li><strong>Ownership:</strong> Safely passing strings between validators and generators.</li>
+<li><strong>Project structure:</strong> Use modules (<code>mod</code>) to separate the interface from logic.</li>
+<li><strong>External crates:</strong> Use <code>rand</code> for random generation.</li>
+<li><strong>Traits and generics:</strong> Format output and reuse behavior.</li>
+<li><strong>Ownership:</strong> Pass strings between validators and generators safely.</li>
 </ol>
 </section>
 <section id="structuring-larger-projects" class="slide level2">
-<h2>Structuring Larger Projects</h2>
-<p>Don’t put everything in <code>main.rs</code>. A professional CLI tool separates the argument parsing (the interface) from the actual business logic.</p>
+<h2>Structuring larger projects</h2>
+<p>Keep <code>main.rs</code> focused on parsing and routing; place password generation and validation in the supplied modules so they can be tested independently.</p>
 <pre><code>src/
 ├── main.rs       # CLI definition and command routing
 ├── generator.rs  # Password generation logic
@@ -396,7 +396,7 @@ Brandon M. Greenwell
 <span id="cb8-4"><a></a><span class="co">// Now you can call generator::generate_random(...)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="working-with-the-rand-crate" class="slide level2">
-<h2>Working with the <code>rand</code> Crate</h2>
+<h2>Working with the <code>rand</code> crate</h2>
 <p>Randomness is not built into the Rust standard library (unlike Python’s <code>import random</code>). You must use an external crate.</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode numberSource toml number-lines code-with-copy"><code class="sourceCode toml"><span id="cb9-1"><a></a><span class="kw">[dependencies]</span></span>
 <span id="cb9-2"><a></a><span class="dt">rand</span> <span class="op">=</span> <span class="st">"0.8"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -413,7 +413,7 @@ Brandon M. Greenwell
 <span id="cb10-11"><a></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="selecting-random-characters" class="slide level2">
-<h2>Selecting Random Characters</h2>
+<h2>Selecting random characters</h2>
 <p>To generate a password, we often need to select random characters from a slice.</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb11-1"><a></a><span class="kw">use</span> <span class="pp">rand::</span>Rng<span class="op">;</span></span>
 <span id="cb11-2"><a></a><span class="kw">use</span> <span class="pp">rand::seq::</span>SliceRandom<span class="op">;</span></span>
@@ -442,13 +442,18 @@ Brandon M. Greenwell
       }</style></aside>
 </section>
 <section id="lab-14-the-capstone-cli" class="slide level2">
-<h2>Lab 14: The Capstone CLI</h2>
-<p>For your final lab, you will build a complete Password Utility CLI.</p>
+<h2>Lab 14: the capstone CLI</h2>
+<p>For your final lab, you will complete a password utility CLI.</p>
 <p><strong>Features to implement:</strong> 1. <code>random</code>: Generate passwords from character sets. 2. <code>passphrase</code>: Generate correct-horse-battery-staple style passphrases. 3. <code>pin</code>: Generate numeric PINs. 4. <code>validate</code>: Calculate entropy and check for common patterns in existing passwords.</p>
 <p>You will implement the logic in <code>generator.rs</code> and <code>validator.rs</code>, and wire it up to the <code>clap</code> parser in <code>main.rs</code>.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a></a><span class="ex">cargo</span> test</span>
+<span id="cb12-2"><a></a><span class="ex">cargo</span> fmt</span>
+<span id="cb12-3"><a></a><span class="ex">cargo</span> clippy <span class="at">--</span> <span class="at">-D</span> warnings</span>
+<span id="cb12-4"><a></a><span class="ex">cargo</span> run <span class="at">--</span> random <span class="at">--length</span> 20 <span class="at">--symbols</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>A green Week 14 badge represents the complete 10-point lab.</p>
 </section>
 <section id="reviewing-ai-prompting-for-rust" class="slide level2">
-<h2>Reviewing AI Prompting for Rust</h2>
+<h2>Reviewing AI prompting for Rust</h2>
 <p>As you tackle the capstone, remember your AI Copilot strategies:</p>
 <ul>
 <li><strong>Good Prompt:</strong> “I need to implement this Rust function: <code>fn generate_pin(length: usize) -&gt; String</code>. I have the <code>rand</code> crate installed. Explain the approach using a <code>for</code> loop before showing any code.”</li>
@@ -457,18 +462,17 @@ Brandon M. Greenwell
 <p>Use AI to help you understand compiler errors, explore the <code>clap</code> documentation, and suggest idiomatic iterator patterns.</p>
 </section>
 <section id="wrapping-up-rust" class="slide level2">
-<h2>Wrapping Up Rust</h2>
-<p>Congratulations! You’ve traversed the steepest learning curve in modern programming.</p>
-<p>You’ve moved from Python’s dynamic, interpreted flexibility to Rust’s compiled, type-safe, and blazingly fast memory safety.</p>
-<p>You now have the vocabulary and experience to choose the right tool for the job.</p>
-<p><strong>Next week:</strong> Advanced AI Workflows.</p>
+<h2>Wrapping up Rust</h2>
+<p>You have moved from Python’s dynamic runtime model to Rust’s compiled type and ownership systems.</p>
+<p>You now have enough vocabulary to compare the trade-offs and continue learning either language.</p>
+<p><strong>Next week:</strong> Advanced AI workflows.</p>
 
 
 </section></section>
     </div>
   <div class="quarto-auto-generated-content" style="display: none;">
 <div class="footer footer-default">
-<p>IS4010: App Development with AI</p>
+<p>IS4010: App development with AI</p>
 </div>
 </div></div>
 

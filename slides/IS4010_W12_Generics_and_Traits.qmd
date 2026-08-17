@@ -1,6 +1,6 @@
 ---
-title: "IS4010: AI-Enhanced Application Development"
-subtitle: "Week 12: Generics and Traits"
+title: "IS4010: AI-enhanced application development"
+subtitle: "Week 12: Generics and traits"
 author: "Brandon M. Greenwell"
 format:
   revealjs:
@@ -9,14 +9,14 @@ format:
     slide-number: true
     chalkboard: true
     preview-links: auto
-    footer: "IS4010: App Development with AI"
+    footer: "IS4010: App development with AI"
     scrollable: true
     css: custom.css
 ---
 
-## Week 12 Overview {.inverse}
+## Week 12 overview {.inverse}
 
-**Session 1: Generic Types**
+**Session 1: generic types**
 
 - Understanding the problem: code duplication
 - Generic functions and structs
@@ -24,7 +24,7 @@ format:
 - Generic methods and implementations
 - Introduction to trait bounds
 
-**Session 2: Traits Deep Dive**
+**Session 2: traits in more depth**
 
 - Trait definitions and implementations
 - Default implementations and trait parameters
@@ -39,44 +39,44 @@ This week focuses on Rust's two big abstraction tools: generics and traits. If y
 
 In Python, you generally don't worry about code reuse across types — duck typing lets you write one function and call it with anything that has the right methods at runtime. Python will simply raise an AttributeError or TypeError if something goes wrong. This is flexible but pushes errors to runtime.
 
-In Rust, the compiler needs to know at *compile time* exactly what types are used and what operations they support. Generics and traits are how you tell the compiler "this code works for any type, as long as it can do these specific things." The payoff: you catch type errors before your program ever runs, and the generated code is just as fast as if you'd written a separate version for each type.
+In Rust, the compiler needs to know at *compile time* what types are used and what operations they support. Generics and traits express "this code works for any type that provides these behaviors." This catches many type errors before execution, and static dispatch can produce specialized code without a virtual-call cost.
 
 **Session 1** covers generics — how to write one function or struct that works across many types.
 **Session 2** goes deeper on traits — how to define and enforce shared behavior contracts.
 
-Keep this framing in mind all week: Rust trades Python's runtime flexibility for compile-time correctness and performance.
+Keep the comparison scoped: Rust checks declared trait constraints at compile time, while Python normally relies on runtime behavior plus optional static analysis. Neither choice removes the need for tests.
 :::
 
 ---
 
-## Why Generics and Traits Matter {.inverse}
+## Why generics and traits matter {.inverse}
 
-**Real-world impact:**
+**Where they appear:**
 
 - **Rust standard library**: Built on generics (`Vec<T>`, `Option<T>`, `Result<T, E>`)
 - **Code reuse**: Write once, use with any type
-- **Type safety**: Compile-time guarantees without runtime cost
-- **Zero-cost abstractions**: No performance penalty
+- **Type checking**: Trait constraints are checked at compile time
+- **Static abstraction**: Generic code can be specialized without dynamic dispatch
 
-**Industry examples:**
+**Library examples:**
 
 - [Servo](https://servo.org/): Mozilla's parallel browser engine
 - [Tokio](https://tokio.rs/): Async runtime using generic futures
 - [Serde](https://serde.rs/): Generic serialization framework
 
 ::: {.notes}
-Point out that Python has generics too (via the `typing` module and, since 3.9, built-in syntax like `list[int]`), but Python generics are mostly documentation and tooling hints — they aren't enforced at runtime. In Rust, generics are fully enforced at compile time with zero extra cost at runtime.
+Point out that Python has generics too (via the `typing` module and built-in syntax such as `list[int]`), but those annotations are normally checked by external tools rather than enforced by the runtime. Rust checks generic constraints at compile time.
 
-The "zero-cost abstractions" point is worth dwelling on. When you write `Vec<i32>`, Rust generates machine code that is identical to what you'd write if you hardcoded `i32` everywhere. There's no boxing, no virtual dispatch, no overhead — the compiler monomorphizes (creates a concrete copy of) the generic code for each type you use it with. In Python, a list holds heterogeneous objects via pointers and the overhead of the interpreter is always present.
+Explain monomorphization: for many generic functions and types, Rust creates concrete code for the type arguments used. This often avoids dynamic dispatch, although optimization, code size, and performance still depend on the program and compiler. CPython lists store references to Python objects and operations pass through the dynamic runtime, so the representation and trade-offs differ.
 
-`Vec<T>`, `Option<T>`, and `Result<T, E>` are the most important generic types they've already seen in this course. Pointing to Servo, Tokio, and Serde reinforces that these aren't just academic concepts — they're the backbone of real, production Rust systems.
+Use `Vec<T>`, `Option<T>`, and `Result<T, E>` as familiar examples. Servo, Tokio, and Serde show the same language features at a larger scale, but their designs involve more than generics alone.
 :::
 
 ---
 
-# Session 1: Generics and Traits
+# Session 1: generics and traits
 
-## Understanding the Problem {.smaller}
+## Understanding the problem {.smaller}
 
 **Without generics, you need duplicate code:**
 
@@ -131,7 +131,7 @@ This is the motivating problem generics solve.
 
 ---
 
-## Introducing Generics {.smaller}
+## Introducing generics {.smaller}
 
 **Generic functions work with multiple types:**
 
@@ -183,7 +183,7 @@ But again, Python doesn't enforce this at runtime. In Rust, if you try to call `
 
 ---
 
-## Generic Structs {.smaller}
+## Generic structs {.smaller}
 
 **Define structs that work with any type:**
 
@@ -215,7 +215,7 @@ fn main() {
 [📖 Rust Book: Generic Structs](https://doc.rust-lang.org/book/ch10-01-syntax.html#in-struct-definitions)
 
 ::: {.notes}
-**Python parallel:** Think of a Python dataclass — it's always generic in the sense that fields can be any type. But there's no mechanism to express "this field and that field must be the *same* type":
+**Python parallel:** An unparameterized Python dataclass may accept values dynamically. A generic dataclass can express relationships with `TypeVar`, but enforcement normally comes from a static type checker rather than the runtime:
 
 ```python
 from dataclasses import dataclass
@@ -235,7 +235,7 @@ That's where `Point<T, U>` comes in: it says x and y can be *different* types. T
 
 ---
 
-## Generic Enums {.smaller}
+## Generic enums {.smaller}
 
 **You've been using generic enums all along:**
 
@@ -256,11 +256,11 @@ enum Result<T, E> {
 **Usage:**
 
 ```rust
-fn divide(a: f64, b: f64) -> Result<f64, String> {
-    if b == 0.0 {
-        Err(String::from("Division by zero"))
+fn validate_username(name: &str) -> Result<&str, String> {
+    if name.trim().is_empty() {
+        Err(String::from("Username cannot be empty"))
     } else {
-        Ok(a / b)
+        Ok(name)
     }
 }
 ```
@@ -268,18 +268,18 @@ fn divide(a: f64, b: f64) -> Result<f64, String> {
 [📖 Rust Book: Generic Enums](https://doc.rust-lang.org/book/ch10-01-syntax.html#in-enum-definitions)
 
 ::: {.notes}
-This is a great "aha moment" slide. Students have been writing `Option<T>` and `Result<T, E>` for weeks — now they can see exactly what those are: generic enums defined in the standard library. They're not magic built-in types; they're just well-designed Rust code.
+Students have been writing `Option<T>` and `Result<T, E>` for weeks. Use their definitions to show that these are generic standard-library enums rather than special syntax.
 
 **Python parallel:** Python's equivalent to `Option<T>` is `Optional[T]` (or `T | None` in modern Python). But in Python, `None` is a valid value for *any* variable — you don't get a compile-time guarantee that you've handled the null case. Rust's `Option<T>` forces you to explicitly handle `Some(value)` and `None` via pattern matching.
 
-Python's equivalent to `Result<T, E>` is raising and catching exceptions. The big difference: in Python, any function might raise an exception and you might not know about it until runtime. In Rust, a function that returns `Result<T, E>` is *advertising* in its type signature that it can fail, and the caller is forced to handle both cases.
+Python commonly reports comparable failures by raising exceptions, which are not normally declared in the function's type. A Rust function returning `Result<T, E>` advertises an expected failure channel in its signature; code must inspect or transform the result to access the success value.
 
-Connecting to the `divide` example: a Python equivalent would just use a try/except block. The Rust version makes the possibility of failure part of the function's public contract. Ask: which approach makes code easier to maintain and reason about?
+Connecting to the `validate_username` example: Python code might raise an exception or return a sentinel value. The Rust version makes the expected failure part of the function's public contract. Ask: which approach makes code easier to maintain and reason about?
 :::
 
 ---
 
-## Generic Methods {.smaller}
+## Generic methods {.smaller}
 
 **Methods on generic structs:**
 
@@ -333,12 +333,12 @@ class Point:
 
 In Python, `distance_from_origin` will crash at runtime if `x` and `y` aren't numbers. In Rust, `impl Point<f32>` limits that method to *only* `Point<f32>` instances — if you have a `Point<i32>` and try to call `.distance_from_origin()`, the compiler rejects it. That's a meaningful safety guarantee.
 
-This is a powerful pattern: you can add "bonus" methods to specific instantiations of your generic type, while keeping the core interface generic.
+This pattern adds methods to one concrete instantiation while keeping the core interface generic.
 :::
 
 ---
 
-## What Are Traits? {.smaller}
+## What are traits? {.smaller}
 
 **Traits define shared behavior:**
 
@@ -400,14 +400,14 @@ class Summary(Protocol):
     def summarize(self) -> str: ...
 ```
 
-**The key difference:** Rust traits are *nominal* — a type explicitly declares it implements a trait with `impl Trait for Type`. Python Protocols are *structural* — any class with the right methods satisfies the Protocol, even if it never heard of the Protocol. Rust's approach is more explicit and makes intent clearer.
+**The key difference:** Rust trait implementation is *nominal*—a type explicitly uses `impl Trait for Type`. Python protocols are *structural*—a static checker can accept a class with the required members even when it never names the protocol.
 
-Also note: Rust has no inheritance. There's no "is-a" relationship between structs. Traits are the *only* way to express shared behavior, which forces a cleaner, more compositional design.
+Rust structs do not form class-inheritance hierarchies. Traits express shared behavior, while enums, composition, and generic parameters model other relationships.
 :::
 
 ---
 
-## Default Trait Implementations {.smaller}
+## Default trait implementations {.smaller}
 
 **Traits can provide default behavior:**
 
@@ -470,7 +470,7 @@ In both Python and Rust, you can:
 
 ---
 
-## Traits as Parameters {.smaller}
+## Traits as parameters {.smaller}
 
 **Accept any type implementing a trait:**
 
@@ -523,7 +523,7 @@ Also note that `+` for multiple bounds in Rust is analogous to defining a Protoc
 
 ---
 
-## The `where` Clause {.smaller}
+## The `where` clause {.smaller}
 
 **Make complex trait bounds readable:**
 
@@ -578,7 +578,7 @@ Emphasize that both styles compile to exactly the same code. This is purely abou
 
 ---
 
-## Returning Trait Types {.smaller}
+## Returning trait types {.smaller}
 
 **Return types that implement traits:**
 
@@ -616,7 +616,7 @@ def returns_summarizable() -> Summary:
 
 And Python has no problem returning different types from different branches — the duck typing just works. This is an area where Rust is more restrictive.
 
-**Why the limitation exists:** When Rust compiles `-> impl Summary`, it needs to know the *exact* concrete type at compile time for monomorphization. If different branches return `NewsArticle` and `Tweet`, those are different sizes in memory and the compiler can't handle that with `impl Trait`.
+**Why the limitation exists:** A return-position `impl Summary` represents one hidden concrete return type. Returning `NewsArticle` from one branch and `Tweet` from another would select two concrete types, so this signature does not accept it.
 
 **The fix for the limitation (preview, don't go deep here):** `Box<dyn Summary>` uses a trait *object* — a pointer with a vtable for runtime dispatch, like Python's normal object dispatch. This has a small runtime cost but enables returning different types:
 
@@ -638,7 +638,7 @@ Students will encounter `dyn Trait` naturally as they write more complex Rust. M
 
 ---
 
-## Common Standard Library Traits {.smaller}
+## Common standard library traits {.smaller}
 
 **Frequently used traits you should know:**
 
@@ -680,7 +680,7 @@ This is a great reference slide to return to throughout the semester.
 
 ---
 
-## Deriving Traits {.smaller}
+## Deriving traits {.smaller}
 
 **Automatically implement common traits:**
 
@@ -739,7 +739,7 @@ The Rust `#[derive(Debug, Clone, PartialEq)]` is conceptually the same — the c
 
 ---
 
-## Implementing Display Trait {.smaller}
+## Implementing the `Display` trait {.smaller}
 
 **Custom formatting for user-facing output:**
 
@@ -796,7 +796,7 @@ def __repr__(self):
 - `write!(f, "({}, {})", self.x, self.y)` — `write!` is a macro that writes formatted text to the formatter `f`. It returns `fmt::Result`, which your function returns directly.
 
 **When to implement each:**
-- `Debug` (via `#[derive(Debug)]`) — always, for debugging and logging
+- `Debug` (often via `#[derive(Debug)]`) — when diagnostic formatting is useful
 - `Display` (manual) — when you have a user-facing string representation that makes semantic sense for your type
 
 **Automatic bonus:** Once a type implements `Display`, it automatically implements the `ToString` trait, which gives you a `.to_string()` method for free.
@@ -804,7 +804,7 @@ def __repr__(self):
 
 ---
 
-## Implementing Iterator Trait {.smaller}
+## Implementing the `Iterator` trait {.smaller}
 
 **Make your types iterable:**
 
@@ -863,20 +863,20 @@ The mapping is very direct:
 | `raise StopIteration` | return `None` |
 | `return value` | return `Some(value)` |
 
-**Associated types:** The `type Item = u32;` line introduces an *associated type* — a type that's part of the trait's interface. The `Iterator` trait says "you must define what type your items are." This is more type-safe than a generic parameter would be.
+**Associated types:** The `type Item = u32;` line selects the item type for this implementation of `Iterator`. This design makes one `Item` type part of each implementation's trait contract.
 
-**The free lunch:** Once you implement `next()`, Rust's standard library provides all of these methods automatically on your `Counter` type:
+**Provided adaptors:** Once you implement `next()`, the `Iterator` trait's provided methods become available on `Counter`:
 - `.map()`, `.filter()`, `.fold()`, `.collect()`
 - `.zip()`, `.enumerate()`, `.take()`, `.skip()`
 - `.sum()`, `.product()`, `.count()`
 - And many more!
 
-This is the same philosophy as Python's `__iter__`/`__next__` — implement the primitive, get the ecosystem for free. But Rust's iterator adapters are all zero-cost: they compile down to simple loops with no heap allocation.
+This resembles Python's `__iter__`/`__next__`: implement the primitive operation and gain provided adaptor methods. Rust's adaptors are lazy and often inline into efficient loops, but terminal operations such as `collect()` may allocate and performance still depends on the full pipeline.
 :::
 
 ---
 
-## Generic Stack Example {.smaller}
+## Generic stack example {.smaller}
 
 **Building a generic data structure:**
 
@@ -887,19 +887,19 @@ struct Stack<T> {
 
 impl<T> Stack<T> {
     fn new() -> Stack<T> {
-        Stack { items: Vec::new() }
+        todo!("construct an empty stack")
     }
 
     fn push(&mut self, item: T) {
-        self.items.push(item);
+        todo!("place item on top")
     }
 
     fn pop(&mut self) -> Option<T> {
-        self.items.pop()
+        todo!("remove and return the top item")
     }
 
     fn is_empty(&self) -> bool {
-        self.items.is_empty()
+        todo!("report whether the stack has no items")
     }
 }
 ```
@@ -919,21 +919,21 @@ len(stack) == 0        # is_empty
 
 In Rust, this is a teaching example — the purpose is to practice generics and traits, not to build something Python doesn't have. That said, a Rust `Stack<T>` has a real advantage: it's a *type-safe contract*. A `Stack<i32>` can *only* hold i32s. Python lists can hold anything mixed together.
 
-**Walk through the code:**
+**Walk through the signatures:**
 
 - `struct Stack<T>` — generic struct that wraps a `Vec<T>`
 - `impl<T> Stack<T>` — implementing methods for all T; remember the `impl<T>` declares the generic before `Stack<T>` uses it
-- `fn new() -> Stack<T>` — constructor that returns an empty stack
-- `fn push(&mut self, item: T)` — `&mut self` because we're modifying the stack; `item: T` means it takes ownership of the item
-- `fn pop(&mut self) -> Option<T>` — returns `Option<T>` because the stack might be empty; `Vec::pop()` already returns `Option`, so this is a clean passthrough
-- `fn is_empty(&self)` — `&self` (read-only reference) is enough since we're not modifying anything
+- `fn new() -> Stack<T>` — associated function that returns an empty stack
+- `fn push(&mut self, item: T)` — mutably borrows the stack and takes ownership of `item`
+- `fn pop(&mut self) -> Option<T>` — returns `None` when the stack is empty
+- `fn is_empty(&self)` — needs only an immutable borrow
 
-**Lab preview:** Students will extend this with `peek`, `len`, and then implement `Display` and `Iterator` for it — applying everything from today's session in one integrated exercise.
+**Lab preview:** Students will extend this with `peek` and `len`, then implement `Display` for it. The supplied tests cover the required behavior.
 :::
 
 ---
 
-## 🤖 AI Prompting: Generics and Traits {.smaller}
+## AI prompting: generics and traits {.smaller}
 
 **Design assistance:**
 - "Help me design a generic cache data structure in Rust"
@@ -968,9 +968,9 @@ Rust's trait system is one of the areas where AI assistants are genuinely most h
 
 ---
 
-# Session 2: Traits Deep Dive
+# Session 2: traits in more depth
 
-## Traits: Defining Shared Behavior {.inverse}
+## Traits: defining shared behavior {.inverse}
 
 **What we'll cover:**
 
@@ -981,107 +981,116 @@ Rust's trait system is one of the areas where AI assistants are genuinely most h
 - Advanced trait bounds with where clauses
 - Common standard library traits
 
-**Goal**: Master Rust's powerful trait system for polymorphism and code reuse
+**Goal**: Read and write trait implementations, bounds, and generic interfaces
 
 ::: {.notes}
 Session 2 is a deeper pass at traits, revisiting the concepts from Session 1 with more detail and more examples. Use this slide to quickly re-orient students after the break.
 
-**Key message to set up Session 2:** In Python, polymorphism comes almost entirely from inheritance and duck typing. In Rust, *traits are the entire story*. Rust has no class hierarchy, no mixins, no multiple inheritance. Everything that would be solved with inheritance in Python gets solved with traits in Rust — and the result tends to be more composable and easier to reason about.
+**Key message to set up Session 2:** Python commonly uses inheritance, protocols, and duck typing for polymorphism. Rust has no class hierarchy; traits express shared behavior and support both static and dynamic dispatch. Compare the designs in context rather than treating one as universally clearer.
 
 The four concepts to emphasize this session:
-1. Writing your own traits (not just implementing standard ones)
+1. Writing your own traits alongside implementations of standard traits
 2. Default implementations for reuse without inheritance
 3. Using traits to write flexible function signatures
-4. The common standard library traits that appear in almost every Rust program
+4. Common standard-library traits that appear throughout Rust code
 
 By the end of Session 2 students should feel comfortable reading and writing `impl Trait for Type` blocks and understanding what trait bounds in function signatures are saying.
 :::
 
 ---
 
-## Lab 12 Preview: Generic Stack {.inverse}
+## Lab 12 preview: generic stack {.inverse}
 
 **What you'll build:**
 
 - Generic `Stack<T>` data structure
 - Implement core methods: `push`, `pop`, `peek`, `is_empty`, `len`
 - Implement `Display` trait for custom formatting
-- Implement `Iterator` trait to make your stack iterable
-- Comprehensive test suite with 15+ tests
+- Use the supplied test suite without modifying it
 
 **Learning goals:**
 
 - Apply generics to create reusable data structures
 - Implement standard library traits
 - Understand trait bounds in practice
-- Write tests for generic types
+- Read tests for generic types and use their failures as evidence
 
-**Deliverable**: A fully functional, well-tested generic stack!
+---
+
+## Lab 12 workflow {.inverse}
+
+**Deliverable**: Complete the `todo!()` implementations in the supplied `Stack<T>` project without modifying the test module.
+
+```bash
+cargo test
+cargo fmt
+cargo clippy -- -D warnings
+git add week12/
+git commit -m "Complete lab 12"
+git push origin main
+```
+
+Confirm the Week 12 README badge is green; that badge is the complete 10-point grade. See [`week12/lab12.md`](https://github.com/bgreenwell/is4010-labs/blob/main/week12/lab12.md).
 
 ::: {.notes}
-This lab is designed to be the "putting it all together" moment for week 12. Each part of the lab exercises a specific concept:
+Each part of the lab exercises a specific concept:
 
 - **`Stack<T>` core methods** — practicing generic structs and `impl<T>` blocks; analogous to building a Python class around a list
 - **`Display` implementation** — practicing manual trait implementation; analogous to Python's `__str__`
-- **`Iterator` implementation** — the most challenging part; analogous to Python's `__iter__`/`__next__`
 
 **Common student stumbling blocks to warn about:**
 
 1. **Forgetting `impl<T>`** — writing `impl Stack<T>` without declaring `<T>` first on impl will confuse the compiler
 2. **`peek` returns a reference** — `fn peek(&self) -> Option<&T>`, not `Option<T>`, because you're just looking, not removing; this connects back to borrowing from earlier weeks
-3. **Iterator and mutable state** — `next` takes `&mut self` because it modifies the counter or index; students may try `&self` first
-4. **`collect()` on custom iterators** — to collect into a `Vec`, the iterator's `Item` type needs to be fully specified; type inference usually handles this but students may see cryptic errors
+3. **Formatting bounds** — the `Display` implementation must require `T: Display` before formatting stack elements
 
-**Encourage early starts:** The `Display` and `Iterator` implementations feel intimidating the first time. Encourage students to get the basic methods working first, then tackle the trait implementations one at a time. AI assistance is great for getting the trait signature boilerplate right — students can then focus on the logic.
+Encourage students to get the core methods working first, then implement `Display`. AI assistance can explain a trait-bound error, but the compiler and tests determine whether the implementation satisfies the contract.
 :::
 
 ---
 
-## Career Relevance {.smaller}
+## Where traits and generics are used {.smaller}
 
 **Why these skills matter:**
 
 **Generics:**
 - Foundation of modern language features (Java, C#, TypeScript, Swift, Go)
-- Essential for library and framework development
-- Interview questions: "Design a generic data structure"
-- Understanding constraints and bounds
+- Reusable library and application interfaces
+- Constraints and bounds that document supported operations
 
 **Traits/Interfaces:**
 - Interface design skills transfer to all languages
-- Composition over inheritance (modern best practice)
-- Critical for extensible systems and plugin architectures
-- Type system understanding for advanced roles
+- Composition as an alternative to inheritance hierarchies
+- Extensible interfaces and selected plugin architectures
+- Explicit reasoning about static and dynamic dispatch
 
-**Real interview questions:**
+**Questions for review:**
 - "Explain the difference between generics and dynamic dispatch"
 - "Design an interface for [problem] - what methods would it have?"
 - "How would you make this code reusable across different types?"
 - "What are the tradeoffs between compile-time and runtime polymorphism?"
 
 ::: {.notes}
-Reinforce that learning Rust's explicit type system makes students *better* Python developers, not just Rust developers. After this course, they'll understand what Python type hints are actually modeling, when duck typing is the right tool, and when stronger contracts would prevent bugs.
+Use the comparison to sharpen specific questions: Which operations does the function require? Who checks that contract? At what stage does a mismatch appear? Avoid mapping Rust's type system to Python's separate EAFP-versus-LBYL runtime style choice.
 
-**The mental model shift:** Python encourages "EAFP" (Easier to Ask Forgiveness than Permission) — try the operation, catch the exception. Rust enforces "LBYL" (Look Before You Leap) at compile time. Understanding both paradigms makes you a more thoughtful programmer in any language.
-
-**For the interview question on generics vs dynamic dispatch:** Compile-time generics (Rust's `impl Trait` / Java's `<T>` / C++'s templates) generate specialized code per type — faster, but larger binary. Runtime dispatch (Rust's `dyn Trait` / Java's interface polymorphism / Python's default behavior) uses a vtable — slightly slower, but more flexible. Being able to explain this trade-off, and give an example of when you'd choose each, is a strong signal in technical interviews.
+**For the generics-versus-dynamic-dispatch question:** Rust's statically dispatched generics are typically monomorphized, which can enable optimization but increase code size. Rust trait objects use a vtable for runtime dispatch, trading some optimization opportunities for runtime flexibility. Measure when performance matters and explain when each representation fits the design.
 
 **Languages to connect this to:**
-- Java/C#: Generics look almost identical — `List<T>`, `<T extends Comparable<T>>`
-- TypeScript: Generics and interfaces map very closely to Rust's model
-- Go: Uses interfaces similarly to Rust traits, though without explicit `impl`
-- Haskell: Type classes are the direct theoretical ancestor of Rust traits
+- Java/C#: Similar parameter syntax, but different runtime representations and variance rules
+- TypeScript: Generic and structural interfaces checked by the TypeScript compiler
+- Go: Structural interface satisfaction rather than Rust's explicit trait implementation
+- Haskell: Type classes as a useful comparison for behavior constraints
 
-Students who understand Rust traits will find Java interfaces, TypeScript generics, and Go interfaces much easier to learn.
+Ask students to name one similarity and one difference before transferring the Rust mental model to another language.
 :::
 
 ---
 
-## Key Takeaways {.inverse}
+## Key takeaways {.inverse}
 
 **Generics:**
 - Enable code reuse without sacrificing type safety
-- Zero-cost abstractions - no runtime overhead
+- Static dispatch can avoid a virtual-call cost; measure the complete program when performance matters
 - Work with structs, enums, functions, and methods
 - Use trait bounds to constrain type parameters
 
@@ -1092,17 +1101,17 @@ Students who understand Rust traits will find Java interfaces, TypeScript generi
 - Can have default implementations for convenience
 
 **Together:**
-- Generics + Traits = Powerful, reusable abstractions
+- Generics and traits support reusable abstractions with compile-time constraints
 - Type safety at compile time
-- Expressive code that's still performant
-- Industry-standard design patterns
+- Explicit reusable interfaces with static or dynamic dispatch choices
+- Patterns used throughout Rust's standard library and ecosystem
 
 ::: {.notes}
-Use this slide to close the loop on the Python-to-Rust journey for the week.
+Use this slide to close the week's Python-to-Rust comparison.
 
 **The core insight for Python developers:**
 
-In Python, you get flexibility for free and pay for it in runtime errors and the need for comprehensive test coverage. In Rust, you pay upfront with explicit type annotations and trait bounds, and the compiler pays you back with a program that's harder to break.
+Python's dynamic runtime and optional static typing support rapid iteration but move some mismatches to tests or execution. Rust requires more contracts at compile time and can reject many type mismatches before execution. Both still need tests for behavior the type system does not express.
 
 Neither approach is universally better. Python's expressiveness is genuinely valuable for rapid prototyping, data science, and scripts. Rust's guarantees are genuinely valuable for systems programming, performance-critical code, and large teams where the compiler catches whole classes of bugs.
 
@@ -1125,7 +1134,7 @@ This table is a useful cheat sheet — consider posting it in the course Teams c
 
 ---
 
-## Additional Resources {.smaller}
+## Additional resources {.smaller}
 
 **Official documentation:**
 - [The Rust Book - Chapter 10: Generic Types, Traits, and Lifetimes](https://doc.rust-lang.org/book/ch10-00-generics.html)
@@ -1145,20 +1154,20 @@ This table is a useful cheat sheet — consider posting it in the course Teams c
 ::: {.notes}
 Point students toward these resources in order of priority:
 
-1. **Rust Book Chapter 10** — the definitive reference; covers everything in this lecture in more depth with additional examples. If students read only one resource this week, this should be it.
+1. **Rust Book Chapter 10** — the primary reference for this lecture's generics, traits, and lifetime material.
 
-2. **Tour of Rust's Standard Library Traits** (the pretzelhammer blog post) — this is a long but excellent deep dive into every important standard library trait. It's too detailed to read all at once, but it's an invaluable reference to bookmark and return to. Especially recommend the Iterator section.
+2. **Tour of Rust's Standard Library Traits** (the pretzelhammer blog post) — optional secondary reading with more detail on standard-library traits.
 
-3. **Rust by Example: Traits** — more code-focused with runnable examples. Great for students who learn by reading and tweaking code rather than reading prose explanations.
+3. **Rust by Example: Traits** — runnable examples for experimentation.
 
-4. **Rust Playground** — encourage students to paste code snippets from the slides and experiment with them. Try breaking things (remove a trait bound, return the wrong type) to see what error messages look like. The compiler error messages for trait-related issues are among the most educational in any language.
+4. **Rust Playground** — change one trait bound or return type at a time and interpret the resulting diagnostic.
 
 **For students coming from Python specifically:** The Rust Book's Chapter 10 occasionally mentions Java interfaces as a comparison point, which may not resonate as strongly. When reading, students can mentally substitute "Python ABC" or "Python Protocol" wherever it says "Java interface" — the concept maps well.
 :::
 
 ---
 
-## Next week: Idiomatic Rust {.inverse}
+## Next week: idiomatic Rust {.inverse}
 
 **Week 13 topics:**
 
@@ -1167,18 +1176,18 @@ Point students toward these resources in order of priority:
 - Idiomatic error handling with `Result`
 - A new Lab 13 assignment
 
-**Why it matters**: These patterns make Rust code expressive, safe, and production-ready.
+**Why it matters**: These patterns help express reusable behavior while preserving Rust's compile-time checks.
 
 **Focus**: Transfer this week's trait and generic foundations into idiomatic Rust patterns.
 
 ::: {.notes}
 Week 13's topics build naturally on this week. A few connections to foreshadow:
 
-- **Iterators:** The `Iterator` implementation for `Stack<T>` provides the bridge to Week 13's iterator pipelines and closures.
+- **Iterators:** Today's separate `Counter` example provides the bridge to Week 13's iterator pipelines and closures.
 - **Error handling with `Result`:** Students have seen `Result<T, E>` as a generic enum; Week 13 develops that pattern more idiomatically.
 - **Smart pointers:** Trait bounds and generic types remain central when students work with `Box`, `Rc`, and `RefCell`.
 
-Lab 13 continues the weekly cadence. Encourage students to finish Lab 12's Iterator implementation before moving on.
+Lab 13 continues the weekly cadence. Encourage students to finish Lab 12's `Display` implementation before moving on.
 :::
 
 ---
@@ -1189,7 +1198,7 @@ Lab 13 continues the weekly cadence. Encourage students to finish Lab 12's Itera
 
 - Office hours: [Schedule on Teams](https://teams.microsoft.com)
 - Course discussion: Microsoft Teams channel
-- AI tools: Claude, ChatGPT, GitHub Copilot
+- AI tools: browser chat, GitHub Copilot, Copilot CLI, or Antigravity CLI
 - Rust community: [users.rust-lang.org](https://users.rust-lang.org)
 
 **This week's materials:**
@@ -1200,9 +1209,9 @@ Lab 13 continues the weekly cadence. Encourage students to finish Lab 12's Itera
 
 ---
 
-## Start Lab 12! {.inverse}
+## Start Lab 12 {.inverse}
 
-**Lab due: Sunday, April 12, 2026, at 11:59 PM**
+**Follow the due date shown in Canvas.**
 
 **What to do:**
 
@@ -1210,9 +1219,9 @@ Lab 13 continues the weekly cadence. Encourage students to finish Lab 12's Itera
 2. Work through interactive exercises
 3. Begin Lab 12: Generic Stack implementation
 4. Apply generics and traits from this week
-5. Write comprehensive tests for your implementation
+5. Run the supplied tests, formatter check, and Clippy
 6. Ask questions early and often
 
-**Remember**: You're not just learning Rust - you're learning universal programming concepts that apply everywhere!
+**Remember**: A green Week 12 badge represents the complete 10-point lab.
 
 **Good luck!** 🦀

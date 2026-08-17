@@ -11,7 +11,7 @@
   <meta name="generator" content="quarto-1.8.25">
 
   <meta name="author" content="Brandon M. Greenwell">
-  <title>IS 4010 - App Dev with AI – IS4010: AI-Enhanced Application Development</title>
+  <title>IS 4010 - App Dev with AI – IS4010: AI-enhanced application development</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -196,8 +196,8 @@
     <div class="slides">
 
 <section id="title-slide" class="quarto-title-block center">
-  <h1 class="title">IS4010: AI-Enhanced Application Development</h1>
-  <p class="subtitle">Week 7: Working with External Data</p>
+  <h1 class="title">IS4010: AI-enhanced application development</h1>
+  <p class="subtitle">Week 07: Working with external data</p>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -210,20 +210,19 @@ Brandon M. Greenwell
 </section>
 <section>
 <section id="working-with-external-data" class="title-slide slide level1 center">
-<h1>Working with External Data 🌐</h1>
+<h1>Working with external data</h1>
 
 </section>
-<section id="from-local-files-to-the-entire-web" class="slide level2">
-<h2>From local files to the entire web</h2>
+<section id="from-local-files-to-web-apis" class="slide level2">
+<h2>From local files to web APIs</h2>
 <ul>
-<li class="fragment"><strong>The progression</strong>: Your app → Files → JSON → APIs → The world</li>
-<li class="fragment"><strong>Why this matters</strong>: No app exists in isolation - data flows between systems constantly</li>
-<li class="fragment"><strong>Real-world reality</strong>: Twitter, Stripe, GitHub, OpenAI - all expose APIs you can use</li>
-<li class="fragment"><strong>Career skill</strong>: API integration is one of the most in-demand programming capabilities</li>
-<li class="fragment"><strong>This week</strong>: Build apps that persist data locally AND fetch live data from the internet</li>
+<li class="fragment"><strong>The progression</strong>: Python values → files → JSON → HTTP responses</li>
+<li class="fragment"><strong>Why this matters</strong>: Applications often exchange data across process and system boundaries</li>
+<li class="fragment"><strong>Examples</strong>: GitHub, weather, mapping, and payment services document APIs for client applications</li>
+<li class="fragment"><strong>This week</strong>: Persist contacts locally and implement a testable HTTP client</li>
 </ul>
 <aside class="notes">
-<p><strong>Session Overview:</strong> - Part 1: File I/O and JSON - The foundation of data persistence - Part 2: HTTP APIs - Connecting your apps to external services - Unified theme: JSON is the universal language that makes data portable across files and networks - Lab 07 will combine both: save/load local data AND fetch live API data</p>
+<p><strong>Session overview:</strong> - Part 1: file I/O and JSON for persistence - Part 2: HTTP APIs and response handling - Lab 07 tests file behavior and an API client with local fakes, so the graded checks do not require network access</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -240,13 +239,13 @@ Brandon M. Greenwell
 
 </section></section>
 <section>
-<section id="part-1-files-json" class="title-slide slide level1 center">
-<h1>Part 1: Files &amp; JSON 📁</h1>
+<section id="part-1-files-and-json" class="title-slide slide level1 center">
+<h1>Part 1: files and JSON</h1>
 
 </section>
-<section id="the-problem-programs-have-amnesia" class="slide level2">
-<h2>🤔 The problem: Programs have amnesia</h2>
-<h3 id="when-the-script-ends-everything-disappears"><strong>When the script ends, everything disappears</strong></h3>
+<section id="the-problem-programs-have-no-persistent-state" class="slide level2">
+<h2>The problem: programs have no persistent state</h2>
+<h3 id="values-in-memory-disappear-when-the-process-ends"><strong>Values in memory disappear when the process ends</strong></h3>
 <ul>
 <li class="fragment"><strong>Every program so far</strong>: Variables, lists, dictionaries - all gone when the program exits</li>
 <li class="fragment"><strong>Real apps need memory</strong>: Contact lists, game progress, user preferences, shopping carts</li>
@@ -281,7 +280,7 @@ Brandon M. Greenwell
 <ul>
 <li class="fragment"><strong>Why <code>with</code>?</strong>: Automatically closes the file even if errors occur</li>
 <li class="fragment"><strong>File modes</strong>: <code>"r"</code> (read), <code>"w"</code> (write/overwrite), <code>"a"</code> (append)</li>
-<li class="fragment"><strong>Best practice</strong>: Always use <code>with</code> - prevents file corruption and resource leaks</li>
+<li class="fragment"><strong>Practice</strong>: Use <code>with</code> so the file closes reliably when the block exits</li>
 <li class="fragment">📚 <a href="https://docs.python.org/3/tutorial/inputoutput.html#reading-and-writing-files">Python file I/O documentation</a></li>
 </ul>
 <aside class="notes">
@@ -299,7 +298,7 @@ Brandon M. Greenwell
       }</style></aside>
 </section>
 <section id="the-problem-with-plain-text-files" class="slide level2">
-<h2>🚧 The problem with plain text files</h2>
+<h2>The problem with plain text files</h2>
 <h3 id="text-is-unstructured-and-hard-to-parse"><strong>Text is unstructured and hard to parse</strong></h3>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a></a><span class="co"># Saving a contact list to a text file - messy!</span></span>
 <span id="cb2-2"><a></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">"contacts.txt"</span>, <span class="st">"w"</span>) <span class="im">as</span> f:</span>
@@ -318,13 +317,13 @@ Brandon M. Greenwell
 <li class="fragment"><strong>The real solution</strong>: We need a <strong>standard data format</strong> everyone agrees on</li>
 </ul>
 </section>
-<section id="enter-json-the-universal-data-format" class="slide level2">
-<h2>Enter JSON: The universal data format 🌍</h2>
-<h3 id="javascript-object-notation---the-language-of-the-web"><strong>JavaScript Object Notation - The language of the web</strong></h3>
+<section id="enter-json-a-common-data-format" class="slide level2">
+<h2>Enter JSON: a common data format</h2>
+<h3 id="javascript-object-notation"><strong>JavaScript Object Notation</strong></h3>
 <ul>
 <li class="fragment"><strong>JSON</strong> is a simple, human-readable text format for representing structured data</li>
 <li class="fragment"><strong>Created</strong>: Early 2000s by Douglas Crockford - became the web’s standard (<a href="https://www.json.org/">JSON.org</a>)</li>
-<li class="fragment"><strong>Why it won</strong>: Simple, language-agnostic, maps perfectly to most programming languages</li>
+<li class="fragment"><strong>Why it is common</strong>: It is text-based, language-independent, and maps naturally to familiar collections</li>
 <li class="fragment"><strong>Ubiquity</strong>: APIs, config files, databases, logs - JSON is everywhere</li>
 <li class="fragment"><strong>Python advantage</strong>: JSON maps directly to Python’s built-in types</li>
 </ul>
@@ -374,8 +373,8 @@ Brandon M. Greenwell
 </tbody>
 </table>
 <ul>
-<li class="fragment"><strong>Key insight</strong>: If you know Python dicts/lists, you already know JSON</li>
-<li class="fragment"><strong>This makes</strong>: Reading/writing JSON in Python incredibly easy</li>
+<li class="fragment"><strong>Key insight</strong>: JSON objects and arrays map closely to Python dictionaries and lists</li>
+<li class="fragment"><strong>Limitation</strong>: JSON supports fewer data types than Python</li>
 </ul>
 </section>
 <section id="using-pythons-json-library" class="slide level2">
@@ -408,7 +407,7 @@ Brandon M. Greenwell
 </ul>
 </section>
 <section id="what-the-generated-json-looks-like" class="slide level2">
-<h2>🎯 What the generated JSON looks like</h2>
+<h2>What the generated JSON looks like</h2>
 <h3 id="contacts.json"><strong>contacts.json</strong></h3>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode numberSource json number-lines code-with-copy"><code class="sourceCode json"><span id="cb4-1"><a></a><span class="fu">{</span></span>
 <span id="cb4-2"><a></a>    <span class="dt">"people"</span><span class="fu">:</span> <span class="ot">[</span></span>
@@ -431,9 +430,9 @@ Brandon M. Greenwell
 <li class="fragment"><strong>Portable</strong>: Email this file to a teammate, they can load it instantly</li>
 </ul>
 </section>
-<section id="why-json-matters-for-apis-preview" class="slide level2">
-<h2>💡 Why JSON matters for APIs (preview)</h2>
-<h3 id="the-connection-to-part-2"><strong>The connection to Part 2</strong></h3>
+<section id="why-json-matters-for-apis" class="slide level2">
+<h2>Why JSON matters for APIs</h2>
+<h3 id="the-connection-to-part-2"><strong>The connection to part 2</strong></h3>
 <ul>
 <li class="fragment"><strong>Files are local</strong>: Your computer reads/writes JSON files</li>
 <li class="fragment"><strong>APIs are remote</strong>: Other computers send/receive JSON over the internet</li>
@@ -460,7 +459,7 @@ Brandon M. Greenwell
 </section></section>
 <section>
 <section id="part-2-working-with-apis" class="title-slide slide level1 center">
-<h1>Part 2: Working with APIs 🔌</h1>
+<h1>Part 2: working with APIs</h1>
 
 </section>
 <section id="what-is-an-api" class="slide level2">
@@ -468,17 +467,17 @@ Brandon M. Greenwell
 <h3 id="application-programming-interface"><strong>Application Programming Interface</strong></h3>
 <ul>
 <li class="fragment"><strong>An API</strong> is a set of rules that allows different software applications to communicate</li>
-<li class="fragment"><strong>Simple analogy</strong>: A restaurant menu
+<li class="fragment"><strong>Working analogy</strong>: A restaurant menu
 <ul>
 <li class="fragment">Menu (API) tells you what you can order (available operations)</li>
 <li class="fragment">You don’t need to know how the kitchen works (implementation details)</li>
 <li class="fragment">You just make a request, and get food back (data)</li>
 </ul></li>
 <li class="fragment"><strong>APIs define</strong>: What operations are available, what data to send, what you get back</li>
-<li class="fragment">📚 <a href="https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Client-side_web_APIs/Introduction">What is an API? (MDN)</a></li>
+<li class="fragment"><a href="https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Client-side_web_APIs/Introduction">What is an API? (MDN)</a></li>
 </ul>
 <aside class="notes">
-<p><strong>Examples of APIs students use daily:</strong> - Instagram API: Apps like Buffer post to Instagram programmatically - Google Maps API: Uber/Lyft use it for navigation - Stripe API: E-commerce sites process payments - OpenAI API: ChatGPT-powered applications</p>
+<p>Use the GitHub endpoint in the deck as the concrete example. Product integrations change; avoid asserting which private vendor a named application uses unless a current primary source supports it.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -491,8 +490,8 @@ Brandon M. Greenwell
           display:block!important;
       }</style></aside>
 </section>
-<section id="web-apis-apps-talking-over-the-internet" class="slide level2 scrollable">
-<h2>🌐 Web APIs: Apps talking over the internet</h2>
+<section id="web-apis-applications-exchanging-data" class="slide level2 scrollable">
+<h2>Web APIs: applications exchanging data</h2>
 <h3 id="http-as-the-communication-protocol"><strong>HTTP as the communication protocol</strong></h3>
 <ul>
 <li class="fragment"><strong>Web APIs</strong> use <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Overview">HTTP</a> (HyperText Transfer Protocol) to communicate over the internet</li>
@@ -503,11 +502,11 @@ Brandon M. Greenwell
 <li class="fragment">Remote server processes the request</li>
 <li class="fragment">Server sends back an <strong>HTTP response</strong> with data (usually JSON!)</li>
 </ol></li>
-<li class="fragment"><strong>Key insight</strong>: Reading API data is just like reading a JSON file, but from a remote server</li>
+<li class="fragment"><strong>Connection</strong>: Both paths can produce Python dictionaries and lists, but HTTP adds status codes, latency, authentication, and network failures</li>
 </ul>
 </section>
 <section id="anatomy-of-a-web-api-request" class="slide level2">
-<h2>🔍 Anatomy of a web API request</h2>
+<h2>Anatomy of a web API request</h2>
 <h3 id="url-structure-and-http-methods"><strong>URL structure and HTTP methods</strong></h3>
 <pre><code>https://api.github.com/users/octocat/repos
 └─┬─┘ └────────┬─────────┘ └─────┬────────┘
@@ -518,18 +517,17 @@ protocol</code></pre>
 <li class="fragment"><strong>Endpoint</strong>: <code>/users/octocat/repos</code> - the specific resource you want</li>
 <li class="fragment"><strong>HTTP method</strong>: <code>GET</code> (retrieve data), <code>POST</code> (send data), <code>PUT</code> (update), <code>DELETE</code> (remove)</li>
 <li class="fragment"><strong>For now</strong>: We’ll focus on <code>GET</code> requests to retrieve data</li>
-<li class="fragment">📚 <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods">HTTP methods explained</a></li>
+<li class="fragment"><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods">HTTP methods explained</a></li>
 </ul>
 </section>
 <section id="installing-the-requests-library" class="slide level2">
 <h2>Installing the <code>requests</code> library</h2>
-<h3 id="pythons-most-popular-http-library"><strong>Python’s most popular HTTP library</strong></h3>
+<h3 id="a-widely-used-third-party-http-library"><strong>A widely used third-party HTTP library</strong></h3>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a></a><span class="ex">uv</span> add requests</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <ul>
 <li class="fragment"><strong>Not built-in</strong>: Unlike <code>json</code>, we need to install <a href="https://requests.readthedocs.io/en/latest/">requests</a></li>
-<li class="fragment"><strong>Why requests?</strong>: Clean, simple API - much easier than Python’s built-in <code>urllib</code></li>
-<li class="fragment"><strong>Industry standard</strong>: Used by millions of Python developers</li>
-<li class="fragment"><strong>Alternative</strong>: Python 3.11+ has <code>urllib3</code>, but <code>requests</code> is still preferred for simplicity</li>
+<li class="fragment"><strong>Why requests?</strong>: A concise interface for common HTTP operations</li>
+<li class="fragment"><strong>Standard-library alternative</strong>: Python includes <code>urllib.request</code>; <code>urllib3</code> is a separate third-party package</li>
 </ul>
 <aside class="notes">
 <p><strong>Installation tips:</strong> - The course repository already includes <code>requests</code>; <code>uv sync --locked</code> installs it. - <code>uv add requests</code> is the command students would use in their own project. - Show how to verify installation: <code>uv run python -c "import requests; print(requests.__version__)"</code></p>
@@ -552,7 +550,7 @@ protocol</code></pre>
 <span id="cb7-2"><a></a></span>
 <span id="cb7-3"><a></a><span class="co"># Make a GET request to the PokeAPI</span></span>
 <span id="cb7-4"><a></a>url <span class="op">=</span> <span class="st">"https://pokeapi.co/api/v2/pokemon/pikachu"</span></span>
-<span id="cb7-5"><a></a>response <span class="op">=</span> requests.get(url)</span>
+<span id="cb7-5"><a></a>response <span class="op">=</span> requests.get(url, timeout<span class="op">=</span><span class="dv">10</span>)</span>
 <span id="cb7-6"><a></a></span>
 <span id="cb7-7"><a></a><span class="co"># Check if the request was successful</span></span>
 <span id="cb7-8"><a></a><span class="cf">if</span> response.status_code <span class="op">==</span> <span class="dv">200</span>:</span>
@@ -571,7 +569,7 @@ protocol</code></pre>
 </ul>
 </section>
 <section id="http-status-codes" class="slide level2">
-<h2>📊 HTTP status codes</h2>
+<h2>HTTP status codes</h2>
 <h3 id="the-servers-way-of-telling-you-what-happened"><strong>The server’s way of telling you what happened</strong></h3>
 <table class="caption-top">
 <thead>
@@ -615,14 +613,14 @@ protocol</code></pre>
 </tbody>
 </table>
 <ul>
-<li class="fragment"><strong>Always check</strong>: <code>response.status_code</code> before processing data</li>
+<li class="fragment"><strong>Check failures</strong>: Inspect the status or call <code>raise_for_status()</code> before processing data</li>
 <li class="fragment"><strong>Error handling</strong>: Different codes need different responses</li>
 <li class="fragment">📚 <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Status">HTTP status codes reference</a></li>
 </ul>
 </section>
 <section id="the-json-connection-same-format-different-source" class="slide level2">
-<h2>🔗 The JSON connection: Same format, different source</h2>
-<h3 id="comparison-files-vs-apis"><strong>Comparison: Files vs APIs</strong></h3>
+<h2>The JSON connection: same format, different source</h2>
+<h3 id="comparison-files-and-apis"><strong>Comparison: files and APIs</strong></h3>
 <div class="columns">
 <div class="column" style="width:50%;">
 <p><strong>Reading JSON from a file:</strong></p>
@@ -646,20 +644,20 @@ protocol</code></pre>
 <li class="fragment"><strong>Key takeaway</strong>: JSON knowledge transfers directly between files and APIs</li>
 </ul>
 </section>
-<section id="real-world-api-examples" class="slide level2">
-<h2>🚀 Real-world API examples</h2>
-<h3 id="apis-you-can-use-right-now-no-api-key-needed"><strong>APIs you can use right now (no API key needed)</strong></h3>
+<section id="api-examples" class="slide level2">
+<h2>API examples</h2>
+<h3 id="examples-with-different-access-requirements"><strong>Examples with different access requirements</strong></h3>
 <ul>
 <li class="fragment"><strong><a href="https://pokeapi.co/">PokeAPI</a></strong>: Pokemon data (what we just used)</li>
-<li class="fragment"><strong><a href="https://openweathermap.org/api">OpenWeatherMap</a></strong>: Current weather and forecasts (free tier)</li>
+<li class="fragment"><strong><a href="https://openweathermap.org/api">OpenWeatherMap</a></strong>: Current weather and forecasts (account and API key required)</li>
 <li class="fragment"><strong><a href="https://restcountries.com/">REST Countries</a></strong>: Country data (population, flags, currencies)</li>
-<li class="fragment"><strong><a href="https://thedogapi.com/">The Dog API</a></strong>: Random dog pictures and breed info</li>
-<li class="fragment"><strong><a href="https://api.nasa.gov/">NASA API</a></strong>: Astronomy picture of the day, Mars rover photos</li>
+<li class="fragment"><strong><a href="https://thedogapi.com/">The Dog API</a></strong>: Dog pictures and breed information; some usage requires a key</li>
+<li class="fragment"><strong><a href="https://api.nasa.gov/">NASA API</a></strong>: Astronomy and space data (API key required)</li>
 <li class="fragment"><strong><a href="https://jokeapi.dev/">JokeAPI</a></strong>: Random jokes and puns</li>
 <li class="fragment"><strong>Thousands more</strong>: <a href="https://github.com/public-apis/public-apis">Public APIs directory</a></li>
 </ul>
 <aside class="notes">
-<p><strong>For Lab 07:</strong> - Students will choose one of these APIs - Some require free API keys (OpenWeatherMap, NASA) - simple signup - Emphasize exploring documentation before coding</p>
+<p>These are optional examples, not Lab 07 choices. Lab tests use local fakes and never contact a live API. Check current documentation before adopting any external service.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -673,7 +671,7 @@ protocol</code></pre>
       }</style></aside>
 </section>
 <section id="error-handling-with-apis" class="slide level2">
-<h2>🛡️ Error handling with APIs</h2>
+<h2>Error handling with APIs</h2>
 <h3 id="networks-are-unreliable---plan-for-failure"><strong>Networks are unreliable - plan for failure</strong></h3>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a></a><span class="im">import</span> requests</span>
 <span id="cb10-2"><a></a></span>
@@ -700,8 +698,8 @@ protocol</code></pre>
 <li class="fragment"><strong>Why this matters</strong>: APIs can be down, slow, or change without notice</li>
 </ul>
 </section>
-<section id="api-best-practices" class="slide level2">
-<h2>⚡ API best practices</h2>
+<section id="api-practices" class="slide level2">
+<h2>API practices</h2>
 <h3 id="being-a-good-api-citizen"><strong>Being a good API citizen</strong></h3>
 <ul>
 <li class="fragment"><strong>Read the docs first</strong>: Every API has different rules and endpoints</li>
@@ -726,57 +724,56 @@ protocol</code></pre>
           display:block!important;
       }</style></aside>
 </section>
-<section id="putting-it-all-together-files-apis" class="slide level2">
-<h2>🎯 Putting it all together: Files + APIs</h2>
+<section id="putting-it-all-together-files-and-apis" class="slide level2">
+<h2>Putting it all together: files and APIs</h2>
 <h3 id="a-complete-data-workflow"><strong>A complete data workflow</strong></h3>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a></a><span class="im">import</span> json</span>
 <span id="cb11-2"><a></a><span class="im">import</span> requests</span>
 <span id="cb11-3"><a></a></span>
 <span id="cb11-4"><a></a><span class="co"># 1. Fetch live data from API</span></span>
-<span id="cb11-5"><a></a>response <span class="op">=</span> requests.get(<span class="st">"https://pokeapi.co/api/v2/pokemon/ditto"</span>)</span>
-<span id="cb11-6"><a></a>pokemon_data <span class="op">=</span> response.json()</span>
-<span id="cb11-7"><a></a></span>
-<span id="cb11-8"><a></a><span class="co"># 2. Process the data (extract what we need)</span></span>
-<span id="cb11-9"><a></a>simplified <span class="op">=</span> {</span>
-<span id="cb11-10"><a></a>    <span class="st">"name"</span>: pokemon_data[<span class="st">"name"</span>],</span>
-<span id="cb11-11"><a></a>    <span class="st">"height"</span>: pokemon_data[<span class="st">"height"</span>],</span>
-<span id="cb11-12"><a></a>    <span class="st">"weight"</span>: pokemon_data[<span class="st">"weight"</span>],</span>
-<span id="cb11-13"><a></a>    <span class="st">"types"</span>: [t[<span class="st">"type"</span>][<span class="st">"name"</span>] <span class="cf">for</span> t <span class="kw">in</span> pokemon_data[<span class="st">"types"</span>]]</span>
-<span id="cb11-14"><a></a>}</span>
-<span id="cb11-15"><a></a></span>
-<span id="cb11-16"><a></a><span class="co"># 3. Save to local JSON file for offline use</span></span>
-<span id="cb11-17"><a></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">"pokemon_cache.json"</span>, <span class="st">"w"</span>) <span class="im">as</span> f:</span>
-<span id="cb11-18"><a></a>    json.dump(simplified, f, indent<span class="op">=</span><span class="dv">4</span>)</span>
+<span id="cb11-5"><a></a>response <span class="op">=</span> requests.get(</span>
+<span id="cb11-6"><a></a>    <span class="st">"https://pokeapi.co/api/v2/pokemon/ditto"</span>,</span>
+<span id="cb11-7"><a></a>    timeout<span class="op">=</span><span class="dv">10</span>,</span>
+<span id="cb11-8"><a></a>)</span>
+<span id="cb11-9"><a></a>response.raise_for_status()</span>
+<span id="cb11-10"><a></a>pokemon_data <span class="op">=</span> response.json()</span>
+<span id="cb11-11"><a></a></span>
+<span id="cb11-12"><a></a><span class="co"># 2. Process the data (extract what we need)</span></span>
+<span id="cb11-13"><a></a>simplified <span class="op">=</span> {</span>
+<span id="cb11-14"><a></a>    <span class="st">"name"</span>: pokemon_data[<span class="st">"name"</span>],</span>
+<span id="cb11-15"><a></a>    <span class="st">"height"</span>: pokemon_data[<span class="st">"height"</span>],</span>
+<span id="cb11-16"><a></a>    <span class="st">"weight"</span>: pokemon_data[<span class="st">"weight"</span>],</span>
+<span id="cb11-17"><a></a>    <span class="st">"types"</span>: [t[<span class="st">"type"</span>][<span class="st">"name"</span>] <span class="cf">for</span> t <span class="kw">in</span> pokemon_data[<span class="st">"types"</span>]]</span>
+<span id="cb11-18"><a></a>}</span>
 <span id="cb11-19"><a></a></span>
-<span id="cb11-20"><a></a><span class="bu">print</span>(<span class="st">"Data fetched from API and saved locally!"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb11-20"><a></a><span class="co"># 3. Save to local JSON file for offline use</span></span>
+<span id="cb11-21"><a></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">"pokemon_cache.json"</span>, <span class="st">"w"</span>) <span class="im">as</span> f:</span>
+<span id="cb11-22"><a></a>    json.dump(simplified, f, indent<span class="op">=</span><span class="dv">4</span>)</span>
+<span id="cb11-23"><a></a></span>
+<span id="cb11-24"><a></a><span class="bu">print</span>(<span class="st">"Data fetched from API and saved locally!"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <ul>
 <li class="fragment"><strong>The pattern</strong>: Fetch → Process → Store</li>
 <li class="fragment"><strong>Why cache?</strong>: Faster loading, works offline, reduces API calls</li>
-<li class="fragment"><strong>Real apps do this</strong>: Weather apps, news readers, social media feeds</li>
+<li class="fragment"><strong>Design question</strong>: Decide how long cached data remains acceptable and how the app behaves when a refresh fails</li>
 </ul>
 </section>
 <section id="lab-07-overview" class="slide level2">
-<h2>🧪 Lab 07 overview</h2>
-<h3 id="two-part-lab-local-persistence-live-api-integration"><strong>Two-part lab: Local persistence + Live API integration</strong></h3>
+<h2>Lab 07 overview</h2>
+<h3 id="json-persistence-and-a-testable-api-client"><strong>JSON persistence and a testable API client</strong></h3>
 <ul>
-<li class="fragment"><strong>Part 1</strong>: Build a contact book application
-<ul>
-<li class="fragment">Store contacts as JSON file</li>
-<li class="fragment">Load contacts when app starts</li>
-<li class="fragment">Add, view, and search contacts</li>
-<li class="fragment">Data persists between runs</li>
-</ul></li>
-<li class="fragment"><strong>Part 2</strong>: Choose a public API and build a data viewer
-<ul>
-<li class="fragment">Pick an API that interests you</li>
-<li class="fragment">Fetch live data with <code>requests</code></li>
-<li class="fragment">Parse JSON response</li>
-<li class="fragment">Display formatted output to user</li>
-</ul></li>
-<li class="fragment"><strong>Bonus challenge</strong>: Combine both - cache API responses to JSON files!</li>
+<li class="fragment"><strong><code>lab07_contact_book.py</code></strong>: Implement <code>save_contacts_to_json</code> and <code>load_contacts_from_json</code></li>
+<li class="fragment">Use a context manager and <code>indent=4</code>; return an empty list when the file is missing</li>
+<li class="fragment"><strong><code>lab07_api_client.py</code></strong>: Implement <code>get_api_data(url)</code></li>
+<li class="fragment">Use <code>requests.get(url, timeout=10)</code>, <code>raise_for_status()</code>, and <code>response.json()</code></li>
+<li class="fragment">Return <code>None</code> for request failures or invalid JSON</li>
+<li class="fragment">Do not modify the supplied tests; they replace network calls with local fakes</li>
 </ul>
 <aside class="notes">
-<p><strong>Lab guidance:</strong> - Part 1 builds on Week 6 OOP concepts (optional: make Contact class) - Part 2 is open-ended - encourage creativity - Grading focuses on: proper error handling, clean JSON structure, user-friendly output - Common issues: forgetting to handle file not found, not checking API status codes</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a></a><span class="ex">uv</span> run <span class="at">--directory</span> week07 python <span class="at">-m</span> pytest tests/ <span class="at">-v</span></span>
+<span id="cb12-2"><a></a><span class="fu">git</span> add week07/lab07_contact_book.py week07/lab07_api_client.py</span>
+<span id="cb12-3"><a></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"Complete Lab 07"</span></span>
+<span id="cb12-4"><a></a><span class="fu">git</span> push</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>A green Week 07 badge earns the complete 10 points.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -789,52 +786,46 @@ protocol</code></pre>
           display:block!important;
       }</style></aside>
 </section>
-<section id="career-relevance-why-this-matters" class="slide level2">
-<h2>🚀 Career relevance: Why this matters</h2>
-<h3 id="api-integration-is-a-core-professional-skill"><strong>API integration is a core professional skill</strong></h3>
+<section id="where-these-skills-are-used" class="slide level2">
+<h2>Where these skills are used</h2>
+<h3 id="files-and-apis-use-many-of-the-same-data-skills"><strong>Files and APIs use many of the same data skills</strong></h3>
 <ul>
-<li class="fragment"><strong>Every modern app</strong>: Integrates with external services (payments, auth, maps, notifications)</li>
-<li class="fragment"><strong>Job requirements</strong>: “Experience with RESTful APIs” appears in 80%+ of backend/full-stack job postings</li>
-<li class="fragment"><strong>Interview questions</strong>: “How would you integrate Stripe payment processing?” “Design a weather dashboard”</li>
-<li class="fragment"><strong>Real companies using APIs</strong>:
-<ul>
-<li class="fragment">Stripe: Payment processing API ($95B valuation)</li>
-<li class="fragment">Twilio: SMS/Voice API ($12B valuation)</li>
-<li class="fragment">Mapbox: Maps API (powers Snapchat, Instacart)</li>
-</ul></li>
-<li class="fragment"><strong>Your portfolio</strong>: API projects demonstrate practical, real-world skills</li>
+<li class="fragment"><strong>Application integration</strong>: Payments, authentication, maps, and notifications often use APIs</li>
+<li class="fragment"><strong>Data exchange</strong>: JSON is common in web services, configuration, and persisted application data</li>
+<li class="fragment"><strong>Review questions</strong>: What can fail, which errors should the caller see, and what data shape should the function return?</li>
+<li class="fragment"><strong>Project connection</strong>: A small API client demonstrates networking, parsing, and failure handling</li>
 </ul>
 </section>
 <section id="key-takeaways" class="slide level2">
-<h2>📚 Key takeaways</h2>
+<h2>Key takeaways</h2>
 <ul>
 <li class="fragment"><strong>Persistence</strong>: Files let your programs remember state between runs</li>
-<li class="fragment"><strong>JSON</strong>: Universal data format - works for files AND APIs</li>
+<li class="fragment"><strong>JSON</strong>: A common text format used in files and many APIs</li>
 <li class="fragment"><strong>APIs</strong>: Let your apps communicate with other systems over the internet</li>
-<li class="fragment"><strong>HTTP</strong>: The protocol that powers the web and most APIs</li>
-<li class="fragment"><strong>Requests library</strong>: Makes HTTP requests simple in Python</li>
-<li class="fragment"><strong>Error handling</strong>: Always check status codes and handle failures gracefully</li>
+<li class="fragment"><strong>HTTP</strong>: A request-response protocol used by the web</li>
+<li class="fragment"><strong>Requests library</strong>: Provides a Python interface for HTTP requests</li>
+<li class="fragment"><strong>Error handling</strong>: Define behavior for HTTP, connection, timeout, and decoding failures</li>
 <li class="fragment"><strong>The connection</strong>: <code>json.load()</code> (files) and <code>response.json()</code> (APIs) both give you Python dicts</li>
 </ul>
 </section>
-<section id="essential-resources" class="slide level2">
-<h2>🔗 Essential resources</h2>
+<section id="resources" class="slide level2">
+<h2>Resources</h2>
 <h3 id="documentation-and-learning-materials"><strong>Documentation and learning materials</strong></h3>
 <ul>
-<li class="fragment">📘 <a href="https://docs.python.org/3/tutorial/inputoutput.html#reading-and-writing-files">Python file I/O tutorial</a></li>
-<li class="fragment">📗 <a href="https://docs.python.org/3/library/json.html">JSON module documentation</a></li>
-<li class="fragment">📕 <a href="https://requests.readthedocs.io/en/latest/">Requests library docs</a></li>
-<li class="fragment">📙 <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods">HTTP methods reference</a></li>
-<li class="fragment">📓 <a href="https://github.com/public-apis/public-apis">Public APIs directory</a></li>
-<li class="fragment">🎓 <a href="https://realpython.com/python-api/">Real Python: Working with APIs</a></li>
+<li class="fragment"><a href="https://docs.python.org/3/tutorial/inputoutput.html#reading-and-writing-files">Python file I/O tutorial</a></li>
+<li class="fragment"><a href="https://docs.python.org/3/library/json.html">JSON module documentation</a></li>
+<li class="fragment"><a href="https://requests.readthedocs.io/en/latest/">Requests library documentation</a></li>
+<li class="fragment"><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods">HTTP methods reference</a></li>
+<li class="fragment"><a href="https://github.com/public-apis/public-apis">Public APIs directory</a></li>
+<li class="fragment"><a href="https://realpython.com/python-api/">Real Python: Working with APIs</a></li>
 </ul>
 </section>
 <section id="questions" class="slide level2">
-<h2>💬 Questions?</h2>
-<p><strong>Next steps:</strong> - Review Lab 07 instructions in <code>week07/lab07.md</code> - Choose an API that interests you - Start with simple examples, then build complexity</p>
-<p><strong>Office hours:</strong> Available for API selection guidance and debugging!</p>
+<h2>Questions?</h2>
+<p><strong>Next steps:</strong> - Review Lab 07 instructions in <code>week07/lab07.md</code> - Implement the two specified modules - Run the offline tests before pushing</p>
+<p><strong>Office hours:</strong> Bring the failing test, traceback, and current diff.</p>
 <aside class="notes">
-<p><strong>Wrap-up reminders:</strong> - Encourage students to start early - API integration can be tricky first time - Suggest pairing up to explore different APIs together - Remind about error handling - it’s part of the grading rubric</p>
+<p><strong>Wrap-up reminders:</strong> - Remind students that the tests replace network calls with local fakes - Trace one request failure and one JSON-decoding failure through <code>get_api_data</code> - Use the lab contract, not an optional live API, to resolve ambiguous behavior</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;

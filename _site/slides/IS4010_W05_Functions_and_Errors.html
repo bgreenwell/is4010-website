@@ -11,7 +11,7 @@
   <meta name="generator" content="quarto-1.8.25">
 
   <meta name="author" content="Brandon M. Greenwell">
-  <title>IS 4010 - App Dev with AI – IS4010: AI-Enhanced Application Development</title>
+  <title>IS 4010 - App Dev with AI – IS4010: AI-enhanced application development</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -196,8 +196,8 @@
     <div class="slides">
 
 <section id="title-slide" class="quarto-title-block center">
-  <h1 class="title">IS4010: AI-Enhanced Application Development</h1>
-  <p class="subtitle">Week 5: Functions &amp; Error Handling</p>
+  <h1 class="title">IS4010: AI-enhanced application development</h1>
+  <p class="subtitle">Week 05: Functions and error handling</p>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -209,26 +209,26 @@ Brandon M. Greenwell
 
 </section>
 <section>
-<section id="welcome-to-functions-error-handling" class="title-slide slide level1 center">
-<h1>Welcome to Functions &amp; Error Handling 🔧</h1>
+<section id="functions-and-error-handling" class="title-slide slide level1 center">
+<h1>Functions and error handling</h1>
 
 </section>
-<section id="building-robust-reusable-code" class="slide level2">
-<h2>Building robust, reusable code 🏗️</h2>
+<section id="building-reusable-code" class="slide level2">
+<h2>Building reusable code</h2>
 <ul>
 <li class="fragment"><strong>Functions</strong> are the building blocks of maintainable software</li>
-<li class="fragment"><strong>Error handling</strong> makes your applications bulletproof</li>
-<li class="fragment"><strong>Career relevance</strong>: Essential skills for any software development role</li>
-<li class="fragment"><strong>Code quality</strong>: Write once, use everywhere - the foundation of professional development</li>
-<li class="fragment"><strong>User experience</strong>: Graceful error handling prevents crashes and frustrated users</li>
+<li class="fragment"><strong>Error handling</strong> defines behavior when an operation cannot succeed</li>
+<li class="fragment"><strong>Course relevance</strong>: These tools support the data-processing functions in Lab 05</li>
+<li class="fragment"><strong>Reuse</strong>: A well-scoped function can support more than one caller</li>
+<li class="fragment"><strong>User experience</strong>: Expected failures can produce useful messages or return values</li>
 </ul>
 <aside class="notes">
 <p><strong>TEACHING NOTES:</strong></p>
 <ul>
-<li><strong>Career connection</strong>: Functions and error handling are fundamental interview topics</li>
-<li><strong>Industry practices</strong>: Professional code always includes comprehensive error handling</li>
+<li><strong>Review focus</strong>: Identify the function contract and its failure cases</li>
+<li><strong>Design practice</strong>: Handle failures that the function can identify and respond to meaningfully</li>
 <li><strong>Code maintainability</strong>: Functions reduce bugs by eliminating code duplication</li>
-<li><strong>User experience</strong>: Well-handled errors vs.&nbsp;crashes make the difference between professional and amateur software</li>
+<li><strong>User experience</strong>: Handle failures the application can explain or recover from</li>
 <li><strong>Course progression</strong>: These concepts build foundation for larger projects and team development</li>
 </ul>
 <style type="text/css">
@@ -248,11 +248,11 @@ Brandon M. Greenwell
 </section></section>
 <section>
 <section id="session-1-writing-clean-functions" class="title-slide slide level1 center">
-<h1>Session 1: Writing clean functions</h1>
+<h1>Session 1: writing clean functions</h1>
 
 </section>
 <section id="why-use-functions" class="slide level2">
-<h2>Why use functions? 🤔</h2>
+<h2>Why use functions?</h2>
 <ul>
 <li class="fragment">The most important reason is the <strong>DRY</strong> principle: <strong>d</strong>on’t <strong>r</strong>epeat <strong>y</strong>ourself</li>
 <li class="fragment"><a href="https://docs.python.org/3/tutorial/controlflow.html#defining-functions">Functions</a> allow us to break down large, complex problems into smaller, logical, and more manageable pieces</li>
@@ -282,12 +282,12 @@ Brandon M. Greenwell
       }</style></aside>
 </section>
 <section id="the-anatomy-of-a-python-function" class="slide level2">
-<h2>The anatomy of a Python function 🔍</h2>
+<h2>The anatomy of a Python function</h2>
 <ul>
 <li class="fragment">Let’s break down the core components of a modern <a href="https://docs.python.org/3/tutorial/controlflow.html#defining-functions">Python function</a></li>
 <li class="fragment">We use the <code>def</code> keyword, a descriptive name, parameters with <a href="https://docs.python.org/3/library/typing.html">type hints</a>, a return type, and a docstring (here we’re using a <a href="https://numpydoc.readthedocs.io/en/latest/format.html">numpy-style docstring</a>)</li>
-<li class="fragment"><strong>Professional standard</strong>: Type hints help catch bugs and make code self-documenting</li>
-<li class="fragment"><strong>Documentation</strong>: Good docstrings explain the ‘why’, not just the ‘what’</li>
+<li class="fragment"><strong>Static-analysis input</strong>: Type hints let editors and type checkers report some mismatches; Python does not normally enforce them at runtime</li>
+<li class="fragment"><strong>Documentation</strong>: Good docstrings explain purpose, inputs, outputs, and important constraints</li>
 </ul>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a></a><span class="kw">def</span> calculate_area(length: <span class="bu">float</span>, width: <span class="bu">float</span>) <span class="op">-&gt;</span> <span class="bu">float</span>:</span>
 <span id="cb1-2"><a></a>    <span class="co">"""Calculate the area of a rectangle.</span></span>
@@ -311,7 +311,7 @@ Brandon M. Greenwell
 <li><strong>Type hints</strong>: Explain how these help IDEs provide better autocomplete and catch errors</li>
 <li><strong>Return types</strong>: Show how <code>-&gt; float</code> documents what the function returns</li>
 <li><strong>Docstring format</strong>: Emphasize consistency in documentation across team projects</li>
-<li><strong>Professional development</strong>: Industry standard to include type hints in new Python code</li>
+<li><strong>Type hints</strong>: Document expected inputs and outputs for readers and tools</li>
 <li><strong>Tool integration</strong>: Type hints work with tools like mypy for static analysis</li>
 </ul>
 <style type="text/css">
@@ -327,7 +327,7 @@ Brandon M. Greenwell
       }</style></aside>
 </section>
 <section id="understanding-variable-scope" class="slide level2">
-<h2>Understanding variable scope 🎯</h2>
+<h2>Understanding variable scope</h2>
 <ul>
 <li class="fragment"><strong><a href="https://docs.python.org/3/tutorial/classes.html#python-scopes-and-namespaces">Scope</a></strong> refers to the region of code where a variable is accessible</li>
 <li class="fragment">Variables created inside a function have <strong>local scope</strong>. They only exist within that function</li>
@@ -365,7 +365,7 @@ Brandon M. Greenwell
       }</style></aside>
 </section>
 <section id="function-parameters-the-basics" class="slide level2">
-<h2>Function parameters: the basics 📝</h2>
+<h2>Function parameters: the basics</h2>
 <ul>
 <li class="fragment"><strong><a href="https://docs.python.org/3/tutorial/controlflow.html#more-on-defining-functions">Parameters</a></strong> are variables that receive values when a function is called</li>
 <li class="fragment"><strong>Arguments</strong> are the actual values passed to the function</li>
@@ -392,7 +392,7 @@ Brandon M. Greenwell
 <ul>
 <li><strong>Terminology clarity</strong>: Parameters vs arguments confusion is common</li>
 <li><strong>Keyword argument benefits</strong>: Self-documenting code, prevents mistakes</li>
-<li><strong>Industry practice</strong>: Many teams require keyword arguments for functions with 3+ parameters</li>
+<li><strong>Design judgment</strong>: Keyword arguments can clarify calls with several similar parameters</li>
 <li><strong>Error prevention</strong>: Show how positional arguments can cause subtle bugs</li>
 <li><strong>Code readability</strong>: Keyword arguments make function calls more readable</li>
 </ul>
@@ -409,13 +409,13 @@ Brandon M. Greenwell
       }</style></aside>
 </section>
 <section id="default-parameters-making-functions-flexible" class="slide level2">
-<h2>Default parameters: making functions flexible 🔧</h2>
+<h2>Default parameters: making functions flexible</h2>
 <ul>
 <li class="fragment"><strong><a href="https://docs.python.org/3/tutorial/controlflow.html#default-argument-values">Default parameters</a></strong> provide fallback values when arguments aren’t provided</li>
 <li class="fragment">Make your functions more user-friendly and reduce duplicate code</li>
 <li class="fragment"><strong>Rule</strong>: Default parameters must come after non-default parameters</li>
 <li class="fragment"><strong>Common pattern</strong>: Use <code>None</code> as default, then check and assign actual default in function body</li>
-<li class="fragment"><strong>Gotcha</strong>: Never use mutable objects (lists, dicts) as default values</li>
+<li class="fragment"><strong>Gotcha</strong>: Avoid shared mutable defaults unless that shared state is intentional</li>
 </ul>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a></a><span class="kw">def</span> send_notification(message: <span class="bu">str</span>, urgency: <span class="bu">str</span> <span class="op">=</span> <span class="st">"normal"</span>,</span>
 <span id="cb4-2"><a></a>                     channels: <span class="bu">list</span> <span class="op">=</span> <span class="va">None</span>) <span class="op">-&gt;</span> <span class="bu">dict</span>:</span>
@@ -439,7 +439,7 @@ Brandon M. Greenwell
 <p><strong>TEACHING NOTES:</strong></p>
 <ul>
 <li><strong>Mutable default gotcha</strong>: Explain why <code>def func(items=[]):</code> is dangerous</li>
-<li><strong>None pattern</strong>: Industry standard for handling mutable defaults</li>
+<li><strong><code>None</code> pattern</strong>: A common way to create a fresh mutable value per call</li>
 <li><strong>API design</strong>: Default parameters make functions easier to use</li>
 <li><strong>Backward compatibility</strong>: Adding default parameters doesn’t break existing code</li>
 <li><strong>Common defaults</strong>: Show typical patterns like empty lists, current time, etc.</li>
@@ -457,7 +457,7 @@ Brandon M. Greenwell
       }</style></aside>
 </section>
 <section id="variable-length-arguments-args-and-kwargs" class="slide level2">
-<h2>Variable-length arguments: *args and **kwargs 🌟</h2>
+<h2>Variable-length arguments: *args and **kwargs</h2>
 <ul>
 <li class="fragment"><strong><a href="https://docs.python.org/3/tutorial/controlflow.html#arbitrary-argument-lists">*args</a></strong>: Accepts any number of positional arguments as a tuple</li>
 <li class="fragment"><strong><a href="https://docs.python.org/3/tutorial/controlflow.html#keyword-arguments">**kwargs</a></strong>: Accepts any number of keyword arguments as a dictionary</li>
@@ -492,7 +492,7 @@ Brandon M. Greenwell
 <ul>
 <li><strong>Real-world usage</strong>: Show how popular libraries like requests use **kwargs</li>
 <li><strong>API design</strong>: Demonstrate how this enables flexible, extensible functions</li>
-<li><strong>Wrapper functions</strong>: Perfect for creating decorators or middleware</li>
+<li><strong>Wrapper functions</strong>: Useful when implementing decorators or middleware</li>
 <li><strong>Performance note</strong>: Tuple/dict creation has minimal overhead for reasonable argument counts</li>
 <li><strong>Debugging tip</strong>: Print args and kwargs to understand what’s being passed</li>
 </ul>
@@ -509,7 +509,7 @@ Brandon M. Greenwell
       }</style></aside>
 </section>
 <section id="working-with-dictionaries-and-lists" class="slide level2">
-<h2>Working with dictionaries and lists 📊</h2>
+<h2>Working with dictionaries and lists</h2>
 <ul>
 <li class="fragment"><strong>Passing dictionaries</strong>: Functions can accept and return complex data structures</li>
 <li class="fragment"><strong>Dictionary unpacking</strong>: Use <code>**dict</code> to pass dictionary as keyword arguments</li>
@@ -569,13 +569,13 @@ Brandon M. Greenwell
       }</style></aside>
 </section>
 <section id="function-design-principles" class="slide level2">
-<h2>Function design principles 🎨</h2>
+<h2>Function design principles</h2>
 <ul>
 <li class="fragment"><strong>Single Responsibility</strong>: Each function should do one thing well</li>
 <li class="fragment"><strong>Pure functions</strong>: Same input → same output, no side effects (when possible)</li>
 <li class="fragment"><strong>Clear naming</strong>: Function names should describe what they do, not how</li>
 <li class="fragment"><strong>Reasonable length</strong>: If a function is over 20-30 lines, consider splitting it</li>
-<li class="fragment"><strong>Return consistency</strong>: Always return the same type, or use Union types with type hints</li>
+<li class="fragment"><strong>Return consistency</strong>: Keep return behavior predictable and document intentional alternatives</li>
 </ul>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a></a><span class="co"># GOOD: Single responsibility, clear purpose</span></span>
 <span id="cb7-2"><a></a><span class="kw">def</span> calculate_order_total(items: <span class="bu">list</span>[<span class="bu">dict</span>]) <span class="op">-&gt;</span> <span class="bu">float</span>:</span>
@@ -624,16 +624,16 @@ Brandon M. Greenwell
       }</style></aside>
 </section>
 <section id="ai-assisted-refactoring" class="slide level2">
-<h2>AI-assisted refactoring 🤖</h2>
+<h2>AI-assisted refactoring</h2>
 <ul>
-<li class="fragment">One of the most powerful uses for an AI partner is <strong><a href="https://refactoring.com/">refactoring</a></strong> code</li>
+<li class="fragment">An AI assistant can propose <strong><a href="https://refactoring.com/">refactoring</a></strong> candidates for review</li>
 <li class="fragment">You can give it a messy, procedural script and ask it to break it down into clean, reusable functions</li>
-<li class="fragment"><strong>Career skill</strong>: Refactoring is a daily activity for professional developers</li>
+<li class="fragment"><strong>Development skill</strong>: Refactoring changes structure while preserving tested behavior</li>
 <li class="fragment"><strong>Collaborative process</strong>: Use AI suggestions as starting points, then apply your judgment</li>
 <li class="fragment"><strong>Quality improvement</strong>: Focus on readability, testability, and maintainability</li>
 </ul>
 <p><strong>Effective refactoring prompts:</strong></p>
-<pre><code>"Act as a senior Python developer. Review this script and refactor it into
+<pre><code>"Review this Python script and propose a refactoring plan before editing it.
 clean, reusable functions. Each function should:
 - Have a single, clear responsibility
 - Include type hints and numpy-style docstrings
@@ -643,11 +643,11 @@ clean, reusable functions. Each function should:
 <aside class="notes">
 <p><strong>TEACHING NOTES:</strong></p>
 <ul>
-<li><strong>Professional practice</strong>: Refactoring is constant in industry - code evolves continuously</li>
+<li><strong>Behavior first</strong>: Run the existing tests before and after each refactor</li>
 <li><strong>AI as assistant</strong>: Emphasize human judgment in evaluating AI suggestions</li>
 <li><strong>Code review skills</strong>: Teach students to critique and improve AI-generated code</li>
 <li><strong>Lab connection</strong>: This directly connects to Lab 05’s refactoring challenge</li>
-<li><strong>Career preparation</strong>: Refactoring skills are essential for technical interviews</li>
+<li><strong>Review practice</strong>: Explain why each proposed refactor improves the function</li>
 </ul>
 <style type="text/css">
         span.MJX_Assistive_MathML {
@@ -665,27 +665,27 @@ clean, reusable functions. Each function should:
 
 </section></section>
 <section>
-<section id="session-2-building-robust-code" class="title-slide slide level1 center">
-<h1>Session 2: Building robust code</h1>
+<section id="session-2-handling-failure" class="title-slide slide level1 center">
+<h1>Session 2: handling failure</h1>
 
 </section>
 <section id="why-error-handling-matters" class="slide level2">
-<h2>Why error handling matters 💪</h2>
+<h2>Why error handling matters</h2>
 <ul>
 <li class="fragment"><strong>User experience</strong>: Crashes vs.&nbsp;graceful error messages make the difference</li>
-<li class="fragment"><strong>Production systems</strong>: Unhandled errors can take down entire applications</li>
-<li class="fragment"><strong>Data integrity</strong>: Proper error handling prevents corrupt data</li>
+<li class="fragment"><strong>Application behavior</strong>: An unhandled exception can terminate the current operation or process</li>
+<li class="fragment"><strong>Data integrity</strong>: Validate before committing a partial state change</li>
 <li class="fragment"><strong>Debugging</strong>: Good error handling provides clear information about what went wrong</li>
-<li class="fragment"><strong>Professional development</strong>: Error handling separates amateur from professional code</li>
+<li class="fragment"><strong>Design contract</strong>: Callers need to know which failures are returned, raised, or handled locally</li>
 </ul>
 <aside class="notes">
 <p><strong>TEACHING NOTES:</strong></p>
 <ul>
-<li><strong>Real consequences</strong>: Share examples of production outages caused by unhandled exceptions</li>
+<li><strong>Concrete consequence</strong>: Trace one exception from its source to the user-visible result</li>
 <li><strong>User trust</strong>: Crashes make users lose confidence in applications</li>
-<li><strong>Cost of downtime</strong>: Enterprise applications losing money per minute of downtime</li>
-<li><strong>Career impact</strong>: Error handling skills are crucial for senior developer roles</li>
-<li><strong>Industry standards</strong>: Most companies have strict error handling requirements</li>
+<li><strong>Scope</strong>: Distinguish recoverable input errors from unexpected programming defects</li>
+<li><strong>Program behavior</strong>: Error handling makes failure cases explicit and testable</li>
+<li><strong>Project conventions</strong>: Follow the error behavior documented by the function and its callers</li>
 </ul>
 <style type="text/css">
         span.MJX_Assistive_MathML {
@@ -700,7 +700,7 @@ clean, reusable functions. Each function should:
       }</style></aside>
 </section>
 <section id="when-things-go-wrong-exceptions" class="slide level2">
-<h2>When things go wrong: exceptions 🚨</h2>
+<h2>When things go wrong: exceptions</h2>
 <ul>
 <li class="fragment">A <strong><a href="https://docs.python.org/3/tutorial/errors.html#syntax-errors">syntax error</a></strong> is like bad grammar; Python doesn’t even understand the code, so it won’t run</li>
 <li class="fragment">A <strong><a href="https://docs.python.org/3/tutorial/errors.html#exceptions">runtime error</a></strong>, or <strong>exception</strong>, happens while the program is running</li>
@@ -709,7 +709,7 @@ clean, reusable functions. Each function should:
 <li class="fragment"><strong>Unhandled exceptions</strong> will crash your program and frustrate users</li>
 </ul>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a></a><span class="co"># Syntax error - won't even run</span></span>
-<span id="cb9-2"><a></a><span class="co"># print("Hello world"  # Missing closing parenthesis</span></span>
+<span id="cb9-2"><a></a><span class="co"># print("Hello world" # Missing closing parenthesis</span></span>
 <span id="cb9-3"><a></a></span>
 <span id="cb9-4"><a></a><span class="co"># Runtime errors - code runs until exception occurs</span></span>
 <span id="cb9-5"><a></a>numbers <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>]</span>
@@ -740,13 +740,13 @@ clean, reusable functions. Each function should:
       }</style></aside>
 </section>
 <section id="handling-exceptions-with-try-and-except" class="slide level2">
-<h2>Handling exceptions with try and except 🛡️</h2>
+<h2>Handling exceptions with try and except</h2>
 <ul>
 <li class="fragment">We can handle these errors gracefully using a <strong><a href="https://docs.python.org/3/tutorial/errors.html#handling-exceptions">try…except</a></strong> block</li>
 <li class="fragment">The <code>try</code> block contains the code that might fail</li>
 <li class="fragment">The <code>except</code> block contains the code that runs <em>only if</em> an error occurs in the <code>try</code> block</li>
 <li class="fragment"><strong>Best practice</strong>: Catch specific exceptions so you can handle different errors appropriately</li>
-<li class="fragment"><strong>Never use bare except</strong>: Always specify which exceptions you’re catching</li>
+<li class="fragment"><strong>Avoid broad catches by default</strong>: Catch the exceptions you can handle; boundary layers may intentionally catch broadly to log or translate failures</li>
 </ul>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a></a><span class="kw">def</span> safe_divide(a: <span class="bu">float</span>, b: <span class="bu">float</span>) <span class="op">-&gt;</span> <span class="bu">float</span> <span class="op">|</span> <span class="va">None</span>:</span>
 <span id="cb10-2"><a></a>    <span class="co">"""Safely divide two numbers, returning None if division fails."""</span></span>
@@ -786,7 +786,7 @@ clean, reusable functions. Each function should:
       }</style></aside>
 </section>
 <section id="pythons-exception-hierarchy" class="slide level2">
-<h2>Python’s exception hierarchy 🌳</h2>
+<h2>Python’s exception hierarchy</h2>
 <ul>
 <li class="fragment"><strong><a href="https://docs.python.org/3/library/exceptions.html#exception-hierarchy">Exception hierarchy</a></strong>: All exceptions inherit from <code>BaseException</code></li>
 <li class="fragment"><strong>Most exceptions</strong> inherit from <code>Exception</code> (the ones you typically catch)</li>
@@ -846,7 +846,7 @@ clean, reusable functions. Each function should:
       }</style></aside>
 </section>
 <section id="creating-custom-exceptions" class="slide level2">
-<h2>Creating custom exceptions 🎨</h2>
+<h2>Creating custom exceptions</h2>
 <ul>
 <li class="fragment"><strong><a href="https://docs.python.org/3/tutorial/errors.html#user-defined-exceptions">Custom exceptions</a></strong>: Create your own exception types for specific scenarios</li>
 <li class="fragment"><strong>Inherit from Exception</strong>: Custom exceptions should inherit from <code>Exception</code> or its subclasses</li>
@@ -891,7 +891,7 @@ clean, reusable functions. Each function should:
 <li><strong>Error context</strong>: Show how custom exceptions can carry more information than built-ins</li>
 <li><strong>API design</strong>: Custom exceptions make your functions’ contracts clearer</li>
 <li><strong>Inheritance benefits</strong>: Can catch custom exceptions individually or as a group</li>
-<li><strong>Professional practice</strong>: Large applications typically have many custom exception types</li>
+<li><strong>Scope</strong>: Add a custom exception when callers need to distinguish a domain-specific failure</li>
 </ul>
 <style type="text/css">
         span.MJX_Assistive_MathML {
@@ -906,11 +906,11 @@ clean, reusable functions. Each function should:
       }</style></aside>
 </section>
 <section id="the-else-and-finally-clauses" class="slide level2">
-<h2>The else and finally clauses 🎯</h2>
+<h2>The else and finally clauses</h2>
 <ul>
 <li class="fragment">We can add two more optional clauses to our error handling</li>
 <li class="fragment">The <strong><a href="https://docs.python.org/3/tutorial/errors.html#defining-clean-up-actions">else</a></strong> block runs only if the <code>try</code> block completes successfully (no exception was raised)</li>
-<li class="fragment">The <strong><a href="https://docs.python.org/3/tutorial/errors.html#defining-clean-up-actions">finally</a></strong> block runs <strong>no matter what</strong> - perfect for cleanup code</li>
+<li class="fragment">The <strong><a href="https://docs.python.org/3/tutorial/errors.html#defining-clean-up-actions">finally</a></strong> block runs whether the <code>try</code> block succeeds or raises, making it useful for cleanup</li>
 <li class="fragment"><strong>Best practice</strong>: Use <code>finally</code> for resource cleanup (files, network connections, locks)</li>
 <li class="fragment"><strong>Performance consideration</strong>: <code>finally</code> ensures cleanup even if exceptions are re-raised</li>
 </ul>
@@ -960,12 +960,12 @@ clean, reusable functions. Each function should:
       }</style></aside>
 </section>
 <section id="context-managers-the-with-statement" class="slide level2">
-<h2>Context managers: the with statement 🔐</h2>
+<h2>Context managers: the with statement</h2>
 <ul>
 <li class="fragment"><strong><a href="https://docs.python.org/3/library/stdtypes.html#context-manager-types">Context managers</a></strong>: Automatically handle setup and cleanup operations</li>
 <li class="fragment"><strong>The <code>with</code> statement</strong>: Guarantees cleanup even if exceptions occur</li>
 <li class="fragment"><strong>Most common use</strong>: File operations - automatically closes files</li>
-<li class="fragment"><strong>Professional standard</strong>: Always use <code>with</code> for file operations</li>
+<li class="fragment"><strong>File handling</strong>: Prefer <code>with</code> so files close when the block exits</li>
 <li class="fragment"><strong>Under the hood</strong>: Uses <code>__enter__</code> and <code>__exit__</code> methods</li>
 </ul>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a></a><span class="co"># OLD WAY: Manual file handling (error-prone)</span></span>
@@ -1004,7 +1004,7 @@ clean, reusable functions. Each function should:
 <li><strong>Resource leaks</strong>: Show how manual file handling can leave files open</li>
 <li><strong>Exception safety</strong>: Context managers guarantee cleanup even during exceptions</li>
 <li><strong>Multiple resources</strong>: with statement can handle multiple context managers</li>
-<li><strong>Industry standard</strong>: Professional Python code almost always uses context managers for files</li>
+<li><strong>Reason</strong>: Context managers make resource cleanup explicit and reliable</li>
 <li><strong>Other uses</strong>: Database connections, network sockets, thread locks all use context managers</li>
 </ul>
 <style type="text/css">
@@ -1020,7 +1020,7 @@ clean, reusable functions. Each function should:
       }</style></aside>
 </section>
 <section id="defensive-programming-input-validation" class="slide level2">
-<h2>Defensive programming: input validation 🛡️</h2>
+<h2>Defensive programming: input validation</h2>
 <ul>
 <li class="fragment"><strong>Defensive programming</strong>: Write code that protects against invalid inputs</li>
 <li class="fragment"><strong>Input validation</strong>: Check arguments before processing them</li>
@@ -1087,7 +1087,7 @@ clean, reusable functions. Each function should:
       }</style></aside>
 </section>
 <section id="error-handling-patterns-eafp-vs-lbyl" class="slide level2">
-<h2>Error handling patterns: EAFP vs LBYL 🤔</h2>
+<h2>Error handling patterns: EAFP vs LBYL</h2>
 <ul>
 <li class="fragment"><strong>EAFP</strong>: “Easier to Ask for Forgiveness than Permission” - try it and handle exceptions</li>
 <li class="fragment"><strong>LBYL</strong>: “Look Before You Leap” - check conditions before attempting operations</li>
@@ -1155,42 +1155,35 @@ clean, reusable functions. Each function should:
           display:block!important;
       }</style></aside>
 </section>
-<section id="introducing-lab-05-functions-error-handling" class="slide level2">
-<h2>Introducing Lab 05: Functions &amp; Error Handling 🚀</h2>
+<section id="introducing-lab-05-functions-and-error-handling" class="slide level2">
+<h2>Introducing Lab 05: functions and error handling</h2>
 <ul>
-<li class="fragment">This week’s lab will have two parts, mirroring our two sessions</li>
-<li class="fragment"><strong>Part 1: The refactor challenge</strong> - Transform messy code into clean, professional functions</li>
-<li class="fragment"><strong>Part 2: Bulletproof your code</strong> - Add comprehensive error handling to make your code production-ready</li>
-<li class="fragment"><strong>Skills practiced</strong>: Function design, parameter handling, exception management, defensive programming</li>
-<li class="fragment"><strong>AI assistance</strong>: Use your AI partner strategically for both refactoring and error handling strategies</li>
+<li class="fragment">Implement <code>calculate_average_age(users)</code> and return <code>0.0</code> when no ages are valid</li>
+<li class="fragment">Implement <code>get_active_user_emails(users)</code> and return an empty list when none qualify</li>
+<li class="fragment">Treat each user as a dictionary and handle missing or invalid values as specified</li>
+<li class="fragment">Include clear docstrings and do not modify the supplied tests</li>
 </ul>
-<p><strong>What you’ll accomplish:</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a></a><span class="co"># From this (messy, fragile code)</span></span>
-<span id="cb17-2"><a></a>total <span class="op">=</span> <span class="dv">0</span></span>
-<span id="cb17-3"><a></a><span class="cf">for</span> user <span class="kw">in</span> users:</span>
-<span id="cb17-4"><a></a>    <span class="cf">if</span> user.get(<span class="st">"age"</span>):</span>
-<span id="cb17-5"><a></a>        total <span class="op">+=</span> user[<span class="st">"age"</span>]</span>
-<span id="cb17-6"><a></a><span class="bu">print</span>(<span class="st">"Average:"</span>, total<span class="op">/</span><span class="bu">len</span>(users))  <span class="co"># Will crash if no users!</span></span>
-<span id="cb17-7"><a></a></span>
-<span id="cb17-8"><a></a><span class="co"># To this (clean, robust functions)</span></span>
-<span id="cb17-9"><a></a><span class="kw">def</span> calculate_average_age(users: <span class="bu">list</span>[<span class="bu">dict</span>]) <span class="op">-&gt;</span> <span class="bu">float</span> <span class="op">|</span> <span class="va">None</span>:</span>
-<span id="cb17-10"><a></a>    <span class="co">"""Calculate average age with proper error handling."""</span></span>
-<span id="cb17-11"><a></a>    <span class="cf">try</span>:</span>
-<span id="cb17-12"><a></a>        valid_ages <span class="op">=</span> [user[<span class="st">"age"</span>] <span class="cf">for</span> user <span class="kw">in</span> users</span>
-<span id="cb17-13"><a></a>                     <span class="cf">if</span> <span class="bu">isinstance</span>(user.get(<span class="st">"age"</span>), (<span class="bu">int</span>, <span class="bu">float</span>))]</span>
-<span id="cb17-14"><a></a>        <span class="cf">return</span> <span class="bu">sum</span>(valid_ages) <span class="op">/</span> <span class="bu">len</span>(valid_ages) <span class="cf">if</span> valid_ages <span class="cf">else</span> <span class="va">None</span></span>
-<span id="cb17-15"><a></a>    <span class="cf">except</span> (<span class="pp">KeyError</span>, <span class="pp">TypeError</span>) <span class="im">as</span> e:</span>
-<span id="cb17-16"><a></a>        logger.warning(<span class="ss">f"Error calculating average age: </span><span class="sc">{</span>e<span class="sc">}</span><span class="ss">"</span>)</span>
-<span id="cb17-17"><a></a>        <span class="cf">return</span> <span class="va">None</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p><strong>Lab objectives</strong>: Clean code organization, defensive programming patterns, professional error handling</p>
+<p><strong>Implementation scaffold:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a></a><span class="kw">def</span> calculate_average_age(users: <span class="bu">list</span>[<span class="bu">dict</span>]) <span class="op">-&gt;</span> <span class="bu">float</span>:</span>
+<span id="cb17-2"><a></a>    <span class="co">"""Return the average numeric age, or 0.0 if none are valid."""</span></span>
+<span id="cb17-3"><a></a>    <span class="co"># </span><span class="al">TODO</span><span class="co">: collect the valid ages and calculate the specified result</span></span>
+<span id="cb17-4"><a></a>    ...</span>
+<span id="cb17-5"><a></a></span>
+<span id="cb17-6"><a></a><span class="kw">def</span> get_active_user_emails(users: <span class="bu">list</span>[<span class="bu">dict</span>]) <span class="op">-&gt;</span> <span class="bu">list</span>[<span class="bu">str</span>]:</span>
+<span id="cb17-7"><a></a>    <span class="co">"""Return emails for users whose active flag is exactly True."""</span></span>
+<span id="cb17-8"><a></a>    <span class="co"># </span><span class="al">TODO</span><span class="co">: preserve input order and skip missing or invalid records</span></span>
+<span id="cb17-9"><a></a>    ...</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb18"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb18-1"><a></a><span class="ex">uv</span> run <span class="at">--directory</span> week05 python <span class="at">-m</span> pytest tests/ <span class="at">-v</span></span>
+<span id="cb18-2"><a></a><span class="fu">git</span> add week05/lab05.py</span>
+<span id="cb18-3"><a></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"Complete Lab 05"</span></span>
+<span id="cb18-4"><a></a><span class="fu">git</span> push</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Instructions:</strong> <a href="https://github.com/bgreenwell/is4010-labs/blob/main/week05/lab05.md"><code>week05/lab05.md</code></a></p>
 <aside class="notes">
 <p><strong>TEACHING NOTES:</strong></p>
 <ul>
-<li><strong>Before/after comparison</strong>: Show transformation from amateur to professional code</li>
-<li><strong>Real-world relevance</strong>: These patterns are used daily in industry</li>
-<li><strong>AI collaboration</strong>: Emphasize using AI as a coding partner, not just code generator</li>
-<li><strong>Quality focus</strong>: Lab emphasizes code quality, not just functionality</li>
-<li><strong>Career preparation</strong>: These skills directly apply to internships and full-time roles</li>
+<li><strong>Contract alignment</strong>: Emphasize the exact return values and the two required functions</li>
+<li><strong>AI collaboration</strong>: Ask students to compare suggestions against the tests and written requirements</li>
+<li><strong>Submission</strong>: A green Week 05 badge earns the complete 10 points</li>
 </ul>
 <style type="text/css">
         span.MJX_Assistive_MathML {
@@ -1204,24 +1197,24 @@ clean, reusable functions. Each function should:
           display:block!important;
       }</style></aside>
 </section>
-<section id="summary-professional-python-development" class="slide level2">
-<h2>Summary: Professional Python development 🎯</h2>
+<section id="summary-functions-and-reliable-behavior" class="slide level2">
+<h2>Summary: functions and reliable behavior</h2>
 <ul>
 <li class="fragment"><strong>Functions</strong>: The foundation of maintainable, testable code</li>
-<li class="fragment"><strong>Error handling</strong>: The difference between amateur and professional software</li>
-<li class="fragment"><strong>Career skills</strong>: These concepts appear in every technical interview and code review</li>
+<li class="fragment"><strong>Error handling</strong>: A way to define and test failure behavior</li>
+<li class="fragment"><strong>Code review</strong>: Check that the behavior matches the function contract</li>
 <li class="fragment"><strong>AI partnership</strong>: Use AI to learn patterns, then apply your judgment</li>
 <li class="fragment"><strong>Next steps</strong>: Practice these patterns until they become second nature</li>
 </ul>
-<p><strong>Key takeaways for your development journey:</strong> - <strong>Design functions</strong> that do one thing well with clear interfaces - <strong>Handle errors</strong> proactively rather than reactively - <strong>Validate inputs</strong> to prevent problems before they occur - <strong>Use context managers</strong> for automatic resource management - <strong>Choose EAFP vs LBYL</strong> based on your specific use case - <strong>Write code</strong> that your future self (and teammates) will thank you for</p>
+<p><strong>Key takeaways:</strong> - <strong>Design functions</strong> that do one thing well with clear interfaces - <strong>Handle expected failures</strong> at the layer that can respond meaningfully - <strong>Validate inputs</strong> to prevent problems before they occur - <strong>Use context managers</strong> for automatic resource management - <strong>Choose EAFP vs LBYL</strong> based on your specific use case - <strong>Verify behavior</strong> with focused tests for success and failure paths</p>
 <aside class="notes">
 <p><strong>TEACHING NOTES:</strong></p>
 <ul>
-<li><strong>Career connection</strong>: Reinforce how these skills apply to professional development</li>
-<li><strong>Confidence building</strong>: Students should feel prepared to write production-quality code</li>
-<li><strong>Next week preview</strong>: These patterns will be essential for upcoming projects</li>
+<li><strong>Course connection</strong>: Reinforce how these skills support the later labs</li>
+<li><strong>Readiness check</strong>: Students should be able to describe each function’s success and failure behavior</li>
+<li><strong>Next week preview</strong>: These patterns support class methods and validation</li>
 <li><strong>Portfolio development</strong>: Encourage students to refactor their previous labs using new techniques</li>
-<li><strong>Industry mindset</strong>: Shift from “getting it to work” to “getting it to work reliably”</li>
+<li><strong>Mindset</strong>: Shift from one successful example to repeatable behavior across specified cases</li>
 </ul>
 <style type="text/css">
         span.MJX_Assistive_MathML {
