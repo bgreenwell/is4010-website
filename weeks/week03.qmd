@@ -23,4 +23,4 @@ This week marks the beginning of our Python journey. We'll start by exploring th
 
 ## Lab assignment
 
-- [Lab 03: Python basics](https://github.com/bgreenwell/is4010-labs/blob/main/week03/lab03.md)
+- [Lab 03: Python basics and automated testing](https://github.com/bgreenwell/is4010-labs/blob/main/week03/lab03.md)

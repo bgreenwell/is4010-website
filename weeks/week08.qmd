@@ -23,4 +23,4 @@ This week, we bridge the gap between simple scripts and professional-grade appli
 
 ## Lab assignment
 
-- [Lab 08: Professional Python](https://github.com/bgreenwell/is4010-labs/blob/main/week08/lab08.md)
+- [Lab 08: Weather CLI application](https://github.com/bgreenwell/is4010-labs/blob/main/week08/lab08.md)

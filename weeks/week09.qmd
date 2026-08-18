@@ -17,4 +17,4 @@ Welcome to the second half of the course—it's time to learn Rust! After master
 
 ## Lab assignment
 
-- [Lab 09: Welcome to Rust](https://github.com/bgreenwell/is4010-labs/blob/main/week09/lab09.md)
+- [Lab 09: Rust basics](https://github.com/bgreenwell/is4010-labs/blob/main/week09/lab09.md)

@@ -16,4 +16,4 @@ This week you'll learn how Rust achieves polymorphism without inheritance throug
 
 ## Lab assignment
 
-- [Lab 12: Generics & traits](https://github.com/bgreenwell/is4010-labs/blob/main/week12/lab12.md)
+- [Lab 12: Generics and traits](https://github.com/bgreenwell/is4010-labs/blob/main/week12/lab12.md)

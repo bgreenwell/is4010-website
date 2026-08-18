@@ -22,4 +22,4 @@ Object-oriented programming (OOP) is the architecture behind most modern softwar
 
 ## Lab assignment
 
-- [Lab 06: OOP](https://github.com/bgreenwell/is4010-labs/blob/main/week06/lab06.md)
+- [Lab 06: Object-oriented programming](https://github.com/bgreenwell/is4010-labs/blob/main/week06/lab06.md)

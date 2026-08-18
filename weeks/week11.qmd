@@ -20,4 +20,4 @@ This week you'll synthesize everything you've learned about Rust by building a c
 
 ## Lab assignment
 
-- [Lab 11: Structuring code](https://github.com/bgreenwell/is4010-labs/blob/main/week11/lab11.md)
+- [Lab 11: Structs, enums, and methods](https://github.com/bgreenwell/is4010-labs/blob/main/week11/lab11.md)
