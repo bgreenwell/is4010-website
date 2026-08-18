@@ -7,7 +7,7 @@ Welcome to the official course website for **IS 4010**.
 ## Course overview
 This course explores the intersection of modern software development and generative AI. Students will learn to build robust applications in **Python** and **Rust** while mastering the art of using AI as a collaborative partner ("Co-Pilot").
 
-A central theme is the practical application of AI code assistants (like **GitHub Copilot** and **Gemini**) to enhance problem-solving, accelerate development, and prepare students for the future of software engineering.
+A central theme is the practical application of AI code assistants (like **GitHub Copilot** and **Antigravity CLI**) to enhance problem-solving, accelerate development, and prepare students for the future of software engineering.
 
 ## Course "books"
 This course uses two primary, free, and open-source resources:

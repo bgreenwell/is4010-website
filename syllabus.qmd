@@ -19,12 +19,11 @@ The material below remains a course-planning reference while the Simple Syllabus
 **Title:** IS4010: Application development with artificial intelligence  
 **Course #:** IS4010   
 **Credit hours:** 3   
-**Term:** Spring 2026   
 **Prerequisites:** IS 3050
 
 # II. Course description
 
-This course introduces students to computer programming with a focus on object-oriented principles and the integration of AI-powered tools. Students will develop solutions to process data and implement algorithms in a modern integrated development environment (IDE). The curriculum begins with [Python](https://www.python.org/) fundamentals and transitions to the [Rust programming language](https://www.rust-lang.org/) for more advanced topics. A central theme is the practical application of AI code assistants (like [GitHub Copilot](https://github.com/features/copilot) and [Gemini](https://gemini.google.com/)) to enhance problem-solving, accelerate development, and prepare students for the future of software engineering.
+This course introduces students to computer programming with a focus on object-oriented principles and the integration of AI-powered tools. Students will develop solutions to process data and implement algorithms in a modern integrated development environment (IDE). The curriculum begins with [Python](https://www.python.org/) fundamentals and transitions to the [Rust programming language](https://www.rust-lang.org/) for more advanced topics. A central theme is the practical application of AI code assistants (like [GitHub Copilot](https://github.com/features/copilot) and [Antigravity CLI](https://antigravity.google/docs/cli/overview/)) to enhance problem-solving, accelerate development, and prepare students for the future of software engineering.
 
 # III. Student learning outcomes
 
@@ -48,7 +47,7 @@ Upon successful completion of this course, the learner will be able to:
 **Office:** Virtual (Teams)   
 **Email:** greenwbm@ucmail.uc.edu (use Teams for fastest response!)    
 **Office hours:** By appointment (reach out on Teams)  
-**Communication policy:** Students are encouraged to contact me anytime via the [course's Teams channel](https://teams.microsoft.com/l/team/19%3ASjdonOkpgQOXFJf6qmHIWfJIwzgKl-xvmnkNVUkg8k81%40thread.tacv2/conversations?groupId=5c3ca09e-ec41-473c-8395-ab28de92a041&tenantId=f5222e6c-5fc6-48eb-8f03-73db18203b63). I'm usually very responsive during weekdays and will reply within 24 hours. 
+**Communication policy:** Students are encouraged to contact me anytime via the course Teams channel. I'm usually very responsive during weekdays and will reply within 24 hours. 
 
 # V. Course materials
 
@@ -112,7 +111,7 @@ If you do not have access to your phone or other two-factor device, please conta
 
 # X. Course communication 
 
-**We will exclusively use Microsoft Teams for all course communication.** Join our course Teams channel here: [IS4010 Course Team](https://teams.microsoft.com/l/team/19%3ASjdonOkpgQOXFJf6qmHIWfJIwzgKl-xvmnkNVUkg8k81%40thread.tacv2/conversations?groupId=5c3ca09e-ec41-473c-8395-ab28de92a041&tenantId=f5222e6c-5fc6-48eb-8f03-73db18203b63)
+**We will exclusively use Microsoft Teams for all course communication.**
 
 Students are strongly encouraged to:
 - **Post questions to the General chat** - Your classmates likely have similar questions and can benefit from the discussion
@@ -129,7 +128,7 @@ Changes to the syllabus, due dates, course requirements or grading requirements 
 
 ## **Academic integrity & AI policy** 
 
-As with all Lindner College of Business efforts, in this course you will be held to the highest ethical standards, critical to building character. This course operates on a modern principle: **use AI, but use it wisely.** The use of AI tools like [GitHub Copilot](https://github.com/features/copilot) and [Gemini](https://gemini.google.com/) is not only permitted but encouraged. However, the goal is for *you* to learn.
+As with all Lindner College of Business efforts, in this course you will be held to the highest ethical standards, critical to building character. This course operates on a modern principle: **use AI, but use it wisely.** The use of AI tools like [GitHub Copilot](https://github.com/features/copilot), [Copilot CLI](https://docs.github.com/en/copilot/how-tos/copilot-cli/set-up-copilot-cli/install-copilot-cli), and [Antigravity CLI](https://antigravity.google/docs/cli/overview/) is not only permitted but encouraged. However, the goal is for *you* to learn.
 
 1. **You are the pilot, AI is the co-pilot.** You are ultimately responsible for every line of code you submit
 2. **Always understand the code.** If you use AI to generate something, you must be able to explain what it does, how it works, and why it's the correct solution
@@ -228,95 +227,98 @@ The final assessment allows students to demonstrate comprehensive understanding 
 
 # XII. Course schedule
 
-| Week | Dates | Module | Topic(s) | Labs (10 pts each) | Notes |
-|:-----|:------|:-------|:---------|:---------|:------|
-| 1 | Jan 13, 15 | Foundations & modern tooling | Course intro, terminal basics, `uv`, [Git](https://git-scm.com/), and [GitHub](https://github.com/) | **Lab 01** (Jan 18, 11:59 PM) | |
-| 2 | Jan 20, 22 | Foundations & modern tooling | Browser chats, Copilot in VS Code, Copilot CLI, Antigravity CLI, and prompting | **Lab 02** (Jan 25, 11:59 PM) | No class Mon Jan 19 (MLK) |
-| 3 | Jan 27, 29 | [Python](https://www.python.org/) fundamentals | Variables, data types, control flow, and loops | **Lab 03** (Feb 1, 11:59 PM) | |
-| 4 | Feb 3, 5 | [Python](https://www.python.org/) fundamentals | Data structures: lists, tuples, dicts, and sets | **Lab 04** (Feb 8, 11:59 PM) | |
-| 5 | Feb 10, 12 | [Python](https://www.python.org/) fundamentals | Functions and error handling | **Lab 05** (Feb 15, 11:59 PM) | |
-| 6 | Feb 17, 19 | [Python](https://www.python.org/) fundamentals | Object-oriented programming (OOP) | **Lab 06** (Feb 22, 11:59 PM) | |
-| 7 | Feb 24, 26 | Building a [Python](https://www.python.org/) application | Working with files and [JSON](https://www.json.org/) | **Lab 07** (Mar 1, 11:59 PM) | |
-| 8 | Mar 3, 5 | Building a [Python](https://www.python.org/) application | Professional Python & API Consumption | **Lab 08** (Mar 8, 11:59 PM) | |
-| 9 | Mar 10, 12 | New frontiers: [Rust](https://www.rust-lang.org/) | Introduction to [Rust](https://www.rust-lang.org/) | **Lab 09** (Mar 15, 11:59 PM) | |
-| - | **Mar 16-22** | **Spring break** | **No classes** | - | **Spring break** |
-| 10 | Mar 24, 26 | New frontiers: [Rust](https://www.rust-lang.org/) | Ownership and the borrow checker | **Lab 10** (Mar 29, 11:59 PM) | |
-| 11 | Mar 31, Apr 2 | New frontiers: [Rust](https://www.rust-lang.org/) | Structs, Enums, and Modules | **Lab 11** (Apr 5, 11:59 PM) | |
-| 12 | Apr 7, 9 | New frontiers: [Rust](https://www.rust-lang.org/) | Generics and traits | **Lab 12** (Apr 12, 11:59 PM) | |
-| 13 | Apr 14, 16 | New frontiers: [Rust](https://www.rust-lang.org/) | Idiomatic Rust | **Lab 13** (Apr 19, 11:59 PM) | |
-| 14 | Apr 21, 23 | New frontiers: [Rust](https://www.rust-lang.org/) | Command-line applications | **Lab 14** (Apr 26, 11:59 PM) | |
-| 15 | Apr 28, 30 | Final project | Final project workshop and polish | | *Last classes* |
-| 16 | May 4-9 | Exam week | **Final project due Sunday, May 3 at 11:59 PM** | | *No final exam - project only* |
+Specific meeting dates and due dates live in Canvas and Simple Syllabus, which are
+authoritative. This table gives the sequence of topics and the lab attached to each week.
 
-### Detailed session schedule:
+Each week meets twice. Labs are due **Sunday at 11:59 PM** of the week they are assigned.
+
+| Week | Module | Topic(s) | Lab (10 pts each) |
+|:-----|:-------|:---------|:------------------|
+| 1 | Foundations & modern tooling | Course intro, terminal basics, `uv`, [Git](https://git-scm.com/), and [GitHub](https://github.com/) | **Lab 01** |
+| 2 | Foundations & modern tooling | Browser chats, Copilot in VS Code, Copilot CLI, Antigravity CLI, and prompting | **Lab 02** |
+| 3 | [Python](https://www.python.org/) fundamentals | Variables, data types, control flow, and loops | **Lab 03** |
+| 4 | [Python](https://www.python.org/) fundamentals | Data structures: lists, tuples, dicts, and sets | **Lab 04** |
+| 5 | [Python](https://www.python.org/) fundamentals | Functions and error handling | **Lab 05** |
+| 6 | [Python](https://www.python.org/) fundamentals | Object-oriented programming (OOP) | **Lab 06** |
+| 7 | Building a [Python](https://www.python.org/) application | Working with files and [JSON](https://www.json.org/) | **Lab 07** |
+| 8 | Building a [Python](https://www.python.org/) application | Professional Python and API consumption | **Lab 08** |
+| 9 | New frontiers: [Rust](https://www.rust-lang.org/) | Introduction to [Rust](https://www.rust-lang.org/) | **Lab 09** |
+| — | **Spring break** | **No classes** | — |
+| 10 | New frontiers: [Rust](https://www.rust-lang.org/) | Ownership and the borrow checker | **Lab 10** |
+| 11 | New frontiers: [Rust](https://www.rust-lang.org/) | Structs, enums, and modules | **Lab 11** |
+| 12 | New frontiers: [Rust](https://www.rust-lang.org/) | Generics and traits | **Lab 12** |
+| 13 | New frontiers: [Rust](https://www.rust-lang.org/) | Idiomatic Rust | **Lab 13** |
+| 14 | New frontiers: [Rust](https://www.rust-lang.org/) | Command-line applications | **Lab 14** |
+| — | Final project | Project work sessions; no new material | — |
+| — | Exam week | No final exam; the final project is the only deliverable | — |
+
+### Detailed session schedule
 
 #### Week 1: Foundations & modern tooling
-• **January 13, 2026 (Tues)**: Welcome to the future of development - Course intro, AI demo, syllabus walkthrough, development environment setup
-• **January 15, 2026 (Thurs)**: Version control with [Git](https://git-scm.com/) & [GitHub](https://github.com/) - Git workflow, repository creation, clone/commit/push cycle
+• **Session 1**: Welcome to the future of development - course intro, AI demo, syllabus walkthrough, development environment setup
+• **Session 2**: Version control with [Git](https://git-scm.com/) and [GitHub](https://github.com/) - Git workflow, repository creation, clone/commit/push cycle
 
-#### Week 2: AI Co-pilots
-• **January 20, 2026 (Tues)**: Introduction to [GitHub Copilot](https://github.com/features/copilot) - Code generation, best practices, guided exercises
-• **January 22, 2026 (Thurs)**: Advanced assistance with [Gemini](https://gemini.google.com/) & prompting - Prompt engineering, debugging with AI, code explanation
+#### Week 2: AI copilots
+• **Session 1**: Introduction to [GitHub Copilot](https://github.com/features/copilot) - code generation, best practices, guided exercises
+• **Session 2**: CLI coding agents and prompting - Copilot CLI, Antigravity CLI, prompt engineering, debugging with AI, code explanation
 
 #### Week 3: [Python](https://www.python.org/) basics & control flow
-• **January 27, 2026 (Tues)**: Variables, data types, and I/O - Core data types, input/print functions, Mad Libs generator
-• **January 29, 2026 (Thurs)**: Control statements & loops - Conditional logic, iteration patterns, number guessing game
+• **Session 1**: Variables, data types, and I/O - core data types, input/print functions, Mad Libs generator
+• **Session 2**: Control statements & loops - conditional logic, iteration patterns, number guessing game
 
 #### Week 4: [Python](https://www.python.org/) data structures
-• **February 3, 2026 (Tues)**: Lists & tuples - Mutable vs immutable sequences, list methods, data processing tasks
-• **February 5, 2026 (Thurs)**: Dictionaries & sets - Key-value pairs, hash maps, choosing appropriate data structures
+• **Session 1**: Lists & tuples - mutable vs immutable sequences, list methods, data processing tasks
+• **Session 2**: Dictionaries & sets - key-value pairs, hash maps, choosing appropriate data structures
 
 #### Week 5: Functions & error handling
-• **February 10, 2026 (Tues)**: Writing clean functions - DRY principle, function arguments, refactoring challenge
-• **February 12, 2026 (Thurs)**: Error handling - Exception handling with try/except blocks, bulletproofing code
+• **Session 1**: Writing clean functions - DRY principle, function arguments, refactoring challenge
+• **Session 2**: Error handling - exception handling with try/except blocks, bulletproofing code
 
 #### Week 6: Object-oriented programming
-• **February 17, 2026 (Tues)**: Classes & objects - Class definitions, __init__ method, object instantiation
-• **February 19, 2026 (Thurs)**: Methods & inheritance - Instance methods, inheritance for code reuse, parent/child classes
+• **Session 1**: Classes & objects - class definitions, `__init__` method, object instantiation
+• **Session 2**: Methods & inheritance - instance methods, inheritance for code reuse, parent/child classes
 
 #### Week 7: Working with external data
-• **February 24, 2026 (Tues)**: Files & [JSON](https://www.json.org/) - File I/O operations, JSON format, contact book application
-• **February 26, 2026 (Thurs)**: API basics & JSON - Working with web data, reading/writing JSON
+• **Session 1**: Files & [JSON](https://www.json.org/) - file I/O operations, JSON format, contact book application
+• **Session 2**: API basics & JSON - working with web data, reading/writing JSON
 
 #### Week 8: Professional Python & API consumption
-• **March 3, 2026 (Tues)**: Consuming APIs - HTTP requests, status codes, public API integration
-• **March 5, 2026 (Thurs)**: Professional Python practices - Type hinting, linting, formatting, and project structure
+• **Session 1**: Consuming APIs - HTTP requests, status codes, public API integration
+• **Session 2**: Professional Python practices - type hinting, linting, formatting, and project structure
 
 #### Week 9: Welcome to Rust
-• **March 10, 2026 (Tues)**: Why [Rust](https://www.rust-lang.org/)? & Hello, World! - Rust value proposition, [Cargo](https://doc.rust-lang.org/cargo/) build tool introduction
-• **March 12, 2026 (Thurs)**: [Rust](https://www.rust-lang.org/) basics - Variables, mutability, data types, functions, testing
+• **Session 1**: Why [Rust](https://www.rust-lang.org/)? & Hello, World! - Rust value proposition, [Cargo](https://doc.rust-lang.org/cargo/) build tool introduction
+• **Session 2**: [Rust](https://www.rust-lang.org/) basics - variables, mutability, data types, functions, testing
 
-#### Spring break (March 16-22, 2026)
+#### Spring break
 • **No classes**
 
 #### Week 10: Ownership & borrowing
-• **March 24, 2026 (Tues)**: The Soul of Rust - Ownership rules, move semantics, stack vs heap
-• **March 26, 2026 (Thurs)**: References & borrowing - Immutable vs mutable references, the borrow checker
+• **Session 1**: The soul of Rust - ownership rules, move semantics, stack vs heap
+• **Session 2**: References & borrowing - immutable vs mutable references, the borrow checker
 
 #### Week 11: Structuring code & data
-• **March 31, 2026 (Tues)**: Structs & Enums - Modeling data, pattern matching with match
-• **April 2, 2026 (Thurs)**: Modules & error handling - Organizing code, Option<T>, Result<T,E>
+• **Session 1**: Structs & enums - modeling data, pattern matching with `match`
+• **Session 2**: Modules & error handling - organizing code, `Option<T>`, `Result<T, E>`
 
 #### Week 12: Generics & traits
-• **April 7, 2026 (Tues)**: Generics - Writing reusable code with type parameters
-• **April 9, 2026 (Thurs)**: Traits - Defining shared behavior, common traits (Display, Iterator)
+• **Session 1**: Generics - writing reusable code with type parameters
+• **Session 2**: Traits - defining shared behavior, common traits (`Display`, `Iterator`)
 
 #### Week 13: Idiomatic Rust
-• **April 14, 2026 (Tues)**: Iterators & closures - Functional programming patterns in Rust
-• **April 16, 2026 (Thurs)**: Smart pointers - Box, Rc, RefCell, and interior mutability
+• **Session 1**: Iterators & closures - functional programming patterns in Rust
+• **Session 2**: Smart pointers - `Box`, `Rc`, `RefCell`, and interior mutability
 
 #### Week 14: Command-line applications
-• **April 21, 2026 (Tues)**: Building CLI apps - Argument parsing with clap, project structure
-• **April 23, 2026 (Thurs)**: Polishing & publishing - Documentation, release builds, publishing to Crates.io
+• **Session 1**: Building CLI apps - argument parsing with clap, project structure
+• **Session 2**: Polishing & publishing - documentation, release builds, publishing to crates.io
 
-#### Week 15: Final project
-• **April 28, 2026 (Tues)**: Final workshop - Bug fixes, polish, testing, and documentation
-• **April 30, 2026 (Thurs)**: Final project office hours - Individual consultations and debugging support
+#### Final project work sessions
+• **Session 1**: Final workshop - bug fixes, polish, testing, and documentation
+• **Session 2**: Final project office hours - individual consultations and debugging support
 
-#### Exam week (May 4-9, 2026)
-• **No final exam or Demo Day**: Final project submission deadline is **Sunday, May 3, 2026 at 11:59 PM** (before exam week starts)
-
-**Total: 26 actual class sessions**
+#### Exam week
+• **No final exam or demo day.** The final project is submitted before exam week begins; see Canvas for the deadline.
 
 # XIII. Additional resources
 

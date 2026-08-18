@@ -93,7 +93,7 @@ Partial credit is available within each component. A project that is mostly comp
 ## Key dates
 
 - **Project proposal**: Not required — just start building!
-- **Final submission**: Sunday, May 3, 2026 at 11:59 PM
+- **Final submission**: the Sunday before exam week, at 11:59 PM. Canvas carries the exact date.
 
 Submit a link to your public GitHub repository via Canvas by the deadline.
 
