@@ -1,0 +1,21 @@
+# Shared configuration for every lecture deck.
+#
+# This is directory metadata, not a nested project, so it applies when the decks are
+# rendered as part of the parent website project. Keep per-deck front matter limited to
+# title, subtitle, and author so that all decks stay visually identical.
+format:
+  revealjs:
+    self-contained: false
+    theme: dracula
+    transition: fade
+    slide-number: true
+    chalkboard: true
+    preview-links: auto
+    scrollable: true
+    css: custom.css
+    footer: "IS4010: app development with AI"
+
+execute:
+  echo: true
+  warning: false
+  error: false
