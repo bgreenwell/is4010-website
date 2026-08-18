@@ -858,7 +858,7 @@ def calculate_average_age(users: list[dict]) -> float:
     ...
 
 def get_active_user_emails(users: list[dict]) -> list[str]:
-    """Return emails for users whose active flag is exactly True."""
+    """Return emails for users whose is_active value is truthy."""
     # TODO: preserve input order and skip missing or invalid records
     ...
 ```

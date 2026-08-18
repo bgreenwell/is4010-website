@@ -994,7 +994,7 @@ By the end of Session 2 students should feel comfortable reading and writing `im
 **What you'll build:**
 
 - Generic `Stack<T>` data structure
-- Implement core methods: `push`, `pop`, `peek`, `is_empty`, `len`
+- Implement core methods: `new`, `push`, `pop`, `peek`, `is_empty`, `len`
 - Implement `Display` trait for custom formatting
 - Use the supplied test suite without modifying it
 
@@ -1016,7 +1016,7 @@ cargo test
 cargo fmt
 cargo clippy -- -D warnings
 git add week12/
-git commit -m "Complete lab 12"
+git commit -m "Complete Lab 12"
 git push origin main
 ```
 

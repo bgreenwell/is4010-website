@@ -939,7 +939,7 @@ cargo test
 cargo fmt
 cargo clippy -- -D warnings
 git add week11/
-git commit -m "Complete lab 11"
+git commit -m "Complete Lab 11"
 git push origin main
 ```
 

@@ -576,10 +576,11 @@ laptop.price = 1199.99  # Valid price change
 ## Introducing Lab 06: part 2
 
 ::: {.incremental}
-- **Build on Part 1**: Extend your `Book` class with meaningful methods
+- **Build on Part 1**: Add `get_age()`, which returns 2026 minus the publication year
+- **Fixed year**: Use 2026 exactly; the tests assert a specific age, so a different year fails
 - **Inheritance practice**: Create an `EBook` class that inherits from `Book`
-- **Method override**: Customize `__str__` method in the child class
-- **Required skills**: Reuse the parent initializer and override `__str__`
+- **Method override**: Customize `__str__` in the child class; it must include the file size and `MB`
+- **Required skills**: Reuse the parent initializer and inherit `get_age` without redefining it
 - **AI collaboration**: Use AI assistants to explore different implementation approaches
 :::
 
@@ -637,3 +638,25 @@ laptop.price = 1199.99  # Valid price change
 - **Next session prep**: Brief mention of what's coming in Session 2
 - **Office hours**: Encourage questions about OOP concepts or lab implementation
 :::
+
+---
+
+## Time for Lab 06
+
+**Deliverable**: `week06/lab06.py` containing `Book` and `EBook`.
+
+- `Book` stores `title`, `author`, and `year`, and its `__str__` includes all three
+- `get_age()` returns 2026 minus the publication year
+- `EBook` extends `Book` with `file_size`, reuses the parent initializer via `super()`, and inherits `get_age`
+- Do not copy or modify the supplied tests
+
+```bash
+uv run --directory week06 python -m pytest tests/ -v
+git add week06/lab06.py
+git commit -m "Complete Lab 06"
+git push origin main
+```
+
+A green Week 06 badge earns the complete 10 points.
+
+**Instructions:** [`week06/lab06.md`](https://github.com/bgreenwell/is4010-labs/blob/main/week06/lab06.md)

@@ -1188,7 +1188,7 @@ uv run my-api-tool pokemon --format json
 **Complete the supplied three-module contract:**
 
 - `favorites.py`: `FavoritesManager` stores case-insensitive favorites in JSON and recovers from missing or corrupted files
-- `weather_api.py`: `WeatherAPI` calls the specified current and forecast endpoints with `params` and `timeout=10`; formatting functions produce the required text
+- `weather_api.py`: `WeatherAPI` calls the specified current and forecast endpoints with `params` and `timeout=10`; `format_current_weather()` and `format_forecast()` produce the required text
 - `weather.py`: `load_api_key()`, `build_parser()`, and `main(argv=None)` implement the documented commands, favorite lookup, standard-error messages, and exit status
 - Automated tests use fake responses; manual API use requires an ignored `config.py` or the `WEATHER_API_KEY` environment variable
 - Do not modify the supplied tests, workflow, `config.example.py`, or root `.gitignore`

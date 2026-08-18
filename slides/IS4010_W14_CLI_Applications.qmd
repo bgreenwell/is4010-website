@@ -298,6 +298,8 @@ cargo run -- random --length 20 --symbols
 
 A green Week 14 badge represents the complete 10-point lab.
 
+**Instructions:** [`week14/lab14.md`](https://github.com/bgreenwell/is4010-labs/blob/main/week14/lab14.md)
+
 ---
 
 ## Reviewing AI prompting for Rust
