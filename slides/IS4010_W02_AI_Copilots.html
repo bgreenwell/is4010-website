@@ -1,21 +1,22 @@
 <!DOCTYPE html>
 <html lang="en"><head>
-<script src="IS4010_W02_AI_Copilots_files/libs/clipboard/clipboard.min.js"></script>
-<script src="IS4010_W02_AI_Copilots_files/libs/quarto-html/tabby.min.js"></script>
-<script src="IS4010_W02_AI_Copilots_files/libs/quarto-html/popper.min.js"></script>
-<script src="IS4010_W02_AI_Copilots_files/libs/quarto-html/tippy.umd.min.js"></script>
-<link href="IS4010_W02_AI_Copilots_files/libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="IS4010_W02_AI_Copilots_files/libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="IS4010_W02_AI_Copilots_files/libs/quarto-html/quarto-syntax-highlighting-dark-b85bc7c33db8c58e0ec93c3465666fed.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+<link href="../images/uc-logo-2.png" rel="icon" type="image/png">
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-html/tabby.min.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-b85bc7c33db8c58e0ec93c3465666fed.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
   <meta name="generator" content="quarto-1.10.18">
 
   <meta name="author" content="Brandon M. Greenwell">
-  <title>IS4010: AI-enhanced application development</title>
+  <title>IS 4010 - App Dev with AI – IS4010: AI-enhanced application development</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
-  <link rel="stylesheet" href="IS4010_W02_AI_Copilots_files/libs/revealjs/dist/reset.css">
-  <link rel="stylesheet" href="IS4010_W02_AI_Copilots_files/libs/revealjs/dist/reveal.css">
+  <link rel="stylesheet" href="../site_libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="../site_libs/revealjs/dist/reveal.css">
   <style>
     /* Default styles provided by pandoc.
     ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -101,13 +102,14 @@
     code span.vs { color: #abe338; } /* VerbatimString */
     code span.wa { color: #dcc6e0; } /* Warning */
   </style>
-  <link rel="stylesheet" href="IS4010_W02_AI_Copilots_files/libs/revealjs/dist/theme/quarto-fdc93494f2580a7e050003a96af38920.css">
-  <link href="IS4010_W02_AI_Copilots_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
-  <link href="IS4010_W02_AI_Copilots_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
-  <link href="IS4010_W02_AI_Copilots_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
-  <link href="IS4010_W02_AI_Copilots_files/libs/revealjs/plugin/reveal-chalkboard/font-awesome/css/all.css" rel="stylesheet">
-  <link href="IS4010_W02_AI_Copilots_files/libs/revealjs/plugin/reveal-chalkboard/style.css" rel="stylesheet">
-  <link href="IS4010_W02_AI_Copilots_files/libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto-fdc93494f2580a7e050003a96af38920.css">
+  <link rel="stylesheet" href="custom.css">
+  <link href="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="../site_libs/revealjs/plugin/reveal-chalkboard/font-awesome/css/all.css" rel="stylesheet">
+  <link href="../site_libs/revealjs/plugin/reveal-chalkboard/style.css" rel="stylesheet">
+  <link href="../site_libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
   <style type="text/css">
     .reveal div.sourceCode {
       margin: 0;
@@ -119,6 +121,7 @@
     }
     .reveal .slide:not(.center) {
       height: 100%;
+      overflow-y: auto;
     }
     .reveal .slide.scrollable {
       overflow-y: auto;
@@ -242,7 +245,7 @@ Brandon M. Greenwell
       }</style></aside>
 </section>
 <section id="course-motto" class="slide level2">
-<h2>Course motto:</h2>
+<h2>Course motto</h2>
 <blockquote>
 <p>Augment, don’t automate!</p>
 </blockquote>
@@ -272,8 +275,7 @@ Brandon M. Greenwell
 <h2>What are AI programming tools?</h2>
 <ul>
 <li class="fragment"><strong>Code generation</strong>: Turn comments and prompts into working code</li>
-<li class="fragment"><strong>Code explanation</strong>: Break down complex functions into plain English<br>
-</li>
+<li class="fragment"><strong>Code explanation</strong>: Break down complex functions into plain English</li>
 <li class="fragment"><strong>Debugging assistance</strong>: Help identify and fix errors</li>
 <li class="fragment"><strong>Refactoring support</strong>: Improve code structure and style</li>
 <li class="fragment"><strong>Learning accelerator</strong>: Get instant feedback and alternative approaches</li>
@@ -310,7 +312,7 @@ Brandon M. Greenwell
 <ul>
 <li class="fragment"><strong>Browser chat</strong>: General-purpose conversation and explanations (Gemini, ChatGPT, Claude, and others)</li>
 <li class="fragment"><strong>Editor assistant</strong>: Contextual completion, chat, and edits with <a href="https://github.com/features/copilot">GitHub Copilot</a> in VS Code</li>
-<li class="fragment"><strong>CLI agents</strong>: Repository-aware work in the terminal with <a href="https://github.com/features/copilot/cli">Copilot CLI</a> and <a href="https://antigravity.google/docs/cli/overview/">Antigravity CLI</a></li>
+<li class="fragment"><strong>CLI agents</strong>: Repository-aware work in the terminal with <a href="https://docs.github.com/en/copilot/how-tos/copilot-cli/set-up-copilot-cli/install-copilot-cli">Copilot CLI</a> and <a href="https://antigravity.google/docs/cli/overview/">Antigravity CLI</a></li>
 </ul>
 <aside class="notes">
 <p>Frame these as surfaces rather than permanent tool loyalties. The same model or provider may appear in more than one surface, but the context and workflow differ.</p>
@@ -353,13 +355,12 @@ Brandon M. Greenwell
           display:block!important;
       }</style></aside>
 </section>
-<section id="conversational-coding" class="slide level2">
+<section id="conversational-coding" class="slide level2 scrollable">
 <h2>Conversational coding</h2>
 <p><strong>The CPTF framework for great prompts:</strong></p>
 <ol type="1">
 <li class="fragment"><strong>Context</strong>: “Here is my <a href="https://www.python.org/">Python</a> function…”</li>
-<li class="fragment"><strong>Persona</strong>: “Act as a senior software developer reviewing my code.”<br>
-</li>
+<li class="fragment"><strong>Persona</strong>: “Act as a senior software developer reviewing my code.”</li>
 <li class="fragment"><strong>Task</strong>: “Find any potential bugs and suggest improvements.”</li>
 <li class="fragment"><strong>Format</strong>: “Provide your answer as a numbered list.”</li>
 </ol>
@@ -432,8 +433,7 @@ Brandon M. Greenwell
 </blockquote>
 <aside class="notes">
 <p>This is the highlight of the session! Have three browser tabs ready: 1. Gemini (gemini.google.com) 2. ChatGPT (chat.openai.com) 3. Claude (claude.ai)</p>
-<p>Paste the exact same prompt into each and show the results side-by-side. Point out: - Different coding styles - Quality of docstrings<br>
-- Error handling approaches - Explanation quality - Any unique insights each model provides</p>
+<p>Paste the exact same prompt into each and show the results side-by-side. Point out: - Different coding styles - Quality of docstrings - Error handling approaches - Explanation quality - Any unique insights each model provides</p>
 <p>This demonstrates that models have different “personalities” and there’s no single “best” tool.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
@@ -531,27 +531,26 @@ Brandon M. Greenwell
 <section class="slide level2">
 
 <p>An example of Numpy-style docstrings:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="" aria-label="1"></a><span class="kw">def</span> add(num1, num2):</span>
-<span id="cb6-2"><a href="" aria-label="2"></a>    <span class="co">"""</span></span>
-<span id="cb6-3"><a href="" aria-label="3"></a><span class="co">    Add two numbers together.</span></span>
-<span id="cb6-4"><a href="" aria-label="4"></a></span>
-<span id="cb6-5"><a href="" aria-label="5"></a><span class="co">    Parameters</span></span>
-<span id="cb6-6"><a href="" aria-label="6"></a><span class="co">    ----------</span></span>
-<span id="cb6-7"><a href="" aria-label="7"></a><span class="co">    num1 : int</span></span>
-<span id="cb6-8"><a href="" aria-label="8"></a><span class="co">        The first number.</span></span>
-<span id="cb6-9"><a href="" aria-label="9"></a><span class="co">    num2 : int</span></span>
-<span id="cb6-10"><a href="" aria-label="10"></a><span class="co">        The second number.</span></span>
-<span id="cb6-11"><a href="" aria-label="11"></a></span>
-<span id="cb6-12"><a href="" aria-label="12"></a><span class="co">    Returns</span></span>
-<span id="cb6-13"><a href="" aria-label="13"></a><span class="co">    -------</span></span>
-<span id="cb6-14"><a href="" aria-label="14"></a><span class="co">    int</span></span>
-<span id="cb6-15"><a href="" aria-label="15"></a><span class="co">        The sum of the two numbers.</span></span>
-<span id="cb6-16"><a href="" aria-label="16"></a><span class="co">    """</span></span>
-<span id="cb6-17"><a href="" aria-label="17"></a>    <span class="cf">return</span> num1 <span class="op">+</span> num2</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a aria-label="1"></a><span class="kw">def</span> add(num1, num2):</span>
+<span id="cb6-2"><a aria-label="2"></a>    <span class="co">"""</span></span>
+<span id="cb6-3"><a aria-label="3"></a><span class="co">    Add two numbers together.</span></span>
+<span id="cb6-4"><a aria-label="4"></a></span>
+<span id="cb6-5"><a aria-label="5"></a><span class="co">    Parameters</span></span>
+<span id="cb6-6"><a aria-label="6"></a><span class="co">    ----------</span></span>
+<span id="cb6-7"><a aria-label="7"></a><span class="co">    num1 : int</span></span>
+<span id="cb6-8"><a aria-label="8"></a><span class="co">        The first number.</span></span>
+<span id="cb6-9"><a aria-label="9"></a><span class="co">    num2 : int</span></span>
+<span id="cb6-10"><a aria-label="10"></a><span class="co">        The second number.</span></span>
+<span id="cb6-11"><a aria-label="11"></a></span>
+<span id="cb6-12"><a aria-label="12"></a><span class="co">    Returns</span></span>
+<span id="cb6-13"><a aria-label="13"></a><span class="co">    -------</span></span>
+<span id="cb6-14"><a aria-label="14"></a><span class="co">    int</span></span>
+<span id="cb6-15"><a aria-label="15"></a><span class="co">        The sum of the two numbers.</span></span>
+<span id="cb6-16"><a aria-label="16"></a><span class="co">    """</span></span>
+<span id="cb6-17"><a aria-label="17"></a>    <span class="cf">return</span> num1 <span class="op">+</span> num2</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <aside class="notes">
 <p>Show the <a href="https://numpy.org/">NumPy</a> docstring format that will be used throughout the course. This is important for Lab 02 where students will be working with docstrings extensively.</p>
-<p>Point out: - The brief description first - Parameters section with types and descriptions<br>
-- Returns section with type and description - Clear, consistent formatting</p>
+<p>Point out: - The brief description first - Parameters section with types and descriptions - Returns section with type and description - Clear, consistent formatting</p>
 <p>This style works particularly well with AI tools because it provides structured, detailed context about function intent. Full Python instruction begins in Week 03.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
@@ -565,13 +564,13 @@ Brandon M. Greenwell
           display:block!important;
       }</style></aside>
 </section>
-<section id="introducing-lab-02-code-preview" class="slide level2">
-<h2>Introducing Lab 02: code preview</h2>
+<section id="where-this-is-heading" class="slide level2">
+<h2>Where this is heading</h2>
 <ul>
-<li>Use any AI coding assistant available to you; GitHub Copilot is not required</li>
-<li>Ask it to help implement three small Python functions: <code>make_greeting</code>, <code>is_even</code>, and <code>count_vowels</code></li>
+<li>In Lab 02 you will implement three small Python functions: <code>make_greeting</code>, <code>is_even</code>, and <code>count_vowels</code></li>
 <li>Read every suggestion, run the provided tests, and revise the result instead of accepting code blindly</li>
 <li>This is a preview of Python and testing; formal Python instruction begins in Week 03</li>
+<li>First we need the other two surfaces: the editor and the terminal</li>
 </ul>
 </section>
 <section class="slide level2">
@@ -584,7 +583,7 @@ Brandon M. Greenwell
 </section>
 <section id="from-browser-to-editor" class="slide level2">
 <h2>From browser to editor</h2>
-<p>Why integration matters 🔗</p>
+<p>Why integration matters</p>
 <ul>
 <li class="fragment"><strong>Stay in your flow state</strong>: No context switching!</li>
 <li class="fragment"><strong>Keep your hands on the keyboard</strong>: Faster than copy-paste workflows</li>
@@ -646,7 +645,7 @@ Brandon M. Greenwell
 <li class="fragment">Use <strong>Alt + ]</strong> (Windows) or <strong>Option + ]</strong> (Mac) to cycle through alternatives</li>
 </ul>
 </section>
-<section id="inline-suggestion-practices" class="slide level2">
+<section id="inline-suggestion-practices" class="slide level2 scrollable">
 <h2>Inline suggestion practices</h2>
 <p><strong>Best practices:</strong></p>
 <ul>
@@ -681,7 +680,7 @@ Brandon M. Greenwell
 </section>
 <section id="copilot-chat-modes" class="slide level2">
 <h2>Copilot Chat modes</h2>
-<p><strong>Your conversational partner</strong> 💬</p>
+<p><strong>Your conversational partner</strong></p>
 <p>Common interaction modes (labels can change):</p>
 <ul>
 <li class="fragment"><strong>Planning mode</strong>: Architectural decisions and project structure</li>
@@ -691,7 +690,7 @@ Brandon M. Greenwell
 </section>
 <section id="when-to-use-each-copilot-chat-mode" class="slide level2">
 <h2>When to use each Copilot Chat mode</h2>
-<p><strong>Your conversational partner</strong> 💬</p>
+<p><strong>Your conversational partner</strong></p>
 <p>When to use each mode:</p>
 <ul>
 <li class="fragment"><strong>Planning</strong>: “How should I structure a student gradebook application?”</li>
@@ -716,7 +715,7 @@ Brandon M. Greenwell
           display:block!important;
       }</style></aside>
 </section>
-<section id="live-demo" class="slide level2">
+<section id="live-demo" class="slide level2 scrollable">
 <h2>Live demo</h2>
 <p><strong>Building a <a href="https://www.python.org/">Python</a> utility with AI assistance:</strong></p>
 <ol type="1">
@@ -779,8 +778,8 @@ Brandon M. Greenwell
 <li class="fragment">Review requested permissions and commands before approval.</li>
 <li class="fragment">Use the official setup guide because installation and authentication flows can change.</li>
 </ul>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="" aria-label="1"></a><span class="bu">cd</span> ~/is4010/is4010-labs</span>
-<span id="cb7-2"><a href="" aria-label="2"></a><span class="ex">agy</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a aria-label="1"></a><span class="bu">cd</span> ~/is4010/is4010-labs</span>
+<span id="cb7-2"><a aria-label="2"></a><span class="ex">agy</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <aside class="notes">
 <p>Use the current official setup guide during class. The course-facing Google terminal tool is Antigravity CLI, launched with <code>agy</code>; installation and account flows may change.</p>
 <style type="text/css">
@@ -796,7 +795,7 @@ Brandon M. Greenwell
       }</style></aside>
 </section>
 <section id="github-copilot-cli" class="slide level2">
-<h2><a href="https://github.com/features/copilot/cli">GitHub Copilot CLI</a></h2>
+<h2><a href="https://docs.github.com/en/copilot/how-tos/copilot-cli/set-up-copilot-cli/install-copilot-cli">GitHub Copilot CLI</a></h2>
 <h3 id="githubs-coding-agent-in-your-terminal">GitHub’s coding agent in your terminal</h3>
 <ul>
 <li class="fragment">Install the standalone tool from the current official GitHub documentation.</li>
@@ -804,8 +803,8 @@ Brandon M. Greenwell
 <li class="fragment">It can reason about repository context, propose edits, and help run checks.</li>
 <li class="fragment">Review its plan, permissions, commands, and final diff.</li>
 </ul>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="" aria-label="1"></a><span class="bu">cd</span> ~/is4010/is4010-labs</span>
-<span id="cb8-2"><a href="" aria-label="2"></a><span class="ex">copilot</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a aria-label="1"></a><span class="bu">cd</span> ~/is4010/is4010-labs</span>
+<span id="cb8-2"><a aria-label="2"></a><span class="ex">copilot</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <aside class="notes">
 <p>The current Copilot CLI is a standalone agent, not the older <code>gh copilot suggest</code> and <code>gh copilot explain</code> extension. Open the official install page during class instead of copying an installer command into the deck.</p>
 <style type="text/css">
@@ -820,7 +819,7 @@ Brandon M. Greenwell
           display:block!important;
       }</style></aside>
 </section>
-<section id="the-comparison-protocol" class="slide level2">
+<section id="the-comparison-protocol" class="slide level2 scrollable">
 <h2>The comparison protocol</h2>
 <ol type="1">
 <li class="fragment">Start both agents in the same repository.</li>
@@ -832,42 +831,6 @@ Brandon M. Greenwell
 </ol>
 <aside class="notes">
 <p>Use <code>count_vowels</code> for the live comparison so class mirrors Lab 02. CI can validate the code and journal structure, but it cannot inspect local tool installations.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="google-jules-repository-workflow" class="slide level2">
-<h2><a href="https://jules.google/">Google Jules</a>: repository workflow</h2>
-<p><strong>Repository-based coding agent</strong></p>
-<p>Repository-based workflow:</p>
-<ul>
-<li class="fragment">Connects to an authorized GitHub repository and branch</li>
-<li class="fragment">Clones the repository into a virtual machine for an assigned task</li>
-<li class="fragment">Proposes a plan before editing and presents a diff for review</li>
-<li class="fragment">Can publish its changes to a branch or pull request after review</li>
-</ul>
-</section>
-<section id="google-jules-review-uses" class="slide level2">
-<h2><a href="https://jules.google/">Google Jules</a>: review uses</h2>
-<p><strong>Repository-based coding agent</strong></p>
-<p>Good for:</p>
-<ul>
-<li class="fragment"><strong>Code review</strong>: Before submitting assignments or pull requests</li>
-<li class="fragment"><strong>Learning</strong>: Understanding best practices in real projects</li>
-<li class="fragment"><strong>Debugging</strong>: Finding subtle issues across multiple files</li>
-<li class="fragment"><strong>Refactoring</strong>: Identifying improvement opportunities</li>
-<li class="fragment"><strong>Addressing <a href="https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/about-pull-requests">PRs</a></strong>: <a href="https://github.com/bgreenwell/statlingua/pull/7">Example</a></li>
-</ul>
-<aside class="notes">
-<p>Use a small disposable repository for the demonstration. Show the authorization boundary, proposed plan, diff, and checks. Do not present an agent’s security or performance suggestions as findings until they are verified.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -910,7 +873,7 @@ Brandon M. Greenwell
           display:block!important;
       }</style></aside>
 </section>
-<section id="ai-workflow-implementation" class="slide level2">
+<section id="ai-workflow-implementation" class="slide level2 scrollable">
 <h2>AI workflow: implementation</h2>
 <p><strong>Daily development:</strong></p>
 <ol type="1">
@@ -920,13 +883,13 @@ Brandon M. Greenwell
 <li><strong>Command-line for quick help</strong>: Terminal-based queries for efficiency</li>
 </ol>
 </section>
-<section id="ai-workflow-review-and-submission" class="slide level2">
+<section id="ai-workflow-review-and-submission" class="slide level2 scrollable">
 <h2>AI workflow: review and submission</h2>
 <p><strong>Code review and submission:</strong></p>
 <ol type="1">
-<li><strong>Repository task</strong>: Assign a scoped task to Jules when an asynchronous agent is useful</li>
+<li><strong>Repository task</strong>: Give a scoped task to a CLI agent started inside the repository</li>
 <li><strong>AI-assisted debugging</strong>: Use chat to identify and fix issues</li>
-<li><strong>Documentation</strong>: Generate docstrings and comments with AI help</li>
+<li><strong>Documentation</strong>: Generate NumPy-style docstrings and comments with AI help</li>
 <li><strong>Testing</strong>: Propose test cases, then inspect and run them</li>
 </ol>
 <aside class="notes">
@@ -971,48 +934,41 @@ Brandon M. Greenwell
           display:block!important;
       }</style></aside>
 </section>
-<section id="introducing-lab-02-cli-comparison" class="slide level2">
-<h2>Introducing Lab 02: CLI comparison</h2>
-<ul>
-<li>Install and authenticate both CLI tools using their official documentation</li>
-<li>Give both agents the exact same <code>count_vowels</code> task</li>
-<li>Compare their suggestions, then select, test, and revise an implementation</li>
-<li>Reflect on the browser, editor, and CLI combination you prefer</li>
-<li>The automated check validates both the Python behavior and the completed journal</li>
-</ul>
-</section>
 <section id="time-for-lab-02" class="slide level2">
 <h2>Time for Lab 02</h2>
 <ul>
-<li>Your next hands-on lab: compare two CLI coding agents on a small <a href="https://www.python.org/">Python</a> task</li>
+<li>Install and authenticate <strong>both</strong> CLI tools using their official documentation</li>
+<li>Give both agents the exact same <code>count_vowels</code> task, then select, test, and revise an implementation</li>
 <li>Complete <code>week02/lab02.py</code> and <code>week02/lab02_prompts.md</code></li>
 <li>Run the provided tests, inspect <code>git diff</code>, push your work, and confirm the Lab 02 README badge is green</li>
+<li>The automated check validates both the Python behavior and the completed journal</li>
 <li>Navigate to <a href="https://github.com/bgreenwell/is4010-labs/blob/main/week02/lab02.md"><code>week02/lab02.md</code></a> for step-by-step instructions</li>
 </ul>
+
 
 </section></section>
     </div>
   <div class="quarto-auto-generated-content" style="display: none;">
 <div class="footer footer-default">
-<p>IS4010: App Development with AI</p>
+<p>IS4010: app development with AI</p>
 </div>
 </div></div>
 
   <script>window.backupDefine = window.define; window.define = undefined;</script>
-  <script src="IS4010_W02_AI_Copilots_files/libs/revealjs/dist/reveal.js"></script>
+  <script src="../site_libs/revealjs/dist/reveal.js"></script>
   <!-- reveal.js plugins -->
-  <script src="IS4010_W02_AI_Copilots_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
-  <script src="IS4010_W02_AI_Copilots_files/libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
-  <script src="IS4010_W02_AI_Copilots_files/libs/revealjs/plugin/reveal-menu/menu.js"></script>
-  <script src="IS4010_W02_AI_Copilots_files/libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
-  <script src="IS4010_W02_AI_Copilots_files/libs/revealjs/plugin/reveal-chalkboard/plugin.js"></script>
-  <script src="IS4010_W02_AI_Copilots_files/libs/revealjs/plugin/quarto-support/support.js"></script>
+  <script src="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="../site_libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="../site_libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="../site_libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="../site_libs/revealjs/plugin/reveal-chalkboard/plugin.js"></script>
+  <script src="../site_libs/revealjs/plugin/quarto-support/support.js"></script>
   
 
-  <script src="IS4010_W02_AI_Copilots_files/libs/revealjs/plugin/notes/notes.js"></script>
-  <script src="IS4010_W02_AI_Copilots_files/libs/revealjs/plugin/search/search.js"></script>
-  <script src="IS4010_W02_AI_Copilots_files/libs/revealjs/plugin/zoom/zoom.js"></script>
-  <script src="IS4010_W02_AI_Copilots_files/libs/revealjs/plugin/math/math.js"></script>
+  <script src="../site_libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="../site_libs/revealjs/plugin/search/search.js"></script>
+  <script src="../site_libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="../site_libs/revealjs/plugin/math/math.js"></script>
   <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
 
   <script>

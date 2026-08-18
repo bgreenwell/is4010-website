@@ -1,21 +1,22 @@
 <!DOCTYPE html>
 <html lang="en"><head>
-<script src="IS4010_W09_Welcome_to_Rust_files/libs/clipboard/clipboard.min.js"></script>
-<script src="IS4010_W09_Welcome_to_Rust_files/libs/quarto-html/tabby.min.js"></script>
-<script src="IS4010_W09_Welcome_to_Rust_files/libs/quarto-html/popper.min.js"></script>
-<script src="IS4010_W09_Welcome_to_Rust_files/libs/quarto-html/tippy.umd.min.js"></script>
-<link href="IS4010_W09_Welcome_to_Rust_files/libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="IS4010_W09_Welcome_to_Rust_files/libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="IS4010_W09_Welcome_to_Rust_files/libs/quarto-html/quarto-syntax-highlighting-dark-b85bc7c33db8c58e0ec93c3465666fed.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+<link href="../images/uc-logo-2.png" rel="icon" type="image/png">
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-html/tabby.min.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-b85bc7c33db8c58e0ec93c3465666fed.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
   <meta name="generator" content="quarto-1.10.18">
 
   <meta name="author" content="Brandon M. Greenwell">
-  <title>IS4010: AI-enhanced application development</title>
+  <title>IS 4010 - App Dev with AI – IS4010: AI-enhanced application development</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
-  <link rel="stylesheet" href="IS4010_W09_Welcome_to_Rust_files/libs/revealjs/dist/reset.css">
-  <link rel="stylesheet" href="IS4010_W09_Welcome_to_Rust_files/libs/revealjs/dist/reveal.css">
+  <link rel="stylesheet" href="../site_libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="../site_libs/revealjs/dist/reveal.css">
   <style>
     /* Default styles provided by pandoc.
     ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -101,14 +102,14 @@
     code span.vs { color: #abe338; } /* VerbatimString */
     code span.wa { color: #dcc6e0; } /* Warning */
   </style>
-  <link rel="stylesheet" href="IS4010_W09_Welcome_to_Rust_files/libs/revealjs/dist/theme/quarto-fdc93494f2580a7e050003a96af38920.css">
+  <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto-fdc93494f2580a7e050003a96af38920.css">
   <link rel="stylesheet" href="custom.css">
-  <link href="IS4010_W09_Welcome_to_Rust_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
-  <link href="IS4010_W09_Welcome_to_Rust_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
-  <link href="IS4010_W09_Welcome_to_Rust_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
-  <link href="IS4010_W09_Welcome_to_Rust_files/libs/revealjs/plugin/reveal-chalkboard/font-awesome/css/all.css" rel="stylesheet">
-  <link href="IS4010_W09_Welcome_to_Rust_files/libs/revealjs/plugin/reveal-chalkboard/style.css" rel="stylesheet">
-  <link href="IS4010_W09_Welcome_to_Rust_files/libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <link href="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="../site_libs/revealjs/plugin/reveal-chalkboard/font-awesome/css/all.css" rel="stylesheet">
+  <link href="../site_libs/revealjs/plugin/reveal-chalkboard/style.css" rel="stylesheet">
+  <link href="../site_libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
   <style type="text/css">
     .reveal div.sourceCode {
       margin: 0;
@@ -416,7 +417,7 @@ Brandon M. Greenwell
 <li><strong>Click “Run” again</strong> - see your personalized greeting!</li>
 <li><strong>Click “Share”</strong> - get a permanent link to save your work</li>
 </ol>
-<p><strong>🎯 Challenge:</strong> Can you make it print TWO lines with different messages?</p>
+<p><strong>Challenge:</strong> Can you make it print TWO lines with different messages?</p>
 <aside class="notes">
 <p><strong>Pause here for 2-3 minutes</strong> - let students actually do this. Walk around (or check screen shares in virtual class) to ensure everyone successfully ran their first Rust code. This builds confidence before diving into syntax.</p>
 <style type="text/css">
@@ -439,11 +440,11 @@ Brandon M. Greenwell
 <li class="fragment">The <code>fn main()</code> function is the entry point for a standard Rust binary</li>
 <li class="fragment"><a href="https://doc.rust-lang.org/std/macro.println.html"><code>println!</code></a> is a <strong>macro</strong> (not a function, note the <code>!</code>) that prints text to the console</li>
 </ul>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb1-1"><a href="" aria-label="1"></a><span class="co">// Inside src/main.rs</span></span>
-<span id="cb1-2"><a href="" aria-label="2"></a><span class="kw">fn</span> main() <span class="op">{</span></span>
-<span id="cb1-3"><a href="" aria-label="3"></a>    <span class="pp">println!</span>(<span class="st">"Hello, Rust!"</span>)<span class="op">;</span></span>
-<span id="cb1-4"><a href="" aria-label="4"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p><strong>🎮 Try it yourself:</strong> <a href="https://play.rust-lang.org/?version=stable&amp;mode=debug&amp;edition=2021&amp;code=fn+main%28%29+%7B%0A++++println%21%28%22Hello%2C+Rust%21%22%29%3B%0A%7D">▶ Run in Rust Playground</a></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb1-1"><a aria-label="1"></a><span class="co">// Inside src/main.rs</span></span>
+<span id="cb1-2"><a aria-label="2"></a><span class="kw">fn</span> main() <span class="op">{</span></span>
+<span id="cb1-3"><a aria-label="3"></a>    <span class="pp">println!</span>(<span class="st">"Hello, Rust!"</span>)<span class="op">;</span></span>
+<span id="cb1-4"><a aria-label="4"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Try it yourself:</strong> <a href="https://play.rust-lang.org/?version=stable&amp;mode=debug&amp;edition=2021&amp;code=fn+main%28%29+%7B%0A++++println%21%28%22Hello%2C+Rust%21%22%29%3B%0A%7D">▶ Run in Rust Playground</a></p>
 <p><strong>Your turn:</strong> Modify the message and add a second <code>println!</code> line!</p>
 <aside class="notes">
 <p>Point out the exclamation mark and describe a macro as syntax expanded into Rust code during compilation. This week uses standard macros without defining new ones.</p>
@@ -483,12 +484,12 @@ Brandon M. Greenwell
 <li class="fragment">To make a variable mutable, you must explicitly use the <a href="https://doc.rust-lang.org/book/ch03-01-variables-and-mutability.html#mutability"><code>let mut</code></a> keyword</li>
 <li class="fragment">This is the opposite of Python, where everything is mutable by default!</li>
 </ul>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb2-1"><a href="" aria-label="1"></a><span class="kw">let</span> x <span class="op">=</span> <span class="dv">5</span><span class="op">;</span>        <span class="co">// immutable</span></span>
-<span id="cb2-2"><a href="" aria-label="2"></a><span class="kw">let</span> <span class="kw">mut</span> y <span class="op">=</span> <span class="dv">10</span><span class="op">;</span>   <span class="co">// mutable</span></span>
-<span id="cb2-3"><a href="" aria-label="3"></a>y <span class="op">=</span> <span class="dv">15</span><span class="op">;</span>           <span class="co">// this is allowed</span></span>
-<span id="cb2-4"><a href="" aria-label="4"></a><span class="co">// x = 6;         // this would cause a compiler error!</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p><strong>🎮 Try it yourself:</strong> <a href="https://play.rust-lang.org/?version=stable&amp;mode=debug&amp;edition=2021&amp;code=fn+main%28%29+%7B%0A++++let+x+%3D+5%3B%0A++++let+mut+y+%3D+10%3B%0A++++y+%3D+15%3B%0A++++println%21%28%22x%3A+%7B%7D%2C+y%3A+%7B%7D%22%2C+x%2C+y%29%3B%0A%7D">▶ Experiment in Playground</a></p>
-<p><strong>🎯 Challenge:</strong> Uncomment the <code>x = 6;</code> line. What error do you get? Read it carefully!</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb2-1"><a aria-label="1"></a><span class="kw">let</span> x <span class="op">=</span> <span class="dv">5</span><span class="op">;</span>        <span class="co">// immutable</span></span>
+<span id="cb2-2"><a aria-label="2"></a><span class="kw">let</span> <span class="kw">mut</span> y <span class="op">=</span> <span class="dv">10</span><span class="op">;</span>   <span class="co">// mutable</span></span>
+<span id="cb2-3"><a aria-label="3"></a>y <span class="op">=</span> <span class="dv">15</span><span class="op">;</span>           <span class="co">// this is allowed</span></span>
+<span id="cb2-4"><a aria-label="4"></a><span class="co">// x = 6;         // this would cause a compiler error!</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Try it yourself:</strong> <a href="https://play.rust-lang.org/?version=stable&amp;mode=debug&amp;edition=2021&amp;code=fn+main%28%29+%7B%0A++++let+x+%3D+5%3B%0A++++let+mut+y+%3D+10%3B%0A++++y+%3D+15%3B%0A++++println%21%28%22x%3A+%7B%7D%2C+y%3A+%7B%7D%22%2C+x%2C+y%29%3B%0A%7D">▶ Experiment in Playground</a></p>
+<p><strong>Challenge:</strong> Uncomment the <code>x = 6;</code> line. What error do you get? Read it carefully!</p>
 <aside class="notes">
 <p>Immutability by default makes mutation explicit and rules out some accidental state changes. Have students uncomment the <code>x = 6</code> line, then read the diagnostic and identify the suggested change.</p>
 <style type="text/css">
@@ -537,13 +538,13 @@ Brandon M. Greenwell
 <li class="fragment">The <strong><a href="https://doc.rust-lang.org/book/ch03-02-data-types.html#the-array-type">array</a></strong> is a fixed-size collection where every element must have the <em>same</em> type</li>
 <li class="fragment">For dynamic sizing, we’ll learn about <a href="https://doc.rust-lang.org/book/ch08-01-vectors.html">Vectors</a> and <a href="https://doc.rust-lang.org/book/ch08-03-hash-maps.html">HashMaps</a> later</li>
 </ul>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb3-1"><a href="" aria-label="1"></a><span class="co">// A tuple with different types</span></span>
-<span id="cb3-2"><a href="" aria-label="2"></a><span class="kw">let</span> my_tuple<span class="op">:</span> (<span class="dt">i32</span><span class="op">,</span> <span class="dt">f64</span><span class="op">,</span> <span class="dt">u8</span>) <span class="op">=</span> (<span class="dv">500</span><span class="op">,</span> <span class="dv">6.4</span><span class="op">,</span> <span class="dv">1</span>)<span class="op">;</span></span>
-<span id="cb3-3"><a href="" aria-label="3"></a></span>
-<span id="cb3-4"><a href="" aria-label="4"></a><span class="co">// An array with five elements of the same type</span></span>
-<span id="cb3-5"><a href="" aria-label="5"></a><span class="kw">let</span> my_array<span class="op">:</span> [<span class="dt">i32</span><span class="op">;</span> <span class="dv">5</span>] <span class="op">=</span> [<span class="dv">1</span><span class="op">,</span> <span class="dv">2</span><span class="op">,</span> <span class="dv">3</span><span class="op">,</span> <span class="dv">4</span><span class="op">,</span> <span class="dv">5</span>]<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p><strong>🎮 Try it yourself:</strong> <a href="https://play.rust-lang.org/?version=stable&amp;mode=debug&amp;edition=2021&amp;code=fn+main%28%29+%7B%0A++++let+my_tuple%3A+%28i32%2C+f64%2C+u8%29+%3D+%28500%2C+6.4%2C+1%29%3B%0A++++let+my_array%3A+%5Bi32%3B+5%5D+%3D+%5B1%2C+2%2C+3%2C+4%2C+5%5D%3B%0A++++println%21%28%22Tuple%3A+%7B%3A%3F%7D%22%2C+my_tuple%29%3B%0A++++println%21%28%22Array%3A+%7B%3A%3F%7D%22%2C+my_array%29%3B%0A%7D">▶ Run in Playground</a></p>
-<p><strong>🎯 Challenge:</strong> Try accessing <code>my_tuple.0</code> and <code>my_array[0]</code>. What do you get?</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb3-1"><a aria-label="1"></a><span class="co">// A tuple with different types</span></span>
+<span id="cb3-2"><a aria-label="2"></a><span class="kw">let</span> my_tuple<span class="op">:</span> (<span class="dt">i32</span><span class="op">,</span> <span class="dt">f64</span><span class="op">,</span> <span class="dt">u8</span>) <span class="op">=</span> (<span class="dv">500</span><span class="op">,</span> <span class="dv">6.4</span><span class="op">,</span> <span class="dv">1</span>)<span class="op">;</span></span>
+<span id="cb3-3"><a aria-label="3"></a></span>
+<span id="cb3-4"><a aria-label="4"></a><span class="co">// An array with five elements of the same type</span></span>
+<span id="cb3-5"><a aria-label="5"></a><span class="kw">let</span> my_array<span class="op">:</span> [<span class="dt">i32</span><span class="op">;</span> <span class="dv">5</span>] <span class="op">=</span> [<span class="dv">1</span><span class="op">,</span> <span class="dv">2</span><span class="op">,</span> <span class="dv">3</span><span class="op">,</span> <span class="dv">4</span><span class="op">,</span> <span class="dv">5</span>]<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Try it yourself:</strong> <a href="https://play.rust-lang.org/?version=stable&amp;mode=debug&amp;edition=2021&amp;code=fn+main%28%29+%7B%0A++++let+my_tuple%3A+%28i32%2C+f64%2C+u8%29+%3D+%28500%2C+6.4%2C+1%29%3B%0A++++let+my_array%3A+%5Bi32%3B+5%5D+%3D+%5B1%2C+2%2C+3%2C+4%2C+5%5D%3B%0A++++println%21%28%22Tuple%3A+%7B%3A%3F%7D%22%2C+my_tuple%29%3B%0A++++println%21%28%22Array%3A+%7B%3A%3F%7D%22%2C+my_array%29%3B%0A%7D">▶ Run in Playground</a></p>
+<p><strong>Challenge:</strong> Try accessing <code>my_tuple.0</code> and <code>my_array[0]</code>. What do you get?</p>
 <aside class="notes">
 <p>Arrays are stack-allocated and fast but inflexible. Unlike Python lists, Rust arrays have fixed size. The {:?} is debug formatting - we’ll cover formatting more later. Have students try accessing individual elements by index.</p>
 <style type="text/css">
@@ -567,12 +568,12 @@ Brandon M. Greenwell
 <li class="fragment">The final expression in a function is automatically returned; you don’t need the <code>return</code> keyword if it’s at the end</li>
 <li class="fragment">This is called an <strong>expression-based language</strong> - expressions return values, statements don’t</li>
 </ul>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb4-1"><a href="" aria-label="1"></a><span class="kw">fn</span> add(num1<span class="op">:</span> <span class="dt">i32</span><span class="op">,</span> num2<span class="op">:</span> <span class="dt">i32</span>) <span class="op">-&gt;</span> <span class="dt">i32</span> <span class="op">{</span></span>
-<span id="cb4-2"><a href="" aria-label="2"></a>    <span class="co">// No semicolon means this is an expression, and it's returned</span></span>
-<span id="cb4-3"><a href="" aria-label="3"></a>    num1 <span class="op">+</span> num2</span>
-<span id="cb4-4"><a href="" aria-label="4"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p><strong>🎮 Try it yourself:</strong> <a href="https://play.rust-lang.org/?version=stable&amp;mode=debug&amp;edition=2021&amp;code=fn+add%28num1%3A+i32%2C+num2%3A+i32%29+-%3E+i32+%7B%0A++++num1+%2B+num2%0A%7D%0A%0Afn+main%28%29+%7B%0A++++let+result+%3D+add%285%2C+7%29%3B%0A++++println%21%28%22Result%3A+%7B%7D%22%2C+result%29%3B%0A%7D">▶ Run in Playground</a></p>
-<p><strong>🎯 Challenge:</strong> Add a semicolon after <code>num1 + num2</code>. What error appears? Why?</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb4-1"><a aria-label="1"></a><span class="kw">fn</span> add(num1<span class="op">:</span> <span class="dt">i32</span><span class="op">,</span> num2<span class="op">:</span> <span class="dt">i32</span>) <span class="op">-&gt;</span> <span class="dt">i32</span> <span class="op">{</span></span>
+<span id="cb4-2"><a aria-label="2"></a>    <span class="co">// No semicolon means this is an expression, and it's returned</span></span>
+<span id="cb4-3"><a aria-label="3"></a>    num1 <span class="op">+</span> num2</span>
+<span id="cb4-4"><a aria-label="4"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Try it yourself:</strong> <a href="https://play.rust-lang.org/?version=stable&amp;mode=debug&amp;edition=2021&amp;code=fn+add%28num1%3A+i32%2C+num2%3A+i32%29+-%3E+i32+%7B%0A++++num1+%2B+num2%0A%7D%0A%0Afn+main%28%29+%7B%0A++++let+result+%3D+add%285%2C+7%29%3B%0A++++println%21%28%22Result%3A+%7B%7D%22%2C+result%29%3B%0A%7D">▶ Run in Playground</a></p>
+<p><strong>Challenge:</strong> Add a semicolon after <code>num1 + num2</code>. What error appears? Why?</p>
 <aside class="notes">
 <p>Key difference from Python: type annotations aren’t optional, they’re required. The semicolon vs no semicolon matters! <strong>CRITICAL DEMO</strong>: With semicolon = statement (no value). Without = expression (returns value). Have students add the semicolon and read the error message together. This is the #1 beginner mistake!</p>
 <style type="text/css">
@@ -616,19 +617,19 @@ Brandon M. Greenwell
 <li class="fragment">By convention, they are placed in a special module named <code>tests</code> inside the same file as the code they are testing</li>
 <li class="fragment">The <code>#[cfg(test)]</code> attribute tells Rust to only compile and run this code when we execute <code>cargo test</code></li>
 </ul>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb5-1"><a href="" aria-label="1"></a><span class="kw">fn</span> add_two(a<span class="op">:</span> <span class="dt">i32</span>) <span class="op">-&gt;</span> <span class="dt">i32</span> <span class="op">{</span></span>
-<span id="cb5-2"><a href="" aria-label="2"></a>    a <span class="op">+</span> <span class="dv">2</span></span>
-<span id="cb5-3"><a href="" aria-label="3"></a><span class="op">}</span></span>
-<span id="cb5-4"><a href="" aria-label="4"></a></span>
-<span id="cb5-5"><a href="" aria-label="5"></a><span class="at">#[</span>cfg<span class="at">(</span>test<span class="at">)]</span></span>
-<span id="cb5-6"><a href="" aria-label="6"></a><span class="kw">mod</span> tests <span class="op">{</span></span>
-<span id="cb5-7"><a href="" aria-label="7"></a>    <span class="kw">use</span> <span class="kw">super</span><span class="pp">::</span><span class="op">*;</span> <span class="co">// Brings `add_two` into scope</span></span>
-<span id="cb5-8"><a href="" aria-label="8"></a></span>
-<span id="cb5-9"><a href="" aria-label="9"></a>    <span class="at">#[</span>test<span class="at">]</span></span>
-<span id="cb5-10"><a href="" aria-label="10"></a>    <span class="kw">fn</span> it_adds_two() <span class="op">{</span></span>
-<span id="cb5-11"><a href="" aria-label="11"></a>        <span class="pp">assert_eq!</span>(add_two(<span class="dv">2</span>)<span class="op">,</span> <span class="dv">4</span>)<span class="op">;</span></span>
-<span id="cb5-12"><a href="" aria-label="12"></a>    <span class="op">}</span></span>
-<span id="cb5-13"><a href="" aria-label="13"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb5-1"><a aria-label="1"></a><span class="kw">fn</span> add_two(a<span class="op">:</span> <span class="dt">i32</span>) <span class="op">-&gt;</span> <span class="dt">i32</span> <span class="op">{</span></span>
+<span id="cb5-2"><a aria-label="2"></a>    a <span class="op">+</span> <span class="dv">2</span></span>
+<span id="cb5-3"><a aria-label="3"></a><span class="op">}</span></span>
+<span id="cb5-4"><a aria-label="4"></a></span>
+<span id="cb5-5"><a aria-label="5"></a><span class="at">#[</span>cfg<span class="at">(</span>test<span class="at">)]</span></span>
+<span id="cb5-6"><a aria-label="6"></a><span class="kw">mod</span> tests <span class="op">{</span></span>
+<span id="cb5-7"><a aria-label="7"></a>    <span class="kw">use</span> <span class="kw">super</span><span class="pp">::</span><span class="op">*;</span> <span class="co">// Brings `add_two` into scope</span></span>
+<span id="cb5-8"><a aria-label="8"></a></span>
+<span id="cb5-9"><a aria-label="9"></a>    <span class="at">#[</span>test<span class="at">]</span></span>
+<span id="cb5-10"><a aria-label="10"></a>    <span class="kw">fn</span> it_adds_two() <span class="op">{</span></span>
+<span id="cb5-11"><a aria-label="11"></a>        <span class="pp">assert_eq!</span>(add_two(<span class="dv">2</span>)<span class="op">,</span> <span class="dv">4</span>)<span class="op">;</span></span>
+<span id="cb5-12"><a aria-label="12"></a>    <span class="op">}</span></span>
+<span id="cb5-13"><a aria-label="13"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <aside class="notes">
 <p>The #[test] attribute is Rust’s way of marking test functions. The #[cfg(test)] conditional compilation ensures test code isn’t included in release builds. The use super::* imports everything from the parent module.</p>
 <style type="text/css">
@@ -681,7 +682,7 @@ Brandon M. Greenwell
 <li class="fragment">Once all checks pass, commit <code>week09/</code>, push, and inspect the Week 09 badge</li>
 </ol></li>
 <li class="fragment">This gives you instant feedback without having to wait for the CI/CD pipeline</li>
-<li class="fragment">Green tests = you’re ready to submit! 🎉</li>
+<li class="fragment">Green tests = you’re ready to submit!</li>
 </ul>
 <aside class="notes">
 <p>Emphasize the instant feedback loop. Students should be running cargo test constantly as they work. It’s much faster than waiting for GitHub Actions.</p>
@@ -725,12 +726,12 @@ Brandon M. Greenwell
 <section id="resources-for-learning-rust" class="slide level2">
 <h2>Resources for learning Rust</h2>
 <ul>
-<li class="fragment">📖 <a href="https://doc.rust-lang.org/book/">The Rust Programming Language Book</a> - the official, free, comprehensive guide</li>
-<li class="fragment">🎮 <a href="https://doc.rust-lang.org/rust-by-example/">Rust by Example</a> - learn through annotated examples</li>
-<li class="fragment">🏃 <a href="https://github.com/rust-lang/rustlings/">Rustlings</a> - small exercises to get you used to reading and writing Rust code</li>
-<li class="fragment">💬 <a href="https://users.rust-lang.org/">Rust Users Forum</a> - friendly community for questions</li>
-<li class="fragment">📺 <a href="https://www.youtube.com/playlist?list=PLlrxD0HtieHjbTjrchBwOVks_sr8EVW1x">Microsoft Rust course on YouTube</a> - free video series</li>
-<li class="fragment">🤖 Use your chosen browser, editor, or CLI assistant, then verify every change with Cargo</li>
+<li class="fragment"><a href="https://doc.rust-lang.org/book/">The Rust Programming Language Book</a> - the official, free, comprehensive guide</li>
+<li class="fragment"><a href="https://doc.rust-lang.org/rust-by-example/">Rust by Example</a> - learn through annotated examples</li>
+<li class="fragment"><a href="https://github.com/rust-lang/rustlings/">Rustlings</a> - small exercises to get you used to reading and writing Rust code</li>
+<li class="fragment"><a href="https://users.rust-lang.org/">Rust Users Forum</a> - friendly community for questions</li>
+<li class="fragment"><a href="https://www.youtube.com/playlist?list=PLlrxD0HtieHjbTjrchBwOVks_sr8EVW1x">Microsoft Rust course on YouTube</a> - free video series</li>
+<li class="fragment">Use your chosen browser, editor, or CLI assistant, then verify every change with Cargo</li>
 </ul>
 <aside class="notes">
 <p>The Rust community is exceptionally welcoming. The book (often called “the Rust book”) is the gold standard - well-written and free. Rustlings is great for building muscle memory with Rust syntax.</p>
@@ -746,29 +747,30 @@ Brandon M. Greenwell
           display:block!important;
       }</style></aside>
 
+
 </section>
     </div>
   <div class="quarto-auto-generated-content" style="display: none;">
 <div class="footer footer-default">
-<p>IS4010: App Development with AI</p>
+<p>IS4010: app development with AI</p>
 </div>
 </div></div>
 
   <script>window.backupDefine = window.define; window.define = undefined;</script>
-  <script src="IS4010_W09_Welcome_to_Rust_files/libs/revealjs/dist/reveal.js"></script>
+  <script src="../site_libs/revealjs/dist/reveal.js"></script>
   <!-- reveal.js plugins -->
-  <script src="IS4010_W09_Welcome_to_Rust_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
-  <script src="IS4010_W09_Welcome_to_Rust_files/libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
-  <script src="IS4010_W09_Welcome_to_Rust_files/libs/revealjs/plugin/reveal-menu/menu.js"></script>
-  <script src="IS4010_W09_Welcome_to_Rust_files/libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
-  <script src="IS4010_W09_Welcome_to_Rust_files/libs/revealjs/plugin/reveal-chalkboard/plugin.js"></script>
-  <script src="IS4010_W09_Welcome_to_Rust_files/libs/revealjs/plugin/quarto-support/support.js"></script>
+  <script src="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="../site_libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="../site_libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="../site_libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="../site_libs/revealjs/plugin/reveal-chalkboard/plugin.js"></script>
+  <script src="../site_libs/revealjs/plugin/quarto-support/support.js"></script>
   
 
-  <script src="IS4010_W09_Welcome_to_Rust_files/libs/revealjs/plugin/notes/notes.js"></script>
-  <script src="IS4010_W09_Welcome_to_Rust_files/libs/revealjs/plugin/search/search.js"></script>
-  <script src="IS4010_W09_Welcome_to_Rust_files/libs/revealjs/plugin/zoom/zoom.js"></script>
-  <script src="IS4010_W09_Welcome_to_Rust_files/libs/revealjs/plugin/math/math.js"></script>
+  <script src="../site_libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="../site_libs/revealjs/plugin/search/search.js"></script>
+  <script src="../site_libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="../site_libs/revealjs/plugin/math/math.js"></script>
   <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
 
   <script>

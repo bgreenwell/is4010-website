@@ -1,21 +1,22 @@
 <!DOCTYPE html>
 <html lang="en"><head>
-<script src="IS4010_W01_Introduction_files/libs/clipboard/clipboard.min.js"></script>
-<script src="IS4010_W01_Introduction_files/libs/quarto-html/tabby.min.js"></script>
-<script src="IS4010_W01_Introduction_files/libs/quarto-html/popper.min.js"></script>
-<script src="IS4010_W01_Introduction_files/libs/quarto-html/tippy.umd.min.js"></script>
-<link href="IS4010_W01_Introduction_files/libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="IS4010_W01_Introduction_files/libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="IS4010_W01_Introduction_files/libs/quarto-html/quarto-syntax-highlighting-dark-b85bc7c33db8c58e0ec93c3465666fed.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+<link href="../images/uc-logo-2.png" rel="icon" type="image/png">
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-html/tabby.min.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-b85bc7c33db8c58e0ec93c3465666fed.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
   <meta name="generator" content="quarto-1.10.18">
 
   <meta name="author" content="Brandon M. Greenwell">
-  <title>IS4010: AI-enhanced application development</title>
+  <title>IS 4010 - App Dev with AI – IS4010: AI-enhanced application development</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
-  <link rel="stylesheet" href="IS4010_W01_Introduction_files/libs/revealjs/dist/reset.css">
-  <link rel="stylesheet" href="IS4010_W01_Introduction_files/libs/revealjs/dist/reveal.css">
+  <link rel="stylesheet" href="../site_libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="../site_libs/revealjs/dist/reveal.css">
   <style>
     /* Default styles provided by pandoc.
     ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -101,13 +102,14 @@
     code span.vs { color: #abe338; } /* VerbatimString */
     code span.wa { color: #dcc6e0; } /* Warning */
   </style>
-  <link rel="stylesheet" href="IS4010_W01_Introduction_files/libs/revealjs/dist/theme/quarto-fdc93494f2580a7e050003a96af38920.css">
-  <link href="IS4010_W01_Introduction_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
-  <link href="IS4010_W01_Introduction_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
-  <link href="IS4010_W01_Introduction_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
-  <link href="IS4010_W01_Introduction_files/libs/revealjs/plugin/reveal-chalkboard/font-awesome/css/all.css" rel="stylesheet">
-  <link href="IS4010_W01_Introduction_files/libs/revealjs/plugin/reveal-chalkboard/style.css" rel="stylesheet">
-  <link href="IS4010_W01_Introduction_files/libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto-fdc93494f2580a7e050003a96af38920.css">
+  <link rel="stylesheet" href="custom.css">
+  <link href="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="../site_libs/revealjs/plugin/reveal-chalkboard/font-awesome/css/all.css" rel="stylesheet">
+  <link href="../site_libs/revealjs/plugin/reveal-chalkboard/style.css" rel="stylesheet">
+  <link href="../site_libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
   <style type="text/css">
     .reveal div.sourceCode {
       margin: 0;
@@ -119,6 +121,7 @@
     }
     .reveal .slide:not(.center) {
       height: 100%;
+      overflow-y: auto;
     }
     .reveal .slide.scrollable {
       overflow-y: auto;
@@ -195,9 +198,9 @@
       margin-right: 0; 
     }
   </style>
-  <script src="IS4010_W01_Introduction_files/libs/quarto-diagram/mermaid.min.js"></script>
-  <script src="IS4010_W01_Introduction_files/libs/quarto-diagram/mermaid-init.js"></script>
-  <link href="IS4010_W01_Introduction_files/libs/quarto-diagram/mermaid.css" rel="stylesheet">
+  <script src="../site_libs/quarto-diagram/mermaid.min.js"></script>
+  <script src="../site_libs/quarto-diagram/mermaid-init.js"></script>
+  <link href="../site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
 </head>
 <body class="quarto-dark">
   <div class="reveal">
@@ -238,7 +241,7 @@ Brandon M. Greenwell
 <ul>
 <li class="fragment">This course directly addresses the valid concerns of using AI in education.</li>
 <li class="fragment">We’ll use AI to handle boilerplate and accelerate development, not to do our thinking for us.</li>
-<li class="fragment"><strong>You’re the pilot! ✈️</strong> You’re responsible for every line of code, and you must understand, test, and be able to explain the code you submit.</li>
+<li class="fragment"><strong>You’re the pilot!</strong> You’re responsible for every line of code, and you must understand, test, and be able to explain the code you submit.</li>
 <li class="fragment">We’ll test where AI assistance is useful or unreliable, including context limits, fabricated claims, and repeatability.</li>
 </ul>
 </section>
@@ -249,7 +252,7 @@ Brandon M. Greenwell
 <li class="fragment">Use <a href="https://git-scm.com/">Git</a> and <a href="https://github.com/">GitHub</a> for version control and collaboration.</li>
 <li class="fragment">Leverage AI code assistants to write, debug, and refactor code.</li>
 <li class="fragment">Build data-driven applications that interact with documented APIs.</li>
-<li class="fragment">Create a unique portfolio project that showcases your skills to future employers. 💼</li>
+<li class="fragment">Create a unique portfolio project that showcases your skills to future employers.</li>
 </ul>
 </section>
 <section id="our-roadmap" class="slide level2">
@@ -259,7 +262,7 @@ Brandon M. Greenwell
 <li class="fragment"><strong><a href="https://www.python.org/">Python</a> fundamentals with an AI partner</strong> (from basics to OOP) (weeks 3-6)</li>
 <li class="fragment"><strong>Building a Python application</strong> (APIs and professional tools) (weeks 7-8)</li>
 <li class="fragment"><strong><a href="https://www.rust-lang.org/">Rust</a> fundamentals and application development</strong> (weeks 9-14)</li>
-<li class="fragment"><strong>Advanced AI workflows and final-project support</strong> (week 15)</li>
+<li class="fragment"><strong>Final solo project</strong>, built alongside the second half of the course</li>
 </ul>
 </section>
 <section id="key-course-components" class="slide level2">
@@ -274,10 +277,10 @@ Brandon M. Greenwell
 <section id="important-course-links" class="slide level2">
 <h2>Important course links</h2>
 <ul>
-<li class="fragment"><strong>Course Canvas:</strong> <a href="https://uc.instructure.com/courses/1812798">uc.instructure.com</a> (grades, slides, labs, due dates, etc.)</li>
+<li class="fragment"><strong>Course Canvas:</strong> <a href="https://uc.instructure.com/">uc.instructure.com</a> (grades, slides, labs, due dates, etc.)</li>
 <li class="fragment"><strong>Labs repository:</strong> <a href="https://github.com/bgreenwell/is4010-labs">GitHub</a> (all 14 labs and status badges)</li>
 <li class="fragment"><strong>Official syllabus:</strong> Simple Syllabus link to be added when published</li>
-<li class="fragment"><strong>Communication:</strong> <a href="https://teams.microsoft.com/l/team/19%3ASjdonOkpgQOXFJf6qmHIWfJIwzgKl-xvmnkNVUkg8k81%40thread.tacv2/conversations?groupId=5c3ca09e-ec41-473c-8395-ab28de92a041&amp;tenantId=f5222e6c-5fc6-48eb-8f03-73db18203b63">Microsoft Teams</a> (primary discussion, questions about the material, questions about the labs, etc.)</li>
+<li class="fragment"><strong>Communication:</strong> Microsoft Teams (primary discussion, questions about the material, questions about the labs, etc.)</li>
 </ul>
 </section>
 <section id="the-final-project-your-portfolio-piece" class="slide level2">
@@ -343,9 +346,9 @@ Brandon M. Greenwell
 </section>
 <section id="location-and-command-anatomy" class="slide level2">
 <h2>Location and command anatomy</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode numberSource text number-lines code-with-copy"><code class="sourceCode"><span id="cb1-1"><a href="" aria-label="1"></a>uv run python hello.py</span>
-<span id="cb1-2"><a href="" aria-label="2"></a>│  └──────── arguments ────────┘</span>
-<span id="cb1-3"><a href="" aria-label="3"></a>└ command</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode numberSource text number-lines code-with-copy"><code class="sourceCode"><span id="cb1-1"><a aria-label="1"></a>uv run python hello.py</span>
+<span id="cb1-2"><a aria-label="2"></a>│  └──────── arguments ────────┘</span>
+<span id="cb1-3"><a aria-label="3"></a>└ command</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <ul>
 <li class="fragment">Every terminal has a <strong>current working directory</strong>.</li>
 <li class="fragment">Relative paths begin from that directory; absolute paths name the full location.</li>
@@ -355,11 +358,11 @@ Brandon M. Greenwell
 </section>
 <section id="five-commands-to-start" class="slide level2">
 <h2>Five commands to start</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="" aria-label="1"></a><span class="bu">pwd</span>                 <span class="co"># Where am I?</span></span>
-<span id="cb2-2"><a href="" aria-label="2"></a><span class="fu">ls</span>                  <span class="co"># What is here?</span></span>
-<span id="cb2-3"><a href="" aria-label="3"></a><span class="bu">cd</span> path/to/folder   <span class="co"># Move to another folder</span></span>
-<span id="cb2-4"><a href="" aria-label="4"></a><span class="fu">mkdir</span> practice      <span class="co"># Create a folder</span></span>
-<span id="cb2-5"><a href="" aria-label="5"></a><span class="ex">code</span> .              <span class="co"># Open this folder in VS Code</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a aria-label="1"></a><span class="bu">pwd</span>                 <span class="co"># Where am I?</span></span>
+<span id="cb2-2"><a aria-label="2"></a><span class="fu">ls</span>                  <span class="co"># What is here?</span></span>
+<span id="cb2-3"><a aria-label="3"></a><span class="bu">cd</span> path/to/folder   <span class="co"># Move to another folder</span></span>
+<span id="cb2-4"><a aria-label="4"></a><span class="fu">mkdir</span> practice      <span class="co"># Create a folder</span></span>
+<span id="cb2-5"><a aria-label="5"></a><span class="ex">code</span> .              <span class="co"># Open this folder in VS Code</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <ul>
 <li class="fragment">Press <strong>Tab</strong> to complete a path.</li>
 <li class="fragment">Press <strong>Up arrow</strong> to reuse a command.</li>
@@ -379,12 +382,12 @@ Brandon M. Greenwell
 </section>
 <section id="live-demo-from-a-folder-to-vs-code" class="slide level2">
 <h2>Live demo: from a folder to VS Code</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="" aria-label="1"></a><span class="bu">pwd</span></span>
-<span id="cb3-2"><a href="" aria-label="2"></a><span class="fu">ls</span></span>
-<span id="cb3-3"><a href="" aria-label="3"></a><span class="fu">mkdir</span> is4010-demo</span>
-<span id="cb3-4"><a href="" aria-label="4"></a><span class="bu">cd</span> is4010-demo</span>
-<span id="cb3-5"><a href="" aria-label="5"></a><span class="bu">pwd</span></span>
-<span id="cb3-6"><a href="" aria-label="6"></a><span class="ex">code</span> .</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a aria-label="1"></a><span class="bu">pwd</span></span>
+<span id="cb3-2"><a aria-label="2"></a><span class="fu">ls</span></span>
+<span id="cb3-3"><a aria-label="3"></a><span class="fu">mkdir</span> is4010-demo</span>
+<span id="cb3-4"><a aria-label="4"></a><span class="bu">cd</span> is4010-demo</span>
+<span id="cb3-5"><a aria-label="5"></a><span class="bu">pwd</span></span>
+<span id="cb3-6"><a aria-label="6"></a><span class="ex">code</span> .</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <aside class="notes">
 <p>Narrate the prompt, current directory, relative path, command, and argument. Demonstrate Tab completion, Up arrow, Ctrl+C, and an intentional wrong directory corrected with <code>pwd</code> and <code>cd</code>. Keep this light: the goal is enough fluency to understand the Git commands that follow.</p>
 <style type="text/css">
@@ -552,8 +555,7 @@ Brandon M. Greenwell
 <ul>
 <li class="fragment"><strong><code>git clone &lt;url&gt;</code></strong> - Download a repository from GitHub to your computer</li>
 <li class="fragment"><strong><code>git status</code></strong> - See what files have changed and what’s ready to commit</li>
-<li class="fragment"><strong><code>git add &lt;file&gt;</code></strong> - Stage specific files for your next commit</li>
-<li class="fragment"><strong><code>git add &lt;reviewed-file&gt;</code></strong> - Stage another file after reviewing it</li>
+<li class="fragment"><strong><code>git add &lt;file&gt;</code></strong> - Stage a specific file for your next commit, once you have reviewed it</li>
 <li class="fragment"><strong><code>git commit -m "message"</code></strong> - Save your staged changes with a descriptive message</li>
 <li class="fragment"><strong><code>git push</code></strong> - Send your commits from local to remote</li>
 </ul>
@@ -561,22 +563,22 @@ Brandon M. Greenwell
 <section id="the-git-workflow-in-action" class="slide level2">
 <h2>The Git workflow in action</h2>
 <p>Here’s what the commands actually look like:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="" aria-label="1"></a><span class="co"># Check what's changed</span></span>
-<span id="cb4-2"><a href="" aria-label="2"></a><span class="ex">$</span> git status</span>
-<span id="cb4-3"><a href="" aria-label="3"></a><span class="ex">On</span> branch main</span>
-<span id="cb4-4"><a href="" aria-label="4"></a><span class="ex">Changes</span> not staged for commit:</span>
-<span id="cb4-5"><a href="" aria-label="5"></a>  <span class="ex">modified:</span>   hello.py</span>
-<span id="cb4-6"><a href="" aria-label="6"></a></span>
-<span id="cb4-7"><a href="" aria-label="7"></a><span class="co"># Stage your changes</span></span>
-<span id="cb4-8"><a href="" aria-label="8"></a><span class="ex">$</span> git add hello.py</span>
-<span id="cb4-9"><a href="" aria-label="9"></a></span>
-<span id="cb4-10"><a href="" aria-label="10"></a><span class="co"># Commit with a message</span></span>
-<span id="cb4-11"><a href="" aria-label="11"></a><span class="ex">$</span> git commit <span class="at">-m</span> <span class="st">"Fix greeting message"</span></span>
-<span id="cb4-12"><a href="" aria-label="12"></a><span class="ex">[main</span> 1a2b3c4] Fix greeting message</span>
-<span id="cb4-13"><a href="" aria-label="13"></a> <span class="ex">1</span> file changed, 1 insertion<span class="er">(</span><span class="ex">+</span><span class="kw">)</span><span class="ex">,</span> 1 deletion<span class="er">(</span><span class="ex">-</span><span class="kw">)</span></span>
-<span id="cb4-14"><a href="" aria-label="14"></a></span>
-<span id="cb4-15"><a href="" aria-label="15"></a><span class="co"># Push to GitHub</span></span>
-<span id="cb4-16"><a href="" aria-label="16"></a><span class="ex">$</span> git push origin main</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a aria-label="1"></a><span class="co"># Check what's changed</span></span>
+<span id="cb4-2"><a aria-label="2"></a><span class="ex">$</span> git status</span>
+<span id="cb4-3"><a aria-label="3"></a><span class="ex">On</span> branch main</span>
+<span id="cb4-4"><a aria-label="4"></a><span class="ex">Changes</span> not staged for commit:</span>
+<span id="cb4-5"><a aria-label="5"></a>  <span class="ex">modified:</span>   hello.py</span>
+<span id="cb4-6"><a aria-label="6"></a></span>
+<span id="cb4-7"><a aria-label="7"></a><span class="co"># Stage your changes</span></span>
+<span id="cb4-8"><a aria-label="8"></a><span class="ex">$</span> git add hello.py</span>
+<span id="cb4-9"><a aria-label="9"></a></span>
+<span id="cb4-10"><a aria-label="10"></a><span class="co"># Commit with a message</span></span>
+<span id="cb4-11"><a aria-label="11"></a><span class="ex">$</span> git commit <span class="at">-m</span> <span class="st">"Fix greeting message"</span></span>
+<span id="cb4-12"><a aria-label="12"></a><span class="ex">[main</span> 1a2b3c4] Fix greeting message</span>
+<span id="cb4-13"><a aria-label="13"></a> <span class="ex">1</span> file changed, 1 insertion<span class="er">(</span><span class="ex">+</span><span class="kw">)</span><span class="ex">,</span> 1 deletion<span class="er">(</span><span class="ex">-</span><span class="kw">)</span></span>
+<span id="cb4-14"><a aria-label="14"></a></span>
+<span id="cb4-15"><a aria-label="15"></a><span class="co"># Push to GitHub</span></span>
+<span id="cb4-16"><a aria-label="16"></a><span class="ex">$</span> git push origin main</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <aside class="notes">
 <p><strong>LIVE DEMO NOTES:</strong> - Open terminal and navigate to a demo repository - Modify a file (edit hello.py to change the message) - Run each command and explain the output - Show how <code>git status</code> changes after each step - Demonstrate the GitHub page updating after push - If time permits, show <code>git log</code> to see the commit history</p>
 <style type="text/css">
@@ -591,7 +593,7 @@ Brandon M. Greenwell
           display:block!important;
       }</style></aside>
 </section>
-<section id="live-demo-time" class="slide level2">
+<section id="live-demo-time" class="slide level2 scrollable">
 <h2>Live demo time!</h2>
 <p>We’ll create repositories two ways, then walk through the basic Git workflow:</p>
 <ol type="1">
@@ -640,9 +642,9 @@ Brandon M. Greenwell
     A[Working Directory&lt;br/&gt;Your files] --&gt; B[Staging Area&lt;br/&gt;git add]
     B --&gt; C[Repository&lt;br/&gt;git commit]
     C --&gt; D[Remote GitHub&lt;br/&gt;git push]
-    
+
     style A fill:#ffcccb
-    style B fill:#ffffcc  
+    style B fill:#ffffcc
     style C fill:#ccffcc
     style D fill:#ccccff
 </pre>
@@ -693,21 +695,20 @@ Brandon M. Greenwell
 <section id="quick-reference-cheat-sheet" class="slide level2">
 <h2>Quick reference cheat sheet</h2>
 <p>Commands you’ll use constantly:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="" aria-label="1"></a><span class="co"># Getting started</span></span>
-<span id="cb5-2"><a href="" aria-label="2"></a><span class="fu">git</span> clone <span class="op">&lt;</span>url<span class="op">&gt;</span>         <span class="co"># Download a repository</span></span>
-<span id="cb5-3"><a href="" aria-label="3"></a><span class="fu">git</span> status              <span class="co"># See what's changed</span></span>
-<span id="cb5-4"><a href="" aria-label="4"></a><span class="fu">git</span> log <span class="at">--oneline</span>       <span class="co"># View commit history</span></span>
-<span id="cb5-5"><a href="" aria-label="5"></a></span>
-<span id="cb5-6"><a href="" aria-label="6"></a><span class="co"># Making changes</span></span>
-<span id="cb5-7"><a href="" aria-label="7"></a><span class="fu">git</span> add <span class="op">&lt;</span>file<span class="op">&gt;</span>          <span class="co"># Stage specific file</span></span>
-<span id="cb5-8"><a href="" aria-label="8"></a><span class="fu">git</span> add <span class="op">&lt;</span>reviewed-file<span class="op">&gt;</span> <span class="co"># Stage a file after reviewing it</span></span>
-<span id="cb5-9"><a href="" aria-label="9"></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"message"</span> <span class="co"># Save your changes</span></span>
-<span id="cb5-10"><a href="" aria-label="10"></a><span class="fu">git</span> push                <span class="co"># Send to GitHub</span></span>
-<span id="cb5-11"><a href="" aria-label="11"></a></span>
-<span id="cb5-12"><a href="" aria-label="12"></a><span class="co"># Fixing mistakes</span></span>
-<span id="cb5-13"><a href="" aria-label="13"></a><span class="fu">git</span> diff                <span class="co"># See what changed</span></span>
-<span id="cb5-14"><a href="" aria-label="14"></a><span class="fu">git</span> reset HEAD <span class="op">&lt;</span>file<span class="op">&gt;</span>   <span class="co"># Unstage a file</span></span>
-<span id="cb5-15"><a href="" aria-label="15"></a><span class="fu">git</span> commit <span class="at">--amend</span>      <span class="co"># Fix last commit message</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a aria-label="1"></a><span class="co"># Getting started</span></span>
+<span id="cb5-2"><a aria-label="2"></a><span class="fu">git</span> clone <span class="op">&lt;</span>url<span class="op">&gt;</span>         <span class="co"># Download a repository</span></span>
+<span id="cb5-3"><a aria-label="3"></a><span class="fu">git</span> status              <span class="co"># See what's changed</span></span>
+<span id="cb5-4"><a aria-label="4"></a><span class="fu">git</span> log <span class="at">--oneline</span>       <span class="co"># View commit history</span></span>
+<span id="cb5-5"><a aria-label="5"></a></span>
+<span id="cb5-6"><a aria-label="6"></a><span class="co"># Making changes</span></span>
+<span id="cb5-7"><a aria-label="7"></a><span class="fu">git</span> add <span class="op">&lt;</span>file<span class="op">&gt;</span>          <span class="co"># Stage a specific file you have reviewed</span></span>
+<span id="cb5-8"><a aria-label="8"></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"message"</span> <span class="co"># Save your changes</span></span>
+<span id="cb5-9"><a aria-label="9"></a><span class="fu">git</span> push                <span class="co"># Send to GitHub</span></span>
+<span id="cb5-10"><a aria-label="10"></a></span>
+<span id="cb5-11"><a aria-label="11"></a><span class="co"># Fixing mistakes</span></span>
+<span id="cb5-12"><a aria-label="12"></a><span class="fu">git</span> diff                <span class="co"># See what changed</span></span>
+<span id="cb5-13"><a aria-label="13"></a><span class="fu">git</span> reset HEAD <span class="op">&lt;</span>file<span class="op">&gt;</span>   <span class="co"># Unstage a file</span></span>
+<span id="cb5-14"><a aria-label="14"></a><span class="fu">git</span> commit <span class="at">--amend</span>      <span class="co"># Fix last commit message</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="time-for-lab-01" class="slide level2">
 <h2>Time for Lab 01</h2>
@@ -718,29 +719,30 @@ Brandon M. Greenwell
 <li>Please navigate to <a href="https://github.com/bgreenwell/is4010-labs/blob/main/week01/lab01.md"><code>week01/lab01.md</code></a> in the course repository for step-by-step instructions.</li>
 </ul>
 
+
 </section></section>
     </div>
   <div class="quarto-auto-generated-content" style="display: none;">
 <div class="footer footer-default">
-<p>IS4010: App Development with AI</p>
+<p>IS4010: app development with AI</p>
 </div>
 </div></div>
 
   <script>window.backupDefine = window.define; window.define = undefined;</script>
-  <script src="IS4010_W01_Introduction_files/libs/revealjs/dist/reveal.js"></script>
+  <script src="../site_libs/revealjs/dist/reveal.js"></script>
   <!-- reveal.js plugins -->
-  <script src="IS4010_W01_Introduction_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
-  <script src="IS4010_W01_Introduction_files/libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
-  <script src="IS4010_W01_Introduction_files/libs/revealjs/plugin/reveal-menu/menu.js"></script>
-  <script src="IS4010_W01_Introduction_files/libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
-  <script src="IS4010_W01_Introduction_files/libs/revealjs/plugin/reveal-chalkboard/plugin.js"></script>
-  <script src="IS4010_W01_Introduction_files/libs/revealjs/plugin/quarto-support/support.js"></script>
+  <script src="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="../site_libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="../site_libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="../site_libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="../site_libs/revealjs/plugin/reveal-chalkboard/plugin.js"></script>
+  <script src="../site_libs/revealjs/plugin/quarto-support/support.js"></script>
   
 
-  <script src="IS4010_W01_Introduction_files/libs/revealjs/plugin/notes/notes.js"></script>
-  <script src="IS4010_W01_Introduction_files/libs/revealjs/plugin/search/search.js"></script>
-  <script src="IS4010_W01_Introduction_files/libs/revealjs/plugin/zoom/zoom.js"></script>
-  <script src="IS4010_W01_Introduction_files/libs/revealjs/plugin/math/math.js"></script>
+  <script src="../site_libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="../site_libs/revealjs/plugin/search/search.js"></script>
+  <script src="../site_libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="../site_libs/revealjs/plugin/math/math.js"></script>
   <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
 
   <script>
