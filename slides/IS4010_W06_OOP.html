@@ -899,10 +899,11 @@ Brandon M. Greenwell
 <section id="introducing-lab-06-part-2" class="slide level2">
 <h2>Introducing Lab 06: part 2</h2>
 <ul>
-<li class="fragment"><strong>Build on Part 1</strong>: Extend your <code>Book</code> class with meaningful methods</li>
+<li class="fragment"><strong>Build on Part 1</strong>: Add <code>get_age()</code>, which returns 2026 minus the publication year</li>
+<li class="fragment"><strong>Fixed year</strong>: Use 2026 exactly; the tests assert a specific age, so a different year fails</li>
 <li class="fragment"><strong>Inheritance practice</strong>: Create an <code>EBook</code> class that inherits from <code>Book</code></li>
-<li class="fragment"><strong>Method override</strong>: Customize <code>__str__</code> method in the child class</li>
-<li class="fragment"><strong>Required skills</strong>: Reuse the parent initializer and override <code>__str__</code></li>
+<li class="fragment"><strong>Method override</strong>: Customize <code>__str__</code> in the child class; it must include the file size and <code>MB</code></li>
+<li class="fragment"><strong>Required skills</strong>: Reuse the parent initializer and inherit <code>get_age</code> without redefining it</li>
 <li class="fragment"><strong>AI collaboration</strong>: Use AI assistants to explore different implementation approaches</li>
 </ul>
 <aside class="notes">
@@ -986,6 +987,22 @@ Brandon M. Greenwell
           overflow: hidden!important;
           display:block!important;
       }</style></aside>
+</section>
+<section id="time-for-lab-06" class="slide level2">
+<h2>Time for Lab 06</h2>
+<p><strong>Deliverable</strong>: <code>week06/lab06.py</code> containing <code>Book</code> and <code>EBook</code>.</p>
+<ul>
+<li><code>Book</code> stores <code>title</code>, <code>author</code>, and <code>year</code>, and its <code>__str__</code> includes all three</li>
+<li><code>get_age()</code> returns 2026 minus the publication year</li>
+<li><code>EBook</code> extends <code>Book</code> with <code>file_size</code>, reuses the parent initializer via <code>super()</code>, and inherits <code>get_age</code></li>
+<li>Do not copy or modify the supplied tests</li>
+</ul>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a aria-label="1"></a><span class="ex">uv</span> run <span class="at">--directory</span> week06 python <span class="at">-m</span> pytest tests/ <span class="at">-v</span></span>
+<span id="cb8-2"><a aria-label="2"></a><span class="fu">git</span> add week06/lab06.py</span>
+<span id="cb8-3"><a aria-label="3"></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"Complete Lab 06"</span></span>
+<span id="cb8-4"><a aria-label="4"></a><span class="fu">git</span> push origin main</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>A green Week 06 badge earns the complete 10 points.</p>
+<p><strong>Instructions:</strong> <a href="https://github.com/bgreenwell/is4010-labs/blob/main/week06/lab06.md"><code>week06/lab06.md</code></a></p>
 
 
 </section></section>

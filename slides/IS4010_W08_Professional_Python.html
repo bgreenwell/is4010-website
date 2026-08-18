@@ -1540,7 +1540,7 @@ Brandon M. Greenwell
 <p><strong>Complete the supplied three-module contract:</strong></p>
 <ul>
 <li><code>favorites.py</code>: <code>FavoritesManager</code> stores case-insensitive favorites in JSON and recovers from missing or corrupted files</li>
-<li><code>weather_api.py</code>: <code>WeatherAPI</code> calls the specified current and forecast endpoints with <code>params</code> and <code>timeout=10</code>; formatting functions produce the required text</li>
+<li><code>weather_api.py</code>: <code>WeatherAPI</code> calls the specified current and forecast endpoints with <code>params</code> and <code>timeout=10</code>; <code>format_current_weather()</code> and <code>format_forecast()</code> produce the required text</li>
 <li><code>weather.py</code>: <code>load_api_key()</code>, <code>build_parser()</code>, and <code>main(argv=None)</code> implement the documented commands, favorite lookup, standard-error messages, and exit status</li>
 <li>Automated tests use fake responses; manual API use requires an ignored <code>config.py</code> or the <code>WEATHER_API_KEY</code> environment variable</li>
 <li>Do not modify the supplied tests, workflow, <code>config.example.py</code>, or root <code>.gitignore</code></li>

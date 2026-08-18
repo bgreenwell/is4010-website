@@ -1178,7 +1178,7 @@ clean, reusable functions. Each function should:
 <span id="cb17-4"><a aria-label="4"></a>    ...</span>
 <span id="cb17-5"><a aria-label="5"></a></span>
 <span id="cb17-6"><a aria-label="6"></a><span class="kw">def</span> get_active_user_emails(users: <span class="bu">list</span>[<span class="bu">dict</span>]) <span class="op">-&gt;</span> <span class="bu">list</span>[<span class="bu">str</span>]:</span>
-<span id="cb17-7"><a aria-label="7"></a>    <span class="co">"""Return emails for users whose active flag is exactly True."""</span></span>
+<span id="cb17-7"><a aria-label="7"></a>    <span class="co">"""Return emails for users whose is_active value is truthy."""</span></span>
 <span id="cb17-8"><a aria-label="8"></a>    <span class="co"># </span><span class="al">TODO</span><span class="co">: preserve input order and skip missing or invalid records</span></span>
 <span id="cb17-9"><a aria-label="9"></a>    ...</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb18"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb18-1"><a aria-label="1"></a><span class="ex">uv</span> run <span class="at">--directory</span> week05 python <span class="at">-m</span> pytest tests/ <span class="at">-v</span></span>
