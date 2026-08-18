@@ -4,13 +4,16 @@ This repository is the public course website for **IS4010: AI-enhanced applicati
 
 ## Course model
 
-IS4010 is a 15-week course built around modern software development with AI assistants as collaborators:
+IS4010 is a 14-week course built around modern software development with AI assistants as collaborators:
 
 - Week 01: terminal basics, `uv`, Git, GitHub, and repository setup
 - Week 02: browser AI chats, GitHub Copilot in VS Code, GitHub Copilot CLI, and Antigravity CLI
 - Weeks 03–08: Python fundamentals and application development
 - Weeks 09–14: Rust fundamentals and application development
-- Week 15: advanced AI workflows and final-project support
+
+`slides/IS4010_Advanced_AI_Workflows.qmd` is an optional appendix, not a fifteenth week. It is
+linked from the Resources section of the sidebar and from the end of the Week 14 deck. Do not
+reintroduce a Week 15 into the schedule, the navigation, or the slide filenames.
 
 The course has 14 labs and one final solo project. There is no midterm. Students fork `bgreenwell/is4010-labs` in Lab 01 and use that single repository for the semester. Each lab is worth 10 points; a green badge in the repository README represents full credit.
 
@@ -33,9 +36,13 @@ When a change affects both teaching content and a lab contract, update the publi
 - `syllabus.qmd`: Simple Syllabus link placeholder plus a non-authoritative planning reference
 - `project.qmd`: final solo project requirements
 - `weeks/`: weekly module pages and interactive notebooks
-- `slides/`: Reveal.js lecture sources
+- `slides/`: Reveal.js lecture sources. Shared deck configuration lives in `slides/_metadata.yml`;
+  per-deck front matter carries only `title`, `subtitle`, and `author`. Never add a `slides/_quarto.yml`
+  — a nested project there excludes the decks from the parent render and makes local output diverge
+  from what CI publishes.
 - `resources/`: setup, troubleshooting, and Python environment guides
-- `_site/`: rendered website output tracked for the current published state
+- `_site/`: local render output. Ignored by Git; the publish workflow renders fresh from
+  source and deploys that, so never commit it and never treat it as the published state
 - `.github/workflows/publish.yml`: render, link-check, and GitHub Pages deployment workflow
 
 The Week 01 instructor introduction should point to the instructor's GitHub profile README at <https://github.com/bgreenwell> rather than maintaining a separate biography in the deck.
@@ -89,13 +96,27 @@ The Week 01 instructor introduction should point to the instructor's GitHub prof
 4. Inspect the rendered `_site/` changes and resolve errors or unexpected omissions.
 5. For slide-specific work, confirm the relevant Reveal.js output renders correctly.
 6. Run `git diff --check` and scan changed sources for stale commands, obsolete tool names, placeholders that should have been filled, credentials, and private content.
-7. Commit source and intended tracked rendered output together.
+7. Commit source only. `_site/` is ignored.
 
-Do not edit generated files under `_site/` as a substitute for changing their source. The publishing workflow renders the website and slides again, runs a link checker, and deploys to GitHub Pages on pushes to `main`.
+Do not edit generated files under `_site/` as a substitute for changing their source. The publishing workflow renders the website and slides, runs a link checker, and deploys to GitHub Pages on pushes to `main`.
+
+## GitHub Actions pinning policy
+
+- `actions/checkout` stays on a major version tag. It is GitHub-owned and its tags are trusted.
+- Every third-party action is pinned to a full commit SHA with the version in a trailing comment,
+  so a moved tag cannot change what runs in the instructor repositories or in student forks.
+- `dtolnay/rust-toolchain` is pinned to a `master` SHA with an explicit `toolchain: stable` input,
+  which is that action's documented form for pinned use. Do not revert it to `@stable`; that is a
+  moving branch reference on a third-party repository.
+- When bumping an action, resolve the new SHA with
+  `gh api /repos/OWNER/REPO/commits/TAG --jq .sha` and update the trailing version comment to match.
 
 ## Validation checklist
 
-- `quarto render` completes successfully for the full 45-item project.
+- `quarto render` completes successfully for the full 42-item project.
+- `_site/` contains no HTML rendered from repository documentation. `_quarto.yml` restricts
+  `project.render` to `**/*.qmd` and `**/*.ipynb` so that `AGENTS.md`, `CLAUDE.md`, `TODO.md`,
+  and `README.md` are never published or indexed in `search.json`.
 - Modified notebooks remain valid JSON.
 - Changed slides render without missing assets.
 - The Simple Syllabus URL remains an explicit placeholder until the instructor supplies it.
@@ -103,7 +124,9 @@ Do not edit generated files under `_site/` as a substitute for changing their so
 - AI-tool references use Copilot CLI and Antigravity CLI consistently.
 - Lab names, commands, and grading language match `is4010-labs`.
 - `git diff --check` reports no whitespace errors.
-- The GitHub Actions render, link-check, publish, and Pages deployment jobs pass after publishing.
+- The GitHub Actions render, publish, and Pages deployment jobs pass after publishing.
+- The link checker runs with `fail: false`, so it never fails the build. Read its output in the
+  workflow log and fix broken links by hand; a green workflow is not evidence that links resolve.
 
 ## Related repositories and protected areas
 
