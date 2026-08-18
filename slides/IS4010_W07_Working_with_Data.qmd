@@ -2,13 +2,6 @@
 title: "IS4010: AI-enhanced application development"
 subtitle: "Week 07: Working with external data"
 author: "Brandon M. Greenwell"
-format:
-  revealjs:
-    self-contained: false
-    theme: dracula
-    transition: fade
-    scrollable: true
-    css: custom.css
 ---
 
 # Working with external data
@@ -75,7 +68,7 @@ with open("my_note.txt", "r") as f:
 - **Why `with`?**: Automatically closes the file even if errors occur
 - **File modes**: `"r"` (read), `"w"` (write/overwrite), `"a"` (append)
 - **Practice**: Use `with` so the file closes reliably when the block exits
-- 📚 [Python file I/O documentation](https://docs.python.org/3/tutorial/inputoutput.html#reading-and-writing-files)
+- [Python file I/O documentation](https://docs.python.org/3/tutorial/inputoutput.html#reading-and-writing-files)
 :::
 
 ::: {.notes}
@@ -156,8 +149,7 @@ import json
 
 # Python dictionary (complex, nested structure)
 contacts = {
-    "people": [
-        {"name": "Alice", "email": "alice@example.com", "age": 30},
+    "people": [{"name": "Alice", "email": "alice@example.com", "age": 30},
         {"name": "Bob", "email": "bob@example.com", "age": 25}
     ],
     "count": 2
@@ -177,7 +169,7 @@ with open("contacts.json", "r") as f:
 - **`json.dump(obj, file)`**: Python object → JSON file
 - **`json.load(file)`**: JSON file → Python object
 - **`indent=4`**: Makes JSON human-readable (use in development, skip in production)
-- 📚 [Python json module docs](https://docs.python.org/3/library/json.html)
+- [Python json module docs](https://docs.python.org/3/library/json.html)
 :::
 
 ---
@@ -188,8 +180,7 @@ with open("contacts.json", "r") as f:
 
 ```json
 {
-    "people": [
-        {
+    "people": [{
             "name": "Alice",
             "email": "alice@example.com",
             "age": 30
@@ -343,7 +334,7 @@ else:
 - **`requests.get(url)`**: Makes HTTP GET request, returns response object
 - **`response.status_code`**: HTTP status code (200 = success)
 - **`response.json()`**: Parses JSON response → Python dict (same as `json.load()`!)
-- 📚 [PokeAPI documentation](https://pokeapi.co/docs/v2)
+- [PokeAPI documentation](https://pokeapi.co/docs/v2)
 :::
 
 ---
@@ -364,7 +355,7 @@ else:
 ::: {.incremental}
 - **Check failures**: Inspect the status or call `raise_for_status()` before processing data
 - **Error handling**: Different codes need different responses
-- 📚 [HTTP status codes reference](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status)
+- [HTTP status codes reference](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status)
 :::
 
 ---
@@ -471,7 +462,7 @@ except requests.exceptions.JSONDecodeError:
 - **Use timeouts**: Don't let your app hang forever waiting for response
 - **Check status codes**: Handle errors gracefully
 - **API keys**: Keep them secret (use `.env` files, never commit to git)
-- 📚 [API development best practices](https://swagger.io/resources/articles/best-practices-in-api-design/)
+- [API development best practices](https://swagger.io/resources/articles/best-practices-in-api-design/)
 :::
 
 ::: {.notes}

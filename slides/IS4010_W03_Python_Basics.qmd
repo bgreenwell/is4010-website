@@ -2,13 +2,6 @@
 title: "IS4010: AI-enhanced application development"
 subtitle: "Week 03: Python basics and control flow"
 author: "Brandon M. Greenwell"
-format: 
-  revealjs:
-    self-contained: false
-    theme: dracula
-    transition: fade
-    scrollable: true
-    css: custom.css
 ---
 
 # Welcome to Python

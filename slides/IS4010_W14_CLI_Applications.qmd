@@ -2,16 +2,6 @@
 title: "IS4010: AI-enhanced application development"
 subtitle: "Week 14: CLI applications"
 author: "Brandon M. Greenwell"
-format:
-  revealjs:
-    theme: dracula
-    transition: fade
-    slide-number: true
-    chalkboard: true
-    preview-links: auto
-    footer: "IS4010: App development with AI"
-    scrollable: true
-    css: custom.css
 ---
 
 ## Week 14 overview {.inverse}
@@ -327,4 +317,6 @@ You have moved from Python's dynamic runtime model to Rust's compiled type and o
 
 You now have enough vocabulary to compare the trade-offs and continue learning either language.
 
-**Next week:** Advanced AI workflows.
+Lab 14 is the last graded lab. What remains is the final project.
+
+**Optional further reading:** the [advanced AI workflows appendix](IS4010_Advanced_AI_Workflows.qmd) collects prompting, review, and verification habits worth carrying into the project.

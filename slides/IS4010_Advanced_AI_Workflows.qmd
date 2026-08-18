@@ -1,29 +1,23 @@
 ---
 title: "IS4010: AI-enhanced application development"
-subtitle: "Week 15: Advanced AI workflows and prompting"
+subtitle: "Optional appendix: advanced AI workflows and prompting"
 author: "Brandon M. Greenwell"
-format:
-  revealjs:
-    theme: dracula
-    transition: fade
-    slide-number: true
-    chalkboard: true
-    preview-links: auto
-    footer: "IS4010: App development with AI"
-    scrollable: true
-    css: custom.css
 ---
 
-## Week 15 overview {.inverse}
+## Overview {.inverse}
 
-**Session 1: advanced prompting**
+This material is optional. It is not tied to a lab, and nothing here is required for
+the final project. Work through it when you want more deliberate habits for the tools
+you already use.
+
+**Part 1: advanced prompting**
 
 - Outcome-focused prompting
 - Context management and iteration
 - AI-assisted code review
 - Debugging with AI
 
-**Session 2: repeatable AI workflows**
+**Part 2: repeatable AI workflows**
 
 - Documentation generation
 - Refactoring strategies
@@ -32,7 +26,7 @@ format:
 - Limitations and verification practices
 
 ::: {.notes}
-This is the final technical week before project completion. Focus on defining outcomes, supplying relevant context, and evaluating results with tests, documentation, diffs, and primary sources.
+Optional appendix, usable as self-study or as filler during a final-project work session. Focus on defining outcomes, supplying relevant context, and evaluating results with tests, documentation, diffs, and primary sources.
 :::
 
 ---
@@ -54,7 +48,7 @@ Avoid universal productivity claims: results depend on the task, model, develope
 
 ---
 
-# Session 1: advanced prompting
+# Part 1: advanced prompting
 
 ## Anatomy of a useful prompt {.smaller}
 
@@ -152,7 +146,7 @@ worth benchmarking.
 - "Act as a code reviewer focusing on maintainability..."
 - "You are teaching this concept to a beginner..."
 
-[📖 Prompt Engineering Patterns](https://github.com/prompt-engineering/prompt-patterns)
+[Prompt Engineering Patterns](https://github.com/prompt-engineering/prompt-patterns)
 
 ::: {.notes}
 The named perspective can focus a review, but concrete criteria matter more than an impressive role label. Ask for evidence, uncertainty, and a way to test each claim.
@@ -188,7 +182,7 @@ This Rust code doesn't compile. Using the compiler message:
 - Separates alternative fixes from the chosen fix
 - Ends with an executable verification step
 
-[📖 OpenAI model guidance](https://developers.openai.com/api/docs/guides/latest-model)
+[OpenAI model guidance](https://developers.openai.com/api/docs/guides/latest-model)
 
 ::: {.notes}
 Do not present generated step-by-step text as access to a model's hidden reasoning. Verification comes from source lines, documentation, compiler output, tests, and reproducible commands.
@@ -299,7 +293,7 @@ For each issue found:
 Is this code good?
 ```
 
-[📖 Google Code Review Guidelines](https://google.github.io/eng-practices/review/)
+[Google Code Review Guidelines](https://google.github.io/eng-practices/review/)
 
 ::: {.notes}
 Specific review criteria get specific feedback. General questions get general answers. Guide the AI to focus on what matters most.
@@ -369,7 +363,7 @@ Please:
 fix this error [paste entire file]
 ```
 
-[📖 Rust Error Index](https://doc.rust-lang.org/error-index.html)
+[Rust Error Index](https://doc.rust-lang.org/error-index.html)
 
 ::: {.notes}
 Debugging prompts should isolate the problem and include the exact diagnostic, relevant code, reproduction steps, and recent change. Treat proposed causes as hypotheses until reproduced.
@@ -517,7 +511,7 @@ Have students actually do this exercise. Compare results from different AI tools
 
 ---
 
-# Session 2: repeatable AI workflows
+# Part 2: repeatable AI workflows
 
 ## AI-generated documentation {.smaller}
 
@@ -559,27 +553,27 @@ Models can draft documentation from a clear structure, but the author still need
 **After AI generates documentation, verify:**
 
 **Accuracy:**
-- [ ] Parameter types match actual code
-- [ ] Return values correctly described
-- [ ] Examples actually work
-- [ ] No hallucinated features
+- [] Parameter types match actual code
+- [] Return values correctly described
+- [] Examples actually work
+- [] No hallucinated features
 
 **Completeness:**
-- [ ] All public functions documented
-- [ ] Edge cases mentioned
-- [ ] Error conditions explained
-- [ ] Performance characteristics noted
+- [] All public functions documented
+- [] Edge cases mentioned
+- [] Error conditions explained
+- [] Performance characteristics noted
 
 **Clarity:**
-- [ ] Written for target audience
-- [ ] Examples are practical
-- [ ] Jargon explained
-- [ ] Links to related functions
+- [] Written for target audience
+- [] Examples are practical
+- [] Jargon explained
+- [] Links to related functions
 
 **Maintenance:**
-- [ ] Matches current code version
-- [ ] Breaking changes highlighted
-- [ ] Deprecation warnings included
+- [] Matches current code version
+- [] Breaking changes highlighted
+- [] Deprecation warnings included
 
 ::: {.notes}
 Generated documentation is a draft. Run examples and verify every signature, exception, complexity statement, and behavior claim against the code.
@@ -657,7 +651,7 @@ Please:
 [paste code]
 ```
 
-[📖 Martin Fowler - Refactoring](https://refactoring.com/)
+[Martin Fowler - Refactoring](https://refactoring.com/)
 
 ::: {.notes}
 Tie each proposed refactor to a named problem and a test that preserves behavior. Reject abstractions that add indirection without serving a requirement.
@@ -730,7 +724,7 @@ For each test:
 
 **Result to inspect**: Candidate cases that must be checked against the function contract
 
-[📖 pytest Documentation](https://docs.pytest.org/)
+[pytest Documentation](https://docs.pytest.org/)
 
 ::: {.notes}
 Generated tests may suggest useful cases, but they can also assert invented behavior or reproduce the implementation's mistake. Derive expected results from the specification and confirm that a test fails for the defect it is meant to catch.
@@ -743,27 +737,27 @@ Generated tests may suggest useful cases, but they can also assert invented beha
 **After AI generates tests, check:**
 
 **Coverage:**
-- [ ] Required behavior and important branches tested
-- [ ] Edge cases included
-- [ ] Error conditions verified
-- [ ] Integration scenarios covered
+- [] Required behavior and important branches tested
+- [] Edge cases included
+- [] Error conditions verified
+- [] Integration scenarios covered
 
 **Quality:**
-- [ ] Tests are independent (no shared state)
-- [ ] Meaningful test names
-- [ ] Clear assertions
-- [ ] Good failure messages
+- [] Tests are independent (no shared state)
+- [] Meaningful test names
+- [] Clear assertions
+- [] Good failure messages
 
 **Practicality:**
-- [ ] Tests actually run and pass
-- [ ] No flaky tests
-- [ ] Reasonable execution time
-- [ ] Mock external dependencies
+- [] Tests actually run and pass
+- [] No flaky tests
+- [] Reasonable execution time
+- [] Mock external dependencies
 
 **Maintenance:**
-- [ ] Tests will remain stable as code evolves
-- [ ] Not too brittle (over-specified)
-- [ ] Well-organized
+- [] Tests will remain stable as code evolves
+- [] Not too brittle (over-specified)
+- [] Well-organized
 
 ::: {.notes}
 AI-generated tests need review just like AI-generated code. They might be technically correct but impractical or brittle.
@@ -798,7 +792,7 @@ git commit -m "[AI-generated message]"
 
 Then give the staged diff to Copilot CLI or Antigravity CLI from inside the repository. Review the proposed message before running `git commit`; do not create a global alias that silently sends every staged diff to an external tool.
 
-[📖 Conventional Commits](https://www.conventionalcommits.org/)
+[Conventional Commits](https://www.conventionalcommits.org/)
 
 ::: {.notes}
 Keep custom workflows visible and reviewable. Confirm what repository content leaves the machine and avoid sending secrets, credentials, or unrelated staged files.
@@ -835,9 +829,9 @@ Please create:
 ## Screenshots (if applicable)
 
 ## Checklist
-- [ ] Tests added/updated
-- [ ] Documentation updated
-- [ ] No breaking changes
+- [] Tests added/updated
+- [] Documentation updated
+- [] No breaking changes
 ```
 
 **Save as a template or shell script for reuse**
@@ -880,29 +874,29 @@ Ask for an explanation at the reader's level, then verify the control flow, term
 
 **Red flags in AI-generated code:**
 
-🚩 **Hallucinated APIs**
+**Hallucinated APIs**
 ```python
 # This doesn't exist in standard library!
 from requests import super_fast_download
 ```
 
-🚩 **Outdated patterns**
+**Outdated patterns**
 ```rust
 // Old Rust 2015 style
 extern crate serde;  // Not needed in 2021 edition
 ```
 
-🚩 **Over-complicated**
+**Over-complicated**
 ```python
 # AI wrote 50 lines when 5 would work
 ```
 
-🚩 **Missing error handling**
+**Missing error handling**
 ```rust
 let file = File::open("data.txt").unwrap();  // Unhandled failure path
 ```
 
-🚩 **Security issues**
+**Security issues**
 ```python
 eval(user_input)  # Never do this!
 ```
@@ -918,28 +912,28 @@ Use the red flags as hypotheses: compile or run the code, inspect the referenced
 **Before using AI-generated code:**
 
 **Correctness:**
-- [ ] Code actually compiles/runs
-- [ ] Logic is sound
-- [ ] Edge cases handled
-- [ ] No hallucinated functions/APIs
+- [] Code actually compiles/runs
+- [] Logic is sound
+- [] Edge cases handled
+- [] No hallucinated functions/APIs
 
 **Security:**
-- [ ] Input validation present
-- [ ] No SQL injection risks
-- [ ] No command injection
-- [ ] Secrets not hardcoded
+- [] Input validation present
+- [] No SQL injection risks
+- [] No command injection
+- [] Secrets not hardcoded
 
 **Performance:**
-- [ ] Algorithms are efficient
-- [ ] No unnecessary allocations
-- [ ] Appropriate data structures
-- [ ] Scalability considered
+- [] Algorithms are efficient
+- [] No unnecessary allocations
+- [] Appropriate data structures
+- [] Scalability considered
 
 **Maintainability:**
-- [ ] Code is readable
-- [ ] Well-structured
-- [ ] Properly documented
-- [ ] Follows project conventions
+- [] Code is readable
+- [] Well-structured
+- [] Properly documented
+- [] Follows project conventions
 
 ::: {.notes}
 Make this checklist a habit. Quick review catches most AI mistakes before they become problems.
@@ -1025,7 +1019,7 @@ Pause tool use when it is adding guesses, complexity, or repeated suggestions wi
 > You must be able to explain every line of code you submit,
 > whether you wrote it, AI wrote it, or you found it online.
 
-[📖 UC Academic Integrity Policy](https://www.uc.edu/conduct/academic-integrity.html)
+[UC Academic Integrity Policy](https://www.uc.edu/conduct/academic-integrity.html)
 
 ::: {.notes}
 The course evaluates the submitted result and the student's understanding. Tool use does not transfer responsibility for correctness or academic integrity.
@@ -1057,7 +1051,7 @@ Please:
 
 **Goal:** Use AI as a tutor, not a solution generator
 
-[📖 Socratic Method](https://en.wikipedia.org/wiki/Socratic_method)
+[Socratic Method](https://en.wikipedia.org/wiki/Socratic_method)
 
 ::: {.notes}
 Ask for a hint, example, counterexample, or question that helps you make the next decision. Then write or revise the code and test your understanding.
@@ -1233,22 +1227,22 @@ Use current primary documentation for the selected tool and compare its advice w
 **Apply these skills to your final project:**
 
 **Documentation:**
-- [ ] Draft and verify a complete README
-- [ ] Add docstrings where they clarify public behavior
-- [ ] Create usage examples
-- [ ] Document installation steps
+- [] Draft and verify a complete README
+- [] Add docstrings where they clarify public behavior
+- [] Create usage examples
+- [] Document installation steps
 
 **Code quality:**
-- [ ] AI-assisted code review
-- [ ] Refactor complex functions
-- [ ] Add tests for required behavior, failure paths, and important boundaries
-- [ ] Check for security issues
+- [] AI-assisted code review
+- [] Refactor complex functions
+- [] Add tests for required behavior, failure paths, and important boundaries
+- [] Check for security issues
 
 **Repository polish:**
-- [ ] Write clear commit messages
-- [ ] Create detailed PR descriptions (if applicable)
-- [ ] Add comments where the reason for a choice is not evident from the code
-- [ ] Include performance notes only when they are measured and relevant
+- [] Write clear commit messages
+- [] Create detailed PR descriptions (if applicable)
+- [] Add comments where the reason for a choice is not evident from the code
+- [] Include performance notes only when they are measured and relevant
 
 **Use AI where it improves a rubric requirement, and verify every resulting change.**
 

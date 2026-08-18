@@ -2,16 +2,6 @@
 title: "IS4010: AI-enhanced application development"
 subtitle: "Week 12: Generics and traits"
 author: "Brandon M. Greenwell"
-format:
-  revealjs:
-    theme: dracula
-    transition: fade
-    slide-number: true
-    chalkboard: true
-    preview-links: auto
-    footer: "IS4010: App development with AI"
-    scrollable: true
-    css: custom.css
 ---
 
 ## Week 12 overview {.inverse}
@@ -156,7 +146,7 @@ let result = largest(&chars);
 
 **Key concept**: `T: PartialOrd` is a [trait bound](https://doc.rust-lang.org/book/ch10-02-traits.html#trait-bounds) - T must implement PartialOrd.
 
-[📖 Rust Book: Generic Data Types](https://doc.rust-lang.org/book/ch10-01-syntax.html)
+[Rust Book: Generic Data Types](https://doc.rust-lang.org/book/ch10-01-syntax.html)
 
 ::: {.notes}
 Break down the syntax carefully — it's dense the first time you see it:
@@ -212,7 +202,7 @@ fn main() {
 }
 ```
 
-[📖 Rust Book: Generic Structs](https://doc.rust-lang.org/book/ch10-01-syntax.html#in-struct-definitions)
+[Rust Book: Generic Structs](https://doc.rust-lang.org/book/ch10-01-syntax.html#in-struct-definitions)
 
 ::: {.notes}
 **Python parallel:** An unparameterized Python dataclass may accept values dynamically. A generic dataclass can express relationships with `TypeVar`, but enforcement normally comes from a static type checker rather than the runtime:
@@ -265,7 +255,7 @@ fn validate_username(name: &str) -> Result<&str, String> {
 }
 ```
 
-[📖 Rust Book: Generic Enums](https://doc.rust-lang.org/book/ch10-01-syntax.html#in-enum-definitions)
+[Rust Book: Generic Enums](https://doc.rust-lang.org/book/ch10-01-syntax.html#in-enum-definitions)
 
 ::: {.notes}
 Students have been writing `Option<T>` and `Result<T, E>` for weeks. Use their definitions to show that these are generic standard-library enums rather than special syntax.
@@ -305,7 +295,7 @@ impl Point<f32> {
 
 **Notice**: `impl<T>` declares the generic, then `Point<T>` uses it.
 
-[📖 Rust Book: Generic Methods](https://doc.rust-lang.org/book/ch10-01-syntax.html#in-method-definitions)
+[Rust Book: Generic Methods](https://doc.rust-lang.org/book/ch10-01-syntax.html#in-method-definitions)
 
 ::: {.notes}
 The `impl<T> Point<T>` syntax is one of the most confusing parts for newcomers. Break it down:
@@ -364,7 +354,7 @@ impl Summary for NewsArticle {
 - Protocols (Swift)
 - Type classes (Haskell)
 
-[📖 Rust Book: Traits](https://doc.rust-lang.org/book/ch10-02-traits.html)
+[Rust Book: Traits](https://doc.rust-lang.org/book/ch10-02-traits.html)
 
 ::: {.notes}
 **Python parallel — Abstract Base Classes (ABCs):** The closest Python equivalent is `abc.ABC`:
@@ -433,7 +423,7 @@ impl Summary for Tweet {
 }
 ```
 
-[📖 Rust Book: Default Implementations](https://doc.rust-lang.org/book/ch10-02-traits.html#default-implementations)
+[Rust Book: Default Implementations](https://doc.rust-lang.org/book/ch10-02-traits.html#default-implementations)
 
 ::: {.notes}
 **Python parallel:** This is exactly like providing a non-abstract method in a Python ABC or base class:
@@ -490,7 +480,7 @@ pub fn notify<T: Summary + Display>(item: &T) {
 }
 ```
 
-[📖 Rust Book: Traits as Parameters](https://doc.rust-lang.org/book/ch10-02-traits.html#traits-as-parameters)
+[Rust Book: Traits as Parameters](https://doc.rust-lang.org/book/ch10-02-traits.html#traits-as-parameters)
 
 ::: {.notes}
 This is where generics and traits come together. There are three syntaxes shown — they all mean the same thing, just with different readability trade-offs:
@@ -548,7 +538,7 @@ where
 - Complex generic relationships
 - Improves readability
 
-[📖 Rust Book: where Clauses](https://doc.rust-lang.org/book/ch10-02-traits.html#clearer-trait-bounds-with-where-clauses)
+[Rust Book: where Clauses](https://doc.rust-lang.org/book/ch10-02-traits.html#clearer-trait-bounds-with-where-clauses)
 
 ::: {.notes}
 There's no real Python equivalent for `where` clauses because Python doesn't have the same richness of compile-time type constraints. Think of it purely as a formatting/readability feature.
@@ -604,7 +594,7 @@ fn returns_summarizable(switch: bool) -> impl Summary {
 }
 ```
 
-[📖 Rust Book: Returning Traits](https://doc.rust-lang.org/book/ch10-02-traits.html#returning-types-that-implement-traits)
+[Rust Book: Returning Traits](https://doc.rust-lang.org/book/ch10-02-traits.html#returning-types-that-implement-traits)
 
 ::: {.notes}
 **Python parallel:** Python return type annotations can express this naturally:
@@ -652,7 +642,7 @@ Students will encounter `dyn Trait` naturally as they write more complex Rust. M
 - **[`Ord`](https://doc.rust-lang.org/std/cmp/trait.Ord.html)**: Total ordering
 - **[`Iterator`](https://doc.rust-lang.org/std/iter/trait.Iterator.html)**: Types that can be iterated over
 
-[📖 Rust Standard Library Traits](https://doc.rust-lang.org/std/#traits)
+[Rust Standard Library Traits](https://doc.rust-lang.org/std/#traits)
 
 ::: {.notes}
 Help students map these to Python's "dunder" (double underscore) methods, which serve a similar role — they're special interfaces the language and standard library know about:
@@ -707,7 +697,7 @@ fn main() {
 
 **Cannot derive**: `Display`, `Iterator` (must implement manually)
 
-[📖 Rust Book: Derivable Traits](https://doc.rust-lang.org/book/appendix-03-derivable-traits.html)
+[Rust Book: Derivable Traits](https://doc.rust-lang.org/book/appendix-03-derivable-traits.html)
 
 ::: {.notes}
 **Python parallel:** The `#[derive(...)]` attribute is most similar to Python's `@dataclass` decorator, which auto-generates `__init__`, `__repr__`, `__eq__`, and optionally `__hash__` and `__lt__`:
@@ -763,7 +753,7 @@ fn main() {
 }
 ```
 
-[📖 Rust Book: Display Trait](https://doc.rust-lang.org/std/fmt/trait.Display.html)
+[Rust Book: Display Trait](https://doc.rust-lang.org/std/fmt/trait.Display.html)
 
 ::: {.notes}
 **Python parallel:** Implementing `Display` is almost identical to Python's `__str__`:
@@ -833,7 +823,7 @@ impl Iterator for Counter {
 }
 ```
 
-[📖 Rust Book: Iterator Trait](https://doc.rust-lang.org/book/ch13-02-iterators.html)
+[Rust Book: Iterator Trait](https://doc.rust-lang.org/book/ch13-02-iterators.html)
 
 ::: {.notes}
 **Python parallel:** This is exactly how Python iterators work, with `__iter__` and `__next__`:
@@ -904,7 +894,7 @@ impl<T> Stack<T> {
 }
 ```
 
-[🎮 Try it in Playground](https://play.rust-lang.org/)
+[Try it in Playground](https://play.rust-lang.org/)
 
 ::: {.notes}
 **Python parallel:** Python's built-in list already acts as a stack. You'd normally just use it directly:
@@ -1224,4 +1214,4 @@ Lab 13 continues the weekly cadence. Encourage students to finish Lab 12's `Disp
 
 **Remember**: A green Week 12 badge represents the complete 10-point lab.
 
-**Good luck!** 🦀
+**Good luck!**

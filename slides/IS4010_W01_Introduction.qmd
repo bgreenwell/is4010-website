@@ -2,11 +2,6 @@
 title: "IS4010: AI-enhanced application development"
 subtitle: "Week 01: Course introduction and setup"
 author: "Brandon M. Greenwell"
-format: 
-  revealjs:
-    self-contained: false
-    theme: dracula
-    transition: fade 
 ---
 
 # Course introduction
@@ -32,7 +27,7 @@ format:
 ::: {.incremental}
 - This course directly addresses the valid concerns of using AI in education.
 - We'll use AI to handle boilerplate and accelerate development, not to do our thinking for us.
-- **You're the pilot! ✈️** You're responsible for every line of code, and you must understand, test, and be able to explain the code you submit.
+- **You're the pilot!** You're responsible for every line of code, and you must understand, test, and be able to explain the code you submit.
 - We'll test where AI assistance is useful or unreliable, including context limits, fabricated claims, and repeatability.
 :::
 
@@ -45,7 +40,7 @@ format:
 - Use [Git](https://git-scm.com/) and [GitHub](https://github.com/) for version control and collaboration.
 - Leverage AI code assistants to write, debug, and refactor code.
 - Build data-driven applications that interact with documented APIs.
-- Create a unique portfolio project that showcases your skills to future employers. 💼
+- Create a unique portfolio project that showcases your skills to future employers.
 :::
 
 ---
@@ -57,7 +52,7 @@ format:
 - **[Python](https://www.python.org/) fundamentals with an AI partner** (from basics to OOP) (weeks 3-6)
 - **Building a Python application** (APIs and professional tools) (weeks 7-8)
 - **[Rust](https://www.rust-lang.org/) fundamentals and application development** (weeks 9-14)
-- **Advanced AI workflows and final-project support** (week 15)
+- **Final solo project**, built alongside the second half of the course
 :::
 
 ---
@@ -76,10 +71,10 @@ format:
 ## Important course links
 
 ::: {.incremental}
-- **Course Canvas:** [uc.instructure.com](https://uc.instructure.com/courses/1812798) (grades, slides, labs, due dates, etc.)
+- **Course Canvas:** [uc.instructure.com](https://uc.instructure.com/) (grades, slides, labs, due dates, etc.)
 - **Labs repository:** [GitHub](https://github.com/bgreenwell/is4010-labs) (all 14 labs and status badges)
 - **Official syllabus:** Simple Syllabus link to be added when published
-- **Communication:** [Microsoft Teams](https://teams.microsoft.com/l/team/19%3ASjdonOkpgQOXFJf6qmHIWfJIwzgKl-xvmnkNVUkg8k81%40thread.tacv2/conversations?groupId=5c3ca09e-ec41-473c-8395-ab28de92a041&tenantId=f5222e6c-5fc6-48eb-8f03-73db18203b63) (primary discussion, questions about the material, questions about the labs, etc.)
+- **Communication:** Microsoft Teams (primary discussion, questions about the material, questions about the labs, etc.)
 :::
 
 ---
@@ -317,8 +312,7 @@ Narrate the prompt, current directory, relative path, command, and argument. Dem
 ::: {.incremental}
 - **`git clone <url>`** - Download a repository from GitHub to your computer
 - **`git status`** - See what files have changed and what's ready to commit
-- **`git add <file>`** - Stage specific files for your next commit
-- **`git add <reviewed-file>`** - Stage another file after reviewing it
+- **`git add <file>`** - Stage a specific file for your next commit, once you have reviewed it
 - **`git commit -m "message"`** - Save your staged changes with a descriptive message
 - **`git push`** - Send your commits from local to remote
 :::
@@ -422,9 +416,9 @@ graph LR
     A[Working Directory<br/>Your files] --> B[Staging Area<br/>git add]
     B --> C[Repository<br/>git commit]
     C --> D[Remote GitHub<br/>git push]
-    
+
     style A fill:#ffcccb
-    style B fill:#ffffcc  
+    style B fill:#ffffcc
     style C fill:#ccffcc
     style D fill:#ccccff
 ```
@@ -478,8 +472,7 @@ git status              # See what's changed
 git log --oneline       # View commit history
 
 # Making changes
-git add <file>          # Stage specific file
-git add <reviewed-file> # Stage a file after reviewing it
+git add <file>          # Stage a specific file you have reviewed
 git commit -m "message" # Save your changes
 git push                # Send to GitHub
 

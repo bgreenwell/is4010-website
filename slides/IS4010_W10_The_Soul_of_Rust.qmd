@@ -2,13 +2,6 @@
 title: "IS4010: AI-enhanced application development"
 subtitle: "Week 10: The soul of Rust — ownership and borrowing"
 author: "Brandon M. Greenwell"
-format:
-  revealjs:
-    self-contained: false
-    theme: dracula
-    transition: fade
-    scrollable: true
-    css: custom.css
 ---
 
 ## Session 1: the ownership model

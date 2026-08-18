@@ -2,13 +2,6 @@
 title: "IS4010: AI-enhanced application development"
 subtitle: "Week 11: Structuring code and data in Rust"
 author: "Brandon M. Greenwell"
-format:
-  revealjs:
-    self-contained: false
-    theme: dracula
-    transition: fade
-    scrollable: true
-    css: custom.css
 ---
 
 ## Session 1: organizing code and custom types
@@ -574,9 +567,9 @@ use std::fs::File;
 use std::io::{self, Read};
 
 fn read_username_from_file() -> Result<String, io::Error> {
-    let mut file = File::open("username.txt")?; // ❓ propagates error if Err
+    let mut file = File::open("username.txt")?; // propagates error if Err
     let mut username = String::new();
-    file.read_to_string(&mut username)?;        // ❓ propagates error if Err
+    file.read_to_string(&mut username)?;        // propagates error if Err
     Ok(username)                                  // ✅ returns Ok if success
 }
 

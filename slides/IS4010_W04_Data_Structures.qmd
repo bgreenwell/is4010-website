@@ -2,13 +2,6 @@
 title: "IS4010: AI-enhanced application development"
 subtitle: "Week 04: Python data structures"
 author: "Brandon M. Greenwell"
-format:
-  revealjs:
-    self-contained: false
-    theme: dracula
-    transition: fade
-    scrollable: true
-    css: custom.css
 ---
 
 # Welcome to Python data structures
@@ -326,9 +319,9 @@ print(f"Slow approach: {slow_time:.4f} seconds, found {vip_count} VIPs")
 
 **Your turn with an AI assistant:**
 
-1. 🤖 **Ask Claude/Gemini/ChatGPT**: "How can I optimize this customer VIP lookup code?"
-2. 📊 **Get timing comparison**: What data structure should we use instead?
-3. 💡 **Implement together**: Let's code the optimized version live!
+1. **Ask Claude/Gemini/ChatGPT**: "How can I optimize this customer VIP lookup code?"
+2. **Get timing comparison**: What data structure should we use instead?
+3. **Implement together**: Let's code the optimized version live!
 
 ::: {.notes}
 **LIVE EXERCISE INSTRUCTIONS:**
@@ -377,8 +370,8 @@ print(f"Speedup: {slow_time/fast_time:.1f}x faster!")
 **Results Discussion:**
 - **Performance effect**: Set membership is average-case O(1), while list membership is O(n)
 - **AI role**: Generate candidate explanations; timing results determine whether they apply here
-- 💼 **Real impact**: This optimization matters in production systems
-- 🔄 **Learning loop**: AI suggestions → implementation → measurement → iteration
+- **Real impact**: This optimization matters in production systems
+- **Learning loop**: AI suggestions → implementation → measurement → iteration
 
 ::: {.notes}
 **DISCUSSION FACILITATION:**
@@ -488,7 +481,7 @@ print(f"IS4010 students: {len(students)}, Average: {avg:.1f}")
 ```
 
 **AI review prompt:**
-🤖 *"Analyze this Python code and suggest improvements for data structure choice, readability, and performance. Focus on eliminating magic numbers and handling duplicate data."*
+*"Analyze this Python code and suggest improvements for data structure choice, readability, and performance. Focus on eliminating magic numbers and handling duplicate data."*
 
 ::: {.notes}
 **INTERACTIVE EXERCISE FLOW:**
@@ -520,8 +513,7 @@ from collections import defaultdict
 
 def process_student_data_improved():
     # Better data structure: list of dictionaries
-    raw_students = [
-        {"name": "Alice Johnson", "email": "alice@uc.edu", "course": "IS4010", "grade": 95},
+    raw_students = [{"name": "Alice Johnson", "email": "alice@uc.edu", "course": "IS4010", "grade": 95},
         {"name": "Bob Smith", "email": "bob@uc.edu", "course": "IS4010", "grade": 87},
         {"name": "Alice Johnson", "email": "alice@uc.edu", "course": "CS2071", "grade": 92},
         {"name": "Carol Davis", "email": "carol@uc.edu", "course": "IS4010", "grade": 78},
@@ -635,8 +627,7 @@ if "Python" in unique_languages:
 ```python
 # Realistic API response from student management system
 api_response = {
-    "students": [
-        {
+    "students": [{
             "id": 12345,
             "username": "alice_j",
             "profile": {
@@ -645,8 +636,7 @@ api_response = {
                 "year": "junior",
                 "major": "Information Systems"
             },
-            "courses": [
-                {"code": "IS4010", "grade": 95, "credits": 3},
+            "courses": [{"code": "IS4010", "grade": 95, "credits": 3},
                 {"code": "CS2071", "grade": 88, "credits": 4},
                 {"code": "MATH2045", "grade": 92, "credits": 3}
             ],
@@ -662,8 +652,7 @@ api_response = {
                 "year": "senior",
                 "major": "Computer Science"
             },
-            "courses": [
-                {"code": "IS4010", "grade": 87, "credits": 3},
+            "courses": [{"code": "IS4010", "grade": 87, "credits": 3},
                 {"code": "CS5168", "grade": 91, "credits": 3}
             ],
             "activities": ["IEEE", "Hackathon Club"],
@@ -679,7 +668,7 @@ api_response = {
 ```
 
 **AI design prompt:**
-🤖 *"I need to design data structures for a student dashboard with these requirements:*
+*"I need to design data structures for a student dashboard with these requirements:*
 *1. Fast lookup of students by username*
 *2. Quick filtering by course enrollment*
 *3. Efficient permission checking*
@@ -774,10 +763,10 @@ print(f"IS4010 + ACM: {is4010_acm}")
 ```
 
 **Check the result:**
-- 🚀 **O(1) lookups** instead of O(n) searches
-- 🔍 **Set operations** for complex filtering
-- 📊 **Multiple access patterns** supported efficiently
-- 💾 **Memory trade-off** for speed (typical AI recommendation)
+- **O(1) lookups** instead of O(n) searches
+- **Set operations** for complex filtering
+- **Multiple access patterns** supported efficiently
+- **Memory trade-off** for speed (typical AI recommendation)
 
 ::: {.notes}
 **DISCUSSION FACILITATORS:**
@@ -864,8 +853,7 @@ Work with an AI assistant for 15 minutes, then verify its recommendation against
 ### **Challenge 1: social media analytics**
 ```python
 # Raw social media engagement data
-posts = [
-    {"id": 1, "user": "alice", "likes": ["bob", "carol", "dave"], "tags": ["python", "coding"]},
+posts = [{"id": 1, "user": "alice", "likes": ["bob", "carol", "dave"], "tags": ["python", "coding"]},
     {"id": 2, "user": "bob", "likes": ["alice", "carol"], "tags": ["ai", "python"]},
     {"id": 3, "user": "carol", "likes": ["alice"], "tags": ["datascience", "python"]},
 ]
@@ -877,8 +865,7 @@ posts = [
 ### **Challenge 2: e-commerce inventory**
 ```python
 # Product inventory system
-inventory = [
-    {"sku": "LAP001", "name": "Laptop", "price": 999, "categories": ["electronics", "computers"], "stock": 5},
+inventory = [{"sku": "LAP001", "name": "Laptop", "price": 999, "categories": ["electronics", "computers"], "stock": 5},
     {"sku": "MOU002", "name": "Mouse", "price": 25, "categories": ["electronics", "accessories"], "stock": 50},
     {"sku": "KEY003", "name": "Keyboard", "price": 75, "categories": ["electronics", "accessories"], "stock": 30},
 ]
@@ -890,8 +877,7 @@ inventory = [
 ### **Challenge 3: university course scheduler**
 ```python
 # Course scheduling conflicts
-courses = [
-    {"code": "IS4010", "time": "MWF 10:00", "room": "Lindner 100", "students": ["alice", "bob"]},
+courses = [{"code": "IS4010", "time": "MWF 10:00", "room": "Lindner 100", "students": ["alice", "bob"]},
     {"code": "CS2071", "time": "TTh 14:00", "room": "Lindner 200", "students": ["alice", "carol"]},
     {"code": "MATH2045", "time": "MWF 10:00", "room": "Swift 300", "students": ["bob", "dave"]},
 ]
@@ -901,10 +887,10 @@ courses = [
 ```
 
 **Your task:**
-1. 🤖 **Pick ONE challenge** that interests you most
+1. **Pick ONE challenge** that interests you most
 2. **Consult an AI assistant** for data structure recommendations
-3. 🚀 **Be ready to share** your AI's best suggestion with the class
-4. 🏆 **Bonus**: Implement a quick prototype if you're feeling ambitious!
+3. **Be ready to share** your AI's best suggestion with the class
+4. **Bonus**: Implement a quick prototype if you're feeling ambitious!
 
 ::: {.notes}
 **FACILITATING THE MINI-HACKATHON:**

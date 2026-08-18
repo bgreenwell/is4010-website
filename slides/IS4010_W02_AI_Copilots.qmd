@@ -2,11 +2,6 @@
 title: "IS4010: AI-enhanced application development"
 subtitle: "Week 02: AI copilots and comparison workflows"
 author: "Brandon M. Greenwell"
-format: 
-  revealjs:
-    self-contained: false
-    theme: dracula
-    transition: fade
 ---
 
 # AI tools for programming
@@ -28,7 +23,7 @@ Demo hook: Have three browser tabs open (Gemini, ChatGPT, Claude) and be ready t
 
 ---
 
-## Course motto:
+## Course motto
 
 > Augment, don't automate!
 
@@ -52,7 +47,7 @@ Use the pilot/co-pilot analogy throughout the course. It's memorable and accurat
 
 ::: {.incremental}
 - **Code generation**: Turn comments and prompts into working code
-- **Code explanation**: Break down complex functions into plain English  
+- **Code explanation**: Break down complex functions into plain English
 - **Debugging assistance**: Help identify and fix errors
 - **Refactoring support**: Improve code structure and style
 - **Learning accelerator**: Get instant feedback and alternative approaches
@@ -93,7 +88,7 @@ Set expectations: These tools can be useful, but their output requires human jud
 ::: {.incremental}
 - **Browser chat**: General-purpose conversation and explanations (Gemini, ChatGPT, Claude, and others)
 - **Editor assistant**: Contextual completion, chat, and edits with [GitHub Copilot](https://github.com/features/copilot) in VS Code
-- **CLI agents**: Repository-aware work in the terminal with [Copilot CLI](https://github.com/features/copilot/cli) and [Antigravity CLI](https://antigravity.google/docs/cli/overview/)
+- **CLI agents**: Repository-aware work in the terminal with [Copilot CLI](https://docs.github.com/en/copilot/how-tos/copilot-cli/set-up-copilot-cli/install-copilot-cli) and [Antigravity CLI](https://antigravity.google/docs/cli/overview/)
 :::
 
 ::: notes
@@ -132,7 +127,7 @@ Point out that we're focusing on the web interfaces first - this is the easiest 
 
 ::: {.incremental}
 1. **Context**: "Here is my [Python](https://www.python.org/) function..."
-2. **Persona**: "Act as a senior software developer reviewing my code."  
+2. **Persona**: "Act as a senior software developer reviewing my code."
 3. **Task**: "Find any potential bugs and suggest improvements."
 4. **Format**: "Provide your answer as a numbered list."
 :::
@@ -162,7 +157,7 @@ Have a few examples ready:
 ```
 
 ### 3. **Refactor for clarity**
-```  
+```
 "Convert this for loop into a more Pythonic equivalent using list comprehension or built-in functions."
 ```
 
@@ -203,12 +198,12 @@ Let's give the **exact same prompt** to all three AIs:
 ::: notes
 This is the highlight of the session! Have three browser tabs ready:
 1. Gemini (gemini.google.com)
-2. ChatGPT (chat.openai.com) 
+2. ChatGPT (chat.openai.com)
 3. Claude (claude.ai)
 
 Paste the exact same prompt into each and show the results side-by-side. Point out:
 - Different coding styles
-- Quality of docstrings  
+- Quality of docstrings
 - Error handling approaches
 - Explanation quality
 - Any unique insights each model provides
@@ -314,7 +309,7 @@ Show the [NumPy](https://numpy.org/) docstring format that will be used througho
 
 Point out:
 - The brief description first
-- Parameters section with types and descriptions  
+- Parameters section with types and descriptions
 - Returns section with type and description
 - Clear, consistent formatting
 
@@ -323,12 +318,12 @@ This style works particularly well with AI tools because it provides structured,
 
 ---
 
-## Introducing Lab 02: code preview
+## Where this is heading
 
-- Use any AI coding assistant available to you; GitHub Copilot is not required
-- Ask it to help implement three small Python functions: `make_greeting`, `is_even`, and `count_vowels`
+- In Lab 02 you will implement three small Python functions: `make_greeting`, `is_even`, and `count_vowels`
 - Read every suggestion, run the provided tests, and revise the result instead of accepting code blindly
 - This is a preview of Python and testing; formal Python instruction begins in Week 03
+- First we need the other two surfaces: the editor and the terminal
 
 ---
 
@@ -336,7 +331,7 @@ This style works particularly well with AI tools because it provides structured,
 
 ## From browser to editor
 
-Why integration matters 🔗
+Why integration matters
 
 ::: {.incremental}
 - **Stay in your flow state**: No context switching!
@@ -394,15 +389,15 @@ Key point: Context awareness and integration. Copilot can see variable names, fu
 **Best practices:**
 
 ::: {.incremental}
-- **Clear comments are key**: 
+- **Clear comments are key**:
 
   `# Calculate the factorial of a positive integer`
 
-- **Descriptive function names**: 
+- **Descriptive function names**:
 
   `calculate_factorial` not `calc_fact`
 
-- **Type hints help**: 
+- **Type hints help**:
 
   `def factorial(n: int) -> int:`
 :::
@@ -423,7 +418,7 @@ Clear names and nearby context can improve a suggestion, but every completion st
 
 ## Copilot Chat modes
 
-**Your conversational partner** 💬
+**Your conversational partner**
 
 Common interaction modes (labels can change):
 
@@ -437,7 +432,7 @@ Common interaction modes (labels can change):
 
 ## When to use each Copilot Chat mode
 
-**Your conversational partner** 💬
+**Your conversational partner**
 
 When to use each mode:
 
@@ -529,7 +524,7 @@ Use the current official setup guide during class. The course-facing Google term
 
 ---
 
-## [GitHub Copilot CLI](https://github.com/features/copilot/cli)
+## [GitHub Copilot CLI](https://docs.github.com/en/copilot/how-tos/copilot-cli/set-up-copilot-cli/install-copilot-cli)
 
 ### GitHub's coding agent in your terminal
 
@@ -564,41 +559,6 @@ The current Copilot CLI is a standalone agent, not the older `gh copilot suggest
 
 ::: notes
 Use `count_vowels` for the live comparison so class mirrors Lab 02. CI can validate the code and journal structure, but it cannot inspect local tool installations.
-:::
-
----
-
-## [Google Jules](https://jules.google/): repository workflow
-
-**Repository-based coding agent**
-
-Repository-based workflow:
-
-::: {.incremental}
-- Connects to an authorized GitHub repository and branch
-- Clones the repository into a virtual machine for an assigned task
-- Proposes a plan before editing and presents a diff for review
-- Can publish its changes to a branch or pull request after review
-:::
-
----
-
-## [Google Jules](https://jules.google/): review uses
-
-**Repository-based coding agent**
-
-Good for:
-
-::: {.incremental}
-- **Code review**: Before submitting assignments or pull requests
-- **Learning**: Understanding best practices in real projects
-- **Debugging**: Finding subtle issues across multiple files
-- **Refactoring**: Identifying improvement opportunities
-- **Addressing [PRs](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/about-pull-requests)**: [Example](https://github.com/bgreenwell/statlingua/pull/7)
-:::
-
-::: notes
-Use a small disposable repository for the demonstration. Show the authorization boundary, proposed plan, diff, and checks. Do not present an agent's security or performance suggestions as findings until they are verified.
 :::
 
 ---
@@ -641,9 +601,9 @@ Students install and try both CLI agents. The point is comparison and informed c
 
 **Code review and submission:**
 
-1. **Repository task**: Assign a scoped task to Jules when an asynchronous agent is useful
+1. **Repository task**: Give a scoped task to a CLI agent started inside the repository
 2. **AI-assisted debugging**: Use chat to identify and fix issues
-3. **Documentation**: Generate docstrings and comments with AI help
+3. **Documentation**: Generate NumPy-style docstrings and comments with AI help
 4. **Testing**: Propose test cases, then inspect and run them
 
 ::: notes
@@ -678,19 +638,11 @@ Ask: "What questions do you have about integrating AI into your development work
 
 ---
 
-## Introducing Lab 02: CLI comparison
-
-- Install and authenticate both CLI tools using their official documentation
-- Give both agents the exact same `count_vowels` task
-- Compare their suggestions, then select, test, and revise an implementation
-- Reflect on the browser, editor, and CLI combination you prefer
-- The automated check validates both the Python behavior and the completed journal
-
----
-
 ## Time for Lab 02
 
-- Your next hands-on lab: compare two CLI coding agents on a small [Python](https://www.python.org/) task
+- Install and authenticate **both** CLI tools using their official documentation
+- Give both agents the exact same `count_vowels` task, then select, test, and revise an implementation
 - Complete `week02/lab02.py` and `week02/lab02_prompts.md`
 - Run the provided tests, inspect `git diff`, push your work, and confirm the Lab 02 README badge is green
+- The automated check validates both the Python behavior and the completed journal
 - Navigate to [`week02/lab02.md`](https://github.com/bgreenwell/is4010-labs/blob/main/week02/lab02.md) for step-by-step instructions

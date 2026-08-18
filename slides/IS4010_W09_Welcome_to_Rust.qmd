@@ -2,13 +2,6 @@
 title: "IS4010: AI-enhanced application development"
 subtitle: "Week 09: Welcome to Rust"
 author: "Brandon M. Greenwell"
-format:
-  revealjs:
-    self-contained: false
-    theme: dracula
-    transition: fade
-    scrollable: true
-    css: custom.css
 ---
 
 ## Session 1: why Rust?
@@ -169,7 +162,7 @@ Explain that Playground is useful for isolated experiments and shareable example
 3. **Click "Run" again** - see your personalized greeting!
 4. **Click "Share"** - get a permanent link to save your work
 
-**🎯 Challenge:** Can you make it print TWO lines with different messages?
+**Challenge:** Can you make it print TWO lines with different messages?
 
 ::: {.notes}
 **Pause here for 2-3 minutes** - let students actually do this. Walk around (or check screen shares in virtual class) to ensure everyone successfully ran their first Rust code. This builds confidence before diving into syntax.
@@ -191,7 +184,7 @@ fn main() {
 }
 ```
 
-**🎮 Try it yourself:** [▶ Run in Rust Playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=fn+main%28%29+%7B%0A++++println%21%28%22Hello%2C+Rust%21%22%29%3B%0A%7D)
+**Try it yourself:** [▶ Run in Rust Playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=fn+main%28%29+%7B%0A++++println%21%28%22Hello%2C+Rust%21%22%29%3B%0A%7D)
 
 **Your turn:** Modify the message and add a second `println!` line!
 
@@ -221,9 +214,9 @@ y = 15;           // this is allowed
 // x = 6;         // this would cause a compiler error!
 ```
 
-**🎮 Try it yourself:** [▶ Experiment in Playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=fn+main%28%29+%7B%0A++++let+x+%3D+5%3B%0A++++let+mut+y+%3D+10%3B%0A++++y+%3D+15%3B%0A++++println%21%28%22x%3A+%7B%7D%2C+y%3A+%7B%7D%22%2C+x%2C+y%29%3B%0A%7D)
+**Try it yourself:** [▶ Experiment in Playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=fn+main%28%29+%7B%0A++++let+x+%3D+5%3B%0A++++let+mut+y+%3D+10%3B%0A++++y+%3D+15%3B%0A++++println%21%28%22x%3A+%7B%7D%2C+y%3A+%7B%7D%22%2C+x%2C+y%29%3B%0A%7D)
 
-**🎯 Challenge:** Uncomment the `x = 6;` line. What error do you get? Read it carefully!
+**Challenge:** Uncomment the `x = 6;` line. What error do you get? Read it carefully!
 
 ::: {.notes}
 Immutability by default makes mutation explicit and rules out some accidental state changes. Have students uncomment the `x = 6` line, then read the diagnostic and identify the suggested change.
@@ -261,9 +254,9 @@ let my_tuple: (i32, f64, u8) = (500, 6.4, 1);
 let my_array: [i32; 5] = [1, 2, 3, 4, 5];
 ```
 
-**🎮 Try it yourself:** [▶ Run in Playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=fn+main%28%29+%7B%0A++++let+my_tuple%3A+%28i32%2C+f64%2C+u8%29+%3D+%28500%2C+6.4%2C+1%29%3B%0A++++let+my_array%3A+%5Bi32%3B+5%5D+%3D+%5B1%2C+2%2C+3%2C+4%2C+5%5D%3B%0A++++println%21%28%22Tuple%3A+%7B%3A%3F%7D%22%2C+my_tuple%29%3B%0A++++println%21%28%22Array%3A+%7B%3A%3F%7D%22%2C+my_array%29%3B%0A%7D)
+**Try it yourself:** [▶ Run in Playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=fn+main%28%29+%7B%0A++++let+my_tuple%3A+%28i32%2C+f64%2C+u8%29+%3D+%28500%2C+6.4%2C+1%29%3B%0A++++let+my_array%3A+%5Bi32%3B+5%5D+%3D+%5B1%2C+2%2C+3%2C+4%2C+5%5D%3B%0A++++println%21%28%22Tuple%3A+%7B%3A%3F%7D%22%2C+my_tuple%29%3B%0A++++println%21%28%22Array%3A+%7B%3A%3F%7D%22%2C+my_array%29%3B%0A%7D)
 
-**🎯 Challenge:** Try accessing `my_tuple.0` and `my_array[0]`. What do you get?
+**Challenge:** Try accessing `my_tuple.0` and `my_array[0]`. What do you get?
 
 ::: {.notes}
 Arrays are stack-allocated and fast but inflexible. Unlike Python lists, Rust arrays have fixed size. The {:?} is debug formatting - we'll cover formatting more later. Have students try accessing individual elements by index.
@@ -286,9 +279,9 @@ fn add(num1: i32, num2: i32) -> i32 {
 }
 ```
 
-**🎮 Try it yourself:** [▶ Run in Playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=fn+add%28num1%3A+i32%2C+num2%3A+i32%29+-%3E+i32+%7B%0A++++num1+%2B+num2%0A%7D%0A%0Afn+main%28%29+%7B%0A++++let+result+%3D+add%285%2C+7%29%3B%0A++++println%21%28%22Result%3A+%7B%7D%22%2C+result%29%3B%0A%7D)
+**Try it yourself:** [▶ Run in Playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=fn+add%28num1%3A+i32%2C+num2%3A+i32%29+-%3E+i32+%7B%0A++++num1+%2B+num2%0A%7D%0A%0Afn+main%28%29+%7B%0A++++let+result+%3D+add%285%2C+7%29%3B%0A++++println%21%28%22Result%3A+%7B%7D%22%2C+result%29%3B%0A%7D)
 
-**🎯 Challenge:** Add a semicolon after `num1 + num2`. What error appears? Why?
+**Challenge:** Add a semicolon after `num1 + num2`. What error appears? Why?
 
 ::: {.notes}
 Key difference from Python: type annotations aren't optional, they're required. The semicolon vs no semicolon matters! **CRITICAL DEMO**: With semicolon = statement (no value). Without = expression (returns value). Have students add the semicolon and read the error message together. This is the #1 beginner mistake!
@@ -360,7 +353,7 @@ Panicking = Rust's way of saying "critical error, can't continue". In tests, a p
     3.  Run `cargo test`, `cargo fmt`, and `cargo clippy -- -D warnings`
     4.  Once all checks pass, commit `week09/`, push, and inspect the Week 09 badge
 -   This gives you instant feedback without having to wait for the CI/CD pipeline
--   Green tests = you're ready to submit! 🎉
+-   Green tests = you're ready to submit!
 :::
 
 ::: {.notes}
@@ -386,12 +379,12 @@ Remind students that compiler diagnostics often identify the relevant type or ow
 ## Resources for learning Rust
 
 ::: {.incremental}
--   📖 [The Rust Programming Language Book](https://doc.rust-lang.org/book/) - the official, free, comprehensive guide
--   🎮 [Rust by Example](https://doc.rust-lang.org/rust-by-example/) - learn through annotated examples
--   🏃 [Rustlings](https://github.com/rust-lang/rustlings/) - small exercises to get you used to reading and writing Rust code
--   💬 [Rust Users Forum](https://users.rust-lang.org/) - friendly community for questions
--   📺 [Microsoft Rust course on YouTube](https://www.youtube.com/playlist?list=PLlrxD0HtieHjbTjrchBwOVks_sr8EVW1x) - free video series
--   🤖 Use your chosen browser, editor, or CLI assistant, then verify every change with Cargo
+-   [The Rust Programming Language Book](https://doc.rust-lang.org/book/) - the official, free, comprehensive guide
+-   [Rust by Example](https://doc.rust-lang.org/rust-by-example/) - learn through annotated examples
+-   [Rustlings](https://github.com/rust-lang/rustlings/) - small exercises to get you used to reading and writing Rust code
+-   [Rust Users Forum](https://users.rust-lang.org/) - friendly community for questions
+-   [Microsoft Rust course on YouTube](https://www.youtube.com/playlist?list=PLlrxD0HtieHjbTjrchBwOVks_sr8EVW1x) - free video series
+-   Use your chosen browser, editor, or CLI assistant, then verify every change with Cargo
 :::
 
 ::: {.notes}

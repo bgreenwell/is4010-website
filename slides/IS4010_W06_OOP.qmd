@@ -2,13 +2,6 @@
 title: "IS4010: AI-enhanced application development"
 subtitle: "Week 06: Object-oriented programming"
 author: "Brandon M. Greenwell"
-format:
-  revealjs:
-    self-contained: false
-    theme: dracula
-    transition: fade
-    scrollable: true
-    css: custom.css
 ---
 
 # Object-oriented programming
@@ -356,7 +349,7 @@ class GameCharacter:
             self.level += 1
             self.max_health += 20
             self.health = self.max_health  # Full heal on level up
-            print(f"🎉 {self.name} reached level {self.level}!")
+            print(f"{self.name} reached level {self.level}!")
 
 # Create and interact with a character
 hero = GameCharacter("Aria the Brave")
