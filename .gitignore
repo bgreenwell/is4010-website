@@ -1,4 +1,7 @@
 /.quarto/
+# Rendered output. The publish workflow renders fresh from source on every push to
+# main and deploys that, so the generated site is never read from version control.
+/_site/
 /docs/
 /.ipynb_checkpoints/
 .DS_Store
