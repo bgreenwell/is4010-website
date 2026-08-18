@@ -16,26 +16,23 @@ jobs:
         uses: actions/checkout@v6
 
       - name: Set up Quarto
-        uses: quarto-dev/quarto-actions/setup@v2
+        uses: quarto-dev/quarto-actions/setup@8a96df13519ee81fd526f2dfca5962811136661b # v2
 
-      - name: Render Website
+      # Renders the whole project, slides included. Deck configuration lives in
+      # slides/_metadata.yml, so this produces byte-identical output to a local
+      # `quarto render`. Do not add a second slides-only render.
+      - name: Render website and slides
         run: |
           quarto render . --output-dir _site
 
-      - name: Render Slides
-        run: |
-          quarto render slides/ --output-dir html
-          mkdir -p _site/slides
-          cp -r slides/html/* _site/slides/
-
       - name: Link Checker
-        uses: lycheeverse/lychee-action@v1.9.0
+        uses: lycheeverse/lychee-action@22134d37a1fff6c2974df9c92a7c7e1e86a08f9c # v1.9.0
         with:
           args: --verbose --no-progress "_site/**/*.html"
           fail: false  # Report but don't fail the build for broken links
 
       - name: Publish to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v4
+        uses: peaceiris/actions-gh-pages@84c30a85c19949d7eee79c4ff27748b70285e453 # v4
         if: github.ref == 'refs/heads/main'
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
