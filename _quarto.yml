@@ -1,5 +1,11 @@
 project:
   type: website
+  # Render only page sources. This keeps repository documentation that happens to
+  # live at the project root (AGENTS.md, CLAUDE.md, TODO.md, README.md) out of the
+  # published site and out of the search index.
+  render:
+    - "**/*.qmd"
+    - "**/*.ipynb"
 
 website:
   title: "IS 4010 - App Dev with AI"
@@ -35,6 +41,8 @@ website:
             href: resources/troubleshooting.qmd
           - text: "Python packages"
             href: resources/packages.qmd
+          - text: "Advanced AI workflows (optional)"
+            href: slides/IS4010_Advanced_AI_Workflows.qmd
       - section: "Weekly schedule"
         contents:
           - text: "Week 01: Toolkit setup"
