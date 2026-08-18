@@ -243,7 +243,7 @@ Each week meets twice. Labs are due **Sunday at 11:59 PM** of the week they are 
 | 7 | Building a [Python](https://www.python.org/) application | Working with files and [JSON](https://www.json.org/) | **Lab 07** |
 | 8 | Building a [Python](https://www.python.org/) application | Professional Python and API consumption | **Lab 08** |
 | 9 | New frontiers: [Rust](https://www.rust-lang.org/) | Introduction to [Rust](https://www.rust-lang.org/) | **Lab 09** |
-| — | **Spring break** | **No classes** | — |
+| — | **Term break** | **No classes** | — |
 | 10 | New frontiers: [Rust](https://www.rust-lang.org/) | Ownership and the borrow checker | **Lab 10** |
 | 11 | New frontiers: [Rust](https://www.rust-lang.org/) | Structs, enums, and modules | **Lab 11** |
 | 12 | New frontiers: [Rust](https://www.rust-lang.org/) | Generics and traits | **Lab 12** |
@@ -255,70 +255,72 @@ Each week meets twice. Labs are due **Sunday at 11:59 PM** of the week they are 
 ### Detailed session schedule
 
 #### Week 1: Foundations & modern tooling
-• **Session 1**: Welcome to the future of development - course intro, AI demo, syllabus walkthrough, development environment setup
-• **Session 2**: Version control with [Git](https://git-scm.com/) and [GitHub](https://github.com/) - Git workflow, repository creation, clone/commit/push cycle
+- **Session 1**: Welcome to the future of development - course intro, AI demo, syllabus walkthrough, development environment setup
+- **Session 2**: Version control with [Git](https://git-scm.com/) and [GitHub](https://github.com/) - Git workflow, repository creation, clone/commit/push cycle
 
 #### Week 2: AI copilots
-• **Session 1**: Introduction to [GitHub Copilot](https://github.com/features/copilot) - code generation, best practices, guided exercises
-• **Session 2**: CLI coding agents and prompting - Copilot CLI, Antigravity CLI, prompt engineering, debugging with AI, code explanation
+- **Session 1**: Introduction to [GitHub Copilot](https://github.com/features/copilot) - code generation, best practices, guided exercises
+- **Session 2**: CLI coding agents and prompting - Copilot CLI, Antigravity CLI, prompt engineering, debugging with AI, code explanation
 
 #### Week 3: [Python](https://www.python.org/) basics & control flow
-• **Session 1**: Variables, data types, and I/O - core data types, input/print functions, Mad Libs generator
-• **Session 2**: Control statements & loops - conditional logic, iteration patterns, number guessing game
+- **Session 1**: Variables, data types, and I/O - core data types, input/print functions, Mad Libs generator
+- **Session 2**: Control statements & loops - conditional logic, iteration patterns, number guessing game
 
 #### Week 4: [Python](https://www.python.org/) data structures
-• **Session 1**: Lists & tuples - mutable vs immutable sequences, list methods, data processing tasks
-• **Session 2**: Dictionaries & sets - key-value pairs, hash maps, choosing appropriate data structures
+- **Session 1**: Lists & tuples - mutable vs immutable sequences, list methods, data processing tasks
+- **Session 2**: Dictionaries & sets - key-value pairs, hash maps, choosing appropriate data structures
 
 #### Week 5: Functions & error handling
-• **Session 1**: Writing clean functions - DRY principle, function arguments, refactoring challenge
-• **Session 2**: Error handling - exception handling with try/except blocks, bulletproofing code
+- **Session 1**: Writing clean functions - DRY principle, function arguments, refactoring challenge
+- **Session 2**: Error handling - exception handling with try/except blocks, bulletproofing code
 
 #### Week 6: Object-oriented programming
-• **Session 1**: Classes & objects - class definitions, `__init__` method, object instantiation
-• **Session 2**: Methods & inheritance - instance methods, inheritance for code reuse, parent/child classes
+- **Session 1**: Classes & objects - class definitions, `__init__` method, object instantiation
+- **Session 2**: Methods & inheritance - instance methods, inheritance for code reuse, parent/child classes
 
 #### Week 7: Working with external data
-• **Session 1**: Files & [JSON](https://www.json.org/) - file I/O operations, JSON format, contact book application
-• **Session 2**: API basics & JSON - working with web data, reading/writing JSON
+- **Session 1**: Files & [JSON](https://www.json.org/) - file I/O operations, JSON format, contact book application
+- **Session 2**: API basics & JSON - working with web data, reading/writing JSON
 
 #### Week 8: Professional Python & API consumption
-• **Session 1**: Consuming APIs - HTTP requests, status codes, public API integration
-• **Session 2**: Professional Python practices - type hinting, linting, formatting, and project structure
+- **Session 1**: Consuming APIs - HTTP requests, status codes, public API integration
+- **Session 2**: Professional Python practices - type hinting, linting, formatting, and project structure
 
 #### Week 9: Welcome to Rust
-• **Session 1**: Why [Rust](https://www.rust-lang.org/)? & Hello, World! - Rust value proposition, [Cargo](https://doc.rust-lang.org/cargo/) build tool introduction
-• **Session 2**: [Rust](https://www.rust-lang.org/) basics - variables, mutability, data types, functions, testing
+- **Session 1**: Why [Rust](https://www.rust-lang.org/)? & Hello, World! - Rust value proposition, [Cargo](https://doc.rust-lang.org/cargo/) build tool introduction
+- **Session 2**: [Rust](https://www.rust-lang.org/) basics - variables, mutability, data types, functions, testing
 
-#### Spring break
-• **No classes**
+#### Term break
+
+- **No classes.** The university academic calendar sets the break; it falls
+  between the two halves of the Rust module.
 
 #### Week 10: Ownership & borrowing
-• **Session 1**: The soul of Rust - ownership rules, move semantics, stack vs heap
-• **Session 2**: References & borrowing - immutable vs mutable references, the borrow checker
+- **Session 1**: The soul of Rust - ownership rules, move semantics, stack vs heap
+- **Session 2**: References & borrowing - immutable vs mutable references, the borrow checker
 
 #### Week 11: Structuring code & data
-• **Session 1**: Structs & enums - modeling data, pattern matching with `match`
-• **Session 2**: Modules & error handling - organizing code, `Option<T>`, `Result<T, E>`
+- **Session 1**: Structs & enums - modeling data, pattern matching with `match`
+- **Session 2**: Modules & error handling - organizing code, `Option<T>`, `Result<T, E>`
 
 #### Week 12: Generics & traits
-• **Session 1**: Generics - writing reusable code with type parameters
-• **Session 2**: Traits - defining shared behavior, common traits (`Display`, `Iterator`)
+- **Session 1**: Generics - writing reusable code with type parameters
+- **Session 2**: Traits - defining shared behavior, common traits (`Display`, `Iterator`)
 
 #### Week 13: Idiomatic Rust
-• **Session 1**: Iterators & closures - functional programming patterns in Rust
-• **Session 2**: Smart pointers - `Box`, `Rc`, `RefCell`, and interior mutability
+- **Session 1**: Iterators & closures - functional programming patterns in Rust
+- **Session 2**: Smart pointers - `Box`, `Rc`, `RefCell`, and interior mutability
 
 #### Week 14: Command-line applications
-• **Session 1**: Building CLI apps - argument parsing with clap, project structure
-• **Session 2**: Polishing & publishing - documentation, release builds, publishing to crates.io
+- **Session 1**: Building CLI apps - argument parsing with clap, project structure
+- **Session 2**: Polishing & publishing - documentation, release builds, publishing to crates.io
 
 #### Final project work sessions
-• **Session 1**: Final workshop - bug fixes, polish, testing, and documentation
-• **Session 2**: Final project office hours - individual consultations and debugging support
+- **Session 1**: Final workshop - bug fixes, polish, testing, and documentation
+- **Session 2**: Final project office hours - individual consultations and debugging support
 
 #### Exam week
-• **No final exam or demo day.** The final project is submitted before exam week begins; see Canvas for the deadline.
+- **No final exam or demo day.** The final project is submitted before exam week begins; see Canvas for the deadline.
 
 # XIII. Additional resources
 
