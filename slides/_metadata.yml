@@ -16,6 +16,10 @@ format:
     footer: "IS4010: app development with AI"
 
 execute:
+  # Code blocks are displayed, never executed. Many slide examples are illustrative
+  # fragments that cannot run standalone, and disabling execution here keeps both the
+  # revealjs and ipynb renders free of a Jupyter dependency.
+  enabled: false
   echo: true
   warning: false
   error: false

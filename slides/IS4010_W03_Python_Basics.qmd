@@ -4,6 +4,34 @@ subtitle: "Week 03: Python basics and control flow"
 author: "Brandon M. Greenwell"
 ---
 
+::: {.content-visible when-format="ipynb"}
+### Learning objectives
+
+By the end of this notebook you will be able to:
+
+- Use variables, core data types, user input, and string formatting
+- Apply conditionals and loops to control program execution
+- Use the `random` module for games and simulations
+- Follow Python naming conventions and write clear docstrings
+- Read a failing `pytest` run and use GitHub Actions for continuous integration
+- Build a Mad Libs generator and a number guessing game
+
+### Prerequisites
+
+- The course environment: Python 3.12 through `uv`, set up with `uv sync --locked`
+- VS Code with the Python extension
+- Labs 01 and 02 complete
+
+### Resources
+
+- [Python documentation](https://docs.python.org/3/)
+- [PEP 8 style guide](https://peps.python.org/pep-0008/)
+- [Python random module](https://docs.python.org/3/library/random.html)
+- [Lab 03 instructions](https://github.com/bgreenwell/is4010-labs/blob/main/week03/lab03.md)
+
+Every code cell below is runnable. Edit them and experiment.
+:::
+
 # Welcome to Python
 
 ## A brief history of Python
@@ -54,7 +82,8 @@ author: "Brandon M. Greenwell"
 
 ## The zen of Python
 
-```python
+```{python}
+#| eval: false
 import this  # Try this in Python!
 ```
 
@@ -155,7 +184,8 @@ Python development has evolved with modern tools that make coding faster and mor
 - **Memory insight**: Variables are actually references to objects in memory
 :::
 
-```python
+```{python}
+#| eval: false
 # Good variable names (descriptive and clear)
 student_name = "Grace Hopper"
 birth_year = 1906
@@ -192,7 +222,8 @@ x = 1906             # What does 'x' represent?
   - `math`, `user_authentication`
 :::
 
-```python
+```{python}
+#| eval: false
 # Following Python conventions
 MAX_LOGIN_ATTEMPTS = 3
 user_email = "grace@navy.mil"
@@ -226,7 +257,8 @@ class BankAccount:
 - **Augmented assignment**: Modify variables in place
 :::
 
-```python
+```{python}
+#| eval: false
 # Multiple assignment
 name, age, grade = "Alice", 20, "A"
 
@@ -266,7 +298,8 @@ score *= 2     # Same as: score = score * 2
 - **`type()` function**: Use this to check what type a variable is
 :::
 
-```python
+```{python}
+#| eval: false
 # Python automatically determines types
 student_name = "Ada Lovelace"        # str
 student_id = 12345                   # int
@@ -302,7 +335,8 @@ print(type(is_honors_student))  # <class 'bool'>
 - **Common methods**: `.upper()`, `.lower()`, `.strip()`, `.replace()`
 :::
 
-```python
+```{python}
+#| eval: false
 # Different ways to create strings
 name = 'Alan Turing'
 name = "Alan Turing"          # Equivalent
@@ -332,6 +366,26 @@ print(name.replace("alan", "Alan"))  # "  Alan turing  "
 
 ---
 
+::: {.content-visible when-format="ipynb"}
+### Your turn: string Practice
+
+Practice working with strings:
+
+```{python}
+#| eval: false
+# TODO: Create a variable with your full name (use mixed case)
+my_name = ""
+
+# TODO: Print your name in all uppercase
+
+# TODO: Print your name in all lowercase
+
+# TODO: Print your name in title case (First Letter Capitalized)
+
+# TODO: Count how many letters are in your name (use len() function)
+```
+:::
+
 ## Numbers: integers and floats
 
 ::: {.incremental}
@@ -342,7 +396,8 @@ print(name.replace("alan", "Alan"))  # "  Alan turing  "
 - **Type conversion**: `int()`, `float()`, `str()`
 :::
 
-```python
+```{python}
+#| eval: false
 # Integer examples
 students_enrolled = 150
 temperature_celsius = -5
@@ -375,6 +430,30 @@ pi_str = str(3.14159)     # Convert float to string
 - **Real applications**: GPA calculations, financial computations, scientific data
 :::
 
+::: {.content-visible when-format="ipynb"}
+### Your turn: number Practice
+
+```{python}
+#| eval: false
+# TODO: Calculate the area of a circle with radius 5
+# Formula: area = π * r²
+# Use 3.14159 for π
+radius = 5
+pi = 3.14159
+# Your calculation here
+
+# TODO: Calculate your age in days (approximate)
+# Assume 365 days per year
+age_in_years = 20  # Change this to your age
+# Your calculation here
+
+# TODO: Convert temperature from Celsius to Fahrenheit
+# Formula: F = (C * 9/5) + 32
+celsius = 25
+# Your calculation here
+```
+:::
+
 ## Getting user input
 
 ::: {.incremental}
@@ -385,7 +464,8 @@ pi_str = str(3.14159)     # Convert float to string
 - **Error handling**: Be prepared for invalid input (we'll cover this later)
 :::
 
-```python
+```{python}
+#| eval: false
 # Simple string input
 name = input("What is your name? ")
 print(f"Hello, {name}!")
@@ -427,7 +507,8 @@ print(f"Hi {name}! You're {age} and love {favorite_color}.")
 - **Formatting numbers**: Control decimal places, padding, alignment
 :::
 
-```python
+```{python}
+#| eval: false
 name = "Katherine Johnson"
 salary = 75000.50
 accuracy = 0.99999
@@ -465,6 +546,27 @@ Performance: {accuracy:.1%}
 - **Common uses**: Reports, user interfaces, file output
 :::
 
+::: {.content-visible when-format="ipynb"}
+### Your turn: string Formatting Practice
+
+```{python}
+#| eval: false
+# TODO: Create variables for a product
+product_name = "Laptop"
+price = 1299.99
+quantity = 5
+
+# TODO: Print the product name and price with proper formatting
+# Format: "Product: Laptop - $1,299.99"
+
+# TODO: Calculate and print the total cost
+# Format: "Total for 5 units: $6,499.95"
+
+# TODO: If there's a 10% discount, show the new price
+# Format: "After 10% discount: $1,169.99"
+```
+:::
+
 ## Python debugging tips
 
 ::: {.incremental}
@@ -475,7 +577,8 @@ Performance: {accuracy:.1%}
 - **Test frequently**: Don't write 100 lines before testing
 :::
 
-```python
+```{python}
+#| eval: false
 # Common debugging techniques
 name = input("Enter name: ")
 print(f"Debug: name = '{name}', type = {type(name)}")
@@ -513,7 +616,8 @@ except ValueError:
 - **Structure**: Separate input/output from the function that returns the story
 :::
 
-```python
+```{python}
+#| eval: false
 def generate_mad_lib(adjective, noun, verb):
     """
     Generates a short story using the provided words.
@@ -543,6 +647,27 @@ def generate_mad_lib(adjective, noun, verb):
 :::
 
 ---
+
+::: {.content-visible when-format="ipynb"}
+### Your turn: create Your Own Mad Lib Function
+
+```{python}
+#| eval: false
+def my_mad_lib(adjective, noun, verb):
+    """
+    Your custom Mad Libs story.
+    
+    TODO: Add a complete NumPy-style docstring
+    """
+    # TODO: Create your own creative story using all three words
+    # Make it at least 10-15 words long
+    # Use f-string formatting
+    pass
+
+# Test your function
+# print(my_mad_lib("sparkly", "unicorn", "danced"))
+```
+:::
 
 ## Preparing for session 2: development workflows
 
@@ -582,7 +707,8 @@ def generate_mad_lib(adjective, noun, verb):
 - **Comparison operators**: `==`, `!=`, `<`, `>`, `<=`, `>=`
 :::
 
-```python
+```{python}
+#| eval: false
 # Simple condition
 temperature = 75
 if temperature > 70:
@@ -623,7 +749,8 @@ else:
 - **Precedence**: `not` → comparisons → `and` → `or`
 :::
 
-```python
+```{python}
+#| eval: false
 # Comparison examples
 score = 85
 grade = "B"
@@ -664,6 +791,32 @@ if username_is_valid and password_is_valid and not is_admin:
 
 ---
 
+::: {.content-visible when-format="ipynb"}
+### Your turn: conditional Practice
+
+```{python}
+#| eval: false
+# TODO: Write a grade calculator
+# Given a numeric score (0-100), determine the letter grade:
+# A: 90-100, B: 80-89, C: 70-79, D: 60-69, F: 0-59
+
+score = 85  # Change this to test different scores
+
+# Your if/elif/else logic here
+
+
+# TODO: Write a password strength checker
+# A password is "strong" if it:
+# - Is at least 8 characters long
+# - Contains at least one number
+# (Hint: use len() and any(char.isdigit() for char in password))
+
+password = "secure123"  # Change this to test
+
+# Your password strength logic here
+```
+:::
+
 ## Loops: repeating actions
 
 ::: {.incremental}
@@ -674,7 +827,8 @@ if username_is_valid and password_is_valid and not is_admin:
 - **Nested loops**: Loops inside other loops
 :::
 
-```python
+```{python}
+#| eval: false
 # For loop with range()
 print("Countdown:")
 for i in range(5, 0, -1):
@@ -725,7 +879,8 @@ for i in range(10):
 - **Convert to list**: `list(range(5))` to see all values
 :::
 
-```python
+```{python}
+#| eval: false
 # Basic range patterns
 print(list(range(5)))           # [0, 1, 2, 3, 4]
 print(list(range(1, 6)))        # [1, 2, 3, 4, 5]
@@ -758,6 +913,26 @@ for i, fruit in enumerate(fruits):
 - **Practical uses**: Counting, indexing, mathematical sequences
 :::
 
+::: {.content-visible when-format="ipynb"}
+### Your turn: loop Practice
+
+```{python}
+#| eval: false
+# TODO: Print all even numbers from 0 to 20
+
+
+# TODO: Calculate the sum of numbers 1 to 100
+# (Hint: use a for loop and accumulate the total)
+
+
+# TODO: Print the first 10 squares (1², 2², 3², etc.)
+
+
+# TODO: Create a while loop that counts down from 10 to 1
+# Print "Happy New Year!" at the end
+```
+:::
+
 ## Let's build something (Part 2)
 
 **Number Guessing Game Preview:**
@@ -770,7 +945,8 @@ for i, fruit in enumerate(fruits):
 - **Random module**: Introduction to Python's standard library
 :::
 
-```python
+```{python}
+#| eval: false
 import random
 
 def guessing_game():
@@ -797,6 +973,42 @@ def guessing_game():
 
 ---
 
+::: {.content-visible when-format="ipynb"}
+### Your turn: enhance the Guessing Game
+
+Modify the game to add features:
+
+```{python}
+#| eval: false
+import random
+
+def enhanced_guessing_game():
+    """
+    Enhanced version of the guessing game with additional features.
+    """
+    secret = random.randint(1, 100)
+    attempts = 0
+    max_attempts = 10  # Add a maximum number of attempts
+    
+    print("Enhanced Number Guessing Game!")
+    print(f"I'm thinking of a number between 1 and 100.")
+    print(f"You have {max_attempts} attempts to guess it.")
+    
+    while attempts < max_attempts:
+        # TODO: Add the game logic here
+        # 1. Get user input
+        # 2. Increment attempts
+        # 3. Check if guess is correct, too high, or too low
+        # 4. If correct, congratulate and break
+        # 5. If wrong, give feedback and continue
+        # 6. If max attempts reached, reveal the number
+        pass
+
+# Test your enhanced game
+# enhanced_guessing_game()
+```
+:::
+
 ## Python ecosystem preview
 
 ::: {.incremental}
@@ -807,7 +1019,8 @@ def guessing_game():
 - **Popular packages**: `requests` (web), `pandas` (data), `flask` (web apps)
 :::
 
-```python
+```{python}
+#| eval: false
 # Standard library examples
 import random
 import math
@@ -874,7 +1087,8 @@ formatted = today.strftime("%B %d, %Y")
 - **Easy assertions**: Use simple `assert` statements to check results
 :::
 
-```python
+```{python}
+#| eval: false
 # In your lab03.py file
 def add_numbers(a, b):
     """Add two numbers and return the result."""
@@ -904,6 +1118,46 @@ def test_add_numbers():
 :::
 
 ---
+
+::: {.content-visible when-format="ipynb"}
+### Your turn: write a Test
+
+Write a test for a grade calculator function:
+
+```{python}
+#| eval: false
+def calculate_letter_grade(score):
+    """Convert numeric score to letter grade."""
+    if score >= 90:
+        return 'A'
+    elif score >= 80:
+        return 'B'
+    elif score >= 70:
+        return 'C'
+    elif score >= 60:
+        return 'D'
+    else:
+        return 'F'
+
+# TODO: Write a test function for calculate_letter_grade
+def test_calculate_letter_grade():
+    """Test the grade calculator."""
+    # TODO: Test that 95 returns 'A'
+    
+    # TODO: Test that 85 returns 'B'
+    
+    # TODO: Test that 75 returns 'C'
+    
+    # TODO: Test that 65 returns 'D'
+    
+    # TODO: Test that 55 returns 'F'
+    
+    print("All grade calculator tests passed!")
+
+# Run your test
+# test_calculate_letter_grade()
+```
+:::
 
 ## GitHub Actions: automation in the cloud
 
