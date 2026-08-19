@@ -258,6 +258,7 @@ Brandon M. Greenwell
 <span id="cb2-6"><a></a>        <span class="co">// ... string matching, error handling, manual parsing ...</span></span>
 <span id="cb2-7"><a></a>    <span class="op">}</span></span>
 <span id="cb2-8"><a></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Try it yourself:</strong> <a href="https://play.rust-lang.org/?version=stable&amp;mode=debug&amp;edition=2021&amp;code=use%20std%3A%3Aenv%3B%0A%0Afn%20main%28%29%20%7B%0A%20%20%20%20let%20args%3A%20Vec%3CString%3E%20%3D%20env%3A%3Aargs%28%29.collect%28%29%3B%0A%20%20%20%20if%20args.len%28%29%20%3E%201%20%26%26%20args%5B1%5D%20%3D%3D%20%22random%22%20%7B%0A%20%20%20%20%20%20%20%20%2F%2F%20...%20string%20matching%2C%20error%20handling%2C%20manual%20parsing%20...%0A%20%20%20%20%7D%0A%7D%0A">Run in Rust Playground</a></p>
 <p><strong>Why is this bad?</strong> - Manual string parsing is error-prone. - Type conversion (String to integer) is tedious. - Generating <code>--help</code> menus manually is a nightmare.</p>
 </section>
 <section id="enter-clap" class="slide level2">

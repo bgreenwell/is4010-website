@@ -308,6 +308,7 @@ Brandon M. Greenwell
 <span id="cb1-17"><a></a>    <span class="op">}</span></span>
 <span id="cb1-18"><a></a>    largest</span>
 <span id="cb1-19"><a></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Try it yourself:</strong> <a href="https://play.rust-lang.org/?version=stable&amp;mode=debug&amp;edition=2021&amp;code=fn%20main%28%29%20%7B%0Afn%20largest_i32%28list%3A%20%26%5Bi32%5D%29%20-%3E%20%26i32%20%7B%0A%20%20%20%20let%20mut%20largest%20%3D%20%26list%5B0%5D%3B%0A%20%20%20%20for%20item%20in%20list%20%7B%0A%20%20%20%20%20%20%20%20if%20item%20%3E%20largest%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20largest%20%3D%20item%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%20%20%20%20largest%0A%7D%0A%0Afn%20largest_f64%28list%3A%20%26%5Bf64%5D%29%20-%3E%20%26f64%20%7B%0A%20%20%20%20let%20mut%20largest%20%3D%20%26list%5B0%5D%3B%0A%20%20%20%20for%20item%20in%20list%20%7B%0A%20%20%20%20%20%20%20%20if%20item%20%3E%20largest%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20largest%20%3D%20item%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%20%20%20%20largest%0A%7D%0A%7D%0A">Run in Rust Playground</a></p>
 <p><strong>Problem</strong>: Same logic, different types → code duplication!</p>
 <aside class="notes">
 <p>In Python, this problem simply doesn’t exist at the function-writing level:</p>
@@ -356,6 +357,7 @@ Brandon M. Greenwell
 <span id="cb3-14"><a></a></span>
 <span id="cb3-15"><a></a><span class="kw">let</span> chars <span class="op">=</span> <span class="pp">vec!</span>[<span class="ch">'y'</span><span class="op">,</span> <span class="ch">'m'</span><span class="op">,</span> <span class="ch">'a'</span><span class="op">,</span> <span class="ch">'q'</span>]<span class="op">;</span></span>
 <span id="cb3-16"><a></a><span class="kw">let</span> result <span class="op">=</span> largest(<span class="op">&amp;</span>chars)<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Try it yourself:</strong> <a href="https://play.rust-lang.org/?version=stable&amp;mode=debug&amp;edition=2021&amp;code=fn%20main%28%29%20%7B%0Afn%20largest%3CT%3A%20PartialOrd%3E%28list%3A%20%26%5BT%5D%29%20-%3E%20%26T%20%7B%0A%20%20%20%20let%20mut%20largest%20%3D%20%26list%5B0%5D%3B%0A%20%20%20%20for%20item%20in%20list%20%7B%0A%20%20%20%20%20%20%20%20if%20item%20%3E%20largest%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20largest%20%3D%20item%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%20%20%20%20largest%0A%7D%0A%0A%2F%2F%20Works%20with%20any%20type%20that%20can%20be%20compared%21%0Alet%20numbers%20%3D%20vec%21%5B34%2C%2050%2C%2025%2C%20100%2C%2065%5D%3B%0Alet%20result%20%3D%20largest%28%26numbers%29%3B%0A%0Alet%20chars%20%3D%20vec%21%5B%27y%27%2C%20%27m%27%2C%20%27a%27%2C%20%27q%27%5D%3B%0Alet%20result%20%3D%20largest%28%26chars%29%3B%0A%7D%0A">Run in Rust Playground</a></p>
 <p><strong>Key concept</strong>: <code>T: PartialOrd</code> is a <a href="https://doc.rust-lang.org/book/ch10-02-traits.html#trait-bounds">trait bound</a> - T must implement PartialOrd.</p>
 <p><a href="https://doc.rust-lang.org/book/ch10-01-syntax.html">Rust Book: Generic Data Types</a></p>
 <aside class="notes">
@@ -398,6 +400,7 @@ Brandon M. Greenwell
 <span id="cb5-7"><a></a>    <span class="kw">let</span> integer_point <span class="op">=</span> Point <span class="op">{</span> x<span class="op">:</span> <span class="dv">5</span><span class="op">,</span> y<span class="op">:</span> <span class="dv">10</span> <span class="op">};</span></span>
 <span id="cb5-8"><a></a>    <span class="kw">let</span> float_point <span class="op">=</span> Point <span class="op">{</span> x<span class="op">:</span> <span class="dv">1.0</span><span class="op">,</span> y<span class="op">:</span> <span class="dv">4.0</span> <span class="op">};</span></span>
 <span id="cb5-9"><a></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Try it yourself:</strong> <a href="https://play.rust-lang.org/?version=stable&amp;mode=debug&amp;edition=2021&amp;code=struct%20Point%3CT%3E%20%7B%0A%20%20%20%20x%3A%20T%2C%0A%20%20%20%20y%3A%20T%2C%0A%7D%0A%0Afn%20main%28%29%20%7B%0A%20%20%20%20let%20integer_point%20%3D%20Point%20%7B%20x%3A%205%2C%20y%3A%2010%20%7D%3B%0A%20%20%20%20let%20float_point%20%3D%20Point%20%7B%20x%3A%201.0%2C%20y%3A%204.0%20%7D%3B%0A%7D%0A">Run in Rust Playground</a></p>
 <p><strong>Multiple type parameters:</strong></p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb6-1"><a></a><span class="kw">struct</span> Point<span class="op">&lt;</span>T<span class="op">,</span> U<span class="op">&gt;</span> <span class="op">{</span></span>
 <span id="cb6-2"><a></a>    x<span class="op">:</span> T<span class="op">,</span></span>
@@ -407,6 +410,7 @@ Brandon M. Greenwell
 <span id="cb6-6"><a></a><span class="kw">fn</span> main() <span class="op">{</span></span>
 <span id="cb6-7"><a></a>    <span class="kw">let</span> mixed <span class="op">=</span> Point <span class="op">{</span> x<span class="op">:</span> <span class="dv">5</span><span class="op">,</span> y<span class="op">:</span> <span class="dv">4.0</span> <span class="op">};</span>  <span class="co">// T=i32, U=f64</span></span>
 <span id="cb6-8"><a></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Try it yourself:</strong> <a href="https://play.rust-lang.org/?version=stable&amp;mode=debug&amp;edition=2021&amp;code=struct%20Point%3CT%2C%20U%3E%20%7B%0A%20%20%20%20x%3A%20T%2C%0A%20%20%20%20y%3A%20U%2C%0A%7D%0A%0Afn%20main%28%29%20%7B%0A%20%20%20%20let%20mixed%20%3D%20Point%20%7B%20x%3A%205%2C%20y%3A%204.0%20%7D%3B%20%20%2F%2F%20T%3Di32%2C%20U%3Df64%0A%7D%0A">Run in Rust Playground</a></p>
 <p><a href="https://doc.rust-lang.org/book/ch10-01-syntax.html#in-struct-definitions">Rust Book: Generic Structs</a></p>
 <aside class="notes">
 <p><strong>Python parallel:</strong> An unparameterized Python dataclass may accept values dynamically. A generic dataclass can express relationships with <code>TypeVar</code>, but enforcement normally comes from a static type checker rather than the runtime:</p>
@@ -445,6 +449,7 @@ Brandon M. Greenwell
 <span id="cb8-9"><a></a>    <span class="cn">Ok</span>(T)<span class="op">,</span></span>
 <span id="cb8-10"><a></a>    <span class="cn">Err</span>(E)<span class="op">,</span></span>
 <span id="cb8-11"><a></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Try it yourself:</strong> <a href="https://play.rust-lang.org/?version=stable&amp;mode=debug&amp;edition=2021&amp;code=fn%20main%28%29%20%7B%0A%2F%2F%20Option%3CT%3E%20from%20standard%20library%0Aenum%20Option%3CT%3E%20%7B%0A%20%20%20%20Some%28T%29%2C%0A%20%20%20%20None%2C%0A%7D%0A%0A%2F%2F%20Result%3CT%2C%20E%3E%20for%20error%20handling%0Aenum%20Result%3CT%2C%20E%3E%20%7B%0A%20%20%20%20Ok%28T%29%2C%0A%20%20%20%20Err%28E%29%2C%0A%7D%0A%7D%0A">Run in Rust Playground</a></p>
 <p><strong>Usage:</strong></p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb9-1"><a></a><span class="kw">fn</span> validate_username(name<span class="op">:</span> <span class="op">&amp;</span><span class="dt">str</span>) <span class="op">-&gt;</span> <span class="dt">Result</span><span class="op">&lt;&amp;</span><span class="dt">str</span><span class="op">,</span> <span class="dt">String</span><span class="op">&gt;</span> <span class="op">{</span></span>
 <span id="cb9-2"><a></a>    <span class="cf">if</span> name<span class="op">.</span>trim()<span class="op">.</span>is_empty() <span class="op">{</span></span>
@@ -453,6 +458,7 @@ Brandon M. Greenwell
 <span id="cb9-5"><a></a>        <span class="cn">Ok</span>(name)</span>
 <span id="cb9-6"><a></a>    <span class="op">}</span></span>
 <span id="cb9-7"><a></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Try it yourself:</strong> <a href="https://play.rust-lang.org/?version=stable&amp;mode=debug&amp;edition=2021&amp;code=fn%20main%28%29%20%7B%0Afn%20validate_username%28name%3A%20%26str%29%20-%3E%20Result%3C%26str%2C%20String%3E%20%7B%0A%20%20%20%20if%20name.trim%28%29.is_empty%28%29%20%7B%0A%20%20%20%20%20%20%20%20Err%28String%3A%3Afrom%28%22Username%20cannot%20be%20empty%22%29%29%0A%20%20%20%20%7D%20else%20%7B%0A%20%20%20%20%20%20%20%20Ok%28name%29%0A%20%20%20%20%7D%0A%7D%0A%7D%0A">Run in Rust Playground</a></p>
 <p><a href="https://doc.rust-lang.org/book/ch10-01-syntax.html#in-enum-definitions">Rust Book: Generic Enums</a></p>
 <aside class="notes">
 <p>Students have been writing <code>Option&lt;T&gt;</code> and <code>Result&lt;T, E&gt;</code> for weeks. Use their definitions to show that these are generic standard-library enums rather than special syntax.</p>
@@ -491,6 +497,7 @@ Brandon M. Greenwell
 <span id="cb10-15"><a></a>        (<span class="kw">self</span><span class="op">.</span>x<span class="op">.</span>powi(<span class="dv">2</span>) <span class="op">+</span> <span class="kw">self</span><span class="op">.</span>y<span class="op">.</span>powi(<span class="dv">2</span>))<span class="op">.</span>sqrt()</span>
 <span id="cb10-16"><a></a>    <span class="op">}</span></span>
 <span id="cb10-17"><a></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Try it yourself:</strong> <a href="https://play.rust-lang.org/?version=stable&amp;mode=debug&amp;edition=2021&amp;code=fn%20main%28%29%20%7B%0Astruct%20Point%3CT%3E%20%7B%0A%20%20%20%20x%3A%20T%2C%0A%20%20%20%20y%3A%20T%2C%0A%7D%0A%0Aimpl%3CT%3E%20Point%3CT%3E%20%7B%0A%20%20%20%20fn%20x%28%26self%29%20-%3E%20%26T%20%7B%0A%20%20%20%20%20%20%20%20%26self.x%0A%20%20%20%20%7D%0A%7D%0A%0A%2F%2F%20Method%20only%20for%20specific%20type%0Aimpl%20Point%3Cf32%3E%20%7B%0A%20%20%20%20fn%20distance_from_origin%28%26self%29%20-%3E%20f32%20%7B%0A%20%20%20%20%20%20%20%20%28self.x.powi%282%29%20%2B%20self.y.powi%282%29%29.sqrt%28%29%0A%20%20%20%20%7D%0A%7D%0A%7D%0A">Run in Rust Playground</a></p>
 <p><strong>Notice</strong>: <code>impl&lt;T&gt;</code> declares the generic, then <code>Point&lt;T&gt;</code> uses it.</p>
 <p><a href="https://doc.rust-lang.org/book/ch10-01-syntax.html#in-method-definitions">Rust Book: Generic Methods</a></p>
 <aside class="notes">
@@ -543,6 +550,7 @@ Brandon M. Greenwell
 <span id="cb12-12"><a></a>        <span class="pp">format!</span>(<span class="st">"{}: {}"</span><span class="op">,</span> <span class="kw">self</span><span class="op">.</span>headline<span class="op">,</span> <span class="kw">self</span><span class="op">.</span>content)</span>
 <span id="cb12-13"><a></a>    <span class="op">}</span></span>
 <span id="cb12-14"><a></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Try it yourself:</strong> <a href="https://play.rust-lang.org/?version=stable&amp;mode=debug&amp;edition=2021&amp;code=fn%20main%28%29%20%7B%0Apub%20trait%20Summary%20%7B%0A%20%20%20%20fn%20summarize%28%26self%29%20-%3E%20String%3B%0A%7D%0A%0Astruct%20NewsArticle%20%7B%0A%20%20%20%20headline%3A%20String%2C%0A%20%20%20%20content%3A%20String%2C%0A%7D%0A%0Aimpl%20Summary%20for%20NewsArticle%20%7B%0A%20%20%20%20fn%20summarize%28%26self%29%20-%3E%20String%20%7B%0A%20%20%20%20%20%20%20%20format%21%28%22%7B%7D%3A%20%7B%7D%22%2C%20self.headline%2C%20self.content%29%0A%20%20%20%20%7D%0A%7D%0A%7D%0A">Run in Rust Playground</a></p>
 <p><strong>Think of traits as:</strong> - Interfaces (Java/C#) - Protocols (Swift) - Type classes (Haskell)</p>
 <p><a href="https://doc.rust-lang.org/book/ch10-02-traits.html">Rust Book: Traits</a></p>
 <aside class="notes">
@@ -603,6 +611,7 @@ Brandon M. Greenwell
 <span id="cb15-17"><a></a>    <span class="op">}</span></span>
 <span id="cb15-18"><a></a>    <span class="co">// summarize() uses the default implementation</span></span>
 <span id="cb15-19"><a></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Try it yourself:</strong> <a href="https://play.rust-lang.org/?version=stable&amp;mode=debug&amp;edition=2021&amp;code=fn%20main%28%29%20%7B%0Apub%20trait%20Summary%20%7B%0A%20%20%20%20fn%20summarize_author%28%26self%29%20-%3E%20String%3B%0A%0A%20%20%20%20fn%20summarize%28%26self%29%20-%3E%20String%20%7B%0A%20%20%20%20%20%20%20%20format%21%28%22%28Read%20more%20from%20%7B%7D...%29%22%2C%20self.summarize_author%28%29%29%0A%20%20%20%20%7D%0A%7D%0A%0Astruct%20Tweet%20%7B%0A%20%20%20%20username%3A%20String%2C%0A%20%20%20%20content%3A%20String%2C%0A%7D%0A%0Aimpl%20Summary%20for%20Tweet%20%7B%0A%20%20%20%20fn%20summarize_author%28%26self%29%20-%3E%20String%20%7B%0A%20%20%20%20%20%20%20%20format%21%28%22%40%7B%7D%22%2C%20self.username%29%0A%20%20%20%20%7D%0A%20%20%20%20%2F%2F%20summarize%28%29%20uses%20the%20default%20implementation%0A%7D%0A%7D%0A">Run in Rust Playground</a></p>
 <p><a href="https://doc.rust-lang.org/book/ch10-02-traits.html#default-implementations">Rust Book: Default Implementations</a></p>
 <aside class="notes">
 <p><strong>Python parallel:</strong> This is exactly like providing a non-abstract method in a Python ABC or base class:</p>
@@ -895,6 +904,7 @@ Brandon M. Greenwell
 <span id="cb26-11"><a></a>    <span class="pp">println!</span>(<span class="st">"{:?}"</span><span class="op">,</span> p1)<span class="op">;</span>  <span class="co">// Debug</span></span>
 <span id="cb26-12"><a></a>    <span class="pp">assert_eq!</span>(p1<span class="op">,</span> p2)<span class="op">;</span>    <span class="co">// PartialEq</span></span>
 <span id="cb26-13"><a></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Try it yourself:</strong> <a href="https://play.rust-lang.org/?version=stable&amp;mode=debug&amp;edition=2021&amp;code=%23%5Bderive%28Debug%2C%20Clone%2C%20PartialEq%2C%20Eq%29%5D%0Astruct%20Point%20%7B%0A%20%20%20%20x%3A%20i32%2C%0A%20%20%20%20y%3A%20i32%2C%0A%7D%0A%0Afn%20main%28%29%20%7B%0A%20%20%20%20let%20p1%20%3D%20Point%20%7B%20x%3A%201%2C%20y%3A%202%20%7D%3B%0A%20%20%20%20let%20p2%20%3D%20p1.clone%28%29%3B%0A%0A%20%20%20%20println%21%28%22%7B%3A%3F%7D%22%2C%20p1%29%3B%20%20%2F%2F%20Debug%0A%20%20%20%20assert_eq%21%28p1%2C%20p2%29%3B%20%20%20%20%2F%2F%20PartialEq%0A%7D%0A">Run in Rust Playground</a></p>
 <p><strong>Can derive:</strong> - <code>Debug</code>, <code>Clone</code>, <code>Copy</code> - <code>PartialEq</code>, <code>Eq</code>, <code>PartialOrd</code>, <code>Ord</code> - <code>Hash</code>, <code>Default</code></p>
 <p><strong>Cannot derive</strong>: <code>Display</code>, <code>Iterator</code> (must implement manually)</p>
 <p><a href="https://doc.rust-lang.org/book/appendix-03-derivable-traits.html">Rust Book: Derivable Traits</a></p>
@@ -949,6 +959,7 @@ Brandon M. Greenwell
 <span id="cb28-15"><a></a>    <span class="kw">let</span> p <span class="op">=</span> Point <span class="op">{</span> x<span class="op">:</span> <span class="dv">1</span><span class="op">,</span> y<span class="op">:</span> <span class="dv">2</span> <span class="op">};</span></span>
 <span id="cb28-16"><a></a>    <span class="pp">println!</span>(<span class="st">"Point: {}"</span><span class="op">,</span> p)<span class="op">;</span>  <span class="co">// Point: (1, 2)</span></span>
 <span id="cb28-17"><a></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Try it yourself:</strong> <a href="https://play.rust-lang.org/?version=stable&amp;mode=debug&amp;edition=2021&amp;code=use%20std%3A%3Afmt%3B%0A%0Astruct%20Point%20%7B%0A%20%20%20%20x%3A%20i32%2C%0A%20%20%20%20y%3A%20i32%2C%0A%7D%0A%0Aimpl%20fmt%3A%3ADisplay%20for%20Point%20%7B%0A%20%20%20%20fn%20fmt%28%26self%2C%20f%3A%20%26mut%20fmt%3A%3AFormatter%29%20-%3E%20fmt%3A%3AResult%20%7B%0A%20%20%20%20%20%20%20%20write%21%28f%2C%20%22%28%7B%7D%2C%20%7B%7D%29%22%2C%20self.x%2C%20self.y%29%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20main%28%29%20%7B%0A%20%20%20%20let%20p%20%3D%20Point%20%7B%20x%3A%201%2C%20y%3A%202%20%7D%3B%0A%20%20%20%20println%21%28%22Point%3A%20%7B%7D%22%2C%20p%29%3B%20%20%2F%2F%20Point%3A%20%281%2C%202%29%0A%7D%0A">Run in Rust Playground</a></p>
 <p><a href="https://doc.rust-lang.org/std/fmt/trait.Display.html">Rust Book: Display Trait</a></p>
 <aside class="notes">
 <p><strong>Python parallel:</strong> Implementing <code>Display</code> is almost identical to Python’s <code>__str__</code>:</p>
@@ -1011,6 +1022,7 @@ Brandon M. Greenwell
 <span id="cb31-20"><a></a>        <span class="op">}</span></span>
 <span id="cb31-21"><a></a>    <span class="op">}</span></span>
 <span id="cb31-22"><a></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Try it yourself:</strong> <a href="https://play.rust-lang.org/?version=stable&amp;mode=debug&amp;edition=2021&amp;code=fn%20main%28%29%20%7B%0Astruct%20Counter%20%7B%0A%20%20%20%20count%3A%20u32%2C%0A%7D%0A%0Aimpl%20Counter%20%7B%0A%20%20%20%20fn%20new%28%29%20-%3E%20Counter%20%7B%0A%20%20%20%20%20%20%20%20Counter%20%7B%20count%3A%200%20%7D%0A%20%20%20%20%7D%0A%7D%0A%0Aimpl%20Iterator%20for%20Counter%20%7B%0A%20%20%20%20type%20Item%20%3D%20u32%3B%20%20%2F%2F%20Associated%20type%0A%0A%20%20%20%20fn%20next%28%26mut%20self%29%20-%3E%20Option%3CSelf%3A%3AItem%3E%20%7B%0A%20%20%20%20%20%20%20%20if%20self.count%20%3C%205%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20self.count%20%2B%3D%201%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20Some%28self.count%29%0A%20%20%20%20%20%20%20%20%7D%20else%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20None%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%7D%0A%7D%0A">Run in Rust Playground</a></p>
 <p><a href="https://doc.rust-lang.org/book/ch13-02-iterators.html">Rust Book: Iterator Trait</a></p>
 <aside class="notes">
 <p><strong>Python parallel:</strong> This is exactly how Python iterators work, with <code>__iter__</code> and <code>__next__</code>:</p>
