@@ -17,6 +17,11 @@ jobs:
 
       - name: Set up Quarto
         uses: quarto-dev/quarto-actions/setup@8a96df13519ee81fd526f2dfca5962811136661b # v2
+        with:
+          # Pinned so notebook generation is byte-identical here and on a maintainer's
+          # machine. Quarto versions differ in markdown list indentation, which otherwise
+          # rewrites every notebook and produces a bot commit on each push.
+          version: 1.8.25
 
       # The Python decks are the single source for the companion notebooks. Regenerate
       # before rendering so the site picks the new notebooks up in this same run.

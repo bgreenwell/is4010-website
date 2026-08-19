@@ -69,6 +69,12 @@ def build(week: str) -> None:
     nb.setdefault("metadata", {})["kernelspec"] = dict(KERNELSPEC)
     nb["metadata"]["language_info"] = dict(LANGUAGE_INFO)
 
+    # nbformat 4.5 assigns a random id per cell, so an unmodified deck would still
+    # produce a different file on every run. Deterministic ids keep regeneration a no-op
+    # and stop CI committing churn on each push.
+    for index, cell in enumerate(nb["cells"]):
+        cell["id"] = f"{week}-{index:03d}"
+
     text = "".join("".join(c["source"]) for c in nb["cells"])
     for marker in FORBIDDEN:
         if marker in text:
