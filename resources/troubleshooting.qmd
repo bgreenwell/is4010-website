@@ -33,12 +33,41 @@ subtitle: "Common issues and their solutions"
 - Run `git status` and `git log -1`.
 - A commit remains local until you run `git push origin main`.
 
+## Using an AI assistant on a failure
+
+Your assistant is at its most useful when a check fails, because the failure output is already
+the context it needs.
+
+**A failing test.** `pytest` prints the test's name, the line that failed, and the expected and
+actual values. `cargo test` prints the assertion and its location. Copy the whole failure, not a
+summary, and paste it into Copilot CLI, Antigravity CLI, or a browser chat.
+
+**A failing style check.** `cargo clippy` names the file, the line, and the specific lint, and
+links to an explanation of the idiom. That is enough for an assistant to show you the rewrite.
+
+Ask a question that produces understanding:
+
+- Good: "What behavior does this test expect, and why does my implementation differ?"
+- Good: "What is this clippy lint objecting to, and what is the idiomatic form?"
+- Bad: "Make the tests pass."
+
+The second kind of prompt often produces code that satisfies the check without fixing the
+misunderstanding, and you still have to explain what you submitted. Read the explanation, make
+the change yourself, and re-run the check locally before you push.
+
 ## Rust issues
 
 **`cargo: command not found`**
 
 - Restart the terminal after installing Rust so its PATH refreshes.
 - Revisit the official [Rust installation guide](https://www.rust-lang.org/tools/install).
+
+**The tests pass but the badge is still red**
+
+- CI runs `cargo fmt --check` and `cargo clippy -- -D warnings` as well as `cargo test`, so
+  correct code can still fail on style.
+- Run `cargo clippy --fix --allow-dirty` and then `cargo fmt` to resolve most of it.
+- `needless_range_loop` is not auto-fixable: rewrite `for i in 0..items.len()` as `for item in items`.
 
 ## GitHub Actions issues
 

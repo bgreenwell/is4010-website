@@ -576,8 +576,8 @@ laptop.price = 1199.99  # Valid price change
 ## Introducing Lab 06: part 2
 
 ::: {.incremental}
-- **Build on Part 1**: Add `get_age()`, which returns 2026 minus the publication year
-- **Fixed year**: Use 2026 exactly; the tests assert a specific age, so a different year fails
+- **Build on Part 1**: Add `get_age()`, which returns the years since publication
+- **Current year**: Use `date.today().year`, not a hardcoded year; the tests derive the expected age the same way
 - **Inheritance practice**: Create an `EBook` class that inherits from `Book`
 - **Method override**: Customize `__str__` in the child class; it must include the file size and `MB`
 - **Required skills**: Reuse the parent initializer and inherit `get_age` without redefining it
@@ -646,7 +646,7 @@ laptop.price = 1199.99  # Valid price change
 **Deliverable**: `week06/lab06.py` containing `Book` and `EBook`.
 
 - `Book` stores `title`, `author`, and `year`, and its `__str__` includes all three
-- `get_age()` returns 2026 minus the publication year
+- `get_age()` returns the years since publication, using `date.today().year`
 - `EBook` extends `Book` with `file_size`, reuses the parent initializer via `super()`, and inherits `get_age`
 - Do not copy or modify the supplied tests
 
