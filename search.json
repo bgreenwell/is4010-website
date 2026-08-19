@@ -2849,7 +2849,7 @@
     "href": "resources/troubleshooting.html",
     "title": "Troubleshooting",
     "section": "",
-    "text": "uv: command not found\n\nRestart the terminal after installation so its PATH refreshes.\nRevisit the official uv installation guide for your operating system.\n\nThe environment is missing or out of date\n\nFrom the repository root, run uv sync --locked.\nRun Python as uv run python ...; no manual activation is required.\n\nModuleNotFoundError: No module named 'labXX'\n\nRun the exact command shown in the lab from the repository root.\nExample: uv run --directory week03 python -m pytest tests/ -v.",
+    "text": "This page covers environment problems: a tool that will not install, authentication, or a workflow that never ran.\nIf a check itself fails, that is the normal working loop rather than a problem with your setup. The labs repository README explains what each failure tells you and how to work through it with an AI assistant.",
     "crumbs": [
       "Resources",
       "Troubleshooting"
@@ -2859,8 +2859,8 @@
     "objectID": "resources/troubleshooting.html#python-and-uv-issues",
     "href": "resources/troubleshooting.html#python-and-uv-issues",
     "title": "Troubleshooting",
-    "section": "",
-    "text": "uv: command not found\n\nRestart the terminal after installation so its PATH refreshes.\nRevisit the official uv installation guide for your operating system.\n\nThe environment is missing or out of date\n\nFrom the repository root, run uv sync --locked.\nRun Python as uv run python ...; no manual activation is required.\n\nModuleNotFoundError: No module named 'labXX'\n\nRun the exact command shown in the lab from the repository root.\nExample: uv run --directory week03 python -m pytest tests/ -v.",
+    "section": "Python and uv issues",
+    "text": "Python and uv issues\nuv: command not found\n\nRestart the terminal after installation so its PATH refreshes.\nRevisit the official uv installation guide for your operating system.\n\nThe environment is missing or out of date\n\nFrom the repository root, run uv sync --locked.\nRun Python as uv run python ...; no manual activation is required.\n\nModuleNotFoundError: No module named 'labXX'\n\nRun the exact command shown in the lab from the repository root.\nExample: uv run --directory week03 python -m pytest tests/ -v.",
     "crumbs": [
       "Resources",
       "Troubleshooting"
@@ -2878,22 +2878,11 @@
     ]
   },
   {
-    "objectID": "resources/troubleshooting.html#using-an-ai-assistant-on-a-failure",
-    "href": "resources/troubleshooting.html#using-an-ai-assistant-on-a-failure",
-    "title": "Troubleshooting",
-    "section": "Using an AI assistant on a failure",
-    "text": "Using an AI assistant on a failure\nYour assistant is at its most useful when a check fails, because the failure output is already the context it needs.\nA failing test. pytest prints the test’s name, the line that failed, and the expected and actual values. cargo test prints the assertion and its location. Copy the whole failure, not a summary, and paste it into Copilot CLI, Antigravity CLI, or a browser chat.\nA failing style check. cargo clippy names the file, the line, and the specific lint, and links to an explanation of the idiom. That is enough for an assistant to show you the rewrite.\nAsk a question that produces understanding:\n\nGood: “What behavior does this test expect, and why does my implementation differ?”\nGood: “What is this clippy lint objecting to, and what is the idiomatic form?”\nBad: “Make the tests pass.”\n\nThe second kind of prompt often produces code that satisfies the check without fixing the misunderstanding, and you still have to explain what you submitted. Read the explanation, make the change yourself, and re-run the check locally before you push.",
-    "crumbs": [
-      "Resources",
-      "Troubleshooting"
-    ]
-  },
-  {
     "objectID": "resources/troubleshooting.html#rust-issues",
     "href": "resources/troubleshooting.html#rust-issues",
     "title": "Troubleshooting",
     "section": "Rust issues",
-    "text": "Rust issues\ncargo: command not found\n\nRestart the terminal after installing Rust so its PATH refreshes.\nRevisit the official Rust installation guide.\n\nThe tests pass but the badge is still red\n\nCI runs cargo fmt --check and cargo clippy -- -D warnings as well as cargo test, so correct code can still fail on style.\nRun cargo clippy --fix --allow-dirty and then cargo fmt to resolve most of it.\nneedless_range_loop is not auto-fixable: rewrite for i in 0..items.len() as for item in items.",
+    "text": "Rust issues\ncargo: command not found\n\nRestart the terminal after installing Rust so its PATH refreshes.\nRevisit the official Rust installation guide.",
     "crumbs": [
       "Resources",
       "Troubleshooting"
