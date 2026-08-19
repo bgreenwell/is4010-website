@@ -198,13 +198,18 @@ Students should clarify with their course instructors how the closure will affec
 **Criteria for letter grades:**   
 Your course grades will be based on your performance on the following:
 
-### Point allocation:
+### Grade weighting
 
-| Assignment | Points | Weight |
-|------------|--------|--------|
-| Labs (14 labs × 10 pts each) | 140 | 80% |
-| Final project | 35 | 20% |
-| **Total** | **175** | **100%** |
+Your grade is calculated from three weighted categories. Each category is scored on its own
+points and then contributes the weight below, so a lab is always worth 10 points and the final
+project is always worth 35.
+
+| Category | Weight | Scored out of |
+|----------|-------:|---------------|
+| Labs | 65% | 14 labs × 10 points |
+| Final project | 20% | 35 points |
+| Class participation | 15% | See below |
+| **Total** | **100%** | |
 
 ### Grading scale
 
@@ -215,7 +220,7 @@ Your course grades will be based on your performance on the following:
 
 ### Description of major assignments
 
-#### *Labs (80%)*
+#### *Labs (65%)*
 
 Students will complete 14 hands-on lab assignments (10 points each). Lab 01 establishes the semester repository, Lab 02 previews Python through AI collaboration, Labs 03–08 develop Python applications, and Labs 09–14 develop Rust applications. Each lab has an independent GitHub Actions badge; a green badge earns the full 10 points.
 
@@ -224,6 +229,19 @@ Students will complete 14 hands-on lab assignments (10 points each). Lab 01 esta
 #### *Final project (20%)*
 
 The final assessment allows students to demonstrate comprehensive understanding of course concepts through a solo capstone project. Students will build a command-line application in either [Python](https://www.python.org/) or [Rust](https://www.rust-lang.org/), with automated testing, CI/CD integration, and professional documentation. All projects must include documentation of AI tool usage in an AGENTS.md file.
+
+#### *Class participation (15%)*
+
+This course is built around hands-on lab time, and it works best when people show up and engage.
+Participation reflects your overall engagement across the semester: being present and working
+during the in-class lab sessions, asking and answering questions, and contributing to the course
+Teams channel. It is assessed holistically at the instructor's discretion rather than by a
+formula.
+
+I am not taking attendance. If attendance declines materially over the semester, I reserve the
+right to begin recording attendance and to give short in-class quizzes at the end of the
+remaining sessions, which would then inform this grade. I will announce any such change in
+Canvas and Teams before it takes effect.
 
 # XII. Course schedule
 

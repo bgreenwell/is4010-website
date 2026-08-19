@@ -61,8 +61,9 @@ author: "Brandon M. Greenwell"
 
 ::: {.incremental}
 - Our grading is designed to reflect hands-on, applied skill.
-- Labs: 80%
+- Labs: 65%
 - Final (solo) project: 20%
+- Class participation: 15%
 - Our primary communication channel will be our associated class channel in [Microsoft Teams](https://teams.microsoft.com/).
 :::
 
