@@ -285,7 +285,9 @@ Brandon M. Greenwell
 </section>
 <section id="the-zen-of-python" class="slide level2">
 <h2>The zen of Python</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a aria-label="1"></a><span class="im">import</span> this  <span class="co"># Try this in Python!</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="845df35d" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a aria-label="1"></a><span class="im">import</span> this  <span class="co"># Try this in Python!</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
 <p><em>(<a href="https://peps.python.org/pep-0020/">PEP 20 - The Zen of Python</a>)</em></p>
 <ul>
 <li class="fragment"><strong>“Beautiful is better than ugly”</strong></li>
@@ -407,7 +409,8 @@ Brandon M. Greenwell
 <li class="fragment"><strong>Python convention</strong>: Use <code>snake_case</code> for variable names (<a href="https://peps.python.org/pep-0008/">PEP 8 Style Guide</a>)</li>
 <li class="fragment"><strong>Memory insight</strong>: Variables are actually references to objects in memory</li>
 </ul>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a aria-label="1"></a><span class="co"># Good variable names (descriptive and clear)</span></span>
+<div id="1e01a834" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a aria-label="1"></a><span class="co"># Good variable names (descriptive and clear)</span></span>
 <span id="cb2-2"><a aria-label="2"></a>student_name <span class="op">=</span> <span class="st">"Grace Hopper"</span></span>
 <span id="cb2-3"><a aria-label="3"></a>birth_year <span class="op">=</span> <span class="dv">1906</span></span>
 <span id="cb2-4"><a aria-label="4"></a>is_computer_pioneer <span class="op">=</span> <span class="va">True</span></span>
@@ -416,6 +419,7 @@ Brandon M. Greenwell
 <span id="cb2-7"><a aria-label="7"></a><span class="co"># Poor variable names (avoid these)</span></span>
 <span id="cb2-8"><a aria-label="8"></a>n <span class="op">=</span> <span class="st">"Grace Hopper"</span>    <span class="co"># What is 'n'?</span></span>
 <span id="cb2-9"><a aria-label="9"></a>x <span class="op">=</span> <span class="dv">1906</span>             <span class="co"># What does 'x' represent?</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
 <aside class="notes">
 <p><strong>TEACHING NOTES:</strong></p>
 <ul>
@@ -457,7 +461,8 @@ Brandon M. Greenwell
 <li class="fragment"><code>math</code>, <code>user_authentication</code></li>
 </ul></li>
 </ul>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a aria-label="1"></a><span class="co"># Following Python conventions</span></span>
+<div id="4788bd26" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a aria-label="1"></a><span class="co"># Following Python conventions</span></span>
 <span id="cb3-2"><a aria-label="2"></a>MAX_LOGIN_ATTEMPTS <span class="op">=</span> <span class="dv">3</span></span>
 <span id="cb3-3"><a aria-label="3"></a>user_email <span class="op">=</span> <span class="st">"grace@navy.mil"</span></span>
 <span id="cb3-4"><a aria-label="4"></a>account_balance <span class="op">=</span> <span class="fl">1250.75</span></span>
@@ -467,6 +472,7 @@ Brandon M. Greenwell
 <span id="cb3-8"><a aria-label="8"></a></span>
 <span id="cb3-9"><a aria-label="9"></a><span class="kw">class</span> BankAccount:</span>
 <span id="cb3-10"><a aria-label="10"></a>    <span class="cf">pass</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
 <aside class="notes">
 <p><strong>TEACHING NOTES:</strong></p>
 <ul>
@@ -496,7 +502,8 @@ Brandon M. Greenwell
 <li class="fragment"><strong>Chained assignment</strong>: Give the same value to multiple variables</li>
 <li class="fragment"><strong>Augmented assignment</strong>: Modify variables in place</li>
 </ul>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a aria-label="1"></a><span class="co"># Multiple assignment</span></span>
+<div id="06d1f489" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a aria-label="1"></a><span class="co"># Multiple assignment</span></span>
 <span id="cb4-2"><a aria-label="2"></a>name, age, grade <span class="op">=</span> <span class="st">"Alice"</span>, <span class="dv">20</span>, <span class="st">"A"</span></span>
 <span id="cb4-3"><a aria-label="3"></a></span>
 <span id="cb4-4"><a aria-label="4"></a><span class="co"># Tuple unpacking from a function return</span></span>
@@ -512,6 +519,7 @@ Brandon M. Greenwell
 <span id="cb4-14"><a aria-label="14"></a>score <span class="op">=</span> <span class="dv">85</span></span>
 <span id="cb4-15"><a aria-label="15"></a>score <span class="op">+=</span> <span class="dv">10</span>    <span class="co"># Same as: score = score + 10</span></span>
 <span id="cb4-16"><a aria-label="16"></a>score <span class="op">*=</span> <span class="dv">2</span>     <span class="co"># Same as: score = score * 2</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
 <aside class="notes">
 <p><strong>TEACHING NOTES:</strong></p>
 <ul>
@@ -543,7 +551,8 @@ Brandon M. Greenwell
 <li class="fragment"><strong>Dynamic typing</strong>: Python figures out the type automatically</li>
 <li class="fragment"><strong><code>type()</code> function</strong>: Use this to check what type a variable is</li>
 </ul>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a aria-label="1"></a><span class="co"># Python automatically determines types</span></span>
+<div id="f3b89999" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a aria-label="1"></a><span class="co"># Python automatically determines types</span></span>
 <span id="cb5-2"><a aria-label="2"></a>student_name <span class="op">=</span> <span class="st">"Ada Lovelace"</span>        <span class="co"># str</span></span>
 <span id="cb5-3"><a aria-label="3"></a>student_id <span class="op">=</span> <span class="dv">12345</span>                   <span class="co"># int</span></span>
 <span id="cb5-4"><a aria-label="4"></a>gpa <span class="op">=</span> <span class="fl">3.95</span>                          <span class="co"># float</span></span>
@@ -554,6 +563,7 @@ Brandon M. Greenwell
 <span id="cb5-9"><a aria-label="9"></a><span class="bu">print</span>(<span class="bu">type</span>(student_name))    <span class="co"># &lt;class 'str'&gt;</span></span>
 <span id="cb5-10"><a aria-label="10"></a><span class="bu">print</span>(<span class="bu">type</span>(gpa))            <span class="co"># &lt;class 'float'&gt;</span></span>
 <span id="cb5-11"><a aria-label="11"></a><span class="bu">print</span>(<span class="bu">type</span>(is_honors_student))  <span class="co"># &lt;class 'bool'&gt;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
 <aside class="notes">
 <p><strong>TEACHING NOTES:</strong></p>
 <ul>
@@ -584,7 +594,8 @@ Brandon M. Greenwell
 <li class="fragment"><strong>String immutability</strong>: Strings cannot be changed after creation</li>
 <li class="fragment"><strong>Common methods</strong>: <code>.upper()</code>, <code>.lower()</code>, <code>.strip()</code>, <code>.replace()</code></li>
 </ul>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a aria-label="1"></a><span class="co"># Different ways to create strings</span></span>
+<div id="2bb1ccb5" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a aria-label="1"></a><span class="co"># Different ways to create strings</span></span>
 <span id="cb6-2"><a aria-label="2"></a>name <span class="op">=</span> <span class="st">'Alan Turing'</span></span>
 <span id="cb6-3"><a aria-label="3"></a>name <span class="op">=</span> <span class="st">"Alan Turing"</span>          <span class="co"># Equivalent</span></span>
 <span id="cb6-4"><a aria-label="4"></a>quote <span class="op">=</span> <span class="st">"""Computing machinery and intelligence</span></span>
@@ -599,6 +610,7 @@ Brandon M. Greenwell
 <span id="cb6-13"><a aria-label="13"></a><span class="bu">print</span>(name.strip().title())   <span class="co"># "Alan Turing"</span></span>
 <span id="cb6-14"><a aria-label="14"></a><span class="bu">print</span>(name.upper())          <span class="co"># "  ALAN TURING  "</span></span>
 <span id="cb6-15"><a aria-label="15"></a><span class="bu">print</span>(name.replace(<span class="st">"alan"</span>, <span class="st">"Alan"</span>))  <span class="co"># "  Alan turing  "</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
 <aside class="notes">
 <p><strong>TEACHING NOTES:</strong></p>
 <ul>
@@ -629,7 +641,8 @@ Brandon M. Greenwell
 <li class="fragment"><strong>Arithmetic operators</strong>: <code>+</code>, <code>-</code>, <code>*</code>, <code>/</code>, <code>//</code> (floor division), <code>%</code> (modulo), <code>**</code> (exponent)</li>
 <li class="fragment"><strong>Type conversion</strong>: <code>int()</code>, <code>float()</code>, <code>str()</code></li>
 </ul>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a aria-label="1"></a><span class="co"># Integer examples</span></span>
+<div id="9f05533a" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a aria-label="1"></a><span class="co"># Integer examples</span></span>
 <span id="cb7-2"><a aria-label="2"></a>students_enrolled <span class="op">=</span> <span class="dv">150</span></span>
 <span id="cb7-3"><a aria-label="3"></a>temperature_celsius <span class="op">=</span> <span class="op">-</span><span class="dv">5</span></span>
 <span id="cb7-4"><a aria-label="4"></a>big_number <span class="op">=</span> <span class="dv">123456789012345678901234567890</span>  <span class="co"># No limits!</span></span>
@@ -649,6 +662,7 @@ Brandon M. Greenwell
 <span id="cb7-18"><a aria-label="18"></a>age_str <span class="op">=</span> <span class="st">"21"</span></span>
 <span id="cb7-19"><a aria-label="19"></a>age_int <span class="op">=</span> <span class="bu">int</span>(age_str)    <span class="co"># Convert string to integer</span></span>
 <span id="cb7-20"><a aria-label="20"></a>pi_str <span class="op">=</span> <span class="bu">str</span>(<span class="fl">3.14159</span>)     <span class="co"># Convert float to string</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
 <aside class="notes">
 <p><strong>TEACHING NOTES:</strong></p>
 <ul>
@@ -679,7 +693,8 @@ Brandon M. Greenwell
 <li class="fragment"><strong>Prompts</strong>: Include helpful messages to guide users</li>
 <li class="fragment"><strong>Error handling</strong>: Be prepared for invalid input (we’ll cover this later)</li>
 </ul>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a aria-label="1"></a><span class="co"># Simple string input</span></span>
+<div id="93977592" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a aria-label="1"></a><span class="co"># Simple string input</span></span>
 <span id="cb8-2"><a aria-label="2"></a>name <span class="op">=</span> <span class="bu">input</span>(<span class="st">"What is your name? "</span>)</span>
 <span id="cb8-3"><a aria-label="3"></a><span class="bu">print</span>(<span class="ss">f"Hello, </span><span class="sc">{</span>name<span class="sc">}</span><span class="ss">!"</span>)</span>
 <span id="cb8-4"><a aria-label="4"></a></span>
@@ -697,6 +712,7 @@ Brandon M. Greenwell
 <span id="cb8-16"><a aria-label="16"></a>favorite_color <span class="op">=</span> <span class="bu">input</span>(<span class="st">"Favorite color: "</span>)</span>
 <span id="cb8-17"><a aria-label="17"></a></span>
 <span id="cb8-18"><a aria-label="18"></a><span class="bu">print</span>(<span class="ss">f"Hi </span><span class="sc">{</span>name<span class="sc">}</span><span class="ss">! You're </span><span class="sc">{</span>age<span class="sc">}</span><span class="ss"> and love </span><span class="sc">{</span>favorite_color<span class="sc">}</span><span class="ss">."</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
 <aside class="notes">
 <p><strong>TEACHING NOTES:</strong></p>
 <ul>
@@ -726,7 +742,8 @@ Brandon M. Greenwell
 <li class="fragment"><strong>% formatting</strong>: <code>"Hello %s!" % name</code> - legacy, avoid in new code</li>
 <li class="fragment"><strong>Formatting numbers</strong>: Control decimal places, padding, alignment</li>
 </ul>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a aria-label="1"></a>name <span class="op">=</span> <span class="st">"Katherine Johnson"</span></span>
+<div id="e37aa2db" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a aria-label="1"></a>name <span class="op">=</span> <span class="st">"Katherine Johnson"</span></span>
 <span id="cb9-2"><a aria-label="2"></a>salary <span class="op">=</span> <span class="fl">75000.50</span></span>
 <span id="cb9-3"><a aria-label="3"></a>accuracy <span class="op">=</span> <span class="fl">0.99999</span></span>
 <span id="cb9-4"><a aria-label="4"></a></span>
@@ -751,6 +768,7 @@ Brandon M. Greenwell
 <span id="cb9-23"><a aria-label="23"></a><span class="ss">Salary: $</span><span class="sc">{</span>salary<span class="sc">:,.2f}</span></span>
 <span id="cb9-24"><a aria-label="24"></a><span class="ss">Performance: </span><span class="sc">{</span>accuracy<span class="sc">:.1%}</span></span>
 <span id="cb9-25"><a aria-label="25"></a><span class="ss">"""</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
 <aside class="notes">
 <p><strong>TEACHING NOTES:</strong></p>
 <ul>
@@ -781,7 +799,8 @@ Brandon M. Greenwell
 <li class="fragment"><strong>Use meaningful variable names</strong>: Makes debugging much easier</li>
 <li class="fragment"><strong>Test frequently</strong>: Don’t write 100 lines before testing</li>
 </ul>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a aria-label="1"></a><span class="co"># Common debugging techniques</span></span>
+<div id="29c4f1d8" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a aria-label="1"></a><span class="co"># Common debugging techniques</span></span>
 <span id="cb10-2"><a aria-label="2"></a>name <span class="op">=</span> <span class="bu">input</span>(<span class="st">"Enter name: "</span>)</span>
 <span id="cb10-3"><a aria-label="3"></a><span class="bu">print</span>(<span class="ss">f"Debug: name = '</span><span class="sc">{</span>name<span class="sc">}</span><span class="ss">', type = </span><span class="sc">{</span><span class="bu">type</span>(name)<span class="sc">}</span><span class="ss">"</span>)</span>
 <span id="cb10-4"><a aria-label="4"></a></span>
@@ -792,6 +811,7 @@ Brandon M. Greenwell
 <span id="cb10-9"><a aria-label="9"></a>    <span class="bu">print</span>(<span class="ss">f"Successfully converted '</span><span class="sc">{</span>age_str<span class="sc">}</span><span class="ss">' to </span><span class="sc">{</span>age<span class="sc">}</span><span class="ss">"</span>)</span>
 <span id="cb10-10"><a aria-label="10"></a><span class="cf">except</span> <span class="pp">ValueError</span>:</span>
 <span id="cb10-11"><a aria-label="11"></a>    <span class="bu">print</span>(<span class="ss">f"Couldn't convert '</span><span class="sc">{</span>age_str<span class="sc">}</span><span class="ss">' to a number"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
 <aside class="notes">
 <p><strong>TEACHING NOTES:</strong></p>
 <ul>
@@ -823,7 +843,8 @@ Brandon M. Greenwell
 <li class="fragment"><strong>Function design</strong>: Write testable, reusable code</li>
 <li class="fragment"><strong>Structure</strong>: Separate input/output from the function that returns the story</li>
 </ul>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a aria-label="1"></a><span class="kw">def</span> generate_mad_lib(adjective, noun, verb):</span>
+<div id="ce6f4016" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a aria-label="1"></a><span class="kw">def</span> generate_mad_lib(adjective, noun, verb):</span>
 <span id="cb11-2"><a aria-label="2"></a>    <span class="co">"""</span></span>
 <span id="cb11-3"><a aria-label="3"></a><span class="co">    Generates a short story using the provided words.</span></span>
 <span id="cb11-4"><a aria-label="4"></a><span class="co">    This function is testable and reusable!</span></span>
@@ -839,6 +860,7 @@ Brandon M. Greenwell
 <span id="cb11-14"><a aria-label="14"></a><span class="co"># word3 = input("Give me a past-tense verb: ")</span></span>
 <span id="cb11-15"><a aria-label="15"></a><span class="co"># result = generate_mad_lib(word1, word2, word3)</span></span>
 <span id="cb11-16"><a aria-label="16"></a><span class="co"># print(result) # Should print your creative story!</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
 <aside class="notes">
 <p><strong>TEACHING NOTES:</strong></p>
 <ul>
@@ -906,7 +928,8 @@ Brandon M. Greenwell
 <li class="fragment"><strong>Indentation matters</strong>: Python uses whitespace to group code (not braces like other languages)</li>
 <li class="fragment"><strong>Comparison operators</strong>: <code>==</code>, <code>!=</code>, <code>&lt;</code>, <code>&gt;</code>, <code>&lt;=</code>, <code>&gt;=</code></li>
 </ul>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a aria-label="1"></a><span class="co"># Simple condition</span></span>
+<div id="76beac19" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a aria-label="1"></a><span class="co"># Simple condition</span></span>
 <span id="cb12-2"><a aria-label="2"></a>temperature <span class="op">=</span> <span class="dv">75</span></span>
 <span id="cb12-3"><a aria-label="3"></a><span class="cf">if</span> temperature <span class="op">&gt;</span> <span class="dv">70</span>:</span>
 <span id="cb12-4"><a aria-label="4"></a>    <span class="bu">print</span>(<span class="st">"It's warm outside!"</span>)</span>
@@ -922,6 +945,7 @@ Brandon M. Greenwell
 <span id="cb12-14"><a aria-label="14"></a>    <span class="bu">print</span>(<span class="st">"You can vote, but can't enter the club."</span>)</span>
 <span id="cb12-15"><a aria-label="15"></a><span class="cf">else</span>:</span>
 <span id="cb12-16"><a aria-label="16"></a>    <span class="bu">print</span>(<span class="st">"Too young for either."</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
 <aside class="notes">
 <p><strong>TEACHING NOTES:</strong></p>
 <ul>
@@ -952,7 +976,8 @@ Brandon M. Greenwell
 <li class="fragment"><strong>Membership operators</strong>: <code>in</code>, <code>not in</code> (check if item in collection)</li>
 <li class="fragment"><strong>Precedence</strong>: <code>not</code> → comparisons → <code>and</code> → <code>or</code></li>
 </ul>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a aria-label="1"></a><span class="co"># Comparison examples</span></span>
+<div id="6d955a03" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a aria-label="1"></a><span class="co"># Comparison examples</span></span>
 <span id="cb13-2"><a aria-label="2"></a>score <span class="op">=</span> <span class="dv">85</span></span>
 <span id="cb13-3"><a aria-label="3"></a>grade <span class="op">=</span> <span class="st">"B"</span></span>
 <span id="cb13-4"><a aria-label="4"></a>is_passing <span class="op">=</span> score <span class="op">&gt;=</span> <span class="dv">60</span>          <span class="co"># True</span></span>
@@ -978,6 +1003,7 @@ Brandon M. Greenwell
 <span id="cb13-24"><a aria-label="24"></a></span>
 <span id="cb13-25"><a aria-label="25"></a><span class="cf">if</span> username_is_valid <span class="kw">and</span> password_is_valid <span class="kw">and</span> <span class="kw">not</span> is_admin:</span>
 <span id="cb13-26"><a aria-label="26"></a>    <span class="bu">print</span>(<span class="st">"Regular user login successful"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
 <aside class="notes">
 <p><strong>TEACHING NOTES:</strong></p>
 <ul>
@@ -1008,7 +1034,8 @@ Brandon M. Greenwell
 <li class="fragment"><strong>Loop control</strong>: <code>break</code> (exit loop), <code>continue</code> (skip to next iteration)</li>
 <li class="fragment"><strong>Nested loops</strong>: Loops inside other loops</li>
 </ul>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a aria-label="1"></a><span class="co"># For loop with range()</span></span>
+<div id="3e82a4f2" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a aria-label="1"></a><span class="co"># For loop with range()</span></span>
 <span id="cb14-2"><a aria-label="2"></a><span class="bu">print</span>(<span class="st">"Countdown:"</span>)</span>
 <span id="cb14-3"><a aria-label="3"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">5</span>, <span class="dv">0</span>, <span class="op">-</span><span class="dv">1</span>):</span>
 <span id="cb14-4"><a aria-label="4"></a>    <span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span>i<span class="sc">}</span><span class="ss">..."</span>)</span>
@@ -1034,6 +1061,7 @@ Brandon M. Greenwell
 <span id="cb14-24"><a aria-label="24"></a>    <span class="cf">if</span> i <span class="op">==</span> <span class="dv">7</span>:</span>
 <span id="cb14-25"><a aria-label="25"></a>        <span class="cf">break</span>     <span class="co"># Stop at 7</span></span>
 <span id="cb14-26"><a aria-label="26"></a>    <span class="bu">print</span>(i)      <span class="co"># Prints: 0, 1, 2, 4, 5, 6</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
 <aside class="notes">
 <p><strong>TEACHING NOTES:</strong></p>
 <ul>
@@ -1065,7 +1093,8 @@ Brandon M. Greenwell
 <li class="fragment"><strong>Memory efficient</strong>: Generates numbers on-demand, not all at once</li>
 <li class="fragment"><strong>Convert to list</strong>: <code>list(range(5))</code> to see all values</li>
 </ul>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a aria-label="1"></a><span class="co"># Basic range patterns</span></span>
+<div id="3faf806e" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a aria-label="1"></a><span class="co"># Basic range patterns</span></span>
 <span id="cb15-2"><a aria-label="2"></a><span class="bu">print</span>(<span class="bu">list</span>(<span class="bu">range</span>(<span class="dv">5</span>)))           <span class="co"># [0, 1, 2, 3, 4]</span></span>
 <span id="cb15-3"><a aria-label="3"></a><span class="bu">print</span>(<span class="bu">list</span>(<span class="bu">range</span>(<span class="dv">1</span>, <span class="dv">6</span>)))        <span class="co"># [1, 2, 3, 4, 5]</span></span>
 <span id="cb15-4"><a aria-label="4"></a><span class="bu">print</span>(<span class="bu">list</span>(<span class="bu">range</span>(<span class="dv">0</span>, <span class="dv">10</span>, <span class="dv">2</span>)))    <span class="co"># [0, 2, 4, 6, 8]</span></span>
@@ -1085,6 +1114,7 @@ Brandon M. Greenwell
 <span id="cb15-18"><a aria-label="18"></a><span class="co"># Better way: enumerate()</span></span>
 <span id="cb15-19"><a aria-label="19"></a><span class="cf">for</span> i, fruit <span class="kw">in</span> <span class="bu">enumerate</span>(fruits):</span>
 <span id="cb15-20"><a aria-label="20"></a>    <span class="bu">print</span>(<span class="ss">f"Item </span><span class="sc">{</span>i<span class="sc">}</span><span class="ss">: </span><span class="sc">{</span>fruit<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
 <aside class="notes">
 <p><strong>TEACHING NOTES:</strong></p>
 <ul>
@@ -1116,7 +1146,8 @@ Brandon M. Greenwell
 <li class="fragment"><strong>User experience</strong>: Clear prompts and helpful feedback</li>
 <li class="fragment"><strong>Random module</strong>: Introduction to Python’s standard library</li>
 </ul>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a aria-label="1"></a><span class="im">import</span> random</span>
+<div id="0191f5ec" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a aria-label="1"></a><span class="im">import</span> random</span>
 <span id="cb16-2"><a aria-label="2"></a></span>
 <span id="cb16-3"><a aria-label="3"></a><span class="kw">def</span> guessing_game():</span>
 <span id="cb16-4"><a aria-label="4"></a>    <span class="co">"""Play the guessing game described in the Lab 03 contract."""</span></span>
@@ -1128,6 +1159,7 @@ Brandon M. Greenwell
 <span id="cb16-10"><a aria-label="10"></a>        <span class="co"># </span><span class="al">TODO</span><span class="co">: count the attempt</span></span>
 <span id="cb16-11"><a aria-label="11"></a>        <span class="co"># </span><span class="al">TODO</span><span class="co">: print "Too low!", "Too high!", or the success message</span></span>
 <span id="cb16-12"><a aria-label="12"></a>        <span class="co"># </span><span class="al">TODO</span><span class="co">: exit the loop after the correct guess</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
 <aside class="notes">
 <p><strong>TEACHING NOTES:</strong></p>
 <ul>
@@ -1158,7 +1190,8 @@ Brandon M. Greenwell
 <li class="fragment"><strong>Virtual environments</strong>: <code>uv sync</code> creates an isolated project environment</li>
 <li class="fragment"><strong>Popular packages</strong>: <code>requests</code> (web), <code>pandas</code> (data), <code>flask</code> (web apps)</li>
 </ul>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a aria-label="1"></a><span class="co"># Standard library examples</span></span>
+<div id="1345c1b9" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a aria-label="1"></a><span class="co"># Standard library examples</span></span>
 <span id="cb17-2"><a aria-label="2"></a><span class="im">import</span> random</span>
 <span id="cb17-3"><a aria-label="3"></a><span class="im">import</span> math</span>
 <span id="cb17-4"><a aria-label="4"></a><span class="im">import</span> datetime</span>
@@ -1179,6 +1212,7 @@ Brandon M. Greenwell
 <span id="cb17-19"><a aria-label="19"></a><span class="co"># In the terminal for your own project: uv add requests</span></span>
 <span id="cb17-20"><a aria-label="20"></a><span class="co"># import requests</span></span>
 <span id="cb17-21"><a aria-label="21"></a><span class="co"># response = requests.get("https://api.github.com/users/bgreenwell")</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
 <aside class="notes">
 <p><strong>TEACHING NOTES:</strong></p>
 <ul>
@@ -1240,7 +1274,8 @@ Brandon M. Greenwell
 <li class="fragment"><strong>Clear feedback</strong>: Detailed output when tests pass or fail</li>
 <li class="fragment"><strong>Easy assertions</strong>: Use simple <code>assert</code> statements to check results</li>
 </ul>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb18"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a aria-label="1"></a><span class="co"># In your lab03.py file</span></span>
+<div id="c9ff33d0" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a aria-label="1"></a><span class="co"># In your lab03.py file</span></span>
 <span id="cb18-2"><a aria-label="2"></a><span class="kw">def</span> add_numbers(a, b):</span>
 <span id="cb18-3"><a aria-label="3"></a>    <span class="co">"""Add two numbers and return the result."""</span></span>
 <span id="cb18-4"><a aria-label="4"></a>    <span class="cf">return</span> a <span class="op">+</span> b</span>
@@ -1256,6 +1291,7 @@ Brandon M. Greenwell
 <span id="cb18-14"><a aria-label="14"></a>    </span>
 <span id="cb18-15"><a aria-label="15"></a>    result <span class="op">=</span> add_numbers(<span class="dv">0</span>, <span class="dv">0</span>)</span>
 <span id="cb18-16"><a aria-label="16"></a>    <span class="cf">assert</span> result <span class="op">==</span> <span class="dv">0</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
 <aside class="notes">
 <p><strong>TEACHING NOTES:</strong></p>
 <ul>
