@@ -4,7 +4,7 @@ title: "Week 09: Welcome to Rust"
 
 ## Introduction
 
-Welcome to the second half of the course—it's time to learn Rust! After mastering Python fundamentals, you're ready to explore a completely different programming paradigm. Rust is a compiled systems programming language that prioritizes performance, reliability, and memory safety. You'll discover why companies like Microsoft, Amazon, Google, Meta, and Discord are adopting Rust for performance-critical systems.
+Welcome to the second half of the course. It's time to learn Rust! After mastering Python fundamentals, you're ready to explore a completely different programming paradigm. Rust is a compiled systems programming language that prioritizes performance, reliability, and memory safety. You'll discover why companies like Microsoft, Amazon, Google, Meta, and Discord are adopting Rust for performance-critical systems.
 
 ## Recommended readings
 

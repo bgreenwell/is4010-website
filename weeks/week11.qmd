@@ -4,7 +4,7 @@ title: "Week 11: Structuring code"
 
 ## Introduction
 
-This week you'll synthesize everything you've learned about Rust by building a complete student management system. You'll create a modular application that demonstrates structs for data modeling, enums for representing alternatives, error handling with Option and Result, and the Rust module system for code organization. This is where Rust's type system shines—making invalid states unrepresentable.
+This week you'll synthesize everything you've learned about Rust by building a complete student management system. You'll create a modular application that demonstrates structs for data modeling, enums for representing alternatives, error handling with Option and Result, and the Rust module system for code organization. This is where Rust's type system shines, making invalid states unrepresentable.
 
 ## Recommended readings
 

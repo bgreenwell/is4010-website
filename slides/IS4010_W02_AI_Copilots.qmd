@@ -77,7 +77,7 @@ Important points:
 - LLMs were trained on billions of lines of code from GitHub and other sources
 - They learned that certain patterns appear together (if you write a function definition, a return statement usually follows)
 - This is why they're good at code completion but can make subtle logical errors
-- They work the same way for Python, Rust, English, or any other language—it's all just patterns in text
+- They work the same way for Python, Rust, English, or any other language: it's all just patterns in text
 
 Set expectations: These tools can be useful, but their output requires human judgment and verification.
 :::

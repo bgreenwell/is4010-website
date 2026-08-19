@@ -1173,7 +1173,7 @@ uv run my-api-tool pokemon --format json
 - **Testability**: Each component can be tested independently
 - **Maintainability**: Easy to find and modify code
 - **Change cost**: Add more layers only when new behavior needs them
-- **Course contract**: The rubric evaluates a working CLI, tests, documentation, and CI—not this exact tree
+- **Course contract**: The rubric evaluates a working CLI, tests, documentation, and CI, not this exact tree
 :::
 
 ---

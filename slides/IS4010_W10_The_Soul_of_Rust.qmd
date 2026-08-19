@@ -1,6 +1,6 @@
 ---
 title: "IS4010: AI-enhanced application development"
-subtitle: "Week 10: The soul of Rust — ownership and borrowing"
+subtitle: "Week 10: The soul of Rust, ownership and borrowing"
 author: "Brandon M. Greenwell"
 ---
 
@@ -142,14 +142,14 @@ Draw one local `String` as a pointer-length-capacity header in the stack frame a
 Think of a chef setting up their station before service (**mise en place**):
 
 - **The stack** → your **mise en place bowls**: ingredients pre-measured into small glass bowls on the counter
-  - Fixed, known sizes — measured precisely before cooking begins
-  - Right at hand — instant access, no searching required
+  - Fixed, known sizes: measured precisely before cooking begins
+  - Right at hand: instant access, no searching required
   - Automatically cleared when the dish is finished
 
 - **The heap** → **the walk-in pantry**: large, flexible storage for bigger and variable quantities
-  - Items vary in size — a whole bag of flour vs. a pinch of salt
-  - Farther away — more effort to access and manage
-  - Must be tracked carefully — leave things unlabeled and they get "forgotten" (memory leak!)
+  - Items vary in size: a whole bag of flour vs. a pinch of salt
+  - Farther away: more effort to access and manage
+  - Must be tracked carefully: leave things unlabeled and they get "forgotten" (memory leak!)
 :::
 
 ::: {.notes}
@@ -166,7 +166,7 @@ The analogy maps directly to [Rust](https://www.rust-lang.org/) types:
 - **Mise en place bowl** (fixed size, cheap to duplicate) → values such as `i32`, `f64`, and `bool` that implement [`Copy`](https://doc.rust-lang.org/std/marker/trait.Copy.html)
 - **Pantry claim ticket** plus stored item → the fixed-size header and heap buffer used by [`String`](https://doc.rust-lang.org/std/string/struct.String.html) or [`Vec<T>`](https://doc.rust-lang.org/std/vec/struct.Vec.html)
 - **Handing a bowl across the counter** → cheap `Copy` (both keep their data)
-- **Handing off the pantry item** → **move** — you no longer have it; they do
+- **Handing off the pantry item** → **move**: you no longer have it, they do
 :::
 
 ::: {.notes}
@@ -288,13 +288,13 @@ print(items)  # Expected: [1, 3, 7]
 ```
 
 ::: {.incremental}
-- Python runs to completion — no error, no warning, exit code 0
+- Python runs to completion: no error, no warning, exit code 0
 - When `4` is removed at index 2, the list shifts left; the iterator advances to `7`, skipping `6` entirely
 - This is a **logic bug**: the language permits the operation, so tests must detect the incorrect result
 :::
 
 ::: {.notes}
-LIVE DEMO opportunity: Run this in the Python REPL and ask students to predict the output BEFORE running it. The mechanism: removing 2 (index 1) shifts the list; the iterator advances to index 2 which is now 4. Removing 4 (index 2) shifts again; the iterator advances to index 3 which is now 7 — skipping 6, which has shifted into index 2. 6 is even and should have been removed but never gets checked. The bug appears whenever two consecutive removal candidates are adjacent in the list.
+LIVE DEMO opportunity: Run this in the Python REPL and ask students to predict the output BEFORE running it. The mechanism: removing 2 (index 1) shifts the list; the iterator advances to index 2 which is now 4. Removing 4 (index 2) shifts again; the iterator advances to index 3 which is now 7, skipping 6, which has shifted into index 2. 6 is even and should have been removed but never gets checked. The bug appears whenever two consecutive removal candidates are adjacent in the list.
 :::
 
 ---
@@ -302,12 +302,12 @@ LIVE DEMO opportunity: Run this in the Python REPL and ask students to predict t
 ## Why the Python loop skips an item
 
 ::: {.incremental}
-`for item in items` tracks a hidden **index counter** — it increments by 1 each step, unaware of any list changes:
+`for item in items` tracks a hidden **index counter**: it increments by 1 each step, unaware of any list changes:
 
 - Index 0 → `1` (odd, skip). List: `[1, 2, 3, 4, 6, 7, 8]`
 - Index 1 → `2` (even, remove). List: `[1, 3, 4, 6, 7, 8]`
 - Index 2 → `4` (even, remove). List: `[1, 3, 6, 7, 8]`
-- Index 3 → `7` (odd, skip) — **`6` shifted into index 2 and was never visited!**
+- Index 3 → `7` (odd, skip): **`6` shifted into index 2 and was never visited!**
 - Index 4 → `8` (even, remove). List: `[1, 3, 6, 7]`
 - Index 5 → past end, loop stops
 
@@ -347,8 +347,8 @@ error[E0502]: cannot borrow `items` as mutable because it is also borrowed as im
 
 ::: {.incremental}
 - `for item in &items` takes an **immutable borrow** of the whole vector
-- `.retain()` needs a **mutable borrow** of the same vector — at the same time
-- Rust's rule: you cannot hold both simultaneously — so this **does not compile**
+- `.retain()` needs a **mutable borrow** of the same vector, at the same time
+- Rust's rule: you cannot hold both simultaneously, so this **does not compile**
 - The logic bug that ran in Python is rejected by Rust's borrowing rules before execution
 :::
 
@@ -363,18 +363,18 @@ Connect this to the course borrowing rule: while an immutable borrow is in use, 
 ## Why Rust catches it
 
 ::: {.incremental}
-`for item in &items` takes an **immutable borrow** of the entire vector — a compile-time contract:
+`for item in &items` takes an **immutable borrow** of the entire vector: a compile-time contract:
 
 > *"This data will not change while I hold this reference."*
 
 - Any method that mutates the vector (`.retain()`, `.remove()`, `.push()`) requires a **mutable borrow**
-- You cannot hold an immutable borrow and a mutable borrow at the same time — ever
-- The compiler checks this **before your program runs** — zero runtime overhead
+- You cannot hold an immutable borrow and a mutable borrow at the same time, ever
+- The compiler checks this **before your program runs**: zero runtime overhead
 - This isn't just about iteration: the ownership system makes *any* aliased mutation impossible
 :::
 
 ::: {.notes}
-The deeper principle: an immutable reference guarantees stability for its entire lifetime. Python's iterator has no such guarantee — the list can change under its feet. Rust makes the contract explicit and enforced at compile time. Iterator invalidation is just one of many bugs this invariant rules out — data races in multithreaded code are another.
+The deeper principle: an immutable reference guarantees stability for its entire lifetime. Python's iterator has no such guarantee: the list can change under its feet. Rust makes the contract explicit and enforced at compile time. Iterator invalidation is just one of many bugs this invariant rules out. Data races in multithreaded code are another.
 :::
 
 ---
@@ -394,15 +394,15 @@ fn main() {
         .filter(|x| x % 2 != 0)
         .collect();
 
-    println!("{:?}", odds);  // ✅ [1, 3, 7] — correct, every time
+    println!("{:?}", odds);  // ✅ [1, 3, 7], correct every time
 }
 ```
 
 ::: {.incremental}
-- `into_iter()` consumes `items`, giving the iterator full ownership — no borrow conflict
+- `into_iter()` consumes `items`, giving the iterator full ownership, with no borrow conflict
 - `.filter()` selects elements without touching the original collection
 - `.collect()` builds a fresh `Vec<i32>`
-- Python equivalent: `odds = [x for x in items if x % 2 != 0]` — same idea, now enforced by the type system
+- Python equivalent: `odds = [x for x in items if x % 2 != 0]`: same idea, now enforced by the type system
 :::
 
 [Try it in Rust Playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=fn+main%28%29+%7B%0A++++let+items+%3D+vec%21%5B1%2C+2%2C+3%2C+4%2C+6%2C+7%2C+8%5D%3B%0A%0A++++let+odds%3A+Vec%3Ci32%3E+%3D+items%0A++++++++.into_iter%28%29%0A++++++++.filter%28%7Cx%7C+x+%25+2+%21%3D+0%29%0A++++++++.collect%28%29%3B%0A%0A++++println%21%28%22%7B%3A%3F%7D%22%2C+odds%29%3B%0A%7D)

@@ -4,7 +4,7 @@ title: "Week 05: Functions & errors"
 
 ## Introduction
 
-Professional development means writing code that is both reusable and robust. This week, we'll master the art of the function—the essential building block of clean, "DRY" code. We'll also learn how to make our applications "bulletproof" by gracefully handling unexpected errors and exceptions, ensuring our users stay happy even when things go wrong.
+Professional development means writing code that is both reusable and robust. This week, we'll master the art of the function, the essential building block of clean, "DRY" code. We'll also learn how to make our applications "bulletproof" by gracefully handling unexpected errors and exceptions, ensuring our users stay happy even when things go wrong.
 
 ## Recommended readings
 

@@ -329,7 +329,7 @@ fn main() {
 [Try it in Rust Playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=struct+User+%7B%0A++++username%3A+String%2C%0A++++email%3A+String%2C%0A++++active%3A+bool%2C%0A%7D%0Afn+main%28%29+%7B%0A++++let+user1+%3D+User+%7B%0A++++++++email%3A+String%3A%3Afrom%28%22ada%40example.com%22%29%2C%0A++++++++username%3A+String%3A%3Afrom%28%22ada_lovelace%22%29%2C%0A++++++++active%3A+true%2C%0A++++%7D%3B%0A++++println%21%28%22Username%3A+%7B%7D%22%2C+user1.username%29%3B%0A%7D)
 
 ::: {.notes}
-**Live demo:** Create a struct instance. Show that the binding must be mutable to change a field—Rust does not apply mutability to individual fields of an otherwise immutable binding.
+**Live demo:** Create a struct instance. Show that the binding must be mutable to change a field. Rust does not apply mutability to individual fields of an otherwise immutable binding.
 :::
 
 ---
@@ -898,7 +898,7 @@ You'll learn to:
 **Teaser:** Lab 12 will have you build a generic `Stack<T>` that works with any type!
 
 ::: {.notes}
-Connect familiar uses—`Vec<T>`, `Option<T>`, and `Result<T, E>`—to next week's task of defining `Stack<T>` and its trait bounds.
+Connect familiar uses (`Vec<T>`, `Option<T>`, and `Result<T, E>`) to next week's task of defining `Stack<T>` and its trait bounds.
 :::
 
 ---

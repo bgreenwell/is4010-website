@@ -39,9 +39,9 @@ When a change affects both teaching content and a lab contract, update the publi
   **generated** from the Python decks by `scripts/build-notebooks.py`. Never edit a notebook by
   hand; edit the deck and regenerate, or the next build silently discards the change
 - `slides/`: Reveal.js lecture sources. Shared deck configuration lives in `slides/_metadata.yml`;
-  per-deck front matter carries only `title`, `subtitle`, and `author`. Never add a `slides/_quarto.yml`
-  — a nested project there excludes the decks from the parent render and makes local output diverge
-  from what CI publishes.
+  per-deck front matter carries only `title`, `subtitle`, and `author`. Never add a `slides/_quarto.yml`,
+  because a nested project there excludes the decks from the parent render and makes local
+  output diverge from what CI publishes.
 - `resources/`: setup, troubleshooting, and Python environment guides
 - `_site/`: local render output. Ignored by Git; the publish workflow renders fresh from
   source and deploys that, so never commit it and never treat it as the published state

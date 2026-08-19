@@ -7,7 +7,7 @@ title: "Syllabus"
 
 The official, current syllabus will be hosted in **Simple Syllabus**.
 
-**Simple Syllabus URL:** *Placeholder — add the published course URL here.*
+**Simple Syllabus URL:** *Placeholder: add the published course URL here.*
 
 The material below remains a course-planning reference while the Simple Syllabus version is the authoritative record.
 :::
@@ -266,8 +266,8 @@ Each week meets twice. Labs are due **Sunday at 11:59 PM** of the week they are 
 | 12 | New frontiers: [Rust](https://www.rust-lang.org/) | Generics and traits | **Lab 12** |
 | 13 | New frontiers: [Rust](https://www.rust-lang.org/) | Idiomatic Rust | **Lab 13** |
 | 14 | New frontiers: [Rust](https://www.rust-lang.org/) | Command-line applications | **Lab 14** |
-| — | Final project | Project work sessions; no new material | — |
-| — | Exam week | No final exam; the final project is the only deliverable | — |
+| n/a | Final project | Project work sessions; no new material | n/a |
+| n/a | Exam week | No final exam; the final project is the only deliverable | n/a |
 
 ### Detailed session schedule
 

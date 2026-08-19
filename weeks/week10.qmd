@@ -4,7 +4,7 @@ title: "Week 10: Soul of Rust"
 
 ## Introduction
 
-This week you'll master Rust's revolutionary memory safety system that makes it unique among programming languages. Ownership and borrowing are what make Rust special—they eliminate entire categories of bugs (use-after-free, double-free, data races) at compile time, with zero runtime cost. You'll develop the muscle memory to work with the borrow checker instead of fighting it, understanding how to manage memory safely without a garbage collector.
+This week you'll master Rust's revolutionary memory safety system that makes it unique among programming languages. Ownership and borrowing are what make Rust special, because they eliminate entire categories of bugs (use-after-free, double-free, data races) at compile time, with zero runtime cost. You'll develop the muscle memory to work with the borrow checker instead of fighting it, understanding how to manage memory safely without a garbage collector.
 
 ## Recommended readings
 

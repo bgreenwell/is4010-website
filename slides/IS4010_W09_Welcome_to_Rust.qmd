@@ -41,7 +41,7 @@ Use the linked engineering posts as case studies. Ask what part of each system c
 
 ::: {.incremental}
 -   [Python](https://www.python.org/) is commonly executed by an interpreter and virtual machine. Its dynamic runtime makes experimentation convenient but adds overhead for some workloads
--   [Rust](https://www.rust-lang.org/) is a **compiled** language. A [compiler](https://doc.rust-lang.org/rustc/what-is-rustc.html) translates your entire program into machine code—the raw instructions the computer's CPU understands—before you run it
+-   [Rust](https://www.rust-lang.org/) is a **compiled** language. A [compiler](https://doc.rust-lang.org/rustc/what-is-rustc.html) translates your entire program into machine code (the raw instructions the computer's CPU understands) before you run it
 -   This ahead-of-time compilation is a major reason for Rust's high performance. It catches errors early and optimizes the code for speed
 -   Bonus: Compiled Rust programs don't need a runtime or interpreter installed to run
 :::

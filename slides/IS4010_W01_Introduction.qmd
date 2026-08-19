@@ -151,7 +151,7 @@ uv run python hello.py
 - Every terminal has a **current working directory**.
 - Relative paths begin from that directory; absolute paths name the full location.
 - Spaces separate the command from its arguments.
-- A command can read, create, change, or delete files—read it before pressing Enter.
+- A command can read, create, change, or delete files, so read it before pressing Enter.
 :::
 
 ---

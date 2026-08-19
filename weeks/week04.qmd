@@ -4,7 +4,7 @@ title: "Week 04: Data structures"
 
 ## Introduction
 
-In programming, how we organize data is just as important as the data itself. This week, we'll dive into Python's powerful built-in data structures—lists, tuples, dictionaries, and sets. You'll learn how to choose the right container for your data and how to use AI to optimize your code for both performance and readability.
+In programming, how we organize data is just as important as the data itself. This week, we'll dive into Python's powerful built-in data structures: lists, tuples, dictionaries, and sets. You'll learn how to choose the right container for your data and how to use AI to optimize your code for both performance and readability.
 
 ## Recommended readings
 

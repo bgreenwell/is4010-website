@@ -19,7 +19,7 @@ author: "Brandon M. Greenwell"
 ::: {.notes}
 **TEACHING NOTES:**
 
-- **Review question**: Ask which operations—order, lookup, uniqueness, or mutation—the representation must support
+- **Review question**: Ask which operations (order, lookup, uniqueness, or mutation) the representation must support
 - **Examples**: Ordered events (list), fixed coordinates (tuple), profiles (dictionary), unique tags (set)
 - **Language comparison**: Compare the built-in interfaces without implying that other languages lack collections
 - **Course progression**: These choices support later file, JSON, and API work
