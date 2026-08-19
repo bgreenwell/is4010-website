@@ -576,7 +576,7 @@ Brandon M. Greenwell
 <span id="cb10-23"><a></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p><a href="https://play.rust-lang.org/?version=stable&amp;mode=debug&amp;edition=2021&amp;code=struct+User+%7B%0A++++username%3A+String%2C%0A++++email%3A+String%2C%0A++++active%3A+bool%2C%0A%7D%0Afn+main%28%29+%7B%0A++++let+user1+%3D+User+%7B%0A++++++++email%3A+String%3A%3Afrom%28%22ada%40example.com%22%29%2C%0A++++++++username%3A+String%3A%3Afrom%28%22ada_lovelace%22%29%2C%0A++++++++active%3A+true%2C%0A++++%7D%3B%0A++++println%21%28%22Username%3A+%7B%7D%22%2C+user1.username%29%3B%0A%7D">Try it in Rust Playground</a></p>
 <aside class="notes">
-<p><strong>Live demo:</strong> Create a struct instance. Show that the binding must be mutable to change a field—Rust does not apply mutability to individual fields of an otherwise immutable binding.</p>
+<p><strong>Live demo:</strong> Create a struct instance. Show that the binding must be mutable to change a field. Rust does not apply mutability to individual fields of an otherwise immutable binding.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1195,7 +1195,7 @@ Brandon M. Greenwell
 <p><strong>Why it matters:</strong> - Write reusable code without duplication - Static dispatch can generate specialized code; dynamic dispatch remains available when needed - Trait bounds state which operations a generic implementation requires - Patterns used throughout Rust libraries and applications</p>
 <p><strong>Teaser:</strong> Lab 12 will have you build a generic <code>Stack&lt;T&gt;</code> that works with any type!</p>
 <aside class="notes">
-<p>Connect familiar uses—<code>Vec&lt;T&gt;</code>, <code>Option&lt;T&gt;</code>, and <code>Result&lt;T, E&gt;</code>—to next week’s task of defining <code>Stack&lt;T&gt;</code> and its trait bounds.</p>
+<p>Connect familiar uses (<code>Vec&lt;T&gt;</code>, <code>Option&lt;T&gt;</code>, and <code>Result&lt;T, E&gt;</code>) to next week’s task of defining <code>Stack&lt;T&gt;</code> and its trait bounds.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
