@@ -299,7 +299,8 @@ Brandon M. Greenwell
 <li class="fragment"><strong>Syntax</strong>: Items enclosed in square brackets <code>[]</code>, separated by commas</li>
 <li class="fragment"><strong>Dynamic size</strong>: Grow or shrink as needed - no fixed size limit</li>
 </ul>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a aria-label="1"></a><span class="co"># A list of computer science pioneers</span></span>
+<div id="85ff437a" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a aria-label="1"></a><span class="co"># A list of computer science pioneers</span></span>
 <span id="cb1-2"><a aria-label="2"></a>pioneers <span class="op">=</span> [<span class="st">"Grace Hopper"</span>, <span class="st">"Ada Lovelace"</span>, <span class="st">"Katherine Johnson"</span>]</span>
 <span id="cb1-3"><a aria-label="3"></a></span>
 <span id="cb1-4"><a aria-label="4"></a><span class="co"># Add new pioneer (append adds to the end)</span></span>
@@ -317,6 +318,7 @@ Brandon M. Greenwell
 <span id="cb1-16"><a aria-label="16"></a><span class="co"># Useful list methods</span></span>
 <span id="cb1-17"><a aria-label="17"></a><span class="bu">print</span>(<span class="ss">f"Number of pioneers: </span><span class="sc">{</span><span class="bu">len</span>(pioneers)<span class="sc">}</span><span class="ss">"</span>)</span>
 <span id="cb1-18"><a aria-label="18"></a><span class="bu">print</span>(<span class="ss">f"Last pioneer: </span><span class="sc">{</span>pioneers[<span class="op">-</span><span class="dv">1</span>]<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
 <aside class="notes">
 <p><strong>TEACHING NOTES:</strong></p>
 <ul>
@@ -350,7 +352,8 @@ Brandon M. Greenwell
 <li class="fragment"><strong>Performance advantage</strong>: Slightly faster than lists for accessing elements</li>
 <li class="fragment"><strong>Memory efficient</strong>: Less overhead than lists due to immutability</li>
 </ul>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a aria-label="1"></a><span class="co"># Coordinate pairs for a map application</span></span>
+<div id="e1bcaa9a" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a aria-label="1"></a><span class="co"># Coordinate pairs for a map application</span></span>
 <span id="cb2-2"><a aria-label="2"></a>start_location <span class="op">=</span> (<span class="fl">39.1031</span>, <span class="op">-</span><span class="fl">84.5120</span>)  <span class="co"># Cincinnati coordinates</span></span>
 <span id="cb2-3"><a aria-label="3"></a>end_location <span class="op">=</span> (<span class="fl">39.7391</span>, <span class="op">-</span><span class="fl">104.9847</span>)   <span class="co"># Denver coordinates</span></span>
 <span id="cb2-4"><a aria-label="4"></a></span>
@@ -373,6 +376,7 @@ Brandon M. Greenwell
 <span id="cb2-21"><a aria-label="21"></a></span>
 <span id="cb2-22"><a aria-label="22"></a><span class="co"># Single item tuple (note the comma!)</span></span>
 <span id="cb2-23"><a aria-label="23"></a>single_item <span class="op">=</span> (<span class="dv">42</span>,)  <span class="co"># Without comma, it's just parentheses for grouping</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
 <aside class="notes">
 <p><strong>TEACHING NOTES:</strong></p>
 <ul>
@@ -405,7 +409,8 @@ Brandon M. Greenwell
 <li class="fragment"><strong>Slice behavior</strong>: <code>[start:stop]</code> includes start, excludes stop</li>
 <li class="fragment"><strong>Advanced slicing</strong>: Control step size and direction</li>
 </ul>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a aria-label="1"></a><span class="co"># Working with sequence data</span></span>
+<div id="e1e344bb" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a aria-label="1"></a><span class="co"># Working with sequence data</span></span>
 <span id="cb3-2"><a aria-label="2"></a>languages <span class="op">=</span> [<span class="st">"Python"</span>, <span class="st">"JavaScript"</span>, <span class="st">"Java"</span>, <span class="st">"C++"</span>, <span class="st">"Rust"</span>, <span class="st">"Go"</span>, <span class="st">"TypeScript"</span>]</span>
 <span id="cb3-3"><a aria-label="3"></a></span>
 <span id="cb3-4"><a aria-label="4"></a><span class="co"># Basic indexing</span></span>
@@ -425,6 +430,7 @@ Brandon M. Greenwell
 <span id="cb3-18"><a aria-label="18"></a>point <span class="op">=</span> (<span class="dv">10</span>, <span class="dv">20</span>, <span class="dv">30</span>, <span class="dv">40</span>)</span>
 <span id="cb3-19"><a aria-label="19"></a>x, y <span class="op">=</span> point[<span class="dv">0</span>:<span class="dv">2</span>]  <span class="co"># Get first two values</span></span>
 <span id="cb3-20"><a aria-label="20"></a><span class="bu">print</span>(<span class="ss">f"2D coordinates: (</span><span class="sc">{</span>x<span class="sc">}</span><span class="ss">, </span><span class="sc">{</span>y<span class="sc">}</span><span class="ss">)"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
 <aside class="notes">
 <p><strong>TEACHING NOTES:</strong></p>
 <ul>
@@ -457,7 +463,8 @@ Brandon M. Greenwell
 <li class="fragment"><strong>Sorting</strong>: <code>sorted()</code> returns new sorted sequence, <code>list.sort()</code> modifies in place</li>
 <li class="fragment"><strong>Finding</strong>: <code>sequence.index(item)</code> finds first occurrence</li>
 </ul>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a aria-label="1"></a><span class="co"># Working with programming languages data</span></span>
+<div id="c6c914df" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a aria-label="1"></a><span class="co"># Working with programming languages data</span></span>
 <span id="cb4-2"><a aria-label="2"></a>popular_languages <span class="op">=</span> [<span class="st">"Python"</span>, <span class="st">"JavaScript"</span>, <span class="st">"TypeScript"</span>]</span>
 <span id="cb4-3"><a aria-label="3"></a>systems_languages <span class="op">=</span> [<span class="st">"C++"</span>, <span class="st">"Rust"</span>, <span class="st">"Go"</span>]</span>
 <span id="cb4-4"><a aria-label="4"></a></span>
@@ -484,6 +491,7 @@ Brandon M. Greenwell
 <span id="cb4-25"><a aria-label="25"></a><span class="co"># List comprehensions (introduced earlier in this lecture!)</span></span>
 <span id="cb4-26"><a aria-label="26"></a>short_names <span class="op">=</span> [lang <span class="cf">for</span> lang <span class="kw">in</span> all_languages <span class="cf">if</span> <span class="bu">len</span>(lang) <span class="op">&lt;=</span> <span class="dv">4</span>]</span>
 <span id="cb4-27"><a aria-label="27"></a><span class="bu">print</span>(<span class="ss">f"Short language names: </span><span class="sc">{</span>short_names<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
 <aside class="notes">
 <p><strong>TEACHING NOTES:</strong></p>
 <ul>
@@ -509,7 +517,8 @@ Brandon M. Greenwell
 <section id="quick-introduction-list-comprehensions" class="slide level2">
 <h2>Quick introduction: list comprehensions</h2>
 <p><strong>Python has a concise way to create lists called <a href="https://docs.python.org/3/tutorial/datastructures.html#list-comprehensions">list comprehensions</a>:</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a aria-label="1"></a><span class="co"># Traditional approach with loops</span></span>
+<div id="e2b00f53" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a aria-label="1"></a><span class="co"># Traditional approach with loops</span></span>
 <span id="cb5-2"><a aria-label="2"></a>numbers <span class="op">=</span> []</span>
 <span id="cb5-3"><a aria-label="3"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">5</span>):</span>
 <span id="cb5-4"><a aria-label="4"></a>    numbers.append(i <span class="op">*</span> <span class="dv">2</span>)</span>
@@ -522,6 +531,7 @@ Brandon M. Greenwell
 <span id="cb5-11"><a aria-label="11"></a><span class="co"># Pattern: [expression for item in iterable]</span></span>
 <span id="cb5-12"><a aria-label="12"></a>emails <span class="op">=</span> [<span class="ss">f"user_</span><span class="sc">{</span>i<span class="sc">}</span><span class="ss">@email.com"</span> <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">3</span>)]</span>
 <span id="cb5-13"><a aria-label="13"></a><span class="bu">print</span>(emails)  <span class="co"># ['user_0@email.com', 'user_1@email.com', 'user_2@email.com']</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
 <p><strong>Why learn this now?</strong> - Useful for generating compact test data for the timing exercise - More readable and Pythonic than traditional loops - We’ll use this pattern extensively in data processing</p>
 <aside class="notes">
 <p><strong>TEACHING NOTES:</strong></p>
@@ -548,7 +558,8 @@ Brandon M. Greenwell
 <section id="live-exercise-ai-assisted-performance-detective" class="slide level2 scrollable">
 <h2>Live exercise: AI-assisted performance detective</h2>
 <p><strong>Challenge:</strong> Ask an AI assistant to identify the bottleneck, then verify its claim with timing evidence.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a aria-label="1"></a><span class="co"># SLOW CODE - Let's time this together!</span></span>
+<div id="6f23e7b6" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a aria-label="1"></a><span class="co"># SLOW CODE - Let's time this together!</span></span>
 <span id="cb6-2"><a aria-label="2"></a><span class="im">import</span> time</span>
 <span id="cb6-3"><a aria-label="3"></a></span>
 <span id="cb6-4"><a aria-label="4"></a><span class="co"># Simulating a large customer database</span></span>
@@ -569,6 +580,7 @@ Brandon M. Greenwell
 <span id="cb6-19"><a aria-label="19"></a>slow_time <span class="op">=</span> time.time() <span class="op">-</span> start_time</span>
 <span id="cb6-20"><a aria-label="20"></a></span>
 <span id="cb6-21"><a aria-label="21"></a><span class="bu">print</span>(<span class="ss">f"Slow approach: </span><span class="sc">{</span>slow_time<span class="sc">:.4f}</span><span class="ss"> seconds, found </span><span class="sc">{</span>vip_count<span class="sc">}</span><span class="ss"> VIPs"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
 <p><strong>Your turn with an AI assistant:</strong></p>
 <ol type="1">
 <li><strong>Ask Claude/Gemini/ChatGPT</strong>: “How can I optimize this customer VIP lookup code?”</li>
@@ -600,7 +612,8 @@ Brandon M. Greenwell
 </section>
 <section id="revised-solution-use-a-set-for-membership" class="slide level2">
 <h2>Revised solution: use a set for membership</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a aria-label="1"></a><span class="co"># Revised code after reviewing the suggestion</span></span>
+<div id="858e68d3" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a aria-label="1"></a><span class="co"># Revised code after reviewing the suggestion</span></span>
 <span id="cb7-2"><a aria-label="2"></a><span class="im">import</span> time</span>
 <span id="cb7-3"><a aria-label="3"></a></span>
 <span id="cb7-4"><a aria-label="4"></a><span class="co"># Convert VIP list to set for O(1) lookups</span></span>
@@ -625,6 +638,7 @@ Brandon M. Greenwell
 <span id="cb7-23"><a aria-label="23"></a><span class="co"># - Pre-compute VIP status in a dictionary</span></span>
 <span id="cb7-24"><a aria-label="24"></a><span class="co"># - Use database indexing for larger datasets</span></span>
 <span id="cb7-25"><a aria-label="25"></a><span class="co"># - Cache frequently accessed results</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
 <p><strong>Results Discussion:</strong> - <strong>Performance effect</strong>: Set membership is average-case O(1), while list membership is O(n) - <strong>AI role</strong>: Generate candidate explanations; timing results determine whether they apply here - <strong>Real impact</strong>: This optimization matters in production systems - <strong>Learning loop</strong>: AI suggestions → implementation → measurement → iteration</p>
 <aside class="notes">
 <p><strong>DISCUSSION FACILITATION:</strong></p>
@@ -667,7 +681,8 @@ Brandon M. Greenwell
 <li class="fragment"><strong>Syntax</strong>: Pairs enclosed in curly braces <code>{key: value}</code></li>
 <li class="fragment"><strong>Python 3.7+</strong>: Dictionaries maintain insertion order (ordered)</li>
 </ul>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a aria-label="1"></a><span class="co"># User profile for a social media application</span></span>
+<div id="a354b75b" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a aria-label="1"></a><span class="co"># User profile for a social media application</span></span>
 <span id="cb8-2"><a aria-label="2"></a>user_profile <span class="op">=</span> {</span>
 <span id="cb8-3"><a aria-label="3"></a>    <span class="st">"username"</span>: <span class="st">"ada_lovelace"</span>,</span>
 <span id="cb8-4"><a aria-label="4"></a>    <span class="st">"first_name"</span>: <span class="st">"Ada"</span>,</span>
@@ -693,6 +708,7 @@ Brandon M. Greenwell
 <span id="cb8-24"><a aria-label="24"></a>user_profile[<span class="st">"followers"</span>] <span class="op">+=</span> <span class="dv">1000</span>  <span class="co"># New followers!</span></span>
 <span id="cb8-25"><a aria-label="25"></a></span>
 <span id="cb8-26"><a aria-label="26"></a><span class="bu">print</span>(<span class="ss">f"Updated profile: </span><span class="sc">{</span>user_profile[<span class="st">'username'</span>]<span class="sc">}</span><span class="ss"> now has </span><span class="sc">{</span>user_profile[<span class="st">'followers'</span>]<span class="sc">:,}</span><span class="ss"> followers"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
 <aside class="notes">
 <p><strong>TEACHING NOTES:</strong></p>
 <ul>
@@ -718,7 +734,8 @@ Brandon M. Greenwell
 <section id="live-exercise-data-structure-refactoring" class="slide level2 scrollable">
 <h2>Live exercise: data-structure refactoring</h2>
 <p><strong>Challenge:</strong> This code works, but positional fields make it hard to read and change.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a aria-label="1"></a><span class="co"># MESSY CODE - Student registration system (needs help!)</span></span>
+<div id="8141bc37" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a aria-label="1"></a><span class="co"># MESSY CODE - Student registration system (needs help!)</span></span>
 <span id="cb9-2"><a aria-label="2"></a><span class="kw">def</span> process_student_data():</span>
 <span id="cb9-3"><a aria-label="3"></a>    <span class="co"># Raw data from registration form</span></span>
 <span id="cb9-4"><a aria-label="4"></a>    students <span class="op">=</span> []</span>
@@ -747,6 +764,7 @@ Brandon M. Greenwell
 <span id="cb9-27"><a aria-label="27"></a><span class="co"># Call the function</span></span>
 <span id="cb9-28"><a aria-label="28"></a>students, avg <span class="op">=</span> process_student_data()</span>
 <span id="cb9-29"><a aria-label="29"></a><span class="bu">print</span>(<span class="ss">f"IS4010 students: </span><span class="sc">{</span><span class="bu">len</span>(students)<span class="sc">}</span><span class="ss">, Average: </span><span class="sc">{</span>avg<span class="sc">:.1f}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
 <p><strong>AI review prompt:</strong> <em>“Analyze this Python code and suggest improvements for data structure choice, readability, and performance. Focus on eliminating magic numbers and handling duplicate data.”</em></p>
 <aside class="notes">
 <p><strong>INTERACTIVE EXERCISE FLOW:</strong></p>
@@ -772,7 +790,8 @@ Brandon M. Greenwell
 </section>
 <section id="refactored-solution" class="slide level2">
 <h2>Refactored solution</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a aria-label="1"></a><span class="co"># Revised code after reviewing the suggestions</span></span>
+<div id="2ef03116" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a aria-label="1"></a><span class="co"># Revised code after reviewing the suggestions</span></span>
 <span id="cb10-2"><a aria-label="2"></a><span class="im">from</span> collections <span class="im">import</span> defaultdict</span>
 <span id="cb10-3"><a aria-label="3"></a></span>
 <span id="cb10-4"><a aria-label="4"></a><span class="kw">def</span> process_student_data_improved():</span>
@@ -804,6 +823,7 @@ Brandon M. Greenwell
 <span id="cb10-30"><a aria-label="30"></a><span class="co"># Much cleaner!</span></span>
 <span id="cb10-31"><a aria-label="31"></a>students, avg <span class="op">=</span> process_student_data_improved()</span>
 <span id="cb10-32"><a aria-label="32"></a><span class="bu">print</span>(<span class="ss">f"IS4010 students: </span><span class="sc">{</span><span class="bu">len</span>(students)<span class="sc">}</span><span class="ss">, Average: </span><span class="sc">{</span>avg<span class="sc">:.1f}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
 <p><strong>What changed:</strong> - <strong>Clearer records</strong>: Dictionaries replace positional indices - <strong>Duplicate handling</strong>: A set tracks unique enrollments - <strong>Grouping</strong>: <code>defaultdict</code> collects records by course - <strong>Readable code</strong>: Field and variable names state their purpose</p>
 <aside class="notes">
 <p><strong>DISCUSSION POINTS:</strong></p>
@@ -837,7 +857,8 @@ Brandon M. Greenwell
 <li class="fragment"><strong>Mutable</strong>: Add and remove items after creation</li>
 <li class="fragment"><strong>Use cases</strong>: Remove duplicates, track unique visitors, mathematical set operations</li>
 </ul>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a aria-label="1"></a><span class="co"># Website analytics: tracking unique visitors</span></span>
+<div id="3535fa5d" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a aria-label="1"></a><span class="co"># Website analytics: tracking unique visitors</span></span>
 <span id="cb11-2"><a aria-label="2"></a>daily_visitors <span class="op">=</span> [<span class="st">"alice"</span>, <span class="st">"bob"</span>, <span class="st">"charlie"</span>, <span class="st">"alice"</span>, <span class="st">"david"</span>, <span class="st">"alice"</span>, <span class="st">"eve"</span>]</span>
 <span id="cb11-3"><a aria-label="3"></a>monthly_visitors <span class="op">=</span> [<span class="st">"alice"</span>, <span class="st">"frank"</span>, <span class="st">"george"</span>, <span class="st">"bob"</span>, <span class="st">"helen"</span>]</span>
 <span id="cb11-4"><a aria-label="4"></a></span>
@@ -869,6 +890,7 @@ Brandon M. Greenwell
 <span id="cb11-30"><a aria-label="30"></a><span class="co"># Fast membership testing</span></span>
 <span id="cb11-31"><a aria-label="31"></a><span class="cf">if</span> <span class="st">"Python"</span> <span class="kw">in</span> unique_languages:</span>
 <span id="cb11-32"><a aria-label="32"></a>    <span class="bu">print</span>(<span class="st">"Python is one of our tracked languages"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
 <aside class="notes">
 <p><strong>TEACHING NOTES:</strong></p>
 <ul>
@@ -894,7 +916,8 @@ Brandon M. Greenwell
 <section id="live-exercise-choose-structures-for-api-data" class="slide level2 scrollable">
 <h2>Live exercise: choose structures for API data</h2>
 <p><strong>Scenario:</strong> Design structures for the stated dashboard queries, then explain the trade-offs.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a aria-label="1"></a><span class="co"># Realistic API response from student management system</span></span>
+<div id="d7bd72d4" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a aria-label="1"></a><span class="co"># Realistic API response from student management system</span></span>
 <span id="cb12-2"><a aria-label="2"></a>api_response <span class="op">=</span> {</span>
 <span id="cb12-3"><a aria-label="3"></a>    <span class="st">"students"</span>: [{</span>
 <span id="cb12-4"><a aria-label="4"></a>            <span class="st">"id"</span>: <span class="dv">12345</span>,</span>
@@ -934,6 +957,7 @@ Brandon M. Greenwell
 <span id="cb12-38"><a aria-label="38"></a>        <span class="st">"api_version"</span>: <span class="st">"v2.1"</span></span>
 <span id="cb12-39"><a aria-label="39"></a>    }</span>
 <span id="cb12-40"><a aria-label="40"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
 <p><strong>AI design prompt:</strong> <em>“I need to design data structures for a student dashboard with these requirements:<em> </em>1. Fast lookup of students by username<em> </em>2. Quick filtering by course enrollment<em> </em>3. Efficient permission checking<em> </em>4. Find students with specific activities<em> </em>What data structures should I use and why?”</em></p>
 <aside class="notes">
 <p><strong>EXERCISE STRUCTURE (15 minutes total):</strong></p>
@@ -959,7 +983,8 @@ Brandon M. Greenwell
 </section>
 <section id="data-structures-for-common-queries" class="slide level2">
 <h2>Data structures for common queries</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a aria-label="1"></a><span class="co"># Build structures that support the required queries</span></span>
+<div id="a3bc27ba" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a aria-label="1"></a><span class="co"># Build structures that support the required queries</span></span>
 <span id="cb13-2"><a aria-label="2"></a><span class="kw">def</span> process_student_api_data(api_response):</span>
 <span id="cb13-3"><a aria-label="3"></a>    students_data <span class="op">=</span> api_response[<span class="st">"students"</span>]</span>
 <span id="cb13-4"><a aria-label="4"></a></span>
@@ -1019,6 +1044,7 @@ Brandon M. Greenwell
 <span id="cb13-58"><a aria-label="58"></a>acm_members <span class="op">=</span> optimized_data[<span class="st">'by_activity'</span>][<span class="st">'ACM'</span>]</span>
 <span id="cb13-59"><a aria-label="59"></a>is4010_acm <span class="op">=</span> is4010_students <span class="op">&amp;</span> acm_members  <span class="co"># Set intersection!</span></span>
 <span id="cb13-60"><a aria-label="60"></a><span class="bu">print</span>(<span class="ss">f"IS4010 + ACM: </span><span class="sc">{</span>is4010_acm<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
 <p><strong>Check the result:</strong> - <strong>O(1) lookups</strong> instead of O(n) searches - <strong>Set operations</strong> for complex filtering - <strong>Multiple access patterns</strong> supported efficiently - <strong>Memory trade-off</strong> for speed (typical AI recommendation)</p>
 <aside class="notes">
 <p><strong>DISCUSSION FACILITATORS:</strong></p>
@@ -1062,7 +1088,8 @@ Brandon M. Greenwell
 <li class="fragment">Unique visitors, tags, permissions, removing duplicates</li>
 </ul></li>
 </ul>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a aria-label="1"></a><span class="co"># Real-world decision making examples</span></span>
+<div id="d11e24d7" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a aria-label="1"></a><span class="co"># Real-world decision making examples</span></span>
 <span id="cb14-2"><a aria-label="2"></a></span>
 <span id="cb14-3"><a aria-label="3"></a><span class="co"># E-commerce shopping cart (order matters, items change)</span></span>
 <span id="cb14-4"><a aria-label="4"></a>shopping_cart <span class="op">=</span> [<span class="st">"laptop"</span>, <span class="st">"mouse"</span>, <span class="st">"keyboard"</span>, <span class="st">"monitor"</span>]</span>
@@ -1098,6 +1125,7 @@ Brandon M. Greenwell
 <span id="cb14-34"><a aria-label="34"></a></span>
 <span id="cb14-35"><a aria-label="35"></a><span class="co"># This is fast for sets (O(1))</span></span>
 <span id="cb14-36"><a aria-label="36"></a><span class="co"># result = 9999 in large_set</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
 <aside class="notes">
 <p><strong>TEACHING NOTES:</strong></p>
 <ul>
@@ -1124,7 +1152,8 @@ Brandon M. Greenwell
 <h2>Interactive challenge: data-structure choices</h2>
 <p>Work with an AI assistant for 15 minutes, then verify its recommendation against each requirement.</p>
 <h3 id="challenge-1-social-media-analytics"><strong>Challenge 1: social media analytics</strong></h3>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a aria-label="1"></a><span class="co"># Raw social media engagement data</span></span>
+<div id="35b013de" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a aria-label="1"></a><span class="co"># Raw social media engagement data</span></span>
 <span id="cb15-2"><a aria-label="2"></a>posts <span class="op">=</span> [{<span class="st">"id"</span>: <span class="dv">1</span>, <span class="st">"user"</span>: <span class="st">"alice"</span>, <span class="st">"likes"</span>: [<span class="st">"bob"</span>, <span class="st">"carol"</span>, <span class="st">"dave"</span>], <span class="st">"tags"</span>: [<span class="st">"python"</span>, <span class="st">"coding"</span>]},</span>
 <span id="cb15-3"><a aria-label="3"></a>    {<span class="st">"id"</span>: <span class="dv">2</span>, <span class="st">"user"</span>: <span class="st">"bob"</span>, <span class="st">"likes"</span>: [<span class="st">"alice"</span>, <span class="st">"carol"</span>], <span class="st">"tags"</span>: [<span class="st">"ai"</span>, <span class="st">"python"</span>]},</span>
 <span id="cb15-4"><a aria-label="4"></a>    {<span class="st">"id"</span>: <span class="dv">3</span>, <span class="st">"user"</span>: <span class="st">"carol"</span>, <span class="st">"likes"</span>: [<span class="st">"alice"</span>], <span class="st">"tags"</span>: [<span class="st">"datascience"</span>, <span class="st">"python"</span>]},</span>
@@ -1132,8 +1161,10 @@ Brandon M. Greenwell
 <span id="cb15-6"><a aria-label="6"></a></span>
 <span id="cb15-7"><a aria-label="7"></a><span class="co"># Goals: Find most popular user, most used tags, mutual connections</span></span>
 <span id="cb15-8"><a aria-label="8"></a><span class="co"># Ask your AI: "What data structures optimize social media analytics?"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
 <h3 id="challenge-2-e-commerce-inventory"><strong>Challenge 2: e-commerce inventory</strong></h3>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a aria-label="1"></a><span class="co"># Product inventory system</span></span>
+<div id="857b6e71" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a aria-label="1"></a><span class="co"># Product inventory system</span></span>
 <span id="cb16-2"><a aria-label="2"></a>inventory <span class="op">=</span> [{<span class="st">"sku"</span>: <span class="st">"LAP001"</span>, <span class="st">"name"</span>: <span class="st">"Laptop"</span>, <span class="st">"price"</span>: <span class="dv">999</span>, <span class="st">"categories"</span>: [<span class="st">"electronics"</span>, <span class="st">"computers"</span>], <span class="st">"stock"</span>: <span class="dv">5</span>},</span>
 <span id="cb16-3"><a aria-label="3"></a>    {<span class="st">"sku"</span>: <span class="st">"MOU002"</span>, <span class="st">"name"</span>: <span class="st">"Mouse"</span>, <span class="st">"price"</span>: <span class="dv">25</span>, <span class="st">"categories"</span>: [<span class="st">"electronics"</span>, <span class="st">"accessories"</span>], <span class="st">"stock"</span>: <span class="dv">50</span>},</span>
 <span id="cb16-4"><a aria-label="4"></a>    {<span class="st">"sku"</span>: <span class="st">"KEY003"</span>, <span class="st">"name"</span>: <span class="st">"Keyboard"</span>, <span class="st">"price"</span>: <span class="dv">75</span>, <span class="st">"categories"</span>: [<span class="st">"electronics"</span>, <span class="st">"accessories"</span>], <span class="st">"stock"</span>: <span class="dv">30</span>},</span>
@@ -1141,8 +1172,10 @@ Brandon M. Greenwell
 <span id="cb16-6"><a aria-label="6"></a></span>
 <span id="cb16-7"><a aria-label="7"></a><span class="co"># Goals: Fast product lookup, category filtering, inventory alerts</span></span>
 <span id="cb16-8"><a aria-label="8"></a><span class="co"># Ask your AI: "How do I optimize product search and filtering?"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
 <h3 id="challenge-3-university-course-scheduler"><strong>Challenge 3: university course scheduler</strong></h3>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a aria-label="1"></a><span class="co"># Course scheduling conflicts</span></span>
+<div id="a9c00fbc" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a aria-label="1"></a><span class="co"># Course scheduling conflicts</span></span>
 <span id="cb17-2"><a aria-label="2"></a>courses <span class="op">=</span> [{<span class="st">"code"</span>: <span class="st">"IS4010"</span>, <span class="st">"time"</span>: <span class="st">"MWF 10:00"</span>, <span class="st">"room"</span>: <span class="st">"Lindner 100"</span>, <span class="st">"students"</span>: [<span class="st">"alice"</span>, <span class="st">"bob"</span>]},</span>
 <span id="cb17-3"><a aria-label="3"></a>    {<span class="st">"code"</span>: <span class="st">"CS2071"</span>, <span class="st">"time"</span>: <span class="st">"TTh 14:00"</span>, <span class="st">"room"</span>: <span class="st">"Lindner 200"</span>, <span class="st">"students"</span>: [<span class="st">"alice"</span>, <span class="st">"carol"</span>]},</span>
 <span id="cb17-4"><a aria-label="4"></a>    {<span class="st">"code"</span>: <span class="st">"MATH2045"</span>, <span class="st">"time"</span>: <span class="st">"MWF 10:00"</span>, <span class="st">"room"</span>: <span class="st">"Swift 300"</span>, <span class="st">"students"</span>: [<span class="st">"bob"</span>, <span class="st">"dave"</span>]},</span>
@@ -1150,6 +1183,7 @@ Brandon M. Greenwell
 <span id="cb17-6"><a aria-label="6"></a></span>
 <span id="cb17-7"><a aria-label="7"></a><span class="co"># Goals: Detect time conflicts, room utilization, student schedules</span></span>
 <span id="cb17-8"><a aria-label="8"></a><span class="co"># Ask your AI: "What's the best way to handle scheduling conflicts?"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
 <p><strong>Your task:</strong> 1. <strong>Pick ONE challenge</strong> that interests you most 2. <strong>Consult an AI assistant</strong> for data structure recommendations 3. <strong>Be ready to share</strong> your AI’s best suggestion with the class 4. <strong>Bonus</strong>: Implement a quick prototype if you’re feeling ambitious!</p>
 <aside class="notes">
 <p><strong>FACILITATING THE MINI-HACKATHON:</strong></p>

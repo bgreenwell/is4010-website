@@ -292,7 +292,8 @@ Brandon M. Greenwell
 </section>
 <section id="a-function-based-shopping-cart" class="slide level2">
 <h2>A function-based shopping cart</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a aria-label="1"></a><span class="co"># Creating and managing cart state with functions - gets messy fast!</span></span>
+<div id="3d4ba714" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a aria-label="1"></a><span class="co"># Creating and managing cart state with functions - gets messy fast!</span></span>
 <span id="cb1-2"><a aria-label="2"></a><span class="kw">def</span> create_cart():</span>
 <span id="cb1-3"><a aria-label="3"></a>    <span class="cf">return</span> {<span class="st">"items"</span>: [], <span class="st">"subtotal"</span>: <span class="dv">0</span>, <span class="st">"tax_rate"</span>: <span class="fl">0.08</span>, <span class="st">"discount"</span>: <span class="dv">0</span>}</span>
 <span id="cb1-4"><a aria-label="4"></a></span>
@@ -316,6 +317,7 @@ Brandon M. Greenwell
 <span id="cb1-22"><a aria-label="22"></a>cart <span class="op">=</span> apply_discount(cart, <span class="dv">10</span>)</span>
 <span id="cb1-23"><a aria-label="23"></a>total <span class="op">=</span> calculate_total(cart)</span>
 <span id="cb1-24"><a aria-label="24"></a><span class="bu">print</span>(<span class="ss">f"Total: $</span><span class="sc">{</span>total<span class="sc">:.2f}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
 <aside class="notes">
 <p><strong>TEACHING NOTES:</strong></p>
 <ul>
@@ -339,7 +341,8 @@ Brandon M. Greenwell
 </section>
 <section id="a-class-based-shopping-cart" class="slide level2">
 <h2>A class-based shopping cart</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a aria-label="1"></a><span class="kw">class</span> ShoppingCart:</span>
+<div id="fddca99a" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a aria-label="1"></a><span class="kw">class</span> ShoppingCart:</span>
 <span id="cb2-2"><a aria-label="2"></a>    <span class="co">"""Represents a shopping cart with items, discounts, and tax calculation."""</span></span>
 <span id="cb2-3"><a aria-label="3"></a></span>
 <span id="cb2-4"><a aria-label="4"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, tax_rate<span class="op">=</span><span class="fl">0.08</span>):</span>
@@ -372,6 +375,7 @@ Brandon M. Greenwell
 <span id="cb2-31"><a aria-label="31"></a>cart.add_item(<span class="st">"Mouse"</span>, <span class="fl">29.99</span>)</span>
 <span id="cb2-32"><a aria-label="32"></a>cart.apply_discount(<span class="dv">10</span>)</span>
 <span id="cb2-33"><a aria-label="33"></a><span class="bu">print</span>(<span class="ss">f"Total: $</span><span class="sc">{</span>cart<span class="sc">.</span>total<span class="sc">:.2f}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
 <aside class="notes">
 <p><strong>TEACHING NOTES:</strong></p>
 <ul>
@@ -462,7 +466,8 @@ Brandon M. Greenwell
 <li class="fragment"><strong>The <code>self</code> parameter</strong>: References the specific instance being created</li>
 <li class="fragment"><strong>Convention</strong>: Always the first parameter in instance methods</li>
 </ul>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a aria-label="1"></a><span class="kw">class</span> BankAccount:</span>
+<div id="1ee6f3e2" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a aria-label="1"></a><span class="kw">class</span> BankAccount:</span>
 <span id="cb3-2"><a aria-label="2"></a>    <span class="co">"""Represents a bank account with balance tracking."""</span></span>
 <span id="cb3-3"><a aria-label="3"></a></span>
 <span id="cb3-4"><a aria-label="4"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, account_holder: <span class="bu">str</span>, initial_balance: <span class="bu">float</span> <span class="op">=</span> <span class="fl">0.0</span>):</span>
@@ -479,6 +484,7 @@ Brandon M. Greenwell
 <span id="cb3-15"><a aria-label="15"></a><span class="co"># Create specific account instances</span></span>
 <span id="cb3-16"><a aria-label="16"></a>alice_account <span class="op">=</span> BankAccount(<span class="st">"Alice Johnson"</span>, <span class="fl">1000.0</span>)</span>
 <span id="cb3-17"><a aria-label="17"></a>bob_account <span class="op">=</span> BankAccount(<span class="st">"Bob Smith"</span>)  <span class="co"># Uses default balance of 0.0</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
 <aside class="notes">
 <p><strong>TEACHING NOTES:</strong></p>
 <ul>
@@ -510,7 +516,8 @@ Brandon M. Greenwell
 <li class="fragment"><strong>AI exercise</strong>: Ask for a draft, then verify its attributes and exact string output</li>
 <li class="fragment"><strong>Debugging aid</strong>: A useful representation makes object state easier to inspect</li>
 </ul>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a aria-label="1"></a><span class="kw">class</span> User:</span>
+<div id="430639bc" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a aria-label="1"></a><span class="kw">class</span> User:</span>
 <span id="cb4-2"><a aria-label="2"></a>    <span class="co">"""Represents a user in a social media application."""</span></span>
 <span id="cb4-3"><a aria-label="3"></a></span>
 <span id="cb4-4"><a aria-label="4"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, username: <span class="bu">str</span>, email: <span class="bu">str</span>, join_date: <span class="bu">str</span>):</span>
@@ -533,6 +540,7 @@ Brandon M. Greenwell
 <span id="cb4-21"><a aria-label="21"></a></span>
 <span id="cb4-22"><a aria-label="22"></a><span class="bu">print</span>(user1)  <span class="co"># @grace_hopper (0 followers) - Joined 2023-01-15</span></span>
 <span id="cb4-23"><a aria-label="23"></a><span class="bu">print</span>(user2)  <span class="co"># @ada_lovelace✓ (50000 followers) - Joined 2023-02-20</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
 <aside class="notes">
 <p><strong>TEACHING NOTES:</strong></p>
 <ul>
@@ -602,7 +610,8 @@ Brandon M. Greenwell
 <li class="fragment"><strong>Encapsulation</strong>: Methods can access and modify private object state safely</li>
 <li class="fragment"><strong>State management</strong>: Methods ensure object data stays consistent and valid</li>
 </ul>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a aria-label="1"></a><span class="kw">class</span> GameCharacter:</span>
+<div id="a33914d7" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a aria-label="1"></a><span class="kw">class</span> GameCharacter:</span>
 <span id="cb5-2"><a aria-label="2"></a>    <span class="co">"""Represents a character in a role-playing game."""</span></span>
 <span id="cb5-3"><a aria-label="3"></a></span>
 <span id="cb5-4"><a aria-label="4"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, name: <span class="bu">str</span>, health: <span class="bu">int</span> <span class="op">=</span> <span class="dv">100</span>):</span>
@@ -638,6 +647,7 @@ Brandon M. Greenwell
 <span id="cb5-34"><a aria-label="34"></a>hero.take_damage(<span class="dv">30</span>)</span>
 <span id="cb5-35"><a aria-label="35"></a>hero.heal(<span class="dv">15</span>)</span>
 <span id="cb5-36"><a aria-label="36"></a>hero.gain_experience(<span class="dv">150</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
 <aside class="notes">
 <p><strong>TEACHING NOTES:</strong></p>
 <ul>
@@ -699,7 +709,8 @@ Brandon M. Greenwell
 <li class="fragment"><strong>Method override</strong>: Child classes can replace parent methods with specialized versions</li>
 <li class="fragment"><strong>Method extension</strong>: Or extend parent methods with additional functionality</li>
 </ul>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a aria-label="1"></a><span class="kw">class</span> Vehicle:</span>
+<div id="e3a9299a" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a aria-label="1"></a><span class="kw">class</span> Vehicle:</span>
 <span id="cb6-2"><a aria-label="2"></a>    <span class="co">"""Base class for all vehicles."""</span></span>
 <span id="cb6-3"><a aria-label="3"></a></span>
 <span id="cb6-4"><a aria-label="4"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, make: <span class="bu">str</span>, model: <span class="bu">str</span>, year: <span class="bu">int</span>):</span>
@@ -740,6 +751,7 @@ Brandon M. Greenwell
 <span id="cb6-39"><a aria-label="39"></a>tesla.start_engine()  <span class="co"># Uses overridden method</span></span>
 <span id="cb6-40"><a aria-label="40"></a>tesla.drive(<span class="dv">50</span>)       <span class="co"># Uses inherited method</span></span>
 <span id="cb6-41"><a aria-label="41"></a>tesla.charge(<span class="dv">2</span>)       <span class="co"># Uses unique method</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
 <aside class="notes">
 <p><strong>TEACHING NOTES:</strong></p>
 <ul>
@@ -771,7 +783,8 @@ Brandon M. Greenwell
 <li class="fragment"><strong><a href="https://docs.python.org/3/library/functions.html#staticmethod">Static methods</a></strong>: Utility functions that belong logically to the class</li>
 <li class="fragment"><strong>Multiple inheritance</strong>: Inheriting from multiple parent classes (advanced topic)</li>
 </ul>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a aria-label="1"></a><span class="kw">class</span> Product:</span>
+<div id="6fa741f3" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a aria-label="1"></a><span class="kw">class</span> Product:</span>
 <span id="cb7-2"><a aria-label="2"></a>    <span class="co">"""Represents a product in an inventory system."""</span></span>
 <span id="cb7-3"><a aria-label="3"></a></span>
 <span id="cb7-4"><a aria-label="4"></a>    <span class="co"># Class variable - shared across all instances</span></span>
@@ -814,6 +827,7 @@ Brandon M. Greenwell
 <span id="cb7-41"><a aria-label="41"></a><span class="co"># Property with validation</span></span>
 <span id="cb7-42"><a aria-label="42"></a><span class="co"># laptop.price = -100 # Would raise ValueError</span></span>
 <span id="cb7-43"><a aria-label="43"></a>laptop.price <span class="op">=</span> <span class="fl">1199.99</span>  <span class="co"># Valid price change</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
 <aside class="notes">
 <p><strong>TEACHING NOTES:</strong></p>
 <ul>

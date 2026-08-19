@@ -391,7 +391,8 @@ Brandon M. Greenwell
 </section>
 <section id="basic-argparse-your-first-cli" class="slide level2">
 <h2>Basic <code>argparse</code>: your first CLI</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a aria-label="1"></a><span class="co">"""simple_greeter.py - A friendly CLI greeter."""</span></span>
+<div id="a32d85df" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a aria-label="1"></a><span class="co">"""simple_greeter.py - A friendly CLI greeter."""</span></span>
 <span id="cb1-2"><a aria-label="2"></a><span class="im">import</span> argparse</span>
 <span id="cb1-3"><a aria-label="3"></a></span>
 <span id="cb1-4"><a aria-label="4"></a><span class="kw">def</span> main():</span>
@@ -426,6 +427,7 @@ Brandon M. Greenwell
 <span id="cb1-33"><a aria-label="33"></a></span>
 <span id="cb1-34"><a aria-label="34"></a><span class="cf">if</span> <span class="va">__name__</span> <span class="op">==</span> <span class="st">"__main__"</span>:</span>
 <span id="cb1-35"><a aria-label="35"></a>    main()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
 <aside class="notes">
 <p><strong>TEACHING NOTES:</strong></p>
 <ul>
@@ -498,7 +500,8 @@ Brandon M. Greenwell
 </section>
 <section id="advanced-argparse-multiple-arguments-and-types" class="slide level2">
 <h2>Advanced <code>argparse</code>: multiple arguments and types</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a aria-label="1"></a><span class="co">"""api_fetcher.py - Fetch data from APIs with configurable options."""</span></span>
+<div id="e8c27817" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a aria-label="1"></a><span class="co">"""api_fetcher.py - Fetch data from APIs with configurable options."""</span></span>
 <span id="cb4-2"><a aria-label="2"></a><span class="im">import</span> argparse</span>
 <span id="cb4-3"><a aria-label="3"></a></span>
 <span id="cb4-4"><a aria-label="4"></a><span class="kw">def</span> fetch_data(api_name: <span class="bu">str</span>, resource: <span class="bu">str</span>, limit: <span class="bu">int</span>, output_file: <span class="bu">str</span> <span class="op">=</span> <span class="va">None</span>):</span>
@@ -546,6 +549,7 @@ Brandon M. Greenwell
 <span id="cb4-46"><a aria-label="46"></a></span>
 <span id="cb4-47"><a aria-label="47"></a><span class="cf">if</span> <span class="va">__name__</span> <span class="op">==</span> <span class="st">"__main__"</span>:</span>
 <span id="cb4-48"><a aria-label="48"></a>    main()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
 <aside class="notes">
 <p><strong>TEACHING NOTES:</strong></p>
 <ul>
@@ -571,7 +575,8 @@ Brandon M. Greenwell
 </section>
 <section id="subcommands-building-multi-function-tools" class="slide level2">
 <h2>Subcommands: building multi-function tools</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a aria-label="1"></a><span class="co">"""project_manager.py - Manage your project with subcommands."""</span></span>
+<div id="0bfabdaf" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a aria-label="1"></a><span class="co">"""project_manager.py - Manage your project with subcommands."""</span></span>
 <span id="cb5-2"><a aria-label="2"></a><span class="im">import</span> argparse</span>
 <span id="cb5-3"><a aria-label="3"></a></span>
 <span id="cb5-4"><a aria-label="4"></a><span class="kw">def</span> cmd_init(args):</span>
@@ -619,6 +624,7 @@ Brandon M. Greenwell
 <span id="cb5-46"><a aria-label="46"></a></span>
 <span id="cb5-47"><a aria-label="47"></a><span class="cf">if</span> <span class="va">__name__</span> <span class="op">==</span> <span class="st">"__main__"</span>:</span>
 <span id="cb5-48"><a aria-label="48"></a>    main()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
 <aside class="notes">
 <p><strong>TEACHING NOTES:</strong></p>
 <ul>
@@ -679,7 +685,8 @@ Brandon M. Greenwell
 </section>
 <section id="practical-example-api-cli" class="slide level2">
 <h2>Practical example: API CLI</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a aria-label="1"></a><span class="co">"""Command-line interface for an API project."""</span></span>
+<div id="74287adc" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a aria-label="1"></a><span class="co">"""Command-line interface for an API project."""</span></span>
 <span id="cb6-2"><a aria-label="2"></a><span class="im">import</span> argparse</span>
 <span id="cb6-3"><a aria-label="3"></a><span class="im">import</span> sys</span>
 <span id="cb6-4"><a aria-label="4"></a><span class="im">from</span> typing <span class="im">import</span> Optional</span>
@@ -717,6 +724,7 @@ Brandon M. Greenwell
 <span id="cb6-36"><a aria-label="36"></a></span>
 <span id="cb6-37"><a aria-label="37"></a><span class="cf">if</span> <span class="va">__name__</span> <span class="op">==</span> <span class="st">"__main__"</span>:</span>
 <span id="cb6-38"><a aria-label="38"></a>    sys.exit(main())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
 <aside class="notes">
 <p><strong>TEACHING NOTES:</strong></p>
 <ul>
@@ -909,13 +917,15 @@ Brandon M. Greenwell
 ├── uv.lock                  # Exact resolved environment
 └── README.md               # Documentation</code></pre>
 <h3 id="using-this-structure"><strong>Using this structure:</strong></h3>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a aria-label="1"></a><span class="co"># In main.py</span></span>
+<div id="b388e3c5" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a aria-label="1"></a><span class="co"># In main.py</span></span>
 <span id="cb8-2"><a aria-label="2"></a><span class="im">from</span> my_api.cli <span class="im">import</span> main</span>
 <span id="cb8-3"><a aria-label="3"></a><span class="im">from</span> my_api.api <span class="im">import</span> fetch_data</span>
 <span id="cb8-4"><a aria-label="4"></a><span class="im">from</span> my_api.utils <span class="im">import</span> format_output</span>
 <span id="cb8-5"><a aria-label="5"></a></span>
 <span id="cb8-6"><a aria-label="6"></a><span class="cf">if</span> <span class="va">__name__</span> <span class="op">==</span> <span class="st">"__main__"</span>:</span>
 <span id="cb8-7"><a aria-label="7"></a>    main()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
 <aside class="notes">
 <p><strong>TEACHING NOTES:</strong></p>
 <ul>
@@ -942,10 +952,13 @@ Brandon M. Greenwell
 <section id="the-__init__.py-file-package-initialization" class="slide level2">
 <h2>The <code>__init__.py</code> file: package initialization</h2>
 <h3 id="empty-__init__.py-most-common"><strong>Empty <code>__init__.py</code> (most common):</strong></h3>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a aria-label="1"></a><span class="co"># my_api/__init__.py</span></span>
+<div id="c1ed1262" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a aria-label="1"></a><span class="co"># my_api/__init__.py</span></span>
 <span id="cb9-2"><a aria-label="2"></a><span class="co"># Empty file - marks directory as package</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
 <h3 id="with-initialization-code"><strong>With initialization code:</strong></h3>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a aria-label="1"></a><span class="co"># my_api/__init__.py</span></span>
+<div id="fcf2e9cc" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a aria-label="1"></a><span class="co"># my_api/__init__.py</span></span>
 <span id="cb10-2"><a aria-label="2"></a><span class="co">"""Public interface for the API client package."""</span></span>
 <span id="cb10-3"><a aria-label="3"></a></span>
 <span id="cb10-4"><a aria-label="4"></a><span class="co"># Import key functions for convenient access</span></span>
@@ -958,12 +971,15 @@ Brandon M. Greenwell
 <span id="cb10-11"><a aria-label="11"></a></span>
 <span id="cb10-12"><a aria-label="12"></a><span class="co"># Define public API - controls "from my_api import *"</span></span>
 <span id="cb10-13"><a aria-label="13"></a><span class="va">__all__</span> <span class="op">=</span> [<span class="st">"fetch_data"</span>, <span class="st">"APIClient"</span>, <span class="st">"format_output"</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
 <h3 id="usage-becomes-cleaner"><strong>Usage becomes cleaner:</strong></h3>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a aria-label="1"></a><span class="co"># Instead of: from my_api.api import fetch_data</span></span>
+<div id="d7ee1615" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a aria-label="1"></a><span class="co"># Instead of: from my_api.api import fetch_data</span></span>
 <span id="cb11-2"><a aria-label="2"></a><span class="co"># You can do: from my_api import fetch_data</span></span>
 <span id="cb11-3"><a aria-label="3"></a></span>
 <span id="cb11-4"><a aria-label="4"></a><span class="im">import</span> my_api</span>
 <span id="cb11-5"><a aria-label="5"></a><span class="bu">print</span>(my_api.__version__)  <span class="co"># 1.0.0</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
 <aside class="notes">
 <p><strong>TEACHING NOTES:</strong></p>
 <ul>
@@ -990,15 +1006,19 @@ Brandon M. Greenwell
 <section id="import-systems-absolute-and-relative" class="slide level2">
 <h2>Import systems: absolute and relative</h2>
 <h3 id="absolute-imports-preferred"><strong>Absolute imports (preferred):</strong></h3>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a aria-label="1"></a><span class="co"># my_api/cli.py</span></span>
+<div id="681ca335" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a aria-label="1"></a><span class="co"># my_api/cli.py</span></span>
 <span id="cb12-2"><a aria-label="2"></a><span class="im">from</span> my_api.api <span class="im">import</span> fetch_data</span>
 <span id="cb12-3"><a aria-label="3"></a><span class="im">from</span> my_api.utils <span class="im">import</span> format_output</span>
 <span id="cb12-4"><a aria-label="4"></a><span class="im">import</span> my_api</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
 <h3 id="relative-imports-within-a-package"><strong>Relative imports (within a package):</strong></h3>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a aria-label="1"></a><span class="co"># my_api/cli.py</span></span>
+<div id="4be28401" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a aria-label="1"></a><span class="co"># my_api/cli.py</span></span>
 <span id="cb13-2"><a aria-label="2"></a><span class="im">from</span> .api <span class="im">import</span> fetch_data        <span class="co"># Same directory</span></span>
 <span id="cb13-3"><a aria-label="3"></a><span class="im">from</span> .utils <span class="im">import</span> format_output   <span class="co"># Same directory</span></span>
 <span id="cb13-4"><a aria-label="4"></a><span class="im">from</span> ..other_package <span class="im">import</span> helper <span class="co"># Parent directory</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
 <h3 id="when-to-use-each"><strong>When to use each:</strong></h3>
 <ul>
 <li class="fragment"><strong>Absolute imports</strong>: Often clearer about the package a name comes from</li>
@@ -1037,7 +1057,8 @@ Brandon M. Greenwell
 <li class="fragment">This allows code to be both a <strong>script</strong> (runnable) and a <strong>module</strong> (importable)</li>
 </ul>
 <h3 id="the-pattern"><strong>The pattern:</strong></h3>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a aria-label="1"></a><span class="co"># my_api/api.py</span></span>
+<div id="0f24c1d7" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a aria-label="1"></a><span class="co"># my_api/api.py</span></span>
 <span id="cb14-2"><a aria-label="2"></a></span>
 <span id="cb14-3"><a aria-label="3"></a><span class="kw">def</span> fetch_data(api_name: <span class="bu">str</span>):</span>
 <span id="cb14-4"><a aria-label="4"></a>    <span class="co">"""Fetch data from an API."""</span></span>
@@ -1052,13 +1073,16 @@ Brandon M. Greenwell
 <span id="cb14-13"><a aria-label="13"></a><span class="co"># Script mode: runs when file is executed directly</span></span>
 <span id="cb14-14"><a aria-label="14"></a><span class="cf">if</span> <span class="va">__name__</span> <span class="op">==</span> <span class="st">"__main__"</span>:</span>
 <span id="cb14-15"><a aria-label="15"></a>    main()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
 <h3 id="usage"><strong>Usage:</strong></h3>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb15-1"><a aria-label="1"></a><span class="co"># Run as script</span></span>
 <span id="cb15-2"><a aria-label="2"></a><span class="ex">$</span> uv run python my_api/api.py</span>
 <span id="cb15-3"><a aria-label="3"></a><span class="ex">Fetching</span> from pokemon</span>
 <span id="cb15-4"><a aria-label="4"></a><span class="ex">{</span><span class="st">'data'</span><span class="ex">:</span> <span class="st">'example'</span>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a aria-label="1"></a><span class="co"># Import as module (main() doesn't run)</span></span>
+<div id="40e8ccce" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a aria-label="1"></a><span class="co"># Import as module (main() doesn't run)</span></span>
 <span id="cb16-2"><a aria-label="2"></a><span class="im">from</span> my_api.api <span class="im">import</span> fetch_data</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
 <aside class="notes">
 <p><strong>TEACHING NOTES:</strong></p>
 <ul>
@@ -1322,13 +1346,16 @@ Brandon M. Greenwell
 <section id="putting-it-all-together-cli-and-package-structure" class="slide level2">
 <h2>Putting it all together: CLI and package structure</h2>
 <h3 id="entry-point-main.py-or-srcmy_api_tool__main__.py"><strong>Entry point (<code>main.py</code> or <code>src/my_api_tool/__main__.py</code>):</strong></h3>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb22"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a aria-label="1"></a><span class="co">"""Entry point for the my_api_tool CLI."""</span></span>
+<div id="03f1ec25" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a aria-label="1"></a><span class="co">"""Entry point for the my_api_tool CLI."""</span></span>
 <span id="cb22-2"><a aria-label="2"></a><span class="im">from</span> my_api_tool.cli <span class="im">import</span> main</span>
 <span id="cb22-3"><a aria-label="3"></a></span>
 <span id="cb22-4"><a aria-label="4"></a><span class="cf">if</span> <span class="va">__name__</span> <span class="op">==</span> <span class="st">"__main__"</span>:</span>
 <span id="cb22-5"><a aria-label="5"></a>    main()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
 <h3 id="cli-module-srcmy_api_toolcli.py"><strong>CLI module (<code>src/my_api_tool/cli.py</code>):</strong></h3>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb23"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a aria-label="1"></a><span class="co">"""Command-line interface for API tool."""</span></span>
+<div id="52026d0e" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a aria-label="1"></a><span class="co">"""Command-line interface for API tool."""</span></span>
 <span id="cb23-2"><a aria-label="2"></a><span class="im">import</span> argparse</span>
 <span id="cb23-3"><a aria-label="3"></a><span class="im">import</span> sys</span>
 <span id="cb23-4"><a aria-label="4"></a><span class="im">from</span> my_api_tool.api_client <span class="im">import</span> APIClient</span>
@@ -1352,6 +1379,7 @@ Brandon M. Greenwell
 <span id="cb23-22"><a aria-label="22"></a></span>
 <span id="cb23-23"><a aria-label="23"></a><span class="cf">if</span> <span class="va">__name__</span> <span class="op">==</span> <span class="st">"__main__"</span>:</span>
 <span id="cb23-24"><a aria-label="24"></a>    sys.exit(main())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
 <h3 id="usage-after-install"><strong>Usage after install:</strong></h3>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb24"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb24-1"><a aria-label="1"></a><span class="ex">uv</span> sync</span>
 <span id="cb24-2"><a aria-label="2"></a><span class="ex">uv</span> run my-api-tool pokemon <span class="at">--format</span> json</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>

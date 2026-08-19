@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>IS4010: AI-Enhanced Application Development – IS 4010 - App Dev with AI</title>
+<title>IS4010: AI-enhanced application development – IS 4010 - App Dev with AI</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -311,49 +311,132 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#week-8-building-professional-python-applications" id="toc-week-8-building-professional-python-applications" class="nav-link active" data-scroll-target="#week-8-building-professional-python-applications">Week 8: Building Professional Python Applications</a></li>
-  <li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link" data-scroll-target="#learning-objectives">📚 Learning Objectives</a></li>
-  <li><a href="#setup" id="toc-setup" class="nav-link" data-scroll-target="#setup">🛠️ Setup</a></li>
-  <li><a href="#part-1-command-line-interfaces-with-argparse" id="toc-part-1-command-line-interfaces-with-argparse" class="nav-link" data-scroll-target="#part-1-command-line-interfaces-with-argparse">Part 1: Command-Line Interfaces with argparse</a>
+  <li><a href="#building-professional-python-applications" id="toc-building-professional-python-applications" class="nav-link active" data-scroll-target="#building-professional-python-applications">Building professional Python applications</a>
   <ul class="collapse">
-  <li><a href="#why-clis-matter" id="toc-why-clis-matter" class="nav-link" data-scroll-target="#why-clis-matter">Why CLIs Matter</a></li>
-  <li><a href="#basic-argparse-your-first-cli" id="toc-basic-argparse-your-first-cli" class="nav-link" data-scroll-target="#basic-argparse-your-first-cli">Basic argparse: Your First CLI</a>
-  <ul class="collapse">
-  <li><a href="#your-turn-exercise-1" id="toc-your-turn-exercise-1" class="nav-link" data-scroll-target="#your-turn-exercise-1">🎯 Your Turn: Exercise 1</a></li>
+  <li><a href="#from-scripts-to-maintainable-tools" id="toc-from-scripts-to-maintainable-tools" class="nav-link" data-scroll-target="#from-scripts-to-maintainable-tools">From scripts to maintainable tools</a></li>
   </ul></li>
-  <li><a href="#advanced-argparse-types-defaults-and-validation" id="toc-advanced-argparse-types-defaults-and-validation" class="nav-link" data-scroll-target="#advanced-argparse-types-defaults-and-validation">Advanced argparse: Types, Defaults, and Validation</a>
+  <li><a href="#part-1-command-line-interfaces" id="toc-part-1-command-line-interfaces" class="nav-link" data-scroll-target="#part-1-command-line-interfaces">Part 1: command-line interfaces</a>
   <ul class="collapse">
-  <li><a href="#your-turn-exercise-2" id="toc-your-turn-exercise-2" class="nav-link" data-scroll-target="#your-turn-exercise-2">🎯 Your Turn: Exercise 2</a></li>
-  </ul></li>
-  <li><a href="#subcommands-git-style-clis" id="toc-subcommands-git-style-clis" class="nav-link" data-scroll-target="#subcommands-git-style-clis">Subcommands: Git-Style CLIs</a>
+  <li><a href="#why-clis-matter-automation" id="toc-why-clis-matter-automation" class="nav-link" data-scroll-target="#why-clis-matter-automation">Why CLIs matter: automation</a>
   <ul class="collapse">
-  <li><a href="#your-turn-exercise-3" id="toc-your-turn-exercise-3" class="nav-link" data-scroll-target="#your-turn-exercise-3">🎯 Your Turn: Exercise 3</a></li>
+  <li><a href="#the-problem-manual-repetitive-tasks" id="toc-the-problem-manual-repetitive-tasks" class="nav-link" data-scroll-target="#the-problem-manual-repetitive-tasks"><strong>The problem</strong>: manual, repetitive tasks</a></li>
   </ul></li>
-  </ul></li>
-  <li><a href="#part-2-python-packages-project-structure" id="toc-part-2-python-packages-project-structure" class="nav-link" data-scroll-target="#part-2-python-packages-project-structure">Part 2: Python Packages &amp; Project Structure</a>
+  <li><a href="#cli-tools-in-the-wild" id="toc-cli-tools-in-the-wild" class="nav-link" data-scroll-target="#cli-tools-in-the-wild">CLI tools in the wild</a></li>
+  <li><a href="#introducing-argparse-pythons-built-in-cli-library" id="toc-introducing-argparse-pythons-built-in-cli-library" class="nav-link" data-scroll-target="#introducing-argparse-pythons-built-in-cli-library">Introducing <code>argparse</code>: Python’s built-in CLI library</a></li>
+  <li><a href="#cli-design-patterns-arguments-and-flags" id="toc-cli-design-patterns-arguments-and-flags" class="nav-link" data-scroll-target="#cli-design-patterns-arguments-and-flags">CLI design patterns: arguments and flags</a>
   <ul class="collapse">
-  <li><a href="#understanding-python-packages" id="toc-understanding-python-packages" class="nav-link" data-scroll-target="#understanding-python-packages">Understanding Python Packages</a></li>
-  <li><a href="#the-__name__-__main__-pattern" id="toc-the-__name__-__main__-pattern" class="nav-link" data-scroll-target="#the-__name__-__main__-pattern">The <code>__name__ == "__main__"</code> Pattern</a>
-  <ul class="collapse">
-  <li><a href="#why-this-matters" id="toc-why-this-matters" class="nav-link" data-scroll-target="#why-this-matters">Why This Matters</a></li>
+  <li><a href="#three-types-of-cli-inputs" id="toc-three-types-of-cli-inputs" class="nav-link" data-scroll-target="#three-types-of-cli-inputs"><strong>Three types of CLI inputs</strong></a></li>
+  <li><a href="#design-principles" id="toc-design-principles" class="nav-link" data-scroll-target="#design-principles"><strong>Design principles:</strong></a></li>
   </ul></li>
-  <li><a href="#package-structure-example" id="toc-package-structure-example" class="nav-link" data-scroll-target="#package-structure-example">Package Structure Example</a></li>
-  <li><a href="#the-__init__.py-file" id="toc-the-__init__.py-file" class="nav-link" data-scroll-target="#the-__init__.py-file">The <code>__init__.py</code> File</a>
+  <li><a href="#basic-argparse-your-first-cli" id="toc-basic-argparse-your-first-cli" class="nav-link" data-scroll-target="#basic-argparse-your-first-cli">Basic <code>argparse</code>: your first CLI</a></li>
+  <li><a href="#running-the-cli-usage-examples" id="toc-running-the-cli-usage-examples" class="nav-link" data-scroll-target="#running-the-cli-usage-examples">Running the CLI: usage examples</a>
   <ul class="collapse">
-  <li><a href="#your-turn-exercise-4" id="toc-your-turn-exercise-4" class="nav-link" data-scroll-target="#your-turn-exercise-4">🎯 Your Turn: Exercise 4</a></li>
+  <li><a href="#getting-help" id="toc-getting-help" class="nav-link" data-scroll-target="#getting-help"><strong>Getting help:</strong></a></li>
+  <li><a href="#using-the-tool" id="toc-using-the-tool" class="nav-link" data-scroll-target="#using-the-tool"><strong>Using the tool:</strong></a></li>
+  <li><a href="#your-turn-practice" id="toc-your-turn-practice" class="nav-link" data-scroll-target="#your-turn-practice">Your turn: practice</a></li>
   </ul></li>
-  <li><a href="#import-patterns-absolute-vs-relative" id="toc-import-patterns-absolute-vs-relative" class="nav-link" data-scroll-target="#import-patterns-absolute-vs-relative">Import Patterns: Absolute vs Relative</a></li>
-  <li><a href="#modern-python-pyproject.toml" id="toc-modern-python-pyproject.toml" class="nav-link" data-scroll-target="#modern-python-pyproject.toml">Modern Python: pyproject.toml</a></li>
-  </ul></li>
-  <li><a href="#putting-it-all-together-complete-example" id="toc-putting-it-all-together-complete-example" class="nav-link" data-scroll-target="#putting-it-all-together-complete-example">Putting It All Together: Complete Example</a>
+  <li><a href="#advanced-argparse-multiple-arguments-and-types" id="toc-advanced-argparse-multiple-arguments-and-types" class="nav-link" data-scroll-target="#advanced-argparse-multiple-arguments-and-types">Advanced <code>argparse</code>: multiple arguments and types</a>
   <ul class="collapse">
-  <li><a href="#your-turn-final-exercise" id="toc-your-turn-final-exercise" class="nav-link" data-scroll-target="#your-turn-final-exercise">🎯 Your Turn: Final Exercise</a></li>
+  <li><a href="#your-turn-practice-1" id="toc-your-turn-practice-1" class="nav-link" data-scroll-target="#your-turn-practice-1">Your turn: practice</a></li>
   </ul></li>
-  <li><a href="#next-steps-applying-to-your-final-project" id="toc-next-steps-applying-to-your-final-project" class="nav-link" data-scroll-target="#next-steps-applying-to-your-final-project">🚀 Next Steps: Applying to Your Final project</a>
+  <li><a href="#subcommands-building-multi-function-tools" id="toc-subcommands-building-multi-function-tools" class="nav-link" data-scroll-target="#subcommands-building-multi-function-tools">Subcommands: building multi-function tools</a>
   <ul class="collapse">
-  <li><a href="#action-items-for-this-week" id="toc-action-items-for-this-week" class="nav-link" data-scroll-target="#action-items-for-this-week">Action Items for This Week:</a></li>
-  <li><a href="#resources" id="toc-resources" class="nav-link" data-scroll-target="#resources">Resources</a></li>
-  <li><a href="#tips-for-success" id="toc-tips-for-success" class="nav-link" data-scroll-target="#tips-for-success">💡 Tips for Success</a></li>
+  <li><a href="#your-turn-practice-2" id="toc-your-turn-practice-2" class="nav-link" data-scroll-target="#your-turn-practice-2">Your turn: practice</a></li>
+  </ul></li>
+  <li><a href="#cli-usability-practices" id="toc-cli-usability-practices" class="nav-link" data-scroll-target="#cli-usability-practices">CLI usability practices</a></li>
+  <li><a href="#practical-example-api-cli" id="toc-practical-example-api-cli" class="nav-link" data-scroll-target="#practical-example-api-cli">Practical example: API CLI</a></li>
+  <li><a href="#ai-assisted-cli-development" id="toc-ai-assisted-cli-development" class="nav-link" data-scroll-target="#ai-assisted-cli-development">AI-assisted CLI development</a>
+  <ul class="collapse">
+  <li><a href="#prompt-strategies-for-building-clis" id="toc-prompt-strategies-for-building-clis" class="nav-link" data-scroll-target="#prompt-strategies-for-building-clis"><strong>Prompt strategies for building CLIs:</strong></a></li>
+  <li><a href="#cli-tasks-an-assistant-can-draft" id="toc-cli-tasks-an-assistant-can-draft" class="nav-link" data-scroll-target="#cli-tasks-an-assistant-can-draft"><strong>CLI tasks an assistant can draft:</strong></a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#part-2-python-packages-and-project-structure" id="toc-part-2-python-packages-and-project-structure" class="nav-link" data-scroll-target="#part-2-python-packages-and-project-structure">Part 2: Python packages and project structure</a>
+  <ul class="collapse">
+  <li><a href="#from-scripts-to-packages" id="toc-from-scripts-to-packages" class="nav-link" data-scroll-target="#from-scripts-to-packages">From scripts to packages</a>
+  <ul class="collapse">
+  <li><a href="#one-possible-progression" id="toc-one-possible-progression" class="nav-link" data-scroll-target="#one-possible-progression"><strong>One possible progression</strong></a></li>
+  </ul></li>
+  <li><a href="#why-package-structure-matters" id="toc-why-package-structure-matters" class="nav-link" data-scroll-target="#why-package-structure-matters">Why package structure matters</a>
+  <ul class="collapse">
+  <li><a href="#examples" id="toc-examples" class="nav-link" data-scroll-target="#examples"><strong>Examples</strong></a></li>
+  </ul></li>
+  <li><a href="#what-is-a-python-package" id="toc-what-is-a-python-package" class="nav-link" data-scroll-target="#what-is-a-python-package">What is a Python package?</a></li>
+  <li><a href="#basic-package-structure-a-practical-example" id="toc-basic-package-structure-a-practical-example" class="nav-link" data-scroll-target="#basic-package-structure-a-practical-example">Basic package structure: a practical example</a>
+  <ul class="collapse">
+  <li><a href="#using-this-structure" id="toc-using-this-structure" class="nav-link" data-scroll-target="#using-this-structure"><strong>Using this structure:</strong></a></li>
+  </ul></li>
+  <li><a href="#the-__init__.py-file-package-initialization" id="toc-the-__init__.py-file-package-initialization" class="nav-link" data-scroll-target="#the-__init__.py-file-package-initialization">The <code>__init__.py</code> file: package initialization</a>
+  <ul class="collapse">
+  <li><a href="#empty-__init__.py-most-common" id="toc-empty-__init__.py-most-common" class="nav-link" data-scroll-target="#empty-__init__.py-most-common"><strong>Empty <code>__init__.py</code> (most common):</strong></a></li>
+  <li><a href="#with-initialization-code" id="toc-with-initialization-code" class="nav-link" data-scroll-target="#with-initialization-code"><strong>With initialization code:</strong></a></li>
+  <li><a href="#usage-becomes-cleaner" id="toc-usage-becomes-cleaner" class="nav-link" data-scroll-target="#usage-becomes-cleaner"><strong>Usage becomes cleaner:</strong></a></li>
+  <li><a href="#your-turn-practice-3" id="toc-your-turn-practice-3" class="nav-link" data-scroll-target="#your-turn-practice-3">Your turn: practice</a></li>
+  </ul></li>
+  <li><a href="#import-systems-absolute-and-relative" id="toc-import-systems-absolute-and-relative" class="nav-link" data-scroll-target="#import-systems-absolute-and-relative">Import systems: absolute and relative</a>
+  <ul class="collapse">
+  <li><a href="#absolute-imports-preferred" id="toc-absolute-imports-preferred" class="nav-link" data-scroll-target="#absolute-imports-preferred"><strong>Absolute imports (preferred):</strong></a></li>
+  <li><a href="#relative-imports-within-a-package" id="toc-relative-imports-within-a-package" class="nav-link" data-scroll-target="#relative-imports-within-a-package"><strong>Relative imports (within a package):</strong></a></li>
+  <li><a href="#when-to-use-each" id="toc-when-to-use-each" class="nav-link" data-scroll-target="#when-to-use-each"><strong>When to use each:</strong></a></li>
+  </ul></li>
+  <li><a href="#the-__name__-__main__-pattern" id="toc-the-__name__-__main__-pattern" class="nav-link" data-scroll-target="#the-__name__-__main__-pattern">The <code>__name__ == "__main__"</code> pattern</a>
+  <ul class="collapse">
+  <li><a href="#understanding-python-execution" id="toc-understanding-python-execution" class="nav-link" data-scroll-target="#understanding-python-execution"><strong>Understanding Python execution:</strong></a></li>
+  <li><a href="#the-pattern" id="toc-the-pattern" class="nav-link" data-scroll-target="#the-pattern"><strong>The pattern:</strong></a></li>
+  <li><a href="#usage" id="toc-usage" class="nav-link" data-scroll-target="#usage"><strong>Usage:</strong></a></li>
+  </ul></li>
+  <li><a href="#the-src-project-layout" id="toc-the-src-project-layout" class="nav-link" data-scroll-target="#the-src-project-layout">The <code>src/</code> project layout</a>
+  <ul class="collapse">
+  <li><a href="#example-structure" id="toc-example-structure" class="nav-link" data-scroll-target="#example-structure"><strong>Example structure</strong></a></li>
+  <li><a href="#why-src-layout" id="toc-why-src-layout" class="nav-link" data-scroll-target="#why-src-layout"><strong>Why <code>src/</code> layout?</strong></a></li>
+  </ul></li>
+  <li><a href="#making-code-installable-pyproject.toml" id="toc-making-code-installable-pyproject.toml" class="nav-link" data-scroll-target="#making-code-installable-pyproject.toml">Making code installable: <code>pyproject.toml</code></a>
+  <ul class="collapse">
+  <li><a href="#modern-python-packaging-with-pyproject.toml" id="toc-modern-python-packaging-with-pyproject.toml" class="nav-link" data-scroll-target="#modern-python-packaging-with-pyproject.toml"><strong>Modern Python packaging with <code>pyproject.toml</code>:</strong></a></li>
+  <li><a href="#installing-in-editable-mode" id="toc-installing-in-editable-mode" class="nav-link" data-scroll-target="#installing-in-editable-mode"><strong>Installing in editable mode:</strong></a></li>
+  </ul></li>
+  <li><a href="#one-project-workflow-with-uv" id="toc-one-project-workflow-with-uv" class="nav-link" data-scroll-target="#one-project-workflow-with-uv">One project workflow with <code>uv</code></a>
+  <ul class="collapse">
+  <li><a href="#basic-usage" id="toc-basic-usage" class="nav-link" data-scroll-target="#basic-usage"><strong>Basic usage:</strong></a></li>
+  </ul></li>
+  <li><a href="#ai-assisted-package-scaffolding" id="toc-ai-assisted-package-scaffolding" class="nav-link" data-scroll-target="#ai-assisted-package-scaffolding">AI-assisted package scaffolding</a>
+  <ul class="collapse">
+  <li><a href="#prompt-strategies-for-project-structure" id="toc-prompt-strategies-for-project-structure" class="nav-link" data-scroll-target="#prompt-strategies-for-project-structure"><strong>Prompt strategies for project structure:</strong></a></li>
+  <li><a href="#package-tasks-an-assistant-can-draft" id="toc-package-tasks-an-assistant-can-draft" class="nav-link" data-scroll-target="#package-tasks-an-assistant-can-draft"><strong>Package tasks an assistant can draft:</strong></a></li>
+  </ul></li>
+  <li><a href="#practical-example-final-project-structure" id="toc-practical-example-final-project-structure" class="nav-link" data-scroll-target="#practical-example-final-project-structure">Practical example: final-project structure</a>
+  <ul class="collapse">
+  <li><a href="#one-possible-structure-for-the-final-project" id="toc-one-possible-structure-for-the-final-project" class="nav-link" data-scroll-target="#one-possible-structure-for-the-final-project"><strong>One possible structure for the final project</strong></a></li>
+  </ul></li>
+  <li><a href="#putting-it-all-together-cli-and-package-structure" id="toc-putting-it-all-together-cli-and-package-structure" class="nav-link" data-scroll-target="#putting-it-all-together-cli-and-package-structure">Putting it all together: CLI and package structure</a>
+  <ul class="collapse">
+  <li><a href="#entry-point-main.py-or-srcmy_api_tool__main__.py" id="toc-entry-point-main.py-or-srcmy_api_tool__main__.py" class="nav-link" data-scroll-target="#entry-point-main.py-or-srcmy_api_tool__main__.py"><strong>Entry point (<code>main.py</code> or <code>src/my_api_tool/__main__.py</code>):</strong></a></li>
+  <li><a href="#cli-module-srcmy_api_toolcli.py" id="toc-cli-module-srcmy_api_toolcli.py" class="nav-link" data-scroll-target="#cli-module-srcmy_api_toolcli.py"><strong>CLI module (<code>src/my_api_tool/cli.py</code>):</strong></a></li>
+  <li><a href="#usage-after-install" id="toc-usage-after-install" class="nav-link" data-scroll-target="#usage-after-install"><strong>Usage after install:</strong></a></li>
+  <li><a href="#your-turn-final-exercise" id="toc-your-turn-final-exercise" class="nav-link" data-scroll-target="#your-turn-final-exercise">Your turn: final exercise</a></li>
+  </ul></li>
+  <li><a href="#bridge-to-rust-a-preview-of-next-week" id="toc-bridge-to-rust-a-preview-of-next-week" class="nav-link" data-scroll-target="#bridge-to-rust-a-preview-of-next-week">Bridge to Rust: a preview of next week</a>
+  <ul class="collapse">
+  <li><a href="#python-packaging-challenges-weve-seen" id="toc-python-packaging-challenges-weve-seen" class="nav-link" data-scroll-target="#python-packaging-challenges-weve-seen"><strong>Python packaging challenges we’ve seen:</strong></a></li>
+  <li><a href="#next-week-in-rust" id="toc-next-week-in-rust" class="nav-link" data-scroll-target="#next-week-in-rust"><strong>Next week in Rust:</strong></a></li>
+  </ul></li>
+  <li><a href="#resources-and-further-learning" id="toc-resources-and-further-learning" class="nav-link" data-scroll-target="#resources-and-further-learning">Resources and further learning</a>
+  <ul class="collapse">
+  <li><a href="#official-documentation" id="toc-official-documentation" class="nav-link" data-scroll-target="#official-documentation"><strong>Official documentation</strong></a></li>
+  <li><a href="#advanced-topics" id="toc-advanced-topics" class="nav-link" data-scroll-target="#advanced-topics"><strong>Advanced topics</strong></a></li>
+  </ul></li>
+  <li><a href="#applying-this-to-the-final-project" id="toc-applying-this-to-the-final-project" class="nav-link" data-scroll-target="#applying-this-to-the-final-project">Applying this to the final project</a>
+  <ul class="collapse">
+  <li><a href="#this-weeks-work-session" id="toc-this-weeks-work-session" class="nav-link" data-scroll-target="#this-weeks-work-session"><strong>This week’s work session</strong></a></li>
+  <li><a href="#success-criteria" id="toc-success-criteria" class="nav-link" data-scroll-target="#success-criteria"><strong>Success criteria</strong></a></li>
+  </ul></li>
+  <li><a href="#summary-key-takeaways" id="toc-summary-key-takeaways" class="nav-link" data-scroll-target="#summary-key-takeaways">Summary: key takeaways</a></li>
+  <li><a href="#lab-08-checkpoint-weather-cli" id="toc-lab-08-checkpoint-weather-cli" class="nav-link" data-scroll-target="#lab-08-checkpoint-weather-cli">Lab 08 checkpoint: weather CLI</a></li>
+  <li><a href="#work-session-build-a-maintainable-python-application" id="toc-work-session-build-a-maintainable-python-application" class="nav-link" data-scroll-target="#work-session-build-a-maintainable-python-application">Work session: build a maintainable Python application</a>
+  <ul class="collapse">
+  <li><a href="#todays-goals" id="toc-todays-goals" class="nav-link" data-scroll-target="#todays-goals"><strong>Today’s goals</strong></a></li>
+  <li><a href="#need-help" id="toc-need-help" class="nav-link" data-scroll-target="#need-help"><strong>Need help?</strong></a></li>
+  </ul></li>
   </ul></li>
   </ul>
 </nav>
@@ -363,7 +446,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">IS4010: AI-Enhanced Application Development</h1>
+<h1 class="title">IS4010: AI-enhanced application development</h1>
 </div>
 
 
@@ -380,527 +463,818 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="week-8-building-professional-python-applications" class="level2">
-<h2 class="anchored" data-anchor-id="week-8-building-professional-python-applications">Week 8: Building Professional Python Applications</h2>
-<p><strong>Instructor:</strong> Brandon M. Greenwell<br>
-<strong>Focus:</strong> Command-Line Interfaces &amp; Python Package Structure</p>
+<p>Week 08: Building professional Python applications</p>
+<p>Brandon M. Greenwell</p>
+<section id="building-professional-python-applications" class="level1">
+<h1>Building professional Python applications</h1>
+<section id="from-scripts-to-maintainable-tools" class="level2">
+<h2 class="anchored" data-anchor-id="from-scripts-to-maintainable-tools">From scripts to maintainable tools</h2>
+<ul>
+<li><strong>Application development</strong> adds a clear interface, structure, tests, and documentation to a script</li>
+<li><strong>Command-line interfaces (CLIs)</strong>: A composable interface for automation and developer tools</li>
+<li><strong>Package structure</strong>: Organizing code for reusability, testing, and distribution</li>
+<li><strong>Final project connection</strong>: Every project needs a usable CLI, tests, documentation, and a repeatable environment</li>
+</ul>
 <hr>
 </section>
-<section id="learning-objectives" class="level2">
-<h2 class="anchored" data-anchor-id="learning-objectives">📚 Learning Objectives</h2>
-<p>By the end of this notebook, you will be able to:</p>
-<ol type="1">
-<li><strong>Create professional CLI applications</strong> using Python’s <code>argparse</code> library</li>
-<li><strong>Design intuitive command-line interfaces</strong> with positional arguments, flags, and subcommands</li>
-<li><strong>Structure Python projects</strong> as proper packages with <code>__init__.py</code> and clean imports</li>
-<li><strong>Understand the <code>__name__ == "__main__"</code> pattern</strong> for dual-purpose scripts</li>
-<li><strong>Make your code installable</strong> using modern <code>pyproject.toml</code> configuration</li>
-<li><strong>Apply these patterns</strong> to your final project for professional-quality code</li>
-</ol>
+</section>
+<section id="part-1-command-line-interfaces" class="level1">
+<h1>Part 1: command-line interfaces</h1>
+<hr>
+<section id="why-clis-matter-automation" class="level2">
+<h2 class="anchored" data-anchor-id="why-clis-matter-automation">Why CLIs matter: automation</h2>
+<section id="the-problem-manual-repetitive-tasks" class="level3">
+<h3 class="anchored" data-anchor-id="the-problem-manual-repetitive-tasks"><strong>The problem</strong>: manual, repetitive tasks</h3>
+<ul>
+<li><strong>Scenario</strong>: You need to fetch data from an API multiple times per day</li>
+<li><strong>Manual approach</strong>: Open browser, navigate to site, copy data, paste into file</li>
+<li><strong>Repeated work</strong>: Manual steps take time and can be difficult to reproduce</li>
+<li><strong>Error-prone</strong>: Manual copy-paste leads to mistakes and inconsistencies</li>
+<li><strong>Solution</strong>: A CLI tool that makes the steps repeatable with one command</li>
+</ul>
 <hr>
 </section>
-<section id="setup" class="level2">
-<h2 class="anchored" data-anchor-id="setup">🛠️ Setup</h2>
-<p>This notebook contains executable examples. Run each cell in order to follow along.</p>
-<div id="cell-2" class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Import required libraries</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> argparse</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sys</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> typing <span class="im">import</span> Optional, List</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"✅ Setup complete! Ready to build professional Python applications."</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
+</section>
+<section id="cli-tools-in-the-wild" class="level2">
+<h2 class="anchored" data-anchor-id="cli-tools-in-the-wild">CLI tools in the wild</h2>
+<ul>
+<li><strong>Version control</strong>: <a href="https://git-scm.com/docs"><code>git</code></a> - <code>git add</code>, <code>git commit</code>, <code>git push</code></li>
+<li><strong>Python project management</strong>: <a href="https://docs.astral.sh/uv/"><code>uv</code></a> - <code>uv sync</code>, <code>uv add</code>, <code>uv run</code></li>
+<li><strong>Web frameworks</strong>: <a href="https://docs.djangoproject.com/en/stable/ref/django-admin/"><code>django-admin</code></a> - <code>startproject</code>, <code>migrate</code>, <code>runserver</code></li>
+<li><strong>AWS CLI</strong>: <a href="https://aws.amazon.com/cli/"><code>aws</code></a> - Manage cloud infrastructure from the terminal</li>
+<li><strong>Data science</strong>: <a href="https://jupyter.readthedocs.io/en/latest/running.html"><code>jupyter</code></a> - <code>jupyter notebook</code>, <code>jupyter lab</code></li>
+<li><strong>Your final project</strong>: Provide the working CLI required by the rubric</li>
+</ul>
 <hr>
 </section>
-<section id="part-1-command-line-interfaces-with-argparse" class="level1">
-<h1>Part 1: Command-Line Interfaces with argparse</h1>
-<section id="why-clis-matter" class="level2">
-<h2 class="anchored" data-anchor-id="why-clis-matter">Why CLIs Matter</h2>
-<p>Command-line interfaces (CLIs) are essential for: - <strong>Automation</strong>: Run tasks without manual interaction - <strong>Scripting</strong>: Chain multiple commands together - <strong>Professional tools</strong>: Git, pip, docker - all CLIs - <strong>Career skills</strong>: Every Python job uses CLI tools</p>
-<p>You’ve already used many CLIs: <code>git</code>, <code>pip</code>, <code>python</code>, <code>jupyter</code></p>
+<section id="introducing-argparse-pythons-built-in-cli-library" class="level2">
+<h2 class="anchored" data-anchor-id="introducing-argparse-pythons-built-in-cli-library">Introducing <code>argparse</code>: Python’s built-in CLI library</h2>
+<ul>
+<li><strong><a href="https://docs.python.org/3/library/argparse.html"><code>argparse</code></a></strong> is Python’s standard library for creating command-line interfaces</li>
+<li><strong>Built-in</strong>: No installation required, part of Python’s standard library</li>
+<li><strong>Capabilities</strong>: Handles arguments, flags, subcommands, help text, and validation</li>
+<li><strong>Automatic help</strong>: Generates <code>--help</code> output from the parser definition</li>
+<li><strong>Established tool</strong>: Used by many Python command-line applications</li>
+<li><strong>Alternatives</strong>: <a href="https://click.palletsprojects.com/">Click</a> and <a href="https://typer.tiangolo.com/">Typer</a> offer different APIs when a project needs them</li>
+</ul>
 <hr>
+</section>
+<section id="cli-design-patterns-arguments-and-flags" class="level2">
+<h2 class="anchored" data-anchor-id="cli-design-patterns-arguments-and-flags">CLI design patterns: arguments and flags</h2>
+<section id="three-types-of-cli-inputs" class="level3">
+<h3 class="anchored" data-anchor-id="three-types-of-cli-inputs"><strong>Three types of CLI inputs</strong></h3>
+<ul>
+<li><strong>Positional arguments</strong>: Required, order matters - <code>git commit message.txt</code></li>
+<li><strong>Optional arguments (flags)</strong>: Named, order flexible - <code>git commit --amend -m "Fix bug"</code></li>
+<li><strong>Subcommands</strong>: Different actions in one tool - <code>git add</code> vs <code>git commit</code></li>
+</ul>
+</section>
+<section id="design-principles" class="level3">
+<h3 class="anchored" data-anchor-id="design-principles"><strong>Design principles:</strong></h3>
+<ul>
+<li><strong>Intuitive</strong>: Users should guess the correct syntax</li>
+<li><strong>Consistent</strong>: Follow conventions from popular tools</li>
+<li><strong>Helpful</strong>: Provide clear error messages and help text</li>
+<li><strong>Forgiving</strong>: Accept common variations and abbreviations</li>
+</ul>
+<hr>
+</section>
 </section>
 <section id="basic-argparse-your-first-cli" class="level2">
-<h2 class="anchored" data-anchor-id="basic-argparse-your-first-cli">Basic argparse: Your First CLI</h2>
-<div id="cell-4" class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Example 1: Simple greeter CLI</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> create_greeter_parser():</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Create a parser for a simple greeting tool."""</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    parser <span class="op">=</span> argparse.ArgumentParser(</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>        description<span class="op">=</span><span class="st">"A simple greeting tool"</span>,</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>        epilog<span class="op">=</span><span class="st">"Thanks for using the greeter!"</span></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Positional argument (required)</span></span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>    parser.add_argument(</span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>        <span class="st">"name"</span>,</span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>        <span class="bu">help</span><span class="op">=</span><span class="st">"The name of the person to greet"</span></span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Optional flag</span></span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>    parser.add_argument(</span>
-<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>        <span class="st">"--loud"</span>,</span>
-<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>        action<span class="op">=</span><span class="st">"store_true"</span>,</span>
-<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>        <span class="bu">help</span><span class="op">=</span><span class="st">"Greet in ALL CAPS"</span></span>
-<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> parser</span>
-<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a><span class="co"># Test it out (simulating command-line arguments)</span></span>
-<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>parser <span class="op">=</span> create_greeter_parser()</span>
-<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a><span class="co"># Simulate: uv run python greeter.py Alice</span></span>
-<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>args <span class="op">=</span> parser.parse_args([<span class="st">"Alice"</span>])</span>
-<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a>greeting <span class="op">=</span> <span class="ss">f"Hello, </span><span class="sc">{</span>args<span class="sc">.</span>name<span class="sc">}</span><span class="ss">!"</span></span>
-<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> args.loud:</span>
-<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a>    greeting <span class="op">=</span> greeting.upper()</span>
-<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(greeting)</span>
-<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a><span class="co"># Simulate: uv run python greeter.py Bob --loud</span></span>
-<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a>args <span class="op">=</span> parser.parse_args([<span class="st">"Bob"</span>, <span class="st">"--loud"</span>])</span>
-<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a>greeting <span class="op">=</span> <span class="ss">f"Hello, </span><span class="sc">{</span>args<span class="sc">.</span>name<span class="sc">}</span><span class="ss">!"</span></span>
-<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> args.loud:</span>
-<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a>    greeting <span class="op">=</span> greeting.upper()</span>
-<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(greeting)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<h2 class="anchored" data-anchor-id="basic-argparse-your-first-cli">Basic <code>argparse</code>: your first CLI</h2>
+<div id="aa6058d4" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">"""simple_greeter.py - A friendly CLI greeter."""</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> argparse</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> main():</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Create the parser</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    parser <span class="op">=</span> argparse.ArgumentParser(</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>        description<span class="op">=</span><span class="st">"A simple greeting tool"</span>,</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>        epilog<span class="op">=</span><span class="st">"Thanks for using the greeter!"</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Add positional argument (required)</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>    parser.add_argument(</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>        <span class="st">"name"</span>,</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>        <span class="bu">help</span><span class="op">=</span><span class="st">"The name of the person to greet"</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Add optional flag</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>    parser.add_argument(</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>        <span class="st">"--loud"</span>,</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>        action<span class="op">=</span><span class="st">"store_true"</span>,</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>        <span class="bu">help</span><span class="op">=</span><span class="st">"Greet in ALL CAPS"</span></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Parse the arguments</span></span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>    args <span class="op">=</span> parser.parse_args()</span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Use the arguments</span></span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>    greeting <span class="op">=</span> <span class="ss">f"Hello, </span><span class="sc">{</span>args<span class="sc">.</span>name<span class="sc">}</span><span class="ss">!"</span></span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> args.loud:</span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>        greeting <span class="op">=</span> greeting.upper()</span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(greeting)</span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="va">__name__</span> <span class="op">==</span> <span class="st">"__main__"</span>:</span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>    main()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<section id="your-turn-exercise-1" class="level3">
-<h3 class="anchored" data-anchor-id="your-turn-exercise-1">🎯 Your Turn: Exercise 1</h3>
+<hr>
+</section>
+<section id="running-the-cli-usage-examples" class="level2">
+<h2 class="anchored" data-anchor-id="running-the-cli-usage-examples">Running the CLI: usage examples</h2>
+<section id="getting-help" class="level3">
+<h3 class="anchored" data-anchor-id="getting-help"><strong>Getting help:</strong></h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> uv run python simple_greeter.py <span class="at">--help</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="ex">usage:</span> simple_greeter.py <span class="pp">[-</span><span class="ss">h</span><span class="pp">]</span> <span class="pp">[--</span><span class="ss">loud</span><span class="pp">]</span> name</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="ex">A</span> simple greeting tool</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="ex">positional</span> arguments:</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  <span class="ex">name</span>        The name of the person to greet</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="ex">options:</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>  <span class="ex">-h,</span> <span class="at">--help</span>  show this help message and exit</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>  <span class="ex">--loud</span>      Greet in ALL CAPS</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="ex">Thanks</span> for using the greeter!</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="using-the-tool" class="level3">
+<h3 class="anchored" data-anchor-id="using-the-tool"><strong>Using the tool:</strong></h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> uv run python simple_greeter.py Alice</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="ex">Hello,</span> Alice!</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> uv run python simple_greeter.py Bob <span class="at">--loud</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="ex">HELLO,</span> BOB!</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> uv run python simple_greeter.py</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="ex">usage:</span> simple_greeter.py <span class="pp">[-</span><span class="ss">h</span><span class="pp">]</span> <span class="pp">[--</span><span class="ss">loud</span><span class="pp">]</span> name</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="ex">simple_greeter.py:</span> error: the following arguments are required: name</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<hr>
+</section>
+<section id="your-turn-practice" class="level3">
+<h3 class="anchored" data-anchor-id="your-turn-practice">Your turn: practice</h3>
 <p>Create a CLI calculator that: 1. Takes two numbers as positional arguments 2. Has a <code>--operation</code> flag with choices: add, subtract, multiply, divide 3. Prints the result</p>
 <p>Example usage:</p>
 <pre><code>uv run python calculator.py 10 5 --operation add     # Should print 15
 uv run python calculator.py 10 5 --operation multiply # Should print 50</code></pre>
-<div id="cell-6" class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Your code here</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> create_calculator_parser():</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Create a parser for a calculator CLI."""</span></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    parser <span class="op">=</span> argparse.ArgumentParser(description<span class="op">=</span><span class="st">"Simple calculator"</span>)</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    <span class="co"># </span><span class="al">TODO</span><span class="co">: Add positional arguments for two numbers</span></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    <span class="co"># </span><span class="al">TODO</span><span class="co">: Add --operation flag with choices</span></span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> parser</span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Test your calculator</span></span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="co"># parser = create_calculator_parser()</span></span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a><span class="co"># args = parser.parse_args(["10", "5", "--operation", "add"])</span></span>
-<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a><span class="co"># print(f"Result: {args.num1 + args.num2}")  # Adjust based on your implementation</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="e3e98186" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Your code here</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> create_calculator_parser():</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Create a parser for a calculator CLI."""</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    parser <span class="op">=</span> argparse.ArgumentParser(description<span class="op">=</span><span class="st">"Simple calculator"</span>)</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    <span class="co"># </span><span class="al">TODO</span><span class="co">: Add positional arguments for two numbers</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    <span class="co"># </span><span class="al">TODO</span><span class="co">: Add --operation flag with choices</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> parser</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Test your calculator</span></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a><span class="co"># parser = create_calculator_parser()</span></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a><span class="co"># args = parser.parse_args(["10", "5", "--operation", "add"])</span></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a><span class="co"># print(f"Result: {args.num1 + args.num2}")  # Adjust based on your implementation</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+</section>
+<section id="advanced-argparse-multiple-arguments-and-types" class="level2">
+<h2 class="anchored" data-anchor-id="advanced-argparse-multiple-arguments-and-types">Advanced <code>argparse</code>: multiple arguments and types</h2>
+<div id="9d3d4c3a" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co">"""api_fetcher.py - Fetch data from APIs with configurable options."""</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> argparse</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> fetch_data(api_name: <span class="bu">str</span>, resource: <span class="bu">str</span>, limit: <span class="bu">int</span>, output_file: <span class="bu">str</span> <span class="op">=</span> <span class="va">None</span>):</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Fetch data from an API (implementation details omitted)."""</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"Fetching </span><span class="sc">{</span>limit<span class="sc">}</span><span class="ss"> </span><span class="sc">{</span>resource<span class="sc">}</span><span class="ss"> from </span><span class="sc">{</span>api_name<span class="sc">}</span><span class="ss">..."</span>)</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> output_file:</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f"Saving to </span><span class="sc">{</span>output_file<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Actual API call would go here</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> {<span class="st">"status"</span>: <span class="st">"success"</span>, <span class="st">"count"</span>: limit}</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> main():</span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>    parser <span class="op">=</span> argparse.ArgumentParser(</span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>        description<span class="op">=</span><span class="st">"Fetch data from various APIs"</span></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Positional arguments</span></span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>    parser.add_argument(<span class="st">"api"</span>, <span class="bu">help</span><span class="op">=</span><span class="st">"API name (e.g., 'pokemon', 'jokes', 'weather')"</span>)</span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>    parser.add_argument(<span class="st">"resource"</span>, <span class="bu">help</span><span class="op">=</span><span class="st">"Resource to fetch (e.g., 'pikachu', 'random')"</span>)</span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Optional arguments with types</span></span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a>    parser.add_argument(</span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a>        <span class="st">"-l"</span>, <span class="st">"--limit"</span>,</span>
+<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a>        <span class="bu">type</span><span class="op">=</span><span class="bu">int</span>,</span>
+<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a>        default<span class="op">=</span><span class="dv">10</span>,</span>
+<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a>        <span class="bu">help</span><span class="op">=</span><span class="st">"Number of items to fetch (default: 10)"</span></span>
+<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a>    parser.add_argument(</span>
+<span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a>        <span class="st">"-o"</span>, <span class="st">"--output"</span>,</span>
+<span id="cb6-31"><a href="#cb6-31" aria-hidden="true" tabindex="-1"></a>        <span class="bu">help</span><span class="op">=</span><span class="st">"Output file path (if not specified, prints to console)"</span></span>
+<span id="cb6-32"><a href="#cb6-32" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb6-33"><a href="#cb6-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-34"><a href="#cb6-34" aria-hidden="true" tabindex="-1"></a>    parser.add_argument(</span>
+<span id="cb6-35"><a href="#cb6-35" aria-hidden="true" tabindex="-1"></a>        <span class="st">"--format"</span>,</span>
+<span id="cb6-36"><a href="#cb6-36" aria-hidden="true" tabindex="-1"></a>        choices<span class="op">=</span>[<span class="st">"json"</span>, <span class="st">"csv"</span>, <span class="st">"txt"</span>],</span>
+<span id="cb6-37"><a href="#cb6-37" aria-hidden="true" tabindex="-1"></a>        default<span class="op">=</span><span class="st">"json"</span>,</span>
+<span id="cb6-38"><a href="#cb6-38" aria-hidden="true" tabindex="-1"></a>        <span class="bu">help</span><span class="op">=</span><span class="st">"Output format (default: json)"</span></span>
+<span id="cb6-39"><a href="#cb6-39" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb6-40"><a href="#cb6-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-41"><a href="#cb6-41" aria-hidden="true" tabindex="-1"></a>    args <span class="op">=</span> parser.parse_args()</span>
+<span id="cb6-42"><a href="#cb6-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-43"><a href="#cb6-43" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Call the function with parsed arguments</span></span>
+<span id="cb6-44"><a href="#cb6-44" aria-hidden="true" tabindex="-1"></a>    result <span class="op">=</span> fetch_data(args.api, args.resource, args.limit, args.output)</span>
+<span id="cb6-45"><a href="#cb6-45" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"Result: </span><span class="sc">{</span>result<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb6-46"><a href="#cb6-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-47"><a href="#cb6-47" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="va">__name__</span> <span class="op">==</span> <span class="st">"__main__"</span>:</span>
+<span id="cb6-48"><a href="#cb6-48" aria-hidden="true" tabindex="-1"></a>    main()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <hr>
-</section>
-</section>
-<section id="advanced-argparse-types-defaults-and-validation" class="level2">
-<h2 class="anchored" data-anchor-id="advanced-argparse-types-defaults-and-validation">Advanced argparse: Types, Defaults, and Validation</h2>
-<div id="cell-8" class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Example 2: API fetcher with multiple argument types</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> create_api_fetcher_parser():</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Create a parser for an API data fetcher."""</span></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    parser <span class="op">=</span> argparse.ArgumentParser(</span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>        description<span class="op">=</span><span class="st">"Fetch data from various APIs"</span></span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Positional arguments</span></span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>    parser.add_argument(<span class="st">"api"</span>, <span class="bu">help</span><span class="op">=</span><span class="st">"API name (e.g., 'pokemon', 'weather')"</span>)</span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>    parser.add_argument(<span class="st">"resource"</span>, <span class="bu">help</span><span class="op">=</span><span class="st">"Resource to fetch"</span>)</span>
-<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Optional argument with type conversion</span></span>
-<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>    parser.add_argument(</span>
-<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>        <span class="st">"-l"</span>, <span class="st">"--limit"</span>,</span>
-<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>        <span class="bu">type</span><span class="op">=</span><span class="bu">int</span>,</span>
-<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>        default<span class="op">=</span><span class="dv">10</span>,</span>
-<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>        <span class="bu">help</span><span class="op">=</span><span class="st">"Number of items to fetch (default: 10)"</span></span>
-<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Choices restriction</span></span>
-<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a>    parser.add_argument(</span>
-<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a>        <span class="st">"--format"</span>,</span>
-<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a>        choices<span class="op">=</span>[<span class="st">"json"</span>, <span class="st">"csv"</span>, <span class="st">"txt"</span>],</span>
-<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a>        default<span class="op">=</span><span class="st">"json"</span>,</span>
-<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a>        <span class="bu">help</span><span class="op">=</span><span class="st">"Output format (default: json)"</span></span>
-<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb5-29"><a href="#cb5-29" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Optional output file</span></span>
-<span id="cb5-30"><a href="#cb5-30" aria-hidden="true" tabindex="-1"></a>    parser.add_argument(</span>
-<span id="cb5-31"><a href="#cb5-31" aria-hidden="true" tabindex="-1"></a>        <span class="st">"-o"</span>, <span class="st">"--output"</span>,</span>
-<span id="cb5-32"><a href="#cb5-32" aria-hidden="true" tabindex="-1"></a>        <span class="bu">help</span><span class="op">=</span><span class="st">"Output file path (prints to console if not specified)"</span></span>
-<span id="cb5-33"><a href="#cb5-33" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb5-34"><a href="#cb5-34" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb5-35"><a href="#cb5-35" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> parser</span>
-<span id="cb5-36"><a href="#cb5-36" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-37"><a href="#cb5-37" aria-hidden="true" tabindex="-1"></a><span class="co"># Test the parser</span></span>
-<span id="cb5-38"><a href="#cb5-38" aria-hidden="true" tabindex="-1"></a>parser <span class="op">=</span> create_api_fetcher_parser()</span>
-<span id="cb5-39"><a href="#cb5-39" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-40"><a href="#cb5-40" aria-hidden="true" tabindex="-1"></a><span class="co"># Simulate: uv run python api_fetcher.py pokemon pikachu -l 5 --format json</span></span>
-<span id="cb5-41"><a href="#cb5-41" aria-hidden="true" tabindex="-1"></a>args <span class="op">=</span> parser.parse_args([<span class="st">"pokemon"</span>, <span class="st">"pikachu"</span>, <span class="st">"-l"</span>, <span class="st">"5"</span>, <span class="st">"--format"</span>, <span class="st">"json"</span>])</span>
-<span id="cb5-42"><a href="#cb5-42" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Fetching </span><span class="sc">{</span>args<span class="sc">.</span>limit<span class="sc">}</span><span class="ss"> </span><span class="sc">{</span>args<span class="sc">.</span>resource<span class="sc">}</span><span class="ss"> from </span><span class="sc">{</span>args<span class="sc">.</span>api<span class="sc">}</span><span class="ss"> API"</span>)</span>
-<span id="cb5-43"><a href="#cb5-43" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Format: </span><span class="sc">{</span>args<span class="sc">.</span><span class="bu">format</span><span class="sc">}</span><span class="ss">"</span>)</span>
-<span id="cb5-44"><a href="#cb5-44" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Output: </span><span class="sc">{</span>args<span class="sc">.</span>output <span class="cf">if</span> args<span class="sc">.</span>output <span class="cf">else</span> <span class="st">'console'</span><span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<section id="your-turn-exercise-2" class="level3">
-<h3 class="anchored" data-anchor-id="your-turn-exercise-2">🎯 Your Turn: Exercise 2</h3>
+<section id="your-turn-practice-1" class="level3">
+<h3 class="anchored" data-anchor-id="your-turn-practice-1">Your turn: practice</h3>
 <p>Create a file processor CLI that: 1. Takes a filename as positional argument 2. Has <code>--lines</code> flag (integer) for number of lines to process (default: 10) 3. Has <code>--mode</code> flag with choices: read, count, search 4. Has <code>--pattern</code> flag (string) for search mode</p>
 <p>Print out what the tool would do based on the arguments.</p>
-<div id="cell-10" class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Your code here</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> create_file_processor_parser():</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Create a parser for a file processing tool."""</span></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    <span class="co"># </span><span class="al">TODO</span><span class="co">: Implement the parser</span></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">pass</span></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Test your parser</span></span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="co"># parser = create_file_processor_parser()</span></span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="co"># args = parser.parse_args(["data.txt", "--lines", "20", "--mode", "search", "--pattern", "error"])</span></span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="co"># print(f"Processing {args.filename}: {args.mode} mode, {args.lines} lines")</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="9a0b79ed" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Your code here</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> create_file_processor_parser():</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Create a parser for a file processing tool."""</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    <span class="co"># </span><span class="al">TODO</span><span class="co">: Implement the parser</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">pass</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Test your parser</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="co"># parser = create_file_processor_parser()</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="co"># args = parser.parse_args(["data.txt", "--lines", "20", "--mode", "search", "--pattern", "error"])</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="co"># print(f"Processing {args.filename}: {args.mode} mode, {args.lines} lines")</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+</section>
+<section id="subcommands-building-multi-function-tools" class="level2">
+<h2 class="anchored" data-anchor-id="subcommands-building-multi-function-tools">Subcommands: building multi-function tools</h2>
+<div id="4d83c21d" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co">"""project_manager.py - Manage your project with subcommands."""</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> argparse</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> cmd_init(args):</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Initialize a new project."""</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"Initializing project: </span><span class="sc">{</span>args<span class="sc">.</span>name<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"Template: </span><span class="sc">{</span>args<span class="sc">.</span>template<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> cmd_build(args):</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Build the project."""</span></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"Building project..."</span>)</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> args.verbose:</span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">"Verbose output enabled"</span>)</span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> cmd_deploy(args):</span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Deploy the project."""</span></span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"Deploying to </span><span class="sc">{</span>args<span class="sc">.</span>environment<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> main():</span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>    parser <span class="op">=</span> argparse.ArgumentParser(description<span class="op">=</span><span class="st">"Project management tool"</span>)</span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a>    subparsers <span class="op">=</span> parser.add_subparsers(dest<span class="op">=</span><span class="st">"command"</span>, <span class="bu">help</span><span class="op">=</span><span class="st">"Available commands"</span>)</span>
+<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 'init' subcommand</span></span>
+<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a>    init_parser <span class="op">=</span> subparsers.add_parser(<span class="st">"init"</span>, <span class="bu">help</span><span class="op">=</span><span class="st">"Initialize a new project"</span>)</span>
+<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a>    init_parser.add_argument(<span class="st">"name"</span>, <span class="bu">help</span><span class="op">=</span><span class="st">"Project name"</span>)</span>
+<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a>    init_parser.add_argument(<span class="st">"--template"</span>, default<span class="op">=</span><span class="st">"basic"</span>, <span class="bu">help</span><span class="op">=</span><span class="st">"Project template"</span>)</span>
+<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a>    init_parser.set_defaults(func<span class="op">=</span>cmd_init)</span>
+<span id="cb8-28"><a href="#cb8-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-29"><a href="#cb8-29" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 'build' subcommand</span></span>
+<span id="cb8-30"><a href="#cb8-30" aria-hidden="true" tabindex="-1"></a>    build_parser <span class="op">=</span> subparsers.add_parser(<span class="st">"build"</span>, <span class="bu">help</span><span class="op">=</span><span class="st">"Build the project"</span>)</span>
+<span id="cb8-31"><a href="#cb8-31" aria-hidden="true" tabindex="-1"></a>    build_parser.add_argument(<span class="st">"-v"</span>, <span class="st">"--verbose"</span>, action<span class="op">=</span><span class="st">"store_true"</span>)</span>
+<span id="cb8-32"><a href="#cb8-32" aria-hidden="true" tabindex="-1"></a>    build_parser.set_defaults(func<span class="op">=</span>cmd_build)</span>
+<span id="cb8-33"><a href="#cb8-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-34"><a href="#cb8-34" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 'deploy' subcommand</span></span>
+<span id="cb8-35"><a href="#cb8-35" aria-hidden="true" tabindex="-1"></a>    deploy_parser <span class="op">=</span> subparsers.add_parser(<span class="st">"deploy"</span>, <span class="bu">help</span><span class="op">=</span><span class="st">"Deploy the project"</span>)</span>
+<span id="cb8-36"><a href="#cb8-36" aria-hidden="true" tabindex="-1"></a>    deploy_parser.add_argument(<span class="st">"environment"</span>, choices<span class="op">=</span>[<span class="st">"dev"</span>, <span class="st">"staging"</span>, <span class="st">"prod"</span>])</span>
+<span id="cb8-37"><a href="#cb8-37" aria-hidden="true" tabindex="-1"></a>    deploy_parser.set_defaults(func<span class="op">=</span>cmd_deploy)</span>
+<span id="cb8-38"><a href="#cb8-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-39"><a href="#cb8-39" aria-hidden="true" tabindex="-1"></a>    args <span class="op">=</span> parser.parse_args()</span>
+<span id="cb8-40"><a href="#cb8-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-41"><a href="#cb8-41" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Call the appropriate function</span></span>
+<span id="cb8-42"><a href="#cb8-42" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="bu">hasattr</span>(args, <span class="st">"func"</span>):</span>
+<span id="cb8-43"><a href="#cb8-43" aria-hidden="true" tabindex="-1"></a>        args.func(args)</span>
+<span id="cb8-44"><a href="#cb8-44" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
+<span id="cb8-45"><a href="#cb8-45" aria-hidden="true" tabindex="-1"></a>        parser.print_help()</span>
+<span id="cb8-46"><a href="#cb8-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-47"><a href="#cb8-47" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="va">__name__</span> <span class="op">==</span> <span class="st">"__main__"</span>:</span>
+<span id="cb8-48"><a href="#cb8-48" aria-hidden="true" tabindex="-1"></a>    main()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <hr>
-</section>
-</section>
-<section id="subcommands-git-style-clis" class="level2">
-<h2 class="anchored" data-anchor-id="subcommands-git-style-clis">Subcommands: Git-Style CLIs</h2>
-<div id="cell-12" class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Example 3: Project manager with subcommands</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> cmd_init(args):</span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Initialize a new project."""</span></span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"Initializing project: </span><span class="sc">{</span>args<span class="sc">.</span>name<span class="sc">}</span><span class="ss">"</span>)</span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"Template: </span><span class="sc">{</span>args<span class="sc">.</span>template<span class="sc">}</span><span class="ss">"</span>)</span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> cmd_build(args):</span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Build the project."""</span></span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Building project..."</span>)</span>
-<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> args.verbose:</span>
-<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">"Verbose output enabled"</span>)</span>
-<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> cmd_deploy(args):</span>
-<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Deploy the project."""</span></span>
-<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"Deploying to </span><span class="sc">{</span>args<span class="sc">.</span>environment<span class="sc">}</span><span class="ss">"</span>)</span>
-<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> create_project_manager_parser():</span>
-<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Create a parser with subcommands."""</span></span>
-<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>    parser <span class="op">=</span> argparse.ArgumentParser(description<span class="op">=</span><span class="st">"Project management tool"</span>)</span>
-<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a>    subparsers <span class="op">=</span> parser.add_subparsers(dest<span class="op">=</span><span class="st">"command"</span>, <span class="bu">help</span><span class="op">=</span><span class="st">"Available commands"</span>)</span>
-<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 'init' subcommand</span></span>
-<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a>    init_parser <span class="op">=</span> subparsers.add_parser(<span class="st">"init"</span>, <span class="bu">help</span><span class="op">=</span><span class="st">"Initialize a new project"</span>)</span>
-<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a>    init_parser.add_argument(<span class="st">"name"</span>, <span class="bu">help</span><span class="op">=</span><span class="st">"Project name"</span>)</span>
-<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a>    init_parser.add_argument(<span class="st">"--template"</span>, default<span class="op">=</span><span class="st">"basic"</span>, <span class="bu">help</span><span class="op">=</span><span class="st">"Project template"</span>)</span>
-<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a>    init_parser.set_defaults(func<span class="op">=</span>cmd_init)</span>
-<span id="cb7-28"><a href="#cb7-28" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb7-29"><a href="#cb7-29" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 'build' subcommand</span></span>
-<span id="cb7-30"><a href="#cb7-30" aria-hidden="true" tabindex="-1"></a>    build_parser <span class="op">=</span> subparsers.add_parser(<span class="st">"build"</span>, <span class="bu">help</span><span class="op">=</span><span class="st">"Build the project"</span>)</span>
-<span id="cb7-31"><a href="#cb7-31" aria-hidden="true" tabindex="-1"></a>    build_parser.add_argument(<span class="st">"-v"</span>, <span class="st">"--verbose"</span>, action<span class="op">=</span><span class="st">"store_true"</span>)</span>
-<span id="cb7-32"><a href="#cb7-32" aria-hidden="true" tabindex="-1"></a>    build_parser.set_defaults(func<span class="op">=</span>cmd_build)</span>
-<span id="cb7-33"><a href="#cb7-33" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb7-34"><a href="#cb7-34" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 'deploy' subcommand</span></span>
-<span id="cb7-35"><a href="#cb7-35" aria-hidden="true" tabindex="-1"></a>    deploy_parser <span class="op">=</span> subparsers.add_parser(<span class="st">"deploy"</span>, <span class="bu">help</span><span class="op">=</span><span class="st">"Deploy the project"</span>)</span>
-<span id="cb7-36"><a href="#cb7-36" aria-hidden="true" tabindex="-1"></a>    deploy_parser.add_argument(<span class="st">"environment"</span>, choices<span class="op">=</span>[<span class="st">"dev"</span>, <span class="st">"staging"</span>, <span class="st">"prod"</span>])</span>
-<span id="cb7-37"><a href="#cb7-37" aria-hidden="true" tabindex="-1"></a>    deploy_parser.set_defaults(func<span class="op">=</span>cmd_deploy)</span>
-<span id="cb7-38"><a href="#cb7-38" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb7-39"><a href="#cb7-39" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> parser</span>
-<span id="cb7-40"><a href="#cb7-40" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-41"><a href="#cb7-41" aria-hidden="true" tabindex="-1"></a><span class="co"># Test subcommands</span></span>
-<span id="cb7-42"><a href="#cb7-42" aria-hidden="true" tabindex="-1"></a>parser <span class="op">=</span> create_project_manager_parser()</span>
-<span id="cb7-43"><a href="#cb7-43" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-44"><a href="#cb7-44" aria-hidden="true" tabindex="-1"></a><span class="co"># Simulate: uv run python project_manager.py init my_app --template django</span></span>
-<span id="cb7-45"><a href="#cb7-45" aria-hidden="true" tabindex="-1"></a>args <span class="op">=</span> parser.parse_args([<span class="st">"init"</span>, <span class="st">"my_app"</span>, <span class="st">"--template"</span>, <span class="st">"django"</span>])</span>
-<span id="cb7-46"><a href="#cb7-46" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="bu">hasattr</span>(args, <span class="st">"func"</span>):</span>
-<span id="cb7-47"><a href="#cb7-47" aria-hidden="true" tabindex="-1"></a>    args.func(args)</span>
-<span id="cb7-48"><a href="#cb7-48" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-49"><a href="#cb7-49" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">---</span><span class="ch">\n</span><span class="st">"</span>)</span>
-<span id="cb7-50"><a href="#cb7-50" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-51"><a href="#cb7-51" aria-hidden="true" tabindex="-1"></a><span class="co"># Simulate: uv run python project_manager.py deploy prod</span></span>
-<span id="cb7-52"><a href="#cb7-52" aria-hidden="true" tabindex="-1"></a>args <span class="op">=</span> parser.parse_args([<span class="st">"deploy"</span>, <span class="st">"prod"</span>])</span>
-<span id="cb7-53"><a href="#cb7-53" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="bu">hasattr</span>(args, <span class="st">"func"</span>):</span>
-<span id="cb7-54"><a href="#cb7-54" aria-hidden="true" tabindex="-1"></a>    args.func(args)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<section id="your-turn-exercise-3" class="level3">
-<h3 class="anchored" data-anchor-id="your-turn-exercise-3">🎯 Your Turn: Exercise 3</h3>
+<section id="your-turn-practice-2" class="level3">
+<h3 class="anchored" data-anchor-id="your-turn-practice-2">Your turn: practice</h3>
 <p>Create a data management CLI with three subcommands: 1. <code>fetch</code> - Fetch data from an API (takes <code>source</code> as argument) 2. <code>clean</code> - Clean a dataset (takes <code>filename</code> and optional <code>--method</code>) 3. <code>export</code> - Export data (takes <code>filename</code> and <code>--format</code> with choices: json, csv, excel)</p>
 <p>Each subcommand should print what action it would take.</p>
-<div id="cell-14" class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Your code here</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> create_data_manager_parser():</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Create a parser for a data management tool with subcommands."""</span></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>    <span class="co"># </span><span class="al">TODO</span><span class="co">: Implement parser with subcommands</span></span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">pass</span></span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Test your data manager</span></span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="co"># parser = create_data_manager_parser()</span></span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="co"># args = parser.parse_args(["export", "data.json", "--format", "csv"])</span></span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a><span class="co"># if hasattr(args, "func"):</span></span>
-<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a><span class="co">#     args.func(args)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="9be801b9" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Your code here</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> create_data_manager_parser():</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Create a parser for a data management tool with subcommands."""</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>    <span class="co"># </span><span class="al">TODO</span><span class="co">: Implement parser with subcommands</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">pass</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Test your data manager</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="co"># parser = create_data_manager_parser()</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="co"># args = parser.parse_args(["export", "data.json", "--format", "csv"])</span></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a><span class="co"># if hasattr(args, "func"):</span></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a><span class="co">#     args.func(args)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
+</section>
+</section>
+<section id="cli-usability-practices" class="level2">
+<h2 class="anchored" data-anchor-id="cli-usability-practices">CLI usability practices</h2>
+<ul>
+<li><strong>Clear error messages</strong>: “Error: API key not found. Set POKEAPI_KEY environment variable.”</li>
+<li><strong>Progress indicators</strong>: Show activity for long-running operations</li>
+<li><strong>Colorized output</strong>: Use libraries like <a href="https://rich.readthedocs.io/"><code>rich</code></a> or <a href="https://pypi.org/project/colorama/"><code>colorama</code></a> for visual hierarchy</li>
+<li><strong>Input validation</strong>: Fail fast with helpful messages, not cryptic stack traces</li>
+<li><strong>Exit codes</strong>: Return 0 for success, non-zero for failures (enables shell scripting)</li>
+<li><strong>Confirmation prompts</strong>: Ask before destructive operations</li>
+<li><strong>Verbose mode</strong>: <code>--verbose</code> or <code>-v</code> flag for debugging</li>
+<li><strong>Version flag</strong>: <code>--version</code> shows tool version</li>
+</ul>
+<hr>
+</section>
+<section id="practical-example-api-cli" class="level2">
+<h2 class="anchored" data-anchor-id="practical-example-api-cli">Practical example: API CLI</h2>
+<div id="b5e72c05" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co">"""Command-line interface for an API project."""</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> argparse</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sys</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> typing <span class="im">import</span> Optional</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> fetch_resource(resource_type: <span class="bu">str</span>, resource_id: Optional[<span class="bu">str</span>], limit: <span class="bu">int</span>):</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Fetch data from your API."""</span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Your API integration code here</span></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"Fetching </span><span class="sc">{</span>resource_type<span class="sc">}</span><span class="ss">..."</span>)</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> resource_id:</span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f"ID: </span><span class="sc">{</span>resource_id<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"Limit: </span><span class="sc">{</span>limit<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Return the data</span></span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> main():</span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>    parser <span class="op">=</span> argparse.ArgumentParser(</span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>        prog<span class="op">=</span><span class="st">"my_api_tool"</span>,</span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a>        description<span class="op">=</span><span class="st">"Interact with [Your API Name] from the command line"</span>,</span>
+<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a>        epilog<span class="op">=</span><span class="st">"Example: uv run python my_api_tool.py pokemon pikachu --format json"</span></span>
+<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a>    parser.add_argument(<span class="st">"resource"</span>, <span class="bu">help</span><span class="op">=</span><span class="st">"Resource type to fetch"</span>)</span>
+<span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a>    parser.add_argument(<span class="st">"id"</span>, nargs<span class="op">=</span><span class="st">"?"</span>, <span class="bu">help</span><span class="op">=</span><span class="st">"Optional resource ID"</span>)</span>
+<span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a>    parser.add_argument(<span class="st">"-l"</span>, <span class="st">"--limit"</span>, <span class="bu">type</span><span class="op">=</span><span class="bu">int</span>, default<span class="op">=</span><span class="dv">10</span>, <span class="bu">help</span><span class="op">=</span><span class="st">"Number of items"</span>)</span>
+<span id="cb10-25"><a href="#cb10-25" aria-hidden="true" tabindex="-1"></a>    parser.add_argument(<span class="st">"--format"</span>, choices<span class="op">=</span>[<span class="st">"json"</span>, <span class="st">"pretty"</span>], default<span class="op">=</span><span class="st">"pretty"</span>)</span>
+<span id="cb10-26"><a href="#cb10-26" aria-hidden="true" tabindex="-1"></a>    parser.add_argument(<span class="st">"-o"</span>, <span class="st">"--output"</span>, <span class="bu">help</span><span class="op">=</span><span class="st">"Save to file instead of printing"</span>)</span>
+<span id="cb10-27"><a href="#cb10-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-28"><a href="#cb10-28" aria-hidden="true" tabindex="-1"></a>    <span class="cf">try</span>:</span>
+<span id="cb10-29"><a href="#cb10-29" aria-hidden="true" tabindex="-1"></a>        args <span class="op">=</span> parser.parse_args()</span>
+<span id="cb10-30"><a href="#cb10-30" aria-hidden="true" tabindex="-1"></a>        result <span class="op">=</span> fetch_resource(args.resource, args.<span class="bu">id</span>, args.limit)</span>
+<span id="cb10-31"><a href="#cb10-31" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">"Success!"</span>)</span>
+<span id="cb10-32"><a href="#cb10-32" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="dv">0</span>  <span class="co"># Success exit code</span></span>
+<span id="cb10-33"><a href="#cb10-33" aria-hidden="true" tabindex="-1"></a>    <span class="cf">except</span> (<span class="pp">OSError</span>, <span class="pp">ValueError</span>) <span class="im">as</span> error:</span>
+<span id="cb10-34"><a href="#cb10-34" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f"Error: </span><span class="sc">{</span>error<span class="sc">}</span><span class="ss">"</span>, <span class="bu">file</span><span class="op">=</span>sys.stderr)</span>
+<span id="cb10-35"><a href="#cb10-35" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="dv">1</span>  <span class="co"># Error exit code</span></span>
+<span id="cb10-36"><a href="#cb10-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-37"><a href="#cb10-37" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="va">__name__</span> <span class="op">==</span> <span class="st">"__main__"</span>:</span>
+<span id="cb10-38"><a href="#cb10-38" aria-hidden="true" tabindex="-1"></a>    sys.exit(main())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<hr>
+</section>
+<section id="ai-assisted-cli-development" class="level2">
+<h2 class="anchored" data-anchor-id="ai-assisted-cli-development">AI-assisted CLI development</h2>
+<section id="prompt-strategies-for-building-clis" class="level3">
+<h3 class="anchored" data-anchor-id="prompt-strategies-for-building-clis"><strong>Prompt strategies for building CLIs:</strong></h3>
+<ul>
+<li><strong>Starter prompt</strong>: “Create a Python argparse CLI for fetching data from the [API Name] API with options for resource type, limit, and output format”</li>
+<li><strong>Enhancement prompt</strong>: “Add subcommands for ‘fetch’, ‘list’, and ‘search’ operations”</li>
+<li><strong>Refinement prompt</strong>: “Improve error handling and add input validation for API parameters”</li>
+<li><strong>Testing prompt</strong>: “Generate test cases for this CLI including error scenarios”</li>
+</ul>
+</section>
+<section id="cli-tasks-an-assistant-can-draft" class="level3">
+<h3 class="anchored" data-anchor-id="cli-tasks-an-assistant-can-draft"><strong>CLI tasks an assistant can draft:</strong></h3>
+<ul>
+<li>Generating boilerplate argparse setup</li>
+<li>Drafting help text from the specified arguments</li>
+<li>Adding input validation logic</li>
+<li>Designing argument structures</li>
+</ul>
 <hr>
 </section>
 </section>
 </section>
-<section id="part-2-python-packages-project-structure" class="level1">
-<h1>Part 2: Python Packages &amp; Project Structure</h1>
-<section id="understanding-python-packages" class="level2">
-<h2 class="anchored" data-anchor-id="understanding-python-packages">Understanding Python Packages</h2>
-<p>A <strong>package</strong> is a way to organize related Python modules (files) into a directory structure.</p>
-<p><strong>Key concepts:</strong> - <strong>Module</strong>: A single <code>.py</code> file - <strong>Package</strong>: A directory containing an <code>__init__.py</code> file - <strong>Subpackage</strong>: A package inside another package</p>
+<section id="part-2-python-packages-and-project-structure" class="level1">
+<h1>Part 2: Python packages and project structure</h1>
 <hr>
-</section>
-<section id="the-__name__-__main__-pattern" class="level2">
-<h2 class="anchored" data-anchor-id="the-__name__-__main__-pattern">The <code>__name__ == "__main__"</code> Pattern</h2>
-<div id="cell-16" class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Example 4: Understanding __name__</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="co"># When Python runs a file directly, __name__ is "__main__"</span></span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="co"># When Python imports a file, __name__ is the module name</span></span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> greet(name: <span class="bu">str</span>) <span class="op">-&gt;</span> <span class="bu">str</span>:</span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Return a greeting message."""</span></span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="ss">f"Hello, </span><span class="sc">{</span>name<span class="sc">}</span><span class="ss">!"</span></span>
-<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> main():</span>
-<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Entry point when run as a script."""</span></span>
-<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"This is the main function"</span>)</span>
-<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(greet(<span class="st">"World"</span>))</span>
-<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a><span class="co"># This code only runs when the file is executed directly</span></span>
-<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a><span class="co"># It does NOT run when the file is imported</span></span>
-<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="va">__name__</span> <span class="op">==</span> <span class="st">"__main__"</span>:</span>
-<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"__name__ is: </span><span class="sc">{</span><span class="va">__name__</span><span class="sc">}</span><span class="ss">"</span>)</span>
-<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>    main()</span>
-<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span>:</span>
-<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"This module was imported. __name__ is: </span><span class="sc">{</span><span class="va">__name__</span><span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<section id="why-this-matters" class="level3">
-<h3 class="anchored" data-anchor-id="why-this-matters">Why This Matters</h3>
-<p>The <code>__name__ == "__main__"</code> pattern allows your code to be: 1. <strong>Runnable as a script</strong>: <code>uv run python my_module.py</code> 2. <strong>Importable as a library</strong>: <code>from my_module import greet</code></p>
-<p>This is essential for: - Testing individual modules - Creating reusable code - Professional project structure</p>
+<section id="from-scripts-to-packages" class="level2">
+<h2 class="anchored" data-anchor-id="from-scripts-to-packages">From scripts to packages</h2>
+<section id="one-possible-progression" class="level3">
+<h3 class="anchored" data-anchor-id="one-possible-progression"><strong>One possible progression</strong></h3>
+<ul>
+<li><strong>Stage 1</strong>: Single <code>.py</code> file - <code>my_script.py</code> does everything</li>
+<li><strong>Stage 2</strong>: Multiple files - <code>utils.py</code>, <code>api.py</code>, <code>cli.py</code> in one folder</li>
+<li><strong>Stage 3</strong>: Package structure - Organized directories with <code>__init__.py</code> files</li>
+<li><strong>Stage 4</strong>: Installable package - Can run your own code through <code>uv</code></li>
+<li><strong>Design choice</strong>: Add structure when it improves imports, tests, or maintenance</li>
+</ul>
 <hr>
 </section>
 </section>
-<section id="package-structure-example" class="level2">
-<h2 class="anchored" data-anchor-id="package-structure-example">Package Structure Example</h2>
-<div id="cell-18" class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Example 5: Simulating package structure</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Imagine this file structure:</span></span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="co"># my_api_project/</span></span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="co">#   ├── my_api/</span></span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="co">#   │   ├── __init__.py</span></span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="co">#   │   ├── api.py</span></span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="co">#   │   ├── cli.py</span></span>
-<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a><span class="co">#   │   └── utils.py</span></span>
-<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a><span class="co">#   └── main.py</span></span>
-<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a><span class="co"># In api.py:</span></span>
-<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> fetch_data(api_name: <span class="bu">str</span>) <span class="op">-&gt;</span> <span class="bu">dict</span>:</span>
-<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Fetch data from an API."""</span></span>
-<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> {<span class="st">"api"</span>: api_name, <span class="st">"data"</span>: <span class="st">"example_data"</span>}</span>
-<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a><span class="co"># In utils.py:</span></span>
-<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> format_output(data: <span class="bu">dict</span>, format_type: <span class="bu">str</span> <span class="op">=</span> <span class="st">"json"</span>) <span class="op">-&gt;</span> <span class="bu">str</span>:</span>
-<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Format data for output."""</span></span>
-<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> format_type <span class="op">==</span> <span class="st">"json"</span>:</span>
-<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="bu">str</span>(data)</span>
-<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a>    <span class="cf">elif</span> format_type <span class="op">==</span> <span class="st">"pretty"</span>:</span>
-<span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="st">"</span><span class="ch">\n</span><span class="st">"</span>.join(<span class="ss">f"</span><span class="sc">{</span>k<span class="sc">}</span><span class="ss">: </span><span class="sc">{</span>v<span class="sc">}</span><span class="ss">"</span> <span class="cf">for</span> k, v <span class="kw">in</span> data.items())</span>
-<span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="bu">str</span>(data)</span>
-<span id="cb10-25"><a href="#cb10-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-26"><a href="#cb10-26" aria-hidden="true" tabindex="-1"></a><span class="co"># In main.py, you would import like this:</span></span>
-<span id="cb10-27"><a href="#cb10-27" aria-hidden="true" tabindex="-1"></a><span class="co"># from my_api.api import fetch_data</span></span>
-<span id="cb10-28"><a href="#cb10-28" aria-hidden="true" tabindex="-1"></a><span class="co"># from my_api.utils import format_output</span></span>
-<span id="cb10-29"><a href="#cb10-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-30"><a href="#cb10-30" aria-hidden="true" tabindex="-1"></a><span class="co"># Demo the functions</span></span>
-<span id="cb10-31"><a href="#cb10-31" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> fetch_data(<span class="st">"pokemon"</span>)</span>
-<span id="cb10-32"><a href="#cb10-32" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"JSON format:"</span>)</span>
-<span id="cb10-33"><a href="#cb10-33" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(format_output(data, <span class="st">"json"</span>))</span>
-<span id="cb10-34"><a href="#cb10-34" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">Pretty format:"</span>)</span>
-<span id="cb10-35"><a href="#cb10-35" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(format_output(data, <span class="st">"pretty"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<section id="why-package-structure-matters" class="level2">
+<h2 class="anchored" data-anchor-id="why-package-structure-matters">Why package structure matters</h2>
+<ul>
+<li><strong>Code organization</strong>: Logical grouping of related functionality</li>
+<li><strong>Reusability</strong>: Import code across multiple projects</li>
+<li><strong>Collaboration</strong>: Team members work on different modules without conflicts</li>
+<li><strong>Testing</strong>: Easier to test individual components in isolation</li>
+<li><strong>Distribution</strong>: Share your code with others via PyPI</li>
+<li><strong>Reviewability</strong>: Makes module responsibilities and imports visible</li>
+</ul>
+<section id="examples" class="level3">
+<h3 class="anchored" data-anchor-id="examples"><strong>Examples</strong></h3>
+<ul>
+<li><strong><a href="https://github.com/django/django">Django</a></strong>: Models, views, templates organized in packages</li>
+<li><strong><a href="https://github.com/psf/requests">Requests</a></strong>: <code>requests/</code>, <code>requests/auth/</code>, <code>requests/models/</code></li>
+<li><strong>Your final project</strong>: Use modules or a package when that structure improves the chosen project</li>
+</ul>
+<hr>
+</section>
+</section>
+<section id="what-is-a-python-package" class="level2">
+<h2 class="anchored" data-anchor-id="what-is-a-python-package">What is a Python package?</h2>
+<ul>
+<li>A regular <strong><a href="https://docs.python.org/3/tutorial/modules.html#packages">package</a></strong> is a directory containing an <code>__init__.py</code> file</li>
+<li><strong>Module</strong>: A single <code>.py</code> file</li>
+<li><strong>Package</strong>: A directory of modules with <code>__init__.py</code></li>
+<li><strong>Subpackage</strong>: A package inside another package</li>
+<li><strong><code>__init__.py</code></strong>: Marks directory as package, can contain initialization code</li>
+<li><strong>Namespace packages</strong>: Can omit <code>__init__.py</code>; this course uses regular packages unless a namespace is intentionally required</li>
+</ul>
+<hr>
+</section>
+<section id="basic-package-structure-a-practical-example" class="level2">
+<h2 class="anchored" data-anchor-id="basic-package-structure-a-practical-example">Basic package structure: a practical example</h2>
+<pre><code>my_api_project/
+│
+├── my_api/                  # Main package directory
+│   ├── __init__.py         # Marks this as a package
+│   ├── api.py              # API client code
+│   ├── cli.py              # CLI interface
+│   └── utils.py            # Utility functions
+│
+├── tests/                   # Test directory
+│   ├── __init__.py
+│   ├── test_api.py
+│   └── test_cli.py
+│
+├── main.py                  # Entry point script
+├── pyproject.toml           # Project metadata and dependencies
+├── uv.lock                  # Exact resolved environment
+└── README.md               # Documentation</code></pre>
+<section id="using-this-structure" class="level3">
+<h3 class="anchored" data-anchor-id="using-this-structure"><strong>Using this structure:</strong></h3>
+<div id="58736e73" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># In main.py</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> my_api.cli <span class="im">import</span> main</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> my_api.api <span class="im">import</span> fetch_data</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> my_api.utils <span class="im">import</span> format_output</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="va">__name__</span> <span class="op">==</span> <span class="st">"__main__"</span>:</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>    main()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <hr>
 </section>
-<section id="the-__init__.py-file" class="level2">
-<h2 class="anchored" data-anchor-id="the-__init__.py-file">The <code>__init__.py</code> File</h2>
-<div id="cell-20" class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Example 6: What goes in __init__.py</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Option 1: Empty __init__.py (most common)</span></span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Just marks the directory as a package</span></span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Option 2: With convenience imports</span></span>
-<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Imagine this is my_api/__init__.py:</span></span>
-<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a><span class="co"># """My API Client Package - A professional API wrapper."""</span></span>
-<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span>
-<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a><span class="co"># # Import key functions for convenient access</span></span>
-<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a><span class="co"># from my_api.api import fetch_data</span></span>
-<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a><span class="co"># from my_api.utils import format_output</span></span>
-<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span>
-<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a><span class="co"># # Package metadata</span></span>
-<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a><span class="co"># __version__ = "1.0.0"</span></span>
-<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a><span class="co"># __author__ = "Your Name"</span></span>
-<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span>
-<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a><span class="co"># # Define public API</span></span>
-<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a><span class="co"># __all__ = ["fetch_data", "format_output"]</span></span>
-<span id="cb11-21"><a href="#cb11-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-22"><a href="#cb11-22" aria-hidden="true" tabindex="-1"></a><span class="co"># With this __init__.py, users can do:</span></span>
-<span id="cb11-23"><a href="#cb11-23" aria-hidden="true" tabindex="-1"></a><span class="co"># from my_api import fetch_data  # Instead of: from my_api.api import fetch_data</span></span>
-<span id="cb11-24"><a href="#cb11-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-25"><a href="#cb11-25" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"✅ __init__.py makes imports cleaner and more convenient"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="the-__init__.py-file-package-initialization" class="level2">
+<h2 class="anchored" data-anchor-id="the-__init__.py-file-package-initialization">The <code>__init__.py</code> file: package initialization</h2>
+<section id="empty-__init__.py-most-common" class="level3">
+<h3 class="anchored" data-anchor-id="empty-__init__.py-most-common"><strong>Empty <code>__init__.py</code> (most common):</strong></h3>
+<div id="2c6a0f87" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># my_api/__init__.py</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Empty file - marks directory as package</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<section id="your-turn-exercise-4" class="level3">
-<h3 class="anchored" data-anchor-id="your-turn-exercise-4">🎯 Your Turn: Exercise 4</h3>
+</section>
+<section id="with-initialization-code" class="level3">
+<h3 class="anchored" data-anchor-id="with-initialization-code"><strong>With initialization code:</strong></h3>
+<div id="d3cbbb5d" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># my_api/__init__.py</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="co">"""Public interface for the API client package."""</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Import key functions for convenient access</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> my_api.api <span class="im">import</span> fetch_data, APIClient</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> my_api.utils <span class="im">import</span> format_output</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Package metadata</span></span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>__version__ <span class="op">=</span> <span class="st">"1.0.0"</span></span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>__author__ <span class="op">=</span> <span class="st">"Your Name"</span></span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Define public API - controls "from my_api import *"</span></span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a><span class="va">__all__</span> <span class="op">=</span> [<span class="st">"fetch_data"</span>, <span class="st">"APIClient"</span>, <span class="st">"format_output"</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="usage-becomes-cleaner" class="level3">
+<h3 class="anchored" data-anchor-id="usage-becomes-cleaner"><strong>Usage becomes cleaner:</strong></h3>
+<div id="825c3896" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Instead of: from my_api.api import fetch_data</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="co"># You can do: from my_api import fetch_data</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> my_api</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(my_api.__version__)  <span class="co"># 1.0.0</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<hr>
+</section>
+<section id="your-turn-practice-3" class="level3">
+<h3 class="anchored" data-anchor-id="your-turn-practice-3">Your turn: practice</h3>
 <p>Design a package structure for your final project. Include: 1. A main package directory name 2. At least 3 module files (<code>.py</code> files) with their purposes 3. What you would put in <code>__init__.py</code></p>
 <p>Write your design as comments or markdown in the cell below.</p>
-<div id="cell-22" class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Your package structure design here</span></span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Example:</span></span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="co"># my_final_project/</span></span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="co">#   ├── pokemon_api/              # Main package</span></span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="co">#   │   ├── __init__.py           # Package initialization</span></span>
-<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="co">#   │   ├── client.py             # API client logic</span></span>
-<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a><span class="co">#   │   ├── cli.py                # Command-line interface</span></span>
-<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a><span class="co">#   │   ├── models.py             # Data models/classes</span></span>
-<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a><span class="co">#   │   └── utils.py              # Helper functions</span></span>
-<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a><span class="co">#   ├── tests/                    # Test directory</span></span>
-<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a><span class="co">#   ├── main.py                   # Entry point</span></span>
-<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a><span class="co">#   └── README.md                 # Documentation</span></span>
-<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TODO</span><span class="co">: Design your own structure</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="00ef50ac" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Your package structure design here</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Example:</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="co"># my_final_project/</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="co">#   ├── pokemon_api/              # Main package</span></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a><span class="co">#   │   ├── __init__.py           # Package initialization</span></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a><span class="co">#   │   ├── client.py             # API client logic</span></span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a><span class="co">#   │   ├── cli.py                # Command-line interface</span></span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a><span class="co">#   │   ├── models.py             # Data models/classes</span></span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a><span class="co">#   │   └── utils.py              # Helper functions</span></span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a><span class="co">#   ├── tests/                    # Test directory</span></span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a><span class="co">#   ├── main.py                   # Entry point</span></span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a><span class="co">#   └── README.md                 # Documentation</span></span>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TODO</span><span class="co">: Design your own structure</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+</section>
+<section id="import-systems-absolute-and-relative" class="level2">
+<h2 class="anchored" data-anchor-id="import-systems-absolute-and-relative">Import systems: absolute and relative</h2>
+<section id="absolute-imports-preferred" class="level3">
+<h3 class="anchored" data-anchor-id="absolute-imports-preferred"><strong>Absolute imports (preferred):</strong></h3>
+<div id="8c610aee" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># my_api/cli.py</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> my_api.api <span class="im">import</span> fetch_data</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> my_api.utils <span class="im">import</span> format_output</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> my_api</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="relative-imports-within-a-package" class="level3">
+<h3 class="anchored" data-anchor-id="relative-imports-within-a-package"><strong>Relative imports (within a package):</strong></h3>
+<div id="06c1fc43" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># my_api/cli.py</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> .api <span class="im">import</span> fetch_data        <span class="co"># Same directory</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> .utils <span class="im">import</span> format_output   <span class="co"># Same directory</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> ..other_package <span class="im">import</span> helper <span class="co"># Parent directory</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="when-to-use-each" class="level3">
+<h3 class="anchored" data-anchor-id="when-to-use-each"><strong>When to use each:</strong></h3>
+<ul>
+<li><strong>Absolute imports</strong>: Often clearer about the package a name comes from</li>
+<li><strong>Relative imports</strong>: Useful for large packages, makes refactoring easier</li>
+<li><strong><a href="https://peps.python.org/pep-0008/#imports">PEP 8</a> recommendation</strong>: Prefer absolute imports unless path becomes excessively long</li>
+</ul>
+<hr>
+</section>
+</section>
+<section id="the-__name__-__main__-pattern" class="level2">
+<h2 class="anchored" data-anchor-id="the-__name__-__main__-pattern">The <code>__name__ == "__main__"</code> pattern</h2>
+<section id="understanding-python-execution" class="level3">
+<h3 class="anchored" data-anchor-id="understanding-python-execution"><strong>Understanding Python execution:</strong></h3>
+<ul>
+<li>When Python runs a file directly: <code>__name__</code> is set to <code>"__main__"</code></li>
+<li>When Python imports a file: <code>__name__</code> is the module name</li>
+<li>This allows code to be both a <strong>script</strong> (runnable) and a <strong>module</strong> (importable)</li>
+</ul>
+</section>
+<section id="the-pattern" class="level3">
+<h3 class="anchored" data-anchor-id="the-pattern"><strong>The pattern:</strong></h3>
+<div id="cc081d24" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># my_api/api.py</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> fetch_data(api_name: <span class="bu">str</span>):</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Fetch data from an API."""</span></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"Fetching from </span><span class="sc">{</span>api_name<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> {<span class="st">"data"</span>: <span class="st">"example"</span>}</span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> main():</span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Entry point for running as a script."""</span></span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>    result <span class="op">=</span> fetch_data(<span class="st">"pokemon"</span>)</span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(result)</span>
+<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Script mode: runs when file is executed directly</span></span>
+<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="va">__name__</span> <span class="op">==</span> <span class="st">"__main__"</span>:</span>
+<span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a>    main()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="usage" class="level3">
+<h3 class="anchored" data-anchor-id="usage"><strong>Usage:</strong></h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb20"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Run as script</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> uv run python my_api/api.py</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="ex">Fetching</span> from pokemon</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="ex">{</span><span class="st">'data'</span><span class="ex">:</span> <span class="st">'example'</span>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="5a607071" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Import as module (main() doesn't run)</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> my_api.api <span class="im">import</span> fetch_data</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <hr>
 </section>
 </section>
-<section id="import-patterns-absolute-vs-relative" class="level2">
-<h2 class="anchored" data-anchor-id="import-patterns-absolute-vs-relative">Import Patterns: Absolute vs Relative</h2>
-<div id="cell-24" class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Example 7: Import strategies</span></span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="co"># ABSOLUTE IMPORTS (preferred)</span></span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="co"># from my_api.api import fetch_data</span></span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="co"># from my_api.utils import format_output</span></span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="co"># RELATIVE IMPORTS (within a package)</span></span>
-<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a><span class="co"># In my_api/cli.py:</span></span>
-<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a><span class="co"># from .api import fetch_data        # Same directory</span></span>
-<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a><span class="co"># from .utils import format_output   # Same directory</span></span>
-<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a><span class="co"># from ..parent import something     # Parent directory</span></span>
-<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Best practice: Use absolute imports unless:</span></span>
-<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. You're within a large package</span></span>
-<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Absolute paths become very long</span></span>
-<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. You're following team conventions</span></span>
-<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"✅ Absolute imports are clearer and easier to understand"</span>)</span>
-<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"✅ Relative imports survive package renaming"</span>)</span>
-<span id="cb13-20"><a href="#cb13-20" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Choose based on your project needs!"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<hr>
+<section id="the-src-project-layout" class="level2">
+<h2 class="anchored" data-anchor-id="the-src-project-layout">The <code>src/</code> project layout</h2>
+<section id="example-structure" class="level3">
+<h3 class="anchored" data-anchor-id="example-structure"><strong>Example structure</strong></h3>
+<pre><code>my_api_project/
+│
+├── src/                     # Optional source-layout directory
+│   └── my_api/
+│       ├── __init__.py
+│       ├── api.py
+│       ├── cli.py
+│       └── utils.py
+│
+├── tests/                   # Tests outside source tree
+│   ├── __init__.py
+│   ├── test_api.py
+│   └── test_cli.py
+│
+├── docs/                    # Documentation
+│   └── index.md
+│
+├── pyproject.toml           # Modern Python project metadata
+├── README.md
+└── .gitignore</code></pre>
 </section>
-<section id="modern-python-pyproject.toml" class="level2">
-<h2 class="anchored" data-anchor-id="modern-python-pyproject.toml">Modern Python: pyproject.toml</h2>
-<div id="cell-26" class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Example 8: Understanding pyproject.toml</span></span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>pyproject_toml_example <span class="op">=</span> <span class="st">"""</span></span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="st">[build-system]</span></span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="st">requires = ["hatchling"]</span></span>
-<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="st">build-backend = "hatchling.build"</span></span>
-<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a><span class="st">[project]</span></span>
-<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a><span class="st">name = "my-api-tool"</span></span>
-<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a><span class="st">version = "0.1.0"</span></span>
-<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a><span class="st">description = "A professional API client"</span></span>
-<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a><span class="st">authors = [{name = "Your Name", email = "you@example.com"}]</span></span>
-<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a><span class="st">readme = "README.md"</span></span>
-<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a><span class="st">requires-python = "&gt;=3.10"</span></span>
-<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a><span class="st">dependencies = [</span></span>
-<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a><span class="st">    "requests&gt;=2.31.0",</span></span>
-<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a><span class="st">]</span></span>
-<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-19"><a href="#cb14-19" aria-hidden="true" tabindex="-1"></a><span class="st">[project.optional-dependencies]</span></span>
-<span id="cb14-20"><a href="#cb14-20" aria-hidden="true" tabindex="-1"></a><span class="st">dev = [</span></span>
-<span id="cb14-21"><a href="#cb14-21" aria-hidden="true" tabindex="-1"></a><span class="st">    "pytest&gt;=7.0.0",</span></span>
-<span id="cb14-22"><a href="#cb14-22" aria-hidden="true" tabindex="-1"></a><span class="st">    "black&gt;=23.0.0",</span></span>
-<span id="cb14-23"><a href="#cb14-23" aria-hidden="true" tabindex="-1"></a><span class="st">]</span></span>
-<span id="cb14-24"><a href="#cb14-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-25"><a href="#cb14-25" aria-hidden="true" tabindex="-1"></a><span class="st">[project.scripts]</span></span>
-<span id="cb14-26"><a href="#cb14-26" aria-hidden="true" tabindex="-1"></a><span class="st">my-api = "my_api.cli:main"  # Creates a 'my-api' command</span></span>
-<span id="cb14-27"><a href="#cb14-27" aria-hidden="true" tabindex="-1"></a><span class="st">"""</span></span>
-<span id="cb14-28"><a href="#cb14-28" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-29"><a href="#cb14-29" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Example pyproject.toml configuration:"</span>)</span>
-<span id="cb14-30"><a href="#cb14-30" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(pyproject_toml_example)</span>
-<span id="cb14-31"><a href="#cb14-31" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-32"><a href="#cb14-32" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">✅ After 'uv sync', you can:"</span>)</span>
-<span id="cb14-33"><a href="#cb14-33" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"   - Import your package from anywhere"</span>)</span>
-<span id="cb14-34"><a href="#cb14-34" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"   - Run your CLI with the command name (my-api)"</span>)</span>
-<span id="cb14-35"><a href="#cb14-35" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"   - Share your package with others"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
+<section id="why-src-layout" class="level3">
+<h3 class="anchored" data-anchor-id="why-src-layout"><strong>Why <code>src/</code> layout?</strong></h3>
+<ul>
+<li><strong>Import discipline</strong>: Ensures you test installed version, not local files</li>
+<li><strong>Namespace clarity</strong>: Prevents accidental relative imports</li>
+<li><strong>Documented option</strong>: <a href="https://packaging.python.org/en/latest/discussions/src-layout-vs-flat-layout/">PyPA compares source and flat layouts</a></li>
+<li><strong>Build isolation</strong>: Cleaner separation of source and build artifacts</li>
+</ul>
 <hr>
 </section>
 </section>
-<section id="putting-it-all-together-complete-example" class="level1">
-<h1>Putting It All Together: Complete Example</h1>
-<p>Here’s how CLI + package structure work together in a real project.</p>
-<div id="cell-28" class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Example 9: Complete integration</span></span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="co"># ===== FILE: my_api/api.py =====</span></span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> APIClient:</span>
-<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Simple API client."""</span></span>
-<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, base_url: <span class="bu">str</span> <span class="op">=</span> <span class="st">"https://api.example.com"</span>):</span>
-<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.base_url <span class="op">=</span> base_url</span>
-<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> fetch(<span class="va">self</span>, resource: <span class="bu">str</span>) <span class="op">-&gt;</span> <span class="bu">dict</span>:</span>
-<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>        <span class="co">"""Fetch a resource from the API."""</span></span>
-<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>        <span class="co"># In a real implementation, this would make an HTTP request</span></span>
-<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> {</span>
-<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a>            <span class="st">"resource"</span>: resource,</span>
-<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a>            <span class="st">"data"</span>: <span class="ss">f"Mock data for </span><span class="sc">{</span>resource<span class="sc">}</span><span class="ss">"</span>,</span>
-<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a>            <span class="st">"status"</span>: <span class="st">"success"</span></span>
-<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a>        }</span>
-<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-19"><a href="#cb15-19" aria-hidden="true" tabindex="-1"></a><span class="co"># ===== FILE: my_api/utils.py =====</span></span>
-<span id="cb15-20"><a href="#cb15-20" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> format_output(data: <span class="bu">dict</span>, format_type: <span class="bu">str</span> <span class="op">=</span> <span class="st">"pretty"</span>) <span class="op">-&gt;</span> <span class="bu">str</span>:</span>
-<span id="cb15-21"><a href="#cb15-21" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Format API response for display."""</span></span>
-<span id="cb15-22"><a href="#cb15-22" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> format_type <span class="op">==</span> <span class="st">"json"</span>:</span>
-<span id="cb15-23"><a href="#cb15-23" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="bu">str</span>(data)</span>
-<span id="cb15-24"><a href="#cb15-24" aria-hidden="true" tabindex="-1"></a>    <span class="cf">elif</span> format_type <span class="op">==</span> <span class="st">"pretty"</span>:</span>
-<span id="cb15-25"><a href="#cb15-25" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="st">"</span><span class="ch">\n</span><span class="st">"</span>.join(<span class="ss">f"</span><span class="sc">{</span>k<span class="sc">}</span><span class="ss">: </span><span class="sc">{</span>v<span class="sc">}</span><span class="ss">"</span> <span class="cf">for</span> k, v <span class="kw">in</span> data.items())</span>
-<span id="cb15-26"><a href="#cb15-26" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="bu">str</span>(data)</span>
-<span id="cb15-27"><a href="#cb15-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-28"><a href="#cb15-28" aria-hidden="true" tabindex="-1"></a><span class="co"># ===== FILE: my_api/cli.py =====</span></span>
-<span id="cb15-29"><a href="#cb15-29" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> create_cli_parser():</span>
-<span id="cb15-30"><a href="#cb15-30" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Create the CLI parser."""</span></span>
-<span id="cb15-31"><a href="#cb15-31" aria-hidden="true" tabindex="-1"></a>    parser <span class="op">=</span> argparse.ArgumentParser(description<span class="op">=</span><span class="st">"My API Client"</span>)</span>
-<span id="cb15-32"><a href="#cb15-32" aria-hidden="true" tabindex="-1"></a>    parser.add_argument(<span class="st">"resource"</span>, <span class="bu">help</span><span class="op">=</span><span class="st">"Resource to fetch"</span>)</span>
-<span id="cb15-33"><a href="#cb15-33" aria-hidden="true" tabindex="-1"></a>    parser.add_argument(</span>
-<span id="cb15-34"><a href="#cb15-34" aria-hidden="true" tabindex="-1"></a>        <span class="st">"--format"</span>,</span>
-<span id="cb15-35"><a href="#cb15-35" aria-hidden="true" tabindex="-1"></a>        choices<span class="op">=</span>[<span class="st">"json"</span>, <span class="st">"pretty"</span>],</span>
-<span id="cb15-36"><a href="#cb15-36" aria-hidden="true" tabindex="-1"></a>        default<span class="op">=</span><span class="st">"pretty"</span>,</span>
-<span id="cb15-37"><a href="#cb15-37" aria-hidden="true" tabindex="-1"></a>        <span class="bu">help</span><span class="op">=</span><span class="st">"Output format"</span></span>
-<span id="cb15-38"><a href="#cb15-38" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb15-39"><a href="#cb15-39" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> parser</span>
-<span id="cb15-40"><a href="#cb15-40" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-41"><a href="#cb15-41" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> cli_main():</span>
-<span id="cb15-42"><a href="#cb15-42" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Main entry point for CLI."""</span></span>
-<span id="cb15-43"><a href="#cb15-43" aria-hidden="true" tabindex="-1"></a>    parser <span class="op">=</span> create_cli_parser()</span>
-<span id="cb15-44"><a href="#cb15-44" aria-hidden="true" tabindex="-1"></a>    args <span class="op">=</span> parser.parse_args([<span class="st">"pokemon"</span>, <span class="st">"--format"</span>, <span class="st">"pretty"</span>])  <span class="co"># Simulated args</span></span>
-<span id="cb15-45"><a href="#cb15-45" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb15-46"><a href="#cb15-46" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Use the API client</span></span>
-<span id="cb15-47"><a href="#cb15-47" aria-hidden="true" tabindex="-1"></a>    client <span class="op">=</span> APIClient()</span>
-<span id="cb15-48"><a href="#cb15-48" aria-hidden="true" tabindex="-1"></a>    data <span class="op">=</span> client.fetch(args.resource)</span>
-<span id="cb15-49"><a href="#cb15-49" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb15-50"><a href="#cb15-50" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Format and display output</span></span>
-<span id="cb15-51"><a href="#cb15-51" aria-hidden="true" tabindex="-1"></a>    output <span class="op">=</span> format_output(data, args.<span class="bu">format</span>)</span>
-<span id="cb15-52"><a href="#cb15-52" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(output)</span>
-<span id="cb15-53"><a href="#cb15-53" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span></span>
-<span id="cb15-54"><a href="#cb15-54" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-55"><a href="#cb15-55" aria-hidden="true" tabindex="-1"></a><span class="co"># Run the integrated example</span></span>
-<span id="cb15-56"><a href="#cb15-56" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"=== Running integrated CLI + Package example ==="</span>)</span>
-<span id="cb15-57"><a href="#cb15-57" aria-hidden="true" tabindex="-1"></a>cli_main()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<section id="making-code-installable-pyproject.toml" class="level2">
+<h2 class="anchored" data-anchor-id="making-code-installable-pyproject.toml">Making code installable: <code>pyproject.toml</code></h2>
+<section id="modern-python-packaging-with-pyproject.toml" class="level3">
+<h3 class="anchored" data-anchor-id="modern-python-packaging-with-pyproject.toml"><strong>Modern Python packaging with <a href="https://packaging.python.org/en/latest/guides/writing-pyproject-toml/"><code>pyproject.toml</code></a>:</strong></h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb23"><pre class="sourceCode toml code-with-copy"><code class="sourceCode toml"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="kw">[build-system]</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="dt">requires</span> <span class="op">=</span> <span class="op">[</span><span class="st">"hatchling"</span><span class="op">]</span></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="dt">build-backend</span> <span class="op">=</span> <span class="st">"hatchling.build"</span></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a><span class="kw">[project]</span></span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a><span class="dt">name</span> <span class="op">=</span> <span class="st">"my-api-tool"</span></span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a><span class="dt">version</span> <span class="op">=</span> <span class="st">"0.1.0"</span></span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a><span class="dt">description</span> <span class="op">=</span> <span class="st">"An API client for [Your API]"</span></span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a><span class="dt">authors</span> <span class="op">=</span> <span class="op">[{</span><span class="dt">name</span><span class="op"> =</span> <span class="st">"Your Name"</span><span class="op">, </span><span class="dt">email</span><span class="op"> =</span> <span class="st">"you@example.com"</span><span class="op">}]</span></span>
+<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a><span class="dt">readme</span> <span class="op">=</span> <span class="st">"README.md"</span></span>
+<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a><span class="dt">requires-python</span> <span class="op">=</span> <span class="st">"&gt;=3.12"</span></span>
+<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a><span class="dt">dependencies</span> <span class="op">=</span> <span class="op">[</span><span class="st">"requests"</span><span class="op">]</span></span>
+<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-14"><a href="#cb23-14" aria-hidden="true" tabindex="-1"></a><span class="kw">[project.optional-dependencies]</span></span>
+<span id="cb23-15"><a href="#cb23-15" aria-hidden="true" tabindex="-1"></a><span class="dt">dev</span> <span class="op">=</span> <span class="op">[</span><span class="st">"pytest"</span><span class="op">,</span> <span class="st">"ruff"</span><span class="op">]</span></span>
+<span id="cb23-16"><a href="#cb23-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-17"><a href="#cb23-17" aria-hidden="true" tabindex="-1"></a><span class="kw">[project.scripts]</span></span>
+<span id="cb23-18"><a href="#cb23-18" aria-hidden="true" tabindex="-1"></a><span class="dt">my-api</span> <span class="op">=</span> <span class="st">"my_api.cli:main"</span>  <span class="co"># Creates a 'my-api' command</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="installing-in-editable-mode" class="level3">
+<h3 class="anchored" data-anchor-id="installing-in-editable-mode"><strong>Installing in editable mode:</strong></h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb24"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Install and lock the project for development</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> sync</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Now you can import it anywhere</span></span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> run python <span class="at">-c</span> <span class="st">"from my_api import fetch_data"</span></span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a><span class="co"># And use the CLI command</span></span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> run my-api pokemon pikachu</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<hr>
+</section>
+</section>
+<section id="one-project-workflow-with-uv" class="level2">
+<h2 class="anchored" data-anchor-id="one-project-workflow-with-uv">One project workflow with <code>uv</code></h2>
+<ul>
+<li><strong><a href="https://docs.astral.sh/uv/"><code>uv</code></a></strong> manages Python versions, environments, dependencies, commands, and lockfiles</li>
+<li><strong>Reproducible</strong>: <code>pyproject.toml</code> declares dependencies and <code>uv.lock</code> records exact resolutions</li>
+<li><strong>No activation step</strong>: <code>uv run</code> executes inside the project environment</li>
+<li><strong>One local/CI interface</strong>: The same commands work on a laptop and in GitHub Actions</li>
+<li><strong>Written in Rust</strong>: A useful bridge to the next half of the course</li>
+</ul>
+<section id="basic-usage" class="level3">
+<h3 class="anchored" data-anchor-id="basic-usage"><strong>Basic usage:</strong></h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb25"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Reproduce a committed project</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> sync <span class="at">--locked</span></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Add dependencies in your own project</span></span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> add requests</span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> add <span class="at">--dev</span> pytest</span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Run inside the project environment</span></span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> run python <span class="at">-m</span> pytest</span>
+<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> run my-api <span class="at">--help</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<hr>
+</section>
+</section>
+<section id="ai-assisted-package-scaffolding" class="level2">
+<h2 class="anchored" data-anchor-id="ai-assisted-package-scaffolding">AI-assisted package scaffolding</h2>
+<section id="prompt-strategies-for-project-structure" class="level3">
+<h3 class="anchored" data-anchor-id="prompt-strategies-for-project-structure"><strong>Prompt strategies for project structure:</strong></h3>
+<ul>
+<li><strong>Initial scaffold</strong>: “Propose the smallest Python project tree for this API client, CLI, and tests. Explain the purpose of every file”</li>
+<li><strong>Alternative</strong>: “Compare a flat layout with a <code>src/</code> layout for this project and name the configuration each requires”</li>
+<li><strong>Migration</strong>: “Plan a behavior-preserving split of this script into modules; do not edit until the current tests pass”</li>
+<li><strong>Documentation</strong>: “Generate a README with installation and usage instructions for my package”</li>
+</ul>
+</section>
+<section id="package-tasks-an-assistant-can-draft" class="level3">
+<h3 class="anchored" data-anchor-id="package-tasks-an-assistant-can-draft"><strong>Package tasks an assistant can draft:</strong></h3>
+<ul>
+<li>Generating boilerplate directory structures</li>
+<li>Creating <code>__init__.py</code> files with proper imports</li>
+<li>Writing <code>pyproject.toml</code> configurations</li>
+<li>Setting up testing frameworks</li>
+<li>Drafting README sections from verified commands and behavior</li>
+</ul>
+<hr>
+</section>
+</section>
+<section id="practical-example-final-project-structure" class="level2">
+<h2 class="anchored" data-anchor-id="practical-example-final-project-structure">Practical example: final-project structure</h2>
+<section id="one-possible-structure-for-the-final-project" class="level3">
+<h3 class="anchored" data-anchor-id="one-possible-structure-for-the-final-project"><strong>One possible structure for the final project</strong></h3>
+<pre><code>my_final_project/
+│
+├── src/
+│   └── my_api_tool/
+│       ├── __init__.py          # Package initialization
+│       ├── api_client.py        # API interaction logic
+│       ├── cli.py               # argparse CLI interface
+│       ├── models.py            # Data models/classes
+│       └── utils.py             # Helper functions
+│
+├── tests/
+│   ├── __init__.py
+│   ├── test_api_client.py      # API tests
+│   ├── test_cli.py              # CLI tests
+│   └── test_models.py           # Model tests
+│
+├── .github/
+│   └── workflows/
+│       └── tests.yml            # GitHub Actions CI/CD
+│
+├── pyproject.toml               # Project configuration
+├── README.md                    # Your documentation
+├── .gitignore                   # Git exclusions
+└── uv.lock                      # Exact resolved dependencies</code></pre>
+<hr>
+</section>
+</section>
+<section id="putting-it-all-together-cli-and-package-structure" class="level2">
+<h2 class="anchored" data-anchor-id="putting-it-all-together-cli-and-package-structure">Putting it all together: CLI and package structure</h2>
+<section id="entry-point-main.py-or-srcmy_api_tool__main__.py" class="level3">
+<h3 class="anchored" data-anchor-id="entry-point-main.py-or-srcmy_api_tool__main__.py"><strong>Entry point (<code>main.py</code> or <code>src/my_api_tool/__main__.py</code>):</strong></h3>
+<div id="fde36018" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co">"""Entry point for the my_api_tool CLI."""</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> my_api_tool.cli <span class="im">import</span> main</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="va">__name__</span> <span class="op">==</span> <span class="st">"__main__"</span>:</span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>    main()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
+</section>
+<section id="cli-module-srcmy_api_toolcli.py" class="level3">
+<h3 class="anchored" data-anchor-id="cli-module-srcmy_api_toolcli.py"><strong>CLI module (<code>src/my_api_tool/cli.py</code>):</strong></h3>
+<div id="c031747a" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co">"""Command-line interface for API tool."""</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> argparse</span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sys</span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> my_api_tool.api_client <span class="im">import</span> APIClient</span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> my_api_tool.utils <span class="im">import</span> format_output</span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> main():</span>
+<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a>    parser <span class="op">=</span> argparse.ArgumentParser(description<span class="op">=</span><span class="st">"API client tool"</span>)</span>
+<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a>    parser.add_argument(<span class="st">"resource"</span>, <span class="bu">help</span><span class="op">=</span><span class="st">"Resource to fetch"</span>)</span>
+<span id="cb28-10"><a href="#cb28-10" aria-hidden="true" tabindex="-1"></a>    parser.add_argument(<span class="st">"--format"</span>, choices<span class="op">=</span>[<span class="st">"json"</span>, <span class="st">"pretty"</span>], default<span class="op">=</span><span class="st">"pretty"</span>)</span>
+<span id="cb28-11"><a href="#cb28-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-12"><a href="#cb28-12" aria-hidden="true" tabindex="-1"></a>    args <span class="op">=</span> parser.parse_args()</span>
+<span id="cb28-13"><a href="#cb28-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-14"><a href="#cb28-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">try</span>:</span>
+<span id="cb28-15"><a href="#cb28-15" aria-hidden="true" tabindex="-1"></a>        client <span class="op">=</span> APIClient()</span>
+<span id="cb28-16"><a href="#cb28-16" aria-hidden="true" tabindex="-1"></a>        data <span class="op">=</span> client.fetch(args.resource)</span>
+<span id="cb28-17"><a href="#cb28-17" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(format_output(data, args.<span class="bu">format</span>))</span>
+<span id="cb28-18"><a href="#cb28-18" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="dv">0</span></span>
+<span id="cb28-19"><a href="#cb28-19" aria-hidden="true" tabindex="-1"></a>    <span class="cf">except</span> (<span class="pp">OSError</span>, <span class="pp">ValueError</span>) <span class="im">as</span> error:</span>
+<span id="cb28-20"><a href="#cb28-20" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f"Error: </span><span class="sc">{</span>error<span class="sc">}</span><span class="ss">"</span>, <span class="bu">file</span><span class="op">=</span>sys.stderr)</span>
+<span id="cb28-21"><a href="#cb28-21" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="dv">1</span></span>
+<span id="cb28-22"><a href="#cb28-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-23"><a href="#cb28-23" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="va">__name__</span> <span class="op">==</span> <span class="st">"__main__"</span>:</span>
+<span id="cb28-24"><a href="#cb28-24" aria-hidden="true" tabindex="-1"></a>    sys.exit(main())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="usage-after-install" class="level3">
+<h3 class="anchored" data-anchor-id="usage-after-install"><strong>Usage after install:</strong></h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb29"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> sync</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> run my-api-tool pokemon <span class="at">--format</span> json</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<hr>
+</section>
 <section id="your-turn-final-exercise" class="level3">
-<h3 class="anchored" data-anchor-id="your-turn-final-exercise">🎯 Your Turn: Final Exercise</h3>
+<h3 class="anchored" data-anchor-id="your-turn-final-exercise">Your turn: final exercise</h3>
 <p>Design a complete CLI application for your final project:</p>
 <ol type="1">
 <li><strong>Create a class</strong> for your API client (like <code>APIClient</code> above)</li>
@@ -909,90 +1283,156 @@ uv run python calculator.py 10 5 --operation multiply # Should print 50</code></
 <li><strong>Use the <code>__name__ == "__main__"</code> pattern</strong></li>
 </ol>
 <p>Test it with simulated arguments.</p>
-<div id="cell-30" class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Your complete final project CLI design here</span></span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TODO</span><span class="co">: Create your API client class</span></span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> YourAPIClient:</span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">pass</span></span>
-<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TODO</span><span class="co">: Create your CLI parser</span></span>
-<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> create_your_cli_parser():</span>
-<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">pass</span></span>
-<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TODO</span><span class="co">: Create main function</span></span>
-<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> your_main():</span>
-<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">pass</span></span>
-<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TODO</span><span class="co">: Add __name__ == "__main__" pattern</span></span>
-<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="va">__name__</span> <span class="op">==</span> <span class="st">"__main__"</span>:</span>
-<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a>    your_main()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="7e8dedb0" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Your complete final project CLI design here</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TODO</span><span class="co">: Create your API client class</span></span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> YourAPIClient:</span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">pass</span></span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TODO</span><span class="co">: Create your CLI parser</span></span>
+<span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> create_your_cli_parser():</span>
+<span id="cb30-9"><a href="#cb30-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">pass</span></span>
+<span id="cb30-10"><a href="#cb30-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-11"><a href="#cb30-11" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TODO</span><span class="co">: Create main function</span></span>
+<span id="cb30-12"><a href="#cb30-12" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> your_main():</span>
+<span id="cb30-13"><a href="#cb30-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">pass</span></span>
+<span id="cb30-14"><a href="#cb30-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-15"><a href="#cb30-15" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TODO</span><span class="co">: Add __name__ == "__main__" pattern</span></span>
+<span id="cb30-16"><a href="#cb30-16" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="va">__name__</span> <span class="op">==</span> <span class="st">"__main__"</span>:</span>
+<span id="cb30-17"><a href="#cb30-17" aria-hidden="true" tabindex="-1"></a>    your_main()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<hr>
 </section>
 </section>
-<section id="next-steps-applying-to-your-final-project" class="level1">
-<h1>🚀 Next Steps: Applying to Your Final project</h1>
-<section id="action-items-for-this-week" class="level2">
-<h2 class="anchored" data-anchor-id="action-items-for-this-week">Action Items for This Week:</h2>
-<ol type="1">
-<li><strong>Restructure your project</strong> with proper package layout
+<section id="bridge-to-rust-a-preview-of-next-week" class="level2">
+<h2 class="anchored" data-anchor-id="bridge-to-rust-a-preview-of-next-week">Bridge to Rust: a preview of next week</h2>
+<section id="python-packaging-challenges-weve-seen" class="level3">
+<h3 class="anchored" data-anchor-id="python-packaging-challenges-weve-seen"><strong>Python packaging challenges we’ve seen:</strong></h3>
 <ul>
-<li>Create package directory with <code>__init__.py</code></li>
-<li>Separate concerns into modules (api, cli, utils, models)</li>
-<li>Add <code>tests/</code> directory</li>
-</ul></li>
-<li><strong>Add CLI interface</strong> using argparse
-<ul>
-<li>Design intuitive commands and arguments</li>
-<li>Add help text for all options</li>
-<li>Include error handling and validation</li>
-</ul></li>
-<li><strong>Create <code>pyproject.toml</code></strong> for your project
-<ul>
-<li>Define project metadata</li>
-<li>List dependencies</li>
-<li>Create CLI entry point</li>
-</ul></li>
-<li><strong>Test installation</strong>
-<ul>
-<li>Run <code>uv sync</code> in your project directory</li>
-<li>Test your CLI command</li>
-<li>Verify imports work from other directories</li>
-</ul></li>
-<li><strong>Update README.md</strong>
-<ul>
-<li>Installation instructions</li>
-<li>Usage examples with your CLI</li>
-<li>Project structure explanation</li>
-</ul></li>
-</ol>
-<hr>
+<li><strong>Manual structure</strong>: Create directories, <code>__init__.py</code> files by hand</li>
+<li><strong>Import complexity</strong>: Absolute vs relative, <code>__name__ == "__main__"</code> patterns</li>
+<li><strong>Dependency management</strong>: Multiple tools (<code>pip</code>, <code>venv</code>, <code>pyproject.toml</code>)</li>
+<li><strong>Build system</strong>: Choose from many options (setuptools, hatch, poetry, PDM)</li>
+</ul>
 </section>
-<section id="resources" class="level2">
-<h2 class="anchored" data-anchor-id="resources">Resources</h2>
+<section id="next-week-in-rust" class="level3">
+<h3 class="anchored" data-anchor-id="next-week-in-rust"><strong>Next week in Rust:</strong></h3>
 <ul>
-<li><a href="https://docs.python.org/3/library/argparse.html">argparse documentation</a></li>
-<li><a href="https://docs.python.org/3/tutorial/modules.html#packages">Python Packages tutorial</a></li>
-<li><a href="https://packaging.python.org/en/latest/guides/writing-pyproject-toml/">pyproject.toml guide</a></li>
-<li><a href="https://click.palletsprojects.com/">Click library</a> - Advanced CLI framework</li>
-<li><a href="https://typer.tiangolo.com/">Typer library</a> - Modern CLI with type hints</li>
+<li><strong><a href="https://doc.rust-lang.org/cargo/">Cargo</a></strong> provides one interface for common Rust project tasks</li>
+<li><strong>One command</strong>: <code>cargo new my_project</code> creates a conventional starting structure</li>
+<li><strong>Integrated commands</strong>: Dependency management, building, testing, and documentation</li>
+<li><strong>Conventions</strong>: <code>cargo new</code> supplies defaults, while larger projects still require design decisions</li>
+<li><strong>Comparison point</strong>: Compare Cargo’s defaults with Python’s explicit project configuration</li>
 </ul>
 <hr>
 </section>
-<section id="tips-for-success" class="level2">
-<h2 class="anchored" data-anchor-id="tips-for-success">💡 Tips for Success</h2>
-<ol type="1">
-<li><strong>Start simple</strong>: Get basic structure working first, then refine</li>
-<li><strong>Test frequently</strong>: Run your CLI after each change</li>
-<li><strong>Use AI assistance</strong>: Great for generating boilerplate and structure</li>
-<li><strong>Study examples</strong>: Look at popular Python packages on GitHub</li>
-<li><strong>Ask for help</strong>: Use office hours if you get stuck on structure</li>
-</ol>
+</section>
+<section id="resources-and-further-learning" class="level2">
+<h2 class="anchored" data-anchor-id="resources-and-further-learning">Resources and further learning</h2>
+<section id="official-documentation" class="level3">
+<h3 class="anchored" data-anchor-id="official-documentation"><strong>Official documentation</strong></h3>
+<ul>
+<li><strong><a href="https://docs.python.org/3/library/argparse.html">argparse</a></strong> - Python standard library CLI tool</li>
+<li><strong><a href="https://docs.python.org/3/tutorial/modules.html#packages">Python Packages</a></strong> - Official modules and packages guide</li>
+<li><strong><a href="https://packaging.python.org/en/latest/tutorials/packaging-projects/">Packaging Projects</a></strong> - Python Packaging Authority tutorial</li>
+<li><strong><a href="https://click.palletsprojects.com/">Click</a></strong> - Alternative CLI framework (more advanced)</li>
+<li><strong><a href="https://typer.tiangolo.com/">Typer</a></strong> - Modern CLI with type hints</li>
+<li><strong><a href="https://rich.readthedocs.io/">Rich</a></strong> - Beautiful terminal output</li>
+<li><strong><a href="https://github.com/astral-sh/uv">uv documentation</a></strong> - Fast Python package installer</li>
+</ul>
+</section>
+<section id="advanced-topics" class="level3">
+<h3 class="anchored" data-anchor-id="advanced-topics"><strong>Advanced topics</strong></h3>
+<ul>
+<li><strong><a href="https://peps.python.org/pep-0008/">PEP 8</a></strong> - Python style guide</li>
+<li><strong><a href="https://peps.python.org/pep-0621/">PEP 621</a></strong> - Project metadata in <code>pyproject.toml</code></li>
+<li><strong>Entry points</strong> - Creating console scripts</li>
+<li><strong>Namespace packages</strong> - Splitting packages across distributions</li>
+</ul>
 <hr>
-<p><strong>Good luck building your professional Python application!</strong> 🎉</p>
+</section>
+</section>
+<section id="applying-this-to-the-final-project" class="level2">
+<h2 class="anchored" data-anchor-id="applying-this-to-the-final-project">Applying this to the final project</h2>
+<section id="this-weeks-work-session" class="level3">
+<h3 class="anchored" data-anchor-id="this-weeks-work-session"><strong>This week’s work session</strong></h3>
+<ul>
+<li><strong>Choose a clear structure</strong>; a <code>src/</code> package is useful for larger Python projects but is not required</li>
+<li><strong>Add a CLI interface</strong> with argparse for easy testing and demonstration</li>
+<li><strong>Create clean imports</strong> between your modules</li>
+<li><strong>Consider an entry point</strong> in <code>pyproject.toml</code> when it improves installation and use</li>
+<li><strong>Document usage</strong> in your README with examples</li>
+<li><strong>Test your CLI</strong> with different arguments and edge cases</li>
+</ul>
+</section>
+<section id="success-criteria" class="level3">
+<h3 class="anchored" data-anchor-id="success-criteria"><strong>Success criteria</strong></h3>
+<ul>
+<li>Can run <code>uv sync</code> and launch the project with <code>uv run</code></li>
+<li>CLI works with intuitive arguments and helpful error messages</li>
+<li>Code is organized in logical modules with clean imports</li>
+<li><code>--help</code> flag provides clear usage instructions</li>
+<li>README explains installation and usage</li>
+</ul>
+<hr>
+</section>
+</section>
+<section id="summary-key-takeaways" class="level2">
+<h2 class="anchored" data-anchor-id="summary-key-takeaways">Summary: key takeaways</h2>
+<ul>
+<li><strong>CLI with argparse</strong>: Create command-line tools with generated help and validation</li>
+<li><strong>Package structure</strong>: Organize code with <code>__init__.py</code>, proper imports, and logical modules</li>
+<li><strong><code>__name__ == "__main__"</code></strong>: Make code both runnable and importable</li>
+<li><strong>Modern tooling</strong>: <code>pyproject.toml</code> describes a project and <code>uv</code> reproduces its environment</li>
+<li><strong>Integration</strong>: A CLI plus clear module boundaries can improve testing and maintenance</li>
+<li><strong>Final project application</strong>: Apply the patterns that make your chosen project easier to run and test</li>
+<li><strong>Next week</strong>: Compare this workflow with Cargo’s defaults and commands</li>
+</ul>
+<hr>
+</section>
+<section id="lab-08-checkpoint-weather-cli" class="level2">
+<h2 class="anchored" data-anchor-id="lab-08-checkpoint-weather-cli">Lab 08 checkpoint: weather CLI</h2>
+<p><strong>Complete the supplied three-module contract:</strong></p>
+<ul>
+<li><code>favorites.py</code>: <code>FavoritesManager</code> stores case-insensitive favorites in JSON and recovers from missing or corrupted files</li>
+<li><code>weather_api.py</code>: <code>WeatherAPI</code> calls the specified current and forecast endpoints with <code>params</code> and <code>timeout=10</code>; <code>format_current_weather()</code> and <code>format_forecast()</code> produce the required text</li>
+<li><code>weather.py</code>: <code>load_api_key()</code>, <code>build_parser()</code>, and <code>main(argv=None)</code> implement the documented commands, favorite lookup, standard-error messages, and exit status</li>
+<li>Automated tests use fake responses; manual API use requires an ignored <code>config.py</code> or the <code>WEATHER_API_KEY</code> environment variable</li>
+<li>Do not modify the supplied tests, workflow, <code>config.example.py</code>, or root <code>.gitignore</code></li>
+</ul>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb31"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> run python <span class="at">-m</span> pytest week08/tests/ <span class="at">-v</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> add week08/favorites.py week08/weather_api.py week08/weather.py</span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"Complete Lab 08"</span></span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> push origin main</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Confirm the Week 08 README badge is green; that badge is the complete 10-point grade.</p>
+<p><strong>Instructions:</strong> <a href="https://github.com/bgreenwell/is4010-labs/blob/main/week08/lab08.md"><code>week08/lab08.md</code></a></p>
+<hr>
+</section>
+<section id="work-session-build-a-maintainable-python-application" class="level2">
+<h2 class="anchored" data-anchor-id="work-session-build-a-maintainable-python-application">Work session: build a maintainable Python application</h2>
+<section id="todays-goals" class="level3">
+<h3 class="anchored" data-anchor-id="todays-goals"><strong>Today’s goals</strong></h3>
+<ul>
+<li>Choose a structure that fits the size of your final project</li>
+<li>Implement a CLI interface with argparse</li>
+<li>Create clean module organization</li>
+<li>Test your CLI and fix any issues</li>
+<li>Update your README with installation and usage instructions</li>
+</ul>
+</section>
+<section id="need-help" class="level3">
+<h3 class="anchored" data-anchor-id="need-help"><strong>Need help?</strong></h3>
+<ul>
+<li>Review the slide examples</li>
+<li>Use AI assistants for structure scaffolding</li>
+<li>Ask questions as you work</li>
+<li>Reference the official documentation</li>
+<li>Test frequently as you refactor</li>
+</ul>
+<p><strong>Build one small, testable improvement before adding more structure.</strong></p>
 
 
+</section>
 </section>
 </section>
 
