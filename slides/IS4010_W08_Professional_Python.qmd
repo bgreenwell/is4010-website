@@ -136,7 +136,8 @@ author: "Brandon M. Greenwell"
 
 ## Basic `argparse`: your first CLI
 
-```python
+```{python}
+#| eval: false
 """simple_greeter.py - A friendly CLI greeter."""
 import argparse
 
@@ -232,9 +233,43 @@ simple_greeter.py: error: the following arguments are required: name
 
 ---
 
+::: {.content-visible when-format="ipynb"}
+### Your turn: practice
+
+Create a CLI calculator that:
+1. Takes two numbers as positional arguments
+2. Has a `--operation` flag with choices: add, subtract, multiply, divide
+3. Prints the result
+
+Example usage:
+```
+uv run python calculator.py 10 5 --operation add     # Should print 15
+uv run python calculator.py 10 5 --operation multiply # Should print 50
+```
+
+```{python}
+#| eval: false
+# Your code here
+def create_calculator_parser():
+    """Create a parser for a calculator CLI."""
+    parser = argparse.ArgumentParser(description="Simple calculator")
+    
+    # TODO: Add positional arguments for two numbers
+    # TODO: Add --operation flag with choices
+    
+    return parser
+
+# Test your calculator
+# parser = create_calculator_parser()
+# args = parser.parse_args(["10", "5", "--operation", "add"])
+# print(f"Result: {args.num1 + args.num2}")  # Adjust based on your implementation
+```
+:::
+
 ## Advanced `argparse`: multiple arguments and types
 
-```python
+```{python}
+#| eval: false
 """api_fetcher.py - Fetch data from APIs with configurable options."""
 import argparse
 
@@ -299,9 +334,36 @@ if __name__ == "__main__":
 
 ---
 
+::: {.content-visible when-format="ipynb"}
+### Your turn: practice
+
+Create a file processor CLI that:
+1. Takes a filename as positional argument
+2. Has `--lines` flag (integer) for number of lines to process (default: 10)
+3. Has `--mode` flag with choices: read, count, search
+4. Has `--pattern` flag (string) for search mode
+
+Print out what the tool would do based on the arguments.
+
+```{python}
+#| eval: false
+# Your code here
+def create_file_processor_parser():
+    """Create a parser for a file processing tool."""
+    # TODO: Implement the parser
+    pass
+
+# Test your parser
+# parser = create_file_processor_parser()
+# args = parser.parse_args(["data.txt", "--lines", "20", "--mode", "search", "--pattern", "error"])
+# print(f"Processing {args.filename}: {args.mode} mode, {args.lines} lines")
+```
+:::
+
 ## Subcommands: building multi-function tools
 
-```python
+```{python}
+#| eval: false
 """project_manager.py - Manage your project with subcommands."""
 import argparse
 
@@ -366,6 +428,32 @@ if __name__ == "__main__":
 
 ---
 
+::: {.content-visible when-format="ipynb"}
+### Your turn: practice
+
+Create a data management CLI with three subcommands:
+1. `fetch` - Fetch data from an API (takes `source` as argument)
+2. `clean` - Clean a dataset (takes `filename` and optional `--method`)
+3. `export` - Export data (takes `filename` and `--format` with choices: json, csv, excel)
+
+Each subcommand should print what action it would take.
+
+```{python}
+#| eval: false
+# Your code here
+def create_data_manager_parser():
+    """Create a parser for a data management tool with subcommands."""
+    # TODO: Implement parser with subcommands
+    pass
+
+# Test your data manager
+# parser = create_data_manager_parser()
+# args = parser.parse_args(["export", "data.json", "--format", "csv"])
+# if hasattr(args, "func"):
+#     args.func(args)
+```
+:::
+
 ## CLI usability practices
 
 ::: {.incremental}
@@ -395,7 +483,8 @@ if __name__ == "__main__":
 
 ## Practical example: API CLI
 
-```python
+```{python}
+#| eval: false
 """Command-line interface for an API project."""
 import argparse
 import sys
@@ -593,7 +682,8 @@ my_api_project/
 
 ### **Using this structure:**
 
-```python
+```{python}
+#| eval: false
 # In main.py
 from my_api.cli import main
 from my_api.api import fetch_data
@@ -621,14 +711,16 @@ if __name__ == "__main__":
 
 ### **Empty `__init__.py` (most common):**
 
-```python
+```{python}
+#| eval: false
 # my_api/__init__.py
 # Empty file - marks directory as package
 ```
 
 ### **With initialization code:**
 
-```python
+```{python}
+#| eval: false
 # my_api/__init__.py
 """Public interface for the API client package."""
 
@@ -646,7 +738,8 @@ __all__ = ["fetch_data", "APIClient", "format_output"]
 
 ### **Usage becomes cleaner:**
 
-```python
+```{python}
+#| eval: false
 # Instead of: from my_api.api import fetch_data
 # You can do: from my_api import fetch_data
 
@@ -668,11 +761,42 @@ print(my_api.__version__)  # 1.0.0
 
 ---
 
+::: {.content-visible when-format="ipynb"}
+### Your turn: practice
+
+Design a package structure for your final project. Include:
+1. A main package directory name
+2. At least 3 module files (`.py` files) with their purposes
+3. What you would put in `__init__.py`
+
+Write your design as comments or markdown in the cell below.
+
+```{python}
+#| eval: false
+# Your package structure design here
+
+# Example:
+# my_final_project/
+#   ├── pokemon_api/              # Main package
+#   │   ├── __init__.py           # Package initialization
+#   │   ├── client.py             # API client logic
+#   │   ├── cli.py                # Command-line interface
+#   │   ├── models.py             # Data models/classes
+#   │   └── utils.py              # Helper functions
+#   ├── tests/                    # Test directory
+#   ├── main.py                   # Entry point
+#   └── README.md                 # Documentation
+
+# TODO: Design your own structure
+```
+:::
+
 ## Import systems: absolute and relative
 
 ### **Absolute imports (preferred):**
 
-```python
+```{python}
+#| eval: false
 # my_api/cli.py
 from my_api.api import fetch_data
 from my_api.utils import format_output
@@ -681,7 +805,8 @@ import my_api
 
 ### **Relative imports (within a package):**
 
-```python
+```{python}
+#| eval: false
 # my_api/cli.py
 from .api import fetch_data        # Same directory
 from .utils import format_output   # Same directory
@@ -722,7 +847,8 @@ from ..other_package import helper # Parent directory
 
 ### **The pattern:**
 
-```python
+```{python}
+#| eval: false
 # my_api/api.py
 
 def fetch_data(api_name: str):
@@ -749,7 +875,8 @@ Fetching from pokemon
 {'data': 'example'}
 ```
 
-```python
+```{python}
+#| eval: false
 # Import as module (main() doesn't run)
 from my_api.api import fetch_data
 ```
@@ -991,7 +1118,8 @@ my_final_project/
 
 ### **Entry point (`main.py` or `src/my_api_tool/__main__.py`):**
 
-```python
+```{python}
+#| eval: false
 """Entry point for the my_api_tool CLI."""
 from my_api_tool.cli import main
 
@@ -1001,7 +1129,8 @@ if __name__ == "__main__":
 
 ### **CLI module (`src/my_api_tool/cli.py`):**
 
-```python
+```{python}
+#| eval: false
 """Command-line interface for API tool."""
 import argparse
 import sys
@@ -1048,6 +1177,40 @@ uv run my-api-tool pokemon --format json
 :::
 
 ---
+
+::: {.content-visible when-format="ipynb"}
+### Your turn: final exercise
+
+Design a complete CLI application for your final project:
+
+1. **Create a class** for your API client (like `APIClient` above)
+2. **Create a CLI parser** with appropriate arguments for your project
+3. **Create a main function** that integrates them together
+4. **Use the `__name__ == "__main__"` pattern**
+
+Test it with simulated arguments.
+
+```{python}
+#| eval: false
+# Your complete final project CLI design here
+
+# TODO: Create your API client class
+class YourAPIClient:
+    pass
+
+# TODO: Create your CLI parser
+def create_your_cli_parser():
+    pass
+
+# TODO: Create main function
+def your_main():
+    pass
+
+# TODO: Add __name__ == "__main__" pattern
+if __name__ == "__main__":
+    your_main()
+```
+:::
 
 ## Bridge to Rust: a preview of next week
 

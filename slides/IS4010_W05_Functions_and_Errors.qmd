@@ -63,7 +63,8 @@ author: "Brandon M. Greenwell"
 - **Documentation**: Good docstrings explain purpose, inputs, outputs, and important constraints
 :::
 
-```python
+```{python}
+#| eval: false
 def calculate_area(length: float, width: float) -> float:
     """Calculate the area of a rectangle.
 
@@ -104,7 +105,8 @@ def calculate_area(length: float, width: float) -> float:
 - **LEGB Rule**: Local → Enclosing → Global → Built-in (scope resolution order)
 :::
 
-```python
+```{python}
+#| eval: false
 def my_function():
     # secret_number has local scope
     secret_number = 42
@@ -137,7 +139,8 @@ my_function()
 - **Best practice**: Use keyword arguments for clarity in function calls
 :::
 
-```python
+```{python}
+#| eval: false
 def create_user_profile(name: str, age: int, city: str) -> dict:
     """Create a user profile dictionary."""
     return {
@@ -176,7 +179,8 @@ profile2 = create_user_profile(city="Columbus", name="Bob", age=25)
 - **Gotcha**: Avoid shared mutable defaults unless that shared state is intentional
 :::
 
-```python
+```{python}
+#| eval: false
 def send_notification(message: str, urgency: str = "normal",
                      channels: list = None) -> dict:
     """Send a notification through specified channels."""
@@ -219,7 +223,8 @@ result2 = send_notification("Critical error!", "high", ["email", "slack", "phone
 - **Order matters**: `def func(required, *args, **kwargs):`
 :::
 
-```python
+```{python}
+#| eval: false
 def analyze_user_data(user_id: int, *metrics: str, **options) -> dict:
     """Analyze user data with flexible metrics and options."""
     print(f"Analyzing user {user_id}")
@@ -266,7 +271,8 @@ result2 = analyze_user_data(456, "clicks", "views", "shares",
 - **Performance consideration**: Large dictionaries are passed by reference, not copied
 :::
 
-```python
+```{python}
+#| eval: false
 def update_user_settings(user_data: dict, **new_settings) -> dict:
     """Update user settings, returning a new dictionary."""
     # Create a copy to avoid modifying original
@@ -321,7 +327,8 @@ stats = calculate_statistics(scores)
 - **Return consistency**: Keep return behavior predictable and document intentional alternatives
 :::
 
-```python
+```{python}
+#| eval: false
 # GOOD: Single responsibility, clear purpose
 def calculate_order_total(items: list[dict]) -> float:
     """Calculate the total cost of items in an order."""
@@ -435,7 +442,8 @@ clean, reusable functions. Each function should:
 - **Unhandled exceptions** will crash your program and frustrate users
 :::
 
-```python
+```{python}
+#| eval: false
 # Syntax error - won't even run
 # print("Hello world" # Missing closing parenthesis
 
@@ -470,7 +478,8 @@ age = int("not a number")  # ValueError: invalid literal for int()
 - **Avoid broad catches by default**: Catch the exceptions you can handle; boundary layers may intentionally catch broadly to log or translate failures
 :::
 
-```python
+```{python}
+#| eval: false
 def safe_divide(a: float, b: float) -> float | None:
     """Safely divide two numbers, returning None if division fails."""
     try:
@@ -511,7 +520,8 @@ print(safe_divide(10, "x"))  # Both arguments must be numbers, returns None
 - **Order matters**: More specific exceptions must come before general ones
 :::
 
-```python
+```{python}
+#| eval: false
 # Common exception types and when they occur
 def demonstrate_exceptions():
     examples = {
@@ -566,7 +576,8 @@ def robust_data_processing(data: dict, key: str) -> str:
 - **When to use**: Domain-specific errors that don't fit built-in exception types
 :::
 
-```python
+```{python}
+#| eval: false
 class InsufficientFundsError(Exception):
     """Raised when account doesn't have enough money for transaction."""
     def __init__(self, balance: float, amount: float):
@@ -621,7 +632,8 @@ except InsufficientFundsError as e:
 - **Performance consideration**: `finally` ensures cleanup even if exceptions are re-raised
 :::
 
-```python
+```{python}
+#| eval: false
 def process_user_data(filename: str) -> dict:
     """Process user data from file with proper cleanup."""
     file_handle = None
@@ -670,7 +682,8 @@ print(f"Result: {result}")
 - **Under the hood**: Uses `__enter__` and `__exit__` methods
 :::
 
-```python
+```{python}
+#| eval: false
 # OLD WAY: Manual file handling (error-prone)
 def read_config_old(filename: str) -> dict:
     try:
@@ -725,7 +738,8 @@ def compare_files(file1: str, file2: str) -> bool:
 - **Type checking**: Use type hints and runtime validation together
 :::
 
-```python
+```{python}
+#| eval: false
 def create_user_account(username: str, age: int, email: str) -> dict:
     """Create user account with comprehensive input validation."""
 
@@ -787,7 +801,8 @@ except (TypeError, ValueError) as e:
 - **Choose wisely**: Some situations favor one approach over the other
 :::
 
-```python
+```{python}
+#| eval: false
 # LBYL Approach: Check first, then act
 def get_user_score_lbyl(users: dict, user_id: str) -> float:
     """Get user score using Look Before You Leap pattern."""
@@ -851,7 +866,8 @@ def demonstrate_patterns():
 :::
 
 **Implementation scaffold:**
-```python
+```{python}
+#| eval: false
 def calculate_average_age(users: list[dict]) -> float:
     """Return the average numeric age, or 0.0 if none are valid."""
     # TODO: collect the valid ages and calculate the specified result

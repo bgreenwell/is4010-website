@@ -35,7 +35,9 @@ When a change affects both teaching content and a lab contract, update the publi
 - `index.qmd`: course landing page
 - `syllabus.qmd`: Simple Syllabus link placeholder plus a non-authoritative planning reference
 - `project.qmd`: final solo project requirements
-- `weeks/`: weekly module pages and interactive notebooks
+- `weeks/`: weekly module pages, plus `weekNN-notebook.ipynb` companion notebooks that are
+  **generated** from the Python decks by `scripts/build-notebooks.py`. Never edit a notebook by
+  hand; edit the deck and regenerate, or the next build silently discards the change
 - `slides/`: Reveal.js lecture sources. Shared deck configuration lives in `slides/_metadata.yml`;
   per-deck front matter carries only `title`, `subtitle`, and `author`. Never add a `slides/_quarto.yml`
   — a nested project there excludes the decks from the parent render and makes local output diverge
@@ -99,6 +101,25 @@ The Week 01 instructor introduction should point to the instructor's GitHub prof
 7. Commit source only. `_site/` is ignored.
 
 Do not edit generated files under `_site/` as a substitute for changing their source. The publishing workflow renders the website and slides, runs a link checker, and deploys to GitHub Pages on pushes to `main`.
+
+## Companion notebooks are generated from the decks
+
+`slides/IS4010_W0{2..8}_*.qmd` are the single source for both the lecture slides and the weekly
+notebooks. Four pieces make that work, and all four must stay in place:
+
+- Code fences are ` ```{python} ` with `#| eval: false`. Quarto splits notebook cells at
+  executable blocks, so a plain ` ```python ` fence collapses the whole deck into one markdown
+  cell. `scripts/build-notebooks.py` fails rather than write such a notebook.
+- `slides/_metadata.yml` sets `execute: enabled: false`. Without it every render, including the
+  revealjs one, fails with `Jupyter is not available in this Python installation`.
+- `slides/strip-notes.lua` drops `::: {.notes}` divs for every format except revealjs. Speaker
+  notes are instructor-only; the build script re-checks each generated notebook and fails on any
+  that survive.
+- Notebook-only material, meaning the exercises and the header, lives in
+  `::: {.content-visible when-format="ipynb"}` blocks so it never reaches the slides.
+
+Regenerate with `python3 scripts/build-notebooks.py`, optionally naming weeks. The publish
+workflow runs it before rendering and commits any changes back to `main`.
 
 ## GitHub Actions pinning policy
 

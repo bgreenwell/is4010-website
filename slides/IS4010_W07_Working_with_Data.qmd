@@ -53,7 +53,8 @@ author: "Brandon M. Greenwell"
 
 ### **The standard pattern: `with open()` context manager**
 
-```python
+```{python}
+#| eval: false
 # Write to a file (overwrites existing content)
 with open("my_note.txt", "w") as f:
     f.write("Hello from our application!")
@@ -80,11 +81,25 @@ with open("my_note.txt", "r") as f:
 
 ---
 
+::: {.content-visible when-format="ipynb"}
+### Your turn: file writing practice
+
+1. Create a file called `todo.txt` with your top 3 tasks
+2. Read it back and print the contents
+3. Use append mode (`"a"`) to add a 4th task
+
+```{python}
+#| eval: false
+# Your code here
+```
+:::
+
 ## The problem with plain text files
 
 ### **Text is unstructured and hard to parse**
 
-```python
+```{python}
+#| eval: false
 # Saving a contact list to a text file - messy!
 with open("contacts.txt", "w") as f:
     f.write("Alice|alice@example.com|555-1234\n")
@@ -144,7 +159,8 @@ with open("contacts.txt", "r") as f:
 
 ### **Two key functions: `dump()` and `load()`**
 
-```python
+```{python}
+#| eval: false
 import json
 
 # Python dictionary (complex, nested structure)
@@ -202,6 +218,19 @@ with open("contacts.json", "r") as f:
 :::
 
 ---
+
+::: {.content-visible when-format="ipynb"}
+### Your turn: JSON practice
+
+1. Create a Python dictionary representing your favorite movies (title, year, rating)
+2. Save it to `movies.json` with nice formatting
+3. Load it back and print the movie with the highest rating
+
+```{python}
+#| eval: false
+# Your code here
+```
+:::
 
 ## Why JSON matters for APIs
 
@@ -312,7 +341,8 @@ uv add requests
 
 ### **GET request to a public API**
 
-```python
+```{python}
+#| eval: false
 import requests
 
 # Make a GET request to the PokeAPI
@@ -338,6 +368,19 @@ else:
 :::
 
 ---
+
+::: {.content-visible when-format="ipynb"}
+### Your turn: explore PokeAPI
+
+1. Fetch data for a different Pokemon (replace "pikachu" with another name)
+2. Print the Pokemon's types (hint: look at `data['types']`)
+3. Try an invalid Pokemon name - what happens?
+
+```{python}
+#| eval: false
+# Your code here
+```
+:::
 
 ## HTTP status codes
 
@@ -367,7 +410,8 @@ else:
 ::: {.columns}
 ::: {.column width="50%"}
 **Reading JSON from a file:**
-```python
+```{python}
+#| eval: false
 import json
 
 with open("data.json", "r") as f:
@@ -378,7 +422,8 @@ with open("data.json", "r") as f:
 
 ::: {.column width="50%"}
 **Reading JSON from an API:**
-```python
+```{python}
+#| eval: false
 import requests
 
 response = requests.get(url)
@@ -417,11 +462,26 @@ These are optional examples, not Lab 07 choices. Lab tests use local fakes and n
 
 ---
 
+::: {.content-visible when-format="ipynb"}
+### Your turn: try different APIs
+
+Pick one of the APIs above and:
+1. Read its documentation to find an interesting endpoint
+2. Make a GET request to that endpoint
+3. Parse and display the interesting data from the response
+
+```{python}
+#| eval: false
+# Your code here - explore a new API!
+```
+:::
+
 ## Error handling with APIs
 
 ### **Networks are unreliable - plan for failure**
 
-```python
+```{python}
+#| eval: false
 import requests
 
 url = "https://api.example.com/data"
@@ -478,7 +538,8 @@ except requests.exceptions.JSONDecodeError:
 
 ### **A complete data workflow**
 
-```python
+```{python}
+#| eval: false
 import json
 import requests
 
@@ -512,6 +573,22 @@ print("Data fetched from API and saved locally!")
 :::
 
 ---
+
+::: {.content-visible when-format="ipynb"}
+### Your turn: complete workflow
+
+Build a complete data workflow:
+1. Choose an API from the list above
+2. Fetch data from that API
+3. Process/filter the data to extract interesting information
+4. Save it to a JSON file
+5. Load it back and display a formatted report
+
+```{python}
+#| eval: false
+# Your complete workflow here
+```
+:::
 
 ## Lab 07 overview
 

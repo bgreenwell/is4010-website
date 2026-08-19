@@ -18,6 +18,24 @@ jobs:
       - name: Set up Quarto
         uses: quarto-dev/quarto-actions/setup@8a96df13519ee81fd526f2dfca5962811136661b # v2
 
+      # The Python decks are the single source for the companion notebooks. Regenerate
+      # before rendering so the site picks the new notebooks up in this same run.
+      - name: Generate companion notebooks
+        run: python3 scripts/build-notebooks.py
+
+      - name: Commit regenerated notebooks
+        if: github.ref == 'refs/heads/main' && github.actor != 'github-actions[bot]'
+        run: |
+          if [ -n "$(git status --porcelain weeks/*-notebook.ipynb)" ]; then
+            git config user.name  "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add weeks/*-notebook.ipynb
+            git commit -m "chore: regenerate companion notebooks from the decks [skip ci]"
+            git push
+          else
+            echo "notebooks already up to date"
+          fi
+
       # Renders the whole project, slides included. Deck configuration lives in
       # slides/_metadata.yml, so this produces byte-identical output to a local
       # `quarto render`. Do not add a second slides-only render.

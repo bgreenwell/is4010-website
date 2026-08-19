@@ -284,7 +284,8 @@ Emphasize the connection: clear human communication (docstrings) leads to better
 
 An example of Numpy-style docstrings:
 
-```python
+```{python}
+#| eval: false
 def add(num1, num2):
     """
     Add two numbers together.
@@ -545,6 +546,35 @@ The current Copilot CLI is a standalone agent, not the older `gh copilot suggest
 :::
 
 ---
+
+::: {.content-visible when-format="ipynb"}
+### Draft your shared prompt
+
+Write one prompt here before opening either CLI. Keeping the prompt fixed makes the comparison more meaningful.
+
+> Replace this line with your CPTF prompt.
+
+### Your turn: implement `count_vowels`
+
+Use the approach you selected after comparing both CLI agents.
+
+```{python}
+#| eval: false
+def count_vowels(text: str) -> int:
+    """Replace this body with the approach you selected and reviewed."""
+    raise NotImplementedError
+```
+
+Run the checks below. They are evidence, not decoration.
+
+```{python}
+#| eval: false
+# These checks are evidence, not decoration. Add one case of your own.
+assert count_vowels("OpenAI") == 4
+assert count_vowels("rhythms") == 0
+assert count_vowels("") == 0
+```
+:::
 
 ## The comparison protocol
 

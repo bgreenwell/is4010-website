@@ -65,7 +65,8 @@ author: "Brandon M. Greenwell"
 - **Dynamic size**: Grow or shrink as needed - no fixed size limit
 :::
 
-```python
+```{python}
+#| eval: false
 # A list of computer science pioneers
 pioneers = ["Grace Hopper", "Ada Lovelace", "Katherine Johnson"]
 
@@ -99,6 +100,28 @@ print(f"Last pioneer: {pioneers[-1]}")
 
 ---
 
+::: {.content-visible when-format="ipynb"}
+### Your turn: practice with lists
+
+Create your own list and practice the operations:
+
+```{python}
+#| eval: false
+# TODO: Create a list of your favorite programming languages
+my_languages = []
+
+# TODO: Add at least 3 languages to your list
+
+# TODO: Print the list and its length
+
+# TODO: Access the first and last items
+
+# TODO: Insert a new language at position 1
+
+# TODO: Remove the last language and print what was removed
+```
+:::
+
 ## The tuple: an immutable sequence
 
 ::: {.incremental}
@@ -111,7 +134,8 @@ print(f"Last pioneer: {pioneers[-1]}")
 - **Memory efficient**: Less overhead than lists due to immutability
 :::
 
-```python
+```{python}
+#| eval: false
 # Coordinate pairs for a map application
 start_location = (39.1031, -84.5120)  # Cincinnati coordinates
 end_location = (39.7391, -104.9847)   # Denver coordinates
@@ -150,6 +174,24 @@ single_item = (42,)  # Without comma, it's just parentheses for grouping
 
 ---
 
+::: {.content-visible when-format="ipynb"}
+### Your turn: practice with tuples
+
+```{python}
+#| eval: false
+# TODO: Create a tuple representing your favorite restaurant's location (name, latitude, longitude)
+
+# TODO: Unpack the tuple into separate variables
+
+# TODO: Print a formatted message about the restaurant
+
+# TODO: Create a function that returns multiple pieces of information about yourself
+# (name, major, year, favorite_color) and unpack the result
+
+# TODO: Call the function and unpack the results
+```
+:::
+
 ## Accessing items: indexing and slicing
 
 ::: {.incremental}
@@ -161,7 +203,8 @@ single_item = (42,)  # Without comma, it's just parentheses for grouping
 - **Advanced slicing**: Control step size and direction
 :::
 
-```python
+```{python}
+#| eval: false
 # Working with sequence data
 languages = ["Python", "JavaScript", "Java", "C++", "Rust", "Go", "TypeScript"]
 
@@ -208,7 +251,8 @@ print(f"2D coordinates: ({x}, {y})")
 - **Finding**: `sequence.index(item)` finds first occurrence
 :::
 
-```python
+```{python}
+#| eval: false
 # Working with programming languages data
 popular_languages = ["Python", "JavaScript", "TypeScript"]
 systems_languages = ["C++", "Rust", "Go"]
@@ -255,7 +299,8 @@ print(f"Short language names: {short_names}")
 
 **Python has a concise way to create lists called [list comprehensions](https://docs.python.org/3/tutorial/datastructures.html#list-comprehensions):**
 
-```python
+```{python}
+#| eval: false
 # Traditional approach with loops
 numbers = []
 for i in range(5):
@@ -289,11 +334,25 @@ print(emails)  # ['user_0@email.com', 'user_1@email.com', 'user_2@email.com']
 
 ---
 
+::: {.content-visible when-format="ipynb"}
+### Your turn: practice list comprehensions
+
+```{python}
+#| eval: false
+# TODO: Create a list of squares for numbers 1-10 using a list comprehension
+
+# TODO: Create a list of even numbers from 0-20 using a list comprehension
+
+# TODO: Create a list of customer emails for customer IDs 100-105
+```
+:::
+
 ## Live exercise: AI-assisted performance detective
 
 **Challenge:** Ask an AI assistant to identify the bottleneck, then verify its claim with timing evidence.
 
-```python
+```{python}
+#| eval: false
 # SLOW CODE - Let's time this together!
 import time
 
@@ -339,7 +398,8 @@ print(f"Slow approach: {slow_time:.4f} seconds, found {vip_count} VIPs")
 
 ## Revised solution: use a set for membership
 
-```python
+```{python}
+#| eval: false
 # Revised code after reviewing the suggestion
 import time
 
@@ -402,7 +462,8 @@ print(f"Speedup: {slow_time/fast_time:.1f}x faster!")
 - **Python 3.7+**: Dictionaries maintain insertion order (ordered)
 :::
 
-```python
+```{python}
+#| eval: false
 # User profile for a social media application
 user_profile = {
     "username": "ada_lovelace",
@@ -448,7 +509,8 @@ print(f"Updated profile: {user_profile['username']} now has {user_profile['follo
 
 **Challenge:** This code works, but positional fields make it hard to read and change.
 
-```python
+```{python}
+#| eval: false
 # MESSY CODE - Student registration system (needs help!)
 def process_student_data():
     # Raw data from registration form
@@ -507,7 +569,8 @@ print(f"IS4010 students: {len(students)}, Average: {avg:.1f}")
 
 ## Refactored solution
 
-```python
+```{python}
+#| eval: false
 # Revised code after reviewing the suggestions
 from collections import defaultdict
 
@@ -560,6 +623,56 @@ print(f"IS4010 students: {len(students)}, Average: {avg:.1f}")
 
 ---
 
+::: {.content-visible when-format="ipynb"}
+### Your turn: dictionary mastery
+
+Practice the dictionary concepts with these hands-on exercises:
+
+```{python}
+#| eval: false
+# TODO: Create a product inventory dictionary
+# Include: product_id, name, price, stock_quantity, category
+inventory = {
+    "LAPTOP001": {"name": "Gaming Laptop", "price": 1299.99, "stock": 15, "category": "Electronics"},
+    "PHONE001": {"name": "Smartphone", "price": 699.99, "stock": 0, "category": "Electronics"},
+    "BOOK001": {"name": "Python Programming", "price": 39.99, "stock": 25, "category": "Books"}
+}
+
+# TODO: Practice safe access - get the price of "LAPTOP001"
+try:
+    inventory["LAPTOP001"]["type"]
+except KeyError:
+    print("KeyError handled gracefully")
+
+# TODO: Check if "PHONE001" is in stock (stock_quantity > 0)
+is_in_stock = inventory.get("PHONE001", {}).get("stock", 0) > 0
+print(f"Is PHONE001 in stock? {'Yes' if is_in_stock else 'No'}")
+
+
+# TODO: Add a new product using setdefault
+inventory.setdefault("TABLET001", {"name": "Tablet", "price": 499.99, "stock": 30, "category": "Electronics"})
+
+# Add to dict using []
+inventory["HEADPHONES001"] = {"name": "Wireless Headphones", "price": 199.99, "stock": 50, "category": "Electronics"}
+
+# TODO: Create a dictionary comprehension to get all product names
+product_names = {pid: details["name"] for pid, details in inventory.items()}
+print(f"Product names: {product_names}")
+
+# DO the same using a list comprehension
+product_names_list = [details["name"] for details in inventory.values()]
+
+# Now use a for loop to print each product name
+for name in inventory.values():
+    print(name["name"])
+
+# TODO: Filter to get only products with stock > 10
+
+# TODO: Use .pop() to remove PHONE001 and print what was removed
+inventory.pop("PHONE001", None)  # Remove PHONE001 if it exists
+```
+:::
+
 ## The set: unique items only
 
 ::: {.incremental}
@@ -572,7 +685,8 @@ print(f"IS4010 students: {len(students)}, Average: {avg:.1f}")
 - **Use cases**: Remove duplicates, track unique visitors, mathematical set operations
 :::
 
-```python
+```{python}
+#| eval: false
 # Website analytics: tracking unique visitors
 daily_visitors = ["alice", "bob", "charlie", "alice", "david", "alice", "eve"]
 monthly_visitors = ["alice", "frank", "george", "bob", "helen"]
@@ -624,7 +738,8 @@ if "Python" in unique_languages:
 
 **Scenario:** Design structures for the stated dashboard queries, then explain the trade-offs.
 
-```python
+```{python}
+#| eval: false
 # Realistic API response from student management system
 api_response = {
     "students": [{
@@ -697,9 +812,49 @@ api_response = {
 
 ---
 
+::: {.content-visible when-format="ipynb"}
+### Your turn: set mastery
+
+Apply set operations to solve real-world problems:
+
+```{python}
+#| eval: false
+# TODO: Social media platform analysis
+instagram_followers = {"alice", "bob", "charlie", "diana", "eve", "frank"}
+twitter_followers = {"bob", "diana", "grace", "henry", "ivan", "frank"}
+tiktok_followers = {"alice", "charlie", "grace", "jane", "diana"}
+
+# TODO: Find followers who follow you on ALL platforms
+all_platforms = instagram_followers & twitter_followers & tiktok_followers
+
+# TODO: Find your total unique audience across all platforms
+total_audience = instagram_followers | twitter_followers | tiktok_followers
+# Do the same using set.union()
+total_audience_union = set().union(instagram_followers, twitter_followers, tiktok_followers)
+
+
+# TODO: Find followers who are ONLY on Instagram
+instagram_only = instagram_followers - (twitter_followers | tiktok_followers)
+
+# TODO: Find followers who are on Instagram OR Twitter, but not both
+instagram_twitter_xor = instagram_followers ^ twitter_followers
+
+# TODO: Use set comprehension to create tags from a blog post
+blog_post = "Python programming data science machine learning AI artificial intelligence"
+tags = {word.lower() for word in blog_post.split()}
+
+# TODO: Check if required skills are a subset of candidate skills
+required_job_skills = {"python", "sql", "excel"}
+candidate_skills = {"python", "sql", "excel", "tableau", "r"}
+
+# TODO: Find what additional skills the candidate brings
+```
+:::
+
 ## Data structures for common queries
 
-```python
+```{python}
+#| eval: false
 # Build structures that support the required queries
 def process_student_api_data(api_response):
     students_data = api_response["students"]
@@ -794,7 +949,8 @@ print(f"IS4010 + ACM: {is4010_acm}")
   - Unique visitors, tags, permissions, removing duplicates
 :::
 
-```python
+```{python}
+#| eval: false
 # Real-world decision making examples
 
 # E-commerce shopping cart (order matters, items change)
@@ -851,7 +1007,8 @@ large_set = set(range(10000))
 Work with an AI assistant for 15 minutes, then verify its recommendation against each requirement.
 
 ### **Challenge 1: social media analytics**
-```python
+```{python}
+#| eval: false
 # Raw social media engagement data
 posts = [{"id": 1, "user": "alice", "likes": ["bob", "carol", "dave"], "tags": ["python", "coding"]},
     {"id": 2, "user": "bob", "likes": ["alice", "carol"], "tags": ["ai", "python"]},
@@ -863,7 +1020,8 @@ posts = [{"id": 1, "user": "alice", "likes": ["bob", "carol", "dave"], "tags": [
 ```
 
 ### **Challenge 2: e-commerce inventory**
-```python
+```{python}
+#| eval: false
 # Product inventory system
 inventory = [{"sku": "LAP001", "name": "Laptop", "price": 999, "categories": ["electronics", "computers"], "stock": 5},
     {"sku": "MOU002", "name": "Mouse", "price": 25, "categories": ["electronics", "accessories"], "stock": 50},
@@ -875,7 +1033,8 @@ inventory = [{"sku": "LAP001", "name": "Laptop", "price": 999, "categories": ["e
 ```
 
 ### **Challenge 3: university course scheduler**
-```python
+```{python}
+#| eval: false
 # Course scheduling conflicts
 courses = [{"code": "IS4010", "time": "MWF 10:00", "room": "Lindner 100", "students": ["alice", "bob"]},
     {"code": "CS2071", "time": "TTh 14:00", "room": "Lindner 200", "students": ["alice", "carol"]},

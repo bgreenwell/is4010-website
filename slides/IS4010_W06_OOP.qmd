@@ -58,7 +58,8 @@ author: "Brandon M. Greenwell"
 
 ## A function-based shopping cart
 
-```python
+```{python}
+#| eval: false
 # Creating and managing cart state with functions - gets messy fast!
 def create_cart():
     return {"items": [], "subtotal": 0, "tax_rate": 0.08, "discount": 0}
@@ -97,9 +98,43 @@ print(f"Total: ${total:.2f}")
 
 ---
 
+::: {.content-visible when-format="ipynb"}
+### Your turn: feel the pain
+Try to add more functionality to the function-based cart:
+1. Add a function to remove items
+2. Add a function to change item quantities
+3. Notice how many parameters you need to pass around!
+
+```{python}
+#| eval: false
+# Your code here - try adding remove_item() and change_quantity() functions
+# Notice how complex the parameter passing becomes!
+
+def remove_item(cart, name):
+    """Remove an item from the cart."""
+    for item in cart["items"]:
+        if item["name"] == name:
+            cart["subtotal"] -= item["price"] * item["qty"]
+            cart["items"].remove(item)
+            break
+    return cart
+
+def change_quantity(cart, name, quantity):
+    """Change the quantity of an item in the cart."""
+    for item in cart["items"]:
+        if item["name"] == name:
+            cart["subtotal"] -= item["price"] * item["qty"]
+            item["qty"] = quantity
+            cart["subtotal"] += item["price"] * item["qty"]
+            break
+    return cart
+```
+:::
+
 ## A class-based shopping cart
 
-```python
+```{python}
+#| eval: false
 class ShoppingCart:
     """Represents a shopping cart with items, discounts, and tax calculation."""
 
@@ -147,6 +182,90 @@ print(f"Total: ${cart.total:.2f}")
 :::
 
 ---
+
+::: {.content-visible when-format="ipynb"}
+### Your turn: extend the class
+Add methods to the ShoppingCart class:
+1. `remove_item(name)` - remove an item by name
+2. `clear()` - empty the cart
+3. `item_count` - property that returns total number of items
+
+```{python}
+#| eval: false
+class ShoppingCart:
+    """Represents a shopping cart with items, discounts, and tax calculation."""
+
+    def __init__(self, tax_rate=0.08):
+        """Initialize a new shopping cart."""
+        self.items = []
+        self.tax_rate = tax_rate
+        self.discount_percent = 0
+
+    def add_item(self, name, price, quantity=1):
+        """Add an item to the cart."""
+        self.items.append({"name": name, "price": price, "qty": quantity})
+
+    def remove_item(self, name):
+        """Remove an item from the cart by name."""
+        # Keep only items that don't match the name
+        self.items = [item for item in self.items if item["name"] != name]
+
+    def clear(self):
+        """Empty the cart."""
+        self.items = []
+
+    def apply_discount(self, discount_percent):
+        """Apply a discount to the entire cart."""
+        self.discount_percent = discount_percent
+
+    @property
+    def item_count(self):
+        """Return total number of items in the cart."""
+        return sum(item["qty"] for item in self.items)
+    
+    @property
+    def subtotal(self):
+        """Calculate subtotal before discount and tax."""
+        return sum(item["price"] * item["qty"] for item in self.items)
+
+    @property
+    def total(self):
+        """Calculate final total after discount and tax."""
+        discounted = self.subtotal * (1 - self.discount_percent/100)
+        return discounted * (1 + self.tax_rate)
+
+    def __str__(self):
+        """Return a string representation of the cart."""
+        lines = ["Shopping Cart:"]
+        if not self.items:
+            lines.append("  (Empty)")
+        else:
+            for item in self.items:
+                lines.append(f"  {item['name']} x{item['qty']} - ${item['price']:.2f} each")
+            lines.append(f"  Subtotal: ${self.subtotal:.2f}")
+            if self.discount_percent > 0:
+                lines.append(f"  Discount: {self.discount_percent}%")
+            lines.append(f"  Total: ${self.total:.2f}")
+            lines.append(f"  Item Count: {self.item_count}")
+            
+        return "\n".join(lines)
+
+# Test the enhanced class
+cart = ShoppingCart()
+cart.add_item("Laptop", 999.99)
+cart.add_item("Mouse", 29.99, 2)
+print("--- Initial Cart ---")
+print(cart)
+
+cart.remove_item("Mouse")
+print("\n--- After removing Mouse ---")
+print(cart)
+
+cart.clear()
+print("\n--- After clearing ---")
+print(cart)
+```
+:::
 
 ## When object-oriented programming helps
 
@@ -201,7 +320,8 @@ print(f"Total: ${cart.total:.2f}")
 - **Convention**: Always the first parameter in instance methods
 :::
 
-```python
+```{python}
+#| eval: false
 class BankAccount:
     """Represents a bank account with balance tracking."""
 
@@ -234,6 +354,19 @@ bob_account = BankAccount("Bob Smith")  # Uses default balance of 0.0
 
 ---
 
+::: {.content-visible when-format="ipynb"}
+### Your turn: bank account features
+Enhance the BankAccount class:
+1. Add a `get_transaction_history()` method
+2. Add an `account_number` attribute (you can use a simple counter)
+3. Add a minimum balance requirement
+
+```{python}
+#| eval: false
+# Your enhanced BankAccount class here
+```
+:::
+
 ## The `__str__` method: human-readable representation
 
 ::: {.incremental}
@@ -244,7 +377,8 @@ bob_account = BankAccount("Bob Smith")  # Uses default balance of 0.0
 - **Debugging aid**: A useful representation makes object state easier to inspect
 :::
 
-```python
+```{python}
+#| eval: false
 class User:
     """Represents a user in a social media application."""
 
@@ -283,6 +417,19 @@ print(user2)  # @ada_lovelace✓ (50000 followers) - Joined 2023-02-20
 
 ---
 
+::: {.content-visible when-format="ipynb"}
+### Your turn: social media features
+Extend the User class with:
+1. A `like_post(user, post_index)` method
+2. A `get_recent_posts(count=5)` method
+3. A `bio` attribute and `update_bio(new_bio)` method
+
+```{python}
+#| eval: false
+# Your enhanced User class here
+```
+:::
+
 ## Introducing Lab 06: part 1
 
 ::: {.incremental}
@@ -319,7 +466,8 @@ print(user2)  # @ada_lovelace✓ (50000 followers) - Joined 2023-02-20
 - **State management**: Methods ensure object data stays consistent and valid
 :::
 
-```python
+```{python}
+#| eval: false
 class GameCharacter:
     """Represents a character in a role-playing game."""
 
@@ -371,6 +519,19 @@ hero.gain_experience(150)
 
 ---
 
+::: {.content-visible when-format="ipynb"}
+### Your turn: game character enhancement
+Add these features to the GameCharacter class:
+1. A `use_potion()` method that heals based on inventory
+2. A `magic_attack(target)` method with different damage
+3. A `get_inventory_value()` method that calculates total value
+
+```{python}
+#| eval: false
+# Your enhanced GameCharacter class here
+```
+:::
+
 ## Understanding inheritance: reusing behavior
 
 ::: {.incremental}
@@ -403,7 +564,8 @@ hero.gain_experience(150)
 - **Method extension**: Or extend parent methods with additional functionality
 :::
 
-```python
+```{python}
+#| eval: false
 class Vehicle:
     """Base class for all vehicles."""
 
@@ -460,6 +622,20 @@ tesla.charge(2)       # Uses unique method
 
 ---
 
+::: {.content-visible when-format="ipynb"}
+### Your turn: vehicle inheritance
+Create a new vehicle type:
+1. Create a `Motorcycle` class that inherits from `Vehicle`
+2. Override the `start_engine()` method with a motorcycle-specific message
+3. Add a `wheelie()` method unique to motorcycles
+4. Make motorcycles more fuel-efficient in the `drive()` method
+
+```{python}
+#| eval: false
+# Your Motorcycle class here
+```
+:::
+
 ## Advanced OOP concepts preview
 
 ::: {.incremental}
@@ -470,7 +646,8 @@ tesla.charge(2)       # Uses unique method
 - **Multiple inheritance**: Inheriting from multiple parent classes (advanced topic)
 :::
 
-```python
+```{python}
+#| eval: false
 class Product:
     """Represents a product in an inventory system."""
 
@@ -528,6 +705,19 @@ laptop.price = 1199.99  # Valid price change
 :::
 
 ---
+
+::: {.content-visible when-format="ipynb"}
+### Your turn: advanced features
+Enhance the Product class:
+1. Add a `stock_quantity` attribute and property with validation
+2. Create a `@classmethod` called `create_electronics(name, price)` that sets category automatically
+3. Add a `@staticmethod` for calculating bulk discount rates
+
+```{python}
+#| eval: false
+# Your enhanced Product class here
+```
+:::
 
 ## Where OOP can help
 
@@ -596,6 +786,25 @@ laptop.price = 1199.99  # Valid price change
 :::
 
 ---
+
+::: {.content-visible when-format="ipynb"}
+### Your turn: complete Lab 06
+Create your own implementation of the Book and EBook classes following the exact lab requirements:
+1. Implement the Book class with the specified attributes and methods
+2. Implement the EBook class that inherits from Book
+3. Test both classes thoroughly
+4. Try adding additional features like a `AudioBook` class
+
+```{python}
+#| eval: false
+# Your complete Lab 06 implementation here
+# This is your chance to practice everything you've learned!
+
+if __name__ == '__main__':
+    # Test your classes here
+    pass
+```
+:::
 
 ## Looking ahead: OOP in practice
 

@@ -367,7 +367,7 @@ print(name.replace("alan", "Alan"))  # "  Alan turing  "
 ---
 
 ::: {.content-visible when-format="ipynb"}
-### Your turn: string Practice
+### Your turn: string practice
 
 Practice working with strings:
 
@@ -431,7 +431,7 @@ pi_str = str(3.14159)     # Convert float to string
 :::
 
 ::: {.content-visible when-format="ipynb"}
-### Your turn: number Practice
+### Your turn: number practice
 
 ```{python}
 #| eval: false
@@ -547,7 +547,7 @@ Performance: {accuracy:.1%}
 :::
 
 ::: {.content-visible when-format="ipynb"}
-### Your turn: string Formatting Practice
+### Your turn: string formatting practice
 
 ```{python}
 #| eval: false
@@ -649,7 +649,7 @@ def generate_mad_lib(adjective, noun, verb):
 ---
 
 ::: {.content-visible when-format="ipynb"}
-### Your turn: create Your Own Mad Lib Function
+### Your turn: create your own Mad Lib function
 
 ```{python}
 #| eval: false
@@ -792,7 +792,7 @@ if username_is_valid and password_is_valid and not is_admin:
 ---
 
 ::: {.content-visible when-format="ipynb"}
-### Your turn: conditional Practice
+### Your turn: conditional practice
 
 ```{python}
 #| eval: false
@@ -914,7 +914,7 @@ for i, fruit in enumerate(fruits):
 :::
 
 ::: {.content-visible when-format="ipynb"}
-### Your turn: loop Practice
+### Your turn: loop practice
 
 ```{python}
 #| eval: false
@@ -974,7 +974,7 @@ def guessing_game():
 ---
 
 ::: {.content-visible when-format="ipynb"}
-### Your turn: enhance the Guessing Game
+### Your turn: enhance the guessing game
 
 Modify the game to add features:
 
@@ -1120,7 +1120,7 @@ def test_add_numbers():
 ---
 
 ::: {.content-visible when-format="ipynb"}
-### Your turn: write a Test
+### Your turn: write a test
 
 Write a test for a grade calculator function:
 
