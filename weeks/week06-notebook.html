@@ -1523,32 +1523,34 @@ Shopping Cart:
 <h2 class="anchored" data-anchor-id="book-class-implementation">Book Class Implementation</h2>
 <p>Let’s work on the exact requirements for Lab 06:</p>
 <div id="cell-43" class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Book:</span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Represents a book with title, author, and publication year."""</span></span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, title: <span class="bu">str</span>, author: <span class="bu">str</span>, year: <span class="bu">int</span>):</span>
-<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>        <span class="co">"""Initialize a new book."""</span></span>
-<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.title <span class="op">=</span> title</span>
-<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.author <span class="op">=</span> author</span>
-<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.year <span class="op">=</span> year</span>
-<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> get_age(<span class="va">self</span>) <span class="op">-&gt;</span> <span class="bu">int</span>:</span>
-<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a>        <span class="co">"""Calculate and return the age of the book based on its publication year."""</span></span>
-<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a>        current_year <span class="op">=</span> <span class="dv">2026</span>  <span class="co"># As specified in the lab</span></span>
-<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> current_year <span class="op">-</span> <span class="va">self</span>.year</span>
-<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__str__</span>(<span class="va">self</span>) <span class="op">-&gt;</span> <span class="bu">str</span>:</span>
-<span id="cb19-16"><a href="#cb19-16" aria-hidden="true" tabindex="-1"></a>        <span class="co">"""Return a user-friendly string representation of the book."""</span></span>
-<span id="cb19-17"><a href="#cb19-17" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="ss">f"</span><span class="ch">\"</span><span class="sc">{</span><span class="va">self</span><span class="sc">.</span>title<span class="sc">}</span><span class="ch">\"</span><span class="ss"> by </span><span class="sc">{</span><span class="va">self</span><span class="sc">.</span>author<span class="sc">}</span><span class="ss"> (</span><span class="sc">{</span><span class="va">self</span><span class="sc">.</span>year<span class="sc">}</span><span class="ss">)"</span></span>
-<span id="cb19-18"><a href="#cb19-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-19"><a href="#cb19-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Test the Book class</span></span>
-<span id="cb19-20"><a href="#cb19-20" aria-hidden="true" tabindex="-1"></a>book1 <span class="op">=</span> Book(<span class="st">"The Pragmatic Programmer"</span>, <span class="st">"Andy Hunt"</span>, <span class="dv">1999</span>)</span>
-<span id="cb19-21"><a href="#cb19-21" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(book1)</span>
-<span id="cb19-22"><a href="#cb19-22" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Age: </span><span class="sc">{</span>book1<span class="sc">.</span>get_age()<span class="sc">}</span><span class="ss"> years"</span>)</span>
-<span id="cb19-23"><a href="#cb19-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-24"><a href="#cb19-24" aria-hidden="true" tabindex="-1"></a>book2 <span class="op">=</span> Book(<span class="st">"Clean Code"</span>, <span class="st">"Robert Martin"</span>, <span class="dv">2008</span>)</span>
-<span id="cb19-25"><a href="#cb19-25" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(book2)</span>
-<span id="cb19-26"><a href="#cb19-26" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Age: </span><span class="sc">{</span>book2<span class="sc">.</span>get_age()<span class="sc">}</span><span class="ss"> years"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> datetime <span class="im">import</span> date</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Book:</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Represents a book with title, author, and publication year."""</span></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, title: <span class="bu">str</span>, author: <span class="bu">str</span>, year: <span class="bu">int</span>):</span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>        <span class="co">"""Initialize a new book."""</span></span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.title <span class="op">=</span> title</span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.author <span class="op">=</span> author</span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.year <span class="op">=</span> year</span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> get_age(<span class="va">self</span>) <span class="op">-&gt;</span> <span class="bu">int</span>:</span>
+<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a>        <span class="co">"""Calculate and return the age of the book based on its publication year."""</span></span>
+<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a>        current_year <span class="op">=</span> date.today().year  <span class="co"># not a hardcoded year</span></span>
+<span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> current_year <span class="op">-</span> <span class="va">self</span>.year</span>
+<span id="cb19-16"><a href="#cb19-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-17"><a href="#cb19-17" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__str__</span>(<span class="va">self</span>) <span class="op">-&gt;</span> <span class="bu">str</span>:</span>
+<span id="cb19-18"><a href="#cb19-18" aria-hidden="true" tabindex="-1"></a>        <span class="co">"""Return a user-friendly string representation of the book."""</span></span>
+<span id="cb19-19"><a href="#cb19-19" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="ss">f"</span><span class="ch">\"</span><span class="sc">{</span><span class="va">self</span><span class="sc">.</span>title<span class="sc">}</span><span class="ch">\"</span><span class="ss"> by </span><span class="sc">{</span><span class="va">self</span><span class="sc">.</span>author<span class="sc">}</span><span class="ss"> (</span><span class="sc">{</span><span class="va">self</span><span class="sc">.</span>year<span class="sc">}</span><span class="ss">)"</span></span>
+<span id="cb19-20"><a href="#cb19-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-21"><a href="#cb19-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Test the Book class</span></span>
+<span id="cb19-22"><a href="#cb19-22" aria-hidden="true" tabindex="-1"></a>book1 <span class="op">=</span> Book(<span class="st">"The Pragmatic Programmer"</span>, <span class="st">"Andy Hunt"</span>, <span class="dv">1999</span>)</span>
+<span id="cb19-23"><a href="#cb19-23" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(book1)</span>
+<span id="cb19-24"><a href="#cb19-24" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Age: </span><span class="sc">{</span>book1<span class="sc">.</span>get_age()<span class="sc">}</span><span class="ss"> years"</span>)</span>
+<span id="cb19-25"><a href="#cb19-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-26"><a href="#cb19-26" aria-hidden="true" tabindex="-1"></a>book2 <span class="op">=</span> Book(<span class="st">"Clean Code"</span>, <span class="st">"Robert Martin"</span>, <span class="dv">2008</span>)</span>
+<span id="cb19-27"><a href="#cb19-27" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(book2)</span>
+<span id="cb19-28"><a href="#cb19-28" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Age: </span><span class="sc">{</span>book2<span class="sc">.</span>get_age()<span class="sc">}</span><span class="ss"> years"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="ebook-class-with-inheritance" class="level2">

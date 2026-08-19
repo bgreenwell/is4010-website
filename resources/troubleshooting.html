@@ -278,6 +278,7 @@ ul.task-list li input[type="checkbox"] {
   <ul>
   <li><a href="#python-and-uv-issues" id="toc-python-and-uv-issues" class="nav-link active" data-scroll-target="#python-and-uv-issues">Python and uv issues</a></li>
   <li><a href="#git-and-github-issues" id="toc-git-and-github-issues" class="nav-link" data-scroll-target="#git-and-github-issues">Git and GitHub issues</a></li>
+  <li><a href="#using-an-ai-assistant-on-a-failure" id="toc-using-an-ai-assistant-on-a-failure" class="nav-link" data-scroll-target="#using-an-ai-assistant-on-a-failure">Using an AI assistant on a failure</a></li>
   <li><a href="#rust-issues" id="toc-rust-issues" class="nav-link" data-scroll-target="#rust-issues">Rust issues</a></li>
   <li><a href="#github-actions-issues" id="toc-github-actions-issues" class="nav-link" data-scroll-target="#github-actions-issues">GitHub Actions issues</a></li>
   </ul>
@@ -338,12 +339,31 @@ ul.task-list li input[type="checkbox"] {
 <li>A commit remains local until you run <code>git push origin main</code>.</li>
 </ul>
 </section>
+<section id="using-an-ai-assistant-on-a-failure" class="level2">
+<h2 class="anchored" data-anchor-id="using-an-ai-assistant-on-a-failure">Using an AI assistant on a failure</h2>
+<p>Your assistant is at its most useful when a check fails, because the failure output is already the context it needs.</p>
+<p><strong>A failing test.</strong> <code>pytest</code> prints the test’s name, the line that failed, and the expected and actual values. <code>cargo test</code> prints the assertion and its location. Copy the whole failure, not a summary, and paste it into Copilot CLI, Antigravity CLI, or a browser chat.</p>
+<p><strong>A failing style check.</strong> <code>cargo clippy</code> names the file, the line, and the specific lint, and links to an explanation of the idiom. That is enough for an assistant to show you the rewrite.</p>
+<p>Ask a question that produces understanding:</p>
+<ul>
+<li>Good: “What behavior does this test expect, and why does my implementation differ?”</li>
+<li>Good: “What is this clippy lint objecting to, and what is the idiomatic form?”</li>
+<li>Bad: “Make the tests pass.”</li>
+</ul>
+<p>The second kind of prompt often produces code that satisfies the check without fixing the misunderstanding, and you still have to explain what you submitted. Read the explanation, make the change yourself, and re-run the check locally before you push.</p>
+</section>
 <section id="rust-issues" class="level2">
 <h2 class="anchored" data-anchor-id="rust-issues">Rust issues</h2>
 <p><strong><code>cargo: command not found</code></strong></p>
 <ul>
 <li>Restart the terminal after installing Rust so its PATH refreshes.</li>
 <li>Revisit the official <a href="https://www.rust-lang.org/tools/install">Rust installation guide</a>.</li>
+</ul>
+<p><strong>The tests pass but the badge is still red</strong></p>
+<ul>
+<li>CI runs <code>cargo fmt --check</code> and <code>cargo clippy -- -D warnings</code> as well as <code>cargo test</code>, so correct code can still fail on style.</li>
+<li>Run <code>cargo clippy --fix --allow-dirty</code> and then <code>cargo fmt</code> to resolve most of it.</li>
+<li><code>needless_range_loop</code> is not auto-fixable: rewrite <code>for i in 0..items.len()</code> as <code>for item in items</code>.</li>
 </ul>
 </section>
 <section id="github-actions-issues" class="level2">
