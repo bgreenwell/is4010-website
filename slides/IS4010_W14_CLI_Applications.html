@@ -7,8 +7,8 @@
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="../site_libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-b85bc7c33db8c58e0ec93c3465666fed.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.10.18">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-707d8167ce6003fca903bfe2be84ab7f.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.8.25">
 
   <meta name="author" content="Brandon M. Greenwell">
   <title>IS 4010 - App Dev with AI – IS4010: AI-enhanced application development</title>
@@ -18,16 +18,10 @@
   <link rel="stylesheet" href="../site_libs/revealjs/dist/reset.css">
   <link rel="stylesheet" href="../site_libs/revealjs/dist/reveal.css">
   <style>
-    /* Default styles provided by pandoc.
-    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
-    */
+    code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
-    div.columns{display: flex; gap: 1.5em;}
-    div.column{flex: auto;}
-    @media screen {
-    div.columns{gap: min(4vw, 1.5em);}
-    div.column{overflow-x: auto;}
-    }
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
     ul.task-list{list-style: none;}
     ul.task-list li input[type="checkbox"] {
@@ -102,7 +96,7 @@
     code span.vs { color: #abe338; } /* VerbatimString */
     code span.wa { color: #dcc6e0; } /* Warning */
   </style>
-  <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto-fdc93494f2580a7e050003a96af38920.css">
+  <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto-a1d3734469117662d4af4794742e8c15.css">
   <link rel="stylesheet" href="custom.css">
   <link href="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
@@ -210,7 +204,7 @@
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
 <div class="quarto-title-author-name">
-Brandon M. Greenwell
+Brandon M. Greenwell 
 </div>
 </div>
 </div>
@@ -250,20 +244,20 @@ Brandon M. Greenwell
 </section>
 <section id="anatomy-of-a-cli-command" class="slide level2">
 <h2>Anatomy of a CLI command</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a aria-label="1"></a><span class="ex">cargo</span> run <span class="at">--</span> random <span class="at">--length</span> 16 <span class="at">--symbols</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a></a><span class="ex">cargo</span> run <span class="at">--</span> random <span class="at">--length</span> 16 <span class="at">--symbols</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Let’s break this down: 1. <strong>Executable:</strong> <code>cargo run --</code> builds and starts the Week 14 binary 2. <strong>Subcommand:</strong> <code>random</code> (A major action the program can take) 3. <strong>Option / Argument:</strong> <code>--length 16</code> (A named parameter with a value) 4. <strong>Flag:</strong> <code>--symbols</code> (A boolean toggle, no value needed)</p>
 </section>
 <section id="argument-parsing-in-rust" class="slide level2">
 <h2>Argument parsing in Rust</h2>
 <p>You <em>could</em> parse arguments manually using <code>std::env::args()</code>.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb2-1"><a aria-label="1"></a><span class="kw">use</span> <span class="pp">std::</span>env<span class="op">;</span></span>
-<span id="cb2-2"><a aria-label="2"></a></span>
-<span id="cb2-3"><a aria-label="3"></a><span class="kw">fn</span> main() <span class="op">{</span></span>
-<span id="cb2-4"><a aria-label="4"></a>    <span class="kw">let</span> args<span class="op">:</span> <span class="dt">Vec</span><span class="op">&lt;</span><span class="dt">String</span><span class="op">&gt;</span> <span class="op">=</span> <span class="pp">env::</span>args()<span class="op">.</span>collect()<span class="op">;</span></span>
-<span id="cb2-5"><a aria-label="5"></a>    <span class="cf">if</span> args<span class="op">.</span>len() <span class="op">&gt;</span> <span class="dv">1</span> <span class="op">&amp;&amp;</span> args[<span class="dv">1</span>] <span class="op">==</span> <span class="st">"random"</span> <span class="op">{</span></span>
-<span id="cb2-6"><a aria-label="6"></a>        <span class="co">// ... string matching, error handling, manual parsing ...</span></span>
-<span id="cb2-7"><a aria-label="7"></a>    <span class="op">}</span></span>
-<span id="cb2-8"><a aria-label="8"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb2-1"><a></a><span class="kw">use</span> <span class="pp">std::</span>env<span class="op">;</span></span>
+<span id="cb2-2"><a></a></span>
+<span id="cb2-3"><a></a><span class="kw">fn</span> main() <span class="op">{</span></span>
+<span id="cb2-4"><a></a>    <span class="kw">let</span> args<span class="op">:</span> <span class="dt">Vec</span><span class="op">&lt;</span><span class="dt">String</span><span class="op">&gt;</span> <span class="op">=</span> <span class="pp">env::</span>args()<span class="op">.</span>collect()<span class="op">;</span></span>
+<span id="cb2-5"><a></a>    <span class="cf">if</span> args<span class="op">.</span>len() <span class="op">&gt;</span> <span class="dv">1</span> <span class="op">&amp;&amp;</span> args[<span class="dv">1</span>] <span class="op">==</span> <span class="st">"random"</span> <span class="op">{</span></span>
+<span id="cb2-6"><a></a>        <span class="co">// ... string matching, error handling, manual parsing ...</span></span>
+<span id="cb2-7"><a></a>    <span class="op">}</span></span>
+<span id="cb2-8"><a></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p><strong>Why is this bad?</strong> - Manual string parsing is error-prone. - Type conversion (String to integer) is tedious. - Generating <code>--help</code> menus manually is a nightmare.</p>
 </section>
 <section id="enter-clap" class="slide level2">
@@ -275,8 +269,8 @@ Brandon M. Greenwell
 <section id="setting-up-clap" class="slide level2">
 <h2>Setting up <code>clap</code></h2>
 <p>First, add it to your <code>Cargo.toml</code>. The <code>derive</code> feature enables the macro API used in these examples.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode numberSource toml number-lines code-with-copy"><code class="sourceCode toml"><span id="cb3-1"><a aria-label="1"></a><span class="kw">[dependencies]</span></span>
-<span id="cb3-2"><a aria-label="2"></a><span class="dt">clap</span> <span class="op">=</span> <span class="op">{ </span><span class="dt">version</span><span class="op"> =</span> <span class="st">"4.5"</span><span class="op">, </span><span class="dt">features</span><span class="op"> =</span> <span class="op">[</span><span class="st">"derive"</span><span class="op">] }</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode numberSource toml number-lines code-with-copy"><code class="sourceCode toml"><span id="cb3-1"><a></a><span class="kw">[dependencies]</span></span>
+<span id="cb3-2"><a></a><span class="dt">clap</span> <span class="op">=</span> <span class="op">{ </span><span class="dt">version</span><span class="op"> =</span> <span class="st">"4.5"</span><span class="op">, </span><span class="dt">features</span><span class="op"> =</span> <span class="op">[</span><span class="st">"derive"</span><span class="op">] }</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <aside class="notes">
 <p>Explain that <code>features = ["derive"]</code> enables <code>Parser</code>, <code>Subcommand</code>, and related derive macros. The builder API is an alternative.</p>
 <style type="text/css">
@@ -294,68 +288,68 @@ Brandon M. Greenwell
 <section id="defining-a-cli-with-clap-using-a-struct" class="slide level2">
 <h2>Defining a CLI with <code>clap</code> using a struct</h2>
 <p>We define our expected arguments as a standard Rust <code>struct</code>.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb4-1"><a aria-label="1"></a><span class="kw">use</span> <span class="pp">clap::</span>Parser<span class="op">;</span></span>
-<span id="cb4-2"><a aria-label="2"></a></span>
-<span id="cb4-3"><a aria-label="3"></a><span class="co">/// A simple password generator</span></span>
-<span id="cb4-4"><a aria-label="4"></a><span class="at">#[</span>derive<span class="at">(</span>Parser<span class="op">,</span> <span class="bu">Debug</span><span class="at">)]</span></span>
-<span id="cb4-5"><a aria-label="5"></a><span class="at">#[</span>command<span class="at">(</span>version<span class="op">,</span> about<span class="op">,</span> long_about <span class="op">=</span> <span class="cn">None</span><span class="at">)]</span></span>
-<span id="cb4-6"><a aria-label="6"></a><span class="kw">struct</span> Cli <span class="op">{</span></span>
-<span id="cb4-7"><a aria-label="7"></a>    <span class="co">/// Length of the password</span></span>
-<span id="cb4-8"><a aria-label="8"></a>    <span class="at">#[</span>arg<span class="at">(</span>short<span class="op">,</span> long<span class="op">,</span> default_value_t <span class="op">=</span> <span class="dv">12</span><span class="at">)]</span></span>
-<span id="cb4-9"><a aria-label="9"></a>    length<span class="op">:</span> <span class="dt">u8</span><span class="op">,</span></span>
-<span id="cb4-10"><a aria-label="10"></a></span>
-<span id="cb4-11"><a aria-label="11"></a>    <span class="co">/// Include special symbols</span></span>
-<span id="cb4-12"><a aria-label="12"></a>    <span class="at">#[</span>arg<span class="at">(</span>short<span class="op">,</span> long<span class="at">)]</span></span>
-<span id="cb4-13"><a aria-label="13"></a>    symbols<span class="op">:</span> <span class="dt">bool</span><span class="op">,</span></span>
-<span id="cb4-14"><a aria-label="14"></a><span class="op">}</span></span>
-<span id="cb4-15"><a aria-label="15"></a></span>
-<span id="cb4-16"><a aria-label="16"></a><span class="kw">fn</span> main() <span class="op">{</span></span>
-<span id="cb4-17"><a aria-label="17"></a>    <span class="kw">let</span> cli <span class="op">=</span> <span class="pp">Cli::</span>parse()<span class="op">;</span></span>
-<span id="cb4-18"><a aria-label="18"></a>    <span class="pp">println!</span>(<span class="st">"Length: {}, Symbols: {}"</span><span class="op">,</span> cli<span class="op">.</span>length<span class="op">,</span> cli<span class="op">.</span>symbols)<span class="op">;</span></span>
-<span id="cb4-19"><a aria-label="19"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb4-1"><a></a><span class="kw">use</span> <span class="pp">clap::</span>Parser<span class="op">;</span></span>
+<span id="cb4-2"><a></a></span>
+<span id="cb4-3"><a></a><span class="co">/// A simple password generator</span></span>
+<span id="cb4-4"><a></a><span class="at">#[</span>derive<span class="at">(</span>Parser<span class="op">,</span> <span class="bu">Debug</span><span class="at">)]</span></span>
+<span id="cb4-5"><a></a><span class="at">#[</span>command<span class="at">(</span>version<span class="op">,</span> about<span class="op">,</span> long_about <span class="op">=</span> <span class="cn">None</span><span class="at">)]</span></span>
+<span id="cb4-6"><a></a><span class="kw">struct</span> Cli <span class="op">{</span></span>
+<span id="cb4-7"><a></a>    <span class="co">/// Length of the password</span></span>
+<span id="cb4-8"><a></a>    <span class="at">#[</span>arg<span class="at">(</span>short<span class="op">,</span> long<span class="op">,</span> default_value_t <span class="op">=</span> <span class="dv">12</span><span class="at">)]</span></span>
+<span id="cb4-9"><a></a>    length<span class="op">:</span> <span class="dt">u8</span><span class="op">,</span></span>
+<span id="cb4-10"><a></a></span>
+<span id="cb4-11"><a></a>    <span class="co">/// Include special symbols</span></span>
+<span id="cb4-12"><a></a>    <span class="at">#[</span>arg<span class="at">(</span>short<span class="op">,</span> long<span class="at">)]</span></span>
+<span id="cb4-13"><a></a>    symbols<span class="op">:</span> <span class="dt">bool</span><span class="op">,</span></span>
+<span id="cb4-14"><a></a><span class="op">}</span></span>
+<span id="cb4-15"><a></a></span>
+<span id="cb4-16"><a></a><span class="kw">fn</span> main() <span class="op">{</span></span>
+<span id="cb4-17"><a></a>    <span class="kw">let</span> cli <span class="op">=</span> <span class="pp">Cli::</span>parse()<span class="op">;</span></span>
+<span id="cb4-18"><a></a>    <span class="pp">println!</span>(<span class="st">"Length: {}, Symbols: {}"</span><span class="op">,</span> cli<span class="op">.</span>length<span class="op">,</span> cli<span class="op">.</span>symbols)<span class="op">;</span></span>
+<span id="cb4-19"><a></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="subcommands-with-clap-using-an-enum" class="slide level2">
 <h2>Subcommands with <code>clap</code> using an enum</h2>
 <p>For complex tools (like <code>git</code> or <code>cargo</code>), you use subcommands. We model these using an <code>enum</code>.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb5-1"><a aria-label="1"></a><span class="kw">use</span> <span class="pp">clap::</span><span class="op">{</span>Parser<span class="op">,</span> Subcommand<span class="op">};</span></span>
-<span id="cb5-2"><a aria-label="2"></a></span>
-<span id="cb5-3"><a aria-label="3"></a><span class="at">#[</span>derive<span class="at">(</span>Parser<span class="at">)]</span></span>
-<span id="cb5-4"><a aria-label="4"></a><span class="at">#[</span>command<span class="at">(</span>version<span class="op">,</span> about<span class="at">)]</span></span>
-<span id="cb5-5"><a aria-label="5"></a><span class="kw">struct</span> Cli <span class="op">{</span></span>
-<span id="cb5-6"><a aria-label="6"></a>    <span class="at">#[</span>command<span class="at">(</span>subcommand<span class="at">)]</span></span>
-<span id="cb5-7"><a aria-label="7"></a>    command<span class="op">:</span> Commands<span class="op">,</span></span>
-<span id="cb5-8"><a aria-label="8"></a><span class="op">}</span></span>
-<span id="cb5-9"><a aria-label="9"></a></span>
-<span id="cb5-10"><a aria-label="10"></a><span class="at">#[</span>derive<span class="at">(</span>Subcommand<span class="at">)]</span></span>
-<span id="cb5-11"><a aria-label="11"></a><span class="kw">enum</span> Commands <span class="op">{</span></span>
-<span id="cb5-12"><a aria-label="12"></a>    <span class="co">/// Generate a random password</span></span>
-<span id="cb5-13"><a aria-label="13"></a>    Random <span class="op">{</span></span>
-<span id="cb5-14"><a aria-label="14"></a>        <span class="at">#[</span>arg<span class="at">(</span>short<span class="op">,</span> long<span class="op">,</span> default_value_t <span class="op">=</span> <span class="dv">12</span><span class="at">)]</span></span>
-<span id="cb5-15"><a aria-label="15"></a>        length<span class="op">:</span> <span class="dt">u8</span><span class="op">,</span></span>
-<span id="cb5-16"><a aria-label="16"></a>    <span class="op">},</span></span>
-<span id="cb5-17"><a aria-label="17"></a>    <span class="co">/// Validate an existing password</span></span>
-<span id="cb5-18"><a aria-label="18"></a>    Validate <span class="op">{</span></span>
-<span id="cb5-19"><a aria-label="19"></a>        password<span class="op">:</span> <span class="dt">String</span><span class="op">,</span></span>
-<span id="cb5-20"><a aria-label="20"></a>    <span class="op">},</span></span>
-<span id="cb5-21"><a aria-label="21"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb5-1"><a></a><span class="kw">use</span> <span class="pp">clap::</span><span class="op">{</span>Parser<span class="op">,</span> Subcommand<span class="op">};</span></span>
+<span id="cb5-2"><a></a></span>
+<span id="cb5-3"><a></a><span class="at">#[</span>derive<span class="at">(</span>Parser<span class="at">)]</span></span>
+<span id="cb5-4"><a></a><span class="at">#[</span>command<span class="at">(</span>version<span class="op">,</span> about<span class="at">)]</span></span>
+<span id="cb5-5"><a></a><span class="kw">struct</span> Cli <span class="op">{</span></span>
+<span id="cb5-6"><a></a>    <span class="at">#[</span>command<span class="at">(</span>subcommand<span class="at">)]</span></span>
+<span id="cb5-7"><a></a>    command<span class="op">:</span> Commands<span class="op">,</span></span>
+<span id="cb5-8"><a></a><span class="op">}</span></span>
+<span id="cb5-9"><a></a></span>
+<span id="cb5-10"><a></a><span class="at">#[</span>derive<span class="at">(</span>Subcommand<span class="at">)]</span></span>
+<span id="cb5-11"><a></a><span class="kw">enum</span> Commands <span class="op">{</span></span>
+<span id="cb5-12"><a></a>    <span class="co">/// Generate a random password</span></span>
+<span id="cb5-13"><a></a>    Random <span class="op">{</span></span>
+<span id="cb5-14"><a></a>        <span class="at">#[</span>arg<span class="at">(</span>short<span class="op">,</span> long<span class="op">,</span> default_value_t <span class="op">=</span> <span class="dv">12</span><span class="at">)]</span></span>
+<span id="cb5-15"><a></a>        length<span class="op">:</span> <span class="dt">u8</span><span class="op">,</span></span>
+<span id="cb5-16"><a></a>    <span class="op">},</span></span>
+<span id="cb5-17"><a></a>    <span class="co">/// Validate an existing password</span></span>
+<span id="cb5-18"><a></a>    Validate <span class="op">{</span></span>
+<span id="cb5-19"><a></a>        password<span class="op">:</span> <span class="dt">String</span><span class="op">,</span></span>
+<span id="cb5-20"><a></a>    <span class="op">},</span></span>
+<span id="cb5-21"><a></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="pattern-matching-on-subcommands" class="slide level2">
 <h2>Pattern matching on subcommands</h2>
 <p>Once parsed, use <code>match</code> to route each subcommand:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb6-1"><a aria-label="1"></a><span class="kw">fn</span> main() <span class="op">{</span></span>
-<span id="cb6-2"><a aria-label="2"></a>    <span class="kw">let</span> cli <span class="op">=</span> <span class="pp">Cli::</span>parse()<span class="op">;</span></span>
-<span id="cb6-3"><a aria-label="3"></a></span>
-<span id="cb6-4"><a aria-label="4"></a>    <span class="cf">match</span> <span class="op">&amp;</span>cli<span class="op">.</span>command <span class="op">{</span></span>
-<span id="cb6-5"><a aria-label="5"></a>        <span class="pp">Commands::</span>Random <span class="op">{</span> length <span class="op">}</span> <span class="op">=&gt;</span> <span class="op">{</span></span>
-<span id="cb6-6"><a aria-label="6"></a>            <span class="pp">println!</span>(<span class="st">"Generating password of length {}"</span><span class="op">,</span> length)<span class="op">;</span></span>
-<span id="cb6-7"><a aria-label="7"></a>            <span class="co">// Call generation logic...</span></span>
-<span id="cb6-8"><a aria-label="8"></a>        <span class="op">}</span></span>
-<span id="cb6-9"><a aria-label="9"></a>        <span class="pp">Commands::</span>Validate <span class="op">{</span> password <span class="op">}</span> <span class="op">=&gt;</span> <span class="op">{</span></span>
-<span id="cb6-10"><a aria-label="10"></a>            <span class="pp">println!</span>(<span class="st">"Validating: {}"</span><span class="op">,</span> password)<span class="op">;</span></span>
-<span id="cb6-11"><a aria-label="11"></a>            <span class="co">// Call validation logic...</span></span>
-<span id="cb6-12"><a aria-label="12"></a>        <span class="op">}</span></span>
-<span id="cb6-13"><a aria-label="13"></a>    <span class="op">}</span></span>
-<span id="cb6-14"><a aria-label="14"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb6-1"><a></a><span class="kw">fn</span> main() <span class="op">{</span></span>
+<span id="cb6-2"><a></a>    <span class="kw">let</span> cli <span class="op">=</span> <span class="pp">Cli::</span>parse()<span class="op">;</span></span>
+<span id="cb6-3"><a></a></span>
+<span id="cb6-4"><a></a>    <span class="cf">match</span> <span class="op">&amp;</span>cli<span class="op">.</span>command <span class="op">{</span></span>
+<span id="cb6-5"><a></a>        <span class="pp">Commands::</span>Random <span class="op">{</span> length <span class="op">}</span> <span class="op">=&gt;</span> <span class="op">{</span></span>
+<span id="cb6-6"><a></a>            <span class="pp">println!</span>(<span class="st">"Generating password of length {}"</span><span class="op">,</span> length)<span class="op">;</span></span>
+<span id="cb6-7"><a></a>            <span class="co">// Call generation logic...</span></span>
+<span id="cb6-8"><a></a>        <span class="op">}</span></span>
+<span id="cb6-9"><a></a>        <span class="pp">Commands::</span>Validate <span class="op">{</span> password <span class="op">}</span> <span class="op">=&gt;</span> <span class="op">{</span></span>
+<span id="cb6-10"><a></a>            <span class="pp">println!</span>(<span class="st">"Validating: {}"</span><span class="op">,</span> password)<span class="op">;</span></span>
+<span id="cb6-11"><a></a>            <span class="co">// Call validation logic...</span></span>
+<span id="cb6-12"><a></a>        <span class="op">}</span></span>
+<span id="cb6-13"><a></a>    <span class="op">}</span></span>
+<span id="cb6-14"><a></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <aside class="notes">
 <p>Emphasize how cleanly this maps to Rust’s ownership and enum features we learned in Week 11.</p>
 <style type="text/css">
@@ -396,43 +390,43 @@ Brandon M. Greenwell
 ├── generator.rs  # Password generation logic
 └── validator.rs  # Password strength calculation</code></pre>
 <p>In <code>main.rs</code>:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb8-1"><a aria-label="1"></a><span class="kw">mod</span> generator<span class="op">;</span></span>
-<span id="cb8-2"><a aria-label="2"></a><span class="kw">mod</span> validator<span class="op">;</span></span>
-<span id="cb8-3"><a aria-label="3"></a></span>
-<span id="cb8-4"><a aria-label="4"></a><span class="co">// Now you can call generator::generate_random(...)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb8-1"><a></a><span class="kw">mod</span> generator<span class="op">;</span></span>
+<span id="cb8-2"><a></a><span class="kw">mod</span> validator<span class="op">;</span></span>
+<span id="cb8-3"><a></a></span>
+<span id="cb8-4"><a></a><span class="co">// Now you can call generator::generate_random(...)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="working-with-the-rand-crate" class="slide level2">
 <h2>Working with the <code>rand</code> crate</h2>
 <p>Randomness is not built into the Rust standard library (unlike Python’s <code>import random</code>). You must use an external crate.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode numberSource toml number-lines code-with-copy"><code class="sourceCode toml"><span id="cb9-1"><a aria-label="1"></a><span class="kw">[dependencies]</span></span>
-<span id="cb9-2"><a aria-label="2"></a><span class="dt">rand</span> <span class="op">=</span> <span class="st">"0.8"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb10-1"><a aria-label="1"></a><span class="kw">use</span> <span class="pp">rand::</span>Rng<span class="op">;</span></span>
-<span id="cb10-2"><a aria-label="2"></a></span>
-<span id="cb10-3"><a aria-label="3"></a><span class="kw">fn</span> main() <span class="op">{</span></span>
-<span id="cb10-4"><a aria-label="4"></a>    <span class="kw">let</span> <span class="kw">mut</span> rng <span class="op">=</span> <span class="pp">rand::</span>thread_rng()<span class="op">;</span></span>
-<span id="cb10-5"><a aria-label="5"></a>    </span>
-<span id="cb10-6"><a aria-label="6"></a>    <span class="co">// Generate a random boolean</span></span>
-<span id="cb10-7"><a aria-label="7"></a>    <span class="kw">let</span> coin_flip<span class="op">:</span> <span class="dt">bool</span> <span class="op">=</span> rng<span class="op">.</span>gen()<span class="op">;</span></span>
-<span id="cb10-8"><a aria-label="8"></a>    </span>
-<span id="cb10-9"><a aria-label="9"></a>    <span class="co">// Generate a number in a range</span></span>
-<span id="cb10-10"><a aria-label="10"></a>    <span class="kw">let</span> secret_pin<span class="op">:</span> <span class="dt">u32</span> <span class="op">=</span> rng<span class="op">.</span>gen_range(<span class="dv">0</span><span class="op">..</span><span class="dv">9999</span>)<span class="op">;</span></span>
-<span id="cb10-11"><a aria-label="11"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode numberSource toml number-lines code-with-copy"><code class="sourceCode toml"><span id="cb9-1"><a></a><span class="kw">[dependencies]</span></span>
+<span id="cb9-2"><a></a><span class="dt">rand</span> <span class="op">=</span> <span class="st">"0.8"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb10-1"><a></a><span class="kw">use</span> <span class="pp">rand::</span>Rng<span class="op">;</span></span>
+<span id="cb10-2"><a></a></span>
+<span id="cb10-3"><a></a><span class="kw">fn</span> main() <span class="op">{</span></span>
+<span id="cb10-4"><a></a>    <span class="kw">let</span> <span class="kw">mut</span> rng <span class="op">=</span> <span class="pp">rand::</span>thread_rng()<span class="op">;</span></span>
+<span id="cb10-5"><a></a>    </span>
+<span id="cb10-6"><a></a>    <span class="co">// Generate a random boolean</span></span>
+<span id="cb10-7"><a></a>    <span class="kw">let</span> coin_flip<span class="op">:</span> <span class="dt">bool</span> <span class="op">=</span> rng<span class="op">.</span>gen()<span class="op">;</span></span>
+<span id="cb10-8"><a></a>    </span>
+<span id="cb10-9"><a></a>    <span class="co">// Generate a number in a range</span></span>
+<span id="cb10-10"><a></a>    <span class="kw">let</span> secret_pin<span class="op">:</span> <span class="dt">u32</span> <span class="op">=</span> rng<span class="op">.</span>gen_range(<span class="dv">0</span><span class="op">..</span><span class="dv">9999</span>)<span class="op">;</span></span>
+<span id="cb10-11"><a></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="selecting-random-characters" class="slide level2">
 <h2>Selecting random characters</h2>
 <p>To generate a password, we often need to select random characters from a slice.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb11-1"><a aria-label="1"></a><span class="kw">use</span> <span class="pp">rand::</span>Rng<span class="op">;</span></span>
-<span id="cb11-2"><a aria-label="2"></a><span class="kw">use</span> <span class="pp">rand::seq::</span>SliceRandom<span class="op">;</span></span>
-<span id="cb11-3"><a aria-label="3"></a></span>
-<span id="cb11-4"><a aria-label="4"></a><span class="kw">fn</span> main() <span class="op">{</span></span>
-<span id="cb11-5"><a aria-label="5"></a>    <span class="kw">let</span> charset<span class="op">:</span> <span class="op">&amp;</span>[<span class="dt">u8</span>] <span class="op">=</span> <span class="st">b"abcdefghijklmnopqrstuvwxyz0123456789"</span><span class="op">;</span></span>
-<span id="cb11-6"><a aria-label="6"></a>    <span class="kw">let</span> <span class="kw">mut</span> rng <span class="op">=</span> <span class="pp">rand::</span>thread_rng()<span class="op">;</span></span>
-<span id="cb11-7"><a aria-label="7"></a>    </span>
-<span id="cb11-8"><a aria-label="8"></a>    <span class="co">// Pick a random byte from the slice and convert to char</span></span>
-<span id="cb11-9"><a aria-label="9"></a>    <span class="kw">let</span> random_char <span class="op">=</span> <span class="op">*</span>charset<span class="op">.</span>choose(<span class="op">&amp;</span><span class="kw">mut</span> rng)<span class="op">.</span>unwrap() <span class="kw">as</span> <span class="dt">char</span><span class="op">;</span></span>
-<span id="cb11-10"><a aria-label="10"></a>    </span>
-<span id="cb11-11"><a aria-label="11"></a>    <span class="pp">println!</span>(<span class="st">"Random char: {}"</span><span class="op">,</span> random_char)<span class="op">;</span></span>
-<span id="cb11-12"><a aria-label="12"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb11-1"><a></a><span class="kw">use</span> <span class="pp">rand::</span>Rng<span class="op">;</span></span>
+<span id="cb11-2"><a></a><span class="kw">use</span> <span class="pp">rand::seq::</span>SliceRandom<span class="op">;</span></span>
+<span id="cb11-3"><a></a></span>
+<span id="cb11-4"><a></a><span class="kw">fn</span> main() <span class="op">{</span></span>
+<span id="cb11-5"><a></a>    <span class="kw">let</span> charset<span class="op">:</span> <span class="op">&amp;</span>[<span class="dt">u8</span>] <span class="op">=</span> <span class="st">b"abcdefghijklmnopqrstuvwxyz0123456789"</span><span class="op">;</span></span>
+<span id="cb11-6"><a></a>    <span class="kw">let</span> <span class="kw">mut</span> rng <span class="op">=</span> <span class="pp">rand::</span>thread_rng()<span class="op">;</span></span>
+<span id="cb11-7"><a></a>    </span>
+<span id="cb11-8"><a></a>    <span class="co">// Pick a random byte from the slice and convert to char</span></span>
+<span id="cb11-9"><a></a>    <span class="kw">let</span> random_char <span class="op">=</span> <span class="op">*</span>charset<span class="op">.</span>choose(<span class="op">&amp;</span><span class="kw">mut</span> rng)<span class="op">.</span>unwrap() <span class="kw">as</span> <span class="dt">char</span><span class="op">;</span></span>
+<span id="cb11-10"><a></a>    </span>
+<span id="cb11-11"><a></a>    <span class="pp">println!</span>(<span class="st">"Random char: {}"</span><span class="op">,</span> random_char)<span class="op">;</span></span>
+<span id="cb11-12"><a></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <aside class="notes">
 <p>Explain why we use <code>b"..."</code> (byte strings) and <code>SliceRandom</code>. This is a very common pattern in Rust for password generation.</p>
 <style type="text/css">
@@ -452,10 +446,10 @@ Brandon M. Greenwell
 <p>For your final lab, you will complete a password utility CLI.</p>
 <p><strong>Features to implement:</strong> 1. <code>random</code>: Generate passwords from character sets. 2. <code>passphrase</code>: Generate correct-horse-battery-staple style passphrases. 3. <code>pin</code>: Generate numeric PINs. 4. <code>validate</code>: Calculate entropy and check for common patterns in existing passwords.</p>
 <p>You will implement the logic in <code>generator.rs</code> and <code>validator.rs</code>, and wire it up to the <code>clap</code> parser in <code>main.rs</code>.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a aria-label="1"></a><span class="ex">cargo</span> test</span>
-<span id="cb12-2"><a aria-label="2"></a><span class="ex">cargo</span> fmt</span>
-<span id="cb12-3"><a aria-label="3"></a><span class="ex">cargo</span> clippy <span class="at">--</span> <span class="at">-D</span> warnings</span>
-<span id="cb12-4"><a aria-label="4"></a><span class="ex">cargo</span> run <span class="at">--</span> random <span class="at">--length</span> 20 <span class="at">--symbols</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a></a><span class="ex">cargo</span> test</span>
+<span id="cb12-2"><a></a><span class="ex">cargo</span> fmt</span>
+<span id="cb12-3"><a></a><span class="ex">cargo</span> clippy <span class="at">--</span> <span class="at">-D</span> warnings</span>
+<span id="cb12-4"><a></a><span class="ex">cargo</span> run <span class="at">--</span> random <span class="at">--length</span> 20 <span class="at">--symbols</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>A green Week 14 badge represents the complete 10-point lab.</p>
 <p><strong>Instructions:</strong> <a href="https://github.com/bgreenwell/is4010-labs/blob/main/week14/lab14.md"><code>week14/lab14.md</code></a></p>
 </section>

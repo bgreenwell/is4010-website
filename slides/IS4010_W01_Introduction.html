@@ -7,8 +7,8 @@
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="../site_libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-b85bc7c33db8c58e0ec93c3465666fed.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.10.18">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-707d8167ce6003fca903bfe2be84ab7f.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.8.25">
 
   <meta name="author" content="Brandon M. Greenwell">
   <title>IS 4010 - App Dev with AI – IS4010: AI-enhanced application development</title>
@@ -18,16 +18,10 @@
   <link rel="stylesheet" href="../site_libs/revealjs/dist/reset.css">
   <link rel="stylesheet" href="../site_libs/revealjs/dist/reveal.css">
   <style>
-    /* Default styles provided by pandoc.
-    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
-    */
+    code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
-    div.columns{display: flex; gap: 1.5em;}
-    div.column{flex: auto;}
-    @media screen {
-    div.columns{gap: min(4vw, 1.5em);}
-    div.column{overflow-x: auto;}
-    }
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
     ul.task-list{list-style: none;}
     ul.task-list li input[type="checkbox"] {
@@ -102,7 +96,7 @@
     code span.vs { color: #abe338; } /* VerbatimString */
     code span.wa { color: #dcc6e0; } /* Warning */
   </style>
-  <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto-fdc93494f2580a7e050003a96af38920.css">
+  <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto-a1d3734469117662d4af4794742e8c15.css">
   <link rel="stylesheet" href="custom.css">
   <link href="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
@@ -213,7 +207,7 @@
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
 <div class="quarto-title-author-name">
-Brandon M. Greenwell
+Brandon M. Greenwell 
 </div>
 </div>
 </div>
@@ -347,9 +341,9 @@ Brandon M. Greenwell
 </section>
 <section id="location-and-command-anatomy" class="slide level2">
 <h2>Location and command anatomy</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode numberSource text number-lines code-with-copy"><code class="sourceCode"><span id="cb1-1"><a aria-label="1"></a>uv run python hello.py</span>
-<span id="cb1-2"><a aria-label="2"></a>│  └──────── arguments ────────┘</span>
-<span id="cb1-3"><a aria-label="3"></a>└ command</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode numberSource text number-lines code-with-copy"><code class="sourceCode"><span id="cb1-1"><a></a>uv run python hello.py</span>
+<span id="cb1-2"><a></a>│  └──────── arguments ────────┘</span>
+<span id="cb1-3"><a></a>└ command</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <ul>
 <li class="fragment">Every terminal has a <strong>current working directory</strong>.</li>
 <li class="fragment">Relative paths begin from that directory; absolute paths name the full location.</li>
@@ -359,11 +353,11 @@ Brandon M. Greenwell
 </section>
 <section id="five-commands-to-start" class="slide level2">
 <h2>Five commands to start</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a aria-label="1"></a><span class="bu">pwd</span>                 <span class="co"># Where am I?</span></span>
-<span id="cb2-2"><a aria-label="2"></a><span class="fu">ls</span>                  <span class="co"># What is here?</span></span>
-<span id="cb2-3"><a aria-label="3"></a><span class="bu">cd</span> path/to/folder   <span class="co"># Move to another folder</span></span>
-<span id="cb2-4"><a aria-label="4"></a><span class="fu">mkdir</span> practice      <span class="co"># Create a folder</span></span>
-<span id="cb2-5"><a aria-label="5"></a><span class="ex">code</span> .              <span class="co"># Open this folder in VS Code</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a></a><span class="bu">pwd</span>                 <span class="co"># Where am I?</span></span>
+<span id="cb2-2"><a></a><span class="fu">ls</span>                  <span class="co"># What is here?</span></span>
+<span id="cb2-3"><a></a><span class="bu">cd</span> path/to/folder   <span class="co"># Move to another folder</span></span>
+<span id="cb2-4"><a></a><span class="fu">mkdir</span> practice      <span class="co"># Create a folder</span></span>
+<span id="cb2-5"><a></a><span class="ex">code</span> .              <span class="co"># Open this folder in VS Code</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <ul>
 <li class="fragment">Press <strong>Tab</strong> to complete a path.</li>
 <li class="fragment">Press <strong>Up arrow</strong> to reuse a command.</li>
@@ -383,12 +377,12 @@ Brandon M. Greenwell
 </section>
 <section id="live-demo-from-a-folder-to-vs-code" class="slide level2">
 <h2>Live demo: from a folder to VS Code</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a aria-label="1"></a><span class="bu">pwd</span></span>
-<span id="cb3-2"><a aria-label="2"></a><span class="fu">ls</span></span>
-<span id="cb3-3"><a aria-label="3"></a><span class="fu">mkdir</span> is4010-demo</span>
-<span id="cb3-4"><a aria-label="4"></a><span class="bu">cd</span> is4010-demo</span>
-<span id="cb3-5"><a aria-label="5"></a><span class="bu">pwd</span></span>
-<span id="cb3-6"><a aria-label="6"></a><span class="ex">code</span> .</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a></a><span class="bu">pwd</span></span>
+<span id="cb3-2"><a></a><span class="fu">ls</span></span>
+<span id="cb3-3"><a></a><span class="fu">mkdir</span> is4010-demo</span>
+<span id="cb3-4"><a></a><span class="bu">cd</span> is4010-demo</span>
+<span id="cb3-5"><a></a><span class="bu">pwd</span></span>
+<span id="cb3-6"><a></a><span class="ex">code</span> .</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <aside class="notes">
 <p>Narrate the prompt, current directory, relative path, command, and argument. Demonstrate Tab completion, Up arrow, Ctrl+C, and an intentional wrong directory corrected with <code>pwd</code> and <code>cd</code>. Keep this light: the goal is enough fluency to understand the Git commands that follow.</p>
 <style type="text/css">
@@ -564,22 +558,22 @@ Brandon M. Greenwell
 <section id="the-git-workflow-in-action" class="slide level2">
 <h2>The Git workflow in action</h2>
 <p>Here’s what the commands actually look like:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a aria-label="1"></a><span class="co"># Check what's changed</span></span>
-<span id="cb4-2"><a aria-label="2"></a><span class="ex">$</span> git status</span>
-<span id="cb4-3"><a aria-label="3"></a><span class="ex">On</span> branch main</span>
-<span id="cb4-4"><a aria-label="4"></a><span class="ex">Changes</span> not staged for commit:</span>
-<span id="cb4-5"><a aria-label="5"></a>  <span class="ex">modified:</span>   hello.py</span>
-<span id="cb4-6"><a aria-label="6"></a></span>
-<span id="cb4-7"><a aria-label="7"></a><span class="co"># Stage your changes</span></span>
-<span id="cb4-8"><a aria-label="8"></a><span class="ex">$</span> git add hello.py</span>
-<span id="cb4-9"><a aria-label="9"></a></span>
-<span id="cb4-10"><a aria-label="10"></a><span class="co"># Commit with a message</span></span>
-<span id="cb4-11"><a aria-label="11"></a><span class="ex">$</span> git commit <span class="at">-m</span> <span class="st">"Fix greeting message"</span></span>
-<span id="cb4-12"><a aria-label="12"></a><span class="ex">[main</span> 1a2b3c4] Fix greeting message</span>
-<span id="cb4-13"><a aria-label="13"></a> <span class="ex">1</span> file changed, 1 insertion<span class="er">(</span><span class="ex">+</span><span class="kw">)</span><span class="ex">,</span> 1 deletion<span class="er">(</span><span class="ex">-</span><span class="kw">)</span></span>
-<span id="cb4-14"><a aria-label="14"></a></span>
-<span id="cb4-15"><a aria-label="15"></a><span class="co"># Push to GitHub</span></span>
-<span id="cb4-16"><a aria-label="16"></a><span class="ex">$</span> git push origin main</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a></a><span class="co"># Check what's changed</span></span>
+<span id="cb4-2"><a></a><span class="ex">$</span> git status</span>
+<span id="cb4-3"><a></a><span class="ex">On</span> branch main</span>
+<span id="cb4-4"><a></a><span class="ex">Changes</span> not staged for commit:</span>
+<span id="cb4-5"><a></a>  <span class="ex">modified:</span>   hello.py</span>
+<span id="cb4-6"><a></a></span>
+<span id="cb4-7"><a></a><span class="co"># Stage your changes</span></span>
+<span id="cb4-8"><a></a><span class="ex">$</span> git add hello.py</span>
+<span id="cb4-9"><a></a></span>
+<span id="cb4-10"><a></a><span class="co"># Commit with a message</span></span>
+<span id="cb4-11"><a></a><span class="ex">$</span> git commit <span class="at">-m</span> <span class="st">"Fix greeting message"</span></span>
+<span id="cb4-12"><a></a><span class="ex">[main</span> 1a2b3c4] Fix greeting message</span>
+<span id="cb4-13"><a></a> <span class="ex">1</span> file changed, 1 insertion<span class="er">(</span><span class="ex">+</span><span class="kw">)</span><span class="ex">,</span> 1 deletion<span class="er">(</span><span class="ex">-</span><span class="kw">)</span></span>
+<span id="cb4-14"><a></a></span>
+<span id="cb4-15"><a></a><span class="co"># Push to GitHub</span></span>
+<span id="cb4-16"><a></a><span class="ex">$</span> git push origin main</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <aside class="notes">
 <p><strong>LIVE DEMO NOTES:</strong> - Open terminal and navigate to a demo repository - Modify a file (edit hello.py to change the message) - Run each command and explain the output - Show how <code>git status</code> changes after each step - Demonstrate the GitHub page updating after push - If time permits, show <code>git log</code> to see the commit history</p>
 <style type="text/css">
@@ -696,20 +690,20 @@ Brandon M. Greenwell
 <section id="quick-reference-cheat-sheet" class="slide level2">
 <h2>Quick reference cheat sheet</h2>
 <p>Commands you’ll use constantly:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a aria-label="1"></a><span class="co"># Getting started</span></span>
-<span id="cb5-2"><a aria-label="2"></a><span class="fu">git</span> clone <span class="op">&lt;</span>url<span class="op">&gt;</span>         <span class="co"># Download a repository</span></span>
-<span id="cb5-3"><a aria-label="3"></a><span class="fu">git</span> status              <span class="co"># See what's changed</span></span>
-<span id="cb5-4"><a aria-label="4"></a><span class="fu">git</span> log <span class="at">--oneline</span>       <span class="co"># View commit history</span></span>
-<span id="cb5-5"><a aria-label="5"></a></span>
-<span id="cb5-6"><a aria-label="6"></a><span class="co"># Making changes</span></span>
-<span id="cb5-7"><a aria-label="7"></a><span class="fu">git</span> add <span class="op">&lt;</span>file<span class="op">&gt;</span>          <span class="co"># Stage a specific file you have reviewed</span></span>
-<span id="cb5-8"><a aria-label="8"></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"message"</span> <span class="co"># Save your changes</span></span>
-<span id="cb5-9"><a aria-label="9"></a><span class="fu">git</span> push                <span class="co"># Send to GitHub</span></span>
-<span id="cb5-10"><a aria-label="10"></a></span>
-<span id="cb5-11"><a aria-label="11"></a><span class="co"># Fixing mistakes</span></span>
-<span id="cb5-12"><a aria-label="12"></a><span class="fu">git</span> diff                <span class="co"># See what changed</span></span>
-<span id="cb5-13"><a aria-label="13"></a><span class="fu">git</span> reset HEAD <span class="op">&lt;</span>file<span class="op">&gt;</span>   <span class="co"># Unstage a file</span></span>
-<span id="cb5-14"><a aria-label="14"></a><span class="fu">git</span> commit <span class="at">--amend</span>      <span class="co"># Fix last commit message</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a></a><span class="co"># Getting started</span></span>
+<span id="cb5-2"><a></a><span class="fu">git</span> clone <span class="op">&lt;</span>url<span class="op">&gt;</span>         <span class="co"># Download a repository</span></span>
+<span id="cb5-3"><a></a><span class="fu">git</span> status              <span class="co"># See what's changed</span></span>
+<span id="cb5-4"><a></a><span class="fu">git</span> log <span class="at">--oneline</span>       <span class="co"># View commit history</span></span>
+<span id="cb5-5"><a></a></span>
+<span id="cb5-6"><a></a><span class="co"># Making changes</span></span>
+<span id="cb5-7"><a></a><span class="fu">git</span> add <span class="op">&lt;</span>file<span class="op">&gt;</span>          <span class="co"># Stage a specific file you have reviewed</span></span>
+<span id="cb5-8"><a></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"message"</span> <span class="co"># Save your changes</span></span>
+<span id="cb5-9"><a></a><span class="fu">git</span> push                <span class="co"># Send to GitHub</span></span>
+<span id="cb5-10"><a></a></span>
+<span id="cb5-11"><a></a><span class="co"># Fixing mistakes</span></span>
+<span id="cb5-12"><a></a><span class="fu">git</span> diff                <span class="co"># See what changed</span></span>
+<span id="cb5-13"><a></a><span class="fu">git</span> reset HEAD <span class="op">&lt;</span>file<span class="op">&gt;</span>   <span class="co"># Unstage a file</span></span>
+<span id="cb5-14"><a></a><span class="fu">git</span> commit <span class="at">--amend</span>      <span class="co"># Fix last commit message</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="time-for-lab-01" class="slide level2">
 <h2>Time for Lab 01</h2>

@@ -2,23 +2,17 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.10.18">
+<meta name="generator" content="quarto-1.8.25">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
 <title>IS4010: AI-enhanced application development – IS 4010 - App Dev with AI</title>
 <style>
-/* Default styles provided by pandoc.
-** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
-*/
+code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
-div.columns{display: flex; gap: 1.5em;}
-div.column{flex: auto;}
-@media screen {
-div.columns{gap: min(4vw, 1.5em);}
-div.column{overflow-x: auto;}
-}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
@@ -73,14 +67,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../images/uc-logo-2.png" rel="icon" type="image/png">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-03a0d00fd5ba774dd8e50f606f192499.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-f429e1b9fabce5b473b24bf8663aabcf.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -122,9 +117,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">
-      IS 4010 - App Dev with AI
-      </li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">IS4010: AI-enhanced application development</li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -138,13 +131,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
-    <div class="sidebar-title mb-0 py-0">
-      <a href="../">IS 4010 - App Dev with AI</a> 
-        <div class="sidebar-tools-main">
+      <a href="../index.html" class="sidebar-logo-link">
+      </a>
+      <div class="sidebar-tools-main">
     <a href="https://github.com/bgreenwell/is4010-labs" title="Labs" class="quarto-navigation-tool px-1" aria-label="Labs"><i class="bi bi-github"></i></a>
     <a href="https://uc.instructure.com/" title="Canvas" class="quarto-navigation-tool px-1" aria-label="Canvas"><i class="bi bi-journal-text"></i></a>
 </div>
-    </div>
       </div>
         <div class="mt-2 flex-shrink-0 align-items-center">
         <div class="sidebar-search">
@@ -404,7 +396,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><strong>Static-analysis input</strong>: Type hints let editors and type checkers report some mismatches; Python does not normally enforce them at runtime</li>
 <li><strong>Documentation</strong>: Good docstrings explain purpose, inputs, outputs, and important constraints</li>
 </ul>
-<div id="5e1d0ac6" class="cell">
+<div id="05-001" class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> calculate_area(length: <span class="bu">float</span>, width: <span class="bu">float</span>) <span class="op">-&gt;</span> <span class="bu">float</span>:</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Calculate the area of a rectangle.</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -433,7 +425,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>This is a good thing! It prevents functions from accidentally modifying variables they shouldn’t have access to</li>
 <li><strong>LEGB Rule</strong>: Local → Enclosing → Global → Built-in (scope resolution order)</li>
 </ul>
-<div id="a890c77b" class="cell">
+<div id="05-003" class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> my_function():</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="co"># secret_number has local scope</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    secret_number <span class="op">=</span> <span class="dv">42</span></span>
@@ -454,7 +446,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><strong>Keyword arguments</strong>: Use parameter names - order doesn’t matter</li>
 <li><strong>Best practice</strong>: Use keyword arguments for clarity in function calls</li>
 </ul>
-<div id="b800c5ba" class="cell">
+<div id="05-005" class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> create_user_profile(name: <span class="bu">str</span>, age: <span class="bu">int</span>, city: <span class="bu">str</span>) <span class="op">-&gt;</span> <span class="bu">dict</span>:</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Create a user profile dictionary."""</span></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> {</span>
@@ -481,7 +473,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><strong>Common pattern</strong>: Use <code>None</code> as default, then check and assign actual default in function body</li>
 <li><strong>Gotcha</strong>: Avoid shared mutable defaults unless that shared state is intentional</li>
 </ul>
-<div id="577b16a7" class="cell">
+<div id="05-007" class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> send_notification(message: <span class="bu">str</span>, urgency: <span class="bu">str</span> <span class="op">=</span> <span class="st">"normal"</span>,</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>                     channels: <span class="bu">list</span> <span class="op">=</span> <span class="va">None</span>) <span class="op">-&gt;</span> <span class="bu">dict</span>:</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Send a notification through specified channels."""</span></span>
@@ -512,7 +504,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><strong>Convention</strong>: Names <code>args</code> and <code>kwargs</code> are standard (but you can use other names)</li>
 <li><strong>Order matters</strong>: <code>def func(required, *args, **kwargs):</code></li>
 </ul>
-<div id="8c7698b9" class="cell">
+<div id="05-009" class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> analyze_user_data(user_id: <span class="bu">int</span>, <span class="op">*</span>metrics: <span class="bu">str</span>, <span class="op">**</span>options) <span class="op">-&gt;</span> <span class="bu">dict</span>:</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Analyze user data with flexible metrics and options."""</span></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"Analyzing user </span><span class="sc">{</span>user_id<span class="sc">}</span><span class="ss">"</span>)</span>
@@ -547,7 +539,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><strong>Modifying vs.&nbsp;returning</strong>: Be clear about whether you modify in-place or return new data</li>
 <li><strong>Performance consideration</strong>: Large dictionaries are passed by reference, not copied</li>
 </ul>
-<div id="c88173fc" class="cell">
+<div id="05-011" class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> update_user_settings(user_data: <span class="bu">dict</span>, <span class="op">**</span>new_settings) <span class="op">-&gt;</span> <span class="bu">dict</span>:</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Update user settings, returning a new dictionary."""</span></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Create a copy to avoid modifying original</span></span>
@@ -590,7 +582,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><strong>Reasonable length</strong>: If a function is over 20-30 lines, consider splitting it</li>
 <li><strong>Return consistency</strong>: Keep return behavior predictable and document intentional alternatives</li>
 </ul>
-<div id="ede21a20" class="cell">
+<div id="05-013" class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># GOOD: Single responsibility, clear purpose</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> calculate_order_total(items: <span class="bu">list</span>[<span class="bu">dict</span>]) <span class="op">-&gt;</span> <span class="bu">float</span>:</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Calculate the total cost of items in an order."""</span></span>
@@ -662,7 +654,7 @@ clean, reusable functions. Each function should:
 <li><strong>Common examples</strong>: Dividing by zero, opening nonexistent files, accessing invalid list indices</li>
 <li><strong>Unhandled exceptions</strong> will crash your program and frustrate users</li>
 </ul>
-<div id="ce69c966" class="cell">
+<div id="05-015" class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Syntax error - won't even run</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="co"># print("Hello world" # Missing closing parenthesis</span></span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -685,7 +677,7 @@ clean, reusable functions. Each function should:
 <li><strong>Best practice</strong>: Catch specific exceptions so you can handle different errors appropriately</li>
 <li><strong>Avoid broad catches by default</strong>: Catch the exceptions you can handle; boundary layers may intentionally catch broadly to log or translate failures</li>
 </ul>
-<div id="f8a5a501" class="cell">
+<div id="05-017" class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> safe_divide(a: <span class="bu">float</span>, b: <span class="bu">float</span>) <span class="op">-&gt;</span> <span class="bu">float</span> <span class="op">|</span> <span class="va">None</span>:</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Safely divide two numbers, returning None if division fails."""</span></span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">try</span>:</span>
@@ -714,7 +706,7 @@ clean, reusable functions. Each function should:
 <li><strong>Inheritance matters</strong>: Catching <code>Exception</code> catches all its subclasses</li>
 <li><strong>Order matters</strong>: More specific exceptions must come before general ones</li>
 </ul>
-<div id="dc6df72d" class="cell">
+<div id="05-019" class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Common exception types and when they occur</span></span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> demonstrate_exceptions():</span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>    examples <span class="op">=</span> {</span>
@@ -757,7 +749,7 @@ clean, reusable functions. Each function should:
 <li><strong>Add context</strong>: Custom exceptions can carry additional information</li>
 <li><strong>When to use</strong>: Domain-specific errors that don’t fit built-in exception types</li>
 </ul>
-<div id="c7a745f1" class="cell">
+<div id="05-021" class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> InsufficientFundsError(<span class="pp">Exception</span>):</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Raised when account doesn't have enough money for transaction."""</span></span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, balance: <span class="bu">float</span>, amount: <span class="bu">float</span>):</span>
@@ -800,7 +792,7 @@ clean, reusable functions. Each function should:
 <li><strong>Best practice</strong>: Use <code>finally</code> for resource cleanup (files, network connections, locks)</li>
 <li><strong>Performance consideration</strong>: <code>finally</code> ensures cleanup even if exceptions are re-raised</li>
 </ul>
-<div id="e4db97ac" class="cell">
+<div id="05-023" class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> process_user_data(filename: <span class="bu">str</span>) <span class="op">-&gt;</span> <span class="bu">dict</span>:</span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Process user data from file with proper cleanup."""</span></span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>    file_handle <span class="op">=</span> <span class="va">None</span></span>
@@ -837,7 +829,7 @@ clean, reusable functions. Each function should:
 <li><strong>File handling</strong>: Prefer <code>with</code> so files close when the block exits</li>
 <li><strong>Under the hood</strong>: Uses <code>__enter__</code> and <code>__exit__</code> methods</li>
 </ul>
-<div id="6edb6580" class="cell">
+<div id="05-025" class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># OLD WAY: Manual file handling (error-prone)</span></span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> read_config_old(filename: <span class="bu">str</span>) <span class="op">-&gt;</span> <span class="bu">dict</span>:</span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">try</span>:</span>
@@ -880,7 +872,7 @@ clean, reusable functions. Each function should:
 <li><strong>Clear error messages</strong>: Help users understand what went wrong</li>
 <li><strong>Type checking</strong>: Use type hints and runtime validation together</li>
 </ul>
-<div id="c8e30d07" class="cell">
+<div id="05-027" class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> create_user_account(username: <span class="bu">str</span>, age: <span class="bu">int</span>, email: <span class="bu">str</span>) <span class="op">-&gt;</span> <span class="bu">dict</span>:</span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Create user account with comprehensive input validation."""</span></span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -930,7 +922,7 @@ clean, reusable functions. Each function should:
 <li><strong>Performance</strong>: EAFP can be faster when exceptions are rare</li>
 <li><strong>Choose wisely</strong>: Some situations favor one approach over the other</li>
 </ul>
-<div id="35a3065b" class="cell">
+<div id="05-029" class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># LBYL Approach: Check first, then act</span></span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> get_user_score_lbyl(users: <span class="bu">dict</span>, user_id: <span class="bu">str</span>) <span class="op">-&gt;</span> <span class="bu">float</span>:</span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Get user score using Look Before You Leap pattern."""</span></span>
@@ -982,7 +974,7 @@ clean, reusable functions. Each function should:
 <li>Include clear docstrings and do not modify the supplied tests</li>
 </ul>
 <p><strong>Implementation scaffold:</strong></p>
-<div id="6d3a1311" class="cell">
+<div id="05-031" class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> calculate_average_age(users: <span class="bu">list</span>[<span class="bu">dict</span>]) <span class="op">-&gt;</span> <span class="bu">float</span>:</span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Return the average numeric age, or 0.0 if none are valid."""</span></span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>    <span class="co"># </span><span class="al">TODO</span><span class="co">: collect the valid ages and calculate the specified result</span></span>

@@ -2,23 +2,17 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.10.18">
+<meta name="generator" content="quarto-1.8.25">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
 <title>IS4010: AI-enhanced application development – IS 4010 - App Dev with AI</title>
 <style>
-/* Default styles provided by pandoc.
-** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
-*/
+code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
-div.columns{display: flex; gap: 1.5em;}
-div.column{flex: auto;}
-@media screen {
-div.columns{gap: min(4vw, 1.5em);}
-div.column{overflow-x: auto;}
-}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
@@ -73,14 +67,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../images/uc-logo-2.png" rel="icon" type="image/png">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-03a0d00fd5ba774dd8e50f606f192499.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-f429e1b9fabce5b473b24bf8663aabcf.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -122,9 +117,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">
-      IS 4010 - App Dev with AI
-      </li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">IS4010: AI-enhanced application development</li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -138,13 +131,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
-    <div class="sidebar-title mb-0 py-0">
-      <a href="../">IS 4010 - App Dev with AI</a> 
-        <div class="sidebar-tools-main">
+      <a href="../index.html" class="sidebar-logo-link">
+      </a>
+      <div class="sidebar-tools-main">
     <a href="https://github.com/bgreenwell/is4010-labs" title="Labs" class="quarto-navigation-tool px-1" aria-label="Labs"><i class="bi bi-github"></i></a>
     <a href="https://uc.instructure.com/" title="Canvas" class="quarto-navigation-tool px-1" aria-label="Canvas"><i class="bi bi-journal-text"></i></a>
 </div>
-    </div>
       </div>
         <div class="mt-2 flex-shrink-0 align-items-center">
         <div class="sidebar-search">
@@ -476,7 +468,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="reading-and-writing-files-in-python">Reading and writing files in Python</h2>
 <section id="the-standard-pattern-with-open-context-manager" class="level3">
 <h3 class="anchored" data-anchor-id="the-standard-pattern-with-open-context-manager"><strong>The standard pattern: <code>with open()</code> context manager</strong></h3>
-<div id="73be16dd" class="cell">
+<div id="07-001" class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Write to a file (overwrites existing content)</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">"my_note.txt"</span>, <span class="st">"w"</span>) <span class="im">as</span> f:</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    f.write(<span class="st">"Hello from our application!"</span>)</span>
@@ -501,7 +493,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Read it back and print the contents</li>
 <li>Use append mode (<code>"a"</code>) to add a 4th task</li>
 </ol>
-<div id="24a9cfcf" class="cell">
+<div id="07-003" class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Your code here</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
@@ -510,7 +502,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="the-problem-with-plain-text-files">The problem with plain text files</h2>
 <section id="text-is-unstructured-and-hard-to-parse" class="level3">
 <h3 class="anchored" data-anchor-id="text-is-unstructured-and-hard-to-parse"><strong>Text is unstructured and hard to parse</strong></h3>
-<div id="0bc8a0dc" class="cell">
+<div id="07-005" class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Saving a contact list to a text file - messy!</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">"contacts.txt"</span>, <span class="st">"w"</span>) <span class="im">as</span> f:</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    f.write(<span class="st">"Alice|alice@example.com|555-1234</span><span class="ch">\n</span><span class="st">"</span>)</span>
@@ -601,7 +593,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="using-pythons-json-library">Using Python’s <code>json</code> library</h2>
 <section id="two-key-functions-dump-and-load" class="level3">
 <h3 class="anchored" data-anchor-id="two-key-functions-dump-and-load"><strong>Two key functions: <code>dump()</code> and <code>load()</code></strong></h3>
-<div id="c7204870" class="cell">
+<div id="07-007" class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> json</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Python dictionary (complex, nested structure)</span></span>
@@ -662,7 +654,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Save it to <code>movies.json</code> with nice formatting</li>
 <li>Load it back and print the movie with the highest rating</li>
 </ol>
-<div id="8feb367d" class="cell">
+<div id="07-009" class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Your code here</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
@@ -756,7 +748,7 @@ protocol</code></pre>
 <h2 class="anchored" data-anchor-id="making-your-first-api-request">Making your first API request</h2>
 <section id="get-request-to-a-public-api" class="level3">
 <h3 class="anchored" data-anchor-id="get-request-to-a-public-api"><strong>GET request to a public API</strong></h3>
-<div id="e668c770" class="cell">
+<div id="07-011" class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> requests</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Make a GET request to the PokeAPI</span></span>
@@ -788,7 +780,7 @@ protocol</code></pre>
 <li>Print the Pokemon’s types (hint: look at <code>data['types']</code>)</li>
 <li>Try an invalid Pokemon name - what happens?</li>
 </ol>
-<div id="dc09781e" class="cell">
+<div id="07-013" class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Your code here</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
@@ -889,7 +881,7 @@ protocol</code></pre>
 <section id="your-turn-try-different-apis" class="level3">
 <h3 class="anchored" data-anchor-id="your-turn-try-different-apis">Your turn: try different APIs</h3>
 <p>Pick one of the APIs above and: 1. Read its documentation to find an interesting endpoint 2. Make a GET request to that endpoint 3. Parse and display the interesting data from the response</p>
-<div id="f72a85cd" class="cell">
+<div id="07-015" class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Your code here - explore a new API!</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
@@ -898,7 +890,7 @@ protocol</code></pre>
 <h2 class="anchored" data-anchor-id="error-handling-with-apis">Error handling with APIs</h2>
 <section id="networks-are-unreliable---plan-for-failure" class="level3">
 <h3 class="anchored" data-anchor-id="networks-are-unreliable---plan-for-failure"><strong>Networks are unreliable - plan for failure</strong></h3>
-<div id="c0de93ec" class="cell">
+<div id="07-017" class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> requests</span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>url <span class="op">=</span> <span class="st">"https://api.example.com/data"</span></span>
@@ -947,7 +939,7 @@ protocol</code></pre>
 <h2 class="anchored" data-anchor-id="putting-it-all-together-files-and-apis">Putting it all together: files and APIs</h2>
 <section id="a-complete-data-workflow" class="level3">
 <h3 class="anchored" data-anchor-id="a-complete-data-workflow"><strong>A complete data workflow</strong></h3>
-<div id="681ccdca" class="cell">
+<div id="07-019" class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> json</span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> requests</span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -983,7 +975,7 @@ protocol</code></pre>
 <section id="your-turn-complete-workflow" class="level3">
 <h3 class="anchored" data-anchor-id="your-turn-complete-workflow">Your turn: complete workflow</h3>
 <p>Build a complete data workflow: 1. Choose an API from the list above 2. Fetch data from that API 3. Process/filter the data to extract interesting information 4. Save it to a JSON file 5. Load it back and display a formatted report</p>
-<div id="ff746da2" class="cell">
+<div id="07-021" class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Your complete workflow here</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>

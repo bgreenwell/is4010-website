@@ -2,23 +2,17 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.10.18">
+<meta name="generator" content="quarto-1.8.25">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
 <title>IS4010: AI-enhanced application development – IS 4010 - App Dev with AI</title>
 <style>
-/* Default styles provided by pandoc.
-** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
-*/
+code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
-div.columns{display: flex; gap: 1.5em;}
-div.column{flex: auto;}
-@media screen {
-div.columns{gap: min(4vw, 1.5em);}
-div.column{overflow-x: auto;}
-}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
@@ -73,14 +67,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../images/uc-logo-2.png" rel="icon" type="image/png">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-03a0d00fd5ba774dd8e50f606f192499.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-f429e1b9fabce5b473b24bf8663aabcf.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -122,9 +117,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">
-      IS 4010 - App Dev with AI
-      </li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">IS4010: AI-enhanced application development</li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -138,13 +131,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
-    <div class="sidebar-title mb-0 py-0">
-      <a href="../">IS 4010 - App Dev with AI</a> 
-        <div class="sidebar-tools-main">
+      <a href="../index.html" class="sidebar-logo-link">
+      </a>
+      <div class="sidebar-tools-main">
     <a href="https://github.com/bgreenwell/is4010-labs" title="Labs" class="quarto-navigation-tool px-1" aria-label="Labs"><i class="bi bi-github"></i></a>
     <a href="https://uc.instructure.com/" title="Canvas" class="quarto-navigation-tool px-1" aria-label="Canvas"><i class="bi bi-journal-text"></i></a>
 </div>
-    </div>
       </div>
         <div class="mt-2 flex-shrink-0 align-items-center">
         <div class="sidebar-search">
@@ -542,7 +534,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="basic-argparse-your-first-cli" class="level2">
 <h2 class="anchored" data-anchor-id="basic-argparse-your-first-cli">Basic <code>argparse</code>: your first CLI</h2>
-<div id="aa6058d4" class="cell">
+<div id="08-001" class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">"""simple_greeter.py - A friendly CLI greeter."""</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> argparse</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -618,7 +610,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Example usage:</p>
 <pre><code>uv run python calculator.py 10 5 --operation add     # Should print 15
 uv run python calculator.py 10 5 --operation multiply # Should print 50</code></pre>
-<div id="e3e98186" class="cell">
+<div id="08-003" class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Your code here</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> create_calculator_parser():</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Create a parser for a calculator CLI."""</span></span>
@@ -638,7 +630,7 @@ uv run python calculator.py 10 5 --operation multiply # Should print 50</code></
 </section>
 <section id="advanced-argparse-multiple-arguments-and-types" class="level2">
 <h2 class="anchored" data-anchor-id="advanced-argparse-multiple-arguments-and-types">Advanced <code>argparse</code>: multiple arguments and types</h2>
-<div id="9d3d4c3a" class="cell">
+<div id="08-005" class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co">"""api_fetcher.py - Fetch data from APIs with configurable options."""</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> argparse</span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -693,7 +685,7 @@ uv run python calculator.py 10 5 --operation multiply # Should print 50</code></
 <h3 class="anchored" data-anchor-id="your-turn-practice-1">Your turn: practice</h3>
 <p>Create a file processor CLI that: 1. Takes a filename as positional argument 2. Has <code>--lines</code> flag (integer) for number of lines to process (default: 10) 3. Has <code>--mode</code> flag with choices: read, count, search 4. Has <code>--pattern</code> flag (string) for search mode</p>
 <p>Print out what the tool would do based on the arguments.</p>
-<div id="9a0b79ed" class="cell">
+<div id="08-007" class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Your code here</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> create_file_processor_parser():</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Create a parser for a file processing tool."""</span></span>
@@ -709,7 +701,7 @@ uv run python calculator.py 10 5 --operation multiply # Should print 50</code></
 </section>
 <section id="subcommands-building-multi-function-tools" class="level2">
 <h2 class="anchored" data-anchor-id="subcommands-building-multi-function-tools">Subcommands: building multi-function tools</h2>
-<div id="4d83c21d" class="cell">
+<div id="08-009" class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co">"""project_manager.py - Manage your project with subcommands."""</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> argparse</span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -764,7 +756,7 @@ uv run python calculator.py 10 5 --operation multiply # Should print 50</code></
 <h3 class="anchored" data-anchor-id="your-turn-practice-2">Your turn: practice</h3>
 <p>Create a data management CLI with three subcommands: 1. <code>fetch</code> - Fetch data from an API (takes <code>source</code> as argument) 2. <code>clean</code> - Clean a dataset (takes <code>filename</code> and optional <code>--method</code>) 3. <code>export</code> - Export data (takes <code>filename</code> and <code>--format</code> with choices: json, csv, excel)</p>
 <p>Each subcommand should print what action it would take.</p>
-<div id="9be801b9" class="cell">
+<div id="08-011" class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Your code here</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> create_data_manager_parser():</span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Create a parser for a data management tool with subcommands."""</span></span>
@@ -795,7 +787,7 @@ uv run python calculator.py 10 5 --operation multiply # Should print 50</code></
 </section>
 <section id="practical-example-api-cli" class="level2">
 <h2 class="anchored" data-anchor-id="practical-example-api-cli">Practical example: API CLI</h2>
-<div id="b5e72c05" class="cell">
+<div id="08-013" class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co">"""Command-line interface for an API project."""</span></span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> argparse</span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sys</span>
@@ -930,7 +922,7 @@ uv run python calculator.py 10 5 --operation multiply # Should print 50</code></
 └── README.md               # Documentation</code></pre>
 <section id="using-this-structure" class="level3">
 <h3 class="anchored" data-anchor-id="using-this-structure"><strong>Using this structure:</strong></h3>
-<div id="58736e73" class="cell">
+<div id="08-015" class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># In main.py</span></span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> my_api.cli <span class="im">import</span> main</span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> my_api.api <span class="im">import</span> fetch_data</span>
@@ -946,14 +938,14 @@ uv run python calculator.py 10 5 --operation multiply # Should print 50</code></
 <h2 class="anchored" data-anchor-id="the-__init__.py-file-package-initialization">The <code>__init__.py</code> file: package initialization</h2>
 <section id="empty-__init__.py-most-common" class="level3">
 <h3 class="anchored" data-anchor-id="empty-__init__.py-most-common"><strong>Empty <code>__init__.py</code> (most common):</strong></h3>
-<div id="2c6a0f87" class="cell">
+<div id="08-017" class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># my_api/__init__.py</span></span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Empty file - marks directory as package</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="with-initialization-code" class="level3">
 <h3 class="anchored" data-anchor-id="with-initialization-code"><strong>With initialization code:</strong></h3>
-<div id="d3cbbb5d" class="cell">
+<div id="08-019" class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># my_api/__init__.py</span></span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="co">"""Public interface for the API client package."""</span></span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -971,7 +963,7 @@ uv run python calculator.py 10 5 --operation multiply # Should print 50</code></
 </section>
 <section id="usage-becomes-cleaner" class="level3">
 <h3 class="anchored" data-anchor-id="usage-becomes-cleaner"><strong>Usage becomes cleaner:</strong></h3>
-<div id="825c3896" class="cell">
+<div id="08-021" class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Instead of: from my_api.api import fetch_data</span></span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="co"># You can do: from my_api import fetch_data</span></span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -984,7 +976,7 @@ uv run python calculator.py 10 5 --operation multiply # Should print 50</code></
 <h3 class="anchored" data-anchor-id="your-turn-practice-3">Your turn: practice</h3>
 <p>Design a package structure for your final project. Include: 1. A main package directory name 2. At least 3 module files (<code>.py</code> files) with their purposes 3. What you would put in <code>__init__.py</code></p>
 <p>Write your design as comments or markdown in the cell below.</p>
-<div id="00ef50ac" class="cell">
+<div id="08-023" class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Your package structure design here</span></span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Example:</span></span>
@@ -1007,7 +999,7 @@ uv run python calculator.py 10 5 --operation multiply # Should print 50</code></
 <h2 class="anchored" data-anchor-id="import-systems-absolute-and-relative">Import systems: absolute and relative</h2>
 <section id="absolute-imports-preferred" class="level3">
 <h3 class="anchored" data-anchor-id="absolute-imports-preferred"><strong>Absolute imports (preferred):</strong></h3>
-<div id="8c610aee" class="cell">
+<div id="08-025" class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># my_api/cli.py</span></span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> my_api.api <span class="im">import</span> fetch_data</span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> my_api.utils <span class="im">import</span> format_output</span>
@@ -1016,7 +1008,7 @@ uv run python calculator.py 10 5 --operation multiply # Should print 50</code></
 </section>
 <section id="relative-imports-within-a-package" class="level3">
 <h3 class="anchored" data-anchor-id="relative-imports-within-a-package"><strong>Relative imports (within a package):</strong></h3>
-<div id="06c1fc43" class="cell">
+<div id="08-027" class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># my_api/cli.py</span></span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> .api <span class="im">import</span> fetch_data        <span class="co"># Same directory</span></span>
 <span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> .utils <span class="im">import</span> format_output   <span class="co"># Same directory</span></span>
@@ -1045,7 +1037,7 @@ uv run python calculator.py 10 5 --operation multiply # Should print 50</code></
 </section>
 <section id="the-pattern" class="level3">
 <h3 class="anchored" data-anchor-id="the-pattern"><strong>The pattern:</strong></h3>
-<div id="cc081d24" class="cell">
+<div id="08-029" class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># my_api/api.py</span></span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> fetch_data(api_name: <span class="bu">str</span>):</span>
@@ -1069,7 +1061,7 @@ uv run python calculator.py 10 5 --operation multiply # Should print 50</code></
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> uv run python my_api/api.py</span>
 <span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="ex">Fetching</span> from pokemon</span>
 <span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="ex">{</span><span class="st">'data'</span><span class="ex">:</span> <span class="st">'example'</span>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div id="5a607071" class="cell">
+<div id="08-031" class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Import as module (main() doesn't run)</span></span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> my_api.api <span class="im">import</span> fetch_data</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
@@ -1230,7 +1222,7 @@ uv run python calculator.py 10 5 --operation multiply # Should print 50</code></
 <h2 class="anchored" data-anchor-id="putting-it-all-together-cli-and-package-structure">Putting it all together: CLI and package structure</h2>
 <section id="entry-point-main.py-or-srcmy_api_tool__main__.py" class="level3">
 <h3 class="anchored" data-anchor-id="entry-point-main.py-or-srcmy_api_tool__main__.py"><strong>Entry point (<code>main.py</code> or <code>src/my_api_tool/__main__.py</code>):</strong></h3>
-<div id="fde36018" class="cell">
+<div id="08-033" class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co">"""Entry point for the my_api_tool CLI."""</span></span>
 <span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> my_api_tool.cli <span class="im">import</span> main</span>
 <span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -1240,7 +1232,7 @@ uv run python calculator.py 10 5 --operation multiply # Should print 50</code></
 </section>
 <section id="cli-module-srcmy_api_toolcli.py" class="level3">
 <h3 class="anchored" data-anchor-id="cli-module-srcmy_api_toolcli.py"><strong>CLI module (<code>src/my_api_tool/cli.py</code>):</strong></h3>
-<div id="c031747a" class="cell">
+<div id="08-035" class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co">"""Command-line interface for API tool."""</span></span>
 <span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> argparse</span>
 <span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sys</span>
@@ -1283,7 +1275,7 @@ uv run python calculator.py 10 5 --operation multiply # Should print 50</code></
 <li><strong>Use the <code>__name__ == "__main__"</code> pattern</strong></li>
 </ol>
 <p>Test it with simulated arguments.</p>
-<div id="7e8dedb0" class="cell">
+<div id="08-037" class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Your complete final project CLI design here</span></span>
 <span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TODO</span><span class="co">: Create your API client class</span></span>

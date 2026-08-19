@@ -2,23 +2,17 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.10.18">
+<meta name="generator" content="quarto-1.8.25">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
 <title>IS4010: AI-enhanced application development – IS 4010 - App Dev with AI</title>
 <style>
-/* Default styles provided by pandoc.
-** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
-*/
+code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
-div.columns{display: flex; gap: 1.5em;}
-div.column{flex: auto;}
-@media screen {
-div.columns{gap: min(4vw, 1.5em);}
-div.column{overflow-x: auto;}
-}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
@@ -73,14 +67,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../images/uc-logo-2.png" rel="icon" type="image/png">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-03a0d00fd5ba774dd8e50f606f192499.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-f429e1b9fabce5b473b24bf8663aabcf.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -122,9 +117,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">
-      IS 4010 - App Dev with AI
-      </li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">IS4010: AI-enhanced application development</li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -138,13 +131,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
-    <div class="sidebar-title mb-0 py-0">
-      <a href="../">IS 4010 - App Dev with AI</a> 
-        <div class="sidebar-tools-main">
+      <a href="../index.html" class="sidebar-logo-link">
+      </a>
+      <div class="sidebar-tools-main">
     <a href="https://github.com/bgreenwell/is4010-labs" title="Labs" class="quarto-navigation-tool px-1" aria-label="Labs"><i class="bi bi-github"></i></a>
     <a href="https://uc.instructure.com/" title="Canvas" class="quarto-navigation-tool px-1" aria-label="Canvas"><i class="bi bi-journal-text"></i></a>
 </div>
-    </div>
       </div>
         <div class="mt-2 flex-shrink-0 align-items-center">
         <div class="sidebar-search">
@@ -429,7 +421,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><strong>Syntax</strong>: Items enclosed in square brackets <code>[]</code>, separated by commas</li>
 <li><strong>Dynamic size</strong>: Grow or shrink as needed - no fixed size limit</li>
 </ul>
-<div id="9b8b46e5" class="cell">
+<div id="04-001" class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># A list of computer science pioneers</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>pioneers <span class="op">=</span> [<span class="st">"Grace Hopper"</span>, <span class="st">"Ada Lovelace"</span>, <span class="st">"Katherine Johnson"</span>]</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -453,7 +445,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="your-turn-practice-with-lists" class="level3">
 <h3 class="anchored" data-anchor-id="your-turn-practice-with-lists">Your turn: practice with lists</h3>
 <p>Create your own list and practice the operations:</p>
-<div id="ba6d0289" class="cell">
+<div id="04-003" class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TODO</span><span class="co">: Create a list of your favorite programming languages</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>my_languages <span class="op">=</span> []</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -480,7 +472,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><strong>Performance advantage</strong>: Slightly faster than lists for accessing elements</li>
 <li><strong>Memory efficient</strong>: Less overhead than lists due to immutability</li>
 </ul>
-<div id="3e805f8a" class="cell">
+<div id="04-005" class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Coordinate pairs for a map application</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>start_location <span class="op">=</span> (<span class="fl">39.1031</span>, <span class="op">-</span><span class="fl">84.5120</span>)  <span class="co"># Cincinnati coordinates</span></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>end_location <span class="op">=</span> (<span class="fl">39.7391</span>, <span class="op">-</span><span class="fl">104.9847</span>)   <span class="co"># Denver coordinates</span></span>
@@ -508,7 +500,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <hr>
 <section id="your-turn-practice-with-tuples" class="level3">
 <h3 class="anchored" data-anchor-id="your-turn-practice-with-tuples">Your turn: practice with tuples</h3>
-<div id="ca92933c" class="cell">
+<div id="04-007" class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TODO</span><span class="co">: Create a tuple representing your favorite restaurant's location (name, latitude, longitude)</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TODO</span><span class="co">: Unpack the tuple into separate variables</span></span>
@@ -532,7 +524,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><strong>Slice behavior</strong>: <code>[start:stop]</code> includes start, excludes stop</li>
 <li><strong>Advanced slicing</strong>: Control step size and direction</li>
 </ul>
-<div id="8d76205c" class="cell">
+<div id="04-009" class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Working with sequence data</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>languages <span class="op">=</span> [<span class="st">"Python"</span>, <span class="st">"JavaScript"</span>, <span class="st">"Java"</span>, <span class="st">"C++"</span>, <span class="st">"Rust"</span>, <span class="st">"Go"</span>, <span class="st">"TypeScript"</span>]</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -566,7 +558,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><strong>Sorting</strong>: <code>sorted()</code> returns new sorted sequence, <code>list.sort()</code> modifies in place</li>
 <li><strong>Finding</strong>: <code>sequence.index(item)</code> finds first occurrence</li>
 </ul>
-<div id="b2c72a00" class="cell">
+<div id="04-011" class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Working with programming languages data</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>popular_languages <span class="op">=</span> [<span class="st">"Python"</span>, <span class="st">"JavaScript"</span>, <span class="st">"TypeScript"</span>]</span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>systems_languages <span class="op">=</span> [<span class="st">"C++"</span>, <span class="st">"Rust"</span>, <span class="st">"Go"</span>]</span>
@@ -600,7 +592,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="quick-introduction-list-comprehensions" class="level2">
 <h2 class="anchored" data-anchor-id="quick-introduction-list-comprehensions">Quick introduction: list comprehensions</h2>
 <p><strong>Python has a concise way to create lists called <a href="https://docs.python.org/3/tutorial/datastructures.html#list-comprehensions">list comprehensions</a>:</strong></p>
-<div id="4a021091" class="cell">
+<div id="04-013" class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Traditional approach with loops</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>numbers <span class="op">=</span> []</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">5</span>):</span>
@@ -619,7 +611,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <hr>
 <section id="your-turn-practice-list-comprehensions" class="level3">
 <h3 class="anchored" data-anchor-id="your-turn-practice-list-comprehensions">Your turn: practice list comprehensions</h3>
-<div id="c964db91" class="cell">
+<div id="04-015" class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TODO</span><span class="co">: Create a list of squares for numbers 1-10 using a list comprehension</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TODO</span><span class="co">: Create a list of even numbers from 0-20 using a list comprehension</span></span>
@@ -631,7 +623,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="live-exercise-ai-assisted-performance-detective" class="level2">
 <h2 class="anchored" data-anchor-id="live-exercise-ai-assisted-performance-detective">Live exercise: AI-assisted performance detective</h2>
 <p><strong>Challenge:</strong> Ask an AI assistant to identify the bottleneck, then verify its claim with timing evidence.</p>
-<div id="d91d1fc1" class="cell">
+<div id="04-017" class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># SLOW CODE - Let's time this together!</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> time</span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -664,7 +656,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="revised-solution-use-a-set-for-membership" class="level2">
 <h2 class="anchored" data-anchor-id="revised-solution-use-a-set-for-membership">Revised solution: use a set for membership</h2>
-<div id="e1049422" class="cell">
+<div id="04-019" class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Revised code after reviewing the suggestion</span></span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> time</span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -709,7 +701,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><strong>Syntax</strong>: Pairs enclosed in curly braces <code>{key: value}</code></li>
 <li><strong>Python 3.7+</strong>: Dictionaries maintain insertion order (ordered)</li>
 </ul>
-<div id="3f5f184a" class="cell">
+<div id="04-021" class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># User profile for a social media application</span></span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>user_profile <span class="op">=</span> {</span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"username"</span>: <span class="st">"ada_lovelace"</span>,</span>
@@ -742,7 +734,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="live-exercise-data-structure-refactoring" class="level2">
 <h2 class="anchored" data-anchor-id="live-exercise-data-structure-refactoring">Live exercise: data-structure refactoring</h2>
 <p><strong>Challenge:</strong> This code works, but positional fields make it hard to read and change.</p>
-<div id="84e688b2" class="cell">
+<div id="04-023" class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># MESSY CODE - Student registration system (needs help!)</span></span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> process_student_data():</span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Raw data from registration form</span></span>
@@ -778,7 +770,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="refactored-solution" class="level2">
 <h2 class="anchored" data-anchor-id="refactored-solution">Refactored solution</h2>
-<div id="0835cb84" class="cell">
+<div id="04-025" class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Revised code after reviewing the suggestions</span></span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> collections <span class="im">import</span> defaultdict</span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -817,7 +809,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="your-turn-dictionary-mastery" class="level3">
 <h3 class="anchored" data-anchor-id="your-turn-dictionary-mastery">Your turn: dictionary mastery</h3>
 <p>Practice the dictionary concepts with these hands-on exercises:</p>
-<div id="6122f34b" class="cell">
+<div id="04-027" class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TODO</span><span class="co">: Create a product inventory dictionary</span></span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Include: product_id, name, price, stock_quantity, category</span></span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>inventory <span class="op">=</span> {</span>
@@ -872,7 +864,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><strong>Mutable</strong>: Add and remove items after creation</li>
 <li><strong>Use cases</strong>: Remove duplicates, track unique visitors, mathematical set operations</li>
 </ul>
-<div id="976e07a7" class="cell">
+<div id="04-029" class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Website analytics: tracking unique visitors</span></span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>daily_visitors <span class="op">=</span> [<span class="st">"alice"</span>, <span class="st">"bob"</span>, <span class="st">"charlie"</span>, <span class="st">"alice"</span>, <span class="st">"david"</span>, <span class="st">"alice"</span>, <span class="st">"eve"</span>]</span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>monthly_visitors <span class="op">=</span> [<span class="st">"alice"</span>, <span class="st">"frank"</span>, <span class="st">"george"</span>, <span class="st">"bob"</span>, <span class="st">"helen"</span>]</span>
@@ -911,7 +903,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="live-exercise-choose-structures-for-api-data" class="level2">
 <h2 class="anchored" data-anchor-id="live-exercise-choose-structures-for-api-data">Live exercise: choose structures for API data</h2>
 <p><strong>Scenario:</strong> Design structures for the stated dashboard queries, then explain the trade-offs.</p>
-<div id="37cfebc4" class="cell">
+<div id="04-031" class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Realistic API response from student management system</span></span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>api_response <span class="op">=</span> {</span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"students"</span>: [{</span>
@@ -953,12 +945,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb16-39"><a href="#cb16-39" aria-hidden="true" tabindex="-1"></a>    }</span>
 <span id="cb16-40"><a href="#cb16-40" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p><strong>AI design prompt:</strong> *“I need to design data structures for a student dashboard with these requirements: <strong>1. Fast lookup of students by username </strong>2. Quick filtering by course enrollment <strong>3. Efficient permission checking </strong>4. Find students with specific activities **What data structures should I use and why?”*</p>
+<p><strong>AI design prompt:</strong> <em>“I need to design data structures for a student dashboard with these requirements:</em> <em>1. Fast lookup of students by username</em> <em>2. Quick filtering by course enrollment</em> <em>3. Efficient permission checking</em> <em>4. Find students with specific activities</em> <em>What data structures should I use and why?”</em></p>
 <hr>
 <section id="your-turn-set-mastery" class="level3">
 <h3 class="anchored" data-anchor-id="your-turn-set-mastery">Your turn: set mastery</h3>
 <p>Apply set operations to solve real-world problems:</p>
-<div id="f8379a4b" class="cell">
+<div id="04-033" class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TODO</span><span class="co">: Social media platform analysis</span></span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>instagram_followers <span class="op">=</span> {<span class="st">"alice"</span>, <span class="st">"bob"</span>, <span class="st">"charlie"</span>, <span class="st">"diana"</span>, <span class="st">"eve"</span>, <span class="st">"frank"</span>}</span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>twitter_followers <span class="op">=</span> {<span class="st">"bob"</span>, <span class="st">"diana"</span>, <span class="st">"grace"</span>, <span class="st">"henry"</span>, <span class="st">"ivan"</span>, <span class="st">"frank"</span>}</span>
@@ -993,7 +985,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="data-structures-for-common-queries" class="level2">
 <h2 class="anchored" data-anchor-id="data-structures-for-common-queries">Data structures for common queries</h2>
-<div id="995527d4" class="cell">
+<div id="04-035" class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Build structures that support the required queries</span></span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> process_student_api_data(api_response):</span>
 <span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>    students_data <span class="op">=</span> api_response[<span class="st">"students"</span>]</span>
@@ -1078,7 +1070,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Unique visitors, tags, permissions, removing duplicates</li>
 </ul></li>
 </ul>
-<div id="7c51066c" class="cell">
+<div id="04-037" class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Real-world decision making examples</span></span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="co"># E-commerce shopping cart (order matters, items change)</span></span>
@@ -1123,7 +1115,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Work with an AI assistant for 15 minutes, then verify its recommendation against each requirement.</p>
 <section id="challenge-1-social-media-analytics" class="level3">
 <h3 class="anchored" data-anchor-id="challenge-1-social-media-analytics"><strong>Challenge 1: social media analytics</strong></h3>
-<div id="2c758fab" class="cell">
+<div id="04-039" class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Raw social media engagement data</span></span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>posts <span class="op">=</span> [{<span class="st">"id"</span>: <span class="dv">1</span>, <span class="st">"user"</span>: <span class="st">"alice"</span>, <span class="st">"likes"</span>: [<span class="st">"bob"</span>, <span class="st">"carol"</span>, <span class="st">"dave"</span>], <span class="st">"tags"</span>: [<span class="st">"python"</span>, <span class="st">"coding"</span>]},</span>
 <span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>    {<span class="st">"id"</span>: <span class="dv">2</span>, <span class="st">"user"</span>: <span class="st">"bob"</span>, <span class="st">"likes"</span>: [<span class="st">"alice"</span>, <span class="st">"carol"</span>], <span class="st">"tags"</span>: [<span class="st">"ai"</span>, <span class="st">"python"</span>]},</span>
@@ -1136,7 +1128,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="challenge-2-e-commerce-inventory" class="level3">
 <h3 class="anchored" data-anchor-id="challenge-2-e-commerce-inventory"><strong>Challenge 2: e-commerce inventory</strong></h3>
-<div id="695ce041" class="cell">
+<div id="04-041" class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Product inventory system</span></span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>inventory <span class="op">=</span> [{<span class="st">"sku"</span>: <span class="st">"LAP001"</span>, <span class="st">"name"</span>: <span class="st">"Laptop"</span>, <span class="st">"price"</span>: <span class="dv">999</span>, <span class="st">"categories"</span>: [<span class="st">"electronics"</span>, <span class="st">"computers"</span>], <span class="st">"stock"</span>: <span class="dv">5</span>},</span>
 <span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>    {<span class="st">"sku"</span>: <span class="st">"MOU002"</span>, <span class="st">"name"</span>: <span class="st">"Mouse"</span>, <span class="st">"price"</span>: <span class="dv">25</span>, <span class="st">"categories"</span>: [<span class="st">"electronics"</span>, <span class="st">"accessories"</span>], <span class="st">"stock"</span>: <span class="dv">50</span>},</span>
@@ -1149,7 +1141,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="challenge-3-university-course-scheduler" class="level3">
 <h3 class="anchored" data-anchor-id="challenge-3-university-course-scheduler"><strong>Challenge 3: university course scheduler</strong></h3>
-<div id="2a6413b5" class="cell">
+<div id="04-043" class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Course scheduling conflicts</span></span>
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>courses <span class="op">=</span> [{<span class="st">"code"</span>: <span class="st">"IS4010"</span>, <span class="st">"time"</span>: <span class="st">"MWF 10:00"</span>, <span class="st">"room"</span>: <span class="st">"Lindner 100"</span>, <span class="st">"students"</span>: [<span class="st">"alice"</span>, <span class="st">"bob"</span>]},</span>
 <span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>    {<span class="st">"code"</span>: <span class="st">"CS2071"</span>, <span class="st">"time"</span>: <span class="st">"TTh 14:00"</span>, <span class="st">"room"</span>: <span class="st">"Lindner 200"</span>, <span class="st">"students"</span>: [<span class="st">"alice"</span>, <span class="st">"carol"</span>]},</span>
