@@ -379,6 +379,7 @@ Remind students that compiler diagnostics often identify the relevant type or ow
 ## Resources for learning Rust
 
 ::: {.incremental}
+-   [Rust for Python Programmers](https://microsoft.github.io/RustTraining/python-book/) - Microsoft's guide written for people arriving from Python
 -   [The Rust Programming Language Book](https://doc.rust-lang.org/book/) - the official, free, comprehensive guide
 -   [Rust by Example](https://doc.rust-lang.org/rust-by-example/) - learn through annotated examples
 -   [Rustlings](https://github.com/rust-lang/rustlings/) - small exercises to get you used to reading and writing Rust code

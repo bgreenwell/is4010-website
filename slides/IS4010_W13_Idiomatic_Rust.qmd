@@ -68,6 +68,8 @@ for num in &numbers {
 // result = [4, 16, 36]
 ```
 
+**Try it yourself:** [Run in Rust Playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=fn%20main%28%29%20%7B%0Alet%20numbers%20%3D%20vec%21%5B1%2C%202%2C%203%2C%204%2C%205%2C%206%5D%3B%0Alet%20mut%20result%20%3D%20Vec%3A%3Anew%28%29%3B%0A%0Afor%20num%20in%20%26numbers%20%7B%0A%20%20%20%20if%20num%20%25%202%20%3D%3D%200%20%7B%20%20%2F%2F%20Keep%20evens%0A%20%20%20%20%20%20%20%20let%20squared%20%3D%20num%20%2A%20num%3B%20%20%2F%2F%20Square%20them%0A%20%20%20%20%20%20%20%20result.push%28squared%29%3B%0A%20%20%20%20%7D%0A%7D%0A%2F%2F%20result%20%3D%20%5B4%2C%2016%2C%2036%5D%0A%7D%0A)
+
 **Problems:**
 
 - Mutable state (`result`)
@@ -96,6 +98,8 @@ let result: Vec<i32> = numbers
 
 // result = [4, 16, 36]
 ```
+
+**Try it yourself:** [Run in Rust Playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=fn%20main%28%29%20%7B%0Alet%20numbers%20%3D%20vec%21%5B1%2C%202%2C%203%2C%204%2C%205%2C%206%5D%3B%0A%0Alet%20result%3A%20Vec%3Ci32%3E%20%3D%20numbers%0A%20%20%20%20.iter%28%29%0A%20%20%20%20.filter%28%7C%26%26n%7C%20n%20%25%202%20%3D%3D%200%29%20%20%2F%2F%20Keep%20evens%0A%20%20%20%20.map%28%7C%26n%7C%20n%20%2A%20n%29%20%20%20%20%20%20%20%20%20%20%20%20%2F%2F%20Square%20them%0A%20%20%20%20.collect%28%29%3B%0A%0A%2F%2F%20result%20%3D%20%5B4%2C%2016%2C%2036%5D%0A%7D%0A)
 
 **Benefits:**
 
@@ -164,6 +168,8 @@ fn nonempty_line_lengths(text: &str) -> Vec<usize> {
 }
 ```
 
+**Try it yourself:** [Run in Rust Playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=fn%20main%28%29%20%7B%0Afn%20nonempty_line_lengths%28text%3A%20%26str%29%20-%3E%20Vec%3Cusize%3E%20%7B%0A%20%20%20%20text.lines%28%29%0A%20%20%20%20%20%20%20%20.map%28str%3A%3Atrim%29%0A%20%20%20%20%20%20%20%20.filter%28%7Cline%7C%20%21line.is_empty%28%29%29%0A%20%20%20%20%20%20%20%20.map%28str%3A%3Alen%29%0A%20%20%20%20%20%20%20%20.collect%28%29%0A%7D%0A%7D%0A)
+
 ::: {.notes}
 Compare this iterator version with a loop using the same requirements. Prefer the version whose data flow the class can explain and test.
 :::
@@ -219,6 +225,8 @@ let add_one = |x| x + 1;
 let result = add_one(5);  // 6
 ```
 
+**Try it yourself:** [Run in Rust Playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=fn%20main%28%29%20%7B%0A%2F%2F%20Regular%20function%0Afn%20add_one%28x%3A%20i32%29%20-%3E%20i32%20%7B%0A%20%20%20%20x%20%2B%201%0A%7D%0A%0A%2F%2F%20Closure%20%28short%20form%29%0Alet%20add_one%20%3D%20%7Cx%3A%20i32%7C%20x%20%2B%201%3B%0A%0A%2F%2F%20Closure%20with%20type%20inference%20%28Rust%20figures%20it%20out%21%29%0Alet%20add_one%20%3D%20%7Cx%7C%20x%20%2B%201%3B%0A%0A%2F%2F%20Use%20it%3A%0Alet%20result%20%3D%20add_one%285%29%3B%20%20%2F%2F%206%0A%7D%0A)
+
 **Closures can capture variables:**
 
 ```rust
@@ -230,6 +238,8 @@ let is_large = |x: i32| x > threshold;
 println!("{}", is_large(5));   // false
 println!("{}", is_large(15));  // true
 ```
+
+**Try it yourself:** [Run in Rust Playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=fn%20main%28%29%20%7B%0Alet%20threshold%20%3D%2010%3B%0A%0A%2F%2F%20Closure%20captures%20%27threshold%27%20from%20environment%0Alet%20is_large%20%3D%20%7Cx%3A%20i32%7C%20x%20%3E%20threshold%3B%0A%0Aprintln%21%28%22%7B%7D%22%2C%20is_large%285%29%29%3B%20%20%20%2F%2F%20false%0Aprintln%21%28%22%7B%7D%22%2C%20is_large%2815%29%29%3B%20%20%2F%2F%20true%0A%7D%0A)
 
 [Closures in Rust Book](https://doc.rust-lang.org/book/ch13-01-closures.html)
 
@@ -250,6 +260,8 @@ let print_x = || println!("{}", x);  // Borrows x
 print_x();  // Can call multiple times
 ```
 
+**Try it yourself:** [Run in Rust Playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=fn%20main%28%29%20%7B%0Alet%20x%20%3D%2010%3B%0Alet%20print_x%20%3D%20%7C%7C%20println%21%28%22%7B%7D%22%2C%20x%29%3B%20%20%2F%2F%20Borrows%20x%0Aprint_x%28%29%3B%20%20%2F%2F%20Can%20call%20multiple%20times%0A%7D%0A)
+
 **`FnMut`** - Borrows mutably:
 ```rust
 let mut count = 0;
@@ -258,12 +270,16 @@ increment();  // count = 1
 increment();  // count = 2
 ```
 
+**Try it yourself:** [Run in Rust Playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=fn%20main%28%29%20%7B%0Alet%20mut%20count%20%3D%200%3B%0Alet%20mut%20increment%20%3D%20%7C%7C%20%7B%20count%20%2B%3D%201%3B%20%7D%3B%20%20%2F%2F%20Mutably%20borrows%20count%0Aincrement%28%29%3B%20%20%2F%2F%20count%20%3D%201%0Aincrement%28%29%3B%20%20%2F%2F%20count%20%3D%202%0A%7D%0A)
+
 **`FnOnce`** - Takes ownership:
 ```rust
 let data = vec![1, 2, 3];
 let consume = || drop(data);  // Takes ownership of data
 consume();  // data is moved, can't call again
 ```
+
+**Try it yourself:** [Run in Rust Playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=fn%20main%28%29%20%7B%0Alet%20data%20%3D%20vec%21%5B1%2C%202%2C%203%5D%3B%0Alet%20consume%20%3D%20%7C%7C%20drop%28data%29%3B%20%20%2F%2F%20Takes%20ownership%20of%20data%0Aconsume%28%29%3B%20%20%2F%2F%20data%20is%20moved%2C%20can%27t%20call%20again%0A%7D%0A)
 
 [Fn traits](https://doc.rust-lang.org/std/ops/index.html#traits)
 
@@ -287,6 +303,8 @@ let mut add_to_total = |amount| {
 println!("{}", add_to_total(4));  // 4
 println!("{}", add_to_total(7));  // 11
 ```
+
+**Try it yourself:** [Run in Rust Playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=fn%20main%28%29%20%7B%0Alet%20mut%20total%20%3D%200%3B%0Alet%20mut%20add_to_total%20%3D%20%7Camount%7C%20%7B%0A%20%20%20%20total%20%2B%3D%20amount%3B%0A%20%20%20%20total%0A%7D%3B%0A%0Aprintln%21%28%22%7B%7D%22%2C%20add_to_total%284%29%29%3B%20%20%2F%2F%204%0Aprintln%21%28%22%7B%7D%22%2C%20add_to_total%287%29%29%3B%20%20%2F%2F%2011%0A%7D%0A)
 
 **Key concepts:**
 
@@ -324,6 +342,8 @@ let honor_roll: Vec<&str> = students
 
 // honor_roll = ["Alice", "Charlie"]
 ```
+
+**Try it yourself:** [Run in Rust Playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=fn%20main%28%29%20%7B%0A%23%5Bderive%28Debug%29%5D%0Astruct%20Student%20%7B%0A%20%20%20%20name%3A%20String%2C%0A%20%20%20%20grade%3A%20f64%2C%0A%7D%0A%0Alet%20students%20%3D%20vec%21%5BStudent%20%7B%20name%3A%20%22Alice%22.to_string%28%29%2C%20grade%3A%2092.0%20%7D%2C%0A%20%20%20%20Student%20%7B%20name%3A%20%22Bob%22.to_string%28%29%2C%20grade%3A%2078.0%20%7D%2C%0A%20%20%20%20Student%20%7B%20name%3A%20%22Charlie%22.to_string%28%29%2C%20grade%3A%2085.0%20%7D%2C%0A%5D%3B%0A%0A%2F%2F%20Find%20honor%20roll%20students%20%28grade%20%3E%3D%2080%29%0Alet%20honor_roll%3A%20Vec%3C%26str%3E%20%3D%20students%0A%20%20%20%20.iter%28%29%0A%20%20%20%20.filter%28%7Cstudent%7C%20student.grade%20%3E%3D%2080.0%29%0A%20%20%20%20.map%28%7Cstudent%7C%20student.name.as_str%28%29%29%0A%20%20%20%20.collect%28%29%3B%0A%0A%2F%2F%20honor_roll%20%3D%20%5B%22Alice%22%2C%20%22Charlie%22%5D%0A%7D%0A)
 
 **Transfer**: The same filter-map-collect pipeline appears in many Rust APIs.
 
@@ -441,6 +461,8 @@ let tree = BinaryTree::Node {
 };
 ```
 
+**Try it yourself:** [Run in Rust Playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=fn%20main%28%29%20%7B%0A%2F%2F%20Simple%20heap%20allocation%0Alet%20boxed_int%20%3D%20Box%3A%3Anew%285%29%3B%0Aprintln%21%28%22%7B%7D%22%2C%20%2Aboxed_int%29%3B%20%20%2F%2F%205%20%28dereference%20with%20%2A%29%0A%0A%2F%2F%20Main%20use%20case%3A%20recursive%20types%0A%23%5Bderive%28Debug%29%5D%0Aenum%20BinaryTree%3CT%3E%20%7B%0A%20%20%20%20Empty%2C%0A%20%20%20%20Node%20%7B%0A%20%20%20%20%20%20%20%20value%3A%20T%2C%0A%20%20%20%20%20%20%20%20left%3A%20Box%3CBinaryTree%3CT%3E%3E%2C%20%20%20%2F%2F%20Box%20enables%20recursion%21%0A%20%20%20%20%20%20%20%20right%3A%20Box%3CBinaryTree%3CT%3E%3E%2C%0A%20%20%20%20%7D%2C%0A%7D%0A%0A%2F%2F%20Create%20a%20tree%0Alet%20tree%20%3D%20BinaryTree%3A%3ANode%20%7B%0A%20%20%20%20value%3A%205%2C%0A%20%20%20%20left%3A%20Box%3A%3Anew%28BinaryTree%3A%3AEmpty%29%2C%0A%20%20%20%20right%3A%20Box%3A%3Anew%28BinaryTree%3A%3AEmpty%29%2C%0A%7D%3B%0A%7D%0A)
+
 **Why it works**: `Box<T>` has fixed size (just a pointer), even though `T` might be recursive.
 
 [Box documentation](https://doc.rust-lang.org/std/boxed/struct.Box.html)
@@ -522,6 +544,8 @@ drop(owner1);
 println!("Count: {}", Rc::strong_count(&data));  // 2
 ```
 
+**Try it yourself:** [Run in Rust Playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=fn%20main%28%29%20%7B%0Ause%20std%3A%3Arc%3A%3ARc%3B%0A%0A%23%5Bderive%28Debug%29%5D%0Astruct%20SharedData%20%7B%0A%20%20%20%20value%3A%20i32%2C%0A%7D%0A%0Alet%20data%20%3D%20Rc%3A%3Anew%28SharedData%20%7B%20value%3A%2042%20%7D%29%3B%0Aprintln%21%28%22Count%3A%20%7B%7D%22%2C%20Rc%3A%3Astrong_count%28%26data%29%29%3B%20%20%2F%2F%201%0A%0A%2F%2F%20Create%20additional%20owners%20by%20cloning%20the%20Rc%0Alet%20owner1%20%3D%20Rc%3A%3Aclone%28%26data%29%3B%20%20%2F%2F%20Increments%20count%0Alet%20owner2%20%3D%20Rc%3A%3Aclone%28%26data%29%3B%20%20%2F%2F%20Increments%20count%0A%0Aprintln%21%28%22Count%3A%20%7B%7D%22%2C%20Rc%3A%3Astrong_count%28%26data%29%29%3B%20%20%2F%2F%203%0Aprintln%21%28%22Value%3A%20%7B%7D%22%2C%20owner1.value%29%3B%20%20%2F%2F%2042%0A%0A%2F%2F%20When%20all%20Rc%27s%20drop%2C%20data%20is%20freed%0Adrop%28owner1%29%3B%0Aprintln%21%28%22Count%3A%20%7B%7D%22%2C%20Rc%3A%3Astrong_count%28%26data%29%29%3B%20%20%2F%2F%202%0A%7D%0A)
+
 **Important**: `Rc::clone` is cheap - it only increments a counter, doesn't copy data!
 
 [Rc documentation](https://doc.rust-lang.org/std/rc/struct.Rc.html)
@@ -555,6 +579,8 @@ let data = RefCell::new(5);
 
 println!("{}", *data.borrow());  // 15
 ```
+
+**Try it yourself:** [Run in Rust Playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=fn%20main%28%29%20%7B%0Ause%20std%3A%3Acell%3A%3ARefCell%3B%0A%0Alet%20data%20%3D%20RefCell%3A%3Anew%285%29%3B%0A%0A%2F%2F%20Borrow%20immutably%0A%7B%0A%20%20%20%20let%20value%20%3D%20data.borrow%28%29%3B%0A%20%20%20%20println%21%28%22%7B%7D%22%2C%20%2Avalue%29%3B%20%20%2F%2F%205%0A%7D%20%2F%2F%20borrow%20ends%20here%0A%0A%2F%2F%20Borrow%20mutably%0A%7B%0A%20%20%20%20let%20mut%20value%20%3D%20data.borrow_mut%28%29%3B%0A%20%20%20%20%2Avalue%20%2B%3D%2010%3B%0A%7D%20%2F%2F%20borrow%20ends%20here%0A%0Aprintln%21%28%22%7B%7D%22%2C%20%2Adata.borrow%28%29%29%3B%20%20%2F%2F%2015%0A%7D%0A)
 
 **Key difference**: Borrows checked at *runtime* instead of compile-time.
 
@@ -597,6 +623,8 @@ counter_ref2.borrow_mut().value += 1;
 
 println!("{}", counter.borrow().value);  // 2
 ```
+
+**Try it yourself:** [Run in Rust Playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=fn%20main%28%29%20%7B%0Ause%20std%3A%3Arc%3A%3ARc%3B%0Ause%20std%3A%3Acell%3A%3ARefCell%3B%0A%0A%23%5Bderive%28Debug%29%5D%0Astruct%20Counter%20%7B%0A%20%20%20%20value%3A%20i32%2C%0A%7D%0A%0Alet%20counter%20%3D%20Rc%3A%3Anew%28RefCell%3A%3Anew%28Counter%20%7B%20value%3A%200%20%7D%29%29%3B%0A%0A%2F%2F%20Create%20multiple%20owners%0Alet%20counter_ref1%20%3D%20Rc%3A%3Aclone%28%26counter%29%3B%0Alet%20counter_ref2%20%3D%20Rc%3A%3Aclone%28%26counter%29%3B%0A%0A%2F%2F%20All%20can%20mutate%20through%20RefCell%0Acounter_ref1.borrow_mut%28%29.value%20%2B%3D%201%3B%0Acounter_ref2.borrow_mut%28%29.value%20%2B%3D%201%3B%0A%0Aprintln%21%28%22%7B%7D%22%2C%20counter.borrow%28%29.value%29%3B%20%20%2F%2F%202%0A%7D%0A)
 
 **Pattern breakdown**:
 
@@ -731,6 +759,8 @@ fn read_file(path: &str) -> io::Result<String> {
 }
 ```
 
+**Try it yourself:** [Run in Rust Playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=fn%20main%28%29%20%7B%0Ause%20std%3A%3Afs%3A%3AFile%3B%0Ause%20std%3A%3Aio%3A%3A%7Bself%2C%20Read%7D%3B%0A%0A%2F%2F%20Without%20%3F%0Afn%20read_file_verbose%28path%3A%20%26str%29%20-%3E%20io%3A%3AResult%3CString%3E%20%7B%0A%20%20%20%20let%20file_result%20%3D%20File%3A%3Aopen%28path%29%3B%0A%20%20%20%20let%20mut%20file%20%3D%20match%20file_result%20%7B%0A%20%20%20%20%20%20%20%20Ok%28f%29%20%3D%3E%20f%2C%0A%20%20%20%20%20%20%20%20Err%28e%29%20%3D%3E%20return%20Err%28e%29%2C%20%20%2F%2F%20Early%20return%20on%20error%0A%20%20%20%20%7D%3B%0A%0A%20%20%20%20let%20mut%20contents%20%3D%20String%3A%3Anew%28%29%3B%0A%20%20%20%20match%20file.read_to_string%28%26mut%20contents%29%20%7B%0A%20%20%20%20%20%20%20%20Ok%28_%29%20%3D%3E%20Ok%28contents%29%2C%0A%20%20%20%20%20%20%20%20Err%28e%29%20%3D%3E%20Err%28e%29%2C%0A%20%20%20%20%7D%0A%7D%0A%0A%2F%2F%20With%20%3F%20%28much%20cleaner%21%29%0Afn%20read_file%28path%3A%20%26str%29%20-%3E%20io%3A%3AResult%3CString%3E%20%7B%0A%20%20%20%20let%20mut%20file%20%3D%20File%3A%3Aopen%28path%29%3F%3B%20%20%2F%2F%20%3F%20propagates%20error%0A%20%20%20%20let%20mut%20contents%20%3D%20String%3A%3Anew%28%29%3B%0A%20%20%20%20file.read_to_string%28%26mut%20contents%29%3F%3B%20%20%2F%2F%20%3F%20propagates%20error%0A%20%20%20%20Ok%28contents%29%0A%7D%0A%7D%0A)
+
 **`?` means**: "If Ok, unwrap the value. If Err, return the error immediately."
 
 [? operator](https://doc.rust-lang.org/book/ch09-02-recoverable-errors-with-result.html#a-shortcut-for-propagating-errors-the--operator)
@@ -784,6 +814,8 @@ fn parse_percentage(input: &str) -> Result<i32, ParseError> {
     Ok(num)
 }
 ```
+
+**Try it yourself:** [Run in Rust Playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=fn%20main%28%29%20%7B%0Ause%20std%3A%3Afmt%3B%0A%0A%23%5Bderive%28Debug%2C%20Clone%29%5D%0Aenum%20ParseError%20%7B%0A%20%20%20%20EmptyInput%2C%0A%20%20%20%20InvalidNumber%28String%29%2C%0A%20%20%20%20InvalidPercentage%28i32%29%2C%0A%7D%0A%0A%2F%2F%20Implement%20Display%20for%20pretty%20error%20messages%0Aimpl%20fmt%3A%3ADisplay%20for%20ParseError%20%7B%0A%20%20%20%20fn%20fmt%28%26self%2C%20f%3A%20%26mut%20fmt%3A%3AFormatter%29%20-%3E%20fmt%3A%3AResult%20%7B%0A%20%20%20%20%20%20%20%20match%20self%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20ParseError%3A%3AEmptyInput%20%3D%3E%20write%21%28f%2C%20%22Input%20string%20is%20empty%22%29%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20ParseError%3A%3AInvalidNumber%28s%29%20%3D%3E%20write%21%28f%2C%20%22Invalid%20number%3A%20%7B%7D%22%2C%20s%29%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20ParseError%3A%3AInvalidPercentage%28n%29%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20write%21%28f%2C%20%22Percentage%20%7Bn%7D%20must%20be%20between%200%20and%20100%22%29%0A%20%20%20%20%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%7D%0A%0A%2F%2F%20Use%20custom%20error%20type%0Afn%20parse_percentage%28input%3A%20%26str%29%20-%3E%20Result%3Ci32%2C%20ParseError%3E%20%7B%0A%20%20%20%20if%20input.trim%28%29.is_empty%28%29%20%7B%0A%20%20%20%20%20%20%20%20return%20Err%28ParseError%3A%3AEmptyInput%29%3B%0A%20%20%20%20%7D%0A%0A%20%20%20%20let%20num%3A%20i32%20%3D%20input.trim%28%29.parse%28%29%0A%20%20%20%20%20%20%20%20.map_err%28%7C_%7C%20ParseError%3A%3AInvalidNumber%28input.to_string%28%29%29%29%3F%3B%0A%0A%20%20%20%20if%20%21%280..%3D100%29.contains%28%26num%29%20%7B%0A%20%20%20%20%20%20%20%20return%20Err%28ParseError%3A%3AInvalidPercentage%28num%29%29%3B%0A%20%20%20%20%7D%0A%0A%20%20%20%20Ok%28num%29%0A%7D%0A%7D%0A)
 
 ::: {.notes}
 Custom error variants communicate expected failure categories, but documentation and tests are still needed and unrelated panics may remain.
@@ -870,6 +902,8 @@ fn process_lines(
         .collect()  // Collect into Result<Vec<_>, _>
 }
 ```
+
+**Try it yourself:** [Run in Rust Playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=fn%20main%28%29%20%7B%0Ause%20std%3A%3Arc%3A%3ARc%3B%0Ause%20std%3A%3Acell%3A%3ARefCell%3B%0Ause%20std%3A%3Afmt%3B%0A%0A%23%5Bderive%28Debug%2C%20Clone%29%5D%0Astruct%20Config%20%7B%0A%20%20%20%20min_length%3A%20usize%2C%0A%20%20%20%20max_length%3A%20usize%2C%0A%7D%0A%0A%23%5Bderive%28Debug%29%5D%0Aenum%20ProcessError%20%7B%0A%20%20%20%20LineTooShort%28String%29%2C%0A%20%20%20%20LineTooLong%28String%29%2C%0A%7D%0A%0Aimpl%20fmt%3A%3ADisplay%20for%20ProcessError%20%7B%0A%20%20%20%20fn%20fmt%28%26self%2C%20f%3A%20%26mut%20fmt%3A%3AFormatter%29%20-%3E%20fmt%3A%3AResult%20%7B%0A%20%20%20%20%20%20%20%20match%20self%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20ProcessError%3A%3ALineTooShort%28line%29%20%3D%3E%20write%21%28f%2C%20%22Line%20too%20short%3A%20%7B%7D%22%2C%20line%29%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20ProcessError%3A%3ALineTooLong%28line%29%20%3D%3E%20write%21%28f%2C%20%22Line%20too%20long%3A%20%7B%7D%22%2C%20line%29%2C%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20process_lines%28%0A%20%20%20%20lines%3A%20%26%5BString%5D%2C%0A%20%20%20%20config%3A%20Rc%3CRefCell%3CConfig%3E%3E%2C%20%20%2F%2F%20Smart%20pointer%20for%20shared%20config%0A%29%20-%3E%20Result%3CVec%3CString%3E%2C%20ProcessError%3E%20%7B%20%20%2F%2F%20Result%20for%20error%20handling%0A%20%20%20%20lines%0A%20%20%20%20%20%20%20%20.iter%28%29%20%20%2F%2F%20Iterator%0A%20%20%20%20%20%20%20%20.map%28%7Cline%7C%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20let%20cfg%20%3D%20config.borrow%28%29%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20let%20len%20%3D%20line.len%28%29%3B%0A%0A%20%20%20%20%20%20%20%20%20%20%20%20if%20len%20%3C%20cfg.min_length%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20Err%28ProcessError%3A%3ALineTooShort%28line.clone%28%29%29%29%0A%20%20%20%20%20%20%20%20%20%20%20%20%7D%20else%20if%20len%20%3E%20cfg.max_length%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20Err%28ProcessError%3A%3ALineTooLong%28line.clone%28%29%29%29%0A%20%20%20%20%20%20%20%20%20%20%20%20%7D%20else%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20Ok%28line.to_uppercase%28%29%29%20%20%2F%2F%20Transform%20on%20success%0A%20%20%20%20%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%7D%29%0A%20%20%20%20%20%20%20%20.collect%28%29%20%20%2F%2F%20Collect%20into%20Result%3CVec%3C_%3E%2C%20_%3E%0A%7D%0A%7D%0A)
 
 ::: {.notes}
 Summarize the decision points: iterator versus loop, single versus shared ownership, compile-time versus runtime borrow checking, and `Result` propagation versus local handling.

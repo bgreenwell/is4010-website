@@ -8,6 +8,7 @@ Welcome to the second half of the course. It's time to learn Rust! After masteri
 
 ## Recommended readings
 
+- [Rust for Python Programmers](https://microsoft.github.io/RustTraining/python-book/) - Microsoft's guide mapping Python concepts you already know onto Rust. The most useful starting point coming out of Weeks 03 to 08
 - [Chapter 1: Getting started](https://doc.rust-lang.org/book/ch01-00-getting-started.html) - Installation and Cargo basics
 - [Chapter 3: Common programming concepts](https://doc.rust-lang.org/book/ch03-00-common-programming-concepts.html) - Variables, types, and functions
 

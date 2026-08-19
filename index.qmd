@@ -17,6 +17,9 @@ This course uses two primary, free, and open-source resources:
 
 We will reference specific chapters from these books each week to support our hands-on labs.
 
+When the course switches to Rust in Week 09, [Rust for Python Programmers](https://microsoft.github.io/RustTraining/python-book/) is a useful
+bridge: Microsoft's guide introduces Rust in terms of the Python you will already know.
+
 ## Quick links
 * [**Syllabus**](syllabus.qmd): the official Simple Syllabus link will be added when published
 * [Weekly schedule](weeks/week01.qmd)

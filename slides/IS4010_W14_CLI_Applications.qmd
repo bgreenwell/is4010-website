@@ -70,6 +70,8 @@ fn main() {
 }
 ```
 
+**Try it yourself:** [Run in Rust Playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=use%20std%3A%3Aenv%3B%0A%0Afn%20main%28%29%20%7B%0A%20%20%20%20let%20args%3A%20Vec%3CString%3E%20%3D%20env%3A%3Aargs%28%29.collect%28%29%3B%0A%20%20%20%20if%20args.len%28%29%20%3E%201%20%26%26%20args%5B1%5D%20%3D%3D%20%22random%22%20%7B%0A%20%20%20%20%20%20%20%20%2F%2F%20...%20string%20matching%2C%20error%20handling%2C%20manual%20parsing%20...%0A%20%20%20%20%7D%0A%7D%0A)
+
 **Why is this bad?**
 - Manual string parsing is error-prone.
 - Type conversion (String to integer) is tedious.
