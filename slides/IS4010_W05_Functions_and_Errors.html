@@ -291,7 +291,7 @@ Brandon M. Greenwell
 <li class="fragment"><strong>Static-analysis input</strong>: Type hints let editors and type checkers report some mismatches; Python does not normally enforce them at runtime</li>
 <li class="fragment"><strong>Documentation</strong>: Good docstrings explain purpose, inputs, outputs, and important constraints</li>
 </ul>
-<div id="ad8caaee" class="cell">
+<div id="13c44659" class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a></a><span class="kw">def</span> calculate_area(length: <span class="bu">float</span>, width: <span class="bu">float</span>) <span class="op">-&gt;</span> <span class="bu">float</span>:</span>
 <span id="cb1-2"><a></a>    <span class="co">"""Calculate the area of a rectangle.</span></span>
 <span id="cb1-3"><a></a></span>
@@ -339,7 +339,7 @@ Brandon M. Greenwell
 <li class="fragment">This is a good thing! It prevents functions from accidentally modifying variables they shouldn’t have access to</li>
 <li class="fragment"><strong>LEGB Rule</strong>: Local → Enclosing → Global → Built-in (scope resolution order)</li>
 </ul>
-<div id="9fe55167" class="cell">
+<div id="8acfd894" class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a></a><span class="kw">def</span> my_function():</span>
 <span id="cb2-2"><a></a>    <span class="co"># secret_number has local scope</span></span>
 <span id="cb2-3"><a></a>    secret_number <span class="op">=</span> <span class="dv">42</span></span>
@@ -379,7 +379,7 @@ Brandon M. Greenwell
 <li class="fragment"><strong>Keyword arguments</strong>: Use parameter names - order doesn’t matter</li>
 <li class="fragment"><strong>Best practice</strong>: Use keyword arguments for clarity in function calls</li>
 </ul>
-<div id="4fe21bea" class="cell">
+<div id="7a98d4a5" class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a></a><span class="kw">def</span> create_user_profile(name: <span class="bu">str</span>, age: <span class="bu">int</span>, city: <span class="bu">str</span>) <span class="op">-&gt;</span> <span class="bu">dict</span>:</span>
 <span id="cb3-2"><a></a>    <span class="co">"""Create a user profile dictionary."""</span></span>
 <span id="cb3-3"><a></a>    <span class="cf">return</span> {</span>
@@ -425,7 +425,7 @@ Brandon M. Greenwell
 <li class="fragment"><strong>Common pattern</strong>: Use <code>None</code> as default, then check and assign actual default in function body</li>
 <li class="fragment"><strong>Gotcha</strong>: Avoid shared mutable defaults unless that shared state is intentional</li>
 </ul>
-<div id="c44c12dd" class="cell">
+<div id="3ac2783e" class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a></a><span class="kw">def</span> send_notification(message: <span class="bu">str</span>, urgency: <span class="bu">str</span> <span class="op">=</span> <span class="st">"normal"</span>,</span>
 <span id="cb4-2"><a></a>                     channels: <span class="bu">list</span> <span class="op">=</span> <span class="va">None</span>) <span class="op">-&gt;</span> <span class="bu">dict</span>:</span>
 <span id="cb4-3"><a></a>    <span class="co">"""Send a notification through specified channels."""</span></span>
@@ -475,7 +475,7 @@ Brandon M. Greenwell
 <li class="fragment"><strong>Convention</strong>: Names <code>args</code> and <code>kwargs</code> are standard (but you can use other names)</li>
 <li class="fragment"><strong>Order matters</strong>: <code>def func(required, *args, **kwargs):</code></li>
 </ul>
-<div id="f7753aab" class="cell">
+<div id="de36d5ba" class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a></a><span class="kw">def</span> analyze_user_data(user_id: <span class="bu">int</span>, <span class="op">*</span>metrics: <span class="bu">str</span>, <span class="op">**</span>options) <span class="op">-&gt;</span> <span class="bu">dict</span>:</span>
 <span id="cb5-2"><a></a>    <span class="co">"""Analyze user data with flexible metrics and options."""</span></span>
 <span id="cb5-3"><a></a>    <span class="bu">print</span>(<span class="ss">f"Analyzing user </span><span class="sc">{</span>user_id<span class="sc">}</span><span class="ss">"</span>)</span>
@@ -529,7 +529,7 @@ Brandon M. Greenwell
 <li class="fragment"><strong>Modifying vs.&nbsp;returning</strong>: Be clear about whether you modify in-place or return new data</li>
 <li class="fragment"><strong>Performance consideration</strong>: Large dictionaries are passed by reference, not copied</li>
 </ul>
-<div id="2f819dfd" class="cell">
+<div id="517bd5e6" class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a></a><span class="kw">def</span> update_user_settings(user_data: <span class="bu">dict</span>, <span class="op">**</span>new_settings) <span class="op">-&gt;</span> <span class="bu">dict</span>:</span>
 <span id="cb6-2"><a></a>    <span class="co">"""Update user settings, returning a new dictionary."""</span></span>
 <span id="cb6-3"><a></a>    <span class="co"># Create a copy to avoid modifying original</span></span>
@@ -591,7 +591,7 @@ Brandon M. Greenwell
 <li class="fragment"><strong>Reasonable length</strong>: If a function is over 20-30 lines, consider splitting it</li>
 <li class="fragment"><strong>Return consistency</strong>: Keep return behavior predictable and document intentional alternatives</li>
 </ul>
-<div id="9ede5479" class="cell">
+<div id="4c4c82d3" class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a></a><span class="co"># GOOD: Single responsibility, clear purpose</span></span>
 <span id="cb7-2"><a></a><span class="kw">def</span> calculate_order_total(items: <span class="bu">list</span>[<span class="bu">dict</span>]) <span class="op">-&gt;</span> <span class="bu">float</span>:</span>
 <span id="cb7-3"><a></a>    <span class="co">"""Calculate the total cost of items in an order."""</span></span>
@@ -724,7 +724,7 @@ clean, reusable functions. Each function should:
 <li class="fragment"><strong>Common examples</strong>: Dividing by zero, opening nonexistent files, accessing invalid list indices</li>
 <li class="fragment"><strong>Unhandled exceptions</strong> will crash your program and frustrate users</li>
 </ul>
-<div id="86618cb7" class="cell">
+<div id="edd5ffaf" class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a></a><span class="co"># Syntax error - won't even run</span></span>
 <span id="cb9-2"><a></a><span class="co"># print("Hello world" # Missing closing parenthesis</span></span>
 <span id="cb9-3"><a></a></span>
@@ -766,7 +766,7 @@ clean, reusable functions. Each function should:
 <li class="fragment"><strong>Best practice</strong>: Catch specific exceptions so you can handle different errors appropriately</li>
 <li class="fragment"><strong>Avoid broad catches by default</strong>: Catch the exceptions you can handle; boundary layers may intentionally catch broadly to log or translate failures</li>
 </ul>
-<div id="79653cb7" class="cell">
+<div id="63d02ad7" class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a></a><span class="kw">def</span> safe_divide(a: <span class="bu">float</span>, b: <span class="bu">float</span>) <span class="op">-&gt;</span> <span class="bu">float</span> <span class="op">|</span> <span class="va">None</span>:</span>
 <span id="cb10-2"><a></a>    <span class="co">"""Safely divide two numbers, returning None if division fails."""</span></span>
 <span id="cb10-3"><a></a>    <span class="cf">try</span>:</span>
@@ -814,7 +814,7 @@ clean, reusable functions. Each function should:
 <li class="fragment"><strong>Inheritance matters</strong>: Catching <code>Exception</code> catches all its subclasses</li>
 <li class="fragment"><strong>Order matters</strong>: More specific exceptions must come before general ones</li>
 </ul>
-<div id="0cbfbd63" class="cell">
+<div id="08e5355e" class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a></a><span class="co"># Common exception types and when they occur</span></span>
 <span id="cb11-2"><a></a><span class="kw">def</span> demonstrate_exceptions():</span>
 <span id="cb11-3"><a></a>    examples <span class="op">=</span> {</span>
@@ -876,7 +876,7 @@ clean, reusable functions. Each function should:
 <li class="fragment"><strong>Add context</strong>: Custom exceptions can carry additional information</li>
 <li class="fragment"><strong>When to use</strong>: Domain-specific errors that don’t fit built-in exception types</li>
 </ul>
-<div id="35e4f116" class="cell">
+<div id="4a62934e" class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a></a><span class="kw">class</span> InsufficientFundsError(<span class="pp">Exception</span>):</span>
 <span id="cb12-2"><a></a>    <span class="co">"""Raised when account doesn't have enough money for transaction."""</span></span>
 <span id="cb12-3"><a></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, balance: <span class="bu">float</span>, amount: <span class="bu">float</span>):</span>
@@ -938,7 +938,7 @@ clean, reusable functions. Each function should:
 <li class="fragment"><strong>Best practice</strong>: Use <code>finally</code> for resource cleanup (files, network connections, locks)</li>
 <li class="fragment"><strong>Performance consideration</strong>: <code>finally</code> ensures cleanup even if exceptions are re-raised</li>
 </ul>
-<div id="8bd74f9a" class="cell">
+<div id="a5823158" class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a></a><span class="kw">def</span> process_user_data(filename: <span class="bu">str</span>) <span class="op">-&gt;</span> <span class="bu">dict</span>:</span>
 <span id="cb13-2"><a></a>    <span class="co">"""Process user data from file with proper cleanup."""</span></span>
 <span id="cb13-3"><a></a>    file_handle <span class="op">=</span> <span class="va">None</span></span>
@@ -994,7 +994,7 @@ clean, reusable functions. Each function should:
 <li class="fragment"><strong>File handling</strong>: Prefer <code>with</code> so files close when the block exits</li>
 <li class="fragment"><strong>Under the hood</strong>: Uses <code>__enter__</code> and <code>__exit__</code> methods</li>
 </ul>
-<div id="9c94f412" class="cell">
+<div id="9eba10fc" class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a></a><span class="co"># OLD WAY: Manual file handling (error-prone)</span></span>
 <span id="cb14-2"><a></a><span class="kw">def</span> read_config_old(filename: <span class="bu">str</span>) <span class="op">-&gt;</span> <span class="bu">dict</span>:</span>
 <span id="cb14-3"><a></a>    <span class="cf">try</span>:</span>
@@ -1056,7 +1056,7 @@ clean, reusable functions. Each function should:
 <li class="fragment"><strong>Clear error messages</strong>: Help users understand what went wrong</li>
 <li class="fragment"><strong>Type checking</strong>: Use type hints and runtime validation together</li>
 </ul>
-<div id="4a8883f9" class="cell">
+<div id="6941da66" class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a></a><span class="kw">def</span> create_user_account(username: <span class="bu">str</span>, age: <span class="bu">int</span>, email: <span class="bu">str</span>) <span class="op">-&gt;</span> <span class="bu">dict</span>:</span>
 <span id="cb15-2"><a></a>    <span class="co">"""Create user account with comprehensive input validation."""</span></span>
 <span id="cb15-3"><a></a></span>
@@ -1125,7 +1125,7 @@ clean, reusable functions. Each function should:
 <li class="fragment"><strong>Performance</strong>: EAFP can be faster when exceptions are rare</li>
 <li class="fragment"><strong>Choose wisely</strong>: Some situations favor one approach over the other</li>
 </ul>
-<div id="b9656a7c" class="cell">
+<div id="654a02c3" class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a></a><span class="co"># LBYL Approach: Check first, then act</span></span>
 <span id="cb16-2"><a></a><span class="kw">def</span> get_user_score_lbyl(users: <span class="bu">dict</span>, user_id: <span class="bu">str</span>) <span class="op">-&gt;</span> <span class="bu">float</span>:</span>
 <span id="cb16-3"><a></a>    <span class="co">"""Get user score using Look Before You Leap pattern."""</span></span>
@@ -1196,7 +1196,7 @@ clean, reusable functions. Each function should:
 <li class="fragment">Include clear docstrings and do not modify the supplied tests</li>
 </ul>
 <p><strong>Implementation scaffold:</strong></p>
-<div id="2a8e186b" class="cell">
+<div id="3b434686" class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a></a><span class="kw">def</span> calculate_average_age(users: <span class="bu">list</span>[<span class="bu">dict</span>]) <span class="op">-&gt;</span> <span class="bu">float</span>:</span>
 <span id="cb17-2"><a></a>    <span class="co">"""Return the average numeric age, or 0.0 if none are valid."""</span></span>
 <span id="cb17-3"><a></a>    <span class="co"># </span><span class="al">TODO</span><span class="co">: collect the valid ages and calculate the specified result</span></span>

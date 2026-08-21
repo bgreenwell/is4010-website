@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Week 05: Functions &amp; errors – IS 4010 - App Dev with AI</title>
+<title>AI tools – IS 4010 - App Dev with AI</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -29,8 +29,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../weeks/week06.html" rel="next">
-<link href="../weeks/week04.html" rel="prev">
+<link href="../slides/IS4010_Advanced_AI_Workflows.html" rel="next">
+<link href="../resources/packages.html" rel="prev">
 <link href="../images/uc-logo-2.png" rel="icon" type="image/png">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
@@ -43,7 +43,6 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="../site_libs/bootstrap/bootstrap-f429e1b9fabce5b473b24bf8663aabcf.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
-<script src="../site_libs/quarto-contrib/iconify-3.0.0/iconify-icon.min.js"></script>
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -85,7 +84,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../weeks/week01.html">Weekly schedule</a></li><li class="breadcrumb-item"><a href="../weeks/week05.html">Week 05: Functions &amp; errors</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../resources/setup.html">Resources</a></li><li class="breadcrumb-item"><a href="../resources/ai-tools.html">AI tools</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -133,13 +132,13 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
  <span class="menu-text">Resources</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../resources/setup.html" class="sidebar-item-text sidebar-link">
@@ -160,7 +159,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../resources/ai-tools.html" class="sidebar-item-text sidebar-link">
+  <a href="../resources/ai-tools.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">AI tools</span></a>
   </div>
 </li>
@@ -174,13 +173,13 @@ ul.task-list li input[type="checkbox"] {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false">
  <span class="menu-text">Weekly schedule</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../weeks/week01.html" class="sidebar-item-text sidebar-link">
@@ -207,7 +206,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../weeks/week05.html" class="sidebar-item-text sidebar-link active">
+  <a href="../weeks/week05.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Week 05: Functions &amp; errors</span></a>
   </div>
 </li>
@@ -277,20 +276,17 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
-  <li><a href="#recommended-readings" id="toc-recommended-readings" class="nav-link" data-scroll-target="#recommended-readings">Recommended readings</a></li>
-  <li><a href="#lectures" id="toc-lectures" class="nav-link" data-scroll-target="#lectures">Lectures</a></li>
-  <li><a href="#interactive-notebooks" id="toc-interactive-notebooks" class="nav-link" data-scroll-target="#interactive-notebooks">Interactive notebooks</a></li>
-  <li><a href="#lab-assignment" id="toc-lab-assignment" class="nav-link" data-scroll-target="#lab-assignment">Lab assignment</a></li>
+  <li><a href="#what-the-course-requires" id="toc-what-the-course-requires" class="nav-link active" data-scroll-target="#what-the-course-requires">What the course requires</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../weeks/week01.html">Weekly schedule</a></li><li class="breadcrumb-item"><a href="../weeks/week05.html">Week 05: Functions &amp; errors</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../resources/setup.html">Resources</a></li><li class="breadcrumb-item"><a href="../resources/ai-tools.html">AI tools</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Week 05: Functions &amp; errors</h1>
+<h1 class="title">AI tools</h1>
+<p class="subtitle lead">Free assistants suitable for coursework</p>
 </div>
 
 
@@ -307,36 +303,102 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="introduction" class="level2">
-<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
-<p>Professional development means writing code that is both reusable and robust. This week, we’ll master the art of the function, the essential building block of clean, “DRY” code. We’ll also learn how to make our applications “bulletproof” by gracefully handling unexpected errors and exceptions, ensuring our users stay happy even when things go wrong.</p>
-</section>
-<section id="recommended-readings" class="level2">
-<h2 class="anchored" data-anchor-id="recommended-readings">Recommended readings</h2>
-<ul>
-<li><a href="https://docs.python.org/3/tutorial/controlflow.html#more-on-defining-functions">Python tutorial (Ch 4.7-4.8)</a> - More on defining functions</li>
-<li><a href="https://docs.python.org/3/tutorial/errors.html">Python tutorial (Ch 8: Errors &amp; exceptions)</a> - Handling errors in Python</li>
-</ul>
-</section>
-<section id="lectures" class="level2">
-<h2 class="anchored" data-anchor-id="lectures">Lectures</h2>
-<ul>
-<li><a href="../slides/IS4010_W05_Functions_and_Errors.html"><strong>Slides: Functions and errors</strong></a></li>
-</ul>
-</section>
-<section id="interactive-notebooks" class="level2">
-<h2 class="anchored" data-anchor-id="interactive-notebooks">Interactive notebooks</h2>
-<ul>
-<li><iconify-icon role="img" inline="" icon="bi:file-earmark-code" aria-label="Icon file-earmark-code from bi Iconify.design set." title="Icon file-earmark-code from bi Iconify.design set."></iconify-icon> <a href="../weeks/week05-notebook.html">Interactive notebook (rendered)</a></li>
-<li><iconify-icon role="img" inline="" icon="bi:github" aria-label="Icon github from bi Iconify.design set." title="Icon github from bi Iconify.design set."></iconify-icon> <a href="https://github.com/bgreenwell/is4010-website/blob/main/weeks/week05-notebook.ipynb">Open in GitHub</a></li>
-<li><iconify-icon role="img" inline="" icon="bi:google" aria-label="Icon google from bi Iconify.design set." title="Icon google from bi Iconify.design set."></iconify-icon> <a href="https://colab.research.google.com/github/bgreenwell/is4010-website/blob/main/weeks/week05-notebook.ipynb">Open in Colab</a></li>
-</ul>
-</section>
-<section id="lab-assignment" class="level2">
-<h2 class="anchored" data-anchor-id="lab-assignment">Lab assignment</h2>
-<ul>
-<li><a href="https://github.com/bgreenwell/is4010-labs/blob/main/week05/lab05.md">Lab 05: Functions and error handling</a></li>
-</ul>
+<p>You need three working surfaces for this course: a browser chat, GitHub Copilot in VS Code, and a command-line agent. Week 02 has you install and compare both course CLI agents before choosing the combination that fits your work.</p>
+<p>This page is a wider survey of what is available and free. The landscape changes quickly, so confirm current free-tier terms before relying on any of them.</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: left;">Client Name</th>
+<th style="text-align: left;">Type</th>
+<th style="text-align: left;">Key Features</th>
+<th style="text-align: left;">Free tier details</th>
+<th style="text-align: left;">Best for</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong><a href="https://chat.openai.com/">ChatGPT</a></strong></td>
+<td style="text-align: left;">Web UI</td>
+<td style="text-align: left;">General-purpose conversational AI for a wide range of tasks</td>
+<td style="text-align: left;">Free access to a highly capable model, with some usage limits</td>
+<td style="text-align: left;">General Q&amp;A, content creation, and exploring creative ideas</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong><a href="https://claude.ai/">Claude</a></strong></td>
+<td style="text-align: left;">Web UI</td>
+<td style="text-align: left;">Strong capabilities in creative writing, summarization, and analysis</td>
+<td style="text-align: left;">Free tier with daily message limits</td>
+<td style="text-align: left;">Sophisticated writing tasks and in-depth document analysis</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong><a href="https://gemini.google.com">Gemini on the web</a></strong></td>
+<td style="text-align: left;">Web UI</td>
+<td style="text-align: left;">User-friendly interface for direct chat, content generation, and analysis</td>
+<td style="text-align: left;">Free access to a powerful model, with some limits on usage</td>
+<td style="text-align: left;">Everyday tasks, brainstorming, writing assistance, and learning LLM capabilities</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong><a href="https://github.com/features/copilot">GitHub Copilot</a></strong></td>
+<td style="text-align: left;">IDE Extension</td>
+<td style="text-align: left;">AI-powered code completion, suggestions, and chat within your editor</td>
+<td style="text-align: left;">Free for verified students, teachers, and maintainers of popular open-source projects</td>
+<td style="text-align: left;">Seamlessly integrating AI assistance into the software development workflow</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong><a href="https://docs.github.com/en/copilot/how-tos/copilot-cli/set-up-copilot-cli/install-copilot-cli">GitHub Copilot CLI</a></strong></td>
+<td style="text-align: left;">Command-line</td>
+<td style="text-align: left;">Repository-aware coding agent in the terminal</td>
+<td style="text-align: left;">Available with GitHub Copilot plans</td>
+<td style="text-align: left;">Testing, editing, and explaining code without leaving the terminal</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong><a href="https://antigravity.google/docs/cli/overview/">Antigravity CLI</a></strong></td>
+<td style="text-align: left;">Command-line</td>
+<td style="text-align: left;">Google’s repository-aware coding agent, launched with <code>agy</code></td>
+<td style="text-align: left;">Free access available</td>
+<td style="text-align: left;">Comparing agent approaches and working from repository context</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong><a href="https://lmstudio.ai/">LM Studio</a></strong></td>
+<td style="text-align: left;">Desktop app</td>
+<td style="text-align: left;">Run open-source LLMs locally, offline capability</td>
+<td style="text-align: left;">Completely free software; uses your computer’s resources</td>
+<td style="text-align: left;">Running models offline and experimenting with privacy</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong><a href="https://ollama.ai/">Ollama</a></strong></td>
+<td style="text-align: left;">CLI / local server</td>
+<td style="text-align: left;">Easily run and manage open-source LLMs locally, provides an API</td>
+<td style="text-align: left;">Completely free software; uses your computer’s resources</td>
+<td style="text-align: left;">Developers building applications on top of local LLMs</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong><a href="https://huggingface.co/chat/">Hugging Face chat</a></strong></td>
+<td style="text-align: left;">Web UI</td>
+<td style="text-align: left;">Access and chat with a wide variety of open-source models</td>
+<td style="text-align: left;">Completely free to use</td>
+<td style="text-align: left;">Quickly trying out and comparing open-source models</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong><a href="https://poe.com">Poe by Quora</a></strong></td>
+<td style="text-align: left;">Web &amp; mobile app</td>
+<td style="text-align: left;">Access a mix of popular models (Claude, Gemini, etc.) in one app</td>
+<td style="text-align: left;">Free daily message limits for most models</td>
+<td style="text-align: left;">Comparing different flagship models, especially on mobile</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong><a href="https://aistudio.google.com/">Google AI Studio</a></strong></td>
+<td style="text-align: left;">Web UI</td>
+<td style="text-align: left;">Prototype prompts for the Gemini API, generate code</td>
+<td style="text-align: left;">Free tier with rate limits, same as the Gemini API</td>
+<td style="text-align: left;">Students learning to build with the Gemini API</td>
+</tr>
+</tbody>
+</table>
+<section id="what-the-course-requires" class="level2">
+<h2 class="anchored" data-anchor-id="what-the-course-requires">What the course requires</h2>
+<p>Everything in the table is optional except the tools named in the <a href="../resources/setup.html">setup guide</a>: a browser chat of your choice, GitHub Copilot in VS Code, and both GitHub Copilot CLI and Antigravity CLI, which you install and compare in Week 02.</p>
+<p>GitHub Copilot is free for verified students through <a href="https://education.github.com/pack">GitHub Education</a>.</p>
 
 
 </section>
@@ -744,13 +806,13 @@ ul.task-list li input[type="checkbox"] {
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../weeks/week04.html" class="pagination-link" aria-label="Week 04: Data structures">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Week 04: Data structures</span>
+      <a href="../resources/packages.html" class="pagination-link" aria-label="Python packages">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Python packages</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../weeks/week06.html" class="pagination-link" aria-label="Week 06: OOP">
-        <span class="nav-page-text">Week 06: OOP</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../slides/IS4010_Advanced_AI_Workflows.html" class="pagination-link" aria-label="Advanced AI workflows (optional)">
+        <span class="nav-page-text">Advanced AI workflows (optional)</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
