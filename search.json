@@ -3026,7 +3026,7 @@
     "href": "index.html#quick-links",
     "title": "IS 4010: Application Development with Artificial Intelligence",
     "section": "Quick links",
-    "text": "Quick links\n\nSyllabus: the official Simple Syllabus link will be added when published\nWeekly schedule\nLabs repository\nCanvas (LMS)",
+    "text": "Quick links\n\nOfficial syllabus in Simple Syllabus, plus a planning reference on this site\nWeekly schedule\nLabs repository\nCanvas (LMS)",
     "crumbs": [
       "Home"
     ]
@@ -3198,7 +3198,7 @@
     "href": "slides/IS4010_W01_Introduction.html#important-course-links",
     "title": "IS4010: AI-enhanced application development",
     "section": "Important course links",
-    "text": "Important course links\n\nCourse Canvas: uc.instructure.com (grades, slides, labs, due dates, etc.)\nLabs repository: GitHub (all 14 labs and status badges)\nOfficial syllabus: Simple Syllabus link to be added when published\nCommunication: Microsoft Teams (primary discussion, questions about the material, questions about the labs, etc.)"
+    "text": "Important course links\n\nCourse Canvas: uc.instructure.com (grades, slides, labs, due dates, etc.)\nLabs repository: GitHub (all 14 labs and status badges)\nOfficial syllabus: Simple Syllabus (the authoritative record)\nCommunication: Microsoft Teams (primary discussion, questions about the material, questions about the labs, etc.)"
   },
   {
     "objectID": "slides/IS4010_W01_Introduction.html#the-final-project-your-portfolio-piece",
@@ -4528,7 +4528,7 @@
     "href": "syllabus.html",
     "title": "Syllabus",
     "section": "",
-    "text": "ImportantOfficial syllabus\n\n\n\nThe official, current syllabus will be hosted in Simple Syllabus.\nSimple Syllabus URL: Placeholder: add the published course URL here.\nThe material below remains a course-planning reference while the Simple Syllabus version is the authoritative record.",
+    "text": "ImportantOfficial syllabus\n\n\n\nThe official syllabus for this course lives in Simple Syllabus:\nIS 4010, Fall 2026, section 001\nThat version is the authoritative record. Where anything on this page disagrees with it, the Simple Syllabus version governs. The material below is a course-planning reference and a convenience copy.",
     "crumbs": [
       "Syllabus"
     ]
