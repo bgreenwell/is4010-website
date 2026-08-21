@@ -5,11 +5,13 @@ title: "Syllabus"
 ::: {.callout-important appearance="simple"}
 ### Official syllabus
 
-The official, current syllabus will be hosted in **Simple Syllabus**.
+The official syllabus for this course lives in Simple Syllabus:
 
-**Simple Syllabus URL:** *Placeholder: add the published course URL here.*
+**[IS 4010, Fall 2026, section 001](https://uc.simplesyllabus.com/doc/mkhmypnvx/2026-Fall-IS-4010-%2822%29-001-%2810885%29-Application-Development-with-Artificial-Intelligence)**
 
-The material below remains a course-planning reference while the Simple Syllabus version is the authoritative record.
+That version is the authoritative record. Where anything on this page disagrees with it, the
+Simple Syllabus version governs. The material below is a course-planning reference and a
+convenience copy.
 :::
 
 ![Lindner College of Business logo](images/lindner_logo.jpg)

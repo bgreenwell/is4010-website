@@ -74,7 +74,7 @@ author: "Brandon M. Greenwell"
 ::: {.incremental}
 - **Course Canvas:** [uc.instructure.com](https://uc.instructure.com/) (grades, slides, labs, due dates, etc.)
 - **Labs repository:** [GitHub](https://github.com/bgreenwell/is4010-labs) (all 14 labs and status badges)
-- **Official syllabus:** Simple Syllabus link to be added when published
+- **Official syllabus:** [Simple Syllabus](https://uc.simplesyllabus.com/doc/mkhmypnvx/2026-Fall-IS-4010-%2822%29-001-%2810885%29-Application-Development-with-Artificial-Intelligence) (the authoritative record)
 - **Communication:** Microsoft Teams (primary discussion, questions about the material, questions about the labs, etc.)
 :::
 

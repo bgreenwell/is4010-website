@@ -21,7 +21,7 @@ When the course switches to Rust in Week 09, [Rust for Python Programmers](https
 bridge: Microsoft's guide introduces Rust in terms of the Python you will already know.
 
 ## Quick links
-* [**Syllabus**](syllabus.qmd): the official Simple Syllabus link will be added when published
+* [**Official syllabus**](https://uc.simplesyllabus.com/doc/mkhmypnvx/2026-Fall-IS-4010-%2822%29-001-%2810885%29-Application-Development-with-Artificial-Intelligence) in Simple Syllabus, plus a [planning reference](syllabus.qmd) on this site
 * [Weekly schedule](weeks/week01.qmd)
 * [Labs repository](https://github.com/bgreenwell/is4010-labs)
 * [Canvas (LMS)](https://uc.instructure.com/)
