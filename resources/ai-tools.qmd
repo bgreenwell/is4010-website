@@ -1,0 +1,34 @@
+---
+title: "AI tools"
+subtitle: "Free assistants suitable for coursework"
+---
+
+You need three working surfaces for this course: a browser chat, GitHub Copilot in VS Code, and
+a command-line agent. Week 02 has you install and compare both course CLI agents before choosing
+the combination that fits your work.
+
+This page is a wider survey of what is available and free. The landscape changes quickly, so
+confirm current free-tier terms before relying on any of them.
+
+| Client Name | Type | Key Features | Free tier details | Best for |
+|:------------|:-----|:-------------|:------------------|:---------|
+| **[ChatGPT](https://chat.openai.com/)** | Web UI | General-purpose conversational AI for a wide range of tasks | Free access to a highly capable model, with some usage limits | General Q&A, content creation, and exploring creative ideas |
+| **[Claude](https://claude.ai/)** | Web UI | Strong capabilities in creative writing, summarization, and analysis | Free tier with daily message limits | Sophisticated writing tasks and in-depth document analysis |
+| **[Gemini on the web](https://gemini.google.com)** | Web UI | User-friendly interface for direct chat, content generation, and analysis | Free access to a powerful model, with some limits on usage | Everyday tasks, brainstorming, writing assistance, and learning LLM capabilities |
+| **[GitHub Copilot](https://github.com/features/copilot)** | IDE Extension | AI-powered code completion, suggestions, and chat within your editor | Free for verified students, teachers, and maintainers of popular open-source projects | Seamlessly integrating AI assistance into the software development workflow |
+| **[GitHub Copilot CLI](https://docs.github.com/en/copilot/how-tos/copilot-cli/set-up-copilot-cli/install-copilot-cli)** | Command-line | Repository-aware coding agent in the terminal | Available with GitHub Copilot plans | Testing, editing, and explaining code without leaving the terminal |
+| **[Antigravity CLI](https://antigravity.google/docs/cli/overview/)** | Command-line | Google's repository-aware coding agent, launched with `agy` | Free access available | Comparing agent approaches and working from repository context |
+| **[LM Studio](https://lmstudio.ai/)** | Desktop app | Run open-source LLMs locally, offline capability | Completely free software; uses your computer's resources | Running models offline and experimenting with privacy |
+| **[Ollama](https://ollama.ai/)** | CLI / local server | Easily run and manage open-source LLMs locally, provides an API | Completely free software; uses your computer's resources | Developers building applications on top of local LLMs |
+| **[Hugging Face chat](https://huggingface.co/chat/)** | Web UI | Access and chat with a wide variety of open-source models | Completely free to use | Quickly trying out and comparing open-source models |
+| **[Poe by Quora](https://poe.com)** | Web & mobile app | Access a mix of popular models (Claude, Gemini, etc.) in one app | Free daily message limits for most models | Comparing different flagship models, especially on mobile |
+| **[Google AI Studio](https://aistudio.google.com/)** | Web UI | Prototype prompts for the Gemini API, generate code | Free tier with rate limits, same as the Gemini API | Students learning to build with the Gemini API |
+
+## What the course requires
+
+Everything in the table is optional except the tools named in the
+[setup guide](setup.qmd): a browser chat of your choice, GitHub Copilot in VS Code, and both
+GitHub Copilot CLI and Antigravity CLI, which you install and compare in Week 02.
+
+GitHub Copilot is free for verified students through
+[GitHub Education](https://education.github.com/pack).

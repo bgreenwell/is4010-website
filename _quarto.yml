@@ -29,8 +29,8 @@ website:
     contents:
       - text: "Home"
         href: index.qmd
-      - text: "Syllabus"
-        href: syllabus.qmd
+      - text: "Syllabus (Simple Syllabus)"
+        href: https://uc.simplesyllabus.com/doc/mkhmypnvx/2026-Fall-IS-4010-%2822%29-001-%2810885%29-Application-Development-with-Artificial-Intelligence
       - text: "Final project"
         href: project.qmd
       - section: "Resources"
@@ -41,6 +41,8 @@ website:
             href: resources/troubleshooting.qmd
           - text: "Python packages"
             href: resources/packages.qmd
+          - text: "AI tools"
+            href: resources/ai-tools.qmd
           - text: "Advanced AI workflows (optional)"
             href: slides/IS4010_Advanced_AI_Workflows.qmd
       - section: "Weekly schedule"

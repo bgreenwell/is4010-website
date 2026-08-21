@@ -21,7 +21,10 @@ Students are expected to install and try both Copilot CLI and Antigravity CLI in
 
 ## Source-of-truth boundaries
 
-- **Official syllabus:** Simple Syllabus is authoritative, published at <https://uc.simplesyllabus.com/doc/mkhmypnvx/2026-Fall-IS-4010-%2822%29-001-%2810885%29-Application-Development-with-Artificial-Intelligence> for Fall 2026 section 001. `syllabus.qmd` is a convenience copy and must defer to it; never invent or infer a URL for a different term or section.
+- **Official syllabus:** Simple Syllabus is the only syllabus. This site does not host a copy;
+  the sidebar links straight to the published record. Do not recreate a `syllabus.qmd`, and do
+  not restate grading, policies, or course description here. Update the sidebar URL when the
+  term or section changes; never invent or infer one.
 - **Course schedule and public teaching content:** The Quarto sources in this repository control the website.
 - **Lab requirements and grading behavior:** `bgreenwell/is4010-labs` is authoritative.
 - **Instructor implementations:** `bgreenwell/is4010-labs-solutions` is private and must never be exposed here.
@@ -33,7 +36,6 @@ When a change affects both teaching content and a lab contract, update the publi
 
 - `_quarto.yml`: website navigation, metadata, and global format configuration
 - `index.qmd`: course landing page
-- `syllabus.qmd`: link to the authoritative Simple Syllabus record plus a non-authoritative planning reference
 - `project.qmd`: final solo project requirements
 - `weeks/`: weekly module pages, plus `weekNN-notebook.ipynb` companion notebooks that are
   **generated** from the Python decks by `scripts/build-notebooks.py`. Never edit a notebook by
@@ -140,7 +142,8 @@ workflow runs it before rendering and commits any changes back to `main`.
   and `README.md` are never published or indexed in `search.json`.
 - Modified notebooks remain valid JSON.
 - Changed slides render without missing assets.
-- The Simple Syllabus link resolves and points at the correct term and section.
+- The Simple Syllabus link in `_quarto.yml` resolves and points at the correct term and section.
+- No page restates syllabus content: grading, policies, outcomes, or course description.
 - Python examples use `uv` and Python 3.12 consistently.
 - AI-tool references use Copilot CLI and Antigravity CLI consistently.
 - Lab names, commands, and grading language match `is4010-labs`.
