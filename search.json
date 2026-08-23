@@ -2368,7 +2368,7 @@
     "href": "slides/IS4010_W01_Introduction.html#lab-01-this-week",
     "title": "IS4010: AI-enhanced application development",
     "section": "Lab 01 this week",
-    "text": "Lab 01 this week\n\nCreate your GitHub account if you haven’t already.\nUse the terminal, fork and clone the semester repository, then run uv sync --locked.\nSubmit your fork URL in Canvas and confirm the Week 01 badge is green."
+    "text": "Lab 01 this week\n\nCreate your GitHub account if you haven’t already.\nUse the terminal, fork and clone the semester repository, then run uv sync --locked.\nSubmit your fork URL in Canvas and confirm the Week 01 badge is green.\nNot sure what that looks like? The demo repository shows a passing badge, a failing one you can click into, and later weeks that have not run yet."
   },
   {
     "objectID": "slides/IS4010_W01_Introduction.html#terminal-shell-and-prompt",
@@ -2577,7 +2577,7 @@
     "href": "resources/troubleshooting.html#github-actions-issues",
     "title": "Troubleshooting",
     "section": "GitHub Actions issues",
-    "text": "GitHub Actions issues\nA workflow did not run\n\nIn a new fork, open Actions and enable the inherited workflows.\nConfirm you pushed the required files to main.\nSelect the badge or workflow run to read the first failing step.",
+    "text": "GitHub Actions issues\nA workflow did not run\n\nIn a new fork, open Actions and enable the inherited workflows.\nConfirm you pushed the required files to main.\nSelect the badge or workflow run to read the first failing step.\n\nMy badge is grey, or says “no status”\n\nThat is normal for a week you have not started. The check only runs once you push a file for that week, so grey means “not attempted yet” rather than “broken.”\n\nWhat should the badges look like?\n\nThe demonstration repository is a stand-in for a fork partway through the semester: Week 01 passing, Week 02 failing, and the later weeks with no status. Select the failing badge there to see how a failure reads before you hit one of your own.",
     "crumbs": [
       "Resources",
       "Troubleshooting"
