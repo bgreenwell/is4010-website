@@ -277,6 +277,7 @@ ul.task-list li input[type="checkbox"] {
    
   <ul>
   <li><a href="#python-and-uv-issues" id="toc-python-and-uv-issues" class="nav-link active" data-scroll-target="#python-and-uv-issues">Python and uv issues</a></li>
+  <li><a href="#windows-issues" id="toc-windows-issues" class="nav-link" data-scroll-target="#windows-issues">Windows issues</a></li>
   <li><a href="#git-and-github-issues" id="toc-git-and-github-issues" class="nav-link" data-scroll-target="#git-and-github-issues">Git and GitHub issues</a></li>
   <li><a href="#rust-issues" id="toc-rust-issues" class="nav-link" data-scroll-target="#rust-issues">Rust issues</a></li>
   <li><a href="#github-actions-issues" id="toc-github-actions-issues" class="nav-link" data-scroll-target="#github-actions-issues">GitHub Actions issues</a></li>
@@ -324,6 +325,27 @@ ul.task-list li input[type="checkbox"] {
 <ul>
 <li>Run the exact command shown in the lab from the repository root.</li>
 <li>Example: <code>uv run --directory week03 python -m pytest tests/ -v</code>.</li>
+</ul>
+</section>
+<section id="windows-issues" class="level2">
+<h2 class="anchored" data-anchor-id="windows-issues">Windows issues</h2>
+<p><strong>I don’t have Git Bash / I can’t find it</strong></p>
+<ul>
+<li>Git Bash is installed by the Git for Windows installer, so install Git and you have it.</li>
+<li>Open it from the Start menu by typing “Git Bash”, or right-click in a folder and choose <strong>Open Git Bash here</strong>.</li>
+</ul>
+<p><strong>My terminal doesn’t look like the course examples</strong></p>
+<ul>
+<li>You are probably in PowerShell or Command Prompt. Confirm the prompt says <code>MINGW64</code>.</li>
+<li>In VS Code, press <code>Ctrl+Shift+P</code>, run <strong>Terminal: Select Default Profile</strong>, choose <strong>Git Bash</strong>, then open a new terminal.</li>
+</ul>
+<p><strong><code>code: command not found</code></strong></p>
+<ul>
+<li>VS Code was installed without <strong>Add to PATH</strong>. Re-run the installer and select it, or open the folder from VS Code with <strong>File &gt; Open Folder</strong> instead.</li>
+</ul>
+<p><strong><code>uv: command not found</code> right after installing it on Windows</strong></p>
+<ul>
+<li>The <code>uv</code> installer runs in PowerShell and updates PATH. Close Git Bash and reopen it so it picks up the change.</li>
 </ul>
 </section>
 <section id="git-and-github-issues" class="level2">

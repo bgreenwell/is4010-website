@@ -315,6 +315,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul class="collapse">
   <li><a href="#visual-studio-code" id="toc-visual-studio-code" class="nav-link" data-scroll-target="#visual-studio-code">Visual Studio Code</a></li>
   <li><a href="#git-and-github" id="toc-git-and-github" class="nav-link" data-scroll-target="#git-and-github">Git and GitHub</a></li>
+  <li><a href="#which-terminal-to-use" id="toc-which-terminal-to-use" class="nav-link" data-scroll-target="#which-terminal-to-use">Which terminal to use</a></li>
   <li><a href="#python-through-uv" id="toc-python-through-uv" class="nav-link" data-scroll-target="#python-through-uv">Python through uv</a></li>
   </ul></li>
   <li><a href="#week-02-ai-tools" id="toc-week-02-ai-tools" class="nav-link" data-scroll-target="#week-02-ai-tools">Week 02: AI tools</a>
@@ -357,7 +358,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h3 class="anchored" data-anchor-id="visual-studio-code">Visual Studio Code</h3>
 <ul>
 <li>Follow the official <a href="https://code.visualstudio.com/docs/setup/setup-overview">VS Code setup documentation</a>.</li>
-<li>On Windows, use <strong>Git Bash</strong> as your course shell. On macOS or Linux, use your default shell.</li>
+<li>On Windows, leave <strong>Add to PATH</strong> selected in the installer. That is what makes the <code>code</code> command work in a terminal later.</li>
 <li>You may work in a standalone terminal or choose <strong>Terminal &gt; New Terminal</strong> in VS Code.</li>
 </ul>
 </section>
@@ -365,6 +366,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h3 class="anchored" data-anchor-id="git-and-github">Git and GitHub</h3>
 <ul>
 <li>Install Git from the official <a href="https://git-scm.com/downloads">Git downloads page</a>.</li>
+<li><strong>Windows:</strong> the installer asks a long list of questions. The defaults are fine for this course; you can click through them. One of those defaults installs <strong>Git Bash</strong>, which is the terminal you will use all semester, so you do not install it separately.</li>
 <li>Create a <a href="https://github.com/signup">GitHub account</a>.</li>
 <li>Apply for <a href="https://education.github.com/pack">GitHub Education benefits</a>.</li>
 <li>Configure your name and the email associated with GitHub:</li>
@@ -372,11 +374,36 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> config <span class="at">--global</span> user.name <span class="st">"Your name"</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> config <span class="at">--global</span> user.email <span class="st">"your.email@example.com"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
+<section id="which-terminal-to-use" class="level3">
+<h3 class="anchored" data-anchor-id="which-terminal-to-use">Which terminal to use</h3>
+<p>Every command in this course is written for a Unix-style shell. On macOS or Linux that is your default Terminal, and there is nothing to do.</p>
+<p>On Windows, use <strong>Git Bash</strong>. It came with Git in the previous step, so it is already on your machine. Open it from the Start menu by typing “Git Bash”, or right-click inside a folder and choose <strong>Open Git Bash here</strong>.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Windows: make VS Code open Git Bash by default
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Otherwise VS Code’s integrated terminal gives you PowerShell, and course commands will behave differently.</p>
+<ol type="1">
+<li>Open VS Code and press <code>Ctrl+Shift+P</code>.</li>
+<li>Type <strong>Terminal: Select Default Profile</strong> and press Enter.</li>
+<li>Choose <strong>Git Bash</strong>.</li>
+<li>Open a new terminal with <strong>Terminal &gt; New Terminal</strong> and confirm the prompt says <code>MINGW64</code>.</li>
+</ol>
+</div>
+</div>
+<p>Do not use Command Prompt for this course. PowerShell is needed for exactly one step, installing <code>uv</code> below, and after that you can stay in Git Bash.</p>
+</section>
 <section id="python-through-uv" class="level3">
 <h3 class="anchored" data-anchor-id="python-through-uv">Python through uv</h3>
 <p>We use Python 3.12, managed by <code>uv</code>. Do not install Python separately unless <code>uv</code>’s official documentation tells you that your system requires it.</p>
 <ol type="1">
-<li>Follow the official <a href="https://docs.astral.sh/uv/getting-started/installation/"><code>uv</code> installation guide</a>.</li>
+<li>Follow the official <a href="https://docs.astral.sh/uv/getting-started/installation/"><code>uv</code> installation guide</a>. On Windows, that installer runs in <strong>PowerShell</strong>, not Git Bash. Run it there, then close PowerShell and return to Git Bash for everything else. If <code>uv --version</code> is not recognized in Git Bash afterward, close and reopen Git Bash so it picks up the updated PATH.</li>
 <li>From your cloned labs repository, create the locked course environment:</li>
 </ol>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> sync <span class="at">--locked</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
