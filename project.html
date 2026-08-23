@@ -283,7 +283,7 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#readme" id="toc-readme" class="nav-link" data-scroll-target="#readme">2. README</a></li>
   <li><a href="#tests" id="toc-tests" class="nav-link" data-scroll-target="#tests">3. Tests</a></li>
   <li><a href="#cicd-pipeline" id="toc-cicd-pipeline" class="nav-link" data-scroll-target="#cicd-pipeline">4. CI/CD pipeline</a></li>
-  <li><a href="#agents.md" id="toc-agents.md" class="nav-link" data-scroll-target="#agents.md">5. AGENTS.md</a></li>
+  <li><a href="#two-markdown-files-about-ai" id="toc-two-markdown-files-about-ai" class="nav-link" data-scroll-target="#two-markdown-files-about-ai">5. Two markdown files about AI</a></li>
   </ul></li>
   <li><a href="#grading-rubric" id="toc-grading-rubric" class="nav-link" data-scroll-target="#grading-rubric">Grading rubric</a></li>
   <li><a href="#key-dates" id="toc-key-dates" class="nav-link" data-scroll-target="#key-dates">Key dates</a></li>
@@ -381,9 +381,23 @@ ul.task-list li input[type="checkbox"] {
 <li>Pass cleanly on your final submission</li>
 </ul>
 </section>
-<section id="agents.md" class="level3">
-<h3 class="anchored" data-anchor-id="agents.md">5. AGENTS.md</h3>
-<p>Include an <code>AGENTS.md</code> file in the root of your repository documenting how you used AI tools during development. This is not a formality, so write honestly about where AI helped, where it steered you wrong, and what you learned from the collaboration.</p>
+<section id="two-markdown-files-about-ai" class="level3">
+<h3 class="anchored" data-anchor-id="two-markdown-files-about-ai">5. Two markdown files about AI</h3>
+<p>Your repository must include two files in its root. They do different jobs, so do not merge them.</p>
+<p><strong><code>AGENTS.md</code>, instructions for the next agent.</strong></p>
+<p>This is the real convention, and you have been reading one all semester: the labs repository has an <code>AGENTS.md</code> telling any AI assistant what it may and may not touch. Yours does the same job for your project. Write it for an agent that has just been pointed at your repository and knows nothing about it. At minimum:</p>
+<ul>
+<li>What the project does, in a sentence or two</li>
+<li>How to set it up and run it</li>
+<li>How to run the tests</li>
+<li>Where things live, and which file holds what</li>
+<li>Conventions you want followed: naming, style, commit messages</li>
+<li>Anything that must not be changed</li>
+</ul>
+<p>Write it forward-looking. It should still be useful to a person who picks up your project six months from now.</p>
+<p><strong><code>AI_USAGE.md</code>, an account of how you used AI.</strong></p>
+<p>This is the disclosure, and it looks backward. Write honestly about which tools you used and for what, where AI genuinely helped, where it was wrong or misleading and how you caught it, and what you would do differently next time.</p>
+<p>This is not a formality, and it is not a sales pitch for AI. A file that says “Copilot wrote my tests and they were perfect” is less credible, and far less interesting, than one that says “Copilot’s first three tests passed against a broken implementation, and I only caught it when I checked one assertion by hand.”</p>
 <hr>
 </section>
 </section>
@@ -468,7 +482,8 @@ ul.task-list li input[type="checkbox"] {
 <li><label><input type="checkbox"><code>README.md</code> covers installation, usage, and examples</label></li>
 <li><label><input type="checkbox">All tests pass locally</label></li>
 <li><label><input type="checkbox">GitHub Actions workflow passes on the <code>main</code> branch</label></li>
-<li><label><input type="checkbox"><code>AGENTS.md</code> is present and honest</label></li>
+<li><label><input type="checkbox"><code>AGENTS.md</code> is present and would actually orient an agent or a new contributor</label></li>
+<li><label><input type="checkbox"><code>AI_USAGE.md</code> is present and honest</label></li>
 <li><label><input type="checkbox">Commit history reflects ongoing work (not one giant commit at the end)</label></li>
 </ul>
 <hr>
