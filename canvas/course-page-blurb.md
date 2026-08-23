@@ -1,7 +1,8 @@
 # IS4010 Canvas blurb
 
-Paste into a Canvas page or the top module. The four sections below are in reading order:
-what the course is, where the three destinations are, the syllabus, and the course website.
+Paste into a Canvas page or the top module. The five sections below are in reading order:
+what the course is, where the three destinations are, the syllabus, attendance and
+participation, and the course website.
 
 ---
 
@@ -39,6 +40,26 @@ navigation to open it.
 That is the official syllabus for the course, and it collects everything in one place:
 instructor information, office hours, grading, course policies, required materials, and the
 course calendar.
+
+## Attendance and participation
+
+Participation is **15% of your grade**, and it is worth understanding how it works.
+
+I am not taking attendance. There is no sign-in sheet and no penalty for a missed class.
+
+What there is, though, is a course built almost entirely around lab time. Each week meets twice:
+the first session introduces the ideas, and the second turns into workshop time on that week's
+lab with me in the room. Showing up is the cheapest way to get unstuck, and it is where most of
+your participation grade comes from. Asking questions, answering someone else's, and helping in
+the Teams channel all count.
+
+Participation is assessed holistically at my discretion rather than by a formula. If you are
+here, working, and engaged with the course, you will do fine on it.
+
+One caveat, stated plainly: if attendance drops off materially over the semester, I reserve the
+right to start recording it and to give short quizzes at the end of the remaining sessions,
+which would then inform this grade. I will announce that in Canvas and Teams before it takes
+effect. I would rather not.
 
 ## Course website
 
