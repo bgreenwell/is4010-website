@@ -119,6 +119,7 @@ author: "Brandon M. Greenwell"
 - Create your [GitHub account](https://github.com/join) if you haven't already.
 - Use the terminal, fork and clone the semester repository, then run `uv sync --locked`.
 - Submit your fork URL in Canvas and confirm the Week 01 badge is green.
+- Not sure what that looks like? The [demo repository](https://github.com/bgreenwell/is4010-labs-demo) shows a passing badge, a failing one you can click into, and later weeks that have not run yet.
 :::
 
 ---
