@@ -27,6 +27,30 @@ failure tells you and how to work through it with an AI assistant.
 - Run the exact command shown in the lab from the repository root.
 - Example: `uv run --directory week03 python -m pytest tests/ -v`.
 
+## Windows issues
+
+**I don't have Git Bash / I can't find it**
+
+- Git Bash is installed by the Git for Windows installer, so install Git and you have it.
+- Open it from the Start menu by typing "Git Bash", or right-click in a folder and choose
+  **Open Git Bash here**.
+
+**My terminal doesn't look like the course examples**
+
+- You are probably in PowerShell or Command Prompt. Confirm the prompt says `MINGW64`.
+- In VS Code, press `Ctrl+Shift+P`, run **Terminal: Select Default Profile**, choose
+  **Git Bash**, then open a new terminal.
+
+**`code: command not found`**
+
+- VS Code was installed without **Add to PATH**. Re-run the installer and select it, or open
+  the folder from VS Code with **File > Open Folder** instead.
+
+**`uv: command not found` right after installing it on Windows**
+
+- The `uv` installer runs in PowerShell and updates PATH. Close Git Bash and reopen it so it
+  picks up the change.
+
 ## Git and GitHub issues
 
 **Authentication failed or permission was denied**

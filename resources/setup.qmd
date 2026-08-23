@@ -10,12 +10,13 @@ Welcome to IS 4010! We use official setup documentation so these instructions st
 ### Visual Studio Code
 
 - Follow the official [VS Code setup documentation](https://code.visualstudio.com/docs/setup/setup-overview).
-- On Windows, use **Git Bash** as your course shell. On macOS or Linux, use your default shell.
+- On Windows, leave **Add to PATH** selected in the installer. That is what makes the `code` command work in a terminal later.
 - You may work in a standalone terminal or choose **Terminal > New Terminal** in VS Code.
 
 ### Git and GitHub
 
 - Install Git from the official [Git downloads page](https://git-scm.com/downloads).
+- **Windows:** the installer asks a long list of questions. The defaults are fine for this course; you can click through them. One of those defaults installs **Git Bash**, which is the terminal you will use all semester, so you do not install it separately.
 - Create a [GitHub account](https://github.com/signup).
 - Apply for [GitHub Education benefits](https://education.github.com/pack).
 - Configure your name and the email associated with GitHub:
@@ -25,11 +26,38 @@ git config --global user.name "Your name"
 git config --global user.email "your.email@example.com"
 ```
 
+### Which terminal to use
+
+Every command in this course is written for a Unix-style shell. On macOS or Linux that is your
+default Terminal, and there is nothing to do.
+
+On Windows, use **Git Bash**. It came with Git in the previous step, so it is already on your
+machine. Open it from the Start menu by typing "Git Bash", or right-click inside a folder and
+choose **Open Git Bash here**.
+
+::: {.callout-tip}
+### Windows: make VS Code open Git Bash by default
+
+Otherwise VS Code's integrated terminal gives you PowerShell, and course commands will behave
+differently.
+
+1. Open VS Code and press `Ctrl+Shift+P`.
+2. Type **Terminal: Select Default Profile** and press Enter.
+3. Choose **Git Bash**.
+4. Open a new terminal with **Terminal > New Terminal** and confirm the prompt says `MINGW64`.
+:::
+
+Do not use Command Prompt for this course. PowerShell is needed for exactly one step, installing
+`uv` below, and after that you can stay in Git Bash.
+
 ### Python through uv
 
 We use Python 3.12, managed by `uv`. Do not install Python separately unless `uv`'s official documentation tells you that your system requires it.
 
 1. Follow the official [`uv` installation guide](https://docs.astral.sh/uv/getting-started/installation/).
+   On Windows, that installer runs in **PowerShell**, not Git Bash. Run it there, then close
+   PowerShell and return to Git Bash for everything else. If `uv --version` is not recognized in
+   Git Bash afterward, close and reopen Git Bash so it picks up the updated PATH.
 2. From your cloned labs repository, create the locked course environment:
 
 ```bash
