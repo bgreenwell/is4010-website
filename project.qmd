@@ -63,9 +63,28 @@ Your repository must include a **GitHub Actions workflow** (`.github/workflows/`
 - Run all tests
 - Pass cleanly on your final submission
 
-### 5. AGENTS.md
+### 5. Two markdown files about AI
 
-Include an `AGENTS.md` file in the root of your repository documenting how you used AI tools during development. This is not a formality, so write honestly about where AI helped, where it steered you wrong, and what you learned from the collaboration.
+Your repository must include two files in its root. They do different jobs, so do not merge them.
+
+**`AGENTS.md`, instructions for the next agent.**
+
+This is the real convention, and you have been reading one all semester: the labs repository has an `AGENTS.md` telling any AI assistant what it may and may not touch. Yours does the same job for your project. Write it for an agent that has just been pointed at your repository and knows nothing about it. At minimum:
+
+- What the project does, in a sentence or two
+- How to set it up and run it
+- How to run the tests
+- Where things live, and which file holds what
+- Conventions you want followed: naming, style, commit messages
+- Anything that must not be changed
+
+Write it forward-looking. It should still be useful to a person who picks up your project six months from now.
+
+**`AI_USAGE.md`, an account of how you used AI.**
+
+This is the disclosure, and it looks backward. Write honestly about which tools you used and for what, where AI genuinely helped, where it was wrong or misleading and how you caught it, and what you would do differently next time.
+
+This is not a formality, and it is not a sales pitch for AI. A file that says "Copilot wrote my tests and they were perfect" is less credible, and far less interesting, than one that says "Copilot's first three tests passed against a broken implementation, and I only caught it when I checked one assertion by hand."
 
 ---
 
@@ -107,7 +126,8 @@ Before submitting, verify the following:
 - [ ] `README.md` covers installation, usage, and examples
 - [ ] All tests pass locally
 - [ ] GitHub Actions workflow passes on the `main` branch
-- [ ] `AGENTS.md` is present and honest
+- [ ] `AGENTS.md` is present and would actually orient an agent or a new contributor
+- [ ] `AI_USAGE.md` is present and honest
 - [ ] Commit history reflects ongoing work (not one giant commit at the end)
 
 ---

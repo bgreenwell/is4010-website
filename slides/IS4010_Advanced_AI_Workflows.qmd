@@ -1013,7 +1013,7 @@ Pause tool use when it is adding guesses, complexity, or repeated suggestions wi
 - Do not modify supplied tests or workflows unless the assignment explicitly permits it
 - Never include passwords, tokens, API keys, or authentication output in a prompt or repository
 - Inspect `git diff`, run the documented checks, and understand every submitted line
-- Document AI use where the assignment requires it; the final project requires an honest `AGENTS.md`
+- Document AI use where the assignment requires it; the final project requires an `AGENTS.md` that orients an agent and an `AI_USAGE.md` that honestly records how you worked
 
 **The standard:**
 > You must be able to explain every line of code you submit,
