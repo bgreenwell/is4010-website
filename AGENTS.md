@@ -45,6 +45,8 @@ When a change affects both teaching content and a lab contract, update the publi
   because a nested project there excludes the decks from the parent render and makes local
   output diverge from what CI publishes.
 - `resources/`: setup, troubleshooting, and Python environment guides
+- `canvas/`: text pasted into Canvas by hand, kept under version control so it stays
+  consistent with the site it links to. Never published; the render list excludes it
 - `_site/`: local render output. Ignored by Git; the publish workflow renders fresh from
   source and deploys that, so never commit it and never treat it as the published state
 - `.github/workflows/publish.yml`: render, link-check, and GitHub Pages deployment workflow
