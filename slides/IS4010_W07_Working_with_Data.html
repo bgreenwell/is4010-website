@@ -11,7 +11,7 @@
   <meta name="generator" content="quarto-1.8.25">
 
   <meta name="author" content="Brandon M. Greenwell">
-  <title>IS 4010 - App Dev with AI – IS4010: AI-enhanced application development</title>
+  <title>IS 4010: App Dev with AI – IS 4010: Application Development with Artificial Intelligence</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -198,7 +198,7 @@
     <div class="slides">
 
 <section id="title-slide" class="quarto-title-block center">
-  <h1 class="title">IS4010: AI-enhanced application development</h1>
+  <h1 class="title">IS 4010: Application Development with Artificial Intelligence</h1>
   <p class="subtitle">Week 07: Working with external data</p>
 
 <div class="quarto-title-authors">
@@ -271,7 +271,7 @@ Brandon M. Greenwell
 <section id="reading-and-writing-files-in-python" class="slide level2">
 <h2>Reading and writing files in Python</h2>
 <h3 id="the-standard-pattern-with-open-context-manager"><strong>The standard pattern: <code>with open()</code> context manager</strong></h3>
-<div id="229149d8" class="cell">
+<div id="b95bd2d9" class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a></a><span class="co"># Write to a file (overwrites existing content)</span></span>
 <span id="cb1-2"><a></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">"my_note.txt"</span>, <span class="st">"w"</span>) <span class="im">as</span> f:</span>
 <span id="cb1-3"><a></a>    f.write(<span class="st">"Hello from our application!"</span>)</span>
@@ -304,7 +304,7 @@ Brandon M. Greenwell
 <section id="the-problem-with-plain-text-files" class="slide level2">
 <h2>The problem with plain text files</h2>
 <h3 id="text-is-unstructured-and-hard-to-parse"><strong>Text is unstructured and hard to parse</strong></h3>
-<div id="4cd98f40" class="cell">
+<div id="a6d350d9" class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a></a><span class="co"># Saving a contact list to a text file - messy!</span></span>
 <span id="cb2-2"><a></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">"contacts.txt"</span>, <span class="st">"w"</span>) <span class="im">as</span> f:</span>
 <span id="cb2-3"><a></a>    f.write(<span class="st">"Alice|alice@example.com|555-1234</span><span class="ch">\n</span><span class="st">"</span>)</span>
@@ -386,7 +386,7 @@ Brandon M. Greenwell
 <section id="using-pythons-json-library" class="slide level2">
 <h2>Using Python’s <code>json</code> library</h2>
 <h3 id="two-key-functions-dump-and-load"><strong>Two key functions: <code>dump()</code> and <code>load()</code></strong></h3>
-<div id="ad530344" class="cell">
+<div id="72706ca1" class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a></a><span class="im">import</span> json</span>
 <span id="cb3-2"><a></a></span>
 <span id="cb3-3"><a></a><span class="co"># Python dictionary (complex, nested structure)</span></span>
@@ -552,7 +552,7 @@ protocol</code></pre>
 <section id="making-your-first-api-request" class="slide level2">
 <h2>Making your first API request</h2>
 <h3 id="get-request-to-a-public-api"><strong>GET request to a public API</strong></h3>
-<div id="dc19887a" class="cell">
+<div id="7d2f7187" class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a></a><span class="im">import</span> requests</span>
 <span id="cb7-2"><a></a></span>
 <span id="cb7-3"><a></a><span class="co"># Make a GET request to the PokeAPI</span></span>
@@ -632,7 +632,7 @@ protocol</code></pre>
 <div class="columns">
 <div class="column" style="width:50%;">
 <p><strong>Reading JSON from a file:</strong></p>
-<div id="e34e512b" class="cell">
+<div id="b0ef0c62" class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a></a><span class="im">import</span> json</span>
 <span id="cb8-2"><a></a></span>
 <span id="cb8-3"><a></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">"data.json"</span>, <span class="st">"r"</span>) <span class="im">as</span> f:</span>
@@ -641,7 +641,7 @@ protocol</code></pre>
 </div>
 </div><div class="column" style="width:50%;">
 <p><strong>Reading JSON from an API:</strong></p>
-<div id="e30f3f96" class="cell">
+<div id="d47a7498" class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a></a><span class="im">import</span> requests</span>
 <span id="cb9-2"><a></a></span>
 <span id="cb9-3"><a></a>response <span class="op">=</span> requests.get(url)</span>
@@ -685,7 +685,7 @@ protocol</code></pre>
 <section id="error-handling-with-apis" class="slide level2">
 <h2>Error handling with APIs</h2>
 <h3 id="networks-are-unreliable---plan-for-failure"><strong>Networks are unreliable - plan for failure</strong></h3>
-<div id="56ad5153" class="cell">
+<div id="773b1eee" class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a></a><span class="im">import</span> requests</span>
 <span id="cb10-2"><a></a></span>
 <span id="cb10-3"><a></a>url <span class="op">=</span> <span class="st">"https://api.example.com/data"</span></span>
@@ -741,7 +741,7 @@ protocol</code></pre>
 <section id="putting-it-all-together-files-and-apis" class="slide level2">
 <h2>Putting it all together: files and APIs</h2>
 <h3 id="a-complete-data-workflow"><strong>A complete data workflow</strong></h3>
-<div id="02a80c19" class="cell">
+<div id="59897640" class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a></a><span class="im">import</span> json</span>
 <span id="cb11-2"><a></a><span class="im">import</span> requests</span>
 <span id="cb11-3"><a></a></span>
@@ -859,7 +859,7 @@ protocol</code></pre>
     </div>
   <div class="quarto-auto-generated-content" style="display: none;">
 <div class="footer footer-default">
-<p>IS4010: app development with AI</p>
+<p>IS 4010: App Dev with AI</p>
 </div>
 </div></div>
 
