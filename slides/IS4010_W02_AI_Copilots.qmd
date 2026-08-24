@@ -616,6 +616,55 @@ Students install and try both CLI agents. The point is comparison and informed c
 
 ---
 
+## One file, every tool: [`AGENTS.md`](https://agents.md/)
+
+**You just set up three agents. They can all read the same file.**
+
+::: {.incremental}
+- `AGENTS.md` is an open format: a README written for coding agents instead of for people
+- Plain Markdown, no schema, no required headings; the agent simply reads the text you wrote
+- It lives in the repository root, so any agent you launch there starts with the same briefing
+- Over 20 tools read it, including GitHub Copilot, VS Code, Antigravity CLI, and Codex
+- More than 60,000 open-source projects publish one
+:::
+
+**You already have one.** Your fork of `is4010-labs` contains an `AGENTS.md` telling any agent that tests, workflows, and lab instructions are read-only.
+
+::: notes
+Open <https://agents.md/> and the labs repository's own `AGENTS.md` side by side. The second one is the better demo because students are governed by it right now: it is the reason a well-behaved agent refuses to "just make the test pass."
+
+The motivating problem is the one they hit in Lab 02, retyping the same setup facts into every new session. `AGENTS.md` is where that context goes once, under version control, instead of into each conversation.
+:::
+
+---
+
+## When a tool wants its own filename
+
+**Some agents also look for a name of their own:**
+
+::: {.incremental}
+- `AGENTS.md`, the common format, read by most tools including both CLIs you just installed
+- `.github/copilot-instructions.md`, GitHub Copilot's own custom-instructions file in VS Code
+- `CLAUDE.md`, read by Claude Code
+:::
+
+**The practical rule: write `AGENTS.md`, then point the others at it.**
+
+::: {.incremental}
+- Copilot in VS Code reads `AGENTS.md` too, so the extra file is often unnecessary
+- When a tool insists, make its file one line that references `AGENTS.md` rather than a second copy
+- This course's own website repository does exactly that: `CLAUDE.md` contains `@AGENTS.md` and nothing else
+- Two copies of your project's rules drift apart; one copy cannot
+:::
+
+::: notes
+Do not turn this into a compatibility matrix; support changes constantly and the deck would go stale. The durable lesson is the single-source-of-truth habit, which is the same reason we do not paste the same constant into three modules.
+
+Students write their own `AGENTS.md` in Week 08, and the final project requires one.
+:::
+
+---
+
 ## AI workflow: implementation
 
 **Daily development:**

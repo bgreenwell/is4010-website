@@ -1069,6 +1069,56 @@ uv run my-api --help
 
 ---
 
+## Writing your own [`AGENTS.md`](https://agents.md/)
+
+### **Week 02 introduced the format; your project needs one**
+
+```markdown
+# AGENTS.md: weather CLI
+
+A Python 3.12 CLI that reports forecasts from the Open-Meteo API.
+Environment managed with `uv`. Source lives in `src/weather_cli/`.
+
+## Commands
+
+- Install: `uv sync`
+- Test: `uv run python -m pytest tests/ -v`
+- Run: `uv run weather --city Cincinnati`
+
+## Conventions
+
+- NumPy-style docstrings on every public function
+- HTTP calls belong in `api_client.py` and are mocked in tests
+- Read the API key from the `WEATHER_API_KEY` environment variable; never commit it
+
+## Before you finish
+
+Run the tests. If one fails, fix the implementation, not the test.
+```
+
+### **This is not your README**
+
+::: {.incremental}
+- The README tells a person what the project is and how to use it
+- `AGENTS.md` tells an agent how to work in the repository without breaking it
+- Commands, conventions, and constraints that would clutter a README belong here
+- Overlap is fine; link between the two instead of maintaining both
+:::
+
+::: {.notes}
+**TEACHING NOTES:**
+
+- **Required deliverable**: The final project rubric expects an `AGENTS.md` that would actually orient an agent
+- **Audience test**: Write for an assistant pointed at the repository that knows nothing about it
+- **Specificity**: Exact commands beat prose; "run the tests" is useless without the command
+- **Constraints matter most**: The read-only rules and the secrets rule are the lines that prevent damage
+- **Keep it short**: A page that is never read is worse than three sections that are
+- **Living document**: Update it when commands change, the same as the README
+- **Self-referential exercise**: Ask an agent to draft one, then check every command it claims
+:::
+
+---
+
 ## Practical example: final-project structure
 
 ### **One possible structure for the final project**
@@ -1096,6 +1146,7 @@ my_final_project/
 │
 ├── pyproject.toml               # Project configuration
 ├── README.md                    # Your documentation
+├── AGENTS.md                    # Briefing for coding agents
 ├── .gitignore                   # Git exclusions
 └── uv.lock                      # Exact resolved dependencies
 ```
@@ -1293,6 +1344,7 @@ if __name__ == "__main__":
 - **Create clean imports** between your modules
 - **Consider an entry point** in `pyproject.toml` when it improves installation and use
 - **Document usage** in your README with examples
+- **Add an `AGENTS.md`** with your real commands, conventions, and constraints
 - **Test your CLI** with different arguments and edge cases
 :::
 
@@ -1304,6 +1356,7 @@ if __name__ == "__main__":
 - Code is organized in logical modules with clean imports
 - `--help` flag provides clear usage instructions
 - README explains installation and usage
+- `AGENTS.md` would orient an agent that has never seen the repository
 :::
 
 ::: {.notes}
