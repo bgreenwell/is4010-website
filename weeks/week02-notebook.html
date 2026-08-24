@@ -358,6 +358,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </ul></li>
   <li><a href="#the-comparison-protocol" id="toc-the-comparison-protocol" class="nav-link" data-scroll-target="#the-comparison-protocol">The comparison protocol</a></li>
   <li><a href="#choosing-your-ai-toolkit" id="toc-choosing-your-ai-toolkit" class="nav-link" data-scroll-target="#choosing-your-ai-toolkit">Choosing your AI toolkit</a></li>
+  <li><a href="#one-file-every-tool-agents.md" id="toc-one-file-every-tool-agents.md" class="nav-link" data-scroll-target="#one-file-every-tool-agents.md">One file, every tool: <code>AGENTS.md</code></a></li>
+  <li><a href="#when-a-tool-wants-its-own-filename" id="toc-when-a-tool-wants-its-own-filename" class="nav-link" data-scroll-target="#when-a-tool-wants-its-own-filename">When a tool wants its own filename</a></li>
   <li><a href="#ai-workflow-implementation" id="toc-ai-workflow-implementation" class="nav-link" data-scroll-target="#ai-workflow-implementation">AI workflow: implementation</a></li>
   <li><a href="#ai-workflow-review-and-submission" id="toc-ai-workflow-review-and-submission" class="nav-link" data-scroll-target="#ai-workflow-review-and-submission">AI workflow: review and submission</a></li>
   <li><a href="#remember-you-are-the-pilot" id="toc-remember-you-are-the-pilot" class="nav-link" data-scroll-target="#remember-you-are-the-pilot">Remember: you are the pilot</a></li>
@@ -765,6 +767,36 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Keep both CLIs installed so you can compare when useful.</li>
 <li>Use whichever browser, editor, and CLI combination best fits the task.</li>
 <li>Tool preference never replaces tests, inspection, or your responsibility for the result.</li>
+</ul>
+<hr>
+</section>
+<section id="one-file-every-tool-agents.md" class="level2">
+<h2 class="anchored" data-anchor-id="one-file-every-tool-agents.md">One file, every tool: <a href="https://agents.md/"><code>AGENTS.md</code></a></h2>
+<p><strong>You just set up three agents. They can all read the same file.</strong></p>
+<ul>
+<li><code>AGENTS.md</code> is an open format: a README written for coding agents instead of for people</li>
+<li>Plain Markdown, no schema, no required headings; the agent simply reads the text you wrote</li>
+<li>It lives in the repository root, so any agent you launch there starts with the same briefing</li>
+<li>Over 20 tools read it, including GitHub Copilot, VS Code, Antigravity CLI, and Codex</li>
+<li>More than 60,000 open-source projects publish one</li>
+</ul>
+<p><strong>You already have one.</strong> Your fork of <code>is4010-labs</code> contains an <code>AGENTS.md</code> telling any agent that tests, workflows, and lab instructions are read-only.</p>
+<hr>
+</section>
+<section id="when-a-tool-wants-its-own-filename" class="level2">
+<h2 class="anchored" data-anchor-id="when-a-tool-wants-its-own-filename">When a tool wants its own filename</h2>
+<p><strong>Some agents also look for a name of their own:</strong></p>
+<ul>
+<li><code>AGENTS.md</code>, the common format, read by most tools including both CLIs you just installed</li>
+<li><code>.github/copilot-instructions.md</code>, GitHub Copilot’s own custom-instructions file in VS Code</li>
+<li><code>CLAUDE.md</code>, read by Claude Code</li>
+</ul>
+<p><strong>The practical rule: write <code>AGENTS.md</code>, then point the others at it.</strong></p>
+<ul>
+<li>Copilot in VS Code reads <code>AGENTS.md</code> too, so the extra file is often unnecessary</li>
+<li>When a tool insists, make its file one line that references <code>AGENTS.md</code> rather than a second copy</li>
+<li>This course’s own website repository does exactly that: <code>CLAUDE.md</code> contains <code>@AGENTS.md</code> and nothing else</li>
+<li>Two copies of your project’s rules drift apart; one copy cannot</li>
 </ul>
 <hr>
 </section>

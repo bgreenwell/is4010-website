@@ -402,6 +402,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#prompt-strategies-for-project-structure" id="toc-prompt-strategies-for-project-structure" class="nav-link" data-scroll-target="#prompt-strategies-for-project-structure"><strong>Prompt strategies for project structure:</strong></a></li>
   <li><a href="#package-tasks-an-assistant-can-draft" id="toc-package-tasks-an-assistant-can-draft" class="nav-link" data-scroll-target="#package-tasks-an-assistant-can-draft"><strong>Package tasks an assistant can draft:</strong></a></li>
   </ul></li>
+  <li><a href="#writing-your-own-agents.md" id="toc-writing-your-own-agents.md" class="nav-link" data-scroll-target="#writing-your-own-agents.md">Writing your own <code>AGENTS.md</code></a>
+  <ul class="collapse">
+  <li><a href="#week-02-introduced-the-format-your-project-needs-one" id="toc-week-02-introduced-the-format-your-project-needs-one" class="nav-link" data-scroll-target="#week-02-introduced-the-format-your-project-needs-one"><strong>Week 02 introduced the format; your project needs one</strong></a></li>
+  <li><a href="#this-is-not-your-readme" id="toc-this-is-not-your-readme" class="nav-link" data-scroll-target="#this-is-not-your-readme"><strong>This is not your README</strong></a></li>
+  </ul></li>
   <li><a href="#practical-example-final-project-structure" id="toc-practical-example-final-project-structure" class="nav-link" data-scroll-target="#practical-example-final-project-structure">Practical example: final-project structure</a>
   <ul class="collapse">
   <li><a href="#one-possible-structure-for-the-final-project" id="toc-one-possible-structure-for-the-final-project" class="nav-link" data-scroll-target="#one-possible-structure-for-the-final-project"><strong>One possible structure for the final project</strong></a></li>
@@ -1193,6 +1198,42 @@ uv run python calculator.py 10 5 --operation multiply # Should print 50</code></
 <hr>
 </section>
 </section>
+<section id="writing-your-own-agents.md" class="level2">
+<h2 class="anchored" data-anchor-id="writing-your-own-agents.md">Writing your own <a href="https://agents.md/"><code>AGENTS.md</code></a></h2>
+<section id="week-02-introduced-the-format-your-project-needs-one" class="level3">
+<h3 class="anchored" data-anchor-id="week-02-introduced-the-format-your-project-needs-one"><strong>Week 02 introduced the format; your project needs one</strong></h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb26"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu"># AGENTS.md: weather CLI</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>A Python 3.12 CLI that reports forecasts from the Open-Meteo API.</span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>Environment managed with <span class="in">`uv`</span>. Source lives in <span class="in">`src/weather_cli/`</span>.</span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a><span class="fu">## Commands</span></span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Install: <span class="in">`uv sync`</span></span>
+<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Test: <span class="in">`uv run python -m pytest tests/ -v`</span></span>
+<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Run: <span class="in">`uv run weather --city Cincinnati`</span></span>
+<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a><span class="fu">## Conventions</span></span>
+<span id="cb26-13"><a href="#cb26-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-14"><a href="#cb26-14" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>NumPy-style docstrings on every public function</span>
+<span id="cb26-15"><a href="#cb26-15" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>HTTP calls belong in <span class="in">`api_client.py`</span> and are mocked in tests</span>
+<span id="cb26-16"><a href="#cb26-16" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Read the API key from the <span class="in">`WEATHER_API_KEY`</span> environment variable; never commit it</span>
+<span id="cb26-17"><a href="#cb26-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-18"><a href="#cb26-18" aria-hidden="true" tabindex="-1"></a><span class="fu">## Before you finish</span></span>
+<span id="cb26-19"><a href="#cb26-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-20"><a href="#cb26-20" aria-hidden="true" tabindex="-1"></a>Run the tests. If one fails, fix the implementation, not the test.</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="this-is-not-your-readme" class="level3">
+<h3 class="anchored" data-anchor-id="this-is-not-your-readme"><strong>This is not your README</strong></h3>
+<ul>
+<li>The README tells a person what the project is and how to use it</li>
+<li><code>AGENTS.md</code> tells an agent how to work in the repository without breaking it</li>
+<li>Commands, conventions, and constraints that would clutter a README belong here</li>
+<li>Overlap is fine; link between the two instead of maintaining both</li>
+</ul>
+<hr>
+</section>
+</section>
 <section id="practical-example-final-project-structure" class="level2">
 <h2 class="anchored" data-anchor-id="practical-example-final-project-structure">Practical example: final-project structure</h2>
 <section id="one-possible-structure-for-the-final-project" class="level3">
@@ -1219,6 +1260,7 @@ uv run python calculator.py 10 5 --operation multiply # Should print 50</code></
 │
 ├── pyproject.toml               # Project configuration
 ├── README.md                    # Your documentation
+├── AGENTS.md                    # Briefing for coding agents
 ├── .gitignore                   # Git exclusions
 └── uv.lock                      # Exact resolved dependencies</code></pre>
 <hr>
@@ -1229,46 +1271,46 @@ uv run python calculator.py 10 5 --operation multiply # Should print 50</code></
 <section id="entry-point-main.py-or-srcmy_api_tool__main__.py" class="level3">
 <h3 class="anchored" data-anchor-id="entry-point-main.py-or-srcmy_api_tool__main__.py"><strong>Entry point (<code>main.py</code> or <code>src/my_api_tool/__main__.py</code>):</strong></h3>
 <div id="08-033" class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co">"""Entry point for the my_api_tool CLI."""</span></span>
-<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> my_api_tool.cli <span class="im">import</span> main</span>
-<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="va">__name__</span> <span class="op">==</span> <span class="st">"__main__"</span>:</span>
-<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>    main()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co">"""Entry point for the my_api_tool CLI."""</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> my_api_tool.cli <span class="im">import</span> main</span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="va">__name__</span> <span class="op">==</span> <span class="st">"__main__"</span>:</span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>    main()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="cli-module-srcmy_api_toolcli.py" class="level3">
 <h3 class="anchored" data-anchor-id="cli-module-srcmy_api_toolcli.py"><strong>CLI module (<code>src/my_api_tool/cli.py</code>):</strong></h3>
 <div id="08-035" class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co">"""Command-line interface for API tool."""</span></span>
-<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> argparse</span>
-<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sys</span>
-<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> my_api_tool.api_client <span class="im">import</span> APIClient</span>
-<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> my_api_tool.utils <span class="im">import</span> format_output</span>
-<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> main():</span>
-<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a>    parser <span class="op">=</span> argparse.ArgumentParser(description<span class="op">=</span><span class="st">"API client tool"</span>)</span>
-<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a>    parser.add_argument(<span class="st">"resource"</span>, <span class="bu">help</span><span class="op">=</span><span class="st">"Resource to fetch"</span>)</span>
-<span id="cb28-10"><a href="#cb28-10" aria-hidden="true" tabindex="-1"></a>    parser.add_argument(<span class="st">"--format"</span>, choices<span class="op">=</span>[<span class="st">"json"</span>, <span class="st">"pretty"</span>], default<span class="op">=</span><span class="st">"pretty"</span>)</span>
-<span id="cb28-11"><a href="#cb28-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-12"><a href="#cb28-12" aria-hidden="true" tabindex="-1"></a>    args <span class="op">=</span> parser.parse_args()</span>
-<span id="cb28-13"><a href="#cb28-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-14"><a href="#cb28-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">try</span>:</span>
-<span id="cb28-15"><a href="#cb28-15" aria-hidden="true" tabindex="-1"></a>        client <span class="op">=</span> APIClient()</span>
-<span id="cb28-16"><a href="#cb28-16" aria-hidden="true" tabindex="-1"></a>        data <span class="op">=</span> client.fetch(args.resource)</span>
-<span id="cb28-17"><a href="#cb28-17" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(format_output(data, args.<span class="bu">format</span>))</span>
-<span id="cb28-18"><a href="#cb28-18" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="dv">0</span></span>
-<span id="cb28-19"><a href="#cb28-19" aria-hidden="true" tabindex="-1"></a>    <span class="cf">except</span> (<span class="pp">OSError</span>, <span class="pp">ValueError</span>) <span class="im">as</span> error:</span>
-<span id="cb28-20"><a href="#cb28-20" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f"Error: </span><span class="sc">{</span>error<span class="sc">}</span><span class="ss">"</span>, <span class="bu">file</span><span class="op">=</span>sys.stderr)</span>
-<span id="cb28-21"><a href="#cb28-21" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="dv">1</span></span>
-<span id="cb28-22"><a href="#cb28-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-23"><a href="#cb28-23" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="va">__name__</span> <span class="op">==</span> <span class="st">"__main__"</span>:</span>
-<span id="cb28-24"><a href="#cb28-24" aria-hidden="true" tabindex="-1"></a>    sys.exit(main())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co">"""Command-line interface for API tool."""</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> argparse</span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sys</span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> my_api_tool.api_client <span class="im">import</span> APIClient</span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> my_api_tool.utils <span class="im">import</span> format_output</span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> main():</span>
+<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a>    parser <span class="op">=</span> argparse.ArgumentParser(description<span class="op">=</span><span class="st">"API client tool"</span>)</span>
+<span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a>    parser.add_argument(<span class="st">"resource"</span>, <span class="bu">help</span><span class="op">=</span><span class="st">"Resource to fetch"</span>)</span>
+<span id="cb29-10"><a href="#cb29-10" aria-hidden="true" tabindex="-1"></a>    parser.add_argument(<span class="st">"--format"</span>, choices<span class="op">=</span>[<span class="st">"json"</span>, <span class="st">"pretty"</span>], default<span class="op">=</span><span class="st">"pretty"</span>)</span>
+<span id="cb29-11"><a href="#cb29-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-12"><a href="#cb29-12" aria-hidden="true" tabindex="-1"></a>    args <span class="op">=</span> parser.parse_args()</span>
+<span id="cb29-13"><a href="#cb29-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-14"><a href="#cb29-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">try</span>:</span>
+<span id="cb29-15"><a href="#cb29-15" aria-hidden="true" tabindex="-1"></a>        client <span class="op">=</span> APIClient()</span>
+<span id="cb29-16"><a href="#cb29-16" aria-hidden="true" tabindex="-1"></a>        data <span class="op">=</span> client.fetch(args.resource)</span>
+<span id="cb29-17"><a href="#cb29-17" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(format_output(data, args.<span class="bu">format</span>))</span>
+<span id="cb29-18"><a href="#cb29-18" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="dv">0</span></span>
+<span id="cb29-19"><a href="#cb29-19" aria-hidden="true" tabindex="-1"></a>    <span class="cf">except</span> (<span class="pp">OSError</span>, <span class="pp">ValueError</span>) <span class="im">as</span> error:</span>
+<span id="cb29-20"><a href="#cb29-20" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f"Error: </span><span class="sc">{</span>error<span class="sc">}</span><span class="ss">"</span>, <span class="bu">file</span><span class="op">=</span>sys.stderr)</span>
+<span id="cb29-21"><a href="#cb29-21" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="dv">1</span></span>
+<span id="cb29-22"><a href="#cb29-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-23"><a href="#cb29-23" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="va">__name__</span> <span class="op">==</span> <span class="st">"__main__"</span>:</span>
+<span id="cb29-24"><a href="#cb29-24" aria-hidden="true" tabindex="-1"></a>    sys.exit(main())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="usage-after-install" class="level3">
 <h3 class="anchored" data-anchor-id="usage-after-install"><strong>Usage after install:</strong></h3>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb29"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> sync</span>
-<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> run my-api-tool pokemon <span class="at">--format</span> json</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb30"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> sync</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> run my-api-tool pokemon <span class="at">--format</span> json</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <hr>
 </section>
 <section id="your-turn-final-exercise" class="level3">
@@ -1282,23 +1324,23 @@ uv run python calculator.py 10 5 --operation multiply # Should print 50</code></
 </ol>
 <p>Test it with simulated arguments.</p>
 <div id="08-037" class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Your complete final project CLI design here</span></span>
-<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TODO</span><span class="co">: Create your API client class</span></span>
-<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> YourAPIClient:</span>
-<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">pass</span></span>
-<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TODO</span><span class="co">: Create your CLI parser</span></span>
-<span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> create_your_cli_parser():</span>
-<span id="cb30-9"><a href="#cb30-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">pass</span></span>
-<span id="cb30-10"><a href="#cb30-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-11"><a href="#cb30-11" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TODO</span><span class="co">: Create main function</span></span>
-<span id="cb30-12"><a href="#cb30-12" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> your_main():</span>
-<span id="cb30-13"><a href="#cb30-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">pass</span></span>
-<span id="cb30-14"><a href="#cb30-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-15"><a href="#cb30-15" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TODO</span><span class="co">: Add __name__ == "__main__" pattern</span></span>
-<span id="cb30-16"><a href="#cb30-16" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="va">__name__</span> <span class="op">==</span> <span class="st">"__main__"</span>:</span>
-<span id="cb30-17"><a href="#cb30-17" aria-hidden="true" tabindex="-1"></a>    your_main()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Your complete final project CLI design here</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TODO</span><span class="co">: Create your API client class</span></span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> YourAPIClient:</span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">pass</span></span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TODO</span><span class="co">: Create your CLI parser</span></span>
+<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> create_your_cli_parser():</span>
+<span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">pass</span></span>
+<span id="cb31-10"><a href="#cb31-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-11"><a href="#cb31-11" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TODO</span><span class="co">: Create main function</span></span>
+<span id="cb31-12"><a href="#cb31-12" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> your_main():</span>
+<span id="cb31-13"><a href="#cb31-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">pass</span></span>
+<span id="cb31-14"><a href="#cb31-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-15"><a href="#cb31-15" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TODO</span><span class="co">: Add __name__ == "__main__" pattern</span></span>
+<span id="cb31-16"><a href="#cb31-16" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="va">__name__</span> <span class="op">==</span> <span class="st">"__main__"</span>:</span>
+<span id="cb31-17"><a href="#cb31-17" aria-hidden="true" tabindex="-1"></a>    your_main()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 </section>
@@ -1360,6 +1402,7 @@ uv run python calculator.py 10 5 --operation multiply # Should print 50</code></
 <li><strong>Create clean imports</strong> between your modules</li>
 <li><strong>Consider an entry point</strong> in <code>pyproject.toml</code> when it improves installation and use</li>
 <li><strong>Document usage</strong> in your README with examples</li>
+<li><strong>Add an <code>AGENTS.md</code></strong> with your real commands, conventions, and constraints</li>
 <li><strong>Test your CLI</strong> with different arguments and edge cases</li>
 </ul>
 </section>
@@ -1371,6 +1414,7 @@ uv run python calculator.py 10 5 --operation multiply # Should print 50</code></
 <li>Code is organized in logical modules with clean imports</li>
 <li><code>--help</code> flag provides clear usage instructions</li>
 <li>README explains installation and usage</li>
+<li><code>AGENTS.md</code> would orient an agent that has never seen the repository</li>
 </ul>
 <hr>
 </section>
@@ -1398,10 +1442,10 @@ uv run python calculator.py 10 5 --operation multiply # Should print 50</code></
 <li>Automated tests use fake responses; manual API use requires an ignored <code>config.py</code> or the <code>WEATHER_API_KEY</code> environment variable</li>
 <li>Do not modify the supplied tests, workflow, <code>config.example.py</code>, or root <code>.gitignore</code></li>
 </ul>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb31"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> run python <span class="at">-m</span> pytest week08/tests/ <span class="at">-v</span></span>
-<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> add week08/favorites.py week08/weather_api.py week08/weather.py</span>
-<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"Complete Lab 08"</span></span>
-<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> push origin main</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb32"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> run python <span class="at">-m</span> pytest week08/tests/ <span class="at">-v</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> add week08/favorites.py week08/weather_api.py week08/weather.py</span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"Complete Lab 08"</span></span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> push origin main</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Confirm the Week 08 README badge is green; that badge is the complete 10-point grade.</p>
 <p><strong>Instructions:</strong> <a href="https://github.com/bgreenwell/is4010-labs/blob/main/week08/lab08.md"><code>week08/lab08.md</code></a></p>
 <hr>

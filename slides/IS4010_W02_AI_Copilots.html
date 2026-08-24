@@ -525,7 +525,7 @@ Brandon M. Greenwell
 <section class="slide level2">
 
 <p>An example of Numpy-style docstrings:</p>
-<div id="f4b829ba" class="cell">
+<div id="0d2c7d82" class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a></a><span class="kw">def</span> add(num1, num2):</span>
 <span id="cb6-2"><a></a>    <span class="co">"""</span></span>
 <span id="cb6-3"><a></a><span class="co">    Add two numbers together.</span></span>
@@ -857,6 +857,62 @@ Brandon M. Greenwell
 <aside class="notes">
 <p>Give clear guidance on what students need vs.&nbsp;what’s nice to have.</p>
 <p>Students install and try both CLI agents. The point is comparison and informed choice, not declaring one permanent winner.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="one-file-every-tool-agents.md" class="slide level2">
+<h2>One file, every tool: <a href="https://agents.md/"><code>AGENTS.md</code></a></h2>
+<p><strong>You just set up three agents. They can all read the same file.</strong></p>
+<ul>
+<li class="fragment"><code>AGENTS.md</code> is an open format: a README written for coding agents instead of for people</li>
+<li class="fragment">Plain Markdown, no schema, no required headings; the agent simply reads the text you wrote</li>
+<li class="fragment">It lives in the repository root, so any agent you launch there starts with the same briefing</li>
+<li class="fragment">Over 20 tools read it, including GitHub Copilot, VS Code, Antigravity CLI, and Codex</li>
+<li class="fragment">More than 60,000 open-source projects publish one</li>
+</ul>
+<p><strong>You already have one.</strong> Your fork of <code>is4010-labs</code> contains an <code>AGENTS.md</code> telling any agent that tests, workflows, and lab instructions are read-only.</p>
+<aside class="notes">
+<p>Open <a href="https://agents.md/" class="uri">https://agents.md/</a> and the labs repository’s own <code>AGENTS.md</code> side by side. The second one is the better demo because students are governed by it right now: it is the reason a well-behaved agent refuses to “just make the test pass.”</p>
+<p>The motivating problem is the one they hit in Lab 02, retyping the same setup facts into every new session. <code>AGENTS.md</code> is where that context goes once, under version control, instead of into each conversation.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="when-a-tool-wants-its-own-filename" class="slide level2">
+<h2>When a tool wants its own filename</h2>
+<p><strong>Some agents also look for a name of their own:</strong></p>
+<ul>
+<li class="fragment"><code>AGENTS.md</code>, the common format, read by most tools including both CLIs you just installed</li>
+<li class="fragment"><code>.github/copilot-instructions.md</code>, GitHub Copilot’s own custom-instructions file in VS Code</li>
+<li class="fragment"><code>CLAUDE.md</code>, read by Claude Code</li>
+</ul>
+<p><strong>The practical rule: write <code>AGENTS.md</code>, then point the others at it.</strong></p>
+<ul>
+<li class="fragment">Copilot in VS Code reads <code>AGENTS.md</code> too, so the extra file is often unnecessary</li>
+<li class="fragment">When a tool insists, make its file one line that references <code>AGENTS.md</code> rather than a second copy</li>
+<li class="fragment">This course’s own website repository does exactly that: <code>CLAUDE.md</code> contains <code>@AGENTS.md</code> and nothing else</li>
+<li class="fragment">Two copies of your project’s rules drift apart; one copy cannot</li>
+</ul>
+<aside class="notes">
+<p>Do not turn this into a compatibility matrix; support changes constantly and the deck would go stale. The durable lesson is the single-source-of-truth habit, which is the same reason we do not paste the same constant into three modules.</p>
+<p>Students write their own <code>AGENTS.md</code> in Week 08, and the final project requires one.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
