@@ -1,5 +1,5 @@
 ---
-title: "IS4010: AI-enhanced application development"
+title: "IS 4010: Application Development with Artificial Intelligence"
 subtitle: "Week 08: Building professional Python applications"
 author: "Brandon M. Greenwell"
 ---

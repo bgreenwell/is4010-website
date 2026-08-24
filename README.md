@@ -1,6 +1,6 @@
-# IS4010 course website
+# IS 4010 course website
 
-Quarto source for the public course website for IS4010: AI-enhanced application development at the University of Cincinnati.
+Quarto source for the public course website for IS 4010: Application Development with Artificial Intelligence at the University of Cincinnati.
 
 - Weekly module pages for all 14 weeks
 - Reveal.js lecture decks, one per week, plus an optional advanced AI workflows appendix

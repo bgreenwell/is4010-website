@@ -1,5 +1,5 @@
 ---
-title: "IS4010: AI-enhanced application development"
+title: "IS 4010: Application Development with Artificial Intelligence"
 subtitle: "Week 10: The soul of Rust, ownership and borrowing"
 author: "Brandon M. Greenwell"
 ---

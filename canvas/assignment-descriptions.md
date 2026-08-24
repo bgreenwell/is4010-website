@@ -1,4 +1,4 @@
-# IS4010 Canvas assignment descriptions
+# IS 4010 Canvas assignment descriptions
 
 One entry per lab. Copy the **Name** into the Canvas assignment title and the **Description**
 into the rich-text description box. Links are live, so pasting from Word carries them across.

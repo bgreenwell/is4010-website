@@ -1,4 +1,4 @@
-# IS4010 Canvas blurb
+# IS 4010 Canvas blurb
 
 Paste into a Canvas page or the top module. The five sections below are in reading order:
 what the course is, where the three destinations are, the syllabus, attendance and

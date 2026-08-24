@@ -1,10 +1,10 @@
-# Agent context for the IS4010 course website
+# Agent context for the IS 4010 course website
 
-This repository is the public course website for **IS4010: AI-enhanced application development**, taught by Brandon M. Greenwell, PhD, at the University of Cincinnati. Treat this file as the definitive context and operating contract for work in this repository.
+This repository is the public course website for **IS 4010: Application Development with Artificial Intelligence**, taught by Brandon M. Greenwell, PhD, at the University of Cincinnati. Treat this file as the definitive context and operating contract for work in this repository.
 
 ## Course model
 
-IS4010 is a 14-week course built around modern software development with AI assistants as collaborators:
+IS 4010 is a 14-week course built around modern software development with AI assistants as collaborators:
 
 - Week 01: terminal basics, `uv`, Git, GitHub, and repository setup
 - Week 02: browser AI chats, GitHub Copilot in VS Code, GitHub Copilot CLI, and Antigravity CLI

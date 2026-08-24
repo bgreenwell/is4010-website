@@ -13,7 +13,7 @@ format:
     preview-links: auto
     scrollable: true
     css: custom.css
-    footer: "IS4010: app development with AI"
+    footer: "IS 4010: App Dev with AI"
 
 execute:
   # Code blocks are displayed, never executed. Many slide examples are illustrative

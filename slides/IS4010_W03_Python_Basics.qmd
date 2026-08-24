@@ -1,5 +1,5 @@
 ---
-title: "IS4010: AI-enhanced application development"
+title: "IS 4010: Application Development with Artificial Intelligence"
 subtitle: "Week 03: Python basics and control flow"
 author: "Brandon M. Greenwell"
 ---
