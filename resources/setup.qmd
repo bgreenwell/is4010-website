@@ -26,6 +26,26 @@ git config --global user.name "Your name"
 git config --global user.email "your.email@example.com"
 ```
 
+### Authenticating with GitHub
+
+You do not need this until your first `git push` in Lab 01, but it helps to know what is coming.
+Git will ask you to prove who you are, and what you see depends on your machine.
+
+**Windows.** Git Credential Manager came with Git and usually opens a browser window. Sign in to
+GitHub there and you are done.
+
+**macOS.** Git prompts in the terminal for a username and password. GitHub no longer accepts your
+account password here. Create a [personal access token](https://github.com/settings/tokens),
+choose the classic token type, and give it the `repo` scope. Enter your GitHub username at the
+username prompt, then paste the token at the password prompt. Nothing appears on screen while you
+paste, which is expected.
+
+Either way your computer saves the result, so this is a one-time step rather than something you
+repeat on every push. Treat a token like a password: never paste it into a file in the
+repository. If you lose it, generate a new one and delete the old one.
+
+If the prompt keeps returning, see the [troubleshooting page](troubleshooting.qmd).
+
 ### Which terminal to use
 
 Every command in this course is written for a Unix-style shell. On macOS or Linux that is your
