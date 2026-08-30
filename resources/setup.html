@@ -315,6 +315,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul class="collapse">
   <li><a href="#visual-studio-code" id="toc-visual-studio-code" class="nav-link" data-scroll-target="#visual-studio-code">Visual Studio Code</a></li>
   <li><a href="#git-and-github" id="toc-git-and-github" class="nav-link" data-scroll-target="#git-and-github">Git and GitHub</a></li>
+  <li><a href="#authenticating-with-github" id="toc-authenticating-with-github" class="nav-link" data-scroll-target="#authenticating-with-github">Authenticating with GitHub</a></li>
   <li><a href="#which-terminal-to-use" id="toc-which-terminal-to-use" class="nav-link" data-scroll-target="#which-terminal-to-use">Which terminal to use</a></li>
   <li><a href="#python-through-uv" id="toc-python-through-uv" class="nav-link" data-scroll-target="#python-through-uv">Python through uv</a></li>
   </ul></li>
@@ -373,6 +374,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> config <span class="at">--global</span> user.name <span class="st">"Your name"</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> config <span class="at">--global</span> user.email <span class="st">"your.email@example.com"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="authenticating-with-github" class="level3">
+<h3 class="anchored" data-anchor-id="authenticating-with-github">Authenticating with GitHub</h3>
+<p>You do not need this until your first <code>git push</code> in Lab 01, but it helps to know what is coming. Git will ask you to prove who you are, and what you see depends on your machine.</p>
+<p><strong>Windows.</strong> Git Credential Manager came with Git and usually opens a browser window. Sign in to GitHub there and you are done.</p>
+<p><strong>macOS.</strong> Git prompts in the terminal for a username and password. GitHub no longer accepts your account password here. Create a <a href="https://github.com/settings/tokens">personal access token</a>, choose the classic token type, and give it the <code>repo</code> scope. Enter your GitHub username at the username prompt, then paste the token at the password prompt. Nothing appears on screen while you paste, which is expected.</p>
+<p>Either way your computer saves the result, so this is a one-time step rather than something you repeat on every push. Treat a token like a password: never paste it into a file in the repository. If you lose it, generate a new one and delete the old one.</p>
+<p>If the prompt keeps returning, see the <a href="../resources/troubleshooting.html">troubleshooting page</a>.</p>
 </section>
 <section id="which-terminal-to-use" class="level3">
 <h3 class="anchored" data-anchor-id="which-terminal-to-use">Which terminal to use</h3>
