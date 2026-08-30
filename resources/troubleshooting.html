@@ -350,16 +350,25 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="git-and-github-issues" class="level2">
 <h2 class="anchored" data-anchor-id="git-and-github-issues">Git and GitHub issues</h2>
+<p><strong>Git asks for a username and password when I push</strong></p>
+<ul>
+<li>GitHub no longer accepts your account password for Git. Retyping it will not help.</li>
+<li>Create a personal access token at <a href="https://github.com/settings/tokens" class="uri">https://github.com/settings/tokens</a>, choose the classic token type, and give it the <code>repo</code> scope. Copy it before you leave the page.</li>
+<li>Run <code>git push origin main</code> again. Enter your GitHub username, then paste the token when Git asks for your password. Nothing appears on screen while you paste, which is expected.</li>
+<li>If earlier attempts saved the wrong password, clear the stored credential and push again: Credential Manager on Windows, Keychain Access on macOS, searching for <code>github.com</code>.</li>
+<li>Never save a token in the repository. Treat it like a password.</li>
+</ul>
 <p><strong>Authentication failed or permission was denied</strong></p>
 <ul>
-<li>Follow GitHub’s current <a href="https://docs.github.com/en/authentication">authentication documentation</a>.</li>
 <li>Confirm <code>git remote -v</code> points to your fork, not the instructor repository.</li>
-<li>Never save a token in the repository.</li>
+<li>Confirm your token has not expired and carries the <code>repo</code> scope.</li>
+<li>For anything else, see GitHub’s <a href="https://docs.github.com/en/authentication">authentication documentation</a>.</li>
 </ul>
 <p><strong>Changes are not showing on GitHub</strong></p>
 <ul>
 <li>Run <code>git status</code> and <code>git log -1</code>.</li>
 <li>A commit remains local until you run <code>git push origin main</code>.</li>
+<li>“Your branch is ahead of <code>origin/main</code> by 1 commit” means the commit worked and the push has not happened yet. Nothing is lost.</li>
 </ul>
 </section>
 <section id="rust-issues" class="level2">
