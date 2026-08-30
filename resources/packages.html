@@ -353,6 +353,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><code>uv.lock</code> for the exact resolved environment</li>
 </ul>
 <p>It creates <code>.venv</code> automatically. You do not need to activate it because <code>uv run</code> selects the project environment for each command.</p>
+<p>The lock file also includes the <code>dev</code> dependency group, which <code>uv</code> installs by default. That is why <code>pytest</code> is available even though <code>requests</code> is the only direct dependency listed in <code>pyproject.toml</code>.</p>
 </section>
 <section id="run-python-and-tests" class="level2">
 <h2 class="anchored" data-anchor-id="run-python-and-tests">Run Python and tests</h2>

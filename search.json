@@ -2620,7 +2620,7 @@
     "href": "resources/packages.html#set-up-the-lab-environment",
     "title": "Python packages and environments",
     "section": "Set up the lab environment",
-    "text": "Set up the lab environment\nFrom the root of your cloned is4010-labs repository:\nuv sync --locked\nThis command reads:\n\n.python-version for the course Python version\npyproject.toml for direct dependencies\nuv.lock for the exact resolved environment\n\nIt creates .venv automatically. You do not need to activate it because uv run selects the project environment for each command.",
+    "text": "Set up the lab environment\nFrom the root of your cloned is4010-labs repository:\nuv sync --locked\nThis command reads:\n\n.python-version for the course Python version\npyproject.toml for direct dependencies\nuv.lock for the exact resolved environment\n\nIt creates .venv automatically. You do not need to activate it because uv run selects the project environment for each command.\nThe lock file also includes the dev dependency group, which uv installs by default. That is why pytest is available even though requests is the only direct dependency listed in pyproject.toml.",
     "crumbs": [
       "Resources",
       "Python packages"
