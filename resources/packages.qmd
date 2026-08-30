@@ -21,6 +21,8 @@ This command reads:
 
 It creates `.venv` automatically. You do not need to activate it because `uv run` selects the project environment for each command.
 
+The lock file also includes the `dev` dependency group, which `uv` installs by default. That is why `pytest` is available even though `requests` is the only direct dependency listed in `pyproject.toml`.
+
 ## Run Python and tests
 
 ```bash
