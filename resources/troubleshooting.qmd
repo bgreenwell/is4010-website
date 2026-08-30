@@ -53,16 +53,30 @@ failure tells you and how to work through it with an AI assistant.
 
 ## Git and GitHub issues
 
+**Git asks for a username and password when I push**
+
+- GitHub no longer accepts your account password for Git. Retyping it will not help.
+- Create a personal access token at <https://github.com/settings/tokens>, choose the classic
+  token type, and give it the `repo` scope. Copy it before you leave the page.
+- Run `git push origin main` again. Enter your GitHub username, then paste the token when Git
+  asks for your password. Nothing appears on screen while you paste, which is expected.
+- If earlier attempts saved the wrong password, clear the stored credential and push again:
+  Credential Manager on Windows, Keychain Access on macOS, searching for `github.com`.
+- Never save a token in the repository. Treat it like a password.
+
 **Authentication failed or permission was denied**
 
-- Follow GitHub's current [authentication documentation](https://docs.github.com/en/authentication).
 - Confirm `git remote -v` points to your fork, not the instructor repository.
-- Never save a token in the repository.
+- Confirm your token has not expired and carries the `repo` scope.
+- For anything else, see GitHub's
+  [authentication documentation](https://docs.github.com/en/authentication).
 
 **Changes are not showing on GitHub**
 
 - Run `git status` and `git log -1`.
 - A commit remains local until you run `git push origin main`.
+- "Your branch is ahead of `origin/main` by 1 commit" means the commit worked and the push has
+  not happened yet. Nothing is lost.
 
 ## Rust issues
 
