@@ -498,56 +498,13 @@ Brandon M. Greenwell
 <li class="fragment">Its purpose is to explain what the code does</li>
 <li class="fragment">We are learning about them now because they are the primary way you will communicate your intent to AI assistants</li>
 <li class="fragment"><strong>A good docstring leads to good AI-generated code</strong></li>
+<li class="fragment">In Lab 02 the docstrings are written for you. Each one states a contract, and your job is to make the function satisfy it</li>
+<li class="fragment">You will write your own, in the fuller style this course uses, in Week 05</li>
 </ul>
 <aside class="notes">
 <p>This bridges from the AI discussion to the practical lab work. Lab 02 is a guided Python preview, so students need only enough context to read a function and describe its intent.</p>
 <p>Emphasize the connection: clear human communication (docstrings) leads to better AI assistance. This reinforces that AI tools respond to human intent and clarity.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="our-docstring-style-numpy" class="slide level2">
-<h2>Our docstring style: <a href="https://numpydoc.readthedocs.io/en/latest/format.html">NumPy</a></h2>
-<ul>
-<li class="fragment">There are several popular styles for writing docstrings. In this course, we will use the <strong><a href="https://numpydoc.readthedocs.io/en/latest/format.html">NumPy style</a></strong></li>
-<li class="fragment">It is clean, readable, and works very well with automated documentation tools</li>
-<li class="fragment">See next slide for an example</li>
-</ul>
-</section>
-<section class="slide level2">
-
-<p>An example of Numpy-style docstrings:</p>
-<div id="c12a6e46" class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a></a><span class="kw">def</span> add(num1, num2):</span>
-<span id="cb6-2"><a></a>    <span class="co">"""</span></span>
-<span id="cb6-3"><a></a><span class="co">    Add two numbers together.</span></span>
-<span id="cb6-4"><a></a></span>
-<span id="cb6-5"><a></a><span class="co">    Parameters</span></span>
-<span id="cb6-6"><a></a><span class="co">    ----------</span></span>
-<span id="cb6-7"><a></a><span class="co">    num1 : int</span></span>
-<span id="cb6-8"><a></a><span class="co">        The first number.</span></span>
-<span id="cb6-9"><a></a><span class="co">    num2 : int</span></span>
-<span id="cb6-10"><a></a><span class="co">        The second number.</span></span>
-<span id="cb6-11"><a></a></span>
-<span id="cb6-12"><a></a><span class="co">    Returns</span></span>
-<span id="cb6-13"><a></a><span class="co">    -------</span></span>
-<span id="cb6-14"><a></a><span class="co">    int</span></span>
-<span id="cb6-15"><a></a><span class="co">        The sum of the two numbers.</span></span>
-<span id="cb6-16"><a></a><span class="co">    """</span></span>
-<span id="cb6-17"><a></a>    <span class="cf">return</span> num1 <span class="op">+</span> num2</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<aside class="notes">
-<p>Show the <a href="https://numpy.org/">NumPy</a> docstring format that will be used throughout the course. This is important for Lab 02 where students will be working with docstrings extensively.</p>
-<p>Point out: - The brief description first - Parameters section with types and descriptions - Returns section with type and description - Clear, consistent formatting</p>
-<p>This style works particularly well with AI tools because it provides structured, detailed context about function intent. Full Python instruction begins in Week 03.</p>
+<p>Keep this at the one-line level. Lab 02 supplies three single-line docstrings as the contracts the agents implement against, so students only need to read one here. The NumPy format with Parameters and Returns sections is introduced in Week 05, where they first write their own.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -774,8 +731,8 @@ Brandon M. Greenwell
 <li class="fragment">Review requested permissions and commands before approval.</li>
 <li class="fragment">Use the official setup guide because installation and authentication flows can change.</li>
 </ul>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a></a><span class="bu">cd</span> ~/is4010/is4010-labs</span>
-<span id="cb7-2"><a></a><span class="ex">agy</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a></a><span class="bu">cd</span> ~/is4010/is4010-labs</span>
+<span id="cb6-2"><a></a><span class="ex">agy</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <aside class="notes">
 <p>Use the current official setup guide during class. The course-facing Google terminal tool is Antigravity CLI, launched with <code>agy</code>; installation and account flows may change.</p>
 <style type="text/css">
@@ -799,8 +756,8 @@ Brandon M. Greenwell
 <li class="fragment">It can reason about repository context, propose edits, and help run checks.</li>
 <li class="fragment">Review its plan, permissions, commands, and final diff.</li>
 </ul>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a></a><span class="bu">cd</span> ~/is4010/is4010-labs</span>
-<span id="cb8-2"><a></a><span class="ex">copilot</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a></a><span class="bu">cd</span> ~/is4010/is4010-labs</span>
+<span id="cb7-2"><a></a><span class="ex">copilot</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <aside class="notes">
 <p>The current Copilot CLI is a standalone agent, not the older <code>gh copilot suggest</code> and <code>gh copilot explain</code> extension. Open the official install page during class instead of copying an installer command into the deck.</p>
 <style type="text/css">

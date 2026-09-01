@@ -333,7 +333,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#what-did-we-learn" id="toc-what-did-we-learn" class="nav-link" data-scroll-target="#what-did-we-learn">What did we learn?</a></li>
   <li><a href="#ethics-and-limitations" id="toc-ethics-and-limitations" class="nav-link" data-scroll-target="#ethics-and-limitations">Ethics and limitations</a></li>
   <li><a href="#a-quick-note-on-docstrings" id="toc-a-quick-note-on-docstrings" class="nav-link" data-scroll-target="#a-quick-note-on-docstrings">A quick note on docstrings</a></li>
-  <li><a href="#our-docstring-style-numpy" id="toc-our-docstring-style-numpy" class="nav-link" data-scroll-target="#our-docstring-style-numpy">Our docstring style: NumPy</a></li>
   <li><a href="#where-this-is-heading" id="toc-where-this-is-heading" class="nav-link" data-scroll-target="#where-this-is-heading">Where this is heading</a></li>
   </ul></li>
   <li><a href="#ai-in-your-editor-and-terminal" id="toc-ai-in-your-editor-and-terminal" class="nav-link" data-scroll-target="#ai-in-your-editor-and-terminal">AI in your editor and terminal</a>
@@ -541,37 +540,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Its purpose is to explain what the code does</li>
 <li>We are learning about them now because they are the primary way you will communicate your intent to AI assistants</li>
 <li><strong>A good docstring leads to good AI-generated code</strong></li>
+<li>In Lab 02 the docstrings are written for you. Each one states a contract, and your job is to make the function satisfy it</li>
+<li>You will write your own, in the fuller style this course uses, in Week 05</li>
 </ul>
-<hr>
-</section>
-<section id="our-docstring-style-numpy" class="level2">
-<h2 class="anchored" data-anchor-id="our-docstring-style-numpy">Our docstring style: <a href="https://numpydoc.readthedocs.io/en/latest/format.html">NumPy</a></h2>
-<ul>
-<li>There are several popular styles for writing docstrings. In this course, we will use the <strong><a href="https://numpydoc.readthedocs.io/en/latest/format.html">NumPy style</a></strong></li>
-<li>It is clean, readable, and works very well with automated documentation tools</li>
-<li>See next slide for an example</li>
-</ul>
-<hr>
-<p>An example of Numpy-style docstrings:</p>
-<div id="02-001" class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> add(num1, num2):</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co">    Add two numbers together.</span></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="co">    Parameters</span></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="co">    ----------</span></span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="co">    num1 : int</span></span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="co">        The first number.</span></span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="co">    num2 : int</span></span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="co">        The second number.</span></span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a><span class="co">    Returns</span></span>
-<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a><span class="co">    -------</span></span>
-<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a><span class="co">    int</span></span>
-<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a><span class="co">        The sum of the two numbers.</span></span>
-<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
-<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> num1 <span class="op">+</span> num2</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
 <hr>
 </section>
 <section id="where-this-is-heading" class="level2">
@@ -698,8 +669,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Review requested permissions and commands before approval.</li>
 <li>Use the official setup guide because installation and authentication flows can change.</li>
 </ul>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ~/is4010/is4010-labs</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="ex">agy</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ~/is4010/is4010-labs</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="ex">agy</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <hr>
 </section>
 </section>
@@ -713,8 +684,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>It can reason about repository context, propose edits, and help run checks.</li>
 <li>Review its plan, permissions, commands, and final diff.</li>
 </ul>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ~/is4010/is4010-labs</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="ex">copilot</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ~/is4010/is4010-labs</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="ex">copilot</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <hr>
 </section>
 <section id="draft-your-shared-prompt" class="level3">
@@ -727,17 +698,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="your-turn-implement-count_vowels" class="level3">
 <h3 class="anchored" data-anchor-id="your-turn-implement-count_vowels">Your turn: implement <code>count_vowels</code></h3>
 <p>Use the approach you selected after comparing both CLI agents.</p>
-<div id="02-003" class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> count_vowels(text: <span class="bu">str</span>) <span class="op">-&gt;</span> <span class="bu">int</span>:</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Replace this body with the approach you selected and reviewed."""</span></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">raise</span> <span class="pp">NotImplementedError</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="02-001" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> count_vowels(text: <span class="bu">str</span>) <span class="op">-&gt;</span> <span class="bu">int</span>:</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Replace this body with the approach you selected and reviewed."""</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">raise</span> <span class="pp">NotImplementedError</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Run the checks below. They are evidence, not decoration.</p>
-<div id="02-005" class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># These checks are evidence, not decoration. Add one case of your own.</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> count_vowels(<span class="st">"OpenAI"</span>) <span class="op">==</span> <span class="dv">4</span></span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> count_vowels(<span class="st">"rhythms"</span>) <span class="op">==</span> <span class="dv">0</span></span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> count_vowels(<span class="st">""</span>) <span class="op">==</span> <span class="dv">0</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="02-003" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># These checks are evidence, not decoration. Add one case of your own.</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> count_vowels(<span class="st">"OpenAI"</span>) <span class="op">==</span> <span class="dv">4</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> count_vowels(<span class="st">"rhythms"</span>) <span class="op">==</span> <span class="dv">0</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> count_vowels(<span class="st">""</span>) <span class="op">==</span> <span class="dv">0</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 </section>

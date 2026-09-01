@@ -345,6 +345,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul class="collapse">
   <li><a href="#your-turn-game-character-enhancement" id="toc-your-turn-game-character-enhancement" class="nav-link" data-scroll-target="#your-turn-game-character-enhancement">Your turn: game character enhancement</a></li>
   </ul></li>
+  <li><a href="#documenting-classes-and-methods" id="toc-documenting-classes-and-methods" class="nav-link" data-scroll-target="#documenting-classes-and-methods">Documenting classes and methods</a></li>
   <li><a href="#understanding-inheritance-reusing-behavior" id="toc-understanding-inheritance-reusing-behavior" class="nav-link" data-scroll-target="#understanding-inheritance-reusing-behavior">Understanding inheritance: reusing behavior</a></li>
   <li><a href="#implementing-inheritance-the-super-function" id="toc-implementing-inheritance-the-super-function" class="nav-link" data-scroll-target="#implementing-inheritance-the-super-function">Implementing inheritance: the <code>super()</code> function</a>
   <ul class="collapse">
@@ -768,6 +769,30 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </section>
 </section>
+<section id="documenting-classes-and-methods" class="level2">
+<h2 class="anchored" data-anchor-id="documenting-classes-and-methods">Documenting classes and methods</h2>
+<ul>
+<li>The rules from Week 05 carry over. A docstring is a string literal in triple quotes, placed as the first statement</li>
+<li><strong>Class docstring</strong>: say what the object represents, not how it is built</li>
+<li><strong>Method docstring</strong>: same as any function. Say what it returns or what it changes</li>
+<li><strong>Skip the obvious</strong>: <code>__init__</code> rarely needs more than the class docstring already tells the reader</li>
+<li>Lab 06 hands you <code>get_age</code> with its docstring written. Match that style for the methods you add</li>
+</ul>
+<div id="06-021" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Book:</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""A book in a personal library."""</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, title: <span class="bu">str</span>, author: <span class="bu">str</span>, year: <span class="bu">int</span>):</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.title <span class="op">=</span> title</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.author <span class="op">=</span> author</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.year <span class="op">=</span> year</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> get_age(<span class="va">self</span>):</span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>        <span class="co">"""Return the number of years since publication."""</span></span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> date.today().year <span class="op">-</span> <span class="va">self</span>.year</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<hr>
+</section>
 <section id="understanding-inheritance-reusing-behavior" class="level2">
 <h2 class="anchored" data-anchor-id="understanding-inheritance-reusing-behavior">Understanding inheritance: reusing behavior</h2>
 <ul>
@@ -788,55 +813,55 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><strong>Method override</strong>: Child classes can replace parent methods with specialized versions</li>
 <li><strong>Method extension</strong>: Or extend parent methods with additional functionality</li>
 </ul>
-<div id="06-021" class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Vehicle:</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Base class for all vehicles."""</span></span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, make: <span class="bu">str</span>, model: <span class="bu">str</span>, year: <span class="bu">int</span>):</span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.make <span class="op">=</span> make</span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.model <span class="op">=</span> model</span>
-<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.year <span class="op">=</span> year</span>
-<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.mileage <span class="op">=</span> <span class="dv">0</span></span>
-<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> start_engine(<span class="va">self</span>):</span>
-<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>        <span class="co">"""Start the vehicle's engine."""</span></span>
-<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f"The </span><span class="sc">{</span><span class="va">self</span><span class="sc">.</span>year<span class="sc">}</span><span class="ss"> </span><span class="sc">{</span><span class="va">self</span><span class="sc">.</span>make<span class="sc">}</span><span class="ss"> </span><span class="sc">{</span><span class="va">self</span><span class="sc">.</span>model<span class="sc">}</span><span class="ss"> engine starts."</span>)</span>
-<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> drive(<span class="va">self</span>, miles: <span class="bu">float</span>):</span>
-<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a>        <span class="co">"""Drive the vehicle and update mileage."""</span></span>
-<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.mileage <span class="op">+=</span> miles</span>
-<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f"Drove </span><span class="sc">{</span>miles<span class="sc">}</span><span class="ss"> miles. Total mileage: </span><span class="sc">{</span><span class="va">self</span><span class="sc">.</span>mileage<span class="sc">}</span><span class="ss">"</span>)</span>
-<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> ElectricCar(Vehicle):</span>
-<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Electric vehicle with battery management."""</span></span>
-<span id="cb11-21"><a href="#cb11-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-22"><a href="#cb11-22" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, make: <span class="bu">str</span>, model: <span class="bu">str</span>, year: <span class="bu">int</span>, battery_capacity: <span class="bu">float</span>):</span>
-<span id="cb11-23"><a href="#cb11-23" aria-hidden="true" tabindex="-1"></a>        <span class="bu">super</span>().<span class="fu">__init__</span>(make, model, year)  <span class="co"># Call parent constructor</span></span>
-<span id="cb11-24"><a href="#cb11-24" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.battery_capacity <span class="op">=</span> battery_capacity</span>
-<span id="cb11-25"><a href="#cb11-25" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.battery_level <span class="op">=</span> <span class="fl">100.0</span>  <span class="co"># Start fully charged</span></span>
-<span id="cb11-26"><a href="#cb11-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-27"><a href="#cb11-27" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> start_engine(<span class="va">self</span>):</span>
-<span id="cb11-28"><a href="#cb11-28" aria-hidden="true" tabindex="-1"></a>        <span class="co">"""Override: Electric cars don't have traditional engines."""</span></span>
-<span id="cb11-29"><a href="#cb11-29" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f"The </span><span class="sc">{</span><span class="va">self</span><span class="sc">.</span>year<span class="sc">}</span><span class="ss"> </span><span class="sc">{</span><span class="va">self</span><span class="sc">.</span>make<span class="sc">}</span><span class="ss"> </span><span class="sc">{</span><span class="va">self</span><span class="sc">.</span>model<span class="sc">}</span><span class="ss"> powers on silently."</span>)</span>
-<span id="cb11-30"><a href="#cb11-30" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-31"><a href="#cb11-31" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> charge(<span class="va">self</span>, hours: <span class="bu">float</span>):</span>
-<span id="cb11-32"><a href="#cb11-32" aria-hidden="true" tabindex="-1"></a>        <span class="co">"""Charge the battery (unique to electric cars)."""</span></span>
-<span id="cb11-33"><a href="#cb11-33" aria-hidden="true" tabindex="-1"></a>        charge_added <span class="op">=</span> <span class="bu">min</span>(hours <span class="op">*</span> <span class="dv">10</span>, <span class="dv">100</span> <span class="op">-</span> <span class="va">self</span>.battery_level)</span>
-<span id="cb11-34"><a href="#cb11-34" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.battery_level <span class="op">+=</span> charge_added</span>
-<span id="cb11-35"><a href="#cb11-35" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f"Charged for </span><span class="sc">{</span>hours<span class="sc">}</span><span class="ss"> hours. Battery: </span><span class="sc">{</span><span class="va">self</span><span class="sc">.</span>battery_level<span class="sc">:.1f}</span><span class="ss">%"</span>)</span>
-<span id="cb11-36"><a href="#cb11-36" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-37"><a href="#cb11-37" aria-hidden="true" tabindex="-1"></a><span class="co"># Inheritance in action</span></span>
-<span id="cb11-38"><a href="#cb11-38" aria-hidden="true" tabindex="-1"></a>tesla <span class="op">=</span> ElectricCar(<span class="st">"Tesla"</span>, <span class="st">"Model S"</span>, <span class="dv">2023</span>, <span class="fl">100.0</span>)</span>
-<span id="cb11-39"><a href="#cb11-39" aria-hidden="true" tabindex="-1"></a>tesla.start_engine()  <span class="co"># Uses overridden method</span></span>
-<span id="cb11-40"><a href="#cb11-40" aria-hidden="true" tabindex="-1"></a>tesla.drive(<span class="dv">50</span>)       <span class="co"># Uses inherited method</span></span>
-<span id="cb11-41"><a href="#cb11-41" aria-hidden="true" tabindex="-1"></a>tesla.charge(<span class="dv">2</span>)       <span class="co"># Uses unique method</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="06-023" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Vehicle:</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Base class for all vehicles."""</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, make: <span class="bu">str</span>, model: <span class="bu">str</span>, year: <span class="bu">int</span>):</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.make <span class="op">=</span> make</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.model <span class="op">=</span> model</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.year <span class="op">=</span> year</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.mileage <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> start_engine(<span class="va">self</span>):</span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>        <span class="co">"""Start the vehicle's engine."""</span></span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f"The </span><span class="sc">{</span><span class="va">self</span><span class="sc">.</span>year<span class="sc">}</span><span class="ss"> </span><span class="sc">{</span><span class="va">self</span><span class="sc">.</span>make<span class="sc">}</span><span class="ss"> </span><span class="sc">{</span><span class="va">self</span><span class="sc">.</span>model<span class="sc">}</span><span class="ss"> engine starts."</span>)</span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> drive(<span class="va">self</span>, miles: <span class="bu">float</span>):</span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>        <span class="co">"""Drive the vehicle and update mileage."""</span></span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.mileage <span class="op">+=</span> miles</span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f"Drove </span><span class="sc">{</span>miles<span class="sc">}</span><span class="ss"> miles. Total mileage: </span><span class="sc">{</span><span class="va">self</span><span class="sc">.</span>mileage<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> ElectricCar(Vehicle):</span>
+<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Electric vehicle with battery management."""</span></span>
+<span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-22"><a href="#cb12-22" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, make: <span class="bu">str</span>, model: <span class="bu">str</span>, year: <span class="bu">int</span>, battery_capacity: <span class="bu">float</span>):</span>
+<span id="cb12-23"><a href="#cb12-23" aria-hidden="true" tabindex="-1"></a>        <span class="bu">super</span>().<span class="fu">__init__</span>(make, model, year)  <span class="co"># Call parent constructor</span></span>
+<span id="cb12-24"><a href="#cb12-24" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.battery_capacity <span class="op">=</span> battery_capacity</span>
+<span id="cb12-25"><a href="#cb12-25" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.battery_level <span class="op">=</span> <span class="fl">100.0</span>  <span class="co"># Start fully charged</span></span>
+<span id="cb12-26"><a href="#cb12-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-27"><a href="#cb12-27" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> start_engine(<span class="va">self</span>):</span>
+<span id="cb12-28"><a href="#cb12-28" aria-hidden="true" tabindex="-1"></a>        <span class="co">"""Override: Electric cars don't have traditional engines."""</span></span>
+<span id="cb12-29"><a href="#cb12-29" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f"The </span><span class="sc">{</span><span class="va">self</span><span class="sc">.</span>year<span class="sc">}</span><span class="ss"> </span><span class="sc">{</span><span class="va">self</span><span class="sc">.</span>make<span class="sc">}</span><span class="ss"> </span><span class="sc">{</span><span class="va">self</span><span class="sc">.</span>model<span class="sc">}</span><span class="ss"> powers on silently."</span>)</span>
+<span id="cb12-30"><a href="#cb12-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-31"><a href="#cb12-31" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> charge(<span class="va">self</span>, hours: <span class="bu">float</span>):</span>
+<span id="cb12-32"><a href="#cb12-32" aria-hidden="true" tabindex="-1"></a>        <span class="co">"""Charge the battery (unique to electric cars)."""</span></span>
+<span id="cb12-33"><a href="#cb12-33" aria-hidden="true" tabindex="-1"></a>        charge_added <span class="op">=</span> <span class="bu">min</span>(hours <span class="op">*</span> <span class="dv">10</span>, <span class="dv">100</span> <span class="op">-</span> <span class="va">self</span>.battery_level)</span>
+<span id="cb12-34"><a href="#cb12-34" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.battery_level <span class="op">+=</span> charge_added</span>
+<span id="cb12-35"><a href="#cb12-35" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f"Charged for </span><span class="sc">{</span>hours<span class="sc">}</span><span class="ss"> hours. Battery: </span><span class="sc">{</span><span class="va">self</span><span class="sc">.</span>battery_level<span class="sc">:.1f}</span><span class="ss">%"</span>)</span>
+<span id="cb12-36"><a href="#cb12-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-37"><a href="#cb12-37" aria-hidden="true" tabindex="-1"></a><span class="co"># Inheritance in action</span></span>
+<span id="cb12-38"><a href="#cb12-38" aria-hidden="true" tabindex="-1"></a>tesla <span class="op">=</span> ElectricCar(<span class="st">"Tesla"</span>, <span class="st">"Model S"</span>, <span class="dv">2023</span>, <span class="fl">100.0</span>)</span>
+<span id="cb12-39"><a href="#cb12-39" aria-hidden="true" tabindex="-1"></a>tesla.start_engine()  <span class="co"># Uses overridden method</span></span>
+<span id="cb12-40"><a href="#cb12-40" aria-hidden="true" tabindex="-1"></a>tesla.drive(<span class="dv">50</span>)       <span class="co"># Uses inherited method</span></span>
+<span id="cb12-41"><a href="#cb12-41" aria-hidden="true" tabindex="-1"></a>tesla.charge(<span class="dv">2</span>)       <span class="co"># Uses unique method</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <hr>
 <section id="your-turn-vehicle-inheritance" class="level3">
 <h3 class="anchored" data-anchor-id="your-turn-vehicle-inheritance">Your turn: vehicle inheritance</h3>
 <p>Create a new vehicle type: 1. Create a <code>Motorcycle</code> class that inherits from <code>Vehicle</code> 2. Override the <code>start_engine()</code> method with a motorcycle-specific message 3. Add a <code>wheelie()</code> method unique to motorcycles 4. Make motorcycles more fuel-efficient in the <code>drive()</code> method</p>
-<div id="06-023" class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Your Motorcycle class here</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="06-025" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Your Motorcycle class here</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 </section>
@@ -849,57 +874,57 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><strong><a href="https://docs.python.org/3/library/functions.html#staticmethod">Static methods</a></strong>: Utility functions that belong logically to the class</li>
 <li><strong>Multiple inheritance</strong>: Inheriting from multiple parent classes (advanced topic)</li>
 </ul>
-<div id="06-025" class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Product:</span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Represents a product in an inventory system."""</span></span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Class variable - shared across all instances</span></span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>    total_products_created <span class="op">=</span> <span class="dv">0</span></span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, name: <span class="bu">str</span>, price: <span class="bu">float</span>):</span>
-<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.name <span class="op">=</span> name</span>
-<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>._price <span class="op">=</span> price  <span class="co"># Private attribute (convention)</span></span>
-<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>        Product.total_products_created <span class="op">+=</span> <span class="dv">1</span></span>
-<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">@property</span></span>
-<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> price(<span class="va">self</span>) <span class="op">-&gt;</span> <span class="bu">float</span>:</span>
-<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>        <span class="co">"""Get the product price."""</span></span>
-<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">self</span>._price</span>
-<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">@price.setter</span></span>
-<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> price(<span class="va">self</span>, value: <span class="bu">float</span>):</span>
-<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a>        <span class="co">"""Set the product price with validation."""</span></span>
-<span id="cb13-20"><a href="#cb13-20" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> value <span class="op">&lt;</span> <span class="dv">0</span>:</span>
-<span id="cb13-21"><a href="#cb13-21" aria-hidden="true" tabindex="-1"></a>            <span class="cf">raise</span> <span class="pp">ValueError</span>(<span class="st">"Price cannot be negative"</span>)</span>
-<span id="cb13-22"><a href="#cb13-22" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>._price <span class="op">=</span> value</span>
-<span id="cb13-23"><a href="#cb13-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-24"><a href="#cb13-24" aria-hidden="true" tabindex="-1"></a>    <span class="at">@classmethod</span></span>
-<span id="cb13-25"><a href="#cb13-25" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> get_total_products(cls) <span class="op">-&gt;</span> <span class="bu">int</span>:</span>
-<span id="cb13-26"><a href="#cb13-26" aria-hidden="true" tabindex="-1"></a>        <span class="co">"""Return total number of products created."""</span></span>
-<span id="cb13-27"><a href="#cb13-27" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> cls.total_products_created</span>
-<span id="cb13-28"><a href="#cb13-28" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-29"><a href="#cb13-29" aria-hidden="true" tabindex="-1"></a>    <span class="at">@staticmethod</span></span>
-<span id="cb13-30"><a href="#cb13-30" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> calculate_tax(price: <span class="bu">float</span>, tax_rate: <span class="bu">float</span> <span class="op">=</span> <span class="fl">0.08</span>) <span class="op">-&gt;</span> <span class="bu">float</span>:</span>
-<span id="cb13-31"><a href="#cb13-31" aria-hidden="true" tabindex="-1"></a>        <span class="co">"""Calculate tax amount for a given price."""</span></span>
-<span id="cb13-32"><a href="#cb13-32" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> price <span class="op">*</span> tax_rate</span>
-<span id="cb13-33"><a href="#cb13-33" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-34"><a href="#cb13-34" aria-hidden="true" tabindex="-1"></a><span class="co"># Advanced features in action</span></span>
-<span id="cb13-35"><a href="#cb13-35" aria-hidden="true" tabindex="-1"></a>laptop <span class="op">=</span> Product(<span class="st">"Gaming Laptop"</span>, <span class="fl">1299.99</span>)</span>
-<span id="cb13-36"><a href="#cb13-36" aria-hidden="true" tabindex="-1"></a>mouse <span class="op">=</span> Product(<span class="st">"Wireless Mouse"</span>, <span class="fl">79.99</span>)</span>
-<span id="cb13-37"><a href="#cb13-37" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-38"><a href="#cb13-38" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Total products: </span><span class="sc">{</span>Product<span class="sc">.</span>get_total_products()<span class="sc">}</span><span class="ss">"</span>)  <span class="co"># Class method</span></span>
-<span id="cb13-39"><a href="#cb13-39" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Tax on laptop: $</span><span class="sc">{</span>Product<span class="sc">.</span>calculate_tax(laptop.price)<span class="sc">:.2f}</span><span class="ss">"</span>)  <span class="co"># Static method</span></span>
-<span id="cb13-40"><a href="#cb13-40" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-41"><a href="#cb13-41" aria-hidden="true" tabindex="-1"></a><span class="co"># Property with validation</span></span>
-<span id="cb13-42"><a href="#cb13-42" aria-hidden="true" tabindex="-1"></a><span class="co"># laptop.price = -100 # Would raise ValueError</span></span>
-<span id="cb13-43"><a href="#cb13-43" aria-hidden="true" tabindex="-1"></a>laptop.price <span class="op">=</span> <span class="fl">1199.99</span>  <span class="co"># Valid price change</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="06-027" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Product:</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Represents a product in an inventory system."""</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Class variable - shared across all instances</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>    total_products_created <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, name: <span class="bu">str</span>, price: <span class="bu">float</span>):</span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.name <span class="op">=</span> name</span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>._price <span class="op">=</span> price  <span class="co"># Private attribute (convention)</span></span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>        Product.total_products_created <span class="op">+=</span> <span class="dv">1</span></span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">@property</span></span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> price(<span class="va">self</span>) <span class="op">-&gt;</span> <span class="bu">float</span>:</span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a>        <span class="co">"""Get the product price."""</span></span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">self</span>._price</span>
+<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">@price.setter</span></span>
+<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> price(<span class="va">self</span>, value: <span class="bu">float</span>):</span>
+<span id="cb14-19"><a href="#cb14-19" aria-hidden="true" tabindex="-1"></a>        <span class="co">"""Set the product price with validation."""</span></span>
+<span id="cb14-20"><a href="#cb14-20" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> value <span class="op">&lt;</span> <span class="dv">0</span>:</span>
+<span id="cb14-21"><a href="#cb14-21" aria-hidden="true" tabindex="-1"></a>            <span class="cf">raise</span> <span class="pp">ValueError</span>(<span class="st">"Price cannot be negative"</span>)</span>
+<span id="cb14-22"><a href="#cb14-22" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>._price <span class="op">=</span> value</span>
+<span id="cb14-23"><a href="#cb14-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-24"><a href="#cb14-24" aria-hidden="true" tabindex="-1"></a>    <span class="at">@classmethod</span></span>
+<span id="cb14-25"><a href="#cb14-25" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> get_total_products(cls) <span class="op">-&gt;</span> <span class="bu">int</span>:</span>
+<span id="cb14-26"><a href="#cb14-26" aria-hidden="true" tabindex="-1"></a>        <span class="co">"""Return total number of products created."""</span></span>
+<span id="cb14-27"><a href="#cb14-27" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> cls.total_products_created</span>
+<span id="cb14-28"><a href="#cb14-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-29"><a href="#cb14-29" aria-hidden="true" tabindex="-1"></a>    <span class="at">@staticmethod</span></span>
+<span id="cb14-30"><a href="#cb14-30" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> calculate_tax(price: <span class="bu">float</span>, tax_rate: <span class="bu">float</span> <span class="op">=</span> <span class="fl">0.08</span>) <span class="op">-&gt;</span> <span class="bu">float</span>:</span>
+<span id="cb14-31"><a href="#cb14-31" aria-hidden="true" tabindex="-1"></a>        <span class="co">"""Calculate tax amount for a given price."""</span></span>
+<span id="cb14-32"><a href="#cb14-32" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> price <span class="op">*</span> tax_rate</span>
+<span id="cb14-33"><a href="#cb14-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-34"><a href="#cb14-34" aria-hidden="true" tabindex="-1"></a><span class="co"># Advanced features in action</span></span>
+<span id="cb14-35"><a href="#cb14-35" aria-hidden="true" tabindex="-1"></a>laptop <span class="op">=</span> Product(<span class="st">"Gaming Laptop"</span>, <span class="fl">1299.99</span>)</span>
+<span id="cb14-36"><a href="#cb14-36" aria-hidden="true" tabindex="-1"></a>mouse <span class="op">=</span> Product(<span class="st">"Wireless Mouse"</span>, <span class="fl">79.99</span>)</span>
+<span id="cb14-37"><a href="#cb14-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-38"><a href="#cb14-38" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Total products: </span><span class="sc">{</span>Product<span class="sc">.</span>get_total_products()<span class="sc">}</span><span class="ss">"</span>)  <span class="co"># Class method</span></span>
+<span id="cb14-39"><a href="#cb14-39" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Tax on laptop: $</span><span class="sc">{</span>Product<span class="sc">.</span>calculate_tax(laptop.price)<span class="sc">:.2f}</span><span class="ss">"</span>)  <span class="co"># Static method</span></span>
+<span id="cb14-40"><a href="#cb14-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-41"><a href="#cb14-41" aria-hidden="true" tabindex="-1"></a><span class="co"># Property with validation</span></span>
+<span id="cb14-42"><a href="#cb14-42" aria-hidden="true" tabindex="-1"></a><span class="co"># laptop.price = -100 # Would raise ValueError</span></span>
+<span id="cb14-43"><a href="#cb14-43" aria-hidden="true" tabindex="-1"></a>laptop.price <span class="op">=</span> <span class="fl">1199.99</span>  <span class="co"># Valid price change</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <hr>
 <section id="your-turn-advanced-features" class="level3">
 <h3 class="anchored" data-anchor-id="your-turn-advanced-features">Your turn: advanced features</h3>
 <p>Enhance the Product class: 1. Add a <code>stock_quantity</code> attribute and property with validation 2. Create a <code>@classmethod</code> called <code>create_electronics(name, price)</code> that sets category automatically 3. Add a <code>@staticmethod</code> for calculating bulk discount rates</p>
-<div id="06-027" class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Your enhanced Product class here</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="06-029" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Your enhanced Product class here</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 </section>
@@ -939,13 +964,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="your-turn-complete-lab-06" class="level3">
 <h3 class="anchored" data-anchor-id="your-turn-complete-lab-06">Your turn: complete Lab 06</h3>
 <p>Create your own implementation of the Book and EBook classes following the exact lab requirements: 1. Implement the Book class with the specified attributes and methods 2. Implement the EBook class that inherits from Book 3. Test both classes thoroughly 4. Try adding additional features like a <code>AudioBook</code> class</p>
-<div id="06-029" class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Your complete Lab 06 implementation here</span></span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="co"># This is your chance to practice everything you've learned!</span></span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="va">__name__</span> <span class="op">==</span> <span class="st">'__main__'</span>:</span>
-<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Test your classes here</span></span>
-<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">pass</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="06-031" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Your complete Lab 06 implementation here</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="co"># This is your chance to practice everything you've learned!</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="va">__name__</span> <span class="op">==</span> <span class="st">'__main__'</span>:</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Test your classes here</span></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">pass</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 </section>
@@ -979,10 +1004,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><code>EBook</code> extends <code>Book</code> with <code>file_size</code>, reuses the parent initializer via <code>super()</code>, and inherits <code>get_age</code></li>
 <li>Do not copy or modify the supplied tests</li>
 </ul>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> run <span class="at">--directory</span> week06 python <span class="at">-m</span> pytest tests/ <span class="at">-v</span></span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> add week06/lab06.py</span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"Complete Lab 06"</span></span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> push origin main</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> run <span class="at">--directory</span> week06 python <span class="at">-m</span> pytest tests/ <span class="at">-v</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> add week06/lab06.py</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"Complete Lab 06"</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> push origin main</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>A green Week 06 badge earns the complete 10 points.</p>
 <p><strong>Instructions:</strong> <a href="https://github.com/bgreenwell/is4010-labs/blob/main/week06/lab06.md"><code>week06/lab06.md</code></a></p>
 

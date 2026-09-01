@@ -401,6 +401,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>We use the <code>def</code> keyword, a descriptive name, parameters with <a href="https://docs.python.org/3/library/typing.html">type hints</a>, a return type, and a docstring (here we’re using a <a href="https://numpydoc.readthedocs.io/en/latest/format.html">numpy-style docstring</a>)</li>
 <li><strong>Static-analysis input</strong>: Type hints let editors and type checkers report some mismatches; Python does not normally enforce them at runtime</li>
 <li><strong>Documentation</strong>: Good docstrings explain purpose, inputs, outputs, and important constraints</li>
+<li>This course uses the <strong><a href="https://numpydoc.readthedocs.io/en/latest/format.html">NumPy style</a></strong>, shown below. It is readable and works well with automated documentation tools</li>
+<li>A one-line summary is enough for a short, obvious function. Add <code>Parameters</code> and <code>Returns</code> sections once the arguments or the return value need explaining</li>
+<li>Lab 05 asks you to include clear docstrings on the functions you write</li>
 </ul>
 <div id="05-001" class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> calculate_area(length: <span class="bu">float</span>, width: <span class="bu">float</span>) <span class="op">-&gt;</span> <span class="bu">float</span>:</span>
