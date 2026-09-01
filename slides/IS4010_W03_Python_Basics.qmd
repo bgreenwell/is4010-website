@@ -666,11 +666,7 @@ def generate_mad_lib(adjective, noun, verb):
 ```{python}
 #| eval: false
 def my_mad_lib(adjective, noun, verb):
-    """
-    Your custom Mad Libs story.
-    
-    TODO: Add a complete NumPy-style docstring
-    """
+    """TODO: Replace this with a one-line description of your story."""
     # TODO: Create your own creative story using all three words
     # Make it at least 10-15 words long
     # Use f-string formatting

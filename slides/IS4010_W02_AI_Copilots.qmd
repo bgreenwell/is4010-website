@@ -262,59 +262,16 @@ Emphasize the course AI policy: use AI freely, but understand everything you sub
 - Its purpose is to explain what the code does
 - We are learning about them now because they are the primary way you will communicate your intent to AI assistants
 - **A good docstring leads to good AI-generated code**
+- In Lab 02 the docstrings are written for you. Each one states a contract, and your job is to make the function satisfy it
+- You will write your own, in the fuller style this course uses, in Week 05
 :::
 
 ::: notes
 This bridges from the AI discussion to the practical lab work. Lab 02 is a guided Python preview, so students need only enough context to read a function and describe its intent.
 
 Emphasize the connection: clear human communication (docstrings) leads to better AI assistance. This reinforces that AI tools respond to human intent and clarity.
-:::
 
----
-
-## Our docstring style: [NumPy](https://numpydoc.readthedocs.io/en/latest/format.html)
-
-::: {.incremental}
-- There are several popular styles for writing docstrings. In this course, we will use the **[NumPy style](https://numpydoc.readthedocs.io/en/latest/format.html)**
-- It is clean, readable, and works very well with automated documentation tools
-- See next slide for an example
-:::
-
----
-
-An example of Numpy-style docstrings:
-
-```{python}
-#| eval: false
-def add(num1, num2):
-    """
-    Add two numbers together.
-
-    Parameters
-    ----------
-    num1 : int
-        The first number.
-    num2 : int
-        The second number.
-
-    Returns
-    -------
-    int
-        The sum of the two numbers.
-    """
-    return num1 + num2
-```
-
-::: notes
-Show the [NumPy](https://numpy.org/) docstring format that will be used throughout the course. This is important for Lab 02 where students will be working with docstrings extensively.
-
-Point out:
-- The brief description first
-- Parameters section with types and descriptions
-- Returns section with type and description
-- Clear, consistent formatting
-
-This style works particularly well with AI tools because it provides structured, detailed context about function intent. Full Python instruction begins in Week 03.
+Keep this at the one-line level. Lab 02 supplies three single-line docstrings as the contracts the agents implement against, so students only need to read one here. The NumPy format with Parameters and Returns sections is introduced in Week 05, where they first write their own.
 :::
 
 ---
