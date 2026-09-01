@@ -532,6 +532,41 @@ Add these features to the GameCharacter class:
 ```
 :::
 
+## Documenting classes and methods
+
+::: {.incremental}
+- The rules from Week 05 carry over. A docstring is a string literal in triple quotes, placed as the first statement
+- **Class docstring**: say what the object represents, not how it is built
+- **Method docstring**: same as any function. Say what it returns or what it changes
+- **Skip the obvious**: `__init__` rarely needs more than the class docstring already tells the reader
+- Lab 06 hands you `get_age` with its docstring written. Match that style for the methods you add
+:::
+
+```{python}
+#| eval: false
+class Book:
+    """A book in a personal library."""
+
+    def __init__(self, title: str, author: str, year: int):
+        self.title = title
+        self.author = author
+        self.year = year
+
+    def get_age(self):
+        """Return the number of years since publication."""
+        return date.today().year - self.year
+```
+
+::: notes
+The `GameCharacter` example earlier in this deck already carries both kinds of docstring, so point back to it rather than treating this as new syntax.
+
+This `Book` example matches the Lab 06 stub on purpose, so students see the expected style before they open the lab. For the fuller NumPy format with Parameters and Returns sections, refer back to Week 05.
+
+Docstrings are not checked by the tests. They are a style expectation for the rest of the course.
+:::
+
+---
+
 ## Understanding inheritance: reusing behavior
 
 ::: {.incremental}
