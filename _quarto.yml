@@ -6,6 +6,8 @@ project:
   render:
     - "**/*.qmd"
     - "**/*.ipynb"
+    # This source generates the live notebook; publish the notebook's HTML only.
+    - "!weeks/week06-live.qmd"
 
 website:
   title: "IS 4010: App Dev with AI"

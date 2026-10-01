@@ -42,7 +42,12 @@ python3 scripts/build-notebooks.py
 
 # Regenerate specific weeks
 python3 scripts/build-notebooks.py 03 05
+
+# Regenerate only the separate Week 06 live notebook
+python3 scripts/build-notebooks.py 06-live
 ```
+
+The Week 06 live demo has its own source, `weeks/week06-live.qmd`, and generates `weeks/week06-live-notebook.ipynb`. Edit that source when revising the live lesson. The default build regenerates it alongside the slide companions. The site renders the generated notebook only, to avoid two pages for the lesson.
 
 ## Layout
 

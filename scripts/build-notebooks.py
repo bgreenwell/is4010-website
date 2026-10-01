@@ -1,15 +1,17 @@
 #!/usr/bin/env python3
-"""Generate the weekly companion notebooks from the Python lecture decks.
+"""Generate the weekly companion notebooks and the Week 06 live notebook.
 
 The decks are the single source. Each ``weeks/weekNN-notebook.ipynb`` is generated
 output and must never be edited by hand: run this script instead.
+The separate Week 06 live notebook uses weeks/week06-live.qmd as its source.
 
 Speaker notes are instructor-only and are stripped by ``slides/strip-notes.lua``.
 This script re-checks every generated file and fails if any survive.
 
 Usage:
-    python3 scripts/build-notebooks.py          # all Python weeks
+    python3 scripts/build-notebooks.py          # all notebooks
     python3 scripts/build-notebooks.py 03 05    # only these weeks
+    python3 scripts/build-notebooks.py 06-live  # only the live OOP notebook
 """
 
 from __future__ import annotations
@@ -26,6 +28,7 @@ WEEKS = ROOT / "weeks"
 
 # Weeks that ship a companion notebook. Rust weeks (09-14) do not.
 PYTHON_WEEKS = ("02", "03", "04", "05", "06", "07", "08")
+LIVE_NOTEBOOK = "06-live"
 
 KERNELSPEC = {"display_name": "Python 3", "language": "python", "name": "python3"}
 LANGUAGE_INFO = {
@@ -49,17 +52,29 @@ def deck_for(week: str) -> Path:
 
 
 def build(week: str) -> None:
-    deck = deck_for(week)
     target = WEEKS / f"week{week}-notebook.ipynb"
+    source = WEEKS / "week06-live.qmd" if week == LIVE_NOTEBOOK else deck_for(week)
+    # Keep intermediate output distinct from notebooks copied by a website render.
+    output_name = f".generated-{target.name}"
+    command = [
+        "quarto", "render", str(source.relative_to(ROOT)), "--to", "ipynb",
+        "-o", output_name,
+    ]
+    if week != LIVE_NOTEBOOK:
+        command.extend(["--metadata", 'filters:["strip-notes.lua"]'])
 
     # Quarto resolves -o against the project output-dir, so render then move.
     subprocess.run(
-        ["quarto", "render", str(deck.relative_to(ROOT)), "--to", "ipynb",
-         "-o", target.name, "--metadata", 'filters:["strip-notes.lua"]'],
+        command,
         cwd=ROOT, check=True, capture_output=True, text=True,
     )
     produced = next(
-        (p for p in (ROOT / "_site" / target.name, deck.with_name(target.name)) if p.exists()),
+        (p for p in (
+            ROOT / "_site" / output_name,
+            ROOT / "_site" / source.parent.relative_to(ROOT) / output_name,
+            ROOT / output_name,
+            source.with_name(output_name),
+        ) if p != target and p.exists()),
         None,
     )
     if produced is None:
@@ -93,10 +108,11 @@ def build(week: str) -> None:
 
 
 def main() -> None:
-    weeks = sys.argv[1:] or list(PYTHON_WEEKS)
-    unknown = [w for w in weeks if w not in PYTHON_WEEKS]
+    choices = (*PYTHON_WEEKS, LIVE_NOTEBOOK)
+    weeks = sys.argv[1:] or list(choices)
+    unknown = [w for w in weeks if w not in choices]
     if unknown:
-        sys.exit(f"not Python weeks: {unknown}")
+        sys.exit(f"unknown notebook selections: {unknown}")
     if not shutil.which("quarto"):
         sys.exit("quarto not found on PATH")
     print(f"generating {len(weeks)} notebook(s)")

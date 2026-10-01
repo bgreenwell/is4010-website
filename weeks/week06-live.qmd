@@ -1,0 +1,606 @@
+---
+title: "Week 06 live: objects, matrices, and vectors"
+author: "Brandon M. Greenwell"
+format:
+  ipynb:
+    wrap: none
+execute:
+  enabled: false
+---
+
+## How to use this notebook
+
+Run the cells from top to bottom with a Python 3.12 kernel. No packages are needed. The main lesson takes about 45 to 55 minutes. The final section is optional.
+
+We will build a small `Matrix` class, add arithmetic, and create a `Vector` subclass. A matrix is a rectangular table of numbers. For this notebook, a vector is a matrix with one column. You only need addition and multiplication to follow the examples.
+
+There are three complete versions of `Matrix`. Each version adds something to the previous one. Run each new definition and the cells beneath it before moving on. Redefining a class does not update objects you already created, so each stage creates fresh examples. After making changes, use **Restart kernel and run all** to check that the notebook still works in order.
+
+## Part 1: from functions to objects
+
+### Start with data and a function
+
+Each inner list holds one row. To multiply every entry by the same number, we can write a function that takes the rows and a scale factor.
+
+```{python}
+#| eval: false
+rows = [[1, 2], [3, 4]]
+
+
+def scale_rows(rows, factor):
+    """Return new rows with every entry multiplied by factor."""
+    result = []
+    for row in rows:
+        result.append([value * factor for value in row])
+    return result
+
+
+print(scale_rows(rows, 3))
+print(rows)  # The original rows have not changed.
+```
+
+This function is enough for a small task. A class becomes useful when we want to keep several operations and rules together: valid dimensions, readable output, scaling, and matrix multiplication.
+
+### Version 1: put the data and behavior together
+
+A **class** defines a type of object. An **instance** is one particular object of that type. Here, each instance stores its own rows.
+
+Python calls `__init__` to initialize a new instance. The parameter `self` refers to that instance. A function defined inside a class is a **method**.
+
+```{python}
+#| eval: false
+class Matrix:
+    """A rectangular table of numbers."""
+
+    def __init__(self, rows):
+        self.rows = [list(row) for row in rows]
+
+    def scale(self, factor):
+        """Return a new matrix with every entry multiplied by factor."""
+        return Matrix(scale_rows(self.rows, factor))
+
+
+A = Matrix([[1, 2], [3, 4]])
+B = Matrix([[10, 20], [30, 40]])
+print(A.rows)
+print(B.rows)
+print(A.scale(3).rows)
+```
+
+`A.rows` is an **attribute**. `A.scale(3)` is a method call. Python supplies `A` as `self` in that call. We can also write the call explicitly:
+
+```{python}
+#| eval: false
+print(Matrix.scale(A, 3).rows)
+print(type(A))
+print(isinstance(A, Matrix))
+```
+
+The class and method docstrings explain what the object represents and what the operation returns. We can inspect them without opening the class definition.
+
+```{python}
+#| eval: false
+print(Matrix.__doc__)
+print(Matrix.scale.__doc__)
+```
+
+**Predict before running:** if we change an entry in `A`, will `B` change?
+
+```{python}
+#| eval: false
+A.rows[0][0] = 99
+print(A.rows)
+print(B.rows)
+```
+
+### Version 2: give the object a clear interface
+
+Our first class accepts uneven rows and has no useful printed form. This version adds a few rules and a better interface:
+
+- Construction requires at least one row and one column, equal row lengths, and numeric entries. We accept ordinary Python integers and floats.
+- `_rows` holds the data. The leading underscore means internal use by convention; Python does not make it inaccessible.
+- `shape` is a computed property. Read `A.shape` without parentheses.
+- `to_list()` returns a copy, so changing the returned rows will not change `A`.
+- `__str__` supplies readable text for `print(A)`.
+- `__repr__` supplies a representation useful when inspecting an object.
+
+The class definition is complete. It replaces version 1 and no longer needs `scale_rows`.
+
+```{python}
+#| eval: false
+class Matrix:
+    """A nonempty rectangular table of integers or floats."""
+
+    def __init__(self, rows):
+        data = [list(row) for row in rows]
+        if not data or not data[0]:
+            raise ValueError("A matrix needs at least one row and one column.")
+        width = len(data[0])
+        for row in data:
+            if len(row) != width:
+                raise ValueError("All rows must have the same length.")
+            for value in row:
+                if not isinstance(value, (int, float)):
+                    raise TypeError("Matrix entries must be integers or floats.")
+        self._rows = data
+
+    @property
+    def shape(self):
+        """Return (number of rows, number of columns)."""
+        return (len(self._rows), len(self._rows[0]))
+
+    def to_list(self):
+        """Return a copy of the rows."""
+        return [row.copy() for row in self._rows]
+
+    def __str__(self):
+        return "\n".join(str(row) for row in self._rows)
+
+    def __repr__(self):
+        return f"Matrix({self._rows!r})"
+
+    def scale(self, factor):
+        """Return a new matrix with every entry multiplied by factor."""
+        if not isinstance(factor, (int, float)):
+            raise TypeError("The scale factor must be an integer or float.")
+        result = []
+        for row in self._rows:
+            result.append([value * factor for value in row])
+        return Matrix(result)
+
+
+A = Matrix([[1, 2], [3, 4]])
+print(A)
+print("Shape:", A.shape)
+```
+
+Compare the next cell with `print(A)`. A notebook normally uses an object's representation when the object is the last expression in a cell. In `__repr__`, the `!r` asks for the representation of the nested list.
+
+```{python}
+#| eval: false
+A
+```
+
+Both special methods **return strings**. Neither method prints anything itself.
+
+```{python}
+#| eval: false
+print(str(A))
+print(repr(A))
+print(A.scale(3))
+print("Original:")
+print(A)
+```
+
+### Check the boundaries
+
+The constructor copies each row. `to_list()` does the same when handing data back to the caller. For our numeric entries, those row copies are enough to keep the lists independent.
+
+```{python}
+#| eval: false
+source = [[1, 2], [3, 4]]
+A = Matrix(source)
+source[0][0] = 999
+
+exported = A.to_list()
+exported[1][1] = 888
+
+print(A)  # Still contains 1, 2, 3, and 4.
+assert A.to_list() == [[1, 2], [3, 4]]
+```
+
+Invalid input should fail where the object is created. These examples catch the expected errors so the notebook can continue running.
+
+```{python}
+#| eval: false
+for bad_rows in ([], [[]], [[1, 2], [3]], [[1, "two"]]):
+    try:
+        Matrix(bad_rows)
+    except (ValueError, TypeError) as error:
+        print(type(error).__name__ + ":", error)
+```
+
+**Pause:** why compute `shape` from the rows instead of storing another attribute that could become inconsistent with them?
+
+## Part 2: operators and inheritance
+
+### Two kinds of multiplication
+
+We will give the operators different meanings:
+
+| Expression | Meaning | Method |
+| --- | --- | --- |
+| `A * 3` | Multiply every entry by 3 | `__mul__` |
+| `3 * A` | Multiply every entry by 3 | `__rmul__` |
+| `A @ B` | Matrix multiplication | `__matmul__` |
+
+We will not define `A * B` for two matrices. Use `@` for matrix multiplication. Each operation returns a new object and leaves its inputs unchanged.
+
+For matrix multiplication, take a row from the left matrix and a column from the right matrix. Multiply matching entries, then add the products.
+
+```{python}
+#| eval: false
+left = [[1, 2], [3, 4]]
+right = [[5, 6], [7, 8]]
+
+# First row of left, first column of right:
+first_entry = left[0][0] * right[0][0] + left[0][1] * right[1][0]
+print(first_entry)  # 1 * 5 + 2 * 7 = 19
+```
+
+The left matrix needs as many **columns** as the right matrix has **rows**. If the shapes are `(m, n)` and `(n, p)`, the result has shape `(m, p)`.
+
+For these two matrices, the full calculation is:
+
+```text
+[1  2]   [5  6]   [1*5 + 2*7   1*6 + 2*8]   [19  22]
+[3  4] @ [7  8] = [3*5 + 4*7   3*6 + 4*8] = [43  50]
+```
+
+### Version 3: add the operators
+
+The existing methods are repeated so this cell contains the complete class. The three new methods are at the bottom.
+
+`__mul__` reuses `scale`. `__rmul__` handles a scalar on the left. `__matmul__` uses three loops: one for result rows, one for result columns, and one to add the products for a single entry.
+
+For unsupported operand types, an operator method returns `NotImplemented`. That lets Python try the other operand's corresponding method. If neither object supports the operation, Python raises `TypeError`. Incompatible matrix dimensions are a separate problem, so we raise `ValueError` for those.
+
+```{python}
+#| eval: false
+class Matrix:
+    """A nonempty rectangular table of integers or floats."""
+
+    def __init__(self, rows):
+        data = [list(row) for row in rows]
+        if not data or not data[0]:
+            raise ValueError("A matrix needs at least one row and one column.")
+        width = len(data[0])
+        for row in data:
+            if len(row) != width:
+                raise ValueError("All rows must have the same length.")
+            for value in row:
+                if not isinstance(value, (int, float)):
+                    raise TypeError("Matrix entries must be integers or floats.")
+        self._rows = data
+
+    @property
+    def shape(self):
+        """Return (number of rows, number of columns)."""
+        return (len(self._rows), len(self._rows[0]))
+
+    def to_list(self):
+        """Return a copy of the rows."""
+        return [row.copy() for row in self._rows]
+
+    def __str__(self):
+        return "\n".join(str(row) for row in self._rows)
+
+    def __repr__(self):
+        return f"Matrix({self._rows!r})"
+
+    def scale(self, factor):
+        """Return a new matrix with every entry multiplied by factor."""
+        if not isinstance(factor, (int, float)):
+            raise TypeError("The scale factor must be an integer or float.")
+        result = []
+        for row in self._rows:
+            result.append([value * factor for value in row])
+        return Matrix(result)
+
+    def __mul__(self, factor):
+        if not isinstance(factor, (int, float)):
+            return NotImplemented
+        return self.scale(factor)
+
+    def __rmul__(self, factor):
+        return self.__mul__(factor)
+
+    def __matmul__(self, other):
+        """Return the matrix product of self and other."""
+        if not isinstance(other, Matrix):
+            return NotImplemented
+        left_rows, left_cols = self.shape
+        right_rows, right_cols = other.shape
+        if left_cols != right_rows:
+            raise ValueError(
+                f"Cannot multiply shapes {self.shape} and {other.shape}: "
+                "left columns must equal right rows."
+            )
+
+        result = []
+        for i in range(left_rows):
+            row = []
+            for j in range(right_cols):
+                total = 0
+                for k in range(left_cols):
+                    total += self._rows[i][k] * other._rows[k][j]
+                row.append(total)
+            result.append(row)
+        return Matrix(result)
+
+
+A = Matrix([[1, 2], [3, 4]])
+B = Matrix([[5, 6], [7, 8]])
+```
+
+### Use the new operators
+
+**Predict:** which expressions below should produce the same result?
+
+```{python}
+#| eval: false
+print("A.scale(3):")
+print(A.scale(3))
+print("A * 3:")
+print(A * 3)
+print("3 * A:")
+print(3 * A)
+
+assert (A * 3).to_list() == (3 * A).to_list() == A.scale(3).to_list()
+```
+
+Now compare `A @ B` and `B @ A`. Reversing the order can change the result.
+
+```{python}
+#| eval: false
+print("A @ B:")
+print(A @ B)
+print("B @ A:")
+print(B @ A)
+
+assert (A @ B).to_list() == [[19, 22], [43, 50]]
+assert (B @ A).to_list() == [[23, 34], [31, 46]]
+```
+
+Matrix multiplication also works for rectangular matrices. Compute the result's shape before running the next cell.
+
+```{python}
+#| eval: false
+wide = Matrix([[1, 2, 3], [4, 5, 6]])
+tall = Matrix([[7, 8], [9, 10], [11, 12]])
+product = wide @ tall
+
+print(wide.shape, "@", tall.shape, "->", product.shape)
+print(product)
+assert product.to_list() == [[58, 64], [139, 154]]
+```
+
+An informative error helps the caller correct the input.
+
+```{python}
+#| eval: false
+try:
+    wide @ A  # A (2, 3) matrix cannot multiply a (2, 2) matrix.
+except ValueError as error:
+    print(error)
+
+try:
+    A * B  # We reserved * for scalar multiplication.
+except TypeError as error:
+    print(error)
+```
+
+### A vector is a specialized matrix
+
+For this example, `Vector([3, 4])` stores `[[3], [4]]`. It has two rows and one column. Keeping the same internal layout lets it reuse matrix behavior.
+
+`Vector(Matrix)` declares the parent class. `super().__init__` calls the parent initializer, including its validation and copying. We override the two display methods and add `magnitude`, which returns the square root of the sum of squared entries.
+
+```{python}
+#| eval: false
+class Vector(Matrix):
+    """A nonempty column vector."""
+
+    def __init__(self, values):
+        super().__init__([[value] for value in values])
+
+    def __str__(self):
+        values = [row[0] for row in self._rows]
+        return f"Vector with entries {values}"
+
+    def __repr__(self):
+        values = [row[0] for row in self._rows]
+        return f"Vector({values!r})"
+
+    def magnitude(self):
+        """Return the square root of the sum of squared entries."""
+        return sum(row[0] ** 2 for row in self._rows) ** 0.5
+
+
+v = Vector([3, 4])
+print(v)
+print("Shape:", v.shape)
+print("Magnitude:", v.magnitude())
+print("Is a Vector:", isinstance(v, Vector))
+print("Is a Matrix:", isinstance(v, Matrix))
+```
+
+The subclass inherits `shape`, `to_list`, and the arithmetic methods. Python finds its own `__str__` when we print it. This is **polymorphism**: the same operation can use different implementations for different objects.
+
+```{python}
+#| eval: false
+for item in (A, v):
+    print(type(item).__name__, "has shape", item.shape)
+    print(item)
+```
+
+### Decide what an operation returns
+
+Our inherited arithmetic constructs `Matrix` objects. A result with one column is mathematically a column vector, but Python will not change its class to `Vector` automatically.
+
+```{python}
+#| eval: false
+scaled = v * 2
+print(scaled)
+print("Result type:", type(scaled).__name__)
+assert scaled.shape == (2, 1)
+assert type(scaled) is Matrix
+```
+
+This is the contract for our small implementation: matrix arithmetic always returns `Matrix`. Preserving a subclass would require another design decision. For example, we could override `Vector.scale` to build a `Vector` instead. We will keep the current rule consistent throughout this notebook.
+
+### Use the classes together: calculate daily revenue
+
+A small store sells notebooks, pens, and mugs. Each row below records the number sold on one day. The price vector uses the same product order.
+
+| Day | Notebooks | Pens | Mugs |
+| --- | --- | --- | --- |
+| Monday | 2 | 1 | 0 |
+| Tuesday | 1 | 3 | 2 |
+| Price in dollars | 5 | 2 | 4 |
+
+Each day's revenue is a row multiplied by the price column. Monday's revenue is `2 * 5 + 1 * 2 + 0 * 4`, or 12 dollars. Tuesday's is 19 dollars.
+
+```{python}
+#| eval: false
+quantities = Matrix([[2, 1, 0], [1, 3, 2]])
+prices = Vector([5, 2, 4])
+revenue = quantities @ prices
+
+print("Input shapes:", quantities.shape, prices.shape)
+print("Revenue by day:")
+print(revenue)
+assert revenue.to_list() == [[12], [19]]
+```
+
+### Check the behavior we promised
+
+These checks use expected values we can calculate by hand. `assert` raises an error if a condition is false. A successful run reaches the final message.
+
+```{python}
+#| eval: false
+identity = Matrix([[1, 0], [0, 1]])
+original = A.to_list()
+
+assert (A @ identity).to_list() == original
+assert (identity @ A).to_list() == original
+assert (A * 0).to_list() == [[0, 0], [0, 0]]
+assert (A * -1).to_list() == [[-1, -2], [-3, -4]]
+assert (A * 0.5).to_list() == [[0.5, 1.0], [1.5, 2.0]]
+assert A.to_list() == original
+assert v.magnitude() == 5.0
+assert (A @ v).to_list() == [[11], [25]]
+assert revenue.shape == (2, 1)
+
+print("All checks passed.")
+```
+
+### Stop and explain
+
+Before moving on, explain these without reading the definitions:
+
+1. What does `self` refer to in `A.scale(3)`?
+2. Why does `shape` have no parentheses?
+3. Which methods run when we call `print(v)` or evaluate `A @ v`?
+4. What does `Vector` reuse through `super()`?
+5. Why does `v * 2` return a `Matrix` in this implementation?
+
+For practice, add matrix addition with `__add__`. Require equal shapes, return a new `Matrix`, and check one valid example and one mismatched pair. If you ask an AI assistant for a draft, give it that contract and verify the output yourself.
+
+## Optional: a few more class features
+
+The slides also preview class variables, class methods, static methods, and property setters. We can see each by giving a vector a display label and a convenient way to construct a zero vector. This section takes about 10 minutes.
+
+- `default_label` is a **class variable** shared through the class. The entries and each vector's chosen label are **instance attributes**.
+- `zeros` is a **class method**. It receives `cls`, the class being called, and constructs an instance of that class.
+- `_validate_label` is a **static method**. It receives neither `self` nor `cls`. It could also be a standalone function; we keep it here because it checks the labels used by this class.
+- `label` is a **property with a setter**. Assignment passes through validation. The initializer uses the same setter, so initial and later labels follow the same rules.
+
+This is a complete replacement for `Vector`. Its arithmetic still returns `Matrix`, as before.
+
+```{python}
+#| eval: false
+class Vector(Matrix):
+    """A nonempty column vector with a display label."""
+
+    default_label = "Vector"
+
+    def __init__(self, values, label=None):
+        super().__init__([[value] for value in values])
+        self.label = self.default_label if label is None else label
+
+    @property
+    def label(self):
+        """Return the display label."""
+        return self._label
+
+    @label.setter
+    def label(self, value):
+        self._validate_label(value)
+        self._label = value.strip()
+
+    @staticmethod
+    def _validate_label(value):
+        """Require a string containing at least one non-whitespace character."""
+        if not isinstance(value, str):
+            raise TypeError("The label must be a string.")
+        if not value.strip():
+            raise ValueError("The label must not be blank.")
+
+    @classmethod
+    def zeros(cls, size):
+        """Return a vector containing size zeros."""
+        if type(size) is not int or size < 1:
+            raise ValueError("Size must be a positive integer.")
+        return cls([0] * size)
+
+    def __str__(self):
+        values = [row[0] for row in self._rows]
+        return f"{self.label}: {values}"
+
+    def __repr__(self):
+        values = [row[0] for row in self._rows]
+        return f"Vector({values!r}, label={self.label!r})"
+
+    def magnitude(self):
+        """Return the square root of the sum of squared entries."""
+        return sum(row[0] ** 2 for row in self._rows) ** 0.5
+
+
+v = Vector([3, 4], label="Position")
+zero = Vector.zeros(3)
+print(v)
+print(zero)
+print("Class default:", Vector.default_label)
+```
+
+A setter is useful when an assignment must follow a rule. A plain public attribute is fine when no such rule is needed.
+
+```{python}
+#| eval: false
+v.label = "Displacement"
+print(v)
+
+try:
+    v.label = "   "
+except ValueError as error:
+    print(error)
+
+assert v.label == "Displacement"  # The failed assignment did not change it.
+assert zero.shape == (3, 1)
+assert zero.magnitude() == 0.0
+print(repr(v))
+```
+
+Changing the class default affects labels chosen for future instances. Existing instances keep the labels stored on them. The cell restores the default so it is safe to run again.
+
+```{python}
+#| eval: false
+Vector.default_label = "Column"
+another = Vector([1, 2])
+print(another)
+print(zero)
+assert another.label == "Column"
+assert zero.label == "Vector"
+Vector.default_label = "Vector"
+```
+
+### When would we choose a different design?
+
+We chose inheritance because our vector uses the same layout and operations as a one-column matrix. **Composition** would put a matrix inside another object, such as a sales report with a `quantities` attribute. A sales report has a matrix; it is not itself a matrix.
+
+Python also supports **multiple inheritance**, where a class has more than one parent. That introduces questions about which parent's method runs. Our example needs only one parent, so we will stop here.
+
+The useful question is whether the class gives its callers a clear interface. Our callers can construct, inspect, print, scale, and multiply objects without repeating the row-processing code each time.
+
+For reference, see the Python 3.12 documentation on [classes](https://docs.python.org/3.12/tutorial/classes.html) and [special methods](https://docs.python.org/3.12/reference/datamodel.html#special-method-names).
