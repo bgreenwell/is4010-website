@@ -1,0 +1,1346 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.25">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Week 06 live: objects, matrices, and vectors – IS 4010: App Dev with AI</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../images/uc-logo-2.png" rel="icon" type="image/png">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-b6dc9e813fb09d2bbff48e8f9eb94b8d.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="nav-sidebar docked quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Week 06 live: objects, matrices, and vectors</li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+      <a href="../index.html" class="sidebar-logo-link">
+      </a>
+      <div class="sidebar-tools-main">
+    <a href="https://github.com/bgreenwell/is4010-labs" title="Labs" class="quarto-navigation-tool px-1" aria-label="Labs"><i class="bi bi-github"></i></a>
+    <a href="https://uc.instructure.com/" title="Canvas" class="quarto-navigation-tool px-1" aria-label="Canvas"><i class="bi bi-journal-text"></i></a>
+</div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Home</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="https://uc.simplesyllabus.com/doc/mkhmypnvx/2026-Fall-IS-4010-%2822%29-001-%2810885%29-Application-Development-with-Artificial-Intelligence" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Syllabus (Simple Syllabus)</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../project.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Final project</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false">
+ <span class="menu-text">Resources</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../resources/setup.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Setup guide</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../resources/troubleshooting.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Troubleshooting</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../resources/packages.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Python packages</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../resources/ai-tools.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">AI tools</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../slides/IS4010_Advanced_AI_Workflows.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Advanced AI workflows (optional)</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false">
+ <span class="menu-text">Weekly schedule</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../weeks/week01.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 01: Toolkit setup</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../weeks/week02.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 02: AI-assisted dev</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../weeks/week03.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 03: Python basics</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../weeks/week04.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 04: Data structures</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../weeks/week05.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 05: Functions &amp; errors</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../weeks/week06.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 06: OOP</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../weeks/week07.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 07: External data</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../weeks/week08.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 08: Professional Python</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../weeks/week09.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 09: Welcome to Rust</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../weeks/week10.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 10: Soul of Rust</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../weeks/week11.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 11: Structuring code</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../weeks/week12.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 12: Generics &amp; traits</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../weeks/week13.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 13: Idiomatic Rust</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../weeks/week14.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 14: CLI applications</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#how-to-use-this-notebook" id="toc-how-to-use-this-notebook" class="nav-link active" data-scroll-target="#how-to-use-this-notebook">How to use this notebook</a></li>
+  <li><a href="#part-1-from-functions-to-objects" id="toc-part-1-from-functions-to-objects" class="nav-link" data-scroll-target="#part-1-from-functions-to-objects">Part 1: from functions to objects</a>
+  <ul class="collapse">
+  <li><a href="#start-with-data-and-a-function" id="toc-start-with-data-and-a-function" class="nav-link" data-scroll-target="#start-with-data-and-a-function">Start with data and a function</a></li>
+  <li><a href="#version-1-put-the-data-and-behavior-together" id="toc-version-1-put-the-data-and-behavior-together" class="nav-link" data-scroll-target="#version-1-put-the-data-and-behavior-together">Version 1: put the data and behavior together</a></li>
+  <li><a href="#version-2-give-the-object-a-clear-interface" id="toc-version-2-give-the-object-a-clear-interface" class="nav-link" data-scroll-target="#version-2-give-the-object-a-clear-interface">Version 2: give the object a clear interface</a></li>
+  <li><a href="#check-the-boundaries" id="toc-check-the-boundaries" class="nav-link" data-scroll-target="#check-the-boundaries">Check the boundaries</a></li>
+  </ul></li>
+  <li><a href="#part-2-operators-and-inheritance" id="toc-part-2-operators-and-inheritance" class="nav-link" data-scroll-target="#part-2-operators-and-inheritance">Part 2: operators and inheritance</a>
+  <ul class="collapse">
+  <li><a href="#two-kinds-of-multiplication" id="toc-two-kinds-of-multiplication" class="nav-link" data-scroll-target="#two-kinds-of-multiplication">Two kinds of multiplication</a></li>
+  <li><a href="#version-3-add-the-operators" id="toc-version-3-add-the-operators" class="nav-link" data-scroll-target="#version-3-add-the-operators">Version 3: add the operators</a></li>
+  <li><a href="#use-the-new-operators" id="toc-use-the-new-operators" class="nav-link" data-scroll-target="#use-the-new-operators">Use the new operators</a></li>
+  <li><a href="#a-vector-is-a-specialized-matrix" id="toc-a-vector-is-a-specialized-matrix" class="nav-link" data-scroll-target="#a-vector-is-a-specialized-matrix">A vector is a specialized matrix</a></li>
+  <li><a href="#decide-what-an-operation-returns" id="toc-decide-what-an-operation-returns" class="nav-link" data-scroll-target="#decide-what-an-operation-returns">Decide what an operation returns</a></li>
+  <li><a href="#use-the-classes-together-calculate-daily-revenue" id="toc-use-the-classes-together-calculate-daily-revenue" class="nav-link" data-scroll-target="#use-the-classes-together-calculate-daily-revenue">Use the classes together: calculate daily revenue</a></li>
+  <li><a href="#check-the-behavior-we-promised" id="toc-check-the-behavior-we-promised" class="nav-link" data-scroll-target="#check-the-behavior-we-promised">Check the behavior we promised</a></li>
+  <li><a href="#stop-and-explain" id="toc-stop-and-explain" class="nav-link" data-scroll-target="#stop-and-explain">Stop and explain</a></li>
+  </ul></li>
+  <li><a href="#optional-a-few-more-class-features" id="toc-optional-a-few-more-class-features" class="nav-link" data-scroll-target="#optional-a-few-more-class-features">Optional: a few more class features</a>
+  <ul class="collapse">
+  <li><a href="#when-would-we-choose-a-different-design" id="toc-when-would-we-choose-a-different-design" class="nav-link" data-scroll-target="#when-would-we-choose-a-different-design">When would we choose a different design?</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Week 06 live: objects, matrices, and vectors</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>Brandon M. Greenwell</p>
+<section id="how-to-use-this-notebook" class="level2">
+<h2 class="anchored" data-anchor-id="how-to-use-this-notebook">How to use this notebook</h2>
+<p>Run the cells from top to bottom with a Python 3.12 kernel. No packages are needed. The main lesson takes about 45 to 55 minutes. The final section is optional.</p>
+<p>We will build a small <code>Matrix</code> class, add arithmetic, and create a <code>Vector</code> subclass. A matrix is a rectangular table of numbers. For this notebook, a vector is a matrix with one column. You only need addition and multiplication to follow the examples.</p>
+<p>There are three complete versions of <code>Matrix</code>. Each version adds something to the previous one. Run each new definition and the cells beneath it before moving on. Redefining a class does not update objects you already created, so each stage creates fresh examples. After making changes, use <strong>Restart kernel and run all</strong> to check that the notebook still works in order.</p>
+</section>
+<section id="part-1-from-functions-to-objects" class="level2">
+<h2 class="anchored" data-anchor-id="part-1-from-functions-to-objects">Part 1: from functions to objects</h2>
+<section id="start-with-data-and-a-function" class="level3">
+<h3 class="anchored" data-anchor-id="start-with-data-and-a-function">Start with data and a function</h3>
+<p>Each inner list holds one row. To multiply every entry by the same number, we can write a function that takes the rows and a scale factor.</p>
+<div id="06-live-001" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>rows <span class="op">=</span> [[<span class="dv">1</span>, <span class="dv">2</span>], [<span class="dv">3</span>, <span class="dv">4</span>]]</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> scale_rows(rows, factor):</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Return new rows with every entry multiplied by factor."""</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    result <span class="op">=</span> []</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> row <span class="kw">in</span> rows:</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>        result.append([value <span class="op">*</span> factor <span class="cf">for</span> value <span class="kw">in</span> row])</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> result</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(scale_rows(rows, <span class="dv">3</span>))</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(rows)  <span class="co"># The original rows have not changed.</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>This function is enough for a small task. A class becomes useful when we want to keep several operations and rules together: valid dimensions, readable output, scaling, and matrix multiplication.</p>
+</section>
+<section id="version-1-put-the-data-and-behavior-together" class="level3">
+<h3 class="anchored" data-anchor-id="version-1-put-the-data-and-behavior-together">Version 1: put the data and behavior together</h3>
+<p>A <strong>class</strong> defines a type of object. An <strong>instance</strong> is one particular object of that type. Here, each instance stores its own rows.</p>
+<p>Python calls <code>__init__</code> to initialize a new instance. The parameter <code>self</code> refers to that instance. A function defined inside a class is a <strong>method</strong>.</p>
+<div id="06-live-003" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Matrix:</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""A rectangular table of numbers."""</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, rows):</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.rows <span class="op">=</span> [<span class="bu">list</span>(row) <span class="cf">for</span> row <span class="kw">in</span> rows]</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> scale(<span class="va">self</span>, factor):</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>        <span class="co">"""Return a new matrix with every entry multiplied by factor."""</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> Matrix(scale_rows(<span class="va">self</span>.rows, factor))</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>A <span class="op">=</span> Matrix([[<span class="dv">1</span>, <span class="dv">2</span>], [<span class="dv">3</span>, <span class="dv">4</span>]])</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>B <span class="op">=</span> Matrix([[<span class="dv">10</span>, <span class="dv">20</span>], [<span class="dv">30</span>, <span class="dv">40</span>]])</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(A.rows)</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(B.rows)</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(A.scale(<span class="dv">3</span>).rows)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p><code>A.rows</code> is an <strong>attribute</strong>. <code>A.scale(3)</code> is a method call. Python supplies <code>A</code> as <code>self</code> in that call. We can also write the call explicitly:</p>
+<div id="06-live-005" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(Matrix.scale(A, <span class="dv">3</span>).rows)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">type</span>(A))</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">isinstance</span>(A, Matrix))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>The class and method docstrings explain what the object represents and what the operation returns. We can inspect them without opening the class definition.</p>
+<div id="06-live-007" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(Matrix.__doc__)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(Matrix.scale.__doc__)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p><strong>Predict before running:</strong> if we change an entry in <code>A</code>, will <code>B</code> change?</p>
+<div id="06-live-009" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>A.rows[<span class="dv">0</span>][<span class="dv">0</span>] <span class="op">=</span> <span class="dv">99</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(A.rows)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(B.rows)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="version-2-give-the-object-a-clear-interface" class="level3">
+<h3 class="anchored" data-anchor-id="version-2-give-the-object-a-clear-interface">Version 2: give the object a clear interface</h3>
+<p>Our first class accepts uneven rows and has no useful printed form. This version adds a few rules and a better interface:</p>
+<ul>
+<li>Construction requires at least one row and one column, equal row lengths, and numeric entries. We accept ordinary Python integers and floats.</li>
+<li><code>_rows</code> holds the data. The leading underscore means internal use by convention; Python does not make it inaccessible.</li>
+<li><code>shape</code> is a computed property. Read <code>A.shape</code> without parentheses.</li>
+<li><code>to_list()</code> returns a copy, so changing the returned rows will not change <code>A</code>.</li>
+<li><code>__str__</code> supplies readable text for <code>print(A)</code>.</li>
+<li><code>__repr__</code> supplies a representation useful when inspecting an object.</li>
+</ul>
+<p>The class definition is complete. It replaces version 1 and no longer needs <code>scale_rows</code>.</p>
+<div id="06-live-011" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Matrix:</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""A nonempty rectangular table of integers or floats."""</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, rows):</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>        data <span class="op">=</span> [<span class="bu">list</span>(row) <span class="cf">for</span> row <span class="kw">in</span> rows]</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="kw">not</span> data <span class="kw">or</span> <span class="kw">not</span> data[<span class="dv">0</span>]:</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>            <span class="cf">raise</span> <span class="pp">ValueError</span>(<span class="st">"A matrix needs at least one row and one column."</span>)</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>        width <span class="op">=</span> <span class="bu">len</span>(data[<span class="dv">0</span>])</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> row <span class="kw">in</span> data:</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> <span class="bu">len</span>(row) <span class="op">!=</span> width:</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>                <span class="cf">raise</span> <span class="pp">ValueError</span>(<span class="st">"All rows must have the same length."</span>)</span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>            <span class="cf">for</span> value <span class="kw">in</span> row:</span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>                <span class="cf">if</span> <span class="kw">not</span> <span class="bu">isinstance</span>(value, (<span class="bu">int</span>, <span class="bu">float</span>)):</span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>                    <span class="cf">raise</span> <span class="pp">TypeError</span>(<span class="st">"Matrix entries must be integers or floats."</span>)</span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>._rows <span class="op">=</span> data</span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">@property</span></span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> shape(<span class="va">self</span>):</span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>        <span class="co">"""Return (number of rows, number of columns)."""</span></span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> (<span class="bu">len</span>(<span class="va">self</span>._rows), <span class="bu">len</span>(<span class="va">self</span>._rows[<span class="dv">0</span>]))</span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> to_list(<span class="va">self</span>):</span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a>        <span class="co">"""Return a copy of the rows."""</span></span>
+<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> [row.copy() <span class="cf">for</span> row <span class="kw">in</span> <span class="va">self</span>._rows]</span>
+<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__str__</span>(<span class="va">self</span>):</span>
+<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="st">"</span><span class="ch">\n</span><span class="st">"</span>.join(<span class="bu">str</span>(row) <span class="cf">for</span> row <span class="kw">in</span> <span class="va">self</span>._rows)</span>
+<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__repr__</span>(<span class="va">self</span>):</span>
+<span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="ss">f"Matrix(</span><span class="sc">{</span><span class="va">self</span><span class="sc">.</span>_rows<span class="sc">!r}</span><span class="ss">)"</span></span>
+<span id="cb6-31"><a href="#cb6-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-32"><a href="#cb6-32" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> scale(<span class="va">self</span>, factor):</span>
+<span id="cb6-33"><a href="#cb6-33" aria-hidden="true" tabindex="-1"></a>        <span class="co">"""Return a new matrix with every entry multiplied by factor."""</span></span>
+<span id="cb6-34"><a href="#cb6-34" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="kw">not</span> <span class="bu">isinstance</span>(factor, (<span class="bu">int</span>, <span class="bu">float</span>)):</span>
+<span id="cb6-35"><a href="#cb6-35" aria-hidden="true" tabindex="-1"></a>            <span class="cf">raise</span> <span class="pp">TypeError</span>(<span class="st">"The scale factor must be an integer or float."</span>)</span>
+<span id="cb6-36"><a href="#cb6-36" aria-hidden="true" tabindex="-1"></a>        result <span class="op">=</span> []</span>
+<span id="cb6-37"><a href="#cb6-37" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> row <span class="kw">in</span> <span class="va">self</span>._rows:</span>
+<span id="cb6-38"><a href="#cb6-38" aria-hidden="true" tabindex="-1"></a>            result.append([value <span class="op">*</span> factor <span class="cf">for</span> value <span class="kw">in</span> row])</span>
+<span id="cb6-39"><a href="#cb6-39" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> Matrix(result)</span>
+<span id="cb6-40"><a href="#cb6-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-41"><a href="#cb6-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-42"><a href="#cb6-42" aria-hidden="true" tabindex="-1"></a>A <span class="op">=</span> Matrix([[<span class="dv">1</span>, <span class="dv">2</span>], [<span class="dv">3</span>, <span class="dv">4</span>]])</span>
+<span id="cb6-43"><a href="#cb6-43" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(A)</span>
+<span id="cb6-44"><a href="#cb6-44" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Shape:"</span>, A.shape)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Compare the next cell with <code>print(A)</code>. A notebook normally uses an object’s representation when the object is the last expression in a cell. In <code>__repr__</code>, the <code>!r</code> asks for the representation of the nested list.</p>
+<div id="06-live-013" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>A</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Both special methods <strong>return strings</strong>. Neither method prints anything itself.</p>
+<div id="06-live-015" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">str</span>(A))</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">repr</span>(A))</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(A.scale(<span class="dv">3</span>))</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Original:"</span>)</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(A)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="check-the-boundaries" class="level3">
+<h3 class="anchored" data-anchor-id="check-the-boundaries">Check the boundaries</h3>
+<p>The constructor copies each row. <code>to_list()</code> does the same when handing data back to the caller. For our numeric entries, those row copies are enough to keep the lists independent.</p>
+<div id="06-live-017" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>source <span class="op">=</span> [[<span class="dv">1</span>, <span class="dv">2</span>], [<span class="dv">3</span>, <span class="dv">4</span>]]</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>A <span class="op">=</span> Matrix(source)</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>source[<span class="dv">0</span>][<span class="dv">0</span>] <span class="op">=</span> <span class="dv">999</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>exported <span class="op">=</span> A.to_list()</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>exported[<span class="dv">1</span>][<span class="dv">1</span>] <span class="op">=</span> <span class="dv">888</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(A)  <span class="co"># Still contains 1, 2, 3, and 4.</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> A.to_list() <span class="op">==</span> [[<span class="dv">1</span>, <span class="dv">2</span>], [<span class="dv">3</span>, <span class="dv">4</span>]]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Invalid input should fail where the object is created. These examples catch the expected errors so the notebook can continue running.</p>
+<div id="06-live-019" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> bad_rows <span class="kw">in</span> ([], [[]], [[<span class="dv">1</span>, <span class="dv">2</span>], [<span class="dv">3</span>]], [[<span class="dv">1</span>, <span class="st">"two"</span>]]):</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">try</span>:</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>        Matrix(bad_rows)</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">except</span> (<span class="pp">ValueError</span>, <span class="pp">TypeError</span>) <span class="im">as</span> error:</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="bu">type</span>(error).<span class="va">__name__</span> <span class="op">+</span> <span class="st">":"</span>, error)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p><strong>Pause:</strong> why compute <code>shape</code> from the rows instead of storing another attribute that could become inconsistent with them?</p>
+</section>
+</section>
+<section id="part-2-operators-and-inheritance" class="level2">
+<h2 class="anchored" data-anchor-id="part-2-operators-and-inheritance">Part 2: operators and inheritance</h2>
+<section id="two-kinds-of-multiplication" class="level3">
+<h3 class="anchored" data-anchor-id="two-kinds-of-multiplication">Two kinds of multiplication</h3>
+<p>We will give the operators different meanings:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Expression</th>
+<th>Meaning</th>
+<th>Method</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>A * 3</code></td>
+<td>Multiply every entry by 3</td>
+<td><code>__mul__</code></td>
+</tr>
+<tr class="even">
+<td><code>3 * A</code></td>
+<td>Multiply every entry by 3</td>
+<td><code>__rmul__</code></td>
+</tr>
+<tr class="odd">
+<td><code>A @ B</code></td>
+<td>Matrix multiplication</td>
+<td><code>__matmul__</code></td>
+</tr>
+</tbody>
+</table>
+<p>We will not define <code>A * B</code> for two matrices. Use <code>@</code> for matrix multiplication. Each operation returns a new object and leaves its inputs unchanged.</p>
+<p>For matrix multiplication, take a row from the left matrix and a column from the right matrix. Multiply matching entries, then add the products.</p>
+<div id="06-live-021" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>left <span class="op">=</span> [[<span class="dv">1</span>, <span class="dv">2</span>], [<span class="dv">3</span>, <span class="dv">4</span>]]</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>right <span class="op">=</span> [[<span class="dv">5</span>, <span class="dv">6</span>], [<span class="dv">7</span>, <span class="dv">8</span>]]</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="co"># First row of left, first column of right:</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>first_entry <span class="op">=</span> left[<span class="dv">0</span>][<span class="dv">0</span>] <span class="op">*</span> right[<span class="dv">0</span>][<span class="dv">0</span>] <span class="op">+</span> left[<span class="dv">0</span>][<span class="dv">1</span>] <span class="op">*</span> right[<span class="dv">1</span>][<span class="dv">0</span>]</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(first_entry)  <span class="co"># 1 * 5 + 2 * 7 = 19</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>The left matrix needs as many <strong>columns</strong> as the right matrix has <strong>rows</strong>. If the shapes are <code>(m, n)</code> and <code>(n, p)</code>, the result has shape <code>(m, p)</code>.</p>
+<p>For these two matrices, the full calculation is:</p>
+<pre class="text"><code>[1  2]   [5  6]   [1*5 + 2*7   1*6 + 2*8]   [19  22]
+[3  4] @ [7  8] = [3*5 + 4*7   3*6 + 4*8] = [43  50]</code></pre>
+</section>
+<section id="version-3-add-the-operators" class="level3">
+<h3 class="anchored" data-anchor-id="version-3-add-the-operators">Version 3: add the operators</h3>
+<p>The existing methods are repeated so this cell contains the complete class. The three new methods are at the bottom.</p>
+<p><code>__mul__</code> reuses <code>scale</code>. <code>__rmul__</code> handles a scalar on the left. <code>__matmul__</code> uses three loops: one for result rows, one for result columns, and one to add the products for a single entry.</p>
+<p>For unsupported operand types, an operator method returns <code>NotImplemented</code>. That lets Python try the other operand’s corresponding method. If neither object supports the operation, Python raises <code>TypeError</code>. Incompatible matrix dimensions are a separate problem, so we raise <code>ValueError</code> for those.</p>
+<div id="06-live-023" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Matrix:</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""A nonempty rectangular table of integers or floats."""</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, rows):</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>        data <span class="op">=</span> [<span class="bu">list</span>(row) <span class="cf">for</span> row <span class="kw">in</span> rows]</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="kw">not</span> data <span class="kw">or</span> <span class="kw">not</span> data[<span class="dv">0</span>]:</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>            <span class="cf">raise</span> <span class="pp">ValueError</span>(<span class="st">"A matrix needs at least one row and one column."</span>)</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>        width <span class="op">=</span> <span class="bu">len</span>(data[<span class="dv">0</span>])</span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> row <span class="kw">in</span> data:</span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> <span class="bu">len</span>(row) <span class="op">!=</span> width:</span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>                <span class="cf">raise</span> <span class="pp">ValueError</span>(<span class="st">"All rows must have the same length."</span>)</span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>            <span class="cf">for</span> value <span class="kw">in</span> row:</span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>                <span class="cf">if</span> <span class="kw">not</span> <span class="bu">isinstance</span>(value, (<span class="bu">int</span>, <span class="bu">float</span>)):</span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>                    <span class="cf">raise</span> <span class="pp">TypeError</span>(<span class="st">"Matrix entries must be integers or floats."</span>)</span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>._rows <span class="op">=</span> data</span>
+<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">@property</span></span>
+<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> shape(<span class="va">self</span>):</span>
+<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a>        <span class="co">"""Return (number of rows, number of columns)."""</span></span>
+<span id="cb13-20"><a href="#cb13-20" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> (<span class="bu">len</span>(<span class="va">self</span>._rows), <span class="bu">len</span>(<span class="va">self</span>._rows[<span class="dv">0</span>]))</span>
+<span id="cb13-21"><a href="#cb13-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-22"><a href="#cb13-22" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> to_list(<span class="va">self</span>):</span>
+<span id="cb13-23"><a href="#cb13-23" aria-hidden="true" tabindex="-1"></a>        <span class="co">"""Return a copy of the rows."""</span></span>
+<span id="cb13-24"><a href="#cb13-24" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> [row.copy() <span class="cf">for</span> row <span class="kw">in</span> <span class="va">self</span>._rows]</span>
+<span id="cb13-25"><a href="#cb13-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-26"><a href="#cb13-26" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__str__</span>(<span class="va">self</span>):</span>
+<span id="cb13-27"><a href="#cb13-27" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="st">"</span><span class="ch">\n</span><span class="st">"</span>.join(<span class="bu">str</span>(row) <span class="cf">for</span> row <span class="kw">in</span> <span class="va">self</span>._rows)</span>
+<span id="cb13-28"><a href="#cb13-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-29"><a href="#cb13-29" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__repr__</span>(<span class="va">self</span>):</span>
+<span id="cb13-30"><a href="#cb13-30" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="ss">f"Matrix(</span><span class="sc">{</span><span class="va">self</span><span class="sc">.</span>_rows<span class="sc">!r}</span><span class="ss">)"</span></span>
+<span id="cb13-31"><a href="#cb13-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-32"><a href="#cb13-32" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> scale(<span class="va">self</span>, factor):</span>
+<span id="cb13-33"><a href="#cb13-33" aria-hidden="true" tabindex="-1"></a>        <span class="co">"""Return a new matrix with every entry multiplied by factor."""</span></span>
+<span id="cb13-34"><a href="#cb13-34" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="kw">not</span> <span class="bu">isinstance</span>(factor, (<span class="bu">int</span>, <span class="bu">float</span>)):</span>
+<span id="cb13-35"><a href="#cb13-35" aria-hidden="true" tabindex="-1"></a>            <span class="cf">raise</span> <span class="pp">TypeError</span>(<span class="st">"The scale factor must be an integer or float."</span>)</span>
+<span id="cb13-36"><a href="#cb13-36" aria-hidden="true" tabindex="-1"></a>        result <span class="op">=</span> []</span>
+<span id="cb13-37"><a href="#cb13-37" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> row <span class="kw">in</span> <span class="va">self</span>._rows:</span>
+<span id="cb13-38"><a href="#cb13-38" aria-hidden="true" tabindex="-1"></a>            result.append([value <span class="op">*</span> factor <span class="cf">for</span> value <span class="kw">in</span> row])</span>
+<span id="cb13-39"><a href="#cb13-39" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> Matrix(result)</span>
+<span id="cb13-40"><a href="#cb13-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-41"><a href="#cb13-41" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__mul__</span>(<span class="va">self</span>, factor):</span>
+<span id="cb13-42"><a href="#cb13-42" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="kw">not</span> <span class="bu">isinstance</span>(factor, (<span class="bu">int</span>, <span class="bu">float</span>)):</span>
+<span id="cb13-43"><a href="#cb13-43" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> <span class="va">NotImplemented</span></span>
+<span id="cb13-44"><a href="#cb13-44" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">self</span>.scale(factor)</span>
+<span id="cb13-45"><a href="#cb13-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-46"><a href="#cb13-46" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__rmul__</span>(<span class="va">self</span>, factor):</span>
+<span id="cb13-47"><a href="#cb13-47" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">self</span>.<span class="fu">__mul__</span>(factor)</span>
+<span id="cb13-48"><a href="#cb13-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-49"><a href="#cb13-49" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__matmul__</span>(<span class="va">self</span>, other):</span>
+<span id="cb13-50"><a href="#cb13-50" aria-hidden="true" tabindex="-1"></a>        <span class="co">"""Return the matrix product of self and other."""</span></span>
+<span id="cb13-51"><a href="#cb13-51" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="kw">not</span> <span class="bu">isinstance</span>(other, Matrix):</span>
+<span id="cb13-52"><a href="#cb13-52" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> <span class="va">NotImplemented</span></span>
+<span id="cb13-53"><a href="#cb13-53" aria-hidden="true" tabindex="-1"></a>        left_rows, left_cols <span class="op">=</span> <span class="va">self</span>.shape</span>
+<span id="cb13-54"><a href="#cb13-54" aria-hidden="true" tabindex="-1"></a>        right_rows, right_cols <span class="op">=</span> other.shape</span>
+<span id="cb13-55"><a href="#cb13-55" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> left_cols <span class="op">!=</span> right_rows:</span>
+<span id="cb13-56"><a href="#cb13-56" aria-hidden="true" tabindex="-1"></a>            <span class="cf">raise</span> <span class="pp">ValueError</span>(</span>
+<span id="cb13-57"><a href="#cb13-57" aria-hidden="true" tabindex="-1"></a>                <span class="ss">f"Cannot multiply shapes </span><span class="sc">{</span><span class="va">self</span><span class="sc">.</span>shape<span class="sc">}</span><span class="ss"> and </span><span class="sc">{</span>other<span class="sc">.</span>shape<span class="sc">}</span><span class="ss">: "</span></span>
+<span id="cb13-58"><a href="#cb13-58" aria-hidden="true" tabindex="-1"></a>                <span class="st">"left columns must equal right rows."</span></span>
+<span id="cb13-59"><a href="#cb13-59" aria-hidden="true" tabindex="-1"></a>            )</span>
+<span id="cb13-60"><a href="#cb13-60" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-61"><a href="#cb13-61" aria-hidden="true" tabindex="-1"></a>        result <span class="op">=</span> []</span>
+<span id="cb13-62"><a href="#cb13-62" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(left_rows):</span>
+<span id="cb13-63"><a href="#cb13-63" aria-hidden="true" tabindex="-1"></a>            row <span class="op">=</span> []</span>
+<span id="cb13-64"><a href="#cb13-64" aria-hidden="true" tabindex="-1"></a>            <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(right_cols):</span>
+<span id="cb13-65"><a href="#cb13-65" aria-hidden="true" tabindex="-1"></a>                total <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb13-66"><a href="#cb13-66" aria-hidden="true" tabindex="-1"></a>                <span class="cf">for</span> k <span class="kw">in</span> <span class="bu">range</span>(left_cols):</span>
+<span id="cb13-67"><a href="#cb13-67" aria-hidden="true" tabindex="-1"></a>                    total <span class="op">+=</span> <span class="va">self</span>._rows[i][k] <span class="op">*</span> other._rows[k][j]</span>
+<span id="cb13-68"><a href="#cb13-68" aria-hidden="true" tabindex="-1"></a>                row.append(total)</span>
+<span id="cb13-69"><a href="#cb13-69" aria-hidden="true" tabindex="-1"></a>            result.append(row)</span>
+<span id="cb13-70"><a href="#cb13-70" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> Matrix(result)</span>
+<span id="cb13-71"><a href="#cb13-71" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-72"><a href="#cb13-72" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-73"><a href="#cb13-73" aria-hidden="true" tabindex="-1"></a>A <span class="op">=</span> Matrix([[<span class="dv">1</span>, <span class="dv">2</span>], [<span class="dv">3</span>, <span class="dv">4</span>]])</span>
+<span id="cb13-74"><a href="#cb13-74" aria-hidden="true" tabindex="-1"></a>B <span class="op">=</span> Matrix([[<span class="dv">5</span>, <span class="dv">6</span>], [<span class="dv">7</span>, <span class="dv">8</span>]])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="use-the-new-operators" class="level3">
+<h3 class="anchored" data-anchor-id="use-the-new-operators">Use the new operators</h3>
+<p><strong>Predict:</strong> which expressions below should produce the same result?</p>
+<div id="06-live-025" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"A.scale(3):"</span>)</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(A.scale(<span class="dv">3</span>))</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"A * 3:"</span>)</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(A <span class="op">*</span> <span class="dv">3</span>)</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"3 * A:"</span>)</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="dv">3</span> <span class="op">*</span> A)</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> (A <span class="op">*</span> <span class="dv">3</span>).to_list() <span class="op">==</span> (<span class="dv">3</span> <span class="op">*</span> A).to_list() <span class="op">==</span> A.scale(<span class="dv">3</span>).to_list()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Now compare <code>A @ B</code> and <code>B @ A</code>. Reversing the order can change the result.</p>
+<div id="06-live-027" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"A @ B:"</span>)</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(A <span class="op">@</span> B)</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"B @ A:"</span>)</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(B <span class="op">@</span> A)</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> (A <span class="op">@</span> B).to_list() <span class="op">==</span> [[<span class="dv">19</span>, <span class="dv">22</span>], [<span class="dv">43</span>, <span class="dv">50</span>]]</span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> (B <span class="op">@</span> A).to_list() <span class="op">==</span> [[<span class="dv">23</span>, <span class="dv">34</span>], [<span class="dv">31</span>, <span class="dv">46</span>]]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Matrix multiplication also works for rectangular matrices. Compute the result’s shape before running the next cell.</p>
+<div id="06-live-029" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>wide <span class="op">=</span> Matrix([[<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>], [<span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>]])</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>tall <span class="op">=</span> Matrix([[<span class="dv">7</span>, <span class="dv">8</span>], [<span class="dv">9</span>, <span class="dv">10</span>], [<span class="dv">11</span>, <span class="dv">12</span>]])</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>product <span class="op">=</span> wide <span class="op">@</span> tall</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(wide.shape, <span class="st">"@"</span>, tall.shape, <span class="st">"-&gt;"</span>, product.shape)</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(product)</span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> product.to_list() <span class="op">==</span> [[<span class="dv">58</span>, <span class="dv">64</span>], [<span class="dv">139</span>, <span class="dv">154</span>]]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>An informative error helps the caller correct the input.</p>
+<div id="06-live-031" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="cf">try</span>:</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>    wide <span class="op">@</span> A  <span class="co"># A (2, 3) matrix cannot multiply a (2, 2) matrix.</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="cf">except</span> <span class="pp">ValueError</span> <span class="im">as</span> error:</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(error)</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a><span class="cf">try</span>:</span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>    A <span class="op">*</span> B  <span class="co"># We reserved * for scalar multiplication.</span></span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a><span class="cf">except</span> <span class="pp">TypeError</span> <span class="im">as</span> error:</span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(error)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="a-vector-is-a-specialized-matrix" class="level3">
+<h3 class="anchored" data-anchor-id="a-vector-is-a-specialized-matrix">A vector is a specialized matrix</h3>
+<p>For this example, <code>Vector([3, 4])</code> stores <code>[[3], [4]]</code>. It has two rows and one column. Keeping the same internal layout lets it reuse matrix behavior.</p>
+<p><code>Vector(Matrix)</code> declares the parent class. <code>super().__init__</code> calls the parent initializer, including its validation and copying. We override the two display methods and add <code>magnitude</code>, which returns the square root of the sum of squared entries.</p>
+<div id="06-live-033" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Vector(Matrix):</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""A nonempty column vector."""</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, values):</span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>        <span class="bu">super</span>().<span class="fu">__init__</span>([[value] <span class="cf">for</span> value <span class="kw">in</span> values])</span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__str__</span>(<span class="va">self</span>):</span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>        values <span class="op">=</span> [row[<span class="dv">0</span>] <span class="cf">for</span> row <span class="kw">in</span> <span class="va">self</span>._rows]</span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="ss">f"Vector with entries </span><span class="sc">{</span>values<span class="sc">}</span><span class="ss">"</span></span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__repr__</span>(<span class="va">self</span>):</span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a>        values <span class="op">=</span> [row[<span class="dv">0</span>] <span class="cf">for</span> row <span class="kw">in</span> <span class="va">self</span>._rows]</span>
+<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="ss">f"Vector(</span><span class="sc">{</span>values<span class="sc">!r}</span><span class="ss">)"</span></span>
+<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> magnitude(<span class="va">self</span>):</span>
+<span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a>        <span class="co">"""Return the square root of the sum of squared entries."""</span></span>
+<span id="cb18-17"><a href="#cb18-17" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="bu">sum</span>(row[<span class="dv">0</span>] <span class="op">**</span> <span class="dv">2</span> <span class="cf">for</span> row <span class="kw">in</span> <span class="va">self</span>._rows) <span class="op">**</span> <span class="fl">0.5</span></span>
+<span id="cb18-18"><a href="#cb18-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-19"><a href="#cb18-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-20"><a href="#cb18-20" aria-hidden="true" tabindex="-1"></a>v <span class="op">=</span> Vector([<span class="dv">3</span>, <span class="dv">4</span>])</span>
+<span id="cb18-21"><a href="#cb18-21" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(v)</span>
+<span id="cb18-22"><a href="#cb18-22" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Shape:"</span>, v.shape)</span>
+<span id="cb18-23"><a href="#cb18-23" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Magnitude:"</span>, v.magnitude())</span>
+<span id="cb18-24"><a href="#cb18-24" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Is a Vector:"</span>, <span class="bu">isinstance</span>(v, Vector))</span>
+<span id="cb18-25"><a href="#cb18-25" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Is a Matrix:"</span>, <span class="bu">isinstance</span>(v, Matrix))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>The subclass inherits <code>shape</code>, <code>to_list</code>, and the arithmetic methods. Python finds its own <code>__str__</code> when we print it. This is <strong>polymorphism</strong>: the same operation can use different implementations for different objects.</p>
+<div id="06-live-035" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> item <span class="kw">in</span> (A, v):</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="bu">type</span>(item).<span class="va">__name__</span>, <span class="st">"has shape"</span>, item.shape)</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(item)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="decide-what-an-operation-returns" class="level3">
+<h3 class="anchored" data-anchor-id="decide-what-an-operation-returns">Decide what an operation returns</h3>
+<p>Our inherited arithmetic constructs <code>Matrix</code> objects. A result with one column is mathematically a column vector, but Python will not change its class to <code>Vector</code> automatically.</p>
+<div id="06-live-037" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>scaled <span class="op">=</span> v <span class="op">*</span> <span class="dv">2</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(scaled)</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Result type:"</span>, <span class="bu">type</span>(scaled).<span class="va">__name__</span>)</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> scaled.shape <span class="op">==</span> (<span class="dv">2</span>, <span class="dv">1</span>)</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> <span class="bu">type</span>(scaled) <span class="kw">is</span> Matrix</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>This is the contract for our small implementation: matrix arithmetic always returns <code>Matrix</code>. Preserving a subclass would require another design decision. For example, we could override <code>Vector.scale</code> to build a <code>Vector</code> instead. We will keep the current rule consistent throughout this notebook.</p>
+</section>
+<section id="use-the-classes-together-calculate-daily-revenue" class="level3">
+<h3 class="anchored" data-anchor-id="use-the-classes-together-calculate-daily-revenue">Use the classes together: calculate daily revenue</h3>
+<p>A small store sells notebooks, pens, and mugs. Each row below records the number sold on one day. The price vector uses the same product order.</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Day</th>
+<th>Notebooks</th>
+<th>Pens</th>
+<th>Mugs</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Monday</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<td>Tuesday</td>
+<td>1</td>
+<td>3</td>
+<td>2</td>
+</tr>
+<tr class="odd">
+<td>Price in dollars</td>
+<td>5</td>
+<td>2</td>
+<td>4</td>
+</tr>
+</tbody>
+</table>
+<p>Each day’s revenue is a row multiplied by the price column. Monday’s revenue is <code>2 * 5 + 1 * 2 + 0 * 4</code>, or 12 dollars. Tuesday’s is 19 dollars.</p>
+<div id="06-live-039" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>quantities <span class="op">=</span> Matrix([[<span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">0</span>], [<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">2</span>]])</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>prices <span class="op">=</span> Vector([<span class="dv">5</span>, <span class="dv">2</span>, <span class="dv">4</span>])</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>revenue <span class="op">=</span> quantities <span class="op">@</span> prices</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Input shapes:"</span>, quantities.shape, prices.shape)</span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Revenue by day:"</span>)</span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(revenue)</span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> revenue.to_list() <span class="op">==</span> [[<span class="dv">12</span>], [<span class="dv">19</span>]]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="check-the-behavior-we-promised" class="level3">
+<h3 class="anchored" data-anchor-id="check-the-behavior-we-promised">Check the behavior we promised</h3>
+<p>These checks use expected values we can calculate by hand. <code>assert</code> raises an error if a condition is false. A successful run reaches the final message.</p>
+<div id="06-live-041" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>identity <span class="op">=</span> Matrix([[<span class="dv">1</span>, <span class="dv">0</span>], [<span class="dv">0</span>, <span class="dv">1</span>]])</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>original <span class="op">=</span> A.to_list()</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> (A <span class="op">@</span> identity).to_list() <span class="op">==</span> original</span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> (identity <span class="op">@</span> A).to_list() <span class="op">==</span> original</span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> (A <span class="op">*</span> <span class="dv">0</span>).to_list() <span class="op">==</span> [[<span class="dv">0</span>, <span class="dv">0</span>], [<span class="dv">0</span>, <span class="dv">0</span>]]</span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> (A <span class="op">*</span> <span class="op">-</span><span class="dv">1</span>).to_list() <span class="op">==</span> [[<span class="op">-</span><span class="dv">1</span>, <span class="op">-</span><span class="dv">2</span>], [<span class="op">-</span><span class="dv">3</span>, <span class="op">-</span><span class="dv">4</span>]]</span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> (A <span class="op">*</span> <span class="fl">0.5</span>).to_list() <span class="op">==</span> [[<span class="fl">0.5</span>, <span class="fl">1.0</span>], [<span class="fl">1.5</span>, <span class="fl">2.0</span>]]</span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> A.to_list() <span class="op">==</span> original</span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> v.magnitude() <span class="op">==</span> <span class="fl">5.0</span></span>
+<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> (A <span class="op">@</span> v).to_list() <span class="op">==</span> [[<span class="dv">11</span>], [<span class="dv">25</span>]]</span>
+<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> revenue.shape <span class="op">==</span> (<span class="dv">2</span>, <span class="dv">1</span>)</span>
+<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-14"><a href="#cb22-14" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"All checks passed."</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="stop-and-explain" class="level3">
+<h3 class="anchored" data-anchor-id="stop-and-explain">Stop and explain</h3>
+<p>Before moving on, explain these without reading the definitions:</p>
+<ol type="1">
+<li>What does <code>self</code> refer to in <code>A.scale(3)</code>?</li>
+<li>Why does <code>shape</code> have no parentheses?</li>
+<li>Which methods run when we call <code>print(v)</code> or evaluate <code>A @ v</code>?</li>
+<li>What does <code>Vector</code> reuse through <code>super()</code>?</li>
+<li>Why does <code>v * 2</code> return a <code>Matrix</code> in this implementation?</li>
+</ol>
+<p>For practice, add matrix addition with <code>__add__</code>. Require equal shapes, return a new <code>Matrix</code>, and check one valid example and one mismatched pair. If you ask an AI assistant for a draft, give it that contract and verify the output yourself.</p>
+</section>
+</section>
+<section id="optional-a-few-more-class-features" class="level2">
+<h2 class="anchored" data-anchor-id="optional-a-few-more-class-features">Optional: a few more class features</h2>
+<p>The slides also preview class variables, class methods, static methods, and property setters. We can see each by giving a vector a display label and a convenient way to construct a zero vector. This section takes about 10 minutes.</p>
+<ul>
+<li><code>default_label</code> is a <strong>class variable</strong> shared through the class. The entries and each vector’s chosen label are <strong>instance attributes</strong>.</li>
+<li><code>zeros</code> is a <strong>class method</strong>. It receives <code>cls</code>, the class being called, and constructs an instance of that class.</li>
+<li><code>_validate_label</code> is a <strong>static method</strong>. It receives neither <code>self</code> nor <code>cls</code>. It could also be a standalone function; we keep it here because it checks the labels used by this class.</li>
+<li><code>label</code> is a <strong>property with a setter</strong>. Assignment passes through validation. The initializer uses the same setter, so initial and later labels follow the same rules.</li>
+</ul>
+<p>This is a complete replacement for <code>Vector</code>. Its arithmetic still returns <code>Matrix</code>, as before.</p>
+<div id="06-live-043" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Vector(Matrix):</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""A nonempty column vector with a display label."""</span></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>    default_label <span class="op">=</span> <span class="st">"Vector"</span></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, values, label<span class="op">=</span><span class="va">None</span>):</span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>        <span class="bu">super</span>().<span class="fu">__init__</span>([[value] <span class="cf">for</span> value <span class="kw">in</span> values])</span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.label <span class="op">=</span> <span class="va">self</span>.default_label <span class="cf">if</span> label <span class="kw">is</span> <span class="va">None</span> <span class="cf">else</span> label</span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">@property</span></span>
+<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> label(<span class="va">self</span>):</span>
+<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a>        <span class="co">"""Return the display label."""</span></span>
+<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">self</span>._label</span>
+<span id="cb23-14"><a href="#cb23-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-15"><a href="#cb23-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">@label.setter</span></span>
+<span id="cb23-16"><a href="#cb23-16" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> label(<span class="va">self</span>, value):</span>
+<span id="cb23-17"><a href="#cb23-17" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>._validate_label(value)</span>
+<span id="cb23-18"><a href="#cb23-18" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>._label <span class="op">=</span> value.strip()</span>
+<span id="cb23-19"><a href="#cb23-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-20"><a href="#cb23-20" aria-hidden="true" tabindex="-1"></a>    <span class="at">@staticmethod</span></span>
+<span id="cb23-21"><a href="#cb23-21" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> _validate_label(value):</span>
+<span id="cb23-22"><a href="#cb23-22" aria-hidden="true" tabindex="-1"></a>        <span class="co">"""Require a string containing at least one non-whitespace character."""</span></span>
+<span id="cb23-23"><a href="#cb23-23" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="kw">not</span> <span class="bu">isinstance</span>(value, <span class="bu">str</span>):</span>
+<span id="cb23-24"><a href="#cb23-24" aria-hidden="true" tabindex="-1"></a>            <span class="cf">raise</span> <span class="pp">TypeError</span>(<span class="st">"The label must be a string."</span>)</span>
+<span id="cb23-25"><a href="#cb23-25" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="kw">not</span> value.strip():</span>
+<span id="cb23-26"><a href="#cb23-26" aria-hidden="true" tabindex="-1"></a>            <span class="cf">raise</span> <span class="pp">ValueError</span>(<span class="st">"The label must not be blank."</span>)</span>
+<span id="cb23-27"><a href="#cb23-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-28"><a href="#cb23-28" aria-hidden="true" tabindex="-1"></a>    <span class="at">@classmethod</span></span>
+<span id="cb23-29"><a href="#cb23-29" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> zeros(cls, size):</span>
+<span id="cb23-30"><a href="#cb23-30" aria-hidden="true" tabindex="-1"></a>        <span class="co">"""Return a vector containing size zeros."""</span></span>
+<span id="cb23-31"><a href="#cb23-31" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="bu">type</span>(size) <span class="kw">is</span> <span class="kw">not</span> <span class="bu">int</span> <span class="kw">or</span> size <span class="op">&lt;</span> <span class="dv">1</span>:</span>
+<span id="cb23-32"><a href="#cb23-32" aria-hidden="true" tabindex="-1"></a>            <span class="cf">raise</span> <span class="pp">ValueError</span>(<span class="st">"Size must be a positive integer."</span>)</span>
+<span id="cb23-33"><a href="#cb23-33" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> cls([<span class="dv">0</span>] <span class="op">*</span> size)</span>
+<span id="cb23-34"><a href="#cb23-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-35"><a href="#cb23-35" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__str__</span>(<span class="va">self</span>):</span>
+<span id="cb23-36"><a href="#cb23-36" aria-hidden="true" tabindex="-1"></a>        values <span class="op">=</span> [row[<span class="dv">0</span>] <span class="cf">for</span> row <span class="kw">in</span> <span class="va">self</span>._rows]</span>
+<span id="cb23-37"><a href="#cb23-37" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="ss">f"</span><span class="sc">{</span><span class="va">self</span><span class="sc">.</span>label<span class="sc">}</span><span class="ss">: </span><span class="sc">{</span>values<span class="sc">}</span><span class="ss">"</span></span>
+<span id="cb23-38"><a href="#cb23-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-39"><a href="#cb23-39" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__repr__</span>(<span class="va">self</span>):</span>
+<span id="cb23-40"><a href="#cb23-40" aria-hidden="true" tabindex="-1"></a>        values <span class="op">=</span> [row[<span class="dv">0</span>] <span class="cf">for</span> row <span class="kw">in</span> <span class="va">self</span>._rows]</span>
+<span id="cb23-41"><a href="#cb23-41" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="ss">f"Vector(</span><span class="sc">{</span>values<span class="sc">!r}</span><span class="ss">, label=</span><span class="sc">{</span><span class="va">self</span><span class="sc">.</span>label<span class="sc">!r}</span><span class="ss">)"</span></span>
+<span id="cb23-42"><a href="#cb23-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-43"><a href="#cb23-43" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> magnitude(<span class="va">self</span>):</span>
+<span id="cb23-44"><a href="#cb23-44" aria-hidden="true" tabindex="-1"></a>        <span class="co">"""Return the square root of the sum of squared entries."""</span></span>
+<span id="cb23-45"><a href="#cb23-45" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="bu">sum</span>(row[<span class="dv">0</span>] <span class="op">**</span> <span class="dv">2</span> <span class="cf">for</span> row <span class="kw">in</span> <span class="va">self</span>._rows) <span class="op">**</span> <span class="fl">0.5</span></span>
+<span id="cb23-46"><a href="#cb23-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-47"><a href="#cb23-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-48"><a href="#cb23-48" aria-hidden="true" tabindex="-1"></a>v <span class="op">=</span> Vector([<span class="dv">3</span>, <span class="dv">4</span>], label<span class="op">=</span><span class="st">"Position"</span>)</span>
+<span id="cb23-49"><a href="#cb23-49" aria-hidden="true" tabindex="-1"></a>zero <span class="op">=</span> Vector.zeros(<span class="dv">3</span>)</span>
+<span id="cb23-50"><a href="#cb23-50" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(v)</span>
+<span id="cb23-51"><a href="#cb23-51" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(zero)</span>
+<span id="cb23-52"><a href="#cb23-52" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Class default:"</span>, Vector.default_label)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>A setter is useful when an assignment must follow a rule. A plain public attribute is fine when no such rule is needed.</p>
+<div id="06-live-045" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>v.label <span class="op">=</span> <span class="st">"Displacement"</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(v)</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a><span class="cf">try</span>:</span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>    v.label <span class="op">=</span> <span class="st">"   "</span></span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a><span class="cf">except</span> <span class="pp">ValueError</span> <span class="im">as</span> error:</span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(error)</span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> v.label <span class="op">==</span> <span class="st">"Displacement"</span>  <span class="co"># The failed assignment did not change it.</span></span>
+<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> zero.shape <span class="op">==</span> (<span class="dv">3</span>, <span class="dv">1</span>)</span>
+<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> zero.magnitude() <span class="op">==</span> <span class="fl">0.0</span></span>
+<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">repr</span>(v))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Changing the class default affects labels chosen for future instances. Existing instances keep the labels stored on them. The cell restores the default so it is safe to run again.</p>
+<div id="06-live-047" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>Vector.default_label <span class="op">=</span> <span class="st">"Column"</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>another <span class="op">=</span> Vector([<span class="dv">1</span>, <span class="dv">2</span>])</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(another)</span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(zero)</span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> another.label <span class="op">==</span> <span class="st">"Column"</span></span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> zero.label <span class="op">==</span> <span class="st">"Vector"</span></span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>Vector.default_label <span class="op">=</span> <span class="st">"Vector"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<section id="when-would-we-choose-a-different-design" class="level3">
+<h3 class="anchored" data-anchor-id="when-would-we-choose-a-different-design">When would we choose a different design?</h3>
+<p>We chose inheritance because our vector uses the same layout and operations as a one-column matrix. <strong>Composition</strong> would put a matrix inside another object, such as a sales report with a <code>quantities</code> attribute. A sales report has a matrix; it is not itself a matrix.</p>
+<p>Python also supports <strong>multiple inheritance</strong>, where a class has more than one parent. That introduces questions about which parent’s method runs. Our example needs only one parent, so we will stop here.</p>
+<p>The useful question is whether the class gives its callers a clear interface. Our callers can construct, inspect, print, scale, and multiply objects without repeating the row-processing code each time.</p>
+<p>For reference, see the Python 3.12 documentation on <a href="https://docs.python.org/3.12/tutorial/classes.html">classes</a> and <a href="https://docs.python.org/3.12/reference/datamodel.html#special-method-names">special methods</a>.</p>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+<p>IS 4010: App Dev with AI</p>
+</div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>
