@@ -4,7 +4,7 @@ title: "Week 10: Soul of Rust"
 
 ## Introduction
 
-This week you'll master Rust's revolutionary memory safety system that makes it unique among programming languages. Ownership and borrowing are what make Rust special, because they eliminate entire categories of bugs (use-after-free, double-free, data races) at compile time, with zero runtime cost. You'll develop the muscle memory to work with the borrow checker instead of fighting it, understanding how to manage memory safely without a garbage collector.
+This week we will follow small Rust programs to see who owns a value, what happens when it moves, and how a function can borrow it to read or change it. We'll predict outputs, read compiler diagnostics, and make one change at a time. The main lesson covers ownership, borrowing, string slices, and keeping borrowed data valid; named lifetime annotations are an optional extension.
 
 ## Recommended readings
 
