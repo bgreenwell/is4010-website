@@ -849,7 +849,7 @@
     "href": "weeks/week10.html",
     "title": "Week 10: Soul of Rust",
     "section": "",
-    "text": "This week you’ll master Rust’s revolutionary memory safety system that makes it unique among programming languages. Ownership and borrowing are what make Rust special, because they eliminate entire categories of bugs (use-after-free, double-free, data races) at compile time, with zero runtime cost. You’ll develop the muscle memory to work with the borrow checker instead of fighting it, understanding how to manage memory safely without a garbage collector.",
+    "text": "This week we will follow small Rust programs to see who owns a value, what happens when it moves, and how a function can borrow it to read or change it. We’ll predict outputs, read compiler diagnostics, and make one change at a time. The main lesson covers ownership, borrowing, string slices, and keeping borrowed data valid; named lifetime annotations are an optional extension.",
     "crumbs": [
       "Weekly schedule",
       "Week 10: Soul of Rust"
@@ -860,7 +860,7 @@
     "href": "weeks/week10.html#introduction",
     "title": "Week 10: Soul of Rust",
     "section": "",
-    "text": "This week you’ll master Rust’s revolutionary memory safety system that makes it unique among programming languages. Ownership and borrowing are what make Rust special, because they eliminate entire categories of bugs (use-after-free, double-free, data races) at compile time, with zero runtime cost. You’ll develop the muscle memory to work with the borrow checker instead of fighting it, understanding how to manage memory safely without a garbage collector.",
+    "text": "This week we will follow small Rust programs to see who owns a value, what happens when it moves, and how a function can borrow it to read or change it. We’ll predict outputs, read compiler diagnostics, and make one change at a time. The main lesson covers ownership, borrowing, string slices, and keeping borrowed data valid; named lifetime annotations are an optional extension.",
     "crumbs": [
       "Weekly schedule",
       "Week 10: Soul of Rust"
@@ -1465,305 +1465,298 @@
     "text": "Start Lab 12\nFollow the due date shown in Canvas.\nWhat to do:\n\nReview lecture materials and examples\nWork through interactive exercises\nBegin Lab 12: Generic Stack implementation\nApply generics and traits from this week\nRun the supplied tests, formatter check, and Clippy\nAsk questions early and often\n\nRemember: A green Week 12 badge represents the complete 10-point lab.\nGood luck!"
   },
   {
-    "objectID": "slides/IS4010_W10_The_Soul_of_Rust.html#session-1-the-ownership-model",
-    "href": "slides/IS4010_W10_The_Soul_of_Rust.html#session-1-the-ownership-model",
+    "objectID": "slides/IS4010_W10_The_Soul_of_Rust.html#session-1-who-owns-this-value",
+    "href": "slides/IS4010_W10_The_Soul_of_Rust.html#session-1-who-owns-this-value",
     "title": "IS 4010: Application Development with Artificial Intelligence",
-    "section": "Session 1: the ownership model",
-    "text": "Session 1: the ownership model\n\nOwnership is the organizing concept for this week. Build from concrete values, moves, and borrows before introducing lifetimes, and state where each analogy stops matching the implementation."
+    "section": "Session 1: who owns this value?",
+    "text": "Session 1: who owns this value?\nWe will follow one small piece of text: \"Ada\".\n\nWho owns it?\nCan we still use it after an assignment or function call?\nWhen is its memory cleaned up?\n\nOur routine: Predict → run → explain.\n\nBegin with a show of hands: in Python, does assigning a list to a second variable create an independent list? No: both names refer to the same list. Rust’s String assignment behaves differently, and today we will trace that difference. Do not assume students already know String, references, or memory allocation. Allow 30–60 seconds for each prediction and 2–3 minutes for each repair exercise. Answers and demonstration steps are in these notes."
   },
   {
-    "objectID": "slides/IS4010_W10_The_Soul_of_Rust.html#why-ownership-matters-memory-safety-defects",
-    "href": "slides/IS4010_W10_The_Soul_of_Rust.html#why-ownership-matters-memory-safety-defects",
+    "objectID": "slides/IS4010_W10_The_Soul_of_Rust.html#why-rust-asks-about-ownership",
+    "href": "slides/IS4010_W10_The_Soul_of_Rust.html#why-rust-asks-about-ownership",
     "title": "IS 4010: Application Development with Artificial Intelligence",
-    "section": "Why ownership matters: memory-safety defects",
-    "text": "Why ownership matters: memory-safety defects\n\nThe 2014 Heartbleed bug was an out-of-bounds read in OpenSSL\nA Microsoft Security Response Center analysis reported that memory-safety issues were a large share of the vulnerabilities it examined\nC and C++ permit low-level memory operations; safe use depends on language features, libraries, tools, and programmer discipline\nSafe Rust rejects many invalid memory-access patterns through ownership and borrowing\n\n\nHeartbleed was a buffer over-read vulnerability. Use it as an example of the class of memory-access errors that safe Rust is designed to prevent; avoid implying that ownership prevents every security vulnerability."
+    "section": "Why Rust asks about ownership",
+    "text": "Why Rust asks about ownership\n\nYour program needs memory to store values.\nThat memory can be reused when the values are no longer needed.\nRust checks who owns data and who may use it before the program runs.\n\nThe benefit: Many mistakes involving invalid memory access become compiler errors.\n\nKeep this motivation brief. Python manages memory automatically at runtime. Rust uses ownership to determine cleanup without a tracing garbage collector. Ownership checks happen at compile time; allocating, copying, and freeing a String still involve runtime work. Safe Rust prevents many memory-safety errors, but it does not guarantee correct answers or prevent every security bug. We will focus on ordinary owned values and references, leaving shared ownership and interior mutability for later study."
   },
   {
-    "objectID": "slides/IS4010_W10_The_Soul_of_Rust.html#memory-management-trade-offs",
-    "href": "slides/IS4010_W10_The_Soul_of_Rust.html#memory-management-trade-offs",
+    "objectID": "slides/IS4010_W10_The_Soul_of_Rust.html#meet-an-owned-string",
+    "href": "slides/IS4010_W10_The_Soul_of_Rust.html#meet-an-owned-string",
     "title": "IS 4010: Application Development with Artificial Intelligence",
-    "section": "Memory-management trade-offs",
-    "text": "Memory-management trade-offs\nLanguages make different trade-offs among:\n\nRuntime overhead and predictability\nCompile-time guarantees\nProgrammer control and implementation complexity\n\nExamples: - Python automates memory management and accepts runtime overhead - C exposes manual memory operations and few compile-time protections - Modern C++ often uses RAII and smart pointers, while still permitting low-level operations - Rust uses ownership and borrowing to enforce many memory-safety rules in safe code without a tracing garbage collector\n\nThe important distinction is enforcement time: Rust moves many checks to compilation. That improves safety and runtime predictability, but it adds concepts that students must learn."
+    "section": "Meet an owned string",
+    "text": "Meet an owned string\nfn main() {\n    let name = String::from(\"Ada\");\n    println!(\"{}\", name);\n}\n\nString stores owned text that can grow.\nString::from(\"Ada\") creates a String containing Ada.\nHere, the variable name is the owner of that String.\n\nPredict: What will this print?\nTry this example in Rust Playground\n\nAnswer: Ada. Run the example in Playground or a scratch Cargo project, separate from the lab. Read String::from as “make an owned String from this text.” The double colon selects the from function associated with String. Recall fn main and println! from Week 09. println! borrows this value for display; it does not take ownership. Explain the distinction from a string literal more fully when we introduce &str in session 2."
   },
   {
-    "objectID": "slides/IS4010_W10_The_Soul_of_Rust.html#how-python-handles-memory-garbage-collection",
-    "href": "slides/IS4010_W10_The_Soul_of_Rust.html#how-python-handles-memory-garbage-collection",
+    "objectID": "slides/IS4010_W10_The_Soul_of_Rust.html#braces-show-where-a-variable-is-available",
+    "href": "slides/IS4010_W10_The_Soul_of_Rust.html#braces-show-where-a-variable-is-available",
     "title": "IS 4010: Application Development with Artificial Intelligence",
-    "section": "How Python handles memory (garbage collection)",
-    "text": "How Python handles memory (garbage collection)\n\nPython implementations manage memory automatically\nCPython primarily uses reference counting and supplements it with a cyclic garbage collector\nMost objects are reclaimed when their reference count reaches zero; the cyclic collector detects unreachable reference cycles\nBenefit: Application code rarely allocates or frees memory directly\nTrade-off: Reference counting and cycle detection add runtime and memory overhead\n\n\nKeep the comparison implementation-specific. CPython, PyPy, and other Python implementations can manage memory differently, and performance should be measured for the workload rather than inferred from the language alone."
+    "section": "Braces show where a variable is available",
+    "text": "Braces show where a variable is available\nfn main() {\n    {\n        let name = String::from(\"Ada\");\n        println!(\"{}\", name);\n    } // name leaves scope; its String is cleaned up\n\n    // println!(\"{}\", name); // Try uncommenting this\n}\nScope is the region of code where a variable can be used.\nPredict: Can the final line use name outside its block?\nTry this example in Rust Playground\n\nAnswer: no. Uncomment the final line and read E0425: cannot find value name in this scope. The inner braces define a block; the name binding is available inside that block. When its owner leaves scope, the String is dropped and its text buffer is freed. Cleanup is automatic; students do not add a manual free call. Distinguish this name-resolution error from the moved-value error coming next."
   },
   {
-    "objectID": "slides/IS4010_W10_The_Soul_of_Rust.html#how-cc-handles-memory-manual-management",
-    "href": "slides/IS4010_W10_The_Soul_of_Rust.html#how-cc-handles-memory-manual-management",
+    "objectID": "slides/IS4010_W10_The_Soul_of_Rust.html#three-rules-for-owned-values",
+    "href": "slides/IS4010_W10_The_Soul_of_Rust.html#three-rules-for-owned-values",
     "title": "IS 4010: Application Development with Artificial Intelligence",
-    "section": "How C/C++ handles memory (manual management)",
-    "text": "How C/C++ handles memory (manual management)\n\nC exposes manual allocation with malloc() and free()\nC++ also provides RAII, containers, and smart pointers; low-level new and delete remain available\nBenefit: Direct control over representation, allocation, and lifetime\nRisk: Low-level operations can introduce mistakes:\n\nUse-after-free: Using memory after it’s been freed (security vulnerability)\nDouble-free: Freeing the same memory twice (crashes)\nMemory leaks: Forgetting to free memory (resource exhaustion)\n\n\n\nModern C++ can reduce these risks with RAII, containers, and smart pointers. Safe Rust rules out many invalid memory-access patterns, while unsafe Rust remains available for operations the compiler cannot verify."
+    "section": "Three rules for owned values",
+    "text": "Three rules for owned values\n\nEvery value has an owner.\nThere is one owner at a time.\nWhen the owner leaves scope, the value is dropped: Rust performs its cleanup.\n\nMoving a value transfers ownership to a new owner.\nCopying creates another value; it does not give one value two owners.\n\nUse these rules for the ordinary owned values in this lesson, following Rust Book Chapter 4. An owner may also be a field or collection, not just a local variable. Do not imply that every assignment moves: Copy values are duplicated instead, as we will see shortly. For String, dropping the value releases its owned buffer. Shared-ownership types are outside today’s scope."
   },
   {
-    "objectID": "slides/IS4010_W10_The_Soul_of_Rust.html#rusts-approach-ownership",
-    "href": "slides/IS4010_W10_The_Soul_of_Rust.html#rusts-approach-ownership",
+    "objectID": "slides/IS4010_W10_The_Soul_of_Rust.html#assignment-can-move-ownership",
+    "href": "slides/IS4010_W10_The_Soul_of_Rust.html#assignment-can-move-ownership",
     "title": "IS 4010: Application Development with Artificial Intelligence",
-    "section": "Rust’s approach: ownership",
-    "text": "Rust’s approach: ownership\n\nRust introduces a third approach: the ownership system\nThe compiler enforces ownership rules at compile time\nIf your code violates these rules, it won’t compile\nOwnership checks themselves occur at compile time\nNo garbage collector needed\nSafe Rust prevents many memory-safety errors through the type system\n\n\nOwnership and borrowing are checked at compile time. In safe Rust, the type system prevents data races and many invalid memory accesses; compilation does not guarantee that the program is free of logic, security, or performance bugs."
+    "section": "Assignment can move ownership",
+    "text": "Assignment can move ownership\nfn main() {\n    let name = String::from(\"Ada\");\n    let guest = name; // The String moves to guest\n\n    println!(\"{}\", guest);\n    // println!(\"{}\", name); // Can we still use name?\n}\nPredict: Which variable owns the String after the assignment?\nTry this example in Rust Playground\n\nAnswer: guest owns the String, and this program prints Ada. Pause before revealing it. The assignment does not create a second text buffer. name is no longer usable unless it is assigned a new value; we do not need that detail for this example. Point out that mut would allow mutation but would not undo a move. Next, try the commented line."
   },
   {
-    "objectID": "slides/IS4010_W10_The_Soul_of_Rust.html#the-three-ownership-rules",
-    "href": "slides/IS4010_W10_The_Soul_of_Rust.html#the-three-ownership-rules",
+    "objectID": "slides/IS4010_W10_The_Soul_of_Rust.html#try-using-the-old-owner",
+    "href": "slides/IS4010_W10_The_Soul_of_Rust.html#try-using-the-old-owner",
     "title": "IS 4010: Application Development with Artificial Intelligence",
-    "section": "The three ownership rules",
-    "text": "The three ownership rules\nUse these three rules as the course model for owned values in safe Rust:\n\nEach value has an owner\n\nA binding, collection, or other value may own its data\n\nThere can only be one owner at a time\n\nWhen you assign a value to a new variable, ownership transfers (it “moves”)\n\nWhen the owner goes out of scope, the value is dropped\n\nRust automatically calls drop() to free the memory\n\n\n\nWrite these three rules on the board. Students will need to internalize these. Rule 2 is the most surprising to newcomers. Rule 3 is why Rust doesn’t need garbage collection. Emphasize that these are compiler-enforced - not guidelines."
+    "section": "Try using the old owner",
+    "text": "Try using the old owner\nThis example intentionally fails to compile.\nfn main() {\n    let name = String::from(\"Ada\");\n    let guest = name;\n\n    println!(\"{}\", guest);\n    println!(\"{}\", name); // name no longer owns the String\n}\nPredict: Which earlier line caused the problem?\nTry this example in Rust Playground\n\nAnswer: let guest = name moved the String. Run this version and ask students to find both the move and the later attempted use in the diagnostic. The program does not print anything: compilation fails before execution. The final println! tries to borrow name for display, which explains “borrow of moved value.” We fix this particular example by using guest. We will learn borrowing when the original owner needs to keep using its data."
   },
   {
-    "objectID": "slides/IS4010_W10_The_Soul_of_Rust.html#ownership-in-action-the-stack-and-the-heap",
-    "href": "slides/IS4010_W10_The_Soul_of_Rust.html#ownership-in-action-the-stack-and-the-heap",
+    "objectID": "slides/IS4010_W10_The_Soul_of_Rust.html#read-the-diagnostic-as-a-timeline",
+    "href": "slides/IS4010_W10_The_Soul_of_Rust.html#read-the-diagnostic-as-a-timeline",
     "title": "IS 4010: Application Development with Artificial Intelligence",
-    "section": "Ownership in action: the stack and the heap",
-    "text": "Ownership in action: the stack and the heap\n\nFixed-size values can be stored directly in a stack frame or inside another allocation\nA String value contains a pointer, length, and capacity; its text buffer is normally allocated on the heap\nMoving a String transfers that fixed-size header; the heap buffer is not duplicated\nStorage location and ownership are related concepts, but they are not the same rule\n\n\nDraw one local String as a pointer-length-capacity header in the stack frame and a byte buffer on the heap. Then move the header to a new binding and mark the old binding unavailable."
+    "section": "Read the diagnostic as a timeline",
+    "text": "Read the diagnostic as a timeline\nThe compiler identifies:\n\nlet name = String::from(\"Ada\"); — the value starts here.\nlet guest = name; — ownership moves here.\nprintln!(\"{}\", name); — the old owner is used here.\n\nerror[E0382]: borrow of moved value: `name`\nSmallest fix: Remove the final use of name; guest already owns the text.\n\nUse the actual compiler output from the previous slide to demonstrate the line markers. Ask a student to explain the error without the words “Rust doesn’t like it.” A good answer is: the String moved from name to guest, so name cannot be read afterward. If both variables really need independent text, cloning is an option; do not add clone merely to silence a diagnostic without considering the intended behavior."
   },
   {
-    "objectID": "slides/IS4010_W10_The_Soul_of_Rust.html#the-stack-and-heap-a-cooking-analogy",
-    "href": "slides/IS4010_W10_The_Soul_of_Rust.html#the-stack-and-heap-a-cooking-analogy",
+    "objectID": "slides/IS4010_W10_The_Soul_of_Rust.html#integers-copy-instead",
+    "href": "slides/IS4010_W10_The_Soul_of_Rust.html#integers-copy-instead",
     "title": "IS 4010: Application Development with Artificial Intelligence",
-    "section": "The stack and heap: a cooking analogy",
-    "text": "The stack and heap: a cooking analogy\nThink of a chef setting up their station before service (mise en place):\n\nThe stack → your mise en place bowls: ingredients pre-measured into small glass bowls on the counter\n\nFixed, known sizes: measured precisely before cooking begins\nRight at hand: instant access, no searching required\nAutomatically cleared when the dish is finished\n\nThe heap → the walk-in pantry: large, flexible storage for bigger and variable quantities\n\nItems vary in size: a whole bag of flour vs. a pinch of salt\nFarther away: more effort to access and manage\nMust be tracked carefully: leave things unlabeled and they get “forgotten” (memory leak!)\n\n\n\nMise en place means “everything in its place.” Use the analogy only to contrast fixed-size frame data with separately allocated buffers. Then return to the actual String representation so students do not equate Copy with stack storage or heap allocation with ownership."
+    "section": "Integers copy instead",
+    "text": "Integers copy instead\nfn main() {\n    let score = 5;\n    let saved_score = score;\n\n    println!(\"{} and {}\", score, saved_score);\n}\n\nIntegers implement Copy: assignment duplicates their value.\nBoth variables remain usable. Output: 5 and 5.\nbool, char, and floating-point numbers also implement Copy.\n\nCheck: Does String behave the same way?\nTry this example in Rust Playground\n\nAnswer: String does not implement Copy; its assignment moves ownership. Copy is a trait, a type’s promise that implicit duplication is allowed. We will study traits later. Copy does not mean “stored only on the stack”: integers can also be stored inside heap-allocated values. Keep the distinction about assignment behavior, not a universal rule about storage location."
   },
   {
-    "objectID": "slides/IS4010_W10_The_Soul_of_Rust.html#from-the-kitchen-to-rust",
-    "href": "slides/IS4010_W10_The_Soul_of_Rust.html#from-the-kitchen-to-rust",
+    "objectID": "slides/IS4010_W10_The_Soul_of_Rust.html#clone-when-you-need-independent-text",
+    "href": "slides/IS4010_W10_The_Soul_of_Rust.html#clone-when-you-need-independent-text",
     "title": "IS 4010: Application Development with Artificial Intelligence",
-    "section": "From the kitchen to Rust",
-    "text": "From the kitchen to Rust\nThe analogy maps directly to Rust types:\n\nMise en place bowl (fixed size, cheap to duplicate) → values such as i32, f64, and bool that implement Copy\nPantry claim ticket plus stored item → the fixed-size header and heap buffer used by String or Vec&lt;T&gt;\nHanding a bowl across the counter → cheap Copy (both keep their data)\nHanding off the pantry item → move: you no longer have it, they do\n\n\nState the limit of the analogy: Copy is a trait about duplication semantics, not a guarantee that a value physically resides on the stack. String and Vec contain fixed-size metadata plus owned buffers."
+    "section": "Clone when you need independent text",
+    "text": "Clone when you need independent text\npush_str appends text. mut allows the owned string to change.\nfn main() {\n    let name = String::from(\"Ada\");\n    let mut guest = name.clone();\n    guest.push_str(\"!\");\n\n    println!(\"{} and {}\", name, guest);\n}\nPredict: Does changing guest also change name?\nTry this example in Rust Playground\n\nAnswer: no; output is Ada and Ada!. String::clone copies the text into a separate owned buffer. Both variables are valid because each owns a different String. Cloning a String allocates and copies data, so its cost depends on the text length. This independence is specific to the type’s clone behavior; do not promise that Clone always makes deep copies for every Rust type. Ask students to replace name.clone() with name: the final print now fails because name moved."
   },
   {
-    "objectID": "slides/IS4010_W10_The_Soul_of_Rust.html#example-ownership-transfer-move",
-    "href": "slides/IS4010_W10_The_Soul_of_Rust.html#example-ownership-transfer-move",
+    "objectID": "slides/IS4010_W10_The_Soul_of_Rust.html#a-move-keeps-one-text-buffer",
+    "href": "slides/IS4010_W10_The_Soul_of_Rust.html#a-move-keeps-one-text-buffer",
     "title": "IS 4010: Application Development with Artificial Intelligence",
-    "section": "Example: ownership transfer (move)",
-    "text": "Example: ownership transfer (move)\nfn main() {\n    let s1 = String::from(\"hello\");\n    let s2 = s1; // Ownership moves from s1 to s2\n\n    // println!(\"{}\", s1); // ❌ ERROR: value borrowed after move\n    println!(\"{}\", s2); // ✅ OK: s2 owns the string now\n}\nTry it in Rust Playground\n\nLive demo: Uncomment the s1 line, read the diagnostic, and trace which assignment moved the value. Explain why invalidating the old binding gives one owner responsibility for dropping the buffer."
+    "section": "A move keeps one text buffer",
+    "text": "A move keeps one text buffer\nFor this local String, its small header tracks a separate text buffer:\nBefore: let guest = name;\n\nname:  [pointer, length, capacity] ──→ [ A d a ]\n           local stack data           heap buffer\n\nAfter the move:\n\nname:  unavailable\nguest: [pointer, length, capacity] ──→ [ A d a ]\n                                      same buffer\nMove: Transfer ownership. Clone: Create independent text storage.\n\nWalk through the arrows slowly. The stack stores this local value’s fixed-size header; the heap holds its separately allocated text buffer. A pointer records where the buffer is, length counts the used bytes, and capacity records how much space is available. Students do not need to calculate sizes. Moving a String transfers the header without duplicating the buffer; the compiler may optimize away physical copying. The previous binding becomes unavailable, leaving one owner responsible for cleanup. Storage location alone does not determine whether a type implements Copy."
   },
   {
-    "objectID": "slides/IS4010_W10_The_Soul_of_Rust.html#why-moves-matter-preventing-double-free",
-    "href": "slides/IS4010_W10_The_Soul_of_Rust.html#why-moves-matter-preventing-double-free",
+    "objectID": "slides/IS4010_W10_The_Soul_of_Rust.html#function-arguments-can-move-too",
+    "href": "slides/IS4010_W10_The_Soul_of_Rust.html#function-arguments-can-move-too",
     "title": "IS 4010: Application Development with Artificial Intelligence",
-    "section": "Why moves matter: preventing double-free",
-    "text": "Why moves matter: preventing double-free\n\nIf Rust allowed both s1 and s2 to be valid, both would try to free the same memory when they go out of scope\nThis is a double-free error - a serious security vulnerability\nRust prevents this by invalidating s1 after the move to s2\nThe borrow checker enforces this at compile time\n\n\nDouble-free defects can be security vulnerabilities. Safe Rust’s ownership rules prevent two ordinary owners from independently dropping the same allocation; unsafe code still requires its invariants to be reviewed."
+    "section": "Function arguments can move too",
+    "text": "Function arguments can move too\nfn welcome(guest: String) {\n    println!(\"Welcome, {}!\", guest);\n} // guest's String is dropped here\n\nfn main() {\n    let name = String::from(\"Ada\");\n    welcome(name); // Ownership moves into the function\n    // println!(\"{}\", name); // Try uncommenting this\n}\nPredict: Who owns the String while welcome runs?\nTry this example in Rust Playground\n\nAnswer: the parameter guest owns it. The program prints Welcome, Ada!. Passing this String to a String parameter moves it, just like assignment did. Uncomment the last line to see E0382. println! inside welcome only borrows guest for display; cleanup occurs when guest leaves scope at the end of the function. Students may ask why a read-only greeting needs ownership. It does not: we deliberately revise this exact example to borrow in session 2."
   },
   {
-    "objectID": "slides/IS4010_W10_The_Soul_of_Rust.html#the-copy-trait-the-exception-to-moves",
-    "href": "slides/IS4010_W10_The_Soul_of_Rust.html#the-copy-trait-the-exception-to-moves",
+    "objectID": "slides/IS4010_W10_The_Soul_of_Rust.html#returning-an-owned-value",
+    "href": "slides/IS4010_W10_The_Soul_of_Rust.html#returning-an-owned-value",
     "title": "IS 4010: Application Development with Artificial Intelligence",
-    "section": "The Copy trait: the exception to moves",
-    "text": "The Copy trait: the exception to moves\n\nSimple types like i32, f64, bool, and char implement the Copy trait\nTypes with Copy are copied instead of moved\nTheir values have copy semantics and do not own resources that require custom cleanup\nAfter copying, both variables remain valid\n\nlet x = 5;\nlet y = x; // Copy happens (not a move)\nprintln!(\"x = {}, y = {}\", x, y); // ✅ Both valid!\n\nCopy vs Move is a key distinction. Copy types are stack-only, so copying is cheap (just copy the bytes). String is NOT Copy because it has heap data. You can’t accidentally expensive operations."
+    "section": "Returning an owned value",
+    "text": "Returning an owned value\nfn make_name() -&gt; String {\n    let name = String::from(\"Ada\");\n    name // No semicolon: return this value\n}\n\nfn main() {\n    let guest = make_name();\n    println!(\"{}\", guest);\n}\nPredict: Is the text cleaned up when make_name finishes?\nTry this example in Rust Playground\n\nAnswer: no. Ownership moves out as the return value, and guest becomes the owner. Output: Ada. The local binding name leaves scope, but it no longer owns the returned String. The String is dropped when guest leaves scope in main. Recall Week 09’s final-expression syntax. If students add a semicolon after name, discuss the resulting type mismatch, then restore the example. No lifetime annotations are needed to return an owned String."
   },
   {
-    "objectID": "slides/IS4010_W10_The_Soul_of_Rust.html#ai-copilot-technique-understanding-moves",
-    "href": "slides/IS4010_W10_The_Soul_of_Rust.html#ai-copilot-technique-understanding-moves",
+    "objectID": "slides/IS4010_W10_The_Soul_of_Rust.html#checkpoint-move-or-copy",
+    "href": "slides/IS4010_W10_The_Soul_of_Rust.html#checkpoint-move-or-copy",
     "title": "IS 4010: Application Development with Artificial Intelligence",
-    "section": "AI copilot technique: understanding moves",
-    "text": "AI copilot technique: understanding moves\nWhen you encounter move errors, ask your AI assistant for help:\nEffective prompts: - “Explain this Rust move error in simple terms: [paste error message]” - “Why does Rust move String but copy i32?” - “How do I use a value after it’s been moved?” - “What’s the difference between Copy and Clone in Rust?”\nFirst step: Read the compiler diagnostic, identify the values and borrows it names, and then ask an AI assistant about the specific rule that remains unclear.\n\nTeach students to read compiler errors first. Rust’s error messages are some of the best in any language. Then use AI to deepen understanding, not as a first resort."
+    "section": "Checkpoint: move or copy?",
+    "text": "Checkpoint: move or copy?\nfn main() {\n    let visits = 2;\n    let saved_visits = visits;\n    let name = String::from(\"Ada\");\n    let guest = name;\n\n    println!(\"{} and {}\", visits, saved_visits);\n    println!(\"{}\", guest);\n    // println!(\"{}\", name);\n}\nExplain: Which assignment copies? Which moves? What happens if we uncomment the last line?\nTry this example in Rust Playground\n\nGive students a minute to discuss with a neighbor before running. Answers: saved_visits = visits copies the integer, so both are usable; guest = name moves the String. Output is 2 and 2, then Ada. Uncommenting the last line causes E0382 and prevents the whole program from running. Ask for the owner of each String, rather than only whether a line compiles."
   },
   {
-    "objectID": "slides/IS4010_W10_The_Soul_of_Rust.html#scope-and-automatic-cleanup",
-    "href": "slides/IS4010_W10_The_Soul_of_Rust.html#scope-and-automatic-cleanup",
+    "objectID": "slides/IS4010_W10_The_Soul_of_Rust.html#ownership-recap",
+    "href": "slides/IS4010_W10_The_Soul_of_Rust.html#ownership-recap",
     "title": "IS 4010: Application Development with Artificial Intelligence",
-    "section": "Scope and automatic cleanup",
-    "text": "Scope and automatic cleanup\n\nEvery variable has a scope: the region of code where it’s valid\nWhen a variable goes out of scope, Rust automatically calls drop()\ndrop() is a special function that cleans up resources (like freeing heap memory)\nThis is called RAII (Resource Acquisition Is Initialization) - borrowed from C++, but enforced by the compiler in Rust\n\n{\n    let s = String::from(\"hello\"); // s is valid here\n    // use s\n} // s goes out of scope, drop() is called automatically\nTry it in Rust Playground\n\nRAII is a C++ concept but Rust enforces it. This is why you rarely see explicit cleanup code in Rust. The scope determines lifetime automatically."
+    "section": "Ownership recap",
+    "text": "Ownership recap\n\n\n\nOperation\nWhat happens?\n\n\n\n\nAssign or pass a String\nOwnership moves\n\n\nAssign or pass an integer\nIts value copies\n\n\nCall .clone() on a String\nIndependent text is created\n\n\nReturn a String\nOwnership moves to the caller\n\n\nOwner leaves scope\nIts value is dropped\n\n\n\nNext question: What if a function needs to use text while the caller keeps ownership?\n\nUse this as the session 1 stopping point. Ask students to explain “move” in one sentence. A strong answer: ownership transfers and the previous binding can no longer use that value. Session 2 provides the alternative for read-only use or temporary mutation: borrowing."
   },
   {
-    "objectID": "slides/IS4010_W10_The_Soul_of_Rust.html#python-permits-mutation-during-iteration",
-    "href": "slides/IS4010_W10_The_Soul_of_Rust.html#python-permits-mutation-during-iteration",
+    "objectID": "slides/IS4010_W10_The_Soul_of_Rust.html#session-2-borrowing-a-value",
+    "href": "slides/IS4010_W10_The_Soul_of_Rust.html#session-2-borrowing-a-value",
     "title": "IS 4010: Application Development with Artificial Intelligence",
-    "section": "Python permits mutation during iteration",
-    "text": "Python permits mutation during iteration\n# Goal: remove all even numbers from a list\nitems = [1, 2, 3, 4, 6, 7, 8]\n\nfor item in items:\n    if item % 2 == 0:\n        items.remove(item)  # Modifying the list while iterating!\n\nprint(items)  # Expected: [1, 3, 7]\n              # Actual:   [1, 3, 6, 7]  ← 6 is never checked!\n\nPython runs to completion: no error, no warning, exit code 0\nWhen 4 is removed at index 2, the list shifts left; the iterator advances to 7, skipping 6 entirely\nThis is a logic bug: the language permits the operation, so tests must detect the incorrect result\n\n\nLIVE DEMO opportunity: Run this in the Python REPL and ask students to predict the output BEFORE running it. The mechanism: removing 2 (index 1) shifts the list; the iterator advances to index 2 which is now 4. Removing 4 (index 2) shifts again; the iterator advances to index 3 which is now 7, skipping 6, which has shifted into index 2. 6 is even and should have been removed but never gets checked. The bug appears whenever two consecutive removal candidates are adjacent in the list."
+    "section": "Session 2: borrowing a value",
+    "text": "Session 2: borrowing a value\nA reference lets us use a value owned elsewhere.\nCreating a reference is called borrowing.\n\n&name: borrow for reading.\n&mut name: borrow for changing.\nNeither transfers ownership of the String.\n\n\nBriefly revisit welcome(name) from session 1. Ask why it is inconvenient if main wants to print the name afterward. Borrowing solves this without making an independent copy of the text. These are checked references: the compiler verifies that the borrowed data remains valid and that conflicting uses do not overlap. We will introduce the call-site and parameter syntax together."
   },
   {
-    "objectID": "slides/IS4010_W10_The_Soul_of_Rust.html#why-the-python-loop-skips-an-item",
-    "href": "slides/IS4010_W10_The_Soul_of_Rust.html#why-the-python-loop-skips-an-item",
+    "objectID": "slides/IS4010_W10_The_Soul_of_Rust.html#we-only-wanted-to-read-the-name",
+    "href": "slides/IS4010_W10_The_Soul_of_Rust.html#we-only-wanted-to-read-the-name",
     "title": "IS 4010: Application Development with Artificial Intelligence",
-    "section": "Why the Python loop skips an item",
-    "text": "Why the Python loop skips an item\nfor item in items tracks a hidden index counter: it increments by 1 each step, unaware of any list changes:\n\nIndex 0 → 1 (odd, skip). List: [1, 2, 3, 4, 6, 7, 8]\nIndex 1 → 2 (even, remove). List: [1, 3, 4, 6, 7, 8]\nIndex 2 → 4 (even, remove). List: [1, 3, 6, 7, 8]\nIndex 3 → 7 (odd, skip): 6 shifted into index 2 and was never visited!\nIndex 4 → 8 (even, remove). List: [1, 3, 6, 7]\nIndex 5 → past end, loop stops\n\nThe counter keeps incrementing; the list keeps shifting. They fall out of sync.\n\nThis is iterator invalidation. The for loop’s index counter has no awareness that the list is changing under its feet. Every removal shifts subsequent elements left, which pushes one element into the “already visited” zone. Python never raises an error because from its perspective, the loop ran to completion normally."
+    "section": "We only wanted to read the name",
+    "text": "We only wanted to read the name\nThis version intentionally fails to compile.\nfn welcome(guest: String) {\n    println!(\"Welcome, {}!\", guest);\n}\n\nfn main() {\n    let name = String::from(\"Ada\");\n    welcome(name);\n    println!(\"See you soon, {}!\", name);\n}\nDiscuss: Does welcome need to own the text just to display it?\nTry this example in Rust Playground\n\nAnswer: no. The function only reads the text, but its String parameter takes ownership. The diagnostic is E0382 at the later print. Ask students to identify the intended behavior before choosing a fix. Cloning would make a second String, but we do not need independent text here. Next, change both the parameter type and the argument to use a reference."
   },
   {
-    "objectID": "slides/IS4010_W10_The_Soul_of_Rust.html#rust-catches-this-at-compile-time",
-    "href": "slides/IS4010_W10_The_Soul_of_Rust.html#rust-catches-this-at-compile-time",
+    "objectID": "slides/IS4010_W10_The_Soul_of_Rust.html#borrow-for-the-function-call",
+    "href": "slides/IS4010_W10_The_Soul_of_Rust.html#borrow-for-the-function-call",
     "title": "IS 4010: Application Development with Artificial Intelligence",
-    "section": "Rust catches this at compile time",
-    "text": "Rust catches this at compile time\nfn main() {\n    let mut items = vec![1, 2, 3, 4, 6, 7, 8];\n\n    for item in &items {                    // immutable borrow of `items`\n        if item % 2 == 0 {\n            items.retain(|x| x != item);   // ❌ ERROR: mutable borrow!\n        }\n    }\n}\nerror[E0502]: cannot borrow `items` as mutable because it is also borrowed as immutable\n --&gt; src/main.rs:6:13\n  |\n4 |     for item in &items {\n  |                 ------  immutable borrow occurs here\n...\n6 |             items.retain(|x| x != item);\n  |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^ mutable borrow occurs here\n\nfor item in &items takes an immutable borrow of the whole vector\n.retain() needs a mutable borrow of the same vector, at the same time\nRust’s rule: you cannot hold both simultaneously, so this does not compile\nThe logic bug that ran in Python is rejected by Rust’s borrowing rules before execution\n\nTry it in Rust Playground\n\nConnect this to the course borrowing rule: while an immutable borrow is in use, a conflicting mutable borrow cannot overlap it. Contrast the Python program’s incorrect output with Rust’s compile-time diagnostic, then have students identify the two operations that conflict."
+    "section": "Borrow for the function call",
+    "text": "Borrow for the function call\nfn welcome(guest: &String) {\n    println!(\"Welcome, {}!\", guest);\n}\n\nfn main() {\n    let name = String::from(\"Ada\");\n    welcome(&name);\n    println!(\"See you soon, {}!\", name);\n}\nPredict: Why can main still use name?\nTry this example in Rust Playground\n\nAnswer: name remains the owner; welcome borrows the String. Output: Welcome, Ada! followed by See you soon, Ada!. Point out the only two changes from the previous slide: &String in the parameter and &name in the call. The borrowed String is not dropped when welcome returns, because the function never owned it. Use &String here to match Lab 10’s string_length signature. Later in this session, explain why &str is a more flexible read-only text parameter; Clippy may recommend it for this example."
   },
   {
-    "objectID": "slides/IS4010_W10_The_Soul_of_Rust.html#why-rust-catches-it",
-    "href": "slides/IS4010_W10_The_Soul_of_Rust.html#why-rust-catches-it",
+    "objectID": "slides/IS4010_W10_The_Soul_of_Rust.html#read-the-two-ampersands",
+    "href": "slides/IS4010_W10_The_Soul_of_Rust.html#read-the-two-ampersands",
     "title": "IS 4010: Application Development with Artificial Intelligence",
-    "section": "Why Rust catches it",
-    "text": "Why Rust catches it\nfor item in &items takes an immutable borrow of the entire vector: a compile-time contract:\n\n“This data will not change while I hold this reference.”\n\n\nAny method that mutates the vector (.retain(), .remove(), .push()) requires a mutable borrow\nYou cannot hold an immutable borrow and a mutable borrow at the same time, ever\nThe compiler checks this before your program runs: zero runtime overhead\nThis isn’t just about iteration: the ownership system makes any aliased mutation impossible\n\n\nThe deeper principle: an immutable reference guarantees stability for its entire lifetime. Python’s iterator has no such guarantee: the list can change under its feet. Rust makes the contract explicit and enforced at compile time. Iterator invalidation is just one of many bugs this invariant rules out. Data races in multithreaded code are another."
+    "section": "Read the two ampersands",
+    "text": "Read the two ampersands\n\n\n\nCode\nRead it as\n\n\n\n\nguest: String\nThis parameter takes ownership of a String\n\n\nguest: &String\nThis parameter borrows a String for reading\n\n\nwelcome(name)\nPass the owned value; it moves\n\n\nwelcome(&name)\nCreate a reference and pass that reference\n\n\n\nA borrow does not copy the text. The owner still handles cleanup.\n\nThe first and third rows describe the original owned version of welcome; the second and fourth describe the borrowed version. An ampersand in a type describes the expected reference; an ampersand in an expression creates a reference. Ask students which of these appears in a function definition and which appears at a call site. Method calls such as guest.len() can use references directly; no manual dereferencing is needed in today’s String examples."
   },
   {
-    "objectID": "slides/IS4010_W10_The_Soul_of_Rust.html#the-rust-way-transform-instead-of-mutate",
-    "href": "slides/IS4010_W10_The_Soul_of_Rust.html#the-rust-way-transform-instead-of-mutate",
+    "objectID": "slides/IS4010_W10_The_Soul_of_Rust.html#borrow-to-change-the-string",
+    "href": "slides/IS4010_W10_The_Soul_of_Rust.html#borrow-to-change-the-string",
     "title": "IS 4010: Application Development with Artificial Intelligence",
-    "section": "The Rust way: transform instead of mutate",
-    "text": "The Rust way: transform instead of mutate\nWhen Rust says no to mutating in place, it is steering you toward a cleaner pattern:\nfn main() {\n    let items = vec![1, 2, 3, 4, 6, 7, 8];\n\n    let odds: Vec&lt;i32&gt; = items\n        .into_iter()\n        .filter(|x| x % 2 != 0)\n        .collect();\n\n    println!(\"{:?}\", odds);  // ✅ [1, 3, 7], correct every time\n}\n\ninto_iter() consumes items, giving the iterator full ownership, with no borrow conflict\n.filter() selects elements without touching the original collection\n.collect() builds a fresh Vec&lt;i32&gt;\nPython equivalent: odds = [x for x in items if x % 2 != 0]: same idea, now enforced by the type system\n\nTry it in Rust Playground\n\nThe borrow checker rejects mutation during iteration, which motivates a pipeline using into_iter, filter, map, and collect. Connect this pattern to the Python list comprehensions from Week 4: the data transformation is familiar, while Rust checks the borrowing rules at compile time."
+    "section": "Borrow to change the string",
+    "text": "Borrow to change the string\nfn add_exclamation(guest: &mut String) {\n    guest.push_str(\"!\");\n}\n\nfn main() {\n    let mut name = String::from(\"Ada\");\n    add_exclamation(&mut name);\n    println!(\"{}\", name);\n}\nPredict: What prints? Which variable owns the changed text?\nTry this example in Rust Playground\n\nAnswer: Ada!; name remains the owner. Trace all three appearances of mut: let mut permits the owned String to change, &mut name creates an exclusive mutable borrow, and &mut String says what access the function accepts. Remove one mut at a time, read the compiler feedback, then restore it. The function changes the original String through the reference. It does not create a second text buffer or take ownership. The push_str method may allocate if the existing buffer needs more capacity."
   },
   {
-    "objectID": "slides/IS4010_W10_The_Soul_of_Rust.html#session-2-borrowing-references-and-lifetimes",
-    "href": "slides/IS4010_W10_The_Soul_of_Rust.html#session-2-borrowing-references-and-lifetimes",
+    "objectID": "slides/IS4010_W10_The_Soul_of_Rust.html#the-borrowing-rules",
+    "href": "slides/IS4010_W10_The_Soul_of_Rust.html#the-borrowing-rules",
     "title": "IS 4010: Application Development with Artificial Intelligence",
-    "section": "Session 2: borrowing, references, and lifetimes",
-    "text": "Session 2: borrowing, references, and lifetimes\n\nThis builds directly on ownership. Borrowing is how we work with data without taking ownership. Students will struggle with the borrow checker at first - normalize that struggle and emphasize the error messages are your friend."
+    "section": "The borrowing rules",
+    "text": "The borrowing rules\nFor the same data, while borrows are in use:\n\nAllow multiple shared references (&T) or one exclusive mutable reference (&mut T).\nThe borrowed value must remain valid for every use of its references.\n\nReading can be shared. Changing needs exclusive access.\n\nT stands for the referenced type, such as String. Use “shared” alongside the familiar word “immutable,” and “exclusive” alongside “mutable.” These rules apply to overlapping uses of the same data, not to every variable in the program. Separate values can be mutably borrowed independently. Rust can also recognize disjoint parts of some values, but that is beyond this lesson. Interior-mutability types have additional mechanisms and are also outside this week’s model. Motivate the rules with valid references and controlled mutation in single-threaded code; threading is not needed to understand them."
   },
   {
-    "objectID": "slides/IS4010_W10_The_Soul_of_Rust.html#the-problem-functions-that-take-ownership",
-    "href": "slides/IS4010_W10_The_Soul_of_Rust.html#the-problem-functions-that-take-ownership",
+    "objectID": "slides/IS4010_W10_The_Soul_of_Rust.html#two-readers-are-fine",
+    "href": "slides/IS4010_W10_The_Soul_of_Rust.html#two-readers-are-fine",
     "title": "IS 4010: Application Development with Artificial Intelligence",
-    "section": "The problem: functions that take ownership",
-    "text": "The problem: functions that take ownership\nfn calculate_length(s: String) -&gt; usize {\n    s.len()\n} // s is dropped here\n\nfn main() {\n    let my_string = String::from(\"hello\");\n    let len = calculate_length(my_string); // Ownership moved!\n    // println!(\"{}\", my_string); // ❌ ERROR: value borrowed after move\n}\n\nWhen we pass my_string to the function, ownership moves to s\nAfter the function returns, we can’t use my_string anymore\nThis is annoying - we just wanted to read the length!\n\n\nThis is the motivating problem for borrowing. Show this code and let students feel the frustration. Then introduce references as the elegant solution."
+    "section": "Two readers are fine",
+    "text": "Two readers are fine\nfn main() {\n    let name = String::from(\"Ada\");\n    let first_reader = &name;\n    let second_reader = &name;\n\n    println!(\"{} and {}\", first_reader, second_reader);\n    println!(\"Owner: {}\", name);\n}\nPredict: Does either reference take ownership or change the text?\nTry this example in Rust Playground\n\nAnswer: neither. Output: Ada and Ada, then Owner: Ada. Both references read the same String. name remains the owner. Shared references do not create independent text. Ask students to point to the two borrow expressions and to the variable responsible for eventual cleanup. Contrast this with name.clone(), which created independent storage."
   },
   {
-    "objectID": "slides/IS4010_W10_The_Soul_of_Rust.html#the-solution-references-and-borrowing",
-    "href": "slides/IS4010_W10_The_Soul_of_Rust.html#the-solution-references-and-borrowing",
+    "objectID": "slides/IS4010_W10_The_Soul_of_Rust.html#two-overlapping-mutable-borrows-fail",
+    "href": "slides/IS4010_W10_The_Soul_of_Rust.html#two-overlapping-mutable-borrows-fail",
     "title": "IS 4010: Application Development with Artificial Intelligence",
-    "section": "The solution: references and borrowing",
-    "text": "The solution: references and borrowing\n\nA reference lets you refer to a value without taking ownership\nReferences are created with the & operator\nUsing references is called borrowing\nThe original owner retains ownership, so the value won’t be dropped\n\nfn calculate_length(s: &String) -&gt; usize {\n    s.len()\n} // s goes out of scope, but it doesn't own the String, so nothing is dropped\n\nfn main() {\n    let my_string = String::from(\"hello\");\n    let len = calculate_length(&my_string); // Borrow, don't move\n    println!(\"{} has length {}\", my_string, len); // ✅ Still valid!\n}\nTry it in Rust Playground\n\nThis is the elegant solution. The ampersand syntax is borrowed from C/C++. Emphasize that references are pointers under the hood, but safe pointers checked by the compiler."
+    "section": "Two overlapping mutable borrows fail",
+    "text": "Two overlapping mutable borrows fail\nThis example intentionally fails to compile.\nfn main() {\n    let mut name = String::from(\"Ada\");\n    let first_editor = &mut name;\n    let second_editor = &mut name; // Overlaps first borrow\n\n    first_editor.push_str(\"!\");\n    second_editor.push_str(\"?\");\n}\nerror[E0499]: cannot borrow `name` as mutable\nmore than once at a time\nTry this example in Rust Playground\n\nAsk students to identify which borrowing rule is violated. first_editor must remain usable through its later push_str, so the second mutable borrow overlaps it. The issue is exclusive access to the same String, even though this code has only one thread. Do not describe this example as an actual data race. No output is produced because compilation fails. Predict a repair by finishing the first editor’s work before borrowing for the second editor."
   },
   {
-    "objectID": "slides/IS4010_W10_The_Soul_of_Rust.html#immutable-and-mutable-references",
-    "href": "slides/IS4010_W10_The_Soul_of_Rust.html#immutable-and-mutable-references",
+    "objectID": "slides/IS4010_W10_The_Soul_of_Rust.html#finish-one-edit-before-starting-the-next",
+    "href": "slides/IS4010_W10_The_Soul_of_Rust.html#finish-one-edit-before-starting-the-next",
     "title": "IS 4010: Application Development with Artificial Intelligence",
-    "section": "Immutable and mutable references",
-    "text": "Immutable and mutable references\n\nBy default, references are immutable (&T)\nYou can create a mutable reference with &mut T\nMutable references let you modify the borrowed value\nBut there’s a catch… (next slide)\n\nfn add_world(s: &mut String) {\n    s.push_str(\", world\");\n}\n\nfn main() {\n    let mut my_string = String::from(\"hello\");\n    add_world(&mut my_string);\n    println!(\"{}\", my_string); // Prints: hello, world\n}\nTry it in Rust Playground\n\nNote that the binding must also be declared mut. Rust requires mutation to be explicit at the binding and borrow sites, which makes intended state changes visible in the code."
+    "section": "Finish one edit before starting the next",
+    "text": "Finish one edit before starting the next\nfn main() {\n    let mut name = String::from(\"Ada\");\n    let first_editor = &mut name;\n    first_editor.push_str(\"!\"); // Last use of first_editor\n\n    let second_editor = &mut name;\n    second_editor.push_str(\"?\"); // Last use of second_editor\n\n    println!(\"{}\", name);\n}\nPredict: Why do these two mutable borrows work now?\nTry this example in Rust Playground\n\nAnswer: their uses no longer overlap. Output: Ada!?. The compiler can end each borrow after its final use here. We did not add another text buffer or silence the error; we changed the sequence of accesses. The variable names remain in lexical scope, but the borrows no longer need to be active. Distinguish borrow duration from where a binding’s name is in scope. Ask what would happen if first_editor were used again after the second mutable borrow: that would make the borrows overlap again."
   },
   {
-    "objectID": "slides/IS4010_W10_The_Soul_of_Rust.html#the-borrowing-rules-enforced-by-the-borrow-checker",
-    "href": "slides/IS4010_W10_The_Soul_of_Rust.html#the-borrowing-rules-enforced-by-the-borrow-checker",
+    "objectID": "slides/IS4010_W10_The_Soul_of_Rust.html#a-reader-and-an-editor-can-conflict",
+    "href": "slides/IS4010_W10_The_Soul_of_Rust.html#a-reader-and-an-editor-can-conflict",
     "title": "IS 4010: Application Development with Artificial Intelligence",
-    "section": "The borrowing rules (enforced by the borrow checker)",
-    "text": "The borrowing rules (enforced by the borrow checker)\nThe borrow checker enforces these rules at compile time:\n\nAt any given time, you can have EITHER:\n\nOne mutable reference (&mut T)\nOR any number of immutable references (&T)\n\nA reference cannot outlive the value it borrows\n\nNo dangling references (pointing to freed memory)\n\n\nWhy? These rules prevent data races at compile time!\n\nWrite these two rules on the board. Rule 1 is the “XOR” rule - mutable XOR immutable. This prevents iterator invalidation bugs (common in C++). Rule 2 prevents use-after-free bugs (also common in C++)."
+    "section": "A reader and an editor can conflict",
+    "text": "A reader and an editor can conflict\nThis example intentionally fails to compile.\nfn main() {\n    let mut name = String::from(\"Ada\");\n    let reader = &name;\n    let editor = &mut name;\n    editor.push_str(\"!\");\n\n    println!(\"{}\", reader); // reader is still needed here\n}\nerror[E0502]: cannot borrow `name` as mutable\nbecause it is also borrowed as immutable\nTry this example in Rust Playground\n\nAnswer to “which rule?”: shared and exclusive borrows of the same data cannot overlap. Trace reader from its creation to its final println!. editor is created within that interval. The compiler rejects the pattern even though the operations would run one after another: the later use of reader keeps the shared borrow active across the mutable borrow. Ask students to move the read before the mutable borrow and predict the result."
   },
   {
-    "objectID": "slides/IS4010_W10_The_Soul_of_Rust.html#borrow-checker-error-multiple-mutable-references",
-    "href": "slides/IS4010_W10_The_Soul_of_Rust.html#borrow-checker-error-multiple-mutable-references",
+    "objectID": "slides/IS4010_W10_The_Soul_of_Rust.html#a-borrow-can-end-after-its-last-use",
+    "href": "slides/IS4010_W10_The_Soul_of_Rust.html#a-borrow-can-end-after-its-last-use",
     "title": "IS 4010: Application Development with Artificial Intelligence",
-    "section": "Borrow checker error: multiple mutable references",
-    "text": "Borrow checker error: multiple mutable references\nlet mut s = String::from(\"hello\");\n\nlet r1 = &mut s;\nlet r2 = &mut s; // ❌ ERROR: cannot borrow as mutable more than once\n\nprintln!(\"{}, {}\", r1, r2);\nThe error:\nerror[E0499]: cannot borrow `s` as mutable more than once at a time\n\nRust prevents multiple mutable references to avoid data races\nA data race occurs when two threads access the same memory and at least one is writing\nRust’s rule is stricter: only one mutable borrow even in single-threaded code\n\nTry it in Rust Playground\n\nLive demo: Show this error and trace the overlapping mutable borrows named in the diagnostic. Explain that safe Rust rejects this pattern before it could create invalidated references."
+    "section": "A borrow can end after its last use",
+    "text": "A borrow can end after its last use\nfn main() {\n    let mut name = String::from(\"Ada\");\n    let reader = &name;\n    println!(\"Before: {}\", reader); // Last use of reader\n\n    let editor = &mut name;\n    editor.push_str(\"!\");\n    println!(\"After: {}\", name);\n}\nTry: Add println!(\"{}\", reader); at the end. Will it still compile?\nTry this example in Rust Playground\n\nOutput: Before: Ada, then After: Ada!. The read finishes before the mutable borrow begins. Adding the suggested final print makes the example fail with E0502: reader would now be used after the edit, extending the shared borrow across the mutable borrow. Run both versions. This behavior is often called non-lexical lifetimes; students do not need the term to use the rule. Ending a borrow does not drop the owned String. name still owns its String until the end of main."
   },
   {
-    "objectID": "slides/IS4010_W10_The_Soul_of_Rust.html#borrow-checker-error-mixing-mutable-and-immutable",
-    "href": "slides/IS4010_W10_The_Soul_of_Rust.html#borrow-checker-error-mixing-mutable-and-immutable",
+    "objectID": "slides/IS4010_W10_The_Soul_of_Rust.html#borrowed-data-must-still-exist",
+    "href": "slides/IS4010_W10_The_Soul_of_Rust.html#borrowed-data-must-still-exist",
     "title": "IS 4010: Application Development with Artificial Intelligence",
-    "section": "Borrow checker error: mixing mutable and immutable",
-    "text": "Borrow checker error: mixing mutable and immutable\nlet mut s = String::from(\"hello\");\n\nlet r1 = &s;     // Immutable borrow\nlet r2 = &s;     // Another immutable borrow (OK)\nlet r3 = &mut s; // ❌ ERROR: cannot borrow as mutable\n\nprintln!(\"{}, {}, {}\", r1, r2, r3);\nThe error:\nerror[E0502]: cannot borrow `s` as mutable because it is also borrowed as immutable\n\nYou can’t modify data while others are reading it\nThis prevents “reading while writing” bugs\n\nTry it in Rust Playground\n\nThis prevents the “reading while writing” pattern that causes bugs in other languages. Example: in C++, you might iterate over a vector while modifying it, causing a crash. Impossible in Rust."
+    "section": "Borrowed data must still exist",
+    "text": "Borrowed data must still exist\nThis example intentionally fails to compile.\nfn main() {\n    let reader;\n    {\n        let name = String::from(\"Ada\");\n        reader = &name;\n    } // name's String is dropped here\n\n    println!(\"{}\", reader); // Too late to read that String\n}\nerror[E0597]: `name` does not live long enough\nTry this example in Rust Playground\n\nExplain let reader; as declaring a variable that will be assigned before use, not creating a null reference. Ask students to identify the owner, the reference, and the closing brace where the String is dropped. The reference would point to data that no longer exists, a dangling reference, so Rust rejects the program before it runs. This is the second borrowing rule. We do not need any named lifetime syntax to understand the error."
   },
   {
-    "objectID": "slides/IS4010_W10_The_Soul_of_Rust.html#the-fix-reference-scope-ends-at-last-use",
-    "href": "slides/IS4010_W10_The_Soul_of_Rust.html#the-fix-reference-scope-ends-at-last-use",
+    "objectID": "slides/IS4010_W10_The_Soul_of_Rust.html#keep-the-owner-available-for-the-read",
+    "href": "slides/IS4010_W10_The_Soul_of_Rust.html#keep-the-owner-available-for-the-read",
     "title": "IS 4010: Application Development with Artificial Intelligence",
-    "section": "The fix: reference scope ends at last use",
-    "text": "The fix: reference scope ends at last use\n\nNon-Lexical Lifetimes (NLL) - a Rust 2018 improvement\nA reference’s scope ends at its last use, not at the closing brace\nThis makes many common patterns “just work”\n\nlet mut s = String::from(\"hello\");\n\nlet r1 = &s;     // Immutable borrow\nlet r2 = &s;     // Another immutable borrow\nprintln!(\"{}, {}\", r1, r2); // r1 and r2 last used here - scope ends\n\nlet r3 = &mut s; // ✅ OK: no immutable borrows are active\nprintln!(\"{}\", r3);\nTry it in Rust Playground\n\nNon-lexical lifetimes let the compiler end these borrows after their last use rather than at the closing brace. Ask students to move the final use of r1 below r3 and compare the diagnostic."
+    "section": "Keep the owner available for the read",
+    "text": "Keep the owner available for the read\nfn main() {\n    let name = String::from(\"Ada\");\n    let reader;\n    {\n        reader = &name;\n    }\n\n    println!(\"{}\", reader);\n} // name's String is dropped here\nExplain: What moved in the source code? Did ownership transfer?\nTry this example in Rust Playground\n\nAnswer: we moved the declaration of name outside the inner block; we did not perform a Rust ownership move. Output: Ada. name stays alive through the final read and remains the owner. The braces remain to make the minimal edit visible. The lifetime of a reference is the region where it must be valid; it cannot require access after the borrowed data is gone. This is enough lifetime reasoning for the required lesson and Lab 10’s scope puzzle."
   },
   {
-    "objectID": "slides/IS4010_W10_The_Soul_of_Rust.html#ai-copilot-technique-debugging-borrow-checker-errors",
-    "href": "slides/IS4010_W10_The_Soul_of_Rust.html#ai-copilot-technique-debugging-borrow-checker-errors",
+    "objectID": "slides/IS4010_W10_The_Soul_of_Rust.html#return-owned-data-when-you-create-it",
+    "href": "slides/IS4010_W10_The_Soul_of_Rust.html#return-owned-data-when-you-create-it",
     "title": "IS 4010: Application Development with Artificial Intelligence",
-    "section": "AI copilot technique: debugging borrow-checker errors",
-    "text": "AI copilot technique: debugging borrow-checker errors\nThe borrow checker is your friend, but it takes practice. Use AI to accelerate your learning:\nEffective prompts: - “Explain this borrow checker error: [paste full error message]” - “Why can’t I borrow this variable as mutable? [paste code]” - “How do I fix ‘cannot borrow as mutable more than once’?” - “What’s a dangling reference and how does Rust prevent them?”\nBest practice: Read the error message first, understand the rule being violated, then ask AI for deeper insight or alternative solutions.\n\nTeach the workflow: 1) Read the compiler error carefully, 2) identify the rule, 3) use AI to explain why the rule exists, and 4) ask for an idiomatic fix. Require students to explain the final change in their own words."
+    "section": "Return owned data when you create it",
+    "text": "Return owned data when you create it\nfn make_name() -&gt; String {\n    String::from(\"Ada\")\n}\n\nfn main() {\n    let name = make_name();\n    println!(\"{}\", name);\n}\n\nThe function creates text and transfers ownership to its caller.\nReturning a reference to a local String would leave no owner to keep it alive.\n\nTry this example in Rust Playground\n\nAnswer: this prints Ada and is the shorter form of session 1’s owned return example. The caller owns the returned String; it stays valid after the function returns. Explain the alternative in words rather than adding several new errors to one slide. A function can return a reference borrowed from caller-owned data; it cannot return a reference into its own local String that is dropped on return. Adding a lifetime annotation would not keep a local value alive."
   },
   {
-    "objectID": "slides/IS4010_W10_The_Soul_of_Rust.html#preventing-dangling-references",
-    "href": "slides/IS4010_W10_The_Soul_of_Rust.html#preventing-dangling-references",
+    "objectID": "slides/IS4010_W10_The_Soul_of_Rust.html#two-useful-text-types-string-and-str",
+    "href": "slides/IS4010_W10_The_Soul_of_Rust.html#two-useful-text-types-string-and-str",
     "title": "IS 4010: Application Development with Artificial Intelligence",
-    "section": "Preventing dangling references",
-    "text": "Preventing dangling references\n\nA dangling reference is a pointer to memory that has been freed\nThis is a critical security vulnerability in C/C++ (use-after-free)\nSafe Rust prevents references from outliving the values they borrow\n\nfn dangle() -&gt; &String {  // ❌ Won't compile!\n    let s = String::from(\"hello\");\n    &s  // ERROR: s will be dropped, but we're returning a reference to it\n} // s goes out of scope and is dropped, but the reference would point to freed memory\nThe fix: Return the owned value, not a reference:\nfn no_dangle() -&gt; String {  // ✅ Ownership transfers to caller\n    let s = String::from(\"hello\");\n    s  // Move ownership out\n}\n\nUse-after-free defects can create serious security vulnerabilities. Safe Rust rejects references that outlive the borrowed value; unsafe code and external interfaces still require separate review."
+    "section": "Two useful text types: String and &str",
+    "text": "Two useful text types: String and &str\nfn main() {\n    let name = String::from(\"Ada\");\n    let borrowed_text: &str = name.as_str();\n    let literal: &str = \"Hello\";\n\n    println!(\"{}: {}\", literal, borrowed_text);\n}\n\nString: owned text that can grow.\n&str: a shared view of text, called a string slice.\n.as_str() borrows the text in a String; it does not copy it.\n\nTry this example in Rust Playground\n\nOutput: Hello: Ada. A slice can view all or part of some text; we use the whole text here and avoid introducing slicing indexes. The string literal has type &str and refers to text stored in the program, rather than to a local owned String. Neither borrowed_text nor literal owns a String buffer. We introduced String::from at the start; now students can distinguish its input literal from the owned String it creates. The explicit &str annotations are for teaching; Rust can infer these types."
   },
   {
-    "objectID": "slides/IS4010_W10_The_Soul_of_Rust.html#introduction-to-lifetimes",
-    "href": "slides/IS4010_W10_The_Soul_of_Rust.html#introduction-to-lifetimes",
+    "objectID": "slides/IS4010_W10_The_Soul_of_Rust.html#str-accepts-borrowed-text-and-literals",
+    "href": "slides/IS4010_W10_The_Soul_of_Rust.html#str-accepts-borrowed-text-and-literals",
     "title": "IS 4010: Application Development with Artificial Intelligence",
-    "section": "Introduction to lifetimes",
-    "text": "Introduction to lifetimes\n\nLifetimes are Rust’s way of ensuring references are always valid\nEvery reference has a lifetime - the scope for which it’s valid\nUsually, the compiler can infer lifetimes automatically\nSometimes you need to annotate them explicitly with 'a, 'b, etc.\nLifetimes prevent dangling references at compile time\n\n\nLifetimes are often the hardest concept for new Rustaceans. Emphasize that the compiler usually handles this automatically. When you do need to annotate, it’s because you have multiple references and the compiler needs clarity."
+    "section": "&str accepts borrowed text and literals",
+    "text": "&str accepts borrowed text and literals\nfn show_size(text: &str) {\n    println!(\"{} bytes\", text.len());\n}\n\nfn main() {\n    let name = String::from(\"Ada\");\n    show_size(name.as_str());\n    show_size(\"Hello\");\n    println!(\"Still owned here: {}\", name);\n}\nPredict: Can the caller still use name?\nTry this example in Rust Playground\n\nAnswer: yes. Output: 3 bytes, then 5 bytes, then Still owned here: Ada. String and str len count UTF-8 bytes, not necessarily characters; these ASCII examples have one byte per character. Read-only text functions usually prefer &str to &String because &str works with both String text and literals. Rust also converts &name to &str automatically when the function expects &str; demonstrate changing name.as_str() to &name after students understand the explicit version. Keep Lab 10’s supplied &String signature unchanged: it is deliberate borrowing practice. This example displays a size instead of implementing the graded string_length function."
   },
   {
-    "objectID": "slides/IS4010_W10_The_Soul_of_Rust.html#why-lifetimes-exist-a-problematic-example",
-    "href": "slides/IS4010_W10_The_Soul_of_Rust.html#why-lifetimes-exist-a-problematic-example",
+    "objectID": "slides/IS4010_W10_The_Soul_of_Rust.html#choose-access-to-match-the-job",
+    "href": "slides/IS4010_W10_The_Soul_of_Rust.html#choose-access-to-match-the-job",
     "title": "IS 4010: Application Development with Artificial Intelligence",
-    "section": "Why lifetimes exist: a problematic example",
-    "text": "Why lifetimes exist: a problematic example\nfn longest(x: &str, y: &str) -&gt; &str {  // ❌ Won't compile!\n    if x.len() &gt; y.len() {\n        x\n    } else {\n        y\n    }\n}\nThe error:\nerror[E0106]: missing lifetime specifier\n  --&gt; src/main.rs:1:33\n   |\n1  | fn longest(x: &str, y: &str) -&gt; &str {\n   |               ----     ----     ^ expected named lifetime parameter\n\nThe compiler doesn’t know if the returned reference comes from x or y\nIt can’t verify the returned reference will be valid\nWe need to tell the compiler about the relationship between input and output lifetimes\n\n\nThis is THE classic lifetime example. Don’t skip this. The error message is excellent - read it aloud. Explain that the compiler is asking “how long is this returned reference valid?”"
+    "section": "Choose access to match the job",
+    "text": "Choose access to match the job\n\n\n\n\n\n\n\n\nWhat does the function need?\nParameter type\nExample argument\n\n\n\n\nOwn the text\nString\nname\n\n\nRead an existing String\n&String\n&name\n\n\nRead text from different sources\n&str\nname.as_str() or \"Ada\"\n\n\nChange the caller’s String\n&mut String\n&mut name\n\n\n\nAsk first: Do I need to own, read, or change this value?\n\nHave students select a type for each situation: a function that stores an owned name for later (String), displays a message (&str), or appends punctuation to the caller’s string (&mut String). The &String row matches the introductory example and the fixed lab contract; prefer &str when designing a general read-only text interface. These types communicate permissions and ownership. &mut String is needed when the function must grow the String, as push_str does."
   },
   {
-    "objectID": "slides/IS4010_W10_The_Soul_of_Rust.html#lifetime-annotations-the-solution",
-    "href": "slides/IS4010_W10_The_Soul_of_Rust.html#lifetime-annotations-the-solution",
+    "objectID": "slides/IS4010_W10_The_Soul_of_Rust.html#your-turn-fix-the-access",
+    "href": "slides/IS4010_W10_The_Soul_of_Rust.html#your-turn-fix-the-access",
     "title": "IS 4010: Application Development with Artificial Intelligence",
-    "section": "Lifetime annotations: the solution",
-    "text": "Lifetime annotations: the solution\nfn longest&lt;'a&gt;(x: &'a str, y: &'a str) -&gt; &'a str {\n    if x.len() &gt; y.len() {\n        x\n    } else {\n        y\n    }\n}\n\n'a is a lifetime parameter\nIt says: “the returned reference will live as long as the shortest-lived input”\nIf x lives longer than y, the return value’s lifetime is tied to y (the shorter one)\nThe borrow checker uses this to ensure safety\n\nTry it in Rust Playground\n\nLifetimes are descriptive, not prescriptive. We’re not changing how long things live - we’re describing the relationships so the compiler can verify safety. The 'a syntax is intimidating but it’s just a label."
+    "section": "Your turn: fix the access",
+    "text": "Your turn: fix the access\nThis example intentionally fails to compile.\nfn add_exclamation(guest: &String) {\n    guest.push_str(\"!\");\n}\n\nfn main() {\n    let name = String::from(\"Ada\");\n    add_exclamation(&name);\n    println!(\"{}\", name);\n}\nRepair: Change the original string through a borrow. Explain each edit.\nTry this example in Rust Playground\n\nGive students 2–3 minutes. Expected initial diagnostic: E0596, cannot borrow through a shared reference as mutable. Three edits: parameter guest: &mut String, binding let mut name, and argument &mut name. Output after repair: Ada!. This recreates the earlier working example for retrieval practice. Ask students why making only the binding mutable is insufficient: the function’s parameter still permits only shared access. Do not solve this by cloning: the goal is to update the original String."
   },
   {
-    "objectID": "slides/IS4010_W10_The_Soul_of_Rust.html#when-you-need-lifetime-annotations",
-    "href": "slides/IS4010_W10_The_Soul_of_Rust.html#when-you-need-lifetime-annotations",
+    "objectID": "slides/IS4010_W10_The_Soul_of_Rust.html#use-the-compiler-then-ask-ai-to-explain",
+    "href": "slides/IS4010_W10_The_Soul_of_Rust.html#use-the-compiler-then-ask-ai-to-explain",
     "title": "IS 4010: Application Development with Artificial Intelligence",
-    "section": "When you need lifetime annotations",
-    "text": "When you need lifetime annotations\nYou typically need lifetime annotations when:\n\nFunction returns a reference that came from one of multiple input references\nStructs contain references (struct must not outlive the referenced data)\nMultiple references with complex relationships where the compiler can’t infer\n\nGood news: In most code, lifetimes are inferred automatically thanks to lifetime elision rules\n\nEmphasize that most Rust code doesn’t need explicit lifetime annotations. The compiler is very smart. When you do need them, the error messages will guide you. Don’t let lifetimes intimidate students - they’re rarer than they think."
+    "section": "Use the compiler, then ask AI to explain",
+    "text": "Use the compiler, then ask AI to explain\n\nRun cargo check and read the first diagnostic.\nFind the owner, the move or borrow, and the later use.\nPredict a small fix; rerun the code to check it.\nAsk your AI assistant about the rule that remains unclear.\n\nExample prompt:\n\nExplain this diagnostic using the variable names in my code. Identify the conflicting uses, then give me one hint before showing a fix.\n\nYour responsibility: Explain why the final change works.\n\nUse browser chat, Copilot in VS Code, Copilot CLI, or Antigravity CLI as appropriate. Start a CLI agent inside the intended scratch repository. Review commands before running them, inspect git diff afterward, and exclude credentials from prompts and commits. Require a plain-language explanation rather than accepting “the AI fixed it.” AI explanations and suggested clones must be checked against the compiler and the intended behavior."
   },
   {
-    "objectID": "slides/IS4010_W10_The_Soul_of_Rust.html#ai-copilot-technique-understanding-lifetimes",
-    "href": "slides/IS4010_W10_The_Soul_of_Rust.html#ai-copilot-technique-understanding-lifetimes",
+    "objectID": "slides/IS4010_W10_The_Soul_of_Rust.html#lab-10-apply-these-access-patterns",
+    "href": "slides/IS4010_W10_The_Soul_of_Rust.html#lab-10-apply-these-access-patterns",
     "title": "IS 4010: Application Development with Artificial Intelligence",
-    "section": "AI copilot technique: understanding lifetimes",
-    "text": "AI copilot technique: understanding lifetimes\nLifetimes can be confusing. Use AI to build intuition:\nEffective prompts: - “Explain Rust lifetimes like I’m coming from Python” - “Why does this code need a lifetime annotation? [paste code]” - “What does ‘a mean in this function signature? [paste signature]“ - ”How do I fix ’lifetime may not live long enough’?” - “When can I omit lifetime annotations in Rust?”\nPro tip: Use Rust Playground to experiment. Change code, see errors, ask AI to explain the errors.\n\nLifetimes can feel abstract. Compare more than one explanation, but bring each analogy back to the concrete question: which borrowed value must remain valid, and for how long? Use Playground to test the explanation."
+    "section": "Lab 10: apply these access patterns",
+    "text": "Lab 10: apply these access patterns\nPart 1: Repair seven borrow-checker puzzles and run them.\nPart 2: Implement the four supplied functions; keep their signatures.\n\n\n\nFunction\nAccess pattern\n\n\n\n\nto_uppercase_owned\nString → owned String\n\n\nstring_length\n&String → usize\n\n\nappend_suffix\n&mut String and &str → change the original\n\n\nconcat_strings\nTwo &str inputs → new owned String\n\n\n\nFollow the Lab 10 instructions. Leave the supplied tests unchanged.\n\nThe public lab repository is authoritative. Part 1 is practice and is not graded automatically. Part 2 contains the graded implementations. Have students describe ownership at each function boundary before coding. Returning a newly created String from concat_strings is different from returning a borrowed input, so it needs no named lifetime parameter. Do not provide implementations of these four functions in the deck. The classroom examples prepare students to choose and explain access patterns without supplying their submissions."
   },
   {
-    "objectID": "slides/IS4010_W10_The_Soul_of_Rust.html#lifetimes-in-structs",
-    "href": "slides/IS4010_W10_The_Soul_of_Rust.html#lifetimes-in-structs",
+    "objectID": "slides/IS4010_W10_The_Soul_of_Rust.html#check-and-submit-lab-10",
+    "href": "slides/IS4010_W10_The_Soul_of_Rust.html#check-and-submit-lab-10",
     "title": "IS 4010: Application Development with Artificial Intelligence",
-    "section": "Lifetimes in structs",
-    "text": "Lifetimes in structs\nstruct Excerpt&lt;'a&gt; {\n    text: &'a str,  // This reference must be valid as long as the Excerpt exists\n}\n\nfn main() {\n    let novel = String::from(\"Call me Ishmael. Some years ago...\");\n    let first_sentence = novel.split('.').next().unwrap();\n    let excerpt = Excerpt { text: first_sentence };\n    println!(\"{}\", excerpt.text);\n} // excerpt and novel both go out of scope here (OK: excerpt doesn't outlive novel)\n\nWhen a struct contains a reference, we must annotate the lifetime\n'a says: “this struct can’t live longer than the data it references”\nThe borrow checker enforces that novel outlives excerpt\n\nTry it in Rust Playground\n\nWhen a struct stores references, its type may need lifetime parameters that relate the struct to the borrowed data. The compiler then rejects a value that would outlive that data."
+    "section": "Check and submit Lab 10",
+    "text": "Check and submit Lab 10\nRun these inside your fork’s week10/ directory:\ncargo test\ncargo fmt\ncargo clippy -- -D warnings\n\nCI checks formatting with cargo fmt --check.\nReview git diff, commit week10/, and push.\nConfirm that the Week 10 README badge is green.\n\n\nThese commands and the submission workflow match week10/lab10.md. cargo fmt applies formatting; cargo fmt –check verifies without rewriting. A green Week 10 badge represents the complete 10-point lab grade. Run the checks after your final edits, and investigate diagnostics rather than changing supplied tests to make them pass."
   },
   {
-    "objectID": "slides/IS4010_W10_The_Soul_of_Rust.html#the-big-picture-why-ownership-matters",
-    "href": "slides/IS4010_W10_The_Soul_of_Rust.html#the-big-picture-why-ownership-matters",
+    "objectID": "slides/IS4010_W10_The_Soul_of_Rust.html#explain-it-in-your-own-words",
+    "href": "slides/IS4010_W10_The_Soul_of_Rust.html#explain-it-in-your-own-words",
     "title": "IS 4010: Application Development with Artificial Intelligence",
-    "section": "The big picture: why ownership matters",
-    "text": "The big picture: why ownership matters\nWhat ownership gives you: - Memory safety without garbage collection - No data races in safe Rust (enforced at compile time) - Predictable performance (no GC pauses) - Compile-time checks that usually do not add runtime work\nThe trade-off: - Steeper learning curve (you’re learning now!) - Resolve borrow-checker feedback while learning the ownership model - More upfront thinking about data ownership\nTransfer: Ownership practice gives you another way to reason about resource lifetimes, aliases, and mutation in Python, JavaScript, and other languages.\n\nEmphasize the transferable questions: who owns this resource, who may mutate it, and how long must a reference remain valid?"
+    "section": "Explain it in your own words",
+    "text": "Explain it in your own words\n\nMove: Who owns the value now?\nCopy or clone: Did we create a separate value?\nBorrow: What access does the function need?\nValidity: Will the borrowed data still exist when it is used?\n\nNext week: Use these ideas with structs, enums, and pattern matching.\n\nAsk each student to explain one repair using the actual variable names. Revisit the example if they cannot identify the owner or conflicting uses yet. Encourage small experiments: changing one line and predicting the result is useful practice. Students can stop after the resources slide; the remaining slides are an optional preview of named lifetime annotations, not required for Lab 10."
   },
   {
-    "objectID": "slides/IS4010_W10_The_Soul_of_Rust.html#case-studies-to-investigate",
-    "href": "slides/IS4010_W10_The_Soul_of_Rust.html#case-studies-to-investigate",
+    "objectID": "slides/IS4010_W10_The_Soul_of_Rust.html#resources-and-questions",
+    "href": "slides/IS4010_W10_The_Soul_of_Rust.html#resources-and-questions",
     "title": "IS 4010: Application Development with Artificial Intelligence",
-    "section": "Case studies to investigate",
-    "text": "Case studies to investigate\nExamples of organizations describing Rust migrations:\n\nDiscord: Discusses latency behavior in one service migration from Go to Rust\nDropbox: Describes design choices in a cross-platform sync engine\nnpm: Reports results from selected CPU-bound services\nMicrosoft: Discusses memory-safety vulnerabilities and safer systems-language research\n\nDiscussion question: Which results come from the language, the new design, the workload, or the implementation team?\n\nTreat these as case studies, not controlled language benchmarks. Ask students to identify the baseline, workload, metric, and other changes that accompanied each rewrite."
+    "section": "Resources and questions",
+    "text": "Resources and questions\nStart here:\n\nRust Book, Chapter 4: ownership\nReferences and borrowing\nString slices\n\nPractice: Rust Playground and Rustlings.\nOptional reading: Rust Book: validating references with lifetimes.\n\nPause for questions and end the required lesson here. Rust Book Chapter 4 is the primary reading. Rustlings is additional practice. The next section can be skipped or revisited after students have successfully explained the core borrowing examples. Named lifetime parameters and reference-containing structs are not required by this week’s lab."
   },
   {
-    "objectID": "slides/IS4010_W10_The_Soul_of_Rust.html#try-it-yourself-borrow-checker-challenges",
-    "href": "slides/IS4010_W10_The_Soul_of_Rust.html#try-it-yourself-borrow-checker-challenges",
+    "objectID": "slides/IS4010_W10_The_Soul_of_Rust.html#optional-extension-named-lifetimes",
+    "href": "slides/IS4010_W10_The_Soul_of_Rust.html#optional-extension-named-lifetimes",
     "title": "IS 4010: Application Development with Artificial Intelligence",
-    "section": "Try it yourself: borrow checker challenges",
-    "text": "Try it yourself: borrow checker challenges\nChallenge 1: Fix the ownership error Rust Playground Link\nChallenge 2: Fix the borrowing error Rust Playground Link\nChallenge 3: Fix the dangling reference Rust Playground Link\n\nGive students 5-10 minutes to work through these. Walk around and help. Encourage them to read the error messages carefully. These are the three most common borrow checker errors."
+    "section": "Optional extension: named lifetimes",
+    "text": "Optional extension: named lifetimes\nWe already checked that borrowed data stays valid through each use.\nSometimes a function signature must also describe which inputs a returned reference can borrow from.\nThat is when a name such as 'a can help.\nThis section is optional; Lab 10 does not require named lifetimes.\n\nContinue only if the main ownership and borrowing examples are comfortable. A named lifetime is a label for a validity relationship, not a timer or an instruction to allocate data. The earlier owned-return functions need no such relationship because they return ownership. Avoid introducing structs containing references or generic trait bounds here."
   },
   {
-    "objectID": "slides/IS4010_W10_The_Soul_of_Rust.html#introducing-lab-10-ownership-and-borrowing",
-    "href": "slides/IS4010_W10_The_Soul_of_Rust.html#introducing-lab-10-ownership-and-borrowing",
+    "objectID": "slides/IS4010_W10_The_Soul_of_Rust.html#optional-which-input-is-borrowed",
+    "href": "slides/IS4010_W10_The_Soul_of_Rust.html#optional-which-input-is-borrowed",
     "title": "IS 4010: Application Development with Artificial Intelligence",
-    "section": "Introducing Lab 10: ownership and borrowing",
-    "text": "Introducing Lab 10: ownership and borrowing\nThis week’s lab has two parts:\n\nBorrow-checker puzzles (practice)\n\nFix and run the seven commented ownership and borrowing examples\nInterpret each compiler diagnostic\n\nImplementation exercises (graded)\n\nImplement to_uppercase_owned, string_length, append_suffix, and concat_strings\nDo not modify the supplied test module\n\nRequired checks\n\nRun cargo test, cargo fmt, and cargo clippy -- -D warnings\nPush week10/ and confirm the matching README badge is green\n\n\nFull instructions: week10/lab10.md\n\nPart 1 is not graded automatically; part 2 and the supplied checks define the automated contract. The green Week 10 badge is the complete 10-point grade."
+    "section": "Optional: which input is borrowed?",
+    "text": "Optional: which input is borrowed?\nThis version intentionally fails to compile.\nfn longest(first: &str, second: &str) -&gt; &str {\n    if first.len() &gt;= second.len() {\n        first\n    } else {\n        second\n    }\n}\n\nfn main() {\n    println!(\"{}\", longest(\"Ada\", \"Grace\"));\n}\nE0106: The signature needs to relate the returned reference to its inputs.\nTry this example in Rust Playground\n\nBoth inputs are borrowed text, and the function returns one of them without making an owned String. Depending on the inputs, either branch may run. Rust requires the relationship in the signature so callers can be checked against that contract. It does not infer this relationship from the function body. Even using two string literals at this call site does not remove the requirement from the function definition. We compare byte lengths; ASCII makes that match our intuition about these names."
   },
   {
-    "objectID": "slides/IS4010_W10_The_Soul_of_Rust.html#resources-for-going-deeper",
-    "href": "slides/IS4010_W10_The_Soul_of_Rust.html#resources-for-going-deeper",
+    "objectID": "slides/IS4010_W10_The_Soul_of_Rust.html#optional-give-the-relationship-a-name",
+    "href": "slides/IS4010_W10_The_Soul_of_Rust.html#optional-give-the-relationship-a-name",
     "title": "IS 4010: Application Development with Artificial Intelligence",
-    "section": "Resources for going deeper",
-    "text": "Resources for going deeper\nOfficial Rust resources: - The Rust Programming Language book - Chapter 4 (Ownership) - The Rust Programming Language book - Chapter 10 (Lifetimes) - Rust by Example - Ownership - The Rustonomicon - Advanced ownership\nInteractive learning: - Rust Playground - experiment in your browser - Rustlings - small exercises to get you used to reading and writing Rust code\nCommunity: - r/rust - Rust subreddit - The Rust Programming Language Discord\n\nUse Rust Book Chapter 4 as the primary reference. Rustlings is optional practice, and the Rustonomicon is outside this lab’s required scope."
+    "section": "Optional: give the relationship a name",
+    "text": "Optional: give the relationship a name\nfn longest&lt;'a&gt;(first: &'a str, second: &'a str) -&gt; &'a str {\n    if first.len() &gt;= second.len() {\n        first\n    } else {\n        second\n    }\n}\n\nfn main() {\n    println!(\"{}\", longest(\"Ada\", \"Grace\"));\n}\n'a ties the result’s allowed use to a period when both inputs are valid.\nAnnotations describe a relationship; they do not keep data alive.\nTry this example in Rust Playground\n\nOutput: Grace. Read apostrophe-a as a lifetime label declared after the function name. It is not the single-quoted char ‘a’. Both input references must be valid for the selected lifetime, and the output reference is usable for that lifetime. The original values need not have identical lifetimes; callers are limited to their common valid region, often described as the shorter input lifetime. The annotation does not extend either value’s life, create a String, or choose the returned input. The if expression still chooses the input at runtime."
   },
   {
-    "objectID": "slides/IS4010_W10_The_Soul_of_Rust.html#looking-ahead-next-week",
-    "href": "slides/IS4010_W10_The_Soul_of_Rust.html#looking-ahead-next-week",
+    "objectID": "slides/IS4010_W10_The_Soul_of_Rust.html#optional-keep-both-inputs-alive",
+    "href": "slides/IS4010_W10_The_Soul_of_Rust.html#optional-keep-both-inputs-alive",
     "title": "IS 4010: Application Development with Artificial Intelligence",
-    "section": "Looking ahead: next week",
-    "text": "Looking ahead: next week\nWeek 11 preview: structs, enums, and pattern matching - Creating custom data types with struct - Rust’s powerful enum type - Pattern matching with match - AI-assisted data modeling strategies\nFor now: Practice ownership and borrowing. These concepts support the Rust topics that follow.\n\nNext week builds on this foundation. Everything in Rust flows from ownership. Structs and enums are easier once ownership is clear. Encourage students to struggle with the borrow checker this week - it’s normal and valuable."
-  },
-  {
-    "objectID": "slides/IS4010_W10_The_Soul_of_Rust.html#questions",
-    "href": "slides/IS4010_W10_The_Soul_of_Rust.html#questions",
-    "title": "IS 4010: Application Development with Artificial Intelligence",
-    "section": "Questions?",
-    "text": "Questions?\nRemember: - The borrow checker is your friend (even when it feels like your enemy) - Read the compiler diagnostic before deciding on a fix - Use AI assistants to deepen understanding, not to skip learning - Explain each ownership fix in terms of the value, owner, and borrow involved\nOffice hours: Available on Microsoft Teams - reach out anytime!\n\nEnd on an encouraging note. Ownership is hard but worth it. Normalize the struggle. Remind them you’re available for help. This is the most important concept in the entire Rust portion of the course."
+    "section": "Optional: keep both inputs alive",
+    "text": "Optional: keep both inputs alive\nThis example intentionally fails to compile.\nfn longest&lt;'a&gt;(first: &'a str, second: &'a str) -&gt; &'a str {\n    if first.len() &gt;= second.len() { first } else { second }\n}\n\nfn main() {\n    let name = String::from(\"Ada\");\n    let result;\n    {\n        let other = String::from(\"Grace\");\n        result = longest(name.as_str(), other.as_str());\n    } // other is dropped here\n    println!(\"{}\", result);\n}\nTry: Move the print inside the inner block. Why does that work?\nTry this example in Rust Playground\n\nExpected diagnostic: E0597, other does not live long enough. Move println! into the inner block, immediately after the call; the revised program prints Grace because both inputs remain valid during the read. The signature permits the result to borrow either input, so the caller must allow for both. Changing Ada to a longer name would not make the original code compile: callers use the function’s declared relationship rather than relying on a particular runtime branch. Emphasize the same concrete rule as before: borrowed data must still exist when the reference is used. Named lifetime annotations describe that rule across the function boundary."
   },
   {
     "objectID": "slides/IS4010_W08_Professional_Python.html#from-scripts-to-maintainable-tools",
