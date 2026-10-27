@@ -4,11 +4,11 @@ title: "Week 10: Soul of Rust"
 
 ## Introduction
 
-This week we will follow small Rust programs to see who owns a value, what happens when it moves, and how a function can borrow it to read or change it. We'll predict outputs, read compiler diagnostics, and make one change at a time. The main lesson covers ownership, borrowing, string slices, and keeping borrowed data valid; named lifetime annotations are an optional extension.
+This week starts with why memory cleanup is hard, how Python handles it for you, and the difference between the stack and the heap. Then we will follow small Rust programs to see who owns a value, what happens when it moves, and how a function can borrow it to read or change it. We'll predict outputs, read compiler diagnostics, and make one change at a time. The main lesson covers ownership, borrowing, string slices, and keeping borrowed data valid; named lifetime annotations are an optional extension.
 
 ## Recommended readings
 
-- [Chapter 4: Understanding ownership](https://doc.rust-lang.org/book/ch04-00-understanding-ownership.html) - Ownership, references, and borrowing
+- [Chapter 4: Understanding ownership](https://doc.rust-lang.org/book/ch04-00-understanding-ownership.html) - Ownership, references, and borrowing. The "stack and the heap" section in 4.1 is the background for session 1
 
 ## Lectures
 

@@ -6,7 +6,7 @@ author: "Brandon M. Greenwell"
 
 ## Session 1: who owns this value?
 
-We will follow one small piece of text: `"Ada"`.
+We will follow one small piece of text: `"Homer"`.
 
 - Who owns it?
 - Can we still use it after an assignment or function call?
@@ -15,21 +15,86 @@ We will follow one small piece of text: `"Ada"`.
 **Our routine:** Predict → run → explain.
 
 ::: {.notes}
-Begin with a show of hands: in Python, does assigning a list to a second variable create an independent list? No: both names refer to the same list. Rust's String assignment behaves differently, and today we will trace that difference. Do not assume students already know String, references, or memory allocation. Allow 30–60 seconds for each prediction and 2–3 minutes for each repair exercise. Answers and demonstration steps are in these notes.
+The next four slides are background: why memory cleanup is a problem at all, how Python handles it, and where values live. They set up ownership as Rust's answer rather than an arbitrary rule. Do not assume students already know String, references, or memory allocation. Allow 30–60 seconds for each prediction and 2–3 minutes for each repair exercise. Answers and demonstration steps are in these notes.
 :::
 
 ---
 
-## Why Rust asks about ownership
+## Who cleans up the memory?
 
-- Your program needs memory to store values.
-- That memory can be reused when the values are no longer needed.
-- Rust checks who owns data and who may use it **before the program runs**.
+Every program borrows memory to store values. Someone has to give it back.
 
-**The benefit:** Many mistakes involving invalid memory access become compiler errors.
+| Strategy | Who cleans up? | The catch |
+|---|---|---|
+| Manual (C, C++) | You call `free` | Forget, free twice, or free too early |
+| Garbage collector (Python, Java, Go) | A helper running alongside your program | Extra runtime work, occasional pauses |
+| Ownership (Rust) | Rules the compiler checks **before the program runs** | Learning the rules (this week!) |
 
 ::: {.notes}
-Keep this motivation brief. Python manages memory automatically at runtime. Rust uses ownership to determine cleanup without a tracing garbage collector. Ownership checks happen at compile time; allocating, copying, and freeing a String still involve runtime work. Safe Rust prevents many memory-safety errors, but it does not guarantee correct answers or prevent every security bug. We will focus on ordinary owned values and references, leaving shared ownership and interior mutability for later study.
+A library analogy works well. Manual memory is returning every book yourself: forget one and it is lost forever; return it twice or while a friend is still reading it and chaos follows. A garbage collector is a librarian who periodically walks the building collecting books nobody seems to be reading; convenient, but the librarian costs time and sometimes everyone waits. Rust puts one name on each checkout card, and the book goes back automatically the moment that person leaves. Ownership checks happen at compile time; allocating and freeing a String still happen at runtime. We will focus on ordinary owned values and references, leaving shared ownership and interior mutability for later study.
+:::
+
+---
+
+## Why this matters: memory bugs are expensive
+
+- [Microsoft](https://www.microsoft.com/en-us/msrc/blog/2019/07/a-proactive-approach-to-more-secure-code): about 70% of the vulnerabilities it assigns a CVE each year are memory-safety issues.
+- [Chromium](https://www.chromium.org/Home/chromium-security/memory-safety/): around 70% of its high-severity security bugs are memory-safety problems.
+
+**Rust's pitch:** Turn many of those bugs into compiler errors you fix before shipping.
+
+::: {.notes}
+A CVE is a publicly catalogued security vulnerability. Both figures come from large C and C++ codebases, which use manual memory management. Safe Rust prevents many memory-safety errors, but it does not guarantee correct answers or prevent every security bug; logic errors are still the programmer's job.
+:::
+
+---
+
+## Remember Python?
+
+```python
+names = ["Homer"]
+guests = names
+guests.append("Marge")
+print(names)
+```
+
+**Predict:** What does this print?
+
+::: {.notes}
+Answer: ['Homer', 'Marge']. In Week 03 we said Python variables point to objects. Here two names point to one list, so a change through guests is visible through names. Python counts how many names refer to each object and frees it when the count reaches zero, with an extra collector for cycles. Students never think about cleanup. Close with the question for today: when Rust runs let guest = name, what should happen to name? Python's answer is "share it." Rust's answer is different.
+:::
+
+---
+
+## Two places to store values: stack and heap
+
+:::: {.columns}
+::: {.column width="50%"}
+**Stack:** a stack of plates
+
+- Fixed, known size
+- Last on, first off
+- Fast
+- Cleared automatically when a function ends
+
+`let score = 5;`
+:::
+::: {.column width="50%"}
+**Heap:** a restaurant host
+
+- Any size, can grow
+- The host finds space and hands you a table number (a **pointer**)
+- Slower to set up and to reach
+- Someone has to say "we're done"
+
+The text inside a `String`
+:::
+::::
+
+**The stack cleans itself up. Heap memory needs an owner.**
+
+::: {.notes}
+Both analogies come from Rust Book 4.1, the assigned reading. A function's local values sit on the stack and disappear together when it returns, like clearing a whole stack of plates. Text that can grow needs heap space; the host analogy covers finding room for a party of any size and telling friends the table number so they can find you. Ownership exists mainly to answer one question: who is responsible for giving each piece of heap memory back? Students do not need to predict where every value lives; we will draw one String's layout shortly.
 :::
 
 ---
@@ -38,21 +103,21 @@ Keep this motivation brief. Python manages memory automatically at runtime. Rust
 
 ```rust
 fn main() {
-    let name = String::from("Ada");
+    let name = String::from("Homer");
     println!("{}", name);
 }
 ```
 
 - `String` stores owned text that can grow.
-- `String::from("Ada")` creates a `String` containing `Ada`.
+- `String::from("Homer")` creates a `String` containing `Homer`.
 - Here, the variable `name` is the **owner** of that `String`.
 
 **Predict:** What will this print?
 
-[Try this example in Rust Playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2024&code=fn+main%28%29+%7B%0A++++let+name+%3D+String%3A%3Afrom%28%22Ada%22%29%3B%0A++++println%21%28%22%7B%7D%22%2C+name%29%3B%0A%7D%0A)
+[Try this example in Rust Playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2024&code=fn+main%28%29+%7B%0A++++let+name+%3D+String%3A%3Afrom%28%22Homer%22%29%3B%0A++++println%21%28%22%7B%7D%22%2C+name%29%3B%0A%7D%0A)
 
 ::: {.notes}
-Answer: Ada. Run the example in Playground or a scratch Cargo project, separate from the lab. Read String::from as “make an owned String from this text.” The double colon selects the from function associated with String. Recall fn main and println! from Week 09. println! borrows this value for display; it does not take ownership. Explain the distinction from a string literal more fully when we introduce &str in session 2.
+Answer: Homer. Run the example in Playground or a scratch Cargo project, separate from the lab. Read String::from as “make an owned String from this text.” The double colon selects the from function associated with String. Recall fn main and println! from Week 09. println! borrows this value for display; it does not take ownership. Explain the distinction from a string literal more fully when we introduce &str in session 2.
 :::
 
 ---
@@ -62,7 +127,7 @@ Answer: Ada. Run the example in Playground or a scratch Cargo project, separate 
 ```rust
 fn main() {
     {
-        let name = String::from("Ada");
+        let name = String::from("Homer");
         println!("{}", name);
     } // name leaves scope; its String is cleaned up
 
@@ -74,7 +139,7 @@ fn main() {
 
 **Predict:** Can the final line use `name` outside its block?
 
-[Try this example in Rust Playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2024&code=fn+main%28%29+%7B%0A++++%7B%0A++++++++let+name+%3D+String%3A%3Afrom%28%22Ada%22%29%3B%0A++++++++println%21%28%22%7B%7D%22%2C+name%29%3B%0A++++%7D+%2F%2F+name+leaves+scope%3B+its+String+is+cleaned+up%0A%0A++++%2F%2F+println%21%28%22%7B%7D%22%2C+name%29%3B+%2F%2F+Try+uncommenting+this%0A%7D%0A)
+[Try this example in Rust Playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2024&code=fn+main%28%29+%7B%0A++++%7B%0A++++++++let+name+%3D+String%3A%3Afrom%28%22Homer%22%29%3B%0A++++++++println%21%28%22%7B%7D%22%2C+name%29%3B%0A++++%7D+%2F%2F+name+leaves+scope%3B+its+String+is+cleaned+up%0A%0A++++%2F%2F+println%21%28%22%7B%7D%22%2C+name%29%3B+%2F%2F+Try+uncommenting+this%0A%7D%0A)
 
 ::: {.notes}
 Answer: no. Uncomment the final line and read E0425: cannot find value name in this scope. The inner braces define a block; the name binding is available inside that block. When its owner leaves scope, the String is dropped and its text buffer is freed. Cleanup is automatic; students do not add a manual free call. Distinguish this name-resolution error from the moved-value error coming next.
@@ -102,7 +167,7 @@ Use these rules for the ordinary owned values in this lesson, following Rust Boo
 
 ```rust
 fn main() {
-    let name = String::from("Ada");
+    let name = String::from("Homer");
     let guest = name; // The String moves to guest
 
     println!("{}", guest);
@@ -112,10 +177,10 @@ fn main() {
 
 **Predict:** Which variable owns the `String` after the assignment?
 
-[Try this example in Rust Playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2024&code=fn+main%28%29+%7B%0A++++let+name+%3D+String%3A%3Afrom%28%22Ada%22%29%3B%0A++++let+guest+%3D+name%3B+%2F%2F+The+String+moves+to+guest%0A%0A++++println%21%28%22%7B%7D%22%2C+guest%29%3B%0A++++%2F%2F+println%21%28%22%7B%7D%22%2C+name%29%3B+%2F%2F+Can+we+still+use+name%3F%0A%7D%0A)
+[Try this example in Rust Playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2024&code=fn+main%28%29+%7B%0A++++let+name+%3D+String%3A%3Afrom%28%22Homer%22%29%3B%0A++++let+guest+%3D+name%3B+%2F%2F+The+String+moves+to+guest%0A%0A++++println%21%28%22%7B%7D%22%2C+guest%29%3B%0A++++%2F%2F+println%21%28%22%7B%7D%22%2C+name%29%3B+%2F%2F+Can+we+still+use+name%3F%0A%7D%0A)
 
 ::: {.notes}
-Answer: guest owns the String, and this program prints Ada. Pause before revealing it. The assignment does not create a second text buffer. name is no longer usable unless it is assigned a new value; we do not need that detail for this example. Point out that mut would allow mutation but would not undo a move. Next, try the commented line.
+Answer: guest owns the String, and this program prints Homer. Pause before revealing it. The assignment does not create a second text buffer. name is no longer usable unless it is assigned a new value; we do not need that detail for this example. Point out that mut would allow mutation but would not undo a move. Next, try the commented line.
 :::
 
 ---
@@ -126,7 +191,7 @@ Answer: guest owns the String, and this program prints Ada. Pause before reveali
 
 ```rust
 fn main() {
-    let name = String::from("Ada");
+    let name = String::from("Homer");
     let guest = name;
 
     println!("{}", guest);
@@ -136,7 +201,7 @@ fn main() {
 
 **Predict:** Which earlier line caused the problem?
 
-[Try this example in Rust Playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2024&code=fn+main%28%29+%7B%0A++++let+name+%3D+String%3A%3Afrom%28%22Ada%22%29%3B%0A++++let+guest+%3D+name%3B%0A%0A++++println%21%28%22%7B%7D%22%2C+guest%29%3B%0A++++println%21%28%22%7B%7D%22%2C+name%29%3B+%2F%2F+name+no+longer+owns+the+String%0A%7D%0A)
+[Try this example in Rust Playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2024&code=fn+main%28%29+%7B%0A++++let+name+%3D+String%3A%3Afrom%28%22Homer%22%29%3B%0A++++let+guest+%3D+name%3B%0A%0A++++println%21%28%22%7B%7D%22%2C+guest%29%3B%0A++++println%21%28%22%7B%7D%22%2C+name%29%3B+%2F%2F+name+no+longer+owns+the+String%0A%7D%0A)
 
 ::: {.notes}
 Answer: let guest = name moved the String. Run this version and ask students to find both the move and the later attempted use in the diagnostic. The program does not print anything: compilation fails before execution. The final println! tries to borrow name for display, which explains “borrow of moved value.” We fix this particular example by using guest. We will learn borrowing when the original owner needs to keep using its data.
@@ -148,7 +213,7 @@ Answer: let guest = name moved the String. Run this version and ask students to 
 
 The compiler identifies:
 
-1. `let name = String::from("Ada");` — the value starts here.
+1. `let name = String::from("Homer");` — the value starts here.
 2. `let guest = name;` — ownership moves here.
 3. `println!("{}", name);` — the old owner is used here.
 
@@ -160,6 +225,31 @@ error[E0382]: borrow of moved value: `name`
 
 ::: {.notes}
 Use the actual compiler output from the previous slide to demonstrate the line markers. Ask a student to explain the error without the words “Rust doesn't like it.” A good answer is: the String moved from name to guest, so name cannot be read afterward. If both variables really need independent text, cloning is an option; do not add clone merely to silence a diagnostic without considering the intended behavior.
+:::
+
+---
+
+## Why the old owner stops working
+
+A `String` is a small header on the stack that points to its text on the heap:
+
+```text
+Before: let guest = name;
+
+name:  [pointer, length, capacity] ──→ [ H o m e r ]
+           stack                        heap
+
+After the move:
+
+name:  unavailable
+guest: [pointer, length, capacity] ──→ [ H o m e r ]
+                                        same text
+```
+
+If `name` and `guest` both stayed valid, **both** would free the same text when `main` ends. Freeing twice is a classic C bug, so Rust retires `name` instead.
+
+::: {.notes}
+Walk through the arrows slowly. A pointer records where the text is, length counts the used bytes, and capacity records how much space is available. Students do not need to calculate sizes. Moving a String copies the header without duplicating the text; the compiler may optimize even that away. Connect back to the first slide's table: "free twice" was one of the manual-memory failures. One owner means exactly one cleanup. Python avoids the problem by counting references at runtime; Rust avoids it by allowing only one owner, checked at compile time.
 :::
 
 ---
@@ -176,6 +266,7 @@ fn main() {
 ```
 
 - Integers implement `Copy`: assignment duplicates their value.
+- A number has no heap text to clean up, so duplicating it is cheap and safe.
 - Both variables remain usable. Output: `5 and 5`.
 - `bool`, `char`, and floating-point numbers also implement `Copy`.
 
@@ -195,7 +286,7 @@ Answer: String does not implement Copy; its assignment moves ownership. Copy is 
 
 ```rust
 fn main() {
-    let name = String::from("Ada");
+    let name = String::from("Homer");
     let mut guest = name.clone();
     guest.push_str("!");
 
@@ -205,35 +296,17 @@ fn main() {
 
 **Predict:** Does changing `guest` also change `name`?
 
-[Try this example in Rust Playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2024&code=fn+main%28%29+%7B%0A++++let+name+%3D+String%3A%3Afrom%28%22Ada%22%29%3B%0A++++let+mut+guest+%3D+name.clone%28%29%3B%0A++++guest.push_str%28%22%21%22%29%3B%0A%0A++++println%21%28%22%7B%7D+and+%7B%7D%22%2C+name%2C+guest%29%3B%0A%7D%0A)
-
-::: {.notes}
-Answer: no; output is Ada and Ada!. String::clone copies the text into a separate owned buffer. Both variables are valid because each owns a different String. Cloning a String allocates and copies data, so its cost depends on the text length. This independence is specific to the type's clone behavior; do not promise that Clone always makes deep copies for every Rust type. Ask students to replace name.clone() with name: the final print now fails because name moved.
+::: {.fragment}
+```text
+name:  [pointer, length, capacity] ──→ [ H o m e r ]
+guest: [pointer, length, capacity] ──→ [ H o m e r ! ]
+```
 :::
 
----
-
-## A move keeps one text buffer
-
-For this local `String`, its small header tracks a separate text buffer:
-
-```text
-Before: let guest = name;
-
-name:  [pointer, length, capacity] ──→ [ A d a ]
-           local stack data           heap buffer
-
-After the move:
-
-name:  unavailable
-guest: [pointer, length, capacity] ──→ [ A d a ]
-                                      same buffer
-```
-
-**Move:** Transfer ownership. **Clone:** Create independent text storage.
+[Try this example in Rust Playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2024&code=fn+main%28%29+%7B%0A++++let+name+%3D+String%3A%3Afrom%28%22Homer%22%29%3B%0A++++let+mut+guest+%3D+name.clone%28%29%3B%0A++++guest.push_str%28%22%21%22%29%3B%0A%0A++++println%21%28%22%7B%7D+and+%7B%7D%22%2C+name%2C+guest%29%3B%0A%7D%0A)
 
 ::: {.notes}
-Walk through the arrows slowly. The stack stores this local value's fixed-size header; the heap holds its separately allocated text buffer. A pointer records where the buffer is, length counts the used bytes, and capacity records how much space is available. Students do not need to calculate sizes. Moving a String transfers the header without duplicating the buffer; the compiler may optimize away physical copying. The previous binding becomes unavailable, leaving one owner responsible for cleanup. Storage location alone does not determine whether a type implements Copy.
+Answer: no; output is Homer and Homer!. String::clone copies the text into a separate owned buffer. Both variables are valid because each owns a different String. Cloning a String allocates and copies data, so its cost depends on the text length. This independence is specific to the type's clone behavior; do not promise that Clone always makes deep copies for every Rust type. Ask students to replace name.clone() with name: the final print now fails because name moved.
 :::
 
 ---
@@ -246,7 +319,7 @@ fn welcome(guest: String) {
 } // guest's String is dropped here
 
 fn main() {
-    let name = String::from("Ada");
+    let name = String::from("Homer");
     welcome(name); // Ownership moves into the function
     // println!("{}", name); // Try uncommenting this
 }
@@ -254,10 +327,10 @@ fn main() {
 
 **Predict:** Who owns the `String` while `welcome` runs?
 
-[Try this example in Rust Playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2024&code=fn+welcome%28guest%3A+String%29+%7B%0A++++println%21%28%22Welcome%2C+%7B%7D%21%22%2C+guest%29%3B%0A%7D+%2F%2F+guest%27s+String+is+dropped+here%0A%0Afn+main%28%29+%7B%0A++++let+name+%3D+String%3A%3Afrom%28%22Ada%22%29%3B%0A++++welcome%28name%29%3B+%2F%2F+Ownership+moves+into+the+function%0A++++%2F%2F+println%21%28%22%7B%7D%22%2C+name%29%3B+%2F%2F+Try+uncommenting+this%0A%7D%0A)
+[Try this example in Rust Playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2024&code=fn+welcome%28guest%3A+String%29+%7B%0A++++println%21%28%22Welcome%2C+%7B%7D%21%22%2C+guest%29%3B%0A%7D+%2F%2F+guest%27s+String+is+dropped+here%0A%0Afn+main%28%29+%7B%0A++++let+name+%3D+String%3A%3Afrom%28%22Homer%22%29%3B%0A++++welcome%28name%29%3B+%2F%2F+Ownership+moves+into+the+function%0A++++%2F%2F+println%21%28%22%7B%7D%22%2C+name%29%3B+%2F%2F+Try+uncommenting+this%0A%7D%0A)
 
 ::: {.notes}
-Answer: the parameter guest owns it. The program prints Welcome, Ada!. Passing this String to a String parameter moves it, just like assignment did. Uncomment the last line to see E0382. println! inside welcome only borrows guest for display; cleanup occurs when guest leaves scope at the end of the function. Students may ask why a read-only greeting needs ownership. It does not: we deliberately revise this exact example to borrow in session 2.
+Answer: the parameter guest owns it. The program prints Welcome, Homer!. Passing this String to a String parameter moves it, just like assignment did. Uncomment the last line to see E0382. println! inside welcome only borrows guest for display; cleanup occurs when guest leaves scope at the end of the function. Students may ask why a read-only greeting needs ownership. It does not: we deliberately revise this exact example to borrow in session 2.
 :::
 
 ---
@@ -266,7 +339,7 @@ Answer: the parameter guest owns it. The program prints Welcome, Ada!. Passing t
 
 ```rust
 fn make_name() -> String {
-    let name = String::from("Ada");
+    let name = String::from("Homer");
     name // No semicolon: return this value
 }
 
@@ -278,10 +351,10 @@ fn main() {
 
 **Predict:** Is the text cleaned up when `make_name` finishes?
 
-[Try this example in Rust Playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2024&code=fn+make_name%28%29+-%3E+String+%7B%0A++++let+name+%3D+String%3A%3Afrom%28%22Ada%22%29%3B%0A++++name+%2F%2F+No+semicolon%3A+return+this+value%0A%7D%0A%0Afn+main%28%29+%7B%0A++++let+guest+%3D+make_name%28%29%3B%0A++++println%21%28%22%7B%7D%22%2C+guest%29%3B%0A%7D%0A)
+[Try this example in Rust Playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2024&code=fn+make_name%28%29+-%3E+String+%7B%0A++++let+name+%3D+String%3A%3Afrom%28%22Homer%22%29%3B%0A++++name+%2F%2F+No+semicolon%3A+return+this+value%0A%7D%0A%0Afn+main%28%29+%7B%0A++++let+guest+%3D+make_name%28%29%3B%0A++++println%21%28%22%7B%7D%22%2C+guest%29%3B%0A%7D%0A)
 
 ::: {.notes}
-Answer: no. Ownership moves out as the return value, and guest becomes the owner. Output: Ada. The local binding name leaves scope, but it no longer owns the returned String. The String is dropped when guest leaves scope in main. Recall Week 09's final-expression syntax. If students add a semicolon after name, discuss the resulting type mismatch, then restore the example. No lifetime annotations are needed to return an owned String.
+Answer: no. Ownership moves out as the return value, and guest becomes the owner. Output: Homer. The local binding name leaves scope, but it no longer owns the returned String. The String is dropped when guest leaves scope in main. Recall Week 09's final-expression syntax. If students add a semicolon after name, discuss the resulting type mismatch, then restore the example. No lifetime annotations are needed to return an owned String.
 :::
 
 ---
@@ -292,7 +365,7 @@ Answer: no. Ownership moves out as the return value, and guest becomes the owner
 fn main() {
     let visits = 2;
     let saved_visits = visits;
-    let name = String::from("Ada");
+    let name = String::from("Homer");
     let guest = name;
 
     println!("{} and {}", visits, saved_visits);
@@ -303,10 +376,10 @@ fn main() {
 
 **Explain:** Which assignment copies? Which moves? What happens if we uncomment the last line?
 
-[Try this example in Rust Playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2024&code=fn+main%28%29+%7B%0A++++let+visits+%3D+2%3B%0A++++let+saved_visits+%3D+visits%3B%0A++++let+name+%3D+String%3A%3Afrom%28%22Ada%22%29%3B%0A++++let+guest+%3D+name%3B%0A%0A++++println%21%28%22%7B%7D+and+%7B%7D%22%2C+visits%2C+saved_visits%29%3B%0A++++println%21%28%22%7B%7D%22%2C+guest%29%3B%0A++++%2F%2F+println%21%28%22%7B%7D%22%2C+name%29%3B%0A%7D%0A)
+[Try this example in Rust Playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2024&code=fn+main%28%29+%7B%0A++++let+visits+%3D+2%3B%0A++++let+saved_visits+%3D+visits%3B%0A++++let+name+%3D+String%3A%3Afrom%28%22Homer%22%29%3B%0A++++let+guest+%3D+name%3B%0A%0A++++println%21%28%22%7B%7D+and+%7B%7D%22%2C+visits%2C+saved_visits%29%3B%0A++++println%21%28%22%7B%7D%22%2C+guest%29%3B%0A++++%2F%2F+println%21%28%22%7B%7D%22%2C+name%29%3B%0A%7D%0A)
 
 ::: {.notes}
-Give students a minute to discuss with a neighbor before running. Answers: saved_visits = visits copies the integer, so both are usable; guest = name moves the String. Output is 2 and 2, then Ada. Uncommenting the last line causes E0382 and prevents the whole program from running. Ask for the owner of each String, rather than only whether a line compiles.
+Give students a minute to discuss with a neighbor before running. Answers: saved_visits = visits copies the integer, so both are usable; guest = name moves the String. Output is 2 and 2, then Homer. Uncommenting the last line causes E0382 and prevents the whole program from running. Ask for the owner of each String, rather than only whether a line compiles.
 :::
 
 ---
@@ -355,7 +428,7 @@ fn welcome(guest: String) {
 }
 
 fn main() {
-    let name = String::from("Ada");
+    let name = String::from("Homer");
     welcome(name);
     println!("See you soon, {}!", name);
 }
@@ -363,7 +436,7 @@ fn main() {
 
 **Discuss:** Does `welcome` need to own the text just to display it?
 
-[Try this example in Rust Playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2024&code=fn+welcome%28guest%3A+String%29+%7B%0A++++println%21%28%22Welcome%2C+%7B%7D%21%22%2C+guest%29%3B%0A%7D%0A%0Afn+main%28%29+%7B%0A++++let+name+%3D+String%3A%3Afrom%28%22Ada%22%29%3B%0A++++welcome%28name%29%3B%0A++++println%21%28%22See+you+soon%2C+%7B%7D%21%22%2C+name%29%3B%0A%7D%0A)
+[Try this example in Rust Playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2024&code=fn+welcome%28guest%3A+String%29+%7B%0A++++println%21%28%22Welcome%2C+%7B%7D%21%22%2C+guest%29%3B%0A%7D%0A%0Afn+main%28%29+%7B%0A++++let+name+%3D+String%3A%3Afrom%28%22Homer%22%29%3B%0A++++welcome%28name%29%3B%0A++++println%21%28%22See+you+soon%2C+%7B%7D%21%22%2C+name%29%3B%0A%7D%0A)
 
 ::: {.notes}
 Answer: no. The function only reads the text, but its String parameter takes ownership. The diagnostic is E0382 at the later print. Ask students to identify the intended behavior before choosing a fix. Cloning would make a second String, but we do not need independent text here. Next, change both the parameter type and the argument to use a reference.
@@ -379,7 +452,7 @@ fn welcome(guest: &String) {
 }
 
 fn main() {
-    let name = String::from("Ada");
+    let name = String::from("Homer");
     welcome(&name);
     println!("See you soon, {}!", name);
 }
@@ -387,10 +460,10 @@ fn main() {
 
 **Predict:** Why can `main` still use `name`?
 
-[Try this example in Rust Playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2024&code=fn+welcome%28guest%3A+%26String%29+%7B%0A++++println%21%28%22Welcome%2C+%7B%7D%21%22%2C+guest%29%3B%0A%7D%0A%0Afn+main%28%29+%7B%0A++++let+name+%3D+String%3A%3Afrom%28%22Ada%22%29%3B%0A++++welcome%28%26name%29%3B%0A++++println%21%28%22See+you+soon%2C+%7B%7D%21%22%2C+name%29%3B%0A%7D%0A)
+[Try this example in Rust Playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2024&code=fn+welcome%28guest%3A+%26String%29+%7B%0A++++println%21%28%22Welcome%2C+%7B%7D%21%22%2C+guest%29%3B%0A%7D%0A%0Afn+main%28%29+%7B%0A++++let+name+%3D+String%3A%3Afrom%28%22Homer%22%29%3B%0A++++welcome%28%26name%29%3B%0A++++println%21%28%22See+you+soon%2C+%7B%7D%21%22%2C+name%29%3B%0A%7D%0A)
 
 ::: {.notes}
-Answer: name remains the owner; welcome borrows the String. Output: Welcome, Ada! followed by See you soon, Ada!. Point out the only two changes from the previous slide: &String in the parameter and &name in the call. The borrowed String is not dropped when welcome returns, because the function never owned it. Use &String here to match Lab 10's string_length signature. Later in this session, explain why &str is a more flexible read-only text parameter; Clippy may recommend it for this example.
+Answer: name remains the owner; welcome borrows the String. Output: Welcome, Homer! followed by See you soon, Homer!. Point out the only two changes from the previous slide: &String in the parameter and &name in the call. The borrowed String is not dropped when welcome returns, because the function never owned it. Use &String here to match Lab 10's string_length signature. Later in this session, explain why &str is a more flexible read-only text parameter; Clippy may recommend it for this example.
 :::
 
 ---
@@ -420,7 +493,7 @@ fn add_exclamation(guest: &mut String) {
 }
 
 fn main() {
-    let mut name = String::from("Ada");
+    let mut name = String::from("Homer");
     add_exclamation(&mut name);
     println!("{}", name);
 }
@@ -428,10 +501,10 @@ fn main() {
 
 **Predict:** What prints? Which variable owns the changed text?
 
-[Try this example in Rust Playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2024&code=fn+add_exclamation%28guest%3A+%26mut+String%29+%7B%0A++++guest.push_str%28%22%21%22%29%3B%0A%7D%0A%0Afn+main%28%29+%7B%0A++++let+mut+name+%3D+String%3A%3Afrom%28%22Ada%22%29%3B%0A++++add_exclamation%28%26mut+name%29%3B%0A++++println%21%28%22%7B%7D%22%2C+name%29%3B%0A%7D%0A)
+[Try this example in Rust Playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2024&code=fn+add_exclamation%28guest%3A+%26mut+String%29+%7B%0A++++guest.push_str%28%22%21%22%29%3B%0A%7D%0A%0Afn+main%28%29+%7B%0A++++let+mut+name+%3D+String%3A%3Afrom%28%22Homer%22%29%3B%0A++++add_exclamation%28%26mut+name%29%3B%0A++++println%21%28%22%7B%7D%22%2C+name%29%3B%0A%7D%0A)
 
 ::: {.notes}
-Answer: Ada!; name remains the owner. Trace all three appearances of mut: let mut permits the owned String to change, &mut name creates an exclusive mutable borrow, and &mut String says what access the function accepts. Remove one mut at a time, read the compiler feedback, then restore it. The function changes the original String through the reference. It does not create a second text buffer or take ownership. The push_str method may allocate if the existing buffer needs more capacity.
+Answer: Homer!; name remains the owner. Trace all three appearances of mut: let mut permits the owned String to change, &mut name creates an exclusive mutable borrow, and &mut String says what access the function accepts. Remove one mut at a time, read the compiler feedback, then restore it. The function changes the original String through the reference. It does not create a second text buffer or take ownership. The push_str method may allocate if the existing buffer needs more capacity.
 :::
 
 ---
@@ -455,7 +528,7 @@ T stands for the referenced type, such as String. Use “shared” alongside the
 
 ```rust
 fn main() {
-    let name = String::from("Ada");
+    let name = String::from("Homer");
     let first_reader = &name;
     let second_reader = &name;
 
@@ -466,10 +539,10 @@ fn main() {
 
 **Predict:** Does either reference take ownership or change the text?
 
-[Try this example in Rust Playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2024&code=fn+main%28%29+%7B%0A++++let+name+%3D+String%3A%3Afrom%28%22Ada%22%29%3B%0A++++let+first_reader+%3D+%26name%3B%0A++++let+second_reader+%3D+%26name%3B%0A%0A++++println%21%28%22%7B%7D+and+%7B%7D%22%2C+first_reader%2C+second_reader%29%3B%0A++++println%21%28%22Owner%3A+%7B%7D%22%2C+name%29%3B%0A%7D%0A)
+[Try this example in Rust Playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2024&code=fn+main%28%29+%7B%0A++++let+name+%3D+String%3A%3Afrom%28%22Homer%22%29%3B%0A++++let+first_reader+%3D+%26name%3B%0A++++let+second_reader+%3D+%26name%3B%0A%0A++++println%21%28%22%7B%7D+and+%7B%7D%22%2C+first_reader%2C+second_reader%29%3B%0A++++println%21%28%22Owner%3A+%7B%7D%22%2C+name%29%3B%0A%7D%0A)
 
 ::: {.notes}
-Answer: neither. Output: Ada and Ada, then Owner: Ada. Both references read the same String. name remains the owner. Shared references do not create independent text. Ask students to point to the two borrow expressions and to the variable responsible for eventual cleanup. Contrast this with name.clone(), which created independent storage.
+Answer: neither. Output: Homer and Homer, then Owner: Homer. Both references read the same String. name remains the owner. Shared references do not create independent text. Ask students to point to the two borrow expressions and to the variable responsible for eventual cleanup. Contrast this with name.clone(), which created independent storage.
 :::
 
 ---
@@ -480,7 +553,7 @@ Answer: neither. Output: Ada and Ada, then Owner: Ada. Both references read the 
 
 ```rust
 fn main() {
-    let mut name = String::from("Ada");
+    let mut name = String::from("Homer");
     let first_editor = &mut name;
     let second_editor = &mut name; // Overlaps first borrow
 
@@ -494,7 +567,7 @@ error[E0499]: cannot borrow `name` as mutable
 more than once at a time
 ```
 
-[Try this example in Rust Playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2024&code=fn+main%28%29+%7B%0A++++let+mut+name+%3D+String%3A%3Afrom%28%22Ada%22%29%3B%0A++++let+first_editor+%3D+%26mut+name%3B%0A++++let+second_editor+%3D+%26mut+name%3B+%2F%2F+Overlaps+first+borrow%0A%0A++++first_editor.push_str%28%22%21%22%29%3B%0A++++second_editor.push_str%28%22%3F%22%29%3B%0A%7D%0A)
+[Try this example in Rust Playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2024&code=fn+main%28%29+%7B%0A++++let+mut+name+%3D+String%3A%3Afrom%28%22Homer%22%29%3B%0A++++let+first_editor+%3D+%26mut+name%3B%0A++++let+second_editor+%3D+%26mut+name%3B+%2F%2F+Overlaps+first+borrow%0A%0A++++first_editor.push_str%28%22%21%22%29%3B%0A++++second_editor.push_str%28%22%3F%22%29%3B%0A%7D%0A)
 
 ::: {.notes}
 Ask students to identify which borrowing rule is violated. first_editor must remain usable through its later push_str, so the second mutable borrow overlaps it. The issue is exclusive access to the same String, even though this code has only one thread. Do not describe this example as an actual data race. No output is produced because compilation fails. Predict a repair by finishing the first editor's work before borrowing for the second editor.
@@ -506,7 +579,7 @@ Ask students to identify which borrowing rule is violated. first_editor must rem
 
 ```rust
 fn main() {
-    let mut name = String::from("Ada");
+    let mut name = String::from("Homer");
     let first_editor = &mut name;
     first_editor.push_str("!"); // Last use of first_editor
 
@@ -519,10 +592,10 @@ fn main() {
 
 **Predict:** Why do these two mutable borrows work now?
 
-[Try this example in Rust Playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2024&code=fn+main%28%29+%7B%0A++++let+mut+name+%3D+String%3A%3Afrom%28%22Ada%22%29%3B%0A++++let+first_editor+%3D+%26mut+name%3B%0A++++first_editor.push_str%28%22%21%22%29%3B+%2F%2F+Last+use+of+first_editor%0A%0A++++let+second_editor+%3D+%26mut+name%3B%0A++++second_editor.push_str%28%22%3F%22%29%3B+%2F%2F+Last+use+of+second_editor%0A%0A++++println%21%28%22%7B%7D%22%2C+name%29%3B%0A%7D%0A)
+[Try this example in Rust Playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2024&code=fn+main%28%29+%7B%0A++++let+mut+name+%3D+String%3A%3Afrom%28%22Homer%22%29%3B%0A++++let+first_editor+%3D+%26mut+name%3B%0A++++first_editor.push_str%28%22%21%22%29%3B+%2F%2F+Last+use+of+first_editor%0A%0A++++let+second_editor+%3D+%26mut+name%3B%0A++++second_editor.push_str%28%22%3F%22%29%3B+%2F%2F+Last+use+of+second_editor%0A%0A++++println%21%28%22%7B%7D%22%2C+name%29%3B%0A%7D%0A)
 
 ::: {.notes}
-Answer: their uses no longer overlap. Output: Ada!?. The compiler can end each borrow after its final use here. We did not add another text buffer or silence the error; we changed the sequence of accesses. The variable names remain in lexical scope, but the borrows no longer need to be active. Distinguish borrow duration from where a binding's name is in scope. Ask what would happen if first_editor were used again after the second mutable borrow: that would make the borrows overlap again.
+Answer: their uses no longer overlap. Output: Homer!?. The compiler can end each borrow after its final use here. We did not add another text buffer or silence the error; we changed the sequence of accesses. The variable names remain in lexical scope, but the borrows no longer need to be active. Distinguish borrow duration from where a binding's name is in scope. Ask what would happen if first_editor were used again after the second mutable borrow: that would make the borrows overlap again.
 :::
 
 ---
@@ -533,7 +606,7 @@ Answer: their uses no longer overlap. Output: Ada!?. The compiler can end each b
 
 ```rust
 fn main() {
-    let mut name = String::from("Ada");
+    let mut name = String::from("Homer");
     let reader = &name;
     let editor = &mut name;
     editor.push_str("!");
@@ -547,7 +620,7 @@ error[E0502]: cannot borrow `name` as mutable
 because it is also borrowed as immutable
 ```
 
-[Try this example in Rust Playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2024&code=fn+main%28%29+%7B%0A++++let+mut+name+%3D+String%3A%3Afrom%28%22Ada%22%29%3B%0A++++let+reader+%3D+%26name%3B%0A++++let+editor+%3D+%26mut+name%3B%0A++++editor.push_str%28%22%21%22%29%3B%0A%0A++++println%21%28%22%7B%7D%22%2C+reader%29%3B+%2F%2F+reader+is+still+needed+here%0A%7D%0A)
+[Try this example in Rust Playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2024&code=fn+main%28%29+%7B%0A++++let+mut+name+%3D+String%3A%3Afrom%28%22Homer%22%29%3B%0A++++let+reader+%3D+%26name%3B%0A++++let+editor+%3D+%26mut+name%3B%0A++++editor.push_str%28%22%21%22%29%3B%0A%0A++++println%21%28%22%7B%7D%22%2C+reader%29%3B+%2F%2F+reader+is+still+needed+here%0A%7D%0A)
 
 ::: {.notes}
 Answer to “which rule?”: shared and exclusive borrows of the same data cannot overlap. Trace reader from its creation to its final println!. editor is created within that interval. The compiler rejects the pattern even though the operations would run one after another: the later use of reader keeps the shared borrow active across the mutable borrow. Ask students to move the read before the mutable borrow and predict the result.
@@ -559,7 +632,7 @@ Answer to “which rule?”: shared and exclusive borrows of the same data canno
 
 ```rust
 fn main() {
-    let mut name = String::from("Ada");
+    let mut name = String::from("Homer");
     let reader = &name;
     println!("Before: {}", reader); // Last use of reader
 
@@ -571,10 +644,10 @@ fn main() {
 
 **Try:** Add `println!("{}", reader);` at the end. Will it still compile?
 
-[Try this example in Rust Playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2024&code=fn+main%28%29+%7B%0A++++let+mut+name+%3D+String%3A%3Afrom%28%22Ada%22%29%3B%0A++++let+reader+%3D+%26name%3B%0A++++println%21%28%22Before%3A+%7B%7D%22%2C+reader%29%3B+%2F%2F+Last+use+of+reader%0A%0A++++let+editor+%3D+%26mut+name%3B%0A++++editor.push_str%28%22%21%22%29%3B%0A++++println%21%28%22After%3A+%7B%7D%22%2C+name%29%3B%0A%7D%0A)
+[Try this example in Rust Playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2024&code=fn+main%28%29+%7B%0A++++let+mut+name+%3D+String%3A%3Afrom%28%22Homer%22%29%3B%0A++++let+reader+%3D+%26name%3B%0A++++println%21%28%22Before%3A+%7B%7D%22%2C+reader%29%3B+%2F%2F+Last+use+of+reader%0A%0A++++let+editor+%3D+%26mut+name%3B%0A++++editor.push_str%28%22%21%22%29%3B%0A++++println%21%28%22After%3A+%7B%7D%22%2C+name%29%3B%0A%7D%0A)
 
 ::: {.notes}
-Output: Before: Ada, then After: Ada!. The read finishes before the mutable borrow begins. Adding the suggested final print makes the example fail with E0502: reader would now be used after the edit, extending the shared borrow across the mutable borrow. Run both versions. This behavior is often called non-lexical lifetimes; students do not need the term to use the rule. Ending a borrow does not drop the owned String. name still owns its String until the end of main.
+Output: Before: Homer, then After: Homer!. The read finishes before the mutable borrow begins. Adding the suggested final print makes the example fail with E0502: reader would now be used after the edit, extending the shared borrow across the mutable borrow. Run both versions. This behavior is often called non-lexical lifetimes; students do not need the term to use the rule. Ending a borrow does not drop the owned String. name still owns its String until the end of main.
 :::
 
 ---
@@ -587,7 +660,7 @@ Output: Before: Ada, then After: Ada!. The read finishes before the mutable borr
 fn main() {
     let reader;
     {
-        let name = String::from("Ada");
+        let name = String::from("Homer");
         reader = &name;
     } // name's String is dropped here
 
@@ -599,7 +672,7 @@ fn main() {
 error[E0597]: `name` does not live long enough
 ```
 
-[Try this example in Rust Playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2024&code=fn+main%28%29+%7B%0A++++let+reader%3B%0A++++%7B%0A++++++++let+name+%3D+String%3A%3Afrom%28%22Ada%22%29%3B%0A++++++++reader+%3D+%26name%3B%0A++++%7D+%2F%2F+name%27s+String+is+dropped+here%0A%0A++++println%21%28%22%7B%7D%22%2C+reader%29%3B+%2F%2F+Too+late+to+read+that+String%0A%7D%0A)
+[Try this example in Rust Playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2024&code=fn+main%28%29+%7B%0A++++let+reader%3B%0A++++%7B%0A++++++++let+name+%3D+String%3A%3Afrom%28%22Homer%22%29%3B%0A++++++++reader+%3D+%26name%3B%0A++++%7D+%2F%2F+name%27s+String+is+dropped+here%0A%0A++++println%21%28%22%7B%7D%22%2C+reader%29%3B+%2F%2F+Too+late+to+read+that+String%0A%7D%0A)
 
 ::: {.notes}
 Explain let reader; as declaring a variable that will be assigned before use, not creating a null reference. Ask students to identify the owner, the reference, and the closing brace where the String is dropped. The reference would point to data that no longer exists, a dangling reference, so Rust rejects the program before it runs. This is the second borrowing rule. We do not need any named lifetime syntax to understand the error.
@@ -611,7 +684,7 @@ Explain let reader; as declaring a variable that will be assigned before use, no
 
 ```rust
 fn main() {
-    let name = String::from("Ada");
+    let name = String::from("Homer");
     let reader;
     {
         reader = &name;
@@ -623,10 +696,10 @@ fn main() {
 
 **Explain:** What moved in the source code? Did ownership transfer?
 
-[Try this example in Rust Playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2024&code=fn+main%28%29+%7B%0A++++let+name+%3D+String%3A%3Afrom%28%22Ada%22%29%3B%0A++++let+reader%3B%0A++++%7B%0A++++++++reader+%3D+%26name%3B%0A++++%7D%0A%0A++++println%21%28%22%7B%7D%22%2C+reader%29%3B%0A%7D+%2F%2F+name%27s+String+is+dropped+here%0A)
+[Try this example in Rust Playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2024&code=fn+main%28%29+%7B%0A++++let+name+%3D+String%3A%3Afrom%28%22Homer%22%29%3B%0A++++let+reader%3B%0A++++%7B%0A++++++++reader+%3D+%26name%3B%0A++++%7D%0A%0A++++println%21%28%22%7B%7D%22%2C+reader%29%3B%0A%7D+%2F%2F+name%27s+String+is+dropped+here%0A)
 
 ::: {.notes}
-Answer: we moved the declaration of name outside the inner block; we did not perform a Rust ownership move. Output: Ada. name stays alive through the final read and remains the owner. The braces remain to make the minimal edit visible. The lifetime of a reference is the region where it must be valid; it cannot require access after the borrowed data is gone. This is enough lifetime reasoning for the required lesson and Lab 10's scope puzzle.
+Answer: we moved the declaration of name outside the inner block; we did not perform a Rust ownership move. Output: Homer. name stays alive through the final read and remains the owner. The braces remain to make the minimal edit visible. The lifetime of a reference is the region where it must be valid; it cannot require access after the borrowed data is gone. This is enough lifetime reasoning for the required lesson and Lab 10's scope puzzle.
 :::
 
 ---
@@ -635,7 +708,7 @@ Answer: we moved the declaration of name outside the inner block; we did not per
 
 ```rust
 fn make_name() -> String {
-    String::from("Ada")
+    String::from("Homer")
 }
 
 fn main() {
@@ -647,10 +720,10 @@ fn main() {
 - The function creates text and transfers ownership to its caller.
 - Returning a reference to a local `String` would leave no owner to keep it alive.
 
-[Try this example in Rust Playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2024&code=fn+make_name%28%29+-%3E+String+%7B%0A++++String%3A%3Afrom%28%22Ada%22%29%0A%7D%0A%0Afn+main%28%29+%7B%0A++++let+name+%3D+make_name%28%29%3B%0A++++println%21%28%22%7B%7D%22%2C+name%29%3B%0A%7D%0A)
+[Try this example in Rust Playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2024&code=fn+make_name%28%29+-%3E+String+%7B%0A++++String%3A%3Afrom%28%22Homer%22%29%0A%7D%0A%0Afn+main%28%29+%7B%0A++++let+name+%3D+make_name%28%29%3B%0A++++println%21%28%22%7B%7D%22%2C+name%29%3B%0A%7D%0A)
 
 ::: {.notes}
-Answer: this prints Ada and is the shorter form of session 1's owned return example. The caller owns the returned String; it stays valid after the function returns. Explain the alternative in words rather than adding several new errors to one slide. A function can return a reference borrowed from caller-owned data; it cannot return a reference into its own local String that is dropped on return. Adding a lifetime annotation would not keep a local value alive.
+Answer: this prints Homer and is the shorter form of session 1's owned return example. The caller owns the returned String; it stays valid after the function returns. Explain the alternative in words rather than adding several new errors to one slide. A function can return a reference borrowed from caller-owned data; it cannot return a reference into its own local String that is dropped on return. Adding a lifetime annotation would not keep a local value alive.
 :::
 
 ---
@@ -659,9 +732,9 @@ Answer: this prints Ada and is the shorter form of session 1's owned return exam
 
 ```rust
 fn main() {
-    let name = String::from("Ada");
+    let name = String::from("Homer");
     let borrowed_text: &str = name.as_str();
-    let literal: &str = "Hello";
+    let literal: &str = "Woo-hoo!";
 
     println!("{}: {}", literal, borrowed_text);
 }
@@ -671,10 +744,10 @@ fn main() {
 - `&str`: a shared view of text, called a **string slice**.
 - `.as_str()` borrows the text in a `String`; it does not copy it.
 
-[Try this example in Rust Playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2024&code=fn+main%28%29+%7B%0A++++let+name+%3D+String%3A%3Afrom%28%22Ada%22%29%3B%0A++++let+borrowed_text%3A+%26str+%3D+name.as_str%28%29%3B%0A++++let+literal%3A+%26str+%3D+%22Hello%22%3B%0A%0A++++println%21%28%22%7B%7D%3A+%7B%7D%22%2C+literal%2C+borrowed_text%29%3B%0A%7D%0A)
+[Try this example in Rust Playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2024&code=fn+main%28%29+%7B%0A++++let+name+%3D+String%3A%3Afrom%28%22Homer%22%29%3B%0A++++let+borrowed_text%3A+%26str+%3D+name.as_str%28%29%3B%0A++++let+literal%3A+%26str+%3D+%22Woo-hoo%21%22%3B%0A%0A++++println%21%28%22%7B%7D%3A+%7B%7D%22%2C+literal%2C+borrowed_text%29%3B%0A%7D%0A)
 
 ::: {.notes}
-Output: Hello: Ada. A slice can view all or part of some text; we use the whole text here and avoid introducing slicing indexes. The string literal has type &str and refers to text stored in the program, rather than to a local owned String. Neither borrowed_text nor literal owns a String buffer. We introduced String::from at the start; now students can distinguish its input literal from the owned String it creates. The explicit &str annotations are for teaching; Rust can infer these types.
+Output: Woo-hoo!: Homer. A slice can view all or part of some text; we use the whole text here and avoid introducing slicing indexes. The string literal has type &str and refers to text stored in the program, rather than to a local owned String. Neither borrowed_text nor literal owns a String buffer. We introduced String::from at the start; now students can distinguish its input literal from the owned String it creates. The explicit &str annotations are for teaching; Rust can infer these types.
 :::
 
 ---
@@ -687,19 +760,19 @@ fn show_size(text: &str) {
 }
 
 fn main() {
-    let name = String::from("Ada");
+    let name = String::from("Homer");
     show_size(name.as_str());
-    show_size("Hello");
+    show_size("Woo-hoo!");
     println!("Still owned here: {}", name);
 }
 ```
 
 **Predict:** Can the caller still use `name`?
 
-[Try this example in Rust Playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2024&code=fn+show_size%28text%3A+%26str%29+%7B%0A++++println%21%28%22%7B%7D+bytes%22%2C+text.len%28%29%29%3B%0A%7D%0A%0Afn+main%28%29+%7B%0A++++let+name+%3D+String%3A%3Afrom%28%22Ada%22%29%3B%0A++++show_size%28name.as_str%28%29%29%3B%0A++++show_size%28%22Hello%22%29%3B%0A++++println%21%28%22Still+owned+here%3A+%7B%7D%22%2C+name%29%3B%0A%7D%0A)
+[Try this example in Rust Playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2024&code=fn+show_size%28text%3A+%26str%29+%7B%0A++++println%21%28%22%7B%7D+bytes%22%2C+text.len%28%29%29%3B%0A%7D%0A%0Afn+main%28%29+%7B%0A++++let+name+%3D+String%3A%3Afrom%28%22Homer%22%29%3B%0A++++show_size%28name.as_str%28%29%29%3B%0A++++show_size%28%22Woo-hoo%21%22%29%3B%0A++++println%21%28%22Still+owned+here%3A+%7B%7D%22%2C+name%29%3B%0A%7D%0A)
 
 ::: {.notes}
-Answer: yes. Output: 3 bytes, then 5 bytes, then Still owned here: Ada. String and str len count UTF-8 bytes, not necessarily characters; these ASCII examples have one byte per character. Read-only text functions usually prefer &str to &String because &str works with both String text and literals. Rust also converts &name to &str automatically when the function expects &str; demonstrate changing name.as_str() to &name after students understand the explicit version. Keep Lab 10's supplied &String signature unchanged: it is deliberate borrowing practice. This example displays a size instead of implementing the graded string_length function.
+Answer: yes. Output: 5 bytes, then 8 bytes, then Still owned here: Homer. String and str len count UTF-8 bytes, not necessarily characters; these ASCII examples have one byte per character. Read-only text functions usually prefer &str to &String because &str works with both String text and literals. Rust also converts &name to &str automatically when the function expects &str; demonstrate changing name.as_str() to &name after students understand the explicit version. Keep Lab 10's supplied &String signature unchanged: it is deliberate borrowing practice. This example displays a size instead of implementing the graded string_length function.
 :::
 
 ---
@@ -710,7 +783,7 @@ Answer: yes. Output: 3 bytes, then 5 bytes, then Still owned here: Ada. String a
 |---|---|---|
 | Own the text | `String` | `name` |
 | Read an existing `String` | `&String` | `&name` |
-| Read text from different sources | `&str` | `name.as_str()` or `"Ada"` |
+| Read text from different sources | `&str` | `name.as_str()` or `"Homer"` |
 | Change the caller's `String` | `&mut String` | `&mut name` |
 
 **Ask first:** Do I need to own, read, or change this value?
@@ -731,7 +804,7 @@ fn add_exclamation(guest: &String) {
 }
 
 fn main() {
-    let name = String::from("Ada");
+    let name = String::from("Homer");
     add_exclamation(&name);
     println!("{}", name);
 }
@@ -739,10 +812,10 @@ fn main() {
 
 **Repair:** Change the original string through a borrow. Explain each edit.
 
-[Try this example in Rust Playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2024&code=fn+add_exclamation%28guest%3A+%26String%29+%7B%0A++++guest.push_str%28%22%21%22%29%3B%0A%7D%0A%0Afn+main%28%29+%7B%0A++++let+name+%3D+String%3A%3Afrom%28%22Ada%22%29%3B%0A++++add_exclamation%28%26name%29%3B%0A++++println%21%28%22%7B%7D%22%2C+name%29%3B%0A%7D%0A)
+[Try this example in Rust Playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2024&code=fn+add_exclamation%28guest%3A+%26String%29+%7B%0A++++guest.push_str%28%22%21%22%29%3B%0A%7D%0A%0Afn+main%28%29+%7B%0A++++let+name+%3D+String%3A%3Afrom%28%22Homer%22%29%3B%0A++++add_exclamation%28%26name%29%3B%0A++++println%21%28%22%7B%7D%22%2C+name%29%3B%0A%7D%0A)
 
 ::: {.notes}
-Give students 2–3 minutes. Expected initial diagnostic: E0596, cannot borrow through a shared reference as mutable. Three edits: parameter guest: &mut String, binding let mut name, and argument &mut name. Output after repair: Ada!. This recreates the earlier working example for retrieval practice. Ask students why making only the binding mutable is insufficient: the function's parameter still permits only shared access. Do not solve this by cloning: the goal is to update the original String.
+Give students 2–3 minutes. Expected initial diagnostic: E0596, cannot borrow through a shared reference as mutable. Three edits: parameter guest: &mut String, binding let mut name, and argument &mut name. Output after repair: Homer!. This recreates the earlier working example for retrieval practice. Ask students why making only the binding mutable is insufficient: the function's parameter still permits only shared access. Do not solve this by cloning: the goal is to update the original String.
 :::
 
 ---
@@ -870,13 +943,13 @@ fn longest(first: &str, second: &str) -> &str {
 }
 
 fn main() {
-    println!("{}", longest("Ada", "Grace"));
+    println!("{}", longest("Bart", "Homer"));
 }
 ```
 
 **E0106:** The signature needs to relate the returned reference to its inputs.
 
-[Try this example in Rust Playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2024&code=fn+longest%28first%3A+%26str%2C+second%3A+%26str%29+-%3E+%26str+%7B%0A++++if+first.len%28%29+%3E%3D+second.len%28%29+%7B%0A++++++++first%0A++++%7D+else+%7B%0A++++++++second%0A++++%7D%0A%7D%0A%0Afn+main%28%29+%7B%0A++++println%21%28%22%7B%7D%22%2C+longest%28%22Ada%22%2C+%22Grace%22%29%29%3B%0A%7D%0A)
+[Try this example in Rust Playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2024&code=fn+longest%28first%3A+%26str%2C+second%3A+%26str%29+-%3E+%26str+%7B%0A++++if+first.len%28%29+%3E%3D+second.len%28%29+%7B%0A++++++++first%0A++++%7D+else+%7B%0A++++++++second%0A++++%7D%0A%7D%0A%0Afn+main%28%29+%7B%0A++++println%21%28%22%7B%7D%22%2C+longest%28%22Bart%22%2C+%22Homer%22%29%29%3B%0A%7D%0A)
 
 ::: {.notes}
 Both inputs are borrowed text, and the function returns one of them without making an owned String. Depending on the inputs, either branch may run. Rust requires the relationship in the signature so callers can be checked against that contract. It does not infer this relationship from the function body. Even using two string literals at this call site does not remove the requirement from the function definition. We compare byte lengths; ASCII makes that match our intuition about these names.
@@ -896,7 +969,7 @@ fn longest<'a>(first: &'a str, second: &'a str) -> &'a str {
 }
 
 fn main() {
-    println!("{}", longest("Ada", "Grace"));
+    println!("{}", longest("Bart", "Homer"));
 }
 ```
 
@@ -904,10 +977,10 @@ fn main() {
 
 **Annotations describe a relationship; they do not keep data alive.**
 
-[Try this example in Rust Playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2024&code=fn+longest%3C%27a%3E%28first%3A+%26%27a+str%2C+second%3A+%26%27a+str%29+-%3E+%26%27a+str+%7B%0A++++if+first.len%28%29+%3E%3D+second.len%28%29+%7B%0A++++++++first%0A++++%7D+else+%7B%0A++++++++second%0A++++%7D%0A%7D%0A%0Afn+main%28%29+%7B%0A++++println%21%28%22%7B%7D%22%2C+longest%28%22Ada%22%2C+%22Grace%22%29%29%3B%0A%7D%0A)
+[Try this example in Rust Playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2024&code=fn+longest%3C%27a%3E%28first%3A+%26%27a+str%2C+second%3A+%26%27a+str%29+-%3E+%26%27a+str+%7B%0A++++if+first.len%28%29+%3E%3D+second.len%28%29+%7B%0A++++++++first%0A++++%7D+else+%7B%0A++++++++second%0A++++%7D%0A%7D%0A%0Afn+main%28%29+%7B%0A++++println%21%28%22%7B%7D%22%2C+longest%28%22Bart%22%2C+%22Homer%22%29%29%3B%0A%7D%0A)
 
 ::: {.notes}
-Output: Grace. Read apostrophe-a as a lifetime label declared after the function name. It is not the single-quoted char 'a'. Both input references must be valid for the selected lifetime, and the output reference is usable for that lifetime. The original values need not have identical lifetimes; callers are limited to their common valid region, often described as the shorter input lifetime. The annotation does not extend either value's life, create a String, or choose the returned input. The if expression still chooses the input at runtime.
+Output: Homer. Read apostrophe-a as a lifetime label declared after the function name. It is not the single-quoted char 'a'. Both input references must be valid for the selected lifetime, and the output reference is usable for that lifetime. The original values need not have identical lifetimes; callers are limited to their common valid region, often described as the shorter input lifetime. The annotation does not extend either value's life, create a String, or choose the returned input. The if expression still chooses the input at runtime.
 :::
 
 ---
@@ -922,10 +995,10 @@ fn longest<'a>(first: &'a str, second: &'a str) -> &'a str {
 }
 
 fn main() {
-    let name = String::from("Ada");
+    let name = String::from("Bart");
     let result;
     {
-        let other = String::from("Grace");
+        let other = String::from("Homer");
         result = longest(name.as_str(), other.as_str());
     } // other is dropped here
     println!("{}", result);
@@ -934,8 +1007,8 @@ fn main() {
 
 **Try:** Move the print inside the inner block. Why does that work?
 
-[Try this example in Rust Playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2024&code=fn+longest%3C%27a%3E%28first%3A+%26%27a+str%2C+second%3A+%26%27a+str%29+-%3E+%26%27a+str+%7B%0A++++if+first.len%28%29+%3E%3D+second.len%28%29+%7B+first+%7D+else+%7B+second+%7D%0A%7D%0A%0Afn+main%28%29+%7B%0A++++let+name+%3D+String%3A%3Afrom%28%22Ada%22%29%3B%0A++++let+result%3B%0A++++%7B%0A++++++++let+other+%3D+String%3A%3Afrom%28%22Grace%22%29%3B%0A++++++++result+%3D+longest%28name.as_str%28%29%2C+other.as_str%28%29%29%3B%0A++++%7D+%2F%2F+other+is+dropped+here%0A++++println%21%28%22%7B%7D%22%2C+result%29%3B%0A%7D%0A)
+[Try this example in Rust Playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2024&code=fn+longest%3C%27a%3E%28first%3A+%26%27a+str%2C+second%3A+%26%27a+str%29+-%3E+%26%27a+str+%7B%0A++++if+first.len%28%29+%3E%3D+second.len%28%29+%7B+first+%7D+else+%7B+second+%7D%0A%7D%0A%0Afn+main%28%29+%7B%0A++++let+name+%3D+String%3A%3Afrom%28%22Bart%22%29%3B%0A++++let+result%3B%0A++++%7B%0A++++++++let+other+%3D+String%3A%3Afrom%28%22Homer%22%29%3B%0A++++++++result+%3D+longest%28name.as_str%28%29%2C+other.as_str%28%29%29%3B%0A++++%7D+%2F%2F+other+is+dropped+here%0A++++println%21%28%22%7B%7D%22%2C+result%29%3B%0A%7D%0A)
 
 ::: {.notes}
-Expected diagnostic: E0597, other does not live long enough. Move println! into the inner block, immediately after the call; the revised program prints Grace because both inputs remain valid during the read. The signature permits the result to borrow either input, so the caller must allow for both. Changing Ada to a longer name would not make the original code compile: callers use the function's declared relationship rather than relying on a particular runtime branch. Emphasize the same concrete rule as before: borrowed data must still exist when the reference is used. Named lifetime annotations describe that rule across the function boundary.
+Expected diagnostic: E0597, other does not live long enough. Move println! into the inner block, immediately after the call; the revised program prints Homer because both inputs remain valid during the read. The signature permits the result to borrow either input, so the caller must allow for both. Changing Bart to a longer name would not make the original code compile: callers use the function's declared relationship rather than relying on a particular runtime branch. Emphasize the same concrete rule as before: borrowed data must still exist when the reference is used. Named lifetime annotations describe that rule across the function boundary.
 :::
