@@ -921,6 +921,9 @@ Brandon M. Greenwell
 </tbody>
 </table>
 <p><strong>Predict:</strong> What prints? Which variable owns the changed text?</p>
+<div class="fragment">
+<p><strong>Why:</strong> <code>guest</code> points at <code>main</code>’s <code>String</code>; it has no text of its own. Changing through <code>guest</code> changes <code>name</code>.</p>
+</div>
 <p><a href="https://play.rust-lang.org/?version=stable&amp;mode=debug&amp;edition=2024&amp;code=fn+add_surname%28guest%3A+%26mut+String%29+%7B%0A++++guest.push_str%28%22+Simpson%22%29%3B%0A%7D%0A%0Afn+main%28%29+%7B%0A++++let+mut+name+%3D+String%3A%3Afrom%28%22Homer%22%29%3B%0A++++add_surname%28%26mut+name%29%3B%0A++++println%21%28%22%7B%7D%22%2C+name%29%3B%0A%7D%0A">Try this example in Rust Playground</a></p>
 <aside class="notes">
 <p>Answer: Homer Simpson; name remains the owner. Walk through the table: all three mut keywords are needed. You cannot hand out a changing reference to something the owner did not declare changeable. Remove one mut at a time, read the compiler feedback, then restore it. The function changes the original String through the reference. It does not create a second text buffer or take ownership. The push_str method may allocate if the existing buffer needs more capacity.</p>
