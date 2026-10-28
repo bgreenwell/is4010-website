@@ -221,6 +221,8 @@ The compiler identifies:
 error[E0382]: borrow of moved value: `name`
 ```
 
+Why "borrow"? `println!` *borrows* a value to display it. Session 2 explains borrowing.
+
 **Smallest fix:** Remove the final use of `name`; `guest` already owns the text.
 
 ::: {.notes}
@@ -402,18 +404,18 @@ Use this as the session 1 stopping point. Ask students to explain “move” in 
 
 ---
 
-## Session 2: borrowing a value
+## Session 2: using a value without owning it
 
-A **reference** lets us use a value owned elsewhere.
+In session 1, passing `name` to `welcome` moved it. `main` lost the text.
 
-Creating a reference is called **borrowing**.
+- Can a function **use** `name` without **taking** it?
+- Can a function change `name` while `main` stays the owner?
+- What stops two parts of a program from getting in each other's way?
 
-- `&name`: borrow for reading.
-- `&mut name`: borrow for changing.
-- Neither transfers ownership of the `String`.
+**Our routine:** Predict → run → explain.
 
 ::: {.notes}
-Briefly revisit welcome(name) from session 1. Ask why it is inconvenient if main wants to print the name afterward. Borrowing solves this without making an independent copy of the text. These are checked references: the compiler verifies that the borrowed data remains valid and that conflicting uses do not overlap. We will introduce the call-site and parameter syntax together.
+Briefly revisit welcome(name) from session 1. Ask why it is inconvenient if main wants to print the name afterward. Do not introduce any new syntax yet; the next slide shows the failure, and the slide after it introduces references with a picture before any code uses them.
 :::
 
 ---
@@ -439,7 +441,42 @@ fn main() {
 [Try this example in Rust Playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2024&code=fn+welcome%28guest%3A+String%29+%7B%0A++++println%21%28%22Welcome%2C+%7B%7D%21%22%2C+guest%29%3B%0A%7D%0A%0Afn+main%28%29+%7B%0A++++let+name+%3D+String%3A%3Afrom%28%22Homer%22%29%3B%0A++++welcome%28name%29%3B%0A++++println%21%28%22See+you+soon%2C+%7B%7D%21%22%2C+name%29%3B%0A%7D%0A)
 
 ::: {.notes}
-Answer: no. The function only reads the text, but its String parameter takes ownership. The diagnostic is E0382 at the later print. Ask students to identify the intended behavior before choosing a fix. Cloning would make a second String, but we do not need independent text here. Next, change both the parameter type and the argument to use a reference.
+Answer: no. The function only reads the text, but its String parameter takes ownership. The diagnostic is E0382 at the later print. Ask students to identify the intended behavior before choosing a fix. Cloning would make a second String, but we do not need independent text here. What we want instead is a way to point at main's String without taking it. That is a reference.
+:::
+
+---
+
+## A reference points to a value someone else owns
+
+```text
+guest ──→ name: [pointer, length, capacity] ──→ [ Homer ]
+(reference)     (owner, lives in main)            heap
+```
+
+- A **reference** lets code use a value without owning it.
+- Making a reference is called **borrowing**.
+- In Rust, the `&` symbol (an ampersand) means "a reference to."
+- The owner keeps ownership and still handles cleanup. Nothing is copied.
+
+::: {.notes}
+Connect this to the String diagram from session 1. The reference is just another arrow: it records where the owner's String is. Library analogy: borrowing a book means you can read it, but it is still checked out to its owner, and you have to give it back before the owner leaves. These are checked references: the compiler verifies that the borrowed data remains valid and that conflicting uses do not overlap. Students do not need to know how a reference is represented in memory beyond "it points at the owner's value."
+:::
+
+---
+
+## `&` shows up in two places
+
+| Code | Where it appears | Read it as |
+|---|---|---|
+| `guest: String` | Parameter type | This parameter takes ownership of a `String` |
+| `guest: &String` | Parameter type | This parameter accepts a reference to a `String` |
+| `welcome(name)` | Function call | Pass the owned value; it moves |
+| `welcome(&name)` | Function call | Make a reference to `name` and pass that |
+
+**In a type, `&` describes what is expected. In an expression, `&` creates the reference.**
+
+::: {.notes}
+The first and third rows describe the original owned version of welcome; the second and fourth describe the borrowed version. Ask students which of these appears in a function definition and which appears at a call site. The next slide applies both rows to the failing example. Method calls such as guest.len() can use references directly; no manual dereferencing is needed in today's String examples.
 :::
 
 ---
@@ -458,34 +495,21 @@ fn main() {
 }
 ```
 
+Only two changes from the failing version: `&String` in the parameter and `&name` in the call.
+
 **Predict:** Why can `main` still use `name`?
 
 [Try this example in Rust Playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2024&code=fn+welcome%28guest%3A+%26String%29+%7B%0A++++println%21%28%22Welcome%2C+%7B%7D%21%22%2C+guest%29%3B%0A%7D%0A%0Afn+main%28%29+%7B%0A++++let+name+%3D+String%3A%3Afrom%28%22Homer%22%29%3B%0A++++welcome%28%26name%29%3B%0A++++println%21%28%22See+you+soon%2C+%7B%7D%21%22%2C+name%29%3B%0A%7D%0A)
 
 ::: {.notes}
-Answer: name remains the owner; welcome borrows the String. Output: Welcome, Homer! followed by See you soon, Homer!. Point out the only two changes from the previous slide: &String in the parameter and &name in the call. The borrowed String is not dropped when welcome returns, because the function never owned it. Use &String here to match Lab 10's string_length signature. Later in this session, explain why &str is a more flexible read-only text parameter; Clippy may recommend it for this example.
-:::
-
----
-
-## Read the two ampersands
-
-| Code | Read it as |
-|---|---|
-| `guest: String` | This parameter takes ownership of a `String` |
-| `guest: &String` | This parameter borrows a `String` for reading |
-| `welcome(name)` | Pass the owned value; it moves |
-| `welcome(&name)` | Create a reference and pass that reference |
-
-**A borrow does not copy the text.** The owner still handles cleanup.
-
-::: {.notes}
-The first and third rows describe the original owned version of welcome; the second and fourth describe the borrowed version. An ampersand in a type describes the expected reference; an ampersand in an expression creates a reference. Ask students which of these appears in a function definition and which appears at a call site. Method calls such as guest.len() can use references directly; no manual dereferencing is needed in today's String examples.
+Answer: name remains the owner; welcome borrows the String. Output: Welcome, Homer! followed by See you soon, Homer!. The borrowed String is not dropped when welcome returns, because the function never owned it. Use &String here to match Lab 10's string_length signature. Later in this session, explain why &str is a more flexible read-only text parameter; Clippy may recommend it for this example.
 :::
 
 ---
 
 ## Borrow to change the string
+
+A plain `&` reference can only read. **`&mut` is a reference that is allowed to change the value.**
 
 ```rust
 fn add_surname(guest: &mut String) {
@@ -499,12 +523,18 @@ fn main() {
 }
 ```
 
+| Code | Meaning |
+|---|---|
+| `let mut name` | The owner allows its `String` to change (Week 09) |
+| `&mut name` | Make a reference that can change `name` |
+| `guest: &mut String` | This parameter accepts a changing reference |
+
 **Predict:** What prints? Which variable owns the changed text?
 
 [Try this example in Rust Playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2024&code=fn+add_surname%28guest%3A+%26mut+String%29+%7B%0A++++guest.push_str%28%22+Simpson%22%29%3B%0A%7D%0A%0Afn+main%28%29+%7B%0A++++let+mut+name+%3D+String%3A%3Afrom%28%22Homer%22%29%3B%0A++++add_surname%28%26mut+name%29%3B%0A++++println%21%28%22%7B%7D%22%2C+name%29%3B%0A%7D%0A)
 
 ::: {.notes}
-Answer: Homer Simpson; name remains the owner. Trace all three appearances of mut: let mut permits the owned String to change, &mut name creates an exclusive mutable borrow, and &mut String says what access the function accepts. Remove one mut at a time, read the compiler feedback, then restore it. The function changes the original String through the reference. It does not create a second text buffer or take ownership. The push_str method may allocate if the existing buffer needs more capacity.
+Answer: Homer Simpson; name remains the owner. Walk through the table: all three mut keywords are needed. You cannot hand out a changing reference to something the owner did not declare changeable. Remove one mut at a time, read the compiler feedback, then restore it. The function changes the original String through the reference. It does not create a second text buffer or take ownership. The push_str method may allocate if the existing buffer needs more capacity.
 :::
 
 ---
@@ -513,13 +543,17 @@ Answer: Homer Simpson; name remains the owner. Trace all three appearances of mu
 
 For the **same data**, while borrows are in use:
 
-1. Allow multiple shared references (`&T`) **or** one exclusive mutable reference (`&mut T`).
+1. Allow many shared references (`&String`) **or** one exclusive reference (`&mut String`), never both.
 2. The borrowed value must remain valid for every use of its references.
 
 **Reading can be shared. Changing needs exclusive access.**
 
+- Think of a shared document: many people can read it, one person can edit it, and nobody reads while an edit is in progress.
+- Compiler messages say **immutable** for shared references and **mutable** for exclusive ones.
+- The same rules apply to references to any type, not only `String`.
+
 ::: {.notes}
-T stands for the referenced type, such as String. Use “shared” alongside the familiar word “immutable,” and “exclusive” alongside “mutable.” These rules apply to overlapping uses of the same data, not to every variable in the program. Separate values can be mutably borrowed independently. Rust can also recognize disjoint parts of some values, but that is beyond this lesson. Interior-mutability types have additional mechanisms and are also outside this week's model. Motivate the rules with valid references and controlled mutation in single-threaded code; threading is not needed to understand them.
+These rules apply to overlapping uses of the same data, not to every variable in the program. Separate values can be mutably borrowed independently. Rust can also recognize disjoint parts of some values, but that is beyond this lesson. Interior-mutability types have additional mechanisms and are also outside this week's model. Motivate the rules with valid references and controlled mutation in single-threaded code; threading is not needed to understand them.
 :::
 
 ---
@@ -652,13 +686,44 @@ Output: Before: Homer, then After: Homer Simpson. The read finishes before the m
 
 ---
 
+## Declare now, assign later
+
+So far every `let` gave the variable a value right away. You can also split that into two steps:
+
+```rust
+fn main() {
+    let total; // Declare total now
+    {
+        let score = 5;
+        total = score * 2; // Give total its value
+    }
+
+    println!("{}", total);
+}
+```
+
+- `let total;` creates the variable but gives it no value yet.
+- Rust works out the type from the later assignment, here an integer.
+- Reading `total` before it has a value is a compile error.
+- Without `mut`, the value can be assigned only once.
+
+**Why do this?** `total` is declared outside the braces, so it is still available after them. This prints `10`.
+
+[Try this example in Rust Playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2024&code=fn+main%28%29+%7B%0A++++let+total%3B+%2F%2F+Declare+total+now%0A++++%7B%0A++++++++let+score+%3D+5%3B%0A++++++++total+%3D+score+%2A+2%3B+%2F%2F+Give+total+its+value%0A++++%7D%0A%0A++++println%21%28%22%7B%7D%22%2C+total%29%3B%0A%7D%0A)
+
+::: {.notes}
+This is new syntax; Week 09 only showed let with a value. Keep the example free of borrowing so the let form is the only new idea. Optional demos: move the println! above the inner block to see E0381 (used binding isn't initialized), or add a second assignment to see E0384 (cannot assign twice to immutable variable). It works here because total holds its own integer, copied out of the block. The next slide uses the same shape with a reference instead, and that changes the answer. Python has no equivalent, since a Python name only exists once it is assigned.
+:::
+
+---
+
 ## Borrowed data must still exist
 
 **This example intentionally fails to compile.**
 
 ```rust
 fn main() {
-    let reader;
+    let reader; // Declared now, given a value below
     {
         let name = String::from("Homer");
         reader = &name;
@@ -668,14 +733,16 @@ fn main() {
 }
 ```
 
+Same shape as the last slide, but `reader` holds a **reference** to `name`, not its own value.
+
 ```text
 error[E0597]: `name` does not live long enough
 ```
 
-[Try this example in Rust Playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2024&code=fn+main%28%29+%7B%0A++++let+reader%3B%0A++++%7B%0A++++++++let+name+%3D+String%3A%3Afrom%28%22Homer%22%29%3B%0A++++++++reader+%3D+%26name%3B%0A++++%7D+%2F%2F+name%27s+String+is+dropped+here%0A%0A++++println%21%28%22%7B%7D%22%2C+reader%29%3B+%2F%2F+Too+late+to+read+that+String%0A%7D%0A)
+[Try this example in Rust Playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2024&code=fn+main%28%29+%7B%0A++++let+reader%3B+%2F%2F+Declared+now%2C+given+a+value+below%0A++++%7B%0A++++++++let+name+%3D+String%3A%3Afrom%28%22Homer%22%29%3B%0A++++++++reader+%3D+%26name%3B%0A++++%7D+%2F%2F+name%27s+String+is+dropped+here%0A%0A++++println%21%28%22%7B%7D%22%2C+reader%29%3B+%2F%2F+Too+late+to+read+that+String%0A%7D%0A)
 
 ::: {.notes}
-Explain let reader; as declaring a variable that will be assigned before use, not creating a null reference. Ask students to identify the owner, the reference, and the closing brace where the String is dropped. The reference would point to data that no longer exists, a dangling reference, so Rust rejects the program before it runs. This is the second borrowing rule. We do not need any named lifetime syntax to understand the error.
+Stress that let reader; does not create a null reference. Ask students to identify the owner, the reference, and the closing brace where the String is dropped. The reference would point to data that no longer exists, a dangling reference, so Rust rejects the program before it runs. This is the second borrowing rule. We do not need any named lifetime syntax to understand the error.
 :::
 
 ---
@@ -742,6 +809,7 @@ fn main() {
 
 - `String`: owned text that can grow.
 - `&str`: a shared view of text, called a **string slice**.
+- `str` is the text itself. You always reach it through a reference, so you will see it written `&str`.
 - `.as_str()` borrows the text in a `String`; it does not copy it.
 
 [Try this example in Rust Playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2024&code=fn+main%28%29+%7B%0A++++let+name+%3D+String%3A%3Afrom%28%22Homer%22%29%3B%0A++++let+borrowed_text%3A+%26str+%3D+name.as_str%28%29%3B%0A++++let+literal%3A+%26str+%3D+%22Simpson%22%3B%0A%0A++++println%21%28%22%7B%7D+%7B%7D%22%2C+borrowed_text%2C+literal%29%3B%0A%7D%0A)
@@ -972,6 +1040,8 @@ fn main() {
     println!("{}", longest("Homer", "Simpson"));
 }
 ```
+
+`<'a>` after the function name declares the label, much like declaring a variable before using it.
 
 `'a` ties the result's allowed use to a period when **both inputs are valid**.
 
