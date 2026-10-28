@@ -886,6 +886,34 @@ Have students select a type for each situation: a function that stores an owned 
 
 ---
 
+## Borrow or clone?
+
+```rust
+let name = String::from("Homer");
+let reader = &name;       // Points at name's text
+let copy = name.clone();  // Makes new text
+```
+
+```text
+reader ──→ name: [pointer, length, capacity] ──→ [ Homer ]
+copy:          [pointer, length, capacity] ──→ [ Homer ]
+```
+
+| | `&name` | `name.clone()` |
+|---|---|---|
+| Creates new text? | No | Yes, a full copy |
+| Who owns it? | `name` | `copy` owns its own |
+| Usable after `name` is dropped? | No | Yes |
+| Cost | Nearly free | Grows with the text's length |
+
+**Borrow by default. Clone when you truly need independent text.**
+
+::: {.notes}
+Both let main keep using name, which is why students confuse them. AI assistants often suggest .clone() to silence a borrow error; that compiles, but it changes the program's meaning when the goal was to update or share the original. Ask: if a function needs to change the caller's text, which one works? Only &mut; a clone would change a copy. Connect the diagram to the clone slide from session 1.
+:::
+
+---
+
 ## Your turn: fix the access
 
 **This example intentionally fails to compile.**
