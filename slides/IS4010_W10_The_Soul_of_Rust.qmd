@@ -267,7 +267,7 @@ fn main() {
 }
 ```
 
-- Integers implement `Copy`: assignment duplicates their value.
+- Integers implement `Copy`, which marks a type as safe to duplicate automatically. Assignment copies the value.
 - A number has no heap text to clean up, so duplicating it is cheap and safe.
 - Both variables remain usable. Output: `5 and 5`.
 - `bool`, `char`, and floating-point numbers also implement `Copy`.
@@ -601,6 +601,8 @@ error[E0499]: cannot borrow `name` as mutable
 more than once at a time
 ```
 
+**Why:** `first_editor` is used again on a later line, so its borrow is still active when `second_editor` tries to start one.
+
 [Try this example in Rust Playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2024&code=fn+main%28%29+%7B%0A++++let+mut+name+%3D+String%3A%3Afrom%28%22Homer%22%29%3B%0A++++let+first_editor+%3D+%26mut+name%3B%0A++++let+second_editor+%3D+%26mut+name%3B+%2F%2F+Overlaps+first+borrow%0A%0A++++first_editor.push_str%28%22+J.%22%29%3B%0A++++second_editor.push_str%28%22+Simpson%22%29%3B%0A%7D%0A)
 
 ::: {.notes}
@@ -625,6 +627,18 @@ fn main() {
 ```
 
 **Predict:** Why do these two mutable borrows work now?
+
+::: {.fragment}
+```text
+let first_editor = &mut name;   ┐ first borrow
+first_editor.push_str(" J.");   ┘ ends at its last use
+let second_editor = &mut name;  ┐ second borrow
+second_editor.push_str(...);    ┘ ends at its last use
+println!("{}", name);           no borrows active
+```
+
+**A borrow lasts until its last use, not until the closing brace.**
+:::
 
 [Try this example in Rust Playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2024&code=fn+main%28%29+%7B%0A++++let+mut+name+%3D+String%3A%3Afrom%28%22Homer%22%29%3B%0A++++let+first_editor+%3D+%26mut+name%3B%0A++++first_editor.push_str%28%22+J.%22%29%3B+%2F%2F+Last+use+of+first_editor%0A%0A++++let+second_editor+%3D+%26mut+name%3B%0A++++second_editor.push_str%28%22+Simpson%22%29%3B+%2F%2F+Last+use+of+second_editor%0A%0A++++println%21%28%22%7B%7D%22%2C+name%29%3B%0A%7D%0A)
 
@@ -654,6 +668,8 @@ error[E0502]: cannot borrow `name` as mutable
 because it is also borrowed as immutable
 ```
 
+**Why:** `reader` is used on the last line, so its shared borrow is still active when `editor` starts changing the text.
+
 [Try this example in Rust Playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2024&code=fn+main%28%29+%7B%0A++++let+mut+name+%3D+String%3A%3Afrom%28%22Homer%22%29%3B%0A++++let+reader+%3D+%26name%3B%0A++++let+editor+%3D+%26mut+name%3B%0A++++editor.push_str%28%22+Simpson%22%29%3B%0A%0A++++println%21%28%22%7B%7D%22%2C+reader%29%3B+%2F%2F+reader+is+still+needed+here%0A%7D%0A)
 
 ::: {.notes}
@@ -675,6 +691,8 @@ fn main() {
     println!("After: {}", name);
 }
 ```
+
+**Why it works:** `reader`'s borrow ends at its last use, before `editor` starts.
 
 **Try:** Add `println!("{}", reader);` at the end. Will it still compile?
 
@@ -739,6 +757,8 @@ Same shape as the last slide, but `reader` holds a **reference** to `name`, not 
 error[E0597]: `name` does not live long enough
 ```
 
+**Why:** `name`'s text is cleaned up at the closing brace, so `reader` would point at text that no longer exists (a **dangling reference**).
+
 [Try this example in Rust Playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2024&code=fn+main%28%29+%7B%0A++++let+reader%3B+%2F%2F+Declared+now%2C+given+a+value+below%0A++++%7B%0A++++++++let+name+%3D+String%3A%3Afrom%28%22Homer%22%29%3B%0A++++++++reader+%3D+%26name%3B%0A++++%7D+%2F%2F+name%27s+String+is+dropped+here%0A%0A++++println%21%28%22%7B%7D%22%2C+reader%29%3B+%2F%2F+Too+late+to+read+that+String%0A%7D%0A)
 
 ::: {.notes}
@@ -761,12 +781,12 @@ fn main() {
 } // name's String is dropped here
 ```
 
-**Explain:** What moved in the source code? Did ownership transfer?
+**What changed:** The `let name` line now sits above the braces. `name` still owns the `String`, and it now lives past the final read.
 
 [Try this example in Rust Playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2024&code=fn+main%28%29+%7B%0A++++let+name+%3D+String%3A%3Afrom%28%22Homer%22%29%3B%0A++++let+reader%3B%0A++++%7B%0A++++++++reader+%3D+%26name%3B%0A++++%7D%0A%0A++++println%21%28%22%7B%7D%22%2C+reader%29%3B%0A%7D+%2F%2F+name%27s+String+is+dropped+here%0A)
 
 ::: {.notes}
-Answer: we moved the declaration of name outside the inner block; we did not perform a Rust ownership move. Output: Homer. name stays alive through the final read and remains the owner. The braces remain to make the minimal edit visible. The lifetime of a reference is the region where it must be valid; it cannot require access after the borrowed data is gone. This is enough lifetime reasoning for the required lesson and Lab 10's scope puzzle.
+Output: Homer. If students say we "moved" name, clarify that relocating a line of code is not a Rust ownership move; no ownership transferred. The braces remain to make the minimal edit visible. The lifetime of a reference is the region where it must be valid; it cannot require access after the borrowed data is gone. This is enough lifetime reasoning for the required lesson and Lab 10's scope puzzle.
 :::
 
 ---
@@ -1043,7 +1063,7 @@ fn main() {
 
 `<'a>` after the function name declares the label, much like declaring a variable before using it.
 
-`'a` ties the result's allowed use to a period when **both inputs are valid**.
+`'a` says: the result can be used only while **both inputs still exist**.
 
 **Annotations describe a relationship; they do not keep data alive.**
 
