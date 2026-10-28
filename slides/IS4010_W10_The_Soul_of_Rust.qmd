@@ -531,6 +531,10 @@ fn main() {
 
 **Predict:** What prints? Which variable owns the changed text?
 
+::: {.fragment}
+**Why:** `guest` points at `main`'s `String`; it has no text of its own. Changing through `guest` changes `name`.
+:::
+
 [Try this example in Rust Playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2024&code=fn+add_surname%28guest%3A+%26mut+String%29+%7B%0A++++guest.push_str%28%22+Simpson%22%29%3B%0A%7D%0A%0Afn+main%28%29+%7B%0A++++let+mut+name+%3D+String%3A%3Afrom%28%22Homer%22%29%3B%0A++++add_surname%28%26mut+name%29%3B%0A++++println%21%28%22%7B%7D%22%2C+name%29%3B%0A%7D%0A)
 
 ::: {.notes}
