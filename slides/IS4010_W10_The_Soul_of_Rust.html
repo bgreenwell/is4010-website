@@ -550,7 +550,7 @@ Brandon M. Greenwell
 <span id="cb8-5"><a></a>    <span class="pp">println!</span>(<span class="st">"{} and {}"</span><span class="op">,</span> score<span class="op">,</span> saved_score)<span class="op">;</span></span>
 <span id="cb8-6"><a></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <ul>
-<li>Integers implement <code>Copy</code>: assignment duplicates their value.</li>
+<li>Integers implement <code>Copy</code>, which marks a type as safe to duplicate automatically. Assignment copies the value.</li>
 <li>A number has no heap text to clean up, so duplicating it is cheap and safe.</li>
 <li>Both variables remain usable. Output: <code>5 and 5</code>.</li>
 <li><code>bool</code>, <code>char</code>, and floating-point numbers also implement <code>Copy</code>.</li>
@@ -1002,6 +1002,7 @@ Brandon M. Greenwell
 <span id="cb19-8"><a></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb20"><pre class="sourceCode numberSource text number-lines code-with-copy"><code class="sourceCode"><span id="cb20-1"><a></a>error[E0499]: cannot borrow `name` as mutable</span>
 <span id="cb20-2"><a></a>more than once at a time</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Why:</strong> <code>first_editor</code> is used again on a later line, so its borrow is still active when <code>second_editor</code> tries to start one.</p>
 <p><a href="https://play.rust-lang.org/?version=stable&amp;mode=debug&amp;edition=2024&amp;code=fn+main%28%29+%7B%0A++++let+mut+name+%3D+String%3A%3Afrom%28%22Homer%22%29%3B%0A++++let+first_editor+%3D+%26mut+name%3B%0A++++let+second_editor+%3D+%26mut+name%3B+%2F%2F+Overlaps+first+borrow%0A%0A++++first_editor.push_str%28%22+J.%22%29%3B%0A++++second_editor.push_str%28%22+Simpson%22%29%3B%0A%7D%0A">Try this example in Rust Playground</a></p>
 <aside class="notes">
 <p>Ask students to identify which borrowing rule is violated. first_editor must remain usable through its later push_str, so the second mutable borrow overlaps it. The issue is exclusive access to the same String, even though this code has only one thread. Do not describe this example as an actual data race. No output is produced because compilation fails. Predict a repair by finishing the first editor’s work before borrowing for the second editor.</p>
@@ -1030,6 +1031,14 @@ Brandon M. Greenwell
 <span id="cb21-9"><a></a>    <span class="pp">println!</span>(<span class="st">"{}"</span><span class="op">,</span> name)<span class="op">;</span></span>
 <span id="cb21-10"><a></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p><strong>Predict:</strong> Why do these two mutable borrows work now?</p>
+<div class="fragment">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb22"><pre class="sourceCode numberSource text number-lines code-with-copy"><code class="sourceCode"><span id="cb22-1"><a></a>let first_editor = &amp;mut name;   ┐ first borrow</span>
+<span id="cb22-2"><a></a>first_editor.push_str(" J.");   ┘ ends at its last use</span>
+<span id="cb22-3"><a></a>let second_editor = &amp;mut name;  ┐ second borrow</span>
+<span id="cb22-4"><a></a>second_editor.push_str(...);    ┘ ends at its last use</span>
+<span id="cb22-5"><a></a>println!("{}", name);           no borrows active</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>A borrow lasts until its last use, not until the closing brace.</strong></p>
+</div>
 <p><a href="https://play.rust-lang.org/?version=stable&amp;mode=debug&amp;edition=2024&amp;code=fn+main%28%29+%7B%0A++++let+mut+name+%3D+String%3A%3Afrom%28%22Homer%22%29%3B%0A++++let+first_editor+%3D+%26mut+name%3B%0A++++first_editor.push_str%28%22+J.%22%29%3B+%2F%2F+Last+use+of+first_editor%0A%0A++++let+second_editor+%3D+%26mut+name%3B%0A++++second_editor.push_str%28%22+Simpson%22%29%3B+%2F%2F+Last+use+of+second_editor%0A%0A++++println%21%28%22%7B%7D%22%2C+name%29%3B%0A%7D%0A">Try this example in Rust Playground</a></p>
 <aside class="notes">
 <p>Answer: their uses no longer overlap. Output: Homer J. Simpson. The compiler can end each borrow after its final use here. We did not add another text buffer or silence the error; we changed the sequence of accesses. The variable names remain in lexical scope, but the borrows no longer need to be active. Distinguish borrow duration from where a binding’s name is in scope. Ask what would happen if first_editor were used again after the second mutable borrow: that would make the borrows overlap again.</p>
@@ -1048,16 +1057,17 @@ Brandon M. Greenwell
 <section id="a-reader-and-an-editor-can-conflict" class="slide level2">
 <h2>A reader and an editor can conflict</h2>
 <p><strong>This example intentionally fails to compile.</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb22"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb22-1"><a></a><span class="kw">fn</span> main() <span class="op">{</span></span>
-<span id="cb22-2"><a></a>    <span class="kw">let</span> <span class="kw">mut</span> name <span class="op">=</span> <span class="dt">String</span><span class="pp">::</span>from(<span class="st">"Homer"</span>)<span class="op">;</span></span>
-<span id="cb22-3"><a></a>    <span class="kw">let</span> reader <span class="op">=</span> <span class="op">&amp;</span>name<span class="op">;</span></span>
-<span id="cb22-4"><a></a>    <span class="kw">let</span> editor <span class="op">=</span> <span class="op">&amp;</span><span class="kw">mut</span> name<span class="op">;</span></span>
-<span id="cb22-5"><a></a>    editor<span class="op">.</span>push_str(<span class="st">" Simpson"</span>)<span class="op">;</span></span>
-<span id="cb22-6"><a></a></span>
-<span id="cb22-7"><a></a>    <span class="pp">println!</span>(<span class="st">"{}"</span><span class="op">,</span> reader)<span class="op">;</span> <span class="co">// reader is still needed here</span></span>
-<span id="cb22-8"><a></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb23"><pre class="sourceCode numberSource text number-lines code-with-copy"><code class="sourceCode"><span id="cb23-1"><a></a>error[E0502]: cannot borrow `name` as mutable</span>
-<span id="cb23-2"><a></a>because it is also borrowed as immutable</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb23"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb23-1"><a></a><span class="kw">fn</span> main() <span class="op">{</span></span>
+<span id="cb23-2"><a></a>    <span class="kw">let</span> <span class="kw">mut</span> name <span class="op">=</span> <span class="dt">String</span><span class="pp">::</span>from(<span class="st">"Homer"</span>)<span class="op">;</span></span>
+<span id="cb23-3"><a></a>    <span class="kw">let</span> reader <span class="op">=</span> <span class="op">&amp;</span>name<span class="op">;</span></span>
+<span id="cb23-4"><a></a>    <span class="kw">let</span> editor <span class="op">=</span> <span class="op">&amp;</span><span class="kw">mut</span> name<span class="op">;</span></span>
+<span id="cb23-5"><a></a>    editor<span class="op">.</span>push_str(<span class="st">" Simpson"</span>)<span class="op">;</span></span>
+<span id="cb23-6"><a></a></span>
+<span id="cb23-7"><a></a>    <span class="pp">println!</span>(<span class="st">"{}"</span><span class="op">,</span> reader)<span class="op">;</span> <span class="co">// reader is still needed here</span></span>
+<span id="cb23-8"><a></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb24"><pre class="sourceCode numberSource text number-lines code-with-copy"><code class="sourceCode"><span id="cb24-1"><a></a>error[E0502]: cannot borrow `name` as mutable</span>
+<span id="cb24-2"><a></a>because it is also borrowed as immutable</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Why:</strong> <code>reader</code> is used on the last line, so its shared borrow is still active when <code>editor</code> starts changing the text.</p>
 <p><a href="https://play.rust-lang.org/?version=stable&amp;mode=debug&amp;edition=2024&amp;code=fn+main%28%29+%7B%0A++++let+mut+name+%3D+String%3A%3Afrom%28%22Homer%22%29%3B%0A++++let+reader+%3D+%26name%3B%0A++++let+editor+%3D+%26mut+name%3B%0A++++editor.push_str%28%22+Simpson%22%29%3B%0A%0A++++println%21%28%22%7B%7D%22%2C+reader%29%3B+%2F%2F+reader+is+still+needed+here%0A%7D%0A">Try this example in Rust Playground</a></p>
 <aside class="notes">
 <p>Answer to “which rule?”: shared and exclusive borrows of the same data cannot overlap. Trace reader from its creation to its final println!. editor is created within that interval. The compiler rejects the pattern even though the operations would run one after another: the later use of reader keeps the shared borrow active across the mutable borrow. Ask students to move the read before the mutable borrow and predict the result.</p>
@@ -1075,15 +1085,16 @@ Brandon M. Greenwell
 </section>
 <section id="a-borrow-can-end-after-its-last-use" class="slide level2">
 <h2>A borrow can end after its last use</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb24"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb24-1"><a></a><span class="kw">fn</span> main() <span class="op">{</span></span>
-<span id="cb24-2"><a></a>    <span class="kw">let</span> <span class="kw">mut</span> name <span class="op">=</span> <span class="dt">String</span><span class="pp">::</span>from(<span class="st">"Homer"</span>)<span class="op">;</span></span>
-<span id="cb24-3"><a></a>    <span class="kw">let</span> reader <span class="op">=</span> <span class="op">&amp;</span>name<span class="op">;</span></span>
-<span id="cb24-4"><a></a>    <span class="pp">println!</span>(<span class="st">"Before: {}"</span><span class="op">,</span> reader)<span class="op">;</span> <span class="co">// Last use of reader</span></span>
-<span id="cb24-5"><a></a></span>
-<span id="cb24-6"><a></a>    <span class="kw">let</span> editor <span class="op">=</span> <span class="op">&amp;</span><span class="kw">mut</span> name<span class="op">;</span></span>
-<span id="cb24-7"><a></a>    editor<span class="op">.</span>push_str(<span class="st">" Simpson"</span>)<span class="op">;</span></span>
-<span id="cb24-8"><a></a>    <span class="pp">println!</span>(<span class="st">"After: {}"</span><span class="op">,</span> name)<span class="op">;</span></span>
-<span id="cb24-9"><a></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb25"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb25-1"><a></a><span class="kw">fn</span> main() <span class="op">{</span></span>
+<span id="cb25-2"><a></a>    <span class="kw">let</span> <span class="kw">mut</span> name <span class="op">=</span> <span class="dt">String</span><span class="pp">::</span>from(<span class="st">"Homer"</span>)<span class="op">;</span></span>
+<span id="cb25-3"><a></a>    <span class="kw">let</span> reader <span class="op">=</span> <span class="op">&amp;</span>name<span class="op">;</span></span>
+<span id="cb25-4"><a></a>    <span class="pp">println!</span>(<span class="st">"Before: {}"</span><span class="op">,</span> reader)<span class="op">;</span> <span class="co">// Last use of reader</span></span>
+<span id="cb25-5"><a></a></span>
+<span id="cb25-6"><a></a>    <span class="kw">let</span> editor <span class="op">=</span> <span class="op">&amp;</span><span class="kw">mut</span> name<span class="op">;</span></span>
+<span id="cb25-7"><a></a>    editor<span class="op">.</span>push_str(<span class="st">" Simpson"</span>)<span class="op">;</span></span>
+<span id="cb25-8"><a></a>    <span class="pp">println!</span>(<span class="st">"After: {}"</span><span class="op">,</span> name)<span class="op">;</span></span>
+<span id="cb25-9"><a></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Why it works:</strong> <code>reader</code>’s borrow ends at its last use, before <code>editor</code> starts.</p>
 <p><strong>Try:</strong> Add <code>println!("{}", reader);</code> at the end. Will it still compile?</p>
 <p><a href="https://play.rust-lang.org/?version=stable&amp;mode=debug&amp;edition=2024&amp;code=fn+main%28%29+%7B%0A++++let+mut+name+%3D+String%3A%3Afrom%28%22Homer%22%29%3B%0A++++let+reader+%3D+%26name%3B%0A++++println%21%28%22Before%3A+%7B%7D%22%2C+reader%29%3B+%2F%2F+Last+use+of+reader%0A%0A++++let+editor+%3D+%26mut+name%3B%0A++++editor.push_str%28%22+Simpson%22%29%3B%0A++++println%21%28%22After%3A+%7B%7D%22%2C+name%29%3B%0A%7D%0A">Try this example in Rust Playground</a></p>
 <aside class="notes">
@@ -1103,15 +1114,15 @@ Brandon M. Greenwell
 <section id="declare-now-assign-later" class="slide level2">
 <h2>Declare now, assign later</h2>
 <p>So far every <code>let</code> gave the variable a value right away. You can also split that into two steps:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb25"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb25-1"><a></a><span class="kw">fn</span> main() <span class="op">{</span></span>
-<span id="cb25-2"><a></a>    <span class="kw">let</span> total<span class="op">;</span> <span class="co">// Declare total now</span></span>
-<span id="cb25-3"><a></a>    <span class="op">{</span></span>
-<span id="cb25-4"><a></a>        <span class="kw">let</span> score <span class="op">=</span> <span class="dv">5</span><span class="op">;</span></span>
-<span id="cb25-5"><a></a>        total <span class="op">=</span> score <span class="op">*</span> <span class="dv">2</span><span class="op">;</span> <span class="co">// Give total its value</span></span>
-<span id="cb25-6"><a></a>    <span class="op">}</span></span>
-<span id="cb25-7"><a></a></span>
-<span id="cb25-8"><a></a>    <span class="pp">println!</span>(<span class="st">"{}"</span><span class="op">,</span> total)<span class="op">;</span></span>
-<span id="cb25-9"><a></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb26"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb26-1"><a></a><span class="kw">fn</span> main() <span class="op">{</span></span>
+<span id="cb26-2"><a></a>    <span class="kw">let</span> total<span class="op">;</span> <span class="co">// Declare total now</span></span>
+<span id="cb26-3"><a></a>    <span class="op">{</span></span>
+<span id="cb26-4"><a></a>        <span class="kw">let</span> score <span class="op">=</span> <span class="dv">5</span><span class="op">;</span></span>
+<span id="cb26-5"><a></a>        total <span class="op">=</span> score <span class="op">*</span> <span class="dv">2</span><span class="op">;</span> <span class="co">// Give total its value</span></span>
+<span id="cb26-6"><a></a>    <span class="op">}</span></span>
+<span id="cb26-7"><a></a></span>
+<span id="cb26-8"><a></a>    <span class="pp">println!</span>(<span class="st">"{}"</span><span class="op">,</span> total)<span class="op">;</span></span>
+<span id="cb26-9"><a></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <ul>
 <li><code>let total;</code> creates the variable but gives it no value yet.</li>
 <li>Rust works out the type from the later assignment, here an integer.</li>
@@ -1137,17 +1148,18 @@ Brandon M. Greenwell
 <section id="borrowed-data-must-still-exist" class="slide level2">
 <h2>Borrowed data must still exist</h2>
 <p><strong>This example intentionally fails to compile.</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb26"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb26-1"><a></a><span class="kw">fn</span> main() <span class="op">{</span></span>
-<span id="cb26-2"><a></a>    <span class="kw">let</span> reader<span class="op">;</span> <span class="co">// Declared now, given a value below</span></span>
-<span id="cb26-3"><a></a>    <span class="op">{</span></span>
-<span id="cb26-4"><a></a>        <span class="kw">let</span> name <span class="op">=</span> <span class="dt">String</span><span class="pp">::</span>from(<span class="st">"Homer"</span>)<span class="op">;</span></span>
-<span id="cb26-5"><a></a>        reader <span class="op">=</span> <span class="op">&amp;</span>name<span class="op">;</span></span>
-<span id="cb26-6"><a></a>    <span class="op">}</span> <span class="co">// name's String is dropped here</span></span>
-<span id="cb26-7"><a></a></span>
-<span id="cb26-8"><a></a>    <span class="pp">println!</span>(<span class="st">"{}"</span><span class="op">,</span> reader)<span class="op">;</span> <span class="co">// Too late to read that String</span></span>
-<span id="cb26-9"><a></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb27"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb27-1"><a></a><span class="kw">fn</span> main() <span class="op">{</span></span>
+<span id="cb27-2"><a></a>    <span class="kw">let</span> reader<span class="op">;</span> <span class="co">// Declared now, given a value below</span></span>
+<span id="cb27-3"><a></a>    <span class="op">{</span></span>
+<span id="cb27-4"><a></a>        <span class="kw">let</span> name <span class="op">=</span> <span class="dt">String</span><span class="pp">::</span>from(<span class="st">"Homer"</span>)<span class="op">;</span></span>
+<span id="cb27-5"><a></a>        reader <span class="op">=</span> <span class="op">&amp;</span>name<span class="op">;</span></span>
+<span id="cb27-6"><a></a>    <span class="op">}</span> <span class="co">// name's String is dropped here</span></span>
+<span id="cb27-7"><a></a></span>
+<span id="cb27-8"><a></a>    <span class="pp">println!</span>(<span class="st">"{}"</span><span class="op">,</span> reader)<span class="op">;</span> <span class="co">// Too late to read that String</span></span>
+<span id="cb27-9"><a></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Same shape as the last slide, but <code>reader</code> holds a <strong>reference</strong> to <code>name</code>, not its own value.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb27"><pre class="sourceCode numberSource text number-lines code-with-copy"><code class="sourceCode"><span id="cb27-1"><a></a>error[E0597]: `name` does not live long enough</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb28"><pre class="sourceCode numberSource text number-lines code-with-copy"><code class="sourceCode"><span id="cb28-1"><a></a>error[E0597]: `name` does not live long enough</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Why:</strong> <code>name</code>’s text is cleaned up at the closing brace, so <code>reader</code> would point at text that no longer exists (a <strong>dangling reference</strong>).</p>
 <p><a href="https://play.rust-lang.org/?version=stable&amp;mode=debug&amp;edition=2024&amp;code=fn+main%28%29+%7B%0A++++let+reader%3B+%2F%2F+Declared+now%2C+given+a+value+below%0A++++%7B%0A++++++++let+name+%3D+String%3A%3Afrom%28%22Homer%22%29%3B%0A++++++++reader+%3D+%26name%3B%0A++++%7D+%2F%2F+name%27s+String+is+dropped+here%0A%0A++++println%21%28%22%7B%7D%22%2C+reader%29%3B+%2F%2F+Too+late+to+read+that+String%0A%7D%0A">Try this example in Rust Playground</a></p>
 <aside class="notes">
 <p>Stress that let reader; does not create a null reference. Ask students to identify the owner, the reference, and the closing brace where the String is dropped. The reference would point to data that no longer exists, a dangling reference, so Rust rejects the program before it runs. This is the second borrowing rule. We do not need any named lifetime syntax to understand the error.</p>
@@ -1165,19 +1177,19 @@ Brandon M. Greenwell
 </section>
 <section id="keep-the-owner-available-for-the-read" class="slide level2">
 <h2>Keep the owner available for the read</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb28"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb28-1"><a></a><span class="kw">fn</span> main() <span class="op">{</span></span>
-<span id="cb28-2"><a></a>    <span class="kw">let</span> name <span class="op">=</span> <span class="dt">String</span><span class="pp">::</span>from(<span class="st">"Homer"</span>)<span class="op">;</span></span>
-<span id="cb28-3"><a></a>    <span class="kw">let</span> reader<span class="op">;</span></span>
-<span id="cb28-4"><a></a>    <span class="op">{</span></span>
-<span id="cb28-5"><a></a>        reader <span class="op">=</span> <span class="op">&amp;</span>name<span class="op">;</span></span>
-<span id="cb28-6"><a></a>    <span class="op">}</span></span>
-<span id="cb28-7"><a></a></span>
-<span id="cb28-8"><a></a>    <span class="pp">println!</span>(<span class="st">"{}"</span><span class="op">,</span> reader)<span class="op">;</span></span>
-<span id="cb28-9"><a></a><span class="op">}</span> <span class="co">// name's String is dropped here</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p><strong>Explain:</strong> What moved in the source code? Did ownership transfer?</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb29"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb29-1"><a></a><span class="kw">fn</span> main() <span class="op">{</span></span>
+<span id="cb29-2"><a></a>    <span class="kw">let</span> name <span class="op">=</span> <span class="dt">String</span><span class="pp">::</span>from(<span class="st">"Homer"</span>)<span class="op">;</span></span>
+<span id="cb29-3"><a></a>    <span class="kw">let</span> reader<span class="op">;</span></span>
+<span id="cb29-4"><a></a>    <span class="op">{</span></span>
+<span id="cb29-5"><a></a>        reader <span class="op">=</span> <span class="op">&amp;</span>name<span class="op">;</span></span>
+<span id="cb29-6"><a></a>    <span class="op">}</span></span>
+<span id="cb29-7"><a></a></span>
+<span id="cb29-8"><a></a>    <span class="pp">println!</span>(<span class="st">"{}"</span><span class="op">,</span> reader)<span class="op">;</span></span>
+<span id="cb29-9"><a></a><span class="op">}</span> <span class="co">// name's String is dropped here</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>What changed:</strong> The <code>let name</code> line now sits above the braces. <code>name</code> still owns the <code>String</code>, and it now lives past the final read.</p>
 <p><a href="https://play.rust-lang.org/?version=stable&amp;mode=debug&amp;edition=2024&amp;code=fn+main%28%29+%7B%0A++++let+name+%3D+String%3A%3Afrom%28%22Homer%22%29%3B%0A++++let+reader%3B%0A++++%7B%0A++++++++reader+%3D+%26name%3B%0A++++%7D%0A%0A++++println%21%28%22%7B%7D%22%2C+reader%29%3B%0A%7D+%2F%2F+name%27s+String+is+dropped+here%0A">Try this example in Rust Playground</a></p>
 <aside class="notes">
-<p>Answer: we moved the declaration of name outside the inner block; we did not perform a Rust ownership move. Output: Homer. name stays alive through the final read and remains the owner. The braces remain to make the minimal edit visible. The lifetime of a reference is the region where it must be valid; it cannot require access after the borrowed data is gone. This is enough lifetime reasoning for the required lesson and Lab 10’s scope puzzle.</p>
+<p>Output: Homer. If students say we “moved” name, clarify that relocating a line of code is not a Rust ownership move; no ownership transferred. The braces remain to make the minimal edit visible. The lifetime of a reference is the region where it must be valid; it cannot require access after the borrowed data is gone. This is enough lifetime reasoning for the required lesson and Lab 10’s scope puzzle.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1192,14 +1204,14 @@ Brandon M. Greenwell
 </section>
 <section id="return-owned-data-when-you-create-it" class="slide level2">
 <h2>Return owned data when you create it</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb29"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb29-1"><a></a><span class="kw">fn</span> make_name() <span class="op">-&gt;</span> <span class="dt">String</span> <span class="op">{</span></span>
-<span id="cb29-2"><a></a>    <span class="dt">String</span><span class="pp">::</span>from(<span class="st">"Homer"</span>)</span>
-<span id="cb29-3"><a></a><span class="op">}</span></span>
-<span id="cb29-4"><a></a></span>
-<span id="cb29-5"><a></a><span class="kw">fn</span> main() <span class="op">{</span></span>
-<span id="cb29-6"><a></a>    <span class="kw">let</span> name <span class="op">=</span> make_name()<span class="op">;</span></span>
-<span id="cb29-7"><a></a>    <span class="pp">println!</span>(<span class="st">"{}"</span><span class="op">,</span> name)<span class="op">;</span></span>
-<span id="cb29-8"><a></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb30"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb30-1"><a></a><span class="kw">fn</span> make_name() <span class="op">-&gt;</span> <span class="dt">String</span> <span class="op">{</span></span>
+<span id="cb30-2"><a></a>    <span class="dt">String</span><span class="pp">::</span>from(<span class="st">"Homer"</span>)</span>
+<span id="cb30-3"><a></a><span class="op">}</span></span>
+<span id="cb30-4"><a></a></span>
+<span id="cb30-5"><a></a><span class="kw">fn</span> main() <span class="op">{</span></span>
+<span id="cb30-6"><a></a>    <span class="kw">let</span> name <span class="op">=</span> make_name()<span class="op">;</span></span>
+<span id="cb30-7"><a></a>    <span class="pp">println!</span>(<span class="st">"{}"</span><span class="op">,</span> name)<span class="op">;</span></span>
+<span id="cb30-8"><a></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <ul>
 <li>The function creates text and transfers ownership to its caller.</li>
 <li>Returning a reference to a local <code>String</code> would leave no owner to keep it alive.</li>
@@ -1221,13 +1233,13 @@ Brandon M. Greenwell
 </section>
 <section id="two-useful-text-types-string-and-str" class="slide level2">
 <h2>Two useful text types: <code>String</code> and <code>&amp;str</code></h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb30"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb30-1"><a></a><span class="kw">fn</span> main() <span class="op">{</span></span>
-<span id="cb30-2"><a></a>    <span class="kw">let</span> name <span class="op">=</span> <span class="dt">String</span><span class="pp">::</span>from(<span class="st">"Homer"</span>)<span class="op">;</span></span>
-<span id="cb30-3"><a></a>    <span class="kw">let</span> borrowed_text<span class="op">:</span> <span class="op">&amp;</span><span class="dt">str</span> <span class="op">=</span> name<span class="op">.</span>as_str()<span class="op">;</span></span>
-<span id="cb30-4"><a></a>    <span class="kw">let</span> literal<span class="op">:</span> <span class="op">&amp;</span><span class="dt">str</span> <span class="op">=</span> <span class="st">"Simpson"</span><span class="op">;</span></span>
-<span id="cb30-5"><a></a></span>
-<span id="cb30-6"><a></a>    <span class="pp">println!</span>(<span class="st">"{} {}"</span><span class="op">,</span> borrowed_text<span class="op">,</span> literal)<span class="op">;</span></span>
-<span id="cb30-7"><a></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb31"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb31-1"><a></a><span class="kw">fn</span> main() <span class="op">{</span></span>
+<span id="cb31-2"><a></a>    <span class="kw">let</span> name <span class="op">=</span> <span class="dt">String</span><span class="pp">::</span>from(<span class="st">"Homer"</span>)<span class="op">;</span></span>
+<span id="cb31-3"><a></a>    <span class="kw">let</span> borrowed_text<span class="op">:</span> <span class="op">&amp;</span><span class="dt">str</span> <span class="op">=</span> name<span class="op">.</span>as_str()<span class="op">;</span></span>
+<span id="cb31-4"><a></a>    <span class="kw">let</span> literal<span class="op">:</span> <span class="op">&amp;</span><span class="dt">str</span> <span class="op">=</span> <span class="st">"Simpson"</span><span class="op">;</span></span>
+<span id="cb31-5"><a></a></span>
+<span id="cb31-6"><a></a>    <span class="pp">println!</span>(<span class="st">"{} {}"</span><span class="op">,</span> borrowed_text<span class="op">,</span> literal)<span class="op">;</span></span>
+<span id="cb31-7"><a></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <ul>
 <li><code>String</code>: owned text that can grow.</li>
 <li><code>&amp;str</code>: a shared view of text, called a <strong>string slice</strong>.</li>
@@ -1251,16 +1263,16 @@ Brandon M. Greenwell
 </section>
 <section id="str-accepts-borrowed-text-and-literals" class="slide level2">
 <h2><code>&amp;str</code> accepts borrowed text and literals</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb31"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb31-1"><a></a><span class="kw">fn</span> show_size(text<span class="op">:</span> <span class="op">&amp;</span><span class="dt">str</span>) <span class="op">{</span></span>
-<span id="cb31-2"><a></a>    <span class="pp">println!</span>(<span class="st">"{} bytes"</span><span class="op">,</span> text<span class="op">.</span>len())<span class="op">;</span></span>
-<span id="cb31-3"><a></a><span class="op">}</span></span>
-<span id="cb31-4"><a></a></span>
-<span id="cb31-5"><a></a><span class="kw">fn</span> main() <span class="op">{</span></span>
-<span id="cb31-6"><a></a>    <span class="kw">let</span> name <span class="op">=</span> <span class="dt">String</span><span class="pp">::</span>from(<span class="st">"Homer"</span>)<span class="op">;</span></span>
-<span id="cb31-7"><a></a>    show_size(name<span class="op">.</span>as_str())<span class="op">;</span></span>
-<span id="cb31-8"><a></a>    show_size(<span class="st">"Simpson"</span>)<span class="op">;</span></span>
-<span id="cb31-9"><a></a>    <span class="pp">println!</span>(<span class="st">"Still owned here: {}"</span><span class="op">,</span> name)<span class="op">;</span></span>
-<span id="cb31-10"><a></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb32"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb32-1"><a></a><span class="kw">fn</span> show_size(text<span class="op">:</span> <span class="op">&amp;</span><span class="dt">str</span>) <span class="op">{</span></span>
+<span id="cb32-2"><a></a>    <span class="pp">println!</span>(<span class="st">"{} bytes"</span><span class="op">,</span> text<span class="op">.</span>len())<span class="op">;</span></span>
+<span id="cb32-3"><a></a><span class="op">}</span></span>
+<span id="cb32-4"><a></a></span>
+<span id="cb32-5"><a></a><span class="kw">fn</span> main() <span class="op">{</span></span>
+<span id="cb32-6"><a></a>    <span class="kw">let</span> name <span class="op">=</span> <span class="dt">String</span><span class="pp">::</span>from(<span class="st">"Homer"</span>)<span class="op">;</span></span>
+<span id="cb32-7"><a></a>    show_size(name<span class="op">.</span>as_str())<span class="op">;</span></span>
+<span id="cb32-8"><a></a>    show_size(<span class="st">"Simpson"</span>)<span class="op">;</span></span>
+<span id="cb32-9"><a></a>    <span class="pp">println!</span>(<span class="st">"Still owned here: {}"</span><span class="op">,</span> name)<span class="op">;</span></span>
+<span id="cb32-10"><a></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p><strong>Predict:</strong> Can the caller still use <code>name</code>?</p>
 <p><a href="https://play.rust-lang.org/?version=stable&amp;mode=debug&amp;edition=2024&amp;code=fn+show_size%28text%3A+%26str%29+%7B%0A++++println%21%28%22%7B%7D+bytes%22%2C+text.len%28%29%29%3B%0A%7D%0A%0Afn+main%28%29+%7B%0A++++let+name+%3D+String%3A%3Afrom%28%22Homer%22%29%3B%0A++++show_size%28name.as_str%28%29%29%3B%0A++++show_size%28%22Simpson%22%29%3B%0A++++println%21%28%22Still+owned+here%3A+%7B%7D%22%2C+name%29%3B%0A%7D%0A">Try this example in Rust Playground</a></p>
 <aside class="notes">
@@ -1333,15 +1345,15 @@ Brandon M. Greenwell
 <section id="your-turn-fix-the-access" class="slide level2">
 <h2>Your turn: fix the access</h2>
 <p><strong>This example intentionally fails to compile.</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb32"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb32-1"><a></a><span class="kw">fn</span> add_surname(guest<span class="op">:</span> <span class="op">&amp;</span><span class="dt">String</span>) <span class="op">{</span></span>
-<span id="cb32-2"><a></a>    guest<span class="op">.</span>push_str(<span class="st">" Simpson"</span>)<span class="op">;</span></span>
-<span id="cb32-3"><a></a><span class="op">}</span></span>
-<span id="cb32-4"><a></a></span>
-<span id="cb32-5"><a></a><span class="kw">fn</span> main() <span class="op">{</span></span>
-<span id="cb32-6"><a></a>    <span class="kw">let</span> name <span class="op">=</span> <span class="dt">String</span><span class="pp">::</span>from(<span class="st">"Homer"</span>)<span class="op">;</span></span>
-<span id="cb32-7"><a></a>    add_surname(<span class="op">&amp;</span>name)<span class="op">;</span></span>
-<span id="cb32-8"><a></a>    <span class="pp">println!</span>(<span class="st">"{}"</span><span class="op">,</span> name)<span class="op">;</span></span>
-<span id="cb32-9"><a></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb33"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb33-1"><a></a><span class="kw">fn</span> add_surname(guest<span class="op">:</span> <span class="op">&amp;</span><span class="dt">String</span>) <span class="op">{</span></span>
+<span id="cb33-2"><a></a>    guest<span class="op">.</span>push_str(<span class="st">" Simpson"</span>)<span class="op">;</span></span>
+<span id="cb33-3"><a></a><span class="op">}</span></span>
+<span id="cb33-4"><a></a></span>
+<span id="cb33-5"><a></a><span class="kw">fn</span> main() <span class="op">{</span></span>
+<span id="cb33-6"><a></a>    <span class="kw">let</span> name <span class="op">=</span> <span class="dt">String</span><span class="pp">::</span>from(<span class="st">"Homer"</span>)<span class="op">;</span></span>
+<span id="cb33-7"><a></a>    add_surname(<span class="op">&amp;</span>name)<span class="op">;</span></span>
+<span id="cb33-8"><a></a>    <span class="pp">println!</span>(<span class="st">"{}"</span><span class="op">,</span> name)<span class="op">;</span></span>
+<span id="cb33-9"><a></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p><strong>Repair:</strong> Change the original string through a borrow. Explain each edit.</p>
 <p><a href="https://play.rust-lang.org/?version=stable&amp;mode=debug&amp;edition=2024&amp;code=fn+add_surname%28guest%3A+%26String%29+%7B%0A++++guest.push_str%28%22+Simpson%22%29%3B%0A%7D%0A%0Afn+main%28%29+%7B%0A++++let+name+%3D+String%3A%3Afrom%28%22Homer%22%29%3B%0A++++add_surname%28%26name%29%3B%0A++++println%21%28%22%7B%7D%22%2C+name%29%3B%0A%7D%0A">Try this example in Rust Playground</a></p>
 <aside class="notes">
@@ -1433,9 +1445,9 @@ Brandon M. Greenwell
 <section id="check-and-submit-lab-10" class="slide level2">
 <h2>Check and submit Lab 10</h2>
 <p>Run these inside your fork’s <code>week10/</code> directory:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb33"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb33-1"><a></a><span class="ex">cargo</span> test</span>
-<span id="cb33-2"><a></a><span class="ex">cargo</span> fmt</span>
-<span id="cb33-3"><a></a><span class="ex">cargo</span> clippy <span class="at">--</span> <span class="at">-D</span> warnings</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb34"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb34-1"><a></a><span class="ex">cargo</span> test</span>
+<span id="cb34-2"><a></a><span class="ex">cargo</span> fmt</span>
+<span id="cb34-3"><a></a><span class="ex">cargo</span> clippy <span class="at">--</span> <span class="at">-D</span> warnings</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <ul>
 <li>CI checks formatting with <code>cargo fmt --check</code>.</li>
 <li>Review <code>git diff</code>, commit <code>week10/</code>, and push.</li>
@@ -1525,17 +1537,17 @@ Brandon M. Greenwell
 <section id="optional-which-input-is-borrowed" class="slide level2">
 <h2>Optional: which input is borrowed?</h2>
 <p><strong>This version intentionally fails to compile.</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb34"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb34-1"><a></a><span class="kw">fn</span> longest(first<span class="op">:</span> <span class="op">&amp;</span><span class="dt">str</span><span class="op">,</span> second<span class="op">:</span> <span class="op">&amp;</span><span class="dt">str</span>) <span class="op">-&gt;</span> <span class="op">&amp;</span><span class="dt">str</span> <span class="op">{</span></span>
-<span id="cb34-2"><a></a>    <span class="cf">if</span> first<span class="op">.</span>len() <span class="op">&gt;=</span> second<span class="op">.</span>len() <span class="op">{</span></span>
-<span id="cb34-3"><a></a>        first</span>
-<span id="cb34-4"><a></a>    <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></span>
-<span id="cb34-5"><a></a>        second</span>
-<span id="cb34-6"><a></a>    <span class="op">}</span></span>
-<span id="cb34-7"><a></a><span class="op">}</span></span>
-<span id="cb34-8"><a></a></span>
-<span id="cb34-9"><a></a><span class="kw">fn</span> main() <span class="op">{</span></span>
-<span id="cb34-10"><a></a>    <span class="pp">println!</span>(<span class="st">"{}"</span><span class="op">,</span> longest(<span class="st">"Homer"</span><span class="op">,</span> <span class="st">"Simpson"</span>))<span class="op">;</span></span>
-<span id="cb34-11"><a></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb35"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb35-1"><a></a><span class="kw">fn</span> longest(first<span class="op">:</span> <span class="op">&amp;</span><span class="dt">str</span><span class="op">,</span> second<span class="op">:</span> <span class="op">&amp;</span><span class="dt">str</span>) <span class="op">-&gt;</span> <span class="op">&amp;</span><span class="dt">str</span> <span class="op">{</span></span>
+<span id="cb35-2"><a></a>    <span class="cf">if</span> first<span class="op">.</span>len() <span class="op">&gt;=</span> second<span class="op">.</span>len() <span class="op">{</span></span>
+<span id="cb35-3"><a></a>        first</span>
+<span id="cb35-4"><a></a>    <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></span>
+<span id="cb35-5"><a></a>        second</span>
+<span id="cb35-6"><a></a>    <span class="op">}</span></span>
+<span id="cb35-7"><a></a><span class="op">}</span></span>
+<span id="cb35-8"><a></a></span>
+<span id="cb35-9"><a></a><span class="kw">fn</span> main() <span class="op">{</span></span>
+<span id="cb35-10"><a></a>    <span class="pp">println!</span>(<span class="st">"{}"</span><span class="op">,</span> longest(<span class="st">"Homer"</span><span class="op">,</span> <span class="st">"Simpson"</span>))<span class="op">;</span></span>
+<span id="cb35-11"><a></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p><strong>E0106:</strong> The signature needs to relate the returned reference to its inputs.</p>
 <p><a href="https://play.rust-lang.org/?version=stable&amp;mode=debug&amp;edition=2024&amp;code=fn+longest%28first%3A+%26str%2C+second%3A+%26str%29+-%3E+%26str+%7B%0A++++if+first.len%28%29+%3E%3D+second.len%28%29+%7B%0A++++++++first%0A++++%7D+else+%7B%0A++++++++second%0A++++%7D%0A%7D%0A%0Afn+main%28%29+%7B%0A++++println%21%28%22%7B%7D%22%2C+longest%28%22Homer%22%2C+%22Simpson%22%29%29%3B%0A%7D%0A">Try this example in Rust Playground</a></p>
 <aside class="notes">
@@ -1554,19 +1566,19 @@ Brandon M. Greenwell
 </section>
 <section id="optional-give-the-relationship-a-name" class="slide level2">
 <h2>Optional: give the relationship a name</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb35"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb35-1"><a></a><span class="kw">fn</span> longest<span class="op">&lt;</span><span class="ot">'a</span><span class="op">&gt;</span>(first<span class="op">:</span> <span class="op">&amp;</span><span class="ot">'a</span> <span class="dt">str</span><span class="op">,</span> second<span class="op">:</span> <span class="op">&amp;</span><span class="ot">'a</span> <span class="dt">str</span>) <span class="op">-&gt;</span> <span class="op">&amp;</span><span class="ot">'a</span> <span class="dt">str</span> <span class="op">{</span></span>
-<span id="cb35-2"><a></a>    <span class="cf">if</span> first<span class="op">.</span>len() <span class="op">&gt;=</span> second<span class="op">.</span>len() <span class="op">{</span></span>
-<span id="cb35-3"><a></a>        first</span>
-<span id="cb35-4"><a></a>    <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></span>
-<span id="cb35-5"><a></a>        second</span>
-<span id="cb35-6"><a></a>    <span class="op">}</span></span>
-<span id="cb35-7"><a></a><span class="op">}</span></span>
-<span id="cb35-8"><a></a></span>
-<span id="cb35-9"><a></a><span class="kw">fn</span> main() <span class="op">{</span></span>
-<span id="cb35-10"><a></a>    <span class="pp">println!</span>(<span class="st">"{}"</span><span class="op">,</span> longest(<span class="st">"Homer"</span><span class="op">,</span> <span class="st">"Simpson"</span>))<span class="op">;</span></span>
-<span id="cb35-11"><a></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb36"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb36-1"><a></a><span class="kw">fn</span> longest<span class="op">&lt;</span><span class="ot">'a</span><span class="op">&gt;</span>(first<span class="op">:</span> <span class="op">&amp;</span><span class="ot">'a</span> <span class="dt">str</span><span class="op">,</span> second<span class="op">:</span> <span class="op">&amp;</span><span class="ot">'a</span> <span class="dt">str</span>) <span class="op">-&gt;</span> <span class="op">&amp;</span><span class="ot">'a</span> <span class="dt">str</span> <span class="op">{</span></span>
+<span id="cb36-2"><a></a>    <span class="cf">if</span> first<span class="op">.</span>len() <span class="op">&gt;=</span> second<span class="op">.</span>len() <span class="op">{</span></span>
+<span id="cb36-3"><a></a>        first</span>
+<span id="cb36-4"><a></a>    <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></span>
+<span id="cb36-5"><a></a>        second</span>
+<span id="cb36-6"><a></a>    <span class="op">}</span></span>
+<span id="cb36-7"><a></a><span class="op">}</span></span>
+<span id="cb36-8"><a></a></span>
+<span id="cb36-9"><a></a><span class="kw">fn</span> main() <span class="op">{</span></span>
+<span id="cb36-10"><a></a>    <span class="pp">println!</span>(<span class="st">"{}"</span><span class="op">,</span> longest(<span class="st">"Homer"</span><span class="op">,</span> <span class="st">"Simpson"</span>))<span class="op">;</span></span>
+<span id="cb36-11"><a></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p><code>&lt;'a&gt;</code> after the function name declares the label, much like declaring a variable before using it.</p>
-<p><code>'a</code> ties the result’s allowed use to a period when <strong>both inputs are valid</strong>.</p>
+<p><code>'a</code> says: the result can be used only while <strong>both inputs still exist</strong>.</p>
 <p><strong>Annotations describe a relationship; they do not keep data alive.</strong></p>
 <p><a href="https://play.rust-lang.org/?version=stable&amp;mode=debug&amp;edition=2024&amp;code=fn+longest%3C%27a%3E%28first%3A+%26%27a+str%2C+second%3A+%26%27a+str%29+-%3E+%26%27a+str+%7B%0A++++if+first.len%28%29+%3E%3D+second.len%28%29+%7B%0A++++++++first%0A++++%7D+else+%7B%0A++++++++second%0A++++%7D%0A%7D%0A%0Afn+main%28%29+%7B%0A++++println%21%28%22%7B%7D%22%2C+longest%28%22Homer%22%2C+%22Simpson%22%29%29%3B%0A%7D%0A">Try this example in Rust Playground</a></p>
 <aside class="notes">
@@ -1586,19 +1598,19 @@ Brandon M. Greenwell
 <section id="optional-keep-both-inputs-alive" class="slide level2">
 <h2>Optional: keep both inputs alive</h2>
 <p><strong>This example intentionally fails to compile.</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb36"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb36-1"><a></a><span class="kw">fn</span> longest<span class="op">&lt;</span><span class="ot">'a</span><span class="op">&gt;</span>(first<span class="op">:</span> <span class="op">&amp;</span><span class="ot">'a</span> <span class="dt">str</span><span class="op">,</span> second<span class="op">:</span> <span class="op">&amp;</span><span class="ot">'a</span> <span class="dt">str</span>) <span class="op">-&gt;</span> <span class="op">&amp;</span><span class="ot">'a</span> <span class="dt">str</span> <span class="op">{</span></span>
-<span id="cb36-2"><a></a>    <span class="cf">if</span> first<span class="op">.</span>len() <span class="op">&gt;=</span> second<span class="op">.</span>len() <span class="op">{</span> first <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span> second <span class="op">}</span></span>
-<span id="cb36-3"><a></a><span class="op">}</span></span>
-<span id="cb36-4"><a></a></span>
-<span id="cb36-5"><a></a><span class="kw">fn</span> main() <span class="op">{</span></span>
-<span id="cb36-6"><a></a>    <span class="kw">let</span> name <span class="op">=</span> <span class="dt">String</span><span class="pp">::</span>from(<span class="st">"Homer"</span>)<span class="op">;</span></span>
-<span id="cb36-7"><a></a>    <span class="kw">let</span> result<span class="op">;</span></span>
-<span id="cb36-8"><a></a>    <span class="op">{</span></span>
-<span id="cb36-9"><a></a>        <span class="kw">let</span> other <span class="op">=</span> <span class="dt">String</span><span class="pp">::</span>from(<span class="st">"Simpson"</span>)<span class="op">;</span></span>
-<span id="cb36-10"><a></a>        result <span class="op">=</span> longest(name<span class="op">.</span>as_str()<span class="op">,</span> other<span class="op">.</span>as_str())<span class="op">;</span></span>
-<span id="cb36-11"><a></a>    <span class="op">}</span> <span class="co">// other is dropped here</span></span>
-<span id="cb36-12"><a></a>    <span class="pp">println!</span>(<span class="st">"{}"</span><span class="op">,</span> result)<span class="op">;</span></span>
-<span id="cb36-13"><a></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb37"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb37-1"><a></a><span class="kw">fn</span> longest<span class="op">&lt;</span><span class="ot">'a</span><span class="op">&gt;</span>(first<span class="op">:</span> <span class="op">&amp;</span><span class="ot">'a</span> <span class="dt">str</span><span class="op">,</span> second<span class="op">:</span> <span class="op">&amp;</span><span class="ot">'a</span> <span class="dt">str</span>) <span class="op">-&gt;</span> <span class="op">&amp;</span><span class="ot">'a</span> <span class="dt">str</span> <span class="op">{</span></span>
+<span id="cb37-2"><a></a>    <span class="cf">if</span> first<span class="op">.</span>len() <span class="op">&gt;=</span> second<span class="op">.</span>len() <span class="op">{</span> first <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span> second <span class="op">}</span></span>
+<span id="cb37-3"><a></a><span class="op">}</span></span>
+<span id="cb37-4"><a></a></span>
+<span id="cb37-5"><a></a><span class="kw">fn</span> main() <span class="op">{</span></span>
+<span id="cb37-6"><a></a>    <span class="kw">let</span> name <span class="op">=</span> <span class="dt">String</span><span class="pp">::</span>from(<span class="st">"Homer"</span>)<span class="op">;</span></span>
+<span id="cb37-7"><a></a>    <span class="kw">let</span> result<span class="op">;</span></span>
+<span id="cb37-8"><a></a>    <span class="op">{</span></span>
+<span id="cb37-9"><a></a>        <span class="kw">let</span> other <span class="op">=</span> <span class="dt">String</span><span class="pp">::</span>from(<span class="st">"Simpson"</span>)<span class="op">;</span></span>
+<span id="cb37-10"><a></a>        result <span class="op">=</span> longest(name<span class="op">.</span>as_str()<span class="op">,</span> other<span class="op">.</span>as_str())<span class="op">;</span></span>
+<span id="cb37-11"><a></a>    <span class="op">}</span> <span class="co">// other is dropped here</span></span>
+<span id="cb37-12"><a></a>    <span class="pp">println!</span>(<span class="st">"{}"</span><span class="op">,</span> result)<span class="op">;</span></span>
+<span id="cb37-13"><a></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p><strong>Try:</strong> Move the print inside the inner block. Why does that work?</p>
 <p><a href="https://play.rust-lang.org/?version=stable&amp;mode=debug&amp;edition=2024&amp;code=fn+longest%3C%27a%3E%28first%3A+%26%27a+str%2C+second%3A+%26%27a+str%29+-%3E+%26%27a+str+%7B%0A++++if+first.len%28%29+%3E%3D+second.len%28%29+%7B+first+%7D+else+%7B+second+%7D%0A%7D%0A%0Afn+main%28%29+%7B%0A++++let+name+%3D+String%3A%3Afrom%28%22Homer%22%29%3B%0A++++let+result%3B%0A++++%7B%0A++++++++let+other+%3D+String%3A%3Afrom%28%22Simpson%22%29%3B%0A++++++++result+%3D+longest%28name.as_str%28%29%2C+other.as_str%28%29%29%3B%0A++++%7D+%2F%2F+other+is+dropped+here%0A++++println%21%28%22%7B%7D%22%2C+result%29%3B%0A%7D%0A">Try this example in Rust Playground</a></p>
 <aside class="notes">
