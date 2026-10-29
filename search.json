@@ -1724,6 +1724,13 @@
     "text": "Choose access to match the job\n\n\n\n\n\n\n\n\nWhat does the function need?\nParameter type\nExample argument\n\n\n\n\nOwn the text\nString\nname\n\n\nRead an existing String\n&String\n&name\n\n\nRead text from different sources\n&str\nname.as_str() or \"Homer\"\n\n\nChange the caller’s String\n&mut String\n&mut name\n\n\n\nAsk first: Do I need to own, read, or change this value?\n\nHave students select a type for each situation: a function that stores an owned name for later (String), displays a message (&str), or adds a surname to the caller’s string (&mut String). The &String row matches the introductory example and the fixed lab contract; prefer &str when designing a general read-only text interface. These types communicate permissions and ownership. &mut String is needed when the function must grow the String, as push_str does."
   },
   {
+    "objectID": "slides/IS4010_W10_The_Soul_of_Rust.html#borrow-or-clone",
+    "href": "slides/IS4010_W10_The_Soul_of_Rust.html#borrow-or-clone",
+    "title": "IS 4010: Application Development with Artificial Intelligence",
+    "section": "Borrow or clone?",
+    "text": "Borrow or clone?\nlet name = String::from(\"Homer\");\nlet reader = &name;       // Points at name's text\nlet copy = name.clone();  // Makes new text\nreader ──→ name: [pointer, length, capacity] ──→ [ Homer ]\ncopy:          [pointer, length, capacity] ──→ [ Homer ]\n\n\n\n\n&name\nname.clone()\n\n\n\n\nCreates new text?\nNo\nYes, a full copy\n\n\nWho owns it?\nname\ncopy owns its own\n\n\nUsable after name is dropped?\nNo\nYes\n\n\nCost\nNearly free\nGrows with the text’s length\n\n\n\nBorrow by default. Clone when you truly need independent text.\n\nBoth let main keep using name, which is why students confuse them. AI assistants often suggest .clone() to silence a borrow error; that compiles, but it changes the program’s meaning when the goal was to update or share the original. Ask: if a function needs to change the caller’s text, which one works? Only &mut; a clone would change a copy. Connect the diagram to the clone slide from session 1."
+  },
+  {
     "objectID": "slides/IS4010_W10_The_Soul_of_Rust.html#your-turn-fix-the-access",
     "href": "slides/IS4010_W10_The_Soul_of_Rust.html#your-turn-fix-the-access",
     "title": "IS 4010: Application Development with Artificial Intelligence",
