@@ -697,7 +697,9 @@ error[E0502]: cannot borrow `name` as mutable
 because it is also borrowed as immutable
 ```
 
-**Why:** `reader` is used on the last line, so its shared borrow is still active when `editor` starts changing the text.
+**A shared reference comes with a promise: the value won't change while you're looking at it.**
+
+**Why:** `reader` is used on the last line, so `editor` changing the text would break that promise.
 
 [Try this example in Rust Playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2024&code=fn+main%28%29+%7B%0A++++let+mut+name+%3D+String%3A%3Afrom%28%22Homer%22%29%3B%0A++++let+reader+%3D+%26name%3B%0A++++let+editor+%3D+%26mut+name%3B%0A++++editor.push_str%28%22+Simpson%22%29%3B%0A%0A++++println%21%28%22%7B%7D%22%2C+reader%29%3B+%2F%2F+reader+is+still+needed+here%0A%7D%0A)
 
