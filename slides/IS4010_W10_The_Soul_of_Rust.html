@@ -1098,6 +1098,7 @@ Brandon M. Greenwell
 <span id="cb25-8"><a></a>    <span class="pp">println!</span>(<span class="st">"After: {}"</span><span class="op">,</span> name)<span class="op">;</span></span>
 <span id="cb25-9"><a></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p><strong>Why it works:</strong> <code>reader</code>’s borrow ends at its last use, before <code>editor</code> starts.</p>
+<p><strong>Ending a borrow does not drop the <code>String</code>.</strong> Only the owner’s scope decides when the text is cleaned up.</p>
 <p><strong>Try:</strong> Add <code>println!("{}", reader);</code> at the end. Will it still compile?</p>
 <p><a href="https://play.rust-lang.org/?version=stable&amp;mode=debug&amp;edition=2024&amp;code=fn+main%28%29+%7B%0A++++let+mut+name+%3D+String%3A%3Afrom%28%22Homer%22%29%3B%0A++++let+reader+%3D+%26name%3B%0A++++println%21%28%22Before%3A+%7B%7D%22%2C+reader%29%3B+%2F%2F+Last+use+of+reader%0A%0A++++let+editor+%3D+%26mut+name%3B%0A++++editor.push_str%28%22+Simpson%22%29%3B%0A++++println%21%28%22After%3A+%7B%7D%22%2C+name%29%3B%0A%7D%0A">Try this example in Rust Playground</a></p>
 <aside class="notes">
