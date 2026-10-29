@@ -507,6 +507,31 @@ Answer: name remains the owner; welcome borrows the String. Output: Welcome, Hom
 
 ---
 
+## Predict: which of these compile?
+
+Here `input` is a `String` in `main`.
+
+| | Parameter | Call |
+|---|---|---|
+| A | `name: String` | `welcome(input)` |
+| B | `name: &String` | `welcome(&input)` |
+| C | `name: String` | `welcome(&input)` |
+| D | `name: &String` | `welcome(input)` |
+
+::: {.fragment}
+- **A** compiles: ownership moves into `welcome`.
+- **B** compiles: `welcome` borrows, and `main` keeps `input`.
+- **C** and **D** fail with E0308, mismatched types.
+
+**The argument must match the parameter type.** Rust will not add or remove the `&` for you.
+:::
+
+::: {.notes}
+Give students a minute to choose before revealing. For C the compiler says expected String, found &String, and suggests removing the borrow; for D it says expected &String, found String, and suggests borrowing here. Point out that E0308 is a type error ("wrong kind of thing"), unlike E0382 or E0502, where the type is right but the timing breaks a rule. The call does not always need a literal &: if a variable already holds a reference, as in let r = &input; welcome(r);, it can be passed directly. Method calls such as input.len() do borrow automatically; ordinary function arguments do not. The &str slides later show one convenience: &input is accepted where &str is expected.
+:::
+
+---
+
 ## Borrow to change the string
 
 A plain `&` reference can only read. **`&mut` is a reference that is allowed to change the value.**
