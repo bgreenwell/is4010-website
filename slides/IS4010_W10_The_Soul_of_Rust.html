@@ -1126,7 +1126,8 @@ Brandon M. Greenwell
 <span id="cb23-8"><a></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb24"><pre class="sourceCode numberSource text number-lines code-with-copy"><code class="sourceCode"><span id="cb24-1"><a></a>error[E0502]: cannot borrow `name` as mutable</span>
 <span id="cb24-2"><a></a>because it is also borrowed as immutable</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p><strong>Why:</strong> <code>reader</code> is used on the last line, so its shared borrow is still active when <code>editor</code> starts changing the text.</p>
+<p><strong>A shared reference comes with a promise: the value won’t change while you’re looking at it.</strong></p>
+<p><strong>Why:</strong> <code>reader</code> is used on the last line, so <code>editor</code> changing the text would break that promise.</p>
 <p><a href="https://play.rust-lang.org/?version=stable&amp;mode=debug&amp;edition=2024&amp;code=fn+main%28%29+%7B%0A++++let+mut+name+%3D+String%3A%3Afrom%28%22Homer%22%29%3B%0A++++let+reader+%3D+%26name%3B%0A++++let+editor+%3D+%26mut+name%3B%0A++++editor.push_str%28%22+Simpson%22%29%3B%0A%0A++++println%21%28%22%7B%7D%22%2C+reader%29%3B+%2F%2F+reader+is+still+needed+here%0A%7D%0A">Try this example in Rust Playground</a></p>
 <aside class="notes">
 <p>Answer to “which rule?”: shared and exclusive borrows of the same data cannot overlap. Trace reader from its creation to its final println!. editor is created within that interval. The compiler rejects the pattern even though the operations would run one after another: the later use of reader keeps the shared borrow active across the mutable borrow. Ask students to move the read before the mutable borrow and predict the result.</p>
