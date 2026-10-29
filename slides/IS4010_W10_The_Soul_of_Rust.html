@@ -886,6 +886,62 @@ Brandon M. Greenwell
           display:block!important;
       }</style></aside>
 </section>
+<section id="predict-which-of-these-compile" class="slide level2">
+<h2>Predict: which of these compile?</h2>
+<p>Here <code>input</code> is a <code>String</code> in <code>main</code>.</p>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th></th>
+<th>Parameter</th>
+<th>Call</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>A</td>
+<td><code>name: String</code></td>
+<td><code>welcome(input)</code></td>
+</tr>
+<tr class="even">
+<td>B</td>
+<td><code>name: &amp;String</code></td>
+<td><code>welcome(&amp;input)</code></td>
+</tr>
+<tr class="odd">
+<td>C</td>
+<td><code>name: String</code></td>
+<td><code>welcome(&amp;input)</code></td>
+</tr>
+<tr class="even">
+<td>D</td>
+<td><code>name: &amp;String</code></td>
+<td><code>welcome(input)</code></td>
+</tr>
+</tbody>
+</table>
+<div class="fragment">
+<ul>
+<li><strong>A</strong> compiles: ownership moves into <code>welcome</code>.</li>
+<li><strong>B</strong> compiles: <code>welcome</code> borrows, and <code>main</code> keeps <code>input</code>.</li>
+<li><strong>C</strong> and <strong>D</strong> fail with E0308, mismatched types.</li>
+</ul>
+<p><strong>The argument must match the parameter type.</strong> Rust will not add or remove the <code>&amp;</code> for you.</p>
+</div>
+<aside class="notes">
+<p>Give students a minute to choose before revealing. For C the compiler says expected String, found &amp;String, and suggests removing the borrow; for D it says expected &amp;String, found String, and suggests borrowing here. Point out that E0308 is a type error (“wrong kind of thing”), unlike E0382 or E0502, where the type is right but the timing breaks a rule. The call does not always need a literal &amp;: if a variable already holds a reference, as in let r = &amp;input; welcome(r);, it can be passed directly. Method calls such as input.len() do borrow automatically; ordinary function arguments do not. The &amp;str slides later show one convenience: &amp;input is accepted where &amp;str is expected.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
 <section id="borrow-to-change-the-string" class="slide level2">
 <h2>Borrow to change the string</h2>
 <p>A plain <code>&amp;</code> reference can only read. <strong><code>&amp;mut</code> is a reference that is allowed to change the value.</strong></p>
