@@ -258,7 +258,7 @@ println!("{}, {}!", greeting, name);
 **Challenge:** Remove `mut` from `name`. What does the compiler say?
 
 ::: {.notes}
-Output: Hello, Homer Simpson!. Lab 09's string functions use both types: they take &str input and return a new String, as in reverse_string(_s: &str) -> String. That is all students need to read the signatures this week. Removing mut gives E0596 (cannot borrow name as mutable); do not explain borrowing yet, just point out that changing a String needs let mut, the same rule as the previous slide. Week 10 returns to both types and explains the & in full. Python comparison: a Python str is closest to &str in that it never changes; Python has no growable string type.
+Output: Hello, Homer Simpson!. Lab 09's string functions use both types: they take &str input and return a new String, as in reverse_string(_s: &str) -> String. That is all students need to read the signatures this week. Removing mut gives E0596 (cannot borrow name as mutable); do not explain borrowing yet, just point out that changing a String needs let mut, the same rule as the variables and mutability slide. Week 10 returns to both types and explains the & in full. Python comparison: a Python str is closest to &str in that it never changes; Python has no growable string type.
 :::
 
 ## Compound data types
