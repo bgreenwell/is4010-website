@@ -237,6 +237,30 @@ Immutability by default makes mutation explicit and rules out some accidental st
 Type inference works most of the time - Rust can figure out types. But when it can't, you'll get a compile error. Integer types: signed can be negative (i), unsigned cannot (u). Memory conscious choices matter in systems programming.
 :::
 
+## Text: `&str` and `String`
+
+::: {.incremental}
+-   Text in double quotes, like `"Hello"`, is a **string literal**. Its type is `&str`: fixed text built into your program
+-   `String` is text your program owns and can grow, created with `String::from("Homer")`
+-   Single quotes make a `char` (`'H'`); double quotes make a `&str` (`"H"`)
+-   The `&` means "a reference." Week 10 explains references fully; for now, read `&str` as "some text you can look at"
+:::
+
+```rust
+let greeting: &str = "Hello";         // A string literal
+let mut name = String::from("Homer"); // An owned, growable String
+name.push_str(" Simpson");            // Only a mut String can grow
+println!("{}, {}!", greeting, name);
+```
+
+**Try it yourself:** [▶ Run in Playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=fn+main%28%29+%7B%0A++++let+greeting%3A+%26str+%3D+%22Hello%22%3B+++++++++%2F%2F+A+string+literal%0A++++let+mut+name+%3D+String%3A%3Afrom%28%22Homer%22%29%3B+%2F%2F+An+owned%2C+growable+String%0A++++name.push_str%28%22+Simpson%22%29%3B++++++++++++%2F%2F+Only+a+mut+String+can+grow%0A++++println%21%28%22%7B%7D%2C+%7B%7D%21%22%2C+greeting%2C+name%29%3B%0A%7D%0A)
+
+**Challenge:** Remove `mut` from `name`. What does the compiler say?
+
+::: {.notes}
+Output: Hello, Homer Simpson!. Lab 09's string functions use both types: they take &str input and return a new String, as in reverse_string(_s: &str) -> String. That is all students need to read the signatures this week. Removing mut gives E0596 (cannot borrow name as mutable); do not explain borrowing yet, just point out that changing a String needs let mut, the same rule as the previous slide. Week 10 returns to both types and explains the & in full. Python comparison: a Python str is closest to &str in that it never changes; Python has no growable string type.
+:::
+
 ## Compound data types
 
 ::: {.incremental}
