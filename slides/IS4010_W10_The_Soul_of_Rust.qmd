@@ -963,6 +963,17 @@ fn main() {
 
 [Try this example in Rust Playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2024&code=fn+add_surname%28guest%3A+%26String%29+%7B%0A++++guest.push_str%28%22+Simpson%22%29%3B%0A%7D%0A%0Afn+main%28%29+%7B%0A++++let+name+%3D+String%3A%3Afrom%28%22Homer%22%29%3B%0A++++add_surname%28%26name%29%3B%0A++++println%21%28%22%7B%7D%22%2C+name%29%3B%0A%7D%0A)
 
+::: {.fragment}
+| After this edit | Compiler says |
+|---|---|
+| (none) | E0596: cannot borrow `*guest` as mutable, behind a `&` reference |
+| `guest: &mut String` | E0308: mismatched types; the call still passes `&name` |
+| `add_surname(&mut name)` | E0596: `name` is not declared as mutable |
+| `let mut name` | Compiles and prints `Homer Simpson` |
+
+**Each fix moves the error one step closer to the owner.**
+:::
+
 ::: {.notes}
 Give students 2–3 minutes. Expected initial diagnostic: E0596, cannot borrow through a shared reference as mutable. Three edits: parameter guest: &mut String, binding let mut name, and argument &mut name. Output after repair: Homer Simpson. This recreates the earlier working example for retrieval practice. Ask students why making only the binding mutable is insufficient: the function's parameter still permits only shared access. Do not solve this by cloning: the goal is to update the original String.
 :::
