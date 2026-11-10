@@ -31,43 +31,124 @@ Routine for the week, same as Week 10: predict, run, explain.
 
 # Session 1: generic types
 
-## One function, many types?
+## Write it once
 
-You have written `largest` for a list of numbers. Now you need it for a list of characters.
+This session follows one small task, **find the largest value in a list**, from copy-and-paste to a single function that works for many types.
 
-- Do you copy the function and change the types?
-- What if you also need it for floats, or for names?
-- How does the compiler know the comparison `>` makes sense for each type?
+- What do you do when the same code appears twice?
+- What if the only difference is the **type**?
+- How does the compiler know `>` makes sense for that type?
 
 **Our routine:** Predict → run → explain.
 
 ::: {.notes}
-Questions only; no syntax yet. Ask students how they would handle this in Python (they would not have to think about it) and whether that ever bit them with a TypeError. The answer this session builds toward: write the function once with a placeholder type, and tell the compiler what that type must be able to do.
+Questions only; no syntax yet. This session follows the Rust Book's own path: chapter 10's introduction removes duplication by extracting a function, then 10.1 removes duplication across types with generics. Ask students how they would handle the "different type" case in Python (they would not have to think about it) and whether that ever bit them with a TypeError.
 :::
 
 ---
 
-## You already use generics
+## Start with the raw logic
 
-| You have written | Read it as |
-|---|---|
-| `Vec<i32>` | A vector **of** `i32` |
-| `Option<i32>` | Maybe an `i32`, maybe nothing |
-| `Result<f64, String>` | An `f64` on success, a `String` on error |
-| `fn find_max_in_vec(numbers: &[i32]) -> Option<i32>` | Lab 09: a slice **of** `i32` in, maybe an `i32` out |
+```rust
+fn main() {
+    let numbers = [34, 50, 25, 100, 65];
 
-- The angle brackets fill in a type, like a blank on a form.
-- `Vec`, `Option`, and `Result` were written once and work with any type you put in the blank.
+    let mut largest = &numbers[0];
+    for number in &numbers {
+        if number > largest {
+            largest = number;
+        }
+    }
 
-**This week you write your own.**
+    println!("Largest number: {}", largest); // 100
+}
+```
+
+**Predict:** What prints? How does `largest` change as the loop runs?
+
+::: {.fragment}
+`Largest number: 100`. `largest` starts at `34`, then moves to `50`, then `100`, and never changes after that.
+:::
+
+[Try this example in Rust Playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2024&code=fn+main%28%29+%7B%0A++++let+numbers+%3D+%5B34%2C+50%2C+25%2C+100%2C+65%5D%3B%0A%0A++++let+mut+largest+%3D+%26numbers%5B0%5D%3B%0A++++for+number+in+%26numbers+%7B%0A++++++++if+number+%3E+largest+%7B%0A++++++++++++largest+%3D+number%3B%0A++++++++%7D%0A++++%7D%0A%0A++++println%21%28%22Largest+number%3A+%7B%7D%22%2C+largest%29%3B+%2F%2F+100%0A%7D%0A)
 
 ::: {.notes}
-Students met these in Weeks 09 and 11 without the word "generic." Make the connection explicit: someone wrote Vec<T> once, with T as the blank, and the compiler fills the blank in each time we use it. The form analogy carries through the session: T is the blank, and a trait bound (later) is the instruction printed next to the blank, like "must be a number."
+This is the Rust Book's listing 10-1, with an array in place of vec! so Clippy stays quiet. Trace it on the board: largest is a reference to the current biggest item (Week 10); `for number in &numbers` borrows each item in turn, and comparing two references compares the values they point to. Nothing generic yet; the point is to have working logic before reorganizing it.
 :::
 
 ---
 
-## The problem: duplicate code {.smaller .code-tight}
+## A second list: copy and paste? {.smaller .code-tight}
+
+```rust
+fn main() {
+    let numbers = [34, 50, 25, 100, 65];
+
+    let mut largest = &numbers[0];
+    for number in &numbers {
+        if number > largest {
+            largest = number;
+        }
+    }
+    println!("Largest number: {}", largest); // 100
+
+    let numbers = [102, 34, 6000, 89, 54, 2, 43, 8];
+
+    let mut largest = &numbers[0];
+    for number in &numbers {
+        if number > largest {
+            largest = number;
+        }
+    }
+    println!("Largest number: {}", largest); // 6000
+}
+```
+
+**Predict:** If the loop had a bug, how many places would you need to fix it?
+
+[Try this example in Rust Playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2024&code=fn+main%28%29+%7B%0A++++let+numbers+%3D+%5B34%2C+50%2C+25%2C+100%2C+65%5D%3B%0A%0A++++let+mut+largest+%3D+%26numbers%5B0%5D%3B%0A++++for+number+in+%26numbers+%7B%0A++++++++if+number+%3E+largest+%7B%0A++++++++++++largest+%3D+number%3B%0A++++++++%7D%0A++++%7D%0A++++println%21%28%22Largest+number%3A+%7B%7D%22%2C+largest%29%3B+%2F%2F+100%0A%0A++++let+numbers+%3D+%5B102%2C+34%2C+6000%2C+89%2C+54%2C+2%2C+43%2C+8%5D%3B%0A%0A++++let+mut+largest+%3D+%26numbers%5B0%5D%3B%0A++++for+number+in+%26numbers+%7B%0A++++++++if+number+%3E+largest+%7B%0A++++++++++++largest+%3D+number%3B%0A++++++++%7D%0A++++%7D%0A++++println%21%28%22Largest+number%3A+%7B%7D%22%2C+largest%29%3B+%2F%2F+6000%0A%7D%0A)
+
+::: {.notes}
+Book listing 10-2. Output: Largest number: 100, then Largest number: 6000. Answer: two, and every new list adds another copy. The second let numbers and let mut largest shadow the first ones (Week 09), which is why the copy compiles unchanged. Ask students what is different between the two blocks: only the list.
+:::
+
+---
+
+## Extract a function {.smaller .code-tight}
+
+```rust
+fn largest(list: &[i32]) -> &i32 {
+    let mut largest = &list[0];
+    for item in list {
+        if item > largest {
+            largest = item;
+        }
+    }
+    largest
+}
+
+fn main() {
+    let numbers = [34, 50, 25, 100, 65];
+    println!("Largest number: {}", largest(&numbers)); // 100
+
+    let numbers = [102, 34, 6000, 89, 54, 2, 43, 8];
+    println!("Largest number: {}", largest(&numbers)); // 6000
+}
+```
+
+1. Find the duplicated code.
+2. Move it into a function. What varied, the list, becomes a parameter: `list: &[i32]`.
+3. Replace each copy with a call.
+
+[Try this example in Rust Playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2024&code=fn+largest%28list%3A+%26%5Bi32%5D%29+-%3E+%26i32+%7B%0A++++let+mut+largest+%3D+%26list%5B0%5D%3B%0A++++for+item+in+list+%7B%0A++++++++if+item+%3E+largest+%7B%0A++++++++++++largest+%3D+item%3B%0A++++++++%7D%0A++++%7D%0A++++largest%0A%7D%0A%0Afn+main%28%29+%7B%0A++++let+numbers+%3D+%5B34%2C+50%2C+25%2C+100%2C+65%5D%3B%0A++++println%21%28%22Largest+number%3A+%7B%7D%22%2C+largest%28%26numbers%29%29%3B+%2F%2F+100%0A%0A++++let+numbers+%3D+%5B102%2C+34%2C+6000%2C+89%2C+54%2C+2%2C+43%2C+8%5D%3B%0A++++println%21%28%22Largest+number%3A+%7B%7D%22%2C+largest%28%26numbers%29%29%3B+%2F%2F+6000%0A%7D%0A)
+
+::: {.notes}
+Book listing 10-3 and its three steps, nearly word for word. Output: Largest number: 100, then 6000. The function borrows the list (&[i32], a slice of i32) and returns a reference to one item (&i32), so the caller keeps ownership: Week 10 again. Students have done this extraction in Python many times; the new idea comes next, when what varies is not a value but a type.
+:::
+
+---
+
+## Same logic, different type {.smaller .code-tight}
 
 :::: {.columns}
 ::: {.column width="50%"}
@@ -108,12 +189,18 @@ fn main() {
 }
 ```
 
+Now we need `largest` for characters too. Extracting worked for a different **list**; what about a different **type**?
+
 **Predict:** What is different between the two functions?
+
+::: {.fragment}
+Only `i32` versus `char`. The bodies are identical. **Next: make the type a parameter, too.**
+:::
 
 [Try this example in Rust Playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2024&code=fn+largest_i32%28list%3A+%26%5Bi32%5D%29+-%3E+%26i32+%7B%0A++++let+mut+largest+%3D+%26list%5B0%5D%3B%0A++++for+item+in+list+%7B%0A++++++++if+item+%3E+largest+%7B%0A++++++++++++largest+%3D+item%3B%0A++++++++%7D%0A++++%7D%0A++++largest%0A%7D%0A%0Afn+largest_char%28list%3A+%26%5Bchar%5D%29+-%3E+%26char+%7B%0A++++let+mut+largest+%3D+%26list%5B0%5D%3B%0A++++for+item+in+list+%7B%0A++++++++if+item+%3E+largest+%7B%0A++++++++++++largest+%3D+item%3B%0A++++++++%7D%0A++++%7D%0A++++largest%0A%7D%0A%0Afn+main%28%29+%7B%0A++++let+numbers+%3D+%5B34%2C+50%2C+25%2C+100%2C+65%5D%3B%0A++++println%21%28%22Largest+number%3A+%7B%7D%22%2C+largest_i32%28%26numbers%29%29%3B+%2F%2F+100%0A%0A++++let+chars+%3D+%5B%27y%27%2C+%27m%27%2C+%27a%27%2C+%27q%27%5D%3B%0A++++println%21%28%22Largest+char%3A+%7B%7D%22%2C+largest_char%28%26chars%29%29%3B+%2F%2F+y%0A%7D%0A)
 
 ::: {.notes}
-Answer: only the types in the signatures. The bodies are identical. This is the book's listing 10-4. Ask: if you found a bug in this logic, how many places would you fix it? With five types, five copies.
+This is the book's listing 10-4, which opens section 10.1. Same move as the last slide: find what differs and make it a parameter. Before, the difference was a value (the list); now it is a type. Ask: if you found a bug in this logic, how many places would you fix it? With five types, five copies.
 
 **Python parallel:**
 
@@ -130,6 +217,26 @@ largest(['y', 'm', 'a', 'q'])   # also works
 ```
 
 Python needs no duplication, but passing values that cannot be compared raises TypeError only when that line runs. Rust wants the same single function, checked before the program runs.
+:::
+
+---
+
+## You already use generics
+
+| You have written | Read it as |
+|---|---|
+| `Vec<i32>` | A vector **of** `i32` |
+| `Option<i32>` | Maybe an `i32`, maybe nothing |
+| `Result<f64, String>` | An `f64` on success, a `String` on error |
+| `fn find_max_in_vec(numbers: &[i32]) -> Option<i32>` | Lab 09: a slice **of** `i32` in, maybe an `i32` out |
+
+- The angle brackets fill in a type, like a blank on a form.
+- `Vec`, `Option`, and `Result` were written once and work with any type you put in the blank.
+
+**This week you write your own.**
+
+::: {.notes}
+Students met these in Weeks 09 and 11 without the word "generic." Make the connection explicit: someone wrote Vec<T> once, with T as the blank, and the compiler fills the blank in each time we use it. The form analogy carries through the session: T is the blank, and a trait bound (later) is the instruction printed next to the blank, like "must be a number."
 :::
 
 ---
