@@ -1470,6 +1470,39 @@ Brandon M. Greenwell
 <span id="cb35-9"><a></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p><strong>Repair:</strong> Change the original string through a borrow. Explain each edit.</p>
 <p><a href="https://play.rust-lang.org/?version=stable&amp;mode=debug&amp;edition=2024&amp;code=fn+add_surname%28guest%3A+%26String%29+%7B%0A++++guest.push_str%28%22+Simpson%22%29%3B%0A%7D%0A%0Afn+main%28%29+%7B%0A++++let+name+%3D+String%3A%3Afrom%28%22Homer%22%29%3B%0A++++add_surname%28%26name%29%3B%0A++++println%21%28%22%7B%7D%22%2C+name%29%3B%0A%7D%0A">Try this example in Rust Playground</a></p>
+<div class="fragment">
+<table class="caption-top">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>After this edit</th>
+<th>Compiler says</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>(none)</td>
+<td>E0596: cannot borrow <code>*guest</code> as mutable, behind a <code>&amp;</code> reference</td>
+</tr>
+<tr class="even">
+<td><code>guest: &amp;mut String</code></td>
+<td>E0308: mismatched types; the call still passes <code>&amp;name</code></td>
+</tr>
+<tr class="odd">
+<td><code>add_surname(&amp;mut name)</code></td>
+<td>E0596: <code>name</code> is not declared as mutable</td>
+</tr>
+<tr class="even">
+<td><code>let mut name</code></td>
+<td>Compiles and prints <code>Homer Simpson</code></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Each fix moves the error one step closer to the owner.</strong></p>
+</div>
 <aside class="notes">
 <p>Give students 2–3 minutes. Expected initial diagnostic: E0596, cannot borrow through a shared reference as mutable. Three edits: parameter guest: &amp;mut String, binding let mut name, and argument &amp;mut name. Output after repair: Homer Simpson. This recreates the earlier working example for retrieval practice. Ask students why making only the binding mutable is insufficient: the function’s parameter still permits only shared access. Do not solve this by cloning: the goal is to update the original String.</p>
 <style type="text/css">
