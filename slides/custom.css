@@ -42,6 +42,15 @@
   line-height: 1.15;
 }
 
+/* Opt-in for slides that show a whole program: smaller code so nothing scrolls */
+.reveal section.code-tight pre {
+  font-size: 0.62em;
+}
+
+.reveal section.code-tight pre code {
+  max-height: 580px;
+}
+
 /* Notes styling - keep readable for instructor */
 .reveal .notes {
   font-size: 0.8em;
