@@ -6,1024 +6,1098 @@ author: "Brandon M. Greenwell"
 
 ## Week 13 overview {.inverse}
 
-**Session 1: iterators and closures**
+**Session 1: closures and iterators** ([Rust Book 13](https://doc.rust-lang.org/book/ch13-00-functional-features.html))
 
-- Iterator methods (`.map()`, `.filter()`, `.fold()`, `.collect()`)
-- Closures and capture semantics
-- Closure traits: `Fn`, `FnMut`, `FnOnce`
-- Building data processing pipelines
-- Lazy evaluation and allocation choices
+- Closures: small functions that capture values around them
+- Iterators: process a collection one item at a time
+- Chaining adaptors: `map`, `filter`, `collect`, `sum`
 
-**Session 2: smart pointers and error handling**
+**Session 2: smart pointers and errors** ([Rust Book 15](https://doc.rust-lang.org/book/ch15-00-smart-pointers.html) and [9](https://doc.rust-lang.org/book/ch09-00-error-handling.html))
 
-- Smart pointers: `Box<T>`, `Rc<T>`, `RefCell<T>`
-- Interior mutability patterns
-- When to use each smart pointer
-- Idiomatic error handling with `Result<T, E>`
-- The `?` operator and custom error types
+- `Box<T>`, `Rc<T>`, and `RefCell<T>`
+- `Result`, the `?` operator, and custom error types
+- Lab 13
 
 ::: {.notes}
-This week focuses on iterator composition, closure capture, shared ownership, interior mutability, and explicit error propagation. Evaluate each pattern by the ownership or control-flow problem it solves.
+Slides follow the Rust Book's own examples where practical: chapter 13 for closures and iterators, chapter 15 for smart pointers, and chapter 9 for error handling, so the reading and the lecture line up.
+
+The thread through the whole week is Week 10's three access levels: read (&), change (&mut), and own. Closures capture with one of the three, iterators hand out items with one of the three, and smart pointers relax the ownership rules in carefully checked ways. Point back to this every time it appears.
 :::
 
 ---
 
-## Why idiomatic Rust matters {.inverse}
+## One idea runs through this week
 
-**What the patterns provide:**
+Week 10 gave us three levels of access to a value:
 
-- **Functional style**: Process data without manual loops
-- **Flexible ownership**: Build complex data structures safely
-- **Explicit errors**: Expected failure categories in return types
-- **Iterator composition**: Lazy adaptors that can avoid intermediate collections
+| Access | Week 10 | Closures | Iterators |
+|---|---|---|---|
+| Read | `&name` | `Fn` | `.iter()` gives `&T` |
+| Change | `&mut name` | `FnMut` | `.iter_mut()` gives `&mut T` |
+| Own | `name` (move) | `FnOnce` | `.into_iter()` gives `T` |
 
-**Project examples:**
-
-- [Ripgrep](https://github.com/BurntSushi/ripgrep): Fast search tool using iterators
-- [Servo](https://servo.org/): Browser engine with smart pointers
-- [Tokio](https://tokio.rs/): Async runtime with Result-based APIs
+**Each new tool this week asks the same question: does it read, change, or own?**
 
 ::: {.notes}
-These patterns appear often in Rust code. Learn to recognize their trade-offs and start with the simplest ownership model that satisfies the requirement.
+Students do not need to memorize the columns now; the table is a map for the session. Each row reappears on a later slide with a working example. Come back to it at the end of session 1.
 :::
 
 ---
 
-# Session 1: iterators and closures
+# Session 1: closures and iterators
 
-## The problem: manual iteration {.smaller}
-
-**Traditional loop-based approach:**
+## Functions you can write inline {.smaller .code-tight}
 
 ```rust
-let numbers = vec![1, 2, 3, 4, 5, 6];
-let mut result = Vec::new();
-
-for num in &numbers {
-    if num % 2 == 0 {  // Keep evens
-        let squared = num * num;  // Square them
-        result.push(squared);
-    }
-}
-// result = [4, 16, 36]
-```
-
-**Try it yourself:** [Run in Rust Playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=fn%20main%28%29%20%7B%0Alet%20numbers%20%3D%20vec%21%5B1%2C%202%2C%203%2C%204%2C%205%2C%206%5D%3B%0Alet%20mut%20result%20%3D%20Vec%3A%3Anew%28%29%3B%0A%0Afor%20num%20in%20%26numbers%20%7B%0A%20%20%20%20if%20num%20%25%202%20%3D%3D%200%20%7B%20%20%2F%2F%20Keep%20evens%0A%20%20%20%20%20%20%20%20let%20squared%20%3D%20num%20%2A%20num%3B%20%20%2F%2F%20Square%20them%0A%20%20%20%20%20%20%20%20result.push%28squared%29%3B%0A%20%20%20%20%7D%0A%7D%0A%2F%2F%20result%20%3D%20%5B4%2C%2016%2C%2036%5D%0A%7D%0A)
-
-**Problems:**
-
-- Mutable state (`result`)
-- Multiple steps spread across lines
-- Intent buried in implementation
-- Error-prone (easy to forget to push, etc.)
-
-::: {.notes}
-Ask students: "What if we had 5 different transformations? Code gets messy fast."
-:::
-
----
-
-## Introducing iterators {.smaller}
-
-**Functional approach with iterator chains:**
-
-```rust
-let numbers = vec![1, 2, 3, 4, 5, 6];
-
-let result: Vec<i32> = numbers
-    .iter()
-    .filter(|&&n| n % 2 == 0)  // Keep evens
-    .map(|&n| n * n)            // Square them
-    .collect();
-
-// result = [4, 16, 36]
-```
-
-**Try it yourself:** [Run in Rust Playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=fn%20main%28%29%20%7B%0Alet%20numbers%20%3D%20vec%21%5B1%2C%202%2C%203%2C%204%2C%205%2C%206%5D%3B%0A%0Alet%20result%3A%20Vec%3Ci32%3E%20%3D%20numbers%0A%20%20%20%20.iter%28%29%0A%20%20%20%20.filter%28%7C%26%26n%7C%20n%20%25%202%20%3D%3D%200%29%20%20%2F%2F%20Keep%20evens%0A%20%20%20%20.map%28%7C%26n%7C%20n%20%2A%20n%29%20%20%20%20%20%20%20%20%20%20%20%20%2F%2F%20Square%20them%0A%20%20%20%20.collect%28%29%3B%0A%0A%2F%2F%20result%20%3D%20%5B4%2C%2016%2C%2036%5D%0A%7D%0A)
-
-**Benefits:**
-
-- Declarative: says *what* to do, not *how*
-- Composable: chain operations together
-- Lazy: only evaluates when needed
-- Optimizable: iterator chains can compile to efficient loops, but measure when performance matters
-
-[Iterator trait documentation](https://doc.rust-lang.org/std/iter/trait.Iterator.html)
-
-::: {.notes}
-Emphasize lazy evaluation - intermediate steps don't create temporary vectors.
-:::
-
----
-
-## Common iterator methods {.smaller}
-
-**Transformation:**
-
-```rust
-// map: transform each element
-vec![1, 2, 3].iter().map(|x| x * 2)  // [2, 4, 6]
-
-// filter: keep elements matching condition
-vec![1, 2, 3, 4].iter().filter(|&&x| x % 2 == 0)  // [2, 4]
-
-// filter_map: transform and filter in one step
-vec!["1", "two", "3"]
-    .iter()
-    .filter_map(|s| s.parse::<i32>().ok())  // [1, 3]
-```
-
-**Aggregation:**
-
-```rust
-// sum: add all elements
-vec![1, 2, 3].iter().sum::<i32>()  // 6
-
-// fold: custom aggregation
-vec![1, 2, 3].iter().fold(0, |acc, x| acc + x)  // 6
-
-// collect: gather results into a collection
-(1..=5).collect::<Vec<i32>>()  // [1, 2, 3, 4, 5]
-```
-
-[Iterator methods](https://doc.rust-lang.org/std/iter/trait.Iterator.html#provided-methods)
-
-::: {.notes}
-Explain that iterator adaptors are lazy and usually inline well. `collect()` intentionally allocates a collection; inspect optimized output or benchmark before claiming equivalence with a particular loop.
-:::
-
----
-
-## Practical example: line lengths {.smaller}
-
-**Trim nonempty lines and record their lengths:**
-
-```rust
-fn nonempty_line_lengths(text: &str) -> Vec<usize> {
-    text.lines()
-        .map(str::trim)
-        .filter(|line| !line.is_empty())
-        .map(str::len)
-        .collect()
-}
-```
-
-**Try it yourself:** [Run in Rust Playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=fn%20main%28%29%20%7B%0Afn%20nonempty_line_lengths%28text%3A%20%26str%29%20-%3E%20Vec%3Cusize%3E%20%7B%0A%20%20%20%20text.lines%28%29%0A%20%20%20%20%20%20%20%20.map%28str%3A%3Atrim%29%0A%20%20%20%20%20%20%20%20.filter%28%7Cline%7C%20%21line.is_empty%28%29%29%0A%20%20%20%20%20%20%20%20.map%28str%3A%3Alen%29%0A%20%20%20%20%20%20%20%20.collect%28%29%0A%7D%0A%7D%0A)
-
-::: {.notes}
-Compare this iterator version with a loop using the same requirements. Prefer the version whose data flow the class can explain and test.
-:::
-
----
-
-## Try it yourself: iterator chains {.inverse .smaller}
-
-**Challenge**: Build an iterator pipeline
-
-```rust
-// Given this vector:
-let numbers = vec![1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-
-// Use iterator methods to:
-// 1. Keep values greater than 5
-// 2. Double each value
-// 3. Sum the results
-// Expected: 80
-
-let result: i32 = numbers
-    .iter()
-    .filter(|&&n| n > 5)
-    .map(|&n| n * 2)
-    .sum();
-```
-
-**Try on [Rust Playground](https://play.rust-lang.org/)**
-
-::: {.notes}
-Give students 3-4 minutes. Then show solution and discuss the pattern.
-:::
-
----
-
-## Closures: anonymous functions {.smaller}
-
-**Closures are functions that can capture their environment:**
-
-```rust
-// Regular function
-fn add_one(x: i32) -> i32 {
+fn add_one_v1(x: u32) -> u32 {
     x + 1
 }
 
-// Closure (short form)
-let add_one = |x: i32| x + 1;
+fn main() {
+    let add_one_v2 = |x: u32| -> u32 { x + 1 };
+    let add_one_v3 = |x: u32| x + 1;
+    let add_one_v4 = |x| x + 1;
 
-// Closure with type inference (Rust figures it out!)
-let add_one = |x| x + 1;
-
-// Use it:
-let result = add_one(5);  // 6
+    println!("{}", add_one_v1(5)); // 6
+    println!("{}", add_one_v2(5)); // 6
+    println!("{}", add_one_v3(5)); // 6
+    println!("{}", add_one_v4(5)); // 6
+}
 ```
 
-**Try it yourself:** [Run in Rust Playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=fn%20main%28%29%20%7B%0A%2F%2F%20Regular%20function%0Afn%20add_one%28x%3A%20i32%29%20-%3E%20i32%20%7B%0A%20%20%20%20x%20%2B%201%0A%7D%0A%0A%2F%2F%20Closure%20%28short%20form%29%0Alet%20add_one%20%3D%20%7Cx%3A%20i32%7C%20x%20%2B%201%3B%0A%0A%2F%2F%20Closure%20with%20type%20inference%20%28Rust%20figures%20it%20out%21%29%0Alet%20add_one%20%3D%20%7Cx%7C%20x%20%2B%201%3B%0A%0A%2F%2F%20Use%20it%3A%0Alet%20result%20%3D%20add_one%285%29%3B%20%20%2F%2F%206%0A%7D%0A)
+- A **closure** is a function without a name: `|x| x + 1`.
+- Read `|x|` as "given `x`." The body follows.
+- Types are optional when Rust can infer them.
 
-**Closures can capture variables:**
-
-```rust
-let threshold = 10;
-
-// Closure captures 'threshold' from environment
-let is_large = |x: i32| x > threshold;
-
-println!("{}", is_large(5));   // false
-println!("{}", is_large(15));  // true
-```
-
-**Try it yourself:** [Run in Rust Playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=fn%20main%28%29%20%7B%0Alet%20threshold%20%3D%2010%3B%0A%0A%2F%2F%20Closure%20captures%20%27threshold%27%20from%20environment%0Alet%20is_large%20%3D%20%7Cx%3A%20i32%7C%20x%20%3E%20threshold%3B%0A%0Aprintln%21%28%22%7B%7D%22%2C%20is_large%285%29%29%3B%20%20%20%2F%2F%20false%0Aprintln%21%28%22%7B%7D%22%2C%20is_large%2815%29%29%3B%20%20%2F%2F%20true%0A%7D%0A)
-
-[Closures in Rust Book](https://doc.rust-lang.org/book/ch13-01-closures.html)
+[Try this example in Rust Playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2024&code=fn+add_one_v1%28x%3A+u32%29+-%3E+u32+%7B%0A++++x+%2B+1%0A%7D%0A%0Afn+main%28%29+%7B%0A++++let+add_one_v2+%3D+%7Cx%3A+u32%7C+-%3E+u32+%7B+x+%2B+1+%7D%3B%0A++++let+add_one_v3+%3D+%7Cx%3A+u32%7C+x+%2B+1%3B%0A++++let+add_one_v4+%3D+%7Cx%7C+x+%2B+1%3B%0A%0A++++println%21%28%22%7B%7D%22%2C+add_one_v1%285%29%29%3B+%2F%2F+6%0A++++println%21%28%22%7B%7D%22%2C+add_one_v2%285%29%29%3B+%2F%2F+6%0A++++println%21%28%22%7B%7D%22%2C+add_one_v3%285%29%29%3B+%2F%2F+6%0A++++println%21%28%22%7B%7D%22%2C+add_one_v4%285%29%29%3B+%2F%2F+6%0A%7D%0A)
 
 ::: {.notes}
-This is where closures shine - they remember their environment!
+Output: 6 four times. This is the Rust Book's add_one_v1 through add_one_v4 comparison from 13.1. Each version drops something optional: the return type, the braces, then the parameter type. Python parallel: lambda x: x + 1. Rust closures can have multi-line bodies in braces, which Python lambdas cannot.
 :::
 
 ---
 
-## Closure traits: `Fn`, `FnMut`, and `FnOnce` {.smaller}
+## Closures can capture values
 
-**Rust has three closure traits based on how they capture variables:**
-
-**`Fn`** - Borrows immutably:
 ```rust
-let x = 10;
-let print_x = || println!("{}", x);  // Borrows x
-print_x();  // Can call multiple times
+fn main() {
+    let threshold = 10;
+
+    // The closure uses threshold from main
+    let is_large = |x: i32| x > threshold;
+
+    println!("{}", is_large(5)); // false
+    println!("{}", is_large(15)); // true
+}
 ```
 
-**Try it yourself:** [Run in Rust Playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=fn%20main%28%29%20%7B%0Alet%20x%20%3D%2010%3B%0Alet%20print_x%20%3D%20%7C%7C%20println%21%28%22%7B%7D%22%2C%20x%29%3B%20%20%2F%2F%20Borrows%20x%0Aprint_x%28%29%3B%20%20%2F%2F%20Can%20call%20multiple%20times%0A%7D%0A)
+**Predict:** Could a regular `fn is_large` inside `main` use `threshold`?
 
-**`FnMut`** - Borrows mutably:
-```rust
-let mut count = 0;
-let mut increment = || { count += 1; };  // Mutably borrows count
-increment();  // count = 1
-increment();  // count = 2
-```
+::: {.fragment}
+No: `E0434: can't capture dynamic environment in a fn item`. Only closures can see variables around them.
+:::
 
-**Try it yourself:** [Run in Rust Playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=fn%20main%28%29%20%7B%0Alet%20mut%20count%20%3D%200%3B%0Alet%20mut%20increment%20%3D%20%7C%7C%20%7B%20count%20%2B%3D%201%3B%20%7D%3B%20%20%2F%2F%20Mutably%20borrows%20count%0Aincrement%28%29%3B%20%20%2F%2F%20count%20%3D%201%0Aincrement%28%29%3B%20%20%2F%2F%20count%20%3D%202%0A%7D%0A)
-
-**`FnOnce`** - Takes ownership:
-```rust
-let data = vec![1, 2, 3];
-let consume = || drop(data);  // Takes ownership of data
-consume();  // data is moved, can't call again
-```
-
-**Try it yourself:** [Run in Rust Playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=fn%20main%28%29%20%7B%0Alet%20data%20%3D%20vec%21%5B1%2C%202%2C%203%5D%3B%0Alet%20consume%20%3D%20%7C%7C%20drop%28data%29%3B%20%20%2F%2F%20Takes%20ownership%20of%20data%0Aconsume%28%29%3B%20%20%2F%2F%20data%20is%20moved%2C%20can%27t%20call%20again%0A%7D%0A)
-
-[Fn traits](https://doc.rust-lang.org/std/ops/index.html#traits)
+[Try this example in Rust Playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2024&code=fn+main%28%29+%7B%0A++++let+threshold+%3D+10%3B%0A%0A++++%2F%2F+The+closure+uses+threshold+from+main%0A++++let+is_large+%3D+%7Cx%3A+i32%7C+x+%3E+threshold%3B%0A%0A++++println%21%28%22%7B%7D%22%2C+is_large%285%29%29%3B+%2F%2F+false%0A++++println%21%28%22%7B%7D%22%2C+is_large%2815%29%29%3B+%2F%2F+true%0A%7D%0A)
 
 ::: {.notes}
-Most closures are Fn or FnMut. FnOnce is rare but important to understand.
+Output: false, then true. The ability to capture is what makes closures useful as arguments to filter and map later: the closure brings its own data, such as a threshold, along with it. Demonstrate the fn version from the fragment if time allows.
 :::
 
 ---
 
-## Practical example: captured state {.smaller}
-
-**A closure can update a value from its environment:**
+## Capturing to read or to change {.smaller}
 
 ```rust
-let mut total = 0;
-let mut add_to_total = |amount| {
-    total += amount;
-    total
-};
+fn main() {
+    let mut list = vec![1, 2, 3];
 
-println!("{}", add_to_total(4));  // 4
-println!("{}", add_to_total(7));  // 11
+    // Borrows list for reading, like &list
+    let print_list = || println!("Closure sees: {:?}", list);
+    print_list(); // Closure sees: [1, 2, 3]
+    println!("Main still sees: {:?}", list); // Main still sees: [1, 2, 3]
+
+    // Borrows list for changing, like &mut list
+    let mut add_seven = || list.push(7);
+    add_seven();
+    println!("After push: {:?}", list); // After push: [1, 2, 3, 7]
+}
 ```
 
-**Try it yourself:** [Run in Rust Playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=fn%20main%28%29%20%7B%0Alet%20mut%20total%20%3D%200%3B%0Alet%20mut%20add_to_total%20%3D%20%7Camount%7C%20%7B%0A%20%20%20%20total%20%2B%3D%20amount%3B%0A%20%20%20%20total%0A%7D%3B%0A%0Aprintln%21%28%22%7B%7D%22%2C%20add_to_total%284%29%29%3B%20%20%2F%2F%204%0Aprintln%21%28%22%7B%7D%22%2C%20add_to_total%287%29%29%3B%20%20%2F%2F%2011%0A%7D%0A)
+- `print_list` only reads `list`, so it borrows like `&list`. Main can still read it too.
+- `add_seven` changes `list`, so it borrows like `&mut list`, and must be declared `let mut`.
 
-**Key concepts:**
-
-- `FnMut` because the closure mutates captured `total`
-- The mutable borrow lasts while the closure may still be used
+[Try this example in Rust Playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2024&code=fn+main%28%29+%7B%0A++++let+mut+list+%3D+vec%21%5B1%2C+2%2C+3%5D%3B%0A%0A++++%2F%2F+Borrows+list+for+reading%2C+like+%26list%0A++++let+print_list+%3D+%7C%7C+println%21%28%22Closure+sees%3A+%7B%3A%3F%7D%22%2C+list%29%3B%0A++++print_list%28%29%3B+%2F%2F+Closure+sees%3A+%5B1%2C+2%2C+3%5D%0A++++println%21%28%22Main+still+sees%3A+%7B%3A%3F%7D%22%2C+list%29%3B+%2F%2F+Main+still+sees%3A+%5B1%2C+2%2C+3%5D%0A%0A++++%2F%2F+Borrows+list+for+changing%2C+like+%26mut+list%0A++++let+mut+add_seven+%3D+%7C%7C+list.push%287%29%3B%0A++++add_seven%28%29%3B%0A++++println%21%28%22After+push%3A+%7B%3A%3F%7D%22%2C+list%29%3B+%2F%2F+After+push%3A+%5B1%2C+2%2C+3%2C+7%5D%0A%7D%0A)
 
 ::: {.notes}
-The captured variable gives this closure state that persists between calls.
+Book listings 13-4 and 13-5. Output: Closure sees: [1, 2, 3], Main still sees: [1, 2, 3], After push: [1, 2, 3, 7]. Rust picks the least access the body needs. Ask: what happens if you try to print list between creating add_seven and calling it? E0502, the reader/editor conflict from Week 10, because the closure holds a mutable borrow until its last use.
 :::
 
 ---
 
-## Iterator and closure pattern {.smaller}
-
-**Processing collections with closures:**
+## Capturing to own: `move` and `FnOnce` {.smaller}
 
 ```rust
-#[derive(Debug)]
+fn main() {
+    let name = String::from("Homer");
+
+    // Moves name into the closure, then gives it away when called
+    let take_name = move || name;
+
+    let owner = take_name();
+    println!("{}", owner); // Homer
+}
+```
+
+- `move` makes the closure take ownership of `name`.
+- Calling it gives `name` away, so it can be called only **once**: an `FnOnce` closure.
+
+**Predict:** What happens if we call `take_name()` a second time?
+
+::: {.fragment}
+`E0382: use of moved value: take_name`. The value was already given away on the first call.
+:::
+
+[Try this example in Rust Playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2024&code=fn+main%28%29+%7B%0A++++let+name+%3D+String%3A%3Afrom%28%22Homer%22%29%3B%0A%0A++++%2F%2F+Moves+name+into+the+closure%2C+then+gives+it+away+when+called%0A++++let+take_name+%3D+move+%7C%7C+name%3B%0A%0A++++let+owner+%3D+take_name%28%29%3B%0A++++println%21%28%22%7B%7D%22%2C+owner%29%3B+%2F%2F+Homer%0A%7D%0A)
+
+::: {.notes}
+Output: Homer. The body returns the captured String, which moves it out of the closure. This is the "own" row of the table. Most closures are Fn or FnMut; FnOnce matters when a closure hands away something it owns.
+:::
+
+---
+
+## The three closure traits
+
+| Trait | The closure... | Week 10 equivalent | Can call |
+|---|---|---|---|
+| `Fn` | Only reads what it captured | `&` | Many times |
+| `FnMut` | Changes what it captured | `&mut` | Many times, needs `let mut` |
+| `FnOnce` | Gives away what it captured | Ownership moves | Once |
+
+**Rust picks the trait from what the body does.** You only write the trait names when a function accepts or returns a closure.
+
+::: {.notes}
+Fn closures also count as FnMut and FnOnce, and FnMut closures also count as FnOnce: a closure that only reads can certainly be called once. Students need that only when reading signatures such as sort_by_key, which takes FnMut. The next slide shows a function returning a closure.
+:::
+
+---
+
+## Returning a closure {.smaller}
+
+```rust
+fn make_adder(n: i32) -> impl Fn(i32) -> i32 {
+    move |x| x + n
+}
+
+fn main() {
+    let add_five = make_adder(5);
+    let add_ten = make_adder(10);
+
+    println!("{}", add_five(1)); // 6
+    println!("{}", add_ten(1)); // 11
+}
+```
+
+- `impl Fn(i32) -> i32`: "some closure that takes an `i32` and returns an `i32`" (Week 12's `impl Trait`).
+- `move` copies `n` into the closure, so it still exists after `make_adder` returns.
+
+**Predict:** What happens without `move`?
+
+::: {.fragment}
+`E0373: closure may outlive the current function, but it borrows n`. Without `move`, the closure would hold a reference to a local variable that is about to disappear (Week 10's dangling reference).
+:::
+
+[Try this example in Rust Playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2024&code=fn+make_adder%28n%3A+i32%29+-%3E+impl+Fn%28i32%29+-%3E+i32+%7B%0A++++move+%7Cx%7C+x+%2B+n%0A%7D%0A%0Afn+main%28%29+%7B%0A++++let+add_five+%3D+make_adder%285%29%3B%0A++++let+add_ten+%3D+make_adder%2810%29%3B%0A%0A++++println%21%28%22%7B%7D%22%2C+add_five%281%29%29%3B+%2F%2F+6%0A++++println%21%28%22%7B%7D%22%2C+add_ten%281%29%29%3B+%2F%2F+11%0A%7D%0A)
+
+::: {.notes}
+Output: 6, then 11. Each call to make_adder builds a separate closure with its own n. Lab 13's make_counter uses the same shape, a returned closure with move, combined with the state-changing idea on the next slide; do not show the lab solution itself.
+:::
+
+---
+
+## A closure that remembers
+
+```rust
+fn main() {
+    let mut total = 0;
+
+    let mut add_to_total = |amount| {
+        total += amount;
+        total
+    };
+
+    println!("{}", add_to_total(4)); // 4
+    println!("{}", add_to_total(7)); // 11
+}
+```
+
+- The closure changes `total` each time it runs, so it is `FnMut`.
+- `total` keeps its value between calls: the closure has **state**.
+
+[Try this example in Rust Playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2024&code=fn+main%28%29+%7B%0A++++let+mut+total+%3D+0%3B%0A%0A++++let+mut+add_to_total+%3D+%7Camount%7C+%7B%0A++++++++total+%2B%3D+amount%3B%0A++++++++total%0A++++%7D%3B%0A%0A++++println%21%28%22%7B%7D%22%2C+add_to_total%284%29%29%3B+%2F%2F+4%0A++++println%21%28%22%7B%7D%22%2C+add_to_total%287%29%29%3B+%2F%2F+11%0A%7D%0A)
+
+::: {.notes}
+Output: 4, then 11. Ask students which row of the access table this is (change, &mut) and why the closure binding needs let mut. While add_to_total may still be called, main cannot use total directly; the mutable borrow is active.
+:::
+
+---
+
+## The problem: a loop with bookkeeping
+
+```rust
+fn main() {
+    let numbers = [1, 2, 3, 4, 5, 6];
+    let mut result = Vec::new();
+
+    for n in numbers {
+        if n % 2 == 0 {
+            result.push(n * n);
+        }
+    }
+
+    println!("{:?}", result); // [4, 16, 36]
+}
+```
+
+- The **goal**: squares of the even numbers.
+- The **bookkeeping**: an empty vector, `if`, `push`, `mut`.
+
+**Can we write just the goal?**
+
+[Try this example in Rust Playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2024&code=fn+main%28%29+%7B%0A++++let+numbers+%3D+%5B1%2C+2%2C+3%2C+4%2C+5%2C+6%5D%3B%0A++++let+mut+result+%3D+Vec%3A%3Anew%28%29%3B%0A%0A++++for+n+in+numbers+%7B%0A++++++++if+n+%25+2+%3D%3D+0+%7B%0A++++++++++++result.push%28n+%2A+n%29%3B%0A++++++++%7D%0A++++%7D%0A%0A++++println%21%28%22%7B%3A%3F%7D%22%2C+result%29%3B+%2F%2F+%5B4%2C+16%2C+36%5D%0A%7D%0A)
+
+::: {.notes}
+Output: [4, 16, 36]. Nothing is wrong with this loop; it is clear and fast. The point is that most of the lines manage the result rather than describe it. Iterators let us write the three steps (keep evens, square, collect) directly.
+:::
+
+---
+
+## An iterator is a bookmark {.smaller .code-tight}
+
+:::: {.columns}
+::: {.column width="55%"}
+```rust
+fn main() {
+    let v = [1, 2, 3];
+    let mut iter = v.iter();
+
+    println!("{:?}", iter.next()); // Some(1)
+    println!("{:?}", iter.next()); // Some(2)
+    println!("{:?}", iter.next()); // Some(3)
+    println!("{:?}", iter.next()); // None
+}
+```
+:::
+::: {.column width="45%"}
+| Method | Items | Access |
+|---|---|---|
+| `.iter()` | `&T` | Read |
+| `.iter_mut()` | `&mut T` | Change |
+| `.into_iter()` | `T` | Own |
+:::
+::::
+
+- Each call to `next()` returns the next item, then `None` at the end.
+- `for` loops call `next()` for you.
+
+[Try this example in Rust Playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2024&code=fn+main%28%29+%7B%0A++++let+v+%3D+%5B1%2C+2%2C+3%5D%3B%0A++++let+mut+iter+%3D+v.iter%28%29%3B%0A%0A++++println%21%28%22%7B%3A%3F%7D%22%2C+iter.next%28%29%29%3B+%2F%2F+Some%281%29%0A++++println%21%28%22%7B%3A%3F%7D%22%2C+iter.next%28%29%29%3B+%2F%2F+Some%282%29%0A++++println%21%28%22%7B%3A%3F%7D%22%2C+iter.next%28%29%29%3B+%2F%2F+Some%283%29%0A++++println%21%28%22%7B%3A%3F%7D%22%2C+iter.next%28%29%29%3B+%2F%2F+None%0A%7D%0A)
+
+::: {.notes}
+Book listing 13-12, written as a program instead of a test. Output: Some(1), Some(2), Some(3), None. The iterator remembers its position, which is why it must be mut: next changes the bookmark. The method table is the "iterators" column of the access map from the start of the session.
+
+Python parallel: iter() and next(), with None in place of StopIteration.
+:::
+
+---
+
+## Adaptors are lazy {.smaller}
+
+**This example compiles with a warning, and the `map` never runs.**
+
+```rust
+fn main() {
+    let v = [1, 2, 3];
+
+    v.iter().map(|x| x + 1);
+
+    println!("{:?}", v);
+}
+```
+
+```text
+warning: unused `Map` that must be used
+  = note: iterators are lazy and do nothing unless consumed
+```
+
+::: {.fragment}
+**Fix:** consume the iterator. `collect()` runs the chain and gathers the results.
+
+```rust
+fn main() {
+    let v = [1, 2, 3];
+
+    let plus_one: Vec<i32> = v.iter().map(|x| x + 1).collect();
+
+    println!("{:?}", plus_one); // [2, 3, 4]
+}
+```
+
+[Try the fixed version in Rust Playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2024&code=fn+main%28%29+%7B%0A++++let+v+%3D+%5B1%2C+2%2C+3%5D%3B%0A%0A++++let+plus_one%3A+Vec%3Ci32%3E+%3D+v.iter%28%29.map%28%7Cx%7C+x+%2B+1%29.collect%28%29%3B%0A%0A++++println%21%28%22%7B%3A%3F%7D%22%2C+plus_one%29%3B+%2F%2F+%5B2%2C+3%2C+4%5D%0A%7D%0A)
+:::
+
+::: {.notes}
+Book listings 13-14 and 13-15. Adaptors such as map and filter describe work; consumers such as collect, sum, and count do it. This laziness is why long chains do not build a temporary vector at every step. Fixed output: [2, 3, 4]. The type annotation Vec<i32> tells collect what to build.
+:::
+
+---
+
+## Chain adaptors: write just the goal
+
+```rust
+fn main() {
+    let numbers = [1, 2, 3, 4, 5, 6];
+
+    let result: Vec<i32> = numbers
+        .into_iter()
+        .filter(|n| n % 2 == 0) // Keep evens
+        .map(|n| n * n) // Square them
+        .collect();
+
+    println!("{:?}", result); // [4, 16, 36]
+}
+```
+
+**Read it aloud:** take the numbers, keep the evens, square them, collect into a vector.
+
+[Try this example in Rust Playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2024&code=fn+main%28%29+%7B%0A++++let+numbers+%3D+%5B1%2C+2%2C+3%2C+4%2C+5%2C+6%5D%3B%0A%0A++++let+result%3A+Vec%3Ci32%3E+%3D+numbers%0A++++++++.into_iter%28%29%0A++++++++.filter%28%7Cn%7C+n+%25+2+%3D%3D+0%29+%2F%2F+Keep+evens%0A++++++++.map%28%7Cn%7C+n+%2A+n%29+%2F%2F+Square+them%0A++++++++.collect%28%29%3B%0A%0A++++println%21%28%22%7B%3A%3F%7D%22%2C+result%29%3B+%2F%2F+%5B4%2C+16%2C+36%5D%0A%7D%0A)
+
+::: {.notes}
+Output: [4, 16, 36], matching the loop. into_iter on an array gives owned i32 values, so the closures receive plain numbers; with .iter() they would receive references and the patterns get noisier (|&&n| in older code). Ask students to compare the two versions line by line: same behavior, but the steps now read in order. Neither is always better; choose the one the team can read and test.
+:::
+
+---
+
+## Common adaptors and consumers {.smaller}
+
+```rust
+fn main() {
+    let numbers = [1, 2, 3, 4];
+    let words = ["1", "two", "3"];
+
+    let doubled: Vec<i32> = numbers.iter().map(|x| x * 2).collect();
+    let parsed: Vec<i32> = words.iter().filter_map(|s| s.parse().ok()).collect();
+    let total: i32 = numbers.iter().sum();
+    let digits = numbers.iter().fold(0, |acc, x| acc * 10 + x);
+    let evens = numbers.iter().filter(|x| *x % 2 == 0).count();
+    let biggest = numbers.iter().max();
+
+    println!("map:        {:?}", doubled); // [2, 4, 6, 8]
+    println!("filter_map: {:?}", parsed); // [1, 3]
+    println!("sum:        {}", total); // 10
+    println!("fold:       {}", digits); // 1234
+    println!("count:      {}", evens); // 2
+    println!("max:        {:?}", biggest); // Some(4)
+}
+```
+
+- **Adaptors** return another iterator: `map`, `filter`, `filter_map`.
+- **Consumers** produce a result: `collect`, `sum`, `fold`, `count`, `max`.
+
+[Try this example in Rust Playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2024&code=fn+main%28%29+%7B%0A++++let+numbers+%3D+%5B1%2C+2%2C+3%2C+4%5D%3B%0A++++let+words+%3D+%5B%221%22%2C+%22two%22%2C+%223%22%5D%3B%0A%0A++++let+doubled%3A+Vec%3Ci32%3E+%3D+numbers.iter%28%29.map%28%7Cx%7C+x+%2A+2%29.collect%28%29%3B%0A++++let+parsed%3A+Vec%3Ci32%3E+%3D+words.iter%28%29.filter_map%28%7Cs%7C+s.parse%28%29.ok%28%29%29.collect%28%29%3B%0A++++let+total%3A+i32+%3D+numbers.iter%28%29.sum%28%29%3B%0A++++let+digits+%3D+numbers.iter%28%29.fold%280%2C+%7Cacc%2C+x%7C+acc+%2A+10+%2B+x%29%3B%0A++++let+evens+%3D+numbers.iter%28%29.filter%28%7Cx%7C+%2Ax+%25+2+%3D%3D+0%29.count%28%29%3B%0A++++let+biggest+%3D+numbers.iter%28%29.max%28%29%3B%0A%0A++++println%21%28%22map%3A++++++++%7B%3A%3F%7D%22%2C+doubled%29%3B+%2F%2F+%5B2%2C+4%2C+6%2C+8%5D%0A++++println%21%28%22filter_map%3A+%7B%3A%3F%7D%22%2C+parsed%29%3B+%2F%2F+%5B1%2C+3%5D%0A++++println%21%28%22sum%3A++++++++%7B%7D%22%2C+total%29%3B+%2F%2F+10%0A++++println%21%28%22fold%3A+++++++%7B%7D%22%2C+digits%29%3B+%2F%2F+1234%0A++++println%21%28%22count%3A++++++%7B%7D%22%2C+evens%29%3B+%2F%2F+2%0A++++println%21%28%22max%3A++++++++%7B%3A%3F%7D%22%2C+biggest%29%3B+%2F%2F+Some%284%29%0A%7D%0A)
+
+::: {.notes}
+filter_map keeps the Some values and drops the None values, here turning text into numbers and skipping "two". fold carries an accumulator through the items; here it builds 1234 from the digits. max returns an Option because an empty list has no maximum. Note for Lab 13: max_by_key returns the last of several equal maxima, which matters when two words tie for longest.
+:::
+
+---
+
+## Closures inside iterator chains {.smaller .code-tight}
+
+:::: {.columns}
+::: {.column width="55%"}
+```rust
 struct Student {
     name: String,
     grade: f64,
 }
 
-let students = vec![Student { name: "Alice".to_string(), grade: 92.0 },
-    Student { name: "Bob".to_string(), grade: 78.0 },
-    Student { name: "Charlie".to_string(), grade: 85.0 },
-];
-
-// Find honor roll students (grade >= 80)
-let honor_roll: Vec<&str> = students
-    .iter()
-    .filter(|student| student.grade >= 80.0)
-    .map(|student| student.name.as_str())
-    .collect();
-
-// honor_roll = ["Alice", "Charlie"]
-```
-
-**Try it yourself:** [Run in Rust Playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=fn%20main%28%29%20%7B%0A%23%5Bderive%28Debug%29%5D%0Astruct%20Student%20%7B%0A%20%20%20%20name%3A%20String%2C%0A%20%20%20%20grade%3A%20f64%2C%0A%7D%0A%0Alet%20students%20%3D%20vec%21%5BStudent%20%7B%20name%3A%20%22Alice%22.to_string%28%29%2C%20grade%3A%2092.0%20%7D%2C%0A%20%20%20%20Student%20%7B%20name%3A%20%22Bob%22.to_string%28%29%2C%20grade%3A%2078.0%20%7D%2C%0A%20%20%20%20Student%20%7B%20name%3A%20%22Charlie%22.to_string%28%29%2C%20grade%3A%2085.0%20%7D%2C%0A%5D%3B%0A%0A%2F%2F%20Find%20honor%20roll%20students%20%28grade%20%3E%3D%2080%29%0Alet%20honor_roll%3A%20Vec%3C%26str%3E%20%3D%20students%0A%20%20%20%20.iter%28%29%0A%20%20%20%20.filter%28%7Cstudent%7C%20student.grade%20%3E%3D%2080.0%29%0A%20%20%20%20.map%28%7Cstudent%7C%20student.name.as_str%28%29%29%0A%20%20%20%20.collect%28%29%3B%0A%0A%2F%2F%20honor_roll%20%3D%20%5B%22Alice%22%2C%20%22Charlie%22%5D%0A%7D%0A)
-
-**Transfer**: The same filter-map-collect pipeline appears in many Rust APIs.
-
-::: {.notes}
-Trace the item type after each adaptor and confirm which values are borrowed. Avoid presenting a pipeline as automatically clearer than a loop.
-:::
-
----
-
-## End of session 1 {.inverse}
-
-**What we covered:**
-
-- Iterator methods (`.map()`, `.filter()`, `.sum()`, `.collect()`)
-- Building data-processing pipelines
-- Closures and capture semantics
-- Closure traits (`Fn`, `FnMut`, `FnOnce`)
-- Combining iterators and closures
-
-**Next session:** Smart pointers and error handling
-
-::: {.notes}
-Take a break. When we return, we'll cover smart pointers for flexible memory management.
-:::
-
----
-
-# Session 2: smart pointers
-
-## The problem: ownership limitations {.smaller}
-
-**Rust's ownership rules are strict:**
-
-```rust
-// ❌ Can't do this - multiple ownership
-let data = vec![1, 2, 3];
-let owner1 = data;
-let owner2 = data;  // ERROR: value moved!
-```
-
-```rust
-// ❌ Can't do this - recursive types have unknown size
-struct Node {
-    value: i32,
-    next: Node,  // ERROR: infinite size!
-}
-```
-
-```rust
-// ❌ Can't do this - mutation through shared reference
-let x = 5;
-let y = &x;
-*y = 10;  // ERROR: cannot assign through &T
-```
-
-**Solution**: Smart pointers!
-
-::: {.notes}
-These limitations are by design - they prevent memory bugs. Smart pointers provide safe flexibility.
-:::
-
----
-
-## Smart pointer overview {.smaller}
-
-**Three essential smart pointers:**
-
-| Type | Purpose | Use When |
-|------|---------|----------|
-| `Box<T>` | Heap allocation | Recursive types, large data |
-| `Rc<T>` | Reference counting | Multiple owners (single-threaded) |
-| `RefCell<T>` | Interior mutability | Runtime borrowing checks |
-
-**Key insight**: Smart pointers provide additional capabilities while maintaining Rust's safety guarantees.
-
-**Common combinations:**
-
-- `Box<T>` alone: Recursive data structures
-- `Rc<T>` alone: Shared read-only data
-- `Rc<RefCell<T>>`: Shared mutable data (single-threaded)
-
-[Smart Pointers in Rust Book](https://doc.rust-lang.org/book/ch15-00-smart-pointers.html)
-
-::: {.notes}
-These types express ownership patterns that ordinary references cannot represent, but they also add complexity.
-:::
-
----
-
-## `Box<T>`: heap allocation {.smaller}
-
-**`Box<T>` stores data on the heap with known size:**
-
-```rust
-// Simple heap allocation
-let boxed_int = Box::new(5);
-println!("{}", *boxed_int);  // 5 (dereference with *)
-
-// Main use case: recursive types
-#[derive(Debug)]
-enum BinaryTree<T> {
-    Empty,
-    Node {
-        value: T,
-        left: Box<BinaryTree<T>>,   // Box enables recursion!
-        right: Box<BinaryTree<T>>,
-    },
-}
-
-// Create a tree
-let tree = BinaryTree::Node {
-    value: 5,
-    left: Box::new(BinaryTree::Empty),
-    right: Box::new(BinaryTree::Empty),
-};
-```
-
-**Try it yourself:** [Run in Rust Playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=fn%20main%28%29%20%7B%0A%2F%2F%20Simple%20heap%20allocation%0Alet%20boxed_int%20%3D%20Box%3A%3Anew%285%29%3B%0Aprintln%21%28%22%7B%7D%22%2C%20%2Aboxed_int%29%3B%20%20%2F%2F%205%20%28dereference%20with%20%2A%29%0A%0A%2F%2F%20Main%20use%20case%3A%20recursive%20types%0A%23%5Bderive%28Debug%29%5D%0Aenum%20BinaryTree%3CT%3E%20%7B%0A%20%20%20%20Empty%2C%0A%20%20%20%20Node%20%7B%0A%20%20%20%20%20%20%20%20value%3A%20T%2C%0A%20%20%20%20%20%20%20%20left%3A%20Box%3CBinaryTree%3CT%3E%3E%2C%20%20%20%2F%2F%20Box%20enables%20recursion%21%0A%20%20%20%20%20%20%20%20right%3A%20Box%3CBinaryTree%3CT%3E%3E%2C%0A%20%20%20%20%7D%2C%0A%7D%0A%0A%2F%2F%20Create%20a%20tree%0Alet%20tree%20%3D%20BinaryTree%3A%3ANode%20%7B%0A%20%20%20%20value%3A%205%2C%0A%20%20%20%20left%3A%20Box%3A%3Anew%28BinaryTree%3A%3AEmpty%29%2C%0A%20%20%20%20right%3A%20Box%3A%3Anew%28BinaryTree%3A%3AEmpty%29%2C%0A%7D%3B%0A%7D%0A)
-
-**Why it works**: `Box<T>` has fixed size (just a pointer), even though `T` might be recursive.
-
-[Box documentation](https://doc.rust-lang.org/std/boxed/struct.Box.html)
-
-::: {.notes}
-Without Box, compiler can't determine struct size. Box breaks the recursion.
-:::
-
----
-
-## Practical example: binary tree {.smaller}
-
-**Building a binary tree with Box:**
-
-```rust
-impl<T> BinaryTree<T> {
-    /// Creates a new empty tree
-    fn new() -> Self {
-        BinaryTree::Empty
-    }
-
-    /// Creates a leaf node (no children)
-    fn leaf(value: T) -> Self {
-        BinaryTree::Node {
-            value,
-            left: Box::new(BinaryTree::Empty),
-            right: Box::new(BinaryTree::Empty),
-        }
-    }
-
-    /// Creates a node with children
-    fn node(value: T, left: BinaryTree<T>, right: BinaryTree<T>) -> Self {
-        BinaryTree::Node {
-            value,
-            left: Box::new(left),
-            right: Box::new(right),
+impl Student {
+    fn new(name: &str, grade: f64) -> Student {
+        Student {
+            name: name.to_string(),
+            grade,
         }
     }
 }
 
-// Usage:
-let tree = BinaryTree::node(
-    10,
-    BinaryTree::leaf(5),
-    BinaryTree::leaf(15),
-);
+fn honor_roll(students: &[Student], cutoff: f64) -> Vec<&str> {
+    students
+        .iter()
+        .filter(|s| s.grade >= cutoff)
+        .map(|s| s.name.as_str())
+        .collect()
+}
 ```
+:::
+::: {.column width="45%"}
+```rust
+fn main() {
+    let students = [
+        Student::new("Lisa", 98.0),
+        Student::new("Bart", 61.0),
+        Student::new("Milhouse", 85.0),
+    ];
+
+    let honors = honor_roll(&students, 80.0);
+    println!("{:?}", honors); // ["Lisa", "Milhouse"]
+}
+```
+:::
+::::
+
+**Why:** The `filter` closure captures `cutoff` from the function, just like `threshold` earlier.
+
+[Try this example in Rust Playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2024&code=struct+Student+%7B%0A++++name%3A+String%2C%0A++++grade%3A+f64%2C%0A%7D%0A%0Aimpl+Student+%7B%0A++++fn+new%28name%3A+%26str%2C+grade%3A+f64%29+-%3E+Student+%7B%0A++++++++Student+%7B%0A++++++++++++name%3A+name.to_string%28%29%2C%0A++++++++++++grade%2C%0A++++++++%7D%0A++++%7D%0A%7D%0A%0Afn+honor_roll%28students%3A+%26%5BStudent%5D%2C+cutoff%3A+f64%29+-%3E+Vec%3C%26str%3E+%7B%0A++++students%0A++++++++.iter%28%29%0A++++++++.filter%28%7Cs%7C+s.grade+%3E%3D+cutoff%29%0A++++++++.map%28%7Cs%7C+s.name.as_str%28%29%29%0A++++++++.collect%28%29%0A%7D%0A%0Afn+main%28%29+%7B%0A++++let+students+%3D+%5B%0A++++++++Student%3A%3Anew%28%22Lisa%22%2C+98.0%29%2C%0A++++++++Student%3A%3Anew%28%22Bart%22%2C+61.0%29%2C%0A++++++++Student%3A%3Anew%28%22Milhouse%22%2C+85.0%29%2C%0A++++%5D%3B%0A%0A++++let+honors+%3D+honor_roll%28%26students%2C+80.0%29%3B%0A++++println%21%28%22%7B%3A%3F%7D%22%2C+honors%29%3B+%2F%2F+%5B%22Lisa%22%2C+%22Milhouse%22%5D%0A%7D%0A)
 
 ::: {.notes}
-This pattern appears in compilers, game engines, databases - anywhere trees are needed.
+Output: ["Lisa", "Milhouse"]. This mirrors the book's shoes_in_size example in 13.2. Trace the item type after each step: iter gives &Student, filter keeps &Student, map turns each into &str, collect builds Vec<&str>. The result borrows names from students, so students must outlive it (Week 10).
 :::
 
 ---
 
-## `Rc<T>`: reference counting {.smaller}
+## Try it: build a chain {.inverse}
 
-**`Rc<T>` enables multiple owners of the same data:**
+Starting from `numbers`, keep values greater than 5, double each one, and sum the results. **Expected: 80.**
+
+```rust
+fn main() {
+    let numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+
+    // 1. Keep values greater than 5
+    // 2. Double each value
+    // 3. Sum the results (expected: 80)
+    let result: i32 = numbers.iter().sum(); // Change this line
+
+    println!("{}", result);
+}
+```
+
+[Open the starter in Rust Playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2024&code=fn+main%28%29+%7B%0A++++let+numbers+%3D+%5B1%2C+2%2C+3%2C+4%2C+5%2C+6%2C+7%2C+8%2C+9%2C+10%5D%3B%0A%0A++++%2F%2F+1.+Keep+values+greater+than+5%0A++++%2F%2F+2.+Double+each+value%0A++++%2F%2F+3.+Sum+the+results+%28expected%3A+80%29%0A++++let+result%3A+i32+%3D+numbers.iter%28%29.sum%28%29%3B+%2F%2F+Change+this+line%0A%0A++++println%21%28%22%7B%7D%22%2C+result%29%3B%0A%7D%0A)
+
+::: {.fragment}
+One answer: `numbers.iter().filter(|n| **n > 5).map(|n| n * 2).sum()`
+:::
+
+::: {.notes}
+Give students 3–4 minutes. The starter compiles and prints 55 (the plain sum) so students can see it change. Alternatives: into_iter() gives owned numbers so the filter becomes |n| *n > 5; filter(|&&n| n > 5) is also common in older code. Ask a student to read their chain aloud.
+:::
+
+---
+
+## Session 1 checkpoint {.smaller .code-tight}
+
+Read each line aloud. What does it produce?
+
+```text
+text.lines().map(str::trim).filter(|line| !line.is_empty()).map(str::len).collect()
+words.iter().filter_map(|w| w.parse::<i32>().ok()).sum::<i32>()
+(1..=3).map(|n| n * n).collect::<Vec<i32>>()
+```
+
+::: {.fragment}
+1. The length of each non-blank line, trimmed.
+2. The sum of the words that are numbers.
+3. `[1, 4, 9]`.
+:::
+
+::: {.notes}
+The first chain is the nonempty_line_lengths function from earlier versions of this deck; a runnable version is linked below. str::trim and str::len are functions passed by name in place of closures. Return to the access table: which methods here read, which own?
+
+[Runnable line-length example](https://play.rust-lang.org/?version=stable&mode=debug&edition=2024&code=fn+nonempty_line_lengths%28text%3A+%26str%29+-%3E+Vec%3Cusize%3E+%7B%0A++++text.lines%28%29%0A++++++++.map%28str%3A%3Atrim%29%0A++++++++.filter%28%7Cline%7C+%21line.is_empty%28%29%29%0A++++++++.map%28str%3A%3Alen%29%0A++++++++.collect%28%29%0A%7D%0A%0Afn+main%28%29+%7B%0A++++let+text+%3D+%22++Homer%5Cn%5Cn++Marge++%5CnBart%5Cn%22%3B%0A++++println%21%28%22%7B%3A%3F%7D%22%2C+nonempty_line_lengths%28text%29%29%3B+%2F%2F+%5B5%2C+5%2C+4%5D%0A%7D%0A)
+:::
+
+---
+
+# Session 2: smart pointers and errors
+
+## When ordinary ownership is not enough
+
+| Situation | Ownership rule in the way | Tool |
+|---|---|---|
+| A type contains itself | Every type needs a known size | `Box<T>` |
+| Several parts of a program own one value | One owner at a time | `Rc<T>` |
+| Change a value that is shared | Shared means read-only | `RefCell<T>` |
+
+**A smart pointer is a value that owns data and adds a rule of its own.**
+
+::: {.notes}
+Each row gets a failing example and then the fix. Stress the order of preference: ordinary ownership and borrowing first, smart pointers only when the design needs them. Strings and Vecs are smart pointers too; students have used them since Week 09 (Rust Book 15 intro).
+:::
+
+---
+
+## A type that contains itself {.smaller}
+
+**This example intentionally fails to compile.**
+
+```rust
+#[derive(Debug)]
+enum List {
+    Cons(i32, List),
+    Nil,
+}
+
+use List::{Cons, Nil};
+
+fn main() {
+    let list = Cons(1, Cons(2, Cons(3, Nil)));
+    println!("{:?}", list);
+}
+```
+
+```text
+error[E0072]: recursive type `List` has infinite size
+help: insert some indirection (e.g., a `Box`, `Rc`, or `&`) to break the cycle
+```
+
+[Try this example in Rust Playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2024&code=%23%5Bderive%28Debug%29%5D%0Aenum+List+%7B%0A++++Cons%28i32%2C+List%29%2C%0A++++Nil%2C%0A%7D%0A%0Ause+List%3A%3A%7BCons%2C+Nil%7D%3B%0A%0Afn+main%28%29+%7B%0A++++let+list+%3D+Cons%281%2C+Cons%282%2C+Cons%283%2C+Nil%29%29%29%3B%0A++++println%21%28%22%7B%3A%3F%7D%22%2C+list%29%3B%0A%7D%0A)
+
+::: {.notes}
+Book listing 15-2, the cons list. A List holds an i32 and another List, which holds another List, and so on: Rust cannot compute a size. Draw nested boxes on the board, each inside the last, forever. The help line names the fix.
+:::
+
+---
+
+## `Box<T>`: put it on the heap {.smaller}
+
+```rust
+#[derive(Debug)]
+enum List {
+    Cons(i32, Box<List>),
+    Nil,
+}
+
+use List::{Cons, Nil};
+
+fn sum(list: &List) -> i32 {
+    match list {
+        Cons(value, rest) => value + sum(rest),
+        Nil => 0,
+    }
+}
+
+fn main() {
+    let list = Cons(1, Box::new(Cons(2, Box::new(Cons(3, Box::new(Nil))))));
+    println!("{:?}", list); // Cons(1, Cons(2, Cons(3, Nil)))
+    println!("sum = {}", sum(&list)); // sum = 6
+}
+```
+
+```text
+Cons(1, ─→) Cons(2, ─→) Cons(3, ─→) Nil
+```
+
+**Why it works:** A `Box` is a pointer with a fixed size, whatever it points to.
+
+[Try this example in Rust Playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2024&code=%23%5Bderive%28Debug%29%5D%0Aenum+List+%7B%0A++++Cons%28i32%2C+Box%3CList%3E%29%2C%0A++++Nil%2C%0A%7D%0A%0Ause+List%3A%3A%7BCons%2C+Nil%7D%3B%0A%0Afn+sum%28list%3A+%26List%29+-%3E+i32+%7B%0A++++match+list+%7B%0A++++++++Cons%28value%2C+rest%29+%3D%3E+value+%2B+sum%28rest%29%2C%0A++++++++Nil+%3D%3E+0%2C%0A++++%7D%0A%7D%0A%0Afn+main%28%29+%7B%0A++++let+list+%3D+Cons%281%2C+Box%3A%3Anew%28Cons%282%2C+Box%3A%3Anew%28Cons%283%2C+Box%3A%3Anew%28Nil%29%29%29%29%29%29%3B%0A++++println%21%28%22%7B%3A%3F%7D%22%2C+list%29%3B+%2F%2F+Cons%281%2C+Cons%282%2C+Cons%283%2C+Nil%29%29%29%0A++++println%21%28%22sum+%3D+%7B%7D%22%2C+sum%28%26list%29%29%3B+%2F%2F+sum+%3D+6%0A%7D%0A)
+
+::: {.notes}
+Book listings 15-3 and 15-5, with a recursive sum added so the data is used. Output: Cons(1, Cons(2, Cons(3, Nil))), then sum = 6. Each Box owns the next node on the heap; when list leaves scope, the whole chain is freed, one owner at a time. Connect to Week 10's stack-and-heap slide: the Box itself is small and fixed; the node it points to lives on the heap.
+:::
+
+---
+
+## Two lists cannot own the same tail {.smaller}
+
+**This example intentionally fails to compile.**
+
+```rust
+#[derive(Debug)]
+enum List {
+    Cons(i32, Box<List>),
+    Nil,
+}
+
+use List::{Cons, Nil};
+
+fn main() {
+    let a = Cons(5, Box::new(Cons(10, Box::new(Nil))));
+    let b = Cons(3, Box::new(a));
+    let c = Cons(4, Box::new(a));
+    println!("{:?} {:?}", b, c);
+}
+```
+
+```text
+error[E0382]: use of moved value: `a`
+```
+
+```text
+b: Cons(3, ─┐
+            ├─→ a: Cons(5, ─→) Cons(10, ─→) Nil
+c: Cons(4, ─┘
+```
+
+::: {.notes}
+Book listing 15-17. Both b and c want to own a; Box allows only one owner, so a moves into b and is gone for c. This is the Week 10 move error with a new type. The diagram shows the design we want: one shared tail.
+:::
+
+---
+
+## `Rc<T>`: shared ownership by counting {.smaller .code-tight}
 
 ```rust
 use std::rc::Rc;
 
-#[derive(Debug)]
-struct SharedData {
-    value: i32,
+enum List {
+    Cons(i32, Rc<List>),
+    Nil,
 }
 
-let data = Rc::new(SharedData { value: 42 });
-println!("Count: {}", Rc::strong_count(&data));  // 1
+use List::{Cons, Nil};
 
-// Create additional owners by cloning the Rc
-let owner1 = Rc::clone(&data);  // Increments count
-let owner2 = Rc::clone(&data);  // Increments count
+fn sum(list: &List) -> i32 {
+    match list {
+        Cons(value, rest) => value + sum(rest),
+        Nil => 0,
+    }
+}
 
-println!("Count: {}", Rc::strong_count(&data));  // 3
-println!("Value: {}", owner1.value);  // 42
+fn main() {
+    let a = Rc::new(Cons(5, Rc::new(Cons(10, Rc::new(Nil)))));
+    println!("count after a = {}", Rc::strong_count(&a)); // 1
 
-// When all Rc's drop, data is freed
-drop(owner1);
-println!("Count: {}", Rc::strong_count(&data));  // 2
+    let b = Cons(3, Rc::clone(&a));
+    println!("count after b = {}", Rc::strong_count(&a)); // 2
+
+    {
+        let c = Cons(4, Rc::clone(&a));
+        println!("count after c = {}", Rc::strong_count(&a)); // 3
+        println!("sum of c = {}", sum(&c)); // 19
+    }
+
+    println!("count after c leaves = {}", Rc::strong_count(&a)); // 2
+    println!("sum of b = {}", sum(&b)); // 18
+}
 ```
 
-**Try it yourself:** [Run in Rust Playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=fn%20main%28%29%20%7B%0Ause%20std%3A%3Arc%3A%3ARc%3B%0A%0A%23%5Bderive%28Debug%29%5D%0Astruct%20SharedData%20%7B%0A%20%20%20%20value%3A%20i32%2C%0A%7D%0A%0Alet%20data%20%3D%20Rc%3A%3Anew%28SharedData%20%7B%20value%3A%2042%20%7D%29%3B%0Aprintln%21%28%22Count%3A%20%7B%7D%22%2C%20Rc%3A%3Astrong_count%28%26data%29%29%3B%20%20%2F%2F%201%0A%0A%2F%2F%20Create%20additional%20owners%20by%20cloning%20the%20Rc%0Alet%20owner1%20%3D%20Rc%3A%3Aclone%28%26data%29%3B%20%20%2F%2F%20Increments%20count%0Alet%20owner2%20%3D%20Rc%3A%3Aclone%28%26data%29%3B%20%20%2F%2F%20Increments%20count%0A%0Aprintln%21%28%22Count%3A%20%7B%7D%22%2C%20Rc%3A%3Astrong_count%28%26data%29%29%3B%20%20%2F%2F%203%0Aprintln%21%28%22Value%3A%20%7B%7D%22%2C%20owner1.value%29%3B%20%20%2F%2F%2042%0A%0A%2F%2F%20When%20all%20Rc%27s%20drop%2C%20data%20is%20freed%0Adrop%28owner1%29%3B%0Aprintln%21%28%22Count%3A%20%7B%7D%22%2C%20Rc%3A%3Astrong_count%28%26data%29%29%3B%20%20%2F%2F%202%0A%7D%0A)
+- `Rc::clone(&a)` adds an owner. It copies a pointer and bumps a count, not the list.
+- The data is freed when the count reaches zero.
 
-**Important**: `Rc::clone` is cheap - it only increments a counter, doesn't copy data!
-
-[Rc documentation](https://doc.rust-lang.org/std/rc/struct.Rc.html)
+[Try this example in Rust Playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2024&code=use+std%3A%3Arc%3A%3ARc%3B%0A%0Aenum+List+%7B%0A++++Cons%28i32%2C+Rc%3CList%3E%29%2C%0A++++Nil%2C%0A%7D%0A%0Ause+List%3A%3A%7BCons%2C+Nil%7D%3B%0A%0Afn+sum%28list%3A+%26List%29+-%3E+i32+%7B%0A++++match+list+%7B%0A++++++++Cons%28value%2C+rest%29+%3D%3E+value+%2B+sum%28rest%29%2C%0A++++++++Nil+%3D%3E+0%2C%0A++++%7D%0A%7D%0A%0Afn+main%28%29+%7B%0A++++let+a+%3D+Rc%3A%3Anew%28Cons%285%2C+Rc%3A%3Anew%28Cons%2810%2C+Rc%3A%3Anew%28Nil%29%29%29%29%29%3B%0A++++println%21%28%22count+after+a+%3D+%7B%7D%22%2C+Rc%3A%3Astrong_count%28%26a%29%29%3B+%2F%2F+1%0A%0A++++let+b+%3D+Cons%283%2C+Rc%3A%3Aclone%28%26a%29%29%3B%0A++++println%21%28%22count+after+b+%3D+%7B%7D%22%2C+Rc%3A%3Astrong_count%28%26a%29%29%3B+%2F%2F+2%0A%0A++++%7B%0A++++++++let+c+%3D+Cons%284%2C+Rc%3A%3Aclone%28%26a%29%29%3B%0A++++++++println%21%28%22count+after+c+%3D+%7B%7D%22%2C+Rc%3A%3Astrong_count%28%26a%29%29%3B+%2F%2F+3%0A++++++++println%21%28%22sum+of+c+%3D+%7B%7D%22%2C+sum%28%26c%29%29%3B+%2F%2F+19%0A++++%7D%0A%0A++++println%21%28%22count+after+c+leaves+%3D+%7B%7D%22%2C+Rc%3A%3Astrong_count%28%26a%29%29%3B+%2F%2F+2%0A++++println%21%28%22sum+of+b+%3D+%7B%7D%22%2C+sum%28%26b%29%29%3B+%2F%2F+18%0A%7D%0A)
 
 ::: {.notes}
-`Rc<T>` is useful for single-threaded structures in which multiple owners share a value, such as some graph representations.
+Book listings 15-18 and 15-19. Output: counts 1, 2, 3, then sum of c = 19, then 2 after c leaves its block, then sum of b = 18. Python parallel: CPython's reference counting from Week 10's first slide; Rc is that same idea, opted into for one value. Rc data is read-only; changing it needs the next tool. Rc is single-threaded; Arc is the thread-safe version.
 :::
 
 ---
 
-## `RefCell<T>`: interior mutability {.smaller}
-
-**`RefCell<T>` allows mutation through shared references (runtime borrow checking):**
+## `RefCell<T>`: borrow rules checked while running {.smaller}
 
 ```rust
 use std::cell::RefCell;
 
-let data = RefCell::new(5);
+fn main() {
+    let score = RefCell::new(5);
 
-// Borrow immutably
-{
-    let value = data.borrow();
-    println!("{}", *value);  // 5
-} // borrow ends here
+    {
+        let reader = score.borrow(); // Like &score, checked while running
+        println!("score = {}", *reader); // score = 5
+    } // reader's borrow ends here
 
-// Borrow mutably
-{
-    let mut value = data.borrow_mut();
-    *value += 10;
-} // borrow ends here
+    {
+        let mut editor = score.borrow_mut(); // Like &mut score
+        *editor += 10;
+    } // editor's borrow ends here
 
-println!("{}", *data.borrow());  // 15
+    println!("score = {}", score.borrow()); // score = 15
+}
 ```
 
-**Try it yourself:** [Run in Rust Playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=fn%20main%28%29%20%7B%0Ause%20std%3A%3Acell%3A%3ARefCell%3B%0A%0Alet%20data%20%3D%20RefCell%3A%3Anew%285%29%3B%0A%0A%2F%2F%20Borrow%20immutably%0A%7B%0A%20%20%20%20let%20value%20%3D%20data.borrow%28%29%3B%0A%20%20%20%20println%21%28%22%7B%7D%22%2C%20%2Avalue%29%3B%20%20%2F%2F%205%0A%7D%20%2F%2F%20borrow%20ends%20here%0A%0A%2F%2F%20Borrow%20mutably%0A%7B%0A%20%20%20%20let%20mut%20value%20%3D%20data.borrow_mut%28%29%3B%0A%20%20%20%20%2Avalue%20%2B%3D%2010%3B%0A%7D%20%2F%2F%20borrow%20ends%20here%0A%0Aprintln%21%28%22%7B%7D%22%2C%20%2Adata.borrow%28%29%29%3B%20%20%2F%2F%2015%0A%7D%0A)
+- `borrow()` is like `&`, and `borrow_mut()` is like `&mut`.
+- Same rules as Week 10, but checked **while the program runs**.
 
-**Key difference**: Borrows checked at *runtime* instead of compile-time.
-
-**Panic if rules violated**:
-```rust
-let value1 = data.borrow_mut();
-let value2 = data.borrow();  // ❌ PANIC: already borrowed mutably!
-```
-
-[RefCell documentation](https://doc.rust-lang.org/std/cell/struct.RefCell.html)
+[Try this example in Rust Playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2024&code=use+std%3A%3Acell%3A%3ARefCell%3B%0A%0Afn+main%28%29+%7B%0A++++let+score+%3D+RefCell%3A%3Anew%285%29%3B%0A%0A++++%7B%0A++++++++let+reader+%3D+score.borrow%28%29%3B+%2F%2F+Like+%26score%2C+checked+while+running%0A++++++++println%21%28%22score+%3D+%7B%7D%22%2C+%2Areader%29%3B+%2F%2F+score+%3D+5%0A++++%7D+%2F%2F+reader%27s+borrow+ends+here%0A%0A++++%7B%0A++++++++let+mut+editor+%3D+score.borrow_mut%28%29%3B+%2F%2F+Like+%26mut+score%0A++++++++%2Aeditor+%2B%3D+10%3B%0A++++%7D+%2F%2F+editor%27s+borrow+ends+here%0A%0A++++println%21%28%22score+%3D+%7B%7D%22%2C+score.borrow%28%29%29%3B+%2F%2F+score+%3D+15%0A%7D%0A)
 
 ::: {.notes}
-Use RefCell when you need flexibility that the borrow checker can't statically verify.
+Output: score = 5, then score = 15. The braces end each borrow, just like a reference's last use. RefCell lets you change a value through a shared handle, which is exactly what Rc needs. The cost: mistakes are found at runtime, not compile time (next slide).
 :::
 
 ---
 
-## Combining `Rc` and `RefCell` {.smaller}
+## Break the rules, and `RefCell` panics {.smaller}
 
-**Pattern: Shared mutable data (single-threaded)**
+**This example compiles, then panics when it runs.**
 
 ```rust
+use std::cell::RefCell;
+
+fn main() {
+    let score = RefCell::new(5);
+
+    let editor = score.borrow_mut();
+    let reader = score.borrow(); // Panics: editor is still active
+
+    println!("{} {}", editor, reader);
+}
+```
+
+```text
+thread 'main' panicked at src/main.rs:7:24:
+RefCell already mutably borrowed
+```
+
+**Why:** `editor` is still active, so a reader breaks the shared reference promise. The compiler could not see it; the program checks and stops.
+
+[Try this example in Rust Playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2024&code=use+std%3A%3Acell%3A%3ARefCell%3B%0A%0Afn+main%28%29+%7B%0A++++let+score+%3D+RefCell%3A%3Anew%285%29%3B%0A%0A++++let+editor+%3D+score.borrow_mut%28%29%3B%0A++++let+reader+%3D+score.borrow%28%29%3B+%2F%2F+Panics%3A+editor+is+still+active%0A%0A++++println%21%28%22%7B%7D+%7B%7D%22%2C+editor%2C+reader%29%3B%0A%7D%0A)
+
+::: {.notes}
+Compare with Week 10's "A reader and an editor can conflict" slide: same rule, same mistake, but caught at runtime with a panic instead of E0502 at compile time. That trade is why RefCell is a last resort, not a default.
+:::
+
+---
+
+## `Rc<RefCell<T>>`: shared and changeable {.smaller .code-tight}
+
+```rust
+use std::cell::RefCell;
 use std::rc::Rc;
-use std::cell::RefCell;
 
-#[derive(Debug)]
-struct Counter {
-    value: i32,
+fn main() {
+    let scores = Rc::new(RefCell::new(Vec::new()));
+
+    let lisa = Rc::clone(&scores);
+    let bart = Rc::clone(&scores);
+
+    lisa.borrow_mut().push(98);
+    bart.borrow_mut().push(61);
+
+    println!("{:?}", scores.borrow()); // [98, 61]
+    println!("owners = {}", Rc::strong_count(&scores)); // owners = 3
 }
-
-let counter = Rc::new(RefCell::new(Counter { value: 0 }));
-
-// Create multiple owners
-let counter_ref1 = Rc::clone(&counter);
-let counter_ref2 = Rc::clone(&counter);
-
-// All can mutate through RefCell
-counter_ref1.borrow_mut().value += 1;
-counter_ref2.borrow_mut().value += 1;
-
-println!("{}", counter.borrow().value);  // 2
 ```
 
-**Try it yourself:** [Run in Rust Playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=fn%20main%28%29%20%7B%0Ause%20std%3A%3Arc%3A%3ARc%3B%0Ause%20std%3A%3Acell%3A%3ARefCell%3B%0A%0A%23%5Bderive%28Debug%29%5D%0Astruct%20Counter%20%7B%0A%20%20%20%20value%3A%20i32%2C%0A%7D%0A%0Alet%20counter%20%3D%20Rc%3A%3Anew%28RefCell%3A%3Anew%28Counter%20%7B%20value%3A%200%20%7D%29%29%3B%0A%0A%2F%2F%20Create%20multiple%20owners%0Alet%20counter_ref1%20%3D%20Rc%3A%3Aclone%28%26counter%29%3B%0Alet%20counter_ref2%20%3D%20Rc%3A%3Aclone%28%26counter%29%3B%0A%0A%2F%2F%20All%20can%20mutate%20through%20RefCell%0Acounter_ref1.borrow_mut%28%29.value%20%2B%3D%201%3B%0Acounter_ref2.borrow_mut%28%29.value%20%2B%3D%201%3B%0A%0Aprintln%21%28%22%7B%7D%22%2C%20counter.borrow%28%29.value%29%3B%20%20%2F%2F%202%0A%7D%0A)
+- `Rc`: several owners. `RefCell`: changes allowed through any of them.
+- Every owner sees the same vector.
 
-**Pattern breakdown**:
-
-- `Rc<T>`: Multiple owners
-- `RefCell<T>`: Interior mutability
-- `Rc<RefCell<T>>`: Multiple owners can all mutate
+[Try this example in Rust Playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2024&code=use+std%3A%3Acell%3A%3ARefCell%3B%0Ause+std%3A%3Arc%3A%3ARc%3B%0A%0Afn+main%28%29+%7B%0A++++let+scores+%3D+Rc%3A%3Anew%28RefCell%3A%3Anew%28Vec%3A%3Anew%28%29%29%29%3B%0A%0A++++let+lisa+%3D+Rc%3A%3Aclone%28%26scores%29%3B%0A++++let+bart+%3D+Rc%3A%3Aclone%28%26scores%29%3B%0A%0A++++lisa.borrow_mut%28%29.push%2898%29%3B%0A++++bart.borrow_mut%28%29.push%2861%29%3B%0A%0A++++println%21%28%22%7B%3A%3F%7D%22%2C+scores.borrow%28%29%29%3B+%2F%2F+%5B98%2C+61%5D%0A++++println%21%28%22owners+%3D+%7B%7D%22%2C+Rc%3A%3Astrong_count%28%26scores%29%29%3B+%2F%2F+owners+%3D+3%0A%7D%0A)
 
 ::: {.notes}
-This is the secret sauce for shared mutable state in single-threaded Rust.
+Output: [98, 61], then owners = 3. This combination appears in graph structures and UI state. It is also easy to overuse: if a single owner with &mut works, use that. Rc cycles leak memory; Weak breaks them (Rust Book 15.6, optional).
 :::
 
 ---
 
-## When to use each smart pointer {.smaller}
+## Which tool do I need?
 
-**Decision tree:**
-
-```
-Do you need multiple owners?
-├─ NO → Use Box<T>
-│   └─ For: Recursive types, large data on heap
-│
-└─ YES → Do you need mutation?
-    ├─ NO → Use Rc<T>
-    │   └─ For: Shared read-only data
-    │
-    └─ YES → Use Rc<RefCell<T>>
-        └─ For: Shared mutable data (single-threaded)
+```text
+Does one owner with & and &mut work?
+├─ Yes → Use ordinary ownership and borrowing. Stop here.
+└─ No  → Does the type contain itself?
+         ├─ Yes → Box<T>
+         └─ No  → Do several parts need to own it?
+                  ├─ No  → Box<T> or plain ownership
+                  └─ Yes → Does it need to change?
+                           ├─ No  → Rc<T>
+                           └─ Yes → Rc<RefCell<T>>
 ```
 
-**Multi-threaded variants** (for future study):
-
-- `Arc<T>`: Thread-safe `Rc<T>` (Atomic Reference Counting)
-- `Mutex<T>`: Thread-safe `RefCell<T>` (Mutual Exclusion)
-- `Arc<Mutex<T>>`: Thread-safe shared mutable data
+**Across threads:** `Arc<T>` replaces `Rc<T>`, and `Mutex<T>` replaces `RefCell<T>` (Rust Book 16).
 
 ::: {.notes}
-For now, focus on single-threaded ownership. `Arc<T>` and `Mutex<T>` are optional follow-up topics and are not required in Lab 14.
+None of these smart pointers are graded in Lab 13; they are here so students can recognize them in other Rust code and in the final project. Arc and Mutex are optional reading.
 :::
 
 ---
 
-## Idiomatic error handling {.inverse}
+## Errors: recover or stop?
 
-**Rust uses `Result<T, E>` for recoverable errors rather than catchable exceptions.**
+| Situation | Tool | Example |
+|---|---|---|
+| A failure the caller should handle | `Result<T, E>` | Bad user input, missing file |
+| A bug or broken assumption | `panic!` | Index out of bounds, `RefCell` misuse |
 
-**What this provides:**
-
-- Errors are explicit in function signatures
-- Code must inspect or transform the result to access the success value
-- Expected failure categories are visible to callers
-- `Result` is an enum whose representation and runtime cost depend on its variants and use
-
-**Two approaches:**
-
-1. **Recoverable errors**: Use `Result<T, E>` (file not found, parse error)
-2. **Unrecoverable errors**: Use `panic!` (programming bugs, invariant violations)
+- `Result` puts the failure in the function's signature.
+- `.unwrap()` and `.expect("why")` turn an `Err` into a panic: fine in tests and quick experiments.
 
 ::: {.notes}
-This is a fundamental mindset shift from exception-based languages.
+Rust Book 9.3, "To panic! or not to panic!". Students used Result and ? in Week 11; this session focuses on writing functions that return good errors. Python parallel: exceptions are not part of a function's signature; Result is.
 :::
 
 ---
 
-## `Result<T, E>` basics {.smaller}
-
-**`Result` is an enum with two variants:**
+## `Result` with `match`
 
 ```rust
-enum Result<T, E> {
-    Ok(T),   // Success - contains value
-    Err(E),  // Failure - contains error
-}
-
-// Example: parsing a network port
 fn parse_port(input: &str) -> Result<u16, String> {
     input
         .trim()
         .parse::<u16>()
-        .map_err(|_| format!("Invalid port: {input}"))
+        .map_err(|_| format!("Invalid port: {}", input))
 }
 
-// Usage with match:
-match parse_port("8080") {
-    Ok(port) => println!("Port: {port}"),
-    Err(e) => println!("Error: {}", e),
-}
-
-// Or with if let:
-if let Ok(port) = parse_port("3000") {
-    println!("Port: {port}");
-}
-```
-
-[Result documentation](https://doc.rust-lang.org/std/result/enum.Result.html)
-
-::: {.notes}
-Result forces you to think about errors upfront, not as an afterthought.
-:::
-
----
-
-## The `?` operator: error propagation {.smaller}
-
-**The `?` operator makes error handling ergonomic:**
-
-```rust
-use std::fs::File;
-use std::io::{self, Read};
-
-// Without ?
-fn read_file_verbose(path: &str) -> io::Result<String> {
-    let file_result = File::open(path);
-    let mut file = match file_result {
-        Ok(f) => f,
-        Err(e) => return Err(e),  // Early return on error
-    };
-
-    let mut contents = String::new();
-    match file.read_to_string(&mut contents) {
-        Ok(_) => Ok(contents),
-        Err(e) => Err(e),
-    }
-}
-
-// With ? (much cleaner!)
-fn read_file(path: &str) -> io::Result<String> {
-    let mut file = File::open(path)?;  // ? propagates error
-    let mut contents = String::new();
-    file.read_to_string(&mut contents)?;  // ? propagates error
-    Ok(contents)
-}
-```
-
-**Try it yourself:** [Run in Rust Playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=fn%20main%28%29%20%7B%0Ause%20std%3A%3Afs%3A%3AFile%3B%0Ause%20std%3A%3Aio%3A%3A%7Bself%2C%20Read%7D%3B%0A%0A%2F%2F%20Without%20%3F%0Afn%20read_file_verbose%28path%3A%20%26str%29%20-%3E%20io%3A%3AResult%3CString%3E%20%7B%0A%20%20%20%20let%20file_result%20%3D%20File%3A%3Aopen%28path%29%3B%0A%20%20%20%20let%20mut%20file%20%3D%20match%20file_result%20%7B%0A%20%20%20%20%20%20%20%20Ok%28f%29%20%3D%3E%20f%2C%0A%20%20%20%20%20%20%20%20Err%28e%29%20%3D%3E%20return%20Err%28e%29%2C%20%20%2F%2F%20Early%20return%20on%20error%0A%20%20%20%20%7D%3B%0A%0A%20%20%20%20let%20mut%20contents%20%3D%20String%3A%3Anew%28%29%3B%0A%20%20%20%20match%20file.read_to_string%28%26mut%20contents%29%20%7B%0A%20%20%20%20%20%20%20%20Ok%28_%29%20%3D%3E%20Ok%28contents%29%2C%0A%20%20%20%20%20%20%20%20Err%28e%29%20%3D%3E%20Err%28e%29%2C%0A%20%20%20%20%7D%0A%7D%0A%0A%2F%2F%20With%20%3F%20%28much%20cleaner%21%29%0Afn%20read_file%28path%3A%20%26str%29%20-%3E%20io%3A%3AResult%3CString%3E%20%7B%0A%20%20%20%20let%20mut%20file%20%3D%20File%3A%3Aopen%28path%29%3F%3B%20%20%2F%2F%20%3F%20propagates%20error%0A%20%20%20%20let%20mut%20contents%20%3D%20String%3A%3Anew%28%29%3B%0A%20%20%20%20file.read_to_string%28%26mut%20contents%29%3F%3B%20%20%2F%2F%20%3F%20propagates%20error%0A%20%20%20%20Ok%28contents%29%0A%7D%0A%7D%0A)
-
-**`?` means**: "If Ok, unwrap the value. If Err, return the error immediately."
-
-[? operator](https://doc.rust-lang.org/book/ch09-02-recoverable-errors-with-result.html#a-shortcut-for-propagating-errors-the--operator)
-
-::: {.notes}
-The ? operator is syntactic sugar that makes error handling look clean.
-:::
-
----
-
-## Custom error types {.smaller}
-
-**Create domain-specific errors:**
-
-```rust
-use std::fmt;
-
-#[derive(Debug, Clone)]
-enum ParseError {
-    EmptyInput,
-    InvalidNumber(String),
-    InvalidPercentage(i32),
-}
-
-// Implement Display for pretty error messages
-impl fmt::Display for ParseError {
-    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
-        match self {
-            ParseError::EmptyInput => write!(f, "Input string is empty"),
-            ParseError::InvalidNumber(s) => write!(f, "Invalid number: {}", s),
-            ParseError::InvalidPercentage(n) => {
-                write!(f, "Percentage {n} must be between 0 and 100")
-            }
+fn main() {
+    for input in ["8080", "http", "70000"] {
+        match parse_port(input) {
+            Ok(port) => println!("Port: {}", port),
+            Err(message) => println!("Error: {}", message),
         }
     }
 }
-
-// Use custom error type
-fn parse_percentage(input: &str) -> Result<i32, ParseError> {
-    if input.trim().is_empty() {
-        return Err(ParseError::EmptyInput);
-    }
-
-    let num: i32 = input.trim().parse()
-        .map_err(|_| ParseError::InvalidNumber(input.to_string()))?;
-
-    if !(0..=100).contains(&num) {
-        return Err(ParseError::InvalidPercentage(num));
-    }
-
-    Ok(num)
-}
 ```
 
-**Try it yourself:** [Run in Rust Playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=fn%20main%28%29%20%7B%0Ause%20std%3A%3Afmt%3B%0A%0A%23%5Bderive%28Debug%2C%20Clone%29%5D%0Aenum%20ParseError%20%7B%0A%20%20%20%20EmptyInput%2C%0A%20%20%20%20InvalidNumber%28String%29%2C%0A%20%20%20%20InvalidPercentage%28i32%29%2C%0A%7D%0A%0A%2F%2F%20Implement%20Display%20for%20pretty%20error%20messages%0Aimpl%20fmt%3A%3ADisplay%20for%20ParseError%20%7B%0A%20%20%20%20fn%20fmt%28%26self%2C%20f%3A%20%26mut%20fmt%3A%3AFormatter%29%20-%3E%20fmt%3A%3AResult%20%7B%0A%20%20%20%20%20%20%20%20match%20self%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20ParseError%3A%3AEmptyInput%20%3D%3E%20write%21%28f%2C%20%22Input%20string%20is%20empty%22%29%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20ParseError%3A%3AInvalidNumber%28s%29%20%3D%3E%20write%21%28f%2C%20%22Invalid%20number%3A%20%7B%7D%22%2C%20s%29%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20ParseError%3A%3AInvalidPercentage%28n%29%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20write%21%28f%2C%20%22Percentage%20%7Bn%7D%20must%20be%20between%200%20and%20100%22%29%0A%20%20%20%20%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%7D%0A%0A%2F%2F%20Use%20custom%20error%20type%0Afn%20parse_percentage%28input%3A%20%26str%29%20-%3E%20Result%3Ci32%2C%20ParseError%3E%20%7B%0A%20%20%20%20if%20input.trim%28%29.is_empty%28%29%20%7B%0A%20%20%20%20%20%20%20%20return%20Err%28ParseError%3A%3AEmptyInput%29%3B%0A%20%20%20%20%7D%0A%0A%20%20%20%20let%20num%3A%20i32%20%3D%20input.trim%28%29.parse%28%29%0A%20%20%20%20%20%20%20%20.map_err%28%7C_%7C%20ParseError%3A%3AInvalidNumber%28input.to_string%28%29%29%29%3F%3B%0A%0A%20%20%20%20if%20%21%280..%3D100%29.contains%28%26num%29%20%7B%0A%20%20%20%20%20%20%20%20return%20Err%28ParseError%3A%3AInvalidPercentage%28num%29%29%3B%0A%20%20%20%20%7D%0A%0A%20%20%20%20Ok%28num%29%0A%7D%0A%7D%0A)
+- `map_err` converts the parse error into our own message.
+- `70000` fails too: it does not fit in a `u16` (0 to 65535).
+
+[Try this example in Rust Playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2024&code=fn+parse_port%28input%3A+%26str%29+-%3E+Result%3Cu16%2C+String%3E+%7B%0A++++input%0A++++++++.trim%28%29%0A++++++++.parse%3A%3A%3Cu16%3E%28%29%0A++++++++.map_err%28%7C_%7C+format%21%28%22Invalid+port%3A+%7B%7D%22%2C+input%29%29%0A%7D%0A%0Afn+main%28%29+%7B%0A++++for+input+in+%5B%228080%22%2C+%22http%22%2C+%2270000%22%5D+%7B%0A++++++++match+parse_port%28input%29+%7B%0A++++++++++++Ok%28port%29+%3D%3E+println%21%28%22Port%3A+%7B%7D%22%2C+port%29%2C%0A++++++++++++Err%28message%29+%3D%3E+println%21%28%22Error%3A+%7B%7D%22%2C+message%29%2C%0A++++++++%7D%0A++++%7D%0A%7D%0A)
 
 ::: {.notes}
-Custom error variants communicate expected failure categories, but documentation and tests are still needed and unrelated panics may remain.
+Output: Port: 8080, Error: Invalid port: http, Error: Invalid port: 70000. The type u16 does the range checking for free. The match forces both outcomes to be handled; there is no way to use the port without checking for an error first.
 :::
 
 ---
 
-## Try it yourself: error handling {.inverse .smaller}
-
-**Challenge**: Parse user input with good error messages
+## The `?` operator {.smaller .code-tight}
 
 ```rust
-// Given this function signature:
-fn parse_age(input: &str) -> Result<u8, String> {
-    // TODO: Parse age (0-120), return helpful errors
+use std::num::ParseIntError;
+
+// Without ?: every step checks and returns early by hand
+#[allow(clippy::question_mark)] // Clippy would suggest ? here
+fn sum_verbose(a: &str, b: &str) -> Result<i32, ParseIntError> {
+    let x = match a.trim().parse::<i32>() {
+        Ok(n) => n,
+        Err(e) => return Err(e),
+    };
+    let y = match b.trim().parse::<i32>() {
+        Ok(n) => n,
+        Err(e) => return Err(e),
+    };
+    Ok(x + y)
 }
 
-// Test cases:
-assert_eq!(parse_age("25"), Ok(25));
-assert!(parse_age("").is_err());           // Empty
-assert!(parse_age("abc").is_err());        // Not a number
-assert!(parse_age("150").is_err());        // Out of range
-assert!(parse_age("-5").is_err());         // Negative
+// With ?: the same behavior
+fn sum(a: &str, b: &str) -> Result<i32, ParseIntError> {
+    let x: i32 = a.trim().parse()?;
+    let y: i32 = b.trim().parse()?;
+    Ok(x + y)
+}
+
+fn main() {
+    println!("{:?}", sum_verbose("2", "3")); // Ok(5)
+    println!("{:?}", sum("2", "3")); // Ok(5)
+    println!("{:?}", sum("2", "three")); // Err(ParseIntError { kind: InvalidDigit })
+}
 ```
 
-**Hint**: Use `?` operator and `.map_err()` for error conversion.
+**`?` means:** if `Ok`, take the value; if `Err`, return the error now. Clippy even suggests `?` for the long version.
 
-**Try on [Rust Playground](https://play.rust-lang.org/)**
+[Try this example in Rust Playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2024&code=use+std%3A%3Anum%3A%3AParseIntError%3B%0A%0A%2F%2F+Without+%3F%3A+every+step+checks+and+returns+early+by+hand%0A%23%5Ballow%28clippy%3A%3Aquestion_mark%29%5D+%2F%2F+Clippy+would+suggest+%3F+here%0Afn+sum_verbose%28a%3A+%26str%2C+b%3A+%26str%29+-%3E+Result%3Ci32%2C+ParseIntError%3E+%7B%0A++++let+x+%3D+match+a.trim%28%29.parse%3A%3A%3Ci32%3E%28%29+%7B%0A++++++++Ok%28n%29+%3D%3E+n%2C%0A++++++++Err%28e%29+%3D%3E+return+Err%28e%29%2C%0A++++%7D%3B%0A++++let+y+%3D+match+b.trim%28%29.parse%3A%3A%3Ci32%3E%28%29+%7B%0A++++++++Ok%28n%29+%3D%3E+n%2C%0A++++++++Err%28e%29+%3D%3E+return+Err%28e%29%2C%0A++++%7D%3B%0A++++Ok%28x+%2B+y%29%0A%7D%0A%0A%2F%2F+With+%3F%3A+the+same+behavior%0Afn+sum%28a%3A+%26str%2C+b%3A+%26str%29+-%3E+Result%3Ci32%2C+ParseIntError%3E+%7B%0A++++let+x%3A+i32+%3D+a.trim%28%29.parse%28%29%3F%3B%0A++++let+y%3A+i32+%3D+b.trim%28%29.parse%28%29%3F%3B%0A++++Ok%28x+%2B+y%29%0A%7D%0A%0Afn+main%28%29+%7B%0A++++println%21%28%22%7B%3A%3F%7D%22%2C+sum_verbose%28%222%22%2C+%223%22%29%29%3B+%2F%2F+Ok%285%29%0A++++println%21%28%22%7B%3A%3F%7D%22%2C+sum%28%222%22%2C+%223%22%29%29%3B+%2F%2F+Ok%285%29%0A++++println%21%28%22%7B%3A%3F%7D%22%2C+sum%28%222%22%2C+%22three%22%29%29%3B+%2F%2F+Err%28ParseIntError+%7B+kind%3A+InvalidDigit+%7D%29%0A%7D%0A)
 
 ::: {.notes}
-Give students 5 minutes. This combines parsing, validation, and error handling.
+Output: Ok(5), Ok(5), Err(ParseIntError { kind: InvalidDigit }). The book's version (9-6, 9-7) reads a username from a file; this one parses numbers so it runs the same way everywhere, including the Playground. The allow attribute keeps Clippy quiet about the deliberately long version; remove it to see the lint. ? only works in a function whose return type can hold the error.
 :::
 
 ---
 
-## Integrative pattern: three concepts {.smaller}
-
-**Combining iterators, smart pointers, and error handling:**
+## `?` in `main`
 
 ```rust
-use std::rc::Rc;
-use std::cell::RefCell;
+use std::error::Error;
+
+fn main() -> Result<(), Box<dyn Error>> {
+    let age: u8 = "42".parse()?;
+    println!("Age: {}", age); // Age: 42
+
+    let oops: u8 = "forty".parse()?; // Returns the error from main
+    println!("Never printed: {}", oops);
+
+    Ok(())
+}
+```
+
+```text
+Age: 42
+Error: ParseIntError { kind: InvalidDigit }
+```
+
+- `Box<dyn Error>` means "any kind of error," in a `Box` because error types differ in size.
+
+[Try this example in Rust Playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2024&code=use+std%3A%3Aerror%3A%3AError%3B%0A%0Afn+main%28%29+-%3E+Result%3C%28%29%2C+Box%3Cdyn+Error%3E%3E+%7B%0A++++let+age%3A+u8+%3D+%2242%22.parse%28%29%3F%3B%0A++++println%21%28%22Age%3A+%7B%7D%22%2C+age%29%3B+%2F%2F+Age%3A+42%0A%0A++++let+oops%3A+u8+%3D+%22forty%22.parse%28%29%3F%3B+%2F%2F+Returns+the+error+from+main%0A++++println%21%28%22Never+printed%3A+%7B%7D%22%2C+oops%29%3B%0A%0A++++Ok%28%28%29%29%0A%7D%0A)
+
+::: {.notes}
+Book 9.2, "Where the ? operator can be used." When main returns Err, the program prints the error with Debug formatting and exits with a nonzero status. dyn Error is a trait object (Week 12's impl Trait limitation slide mentioned it); Box is the session's first smart pointer, reappearing.
+:::
+
+---
+
+## Custom error types: define the error {.smaller .code-tight}
+
+```rust
 use std::fmt;
-
-#[derive(Debug, Clone)]
-struct Config {
-    min_length: usize,
-    max_length: usize,
-}
 
 #[derive(Debug)]
-enum ProcessError {
-    LineTooShort(String),
-    LineTooLong(String),
+enum PercentError {
+    Empty,
+    NotANumber(String),
+    OutOfRange(i32),
 }
 
-impl fmt::Display for ProcessError {
+impl fmt::Display for PercentError {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         match self {
-            ProcessError::LineTooShort(line) => write!(f, "Line too short: {}", line),
-            ProcessError::LineTooLong(line) => write!(f, "Line too long: {}", line),
+            PercentError::Empty => write!(f, "input is empty"),
+            PercentError::NotANumber(s) => write!(f, "{:?} is not a number", s),
+            PercentError::OutOfRange(n) => write!(f, "{} is not between 0 and 100", n),
         }
     }
 }
+```
 
-fn process_lines(
-    lines: &[String],
-    config: Rc<RefCell<Config>>,  // Smart pointer for shared config
-) -> Result<Vec<String>, ProcessError> {  // Result for error handling
-    lines
-        .iter()  // Iterator
-        .map(|line| {
-            let cfg = config.borrow();
-            let len = line.len();
+- The enum lists **every way** the function can fail; some variants carry details.
+- `Display` (Week 12) turns each variant into a message for people.
 
-            if len < cfg.min_length {
-                Err(ProcessError::LineTooShort(line.clone()))
-            } else if len > cfg.max_length {
-                Err(ProcessError::LineTooLong(line.clone()))
-            } else {
-                Ok(line.to_uppercase())  // Transform on success
-            }
-        })
-        .collect()  // Collect into Result<Vec<_>, _>
+::: {.notes}
+An enum error lets callers match on the variant and react differently, which a String error cannot offer. Debug is derived for programmers; Display is written by hand because only we know the right wording. Lab 13 asks for a smaller version of this pattern with its own ParseError; this example uses different names and rules so it is not the lab answer.
+:::
+
+---
+
+## Custom error types: use the error {.smaller .code-tight}
+
+```rust
+fn parse_percent(input: &str) -> Result<i32, PercentError> {
+    let input = input.trim();
+    if input.is_empty() {
+        return Err(PercentError::Empty);
+    }
+    let n: i32 = input
+        .parse()
+        .map_err(|_| PercentError::NotANumber(input.to_string()))?;
+    if !(0..=100).contains(&n) {
+        return Err(PercentError::OutOfRange(n));
+    }
+    Ok(n)
+}
+
+fn main() {
+    for input in ["85", "", "lots", "150"] {
+        match parse_percent(input) {
+            Ok(n) => println!("{}%", n),
+            Err(e) => println!("Error: {}", e),
+        }
+    }
 }
 ```
 
-**Try it yourself:** [Run in Rust Playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=fn%20main%28%29%20%7B%0Ause%20std%3A%3Arc%3A%3ARc%3B%0Ause%20std%3A%3Acell%3A%3ARefCell%3B%0Ause%20std%3A%3Afmt%3B%0A%0A%23%5Bderive%28Debug%2C%20Clone%29%5D%0Astruct%20Config%20%7B%0A%20%20%20%20min_length%3A%20usize%2C%0A%20%20%20%20max_length%3A%20usize%2C%0A%7D%0A%0A%23%5Bderive%28Debug%29%5D%0Aenum%20ProcessError%20%7B%0A%20%20%20%20LineTooShort%28String%29%2C%0A%20%20%20%20LineTooLong%28String%29%2C%0A%7D%0A%0Aimpl%20fmt%3A%3ADisplay%20for%20ProcessError%20%7B%0A%20%20%20%20fn%20fmt%28%26self%2C%20f%3A%20%26mut%20fmt%3A%3AFormatter%29%20-%3E%20fmt%3A%3AResult%20%7B%0A%20%20%20%20%20%20%20%20match%20self%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20ProcessError%3A%3ALineTooShort%28line%29%20%3D%3E%20write%21%28f%2C%20%22Line%20too%20short%3A%20%7B%7D%22%2C%20line%29%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20ProcessError%3A%3ALineTooLong%28line%29%20%3D%3E%20write%21%28f%2C%20%22Line%20too%20long%3A%20%7B%7D%22%2C%20line%29%2C%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20process_lines%28%0A%20%20%20%20lines%3A%20%26%5BString%5D%2C%0A%20%20%20%20config%3A%20Rc%3CRefCell%3CConfig%3E%3E%2C%20%20%2F%2F%20Smart%20pointer%20for%20shared%20config%0A%29%20-%3E%20Result%3CVec%3CString%3E%2C%20ProcessError%3E%20%7B%20%20%2F%2F%20Result%20for%20error%20handling%0A%20%20%20%20lines%0A%20%20%20%20%20%20%20%20.iter%28%29%20%20%2F%2F%20Iterator%0A%20%20%20%20%20%20%20%20.map%28%7Cline%7C%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20let%20cfg%20%3D%20config.borrow%28%29%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20let%20len%20%3D%20line.len%28%29%3B%0A%0A%20%20%20%20%20%20%20%20%20%20%20%20if%20len%20%3C%20cfg.min_length%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20Err%28ProcessError%3A%3ALineTooShort%28line.clone%28%29%29%29%0A%20%20%20%20%20%20%20%20%20%20%20%20%7D%20else%20if%20len%20%3E%20cfg.max_length%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20Err%28ProcessError%3A%3ALineTooLong%28line.clone%28%29%29%29%0A%20%20%20%20%20%20%20%20%20%20%20%20%7D%20else%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20Ok%28line.to_uppercase%28%29%29%20%20%2F%2F%20Transform%20on%20success%0A%20%20%20%20%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%7D%29%0A%20%20%20%20%20%20%20%20.collect%28%29%20%20%2F%2F%20Collect%20into%20Result%3CVec%3C_%3E%2C%20_%3E%0A%7D%0A%7D%0A)
+```text
+85%
+Error: input is empty
+Error: "lots" is not a number
+Error: 150 is not between 0 and 100
+```
+
+[Try the full program in Rust Playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2024&code=use+std%3A%3Afmt%3B%0A%0A%23%5Bderive%28Debug%29%5D%0Aenum+PercentError+%7B%0A++++Empty%2C%0A++++NotANumber%28String%29%2C%0A++++OutOfRange%28i32%29%2C%0A%7D%0A%0Aimpl+fmt%3A%3ADisplay+for+PercentError+%7B%0A++++fn+fmt%28%26self%2C+f%3A+%26mut+fmt%3A%3AFormatter%29+-%3E+fmt%3A%3AResult+%7B%0A++++++++match+self+%7B%0A++++++++++++PercentError%3A%3AEmpty+%3D%3E+write%21%28f%2C+%22input+is+empty%22%29%2C%0A++++++++++++PercentError%3A%3ANotANumber%28s%29+%3D%3E+write%21%28f%2C+%22%7B%3A%3F%7D+is+not+a+number%22%2C+s%29%2C%0A++++++++++++PercentError%3A%3AOutOfRange%28n%29+%3D%3E+write%21%28f%2C+%22%7B%7D+is+not+between+0+and+100%22%2C+n%29%2C%0A++++++++%7D%0A++++%7D%0A%7D%0A%0Afn+parse_percent%28input%3A+%26str%29+-%3E+Result%3Ci32%2C+PercentError%3E+%7B%0A++++let+input+%3D+input.trim%28%29%3B%0A++++if+input.is_empty%28%29+%7B%0A++++++++return+Err%28PercentError%3A%3AEmpty%29%3B%0A++++%7D%0A++++let+n%3A+i32+%3D+input%0A++++++++.parse%28%29%0A++++++++.map_err%28%7C_%7C+PercentError%3A%3ANotANumber%28input.to_string%28%29%29%29%3F%3B%0A++++if+%21%280..%3D100%29.contains%28%26n%29+%7B%0A++++++++return+Err%28PercentError%3A%3AOutOfRange%28n%29%29%3B%0A++++%7D%0A++++Ok%28n%29%0A%7D%0A%0Afn+main%28%29+%7B%0A++++for+input+in+%5B%2285%22%2C+%22%22%2C+%22lots%22%2C+%22150%22%5D+%7B%0A++++++++match+parse_percent%28input%29+%7B%0A++++++++++++Ok%28n%29+%3D%3E+println%21%28%22%7B%7D%25%22%2C+n%29%2C%0A++++++++++++Err%28e%29+%3D%3E+println%21%28%22Error%3A+%7B%7D%22%2C+e%29%2C%0A++++++++%7D%0A++++%7D%0A%7D%0A)
 
 ::: {.notes}
-Summarize the decision points: iterator versus loop, single versus shared ownership, compile-time versus runtime borrow checking, and `Result` propagation versus local handling.
+Each check returns a different variant. map_err converts the standard parse error into our NotANumber variant, and ? returns it early. The match in main prints each error with Display. Ask: which input produces which variant?
 :::
 
 ---
 
-## Where these patterns appear {.inverse .smaller}
+## Try it: parse an age {.inverse .smaller}
 
-**Where you'll use these patterns:**
+```rust
+fn parse_age(_input: &str) -> Result<u8, String> {
+    todo!("Parse an age from 0 to 120 with helpful error messages")
+}
 
-**Iterators:**
+fn main() {
+    assert_eq!(parse_age("25"), Ok(25));
+    assert!(parse_age("").is_err()); // Empty
+    assert!(parse_age("abc").is_err()); // Not a number
+    assert!(parse_age("150").is_err()); // Out of range
+    assert!(parse_age("-5").is_err()); // Negative
+    println!("All checks passed!");
+}
+```
 
-- Data processing pipelines (ETL, analytics)
-- Web server request filtering
-- Database query building
-- JSON/XML parsing
+**Goal:** Replace `todo!` so all checks pass. Rename `_input` to `input` when you use it.
 
-**Smart pointers:**
+**Hint:** `trim`, `parse::<u8>()`, `map_err`, and a range check.
 
-- Graph databases (Rc for shared nodes)
-- Game engines (entity-component systems)
-- Compilers (AST with shared subtrees)
-- UI frameworks (shared state management)
-
-**Error handling:**
-
-- Library APIs that expose recoverable failure
-- File I/O, network requests, parsing
-- Database operations
-- Command-line tools
-
-**Review prompt**: For each pattern, name the ownership or error-handling constraint that motivates it.
+[Open the starter in Rust Playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2024&code=fn+parse_age%28_input%3A+%26str%29+-%3E+Result%3Cu8%2C+String%3E+%7B%0A++++todo%21%28%22Parse+an+age+from+0+to+120+with+helpful+error+messages%22%29%0A%7D%0A%0Afn+main%28%29+%7B%0A++++assert_eq%21%28parse_age%28%2225%22%29%2C+Ok%2825%29%29%3B%0A++++assert%21%28parse_age%28%22%22%29.is_err%28%29%29%3B+%2F%2F+Empty%0A++++assert%21%28parse_age%28%22abc%22%29.is_err%28%29%29%3B+%2F%2F+Not+a+number%0A++++assert%21%28parse_age%28%22150%22%29.is_err%28%29%29%3B+%2F%2F+Out+of+range%0A++++assert%21%28parse_age%28%22-5%22%29.is_err%28%29%29%3B+%2F%2F+Negative%0A++++println%21%28%22All+checks+passed%21%22%29%3B%0A%7D%0A)
 
 ::: {.notes}
-Use one primary-source example for each pattern and identify where a simpler owned value, loop, or local error branch would be sufficient.
+Give students 5 minutes. The starter compiles and panics with "not yet implemented" until todo! is replaced. Note that "-5" and "abc" both fail to parse as u8, so one map_err covers both; "150" parses but fails the range check. A good solution returns a different message for each case. The leading underscore convention matches the labs.
 :::
 
 ---
 
-## Common pitfalls and practices {.smaller}
+## Putting it together {.smaller}
 
-**Iterators:**
+```rust
+use std::num::ParseIntError;
 
-❌ Collecting unnecessarily: `.collect::<Vec<_>>()` then iterate again
-✅ Chain operations: `.map().filter().sum()` in one go
+fn parse_all(inputs: &[&str]) -> Result<Vec<i32>, ParseIntError> {
+    inputs.iter().map(|s| s.trim().parse::<i32>()).collect()
+}
 
-❌ Using `clone()` in iterators when reference works
-✅ Use references or `Copy` types
+fn main() {
+    println!("{:?}", parse_all(&["1", " 2", "3 "])); // Ok([1, 2, 3])
+    println!("{:?}", parse_all(&["1", "two", "3"])); // Err(ParseIntError { kind: InvalidDigit })
+}
+```
 
-**Smart Pointers:**
+- An iterator of `Result`s can `collect` into a `Result` of a vector.
+- The first `Err` stops the chain: no partial lists to clean up.
 
-❌ Using `Rc<RefCell<T>>` when `&mut T` works
-✅ Start simple, add smart pointers only when needed
-
-❌ Creating reference cycles with `Rc` (memory leak!)
-✅ Use `Weak<T>` for back-references
-
-**Error Handling:**
-
-❌ Using `.unwrap()` everywhere (panics in production!)
-✅ Use `?` operator and handle errors properly
-
-❌ String errors: `Err("something failed".to_string())`
-✅ Custom error enums with specific variants
+[Try this example in Rust Playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2024&code=use+std%3A%3Anum%3A%3AParseIntError%3B%0A%0Afn+parse_all%28inputs%3A+%26%5B%26str%5D%29+-%3E+Result%3CVec%3Ci32%3E%2C+ParseIntError%3E+%7B%0A++++inputs.iter%28%29.map%28%7Cs%7C+s.trim%28%29.parse%3A%3A%3Ci32%3E%28%29%29.collect%28%29%0A%7D%0A%0Afn+main%28%29+%7B%0A++++println%21%28%22%7B%3A%3F%7D%22%2C+parse_all%28%26%5B%221%22%2C+%22+2%22%2C+%223+%22%5D%29%29%3B+%2F%2F+Ok%28%5B1%2C+2%2C+3%5D%29%0A++++println%21%28%22%7B%3A%3F%7D%22%2C+parse_all%28%26%5B%221%22%2C+%22two%22%2C+%223%22%5D%29%29%3B+%2F%2F+Err%28ParseIntError+%7B+kind%3A+InvalidDigit+%7D%29%0A%7D%0A)
 
 ::: {.notes}
-These mistakes are common in beginners. Avoid them from the start!
+Output: Ok([1, 2, 3]), then Err(ParseIntError { kind: InvalidDigit }). This combines a closure, an iterator chain, and Result, which is the shape of a lot of real Rust input handling. Ask: how would the loop version look? It needs a mutable vector and an early return.
 :::
 
 ---
 
-## Optional advanced topics {.inverse .smaller}
+## Common pitfalls
 
-**If you want to go deeper:**
-
-**Custom Iterators:**
-
-- Implement the `Iterator` trait
-- Create infinite sequences
-- Build adapters like `filter` and `map`
-
-**More Smart Pointers:**
-
-- `Weak<T>`: Non-owning references (break cycles)
-- `Cow<T>`: Clone-on-write
-- `Pin<T>`: Prevent moves (async/await)
-
-**Error Libraries:**
-
-- [`thiserror`](https://docs.rs/thiserror/): Derive Error trait
-- [`anyhow`](https://docs.rs/anyhow/): Convenient error handling
-
-**None of these are required for Lab 13, but great for projects!**
+| Instead of | Prefer |
+|---|---|
+| `.collect()` then iterate the vector again | One chain ending in a consumer |
+| `.clone()` inside a chain to silence an error | `.iter()` and references, or `.into_iter()` if you own the data |
+| `Rc<RefCell<T>>` by default | Plain ownership and `&mut` until sharing is required |
+| `.unwrap()` on user input | `?` or `match`, with a useful error |
+| `String` errors everywhere | An error enum when callers need to react differently |
 
 ::: {.notes}
-These are for students who want to explore beyond the basics.
+Each row connects to a slide: lazy adaptors, the access table, the smart-pointer decision tree, Result vs. panic, and custom errors. AI assistants often suggest clone, unwrap, and Rc<RefCell<T>> to make errors go away; ask students to justify each one before accepting it.
 :::
 
 ---
 
 ## Lab 13 preview {.inverse}
 
-**This week's lab focuses on two parts:**
-
 **Part 1: iterators and closures**
 
-- Text analysis with iterator chains
-- Custom data processing pipelines
-- Stateful closures
+- `analyze_text`: count words, average length, longest word. On a tie, the **first** longest word wins.
+- `process_numbers`: a `filter`, `map`, `sum` chain.
+- `make_counter`: return a closure that remembers a count.
 
-**Part 2: error handling with `Result`**
+**Part 2: errors with `Result`**
 
-- Division with `Result`
-- `Display` messages for the supplied `ParseError` variants
-- Parsing a positive integer into `Result<i32, ParseError>`
+- `divide`, `Display` for `ParseError`, and `parse_positive_number`.
+
+Follow the [Lab 13 instructions](https://github.com/bgreenwell/is4010-labs/blob/main/week13/lab13.md).
+
+::: {.notes}
+Map each function to its slides without giving answers: analyze_text uses split_whitespace and the consumers slide (warn about max_by_key returning the last of equal maxima; the test expects the first); process_numbers uses the chain slides; make_counter combines "Returning a closure" with "A closure that remembers"; the Part 2 functions follow "Result with match" and "Custom error types." Smart pointers are not graded in Lab 13.
+:::
 
 ---
 
 ## Lab 13 workflow {.inverse}
+
+Run these inside your fork's `week13/` directory:
 
 ```bash
 cargo test
@@ -1034,68 +1108,58 @@ git commit -m "Complete Lab 13"
 git push origin main
 ```
 
-Confirm the Week 13 README badge is green; that badge is the complete 10-point grade. See [`week13/lab13.md`](https://github.com/bgreenwell/is4010-labs/blob/main/week13/lab13.md).
+- CI checks formatting with `cargo fmt --check`.
+- Confirm that the Week 13 README badge is green; that badge is the complete 10-point grade.
 
 ::: {.notes}
-Smart pointers remain lecture enrichment; they are not Lab 13 deliverables. Students implement every `todo!()` in the supplied `src/main.rs` and do not modify the tests.
+These commands match week13/lab13.md. Students implement every todo!() and do not modify the test module.
 :::
 
 ---
 
-## Week 13 summary {.inverse}
+## Key takeaways {.inverse}
 
-**What makes Rust code "idiomatic":**
+- **Closures** capture values to read, change, or own them: `Fn`, `FnMut`, `FnOnce`.
+- **Iterators** describe steps; a consumer like `collect` or `sum` runs them.
+- **Smart pointers** relax one ownership rule each: `Box` (size), `Rc` (owners), `RefCell` (when borrows are checked).
+- **`Result` and `?`** make failure part of the signature and pass it up cleanly.
 
-- **Iterators**: Composable data processing
-- **Closures**: Functions that can capture their environment
-- **Smart pointers**: Optional tools for ownership patterns that references cannot express
-- **Error handling**: Explicit, recoverable errors
-
-**Key takeaways:**
-
-- Iterator chains are lazy and often optimize well; collection and algorithm choices still matter
-- Smart pointers add capabilities and complexity; start with ordinary ownership and borrowing
-- `Result<T, E>` makes errors part of your API
-- These patterns appear throughout Rust's standard library and ecosystem
-
-**Next week**: Build a complete command-line application with Lab 14!
+**Every tool this week answers Week 10's question: read, change, or own?**
 
 ::: {.notes}
-Next week synthesizes these patterns in a tested password generator and validator CLI built with `clap`.
+Return to the access table from the start of session 1 and fill it in with the class. Next week's Lab 14 command-line tool uses iterators, closures, and Result throughout.
 :::
 
 ---
 
-## Resources and further reading {.smaller}
+## Resources and questions
 
-**Official Documentation:**
+**Start here:**
 
-- [The Rust Book Ch 13 - Functional Features](https://doc.rust-lang.org/book/ch13-00-functional-features.html)
-- [The Rust Book Ch 15 - Smart Pointers](https://doc.rust-lang.org/book/ch15-00-smart-pointers.html)
-- [The Rust Book Ch 9 - Error Handling](https://doc.rust-lang.org/book/ch09-00-error-handling.html)
-- [Iterator trait](https://doc.rust-lang.org/std/iter/trait.Iterator.html)
-- [Rc documentation](https://doc.rust-lang.org/std/rc/struct.Rc.html)
-- [RefCell documentation](https://doc.rust-lang.org/std/cell/struct.RefCell.html)
+- [Rust Book 13: closures and iterators](https://doc.rust-lang.org/book/ch13-00-functional-features.html)
+- [Rust Book 15: smart pointers](https://doc.rust-lang.org/book/ch15-00-smart-pointers.html)
+- [Rust Book 9: error handling](https://doc.rust-lang.org/book/ch09-00-error-handling.html)
 
-**Practice:**
+**More practice:**
 
-- [Rustlings](https://github.com/rust-lang/rustlings/) - Iterators, Smart Pointers, Error Handling sections
-- [Exercism Rust Track](https://exercism.org/tracks/rust) - Real-world exercises
-- [Rust by Example](https://doc.rust-lang.org/rust-by-example/) - Code examples
+- [Rustlings](https://github.com/rust-lang/rustlings): iterators, smart pointers, and error handling exercises
+- [Iterator methods](https://doc.rust-lang.org/std/iter/trait.Iterator.html) in the standard library
+- [Rust Playground](https://play.rust-lang.org/)
 
-**Community:**
+**Going further (optional):** `Weak<T>` for cycles, `Arc<T>` and `Mutex<T>` for threads, and the [`thiserror`](https://docs.rs/thiserror/) and [`anyhow`](https://docs.rs/anyhow/) error crates.
 
-- [Rust Users Forum](https://users.rust-lang.org/)
-- [r/rust](https://www.reddit.com/r/rust/)
+::: {.notes}
+The book chapters use the same examples as these slides. None of the optional topics are needed for Lab 13; they are useful for final projects. Get help through office hours, the course Teams channel, or users.rust-lang.org.
+:::
 
 ---
 
-## Questions? {.inverse}
+## Next week: build a command-line tool {.inverse}
 
-**Office hours**: See syllabus
+- Command-line programs with `clap`: arguments, subcommands, and `match`
+- Lab 14 brings six weeks of Rust together in one tested tool
+- Iterators, closures, and `Result` from this week appear throughout
 
-**AI assistance**: Browser chat, GitHub Copilot, Copilot CLI, Antigravity CLI
-
-**Lab 13**: Follow the due date shown in Canvas
-
-**Good luck and have fun with idiomatic Rust!**
+::: {.notes}
+Week 14 synthesizes these patterns in a password generator and validator CLI. Encourage students to finish Lab 13 first.
+:::
