@@ -4467,238 +4467,280 @@
     "href": "slides/IS4010_W13_Idiomatic_Rust.html#week-13-overview",
     "title": "IS 4010: Application Development with Artificial Intelligence",
     "section": "Week 13 overview",
-    "text": "Week 13 overview\nSession 1: iterators and closures\n\nIterator methods (.map(), .filter(), .fold(), .collect())\nClosures and capture semantics\nClosure traits: Fn, FnMut, FnOnce\nBuilding data processing pipelines\nLazy evaluation and allocation choices\n\nSession 2: smart pointers and error handling\n\nSmart pointers: Box&lt;T&gt;, Rc&lt;T&gt;, RefCell&lt;T&gt;\nInterior mutability patterns\nWhen to use each smart pointer\nIdiomatic error handling with Result&lt;T, E&gt;\nThe ? operator and custom error types\n\n\nThis week focuses on iterator composition, closure capture, shared ownership, interior mutability, and explicit error propagation. Evaluate each pattern by the ownership or control-flow problem it solves."
+    "text": "Week 13 overview\nSession 1: closures and iterators (Rust Book 13)\n\nClosures: small functions that capture values around them\nIterators: process a collection one item at a time\nChaining adaptors: map, filter, collect, sum\n\nSession 2: smart pointers and errors (Rust Book 15 and 9)\n\nBox&lt;T&gt;, Rc&lt;T&gt;, and RefCell&lt;T&gt;\nResult, the ? operator, and custom error types\nLab 13\n\n\nSlides follow the Rust Book’s own examples where practical: chapter 13 for closures and iterators, chapter 15 for smart pointers, and chapter 9 for error handling, so the reading and the lecture line up.\nThe thread through the whole week is Week 10’s three access levels: read (&), change (&mut), and own. Closures capture with one of the three, iterators hand out items with one of the three, and smart pointers relax the ownership rules in carefully checked ways. Point back to this every time it appears."
   },
   {
-    "objectID": "slides/IS4010_W13_Idiomatic_Rust.html#why-idiomatic-rust-matters",
-    "href": "slides/IS4010_W13_Idiomatic_Rust.html#why-idiomatic-rust-matters",
+    "objectID": "slides/IS4010_W13_Idiomatic_Rust.html#one-idea-runs-through-this-week",
+    "href": "slides/IS4010_W13_Idiomatic_Rust.html#one-idea-runs-through-this-week",
     "title": "IS 4010: Application Development with Artificial Intelligence",
-    "section": "Why idiomatic Rust matters",
-    "text": "Why idiomatic Rust matters\nWhat the patterns provide:\n\nFunctional style: Process data without manual loops\nFlexible ownership: Build complex data structures safely\nExplicit errors: Expected failure categories in return types\nIterator composition: Lazy adaptors that can avoid intermediate collections\n\nProject examples:\n\nRipgrep: Fast search tool using iterators\nServo: Browser engine with smart pointers\nTokio: Async runtime with Result-based APIs\n\n\nThese patterns appear often in Rust code. Learn to recognize their trade-offs and start with the simplest ownership model that satisfies the requirement."
+    "section": "One idea runs through this week",
+    "text": "One idea runs through this week\nWeek 10 gave us three levels of access to a value:\n\n\n\nAccess\nWeek 10\nClosures\nIterators\n\n\n\n\nRead\n&name\nFn\n.iter() gives &T\n\n\nChange\n&mut name\nFnMut\n.iter_mut() gives &mut T\n\n\nOwn\nname (move)\nFnOnce\n.into_iter() gives T\n\n\n\nEach new tool this week asks the same question: does it read, change, or own?\n\nStudents do not need to memorize the columns now; the table is a map for the session. Each row reappears on a later slide with a working example. Come back to it at the end of session 1."
   },
   {
-    "objectID": "slides/IS4010_W13_Idiomatic_Rust.html#the-problem-manual-iteration",
-    "href": "slides/IS4010_W13_Idiomatic_Rust.html#the-problem-manual-iteration",
+    "objectID": "slides/IS4010_W13_Idiomatic_Rust.html#functions-you-can-write-inline",
+    "href": "slides/IS4010_W13_Idiomatic_Rust.html#functions-you-can-write-inline",
     "title": "IS 4010: Application Development with Artificial Intelligence",
-    "section": "The problem: manual iteration",
-    "text": "The problem: manual iteration\nTraditional loop-based approach:\nlet numbers = vec![1, 2, 3, 4, 5, 6];\nlet mut result = Vec::new();\n\nfor num in &numbers {\n    if num % 2 == 0 {  // Keep evens\n        let squared = num * num;  // Square them\n        result.push(squared);\n    }\n}\n// result = [4, 16, 36]\nTry it yourself: Run in Rust Playground\nProblems:\n\nMutable state (result)\nMultiple steps spread across lines\nIntent buried in implementation\nError-prone (easy to forget to push, etc.)\n\n\nAsk students: “What if we had 5 different transformations? Code gets messy fast.”"
+    "section": "Functions you can write inline",
+    "text": "Functions you can write inline\nfn add_one_v1(x: u32) -&gt; u32 {\n    x + 1\n}\n\nfn main() {\n    let add_one_v2 = |x: u32| -&gt; u32 { x + 1 };\n    let add_one_v3 = |x: u32| x + 1;\n    let add_one_v4 = |x| x + 1;\n\n    println!(\"{}\", add_one_v1(5)); // 6\n    println!(\"{}\", add_one_v2(5)); // 6\n    println!(\"{}\", add_one_v3(5)); // 6\n    println!(\"{}\", add_one_v4(5)); // 6\n}\n\nA closure is a function without a name: |x| x + 1.\nRead |x| as “given x.” The body follows.\nTypes are optional when Rust can infer them.\n\nTry this example in Rust Playground\n\nOutput: 6 four times. This is the Rust Book’s add_one_v1 through add_one_v4 comparison from 13.1. Each version drops something optional: the return type, the braces, then the parameter type. Python parallel: lambda x: x + 1. Rust closures can have multi-line bodies in braces, which Python lambdas cannot."
   },
   {
-    "objectID": "slides/IS4010_W13_Idiomatic_Rust.html#introducing-iterators",
-    "href": "slides/IS4010_W13_Idiomatic_Rust.html#introducing-iterators",
+    "objectID": "slides/IS4010_W13_Idiomatic_Rust.html#closures-can-capture-values",
+    "href": "slides/IS4010_W13_Idiomatic_Rust.html#closures-can-capture-values",
     "title": "IS 4010: Application Development with Artificial Intelligence",
-    "section": "Introducing iterators",
-    "text": "Introducing iterators\nFunctional approach with iterator chains:\nlet numbers = vec![1, 2, 3, 4, 5, 6];\n\nlet result: Vec&lt;i32&gt; = numbers\n    .iter()\n    .filter(|&&n| n % 2 == 0)  // Keep evens\n    .map(|&n| n * n)            // Square them\n    .collect();\n\n// result = [4, 16, 36]\nTry it yourself: Run in Rust Playground\nBenefits:\n\nDeclarative: says what to do, not how\nComposable: chain operations together\nLazy: only evaluates when needed\nOptimizable: iterator chains can compile to efficient loops, but measure when performance matters\n\nIterator trait documentation\n\nEmphasize lazy evaluation - intermediate steps don’t create temporary vectors."
+    "section": "Closures can capture values",
+    "text": "Closures can capture values\nfn main() {\n    let threshold = 10;\n\n    // The closure uses threshold from main\n    let is_large = |x: i32| x &gt; threshold;\n\n    println!(\"{}\", is_large(5)); // false\n    println!(\"{}\", is_large(15)); // true\n}\nPredict: Could a regular fn is_large inside main use threshold?\n\nNo: E0434: can't capture dynamic environment in a fn item. Only closures can see variables around them.\n\nTry this example in Rust Playground\n\nOutput: false, then true. The ability to capture is what makes closures useful as arguments to filter and map later: the closure brings its own data, such as a threshold, along with it. Demonstrate the fn version from the fragment if time allows."
   },
   {
-    "objectID": "slides/IS4010_W13_Idiomatic_Rust.html#common-iterator-methods",
-    "href": "slides/IS4010_W13_Idiomatic_Rust.html#common-iterator-methods",
+    "objectID": "slides/IS4010_W13_Idiomatic_Rust.html#capturing-to-read-or-to-change",
+    "href": "slides/IS4010_W13_Idiomatic_Rust.html#capturing-to-read-or-to-change",
     "title": "IS 4010: Application Development with Artificial Intelligence",
-    "section": "Common iterator methods",
-    "text": "Common iterator methods\nTransformation:\n// map: transform each element\nvec![1, 2, 3].iter().map(|x| x * 2)  // [2, 4, 6]\n\n// filter: keep elements matching condition\nvec![1, 2, 3, 4].iter().filter(|&&x| x % 2 == 0)  // [2, 4]\n\n// filter_map: transform and filter in one step\nvec![\"1\", \"two\", \"3\"]\n    .iter()\n    .filter_map(|s| s.parse::&lt;i32&gt;().ok())  // [1, 3]\nAggregation:\n// sum: add all elements\nvec![1, 2, 3].iter().sum::&lt;i32&gt;()  // 6\n\n// fold: custom aggregation\nvec![1, 2, 3].iter().fold(0, |acc, x| acc + x)  // 6\n\n// collect: gather results into a collection\n(1..=5).collect::&lt;Vec&lt;i32&gt;&gt;()  // [1, 2, 3, 4, 5]\nIterator methods\n\nExplain that iterator adaptors are lazy and usually inline well. collect() intentionally allocates a collection; inspect optimized output or benchmark before claiming equivalence with a particular loop."
+    "section": "Capturing to read or to change",
+    "text": "Capturing to read or to change\nfn main() {\n    let mut list = vec![1, 2, 3];\n\n    // Borrows list for reading, like &list\n    let print_list = || println!(\"Closure sees: {:?}\", list);\n    print_list(); // Closure sees: [1, 2, 3]\n    println!(\"Main still sees: {:?}\", list); // Main still sees: [1, 2, 3]\n\n    // Borrows list for changing, like &mut list\n    let mut add_seven = || list.push(7);\n    add_seven();\n    println!(\"After push: {:?}\", list); // After push: [1, 2, 3, 7]\n}\n\nprint_list only reads list, so it borrows like &list. Main can still read it too.\nadd_seven changes list, so it borrows like &mut list, and must be declared let mut.\n\nTry this example in Rust Playground\n\nBook listings 13-4 and 13-5. Output: Closure sees: [1, 2, 3], Main still sees: [1, 2, 3], After push: [1, 2, 3, 7]. Rust picks the least access the body needs. Ask: what happens if you try to print list between creating add_seven and calling it? E0502, the reader/editor conflict from Week 10, because the closure holds a mutable borrow until its last use."
   },
   {
-    "objectID": "slides/IS4010_W13_Idiomatic_Rust.html#practical-example-line-lengths",
-    "href": "slides/IS4010_W13_Idiomatic_Rust.html#practical-example-line-lengths",
+    "objectID": "slides/IS4010_W13_Idiomatic_Rust.html#capturing-to-own-move-and-fnonce",
+    "href": "slides/IS4010_W13_Idiomatic_Rust.html#capturing-to-own-move-and-fnonce",
     "title": "IS 4010: Application Development with Artificial Intelligence",
-    "section": "Practical example: line lengths",
-    "text": "Practical example: line lengths\nTrim nonempty lines and record their lengths:\nfn nonempty_line_lengths(text: &str) -&gt; Vec&lt;usize&gt; {\n    text.lines()\n        .map(str::trim)\n        .filter(|line| !line.is_empty())\n        .map(str::len)\n        .collect()\n}\nTry it yourself: Run in Rust Playground\n\nCompare this iterator version with a loop using the same requirements. Prefer the version whose data flow the class can explain and test."
+    "section": "Capturing to own: move and FnOnce",
+    "text": "Capturing to own: move and FnOnce\nfn main() {\n    let name = String::from(\"Homer\");\n\n    // Moves name into the closure, then gives it away when called\n    let take_name = move || name;\n\n    let owner = take_name();\n    println!(\"{}\", owner); // Homer\n}\n\nmove makes the closure take ownership of name.\nCalling it gives name away, so it can be called only once: an FnOnce closure.\n\nPredict: What happens if we call take_name() a second time?\n\nE0382: use of moved value: take_name. The value was already given away on the first call.\n\nTry this example in Rust Playground\n\nOutput: Homer. The body returns the captured String, which moves it out of the closure. This is the “own” row of the table. Most closures are Fn or FnMut; FnOnce matters when a closure hands away something it owns."
   },
   {
-    "objectID": "slides/IS4010_W13_Idiomatic_Rust.html#try-it-yourself-iterator-chains",
-    "href": "slides/IS4010_W13_Idiomatic_Rust.html#try-it-yourself-iterator-chains",
+    "objectID": "slides/IS4010_W13_Idiomatic_Rust.html#the-three-closure-traits",
+    "href": "slides/IS4010_W13_Idiomatic_Rust.html#the-three-closure-traits",
     "title": "IS 4010: Application Development with Artificial Intelligence",
-    "section": "Try it yourself: iterator chains",
-    "text": "Try it yourself: iterator chains\nChallenge: Build an iterator pipeline\n// Given this vector:\nlet numbers = vec![1, 2, 3, 4, 5, 6, 7, 8, 9, 10];\n\n// Use iterator methods to:\n// 1. Keep values greater than 5\n// 2. Double each value\n// 3. Sum the results\n// Expected: 80\n\nlet result: i32 = numbers\n    .iter()\n    .filter(|&&n| n &gt; 5)\n    .map(|&n| n * 2)\n    .sum();\nTry on Rust Playground\n\nGive students 3-4 minutes. Then show solution and discuss the pattern."
+    "section": "The three closure traits",
+    "text": "The three closure traits\n\n\n\n\n\n\n\n\n\nTrait\nThe closure…\nWeek 10 equivalent\nCan call\n\n\n\n\nFn\nOnly reads what it captured\n&\nMany times\n\n\nFnMut\nChanges what it captured\n&mut\nMany times, needs let mut\n\n\nFnOnce\nGives away what it captured\nOwnership moves\nOnce\n\n\n\nRust picks the trait from what the body does. You only write the trait names when a function accepts or returns a closure.\n\nFn closures also count as FnMut and FnOnce, and FnMut closures also count as FnOnce: a closure that only reads can certainly be called once. Students need that only when reading signatures such as sort_by_key, which takes FnMut. The next slide shows a function returning a closure."
   },
   {
-    "objectID": "slides/IS4010_W13_Idiomatic_Rust.html#closures-anonymous-functions",
-    "href": "slides/IS4010_W13_Idiomatic_Rust.html#closures-anonymous-functions",
+    "objectID": "slides/IS4010_W13_Idiomatic_Rust.html#returning-a-closure",
+    "href": "slides/IS4010_W13_Idiomatic_Rust.html#returning-a-closure",
     "title": "IS 4010: Application Development with Artificial Intelligence",
-    "section": "Closures: anonymous functions",
-    "text": "Closures: anonymous functions\nClosures are functions that can capture their environment:\n// Regular function\nfn add_one(x: i32) -&gt; i32 {\n    x + 1\n}\n\n// Closure (short form)\nlet add_one = |x: i32| x + 1;\n\n// Closure with type inference (Rust figures it out!)\nlet add_one = |x| x + 1;\n\n// Use it:\nlet result = add_one(5);  // 6\nTry it yourself: Run in Rust Playground\nClosures can capture variables:\nlet threshold = 10;\n\n// Closure captures 'threshold' from environment\nlet is_large = |x: i32| x &gt; threshold;\n\nprintln!(\"{}\", is_large(5));   // false\nprintln!(\"{}\", is_large(15));  // true\nTry it yourself: Run in Rust Playground\nClosures in Rust Book\n\nThis is where closures shine - they remember their environment!"
+    "section": "Returning a closure",
+    "text": "Returning a closure\nfn make_adder(n: i32) -&gt; impl Fn(i32) -&gt; i32 {\n    move |x| x + n\n}\n\nfn main() {\n    let add_five = make_adder(5);\n    let add_ten = make_adder(10);\n\n    println!(\"{}\", add_five(1)); // 6\n    println!(\"{}\", add_ten(1)); // 11\n}\n\nimpl Fn(i32) -&gt; i32: “some closure that takes an i32 and returns an i32” (Week 12’s impl Trait).\nmove copies n into the closure, so it still exists after make_adder returns.\n\nPredict: What happens without move?\n\nE0373: closure may outlive the current function, but it borrows n. Without move, the closure would hold a reference to a local variable that is about to disappear (Week 10’s dangling reference).\n\nTry this example in Rust Playground\n\nOutput: 6, then 11. Each call to make_adder builds a separate closure with its own n. Lab 13’s make_counter uses the same shape, a returned closure with move, combined with the state-changing idea on the next slide; do not show the lab solution itself."
   },
   {
-    "objectID": "slides/IS4010_W13_Idiomatic_Rust.html#closure-traits-fn-fnmut-and-fnonce",
-    "href": "slides/IS4010_W13_Idiomatic_Rust.html#closure-traits-fn-fnmut-and-fnonce",
+    "objectID": "slides/IS4010_W13_Idiomatic_Rust.html#a-closure-that-remembers",
+    "href": "slides/IS4010_W13_Idiomatic_Rust.html#a-closure-that-remembers",
     "title": "IS 4010: Application Development with Artificial Intelligence",
-    "section": "Closure traits: Fn, FnMut, and FnOnce",
-    "text": "Closure traits: Fn, FnMut, and FnOnce\nRust has three closure traits based on how they capture variables:\nFn - Borrows immutably:\nlet x = 10;\nlet print_x = || println!(\"{}\", x);  // Borrows x\nprint_x();  // Can call multiple times\nTry it yourself: Run in Rust Playground\nFnMut - Borrows mutably:\nlet mut count = 0;\nlet mut increment = || { count += 1; };  // Mutably borrows count\nincrement();  // count = 1\nincrement();  // count = 2\nTry it yourself: Run in Rust Playground\nFnOnce - Takes ownership:\nlet data = vec![1, 2, 3];\nlet consume = || drop(data);  // Takes ownership of data\nconsume();  // data is moved, can't call again\nTry it yourself: Run in Rust Playground\nFn traits\n\nMost closures are Fn or FnMut. FnOnce is rare but important to understand."
+    "section": "A closure that remembers",
+    "text": "A closure that remembers\nfn main() {\n    let mut total = 0;\n\n    let mut add_to_total = |amount| {\n        total += amount;\n        total\n    };\n\n    println!(\"{}\", add_to_total(4)); // 4\n    println!(\"{}\", add_to_total(7)); // 11\n}\n\nThe closure changes total each time it runs, so it is FnMut.\ntotal keeps its value between calls: the closure has state.\n\nTry this example in Rust Playground\n\nOutput: 4, then 11. Ask students which row of the access table this is (change, &mut) and why the closure binding needs let mut. While add_to_total may still be called, main cannot use total directly; the mutable borrow is active."
   },
   {
-    "objectID": "slides/IS4010_W13_Idiomatic_Rust.html#practical-example-captured-state",
-    "href": "slides/IS4010_W13_Idiomatic_Rust.html#practical-example-captured-state",
+    "objectID": "slides/IS4010_W13_Idiomatic_Rust.html#the-problem-a-loop-with-bookkeeping",
+    "href": "slides/IS4010_W13_Idiomatic_Rust.html#the-problem-a-loop-with-bookkeeping",
     "title": "IS 4010: Application Development with Artificial Intelligence",
-    "section": "Practical example: captured state",
-    "text": "Practical example: captured state\nA closure can update a value from its environment:\nlet mut total = 0;\nlet mut add_to_total = |amount| {\n    total += amount;\n    total\n};\n\nprintln!(\"{}\", add_to_total(4));  // 4\nprintln!(\"{}\", add_to_total(7));  // 11\nTry it yourself: Run in Rust Playground\nKey concepts:\n\nFnMut because the closure mutates captured total\nThe mutable borrow lasts while the closure may still be used\n\n\nThe captured variable gives this closure state that persists between calls."
+    "section": "The problem: a loop with bookkeeping",
+    "text": "The problem: a loop with bookkeeping\nfn main() {\n    let numbers = [1, 2, 3, 4, 5, 6];\n    let mut result = Vec::new();\n\n    for n in numbers {\n        if n % 2 == 0 {\n            result.push(n * n);\n        }\n    }\n\n    println!(\"{:?}\", result); // [4, 16, 36]\n}\n\nThe goal: squares of the even numbers.\nThe bookkeeping: an empty vector, if, push, mut.\n\nCan we write just the goal?\nTry this example in Rust Playground\n\nOutput: [4, 16, 36]. Nothing is wrong with this loop; it is clear and fast. The point is that most of the lines manage the result rather than describe it. Iterators let us write the three steps (keep evens, square, collect) directly."
   },
   {
-    "objectID": "slides/IS4010_W13_Idiomatic_Rust.html#iterator-and-closure-pattern",
-    "href": "slides/IS4010_W13_Idiomatic_Rust.html#iterator-and-closure-pattern",
+    "objectID": "slides/IS4010_W13_Idiomatic_Rust.html#an-iterator-is-a-bookmark",
+    "href": "slides/IS4010_W13_Idiomatic_Rust.html#an-iterator-is-a-bookmark",
     "title": "IS 4010: Application Development with Artificial Intelligence",
-    "section": "Iterator and closure pattern",
-    "text": "Iterator and closure pattern\nProcessing collections with closures:\n#[derive(Debug)]\nstruct Student {\n    name: String,\n    grade: f64,\n}\n\nlet students = vec![Student { name: \"Alice\".to_string(), grade: 92.0 },\n    Student { name: \"Bob\".to_string(), grade: 78.0 },\n    Student { name: \"Charlie\".to_string(), grade: 85.0 },\n];\n\n// Find honor roll students (grade &gt;= 80)\nlet honor_roll: Vec&lt;&str&gt; = students\n    .iter()\n    .filter(|student| student.grade &gt;= 80.0)\n    .map(|student| student.name.as_str())\n    .collect();\n\n// honor_roll = [\"Alice\", \"Charlie\"]\nTry it yourself: Run in Rust Playground\nTransfer: The same filter-map-collect pipeline appears in many Rust APIs.\n\nTrace the item type after each adaptor and confirm which values are borrowed. Avoid presenting a pipeline as automatically clearer than a loop."
+    "section": "An iterator is a bookmark",
+    "text": "An iterator is a bookmark\n\n\nfn main() {\n    let v = [1, 2, 3];\n    let mut iter = v.iter();\n\n    println!(\"{:?}\", iter.next()); // Some(1)\n    println!(\"{:?}\", iter.next()); // Some(2)\n    println!(\"{:?}\", iter.next()); // Some(3)\n    println!(\"{:?}\", iter.next()); // None\n}\n\n\n\n\nMethod\nItems\nAccess\n\n\n\n\n.iter()\n&T\nRead\n\n\n.iter_mut()\n&mut T\nChange\n\n\n.into_iter()\nT\nOwn\n\n\n\n\n\nEach call to next() returns the next item, then None at the end.\nfor loops call next() for you.\n\nTry this example in Rust Playground\n\nBook listing 13-12, written as a program instead of a test. Output: Some(1), Some(2), Some(3), None. The iterator remembers its position, which is why it must be mut: next changes the bookmark. The method table is the “iterators” column of the access map from the start of the session.\nPython parallel: iter() and next(), with None in place of StopIteration."
   },
   {
-    "objectID": "slides/IS4010_W13_Idiomatic_Rust.html#end-of-session-1",
-    "href": "slides/IS4010_W13_Idiomatic_Rust.html#end-of-session-1",
+    "objectID": "slides/IS4010_W13_Idiomatic_Rust.html#adaptors-are-lazy",
+    "href": "slides/IS4010_W13_Idiomatic_Rust.html#adaptors-are-lazy",
     "title": "IS 4010: Application Development with Artificial Intelligence",
-    "section": "End of session 1",
-    "text": "End of session 1\nWhat we covered:\n\nIterator methods (.map(), .filter(), .sum(), .collect())\nBuilding data-processing pipelines\nClosures and capture semantics\nClosure traits (Fn, FnMut, FnOnce)\nCombining iterators and closures\n\nNext session: Smart pointers and error handling\n\nTake a break. When we return, we’ll cover smart pointers for flexible memory management."
+    "section": "Adaptors are lazy",
+    "text": "Adaptors are lazy\nThis example compiles with a warning, and the map never runs.\nfn main() {\n    let v = [1, 2, 3];\n\n    v.iter().map(|x| x + 1);\n\n    println!(\"{:?}\", v);\n}\nwarning: unused `Map` that must be used\n  = note: iterators are lazy and do nothing unless consumed\n\nFix: consume the iterator. collect() runs the chain and gathers the results.\nfn main() {\n    let v = [1, 2, 3];\n\n    let plus_one: Vec&lt;i32&gt; = v.iter().map(|x| x + 1).collect();\n\n    println!(\"{:?}\", plus_one); // [2, 3, 4]\n}\nTry the fixed version in Rust Playground\n\n\nBook listings 13-14 and 13-15. Adaptors such as map and filter describe work; consumers such as collect, sum, and count do it. This laziness is why long chains do not build a temporary vector at every step. Fixed output: [2, 3, 4]. The type annotation Vec tells collect what to build."
   },
   {
-    "objectID": "slides/IS4010_W13_Idiomatic_Rust.html#the-problem-ownership-limitations",
-    "href": "slides/IS4010_W13_Idiomatic_Rust.html#the-problem-ownership-limitations",
+    "objectID": "slides/IS4010_W13_Idiomatic_Rust.html#chain-adaptors-write-just-the-goal",
+    "href": "slides/IS4010_W13_Idiomatic_Rust.html#chain-adaptors-write-just-the-goal",
     "title": "IS 4010: Application Development with Artificial Intelligence",
-    "section": "The problem: ownership limitations",
-    "text": "The problem: ownership limitations\nRust’s ownership rules are strict:\n// ❌ Can't do this - multiple ownership\nlet data = vec![1, 2, 3];\nlet owner1 = data;\nlet owner2 = data;  // ERROR: value moved!\n// ❌ Can't do this - recursive types have unknown size\nstruct Node {\n    value: i32,\n    next: Node,  // ERROR: infinite size!\n}\n// ❌ Can't do this - mutation through shared reference\nlet x = 5;\nlet y = &x;\n*y = 10;  // ERROR: cannot assign through &T\nSolution: Smart pointers!\n\nThese limitations are by design - they prevent memory bugs. Smart pointers provide safe flexibility."
+    "section": "Chain adaptors: write just the goal",
+    "text": "Chain adaptors: write just the goal\nfn main() {\n    let numbers = [1, 2, 3, 4, 5, 6];\n\n    let result: Vec&lt;i32&gt; = numbers\n        .into_iter()\n        .filter(|n| n % 2 == 0) // Keep evens\n        .map(|n| n * n) // Square them\n        .collect();\n\n    println!(\"{:?}\", result); // [4, 16, 36]\n}\nRead it aloud: take the numbers, keep the evens, square them, collect into a vector.\nTry this example in Rust Playground\n\nOutput: [4, 16, 36], matching the loop. into_iter on an array gives owned i32 values, so the closures receive plain numbers; with .iter() they would receive references and the patterns get noisier (|&&n| in older code). Ask students to compare the two versions line by line: same behavior, but the steps now read in order. Neither is always better; choose the one the team can read and test."
   },
   {
-    "objectID": "slides/IS4010_W13_Idiomatic_Rust.html#smart-pointer-overview",
-    "href": "slides/IS4010_W13_Idiomatic_Rust.html#smart-pointer-overview",
+    "objectID": "slides/IS4010_W13_Idiomatic_Rust.html#common-adaptors-and-consumers",
+    "href": "slides/IS4010_W13_Idiomatic_Rust.html#common-adaptors-and-consumers",
     "title": "IS 4010: Application Development with Artificial Intelligence",
-    "section": "Smart pointer overview",
-    "text": "Smart pointer overview\nThree essential smart pointers:\n\n\n\nType\nPurpose\nUse When\n\n\n\n\nBox&lt;T&gt;\nHeap allocation\nRecursive types, large data\n\n\nRc&lt;T&gt;\nReference counting\nMultiple owners (single-threaded)\n\n\nRefCell&lt;T&gt;\nInterior mutability\nRuntime borrowing checks\n\n\n\nKey insight: Smart pointers provide additional capabilities while maintaining Rust’s safety guarantees.\nCommon combinations:\n\nBox&lt;T&gt; alone: Recursive data structures\nRc&lt;T&gt; alone: Shared read-only data\nRc&lt;RefCell&lt;T&gt;&gt;: Shared mutable data (single-threaded)\n\nSmart Pointers in Rust Book\n\nThese types express ownership patterns that ordinary references cannot represent, but they also add complexity."
+    "section": "Common adaptors and consumers",
+    "text": "Common adaptors and consumers\nfn main() {\n    let numbers = [1, 2, 3, 4];\n    let words = [\"1\", \"two\", \"3\"];\n\n    let doubled: Vec&lt;i32&gt; = numbers.iter().map(|x| x * 2).collect();\n    let parsed: Vec&lt;i32&gt; = words.iter().filter_map(|s| s.parse().ok()).collect();\n    let total: i32 = numbers.iter().sum();\n    let digits = numbers.iter().fold(0, |acc, x| acc * 10 + x);\n    let evens = numbers.iter().filter(|x| *x % 2 == 0).count();\n    let biggest = numbers.iter().max();\n\n    println!(\"map:        {:?}\", doubled); // [2, 4, 6, 8]\n    println!(\"filter_map: {:?}\", parsed); // [1, 3]\n    println!(\"sum:        {}\", total); // 10\n    println!(\"fold:       {}\", digits); // 1234\n    println!(\"count:      {}\", evens); // 2\n    println!(\"max:        {:?}\", biggest); // Some(4)\n}\n\nAdaptors return another iterator: map, filter, filter_map.\nConsumers produce a result: collect, sum, fold, count, max.\n\nTry this example in Rust Playground\n\nfilter_map keeps the Some values and drops the None values, here turning text into numbers and skipping “two”. fold carries an accumulator through the items; here it builds 1234 from the digits. max returns an Option because an empty list has no maximum. Note for Lab 13: max_by_key returns the last of several equal maxima, which matters when two words tie for longest."
   },
   {
-    "objectID": "slides/IS4010_W13_Idiomatic_Rust.html#boxt-heap-allocation",
-    "href": "slides/IS4010_W13_Idiomatic_Rust.html#boxt-heap-allocation",
+    "objectID": "slides/IS4010_W13_Idiomatic_Rust.html#closures-inside-iterator-chains",
+    "href": "slides/IS4010_W13_Idiomatic_Rust.html#closures-inside-iterator-chains",
     "title": "IS 4010: Application Development with Artificial Intelligence",
-    "section": "Box<T>: heap allocation",
-    "text": "Box&lt;T&gt;: heap allocation\nBox&lt;T&gt; stores data on the heap with known size:\n// Simple heap allocation\nlet boxed_int = Box::new(5);\nprintln!(\"{}\", *boxed_int);  // 5 (dereference with *)\n\n// Main use case: recursive types\n#[derive(Debug)]\nenum BinaryTree&lt;T&gt; {\n    Empty,\n    Node {\n        value: T,\n        left: Box&lt;BinaryTree&lt;T&gt;&gt;,   // Box enables recursion!\n        right: Box&lt;BinaryTree&lt;T&gt;&gt;,\n    },\n}\n\n// Create a tree\nlet tree = BinaryTree::Node {\n    value: 5,\n    left: Box::new(BinaryTree::Empty),\n    right: Box::new(BinaryTree::Empty),\n};\nTry it yourself: Run in Rust Playground\nWhy it works: Box&lt;T&gt; has fixed size (just a pointer), even though T might be recursive.\nBox documentation\n\nWithout Box, compiler can’t determine struct size. Box breaks the recursion."
+    "section": "Closures inside iterator chains",
+    "text": "Closures inside iterator chains\n\n\nstruct Student {\n    name: String,\n    grade: f64,\n}\n\nimpl Student {\n    fn new(name: &str, grade: f64) -&gt; Student {\n        Student {\n            name: name.to_string(),\n            grade,\n        }\n    }\n}\n\nfn honor_roll(students: &[Student], cutoff: f64) -&gt; Vec&lt;&str&gt; {\n    students\n        .iter()\n        .filter(|s| s.grade &gt;= cutoff)\n        .map(|s| s.name.as_str())\n        .collect()\n}\n\nfn main() {\n    let students = [\n        Student::new(\"Lisa\", 98.0),\n        Student::new(\"Bart\", 61.0),\n        Student::new(\"Milhouse\", 85.0),\n    ];\n\n    let honors = honor_roll(&students, 80.0);\n    println!(\"{:?}\", honors); // [\"Lisa\", \"Milhouse\"]\n}\n\nWhy: The filter closure captures cutoff from the function, just like threshold earlier.\nTry this example in Rust Playground\n\nOutput: [“Lisa”, “Milhouse”]. This mirrors the book’s shoes_in_size example in 13.2. Trace the item type after each step: iter gives &Student, filter keeps &Student, map turns each into &str, collect builds Vec&lt;&str&gt;. The result borrows names from students, so students must outlive it (Week 10)."
   },
   {
-    "objectID": "slides/IS4010_W13_Idiomatic_Rust.html#practical-example-binary-tree",
-    "href": "slides/IS4010_W13_Idiomatic_Rust.html#practical-example-binary-tree",
+    "objectID": "slides/IS4010_W13_Idiomatic_Rust.html#try-it-build-a-chain",
+    "href": "slides/IS4010_W13_Idiomatic_Rust.html#try-it-build-a-chain",
     "title": "IS 4010: Application Development with Artificial Intelligence",
-    "section": "Practical example: binary tree",
-    "text": "Practical example: binary tree\nBuilding a binary tree with Box:\nimpl&lt;T&gt; BinaryTree&lt;T&gt; {\n    /// Creates a new empty tree\n    fn new() -&gt; Self {\n        BinaryTree::Empty\n    }\n\n    /// Creates a leaf node (no children)\n    fn leaf(value: T) -&gt; Self {\n        BinaryTree::Node {\n            value,\n            left: Box::new(BinaryTree::Empty),\n            right: Box::new(BinaryTree::Empty),\n        }\n    }\n\n    /// Creates a node with children\n    fn node(value: T, left: BinaryTree&lt;T&gt;, right: BinaryTree&lt;T&gt;) -&gt; Self {\n        BinaryTree::Node {\n            value,\n            left: Box::new(left),\n            right: Box::new(right),\n        }\n    }\n}\n\n// Usage:\nlet tree = BinaryTree::node(\n    10,\n    BinaryTree::leaf(5),\n    BinaryTree::leaf(15),\n);\n\nThis pattern appears in compilers, game engines, databases - anywhere trees are needed."
+    "section": "Try it: build a chain",
+    "text": "Try it: build a chain\nStarting from numbers, keep values greater than 5, double each one, and sum the results. Expected: 80.\nfn main() {\n    let numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];\n\n    // 1. Keep values greater than 5\n    // 2. Double each value\n    // 3. Sum the results (expected: 80)\n    let result: i32 = numbers.iter().sum(); // Change this line\n\n    println!(\"{}\", result);\n}\nOpen the starter in Rust Playground\n\nOne answer: numbers.iter().filter(|n| **n &gt; 5).map(|n| n * 2).sum()\n\n\nGive students 3–4 minutes. The starter compiles and prints 55 (the plain sum) so students can see it change. Alternatives: into_iter() gives owned numbers so the filter becomes |n| *n &gt; 5; filter(|&&n| n &gt; 5) is also common in older code. Ask a student to read their chain aloud."
   },
   {
-    "objectID": "slides/IS4010_W13_Idiomatic_Rust.html#rct-reference-counting",
-    "href": "slides/IS4010_W13_Idiomatic_Rust.html#rct-reference-counting",
+    "objectID": "slides/IS4010_W13_Idiomatic_Rust.html#session-1-checkpoint",
+    "href": "slides/IS4010_W13_Idiomatic_Rust.html#session-1-checkpoint",
     "title": "IS 4010: Application Development with Artificial Intelligence",
-    "section": "Rc<T>: reference counting",
-    "text": "Rc&lt;T&gt;: reference counting\nRc&lt;T&gt; enables multiple owners of the same data:\nuse std::rc::Rc;\n\n#[derive(Debug)]\nstruct SharedData {\n    value: i32,\n}\n\nlet data = Rc::new(SharedData { value: 42 });\nprintln!(\"Count: {}\", Rc::strong_count(&data));  // 1\n\n// Create additional owners by cloning the Rc\nlet owner1 = Rc::clone(&data);  // Increments count\nlet owner2 = Rc::clone(&data);  // Increments count\n\nprintln!(\"Count: {}\", Rc::strong_count(&data));  // 3\nprintln!(\"Value: {}\", owner1.value);  // 42\n\n// When all Rc's drop, data is freed\ndrop(owner1);\nprintln!(\"Count: {}\", Rc::strong_count(&data));  // 2\nTry it yourself: Run in Rust Playground\nImportant: Rc::clone is cheap - it only increments a counter, doesn’t copy data!\nRc documentation\n\nRc&lt;T&gt; is useful for single-threaded structures in which multiple owners share a value, such as some graph representations."
+    "section": "Session 1 checkpoint",
+    "text": "Session 1 checkpoint\nRead each line aloud. What does it produce?\ntext.lines().map(str::trim).filter(|line| !line.is_empty()).map(str::len).collect()\nwords.iter().filter_map(|w| w.parse::&lt;i32&gt;().ok()).sum::&lt;i32&gt;()\n(1..=3).map(|n| n * n).collect::&lt;Vec&lt;i32&gt;&gt;()\n\n\nThe length of each non-blank line, trimmed.\nThe sum of the words that are numbers.\n[1, 4, 9].\n\n\n\nThe first chain is the nonempty_line_lengths function from earlier versions of this deck; a runnable version is linked below. str::trim and str::len are functions passed by name in place of closures. Return to the access table: which methods here read, which own?\nRunnable line-length example"
   },
   {
-    "objectID": "slides/IS4010_W13_Idiomatic_Rust.html#refcellt-interior-mutability",
-    "href": "slides/IS4010_W13_Idiomatic_Rust.html#refcellt-interior-mutability",
+    "objectID": "slides/IS4010_W13_Idiomatic_Rust.html#when-ordinary-ownership-is-not-enough",
+    "href": "slides/IS4010_W13_Idiomatic_Rust.html#when-ordinary-ownership-is-not-enough",
     "title": "IS 4010: Application Development with Artificial Intelligence",
-    "section": "RefCell<T>: interior mutability",
-    "text": "RefCell&lt;T&gt;: interior mutability\nRefCell&lt;T&gt; allows mutation through shared references (runtime borrow checking):\nuse std::cell::RefCell;\n\nlet data = RefCell::new(5);\n\n// Borrow immutably\n{\n    let value = data.borrow();\n    println!(\"{}\", *value);  // 5\n} // borrow ends here\n\n// Borrow mutably\n{\n    let mut value = data.borrow_mut();\n    *value += 10;\n} // borrow ends here\n\nprintln!(\"{}\", *data.borrow());  // 15\nTry it yourself: Run in Rust Playground\nKey difference: Borrows checked at runtime instead of compile-time.\nPanic if rules violated:\nlet value1 = data.borrow_mut();\nlet value2 = data.borrow();  // ❌ PANIC: already borrowed mutably!\nRefCell documentation\n\nUse RefCell when you need flexibility that the borrow checker can’t statically verify."
+    "section": "When ordinary ownership is not enough",
+    "text": "When ordinary ownership is not enough\n\n\n\n\n\n\n\n\nSituation\nOwnership rule in the way\nTool\n\n\n\n\nA type contains itself\nEvery type needs a known size\nBox&lt;T&gt;\n\n\nSeveral parts of a program own one value\nOne owner at a time\nRc&lt;T&gt;\n\n\nChange a value that is shared\nShared means read-only\nRefCell&lt;T&gt;\n\n\n\nA smart pointer is a value that owns data and adds a rule of its own.\n\nEach row gets a failing example and then the fix. Stress the order of preference: ordinary ownership and borrowing first, smart pointers only when the design needs them. Strings and Vecs are smart pointers too; students have used them since Week 09 (Rust Book 15 intro)."
   },
   {
-    "objectID": "slides/IS4010_W13_Idiomatic_Rust.html#combining-rc-and-refcell",
-    "href": "slides/IS4010_W13_Idiomatic_Rust.html#combining-rc-and-refcell",
+    "objectID": "slides/IS4010_W13_Idiomatic_Rust.html#a-type-that-contains-itself",
+    "href": "slides/IS4010_W13_Idiomatic_Rust.html#a-type-that-contains-itself",
     "title": "IS 4010: Application Development with Artificial Intelligence",
-    "section": "Combining Rc and RefCell",
-    "text": "Combining Rc and RefCell\nPattern: Shared mutable data (single-threaded)\nuse std::rc::Rc;\nuse std::cell::RefCell;\n\n#[derive(Debug)]\nstruct Counter {\n    value: i32,\n}\n\nlet counter = Rc::new(RefCell::new(Counter { value: 0 }));\n\n// Create multiple owners\nlet counter_ref1 = Rc::clone(&counter);\nlet counter_ref2 = Rc::clone(&counter);\n\n// All can mutate through RefCell\ncounter_ref1.borrow_mut().value += 1;\ncounter_ref2.borrow_mut().value += 1;\n\nprintln!(\"{}\", counter.borrow().value);  // 2\nTry it yourself: Run in Rust Playground\nPattern breakdown:\n\nRc&lt;T&gt;: Multiple owners\nRefCell&lt;T&gt;: Interior mutability\nRc&lt;RefCell&lt;T&gt;&gt;: Multiple owners can all mutate\n\n\nThis is the secret sauce for shared mutable state in single-threaded Rust."
+    "section": "A type that contains itself",
+    "text": "A type that contains itself\nThis example intentionally fails to compile.\n#[derive(Debug)]\nenum List {\n    Cons(i32, List),\n    Nil,\n}\n\nuse List::{Cons, Nil};\n\nfn main() {\n    let list = Cons(1, Cons(2, Cons(3, Nil)));\n    println!(\"{:?}\", list);\n}\nerror[E0072]: recursive type `List` has infinite size\nhelp: insert some indirection (e.g., a `Box`, `Rc`, or `&`) to break the cycle\nTry this example in Rust Playground\n\nBook listing 15-2, the cons list. A List holds an i32 and another List, which holds another List, and so on: Rust cannot compute a size. Draw nested boxes on the board, each inside the last, forever. The help line names the fix."
   },
   {
-    "objectID": "slides/IS4010_W13_Idiomatic_Rust.html#when-to-use-each-smart-pointer",
-    "href": "slides/IS4010_W13_Idiomatic_Rust.html#when-to-use-each-smart-pointer",
+    "objectID": "slides/IS4010_W13_Idiomatic_Rust.html#boxt-put-it-on-the-heap",
+    "href": "slides/IS4010_W13_Idiomatic_Rust.html#boxt-put-it-on-the-heap",
     "title": "IS 4010: Application Development with Artificial Intelligence",
-    "section": "When to use each smart pointer",
-    "text": "When to use each smart pointer\nDecision tree:\nDo you need multiple owners?\n├─ NO → Use Box&lt;T&gt;\n│   └─ For: Recursive types, large data on heap\n│\n└─ YES → Do you need mutation?\n    ├─ NO → Use Rc&lt;T&gt;\n    │   └─ For: Shared read-only data\n    │\n    └─ YES → Use Rc&lt;RefCell&lt;T&gt;&gt;\n        └─ For: Shared mutable data (single-threaded)\nMulti-threaded variants (for future study):\n\nArc&lt;T&gt;: Thread-safe Rc&lt;T&gt; (Atomic Reference Counting)\nMutex&lt;T&gt;: Thread-safe RefCell&lt;T&gt; (Mutual Exclusion)\nArc&lt;Mutex&lt;T&gt;&gt;: Thread-safe shared mutable data\n\n\nFor now, focus on single-threaded ownership. Arc&lt;T&gt; and Mutex&lt;T&gt; are optional follow-up topics and are not required in Lab 14."
+    "section": "Box<T>: put it on the heap",
+    "text": "Box&lt;T&gt;: put it on the heap\n#[derive(Debug)]\nenum List {\n    Cons(i32, Box&lt;List&gt;),\n    Nil,\n}\n\nuse List::{Cons, Nil};\n\nfn sum(list: &List) -&gt; i32 {\n    match list {\n        Cons(value, rest) =&gt; value + sum(rest),\n        Nil =&gt; 0,\n    }\n}\n\nfn main() {\n    let list = Cons(1, Box::new(Cons(2, Box::new(Cons(3, Box::new(Nil))))));\n    println!(\"{:?}\", list); // Cons(1, Cons(2, Cons(3, Nil)))\n    println!(\"sum = {}\", sum(&list)); // sum = 6\n}\nCons(1, ─→) Cons(2, ─→) Cons(3, ─→) Nil\nWhy it works: A Box is a pointer with a fixed size, whatever it points to.\nTry this example in Rust Playground\n\nBook listings 15-3 and 15-5, with a recursive sum added so the data is used. Output: Cons(1, Cons(2, Cons(3, Nil))), then sum = 6. Each Box owns the next node on the heap; when list leaves scope, the whole chain is freed, one owner at a time. Connect to Week 10’s stack-and-heap slide: the Box itself is small and fixed; the node it points to lives on the heap."
   },
   {
-    "objectID": "slides/IS4010_W13_Idiomatic_Rust.html#idiomatic-error-handling",
-    "href": "slides/IS4010_W13_Idiomatic_Rust.html#idiomatic-error-handling",
+    "objectID": "slides/IS4010_W13_Idiomatic_Rust.html#two-lists-cannot-own-the-same-tail",
+    "href": "slides/IS4010_W13_Idiomatic_Rust.html#two-lists-cannot-own-the-same-tail",
     "title": "IS 4010: Application Development with Artificial Intelligence",
-    "section": "Idiomatic error handling",
-    "text": "Idiomatic error handling\nRust uses Result&lt;T, E&gt; for recoverable errors rather than catchable exceptions.\nWhat this provides:\n\nErrors are explicit in function signatures\nCode must inspect or transform the result to access the success value\nExpected failure categories are visible to callers\nResult is an enum whose representation and runtime cost depend on its variants and use\n\nTwo approaches:\n\nRecoverable errors: Use Result&lt;T, E&gt; (file not found, parse error)\nUnrecoverable errors: Use panic! (programming bugs, invariant violations)\n\n\nThis is a fundamental mindset shift from exception-based languages."
+    "section": "Two lists cannot own the same tail",
+    "text": "Two lists cannot own the same tail\nThis example intentionally fails to compile.\n#[derive(Debug)]\nenum List {\n    Cons(i32, Box&lt;List&gt;),\n    Nil,\n}\n\nuse List::{Cons, Nil};\n\nfn main() {\n    let a = Cons(5, Box::new(Cons(10, Box::new(Nil))));\n    let b = Cons(3, Box::new(a));\n    let c = Cons(4, Box::new(a));\n    println!(\"{:?} {:?}\", b, c);\n}\nerror[E0382]: use of moved value: `a`\nb: Cons(3, ─┐\n            ├─→ a: Cons(5, ─→) Cons(10, ─→) Nil\nc: Cons(4, ─┘\n\nBook listing 15-17. Both b and c want to own a; Box allows only one owner, so a moves into b and is gone for c. This is the Week 10 move error with a new type. The diagram shows the design we want: one shared tail."
   },
   {
-    "objectID": "slides/IS4010_W13_Idiomatic_Rust.html#resultt-e-basics",
-    "href": "slides/IS4010_W13_Idiomatic_Rust.html#resultt-e-basics",
+    "objectID": "slides/IS4010_W13_Idiomatic_Rust.html#rct-shared-ownership-by-counting",
+    "href": "slides/IS4010_W13_Idiomatic_Rust.html#rct-shared-ownership-by-counting",
     "title": "IS 4010: Application Development with Artificial Intelligence",
-    "section": "Result<T, E> basics",
-    "text": "Result&lt;T, E&gt; basics\nResult is an enum with two variants:\nenum Result&lt;T, E&gt; {\n    Ok(T),   // Success - contains value\n    Err(E),  // Failure - contains error\n}\n\n// Example: parsing a network port\nfn parse_port(input: &str) -&gt; Result&lt;u16, String&gt; {\n    input\n        .trim()\n        .parse::&lt;u16&gt;()\n        .map_err(|_| format!(\"Invalid port: {input}\"))\n}\n\n// Usage with match:\nmatch parse_port(\"8080\") {\n    Ok(port) =&gt; println!(\"Port: {port}\"),\n    Err(e) =&gt; println!(\"Error: {}\", e),\n}\n\n// Or with if let:\nif let Ok(port) = parse_port(\"3000\") {\n    println!(\"Port: {port}\");\n}\nResult documentation\n\nResult forces you to think about errors upfront, not as an afterthought."
+    "section": "Rc<T>: shared ownership by counting",
+    "text": "Rc&lt;T&gt;: shared ownership by counting\nuse std::rc::Rc;\n\nenum List {\n    Cons(i32, Rc&lt;List&gt;),\n    Nil,\n}\n\nuse List::{Cons, Nil};\n\nfn sum(list: &List) -&gt; i32 {\n    match list {\n        Cons(value, rest) =&gt; value + sum(rest),\n        Nil =&gt; 0,\n    }\n}\n\nfn main() {\n    let a = Rc::new(Cons(5, Rc::new(Cons(10, Rc::new(Nil)))));\n    println!(\"count after a = {}\", Rc::strong_count(&a)); // 1\n\n    let b = Cons(3, Rc::clone(&a));\n    println!(\"count after b = {}\", Rc::strong_count(&a)); // 2\n\n    {\n        let c = Cons(4, Rc::clone(&a));\n        println!(\"count after c = {}\", Rc::strong_count(&a)); // 3\n        println!(\"sum of c = {}\", sum(&c)); // 19\n    }\n\n    println!(\"count after c leaves = {}\", Rc::strong_count(&a)); // 2\n    println!(\"sum of b = {}\", sum(&b)); // 18\n}\n\nRc::clone(&a) adds an owner. It copies a pointer and bumps a count, not the list.\nThe data is freed when the count reaches zero.\n\nTry this example in Rust Playground\n\nBook listings 15-18 and 15-19. Output: counts 1, 2, 3, then sum of c = 19, then 2 after c leaves its block, then sum of b = 18. Python parallel: CPython’s reference counting from Week 10’s first slide; Rc is that same idea, opted into for one value. Rc data is read-only; changing it needs the next tool. Rc is single-threaded; Arc is the thread-safe version."
   },
   {
-    "objectID": "slides/IS4010_W13_Idiomatic_Rust.html#the-operator-error-propagation",
-    "href": "slides/IS4010_W13_Idiomatic_Rust.html#the-operator-error-propagation",
+    "objectID": "slides/IS4010_W13_Idiomatic_Rust.html#refcellt-borrow-rules-checked-while-running",
+    "href": "slides/IS4010_W13_Idiomatic_Rust.html#refcellt-borrow-rules-checked-while-running",
     "title": "IS 4010: Application Development with Artificial Intelligence",
-    "section": "The ? operator: error propagation",
-    "text": "The ? operator: error propagation\nThe ? operator makes error handling ergonomic:\nuse std::fs::File;\nuse std::io::{self, Read};\n\n// Without ?\nfn read_file_verbose(path: &str) -&gt; io::Result&lt;String&gt; {\n    let file_result = File::open(path);\n    let mut file = match file_result {\n        Ok(f) =&gt; f,\n        Err(e) =&gt; return Err(e),  // Early return on error\n    };\n\n    let mut contents = String::new();\n    match file.read_to_string(&mut contents) {\n        Ok(_) =&gt; Ok(contents),\n        Err(e) =&gt; Err(e),\n    }\n}\n\n// With ? (much cleaner!)\nfn read_file(path: &str) -&gt; io::Result&lt;String&gt; {\n    let mut file = File::open(path)?;  // ? propagates error\n    let mut contents = String::new();\n    file.read_to_string(&mut contents)?;  // ? propagates error\n    Ok(contents)\n}\nTry it yourself: Run in Rust Playground\n? means: “If Ok, unwrap the value. If Err, return the error immediately.”\n? operator\n\nThe ? operator is syntactic sugar that makes error handling look clean."
+    "section": "RefCell<T>: borrow rules checked while running",
+    "text": "RefCell&lt;T&gt;: borrow rules checked while running\nuse std::cell::RefCell;\n\nfn main() {\n    let score = RefCell::new(5);\n\n    {\n        let reader = score.borrow(); // Like &score, checked while running\n        println!(\"score = {}\", *reader); // score = 5\n    } // reader's borrow ends here\n\n    {\n        let mut editor = score.borrow_mut(); // Like &mut score\n        *editor += 10;\n    } // editor's borrow ends here\n\n    println!(\"score = {}\", score.borrow()); // score = 15\n}\n\nborrow() is like &, and borrow_mut() is like &mut.\nSame rules as Week 10, but checked while the program runs.\n\nTry this example in Rust Playground\n\nOutput: score = 5, then score = 15. The braces end each borrow, just like a reference’s last use. RefCell lets you change a value through a shared handle, which is exactly what Rc needs. The cost: mistakes are found at runtime, not compile time (next slide)."
   },
   {
-    "objectID": "slides/IS4010_W13_Idiomatic_Rust.html#custom-error-types",
-    "href": "slides/IS4010_W13_Idiomatic_Rust.html#custom-error-types",
+    "objectID": "slides/IS4010_W13_Idiomatic_Rust.html#break-the-rules-and-refcell-panics",
+    "href": "slides/IS4010_W13_Idiomatic_Rust.html#break-the-rules-and-refcell-panics",
     "title": "IS 4010: Application Development with Artificial Intelligence",
-    "section": "Custom error types",
-    "text": "Custom error types\nCreate domain-specific errors:\nuse std::fmt;\n\n#[derive(Debug, Clone)]\nenum ParseError {\n    EmptyInput,\n    InvalidNumber(String),\n    InvalidPercentage(i32),\n}\n\n// Implement Display for pretty error messages\nimpl fmt::Display for ParseError {\n    fn fmt(&self, f: &mut fmt::Formatter) -&gt; fmt::Result {\n        match self {\n            ParseError::EmptyInput =&gt; write!(f, \"Input string is empty\"),\n            ParseError::InvalidNumber(s) =&gt; write!(f, \"Invalid number: {}\", s),\n            ParseError::InvalidPercentage(n) =&gt; {\n                write!(f, \"Percentage {n} must be between 0 and 100\")\n            }\n        }\n    }\n}\n\n// Use custom error type\nfn parse_percentage(input: &str) -&gt; Result&lt;i32, ParseError&gt; {\n    if input.trim().is_empty() {\n        return Err(ParseError::EmptyInput);\n    }\n\n    let num: i32 = input.trim().parse()\n        .map_err(|_| ParseError::InvalidNumber(input.to_string()))?;\n\n    if !(0..=100).contains(&num) {\n        return Err(ParseError::InvalidPercentage(num));\n    }\n\n    Ok(num)\n}\nTry it yourself: Run in Rust Playground\n\nCustom error variants communicate expected failure categories, but documentation and tests are still needed and unrelated panics may remain."
+    "section": "Break the rules, and RefCell panics",
+    "text": "Break the rules, and RefCell panics\nThis example compiles, then panics when it runs.\nuse std::cell::RefCell;\n\nfn main() {\n    let score = RefCell::new(5);\n\n    let editor = score.borrow_mut();\n    let reader = score.borrow(); // Panics: editor is still active\n\n    println!(\"{} {}\", editor, reader);\n}\nthread 'main' panicked at src/main.rs:7:24:\nRefCell already mutably borrowed\nWhy: editor is still active, so a reader breaks the shared reference promise. The compiler could not see it; the program checks and stops.\nTry this example in Rust Playground\n\nCompare with Week 10’s “A reader and an editor can conflict” slide: same rule, same mistake, but caught at runtime with a panic instead of E0502 at compile time. That trade is why RefCell is a last resort, not a default."
   },
   {
-    "objectID": "slides/IS4010_W13_Idiomatic_Rust.html#try-it-yourself-error-handling",
-    "href": "slides/IS4010_W13_Idiomatic_Rust.html#try-it-yourself-error-handling",
+    "objectID": "slides/IS4010_W13_Idiomatic_Rust.html#rcrefcellt-shared-and-changeable",
+    "href": "slides/IS4010_W13_Idiomatic_Rust.html#rcrefcellt-shared-and-changeable",
     "title": "IS 4010: Application Development with Artificial Intelligence",
-    "section": "Try it yourself: error handling",
-    "text": "Try it yourself: error handling\nChallenge: Parse user input with good error messages\n// Given this function signature:\nfn parse_age(input: &str) -&gt; Result&lt;u8, String&gt; {\n    // TODO: Parse age (0-120), return helpful errors\n}\n\n// Test cases:\nassert_eq!(parse_age(\"25\"), Ok(25));\nassert!(parse_age(\"\").is_err());           // Empty\nassert!(parse_age(\"abc\").is_err());        // Not a number\nassert!(parse_age(\"150\").is_err());        // Out of range\nassert!(parse_age(\"-5\").is_err());         // Negative\nHint: Use ? operator and .map_err() for error conversion.\nTry on Rust Playground\n\nGive students 5 minutes. This combines parsing, validation, and error handling."
+    "section": "Rc<RefCell<T>>: shared and changeable",
+    "text": "Rc&lt;RefCell&lt;T&gt;&gt;: shared and changeable\nuse std::cell::RefCell;\nuse std::rc::Rc;\n\nfn main() {\n    let scores = Rc::new(RefCell::new(Vec::new()));\n\n    let lisa = Rc::clone(&scores);\n    let bart = Rc::clone(&scores);\n\n    lisa.borrow_mut().push(98);\n    bart.borrow_mut().push(61);\n\n    println!(\"{:?}\", scores.borrow()); // [98, 61]\n    println!(\"owners = {}\", Rc::strong_count(&scores)); // owners = 3\n}\n\nRc: several owners. RefCell: changes allowed through any of them.\nEvery owner sees the same vector.\n\nTry this example in Rust Playground\n\nOutput: [98, 61], then owners = 3. This combination appears in graph structures and UI state. It is also easy to overuse: if a single owner with &mut works, use that. Rc cycles leak memory; Weak breaks them (Rust Book 15.6, optional)."
   },
   {
-    "objectID": "slides/IS4010_W13_Idiomatic_Rust.html#integrative-pattern-three-concepts",
-    "href": "slides/IS4010_W13_Idiomatic_Rust.html#integrative-pattern-three-concepts",
+    "objectID": "slides/IS4010_W13_Idiomatic_Rust.html#which-tool-do-i-need",
+    "href": "slides/IS4010_W13_Idiomatic_Rust.html#which-tool-do-i-need",
     "title": "IS 4010: Application Development with Artificial Intelligence",
-    "section": "Integrative pattern: three concepts",
-    "text": "Integrative pattern: three concepts\nCombining iterators, smart pointers, and error handling:\nuse std::rc::Rc;\nuse std::cell::RefCell;\nuse std::fmt;\n\n#[derive(Debug, Clone)]\nstruct Config {\n    min_length: usize,\n    max_length: usize,\n}\n\n#[derive(Debug)]\nenum ProcessError {\n    LineTooShort(String),\n    LineTooLong(String),\n}\n\nimpl fmt::Display for ProcessError {\n    fn fmt(&self, f: &mut fmt::Formatter) -&gt; fmt::Result {\n        match self {\n            ProcessError::LineTooShort(line) =&gt; write!(f, \"Line too short: {}\", line),\n            ProcessError::LineTooLong(line) =&gt; write!(f, \"Line too long: {}\", line),\n        }\n    }\n}\n\nfn process_lines(\n    lines: &[String],\n    config: Rc&lt;RefCell&lt;Config&gt;&gt;,  // Smart pointer for shared config\n) -&gt; Result&lt;Vec&lt;String&gt;, ProcessError&gt; {  // Result for error handling\n    lines\n        .iter()  // Iterator\n        .map(|line| {\n            let cfg = config.borrow();\n            let len = line.len();\n\n            if len &lt; cfg.min_length {\n                Err(ProcessError::LineTooShort(line.clone()))\n            } else if len &gt; cfg.max_length {\n                Err(ProcessError::LineTooLong(line.clone()))\n            } else {\n                Ok(line.to_uppercase())  // Transform on success\n            }\n        })\n        .collect()  // Collect into Result&lt;Vec&lt;_&gt;, _&gt;\n}\nTry it yourself: Run in Rust Playground\n\nSummarize the decision points: iterator versus loop, single versus shared ownership, compile-time versus runtime borrow checking, and Result propagation versus local handling."
+    "section": "Which tool do I need?",
+    "text": "Which tool do I need?\nDoes one owner with & and &mut work?\n├─ Yes → Use ordinary ownership and borrowing. Stop here.\n└─ No  → Does the type contain itself?\n         ├─ Yes → Box&lt;T&gt;\n         └─ No  → Do several parts need to own it?\n                  ├─ No  → Box&lt;T&gt; or plain ownership\n                  └─ Yes → Does it need to change?\n                           ├─ No  → Rc&lt;T&gt;\n                           └─ Yes → Rc&lt;RefCell&lt;T&gt;&gt;\nAcross threads: Arc&lt;T&gt; replaces Rc&lt;T&gt;, and Mutex&lt;T&gt; replaces RefCell&lt;T&gt; (Rust Book 16).\n\nNone of these smart pointers are graded in Lab 13; they are here so students can recognize them in other Rust code and in the final project. Arc and Mutex are optional reading."
   },
   {
-    "objectID": "slides/IS4010_W13_Idiomatic_Rust.html#where-these-patterns-appear",
-    "href": "slides/IS4010_W13_Idiomatic_Rust.html#where-these-patterns-appear",
+    "objectID": "slides/IS4010_W13_Idiomatic_Rust.html#errors-recover-or-stop",
+    "href": "slides/IS4010_W13_Idiomatic_Rust.html#errors-recover-or-stop",
     "title": "IS 4010: Application Development with Artificial Intelligence",
-    "section": "Where these patterns appear",
-    "text": "Where these patterns appear\nWhere you’ll use these patterns:\nIterators:\n\nData processing pipelines (ETL, analytics)\nWeb server request filtering\nDatabase query building\nJSON/XML parsing\n\nSmart pointers:\n\nGraph databases (Rc for shared nodes)\nGame engines (entity-component systems)\nCompilers (AST with shared subtrees)\nUI frameworks (shared state management)\n\nError handling:\n\nLibrary APIs that expose recoverable failure\nFile I/O, network requests, parsing\nDatabase operations\nCommand-line tools\n\nReview prompt: For each pattern, name the ownership or error-handling constraint that motivates it.\n\nUse one primary-source example for each pattern and identify where a simpler owned value, loop, or local error branch would be sufficient."
+    "section": "Errors: recover or stop?",
+    "text": "Errors: recover or stop?\n\n\n\n\n\n\n\n\nSituation\nTool\nExample\n\n\n\n\nA failure the caller should handle\nResult&lt;T, E&gt;\nBad user input, missing file\n\n\nA bug or broken assumption\npanic!\nIndex out of bounds, RefCell misuse\n\n\n\n\nResult puts the failure in the function’s signature.\n.unwrap() and .expect(\"why\") turn an Err into a panic: fine in tests and quick experiments.\n\n\nRust Book 9.3, “To panic! or not to panic!”. Students used Result and ? in Week 11; this session focuses on writing functions that return good errors. Python parallel: exceptions are not part of a function’s signature; Result is."
   },
   {
-    "objectID": "slides/IS4010_W13_Idiomatic_Rust.html#common-pitfalls-and-practices",
-    "href": "slides/IS4010_W13_Idiomatic_Rust.html#common-pitfalls-and-practices",
+    "objectID": "slides/IS4010_W13_Idiomatic_Rust.html#result-with-match",
+    "href": "slides/IS4010_W13_Idiomatic_Rust.html#result-with-match",
     "title": "IS 4010: Application Development with Artificial Intelligence",
-    "section": "Common pitfalls and practices",
-    "text": "Common pitfalls and practices\nIterators:\n❌ Collecting unnecessarily: .collect::&lt;Vec&lt;_&gt;&gt;() then iterate again ✅ Chain operations: .map().filter().sum() in one go\n❌ Using clone() in iterators when reference works ✅ Use references or Copy types\nSmart Pointers:\n❌ Using Rc&lt;RefCell&lt;T&gt;&gt; when &mut T works ✅ Start simple, add smart pointers only when needed\n❌ Creating reference cycles with Rc (memory leak!) ✅ Use Weak&lt;T&gt; for back-references\nError Handling:\n❌ Using .unwrap() everywhere (panics in production!) ✅ Use ? operator and handle errors properly\n❌ String errors: Err(\"something failed\".to_string()) ✅ Custom error enums with specific variants\n\nThese mistakes are common in beginners. Avoid them from the start!"
+    "section": "Result with match",
+    "text": "Result with match\nfn parse_port(input: &str) -&gt; Result&lt;u16, String&gt; {\n    input\n        .trim()\n        .parse::&lt;u16&gt;()\n        .map_err(|_| format!(\"Invalid port: {}\", input))\n}\n\nfn main() {\n    for input in [\"8080\", \"http\", \"70000\"] {\n        match parse_port(input) {\n            Ok(port) =&gt; println!(\"Port: {}\", port),\n            Err(message) =&gt; println!(\"Error: {}\", message),\n        }\n    }\n}\n\nmap_err converts the parse error into our own message.\n70000 fails too: it does not fit in a u16 (0 to 65535).\n\nTry this example in Rust Playground\n\nOutput: Port: 8080, Error: Invalid port: http, Error: Invalid port: 70000. The type u16 does the range checking for free. The match forces both outcomes to be handled; there is no way to use the port without checking for an error first."
   },
   {
-    "objectID": "slides/IS4010_W13_Idiomatic_Rust.html#optional-advanced-topics",
-    "href": "slides/IS4010_W13_Idiomatic_Rust.html#optional-advanced-topics",
+    "objectID": "slides/IS4010_W13_Idiomatic_Rust.html#the-operator",
+    "href": "slides/IS4010_W13_Idiomatic_Rust.html#the-operator",
     "title": "IS 4010: Application Development with Artificial Intelligence",
-    "section": "Optional advanced topics",
-    "text": "Optional advanced topics\nIf you want to go deeper:\nCustom Iterators:\n\nImplement the Iterator trait\nCreate infinite sequences\nBuild adapters like filter and map\n\nMore Smart Pointers:\n\nWeak&lt;T&gt;: Non-owning references (break cycles)\nCow&lt;T&gt;: Clone-on-write\nPin&lt;T&gt;: Prevent moves (async/await)\n\nError Libraries:\n\nthiserror: Derive Error trait\nanyhow: Convenient error handling\n\nNone of these are required for Lab 13, but great for projects!\n\nThese are for students who want to explore beyond the basics."
+    "section": "The ? operator",
+    "text": "The ? operator\nuse std::num::ParseIntError;\n\n// Without ?: every step checks and returns early by hand\n#[allow(clippy::question_mark)] // Clippy would suggest ? here\nfn sum_verbose(a: &str, b: &str) -&gt; Result&lt;i32, ParseIntError&gt; {\n    let x = match a.trim().parse::&lt;i32&gt;() {\n        Ok(n) =&gt; n,\n        Err(e) =&gt; return Err(e),\n    };\n    let y = match b.trim().parse::&lt;i32&gt;() {\n        Ok(n) =&gt; n,\n        Err(e) =&gt; return Err(e),\n    };\n    Ok(x + y)\n}\n\n// With ?: the same behavior\nfn sum(a: &str, b: &str) -&gt; Result&lt;i32, ParseIntError&gt; {\n    let x: i32 = a.trim().parse()?;\n    let y: i32 = b.trim().parse()?;\n    Ok(x + y)\n}\n\nfn main() {\n    println!(\"{:?}\", sum_verbose(\"2\", \"3\")); // Ok(5)\n    println!(\"{:?}\", sum(\"2\", \"3\")); // Ok(5)\n    println!(\"{:?}\", sum(\"2\", \"three\")); // Err(ParseIntError { kind: InvalidDigit })\n}\n? means: if Ok, take the value; if Err, return the error now. Clippy even suggests ? for the long version.\nTry this example in Rust Playground\n\nOutput: Ok(5), Ok(5), Err(ParseIntError { kind: InvalidDigit }). The book’s version (9-6, 9-7) reads a username from a file; this one parses numbers so it runs the same way everywhere, including the Playground. The allow attribute keeps Clippy quiet about the deliberately long version; remove it to see the lint. ? only works in a function whose return type can hold the error."
+  },
+  {
+    "objectID": "slides/IS4010_W13_Idiomatic_Rust.html#in-main",
+    "href": "slides/IS4010_W13_Idiomatic_Rust.html#in-main",
+    "title": "IS 4010: Application Development with Artificial Intelligence",
+    "section": "? in main",
+    "text": "? in main\nuse std::error::Error;\n\nfn main() -&gt; Result&lt;(), Box&lt;dyn Error&gt;&gt; {\n    let age: u8 = \"42\".parse()?;\n    println!(\"Age: {}\", age); // Age: 42\n\n    let oops: u8 = \"forty\".parse()?; // Returns the error from main\n    println!(\"Never printed: {}\", oops);\n\n    Ok(())\n}\nAge: 42\nError: ParseIntError { kind: InvalidDigit }\n\nBox&lt;dyn Error&gt; means “any kind of error,” in a Box because error types differ in size.\n\nTry this example in Rust Playground\n\nBook 9.2, “Where the ? operator can be used.” When main returns Err, the program prints the error with Debug formatting and exits with a nonzero status. dyn Error is a trait object (Week 12’s impl Trait limitation slide mentioned it); Box is the session’s first smart pointer, reappearing."
+  },
+  {
+    "objectID": "slides/IS4010_W13_Idiomatic_Rust.html#custom-error-types-define-the-error",
+    "href": "slides/IS4010_W13_Idiomatic_Rust.html#custom-error-types-define-the-error",
+    "title": "IS 4010: Application Development with Artificial Intelligence",
+    "section": "Custom error types: define the error",
+    "text": "Custom error types: define the error\nuse std::fmt;\n\n#[derive(Debug)]\nenum PercentError {\n    Empty,\n    NotANumber(String),\n    OutOfRange(i32),\n}\n\nimpl fmt::Display for PercentError {\n    fn fmt(&self, f: &mut fmt::Formatter) -&gt; fmt::Result {\n        match self {\n            PercentError::Empty =&gt; write!(f, \"input is empty\"),\n            PercentError::NotANumber(s) =&gt; write!(f, \"{:?} is not a number\", s),\n            PercentError::OutOfRange(n) =&gt; write!(f, \"{} is not between 0 and 100\", n),\n        }\n    }\n}\n\nThe enum lists every way the function can fail; some variants carry details.\nDisplay (Week 12) turns each variant into a message for people.\n\n\nAn enum error lets callers match on the variant and react differently, which a String error cannot offer. Debug is derived for programmers; Display is written by hand because only we know the right wording. Lab 13 asks for a smaller version of this pattern with its own ParseError; this example uses different names and rules so it is not the lab answer."
+  },
+  {
+    "objectID": "slides/IS4010_W13_Idiomatic_Rust.html#custom-error-types-use-the-error",
+    "href": "slides/IS4010_W13_Idiomatic_Rust.html#custom-error-types-use-the-error",
+    "title": "IS 4010: Application Development with Artificial Intelligence",
+    "section": "Custom error types: use the error",
+    "text": "Custom error types: use the error\nfn parse_percent(input: &str) -&gt; Result&lt;i32, PercentError&gt; {\n    let input = input.trim();\n    if input.is_empty() {\n        return Err(PercentError::Empty);\n    }\n    let n: i32 = input\n        .parse()\n        .map_err(|_| PercentError::NotANumber(input.to_string()))?;\n    if !(0..=100).contains(&n) {\n        return Err(PercentError::OutOfRange(n));\n    }\n    Ok(n)\n}\n\nfn main() {\n    for input in [\"85\", \"\", \"lots\", \"150\"] {\n        match parse_percent(input) {\n            Ok(n) =&gt; println!(\"{}%\", n),\n            Err(e) =&gt; println!(\"Error: {}\", e),\n        }\n    }\n}\n85%\nError: input is empty\nError: \"lots\" is not a number\nError: 150 is not between 0 and 100\nTry the full program in Rust Playground\n\nEach check returns a different variant. map_err converts the standard parse error into our NotANumber variant, and ? returns it early. The match in main prints each error with Display. Ask: which input produces which variant?"
+  },
+  {
+    "objectID": "slides/IS4010_W13_Idiomatic_Rust.html#try-it-parse-an-age",
+    "href": "slides/IS4010_W13_Idiomatic_Rust.html#try-it-parse-an-age",
+    "title": "IS 4010: Application Development with Artificial Intelligence",
+    "section": "Try it: parse an age",
+    "text": "Try it: parse an age\nfn parse_age(_input: &str) -&gt; Result&lt;u8, String&gt; {\n    todo!(\"Parse an age from 0 to 120 with helpful error messages\")\n}\n\nfn main() {\n    assert_eq!(parse_age(\"25\"), Ok(25));\n    assert!(parse_age(\"\").is_err()); // Empty\n    assert!(parse_age(\"abc\").is_err()); // Not a number\n    assert!(parse_age(\"150\").is_err()); // Out of range\n    assert!(parse_age(\"-5\").is_err()); // Negative\n    println!(\"All checks passed!\");\n}\nGoal: Replace todo! so all checks pass. Rename _input to input when you use it.\nHint: trim, parse::&lt;u8&gt;(), map_err, and a range check.\nOpen the starter in Rust Playground\n\nGive students 5 minutes. The starter compiles and panics with “not yet implemented” until todo! is replaced. Note that “-5” and “abc” both fail to parse as u8, so one map_err covers both; “150” parses but fails the range check. A good solution returns a different message for each case. The leading underscore convention matches the labs."
+  },
+  {
+    "objectID": "slides/IS4010_W13_Idiomatic_Rust.html#putting-it-together",
+    "href": "slides/IS4010_W13_Idiomatic_Rust.html#putting-it-together",
+    "title": "IS 4010: Application Development with Artificial Intelligence",
+    "section": "Putting it together",
+    "text": "Putting it together\nuse std::num::ParseIntError;\n\nfn parse_all(inputs: &[&str]) -&gt; Result&lt;Vec&lt;i32&gt;, ParseIntError&gt; {\n    inputs.iter().map(|s| s.trim().parse::&lt;i32&gt;()).collect()\n}\n\nfn main() {\n    println!(\"{:?}\", parse_all(&[\"1\", \" 2\", \"3 \"])); // Ok([1, 2, 3])\n    println!(\"{:?}\", parse_all(&[\"1\", \"two\", \"3\"])); // Err(ParseIntError { kind: InvalidDigit })\n}\n\nAn iterator of Results can collect into a Result of a vector.\nThe first Err stops the chain: no partial lists to clean up.\n\nTry this example in Rust Playground\n\nOutput: Ok([1, 2, 3]), then Err(ParseIntError { kind: InvalidDigit }). This combines a closure, an iterator chain, and Result, which is the shape of a lot of real Rust input handling. Ask: how would the loop version look? It needs a mutable vector and an early return."
+  },
+  {
+    "objectID": "slides/IS4010_W13_Idiomatic_Rust.html#common-pitfalls",
+    "href": "slides/IS4010_W13_Idiomatic_Rust.html#common-pitfalls",
+    "title": "IS 4010: Application Development with Artificial Intelligence",
+    "section": "Common pitfalls",
+    "text": "Common pitfalls\n\n\n\n\n\n\n\nInstead of\nPrefer\n\n\n\n\n.collect() then iterate the vector again\nOne chain ending in a consumer\n\n\n.clone() inside a chain to silence an error\n.iter() and references, or .into_iter() if you own the data\n\n\nRc&lt;RefCell&lt;T&gt;&gt; by default\nPlain ownership and &mut until sharing is required\n\n\n.unwrap() on user input\n? or match, with a useful error\n\n\nString errors everywhere\nAn error enum when callers need to react differently\n\n\n\n\nEach row connects to a slide: lazy adaptors, the access table, the smart-pointer decision tree, Result vs. panic, and custom errors. AI assistants often suggest clone, unwrap, and Rc&lt;RefCell&gt; to make errors go away; ask students to justify each one before accepting it."
   },
   {
     "objectID": "slides/IS4010_W13_Idiomatic_Rust.html#lab-13-preview",
     "href": "slides/IS4010_W13_Idiomatic_Rust.html#lab-13-preview",
     "title": "IS 4010: Application Development with Artificial Intelligence",
     "section": "Lab 13 preview",
-    "text": "Lab 13 preview\nThis week’s lab focuses on two parts:\nPart 1: iterators and closures\n\nText analysis with iterator chains\nCustom data processing pipelines\nStateful closures\n\nPart 2: error handling with Result\n\nDivision with Result\nDisplay messages for the supplied ParseError variants\nParsing a positive integer into Result&lt;i32, ParseError&gt;"
+    "text": "Lab 13 preview\nPart 1: iterators and closures\n\nanalyze_text: count words, average length, longest word. On a tie, the first longest word wins.\nprocess_numbers: a filter, map, sum chain.\nmake_counter: return a closure that remembers a count.\n\nPart 2: errors with Result\n\ndivide, Display for ParseError, and parse_positive_number.\n\nFollow the Lab 13 instructions.\n\nMap each function to its slides without giving answers: analyze_text uses split_whitespace and the consumers slide (warn about max_by_key returning the last of equal maxima; the test expects the first); process_numbers uses the chain slides; make_counter combines “Returning a closure” with “A closure that remembers”; the Part 2 functions follow “Result with match” and “Custom error types.” Smart pointers are not graded in Lab 13."
   },
   {
     "objectID": "slides/IS4010_W13_Idiomatic_Rust.html#lab-13-workflow",
     "href": "slides/IS4010_W13_Idiomatic_Rust.html#lab-13-workflow",
     "title": "IS 4010: Application Development with Artificial Intelligence",
     "section": "Lab 13 workflow",
-    "text": "Lab 13 workflow\ncargo test\ncargo fmt\ncargo clippy -- -D warnings\ngit add week13/\ngit commit -m \"Complete Lab 13\"\ngit push origin main\nConfirm the Week 13 README badge is green; that badge is the complete 10-point grade. See week13/lab13.md.\n\nSmart pointers remain lecture enrichment; they are not Lab 13 deliverables. Students implement every todo!() in the supplied src/main.rs and do not modify the tests."
+    "text": "Lab 13 workflow\nRun these inside your fork’s week13/ directory:\ncargo test\ncargo fmt\ncargo clippy -- -D warnings\ngit add week13/\ngit commit -m \"Complete Lab 13\"\ngit push origin main\n\nCI checks formatting with cargo fmt --check.\nConfirm that the Week 13 README badge is green; that badge is the complete 10-point grade.\n\n\nThese commands match week13/lab13.md. Students implement every todo!() and do not modify the test module."
   },
   {
-    "objectID": "slides/IS4010_W13_Idiomatic_Rust.html#week-13-summary",
-    "href": "slides/IS4010_W13_Idiomatic_Rust.html#week-13-summary",
+    "objectID": "slides/IS4010_W13_Idiomatic_Rust.html#key-takeaways",
+    "href": "slides/IS4010_W13_Idiomatic_Rust.html#key-takeaways",
     "title": "IS 4010: Application Development with Artificial Intelligence",
-    "section": "Week 13 summary",
-    "text": "Week 13 summary\nWhat makes Rust code “idiomatic”:\n\nIterators: Composable data processing\nClosures: Functions that can capture their environment\nSmart pointers: Optional tools for ownership patterns that references cannot express\nError handling: Explicit, recoverable errors\n\nKey takeaways:\n\nIterator chains are lazy and often optimize well; collection and algorithm choices still matter\nSmart pointers add capabilities and complexity; start with ordinary ownership and borrowing\nResult&lt;T, E&gt; makes errors part of your API\nThese patterns appear throughout Rust’s standard library and ecosystem\n\nNext week: Build a complete command-line application with Lab 14!\n\nNext week synthesizes these patterns in a tested password generator and validator CLI built with clap."
+    "section": "Key takeaways",
+    "text": "Key takeaways\n\nClosures capture values to read, change, or own them: Fn, FnMut, FnOnce.\nIterators describe steps; a consumer like collect or sum runs them.\nSmart pointers relax one ownership rule each: Box (size), Rc (owners), RefCell (when borrows are checked).\nResult and ? make failure part of the signature and pass it up cleanly.\n\nEvery tool this week answers Week 10’s question: read, change, or own?\n\nReturn to the access table from the start of session 1 and fill it in with the class. Next week’s Lab 14 command-line tool uses iterators, closures, and Result throughout."
   },
   {
-    "objectID": "slides/IS4010_W13_Idiomatic_Rust.html#resources-and-further-reading",
-    "href": "slides/IS4010_W13_Idiomatic_Rust.html#resources-and-further-reading",
+    "objectID": "slides/IS4010_W13_Idiomatic_Rust.html#resources-and-questions",
+    "href": "slides/IS4010_W13_Idiomatic_Rust.html#resources-and-questions",
     "title": "IS 4010: Application Development with Artificial Intelligence",
-    "section": "Resources and further reading",
-    "text": "Resources and further reading\nOfficial Documentation:\n\nThe Rust Book Ch 13 - Functional Features\nThe Rust Book Ch 15 - Smart Pointers\nThe Rust Book Ch 9 - Error Handling\nIterator trait\nRc documentation\nRefCell documentation\n\nPractice:\n\nRustlings - Iterators, Smart Pointers, Error Handling sections\nExercism Rust Track - Real-world exercises\nRust by Example - Code examples\n\nCommunity:\n\nRust Users Forum\nr/rust"
+    "section": "Resources and questions",
+    "text": "Resources and questions\nStart here:\n\nRust Book 13: closures and iterators\nRust Book 15: smart pointers\nRust Book 9: error handling\n\nMore practice:\n\nRustlings: iterators, smart pointers, and error handling exercises\nIterator methods in the standard library\nRust Playground\n\nGoing further (optional): Weak&lt;T&gt; for cycles, Arc&lt;T&gt; and Mutex&lt;T&gt; for threads, and the thiserror and anyhow error crates.\n\nThe book chapters use the same examples as these slides. None of the optional topics are needed for Lab 13; they are useful for final projects. Get help through office hours, the course Teams channel, or users.rust-lang.org."
   },
   {
-    "objectID": "slides/IS4010_W13_Idiomatic_Rust.html#questions",
-    "href": "slides/IS4010_W13_Idiomatic_Rust.html#questions",
+    "objectID": "slides/IS4010_W13_Idiomatic_Rust.html#next-week-build-a-command-line-tool",
+    "href": "slides/IS4010_W13_Idiomatic_Rust.html#next-week-build-a-command-line-tool",
     "title": "IS 4010: Application Development with Artificial Intelligence",
-    "section": "Questions?",
-    "text": "Questions?\nOffice hours: See syllabus\nAI assistance: Browser chat, GitHub Copilot, Copilot CLI, Antigravity CLI\nLab 13: Follow the due date shown in Canvas\nGood luck and have fun with idiomatic Rust!"
+    "section": "Next week: build a command-line tool",
+    "text": "Next week: build a command-line tool\n\nCommand-line programs with clap: arguments, subcommands, and match\nLab 14 brings six weeks of Rust together in one tested tool\nIterators, closures, and Result from this week appear throughout\n\n\nWeek 14 synthesizes these patterns in a password generator and validator CLI. Encourage students to finish Lab 13 first."
   },
   {
     "objectID": "weeks/week01.html",
@@ -5068,7 +5110,7 @@
     "href": "weeks/week13.html",
     "title": "Week 13: Idiomatic Rust",
     "section": "",
-    "text": "This week you’ll master advanced Rust patterns that make code elegant, efficient, and truly “Rusty”. You’ll explore three essential patterns used throughout professional codebases: iterators and closures for functional programming, smart pointers for flexible memory management, and idiomatic error handling with Result. These patterns separate beginner Rust from production-ready Rust.",
+    "text": "This week covers three tools you will see in almost every Rust program. Closures are small functions that capture values around them, and iterators chain steps like filter, map, and sum over a collection. Smart pointers (Box, Rc, and RefCell) handle the cases ordinary ownership cannot, and Result with the ? operator makes errors part of a function’s signature. One idea ties the week together: Week 10’s three levels of access, read, change, or own.",
     "crumbs": [
       "Weekly schedule",
       "Week 13: Idiomatic Rust"
@@ -5079,7 +5121,7 @@
     "href": "weeks/week13.html#introduction",
     "title": "Week 13: Idiomatic Rust",
     "section": "",
-    "text": "This week you’ll master advanced Rust patterns that make code elegant, efficient, and truly “Rusty”. You’ll explore three essential patterns used throughout professional codebases: iterators and closures for functional programming, smart pointers for flexible memory management, and idiomatic error handling with Result. These patterns separate beginner Rust from production-ready Rust.",
+    "text": "This week covers three tools you will see in almost every Rust program. Closures are small functions that capture values around them, and iterators chain steps like filter, map, and sum over a collection. Smart pointers (Box, Rc, and RefCell) handle the cases ordinary ownership cannot, and Result with the ? operator makes errors part of a function’s signature. One idea ties the week together: Week 10’s three levels of access, read, change, or own.",
     "crumbs": [
       "Weekly schedule",
       "Week 13: Idiomatic Rust"
@@ -5090,7 +5132,7 @@
     "href": "weeks/week13.html#recommended-readings",
     "title": "Week 13: Idiomatic Rust",
     "section": "Recommended readings",
-    "text": "Recommended readings\n\nChapter 13: Functional language features - Iterators and closures\nChapter 15: Smart pointers - Box, Rc, and RefCell",
+    "text": "Recommended readings\n\nChapter 13: Functional language features - Closures and iterators, session 1\nChapter 15: Smart pointers - Box, Rc, and RefCell, session 2\nChapter 9: Error handling - Result and the ? operator, session 2",
     "crumbs": [
       "Weekly schedule",
       "Week 13: Idiomatic Rust"
