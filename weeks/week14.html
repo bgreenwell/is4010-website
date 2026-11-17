@@ -41,7 +41,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-564b3fe01fc4d9020f85cf2d1401d940.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-902ceee47f871ec4fbfb810afe9d9e4f.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -306,14 +306,15 @@ ul.task-list li input[type="checkbox"] {
 
 <section id="introduction" class="level2">
 <h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
-<p>This week you’ll build a complete command-line application that synthesizes everything you’ve learned about Rust. You’ll create a professional CLI password generator and validator that demonstrates ownership, modules, traits, generics, iterators, error handling, and the clap argument parsing library. This is the capstone project that brings together 14 weeks of learning into a production-ready tool.</p>
+<p>This week turns Rust programs into command-line tools. We start the way Rust Book chapter 12 does, reading arguments by hand with <code>std::env::args</code>, then let the <code>clap</code> crate build the parser, help screen, and error messages from a struct. Lab 14 brings the Rust weeks together in a tested password generator and validator: modules, enums and <code>match</code>, traits, iterators, the <code>rand</code> crate, and integration tests that check the program’s output.</p>
 </section>
 <section id="recommended-readings" class="level2">
 <h2 class="anchored" data-anchor-id="recommended-readings">Recommended readings</h2>
 <ul>
 <li><a href="https://doc.rust-lang.org/book/ch12-00-an-io-project.html">Chapter 12: An I/O Project: Building a Command Line Program</a> - Rust Book</li>
-<li><a href="https://rust-cli.github.io/book/">Command Line Applications in Rust</a> - Official CLI Book</li>
-<li><a href="https://docs.rs/clap/latest/clap/">clap documentation</a> - Argument parser</li>
+<li><a href="https://docs.rs/clap/latest/clap/_derive/_tutorial/index.html">clap derive tutorial</a> - Argument parsing from structs and enums</li>
+<li><a href="https://docs.rs/rand/0.8/rand/">rand 0.8 documentation</a> - The version Lab 14 uses</li>
+<li><a href="https://rust-cli.github.io/book/">Command Line Applications in Rust</a> - Optional, from the Rust CLI working group</li>
 </ul>
 </section>
 <section id="lectures" class="level2">
