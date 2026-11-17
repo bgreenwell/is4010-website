@@ -5188,7 +5188,18 @@
     "href": "weeks/week13.html#recommended-readings",
     "title": "Week 13: Idiomatic Rust",
     "section": "Recommended readings",
-    "text": "Recommended readings\n\nChapter 13: Functional language features - Closures and iterators, session 1\nChapter 15: Smart pointers - Box, Rc, and RefCell, session 2\nChapter 9: Error handling - Result and the ? operator, session 2\n\n\nVideo: closures and iterators\nIf you prefer video, this Data Science Learning Community session walks through Chapter 13 of the Rust Book. Watch it before or alongside session 1.\n\nWatch on YouTube if the embedded player does not load.",
+    "text": "Recommended readings\n\nChapter 13: Functional language features - Closures and iterators, session 1\nChapter 15: Smart pointers - Box, Rc, and RefCell, session 2\nChapter 9: Error handling - Result and the ? operator, session 2",
+    "crumbs": [
+      "Weekly schedule",
+      "Week 13: Idiomatic Rust"
+    ]
+  },
+  {
+    "objectID": "weeks/week13.html#videos",
+    "href": "weeks/week13.html#videos",
+    "title": "Week 13: Idiomatic Rust",
+    "section": "Videos",
+    "text": "Videos\nIf you prefer video, these Data Science Learning Community sessions walk through the same Rust Book chapters. Each has a “Watch on YouTube” link in case the embedded player does not load.\n\nClosures and iterators (Chapter 13)\nWatch before or alongside session 1.\n\nWatch on YouTube\n\n\nSmart pointers (Chapter 15)\nWatch before or alongside session 2.\n\nWatch on YouTube\n\n\nError handling (Chapter 9)\nWatch before or alongside session 2. This session also covers Chapter 8 (common collections), so the error handling material comes after the collections discussion.\n\nWatch on YouTube",
     "crumbs": [
       "Weekly schedule",
       "Week 13: Idiomatic Rust"
