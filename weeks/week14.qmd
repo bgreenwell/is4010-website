@@ -4,13 +4,14 @@ title: "Week 14: CLI applications"
 
 ## Introduction
 
-This week you'll build a complete command-line application that synthesizes everything you've learned about Rust. You'll create a professional CLI password generator and validator that demonstrates ownership, modules, traits, generics, iterators, error handling, and the clap argument parsing library. This is the capstone project that brings together 14 weeks of learning into a production-ready tool.
+This week turns Rust programs into command-line tools. We start the way Rust Book chapter 12 does, reading arguments by hand with `std::env::args`, then let the `clap` crate build the parser, help screen, and error messages from a struct. Lab 14 brings the Rust weeks together in a tested password generator and validator: modules, enums and `match`, traits, iterators, the `rand` crate, and integration tests that check the program's output.
 
 ## Recommended readings
 
 - [Chapter 12: An I/O Project: Building a Command Line Program](https://doc.rust-lang.org/book/ch12-00-an-io-project.html) - Rust Book
-- [Command Line Applications in Rust](https://rust-cli.github.io/book/) - Official CLI Book
-- [clap documentation](https://docs.rs/clap/latest/clap/) - Argument parser
+- [clap derive tutorial](https://docs.rs/clap/latest/clap/_derive/_tutorial/index.html) - Argument parsing from structs and enums
+- [rand 0.8 documentation](https://docs.rs/rand/0.8/rand/) - The version Lab 14 uses
+- [Command Line Applications in Rust](https://rust-cli.github.io/book/) - Optional, from the Rust CLI working group
 
 ## Lectures
 

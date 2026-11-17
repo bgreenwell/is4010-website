@@ -6,145 +6,311 @@ author: "Brandon M. Greenwell"
 
 ## Week 14 overview {.inverse}
 
-**Session 1: CLI architecture and `clap`**
-- The anatomy of a CLI tool
-- Argument parsing with the `clap` crate
-- Subcommands and flags
+**Session 1: from raw arguments to `clap`** ([Rust Book 12](https://doc.rust-lang.org/book/ch12-00-an-io-project.html))
 
-**Session 2: Capstone integration**
-- Managing external crates (`rand`)
-- Structuring larger projects (modules)
-- Synthesizing traits, ownership, and error handling
+- What a command-line program receives and returns
+- Reading arguments by hand with `std::env::args`
+- Letting `clap` build the parser, help, and errors from a struct
 
----
+**Session 2: building the capstone**
 
-# Session 1: CLI architecture and `clap` {.inverse}
-
----
-
-## The value of a CLI
-
-While graphical interfaces (GUIs) are great for end-users, command-line interfaces (CLIs) remain the backbone of developer tooling.
-
-**Why build CLI tools?**
-- **Automation:** Easily scriptable in CI/CD pipelines
-- **Speed:** Faster for power users to execute complex commands
-- **Composability:** Can be piped together (`grep | wc -l`)
-- **Low Overhead:** Minimal system resources required
-
-*Think about the tools you use: `git`, `python`, `cargo`, `pytest`.*
+- Modules, crates, and randomness with `rand`
+- Output and exit codes as a contract, checked by tests
+- Lab 14: a password generator CLI
 
 ::: {.notes}
-Ask students what their favorite CLI tool is and why. 
-Remind them of Week 8 when we built a Python CLI using `argparse`. Today we do the Rust equivalent.
+Session 1 follows Rust Book chapter 12's opening sections (reading arguments, a Config struct, returning errors) and then shows clap doing the same work from a struct. Session 2 is about Lab 14.
+
+All examples this week were built and run in real Cargo projects with the lab's exact crate versions (clap 4.5, rand 0.8). The terminal output on the slides is copied from those runs.
 :::
 
 ---
 
-## Anatomy of a CLI command
+# Session 1: from raw arguments to `clap`
+
+## A CLI is a function
+
+```text
+  arguments                       output
+  Homer --times 2  ──→  program  ──→  text on stdout
+                                      errors on stderr
+                                      exit code (0 = success)
+```
+
+- **In:** a list of strings typed after the program name.
+- **Out:** printed text, plus a number that tells scripts whether it worked.
+
+**Everything this week is about turning that list of strings into typed values, safely.**
+
+::: {.notes}
+Students used CLIs all semester: git, uv, cargo, pytest. In Week 08 they built a Python CLI with argparse; today is the Rust equivalent. The exit code is invisible in normal use but matters to scripts and CI: GitHub Actions marks a step red when a command exits nonzero, which is exactly how the lab badges work.
+:::
+
+---
+
+## Anatomy of a command
 
 ```bash
 cargo run -- random --length 16 --symbols
 ```
 
-Let's break this down:
-1. **Executable:** `cargo run --` builds and starts the Week 14 binary
-2. **Subcommand:** `random` (A major action the program can take)
-3. **Option / Argument:** `--length 16` (A named parameter with a value)
-4. **Flag:** `--symbols` (A boolean toggle, no value needed)
+| Piece | Name | Meaning |
+|---|---|---|
+| `cargo run` | Runner | Build the project, then start it |
+| `--` | Separator | Everything after this goes to **our** program, not to Cargo |
+| `random` | Subcommand | Which action to take |
+| `--length 16` | Option | A named value |
+| `--symbols` | Flag | On if present, off if absent |
+
+::: {.notes}
+The -- trips students up. Without it, Cargo would try to interpret --length itself and fail. After building, the same command runs directly as target/debug/week14 random --length 16 --symbols, with no cargo and no --.
+:::
 
 ---
 
-## Argument parsing in Rust
+## Running examples this week
 
-You *could* parse arguments manually using `std::env::args()`. 
+The Rust Playground cannot pass command-line arguments, so this week's examples run in a scratch Cargo project:
+
+```bash
+cargo new cli-demo
+cd cli-demo
+cargo add clap --features derive    # Only for the clap examples
+cargo run -q -- Homer --times 2
+```
+
+- `cargo add` updates `Cargo.toml` for you, like `uv add` in Python.
+- `-q` hides Cargo's build messages so you see only the program's output.
+
+::: {.notes}
+Use a scratch project, not the lab directory. Lab 14 already lists its dependencies in Cargo.toml, so students do not run cargo add there. The output shown on the following slides was copied from real runs.
+:::
+
+---
+
+## Reading arguments by hand {.smaller}
 
 ```rust
 use std::env;
 
 fn main() {
     let args: Vec<String> = env::args().collect();
-    if args.len() > 1 && args[1] == "random" {
-        // ... string matching, error handling, manual parsing ...
-    }
+    println!("{:?}", args);
 }
 ```
 
-**Try it yourself:** [Run in Rust Playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=use%20std%3A%3Aenv%3B%0A%0Afn%20main%28%29%20%7B%0A%20%20%20%20let%20args%3A%20Vec%3CString%3E%20%3D%20env%3A%3Aargs%28%29.collect%28%29%3B%0A%20%20%20%20if%20args.len%28%29%20%3E%201%20%26%26%20args%5B1%5D%20%3D%3D%20%22random%22%20%7B%0A%20%20%20%20%20%20%20%20%2F%2F%20...%20string%20matching%2C%20error%20handling%2C%20manual%20parsing%20...%0A%20%20%20%20%7D%0A%7D%0A)
-
-**Why is this bad?**
-- Manual string parsing is error-prone.
-- Type conversion (String to integer) is tedious.
-- Generating `--help` menus manually is a nightmare.
-
----
-
-## Enter `clap`
-
-`clap` (Command Line Argument Parser) is a widely used crate for building CLIs in Rust.
-
-**Features:**
-- Declarative macro-based or derive-based API
-- Automatic `--help` and `--version` generation
-- Type parsing and configurable value validation
-- Subcommand routing
-
-The course uses `clap`'s derive API so the command structure is visible in Rust structs and enums.
-
----
-
-## Setting up `clap`
-
-First, add it to your `Cargo.toml`. The `derive` feature enables the macro API used in these examples.
-
-```toml
-[dependencies]
-clap = { version = "4.5", features = ["derive"] }
+```text
+$ cargo run -q -- needle haystack
+["target/debug/args", "needle", "haystack"]
 ```
 
+- `env::args()` returns an iterator over the arguments; `collect` gathers them (Week 13).
+- `args[0]` is the program's own path. Your values start at `args[1]`.
+
 ::: {.notes}
-Explain that `features = ["derive"]` enables `Parser`, `Subcommand`, and related derive macros. The builder API is an alternative.
+Rust Book listing 12-1, using println! with {:?} in place of dbg!. Students often expect args[0] to be the first value they typed; it is the program. Everything arrives as a String, even numbers: turning "2" into a u32 is our job.
 :::
 
 ---
 
-## Defining a CLI with `clap` using a struct
+## Turning strings into typed values {.smaller .code-tight}
 
-We define our expected arguments as a standard Rust `struct`.
+```rust
+use std::env;
+use std::process;
+
+struct Config {
+    name: String,
+    times: u32,
+}
+
+impl Config {
+    fn build(args: &[String]) -> Result<Config, String> {
+        if args.len() < 3 {
+            return Err(String::from("usage: greet NAME TIMES"));
+        }
+        let name = args[1].clone();
+        let times = args[2]
+            .parse()
+            .map_err(|_| format!("TIMES must be a number, got {:?}", args[2]))?;
+        Ok(Config { name, times })
+    }
+}
+```
+
+- A `Config` struct holds the typed values the program needs.
+- `Config::build` returns a `Result` (Week 13): check the count, parse the number, report problems.
+
+::: {.notes}
+This follows Rust Book 12.3: a Config struct and a build function that returns Result instead of panicking. map_err and ? are the Week 13 error patterns. Clone copies the name out of the argument list so Config owns its own String (Week 10).
+:::
+
+---
+
+## `main` decides how to report errors {.smaller .code-tight}
+
+:::: {.columns}
+::: {.column width="50%"}
+```rust
+fn main() {
+    let args: Vec<String> = env::args().collect();
+
+    let config = Config::build(&args).unwrap_or_else(|err| {
+        eprintln!("Error: {}", err);
+        process::exit(1);
+    });
+
+    for _ in 0..config.times {
+        println!("Hello, {}!", config.name);
+    }
+}
+```
+:::
+::: {.column width="50%"}
+```text
+$ cargo run -q -- Homer 2
+Hello, Homer!
+Hello, Homer!
+$ cargo run -q -- Homer
+Error: usage: greet NAME TIMES
+$ cargo run -q -- Homer two
+Error: TIMES must be a number, got "two"
+```
+:::
+::::
+
+- `unwrap_or_else` prints the error to **stderr** with `eprintln!` and exits with code `1`.
+- **Still missing:** `--help`, named options like `--times`, flags, and defaults. Each one is more code to write by hand.
+
+::: {.notes}
+Rust Book 12.3 and 12.6: main decides how to report errors, and eprintln! writes to stderr so error messages do not mix with real output when the output is redirected to a file. process::exit(1) stops the program with a failure code. This is the point to introduce clap: describe the arguments as data, and let a library write the parser.
+:::
+
+---
+
+## The same tool with `clap` {.smaller .code-tight}
 
 ```rust
 use clap::Parser;
 
-/// A simple password generator
-#[derive(Parser, Debug)]
-#[command(version, about, long_about = None)]
+/// Greet someone, one or more times
+#[derive(Parser)]
+#[command(name = "greet", version)]
 struct Cli {
-    /// Length of the password
-    #[arg(short, long, default_value_t = 12)]
-    length: u8,
+    /// Who to greet
+    name: String,
 
-    /// Include special symbols
+    /// How many times to greet them
+    #[arg(short, long, default_value_t = 1)]
+    times: u32,
+
+    /// Shout the greeting
     #[arg(short, long)]
-    symbols: bool,
+    loud: bool,
 }
 
 fn main() {
     let cli = Cli::parse();
-    println!("Length: {}, Symbols: {}", cli.length, cli.symbols);
+
+    for _ in 0..cli.times {
+        let greeting = format!("Hello, {}!", cli.name);
+        if cli.loud {
+            println!("{}", greeting.to_uppercase());
+        } else {
+            println!("{}", greeting);
+        }
+    }
 }
 ```
 
+**Why:** The struct **is** the interface. Each field becomes an argument; `clap` writes the parsing code.
+
+::: {.notes}
+Compare with the hand-written version: no args vector, no index checks, no parse call, no usage string. #[derive(Parser)] generates the parser from the struct, the same way #[derive(Debug)] generated formatting in Week 12. Cli::parse() reads the real arguments and either returns a filled-in Cli or prints an error and exits.
+:::
+
 ---
 
-## Subcommands with `clap` using an enum
+## `clap` writes the help screen
 
-For complex tools (like `git` or `cargo`), you use subcommands. We model these using an `enum`.
+```text
+$ cargo run -q -- --help
+Greet someone, one or more times
 
+Usage: greet [OPTIONS] <NAME>
+
+Arguments:
+  <NAME>  Who to greet
+
+Options:
+  -t, --times <TIMES>  How many times to greet them [default: 1]
+  -l, --loud           Shout the greeting
+  -h, --help           Print help
+  -V, --version        Print version
+```
+
+- Every line comes from the struct: field names, `///` doc comments, and the default.
+- `-h`, `--help`, `-V`, and `--version` are added automatically.
+
+::: {.notes}
+Real output. Ask students to find each struct field in the help text. The [OPTIONS] and <NAME> in the usage line come from the field kinds: named options versus the required positional name.
+:::
+
+---
+
+## `clap` parses and checks the input {.smaller .code-tight}
+
+```text
+$ cargo run -q -- Homer --times 2
+Hello, Homer!
+Hello, Homer!
+$ cargo run -q -- Homer -t 2 --loud
+HELLO, HOMER!
+HELLO, HOMER!
+$ cargo run -q -- Homer --times two
+error: invalid value 'two' for '--times <TIMES>': invalid digit found in string
+
+For more information, try '--help'.
+```
+
+- Short and long options, a default for `--times`, and a flag for `--loud`.
+- Bad input gets a clear error and exit code `2` before your code runs.
+
+::: {.notes}
+Real output. Compare with the hand-written error messages two slides back: clap's version names the option, the bad value, and the reason, and points to --help.
+:::
+
+---
+
+## Read the attributes aloud
+
+| Code | Read it as | Command line |
+|---|---|---|
+| `#[derive(Parser)]` | Build a parser from this struct | |
+| `/// Who to greet` | Help text for the next field | Shown by `--help` |
+| `name: String` | A required positional argument | `Homer` |
+| `#[arg(short, long)]` | Accept `-t` and `--times` | `--times 2` |
+| `default_value_t = 1` | Use `1` if the option is missing | |
+| `loud: bool` with `#[arg(short, long)]` | A flag | `--loud` |
+
+**The field's type does the validation:** `times: u32` rejects `two` and `-1` automatically.
+
+::: {.notes}
+A field without #[arg] is positional; with #[arg(short, long)] it becomes a named option; a bool option becomes a flag. An Option<T> field would make an option optional without a default. Point students to the clap derive tutorial in the resources for more.
+:::
+
+---
+
+## Subcommands are an enum {.smaller .code-tight}
+
+:::: {.columns}
+::: {.column width="42%"}
 ```rust
 use clap::{Parser, Subcommand};
 
+/// A tiny calculator
 #[derive(Parser)]
-#[command(version, about)]
+#[command(name = "calc", version)]
 struct Cli {
     #[command(subcommand)]
     command: Commands,
@@ -152,175 +318,369 @@ struct Cli {
 
 #[derive(Subcommand)]
 enum Commands {
-    /// Generate a random password
-    Random {
-        #[arg(short, long, default_value_t = 12)]
-        length: u8,
-    },
-    /// Validate an existing password
-    Validate {
-        password: String,
+    /// Add two numbers
+    Add { a: i32, b: i32 },
+
+    /// Square a number
+    Square {
+        n: i32,
+
+        /// Show the work
+        #[arg(short, long)]
+        verbose: bool,
     },
 }
 ```
-
----
-
-## Pattern matching on subcommands
-
-Once parsed, use `match` to route each subcommand:
-
+:::
+::: {.column width="58%"}
 ```rust
 fn main() {
     let cli = Cli::parse();
 
-    match &cli.command {
-        Commands::Random { length } => {
-            println!("Generating password of length {}", length);
-            // Call generation logic...
-        }
-        Commands::Validate { password } => {
-            println!("Validating: {}", password);
-            // Call validation logic...
+    match cli.command {
+        Commands::Add { a, b } => println!("{}", a + b),
+        Commands::Square { n, verbose } => {
+            if verbose {
+                println!("{} * {} = {}", n, n, n * n);
+            } else {
+                println!("{}", n * n);
+            }
         }
     }
 }
 ```
+:::
+::::
+
+- Each enum **variant** is a subcommand; its fields are that subcommand's arguments.
+- `match` routes each subcommand to its code (Week 11).
 
 ::: {.notes}
-Emphasize how cleanly this maps to Rust's ownership and enum features we learned in Week 11.
+This is the same shape as git commit / git push or cargo build / cargo test. #[command(subcommand)] tells clap the command field holds the enum. Because match must handle every variant, adding a subcommand without handling it is a compile error, not a forgotten branch.
 :::
 
 ---
 
-# Session 2: capstone integration {.inverse}
+## Run the subcommands {.smaller .code-tight}
 
----
+```text
+$ cargo run -q -- add 2 3
+5
+$ cargo run -q -- square 4 --verbose
+4 * 4 = 16
+$ cargo run -q -- square
+error: the following required arguments were not provided:
+  <N>
 
-## Synthesizing six weeks of Rust
+Usage: calc square <N>
 
-Building a CLI application isn't just about parsing arguments. It requires pulling together everything we've learned:
-
-1. **Project structure:** Use modules (`mod`) to separate the interface from logic.
-2. **External crates:** Use `rand` for random generation.
-3. **Traits and generics:** Format output and reuse behavior.
-4. **Ownership:** Pass strings between validators and generators safely.
-
----
-
-## Structuring larger projects
-
-Keep `main.rs` focused on parsing and routing; place password generation and validation in the supplied modules so they can be tested independently.
-
+For more information, try '--help'.
 ```
+
+```text
+$ cargo run -q -- --help
+A tiny calculator
+
+Usage: calc <COMMAND>
+
+Commands:
+  add     Add two numbers
+  square  Square a number
+  help    Print this message or the help of the given subcommand(s)
+
+Options:
+  -h, --help     Print help
+  -V, --version  Print version
+```
+
+**Predict:** What does `cargo run -q -- square --help` show?
+
+::: {.fragment}
+Help for just the `square` subcommand: its `<N>` argument and the `--verbose` flag.
+:::
+
+::: {.notes}
+Real output from the calc project. The help subcommand appears automatically. Run square --help live to confirm the prediction.
+:::
+
+---
+
+## Session 1 checkpoint
+
+Lab 14 supplies this variant:
+
+```text
+/// Generate a random password.
+Random {
+    #[arg(short, long, default_value_t = 16)]
+    length: usize,
+    #[arg(short, long)]
+    symbols: bool,
+},
+```
+
+**Predict:** What do `length` and `symbols` hold for each command?
+
+1. `random`
+2. `random -l 20 -s`
+3. `random --length abc`
+
+::: {.fragment}
+1. `16` and `false`. 2. `20` and `true`. 3. Neither: `clap` prints `error: invalid value 'abc' for '--length <LENGTH>'` and exits with code `2`.
+:::
+
+::: {.notes}
+The definition is copied from week14/src/main.rs, where students do not need to change it. The third answer is real output from the lab's program.
+:::
+
+---
+
+# Session 2: building the capstone
+
+## From parser to program
+
+```text
 src/
-├── main.rs       # CLI definition and command routing
-├── generator.rs  # Password generation logic
-└── validator.rs  # Password strength calculation
+├── main.rs       # Parse, route, print
+├── generator.rs  # Passwords, passphrases, PINs
+└── validator.rs  # Strength, patterns, entropy
+tests/
+└── cli.rs        # Run the program, check output
 ```
 
-In `main.rs`:
 ```rust
-mod generator;
+mod generator; // Loads src/generator.rs (Week 11)
 mod validator;
 
-// Now you can call generator::generate_random(...)
+use generator::{generate_passphrase, generate_pin, generate_random};
 ```
 
----
-
-## Working with the `rand` crate
-
-Randomness is not built into the Rust standard library (unlike Python's `import random`). You must use an external crate.
-
-```toml
-[dependencies]
-rand = "0.8"
-```
-
-```rust
-use rand::Rng;
-
-fn main() {
-    let mut rng = rand::thread_rng();
-    
-    // Generate a random boolean
-    let coin_flip: bool = rng.gen();
-    
-    // Generate a number in a range
-    let secret_pin: u32 = rng.gen_range(0..9999);
-}
-```
-
----
-
-## Selecting random characters
-
-To generate a password, we often need to select random characters from a slice.
-
-```rust
-use rand::Rng;
-use rand::seq::SliceRandom;
-
-fn main() {
-    let charset: &[u8] = b"abcdefghijklmnopqrstuvwxyz0123456789";
-    let mut rng = rand::thread_rng();
-    
-    // Pick a random byte from the slice and convert to char
-    let random_char = *charset.choose(&mut rng).unwrap() as char;
-    
-    println!("Random char: {}", random_char);
-}
-```
+**`main.rs` stays thin.** The logic lives in modules that can be tested without the command line.
 
 ::: {.notes}
-Explain why we use `b"..."` (byte strings) and `SliceRandom`. This is a very common pattern in Rust for password generation.
+This is the book's chapter 12 advice ("separation of concerns for binary projects") applied to the lab. generator.rs and validator.rs each have their own unit tests; tests/cli.rs runs the compiled program. The mod and use lines are already in the lab's main.rs.
 :::
 
 ---
 
-## Lab 14: the capstone CLI
+## Randomness comes from a crate {.smaller .code-tight}
 
-For your final lab, you will complete a password utility CLI.
+```rust
+use rand::seq::SliceRandom;
+use rand::Rng;
 
-**Features to implement:**
-1. `random`: Generate passwords from character sets.
-2. `passphrase`: Generate correct-horse-battery-staple style passphrases.
-3. `pin`: Generate numeric PINs.
-4. `validate`: Calculate entropy and check for common patterns in existing passwords.
+fn main() {
+    let mut rng = rand::thread_rng();
 
-You will implement the logic in `generator.rs` and `validator.rs`, and wire it up to the `clap` parser in `main.rs`.
+    let roll = rng.gen_range(1..=6); // 1 through 6, inclusive
+    let heads = rng.gen_bool(0.5); // true half the time
+    let names = ["Homer", "Marge", "Bart", "Lisa", "Maggie"];
+    let pick = names.choose(&mut rng); // Option<&&str>
+
+    println!("Roll: {}", roll);
+    println!("Heads? {}", heads);
+    println!("Pick: {:?}", pick);
+
+    let rolls: Vec<String> = (0..5).map(|_| rng.gen_range(1..=6).to_string()).collect();
+    println!("Five rolls: {}", rolls.join(" "));
+}
+```
+
+```text
+$ cargo run -q
+Roll: 2
+Heads? true
+Pick: Some("Marge")
+Five rolls: 6 3 5 4 2
+```
+
+Your output will differ: it is random.
+
+::: {.notes}
+Python ships random in the standard library; Rust keeps randomness in the rand crate. thread_rng gives a generator; gen_range picks from a range (1..=6 includes 6, 1..6 would not); choose picks from a slice and returns an Option because the slice might be empty. The last example builds a String with an iterator, the Week 13 pattern. These are general tools, not the lab's functions.
+:::
+
+---
+
+## Check your crate version
+
+Lab 14 pins **`rand = "0.8"`**. Newer `rand` releases renamed these functions:
+
+| `rand` 0.8 (Lab 14) | `rand` 0.9 and later |
+|---|---|
+| `rand::thread_rng()` | `rand::rng()` |
+| `rng.gen_range(1..=6)` | `rng.random_range(1..=6)` |
+| `rng.gen_bool(0.5)` | `rng.random_bool(0.5)` |
+
+- The new names **do not exist** in 0.8: `rand::rng()` fails with `E0423` in Lab 14.
+- The old names still work in 0.9 but are deprecated, and `cargo clippy -- -D warnings` turns that warning into a failure.
+- Search answers and AI assistants often show the newer API. Tell them your version, or check `Cargo.toml` first.
+- Read the docs for **your** version: [docs.rs/rand/0.8](https://docs.rs/rand/0.8/rand/).
+
+::: {.notes}
+Both directions were checked against real builds. This is a real trap: the default docs.rs page shows the latest rand, and many recent examples use rand::rng(). Lab 14's Cargo.lock pins rand 0.8.5 and clap 4.5.60; students should not upgrade them. Good habit for any project: when an example does not compile, compare its crate version with yours.
+:::
+
+---
+
+## Output is part of the contract {.smaller .code-tight}
+
+Lab 14's integration tests run the finished program and check what it prints:
+
+```rust
+fn run(args: &[&str]) -> Output {
+    Command::new(env!("CARGO_BIN_EXE_week14"))
+        .args(args)
+        .output()
+        .expect("the Week 14 binary should run")
+}
+
+#[test]
+fn pin_command_prints_requested_digits() {
+    let text = stdout(&run(&["pin", "--length", "8"]));
+    let pin = text
+        .trim()
+        .strip_prefix("Generated PIN: ")
+        .expect("pin command should print a PIN");
+    assert_eq!(pin.len(), 8);
+    assert!(pin.chars().all(|character| character.is_ascii_digit()));
+}
+```
+
+| Subcommand | Required output |
+|---|---|
+| `random` | `Generated password: ...` then `Entropy: ... bits` |
+| `passphrase` | `Generated passphrase: ...` |
+| `pin` | `Generated PIN: ...` |
+| `validate` | `Password strength: ...`, `Entropy: ... bits`, and `Warning: ...` for weak patterns |
+
+::: {.notes}
+Integration tests live in tests/ and treat the program as a black box: std::process::Command runs the compiled binary with arguments, exactly as a user or a script would. env!("CARGO_BIN_EXE_week14") is the path Cargo gives the test. The same prefixes are listed in lab14.md and in the TODO comments in main.rs. Other programs and scripts depend on output formats in the same way, which is why changing them is a breaking change.
+:::
+
+---
+
+## Exit codes tell scripts what happened
+
+```text
+$ cargo run -q -- Homer --times two
+error: invalid value ...
+$ echo $?
+2
+$ cargo run -q -- Homer --times 2 > /dev/null
+$ echo $?
+0
+```
+
+| Code | Meaning | Who sets it |
+|---|---|---|
+| `0` | Success | Returning normally from `main` |
+| `1` | Your program reported an error | `process::exit(1)` |
+| `2` | Bad command-line usage | `clap`, automatically |
+
+- Errors go to **stderr** (`eprintln!`), so `> file` captures only the real output.
+
+::: {.notes}
+echo $? prints the previous command's exit code in bash and zsh (PowerShell uses $LASTEXITCODE). The first run is the greet program with a bad --times value; its error line is shortened here. CI systems and the lab badges rely on exactly this: a failing test makes cargo test exit nonzero, and the workflow turns red.
+:::
+
+---
+
+## Lab 14: the capstone CLI {.smaller}
+
+**`generator.rs`:** `generate_random`, `generate_passphrase`, `generate_pin`
+
+**`validator.rs`:** `validate_strength`, `check_common_patterns`, `calculate_entropy`
+
+**`main.rs`:** implement the four `match` arms; the `clap` structs are already complete.
+
+```bash
+cargo run -- random --length 20 --symbols
+cargo run -- passphrase --words 4
+cargo run -- pin --length 8
+cargo run -- validate "MyStr0ng!Pass2026"
+```
+
+**Suggested order:** the generator and validator unit tests first, then the `match` arms and `tests/cli.rs`.
+
+Follow the [Lab 14 instructions](https://github.com/bgreenwell/is4010-labs/blob/main/week14/lab14.md).
+
+::: {.notes}
+Function details (scoring tiers, charset sizes, word lists) are in lab14.md and the doc comments. Run a single test file with cargo test --test cli, or a module's tests with cargo test validator. Common stumbling blocks: newer rand API names and missing the exact output prefixes.
+:::
+
+---
+
+## Lab 14 workflow {.inverse}
+
+Run these inside your fork's `week14/` directory:
 
 ```bash
 cargo test
 cargo fmt
 cargo clippy -- -D warnings
-cargo run -- random --length 20 --symbols
+git add week14/
+git commit -m "Complete Lab 14"
+git push origin main
 ```
 
-A green Week 14 badge represents the complete 10-point lab.
+- CI checks formatting with `cargo fmt --check`.
+- Confirm that the Week 14 README badge is green; that badge is the complete 10-point grade.
 
-**Instructions:** [`week14/lab14.md`](https://github.com/bgreenwell/is4010-labs/blob/main/week14/lab14.md)
-
----
-
-## Reviewing AI prompting for Rust
-
-As you tackle the capstone, remember your AI Copilot strategies:
-
-* **Good Prompt:** "I need to implement this Rust function: `fn generate_pin(length: usize) -> String`. I have the `rand` crate installed. Explain the approach using a `for` loop before showing any code."
-* **Bad Prompt:** "Write my capstone lab."
-
-Use AI to help you understand compiler errors, explore the `clap` documentation, and suggest idiomatic iterator patterns.
+::: {.notes}
+These commands match week14/lab14.md. cargo test runs the unit tests in both modules and the integration tests in tests/cli.rs.
+:::
 
 ---
 
-## Wrapping up Rust
+## AI prompting for the capstone
 
-You have moved from Python's dynamic runtime model to Rust's compiled type and ownership systems.
+**Good:** "I'm using `rand` 0.8 in Rust. Explain how to build a `String` of random characters from a charset, using an iterator. Describe the approach before showing code."
 
-You now have enough vocabulary to compare the trade-offs and continue learning either language.
+**Not helpful:** "Write my Lab 14."
+
+- Include your **crate versions** and the **exact compiler error**.
+- Ask for an explanation or a hint first; check it against the docs for your version.
+- Run `cargo test` after every change, and read `git diff` before committing.
+
+::: {.notes}
+Students can use browser chat, Copilot in VS Code, Copilot CLI, or Antigravity CLI; start CLI agents inside the week14 directory. The most common AI failure this week is newer rand API names; the version table two slides back is the fix.
+:::
+
+---
+
+## Wrapping up Rust {.inverse .smaller}
+
+| Week | Idea | Where it shows up in Lab 14 |
+|---|---|---|
+| 09–10 | Types, ownership, borrowing | `&str` parameters, owned `String` results |
+| 11 | Modules, structs, enums, `match` | `mod generator`, the `Commands` enum |
+| 12 | Traits and generics | `#[derive(Parser)]`, `Display` for `PasswordStrength` |
+| 13 | Iterators and closures | Building passwords and passphrases from random picks |
+| 14 | Crates and CLIs | `clap`, `rand`, exit codes, integration tests |
 
 Lab 14 is the last graded lab. What remains is the final project.
 
-**Optional further reading:** the [advanced AI workflows appendix](IS4010_Advanced_AI_Workflows.qmd) collects prompting, review, and verification habits worth carrying into the project.
+**Optional:** the [advanced AI workflows appendix](IS4010_Advanced_AI_Workflows.qmd) collects prompting, review, and verification habits for the project.
+
+::: {.notes}
+You have moved from Python's dynamic runtime to Rust's compiled type and ownership systems, and now have the vocabulary to compare their trade-offs. Ask students which week's idea they expect to use most in their final project.
+:::
+
+---
+
+## Resources and questions
+
+**Start here:**
+
+- [Rust Book 12: building a command-line program](https://doc.rust-lang.org/book/ch12-00-an-io-project.html)
+- [`clap` derive tutorial](https://docs.rs/clap/latest/clap/_derive/_tutorial/index.html)
+- [`rand` 0.8 documentation](https://docs.rs/rand/0.8/rand/)
+
+**Going further:** [Command Line Applications in Rust](https://rust-cli.github.io/book/), the Rust CLI working group's book.
+
+**Get help:** office hours, the course Teams channel, and [users.rust-lang.org](https://users.rust-lang.org).
+
+::: {.notes}
+The clap tutorial covers everything in session 1 in more depth: positional arguments, options, flags, defaults, and subcommands. The CLI book covers testing, configuration files, and packaging, useful for final projects.
+:::
