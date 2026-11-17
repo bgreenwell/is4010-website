@@ -12,6 +12,14 @@ This week covers three tools you will see in almost every Rust program. Closures
 - [Chapter 15: Smart pointers](https://doc.rust-lang.org/book/ch15-00-smart-pointers.html) - Box, Rc, and RefCell, session 2
 - [Chapter 9: Error handling](https://doc.rust-lang.org/book/ch09-00-error-handling.html) - Result and the ? operator, session 2
 
+### Video: closures and iterators
+
+If you prefer video, this Data Science Learning Community session walks through Chapter 13 of the Rust Book. Watch it before or alongside session 1.
+
+{{< video https://www.youtube.com/embed/8wZwwnDOutI title="The Rust Programming Language: Functional Language Features: Iterators and Closures" >}}
+
+[Watch on YouTube](https://www.youtube.com/watch?v=8wZwwnDOutI) if the embedded player does not load.
+
 ## Lectures
 
 - [**Slides: Idiomatic Rust**](../slides/IS4010_W13_Idiomatic_Rust.qmd)
