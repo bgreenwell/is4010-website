@@ -12,13 +12,33 @@ This week covers three tools you will see in almost every Rust program. Closures
 - [Chapter 15: Smart pointers](https://doc.rust-lang.org/book/ch15-00-smart-pointers.html) - Box, Rc, and RefCell, session 2
 - [Chapter 9: Error handling](https://doc.rust-lang.org/book/ch09-00-error-handling.html) - Result and the ? operator, session 2
 
-### Video: closures and iterators
+## Videos
 
-If you prefer video, this Data Science Learning Community session walks through Chapter 13 of the Rust Book. Watch it before or alongside session 1.
+If you prefer video, these Data Science Learning Community sessions walk through the same Rust Book chapters. Each has a "Watch on YouTube" link in case the embedded player does not load.
+
+### Closures and iterators (Chapter 13)
+
+Watch before or alongside session 1.
 
 {{< video https://www.youtube.com/embed/8wZwwnDOutI title="The Rust Programming Language: Functional Language Features: Iterators and Closures" >}}
 
-[Watch on YouTube](https://www.youtube.com/watch?v=8wZwwnDOutI) if the embedded player does not load.
+[Watch on YouTube](https://www.youtube.com/watch?v=8wZwwnDOutI)
+
+### Smart pointers (Chapter 15)
+
+Watch before or alongside session 2.
+
+{{< video https://www.youtube.com/embed/Sw1PGuFMksk title="The Rust Programming Language: Smart Pointers" >}}
+
+[Watch on YouTube](https://www.youtube.com/watch?v=Sw1PGuFMksk)
+
+### Error handling (Chapter 9)
+
+Watch before or alongside session 2. This session also covers Chapter 8 (common collections), so the error handling material comes after the collections discussion.
+
+{{< video https://www.youtube.com/embed/ONyjV6nD4ng title="The Rust Programming Language: Common Collections and Error Handling" >}}
+
+[Watch on YouTube](https://www.youtube.com/watch?v=ONyjV6nD4ng)
 
 ## Lectures
 
