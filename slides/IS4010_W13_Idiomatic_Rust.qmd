@@ -519,207 +519,327 @@ The first chain is the nonempty_line_lengths function from earlier versions of t
 
 # Session 2: smart pointers and errors
 
-## When ordinary ownership is not enough
+## References are pointers too {.smaller}
 
-| Situation | Ownership rule in the way | Tool |
+A **pointer** is a value that holds the location of another value. You have used one kind since Week 10.
+
+| | Reference: `&T`, `&mut T` | Smart pointer: `Box`, `Rc`, `RefCell` |
 |---|---|---|
-| A type contains itself | Every type needs a known size | `Box<T>` |
-| Several parts of a program own one value | One owner at a time | `Rc<T>` |
-| Change a value that is shared | Shared means read-only | `RefCell<T>` |
+| Points to a value stored elsewhere | Yes | Yes |
+| Owns that value | No, it borrows | Yes |
+| When it goes away | Nothing is freed | It cleans up the value |
+| Rules checked | When compiling | When compiling (`RefCell`: while running) |
+| You have already used | `&str`, `&[i32]` | `String`, `Vec<T>` |
 
-**A smart pointer is a value that owns data and adds a rule of its own.**
+**A reference borrows a value. A smart pointer owns it and adds one ability a plain owner lacks.**
+
+- `Box<T>`: keep the value on the heap
+- `Rc<T>`: let several owners share it
+- `RefCell<T>`: change it through a shared handle
 
 ::: {.notes}
-Each row gets a failing example and then the fix. Stress the order of preference: ordinary ownership and borrowing first, smart pointers only when the design needs them. Strings and Vecs are smart pointers too; students have used them since Week 09 (Rust Book 15 intro).
+Rust Book 15 intro. The first two rows are the whole idea: both kinds point, only smart pointers own. String and Vec already count, since each owns a heap buffer and frees it when dropped. Every example this session uses one tiny Song struct from a music app, so the only new thing on each slide is the pointer. Stress the order of preference: plain ownership and references first, smart pointers only when the design needs them.
 :::
 
 ---
 
-## A type that contains itself {.smaller}
+## `Box<T>`: one owner, data on the heap
+
+Normally a value sits on the **stack**, and Rust must know its exact size when compiling (Week 10). `Box::new(value)` moves the value to the **heap** and keeps only a small pointer on the stack.
+
+```text
+stack: song ──→ heap: Song { title: "Midnight Drive", ... }
+```
+
+- A `Box` has one owner, like any value. When the owner goes out of scope, the heap value is freed.
+- A `Box` always has the same size, whatever it points to.
+
+**When to use it:**
+
+- A type that contains itself, so Rust cannot work out its size
+- A large value you want to hand off without copying all its bytes
+
+::: {.notes}
+Rust Book 15.1. Connect to Week 10's stack and heap slide. The second use is less common in student code; the first is the one the next two slides show. The book makes the same point with a cons list; a song that knows the next song is the same shape.
+:::
+
+---
+
+## A song that contains the next song {.smaller}
+
+A music app wants each song to know which song plays next.
 
 **This example intentionally fails to compile.**
 
 ```rust
-#[derive(Debug)]
-enum List {
-    Cons(i32, List),
-    Nil,
+struct Song {
+    title: String,
+    next: Option<Song>,
 }
 
-use List::{Cons, Nil};
-
 fn main() {
-    let list = Cons(1, Cons(2, Cons(3, Nil)));
-    println!("{:?}", list);
+    let last = Song {
+        title: String::from("Sunrise"),
+        next: None,
+    };
+    let first = Song {
+        title: String::from("Midnight Drive"),
+        next: Some(last),
+    };
+    println!("{}", first.title);
 }
 ```
 
 ```text
-error[E0072]: recursive type `List` has infinite size
+error[E0072]: recursive type `Song` has infinite size
 help: insert some indirection (e.g., a `Box`, `Rc`, or `&`) to break the cycle
 ```
 
-[Try this example in Rust Playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2024&code=%23%5Bderive%28Debug%29%5D%0Aenum+List+%7B%0A++++Cons%28i32%2C+List%29%2C%0A++++Nil%2C%0A%7D%0A%0Ause+List%3A%3A%7BCons%2C+Nil%7D%3B%0A%0Afn+main%28%29+%7B%0A++++let+list+%3D+Cons%281%2C+Cons%282%2C+Cons%283%2C+Nil%29%29%29%3B%0A++++println%21%28%22%7B%3A%3F%7D%22%2C+list%29%3B%0A%7D%0A)
+**Why:** A `Song` holds a whole `Song`, which holds a whole `Song`, with no end. `Option` does not help: `Some(song)` still stores the entire song inside.
+
+[Try this example in Rust Playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2024&code=struct+Song+%7B%0A++++title%3A+String%2C%0A++++next%3A+Option%3CSong%3E%2C%0A%7D%0A%0Afn+main%28%29+%7B%0A++++let+last+%3D+Song+%7B%0A++++++++title%3A+String%3A%3Afrom%28%22Sunrise%22%29%2C%0A++++++++next%3A+None%2C%0A++++%7D%3B%0A++++let+first+%3D+Song+%7B%0A++++++++title%3A+String%3A%3Afrom%28%22Midnight+Drive%22%29%2C%0A++++++++next%3A+Some%28last%29%2C%0A++++%7D%3B%0A++++println%21%28%22%7B%7D%22%2C+first.title%29%3B%0A%7D%0A)
 
 ::: {.notes}
-Book listing 15-2, the cons list. A List holds an i32 and another List, which holds another List, and so on: Rust cannot compute a size. Draw nested boxes on the board, each inside the last, forever. The help line names the fix.
+Ask how big a Song is: a title plus a whole Song, which is a title plus a whole Song, and so on. Draw nested boxes on the board. The help line names the fix.
 :::
 
 ---
 
-## `Box<T>`: put it on the heap {.smaller}
+## `Box` fixes it: point to the next song {.smaller}
 
 ```rust
-#[derive(Debug)]
-enum List {
-    Cons(i32, Box<List>),
-    Nil,
+struct Song {
+    title: String,
+    next: Option<Box<Song>>,
 }
 
-use List::{Cons, Nil};
-
-fn sum(list: &List) -> i32 {
-    match list {
-        Cons(value, rest) => value + sum(rest),
-        Nil => 0,
+fn play(song: &Song) {
+    println!("Now playing: {}", song.title);
+    if let Some(next) = &song.next {
+        play(next);
     }
 }
 
 fn main() {
-    let list = Cons(1, Box::new(Cons(2, Box::new(Cons(3, Box::new(Nil))))));
-    println!("{:?}", list); // Cons(1, Cons(2, Cons(3, Nil)))
-    println!("sum = {}", sum(&list)); // sum = 6
+    let last = Song {
+        title: String::from("Sunrise"),
+        next: None,
+    };
+    let first = Song {
+        title: String::from("Midnight Drive"),
+        next: Some(Box::new(last)),
+    };
+    play(&first);
 }
 ```
 
 ```text
-Cons(1, ─→) Cons(2, ─→) Cons(3, ─→) Nil
+Now playing: Midnight Drive
+Now playing: Sunrise
 ```
 
-**Why it works:** A `Box` is a pointer with a fixed size, whatever it points to.
+**Why it works:** "contains a song" became "points to a song." The pointer is a fixed size, so `Song` is too.
 
-[Try this example in Rust Playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2024&code=%23%5Bderive%28Debug%29%5D%0Aenum+List+%7B%0A++++Cons%28i32%2C+Box%3CList%3E%29%2C%0A++++Nil%2C%0A%7D%0A%0Ause+List%3A%3A%7BCons%2C+Nil%7D%3B%0A%0Afn+sum%28list%3A+%26List%29+-%3E+i32+%7B%0A++++match+list+%7B%0A++++++++Cons%28value%2C+rest%29+%3D%3E+value+%2B+sum%28rest%29%2C%0A++++++++Nil+%3D%3E+0%2C%0A++++%7D%0A%7D%0A%0Afn+main%28%29+%7B%0A++++let+list+%3D+Cons%281%2C+Box%3A%3Anew%28Cons%282%2C+Box%3A%3Anew%28Cons%283%2C+Box%3A%3Anew%28Nil%29%29%29%29%29%29%3B%0A++++println%21%28%22%7B%3A%3F%7D%22%2C+list%29%3B+%2F%2F+Cons%281%2C+Cons%282%2C+Cons%283%2C+Nil%29%29%29%0A++++println%21%28%22sum+%3D+%7B%7D%22%2C+sum%28%26list%29%29%3B+%2F%2F+sum+%3D+6%0A%7D%0A)
+[Try this example in Rust Playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2024&code=struct+Song+%7B%0A++++title%3A+String%2C%0A++++next%3A+Option%3CBox%3CSong%3E%3E%2C%0A%7D%0A%0Afn+play%28song%3A+%26Song%29+%7B%0A++++println%21%28%22Now+playing%3A+%7B%7D%22%2C+song.title%29%3B%0A++++if+let+Some%28next%29+%3D+%26song.next+%7B%0A++++++++play%28next%29%3B%0A++++%7D%0A%7D%0A%0Afn+main%28%29+%7B%0A++++let+last+%3D+Song+%7B%0A++++++++title%3A+String%3A%3Afrom%28%22Sunrise%22%29%2C%0A++++++++next%3A+None%2C%0A++++%7D%3B%0A++++let+first+%3D+Song+%7B%0A++++++++title%3A+String%3A%3Afrom%28%22Midnight+Drive%22%29%2C%0A++++++++next%3A+Some%28Box%3A%3Anew%28last%29%29%2C%0A++++%7D%3B%0A++++play%28%26first%29%3B%0A%7D%0A)
 
 ::: {.notes}
-Book listings 15-3 and 15-5, with a recursive sum added so the data is used. Output: Cons(1, Cons(2, Cons(3, Nil))), then sum = 6. Each Box owns the next node on the heap; when list leaves scope, the whole chain is freed, one owner at a time. Connect to Week 10's stack-and-heap slide: the Box itself is small and fixed; the node it points to lives on the heap.
+The only change from the last slide is Box<Song> and Box::new. play calls itself until a song has no next song. Passing next (a &Box<Song>) where play expects &Song works because Rust follows the Box automatically. When first goes out of scope, it frees Sunrise too: one owner each, all the way down.
 :::
 
 ---
 
-## Two lists cannot own the same tail {.smaller}
+## `Rc<T>`: shared ownership by counting
+
+`Rc` stands for **reference counted**. `Rc::new(value)` puts the value on the heap along with a count of its owners.
+
+- `Rc::clone(&song)` adds an owner. It copies the pointer and adds 1 to the count. The song itself is not copied.
+- When an owner goes away, the count drops by 1. At 0, the value is freed.
+- The value is read-only, and `Rc` works on one thread. `Arc` is the thread-safe version.
+
+**When to use it:** several parts of a program need the same value, and none of them is sure to outlast the others.
+
+::: {.notes}
+Rust Book 15.4. Python parallel: CPython counts references to every object, which is why Week 10 said Python cleans up when the last name goes away. Rc is that same idea, opted into for one value.
+:::
+
+---
+
+## Two playlists, one song {.smaller}
 
 **This example intentionally fails to compile.**
 
 ```rust
-#[derive(Debug)]
-enum List {
-    Cons(i32, Box<List>),
-    Nil,
+struct Song {
+    title: String,
 }
-
-use List::{Cons, Nil};
 
 fn main() {
-    let a = Cons(5, Box::new(Cons(10, Box::new(Nil))));
-    let b = Cons(3, Box::new(a));
-    let c = Cons(4, Box::new(a));
-    println!("{:?} {:?}", b, c);
+    let song = Song {
+        title: String::from("Midnight Drive"),
+    };
+
+    let mut workout = Vec::new();
+    let mut road_trip = Vec::new();
+
+    workout.push(song);
+    road_trip.push(song);
+
+    println!("{} {}", workout[0].title, road_trip[0].title);
 }
 ```
 
 ```text
-error[E0382]: use of moved value: `a`
+error[E0382]: use of moved value: `song`
 ```
 
-```text
-b: Cons(3, ─┐
-            ├─→ a: Cons(5, ─→) Cons(10, ─→) Nil
-c: Cons(4, ─┘
-```
+**Why:** `workout.push(song)` moves the song into the first playlist, so it is gone for the second.
+
+If one variable keeps the song alive longer than both playlists, `&Song` is enough. `Rc` is for when nothing outlives the others, such as playlists a user can delete in any order.
+
+[Try this example in Rust Playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2024&code=struct+Song+%7B%0A++++title%3A+String%2C%0A%7D%0A%0Afn+main%28%29+%7B%0A++++let+song+%3D+Song+%7B%0A++++++++title%3A+String%3A%3Afrom%28%22Midnight+Drive%22%29%2C%0A++++%7D%3B%0A%0A++++let+mut+workout+%3D+Vec%3A%3Anew%28%29%3B%0A++++let+mut+road_trip+%3D+Vec%3A%3Anew%28%29%3B%0A%0A++++workout.push%28song%29%3B%0A++++road_trip.push%28song%29%3B%0A%0A++++println%21%28%22%7B%7D+%7B%7D%22%2C+workout%5B0%5D.title%2C+road_trip%5B0%5D.title%29%3B%0A%7D%0A)
 
 ::: {.notes}
-Book listing 15-17. Both b and c want to own a; Box allows only one owner, so a moves into b and is gone for c. This is the Week 10 move error with a new type. The diagram shows the design we want: one shared tail.
+This is Week 10's move error with a new type. Students may ask why not clone: that makes two separate songs, and a later change to one would not show up in the other. The references aside ties back to the first slide of the session.
 :::
 
 ---
 
-## `Rc<T>`: shared ownership by counting {.smaller .code-tight}
+## `Rc` fixes it: both playlists own the song {.smaller .code-tight}
 
 ```rust
 use std::rc::Rc;
 
-enum List {
-    Cons(i32, Rc<List>),
-    Nil,
-}
-
-use List::{Cons, Nil};
-
-fn sum(list: &List) -> i32 {
-    match list {
-        Cons(value, rest) => value + sum(rest),
-        Nil => 0,
-    }
+struct Song {
+    title: String,
 }
 
 fn main() {
-    let a = Rc::new(Cons(5, Rc::new(Cons(10, Rc::new(Nil)))));
-    println!("count after a = {}", Rc::strong_count(&a)); // 1
+    let song = Rc::new(Song {
+        title: String::from("Midnight Drive"),
+    });
+    println!("owners = {}", Rc::strong_count(&song)); // owners = 1
 
-    let b = Cons(3, Rc::clone(&a));
-    println!("count after b = {}", Rc::strong_count(&a)); // 2
+    let mut workout = Vec::new();
+    let mut road_trip = Vec::new();
 
-    {
-        let c = Cons(4, Rc::clone(&a));
-        println!("count after c = {}", Rc::strong_count(&a)); // 3
-        println!("sum of c = {}", sum(&c)); // 19
-    }
+    workout.push(Rc::clone(&song));
+    println!("owners = {}", Rc::strong_count(&song)); // owners = 2
 
-    println!("count after c leaves = {}", Rc::strong_count(&a)); // 2
-    println!("sum of b = {}", sum(&b)); // 18
+    road_trip.push(Rc::clone(&song));
+    println!("owners = {}", Rc::strong_count(&song)); // owners = 3
+
+    println!("Road trip starts with {}", road_trip[0].title);
+    drop(road_trip); // Delete the road trip playlist
+    println!("owners = {}", Rc::strong_count(&song)); // owners = 2
+
+    println!("Workout starts with {}", workout[0].title);
 }
 ```
 
-- `Rc::clone(&a)` adds an owner. It copies a pointer and bumps a count, not the list.
-- The data is freed when the count reaches zero.
+- `drop(road_trip)` deletes the playlist early, as the end of its scope would.
+- The song is freed only when the last owner is gone.
 
-[Try this example in Rust Playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2024&code=use+std%3A%3Arc%3A%3ARc%3B%0A%0Aenum+List+%7B%0A++++Cons%28i32%2C+Rc%3CList%3E%29%2C%0A++++Nil%2C%0A%7D%0A%0Ause+List%3A%3A%7BCons%2C+Nil%7D%3B%0A%0Afn+sum%28list%3A+%26List%29+-%3E+i32+%7B%0A++++match+list+%7B%0A++++++++Cons%28value%2C+rest%29+%3D%3E+value+%2B+sum%28rest%29%2C%0A++++++++Nil+%3D%3E+0%2C%0A++++%7D%0A%7D%0A%0Afn+main%28%29+%7B%0A++++let+a+%3D+Rc%3A%3Anew%28Cons%285%2C+Rc%3A%3Anew%28Cons%2810%2C+Rc%3A%3Anew%28Nil%29%29%29%29%29%3B%0A++++println%21%28%22count+after+a+%3D+%7B%7D%22%2C+Rc%3A%3Astrong_count%28%26a%29%29%3B+%2F%2F+1%0A%0A++++let+b+%3D+Cons%283%2C+Rc%3A%3Aclone%28%26a%29%29%3B%0A++++println%21%28%22count+after+b+%3D+%7B%7D%22%2C+Rc%3A%3Astrong_count%28%26a%29%29%3B+%2F%2F+2%0A%0A++++%7B%0A++++++++let+c+%3D+Cons%284%2C+Rc%3A%3Aclone%28%26a%29%29%3B%0A++++++++println%21%28%22count+after+c+%3D+%7B%7D%22%2C+Rc%3A%3Astrong_count%28%26a%29%29%3B+%2F%2F+3%0A++++++++println%21%28%22sum+of+c+%3D+%7B%7D%22%2C+sum%28%26c%29%29%3B+%2F%2F+19%0A++++%7D%0A%0A++++println%21%28%22count+after+c+leaves+%3D+%7B%7D%22%2C+Rc%3A%3Astrong_count%28%26a%29%29%3B+%2F%2F+2%0A++++println%21%28%22sum+of+b+%3D+%7B%7D%22%2C+sum%28%26b%29%29%3B+%2F%2F+18%0A%7D%0A)
+[Try this example in Rust Playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2024&code=use+std%3A%3Arc%3A%3ARc%3B%0A%0Astruct+Song+%7B%0A++++title%3A+String%2C%0A%7D%0A%0Afn+main%28%29+%7B%0A++++let+song+%3D+Rc%3A%3Anew%28Song+%7B%0A++++++++title%3A+String%3A%3Afrom%28%22Midnight+Drive%22%29%2C%0A++++%7D%29%3B%0A++++println%21%28%22owners+%3D+%7B%7D%22%2C+Rc%3A%3Astrong_count%28%26song%29%29%3B+%2F%2F+owners+%3D+1%0A%0A++++let+mut+workout+%3D+Vec%3A%3Anew%28%29%3B%0A++++let+mut+road_trip+%3D+Vec%3A%3Anew%28%29%3B%0A%0A++++workout.push%28Rc%3A%3Aclone%28%26song%29%29%3B%0A++++println%21%28%22owners+%3D+%7B%7D%22%2C+Rc%3A%3Astrong_count%28%26song%29%29%3B+%2F%2F+owners+%3D+2%0A%0A++++road_trip.push%28Rc%3A%3Aclone%28%26song%29%29%3B%0A++++println%21%28%22owners+%3D+%7B%7D%22%2C+Rc%3A%3Astrong_count%28%26song%29%29%3B+%2F%2F+owners+%3D+3%0A%0A++++println%21%28%22Road+trip+starts+with+%7B%7D%22%2C+road_trip%5B0%5D.title%29%3B%0A++++drop%28road_trip%29%3B+%2F%2F+Delete+the+road+trip+playlist%0A++++println%21%28%22owners+%3D+%7B%7D%22%2C+Rc%3A%3Astrong_count%28%26song%29%29%3B+%2F%2F+owners+%3D+2%0A%0A++++println%21%28%22Workout+starts+with+%7B%7D%22%2C+workout%5B0%5D.title%29%3B%0A%7D%0A)
 
 ::: {.notes}
-Book listings 15-18 and 15-19. Output: counts 1, 2, 3, then sum of c = 19, then 2 after c leaves its block, then sum of b = 18. Python parallel: CPython's reference counting from Week 10's first slide; Rc is that same idea, opted into for one value. Rc data is read-only; changing it needs the next tool. Rc is single-threaded; Arc is the thread-safe version.
+Output: owners = 1, 2, 3, the road trip line, owners = 2, the workout line. The song variable itself is the first owner. Both playlists print the same title because they point to the same song, not two copies.
 :::
 
 ---
 
-## `RefCell<T>`: borrow rules checked while running {.smaller}
+## `RefCell<T>`: change through a shared handle
+
+`Rc` values are read-only. `RefCell` lets you change a value even when it is shared.
+
+- `.borrow()` gives a read-only borrow, like `&`.
+- `.borrow_mut()` gives a changeable borrow, like `&mut`.
+- Week 10's rules still apply: many readers, or one writer. `RefCell` checks them **while the program runs**, and breaking them stops the program with a panic.
+
+**When to use it:** almost always inside an `Rc`, to change a value that several owners share.
+
+::: {.notes}
+Rust Book 15.5. Rust calls this interior mutability. The trade is real: mistakes that would be compile errors with & and &mut become panics at runtime, so RefCell is a last resort, not a default.
+:::
+
+---
+
+## Shared values are read-only {.smaller}
+
+The song now counts its plays.
+
+**This example intentionally fails to compile.**
 
 ```rust
-use std::cell::RefCell;
+use std::rc::Rc;
+
+struct Song {
+    title: String,
+    plays: u32,
+}
 
 fn main() {
-    let score = RefCell::new(5);
+    let song = Rc::new(Song {
+        title: String::from("Midnight Drive"),
+        plays: 0,
+    });
 
-    {
-        let reader = score.borrow(); // Like &score, checked while running
-        println!("score = {}", *reader); // score = 5
-    } // reader's borrow ends here
+    song.plays += 1;
 
-    {
-        let mut editor = score.borrow_mut(); // Like &mut score
-        *editor += 10;
-    } // editor's borrow ends here
-
-    println!("score = {}", score.borrow()); // score = 15
+    println!("{} has {} plays", song.title, song.plays);
 }
 ```
 
-- `borrow()` is like `&`, and `borrow_mut()` is like `&mut`.
-- Same rules as Week 10, but checked **while the program runs**.
+```text
+error[E0594]: cannot assign to data in an `Rc`
+```
 
-[Try this example in Rust Playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2024&code=use+std%3A%3Acell%3A%3ARefCell%3B%0A%0Afn+main%28%29+%7B%0A++++let+score+%3D+RefCell%3A%3Anew%285%29%3B%0A%0A++++%7B%0A++++++++let+reader+%3D+score.borrow%28%29%3B+%2F%2F+Like+%26score%2C+checked+while+running%0A++++++++println%21%28%22score+%3D+%7B%7D%22%2C+%2Areader%29%3B+%2F%2F+score+%3D+5%0A++++%7D+%2F%2F+reader%27s+borrow+ends+here%0A%0A++++%7B%0A++++++++let+mut+editor+%3D+score.borrow_mut%28%29%3B+%2F%2F+Like+%26mut+score%0A++++++++%2Aeditor+%2B%3D+10%3B%0A++++%7D+%2F%2F+editor%27s+borrow+ends+here%0A%0A++++println%21%28%22score+%3D+%7B%7D%22%2C+score.borrow%28%29%29%3B+%2F%2F+score+%3D+15%0A%7D%0A)
+**Why:** an `Rc` value might have other owners, so no single owner may change it. Not even the first one.
+
+[Try this example in Rust Playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2024&code=use+std%3A%3Arc%3A%3ARc%3B%0A%0Astruct+Song+%7B%0A++++title%3A+String%2C%0A++++plays%3A+u32%2C%0A%7D%0A%0Afn+main%28%29+%7B%0A++++let+song+%3D+Rc%3A%3Anew%28Song+%7B%0A++++++++title%3A+String%3A%3Afrom%28%22Midnight+Drive%22%29%2C%0A++++++++plays%3A+0%2C%0A++++%7D%29%3B%0A%0A++++song.plays+%2B%3D+1%3B%0A%0A++++println%21%28%22%7B%7D+has+%7B%7D+plays%22%2C+song.title%2C+song.plays%29%3B%0A%7D%0A)
 
 ::: {.notes}
-Output: score = 5, then score = 15. The braces end each borrow, just like a reference's last use. RefCell lets you change a value through a shared handle, which is exactly what Rc needs. The cost: mistakes are found at runtime, not compile time (next slide).
+Adding mut to song does not help; the restriction is on the data inside the Rc, not the variable. This is the problem RefCell solves on the next slide.
+:::
+
+---
+
+## `Rc<RefCell<Song>>`: one play count, shared {.smaller .code-tight}
+
+```rust
+use std::cell::RefCell;
+use std::rc::Rc;
+
+struct Song {
+    title: String,
+    plays: u32,
+}
+
+fn main() {
+    let song = Rc::new(RefCell::new(Song {
+        title: String::from("Midnight Drive"),
+        plays: 0,
+    }));
+
+    let mut workout = Vec::new();
+    let mut road_trip = Vec::new();
+    workout.push(Rc::clone(&song));
+    road_trip.push(Rc::clone(&song));
+
+    workout[0].borrow_mut().plays += 1; // Played from the workout list
+    road_trip[0].borrow_mut().plays += 1; // Played from the road trip list
+
+    let now = song.borrow();
+    println!("{} has {} plays", now.title, now.plays); // Midnight Drive has 2 plays
+}
+```
+
+- `Rc`: both playlists own the same song.
+- `RefCell`: either playlist can change it.
+
+[Try this example in Rust Playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2024&code=use+std%3A%3Acell%3A%3ARefCell%3B%0Ause+std%3A%3Arc%3A%3ARc%3B%0A%0Astruct+Song+%7B%0A++++title%3A+String%2C%0A++++plays%3A+u32%2C%0A%7D%0A%0Afn+main%28%29+%7B%0A++++let+song+%3D+Rc%3A%3Anew%28RefCell%3A%3Anew%28Song+%7B%0A++++++++title%3A+String%3A%3Afrom%28%22Midnight+Drive%22%29%2C%0A++++++++plays%3A+0%2C%0A++++%7D%29%29%3B%0A%0A++++let+mut+workout+%3D+Vec%3A%3Anew%28%29%3B%0A++++let+mut+road_trip+%3D+Vec%3A%3Anew%28%29%3B%0A++++workout.push%28Rc%3A%3Aclone%28%26song%29%29%3B%0A++++road_trip.push%28Rc%3A%3Aclone%28%26song%29%29%3B%0A%0A++++workout%5B0%5D.borrow_mut%28%29.plays+%2B%3D+1%3B+%2F%2F+Played+from+the+workout+list%0A++++road_trip%5B0%5D.borrow_mut%28%29.plays+%2B%3D+1%3B+%2F%2F+Played+from+the+road+trip+list%0A%0A++++let+now+%3D+song.borrow%28%29%3B%0A++++println%21%28%22%7B%7D+has+%7B%7D+plays%22%2C+now.title%2C+now.plays%29%3B+%2F%2F+Midnight+Drive+has+2+plays%0A%7D%0A)
+
+::: {.notes}
+Output: Midnight Drive has 2 plays. Each borrow_mut lasts only for its line, so the two changes never overlap. Read the type from the inside out: a Song, changeable at runtime (RefCell), with several owners (Rc). Easy to overuse: if a single owner with &mut works, use that.
 :::
 
 ---
@@ -731,58 +851,36 @@ Output: score = 5, then score = 15. The braces end each borrow, just like a refe
 ```rust
 use std::cell::RefCell;
 
+struct Song {
+    title: String,
+    plays: u32,
+}
+
 fn main() {
-    let score = RefCell::new(5);
+    let song = RefCell::new(Song {
+        title: String::from("Midnight Drive"),
+        plays: 0,
+    });
 
-    let editor = score.borrow_mut();
-    let reader = score.borrow(); // Panics: editor is still active
+    let mut editing = song.borrow_mut();
+    let reading = song.borrow(); // Panics: editing is still active
 
-    println!("{} {}", editor, reader);
+    editing.plays += 1;
+    println!("{} has {} plays", reading.title, reading.plays);
 }
 ```
 
 ```text
-thread 'main' panicked at src/main.rs:7:24:
+thread 'main' panicked at src/main.rs:15:24:
 RefCell already mutably borrowed
 ```
 
-**Why:** `editor` is still active, so a reader breaks the shared reference promise. The compiler could not see it; the program checks and stops.
+**Why:** `editing` is still active, so a reader breaks the shared reference promise. The compiler could not see it; the program checks and stops.
 
-[Try this example in Rust Playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2024&code=use+std%3A%3Acell%3A%3ARefCell%3B%0A%0Afn+main%28%29+%7B%0A++++let+score+%3D+RefCell%3A%3Anew%285%29%3B%0A%0A++++let+editor+%3D+score.borrow_mut%28%29%3B%0A++++let+reader+%3D+score.borrow%28%29%3B+%2F%2F+Panics%3A+editor+is+still+active%0A%0A++++println%21%28%22%7B%7D+%7B%7D%22%2C+editor%2C+reader%29%3B%0A%7D%0A)
-
-::: {.notes}
-Compare with Week 10's "A reader and an editor can conflict" slide: same rule, same mistake, but caught at runtime with a panic instead of E0502 at compile time. That trade is why RefCell is a last resort, not a default.
-:::
-
----
-
-## `Rc<RefCell<T>>`: shared and changeable {.smaller .code-tight}
-
-```rust
-use std::cell::RefCell;
-use std::rc::Rc;
-
-fn main() {
-    let scores = Rc::new(RefCell::new(Vec::new()));
-
-    let lisa = Rc::clone(&scores);
-    let bart = Rc::clone(&scores);
-
-    lisa.borrow_mut().push(98);
-    bart.borrow_mut().push(61);
-
-    println!("{:?}", scores.borrow()); // [98, 61]
-    println!("owners = {}", Rc::strong_count(&scores)); // owners = 3
-}
-```
-
-- `Rc`: several owners. `RefCell`: changes allowed through any of them.
-- Every owner sees the same vector.
-
-[Try this example in Rust Playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2024&code=use+std%3A%3Acell%3A%3ARefCell%3B%0Ause+std%3A%3Arc%3A%3ARc%3B%0A%0Afn+main%28%29+%7B%0A++++let+scores+%3D+Rc%3A%3Anew%28RefCell%3A%3Anew%28Vec%3A%3Anew%28%29%29%29%3B%0A%0A++++let+lisa+%3D+Rc%3A%3Aclone%28%26scores%29%3B%0A++++let+bart+%3D+Rc%3A%3Aclone%28%26scores%29%3B%0A%0A++++lisa.borrow_mut%28%29.push%2898%29%3B%0A++++bart.borrow_mut%28%29.push%2861%29%3B%0A%0A++++println%21%28%22%7B%3A%3F%7D%22%2C+scores.borrow%28%29%29%3B+%2F%2F+%5B98%2C+61%5D%0A++++println%21%28%22owners+%3D+%7B%7D%22%2C+Rc%3A%3Astrong_count%28%26scores%29%29%3B+%2F%2F+owners+%3D+3%0A%7D%0A)
+[Try this example in Rust Playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2024&code=use+std%3A%3Acell%3A%3ARefCell%3B%0A%0Astruct+Song+%7B%0A++++title%3A+String%2C%0A++++plays%3A+u32%2C%0A%7D%0A%0Afn+main%28%29+%7B%0A++++let+song+%3D+RefCell%3A%3Anew%28Song+%7B%0A++++++++title%3A+String%3A%3Afrom%28%22Midnight+Drive%22%29%2C%0A++++++++plays%3A+0%2C%0A++++%7D%29%3B%0A%0A++++let+mut+editing+%3D+song.borrow_mut%28%29%3B%0A++++let+reading+%3D+song.borrow%28%29%3B+%2F%2F+Panics%3A+editing+is+still+active%0A%0A++++editing.plays+%2B%3D+1%3B%0A++++println%21%28%22%7B%7D+has+%7B%7D+plays%22%2C+reading.title%2C+reading.plays%29%3B%0A%7D%0A)
 
 ::: {.notes}
-Output: [98, 61], then owners = 3. This combination appears in graph structures and UI state. It is also easy to overuse: if a single owner with &mut works, use that. Rc cycles leak memory; Weak breaks them (Rust Book 15.6, optional).
+Compare with Week 10's "A reader and an editor can conflict" slide: same rule, same mistake, but caught at runtime with a panic instead of E0502 at compile time. That trade is why RefCell is a last resort.
 :::
 
 ---
@@ -792,7 +890,7 @@ Output: [98, 61], then owners = 3. This combination appears in graph structures 
 ```text
 Does one owner with & and &mut work?
 ├─ Yes → Use ordinary ownership and borrowing. Stop here.
-└─ No  → Does the type contain itself?
+└─ No  → Does the type contain itself (a song with a next song)?
          ├─ Yes → Box<T>
          └─ No  → Do several parts need to own it?
                   ├─ No  → Box<T> or plain ownership
